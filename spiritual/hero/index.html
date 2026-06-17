@@ -1,0 +1,1460 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>코치로 말씀과 묵상, 셀프코칭 그리고 감사 </title>
+  <style>
+    :root{
+      --bg:#fbfaf6;
+      --card:rgba(255,255,255,.92);
+      --ink:#0b1b2b;
+      --muted:rgba(11,27,43,.62);
+      --line:rgba(11,27,43,.10);
+      --shadow:0 16px 40px rgba(11,27,43,.10);
+      --trail:rgba(15,118,110,.88);
+      --hub:rgba(59,130,246,.88);
+      --gold:rgba(212,175,55,.85);
+      --r20:22px;
+      --r16:18px;
+      --focus:rgba(59,130,246,.22);
+    }
+
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 12% -10%, rgba(15,118,110,.07), transparent 62%),
+        radial-gradient(900px 500px at 92% 0%, rgba(59,130,246,.06), transparent 58%),
+        var(--bg);
+    }
+    button,input,textarea,select{font:inherit;color:inherit;}
+    a{color:inherit;}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(251,250,246,.88);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .head{
+      max-width:1200px;margin:0 auto;padding:10px 14px;
+      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;
+    }
+    .brand{display:flex;flex-direction:column;gap:2px;min-width:0;}
+    .brand b{font-size:14px;letter-spacing:.12em;}
+    .brand .meta{font-size:12px;color:rgba(11,27,43,.58);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+    .qnav{
+      display:flex;align-items:center;gap:0;
+      background:rgba(255,255,255,.76);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      flex:0 0 auto;
+    }
+    .qnav::-webkit-scrollbar{display:none;}
+    .qnav button{
+      border:0;background:transparent;border-radius:999px;
+      padding:8px 11px;
+      font-weight:850;color:rgba(11,27,43,.66);
+      cursor:pointer;white-space:nowrap;flex:0 0 auto;
+    }
+    .qnav button:hover{background:rgba(11,27,43,.06);}
+    .qnav button[data-on="1"]{background:rgba(11,27,43,.08);color:rgba(11,27,43,.92);}
+
+    .statusRow{
+      display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.70);
+      font-size:12px;font-weight:900;color:rgba(11,27,43,.72);
+      white-space:nowrap;
+    }
+    .pill strong{font-weight:950;}
+
+    .wrap{max-width:1200px;margin:0 auto;padding:14px;}
+    .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;align-items:start;}
+    @media (max-width:980px){.grid{grid-template-columns:1fr;}}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--r20);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .card h2{margin:0 0 4px;font-size:17px;letter-spacing:-0.01em;}
+    .sub{margin:0;font-size:13px;color:rgba(11,27,43,.62);line-height:1.45;}
+    .hr{height:1px;background:var(--line);margin:14px 0;}
+
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+    .row .grow{flex:1;min-width:180px;}
+
+    textarea,input[type="text"],input[type="url"],input[type="date"]{
+      width:100%;
+      border:1px solid rgba(11,27,43,.10);
+      background:rgba(255,255,255,.96);
+      border-radius:var(--r16);
+      padding:13px 13px;
+      outline:none;
+    }
+    textarea{min-height:118px;resize:vertical;line-height:1.5;}
+    textarea:focus,input:focus{
+      border-color:rgba(59,130,246,.34);
+      box-shadow:0 0 0 4px var(--focus);
+    }
+
+    button{
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(255,255,255,.92);
+      border-radius:16px;
+      padding:11px 12px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    button:hover{background:rgba(255,255,255,.98);}
+    button:active{transform:translateY(1px);}
+    .primary{border-color:rgba(15,118,110,.20);background:rgba(15,118,110,.14);}
+    .ghost{background:transparent;}
+    .mini{padding:8px 10px;border-radius:14px;font-weight:900;font-size:12px;}
+
+    .mutebox{
+      border:1px solid rgba(15,118,110,.16);
+      background:rgba(15,118,110,.06);
+      border-radius:20px;
+      padding:12px;
+      color:rgba(11,27,43,.78);
+    }
+    .note{
+      font-size:12px;color:rgba(11,27,43,.58);
+      margin-top:8px;line-height:1.45;
+      display:none;
+    }
+    .note.show{display:block;}
+
+    /* Accordion (KOUM) */
+    .acc{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+    .accItem{
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(255,255,255,.88);
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .accItem.isCore{border-color:rgba(15,118,110,.22);box-shadow:0 10px 26px rgba(15,118,110,.08);}
+    .accHead{
+      width:100%;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+      padding:12px 14px;border:0;background:transparent;cursor:pointer;text-align:left;
+    }
+    .accLeft{display:flex;align-items:center;gap:10px;min-width:0;}
+    .accDot{width:10px;height:10px;border-radius:999px;background:var(--trail);flex:0 0 auto;}
+    .accDot.hub{background:var(--hub);}
+    .accTitle{font-weight:950;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .accHint{font-size:12px;color:rgba(11,27,43,.52);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .accChevron{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(255,255,255,.85);
+      display:grid;place-items:center;flex:0 0 auto;
+    }
+    .accChevron span{display:block;transform:rotate(0deg);transition:transform .18s ease;font-weight:950;font-size:18px;line-height:1;color:rgba(11,27,43,.65);}
+    .accBody{padding:0 14px 14px 14px;display:none;}
+    .accItem[data-open="1"] .accBody{display:block;}
+    .accItem[data-open="1"] .accChevron span{transform:rotate(90deg);}
+
+    /* One-line UX */
+    .miniInput{
+      display:flex;align-items:center;gap:10px;width:100%;
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(255,255,255,.92);
+      border-radius:16px;padding:10px 12px;cursor:text;margin-top:10px;
+    }
+    .miniInput:hover{background:rgba(255,255,255,.98);}
+    .miniPh{color:rgba(11,27,43,.48);font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .miniVal{color:rgba(11,27,43,.88);font-size:13px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .miniBadge{
+      margin-left:auto;font-size:12px;font-weight:950;color:rgba(11,27,43,.55);
+      border:1px solid rgba(11,27,43,.12);background:rgba(11,27,43,.04);
+      padding:6px 10px;border-radius:999px;
+    }
+
+    /* M chips */
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;display:none;}
+    .chip{
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(11,27,43,.04);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      font-weight:950;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chip:hover{background:rgba(11,27,43,.06);}
+    .chip.isOn{background:rgba(15,118,110,.14);border-color:rgba(15,118,110,.20);}
+
+    .actionLine{display:flex;gap:10px;align-items:center;margin-top:10px;display:none;}
+    .btnNext{padding:10px 12px;border-radius:16px;font-weight:950;}
+
+    /* Gratitude */
+    .scaleRow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px;}
+    .scaleRow input[type="range"]{width:100%;accent-color:rgba(15,118,110,.75);}
+    .scoreBox{
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(255,255,255,.88);
+      border-radius:16px;padding:10px 12px;
+      font-weight:950;min-width:64px;text-align:center;
+    }
+
+    /* Right sticky */
+    .sticky{position:sticky;top:78px;display:flex;flex-direction:column;gap:12px;}
+
+    .kpiRow{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;margin-bottom:10px;
+    }
+    @media (max-width:980px){.kpiRow{grid-template-columns:1fr;}}
+    .kpi{
+      border:1px solid rgba(11,27,43,.12);
+      background:rgba(255,255,255,.90);
+      border-radius:18px;padding:12px;
+    }
+    .kpi .k{font-size:12px;color:rgba(11,27,43,.55);font-weight:850;}
+    .kpi .v{margin-top:6px;font-size:20px;font-weight:950;letter-spacing:-0.02em;}
+    .kpi .s{margin-top:4px;font-size:12px;color:rgba(11,27,43,.55);}
+
+    /* checklist */
+    .list{display:flex;flex-direction:column;gap:8px;}
+    .item{
+      border:1px solid rgba(11,27,43,.10);
+      background:rgba(255,255,255,.86);
+      border-radius:18px;
+      padding:10px 12px;
+      display:flex;justify-content:space-between;gap:10px;align-items:flex-start;
+      cursor:pointer;
+    }
+    .item b{font-weight:950;}
+    .item .meta2{font-size:12px;color:rgba(11,27,43,.55);margin-top:2px;line-height:1.35;}
+
+    /* charts */
+    canvas{
+      width:100%;height:160px;
+      border:1px solid rgba(11,27,43,.10);
+      background:rgba(255,255,255,.90);
+      border-radius:14px;
+      display:block;
+    }
+
+    /* bottom action bar */
+    .bar{
+      position:sticky;bottom:0;z-index:40;
+      background:rgba(255,255,255,.94);
+      border-top:1px solid var(--line);
+      backdrop-filter:blur(10px);
+    }
+    .bar .inner{
+      max-width:1200px;margin:0 auto;padding:10px 14px;
+      display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    .bar .group{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+    .tag{font-size:12px;color:rgba(11,27,43,.62);font-weight:900;}
+
+    /* Mobile layout hotfix */
+    @media (max-width:520px){
+      .head{flex-wrap:wrap;align-items:center;}
+      .brand{flex:1 1 100%;}
+      .qnav{flex:1 1 100%;order:3;}
+      .statusRow{order:2;width:100%;justify-content:flex-end;}
+      .pill{padding:5px 9px;font-size:11px;}
+      .bar .inner{justify-content:center;}
+      .bar .group{width:100%;justify-content:center;}
+      .bar button{min-width:30%;}
+      #secQT .row{align-items:stretch;}
+      #secQT .row .grow{min-width:100%;}
+      #secQT .row button{width:100%;}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="head">
+    <div class="brand">
+      <b>COACHERO</b>
+      <div class="meta" id="metaLine">—</div>
+    </div>
+
+    <div class="qnav" role="tablist" aria-label="sections">
+      <button type="button" data-tab="TODAY" data-on="1">Today</button>
+      <button type="button" data-tab="HISTORY" data-on="0">History</button>
+      <button type="button" data-tab="DASH" data-on="0">Dashboard</button>
+      <button type="button" data-tab="SETTINGS" data-on="0">Settings</button>
+    </div>
+
+    <div class="statusRow">
+      <div class="pill"><strong id="pillDone">0/3</strong> done</div>
+      <div class="pill">Streak <strong id="pillStreak">0</strong></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <!-- LEFT -->
+    <section style="display:flex; flex-direction:column; gap:12px;">
+      <!-- TODAY -->
+      <div class="card" id="secToday">
+        <h2>오늘</h2>
+        <p class="sub" id="weekdayHint">—</p>
+        <div class="hr"></div>
+
+        <!-- QT -->
+        <section class="card" id="secQT" style="box-shadow:none;">
+          <h2>QT</h2>
+          <div class="row" style="margin-top:10px;">
+            <div class="grow"><input id="qtDate" type="date"></div>
+            <button id="btnFetchQT" class="primary">불러오기</button>
+            <button id="btnOpenQT" class="ghost">원문</button>
+          </div>
+
+          <div class="note" id="qtNote"></div>
+
+          <div class="mutebox" id="qtBox" style="margin-top:10px; display:none;">
+            <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:flex-start;">
+              <div style="min-width:220px;">
+                <div style="font-weight:950;" id="qtTitle">—</div>
+                <div class="sub" id="qtPassage" style="margin-top:4px;">—</div>
+              </div>
+              <div class="row" style="gap:8px;">
+                <button class="mini" id="btnCopyQT">본문 복사</button>
+                <button class="mini" id="btnInsertQT">기도문에 삽입</button>
+              </div>
+            </div>
+            <div class="hr"></div>
+            <div id="qtText" style="white-space:pre-wrap; line-height:1.55;">—</div>
+          </div>
+        </section>
+
+        <!-- KOUM -->
+        <section class="card" id="secKOUM" style="box-shadow:none;">
+          <h2>KOUM</h2>
+
+          <div class="acc" id="accKoum">
+            <!-- K -->
+            <div class="accItem isCore" data-open="1">
+              <button type="button" class="accHead">
+                <div class="accLeft">
+                  <div class="accDot hub"></div>
+                  <div style="min-width:0">
+                    <div class="accTitle">K · 한 걸음 물러남</div>
+                    <div class="accHint">한 문장으로</div>
+                  </div>
+                </div>
+                <div class="accChevron"><span>›</span></div>
+              </button>
+              <div class="accBody">
+                <div class="miniInput" data-for="koumK">
+                  <div class="miniPh" data-ph>나는 지금 ___ 때문에 마음이 ___ 하다.</div>
+                  <div class="miniVal" data-val style="display:none;"></div>
+                  <div class="miniBadge">Tap</div>
+                </div>
+                <textarea id="koumK" placeholder="나는 지금 ___ 때문에 마음이 ___ 하다." style="display:none;"></textarea>
+              </div>
+            </div>
+
+            <!-- O -->
+            <div class="accItem" data-open="0">
+              <button type="button" class="accHead">
+                <div class="accLeft">
+                  <div class="accDot"></div>
+                  <div style="min-width:0">
+                    <div class="accTitle">O · 질문으로 성찰</div>
+                    <div class="accHint">질문 1개</div>
+                  </div>
+                </div>
+                <div class="accChevron"><span>›</span></div>
+              </button>
+              <div class="accBody">
+                <div class="miniInput" data-for="koumO">
+                  <div class="miniPh" data-ph>내가 지금 진짜 원하는 건 ___ 인가?</div>
+                  <div class="miniVal" data-val style="display:none;"></div>
+                  <div class="miniBadge">Tap</div>
+                </div>
+                <textarea id="koumO" placeholder="내가 지금 진짜 원하는 건 ___ 인가?" style="display:none;"></textarea>
+              </div>
+            </div>
+
+            <!-- U -->
+            <div class="accItem" data-open="0">
+              <button type="button" class="accHead">
+                <div class="accLeft">
+                  <div class="accDot"></div>
+                  <div style="min-width:0">
+                    <div class="accTitle">U · 대안 탐색</div>
+                    <div class="accHint">2~3가지</div>
+                  </div>
+                </div>
+                <div class="accChevron"><span>›</span></div>
+              </button>
+              <div class="accBody">
+                <div class="miniInput" data-for="koumU">
+                  <div class="miniPh" data-ph>내 선택은 ① ___ ② ___ ③ ___</div>
+                  <div class="miniVal" data-val style="display:none;"></div>
+                  <div class="miniBadge">Tap</div>
+                </div>
+                <textarea id="koumU" placeholder="내 선택은 ① ___ ② ___ ③ ___" style="display:none;"></textarea>
+              </div>
+            </div>
+
+            <!-- M -->
+            <div class="accItem isCore" data-open="1">
+              <button type="button" class="accHead">
+                <div class="accLeft">
+                  <div class="accDot hub"></div>
+                  <div style="min-width:0">
+                    <div class="accTitle">M · 목표로 실행</div>
+                    <div class="accHint">오늘 1개</div>
+                  </div>
+                </div>
+                <div class="accChevron"><span>›</span></div>
+              </button>
+              <div class="accBody">
+                <div class="miniInput" data-for="koumM">
+                  <div class="miniPh" data-ph>오늘 나는 ___ 을(를) ___ 하겠다.</div>
+                  <div class="miniVal" data-val style="display:none;"></div>
+                  <div class="miniBadge">Tap</div>
+                </div>
+
+                <div class="chips" id="mChips">
+                  <div class="chip" data-val="5분 말씀 묵상">5min QT</div>
+                  <div class="chip" data-val="감사 3개 적기">Gratitude 3</div>
+                  <div class="chip" data-val="연락 1명(안부)">Ping 1</div>
+                  <div class="chip" data-val="정리 10분">Tidy 10</div>
+                  <div class="chip" data-val="걷기 15분">Walk 15</div>
+                  <div class="chip" data-val="미루던 1개 처리">Finish 1</div>
+                </div>
+
+                <div class="actionLine">
+                  <input id="koumM_action" type="text" placeholder="오늘 실행 1개를 한 줄로">
+                  <button type="button" class="btnNext" id="btnNextPrayer">Next →</button>
+                </div>
+
+                <textarea id="koumM" placeholder="오늘 나는 ___ 을(를) ___ 하겠다." style="display:none;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <h2 style="font-size:15px;margin:0;">감사 점수</h2>
+          <div class="scaleRow">
+            <div class="grow"><input id="gratRange" type="range" min="1" max="10" step="1" value="7"></div>
+            <div class="scoreBox" id="gratVal">7</div>
+          </div>
+        </section>
+
+        <!-- PRAYER -->
+        <section class="card" id="secPrayer" style="box-shadow:none;">
+          <h2>기도문</h2>
+          <div class="row" style="margin-top:10px;">
+            <button id="btnBuildPrayer" class="primary">생성</button>
+            <button id="btnCopyPrayer" class="ghost">복사</button>
+            <button id="btnCopy3" class="ghost">3줄 복사</button>
+          </div>
+
+          <div class="hr"></div>
+
+          <textarea id="prayerText" placeholder="기도문"></textarea>
+          <div style="height:10px"></div>
+          <textarea id="share3" placeholder="3줄 요약"></textarea>
+        </section>
+
+        <!-- SHARE -->
+        <section class="card" id="secShare" style="box-shadow:none;">
+          <h2>공유/저장</h2>
+          <div class="row" style="margin-top:10px;">
+            <button id="btnShareNative" class="primary">공유(폰)</button>
+            <button id="btnSave" class="ghost">저장</button>
+            <button id="btnClear" class="ghost">초기화</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="card" id="secHistory" style="display:none;">
+        <h2>History</h2>
+        <div class="row" style="margin-top:10px;">
+          <div class="grow"><input id="histKeyword" type="text" placeholder="키워드"></div>
+          <button id="btnHistFilter" class="primary">필터</button>
+          <button id="btnHistReset" class="ghost">리셋</button>
+        </div>
+        <div class="hr"></div>
+        <div class="list" id="histList"></div>
+      </div>
+
+      <!-- DASH -->
+      <div class="card" id="secDashLeft" style="display:none;">
+        <h2>Dashboard</h2>
+        <div class="hr"></div>
+        <h2 style="font-size:15px;margin:0;">주간</h2>
+        <div style="margin-top:10px;"><canvas id="cvWeek" width="600" height="160"></canvas></div>
+        <div class="hr"></div>
+        <h2 style="font-size:15px;margin:0;">월간</h2>
+        <div style="margin-top:10px;"><canvas id="cvMonth" width="600" height="160"></canvas></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="card" id="secSettingsLeft" style="display:none;">
+        <h2>Settings</h2>
+        <p class="sub">QT 프록시 URL</p>
+        <div style="height:10px"></div>
+        <input id="proxyInput" type="url" placeholder="https://.../qt">
+        <div class="row" style="margin-top:10px;">
+          <button id="btnSaveProxy" class="primary">저장</button>
+          <button id="btnTestProxy" class="ghost">테스트</button>
+        </div>
+        <div class="note show" id="proxyHint">프록시가 비어있으면 QT 불러오기는 동작하지 않을 수 있어요.</div>
+      </div>
+    </section>
+
+    <!-- RIGHT -->
+    <aside class="sticky">
+      <div class="card">
+        <div class="kpiRow">
+          <div class="kpi">
+            <div class="k">This Week</div>
+            <div class="v" id="kpiWeekDone">0/5</div>
+            <div class="s">entries</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Streak</div>
+            <div class="v" id="kpiStreak">0</div>
+            <div class="s">days</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Gratitude Avg</div>
+            <div class="v" id="kpiGAvg">–</div>
+            <div class="s">1–10</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Monthly</div>
+            <div class="v" id="kpiMonthDone">0</div>
+            <div class="s">entries</div>
+          </div>
+        </div>
+
+        <div class="list" id="todayChecklist" style="gap:10px;">
+          <div class="item" data-chk="qt">
+            <div>
+              <b>QT</b>
+              <div class="meta2">말씀 확인</div>
+            </div>
+            <div class="pill" id="chkQT">—</div>
+          </div>
+          <div class="item" data-chk="koum">
+            <div>
+              <b>KOUM</b>
+              <div class="meta2">K + M</div>
+            </div>
+            <div class="pill" id="chkKOUM">—</div>
+          </div>
+          <div class="item" data-chk="prayer">
+            <div>
+              <b>공유</b>
+              <div class="meta2">3줄/기도문</div>
+            </div>
+            <div class="pill" id="chkPrayer">—</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="bar">
+  <div class="inner">
+    <div class="group">
+      <span class="tag" id="barTag">Ready</span>
+    </div>
+    <div class="group">
+      <button id="abBuildPrayer" class="primary">기도문 생성</button>
+      <button id="abCopy3" class="ghost">3줄 복사</button>
+      <button id="abShare" class="ghost">공유</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* =========================
+     COACHERO v4.5 Clean JS
+     - 중복 함수 제거
+     - 문구 최소화
+     - 복사(안드로이드/인앱) 안정화
+  ========================= */
+
+  // ---- Helpers ----
+  const $ = (id)=>document.getElementById(id);
+  const $$ = (sel, root=document)=>Array.from(root.querySelectorAll(sel));
+  const z2 = (n)=>String(n).padStart(2,'0');
+  const todayYMD = ()=> {
+    const d=new Date(); return `${d.getFullYear()}-${z2(d.getMonth()+1)}-${z2(d.getDate())}`;
+  };
+  const toYMD = (d)=> `${d.getFullYear()}-${z2(d.getMonth()+1)}-${z2(d.getDate())}`;
+  const previewText = (v,n=28)=>{
+    const s=(v||"").replace(/\s+/g,' ').trim();
+    if(!s) return "";
+    return s.length>n ? s.slice(0,n)+"…" : s;
+  };
+  const weekdayKo = (d=new Date())=> new Intl.DateTimeFormat('ko-KR',{weekday:'long'}).format(d);
+
+  function toast(msg){
+    const t=document.createElement('div');
+    t.textContent=msg;
+    Object.assign(t.style,{
+      position:'fixed', left:'50%', bottom:'86px', transform:'translateX(-50%)',
+      background:'rgba(11,27,43,.92)', color:'#fff', padding:'10px 12px',
+      borderRadius:'14px', fontSize:'13px', fontWeight:'850', zIndex:'9999',
+      boxShadow:'0 10px 24px rgba(0,0,0,.18)'
+    });
+    document.body.appendChild(t);
+    setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .18s ease';},900);
+    setTimeout(()=>t.remove(),1100);
+  }
+
+  async function copyText(text){
+    const t=(text||"").trim();
+    if(!t) return false;
+
+    try{
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(t);
+        return true;
+      }
+    }catch(e){}
+
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=t;
+      ta.setAttribute('readonly','');
+      Object.assign(ta.style,{position:'fixed',left:'-9999px',top:'0',opacity:'0'});
+      document.body.appendChild(ta);
+      ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length);
+      const ok=document.execCommand('copy');
+      document.body.removeChild(ta);
+      return !!ok;
+    }catch(e){
+      return false;
+    }
+  }
+
+  function setPill(el, on){
+    el.textContent = on ? "OK" : "—";
+    el.style.borderColor = on ? "rgba(15,118,110,.22)" : "rgba(11,27,43,.12)";
+    el.style.background  = on ? "rgba(15,118,110,.10)" : "rgba(255,255,255,.70)";
+    el.style.color       = on ? "rgba(11,27,43,.90)" : "rgba(11,27,43,.62)";
+  }
+
+  // ---- Storage ----
+  const FALLBACK_PROXY = 'https://build.ros2468.workers.dev/';
+
+  const LS = {
+    entries:'entries',
+    proxy:'QT_PROXY_ENDPOINT',
+    key:(ymd)=>`coachero:${ymd}`
+  };
+  function getEntries(){
+    try{
+      const raw=localStorage.getItem(LS.entries);
+      const arr=raw?JSON.parse(raw):[];
+      return Array.isArray(arr)?arr:[];
+    }catch(e){return [];}
+  }
+  function readEntry(ymd){
+    try{
+      const raw=localStorage.getItem(LS.key(ymd));
+      return raw?JSON.parse(raw):null;
+    }catch(e){return null;}
+  }
+  function writeEntry(ymd, obj){
+    localStorage.setItem(LS.key(ymd), JSON.stringify(obj));
+
+    let arr=getEntries();
+    const idx=arr.findIndex(x=>x && x.date===ymd);
+    if(idx>=0) arr[idx]={...arr[idx],...obj,date:ymd};
+    else arr.push({...obj,date:ymd});
+    arr.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+    localStorage.setItem(LS.entries, JSON.stringify(arr));
+
+    refreshKPIs(); drawCharts(); renderHistory();
+  }
+
+  // ---- Tabs ----
+  function setTab(tab){
+    $$('.qnav button').forEach(b=>b.dataset.on=(b.dataset.tab===tab)?"1":"0");
+    $('secToday').style.display      = (tab==='TODAY')?'':'none';
+    $('secHistory').style.display    = (tab==='HISTORY')?'':'none';
+    $('secDashLeft').style.display   = (tab==='DASH')?'':'none';
+    $('secSettingsLeft').style.display=(tab==='SETTINGS')?'':'none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  // ---- KOUM One-line / Accordion ----
+  function bindAccordion(){
+    $$('#accKoum .accHead').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const item=btn.closest('.accItem');
+        const open=item.getAttribute('data-open')==='1';
+        item.setAttribute('data-open', open?'0':'1');
+      });
+    });
+  }
+
+  function showEditor(mini){
+    const id=mini.getAttribute('data-for');
+    const ta=$(id);
+    if(!ta) return;
+
+    const body=mini.closest('.accBody');
+    mini.style.display='none';
+    ta.style.display='';
+    const item=mini.closest('.accItem');
+    if(item) item.setAttribute('data-open','1');
+
+    if(id==='koumM'){
+      $('mChips').style.display='';
+      document.querySelector('.actionLine').style.display='';
+      $('koumM_action').value = (ta.value||"").trim() || "오늘 나는 ";
+      setTimeout(()=>$('koumM_action').focus(),50);
+    }else{
+      setTimeout(()=>ta.focus(),50);
+    }
+  }
+
+  function showMini(ta){
+    const body=ta.closest('.accBody');
+    const mini=body.querySelector('.miniInput');
+    const ph=mini.querySelector('[data-ph]');
+    const val=mini.querySelector('[data-val]');
+    const p=previewText(ta.value,28);
+
+    if(p){
+      ph.style.display='none';
+      val.textContent=p; val.style.display='';
+    }else{
+      ph.style.display='';
+      val.style.display='none';
+    }
+    ta.style.display='none';
+    mini.style.display='';
+
+    if(ta.id==='koumM'){
+      $('mChips').style.display='none';
+      document.querySelector('.actionLine').style.display='none';
+    }
+  }
+
+  function bindOneLine(){
+    $$('.miniInput').forEach(mini=>mini.addEventListener('click',()=>showEditor(mini)));
+    $$('#accKoum textarea').forEach(ta=>{
+      showMini(ta);
+      ta.addEventListener('input', ()=>{
+        const item=ta.closest('.accItem');
+        const hint=item.querySelector('.accHint');
+        const p=previewText(ta.value,32);
+        if(p) hint.textContent=p;
+        updateChecklist();
+      });
+      ta.addEventListener('blur', ()=>{ showMini(ta); updateChecklist(); refreshKPIs(); });
+    });
+  }
+
+  function bindMChips(){
+    const wrap=$('mChips');
+    const ta=$('koumM');
+    const ai=$('koumM_action');
+
+    $$('.chip',wrap).forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        $$('.chip',wrap).forEach(c=>c.classList.remove('isOn'));
+        chip.classList.add('isOn');
+        const v=chip.getAttribute('data-val')||chip.textContent.trim();
+        const s=`오늘 나는 ${v} 한다.`;
+        ai.value=s; ta.value=s;
+        const hint=ta.closest('.accItem').querySelector('.accHint');
+        hint.textContent=previewText(s,32);
+        updateChecklist();
+      });
+    });
+
+    ai.addEventListener('input', ()=>{
+      ta.value=ai.value;
+      const hint=ta.closest('.accItem').querySelector('.accHint');
+      const p=previewText(ta.value,32);
+      if(p) hint.textContent=p;
+      updateChecklist();
+    });
+
+    $('btnNextPrayer').addEventListener('click', ()=> $('prayerText').focus());
+  }
+
+  // ---- Gratitude ----
+  function bindGratitude(){
+    $('gratRange').addEventListener('input', ()=>{
+      $('gratVal').textContent=$('gratRange').value;
+      updateChecklist(); refreshKPIs(); drawCharts();
+    });
+  }
+
+  // ---- QT Fetch ----
+  function proxyEndpoint(){
+    const v = (localStorage.getItem(LS.proxy)||"").trim();
+    return v || FALLBACK_PROXY;
+  }
+
+  async function fetchQT(ymd){
+    const proxy=proxyEndpoint();
+    if(!proxy) return null;
+
+    const url = proxy.includes('?') ? `${proxy}&date=${encodeURIComponent(ymd)}` : `${proxy}?date=${encodeURIComponent(ymd)}`;
+    const res = await fetch(url,{method:'GET', headers:{'accept':'application/json'}});
+    if(!res.ok) throw new Error(String(res.status));
+    const data = await res.json();
+
+    const rawTitle   = String((data.title ?? data.qtTitle ?? data.heading ?? "오늘 QT")).trim();
+    const rawPassage = String((data.passage ?? data.ref ?? data.reference ?? data.scriptureRef ?? data.scripture_ref ?? "")).trim();
+    const rawUrl     = String((data.url ?? data.link ?? data.sourceUrl ?? "https://oryun.org/life/?menu=248")).trim();
+
+    // Proxy implementations differ: prefer `text`, fallback to `scripture/content/body`.
+    let rawText = String((data.text ?? data.scripture ?? data.content ?? data.body ?? "")).trim();
+
+    // If a proxy accidentally put the whole scripture into `title`, rescue it.
+    if(!rawText && rawTitle && rawTitle.length>80) rawText = rawTitle;
+
+    // ---- Clean: keep ONLY "말씀" and drop "오늘의 만나는/질문" blocks ----
+    let clean = rawText
+      .replace(/\r/g,'')
+      .replace(/<[^>]+>/g,'')            // just in case
+      .replace(/\n{3,}/g,'\n\n')
+      .trim();
+
+    // Remove "오늘의 만나는" and anything after it
+    clean = clean.replace(/(^|\n)\s*오늘의\s*만나는[\s\S]*$/i, '').trim();
+
+    // Remove common question blocks if included
+    clean = clean
+      .replace(/(^|\n)\s*(question\s*1|question\s*2)\s*[:：].*$/ig,'')
+      .replace(/(^|\n)\s*오늘의\s*만나는\s*질문\s*\d+\s*[:：]?[\s\S]*$/ig,'')
+      .trim();
+
+    const qt = { title: rawTitle, passage: rawPassage, text: clean, url: rawUrl };
+    return qt.text ? qt : null;
+  }
+
+  function renderQT(qt){
+    if(!qt){
+      $('qtBox').style.display='none';
+      $('qtNote').className='note show';
+      $('qtNote').textContent = proxyEndpoint()
+        ? "QT를 불러오지 못했어요."
+        : "Settings에서 QT 프록시 URL을 먼저 넣어주세요.";
+      return;
+    }
+    $('qtTitle').textContent=qt.title||"오늘 QT";
+    $('qtPassage').textContent=qt.passage||"";
+    $('qtText').textContent=qt.text||"";
+    $('btnOpenQT').dataset.url=qt.url||"";
+    $('qtNote').className='note';
+    $('qtNote').textContent="";
+    $('qtBox').style.display='';
+  }
+
+  async function handleFetchQT(){
+    const ymd=$('qtDate').value || todayYMD();
+    try{
+      const qt=await fetchQT(ymd);
+      renderQT(qt);
+      if(qt){
+        const entry=currentEntryFromUI();
+        entry.qt=qt;
+        writeEntry(ymd, entry);
+        toast("QT 불러오기");
+      }else{
+        toast("QT 없음");
+      }
+    }catch(e){
+      $('qtBox').style.display='none';
+      $('qtNote').className='note show';
+      $('qtNote').textContent="QT 불러오기 실패";
+      toast("QT 실패");
+    }
+    updateChecklist();
+  }
+
+  function insertQTToPrayer(){
+    const qtText=($('qtText').textContent||"").trim();
+    if(!qtText || qtText==="—"){ toast("QT 없음"); return; }
+    const cur=$('prayerText').value||"";
+    if(cur.includes(qtText)){ toast("이미 포함"); return; }
+    $('prayerText').value=(qtText+"\n\n"+cur).trim();
+    updateChecklist();
+    toast("삽입");
+  }
+
+  // ---- Prayer: 이어령 톤 (no verse quoting) ----
+  function weekdayVariant(weekday){
+    const map = {
+      '월요일': { hook:"월요일, 다시 시작", focus:"작게라도 방향을 붙들게 하소서." },
+      '화요일': { hook:"화요일, 지속", focus:"작은 반복을 선택하게 하소서." },
+      '수요일': { hook:"수요일, 점검", focus:"마음의 속도를 점검하게 하소서." },
+      '목요일': { hook:"목요일, 확장", focus:"한 걸음 더 성숙한 선택을 하게 하소서." },
+      '금요일': { hook:"금요일, 정리", focus:"감사로 한 주를 정리하게 하소서." },
+      '토요일': { hook:"토요일, 회복", focus:"쉼이 회복이 되게 하소서." },
+      '일요일': { hook:"일요일, 재정렬", focus:"중심을 다시 세우게 하소서." }
+    };
+    return map[weekday] || { hook:"오늘, 선택", focus:"말씀을 실행으로 옮기게 하소서." };
+  }
+
+  function buildPrayerText(entry){
+    const wk = weekdayKo(new Date(entry.date));
+    const v = weekdayVariant(wk);
+
+    const qt = entry.qt || {};
+    const qtText = (qt.text || "").replace(/\s+/g," ").trim();
+    const qtPassage = (qt.passage || "").trim();
+
+    const K = (entry.koum?.K || "").trim();
+    const O = (entry.koum?.O || "").trim();
+    const U = (entry.koum?.U || "").trim();
+    const M = (entry.koum?.M || "").trim();
+    const g = Number(entry.gratitude || 0);
+
+    const qtEssence = (() => {
+      if(!qtText) return "";
+      const s = qtText.length > 120 ? qtText.slice(0,120)+"…" : qtText;
+      return s.replace(/오늘의\s*만나는[\s\S]*$/i, "").trim();
+    })();
+
+    const safe = (s, fallback)=> (s && s.trim()) ? s.trim() : fallback;
+
+    const kLine = safe(K, "내 마음이 어디엔가 붙잡혀 있습니다.");
+    const oLine = safe(O, "제가 무엇을 놓치고 있는지 스스로에게 묻게 하소서.");
+    const uLine = safe(U, "제가 볼 수 있는 선택을 조금 더 넓혀 보게 하소서.");
+    const mLine = safe(M, "오늘 할 수 있는 작은 실행 하나로 옮기게 하소서.");
+
+    const gratLine = (() => {
+      if(!Number.isFinite(g) || g <= 0) return "감사를 찾는 눈을 다시 열어 주소서.";
+      if(g <= 3) return "감사는 아직 작지만, 그 불씨를 꺼뜨리지 않게 하소서.";
+      if(g <= 6) return "감사가 흔들릴 때에도, 오늘의 작은 은혜를 놓치지 않게 하소서.";
+      if(g <= 8) return "감사가 마음을 지탱하는 힘이 되게 하소서.";
+      return "감사가 오늘을 밝히는 등불이 되게 하소서.";
+    })();
+
+    const lines = [];
+    lines.push("주님, 오늘도 제 하루가 말보다 먼저 숨을 고르게 하소서.");
+    lines.push(`${v.hook}인 오늘, 저는 다시 중심으로 돌아오고 싶습니다.`);
+
+    if(qtPassage || qtEssence){
+      lines.push("");
+      lines.push("말씀 앞에서 저는 자주 급해집니다.");
+      if(qtPassage) lines.push(`오늘 읽은 자리: ${qtPassage}`);
+      if(qtEssence) lines.push(`제 마음에 남은 결: ${qtEssence}`);
+      lines.push("그 결이 제 선택의 결이 되게 하소서.");
+    }
+
+    lines.push("");
+    lines.push("제가 먼저 한 걸음 물러납니다.");
+    lines.push(`지금 제 마음은 이렇게 말합니다: ${kLine}`);
+
+    lines.push("");
+    lines.push("그리고 질문을 하나 붙잡습니다.");
+    lines.push(oLine);
+
+    lines.push("");
+    lines.push("선택지는 많지 않아도, 길은 하나만 있는 게 아니었습니다.");
+    lines.push(uLine);
+
+    lines.push("");
+    lines.push("마지막으로, 실행을 작게 꺼내어 손에 쥡니다.");
+    lines.push(`오늘 제가 하겠습니다: ${mLine}`);
+
+    lines.push("");
+    lines.push(gratLine);
+    lines.push(v.focus);
+
+    lines.push("");
+    lines.push("제가 오늘 깨닫는 사람에 머물지 않고,");
+    lines.push("살아내는 사람으로 한 걸음 옮기게 하소서.");
+    lines.push("예수님의 이름으로 기도드립니다. 아멘.");
+
+    return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+
+  function buildShare3(entry){
+    const qt = entry.qt || {};
+    const qtText = (qt.text || "").replace(/\s+/g," ").trim();
+    const qtPassage = (qt.passage || "").trim();
+    const K = (entry.koum?.K || "").replace(/\s+/g," ").trim();
+    const M = (entry.koum?.M || "").replace(/\s+/g," ").trim();
+    const g = Number(entry.gratitude || 0);
+
+    const essence = (() => {
+      if(!qtText) return "말씀의 결을 따라";
+      const s = qtText.length > 42 ? qtText.slice(0, 42) + "…" : qtText;
+      return s.replace(/오늘의\s*만나는[\s\S]*$/i, "").trim() || "말씀의 결을 따라";
+    })();
+
+    const kLine = K ? (K.length > 34 ? K.slice(0,34)+"…" : K) : "내 마음을 한 걸음 물러서서";
+    const mLine = M ? (M.length > 34 ? M.slice(0,34)+"…" : M) : "작은 실행 하나를";
+
+    const gWord = (() => {
+      if(!Number.isFinite(g) || g <= 0) return "감사: 다시 찾기";
+      if(g <= 3) return "감사: 불씨";
+      if(g <= 6) return "감사: 유지";
+      if(g <= 8) return "감사: 등불";
+      return "감사: 충만";
+    })();
+
+    const line1 = `오늘 말씀: ${qtPassage ? qtPassage : ""} ${essence}`.trim();
+    const line2 = `오늘 마음: ${kLine}`.trim();
+    const line3 = `오늘 한 걸음: ${mLine} · ${gWord}`.trim();
+    return `${line1}\n${line2}\n${line3}`.trim();
+  }
+
+  function buildPrayer(){
+    const entry=currentEntryFromUI();
+    $('prayerText').value = buildPrayerText(entry);
+    $('share3').value = buildShare3(entry);
+    updateChecklist();
+  }
+
+  // ---- Checklist / KPIs / Charts ----
+  function startOfWeekMon(d){
+    const x=new Date(d);
+    const day=(x.getDay()+6)%7;
+    x.setDate(x.getDate()-day); x.setHours(0,0,0,0);
+    return x;
+  }
+  function sameMonth(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth(); }
+
+  function updateChecklist(){
+    const qtLoaded = $('qtBox').style.display !== 'none' && (($('qtText').textContent||"").trim().length>0) && ($('qtText').textContent.trim()!=="—");
+    const K = ($('koumK').value||"").trim();
+    const M = ($('koumM').value||"").trim();
+    const koumDone = (K.length>0) && (M.length>0);
+    const prayerDone = (($('prayerText').value||"").trim().length>0) || (($('share3').value||"").trim().length>0);
+
+    setPill($('chkQT'), qtLoaded);
+    setPill($('chkKOUM'), koumDone);
+    setPill($('chkPrayer'), prayerDone);
+
+    const doneCount=[qtLoaded,koumDone,prayerDone].filter(Boolean).length;
+    $('pillDone').textContent = `${doneCount}/3`;
+    $('barTag').textContent = doneCount===3 ? "Done" : (doneCount===2 ? "Almost" : "Ready");
+
+    const ymd=$('qtDate').value || todayYMD();
+    $('metaLine').textContent = `${ymd} · ${weekdayKo(new Date(ymd))} · 감사 ${$('gratRange').value}/10`;
+  }
+
+  function refreshKPIs(){
+    const entries = getEntries()
+      .filter(e=>e && e.date)
+      .map(e=>({ ...e, _d:new Date(e.date), _ymd:e.date }))
+      .sort((a,b)=>a._d-b._d);
+
+    const now=new Date();
+    const mon=startOfWeekMon(now);
+    const weekDays=new Set();
+    let monthCount=0;
+    let gSum=0,gN=0;
+
+    entries.forEach(e=>{
+      if(e._d>=mon && e._d<=now) weekDays.add(e._ymd);
+      if(sameMonth(e._d, now)) monthCount++;
+      const g=Number(e.gratitude ?? NaN);
+      if(Number.isFinite(g)){ gSum+=g; gN++; }
+    });
+
+    const set=new Set(entries.map(e=>e._ymd));
+    let streak=0;
+    for(let i=0;i<370;i++){
+      const d=new Date(now); d.setDate(now.getDate()-i);
+      const ymd=toYMD(d);
+      if(set.has(ymd)) streak++; else break;
+    }
+
+    $('kpiWeekDone').textContent = `${weekDays.size}/5`;
+    $('kpiStreak').textContent = String(streak);
+    $('kpiGAvg').textContent = gN ? (gSum/gN).toFixed(1) : '–';
+    $('kpiMonthDone').textContent = String(monthCount);
+    $('pillStreak').textContent = String(streak);
+  }
+
+  function getSeries(days){
+    const entries=getEntries();
+    const map=new Map(entries.map(e=>[e.date,e]));
+    const out=[];
+    const now=new Date();
+    for(let i=days-1;i>=0;i--){
+      const d=new Date(now); d.setDate(now.getDate()-i);
+      const ymd=toYMD(d);
+      const e=map.get(ymd);
+      out.push({x:ymd,y:e?Number(e.gratitude||0):0});
+    }
+    return out;
+  }
+
+  function drawBars(canvas, points, maxY=10){
+    const ctx=canvas.getContext('2d');
+    const W=canvas.width,H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+
+    const padL=10,padR=10,padT=10,padB=18;
+    const w=W-padL-padR,h=H-padT-padB;
+
+    ctx.strokeStyle="rgba(11,27,43,.12)";
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.moveTo(padL,padT+h);
+    ctx.lineTo(padL+w,padT+h);
+    ctx.stroke();
+
+    const n=points.length;
+    const barW=Math.max(6,Math.floor(w/(n*1.6)));
+    const gap=Math.floor((w-barW*n)/Math.max(1,n-1));
+
+    for(let i=0;i<n;i++){
+      const val=Number(points[i].y||0);
+      const x=padL+i*(barW+gap);
+      const bh=Math.max(0,Math.round((Math.min(val,maxY)/maxY)*h));
+      const y=padT+h-bh;
+
+      ctx.fillStyle="rgba(15,118,110,.25)";
+      ctx.fillRect(x,y,barW,bh);
+
+      ctx.fillStyle="rgba(11,27,43,.25)";
+      ctx.beginPath();
+      ctx.arc(x+barW/2,padT+h+6,1.8,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    const today=todayYMD();
+    const idx=points.findIndex(p=>p.x===today);
+    if(idx>=0){
+      const x=padL+idx*(barW+gap)+barW/2;
+      ctx.fillStyle="rgba(212,175,55,.55)";
+      ctx.beginPath();
+      ctx.arc(x,padT+8,3.5,0,Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function drawCharts(){
+    if($('cvWeek')) drawBars($('cvWeek'), getSeries(7), 10);
+    if($('cvMonth')) drawBars($('cvMonth'), getSeries(30), 10);
+  }
+
+  // ---- History ----
+  function renderHistory(keyword=""){
+    const list=$('histList');
+    if(!list) return;
+    list.innerHTML="";
+
+    const entries=getEntries();
+    const kw=(keyword||"").trim().toLowerCase();
+
+    const filtered=kw ? entries.filter(e=>JSON.stringify(e||{}).toLowerCase().includes(kw)) : entries;
+
+    if(filtered.length===0){
+      const div=document.createElement('div');
+      div.className='sub';
+      div.textContent="기록이 없습니다.";
+      list.appendChild(div);
+      return;
+    }
+
+    filtered.forEach(e=>{
+      const div=document.createElement('div');
+      div.className='item';
+      div.innerHTML=`
+        <div>
+          <b>${e.date||"—"}</b>
+          <div class="meta2">${(e.qt?.passage||e.qt?.title||"QT")}${e.gratitude?` · 감사 ${e.gratitude}/10`:""}</div>
+          <div class="meta2">M: ${e.koum?.M?previewText(e.koum.M,36):"—"}</div>
+        </div>
+        <div class="pill">Open</div>
+      `;
+      div.addEventListener('click', ()=>{ loadToUI(e.date); setTab('TODAY'); });
+      list.appendChild(div);
+    });
+  }
+
+  // ---- UI: load/save ----
+  function currentEntryFromUI(){
+    const ymd=$('qtDate').value || todayYMD();
+    const qtText=($('qtText').textContent||"").trim();
+    const qt = (qtText && qtText!=="—") ? {
+      title:$('qtTitle').textContent||"",
+      passage:$('qtPassage').textContent||"",
+      text:qtText,
+      url:$('btnOpenQT').dataset.url||""
+    } : null;
+
+    return {
+      date:ymd,
+      qt,
+      koum:{
+        K:($('koumK').value||"").trim(),
+        O:($('koumO').value||"").trim(),
+        U:($('koumU').value||"").trim(),
+        M:($('koumM').value||"").trim()
+      },
+      gratitude:Number($('gratRange').value||0),
+      prayer:($('prayerText').value||"").trim(),
+      share3:($('share3').value||"").trim()
+    };
+  }
+
+  function resetTodayUI(keepDate=true){
+    const ymd=keepDate ? ($('qtDate').value||todayYMD()) : todayYMD();
+    $('qtDate').value=ymd;
+
+    $('qtTitle').textContent="—";
+    $('qtPassage').textContent="—";
+    $('qtText').textContent="—";
+    $('btnOpenQT').dataset.url="";
+    $('qtBox').style.display='none';
+    $('qtNote').className='note';
+    $('qtNote').textContent="";
+
+    $('koumK').value="";
+    $('koumO').value="";
+    $('koumU').value="";
+    $('koumM').value="";
+    $('koumM_action').value="오늘 나는 ";
+
+    $('gratRange').value="7";
+    $('gratVal').textContent="7";
+
+    $('prayerText').value="";
+    $('share3').value="";
+
+    $$('.chip', $('mChips')).forEach(c=>c.classList.remove('isOn'));
+    $$('#accKoum textarea').forEach(ta=>{ try{ showMini(ta); }catch(e){} });
+
+    updateChecklist();
+  }
+
+  function loadToUI(ymd){
+    const entry = readEntry(ymd) || getEntries().find(e=>e.date===ymd) || null;
+    $('qtDate').value=ymd;
+
+    if(!entry){
+      resetTodayUI(true);
+      return;
+    }
+
+    if(entry.qt && entry.qt.text){
+      renderQT(entry.qt);
+    }else{
+      $('qtBox').style.display='none';
+      $('qtNote').className='note';
+      $('qtNote').textContent="";
+    }
+
+    $('koumK').value = entry.koum?.K || "";
+    $('koumO').value = entry.koum?.O || "";
+    $('koumU').value = entry.koum?.U || "";
+    $('koumM').value = entry.koum?.M || "";
+    $('koumM_action').value = entry.koum?.M || "오늘 나는 ";
+
+    $('gratRange').value = String(entry.gratitude || 7);
+    $('gratVal').textContent = String(entry.gratitude || 7);
+
+    $('prayerText').value = entry.prayer || "";
+    $('share3').value = entry.share3 || "";
+
+    $$('#accKoum textarea').forEach(ta=>{ try{ showMini(ta); }catch(e){} });
+
+    updateChecklist();
+    refreshKPIs();
+    drawCharts();
+  }
+
+  function saveToday(){
+    const entry=currentEntryFromUI();
+    writeEntry(entry.date, entry);
+    toast("저장");
+  }
+
+  async function shareNative(){
+    const text = (($('share3').value||"").trim() || ($('prayerText').value||"").trim());
+    if(!text){ toast("내용 없음"); return; }
+    if(navigator.share){
+      try{ await navigator.share({text}); }catch(e){}
+    }else{
+      const ok=await copyText(text);
+      ok?toast("복사"):toast("복사 실패");
+    }
+  }
+
+  // ---- Settings ----
+  function loadSettings(){
+    const v=proxyEndpoint();
+    $('proxyInput').value=v;
+    $('proxyHint').textContent = "기본 프록시가 적용됩니다.";
+  }
+  function saveProxy(){
+    const v=($('proxyInput').value||"").trim();
+    if(!v){
+      localStorage.removeItem(LS.proxy);
+      $('proxyInput').value = FALLBACK_PROXY;
+      loadSettings();
+      toast("기본값 적용");
+      return;
+    }
+    localStorage.setItem(LS.proxy, v);
+    loadSettings();
+    toast("저장");
+  }
+  async function testProxy(){
+    const v=($('proxyInput').value||"").trim();
+    if(!v){ toast("URL 없음"); return; }
+    localStorage.setItem(LS.proxy, v);
+    loadSettings();
+    await handleFetchQT();
+  }
+
+  // ---- Bind ----
+  function bindUI(){
+    // tabs
+    $$('.qnav button').forEach(btn=>btn.addEventListener('click', ()=>setTab(btn.dataset.tab)));
+
+    // checklist quick jump
+    $('todayChecklist').addEventListener('click', (e)=>{
+      const it=e.target.closest('.item');
+      if(!it) return;
+      const k=it.dataset.chk;
+      if(k==='qt') $('secQT').scrollIntoView({behavior:'smooth',block:'start'});
+      if(k==='koum') $('secKOUM').scrollIntoView({behavior:'smooth',block:'start'});
+      if(k==='prayer') $('secPrayer').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+
+    // date
+    $('qtDate').addEventListener('change', ()=>loadToUI($('qtDate').value));
+
+    // qt
+    $('btnFetchQT').addEventListener('click', handleFetchQT);
+    $('btnOpenQT').addEventListener('click', ()=>{
+      const u=$('btnOpenQT').dataset.url;
+      if(u) window.open(u,'_blank','noopener');
+      else toast("원문 URL 없음");
+    });
+    $('btnInsertQT').addEventListener('click', insertQTToPrayer);
+
+    $('btnCopyQT').addEventListener('click', async ()=>{
+      const t=($('qtText').textContent||"").trim();
+      if(!t || t==="—"){ toast("QT 없음"); return; }
+      const ok=await copyText(t);
+      ok?toast("복사"):toast("복사 실패");
+    });
+
+    // koum
+    bindAccordion();
+    bindOneLine();
+    bindMChips();
+
+    // gratitude
+    bindGratitude();
+
+    // prayer + copy
+    $('btnBuildPrayer').addEventListener('click', ()=>{ buildPrayer(); saveToday(); });
+    $('btnCopyPrayer').addEventListener('click', async ()=>{
+      const t=($('prayerText').value||"").trim();
+      if(!t){ toast("기도문 없음"); return; }
+      const ok=await copyText(t);
+      ok?toast("복사"):toast("복사 실패");
+      updateChecklist();
+    });
+    $('btnCopy3').addEventListener('click', async ()=>{
+      const t=($('share3').value||"").trim();
+      if(!t){ toast("3줄 없음"); return; }
+      const ok=await copyText(t);
+      ok?toast("복사"):toast("복사 실패");
+      updateChecklist();
+    });
+
+    // share/save/clear
+    $('btnShareNative').addEventListener('click', shareNative);
+    $('btnSave').addEventListener('click', saveToday);
+    $('btnClear').addEventListener('click', ()=>{
+      if(confirm("오늘 입력을 초기화할까요?")){
+        resetTodayUI(true);
+        toast("초기화");
+      }
+    });
+
+    // bottom bar
+    $('abBuildPrayer').addEventListener('click', ()=>{ buildPrayer(); saveToday(); });
+    $('abCopy3').addEventListener('click', async ()=>{
+      const t=($('share3').value||"").trim();
+      if(!t){ toast("3줄 없음"); return; }
+      const ok=await copyText(t);
+      ok?toast("복사"):toast("복사 실패");
+    });
+    $('abShare').addEventListener('click', shareNative);
+
+    // history
+    $('btnHistFilter').addEventListener('click', ()=>renderHistory($('histKeyword').value));
+    $('btnHistReset').addEventListener('click', ()=>{ $('histKeyword').value=""; renderHistory(""); });
+
+    // settings
+    $('btnSaveProxy').addEventListener('click', saveProxy);
+    $('btnTestProxy').addEventListener('click', testProxy);
+
+    // autosave light
+    window.addEventListener('beforeunload', ()=>{
+      try{ const e=currentEntryFromUI(); writeEntry(e.date, e); }catch(_){}
+    });
+  }
+
+  // ---- Init ----
+  function init(){
+    // Auto-fix proxy to the provided Worker endpoint
+    if(!(localStorage.getItem(LS.proxy)||"").trim()){
+      localStorage.setItem(LS.proxy, FALLBACK_PROXY);
+    }
+    $('qtDate').value = todayYMD();
+    const wk=weekdayKo(new Date());
+    const v=weekdayVariant(wk);
+    $('weekdayHint').textContent = `${wk} · ${v.hook}`;
+
+    loadSettings();
+    refreshKPIs();
+    drawCharts();
+    renderHistory("");
+
+    const existing=readEntry(todayYMD());
+    if(existing) loadToUI(todayYMD());
+    else resetTodayUI(true);
+
+    updateChecklist();
+    setInterval(()=>{ refreshKPIs(); updateChecklist(); }, 6000);
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{ bindUI(); init(); });
+</script>
+</body>
+</html>
+
