@@ -1,0 +1,114 @@
+﻿[
+    {
+        "title":  "기업소개",
+        "description":  "데일리코칭의 철학과 서비스 구조를 소개하는 페이지",
+        "category":  "brand",
+        "url":  "/company/",
+        "source":  "local placeholder"
+    },
+    {
+        "title":  "코치소개",
+        "description":  "코치 프로필과 코칭 방식을 소개하는 페이지",
+        "category":  "brand",
+        "url":  "/coach/",
+        "source":  "local placeholder"
+    },
+    {
+        "title":  "LCMS",
+        "description":  "데이터 기반 맞춤형 진로 교육 인프라",
+        "category":  "education",
+        "url":  "/lcms/",
+        "source":  "https://github.com/dailycoach/LCMS"
+    },
+    {
+        "title":  "대화 질문 카드 180",
+        "description":  "대화를 여는 질문 카드 도구",
+        "category":  "cards",
+        "url":  "/cards/talkcard180/",
+        "source":  "https://github.com/dailycoach/talkcard180"
+    },
+    {
+        "title":  "GROW 11-Step 질문 카드 88",
+        "description":  "GROW 모델 기반 코칭 질문 카드",
+        "category":  "cards",
+        "url":  "/cards/grow88/",
+        "source":  "https://github.com/dailycoach/grow88"
+    },
+    {
+        "title":  "마음챙김 질문 카드",
+        "description":  "마음챙김과 성찰을 돕는 질문 카드",
+        "category":  "cards",
+        "url":  "/cards/mindset120/",
+        "source":  "https://github.com/dailycoach/mindset120"
+    },
+    {
+        "title":  "SELF INC. 자존감 리포트",
+        "description":  "CEO 자존감 리포트형 자기이해 도구",
+        "category":  "tests",
+        "url":  "/tests/self/",
+        "source":  "https://github.com/dailycoach/self"
+    },
+    {
+        "title":  "색채심리 코칭",
+        "description":  "세 장의 색채 카드로 현재 마음을 살피는 코칭 도구",
+        "category":  "tests",
+        "url":  "/tests/color-psychology/",
+        "source":  "https://github.com/dailycoach/colorpsycoaching"
+    },
+    {
+        "title":  "선호 표상체계 진단",
+        "description":  "V/A/K/D 선호 표상체계를 확인하는 자기이해 검사",
+        "category":  "tests",
+        "url":  "/tests/vakd/",
+        "source":  "https://github.com/dailycoach/VAKD"
+    },
+    {
+        "title":  "자기주도학습 역량검사",
+        "description":  "청소년 및 학습자를 위한 자기주도학습 역량검사",
+        "category":  "tests",
+        "url":  "/tests/learning/",
+        "source":  "https://github.com/dailycoach/learning"
+    },
+    {
+        "title":  "나의 배움 강점 찾기",
+        "description":  "어린이를 위한 배움 강점 탐색 도구",
+        "category":  "tests",
+        "url":  "/tests/child-learning/",
+        "source":  "https://github.com/dailycoach/child"
+    },
+    {
+        "title":  "초등학생용 자기주도학습 역량검사",
+        "description":  "초등학생 눈높이에 맞춘 자기주도학습 검사",
+        "category":  "tests",
+        "url":  "/tests/elementary-self-learning/",
+        "source":  "https://github.com/dailycoach/child10"
+    },
+    {
+        "title":  "ICF 코치 자기진단검사",
+        "description":  "ICF 핵심역량 기반 코치 자기진단검사",
+        "category":  "tests",
+        "url":  "/tests/icf8/",
+        "source":  "https://github.com/dailycoach/icf8"
+    },
+    {
+        "title":  "KCA 코치 역량 자기진단검사",
+        "description":  "KCA 코치 역량 기준 자기진단검사",
+        "category":  "tests",
+        "url":  "/tests/kca8/",
+        "source":  "https://github.com/dailycoach/8"
+    },
+    {
+        "title":  "말씀 묵상 셀프코칭 감사",
+        "description":  "말씀과 묵상, 셀프코칭과 감사를 위한 페이지",
+        "category":  "spiritual",
+        "url":  "/spiritual/hero/",
+        "source":  "https://github.com/dailycoach/hero"
+    },
+    {
+        "title":  "광야 서바이벌 활동도구",
+        "description":  "광야 서바이벌 활동을 위한 웹카드형 진행 도구",
+        "category":  "activities",
+        "url":  "/activities/wilderness-survival/",
+        "source":  "local import"
+    }
+]
