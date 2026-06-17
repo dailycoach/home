@@ -3,52 +3,90 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=https://dailycoach.github.io/live-board/" />
-  <title>라이브보드로 이동</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      color: #1f2a24;
-      background: #f4f7f5;
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
-      text-align: center;
-    }
-    main {
-      width: min(520px, 100%);
-      padding: 32px;
-      border: 1px solid #dbe4dd;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 22px 70px rgba(28, 41, 33, .14);
-    }
-    h1 { margin: 0; font-size: 30px; line-height: 1.2; }
-    p { margin: 14px 0 0; color: #6d756e; line-height: 1.6; }
-    a {
-      display: inline-flex;
-      justify-content: center;
-      margin-top: 22px;
-      padding: 13px 18px;
-      border-radius: 8px;
-      color: #fff;
-      background: #214c3a;
-      font-weight: 850;
-      text-decoration: none;
-    }
-  </style>
+  <meta name="theme-color" content="#214c3a" />
+  <title>Live Board Basic</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./assets/styles.css" />
 </head>
-<body>
-  <main>
-    <h1>라이브보드로 이동합니다</h1>
-    <p>자동으로 이동하지 않으면 아래 버튼을 눌러주세요.</p>
-    <a href="https://dailycoach.github.io/live-board/">라이브보드 열기</a>
+<body data-page="write">
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow" data-config="eyebrow">Live Board Basic</p>
+      <h1 data-config="siteTitle">강의용 라이브보드</h1>
+      <p class="hero-copy" data-config="siteSubtitle">지금 떠오른 생각을 짧게 남겨주세요. 공개 동의한 응답만 라이브보드에 표시됩니다.</p>
+    </header>
+
+    <section class="layout">
+      <aside class="side-card" aria-label="사용 안내">
+        <div class="step-badge">LIVE</div>
+        <h2 data-config="sideTitle">참여 방법</h2>
+        <ol class="guide-list">
+          <li>참여자 코드를 선택합니다.</li>
+          <li>키워드와 한줄 응답을 적습니다.</li>
+          <li>공개 여부를 선택하고 제출합니다.</li>
+        </ol>
+        <p class="notice-text" data-config="publicNotice">라이브보드에는 공개 동의한 문장만 참여자 코드로 표시됩니다.</p>
+        <a class="ghost-link" href="./live.html" target="_blank" rel="noopener">라이브보드 열기</a>
+      </aside>
+
+      <section class="card form-card">
+        <form id="liveForm" autocomplete="off">
+          <div class="field">
+            <label for="participantCode" data-config="participantLabel">참여자 코드</label>
+            <select id="participantCode" name="participantCode" required>
+              <option value="">선택</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="keyword" data-config="keywordLabel">키워드</label>
+            <input id="keyword" name="keyword" required maxlength="80" placeholder="예: 성장, 몰입, 관계" />
+            <p class="help-text" data-config="keywordHelp">쉼표로 여러 개를 입력할 수 있습니다.</p>
+          </div>
+
+          <div class="field">
+            <label for="response" data-config="responseLabel">한줄 응답</label>
+            <textarea id="response" name="response" required maxlength="140" rows="4" placeholder="예: 오늘 가장 남는 한 문장은 무엇인가요?"></textarea>
+            <div class="field-footer">
+              <span class="help-text" data-config="responseHelp">라이브보드 카드에 크게 표시됩니다.</span>
+              <span id="responseCount" class="counter">0 / 140</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label-text">공개 여부</span>
+            <div class="choice-grid" role="radiogroup" aria-label="공개 여부">
+              <label class="choice-card">
+                <input type="radio" name="publicConsent" value="공개 가능" checked />
+                <span>
+                  <strong>공개 가능</strong>
+                  <small>라이브보드에 표시</small>
+                </span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="publicConsent" value="비공개" />
+                <span>
+                  <strong>비공개</strong>
+                  <small>스프레드시트에만 저장</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field" id="privateMemoWrap">
+            <label for="privateMemo">강사에게만 남기는 메모</label>
+            <textarea id="privateMemo" name="privateMemo" maxlength="500" rows="3" placeholder="라이브보드에는 표시되지 않습니다."></textarea>
+          </div>
+
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+          <button id="submitBtn" class="primary-button" type="submit" data-config="submitButtonText">라이브보드에 기록하기</button>
+        </form>
+      </section>
+    </section>
   </main>
-  <script>
-    window.location.replace("https://dailycoach.github.io/live-board/");
-  </script>
+
+  <script src="./assets/config.js"></script>
+  <script src="./assets/shared.js"></script>
+  <script src="./assets/app.js"></script>
 </body>
 </html>

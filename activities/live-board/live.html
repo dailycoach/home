@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#14241d" />
+  <title>Live Board</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body data-page="live">
+  <main class="live-shell">
+    <header class="live-header">
+      <div>
+        <p class="eyebrow" data-config="eyebrow">Live Board Basic</p>
+        <h1 data-config="liveTitle">강의용 라이브보드</h1>
+        <p class="live-subtitle" data-config="liveSubtitle">참여자들의 공개 응답이 실시간으로 모입니다.</p>
+      </div>
+      <div class="live-meta" aria-label="라이브보드 상태">
+        <span id="countLabel">0개 기록</span>
+        <span id="lastUpdated">대기 중</span>
+      </div>
+    </header>
+
+    <section class="live-toolbar" aria-label="라이브보드 조작">
+      <a class="toolbar-link" href="./index.html" target="_blank" rel="noopener">입력 페이지</a>
+      <button id="refreshBtn" type="button">새로고침</button>
+      <button id="fullscreenBtn" type="button">전체화면</button>
+    </section>
+
+    <section class="live-grid">
+      <article class="panel response-panel">
+        <div class="panel-title-row">
+          <h2 data-config="boardResponseTitle">한줄 응답</h2>
+          <span class="panel-caption" data-config="boardResponseCaption">최근 공개 응답</span>
+        </div>
+        <div id="responseBoard" class="response-board"></div>
+      </article>
+
+      <article class="panel keyword-panel">
+        <div class="panel-title-row">
+          <h2 data-config="boardKeywordTitle">키워드 클라우드</h2>
+          <span class="panel-caption" data-config="boardKeywordCaption">많이 나온 키워드</span>
+        </div>
+        <div id="keywordBoard" class="tag-cloud"></div>
+      </article>
+    </section>
+
+    <p id="emptyState" class="empty hidden">아직 공개된 기록이 없습니다.</p>
+  </main>
+
+  <script src="./assets/config.js"></script>
+  <script src="./assets/shared.js"></script>
+  <script src="./assets/live.js"></script>
+</body>
+</html>
