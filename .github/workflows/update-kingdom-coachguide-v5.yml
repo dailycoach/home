@@ -1,0 +1,177 @@
+name: Update KINGDOM coach guide v5
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-kingdom-coachguide-v5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch KINGDOM card coach guide
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'cards/kingdom/index.html';
+          let text = fs.readFileSync(path, 'utf8');
+
+          text = text.replace('<title>KINGDOM 대화카드 | DAILYCOACHING</title>', '<title>KINGDOM 대화카드 v5 | DAILYCOACHING</title>');
+          text = text.replace('코칭 대화를 바로 시작하도록 돕는 KINGDOM 7단계 초대카드', '코치가이드 v5가 강화된 KINGDOM 7단계 초대카드');
+          text = text.replace("const STORE = 'kingdom.dialog.card.v1';", "const STORE = 'kingdom.dialog.card.v5';");
+          text = text.replace("const moods = ['분주함','답답함','설렘','기대','흔들림','피로','괜찮음','잘 모르겠음'];", "const moods = ['분주함','답답함','피곤함','기대','흔들림','외로움','괜찮음','모르겠음'];");
+
+          const stepsBlock = String.raw`    const steps = [
+      ['문 고르기', '지금 어떤 말이 가까워요?', '고르기만 해도 괜찮아요.'],
+      ['마음 날씨', '지금 마음 날씨', '바꾸지 않아도 괜찮아요.'],
+      ['장면 하나', '떠오르는 장면 하나', '크게 말하지 않아도 됩니다.'],
+      ['씨앗', '함께 볼 씨앗', '오늘 코칭의 작은 실마리입니다.'],
+      ['방식', '시작은 이렇게', '대화의 속도와 경계를 먼저 맞춥니다.'],
+      ['바로 전', '이제 이어갈 준비', '바로 시작하기 전에 마지막으로 확인합니다.'],
+      ['시작 문장', '이 문장으로 시작해요', '이 문장 하나를 붙잡고 코칭을 바로 시작합니다.']
+    ];`;
+          text = text.replace(/    const steps = \[[\s\S]*?\n    \];(?=\n    const doors =)/, stepsBlock);
+
+          const styleInsert = String.raw`
+    .coach-title { color: #2d2722; font-weight: 950; font-size: 1rem; }
+    .coach-section { padding-top: 10px; border-top: 1px solid rgba(17,24,39,.10); }
+    .coach-section:first-child { padding-top: 0; border-top: 0; }
+    .coach-section h4 { margin: 0 0 7px; color: #2d2722; font-size: .9rem; }
+    .coach-section p { margin: 0 0 9px; }
+    .coach-note { margin: 8px 0; padding: 10px 11px; border-left: 4px solid var(--accent); border-radius: 8px; background: var(--accent-soft); color: #3c352e; }
+    .coach-grid { display: grid; gap: 9px; }
+    .coach-mini { padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: #fffdfa; }
+    .coach-mini b { display: block; margin-bottom: 5px; }
+`;
+          if (!text.includes('.coach-section h4')) {
+            text = text.replace('    .coach ul { margin: 8px 0 0; padding-left: 18px; }\n', '    .coach ul { margin: 8px 0 0; padding-left: 18px; }\n' + styleInsert);
+          }
+
+          const guideBlock = String.raw`
+    const pageGuides = [
+      {
+        role: '고객이 지금 바로 이어질 코칭대화의 입구를 스스로 고르게 합니다. KINGDOM 모델을 설명하는 시간이 아니라, 고객이 고른 단어를 존중하며 세션의 첫 방향감을 잡는 시간입니다.',
+        line: '좋아요. 오늘은 이 말이 가장 가까웠군요. 아직 깊게 말하지 않아도 괜찮습니다. 지금은 문을 고르는 정도로만 시작해도 충분합니다.',
+        stance: ['고객이 고른 단어를 그대로 다시 말해준다.', '왜 골랐는지 캐묻기보다, 그 말이 지금 가까운 이유를 부드럽게 묻는다.', '첫 장에서는 해결, 분석, 목표 설정으로 들어가지 않는다.'],
+        questions: ['이 말이 오늘 조금 가까웠던 이유가 있을까요?', '이 단어를 보자마자 떠오른 느낌이 있었나요?', '깊게 말하지 않아도 괜찮아요. 그냥 지금 가까운 정도만 확인해볼게요.'],
+        stuck: '괜찮습니다. 지금은 정확히 설명하지 않아도 됩니다. 이 단어를 오늘의 문으로 잠깐 두고 다음 카드로 넘어가볼게요.',
+        next: '그럼 이 단어를 마음 한쪽에 두고, 지금 하루의 느낌을 아주 가볍게 확인해보겠습니다.'
+      },
+      {
+        role: '고객의 현재 정서 온도를 맞추는 장입니다. 감정을 해석하거나 교정하지 않고, 지금 고객의 하루가 어떤 결로 흐르고 있는지 코치가 먼저 따라갑니다.',
+        line: '지금은 이 느낌이 함께 있군요. 이 느낌을 바꾸려고 하지 않아도 됩니다. 잠깐 옆에 두고 같이 바라보겠습니다.',
+        stance: ['감정 단어를 고르면 그 단어를 그대로 반영한다.', '여러 감정을 고르면 모순으로 보지 말고 공존으로 받아준다.', '좋은 감정과 불편한 감정 모두 세션에 들어오는 입구가 될 수 있음을 알려준다.'],
+        questions: ['그 느낌이 오늘 하루 중 언제 가장 크게 올라왔나요?', '그 느낌을 몸으로 표현하면 어디쯤에 있는 것 같나요?', '그 느낌이 지금 당장 말하고 싶은 게 있다면 뭐라고 할까요?'],
+        stuck: '말로 잘 안 잡히면 괜찮습니다. 그냥 분주함, 답답함, 괜찮음 중 어디에 조금 더 가까운지만 봐도 충분합니다.',
+        next: '이 느낌을 만든 장면이 하나 있을 수 있습니다. 다음 장에서는 마음에 남아 있는 장면 하나만 살짝 떠올려보겠습니다.'
+      },
+      {
+        role: '본격적인 탐색 전에 고객의 이야기가 붙을 수 있는 구체적 장면 하나를 확보합니다. 이 장의 목적은 원인분석이 아니라, 코칭이 시작될 실제 장면을 찾는 것입니다.',
+        line: '그 장면이 아직 마음에 남아 있군요. 오늘 코칭은 그 장면을 억지로 해석하기보다, 거기서 조심스럽게 시작해보겠습니다.',
+        stance: ['고객이 말한 장면의 사실, 감정, 해석을 섞어 판단하지 않는다.', '장면이 작아 보여도 축소하지 않는다.', '고객이 자세히 말하지 않으려 하면 깊이를 고객에게 맡긴다.'],
+        questions: ['그 장면에서 가장 선명하게 남은 순간은 어디였나요?', '그때 마음속에 제일 먼저 올라온 말은 무엇이었나요?', '이 장면을 오늘 코칭의 출발점으로 삼아도 괜찮을까요?'],
+        stuck: '괜찮습니다. 정확한 사건이 없어도 됩니다. 자꾸 떠오르는 사람, 말, 분위기, 피하고 싶은 순간 중 하나만 골라도 됩니다.',
+        next: '이 장면을 문제로 확정하지는 않고, 오늘 함께 볼 작은 씨앗으로만 잠깐 남겨보겠습니다.'
+      },
+      {
+        role: '고객의 이야기를 문제명으로 고정하지 않고, 지금 바로 이어질 코칭에서 붙잡을 작은 씨앗으로 정리합니다. 고객의 표현을 가능한 그대로 보존하는 것이 중요합니다.',
+        line: '좋아요. 이 말은 오늘 바로 이어질 코칭에서 중요한 실마리가 될 수 있겠습니다. 아직 결론을 내리지는 않고, 씨앗으로만 두겠습니다.',
+        stance: ['고객의 씨앗을 코치의 전문용어로 바꿔치기하지 않는다.', '이게 진짜 주제다라고 확정하지 않는다.', '고객이 고른 단어와 직접 입력한 문장을 우선한다.'],
+        questions: ['이 씨앗을 오늘 코칭에서 조금 더 들여다봐도 괜찮을까요?', '이 말 안에서 제일 마음이 가는 단어는 무엇인가요?', '지금은 해결보다, 무엇을 함께 봐주면 좋을지 정하는 정도로만 가보겠습니다.'],
+        stuck: '여러 개가 함께 있군요. 지금은 하나만 고르지 않아도 됩니다. 다만 코칭을 시작할 때 가장 먼저 꺼내기 쉬운 것 하나만 표시해볼까요?',
+        next: '이제 이 씨앗을 다룰 때 어떤 방식이 편한지 먼저 정하고 들어가겠습니다.'
+      },
+      {
+        role: '고객이 곧바로 이어질 코칭의 속도, 경계, 대화 방식을 선택하게 합니다. 안전한 세션 환경을 함께 만드는 합의 과정입니다.',
+        line: '좋아요. 지금부터 이어질 코칭에서는 이 방식을 지키면서 진행하겠습니다. 불편하면 중간에 멈춰도 됩니다.',
+        stance: ['고객이 고른 방식을 실제 세션 중에도 기억하고 지킨다.', '조언은 나중에, 중간에 멈춰주기 같은 선택을 방해로 보지 않는다.', '세션의 주도권 일부가 고객에게 있다는 감각을 만들어준다.'],
+        questions: ['이 방식이 편하다고 느낀 이유가 있을까요?', '오늘 대화 중 제가 특히 조심해주면 좋을 것이 있나요?', '중간에 멈추고 싶을 때 어떤 신호를 주면 좋을까요?'],
+        stuck: '경계가 강하게 나오면 방어로 해석하지 말고 안전 욕구로 받아준다. 좋습니다. 그 경계를 존중하면서 진행하겠습니다라고 확인한다.',
+        next: '방식은 확인했습니다. 이제 바로 시작하기 전, 지금 어느 정도 준비되어 있는지만 가볍게 확인하겠습니다.'
+      },
+      {
+        role: '초대카드와 본 코칭세션 사이의 마지막 문턱입니다. 고객에게 곧바로 시작된다는 예고를 주되, 압박하지 않고 현재 준비 정도와 필요한 안전장치를 확인합니다.',
+        line: '좋습니다. 이제 카드 대화는 거의 마무리하고, 바로 이어서 코칭대화로 들어가겠습니다. 시작 전에 하나만 확인하겠습니다.',
+        stance: ['준비가 낮아도 문제로 보지 않는다.', '고객이 천천히, 가볍게라고 고르면 실제 첫 질문의 깊이를 낮춘다.', '동의 없이 깊은 감정 탐색으로 들어가지 않는다.'],
+        questions: ['지금 바로 시작한다면, 어느 정도 깊이까지 괜찮을까요?', '시작 전에 제가 꼭 기억했으면 하는 말이 있나요?', '오늘은 깊이 들어가기보다 입구만 확인하는 방식도 가능합니다.'],
+        stuck: '그럼 오늘은 아주 가볍게 시작하겠습니다. 깊게 들어가는 대신, 지금 가장 덜 부담스러운 말 하나만 붙잡아보겠습니다.',
+        next: '마지막으로, 코칭을 시작할 첫 문장 하나만 정하고 바로 이어가겠습니다.'
+      },
+      {
+        role: '초대카드를 종료하고 본 코칭세션으로 즉시 전환합니다. 고객이 만든 시작 문장을 코치가 바로 받아 세션의 첫 질문으로 연결합니다.',
+        line: '좋아요. 여기까지는 문을 여는 시간이었습니다. 지금부터는 이 문장 하나를 붙잡고 코칭을 시작해볼게요.',
+        stance: ['요약을 읽어주되, 고객이 직접 고른 시작 문장을 가장 크게 존중한다.', '카드 결과를 평가하거나 해석하지 않는다.', '해결책, 과제, 진단으로 바로 가지 않는다.'],
+        questions: ['이 문장에서 지금 가장 먼저 살펴보고 싶은 단어는 무엇인가요?', '이 말을 꺼내게 된 가장 가까운 장면은 어디에 있나요?', '제가 먼저 들어줬으면 하는 부분과, 아직 건드리지 않았으면 하는 부분이 있을까요?'],
+        stuck: '좋습니다. 오늘은 짧게 시작해도 됩니다. 이 문장을 말할 때 마음 안에서 조금 움직인 부분이 있었나요?',
+        next: '1단계: 이 문장부터 시작해도 괜찮을까요? 2단계: 문장 안의 핵심 단어를 하나 고릅니다. 3단계: 그 단어가 나온 장면, 감정, 바람 중 하나로 천천히 들어갑니다.'
+      }
+    ];
+    const doorGuides = {
+      K: { purpose: '고객이 지금부터 코칭에서 다룰 말을 스스로 고르게 돕습니다. 여기서는 선택권을 회복시키되 해결을 시작하지 않습니다.', listen: ['끌려감','무기력','외부 기준','통제 불가능감','작은 선택 가능성'], avoid: ['바로 시간관리 조언','의지 부족 해석','목표 확정'], bridge: '좋아요. 여기까지는 문을 여는 시간이었고, 지금부터는 내 페이스라는 말에서 코칭을 시작해볼게요.' },
+      I: { purpose: '정체성 개입 전, 고객이 자기표현을 안전하게 꺼낼 수 있도록 낮은 문턱을 만듭니다.', listen: ['자기비난','비교','타인의 시선','되고 싶은 모습','자기언어'], avoid: ['성급한 긍정','낙인 반박','정체성 규정'], bridge: '좋아요. 지금부터는 고객님의 말 속에서 나다움을 함께 찾아보는 코칭으로 이어가겠습니다.' },
+      N: { purpose: '고객의 서사를 분석하기보다, 본 세션으로 가져올 이야기의 입구를 확보합니다.', listen: ['반복어','감정 이름','자기비난','억울함','숨은 욕구'], avoid: ['원인 분석 과잉','문제명 붙이기','성급한 재해석'], bridge: '좋아요. 지금부터는 그 반복되는 말을 중심에 두고, 본 코칭대화를 시작하겠습니다.' },
+      G: { purpose: '강점 코칭을 본격 진행하기 전, 고객이 내 안의 힘을 부담 없이 말할 수 있게 합니다.', listen: ['작은 성취','타인에게 준 도움','버팀','자연스러운 재능','인정 욕구'], avoid: ['과한 칭찬','성취 압박','강점 단정'], bridge: '좋아요. 지금부터는 그 작은 힘을 단서로 삼아 코칭을 시작해보겠습니다.' },
+      D: { purpose: '책임을 압박하지 않고, 고객이 안전하게 부담을 꺼내도록 돕습니다.', listen: ['떠안음','경계 어려움','미안함','억울함','과잉책임'], avoid: ['책임 훈계','네 몫이라고 몰기','해결책 지시'], bridge: '좋아요. 지금부터는 그 부담을 중심으로, 무엇이 내 몫이고 무엇은 내려놓을 수 있는지 함께 보겠습니다.' },
+      O: { purpose: '실행계획을 세우기 전, 고객이 부담 없이 가능성을 말하게 하는 초대감을 만듭니다.', listen: ['미룸','막막함','해보고 싶은 마음','도움 자원','작은 가능성'], avoid: ['계획표 작성','약속 받아내기','의지 부족 해석'], bridge: '좋아요. 지금부터는 이 작은 시작을 중심으로 코칭대화를 이어가겠습니다.' },
+      M: { purpose: '의미를 강요하지 않고, 고객이 준비된 만큼 경험을 세션 안으로 들여오게 합니다.', listen: ['남은 감정','후회','배움','감사','방향 질문'], avoid: ['억지 긍정','상처 미화','성장으로 포장'], bridge: '좋아요. 지금부터는 그 경험이 남긴 것을 중심으로 코칭을 시작해보겠습니다.' }
+    };
+`;
+          if (!text.includes('const pageGuides = [')) {
+            text = text.replace(/    const ready = \[[^\n]+\];\n/, match => match + guideBlock + '\n');
+          }
+
+          text = text.replace("    let state = load();\n    let step =", "    let state = load();\n    if (new URLSearchParams(location.search).get('coach') === '1') state.coach = true;\n    let step =");
+          text = text.replace("      document.body.classList.toggle('coach-on', !!state.coach);\n      const [title, heading, lead] = steps[step];", "      document.body.classList.toggle('coach-on', !!state.coach);\n      const coachToggle = document.getElementById('coachToggle');\n      if (coachToggle) coachToggle.textContent = state.coach ? '고객 보기' : '코치 보기';\n      const [title, heading, lead] = steps[step];");
+
+          const coachRender = String.raw`      const guide = pageGuides[step] || pageGuides[0];
+      const doorGuide = doorGuides[d.code] || { purpose: d.coach, listen: [], avoid: [], bridge: d.coach };
+      const listItems = (items) => items.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('coachBox').innerHTML = [
+        '<div class="coach-title">코치 전용 보기 · v5</div>',
+        '<div class="coach-section"><h4>이 장의 역할</h4><p>' + esc(guide.role) + '</p><div class="coach-note"><b>진행 멘트</b><br>' + esc(guide.line) + '</div></div>',
+        '<div class="coach-section"><h4>코치의 태도</h4><ul>' + listItems(guide.stance) + '</ul></div>',
+        '<div class="coach-section"><h4>짧은 후속 질문</h4><ul>' + listItems(guide.questions) + '</ul><div class="coach-note"><b>답변이 짧거나 막힐 때</b><br>' + esc(guide.stuck) + '</div></div>',
+        '<div class="coach-section coach-grid"><div class="coach-mini"><b>선택한 문에서 들을 것</b><ul>' + listItems(doorGuide.listen) + '</ul></div><div class="coach-mini"><b>피할 것</b><ul>' + listItems(doorGuide.avoid) + '</ul></div></div>',
+        '<div class="coach-section"><h4>문별 코칭 목적</h4><p>' + esc(doorGuide.purpose) + '</p><div class="coach-note"><b>다음 연결</b><br>' + esc(guide.next) + '</div><div class="coach-note"><b>즉시 세션 브릿지</b><br>' + esc(doorGuide.bridge) + '</div></div>'
+      ].join('');
+      const copyRows = state.coach ? [...rows, ['코치 진행 멘트', guide.line], ['즉시 세션 브릿지', doorGuide.bridge]] : rows;
+      document.getElementById('copyText').value = copyRows.map(([key, value]) => `\${key}: \${value}`).join('\n');`;
+          text = text.replace(/      document\.getElementById\('coachBox'\)\.innerHTML = `<b>코치 포인트<\/b>[\s\S]*?document\.getElementById\('copyText'\)\.value = rows\.map\(\(\[key, value\]\) => `\$\{key\}: \$\{value\}`\)\.join\('\\n'\);/, () => coachRender);
+
+          const tapBlock = String.raw`    let coachTapCount = 0;
+    let coachTapTimer = null;
+    document.getElementById('brandMark').addEventListener('click', () => {
+      coachTapCount += 1;
+      clearTimeout(coachTapTimer);
+      coachTapTimer = setTimeout(() => { coachTapCount = 0; }, 900);
+      if (coachTapCount >= 5) {
+        state.coach = !state.coach;
+        coachTapCount = 0;
+        save();
+        render();
+        toast(state.coach ? '코치 모드를 켰습니다.' : '고객 보기로 전환했습니다.');
+      }
+    });`;
+          if (!text.includes('coachTapCount')) {
+            text = text.replace("    document.getElementById('coachToggle').addEventListener('click', () => { state.coach = !state.coach; save(); render(); });\n", "    document.getElementById('coachToggle').addEventListener('click', () => { state.coach = !state.coach; save(); render(); });\n" + tapBlock + '\n');
+          }
+
+          fs.writeFileSync(path, text);
+          NODE
+      - name: Commit coach guide update
+        run: |
+          if git diff --quiet -- cards/kingdom/index.html; then
+            echo "No KINGDOM coach guide changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cards/kingdom/index.html
+          git commit -m "Update KINGDOM coach guide to v5"
+          git push
