@@ -949,7 +949,13 @@
           </div>
         </div>
         <a class="nav-link" href="/lcms/" data-route="lcms">LCMS</a>
-        <a class="nav-link" href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
+        <div class="nav-group">
+          <button class="nav-button" type="button" aria-haspopup="true">활동도구 <span aria-hidden="true">⌄</span></button>
+          <div class="dropdown" role="menu">
+            <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>
+            <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>
+          </div>
+        </div>
         <a class="nav-link" href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
       </nav>
 
@@ -1077,6 +1083,7 @@
           <h3>활동도구</h3>
           <p>교육과 코칭 장면에서 바로 활용할 수 있는 진행 도구입니다.</p>
           <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>
+          <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>
         </article>
 
         <article class="category" data-category="contents">
@@ -1110,6 +1117,7 @@
           <a href="/cards/talkcard180/" data-route="talkcard180">카드도구</a>
           <a href="/lcms/" data-route="lcms">LCMS</a>
           <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
+          <a href="/activities/live-board/" data-route="liveBoard">라이브보드</a>
           <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
         </div>
       </div>
@@ -1157,6 +1165,7 @@
       icf8: '/tests/icf8/',
       kca8: '/tests/kca8/',
       wildernessSurvival: '/activities/wilderness-survival/',
+      liveBoard: '/activities/live-board/',
       spiritualHero: '/spiritual/hero/',
       pagesJson: '/pages.json'
     });
