@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>LCMS 데이터기반 맞춤형 진로 교육 인프라</title>
+  <style>
+    :root {
+      --bg: #04060b;
+      --line: rgba(255,255,255,.12);
+      --text: #fff;
+      --shadow: 0 18px 40px rgba(0,0,0,.36);
+      --safe-top: env(safe-area-inset-top);
+      --safe-bottom: env(safe-area-inset-bottom);
+      --accent: #1f4fc6;
+      --accent-2: #3f79ff;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; height: 100%; background: #000; overflow: hidden; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; border: 0; cursor: pointer; }
+    .viewport { position: relative; width: 100vw; height: 100dvh; background: #000; }
+    .carousel {
+      width: 100%; height: 100%; display: flex; overflow-x: auto; overflow-y: hidden;
+      scroll-snap-type: x mandatory; scroll-snap-stop: always; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; touch-action: pan-x; overscroll-behavior-x: contain; scroll-behavior: smooth;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .slide { flex: 0 0 100vw; width: 100vw; height: 100dvh; scroll-snap-align: start; position: relative; overflow: hidden; background: #000; }
+    .visual-stage, .final-stage { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; }
+    .bg-blur {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      filter: blur(26px) saturate(.98); transform: scale(1.08); opacity: .94;
+    }
+    .bg-dim {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,.04), rgba(0,0,0,.42) 68%, rgba(0,0,0,.72));
+    }
+    .hero-image {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; z-index: 2;
+      user-select: none; -webkit-user-drag: none; transition: transform .25s ease;
+    }
+
+    .ui-top, .ui-bottom { position: fixed; left: 0; right: 0; z-index: 20; transition: opacity .25s ease, visibility .25s ease; }
+    .ui-top {
+      top: 0; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      padding: calc(14px + var(--safe-top)) 14px 0 14px; pointer-events: none;
+    }
+    .ui-bottom {
+      bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 10px;
+      padding: 0 16px calc(14px + var(--safe-bottom)); pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.34) 30%, rgba(0,0,0,.6) 100%);
+    }
+    .ui-group {
+      display: flex; align-items: center; gap: 8px; pointer-events: auto; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .counter, .jump-last, .fullscreen-btn, .zoom-btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 0 14px;
+      border-radius: 999px; background: rgba(0,0,0,.4); border: 1px solid var(--line); backdrop-filter: blur(10px);
+      color: #fff; font-weight: 700; font-size: 13px; box-shadow: var(--shadow); white-space: nowrap;
+    }
+    .jump-last { background: rgba(22,57,136,.86); }
+    .fullscreen-btn { background: linear-gradient(135deg, var(--accent-2), var(--accent)); }
+    .zoom-btn { background: rgba(255,255,255,.12); }
+
+    .dots {
+      pointer-events: auto; display: flex; align-items: center; gap: 7px; padding: 10px 12px; border-radius: 999px;
+      background: rgba(0,0,0,.34); border: 1px solid var(--line); backdrop-filter: blur(10px);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer;
+      transition: transform .2s ease, background .2s ease; border: 0; padding: 0;
+    }
+    .dot.active { background: #fff; transform: scale(1.28); }
+
+    .hint {
+      pointer-events: none; padding: 8px 12px; border-radius: 999px; background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.76); font-size: 12px; opacity: 1;
+      transition: opacity .5s ease; text-align: center;
+    }
+    .hint.hidden { opacity: 0; }
+
+    .rotate-overlay {
+      position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center;
+      padding: 24px; background: rgba(0,0,0,.52); backdrop-filter: blur(10px);
+      opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease;
+    }
+    .rotate-overlay.show { opacity: 1; visibility: visible; }
+    .rotate-card {
+      width: min(92vw, 380px); padding: 22px 20px; border-radius: 24px; background: rgba(10,14,24,.82);
+      border: 1px solid rgba(255,255,255,.12); box-shadow: 0 20px 50px rgba(0,0,0,.35); text-align: center; color: #fff;
+    }
+    .rotate-icon { font-size: 34px; line-height: 1; margin-bottom: 14px; }
+    .rotate-title { margin: 0 0 8px; font-size: 1.05rem; font-weight: 800; line-height: 1.5; }
+    .rotate-desc { margin: 0 0 16px; color: rgba(255,255,255,.72); font-size: .92rem; line-height: 1.65; }
+    .rotate-actions { display: flex; flex-direction: column; gap: 10px; }
+    .rotate-primary, .rotate-secondary {
+      min-height: 46px; border-radius: 14px; color: #fff; font-weight: 800;
+    }
+    .rotate-primary { background: linear-gradient(135deg, var(--accent-2), var(--accent)); }
+    .rotate-secondary { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1); }
+    .rotate-support { margin-top: 12px; font-size: 12px; color: rgba(255,255,255,.58); line-height: 1.5; }
+
+    .landscape-mode .ui-top, .landscape-mode .ui-bottom, .fullscreen-active .ui-top, .fullscreen-active .ui-bottom {
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+
+    .zoomed .hero-image { transform: scale(1.16); transform-origin: center center; }
+
+    .slide-final { background: linear-gradient(180deg, #061430 0%, #03060d 100%); }
+    .final-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(67,132,255,.25), transparent 22%),
+        radial-gradient(circle at 82% 16%, rgba(124,189,255,.18), transparent 18%),
+        radial-gradient(circle at 80% 82%, rgba(32,72,180,.22), transparent 22%);
+    }
+    .final-link {
+      position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .final-poster {
+      position: relative; inset: auto; width: auto; height: auto; max-width: 99vw; max-height: calc(100dvh - 6px);
+      object-fit: contain; filter: drop-shadow(0 18px 40px rgba(0,0,0,.32)); transition: transform .25s ease;
+      transform: scale(1.24); transform-origin: center center;
+    }
+    .landscape-mode .final-poster, .fullscreen-active .final-poster {
+      max-width: 100vw; max-height: 100dvh; transform: scale(1.32);
+    }
+    .zoomed .final-poster { transform: scale(1.38); }
+
+    .status-toast {
+      position: fixed; left: 50%; top: calc(18px + var(--safe-top)); transform: translateX(-50%); z-index: 50;
+      padding: 10px 14px; border-radius: 999px; background: rgba(10,14,24,.86); border: 1px solid rgba(255,255,255,.12);
+      color: #fff; font-size: 12px; font-weight: 700; opacity: 0; visibility: hidden;
+      transition: opacity .22s ease, visibility .22s ease; box-shadow: var(--shadow); max-width: calc(100vw - 32px); text-align: center;
+    }
+    .status-toast.show { opacity: 1; visibility: visible; }
+
+    @media (max-width: 640px) {
+      .ui-top { padding-left: 10px; padding-right: 10px; }
+      .ui-bottom { padding-left: 10px; padding-right: 10px; }
+      .counter, .jump-last, .fullscreen-btn, .zoom-btn { min-height: 36px; padding-inline: 12px; font-size: 12px; }
+      .dots { gap: 6px; padding: 9px 10px; }
+      .dot { width: 7px; height: 7px; }
+      .hint { font-size: 11px; }
+      .zoomed .hero-image { transform: scale(1.22); }
+      .final-poster { max-width: 100vw; max-height: 100dvh; transform: scale(1.28); }
+      .landscape-mode .final-poster, .fullscreen-active .final-poster { transform: scale(1.38); }
+      .zoomed .final-poster { transform: scale(1.44); }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport" id="viewport">
+    <div class="status-toast" id="statusToast"></div>
+
+    <div class="ui-top">
+      <div class="counter" id="counter">1 / 10</div>
+      <div class="ui-group">
+        <button class="fullscreen-btn" id="fullscreenBtn" type="button">전체화면</button>
+        <button class="zoom-btn" id="zoomBtn" type="button">확대보기</button>
+        <a class="jump-last" href="#final" id="jumpLast">마지막 장</a>
+      </div>
+    </div>
+
+    <main class="carousel" id="carousel">
+      
+      <section class="slide slide-image" data-index="0" aria-label="이미지 1" id="slide-1">
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_1.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_1.jpg" alt="안내 이미지 1" loading="eager" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="1" aria-label="이미지 2" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_2.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_2.jpg" alt="안내 이미지 2" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="2" aria-label="이미지 3" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_3.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_3.jpg" alt="안내 이미지 3" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="3" aria-label="이미지 4" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_4.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_4.jpg" alt="안내 이미지 4" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="4" aria-label="이미지 5" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_5.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_5.jpg" alt="안내 이미지 5" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="5" aria-label="이미지 6" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_6.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_6.jpg" alt="안내 이미지 6" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="6" aria-label="이미지 7" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_7.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_7.jpg" alt="안내 이미지 7" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="7" aria-label="이미지 8" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_8.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_8.jpg" alt="안내 이미지 8" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-image" data-index="8" aria-label="이미지 9" >
+        <div class="visual-stage">
+          <div class="bg-blur" style="background-image:url('https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_9.jpg')"></div>
+          <div class="bg-dim"></div>
+          <img class="hero-image" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/lcms_eb8db0ec9db4ed84b0_eab8b0ebb098_ed8f89ec839d_eca784eba19c_ec9db8ed9484eb9dbc_9.jpg" alt="안내 이미지 9" loading="lazy" referrerpolicy="no-referrer" />
+        </div>
+      </section>
+    
+      <section class="slide slide-final" data-index="9" aria-label="설문지 바로가기" id="final">
+        <div class="final-stage">
+          <div class="final-bg"></div>
+          <a class="final-link" href="https://forms.gle/DogHYoo8Xd9iKwT39" target="_blank" rel="noopener noreferrer" aria-label="LCMS 신청서 열기">
+            <img class="final-poster" src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/04/chatgpt-image-2026eb8584-4ec9b94-22ec9dbc-ec98a4eca084-10_46_00.png" alt="LCMS 신청서 바로가기 이미지" referrerpolicy="no-referrer" />
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="ui-bottom">
+      <div class="hint" id="hint">세로에서는 전체화면 또는 확대보기, 가로에서는 더 크게 볼 수 있습니다.</div>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <div class="rotate-overlay" id="rotateOverlay" aria-live="polite">
+      <div class="rotate-card">
+        <div class="rotate-icon">↻</div>
+        <h2 class="rotate-title">이미지를 더 크게 보려면 휴대폰을 가로로 돌려주세요</h2>
+        <p class="rotate-desc">회전 잠금이 켜져 있으면 자동 회전이 되지 않을 수 있습니다. 아래 버튼으로 전체화면 또는 확대보기를 먼저 사용할 수 있습니다.</p>
+        <div class="rotate-actions">
+          <button class="rotate-primary" id="overlayFullscreenBtn" type="button">전체화면으로 보기</button>
+          <button class="rotate-secondary" id="overlayZoomBtn" type="button">세로에서도 크게 보기</button>
+        </div>
+        <div class="rotate-support">일부 브라우저에서는 전체화면 진입 후에도 주소창이 남을 수 있습니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const slides = [...document.querySelectorAll('.slide')];
+    const dotsWrap = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    const jumpLast = document.getElementById('jumpLast');
+    const hint = document.getElementById('hint');
+    const rotateOverlay = document.getElementById('rotateOverlay');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const overlayFullscreenBtn = document.getElementById('overlayFullscreenBtn');
+    const zoomBtn = document.getElementById('zoomBtn');
+    const overlayZoomBtn = document.getElementById('overlayZoomBtn');
+    const statusToast = document.getElementById('statusToast');
+    let currentIndex = 0;
+    let toastTimer = null;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `${i + 1}번째 화면으로 이동`);
+      dot.addEventListener('click', () => scrollToIndex(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = [...document.querySelectorAll('.dot')];
+
+    function showToast(message) {
+      statusToast.textContent = message;
+      statusToast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => statusToast.classList.remove('show'), 2200);
+    }
+
+    function slideWidth() { return window.innerWidth; }
+    function isMobileLike() {
+      return window.matchMedia('(max-width: 900px)').matches || 'ontouchstart' in window;
+    }
+    function isPortrait() { return window.matchMedia('(orientation: portrait)').matches; }
+    function isFullscreen() { return !!document.fullscreenElement; }
+
+    async function enterFullscreen() {
+      const target = document.documentElement;
+      if (!target.requestFullscreen) {
+        showToast('이 브라우저는 전체화면 지원이 제한됩니다.');
+        return;
+      }
+      try {
+        await target.requestFullscreen();
+        document.body.classList.add('fullscreen-active');
+        showToast('전체화면으로 전환했습니다.');
+      } catch (e) {
+        showToast('전체화면 전환이 제한되었습니다.');
+      }
+    }
+
+    function toggleZoom() {
+      document.body.classList.toggle('zoomed');
+      const active = document.body.classList.contains('zoomed');
+      zoomBtn.textContent = active ? '기본크기' : '확대보기';
+      overlayZoomBtn.textContent = active ? '기본 크기로 보기' : '세로에서도 크게 보기';
+      showToast(active ? '이미지를 더 크게 표시합니다.' : '기본 크기로 돌아왔습니다.');
+      updateOrientationUI();
+    }
+
+    function updateOrientationUI() {
+      const showOverlay = isMobileLike() && isPortrait() && !document.body.classList.contains('zoomed');
+      rotateOverlay.classList.toggle('show', showOverlay);
+      document.body.classList.toggle('landscape-mode', isMobileLike() && !isPortrait());
+      document.body.classList.toggle('fullscreen-active', isFullscreen());
+    }
+
+    function scrollToIndex(index) {
+      const target = Math.max(0, Math.min(index, slides.length - 1));
+      carousel.scrollTo({ left: target * slideWidth(), behavior: 'smooth' });
+    }
+
+    function updateUI(index) {
+      currentIndex = index;
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      jumpLast.textContent = index === slides.length - 1 ? '설문 열기' : '마지막 장';
+      if (index > 0) hint.classList.add('hidden');
+    }
+
+    let ticking = false;
+    carousel.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const nextIndex = Math.round(carousel.scrollLeft / slideWidth());
+        if (nextIndex !== currentIndex) updateUI(nextIndex);
+        ticking = false;
+      });
+    }, { passive: true });
+
+    jumpLast.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentIndex === slides.length - 1) {
+        window.open('https://forms.gle/DogHYoo8Xd9iKwT39', '_blank', 'noopener');
+      } else {
+        scrollToIndex(slides.length - 1);
+      }
+    });
+
+    fullscreenBtn.addEventListener('click', enterFullscreen);
+    overlayFullscreenBtn.addEventListener('click', enterFullscreen);
+    zoomBtn.addEventListener('click', toggleZoom);
+    overlayZoomBtn.addEventListener('click', toggleZoom);
+
+    document.addEventListener('fullscreenchange', updateOrientationUI);
+    setTimeout(() => hint.classList.add('hidden'), 3200);
+    window.addEventListener('resize', () => { scrollToIndex(currentIndex); updateOrientationUI(); });
+    window.addEventListener('orientationchange', updateOrientationUI);
+
+    updateUI(0);
+    updateOrientationUI();
+  </script>
+</body>
+</html>
+
