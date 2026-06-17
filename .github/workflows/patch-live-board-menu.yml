@@ -23,16 +23,20 @@ jobs:
           const path = 'index.html';
           let html = fs.readFileSync(path, 'utf8');
 
+          const activityDropdown = [
+            '        <div class="nav-group">',
+            '          <button class="nav-button" type="button" aria-haspopup="true">활동도구 <span aria-hidden="true">⌄</span></button>',
+            '          <div class="dropdown" role="menu">',
+            '            <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>',
+            '            <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>',
+            '          </div>',
+            '        </div>'
+          ].join('\n');
+
           const replacements = [
             [
               '        <a class="nav-link" href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>',
-              `        <div class="nav-group">
-          <button class="nav-button" type="button" aria-haspopup="true">활동도구 <span aria-hidden="true">⌄</span></button>
-          <div class="dropdown" role="menu">
-            <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>
-            <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>
-          </div>
-        </div>`
+              activityDropdown
             ],
             [
               '          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>\n        </article>',
