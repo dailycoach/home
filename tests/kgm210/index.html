@@ -1,0 +1,2136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KGM210 성장코칭 도구 · 목록형 v2.1</title>
+  <style>
+:root{--bg:#090d16;--card:rgba(18,25,42,.82);--ink:#f7f1e6;--muted:#bdb5a8;--line:rgba(255,255,255,.12);--gold:#d9b665;--gold2:#a8732d;--soft:rgba(255,255,255,.06);--deep:#0e1424;--green:#9fd6b4;--blue:#98b9ff;--red:#e9a6a6}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#29324c 0,#101626 42%,#070a11 100%);color:var(--ink);word-break:keep-all}.ambient{position:fixed;border-radius:999px;filter:blur(50px);opacity:.28;pointer-events:none}.a1{width:360px;height:360px;background:#d9b665;top:-120px;right:-90px}.a2{width:300px;height:300px;background:#6177d8;bottom:-100px;left:-90px}.app{max-width:1120px;margin:0 auto;padding:22px;position:relative}.topbar{display:flex;align-items:center;gap:12px;padding:14px 0}.brandMark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:grid;place-items:center;color:#171107;font-weight:1000}.topbar b{display:block}.topbar span{display:block;color:var(--muted);font-size:12px}.topbar button{margin-left:auto}.hero{padding:8px 0 24px}.heroPanel{display:grid;grid-template-columns:1.45fr .75fr;gap:22px;align-items:stretch;padding:34px;border:1px solid var(--line);border-radius:34px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.025));box-shadow:0 24px 80px rgba(0,0,0,.28);overflow:hidden}.eyebrow{letter-spacing:.18em;color:var(--gold);font-size:12px;font-weight:900;text-transform:uppercase}.hero h1{font-size:54px;letter-spacing:-.04em;margin:8px 0 12px}.hero p{max-width:720px;color:var(--muted);line-height:1.75;font-size:17px}.heroActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.glassStats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.glassStats div,.card{background:var(--card);border:1px solid var(--line);backdrop-filter:blur(16px);box-shadow:0 20px 70px rgba(0,0,0,.24)}.glassStats div{border-radius:24px;padding:20px;display:flex;flex-direction:column;justify-content:center;min-height:112px}.glassStats strong{font-size:38px;color:var(--gold);letter-spacing:-.04em}.glassStats span{color:var(--muted)}.card{padding:30px;border-radius:28px;margin-bottom:22px}.hidden{display:none!important}.sectionHead,.testTop,.resultHead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.pill,.tag{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(217,182,101,.13);border:1px solid rgba(217,182,101,.28);color:#f2d798;font-size:12px;font-weight:800}.notice,.reportNotice{background:linear-gradient(135deg,rgba(217,182,101,.12),rgba(255,255,255,.04));border-left:4px solid var(--gold);padding:17px;border-radius:16px;line-height:1.75;color:#e5ded0}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.field{display:block;color:var(--muted);font-weight:700}input{width:100%;margin-top:8px;padding:15px 16px;background:rgba(5,8,16,.55);border:1px solid var(--line);border-radius:15px;color:var(--ink);font-size:16px;outline:none}input:focus{border-color:rgba(217,182,101,.7);box-shadow:0 0 0 4px rgba(217,182,101,.1)}.checkGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0;color:var(--muted)}.checkGrid label{background:rgba(255,255,255,.04);padding:12px;border-radius:14px;border:1px solid var(--line)}button{border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--ink);padding:13px 18px;border-radius:15px;font-weight:900;cursor:pointer;transition:.18s}button:hover{transform:translateY(-1px);border-color:rgba(217,182,101,.45)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#171107;border:0}.ghost{background:rgba(255,255,255,.04)}.big{padding:15px 22px}.wide{width:100%;font-size:17px}.progressBox{text-align:right}.progressBox b{display:block;font-size:26px;color:var(--gold)}.progressBox small{color:var(--muted)}.bar{height:12px;background:rgba(0,0,0,.25);border-radius:99px;overflow:hidden;margin:16px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:.25s}.domainStrip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:18px}.domainStrip button{padding:8px 6px;border-radius:11px;font-size:12px;color:var(--muted)}.domainStrip button.on{background:rgba(217,182,101,.18);color:var(--gold);border-color:rgba(217,182,101,.42)}.domainStrip button.done{color:var(--green)}.question{background:rgba(3,7,15,.38);border:1px solid var(--line);border-radius:24px;padding:28px}.meta{color:#f0d48c;font-weight:900;margin-bottom:12px}#qText{font-size:27px;line-height:1.55;margin:0 0 26px;letter-spacing:-.02em}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.scale button{min-height:92px;background:rgba(255,255,255,.055)}.scale button.active{outline:3px solid rgba(217,182,101,.9);background:rgba(217,182,101,.16);box-shadow:0 12px 30px rgba(0,0,0,.18)}.scale b{display:block;font-size:24px;color:var(--gold);margin-bottom:5px}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}.small{color:var(--muted);line-height:1.65}.resultActions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.resultGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch;margin:18px 0}canvas{width:100%;height:auto;background:rgba(3,7,15,.4);border:1px solid var(--line);border-radius:22px}.summary{display:grid;gap:12px}.summary div,.domainCard,.subScores>div,.coachQuestions>div,.narrative{background:rgba(3,7,15,.36);border:1px solid var(--line);border-radius:20px;padding:17px}.summary b,.subScores b,.coachQuestions b{display:block;color:var(--gold);margin-bottom:8px}.narrative{line-height:1.85;color:#e6dfd2}.domainCards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.domainCard h4{margin:0 0 8px;color:var(--gold);font-size:20px}.scoreLine{display:flex;align-items:center;gap:10px}.score{font-size:32px;font-weight:1000;letter-spacing:-.04em}.meter{height:9px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden;flex:1}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold))}.domainCard p{line-height:1.72}.subScores{display:grid;grid-template-columns:1fr 1fr;gap:12px;color:var(--muted)}.scoreRows{display:grid;gap:9px}.scoreRow{display:grid;grid-template-columns:100px 1fr 46px;gap:8px;align-items:center}.coachQuestions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:820px){.app{padding:14px}.heroPanel,.formGrid,.checkGrid,.resultGrid,.domainCards,.subScores,.coachQuestions{grid-template-columns:1fr}.hero h1{font-size:39px}.glassStats{grid-template-columns:1fr 1fr}.scale{grid-template-columns:1fr}#qText{font-size:21px}.sectionHead,.testTop,.resultHead{flex-direction:column}.progressBox{text-align:left}.domainStrip{grid-template-columns:repeat(2,1fr)}}@media print{body{background:white;color:#111}.ambient,.hero,#intro,#test,.nav,button{display:none!important}.app{max-width:none;padding:0}.card{box-shadow:none;border:0;background:white;padding:0}.reportNotice,.small,.domainCard,.summary div,.subScores>div,.coachQuestions>div,.narrative{color:#111;background:#fff;border:1px solid #ddd}.resultGrid{grid-template-columns:1fr}.domainCards{grid-template-columns:1fr 1fr}.eyebrow,.domainCard h4,.summary b{color:#7a581d}canvas{border:1px solid #ddd;background:white;max-height:420px;width:auto;max-width:100%}}
+.domainOverview{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:18px}.domainOverviewCard{min-height:118px;text-align:left;background:rgba(3,7,15,.34);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:7px}.domainOverviewCard span{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:.06em}.domainOverviewCard b{font-size:17px}.domainOverviewCard em{font-style:normal;color:var(--muted);font-size:12px}.domainOverviewCard i{display:block;height:7px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden;margin-top:auto}.domainOverviewCard u{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));text-decoration:none}.domainOverviewCard.on{border-color:rgba(217,182,101,.55);background:rgba(217,182,101,.11)}.domainOverviewCard.complete b,.domainOverviewCard.complete em{color:var(--green)}.domainGuide{padding:14px 16px;margin:0 0 14px;background:rgba(217,182,101,.09);border:1px solid rgba(217,182,101,.18);border-radius:16px;color:var(--muted);line-height:1.65}.domainGuide b{color:var(--gold)}.domainGuide span{font-size:13px}.domainStrip button{display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;pointer-events:none}.domainStrip button b{font-size:13px;color:var(--gold)}.domainStrip small{font-size:11px;color:inherit}.totalBar{height:6px;margin-top:-8px;opacity:.55}.domainBar:before{content:'현재 영역 진행률';position:absolute;transform:translateY(-18px);font-size:11px;color:var(--muted)}.bar{position:relative}.domainFinishScore{display:flex;align-items:center;gap:12px;margin-bottom:14px}.domainFinishScore b{font-size:44px;color:var(--gold);letter-spacing:-.04em}.domainCompleteCard{max-width:760px;margin-left:auto;margin-right:auto}@media(max-width:820px){.domainOverview{grid-template-columns:1fr 1fr}.domainOverviewCard{min-height:98px}}@media print{.domainOverview,.domainGuide,.domainCompleteCard,.totalBar{display:none!important}}
+.growthIdentity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.growthIdentity>div{background:linear-gradient(135deg,rgba(217,182,101,.18),rgba(255,255,255,.04));border:1px solid rgba(217,182,101,.26);border-radius:22px;padding:20px}.growthIdentity span{display:block;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.08em}.growthIdentity b{display:block;font-size:32px;color:var(--gold);letter-spacing:-.04em;margin:5px 0}.growthIdentity em{font-style:normal;color:#e6dfd2;line-height:1.5}.growthMap{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:14px 0 20px}.mapNode{min-height:190px;position:relative;overflow:hidden;background:rgba(3,7,15,.36);border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;justify-content:flex-end}.mapNode strong{position:absolute;top:13px;left:14px;width:34px;height:34px;border-radius:12px;background:rgba(217,182,101,.14);display:grid;place-items:center;color:var(--gold);z-index:2}.mapNode b{font-size:19px;z-index:2}.mapNode span{color:var(--muted);z-index:2}.mapNode i{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(217,182,101,.45),rgba(217,182,101,.05));z-index:1}.mapNode.strength{border-color:rgba(159,214,180,.45)}.mapNode.priority{border-color:rgba(233,166,166,.45)}.reliabilityBox,.practitionerReport{margin-bottom:18px}.reliabilityBox .summary{grid-template-columns:1fr}.prGrid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:12px}.prGrid>div{background:rgba(3,7,15,.36);border:1px solid var(--line);border-radius:20px;padding:17px}.prGrid b{display:block;color:var(--gold);margin-bottom:8px}.prGrid p{color:var(--muted);line-height:1.55}.tag.priority{background:rgba(233,166,166,.13);border-color:rgba(233,166,166,.32);color:#f1b8b8}.tag.check{background:rgba(217,182,101,.13);border-color:rgba(217,182,101,.32);color:#f2d798}.tag.stable{background:rgba(152,185,255,.13);border-color:rgba(152,185,255,.32);color:#bdd0ff}.tag.strength{background:rgba(159,214,180,.13);border-color:rgba(159,214,180,.32);color:#b8e6c8}@media(max-width:820px){.growthIdentity,.growthMap,.prGrid{grid-template-columns:1fr}.mapNode{min-height:100px}}@media print{.growthIdentity>div,.mapNode,.prGrid>div{background:#fff;border:1px solid #ddd;color:#111}.growthIdentity b,.mapNode strong,.prGrid b{color:#7a581d}.growthMap{grid-template-columns:repeat(7,1fr)}.mapNode{min-height:120px}.mapNode i{background:#eee}.resultActions,#backToTestBtn,#resetBtn{display:none!important}}
+
+/* v2.3 coaching-tool update */
+.heroPanel{position:relative}.heroPanel:after{content:"코칭 대화용";position:absolute;right:26px;top:22px;border:1px solid rgba(217,182,101,.32);color:#f2d798;border-radius:999px;padding:8px 12px;background:rgba(217,182,101,.12);font-size:12px;font-weight:900}.question{border:1px solid rgba(217,182,101,.22);background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(217,182,101,.055));position:relative}.question:before{content:"성장질문";position:absolute;top:-13px;left:20px;background:#12192a;border:1px solid rgba(217,182,101,.3);color:#f2d798;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:900;letter-spacing:.12em}.domainGuide{background:rgba(159,214,180,.08);border-color:rgba(159,214,180,.22)}.meta{opacity:.65}.scale button{min-height:74px}.scale button:hover{background:rgba(217,182,101,.15)}.growthIdentity div{background:linear-gradient(135deg,rgba(159,214,180,.12),rgba(255,255,255,.04))}.narrative{font-size:18px;line-height:1.9;border-left:4px solid var(--green)}.coachQuestions,.actionCards,.sessionGuide{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.coachQuestions div,.actionCards div,.sessionGuide div{border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:18px;padding:18px;line-height:1.65}.coachQuestions b,.actionCards b,.sessionGuide b{display:block;color:var(--gold);margin-bottom:8px}.actionCards div{background:linear-gradient(135deg,rgba(217,182,101,.12),rgba(255,255,255,.04))}.sessionGuide div{background:linear-gradient(135deg,rgba(152,185,255,.10),rgba(255,255,255,.035))}.coachBadge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(217,182,101,.3);background:rgba(217,182,101,.1);border-radius:999px;padding:6px 10px;color:#f2d798;font-size:12px;font-weight:900}.resultGrid canvas{background:rgba(255,255,255,.025);border-radius:22px}.domainCard h4:before{content:"대화주제 · ";color:var(--gold);font-size:12px}@media(max-width:760px){.coachQuestions,.actionCards,.sessionGuide{grid-template-columns:1fr}.heroPanel:after{position:static;display:inline-block;margin-top:14px}.scale button{min-height:62px}}
+@media print{.hero,.topbar,#intro,#test,.nav,.resultActions{display:none!important}.card{box-shadow:none}.coachQuestions,.actionCards,.sessionGuide{grid-template-columns:1fr 1fr 1fr}}
+
+
+/* v2.4 coaching wheel flow */
+.coachingWheelFlow{margin:14px 0 24px}.wheelShell{display:grid;grid-template-columns:430px 1fr;gap:18px;align-items:stretch}.wheelBoard{position:relative;min-height:430px;border:1px solid rgba(217,182,101,.24);border-radius:32px;background:radial-gradient(circle at center,rgba(217,182,101,.14),rgba(255,255,255,.035) 38%,rgba(3,7,15,.36) 72%);overflow:hidden}.wheelRing{position:absolute;inset:54px;border:1px dashed rgba(217,182,101,.32);border-radius:999px}.wheelRing:before,.wheelRing:after{content:"";position:absolute;inset:54px;border:1px solid rgba(255,255,255,.08);border-radius:999px}.wheelRing:after{inset:108px;border-style:dashed}.wheelNode{position:absolute;left:50%;top:50%;width:118px;min-height:86px;transform:rotate(var(--deg)) translate(154px) rotate(calc(-1 * var(--deg))) translate(-50%,-50%);border:1px solid var(--line);border-radius:18px;background:rgba(7,13,25,.88);padding:12px;text-align:center;box-shadow:0 16px 35px rgba(0,0,0,.18);overflow:hidden}.wheelNode:after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--pct);background:linear-gradient(0deg,rgba(217,182,101,.24),rgba(217,182,101,.04));z-index:0}.wheelNode b,.wheelNode span,.wheelNode em{position:relative;z-index:1}.wheelNode b{display:grid;place-items:center;margin:0 auto 6px;width:30px;height:30px;border-radius:11px;background:rgba(217,182,101,.16);color:var(--gold)}.wheelNode span{display:block;font-weight:900;font-size:13px}.wheelNode em{display:block;font-style:normal;color:var(--muted);font-size:11px;margin-top:4px}.wheelNode.strength{border-color:rgba(159,214,180,.45)}.wheelNode.priority{border-color:rgba(233,166,166,.42)}.wheelHub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:148px;height:148px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,rgba(217,182,101,.24),rgba(159,214,180,.12));border:1px solid rgba(217,182,101,.4);box-shadow:0 20px 50px rgba(0,0,0,.25)}.wheelHub small{color:var(--muted);font-weight:900;letter-spacing:.08em}.wheelHub b{color:var(--gold);font-size:24px;letter-spacing:-.04em;margin:5px 0}.wheelHub span{color:#e6dfd2}.wheelPanel{border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.045);padding:22px}.coachFlowTitle{margin-bottom:14px}.coachFlowTitle span{display:inline-block;color:var(--gold);font-size:12px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}.coachFlowTitle b{display:block;font-size:24px;letter-spacing:-.03em;line-height:1.25}.wheelSteps{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wheelSteps>div{position:relative;border:1px solid var(--line);border-radius:20px;padding:16px;background:rgba(3,7,15,.32);min-height:150px}.wheelSteps strong{display:grid;place-items:center;width:32px;height:32px;border-radius:12px;background:rgba(217,182,101,.16);color:var(--gold);margin-bottom:10px}.wheelSteps b{display:block;color:#fff;margin-bottom:6px}.wheelSteps p{margin:0;color:var(--muted);line-height:1.6}.wheelCoachCards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.wheelCoachCards>div{border:1px solid rgba(159,214,180,.22);border-radius:18px;background:rgba(159,214,180,.07);padding:14px;line-height:1.55;color:#e6dfd2}.wheelCoachCards b{display:block;color:var(--green);margin-bottom:6px}@media(max-width:980px){.wheelShell{grid-template-columns:1fr}.wheelBoard{min-height:380px}.wheelNode{transform:rotate(var(--deg)) translate(132px) rotate(calc(-1 * var(--deg))) translate(-50%,-50%);width:102px}.wheelSteps,.wheelCoachCards{grid-template-columns:1fr}}@media(max-width:560px){.wheelBoard{min-height:520px}.wheelRing{display:none}.wheelNode{position:relative;left:auto;top:auto;transform:none!important;width:auto;min-height:70px;margin:8px}.wheelHub{position:relative;left:auto;top:auto;transform:none;width:auto;height:auto;border-radius:22px;margin:10px}.wheelBoard{display:grid;grid-template-columns:1fr 1fr;padding:10px}.wheelHub{grid-column:1/-1;grid-row:1}.wheelPanel{padding:16px}.coachFlowTitle b{font-size:20px}}@media print{.wheelShell{grid-template-columns:1fr}.wheelBoard,.wheelPanel,.wheelSteps>div,.wheelCoachCards>div,.wheelNode,.wheelHub{background:#fff!important;border:1px solid #ddd;color:#111}.wheelHub b,.wheelNode b,.coachFlowTitle span,.wheelSteps strong,.wheelCoachCards b{color:#7a581d}.wheelSteps p,.wheelNode em{color:#333}.wheelCoachCards{grid-template-columns:1fr 1fr 1fr}}
+
+
+/* v2.5 XYZ 3D growth model */
+.xyzModel{display:grid;grid-template-columns:minmax(420px,1.25fr) minmax(280px,.8fr);gap:18px;margin:12px 0 26px;align-items:stretch}.xyzModel canvas{width:100%;height:auto;border:1px solid rgba(217,182,101,.24);border-radius:28px;background:radial-gradient(circle at 62% 18%,rgba(152,185,255,.16),transparent 30%),linear-gradient(135deg,rgba(3,7,15,.62),rgba(255,255,255,.04));box-shadow:0 20px 60px rgba(0,0,0,.22)}.xyzLegend{display:flex;flex-direction:column;gap:12px}.xyzText,.xyzAxisCards>div,.xyzCoordTable{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.05);padding:17px}.xyzText b{display:block;color:var(--gold);font-size:18px;margin-bottom:8px}.xyzText p{color:var(--muted);line-height:1.7;margin:8px 0}.xyzText strong{color:#e6dfd2}.xyzAxisCards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.xyzAxisCards span{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(217,182,101,.15);color:var(--gold);font-weight:1000;margin-bottom:8px}.xyzAxisCards b{display:block}.xyzAxisCards em{display:block;color:#f2d798;font-style:normal;font-weight:900;margin:4px 0}.xyzAxisCards p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.xyzCoordTable{display:grid;gap:8px}.xyzCoordTable>div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:7px}.xyzCoordTable>div:last-child{border-bottom:0;padding-bottom:0}.xyzCoordTable b{color:#f7f1e6}.xyzCoordTable span{color:var(--muted);font-size:13px;white-space:nowrap}@media(max-width:980px){.xyzModel{grid-template-columns:1fr}.xyzAxisCards{grid-template-columns:1fr 1fr 1fr}}@media(max-width:560px){.xyzAxisCards{grid-template-columns:1fr}.xyzCoordTable>div{display:block}.xyzModel canvas{min-height:320px;object-fit:cover}}@media print{.xyzModel{grid-template-columns:1fr}.xyzModel canvas,.xyzText,.xyzAxisCards>div,.xyzCoordTable{background:#fff!important;border:1px solid #ddd;color:#111;box-shadow:none}.xyzText b,.xyzAxisCards span,.xyzAxisCards em{color:#7a581d}.xyzText p,.xyzAxisCards p,.xyzCoordTable span{color:#333}.xyzAxisCards{grid-template-columns:repeat(3,1fr)}}
+
+/* v2.6 growth cycle engine */
+.growthPlan,.growthTracker,.growthCompare,.coachDashboard{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.045);padding:18px;margin:10px 0 24px}.planHero,.trackerHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:14px;margin-bottom:14px}.planHero span{display:block;color:var(--gold);font-size:12px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase}.planHero b,.trackerHead b,.compareMsg b{display:block;font-size:22px;color:#fff;letter-spacing:-.03em}.planHero p,.trackerHead span,.compareMsg p{color:var(--muted);line-height:1.65;margin:.35rem 0}.planHero strong{color:#f2d798}.planGrid,.dashGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.planGrid>div,.dashGrid>div,.compareMsg,.compareRows>div{border:1px solid var(--line);border-radius:18px;background:rgba(3,7,15,.28);padding:15px;line-height:1.55}.planGrid b,.dashGrid b,.experimentSelect b{display:block;color:var(--gold);margin-bottom:8px}.planGrid p,.dashGrid p{margin:6px 0;color:var(--muted)}.experimentSelect{margin-top:14px;border:1px solid rgba(217,182,101,.22);border-radius:18px;background:rgba(217,182,101,.07);padding:15px}.experimentSelect label{display:block;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#e6dfd2}.experimentSelect label:last-child{border-bottom:0}.experimentSelect span{display:inline-flex;margin:0 7px;color:#f2d798;font-weight:900}.selectedExperiments{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}.selectedExperiments span{display:inline-block;border:1px solid rgba(159,214,180,.28);background:rgba(159,214,180,.08);color:#d8f4e2;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}.trackerGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.dayCard{border:1px solid var(--line);border-radius:16px;background:rgba(3,7,15,.28);padding:12px}.dayCard b{display:block;color:var(--gold);margin-bottom:8px}.dayCard select,.dayCard input{width:100%;margin:6px 0 0;padding:10px;border-radius:11px;background:rgba(5,8,16,.55);border:1px solid var(--line);color:var(--ink)}.compareEmpty{border:1px dashed rgba(217,182,101,.38);border-radius:18px;background:rgba(217,182,101,.07);padding:16px;color:var(--muted)}.compareEmpty b{display:block;color:#f2d798;margin-bottom:6px}.compareRows{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}.compareRows>div{display:flex;align-items:center;justify-content:space-between;gap:10px}.compareRows b{color:#fff}.compareRows span{color:var(--muted)}.compareRows em{font-style:normal;font-weight:1000}.compareRows em.up{color:var(--green)}.compareRows em.down{color:var(--red)}.dashGrid{grid-template-columns:repeat(2,1fr)}@media(max-width:960px){.planGrid,.trackerGrid,.dashGrid{grid-template-columns:1fr 1fr}.compareRows{grid-template-columns:1fr}}@media(max-width:620px){.planHero,.trackerHead{display:block}.planGrid,.trackerGrid,.dashGrid{grid-template-columns:1fr}.dayCard{padding:11px}.compareRows>div{display:block}}@media print{.growthPlan,.growthTracker,.growthCompare,.coachDashboard,.planGrid>div,.dashGrid>div,.dayCard,.compareRows>div,.experimentSelect{background:#fff!important;border:1px solid #ddd;color:#111}.planHero b,.trackerHead b,.compareMsg b,.planGrid b,.dashGrid b,.experimentSelect b,.dayCard b{color:#7a581d}.planHero p,.trackerHead span,.planGrid p,.dashGrid p,.compareRows span,.selectedExperiments span{color:#333}.trackerHead button,#savePlanBtn{display:none!important}}
+.homeActions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}.homeActions .wide{width:100%}.danger{border-color:rgba(255,120,120,.35)!important;color:#ffb7b7!important}.journeyList{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}.journeyItem{text-align:left;padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.05);color:inherit}.journeyItem b,.journeyItem span,.journeyItem em{display:block}.journeyItem span{color:#bdb5a8;margin:5px 0}.journeyItem em{font-style:normal;color:#d9b665}.comparePicker{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin:16px 0}.comparePicker label{display:grid;gap:6px;color:#bdb5a8}.comparePicker select{border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.22);color:#f7f1e6;border-radius:12px;padding:12px}.xyzModel{overflow:hidden}.xyzModel canvas{display:block;width:100%;max-width:100%;border-radius:20px}.topbar{gap:10px}.topbar .ghost{white-space:nowrap}@media(max-width:640px){.comparePicker{grid-template-columns:1fr}.xyzLegend{font-size:13px}.xyzAxisCards,.xyzCoordTable{grid-template-columns:1fr!important}.resultGrid canvas{width:100%;height:auto}.topbar{flex-wrap:wrap}.topbar .ghost{padding:8px 10px}.heroActions{grid-template-columns:1fr}.glassStats{grid-template-columns:repeat(2,1fr)}}
+
+/* v2.8 cognitive load reduction restore */
+.hardHidden{display:none!important}
+.simpleHeroActions{margin-top:20px}
+.simpleNotice{font-size:14px;line-height:1.7}
+.compactOnly{display:none!important}
+.mainNarrative{font-size:16px;line-height:1.8}
+.mainActions{margin-bottom:18px}
+.advancedBlock,.coachOnlyBlock{margin-top:20px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:rgba(255,255,255,.045);padding:0;overflow:hidden}
+.advancedBlock summary,.coachOnlyBlock summary{cursor:pointer;padding:18px 20px;font-weight:900;color:#f7f1e6;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.advancedBlock summary:after,.coachOnlyBlock summary:after{content:'열기';font-size:12px;color:#bdb5a8;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:5px 10px}
+.advancedBlock[open] summary:after,.coachOnlyBlock[open] summary:after{content:'접기'}
+.advancedBlock>*:not(summary),.coachOnlyBlock>*:not(summary){margin-left:18px;margin-right:18px}
+.advancedBlock>:last-child,.coachOnlyBlock>:last-child{margin-bottom:18px}
+.simpleReportNotice{margin-bottom:20px}
+#result .coachOnlyBlock:not([open]) #xyzCanvas{height:0!important}
+@media(max-width:760px){
+  .heroPanel{padding:24px 18px}.heroPanel h1{font-size:32px}.heroPanel p{font-size:15px}
+  .resultHead{gap:12px}.resultActions{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  .advancedBlock summary,.coachOnlyBlock summary{padding:16px}
+  .advancedBlock>*:not(summary),.coachOnlyBlock>*:not(summary){margin-left:12px;margin-right:12px}
+}
+
+
+.nextFocus{border:1px solid rgba(217,182,101,.32);background:linear-gradient(135deg,rgba(217,182,101,.18),rgba(159,214,180,.08));border-radius:22px;padding:20px;font-size:18px;line-height:1.75;margin-bottom:18px}
+.nextFocus b{display:block;color:var(--gold);font-size:20px;margin-bottom:6px}
+.nextFocus span{display:block;color:#f7f1e6;font-weight:900}
+.actionCards label{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);background:linear-gradient(135deg,rgba(217,182,101,.12),rgba(255,255,255,.04));border-radius:18px;padding:18px;line-height:1.65;cursor:pointer}
+.actionCards label input{width:20px;height:20px;margin:4px 0 0;accent-color:#d9b665;flex:0 0 auto}
+.actionCards label b{display:block;color:var(--gold);margin-bottom:5px}
+.coachLocked{display:none!important}
+
+
+/* KGM210 검사 UI v2.1 · 영역별 30문항 목록형 */
+.testListCard{padding-bottom:92px}.listTestTop{position:relative}.listModeNote{margin:6px 0 0}.questionList{display:grid;gap:14px;margin-top:18px}.listQuestion{position:relative;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:19px 20px 18px;scroll-margin-top:24px;transition:.18s}.listQuestion.answered{border-color:rgba(217,182,101,.28);background:linear-gradient(135deg,rgba(217,182,101,.09),rgba(255,255,255,.03))}.listQuestion.missing.pulse{animation:kgmPulse 1.2s ease 0s 2;border-color:rgba(217,182,101,.75)}@keyframes kgmPulse{0%,100%{box-shadow:0 0 0 rgba(217,182,101,0)}50%{box-shadow:0 0 0 5px rgba(217,182,101,.16)}}.listQuestionHead{display:flex;align-items:flex-start;gap:12px}.qNo{flex:0 0 auto;min-width:38px;height:30px;border-radius:999px;display:grid;place-items:center;background:rgba(217,182,101,.12);border:1px solid rgba(217,182,101,.26);color:var(--gold);font-weight:1000;font-size:13px}.qTextList{margin:0;font-size:19px;line-height:1.62;letter-spacing:-.02em;color:var(--ink);font-weight:760}.scaleHint{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px auto 7px;max-width:520px;color:var(--muted);font-size:11px;font-weight:800}.scaleHint span:nth-child(2){text-align:center}.scaleHint span:nth-child(3){text-align:right}.circleScale{display:flex;justify-content:center;align-items:center;gap:18px;min-height:46px}.circleChoice{width:42px;height:42px;border-radius:999px;padding:0;display:grid;place-items:center;background:rgba(255,255,255,.045);border:2px solid rgba(255,255,255,.22);color:transparent;box-shadow:inset 0 0 0 8px rgba(9,13,22,.92);position:relative}.circleChoice::after{content:attr(data-val);position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:1000;color:rgba(247,241,230,.42)}.circleChoice:hover{transform:translateY(-1px);border-color:rgba(217,182,101,.58);background:rgba(217,182,101,.08)}.circleChoice.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,182,101,.13), inset 0 0 0 9px #151827}.circleChoice.active::after{color:var(--gold)}.circleChoice.v1,.circleChoice.v5{width:50px;height:50px}.circleChoice.v2,.circleChoice.v4{width:46px;height:46px}.domainGuide{display:block}.domainGuide .modeBadge{display:inline-block;margin-right:8px;padding:4px 9px;border-radius:999px;background:rgba(217,182,101,.14);border:1px solid rgba(217,182,101,.24);color:var(--gold);font-size:11px;font-weight:1000}.listNav{position:sticky;bottom:12px;z-index:5;background:linear-gradient(180deg,rgba(9,13,22,.12),rgba(9,13,22,.92) 28%,rgba(9,13,22,.98));padding-top:16px;margin-top:24px}.listNav #nextBtn.ready{box-shadow:0 0 0 4px rgba(217,182,101,.12)}.listNav #nextBtn.blocked{opacity:.86;background:rgba(255,255,255,.08);color:var(--ink);border:1px solid rgba(217,182,101,.28)}@media(max-width:820px){.testListCard{padding:18px 14px 88px}.listTestTop{gap:8px}.listModeNote{font-size:12px}.questionList{gap:11px;margin-top:14px}.listQuestion{border-radius:18px;padding:15px 13px 14px}.listQuestionHead{gap:9px}.qNo{min-width:32px;height:27px;font-size:12px}.qTextList{font-size:16.5px;line-height:1.58;font-weight:760}.scaleHint{max-width:330px;margin-top:12px;font-size:10px}.circleScale{gap:13px;min-height:40px}.circleChoice{width:35px;height:35px;box-shadow:inset 0 0 0 7px rgba(9,13,22,.92)}.circleChoice.v1,.circleChoice.v5{width:40px;height:40px}.circleChoice.v2,.circleChoice.v4{width:37px;height:37px}.circleChoice::after{font-size:10px}.domainStrip{display:none}.progressBox b{font-size:24px}.bar{height:9px;margin:12px 0}.domainGuide{font-size:12px;padding:12px 13px}.listNav{left:0;right:0;bottom:0;margin-left:-14px;margin-right:-14px;padding:13px 14px 14px;border-top:1px solid rgba(255,255,255,.08)}.listNav button{padding:13px 14px;border-radius:14px}.listNav #nextBtn{min-width:138px}.heroPanel{padding:26px}.hero h1{font-size:36px}}@media(min-width:821px){.questionList{grid-template-columns:1fr}.listQuestion{padding-left:28px;padding-right:28px}.qTextList{font-size:21px}.circleScale{gap:20px}.circleChoice{width:44px;height:44px}.circleChoice.v1,.circleChoice.v5{width:54px;height:54px}.circleChoice.v2,.circleChoice.v4{width:49px;height:49px}}@media print{.testListCard{display:none!important}}
+
+</style>
+</head>
+<body>
+  <div class="ambient a1"></div><div class="ambient a2"></div>
+  <div class="app">
+    <header class="topbar">
+      <div class="brandMark">K</div>
+      <div><b>KINGDOM KGM210</b><span>성장코칭 도구</span></div>
+      <button id="resumeBtn" class="ghost">이어하기</button>
+      <button id="journeyBtn" class="ghost">성장여정 보기</button>
+    </header>
+
+    <section class="hero">
+      <div class="heroPanel">
+        <div>
+          <div class="eyebrow">KINGDOM · KGM210</div>
+          <h1>KINGDOM 성장진단</h1>
+          <p>나의 성장지도를 확인해보세요. 약 20~30분 동안 210개 질문에 답하면, 결과는 쉬운 성장 이야기로 정리됩니다.</p>
+          <div class="heroActions simpleHeroActions">
+            <button id="heroStartBtn" class="primary big">검사 시작</button>
+            <button id="sampleResultBtn" class="ghost big hardHidden" aria-hidden="true" tabindex="-1" style="display:none"></button>
+          </div>
+        </div>
+        <div class="glassStats hardHidden" aria-hidden="true">
+          <div><strong>210</strong><span>성장질문</span></div>
+          <div><strong>7</strong><span>KINGDOM 영역</span></div>
+          <div><strong>3</strong><span>XYZ 과정층위</span></div>
+          <div><strong>10</strong><span>Z 구현수준</span></div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="intro" class="card">
+        <div class="sectionHead">
+          <div>
+            <div class="eyebrow">Before Test</div>
+            <h2>검사 전 확인</h2>
+          </div>
+          <span class="pill">약 20~30분</span>
+        </div>
+        <div class="notice simpleNotice">
+          이 도구는 사람을 판단하거나 진단하지 않습니다. 답변 후에는 <b>성장이야기</b>, <b>성장지도</b>, <b>이번 주 작은 실험</b>만 먼저 보여드립니다.
+        </div>
+        <div class="formGrid">
+          <label class="field">이름 또는 별칭 <input id="name" placeholder="예: 김철웅" /></label>
+          <label class="field">검사 메모 <input id="memo" placeholder="예: 1차 파일럿 / 청소년용 / 자기점검" /></label>
+        </div>
+        <div class="checkGrid">
+          <label><input id="agree1" type="checkbox" /> KGM210은 진단·치료·선발 목적이 아닌 성장코칭 도구임을 확인합니다.</label>
+          <label><input id="agree2" type="checkbox" /> 결과는 코치와 함께 실제 삶의 장면을 떠올리며 사용합니다.</label>
+        </div>
+        <div id="domainOverview" class="domainOverview hardHidden" aria-hidden="true"></div>
+        <div class="homeActions">
+          <button id="startBtn" class="primary wide">검사 시작</button>
+          <button id="introResumeBtn" class="ghost wide">이어하기</button>
+          <button id="introJourneyBtn" class="ghost wide">성장여정 보기</button>
+        </div>
+      </section>
+
+      <section id="test" class="card hidden testListCard">
+        <div id="domainStrip" class="domainStrip compactOnly"></div>
+        <div class="testTop listTestTop">
+          <div>
+            <div class="eyebrow" id="sectionLabel">K 주도성</div>
+            <h2 id="qTitle">영역별 성장질문</h2>
+            <p class="small listModeNote">한 영역의 30개 문항을 한 번에 확인하고, 각 문항 아래 동그라미를 선택합니다.</p>
+          </div>
+          <div class="progressBox"><b><span id="progressNow">0</span>/<span id="progressTotal">30</span></b><small id="answeredText">전체 0/210</small></div>
+        </div>
+        <div class="bar domainBar"><i id="barFill"></i></div>
+        <div class="bar totalBar"><i id="totalBarFill"></i></div>
+        <div id="domainGuide" class="domainGuide"></div>
+        <div id="questionList" class="questionList" aria-live="polite"></div>
+        <div class="nav listNav">
+          <button id="prevBtn">이전 영역</button>
+          <button id="saveBtn" class="hardHidden" aria-hidden="true" tabindex="-1" style="display:none"></button>
+          <button id="nextBtn" class="primary">다음 영역</button>
+        </div>
+      </section>
+
+      <section id="domainComplete" class="card hidden domainCompleteCard">
+        <div class="eyebrow">Domain Complete</div>
+        <h2 id="completeTitle">영역 완료</h2>
+        <p id="completeMeta" class="small"></p>
+        <div id="completeBody"></div>
+        <div class="nav">
+          <button id="reviewDomainBtn">이 영역 다시 보기</button>
+          <button id="continueDomainBtn" class="primary">계속 진행</button>
+        </div>
+      </section>
+
+      <section id="journey" class="card hidden"></section>
+
+      <section id="result" class="card hidden">
+        <div class="resultHead simplifiedResultHead">
+          <div>
+            <div class="eyebrow">KGM210 Result</div>
+            <h2 id="resultTitle">나의 성장보고서</h2>
+            <p id="reportMeta" class="small"></p>
+          </div>
+          <div class="resultActions">
+            <button id="copyBtn">요약 복사</button>
+            <button id="printBtn" class="primary">PDF 저장</button>
+          </div>
+        </div>
+        <div class="reportNotice simpleReportNotice">이 결과는 점수표가 아니라 성장대화를 여는 지도입니다. 먼저 성장이야기와 이번 주 작은 실험만 확인해도 충분합니다.</div>
+
+        <h3>당신의 성장이야기</h3>
+        <div id="narrative" class="narrative mainNarrative"></div>
+
+        <h3>당신의 다음 성장지점</h3>
+        <div id="nextFocus" class="nextFocus"></div>
+
+        <h3>KINGDOM 성장지도</h3>
+        <div id="growthMap" class="growthMap"></div>
+
+        <h3>이번 주 작은 성장실험</h3>
+        <div id="actionCards" class="actionCards mainActions"></div>
+
+        <details class="advancedBlock">
+          <summary>자세히 보기</summary>
+          <div id="growthIdentity" class="growthIdentity"></div>
+          <h3>코칭수레바퀴 세션 흐름</h3>
+          <div id="coachingWheelFlow" class="coachingWheelFlow"></div>
+          <div class="resultGrid">
+            <canvas id="radar" width="720" height="520"></canvas>
+            <div>
+              <h3>핵심 요약</h3>
+              <div id="summary" class="summary"></div>
+            </div>
+          </div>
+          <h3>영역별 결과</h3>
+          <div id="domainCards" class="domainCards"></div>
+          <h3>성장계획서</h3>
+          <div id="growthPlan" class="growthPlan"></div>
+          <h3>7일 성장기록</h3>
+          <div id="growthTracker" class="growthTracker"></div>
+        </details>
+
+        <details class="coachOnlyBlock">
+          <summary>코치전용 보기</summary>
+          <h3>XYZ 입체 성장모형</h3>
+          <div id="xyzModel" class="xyzModel">
+            <canvas id="xyzCanvas" width="860" height="560"></canvas>
+            <div id="xyzLegend" class="xyzLegend"></div>
+          </div>
+          <h3>XYZ 과정·Z 구현수준</h3>
+          <div id="subScores" class="subScores"></div>
+          <h3>응답신뢰도</h3>
+          <div id="reliabilityBox" class="reliabilityBox"></div>
+          <h3>상담사용 분석</h3>
+          <div id="practitionerReport" class="practitionerReport"></div>
+          <h3>코칭 대화카드</h3>
+          <div id="coachQuestions" class="coachQuestions"></div>
+          <h3>코치 진행 가이드</h3>
+          <div id="sessionGuide" class="sessionGuide"></div>
+          <h3>재측정 비교</h3>
+          <div id="growthCompare" class="growthCompare"></div>
+          <h3>코치 대시보드</h3>
+          <div id="coachDashboard" class="coachDashboard"></div>
+        </details>
+
+        <div class="nav">
+          <button id="backToTestBtn">처음으로</button>
+          <button id="resetBtn">새 검사 시작</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+window.KGM_QUESTIONS = [
+  {
+    "no": 1,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내가 어떤 상황에서 끌려다니는지 알아차릴 수 있다."
+  },
+  {
+    "no": 2,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 내 선택을 어렵게 만드는 영향을 알아차릴 수 있다."
+  },
+  {
+    "no": 3,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 반복해서 미루거나 피하는 순간을 알아차릴 수 있다."
+  },
+  {
+    "no": 4,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 다른 사람의 말에 내 선택이 흔들리는 때를 알고 있다."
+  },
+  {
+    "no": 5,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 선택할 수 있는 것과 없는 것을 구분하려 한다."
+  },
+  {
+    "no": 6,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내 감정이 내 선택을 바꾸는 순간을 알아차릴 수 있다."
+  },
+  {
+    "no": 7,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 내가 주도적으로 움직이는 순간과 끌려가는 순간을 구분할 수 있다."
+  },
+  {
+    "no": 8,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 중요한 선택 앞에서 내 생각이나 기준이 흐려지는 순간을 알아차릴 수 있다."
+  },
+  {
+    "no": 9,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 상황에 따라 내 선택이 왜 흔들렸는지 파악하기 어려울 때가 있다."
+  },
+  {
+    "no": 10,
+    "domain": "K 주도성",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 상황에 휩쓸릴 때 내가 선택할 수 있는 부분을 놓칠 때가 있다."
+  },
+  {
+    "no": 11,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 중요한 선택 앞에서 내가 중요하게 여길 기준을 정리하려 한다."
+  },
+  {
+    "no": 12,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 내게 중요한 선택 기준을 말로 정리할 수 있다."
+  },
+  {
+    "no": 13,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 다른 사람의 기대와 나의 선택 기준을 구분하려 한다."
+  },
+  {
+    "no": 14,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 선택하기 전 무엇을 우선해야 할지 생각해본다."
+  },
+  {
+    "no": 15,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 할 수 있는 선택의 범위를 정리할 수 있다."
+  },
+  {
+    "no": 16,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내 선택이 어떤 방향으로 이어질지 생각해본다."
+  },
+  {
+    "no": 17,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 여러 선택지 중 내게 맞는 방향을 고르려 한다."
+  },
+  {
+    "no": 18,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 흔들릴 때 다시 확인할 수 있는 기준이나 방향을 정리해본다."
+  },
+  {
+    "no": 19,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 주변 분위기에 따라 결정하면서 내 기준을 충분히 확인하지 못할 때가 있다."
+  },
+  {
+    "no": 20,
+    "domain": "K 주도성",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 중요한 선택 앞에서 내 생각을 충분히 정리하지 못하고 지나갈 때가 있다."
+  },
+  {
+    "no": 21,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내가 정한 기준이나 방향을 실제 상황에서 적용해보려 한다."
+  },
+  {
+    "no": 22,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 어려운 상황에서도 내가 선택할 수 있는 부분을 찾으려 한다."
+  },
+  {
+    "no": 23,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 바로 반응하기보다 잠시 멈추고 선택하려 한다."
+  },
+  {
+    "no": 24,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내 선택의 이유를 스스로 살펴보려 한다."
+  },
+  {
+    "no": 25,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 작은 일이라도 내가 정한 방향대로 해보려 한다."
+  },
+  {
+    "no": 26,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내 기준과 맞지 않는 상황에서 조율하려 한다."
+  },
+  {
+    "no": 27,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 선택 후에 내가 왜 그렇게 선택했는지 돌아본다."
+  },
+  {
+    "no": 28,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 상황이 바뀌어도 내가 참여하거나 선택할 수 있는 부분을 다시 찾아본다."
+  },
+  {
+    "no": 29,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 상황이 어려워지면 내가 선택할 수 있는 부분을 놓칠 때가 있다."
+  },
+  {
+    "no": 30,
+    "domain": "K 주도성",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내 기준보다 순간적인 반응대로 움직일 때가 많다."
+  },
+  {
+    "no": 31,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 상황에 따라 내가 다르게 행동하는 모습을 알아차릴 수 있다."
+  },
+  {
+    "no": 32,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 내가 어떤 역할에서 편안한지 알아차릴 수 있다."
+  },
+  {
+    "no": 33,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 사람들 앞에서 보이는 나와 혼자 있을 때의 나를 구분할 수 있다."
+  },
+  {
+    "no": 34,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내가 중요하게 여기는 가치가 무엇인지 살펴본다."
+  },
+  {
+    "no": 35,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 어떤 관계에서 내가 작아지는지 알아차릴 수 있다."
+  },
+  {
+    "no": 36,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 여러 상황 속에서 내가 중요하게 여기는 모습이 무엇인지 살펴본다."
+  },
+  {
+    "no": 37,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 지금의 내가 어떤 역할과 관계 속에 있는지 정리해볼 수 있다."
+  },
+  {
+    "no": 38,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 상황에 따라 달라지는 내 모습을 이해하기 어려울 때가 있다."
+  },
+  {
+    "no": 39,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 남들이 보는 나와 내가 느끼는 나의 차이를 알아차릴 수 있다."
+  },
+  {
+    "no": 40,
+    "domain": "I 정체성",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 앞으로도 이어가고 싶은 나의 모습이나 가치를 떠올릴 수 있다."
+  },
+  {
+    "no": 41,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내가 중요하게 여기는 가치와 선택을 연결해본다."
+  },
+  {
+    "no": 42,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 어떤 사람으로 살아가고 싶은지 생각해본다."
+  },
+  {
+    "no": 43,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내 역할 중 유지하고 싶은 것과 바꾸고 싶은 것을 구분한다."
+  },
+  {
+    "no": 44,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 다른 사람의 기대와 내가 원하는 모습을 구분하려 한다."
+  },
+  {
+    "no": 45,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 지금의 나와 앞으로의 나를 연결해본다."
+  },
+  {
+    "no": 46,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내가 중요하게 여기는 삶의 방향을 정리해본다."
+  },
+  {
+    "no": 47,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 상황이 달라져도 내가 중요하게 여길 가치를 확인해본다."
+  },
+  {
+    "no": 48,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 지금의 나를 이해하기 위해 여러 가능성을 탐색해본다."
+  },
+  {
+    "no": 49,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내 안의 여러 모습이 서로 충돌할 때 정리해본다."
+  },
+  {
+    "no": 50,
+    "domain": "I 정체성",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 맡은 역할이 내 가치와 맞는지 생각해본다."
+  },
+  {
+    "no": 51,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내가 중요하게 여기는 모습에 맞게 작은 행동을 해본다."
+  },
+  {
+    "no": 52,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 새로운 역할을 안전한 범위에서 시도해본다."
+  },
+  {
+    "no": 53,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 원하는 방향과 맞지 않는 행동을 했을 때 다시 조정해본다."
+  },
+  {
+    "no": 54,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 관계 속에서 내 생각이나 가치를 표현해본다."
+  },
+  {
+    "no": 55,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 되고 싶은 모습에 가까운 선택을 실제로 해본다."
+  },
+  {
+    "no": 56,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 상황에 맞게 내가 중요하게 여기는 모습을 행동으로 표현해본다."
+  },
+  {
+    "no": 57,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 다른 사람의 기대를 살피면서도 내 생각을 함께 표현해본다."
+  },
+  {
+    "no": 58,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 내가 중요하게 여기는 방향을 일상에서 반복해보려 한다."
+  },
+  {
+    "no": 59,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 새로운 상황에서도 나의 가치를 적용해본다."
+  },
+  {
+    "no": 60,
+    "domain": "I 정체성",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 배운 나의 모습을 다른 관계에서도 사용해본다."
+  },
+  {
+    "no": 61,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 어떤 사건이 내 마음에 오래 남는지 알아차릴 수 있다."
+  },
+  {
+    "no": 62,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 같은 일을 두고도 다르게 해석할 수 있음을 안다."
+  },
+  {
+    "no": 63,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 자주 반복해서 말하는 이야기를 알아차린다."
+  },
+  {
+    "no": 64,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 어떤 말이나 기억이 나를 작아지게 하는지 알아차린다."
+  },
+  {
+    "no": 65,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내 경험에서 사실과 해석을 구분하려 한다."
+  },
+  {
+    "no": 66,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 과거 경험이 지금의 나에게 어떤 영향을 주었는지 살펴본다."
+  },
+  {
+    "no": 67,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 지금의 이야기가 앞으로 어떤 선택으로 이어질 수 있는지 생각해본다."
+  },
+  {
+    "no": 68,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 힘든 경험을 어떻게 이해할 수 있을지 천천히 살펴본다."
+  },
+  {
+    "no": 69,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내 경험을 한쪽 방향으로만 해석하고 있는지 알아차리려 한다."
+  },
+  {
+    "no": 70,
+    "domain": "N 자기이야기",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 빠뜨리고 있는 이야기가 있는지 살펴본다."
+  },
+  {
+    "no": 71,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내 경험을 다른 관점에서 다시 바라보려 한다."
+  },
+  {
+    "no": 72,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 사건과 감정, 생각을 구분해서 정리해본다."
+  },
+  {
+    "no": 73,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내 이야기가 나를 돕는지 어렵게 하는지 살펴본다."
+  },
+  {
+    "no": 74,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 한 가지 설명만이 아니라 다른 가능성도 생각해본다."
+  },
+  {
+    "no": 75,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 과거 경험을 현재의 선택과 연결해본다."
+  },
+  {
+    "no": 76,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 지금 내 경험에서 중요하게 여길 의미나 방향을 정리해본다."
+  },
+  {
+    "no": 77,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 힘든 경험이 내게 남긴 영향과 앞으로의 선택을 구분해본다."
+  },
+  {
+    "no": 78,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 내 이야기를 더 넓고 균형 있게 바라보려 한다."
+  },
+  {
+    "no": 79,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내가 책임질 부분과 아닌 부분을 이야기 속에서 구분한다."
+  },
+  {
+    "no": 80,
+    "domain": "N 자기이야기",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 앞으로 써가고 싶은 이야기를 생각해본다."
+  },
+  {
+    "no": 81,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 새롭게 이해한 이야기를 실제 선택에 반영해본다."
+  },
+  {
+    "no": 82,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 같은 상황이 반복될 때 다른 반응을 시도해본다."
+  },
+  {
+    "no": 83,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 나를 어렵게 하는 이야기를 멈추고 다른 설명을 찾아본다."
+  },
+  {
+    "no": 84,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내가 정리한 의미를 작은 행동으로 옮겨본다."
+  },
+  {
+    "no": 85,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내 경험을 말할 때 사실과 해석을 나누어 표현해본다."
+  },
+  {
+    "no": 86,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내 이야기를 상황과 경험에 따라 다시 정리해본다."
+  },
+  {
+    "no": 87,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 과거 경험에 묶이지 않도록 지금 가능한 행동을 시도해본다."
+  },
+  {
+    "no": 88,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 내 경험을 나눌 때 상대에게 도움이 되는 방식인지 살펴본다."
+  },
+  {
+    "no": 89,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 다른 장면에서도 새롭게 이해한 관점을 사용해본다."
+  },
+  {
+    "no": 90,
+    "domain": "N 자기이야기",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내 이야기가 바뀌었을 때 행동도 함께 점검해본다."
+  },
+  {
+    "no": 91,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 어떤 활동을 할 때 생동감을 느끼는지 알아차릴 수 있다."
+  },
+  {
+    "no": 92,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 내가 자연스럽게 관심을 갖는 주제를 알아차린다."
+  },
+  {
+    "no": 93,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 어떤 상황에서 내 강점이 잘 드러나는지 살펴본다."
+  },
+  {
+    "no": 94,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내가 몰입하게 되는 조건을 알아차릴 수 있다."
+  },
+  {
+    "no": 95,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 즐거움을 느끼는 방식이 다른 사람과 다를 수 있음을 안다."
+  },
+  {
+    "no": 96,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 나에게 자연스럽게 관심이 가거나 힘이 나는 부분을 살펴본다."
+  },
+  {
+    "no": 97,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 잘하는 것뿐 아니라 관심이 살아나는 조건도 함께 살펴본다."
+  },
+  {
+    "no": 98,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 관심이 바뀔 때 그 변화가 무엇을 알려주는지 살펴본다."
+  },
+  {
+    "no": 99,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내가 무엇을 할 때 살아 있는 느낌이 드는지 알고 있다."
+  },
+  {
+    "no": 100,
+    "domain": "G 강점",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내 관심이 어떤 사람이나 환경에서 살아나는지 알아차린다."
+  },
+  {
+    "no": 101,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내가 관심을 느끼는 활동의 공통점을 정리해본다."
+  },
+  {
+    "no": 102,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 내 강점이 잘 쓰이는 조건을 생각해본다."
+  },
+  {
+    "no": 103,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 좋아하는 것과 잘하는 것을 구분해본다."
+  },
+  {
+    "no": 104,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내 관심을 앞으로의 선택과 연결해본다."
+  },
+  {
+    "no": 105,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 몰입할 수 있는 환경을 생각해본다."
+  },
+  {
+    "no": 106,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내 관심과 강점이 어떤 장면에서 살아나는지 탐색해본다."
+  },
+  {
+    "no": 107,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 다른 사람과 비교하기보다 나에게 잘 맞는 방식과 조건을 찾아본다."
+  },
+  {
+    "no": 108,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 내가 좋아하는 일을 실제 삶에서 어떻게 다룰지 생각해본다."
+  },
+  {
+    "no": 109,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내 관심이 다른 사람에게도 도움이 될 수 있는지 생각해본다."
+  },
+  {
+    "no": 110,
+    "domain": "G 강점",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 가진 강점의 한계도 함께 살펴본다."
+  },
+  {
+    "no": 111,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 관심 있는 일을 작은 방식으로 시도해본다."
+  },
+  {
+    "no": 112,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 내 강점이 필요한 상황에서 조심스럽게 사용해본다."
+  },
+  {
+    "no": 113,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 좋아하는 활동을 일상 속에 조금씩 넣어본다."
+  },
+  {
+    "no": 114,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내 관심을 다른 사람과 나누어본다."
+  },
+  {
+    "no": 115,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내 강점이 잘 맞지 않는 상황에서는 다른 방식을 찾아본다."
+  },
+  {
+    "no": 116,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내 강점이 잘 쓰이는 장면에서 적절한 역할을 시도해본다."
+  },
+  {
+    "no": 117,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 나에게 잘 맞고 의미 있는 일을 작은 행동으로 시도해본다."
+  },
+  {
+    "no": 118,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 관심이 이어질 때와 바뀔 때를 살피며 내 방식을 조정해본다."
+  },
+  {
+    "no": 119,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내 관심을 다른 장면에서도 활용해본다."
+  },
+  {
+    "no": 120,
+    "domain": "G 강점",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 가진 강점이 누군가에게 도움이 되는 방식인지 확인해본다."
+  },
+  {
+    "no": 121,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내가 맡을 수 있는 일과 맡기 어려운 일을 구분하려 한다."
+  },
+  {
+    "no": 122,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 다른 사람의 감정까지 내 책임처럼 느끼는 순간을 알아차린다."
+  },
+  {
+    "no": 123,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 도움을 요청해야 할 때를 알아차릴 수 있다."
+  },
+  {
+    "no": 124,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 내 행동이 다른 사람에게 미친 영향을 살펴본다."
+  },
+  {
+    "no": 125,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 과하게 책임지려는 상황을 알아차린다."
+  },
+  {
+    "no": 126,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 내가 책임질 부분과 함께 나누어야 할 부분을 구분해본다."
+  },
+  {
+    "no": 127,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 도움을 요청하는 것을 어렵게 느끼는 순간을 알아차린다."
+  },
+  {
+    "no": 128,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 내가 책임지지 않아도 되는 일까지 떠안을 때가 있다."
+  },
+  {
+    "no": 129,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 실수했을 때 내가 회복해야 할 부분을 살펴본다."
+  },
+  {
+    "no": 130,
+    "domain": "D 책임영역",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 통제할 수 있는 것과 없는 것을 구분하려 한다."
+  },
+  {
+    "no": 131,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 내 몫과 다른 사람의 몫을 구분해본다."
+  },
+  {
+    "no": 132,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 도움을 요청할 사람이나 자원을 생각해본다."
+  },
+  {
+    "no": 133,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내가 감당할 수 있는 책임의 범위를 정리해본다."
+  },
+  {
+    "no": 134,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 실수했을 때 어떻게 회복할지 생각해본다."
+  },
+  {
+    "no": 135,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내 행동의 영향과 의도를 구분해본다."
+  },
+  {
+    "no": 136,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 맡은 일을 이어가기 위해 필요한 조건과 도움을 함께 생각해본다."
+  },
+  {
+    "no": 137,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 내 선택이 다른 사람에게 미칠 영향을 살피되, 내 필요와 한계도 함께 생각해본다."
+  },
+  {
+    "no": 138,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 내가 응답해야 할 일과 조정해야 할 일을 구분하는 기준을 세워본다."
+  },
+  {
+    "no": 139,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 혼자 해볼 부분과 도움을 요청할 부분을 나누어 계획해본다."
+  },
+  {
+    "no": 140,
+    "domain": "D 책임영역",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 관계 속에서 서로 기대할 수 있는 부분을 정리해본다."
+  },
+  {
+    "no": 141,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 필요한 경우 도움을 요청해본다."
+  },
+  {
+    "no": 142,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 실수했을 때 변명보다 회복 행동을 해본다."
+  },
+  {
+    "no": 143,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 내 한계를 알게 되면 역할을 조정해본다."
+  },
+  {
+    "no": 144,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 다른 사람의 몫까지 대신하지 않으려 노력한다."
+  },
+  {
+    "no": 145,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내가 맡은 일의 진행 상황을 필요한 사람과 공유한다."
+  },
+  {
+    "no": 146,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 맡은 일을 해내기 위해 필요한 도움과 조정을 실제로 시도해본다."
+  },
+  {
+    "no": 147,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 도움이 필요한 상황을 적절한 사람에게 알리는 연습을 해본다."
+  },
+  {
+    "no": 148,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 관계에서 내가 감당할 수 있는 만큼만 약속하려 한다."
+  },
+  {
+    "no": 149,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내 행동으로 생긴 영향을 확인하고 필요한 조치를 해본다."
+  },
+  {
+    "no": 150,
+    "domain": "D 책임영역",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 서로 도울 수 있는 방식으로 역할을 나누어본다."
+  },
+  {
+    "no": 151,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 지금 내가 실제로 시도할 수 있는 일이 무엇인지 살펴본다."
+  },
+  {
+    "no": 152,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 실행을 어렵게 만드는 조건을 알아차릴 수 있다."
+  },
+  {
+    "no": 153,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 기회가 부족한 것과 내가 미루는 것을 구분하려 한다."
+  },
+  {
+    "no": 154,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 작은 시도부터 시작할 수 있는지 살펴본다."
+  },
+  {
+    "no": 155,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 행동하기 전에 필요한 자원이나 도움을 확인한다."
+  },
+  {
+    "no": 156,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 현재 조건에서 만들 수 있는 기회와 주변에 요청할 수 있는 자원을 함께 살펴본다."
+  },
+  {
+    "no": 157,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 실행이 어려울 때 의지뿐 아니라 조건·자원·두려움·시간도 함께 살펴본다."
+  },
+  {
+    "no": 158,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 실패할까 봐 시작하지 못하는 순간을 알아차린다."
+  },
+  {
+    "no": 159,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 내가 행동할 수 있는 안전한 범위를 살펴본다."
+  },
+  {
+    "no": 160,
+    "domain": "O 기회실행",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 기회가 생겼을 때 내가 준비된 부분과 더 필요한 조건을 확인한다."
+  },
+  {
+    "no": 161,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 작은 행동실험의 목표를 정해본다."
+  },
+  {
+    "no": 162,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 시도하기 전에 필요한 시간과 자원을 정리해본다."
+  },
+  {
+    "no": 163,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 실패했을 때 무엇을 배울 수 있을지 생각해본다."
+  },
+  {
+    "no": 164,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 처음부터 크게 하기보다 작게 시작할 방법을 정한다."
+  },
+  {
+    "no": 165,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 실행 후 무엇을 관찰할지 미리 정해본다."
+  },
+  {
+    "no": 166,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 실행 중에 상황이 달라지면 목표와 방법을 조정할 수 있는지 생각해본다."
+  },
+  {
+    "no": 167,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 실패하거나 막혔을 때 다시 시도할 조건과 도움을 계획해본다."
+  },
+  {
+    "no": 168,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 실행할 기회가 왔을 때 확인할 기준과 첫 행동을 정해본다."
+  },
+  {
+    "no": 169,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 행동을 미루지 않기 위해 구체적인 첫걸음을 정한다."
+  },
+  {
+    "no": 170,
+    "domain": "O 기회실행",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 시도 후 결과를 확인할 시간을 정해본다."
+  },
+  {
+    "no": 171,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 작은 행동을 실제로 시도해본다."
+  },
+  {
+    "no": 172,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 시도한 뒤 결과를 확인해본다."
+  },
+  {
+    "no": 173,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 예상과 다른 결과가 나오면 방법을 조정해본다."
+  },
+  {
+    "no": 174,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 혼자 어렵다면 도움을 받아 실행해본다."
+  },
+  {
+    "no": 175,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 실행을 방해하는 조건을 줄이는 행동을 해본다."
+  },
+  {
+    "no": 176,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 실패하거나 막혔을 때 결과를 살펴보고 다른 방법을 시도해본다."
+  },
+  {
+    "no": 177,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 실행하기로 한 일을 가능한 범위에서 시도하고 결과를 점검해본다."
+  },
+  {
+    "no": 178,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 기회가 왔을 때 나에게 맞는지 확인하고 가능한 첫 행동을 해본다."
+  },
+  {
+    "no": 179,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 작은 성공을 다음 행동으로 연결해본다."
+  },
+  {
+    "no": 180,
+    "domain": "O 기회실행",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 한 장면에서 배운 실행방법을 다른 장면에도 적용해본다."
+  },
+  {
+    "no": 181,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 경험 후에 무엇이 달랐는지 알아차리려 한다."
+  },
+  {
+    "no": 182,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 예상한 결과와 실제 결과의 차이를 살펴본다."
+  },
+  {
+    "no": 183,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 성공한 일과 어려웠던 일을 함께 돌아본다."
+  },
+  {
+    "no": 184,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 반복되는 실수나 패턴을 알아차리려 한다."
+  },
+  {
+    "no": 185,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 내 행동이 어떤 결과로 이어졌는지 살펴본다."
+  },
+  {
+    "no": 186,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 경험에서 배울 점이 있는지, 아직 정리되지 않은 점은 무엇인지 함께 살펴본다."
+  },
+  {
+    "no": 187,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 실패한 경험에서 무엇을 알게 되었고 무엇은 아직 어려운지 살펴본다."
+  },
+  {
+    "no": 188,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 후회되는 경험도 사실·감정·배울 점으로 나누어 살펴본다."
+  },
+  {
+    "no": 189,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 어떤 경험이 다음 선택에 영향을 주는지 알아차린다."
+  },
+  {
+    "no": 190,
+    "domain": "M 의미통합",
+    "process": "알아차림",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 배운 것과 아직 모르는 것을 구분해본다."
+  },
+  {
+    "no": 191,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 경험에서 얻은 내용을 다음 선택에 어떻게 사용할지 생각해본다."
+  },
+  {
+    "no": 192,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 성공과 실패에서 반복되는 조건을 정리해본다."
+  },
+  {
+    "no": 193,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 이전 생각과 새롭게 알게 된 점을 비교해본다."
+  },
+  {
+    "no": 194,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 같은 실수를 줄이기 위해 바꿀 부분을 정리한다."
+  },
+  {
+    "no": 195,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 배운 내용을 나만의 방식으로 정리해본다."
+  },
+  {
+    "no": 196,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 경험을 통해 다음에 다르게 시도할 점을 정리해본다."
+  },
+  {
+    "no": 197,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 경험에서 남길 점과 아직 해석하지 않아도 되는 점을 구분해본다."
+  },
+  {
+    "no": 198,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 과거의 실수가 반복되지 않도록 필요한 조건과 도움을 계획해본다."
+  },
+  {
+    "no": 199,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 배운 내용을 다른 상황에서도 사용할 방법을 생각해본다."
+  },
+  {
+    "no": 200,
+    "domain": "M 의미통합",
+    "process": "세우기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 아직 해결되지 않은 부분을 다음 질문으로 남겨둔다."
+  },
+  {
+    "no": 201,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z1",
+    "zLabel": "인식",
+    "text": "나는 배운 내용을 다음 행동에 적용해본다."
+  },
+  {
+    "no": 202,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z2",
+    "zLabel": "맥락이해",
+    "text": "나는 같은 상황이 반복될 때 이전과 다른 방법을 시도해본다."
+  },
+  {
+    "no": 203,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z3",
+    "zLabel": "구분",
+    "text": "나는 결과를 보고 내 생각이나 방법을 수정해본다."
+  },
+  {
+    "no": 204,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z4",
+    "zLabel": "현실인정",
+    "text": "나는 배운 내용을 기록하거나 정리해 다시 확인한다."
+  },
+  {
+    "no": 205,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z5",
+    "zLabel": "선택",
+    "text": "나는 배운 것을 다른 장면에서도 시험해본다."
+  },
+  {
+    "no": 206,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z6",
+    "zLabel": "정렬",
+    "text": "나는 실패가 반복될 때 원인과 조건을 살펴보고 다른 방법을 시도해본다."
+  },
+  {
+    "no": 207,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z7",
+    "zLabel": "실험실천",
+    "text": "나는 경험에서 배운 것을 필요한 사람에게 조심스럽게 나누어본다."
+  },
+  {
+    "no": 208,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z8",
+    "zLabel": "유지·복귀",
+    "text": "나는 배운 내용을 꾸준히 삶에 적용한다."
+  },
+  {
+    "no": 209,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z9",
+    "zLabel": "전이",
+    "text": "나는 이전 경험을 바탕으로 새로운 상황에 대응해본다."
+  },
+  {
+    "no": 210,
+    "domain": "M 의미통합",
+    "process": "적용하기",
+    "z": "Z10",
+    "zLabel": "상호적 기여",
+    "text": "나는 내가 배운 것이 실제로 도움이 되었는지 점검해본다."
+  }
+];
+
+</script>
+  <script>
+const Q = window.KGM_QUESTIONS || [];
+const labels = ['전혀 아니다','아니다','보통이다','그렇다','매우 그렇다'];
+const $ = id => document.getElementById(id);
+const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0;
+const today = () => new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
+
+const DOMAIN = {
+  'K 주도성': {short:'K', title:'주도성', easy:'내 선택 잡기', desc:'상황에 끌려가기보다 내가 선택할 수 있는 부분을 찾는 힘입니다.', high:'내 선택을 비교적 잘 알고 움직이는 힘이 보입니다.', low:'내가 선택할 수 있는 부분을 다시 찾는 대화가 필요합니다.', q:'최근에 내 선택을 놓쳤던 장면은 언제였나요?'},
+  'I 정체성': {short:'I', title:'정체성', easy:'나답게 서기', desc:'역할과 기대 속에서 나의 가치와 방향을 세우는 힘입니다.', high:'나의 가치와 역할을 연결해 설명하는 힘이 보입니다.', low:'남의 기대와 나의 기준을 나누어 보는 시간이 필요합니다.', q:'요즘 내가 나답지 않다고 느낀 순간은 언제였나요?'},
+  'N 자기이야기': {short:'N', title:'자기이야기', easy:'내 이야기 다시 쓰기', desc:'경험을 해석하고 나의 이야기로 새롭게 정리하는 힘입니다.', high:'경험을 의미 있는 이야기로 정리하는 힘이 있습니다.', low:'반복되는 생각과 다른 해석을 함께 찾아볼 필요가 있습니다.', q:'내가 나에게 자주 들려주는 이야기는 무엇인가요?'},
+  'G 강점': {short:'G', title:'강점', easy:'가진 힘 찾기', desc:'내 안의 자원과 강점을 발견하고 적절히 쓰는 힘입니다.', high:'내가 가진 힘을 알아차리고 쓰는 감각이 살아 있습니다.', low:'강점은 증명해야 할 능력이 아니라 찾아야 할 자원입니다.', q:'작지만 이미 잘하고 있는 것은 무엇인가요?'},
+  'D 책임영역': {short:'D', title:'책임영역', easy:'내 몫 정하기', desc:'내가 감당할 수 있는 책임과 타인의 몫을 구분하는 힘입니다.', high:'내 몫과 타인의 몫을 비교적 잘 나누는 힘이 보입니다.', low:'내 책임과 남의 책임을 나누는 대화가 중요합니다.', q:'내가 너무 많이 짊어진 것은 무엇인가요?'},
+  'O 기회실행': {short:'O', title:'기회실행', easy:'작게 해보기', desc:'생각을 작은 행동으로 옮기고 실제로 확인하는 힘입니다.', high:'생각을 행동으로 옮기며 배우는 힘이 보입니다.', low:'큰 결심보다 아주 작은 행동부터 정하는 것이 좋습니다.', q:'오늘 바로 해볼 수 있는 가장 작은 행동은 무엇인가요?'},
+  'M 의미통합': {short:'M', title:'의미통합', easy:'배움으로 묶기', desc:'흩어진 경험을 돌아보고 삶의 방향과 의미로 묶는 힘입니다.', high:'경험을 돌아보고 삶의 방향과 연결하는 힘이 있습니다.', low:'지난 경험을 평가보다 배움의 언어로 다시 정리할 시간이 필요합니다.', q:'이번 경험에서 내가 가져갈 배움은 무엇인가요?'}
+};
+const PROCESS_AXIS = {'알아차림':'X','세우기':'Y','적용하기':'Z'};
+const AXIS = {X:['알아차림','지금 무슨 일이 일어나는지 보는 힘'], Y:['세우기','나의 기준과 방향을 정하는 힘'], Z:['해보기','작은 행동으로 옮기고 돌아보는 힘']};
+
+Q.forEach(q=>{ const d=DOMAIN[q.domain]||{short:q.domain[0]}; const axis=PROCESS_AXIS[q.process]||q.process[0]; const local=Q.filter(x=>x.domain===q.domain && x.process===q.process).findIndex(x=>x.no===q.no)+1; q.axis=axis; q.code=`${d.short}${axis}${String(local).padStart(2,'0')}`; });
+let idx = 0;
+let answers = JSON.parse(localStorage.getItem('kgm210_answers')||'{}');
+const TOTAL = Q.length;
+function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
+function completed(){ return answeredCount()>=TOTAL; }
+function setCompleted(v){ if(v) localStorage.setItem('kgm210_completed','true'); else localStorage.removeItem('kgm210_completed'); }
+function clearCurrentTest(){ answers={}; idx=0; localStorage.removeItem('kgm210_answers'); localStorage.removeItem('kgm210_completed'); localStorage.removeItem('kgm210_growth_plan'); }
+function hideAll(){ ['intro','test','domainComplete','result','journey'].forEach(id=>{const el=$(id); if(el)el.classList.add('hidden');}); }
+function showIntro(){ hideAll(); $('intro')?.classList.remove('hidden'); updateHomeButtons(); window.scrollTo({top:0,behavior:'smooth'}); }
+function save(){ localStorage.setItem('kgm210_answers',JSON.stringify(answers)); localStorage.setItem('kgm210_name',$('name')?.value||''); localStorage.setItem('kgm210_memo',$('memo')?.value||''); }
+function domains(){ return [...new Set(Q.map(q=>q.domain))]; }
+function domainQuestions(d){ return Q.filter(q=>q.domain===d); }
+function answeredCount(){ return clamp(Object.keys(answers).filter(k=>answers[k]).length,0,TOTAL); }
+function domainProgress(d){ const qs=domainQuestions(d); const done=qs.filter(q=>answers[q.no]).length; return {done,total:qs.length,pct:qs.length?Math.round(done/qs.length*100):0,complete:qs.length>0&&done===qs.length}; }
+function missingQuestions(){ return Q.filter(q=>!answers[q.no]); }
+function moveToFirstMissing(message=true){ const m=missingQuestions(); if(!m.length)return false; idx=Q.findIndex(q=>q.no===m[0].no); setCompleted(false); hideAll(); $('test').classList.remove('hidden'); renderQ(); setTimeout(()=>{ const el=document.getElementById('qitem-'+m[0].no); if(el){el.classList.add('pulse'); el.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>el.classList.remove('pulse'),1800);} if(message) alert(`아직 ${m.length}개 성장질문이 남았습니다. 첫 미응답 문항으로 이동합니다.`); },80); return true; }
+function currentDomain(){ return Q[idx]?.domain || domains()[0]; }
+function firstUnansweredInDomain(d){ const qs=domainQuestions(d); const q=qs.find(q=>!answers[q.no]) || qs[0]; return Q.findIndex(x=>x.no===q.no); }
+function nextDomainName(d){ const ds=domains(); return ds[ds.indexOf(d)+1] || null; }
+function prevDomainName(d){ const ds=domains(); return ds[ds.indexOf(d)-1] || null; }
+function domainIndex(d){ return domains().indexOf(d); }
+function dTitle(d){ const x=DOMAIN[d]; return x?`${x.short} ${x.title}`:d; }
+function shortTitle(d){ return DOMAIN[d]?.easy || d; }
+function pct(v){ return Math.max(0,Math.min(100,(v/5)*100)); }
+function easyScore(v){ if(v>=4.2)return ['잘 자라는 곳','strength']; if(v>=3.5)return ['잘 쓰는 중','stable']; if(v>=2.8)return ['함께 볼 곳','check']; return ['먼저 돌볼 곳','priority']; }
+function band(v){ return easyScore(v); }
+function renderDomainOverview(){ const el=$('domainOverview'); if(!el)return; el.innerHTML=''; }
+function renderDomainStrip(){ const el=$('domainStrip'); if(!el)return; el.innerHTML=domains().map((d,i)=>{const pr=domainProgress(d), info=DOMAIN[d]; return `<button class="${currentDomain()===d?'on':''} ${pr.complete?'done':''}" data-domain="${d}" tabindex="-1" aria-disabled="true"><b>${i+1}</b> ${info.short}<small>${pr.done}/30</small></button>`}).join(''); }
+function requireAgree(){ if(!$('agree1').checked || !$('agree2').checked){ alert('검사 시작 전 안내 항목을 확인해 주세요.'); return false;} return true; }
+function updateHomeButtons(){ const hasAnswers=answeredCount()>0 && !completed(); const hasHistory=getHistory().length>0; if($('resumeBtn')){ $('resumeBtn').textContent=completed()?'결과 보기':'이어하기'; $('resumeBtn').style.display=(hasAnswers||completed())?'inline-flex':'none'; } if($('journeyBtn')) $('journeyBtn').style.display=hasHistory?'inline-flex':'none'; if($('introResumeBtn')) $('introResumeBtn').style.display=hasAnswers?'inline-flex':'none'; if($('introJourneyBtn')) $('introJourneyBtn').style.display=hasHistory?'inline-flex':'none'; }
+function start(skip=false){ if(skip){ if(completed()) return showResult(false); if(answeredCount()===0){ alert('이어갈 검사가 없습니다. 새 검사를 시작해 주세요.'); return; } } else { if(!requireAgree())return; if(answeredCount()>0 && !completed() && !confirm('진행 중인 응답이 있습니다. 새 검사로 시작할까요?')) return; clearCurrentTest(); } const first=Q.findIndex(q=>!answers[q.no]); idx=first>=0?first:0; save(); hideAll(); $('test').classList.remove('hidden'); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
+function updateTestProgress(d=currentDomain()){ const pr=domainProgress(d), di=domainIndex(d)+1, info=DOMAIN[d]; $('sectionLabel').textContent=`${di}번째 성장대화 · ${info.easy}`; $('qTitle').textContent=`${dTitle(d)} ${pr.done}/30`; $('progressNow').textContent=pr.done; $('progressTotal').textContent='30'; $('answeredText').textContent=`전체 ${answeredCount()}/${TOTAL} · 목록형 v2.1`; $('barFill').style.width=clamp(pr.done/30*100,0,100)+'%'; $('totalBarFill').style.width=clamp(answeredCount()/TOTAL*100,0,100)+'%'; $('domainGuide').innerHTML=`<span class="modeBadge">검사지형 v2.1</span><b>${info.easy}</b> · ${info.desc}<br><span>문항 아래 동그라미를 선택하세요. 30개 완료 후 다음 영역으로 이동합니다.</span>`; const nd=nextDomainName(d), pd=prevDomainName(d), next=$('nextBtn'); $('prevBtn').disabled=!pd; next.classList.toggle('ready',pr.complete); next.classList.toggle('blocked',!pr.complete); next.disabled=false; next.textContent=pr.complete?(nd?'다음 영역':'코칭 리포트 보기'):`미응답 ${pr.total-pr.done}개 확인`; renderDomainStrip(); renderDomainOverview(); }
+function renderQ(){ if(completed()){ idx=TOTAL-1; return showResult(false); } idx=clamp(idx,0,TOTAL-1); const q=Q[idx]; if(!q){ return showIntro(); } const d=q.domain, qs=domainQuestions(d); updateTestProgress(d); const list=$('questionList'); list.innerHTML=qs.map((item,i)=>{ const val=answers[item.no]; return `<section class="listQuestion ${val?'answered':'missing'}" id="qitem-${item.no}" data-no="${item.no}"><div class="listQuestionHead"><span class="qNo">${String(i+1).padStart(2,'0')}</span><p class="qTextList">${item.text}</p></div><div class="scaleHint"><span>전혀 아니다</span><span>보통이다</span><span>매우 그렇다</span></div><div class="circleScale" role="radiogroup" aria-label="${i+1}번 응답">${labels.map((l,li)=>{const v=li+1; return `<button type="button" class="circleChoice v${v} ${val===v?'active':''}" data-no="${item.no}" data-val="${v}" aria-label="${v} ${l}" aria-pressed="${val===v?'true':'false'}"></button>`}).join('')}</div></section>`; }).join(''); list.querySelectorAll('.circleChoice').forEach(btn=>btn.onclick=()=>selectListAnswer(Number(btn.dataset.no),Number(btn.dataset.val))); }
+function selectListAnswer(no,val){ answers[no]=val; setCompleted(false); save(); const item=document.getElementById('qitem-'+no); if(item){ item.classList.remove('missing','pulse'); item.classList.add('answered'); item.querySelectorAll('.circleChoice').forEach(b=>{const on=Number(b.dataset.val)===val; b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false');}); } const q=Q.find(x=>x.no===no); if(q) updateTestProgress(q.domain); }
+function firstMissingInCurrentDomain(){ const d=currentDomain(); return domainQuestions(d).find(q=>!answers[q.no]) || null; }
+function scrollToQuestion(no,withAlert=false){ const el=document.getElementById('qitem-'+no); if(el){el.classList.add('pulse'); el.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>el.classList.remove('pulse'),1800);} if(withAlert) setTimeout(()=>alert('아직 응답하지 않은 성장질문이 있습니다.'),120); }
+function goNextDomain(){ const d=currentDomain(), nd=nextDomainName(d); if(!nd){ if(answeredCount()>=TOTAL){ setCompleted(true); return showResult(false); } return moveToFirstMissing(true); } idx=Q.findIndex(q=>q.domain===nd); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
+function goPrevDomain(){ const pd=prevDomainName(currentDomain()); if(!pd)return; idx=Q.findIndex(q=>q.domain===pd); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
+function next(){ const miss=firstMissingInCurrentDomain(); if(miss){ scrollToQuestion(miss.no,true); return; } goNextDomain(); }
+function advanceAfterAnswer(){ updateTestProgress(currentDomain()); }
+function showDomainComplete(d){ goNextDomain(); }
+
+function sampleValue(q){ const m={'K 주도성':3.8,'I 정체성':3.25,'N 자기이야기':3.6,'G 강점':4.15,'D 책임영역':3.05,'O 기회실행':2.85,'M 의미통합':3.75}; return Math.max(1,Math.min(5,(m[q.domain]||3.3)+((parseInt(q.z.replace('Z',''))%3)-1)*.1)); }
+function buildScores(sample=false){ const val=q=>sample?sampleValue(q):answers[q.no]; const pick=f=>Q.filter(f).map(q=>val(q)).filter(Boolean); const domainAxes=domains().map(d=>({name:d,X:avg(pick(q=>q.domain===d&&q.process==='알아차림')),Y:avg(pick(q=>q.domain===d&&q.process==='세우기')),Z:avg(pick(q=>q.domain===d&&q.process==='적용하기'))})); return {domains:domains().map(d=>({name:d,avg:avg(pick(q=>q.domain===d)),n:pick(q=>q.domain===d).length})), processes:['알아차림','세우기','적용하기'].map(p=>({name:p,avg:avg(pick(q=>q.process===p))})), zs:[...new Set(Q.map(q=>q.z+' '+q.zLabel))].map(z=>({name:z,avg:avg(pick(q=>(q.z+' '+q.zLabel)===z))})), domainAxes}; }
+function axisScores(scores){ const g=n=>scores.processes.find(x=>x.name===n)?.avg||0; return {X:g('알아차림'),Y:g('세우기'),Z:g('적용하기')}; }
+function std(a){ const m=avg(a); return Math.sqrt(avg(a.map(x=>(x-m)**2))); }
+function classify(scores){
+  const ax=axisScores(scores);
+  const vals=[ax.X,ax.Y,ax.Z];
+  const domainVals=scores.domains.map(d=>d.avg);
+  const overall=avg(domainVals);
+  const range=Math.max(...vals)-Math.min(...vals);
+  const dsd=std(domainVals);
+  const top=[...scores.domains].sort((a,b)=>b.avg-a.avg)[0]?.name || '';
+  const low=[...scores.domains].sort((a,b)=>a.avg-b.avg)[0]?.name || '';
+  const domainAvg=name=>scores.domains.find(d=>d.name===name)?.avg || 0;
+  const strong=v=>v>=3.8, weak=v=>v<3.1;
+  if(overall>=4.35 && vals.every(v=>v>=4.15) && dsd<.45) return {name:'KINGDOM형',badge:'성장 선순환 구축',desc:'알아차림, 기준 세우기, 작은 실천이 삶 안에서 비교적 고르게 움직이고 있습니다.',guide:'좋은 흐름을 유지하면서 다른 사람에게도 도움이 되는 방식으로 확장합니다.'};
+  if(overall>=4.0 && dsd<.55) return {name:'숲형',badge:'다수 영역 안정',desc:'여러 성장영역이 고르게 자라고 있어 전체적인 균형감이 좋습니다.',guide:'가장 낮은 영역 하나를 골라 균형을 더 단단하게 만듭니다.'};
+  if(dsd<.35 && overall>=3.35) return {name:'이음형',badge:'영역 연결 우수',desc:'한 영역만 튀기보다 여러 영역이 서로 이어지며 작동하는 편입니다.',guide:'이미 연결된 힘을 실제 생활 장면 하나에 더 선명하게 적용합니다.'};
+  if(range>=.9 || dsd>=.85) return {name:'전환형',badge:'성장전환기',desc:'어떤 부분은 앞서가고 어떤 부분은 따라오는 중입니다. 지금은 성장방식이 바뀌는 시기일 수 있습니다.',guide:'가장 강한 자원 하나와 가장 약한 성장지점 하나를 연결해 작은 실험을 정합니다.'};
+  if(overall<2.8 || vals.every(weak)) return {name:'씨앗형',badge:'성장 시작단계',desc:'아직 충분히 드러나지 않았지만 작은 가능성이 시작되고 있습니다.',guide:'큰 목표보다 안전하고 쉬운 행동 하나로 시작합니다.'};
+  if(domainAvg('D 책임영역')>=3.7 || domainAvg('M 의미통합')>=3.7 || top==='D 책임영역' || top==='M 의미통합') return {name:'연결형',badge:'관계와 의미를 통해 성장',desc:'책임, 의미, 관계의 장면 속에서 성장의 힘이 잘 살아납니다.',guide:'중요한 사람이나 의미 있는 역할 안에서 다음 행동을 정합니다.'};
+  if(domainAvg('O 기회실행')>=3.7 || domainAvg('G 강점')>=3.8 || top==='O 기회실행') return {name:'확장형',badge:'도전과 확장',desc:'새로운 시도와 강점 활용을 통해 성장할 수 있는 힘이 보입니다.',guide:'기회를 더 크게 만들기보다 이번 주에 반복 가능한 작은 도전을 고릅니다.'};
+  if(strong(ax.Z) || domainAvg('M 의미통합')>=3.8) return {name:'통합형',badge:'삶으로 연결되는 성장',desc:'배운 것을 돌아보고 삶의 방향으로 묶는 힘이 자라고 있습니다.',guide:'좋은 깨달음을 일상 습관으로 연결할 작은 장치를 만듭니다.'};
+  return {name:'개척형',badge:'실행 시작',desc:'아직 완전히 자리잡지는 않았지만 움직이기 시작한 성장상태입니다.',guide:'완벽하게 준비하려 하기보다 오늘 바로 가능한 첫 행동을 선택합니다.'};
+}
+function level(scores){ const p=Math.round(avg(scores.domains.map(d=>d.avg))/5*100); if(p<=20)return {name:'Seed',pct:p,desc:'성장 인식이 시작되는 단계'}; if(p<=40)return {name:'Root',pct:p,desc:'기초를 다시 세우는 단계'}; if(p<=60)return {name:'Branch',pct:p,desc:'여러 영역으로 뻗어가는 단계'}; if(p<=80)return {name:'Forest',pct:p,desc:'경험과 행동이 연결되는 단계'}; return {name:'Kingdom',pct:p,desc:'자기주도 성장과 기여가 작동하는 단계'}; }
+function reliability(sample=false){ if(sample)return {label:'미리보기',cls:'stable',items:['샘플 데이터입니다.']}; const vals=Q.map(q=>answers[q.no]).filter(Boolean), n=vals.length; const counts=[1,2,3,4,5].map(v=>vals.filter(x=>x===v).length/n); const items=[]; let sc=100; if(Math.max(...counts)>=.85){sc-=45;items.push('같은 답을 많이 골랐습니다. 헷갈렸던 문항이 있었는지 확인합니다.');} if(counts[2]>=.65){sc-=25;items.push('보통이라는 답이 많습니다. 아직 잘 모르겠는 장면이 많았을 수 있습니다.');} if(counts[0]+counts[4]>=.75){sc-=25;items.push('강한 답이 많습니다. 오늘의 기분이나 상황도 함께 살펴봅니다.');} if(!items.length)items.push('응답 흐름에서 큰 이상 신호는 보이지 않습니다. 단, 연구개발 단계이므로 진단적 판단에는 쓰지 않습니다.'); return sc>=80?{label:'양호',cls:'strength',items}:sc>=55?{label:'확인 필요',cls:'check',items}:{label:'해석 주의',cls:'priority',items}; }
+function row(name,val){ return `<div class="scoreRow"><span>${name}</span><div class="meter"><i style="width:${pct(val)}%"></i></div><b>${val.toFixed(1)}</b></div>`; }
+function coachingWheel(scores,top,priority,type,lv,ax){ const nodes=scores.domains.map((d,i)=>{const deg=-90+360/scores.domains.length*i; const [lab,cls]=easyScore(d.avg); return `<div class="wheelNode ${cls}" style="--deg:${deg}deg"><b>${DOMAIN[d.name].short}</b><span>${DOMAIN[d.name].easy}</span><em>${lab}</em></div>`}).join(''); const lowAxis=[['X',ax.X],['Y',ax.Y],['Z',ax.Z]].sort((a,b)=>a[1]-b[1])[0][0]; const guide={X:'먼저 장면을 선명하게 알아차립니다.',Y:'먼저 나의 기준을 세웁니다.',Z:'먼저 작은 행동으로 해봅니다.'}[lowAxis]; return `<div class="wheelShell"><div class="wheelBoard"><div class="wheelRing"></div>${nodes}<div class="wheelHub"><small>오늘의 중심</small><b>${type.name}</b><span>${lv.name}</span></div></div><div class="wheelPanel"><div class="coachFlowTitle"><span>코치 진행 흐름</span><b>수레바퀴를 점수판이 아니라 대화순서로 사용합니다.</b></div><div class="wheelSteps"><div><strong>1</strong><b>둘러보기</b><p>7개 영역 중 먼저 눈에 들어오는 곳을 묻습니다.</p></div><div><strong>2</strong><b>자원 잡기</b><p>${shortTitle(top.name)}은 이미 자라고 있는 힘입니다.</p></div><div><strong>3</strong><b>다음성장지점 고르기</b><p>${shortTitle(priority.name)}은 오늘의 우선 대화주제입니다. ${guide}</p></div><div><strong>4</strong><b>작은 실험 정하기</b><p>이번 주 10분 안에 할 수 있는 행동 하나를 정합니다.</p></div></div><div class="wheelCoachCards"><div><b>질문 1</b>이 바퀴에서 가장 먼저 눈에 들어오는 곳은 어디인가요?</div><div><b>질문 2</b>${shortTitle(top.name)}의 힘을 ${shortTitle(priority.name)}에 가져온다면 무엇이 달라질까요?</div><div><b>질문 3</b>이번 주 이 바퀴를 1칸 굴리기 위해 무엇을 작게 해볼까요?</div></div></div></div>`; }
+
+function nextFocusText(priority,type,ax){
+  const axis=[['X',ax.X,'먼저 지금의 장면을 또렷하게 알아차려보세요.'],['Y',ax.Y,'생각한 것을 나의 기준과 약속으로 세워보세요.'],['Z',ax.Z,'완벽하게 준비하기보다 아주 작은 행동으로 먼저 해보세요.']].sort((a,b)=>a[1]-b[1])[0];
+  return {axis:axis[0], text:`${shortTitle(priority.name)}을(를) 오늘의 다음 성장지점으로 삼아, ${axis[2]}`};
+}
+function typeMeaning(type){
+  return `${type.name}은(는) ${type.desc} ${type.guide}`;
+}
+function mainExperimentCards(exps,selected=[]){
+  return exps.slice(0,3).map((e,i)=>`<label><input type="checkbox" class="mainExpPick" value="${e.text.replace(/"/g,'&quot;')}" ${selected.includes(e.text)?'checked':''}/> <span><b>${e.id}</b>${e.text}</span></label>`).join('');
+}
+
+function showResult(sample=false){ if(!sample && answeredCount()<TOTAL){ alert(`아직 ${TOTAL-answeredCount()}개 성장질문이 남았습니다.`); return;} if(!sample)setCompleted(true); save(); hideAll(); $('result').classList.remove('hidden'); const s=buildScores(sample), name=sample?'샘플 응답자':($('name').value||localStorage.getItem('kgm210_name')||'응답자'), memo=sample?'샘플':($('memo').value||localStorage.getItem('kgm210_memo')||''); const sorted=[...s.domains].sort((a,b)=>b.avg-a.avg), low=[...s.domains].sort((a,b)=>a.avg-b.avg), top=sorted[0], priority=low[0], type=classify(s), lv=level(s), ax=axisScores(s), rel=reliability(sample); $('resultTitle').textContent=`${name}님의 성장코칭 리포트`; $('reportMeta').textContent=`${today()} · ${memo}`; $('growthIdentity').innerHTML=`<div><span>오늘의 코칭 주제</span><b>${type.name}</b><em>${type.badge}</em><p class="small">${typeMeaning(type)}</p></div><div><span>성장 단계</span><b>${lv.name}</b><em>${lv.pct}/100 · ${lv.desc}</em></div><div><span>응답 확인</span><b>${rel.label}</b><em>결과 해석 전 참고</em></div>`; $('growthMap').innerHTML=s.domains.map(d=>{const [lab,cls]=easyScore(d.avg); return `<div class="mapNode ${cls}"><strong>${DOMAIN[d.name].short}</strong><b>${DOMAIN[d.name].easy}</b><span>${lab}</span><i style="height:${pct(d.avg)}%"></i></div>`}).join(''); $('xyzLegend').innerHTML=xyzLegend(s,ax,type); $('coachingWheelFlow').innerHTML=coachingWheel(s,top,priority,type,lv,ax); $('summary').innerHTML=`<div><b>대화의 출발점</b>${dTitle(top.name)} · ${shortTitle(top.name)}<br><span class="small">${DOMAIN[top.name].high}</span></div><div><b>오늘의 코칭주제</b>${dTitle(priority.name)} · ${shortTitle(priority.name)}<br><span class="small">${DOMAIN[priority.name].low}</span></div><div><b>성장 흐름</b>알아차림 ${ax.X.toFixed(1)} · 세우기 ${ax.Y.toFixed(1)} · 해보기 ${ax.Z.toFixed(1)}<br><span class="small">가장 낮은 흐름을 작은 행동으로 연결합니다.</span></div>`; $('narrative').innerHTML=`${name}님은 지금 <b>${type.name}</b>이라는 코칭 주제로 만날 수 있습니다. ${type.desc}<br><br>이 리포트에서 중요한 것은 높은 점수와 낮은 점수를 가르는 일이 아닙니다. <b>${shortTitle(top.name)}</b>은 대화를 시작할 때 사용할 수 있는 힘이고, <b>${shortTitle(priority.name)}</b>은 이번 주에 실제 장면으로 확인해 볼 주제입니다.<br><br>${type.guide} 코칭에서는 “왜 못했나”보다 “어떤 상황에서 어려웠나”, “내가 가진 힘을 어디에 써볼까”, “이번 주에 무엇을 작게 해볼까”를 묻습니다.`; const focus=nextFocusText(priority,type,ax); if($('nextFocus')) $('nextFocus').innerHTML=`<b>오늘의 한 문장</b><span>${focus.text}</span><p class="small">이 문장은 점수의 결론이 아니라, 이번 주에 확인해 볼 작은 방향입니다.</p>`; $('domainCards').innerHTML=s.domains.map(d=>{const [lab,cls]=easyScore(d.avg); const info=DOMAIN[d.name]; return `<div class="domainCard"><h4>${info.short} ${info.title}</h4><div class="small">코칭 주제 · ${info.easy}</div><div class="scoreLine"><div class="score">${d.avg.toFixed(1)}</div><div class="meter"><i style="width:${pct(d.avg)}%"></i></div></div><span class="tag ${cls}">${lab}</span><p>${info.desc}</p><p class="small"><b>코치 질문</b><br>${info.q}</p></div>`}).join(''); $('subScores').innerHTML=`<div><b>성장 흐름 3단계</b><div class="scoreRows">${[['X',ax.X],['Y',ax.Y],['Z',ax.Z]].map(([k,v])=>row(`${AXIS[k][0]} · ${AXIS[k][1]}`,v)).join('')}</div></div><div><b>생활 속 작동 모습</b><div class="scoreRows">${s.zs.map(x=>row(x.name.replace('Z','생활 '),x.avg)).join('')}</div></div>`; $('reliabilityBox').innerHTML=`<div class="summary"><div><b>응답 확인 · <span class="tag ${rel.cls}">${rel.label}</span></b>${rel.items.map(x=>`<p class="small">${x}</p>`).join('')}</div></div>`; $('practitionerReport').innerHTML=`<div class="prGrid"><div><b>코칭 자원 3</b>${sorted.slice(0,3).map(x=>`<p>${dTitle(x.name)} · ${x.avg.toFixed(1)}</p>`).join('')}</div><div><b>우선 대화주제 3</b>${low.slice(0,3).map(x=>`<p>${dTitle(x.name)} · ${x.avg.toFixed(1)}</p>`).join('')}</div><div><b>코치 진행멘트</b><p>이 점수는 좋고 나쁨이 아니라 오늘 대화를 시작할 위치입니다.</p><p>${shortTitle(top.name)}의 힘을 ${shortTitle(priority.name)}의 작은 성장실험에 연결합니다.</p></div></div>`; $('coachQuestions').innerHTML=[...recommendedQuestions(priority.name).slice(0,5), ...recommendedQuestions(top.name).slice(0,2)].map((q,i)=>`<div><b>질문카드 ${i+1}</b>${q}</div>`).join(''); const mainExps=recommendedExperiments(priority.name).slice(0,3); const plan0=getPlan(); const selected0=plan0.experiments||mainExps.map(e=>e.text); $('actionCards').innerHTML=mainExperimentCards(mainExps,selected0); setTimeout(()=>{document.querySelectorAll('.mainExpPick').forEach(cb=>cb.onchange=()=>{const picked=[...document.querySelectorAll('.mainExpPick')].filter(x=>x.checked).map(x=>x.value); const plan=getPlan(); plan.experiments=picked; plan.date=new Date().toISOString(); plan.domain=priority.name; plan.type=type.name; setPlan(plan);});},0); $('sessionGuide').innerHTML=`<div><b>10분 · 결과 열기</b>성장유형과 성장지도를 보며 떠오르는 장면을 먼저 묻습니다.</div><div><b>20분 · 장면 다루기</b>${shortTitle(priority.name)}이 약하게 작동했던 실제 상황을 하나 고릅니다.</div><div><b>10분 · 실험 정하기</b>이번 주에 할 수 있는 작은 행동 하나를 정합니다.</div>`; drawXYZ(s,ax,type); drawRadar(s.domains); renderGrowthCycle(s,sorted,low,type,lv,ax,sample); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function xyzLegend(scores,ax,type){ const order=[['X',ax.X,'성장인식','무엇이 중요한지 알아차리는 힘'],['Y',ax.Y,'성장실행','정한 것을 실제로 해보는 힘'],['Z',ax.Z,'성장통합','배운 것이 삶에 자리잡는 힘']]; const low=[...order].sort((a,b)=>a[1]-b[1])[0]; const high=[...order].sort((a,b)=>b[1]-a[1])[0]; return `<div class="xyzText"><b>현재 성장공간 위치 · ${type.name}</b><p>${typeMeaning(type)}</p><p>X는 알아차림, Y는 실행, Z는 통합입니다. 이 그림은 사람을 평가하는 점수표가 아니라, 지금 성장이 어디에서 먼저 움직이고 어디가 더 돌봄을 원하는지 보여주는 성장지도입니다.</p><p><strong>가장 잘 움직이는 축</strong> ${high[2]} ${high[1].toFixed(1)} · <strong>먼저 연결할 축</strong> ${low[2]} ${low[1].toFixed(1)}</p></div><div class="xyzAxisCards">${order.map(([k,v,t,d])=>`<div><span>${k}</span><b>${t}</b><em>${v.toFixed(1)}/5</em><div class="meter"><i style="width:${pct(v)}%"></i></div><p>${d}</p></div>`).join('')}</div><div class="xyzCoordTable">${scores.domainAxes.map(d=>`<div><b>${DOMAIN[d.name].short} ${DOMAIN[d.name].title}</b><span>X ${d.X.toFixed(1)} · Y ${d.Y.toFixed(1)} · Z ${d.Z.toFixed(1)}</span></div>`).join('')}</div>`; }
+function drawXYZ(scores,ax,type){
+  const c=$('xyzCanvas'); if(!c)return; const wrap=$('xyzModel')||c.parentElement; const cssW=Math.max(280, Math.min(860, wrap.clientWidth || 360)); const cssH=cssW<520?390:560; const dpr=window.devicePixelRatio||1; c.style.width='100%'; c.style.height=cssH+'px'; c.width=Math.floor(cssW*dpr); c.height=Math.floor(cssH*dpr);
+  const ctx=c.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); const w=cssW,h=cssH; ctx.clearRect(0,0,w,h);
+  const mobile=w<560; const max=5; const scale=mobile ? Math.max(34, Math.min(52, w/8.2)) : Math.max(56, Math.min(72, w/12)); const ox=mobile ? w*.50 : w*.31; const oy=mobile ? h*.80 : h*.77;
+  const iso=(x,y,z)=>({x:ox+(y-x)*scale*0.95,y:oy-(z*scale)-(x+y)*scale*.32});
+  ctx.lineWidth=1; ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.fillStyle='rgba(255,255,255,.45)'; ctx.font='12px system-ui';
+  for(let i=1;i<=max;i++){ let a=iso(i,0,0), b=iso(i,max,0), d=iso(0,i,0), e=iso(max,i,0), z1=iso(0,0,i), z2=iso(max,0,i), z3=iso(0,max,i); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.moveTo(d.x,d.y); ctx.lineTo(e.x,e.y); ctx.moveTo(z1.x,z1.y); ctx.lineTo(z2.x,z2.y); ctx.moveTo(z1.x,z1.y); ctx.lineTo(z3.x,z3.y); ctx.stroke(); }
+  const drawAxis=(to,label,color)=>{const p=iso(0,0,0), q=to; ctx.strokeStyle=color; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); ctx.fillStyle=color; ctx.font=mobile?'800 13px system-ui':'800 18px system-ui'; const lx=clamp(q.x+(mobile?-8:8),8,w-72), ly=clamp(q.y-8,24,h-12); ctx.fillText(label,lx,ly);};
+  drawAxis(iso(max+.25,0,0),mobile?'X 인식':'X 성장인식','#9fd6b4'); drawAxis(iso(0,max+.25,0),mobile?'Y 실행':'Y 성장실행','#d9b665'); drawAxis(iso(0,0,max+.25),mobile?'Z 통합':'Z 성장통합','#98b9ff');
+  if(!mobile){ const zones=[{name:'Seed',p:iso(1,1,.6)},{name:'Forest',p:iso(3.3,3.3,3.3)},{name:'Kingdom',p:iso(4.7,4.7,4.7)}]; zones.forEach(z=>{ctx.fillStyle='rgba(255,255,255,.18)'; ctx.font='900 20px system-ui'; ctx.fillText(z.name,z.p.x,z.p.y);}); }
+  const point=(x,y,z)=>iso(x,y,z); const pts=scores.domainAxes.map(d=>({name:d.name,...point(d.X,d.Y,d.Z),v:(d.X+d.Y+d.Z)/3})); ctx.strokeStyle='rgba(217,182,101,.38)'; ctx.lineWidth=2; ctx.beginPath(); pts.forEach((p,i)=>{i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)}); ctx.closePath(); ctx.stroke(); ctx.fillStyle='rgba(217,182,101,.10)'; ctx.fill();
+  pts.forEach(p=>{const info=DOMAIN[p.name]; ctx.beginPath(); ctx.arc(p.x,p.y,mobile?6:7+Math.max(0,p.v-2),0,Math.PI*2); ctx.fillStyle='rgba(217,182,101,.95)'; ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.7)'; ctx.lineWidth=1; ctx.stroke(); ctx.fillStyle='#f7f1e6'; ctx.font=mobile?'800 11px system-ui':'800 13px system-ui'; ctx.fillText(info.short,clamp(p.x+9,4,w-18),clamp(p.y+4,14,h-8));});
+  const me=point(ax.X,ax.Y,ax.Z); ctx.beginPath(); ctx.arc(me.x,me.y,mobile?12:15,0,Math.PI*2); ctx.fillStyle='rgba(159,214,180,.95)'; ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.stroke(); ctx.fillStyle='#fff'; ctx.font=mobile?'900 12px system-ui':'900 14px system-ui'; ctx.fillText('현재',clamp(me.x+16,8,w-44),clamp(me.y+4,18,h-10));
+}
+function drawRadar(data){ const c=$('radar'),ctx=c.getContext('2d'),w=c.width,h=c.height,cx=w/2,cy=h/2+30,r=190; ctx.clearRect(0,0,w,h); ctx.font='15px system-ui'; ctx.strokeStyle='rgba(255,255,255,.16)'; ctx.fillStyle='#bdb5a8'; for(let k=1;k<=5;k++){ctx.beginPath(); data.forEach((d,i)=>{const a=-Math.PI/2+i*2*Math.PI/data.length,rr=r*k/5,x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr; i?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.closePath(); ctx.stroke(); ctx.fillText(String(k),cx+6,cy-r*k/5+4);} data.forEach((d,i)=>{const a=-Math.PI/2+i*2*Math.PI/data.length; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r); ctx.stroke(); ctx.fillStyle='#e7dcc7'; ctx.fillText(`${DOMAIN[d.name].short} ${DOMAIN[d.name].title}`,cx+Math.cos(a)*(r+42)-34,cy+Math.sin(a)*(r+42)+4);}); ctx.beginPath(); data.forEach((d,i)=>{const a=-Math.PI/2+i*2*Math.PI/data.length,rr=r*d.avg/5,x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr; i?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.closePath(); ctx.fillStyle='rgba(217,182,101,.26)'; ctx.fill(); ctx.strokeStyle='#d9b665'; ctx.lineWidth=4; ctx.stroke(); ctx.lineWidth=1; ctx.fillStyle='#f7f1e6'; ctx.font='700 24px system-ui'; ctx.fillText('KGM210 코칭수레바퀴',28,42); ctx.font='14px system-ui'; ctx.fillStyle='#bdb5a8'; ctx.fillText('7영역 성장대화 지도 · 총점으로 사람을 판단하지 않습니다',28,66); }
+
+
+function domainKey(d){ return DOMAIN[d]?.short || d.slice(0,1); }
+function getPlan(){ try{return JSON.parse(localStorage.getItem('kgm210_growth_plan')||'{}')}catch(e){return {}} }
+function setPlan(plan){ localStorage.setItem('kgm210_growth_plan',JSON.stringify(plan)); }
+function getHistory(){ try{return JSON.parse(localStorage.getItem('kgm210_history')||'[]')}catch(e){return []} }
+function setHistory(h){ localStorage.setItem('kgm210_history',JSON.stringify(h)); }
+function scoreSnapshot(scores){ return scores.domains.map(d=>({name:d.name,avg:+d.avg.toFixed(2)})); }
+function axisSnapshot(scores){ const ax=axisScores(scores); return {X:+ax.X.toFixed(2),Y:+ax.Y.toFixed(2),Z:+ax.Z.toFixed(2)}; }
+function fmtDate(iso){ try{return new Date(iso).toLocaleDateString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return iso||''} }
+function avgFromSnap(snap){ return avg((snap.scores||[]).map(x=>x.avg)); }
+function showJourney(){ hideAll(); renderJourney(); $('journey')?.classList.remove('hidden'); window.scrollTo({top:0,behavior:'smooth'}); }
+function renderJourney(){
+  const el=$('journey'); if(!el)return; const h=getHistory();
+  if(!h.length){ el.innerHTML=`<div class="sectionHead"><div><div class="eyebrow">Growth Journey</div><h2>성장여정 보기</h2></div></div><div class="notice">저장된 검사 결과가 아직 없습니다. 검사를 완료하면 검사일자별 성장변화가 이곳에 쌓입니다.</div><button id="journeyHomeBtn" class="primary">처음으로</button>`; setTimeout(()=>{$('journeyHomeBtn').onclick=showIntro},0); return; }
+  const options=h.map((r,i)=>`<option value="${i}">${i+1}차 · ${fmtDate(r.date)} · ${r.type||'성장기록'}</option>`).join('');
+  const last=h[h.length-1];
+  el.innerHTML=`<div class="sectionHead"><div><div class="eyebrow">Growth Journey</div><h2>성장여정 보기</h2><p class="small">검사일자를 기준으로 성장유형, 7영역, XYZ 변화를 확인합니다.</p></div><span class="pill">${h.length}회 기록</span></div><div class="journeyList">${h.map((r,i)=>`<button class="journeyItem" data-open="${i}"><b>${i+1}차 검사</b><span>${fmtDate(r.date)}</span><em>${r.type||'성장기록'} · 평균 ${avgFromSnap(r).toFixed(1)}</em></button>`).join('')}</div><div class="comparePicker"><label>이전 회차 <select id="compareA">${options}</select></label><label>비교 회차 <select id="compareB">${options}</select></label><button id="compareBtn" class="primary">성장변화 비교</button></div><div id="journeyCompareBox">${renderHistoryCompare(Math.max(0,h.length-2),h.length-1)}</div><div class="nav"><button id="journeyHomeBtn">처음으로</button><button id="clearHistoryBtn" class="danger">성장여정 전체 삭제</button></div>`;
+  setTimeout(()=>{ document.querySelectorAll('.journeyItem').forEach(b=>b.onclick=()=>showHistoryResult(Number(b.dataset.open))); $('compareA').value=Math.max(0,h.length-2); $('compareB').value=h.length-1; $('compareBtn').onclick=()=>{$('journeyCompareBox').innerHTML=renderHistoryCompare(Number($('compareA').value),Number($('compareB').value));}; $('journeyHomeBtn').onclick=showIntro; $('clearHistoryBtn').onclick=()=>{if(confirm('저장된 성장여정 전체를 삭제할까요? 현재 진행 중인 검사는 유지됩니다.')){setHistory([]); showJourney(); updateHomeButtons();}}; },0);
+}
+function renderHistoryCompare(ai,bi){
+  const h=getHistory(); if(h.length<2)return `<div class="compareEmpty"><b>비교 대기</b><p>검사를 2회 이상 완료하면 성장변화를 비교할 수 있습니다.</p></div>`; const a=h[ai], b=h[bi]; if(!a||!b||ai===bi)return `<div class="compareEmpty"><b>회차를 2개 선택해 주세요.</b></div>`;
+  const rows=(b.scores||[]).map(cur=>{const prev=(a.scores||[]).find(x=>x.name===cur.name)||cur; return {name:cur.name,p:prev.avg,c:cur.avg,diff:cur.avg-prev.avg};}); const best=[...rows].sort((x,y)=>y.diff-x.diff)[0];
+  const axA=a.axes||{}, axB=b.axes||{}; const axRows=['X','Y','Z'].map(k=>({k,p:axA[k]||0,c:axB[k]||0,diff:(axB[k]||0)-(axA[k]||0)}));
+  return `<div class="compareMsg"><b>${ai+1}차 → ${bi+1}차 성장변화</b><p>가장 크게 움직인 영역은 <strong>${dTitle(best.name)}</strong>입니다. 변화는 좋고 나쁨보다 “어떤 장면이 달라졌는가”를 묻는 자료입니다.</p><p class="small">${a.type||'이전'} → ${b.type||'현재'}</p></div><div class="compareRows">${rows.map(r=>`<div><b>${dTitle(r.name)}</b><span>${r.p.toFixed(1)} → ${r.c.toFixed(1)}</span><em class="${r.diff>=0?'up':'down'}">${r.diff>=0?'+':''}${r.diff.toFixed(1)}</em></div>`).join('')}</div><h3>XYZ 변화</h3><div class="compareRows">${axRows.map(r=>`<div><b>${AXIS[r.k][0]}</b><span>${r.p.toFixed(1)} → ${r.c.toFixed(1)}</span><em class="${r.diff>=0?'up':'down'}">${r.diff>=0?'+':''}${r.diff.toFixed(1)}</em></div>`).join('')}</div>`;
+}
+function showHistoryResult(i){ const h=getHistory(); const r=h[i]; if(!r)return; hideAll(); $('journey')?.classList.remove('hidden'); $('journey').innerHTML=`<div class="sectionHead"><div><div class="eyebrow">Saved Result</div><h2>${i+1}차 성장결과</h2><p class="small">${fmtDate(r.date)} · ${r.type||'성장기록'}</p></div></div><div class="growthIdentity"><div><span>성장유형</span><b>${r.type||'-'}</b><em>${r.level?.name||''}</em></div><div><span>평균</span><b>${avgFromSnap(r).toFixed(1)}</b><em>5점 기준</em></div></div><div class="compareRows">${(r.scores||[]).map(x=>`<div><b>${dTitle(x.name)}</b><span>${x.avg.toFixed(1)}</span><em>${DOMAIN[x.name]?.easy||''}</em></div>`).join('')}</div><div class="nav"><button id="backJourneyBtn">성장여정 목록</button><button id="deleteOneHistoryBtn" class="danger">이 결과 삭제</button></div>`; setTimeout(()=>{$('backJourneyBtn').onclick=showJourney; $('deleteOneHistoryBtn').onclick=()=>{if(confirm('이 결과를 삭제할까요?')){const hh=getHistory(); hh.splice(i,1); setHistory(hh); showJourney(); updateHomeButtons();}};},0); }
+
+function recommendedExperiments(domain){
+  const info=DOMAIN[domain];
+  const list={"K": ["오늘 할 일 1개를 스스로 정하고 끝내기", "미루던 일 중 가장 작은 것 5분만 시작하기", "누가 시키기 전에 먼저 정리하기", "오늘의 선택 1개를 기록하기", "“나는 이것을 선택했다” 문장 쓰기", "작은 약속 하나 정하고 지키기", "결정이 필요한 일 하나를 더 미루지 않기", "오늘 거절해야 할 것 하나 정하기", "내 의견을 한 문장으로 말하기", "부탁받기 전에 먼저 제안하기", "하루 시작 전 우선순위 3개 쓰기", "선택하지 않은 이유를 변명 없이 적어보기", "내가 바꿀 수 있는 것과 없는 것 나누기", "오늘 내 책임으로 한 일 표시하기", "작은 결정을 10초 안에 해보기", "“다음에”라고 하던 일을 오늘 1단계만 하기", "도움을 기다리지 않고 먼저 요청하기", "내 시간 30분을 직접 설계하기", "오늘의 선택에서 배운 점 1개 쓰기", "이번 주 내가 주도할 일 1개 정하기"], "I": ["나를 설명하는 한 문장 쓰기", "내가 중요하게 여기는 가치 3개 적기", "나다운 행동 하나 찾아보기", "내가 자랑스러운 경험 1개 기록하기", "사람들이 나를 어떻게 기억하길 원하는지 쓰기", "오늘 내 가치와 맞는 선택 1개 하기", "남들이 원하는 나와 진짜 내가 원하는 나 구분하기", "나를 힘나게 하는 말 1개 정하기", "내가 지키고 싶은 기준 1개 세우기", "“나는 이런 사람이고 싶다” 문장 완성하기", "나의 장점 5개 적기", "나의 약점도 부드럽게 표현해보기", "내가 자주 맡는 역할 적어보기", "그 역할 중 내려놓고 싶은 것 1개 찾기", "내가 계속 키우고 싶은 모습 1개 정하기", "오늘 나답게 행동한 순간 표시하기", "비교를 멈추고 내 기준으로 평가하기", "내 이름 앞에 붙이고 싶은 단어 3개 쓰기", "나에게 어울리는 성장문장 만들기", "이번 주 나다운 선택 1개 실천하기"], "N": ["오늘 자주 떠오른 생각 1개 적기", "스스로에게 자주 하는 말 찾기", "나를 힘들게 하는 말 바꿔 써보기", "“나는 항상…”으로 시작하는 생각 점검하기", "오늘의 장면 하나를 이야기처럼 기록하기", "나에게 붙인 별명이나 꼬리표 하나 내려놓기", "실패한 경험에서 배운 점 1개 찾기", "오래 붙잡고 있던 생각 하나를 종이에 쓰고 접기", "나를 응원하는 문장 1개 만들기", "오늘 있었던 좋은 장면 1개 다시 떠올리기", "내 인생 제목을 새롭게 써보기", "“아직 끝난 이야기가 아니다” 문장으로 하루 정리하기", "반복되는 걱정에 이름 붙이기", "걱정을 사실과 상상으로 나누기", "과거의 나에게 짧은 편지 쓰기", "미래의 나에게 짧은 응원 쓰기", "내 이야기에 등장하는 도움 자원 찾기", "나를 아프게 한 문장을 나를 살리는 문장으로 바꾸기", "오늘 내가 새로 선택한 이야기 적기", "이번 주 새롭게 믿어볼 문장 하나 정하기"], "G": ["오늘 내가 쉽게 해낸 일 1개 찾기", "주변 사람이 고마워한 행동 적기", "나의 강점 3개를 실제 행동으로 연결하기", "잘하는 일을 10분 더 해보기", "내가 가진 자원 목록 만들기", "누군가에게 작은 도움 주기", "칭찬받은 경험 하나 기록하기", "내가 즐겁게 몰입한 순간 찾기", "강점을 너무 많이 써서 지친 적 돌아보기", "오늘 강점 하나를 의식적으로 사용하기", "다른 사람이 보는 나의 장점 물어보기", "내가 잘하는 방식으로 문제 하나 해결하기", "힘들 때 나를 버티게 한 자원 찾기", "강점을 새로운 상황에 써보기", "내가 배우고 싶은 강점 정하기", "나의 강점이 필요한 사람 생각하기", "강점 사용 후 기분 기록하기", "강점과 약점이 함께 있는 장면 적기", "내가 이미 가진 것을 인정하는 문장 쓰기", "이번 주 가장 많이 써볼 강점 1개 정하기"], "D": ["오늘 맡은 일 하나 끝까지 마무리하기", "약속한 시간 지키기", "미뤄둔 책임 하나 정리하기", "감사해야 할 사람에게 감사 전하기", "맡은 역할 목록 적기", "내가 책임질 수 있는 범위 구분하기", "남의 책임 대신 지고 있는 것 내려놓기", "오늘의 약속 한 가지 실천하기", "책임을 회피했던 이유 적어보기", "책임을 다한 경험 기록하기", "끝까지 해낸 일 체크하기", "맡은 역할 중 가장 중요한 것 선택하기", "가족·학교·직장 중 한 곳에 기여하기", "내가 영향을 주는 사람 떠올리기", "작은 봉사 행동 하나 실천하기", "책임이 부담될 때 필요한 도움 요청하기", "약속한 일을 스스로 점검하기", "책임감 때문에 놓친 휴식 챙기기", "오늘 책임 있게 행동한 순간 기록하기", "이번 주 끝까지 완수할 일 정하기"], "O": ["처음 해보는 일 1개 시도하기", "평소와 다른 길로 가보기", "새로운 사람과 대화하기", "배우고 싶던 것 10분 시작하기", "작은 아이디어 바로 실행하기", "실패해도 되는 도전 하나 정하기", "오늘의 기회 3가지 찾기", "미뤄둔 연락 보내기", "새로운 경험 일정 잡기", "“나중에”를 “지금 5분”으로 바꾸기", "관심 분야 기사 하나 읽기", "도움을 줄 수 있는 기회 찾기", "새로운 방식으로 문제 해결하기", "두려운 일의 가장 작은 단계 실행하기", "배우고 싶은 사람 관찰하기", "새로운 장소 가보기", "오늘의 배움 한 줄 기록하기", "가능성을 막는 생각 적어보기", "가능성을 여는 행동 하나 하기", "이번 주 도전 목표 정하기"], "M": ["감사한 일 3가지 적기", "오늘 의미 있었던 순간 기록하기", "나를 웃게 한 장면 적기", "최근 배운 점 한 줄 쓰기", "나에게 중요한 가치 점검하기", "하루를 한 문장으로 정리하기", "의미 있는 사람 떠올리기", "고마운 사람에게 메시지 보내기", "힘들었던 경험의 배움 찾기", "오늘 가장 소중했던 순간 적기", "나를 살리는 습관 하나 기록하기", "삶에서 놓치고 싶지 않은 것 적기", "자연이나 음악을 10분 느끼기", "하루를 돌아보며 의미 점수 매기기", "미래의 나에게 감사 편지 쓰기", "나의 경험이 도움이 될 사람 떠올리기", "오늘의 의미 한 단어 정하기", "내가 남기고 싶은 영향 적기", "삶의 방향을 다시 점검하기", "이번 주 의미를 더할 행동 하나 실천하기"]};
+  return (list[info?.short]||[]).map((text,i)=>({id:`${info?.short||'X'}-실험${String(i+1).padStart(2,'0')}`,text}));
+}
+function recommendedQuestions(domain){
+  const info=DOMAIN[domain];
+  const list={"K": ["최근 스스로 결정한 일은 무엇입니까?", "누가 시키지 않아도 꾸준히 하는 것은 무엇입니까?", "지금 가장 바꾸고 싶은 것은 무엇입니까?", "당신이 주도권을 잡을 때 가장 달라지는 점은 무엇입니까?", "미루고 있는 결정이 있습니까?", "결정을 어렵게 만드는 것은 무엇입니까?", "당신이 선택할 수 있는 것은 무엇입니까?", "최근 가장 만족스러운 선택은 무엇입니까?", "당신이 책임질 수 있는 범위는 어디까지입니까?", "이번 주 스스로 결정해볼 일은 무엇입니까?"], "I": ["당신을 가장 잘 설명하는 한 문장은 무엇입니까?", "당신은 어떤 사람이라고 생각합니까?", "당신은 무엇을 중요하게 생각합니까?", "사람들은 당신을 어떻게 기억하길 원합니까?", "당신의 강점은 무엇입니까?", "당신의 가치관을 보여주는 행동은 무엇입니까?", "당신이 지키고 싶은 모습은 무엇입니까?", "당신이 자랑스럽게 여기는 경험은 무엇입니까?", "당신은 어떤 방향으로 성장하고 싶습니까?", "당신다움이 가장 잘 드러나는 순간은 언제입니까?"], "N": ["최근 가장 자주 떠오르는 생각은 무엇입니까?", "스스로에게 자주 하는 말은 무엇입니까?", "반복되는 걱정은 무엇입니까?", "반복되는 기대는 무엇입니까?", "당신의 인생을 한 편의 이야기로 표현한다면 제목은 무엇입니까?", "최근 가장 기억에 남는 장면은 무엇입니까?", "당신은 자신을 어떤 이야기 속 주인공으로 보고 있습니까?", "놓아주고 싶은 이야기가 있습니까?", "새롭게 써보고 싶은 이야기는 무엇입니까?", "당신이 믿고 싶은 미래의 이야기는 무엇입니까?"], "G": ["다른 사람보다 쉽게 하는 것은 무엇입니까?", "주변 사람들이 자주 부탁하는 것은 무엇입니까?", "시간 가는 줄 모르고 하는 것은 무엇입니까?", "성취감을 느끼는 순간은 언제입니까?", "지금 활용하지 못하고 있는 강점은 무엇입니까?", "당신이 가진 자원은 무엇입니까?", "최근 가장 잘한 일은 무엇입니까?", "어떤 상황에서 힘이 생깁니까?", "당신의 강점이 도움이 된 경험은 무엇입니까?", "이번 주 활용해보고 싶은 강점은 무엇입니까?"], "D": ["지금 가장 책임지고 싶은 것은 무엇입니까?", "당신에게 중요한 역할은 무엇입니까?", "최근 끝까지 해낸 일은 무엇입니까?", "포기하지 않은 이유는 무엇입니까?", "당신이 지켜야 할 약속은 무엇입니까?", "당신이 영향을 주는 사람은 누구입니까?", "당신이 돌봐야 할 것은 무엇입니까?", "책임이 부담이 될 때는 언제입니까?", "책임이 의미 있게 느껴질 때는 언제입니까?", "이번 주 책임 있게 실천할 일은 무엇입니까?"], "O": ["최근 새롭게 시도한 일은 무엇입니까?", "지금 해보고 싶지만 미루는 일은 무엇입니까?", "작은 기회로 바꿀 수 있는 상황은 무엇입니까?", "실패해도 배울 수 있는 일은 무엇입니까?", "지금 바로 시작할 수 있는 가장 작은 행동은 무엇입니까?", "당신 앞에 열려 있는 선택지는 무엇입니까?", "도전할 때 가장 필요한 도움은 무엇입니까?", "최근 용기를 낸 순간은 언제입니까?", "이번 주 붙잡고 싶은 기회는 무엇입니까?", "오늘 한 걸음 움직인다면 무엇을 하겠습니까?"], "M": ["지금 삶에서 가장 중요한 것은 무엇입니까?", "최근 의미 있었다고 느낀 순간은 언제입니까?", "힘든 경험 속에서 배운 것은 무엇입니까?", "당신이 지키고 싶은 가치는 무엇입니까?", "지금까지의 경험이 어디에 도움이 될 수 있습니까?", "당신의 삶이 누군가에게 어떤 도움이 되길 원합니까?", "감사한 일 세 가지는 무엇입니까?", "지금의 시간을 어떤 의미로 기억하고 싶습니까?", "당신이 다시 붙잡고 싶은 마음은 무엇입니까?", "이번 주 삶에 의미를 더할 작은 행동은 무엇입니까?"]};
+  return list[info?.short]||[info?.q||'오늘 어떤 장면을 함께 보고 싶나요?'];
+}
+function saveCurrentSnapshot(scores,type){
+  const h=getHistory();
+  const snap={date:new Date().toISOString(), version:'KGM210 v1.0', type:type.name, badge:type.badge, level:level(scores), axes:axisSnapshot(scores), scores:scoreSnapshot(scores), experiments:(getPlan().experiments||[])};
+  const last=h[h.length-1];
+  if(!last || JSON.stringify(last.scores)!==JSON.stringify(snap.scores)){ h.push(snap); setHistory(h.slice(-6)); }
+}
+function renderGrowthCycle(scores,sorted,low,type,lv,ax,sample=false){
+  const priority=low[0], second=low[1]||priority, top=sorted[0];
+  const exps=[...recommendedExperiments(priority.name).slice(0,3), ...recommendedExperiments(second.name).slice(0,2)].slice(0,5);
+  const plan=getPlan();
+  if(!sample){ saveCurrentSnapshot(scores,type); }
+  const selected=plan.experiments && plan.experiments.length ? plan.experiments : exps.slice(0,3).map(e=>e.text);
+  if($('growthPlan')) $('growthPlan').innerHTML=`<div class="planHero"><div><span>KINGDOM 7일 성장계획</span><b>${type.name} · ${lv.name}</b><p>이번 주는 <strong>${shortTitle(priority.name)}</strong>을 먼저 돌보고, <strong>${shortTitle(top.name)}</strong>의 힘을 연결합니다.</p></div><button id="savePlanBtn" class="primary">계획 저장</button></div><div class="planGrid"><div><b>성장강점</b>${sorted.slice(0,3).map(x=>`<p>${dTitle(x.name)} · ${x.avg.toFixed(1)}</p>`).join('')}</div><div><b>다음성장지점</b>${low.slice(0,3).map(x=>`<p>${dTitle(x.name)} · ${x.avg.toFixed(1)}</p>`).join('')}</div><div><b>추천 질문카드</b>${recommendedQuestions(priority.name).map(q=>`<p>“${q}”</p>`).join('')}</div></div><div class="experimentSelect"><b>추천 성장실험</b>${exps.map((e,i)=>`<label><input type="checkbox" class="expPick" value="${e.text.replace(/"/g,'&quot;')}" ${selected.includes(e.text)?'checked':''}/> <span>${e.id}</span> ${e.text}</label>`).join('')}</div>`;
+  const savedPlan=()=>{ const picked=[...document.querySelectorAll('.expPick')].filter(x=>x.checked).map(x=>x.value); setPlan({date:new Date().toISOString(), experiments:picked.length?picked:selected, domain:priority.name, type:type.name}); alert('성장계획서를 저장했습니다. 인쇄/PDF 저장에 함께 포함됩니다.'); renderGrowthCycle(scores,sorted,low,type,lv,ax,sample); };
+  setTimeout(()=>{ const b=$('savePlanBtn'); if(b)b.onclick=savedPlan; },0);
+  if($('growthTracker')) $('growthTracker').innerHTML=renderTracker(selected);
+  if($('growthCompare')) $('growthCompare').innerHTML=renderCompare(scores,type);
+  if($('coachDashboard')) $('coachDashboard').innerHTML=renderCoachDashboard(scores,sorted,low,type,lv,ax,selected);
+  setTimeout(bindTracker,0);
+}
+function renderTracker(selected){
+  const plan=getPlan(); const logs=plan.logs||Array.from({length:7},()=>({done:'',learn:'',feel:''}));
+  return `<div class="trackerHead"><div><b>7일 성장기록</b><span>매일 1분만 기록합니다. ○는 실천, △는 조금, ×는 쉬어감입니다.</span></div><button id="saveTrackerBtn">기록 저장</button></div><div class="selectedExperiments">${selected.map(x=>`<span>${x}</span>`).join('')}</div><div class="trackerGrid">${logs.map((log,i)=>`<div class="dayCard"><b>${i+1}일차</b><select data-day="${i}" class="dayDone"><option value="">선택</option><option ${log.done==='○'?'selected':''}>○</option><option ${log.done==='△'?'selected':''}>△</option><option ${log.done==='×'?'selected':''}>×</option></select><input data-day="${i}" class="dayLearn" placeholder="배운 점 한 줄" value="${(log.learn||'').replace(/"/g,'&quot;')}"><input data-day="${i}" class="dayFeel" placeholder="느낀 점 한 줄" value="${(log.feel||'').replace(/"/g,'&quot;')}"></div>`).join('')}</div>`;
+}
+function bindTracker(){ const b=$('saveTrackerBtn'); if(!b)return; b.onclick=()=>{ const plan=getPlan(); plan.logs=Array.from({length:7},(_,i)=>({done:document.querySelector(`.dayDone[data-day="${i}"]`)?.value||'', learn:document.querySelector(`.dayLearn[data-day="${i}"]`)?.value||'', feel:document.querySelector(`.dayFeel[data-day="${i}"]`)?.value||''})); setPlan(plan); alert('7일 성장기록을 저장했습니다.'); }; }
+function renderCompare(scores,type){
+  const h=getHistory(); if(h.length<2) return `<div class="compareEmpty"><b>재측정 대기</b><p>다음 검사 결과가 저장되면 1차 결과와 자동 비교됩니다. 지금은 현재 결과를 기준점으로 보관합니다.</p></div>`;
+  const prev=h[h.length-2], cur=h[h.length-1];
+  const rows=scores.domains.map(d=>{const p=prev.scores.find(x=>x.name===d.name)?.avg||d.avg; const c=cur.scores.find(x=>x.name===d.name)?.avg||d.avg; const diff=c-p; return {name:d.name,p,c,diff};});
+  const best=[...rows].sort((a,b)=>b.diff-a.diff)[0];
+  return `<div class="compareMsg"><b>성장비교 리포트</b><p>${dTitle(best.name)}이 이전보다 ${best.diff>=0?'커졌습니다':'낮아졌습니다'}. 변화는 좋고 나쁨보다 “어떤 장면이 달라졌는가”를 묻는 자료입니다.</p></div><div class="compareRows">${rows.map(r=>`<div><b>${dTitle(r.name)}</b><span>${r.p.toFixed(1)} → ${r.c.toFixed(1)}</span><em class="${r.diff>=0?'up':'down'}">${r.diff>=0?'+':''}${r.diff.toFixed(1)}</em></div>`).join('')}</div>`;
+}
+function renderCoachDashboard(scores,sorted,low,type,lv,ax,selected){
+  const priority=low[0], top=sorted[0];
+  return `<div class="dashGrid"><div><b>세션 핵심</b><p>성장유형: ${type.name}</p><p>성장단계: ${lv.name} ${lv.pct}/100</p><p>XYZ: X ${ax.X.toFixed(1)} · Y ${ax.Y.toFixed(1)} · Z ${ax.Z.toFixed(1)}</p></div><div><b>상위 자원</b>${sorted.slice(0,3).map(x=>`<p>${dTitle(x.name)} · ${DOMAIN[x.name].easy}</p>`).join('')}</div><div><b>우선성장영역</b>${low.slice(0,3).map(x=>`<p>${dTitle(x.name)} · ${DOMAIN[x.name].easy}</p>`).join('')}</div><div><b>추천 질문</b>${recommendedQuestions(priority.name).map(q=>`<p>“${q}”</p>`).join('')}</div><div><b>추천 실험</b>${selected.map(x=>`<p>${x}</p>`).join('')}</div><div><b>코치 메모</b><p>${shortTitle(top.name)}의 자원을 ${shortTitle(priority.name)}의 작은 행동으로 연결한다.</p><p>점수 설명보다 실제 장면, 맥락, 다음 선택을 묻는다.</p></div></div>`;
+}
+
+function resultText(){ const s=buildScores(false); const sorted=[...s.domains].sort((a,b)=>b.avg-a.avg), low=[...s.domains].sort((a,b)=>a.avg-b.avg), type=classify(s), lv=level(s), ax=axisScores(s); return `KGM210 성장코칭 요약\n오늘의 코칭 주제: ${type.name}\n성장 단계: ${lv.name} (${lv.pct}/100)\n성장 흐름: 알아차림 ${ax.X.toFixed(1)} / 세우기 ${ax.Y.toFixed(1)} / 해보기 ${ax.Z.toFixed(1)}\n대화의 출발점: ${sorted.slice(0,2).map(x=>`${dTitle(x.name)} ${x.avg.toFixed(1)}`).join(', ')}\n우선 대화주제: ${low.slice(0,2).map(x=>`${dTitle(x.name)} ${x.avg.toFixed(1)}`).join(', ')}\n기억할 점: 이 결과는 판정이 아니라 코칭 대화를 여는 지도입니다.`; }
+
+$('startBtn').onclick=()=>start(false);
+$('heroStartBtn').onclick=()=>{ if(!requireAgree()) return; start(false); };
+$('resumeBtn').onclick=()=>{ if(completed()) showResult(false); else start(true); };
+$('introResumeBtn') && ($('introResumeBtn').onclick=()=>start(true));
+$('journeyBtn') && ($('journeyBtn').onclick=showJourney);
+$('introJourneyBtn') && ($('introJourneyBtn').onclick=showJourney);
+$('sampleResultBtn').onclick=()=>showResult(true); $('nextBtn').onclick=next; $('prevBtn').onclick=goPrevDomain; if($('saveBtn')) $('saveBtn').onclick=()=>save(); $('printBtn').onclick=()=>window.print(); $('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(resultText());alert('결과 요약을 복사했습니다.')}catch(e){alert('복사 기능을 사용할 수 없습니다.')}};
+$('backToTestBtn').textContent='처음으로'; $('backToTestBtn').onclick=showIntro;
+$('resetBtn').textContent='새 검사 시작'; $('resetBtn').onclick=()=>{if(confirm('새 검사로 시작할까요? 이전 성장여정 기록은 유지됩니다.')){clearCurrentTest(); save(); showIntro(); updateHomeButtons();}};
+$('name').value=localStorage.getItem('kgm210_name')||''; $('memo').value=localStorage.getItem('kgm210_memo')||'';
+document.addEventListener('keydown',e=>{if($('test').classList.contains('hidden'))return; if(completed())return showResult(false); const d=currentDomain(); if(e.key>='1'&&e.key<='5'){const miss=domainQuestions(d).find(q=>!answers[q.no]); if(miss){selectListAnswer(miss.no,Number(e.key)); const nextMiss=domainQuestions(d).find(q=>!answers[q.no]); if(nextMiss) setTimeout(()=>document.getElementById('qitem-'+nextMiss.no)?.scrollIntoView({behavior:'smooth',block:'center'}),80);}} if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')goPrevDomain();});
+
+function bindCoachLock(){ const d=document.querySelector('.coachOnlyBlock'); if(!d || d.dataset.lockBound)return; d.dataset.lockBound='1'; d.addEventListener('toggle',()=>{ if(d.open && sessionStorage.getItem('kgmCoachOpen')!=='1'){ const v=prompt('코치전용 보기 비밀번호를 입력하세요.'); if(v!=='KGM210'){ d.open=false; alert('코치전용 보기가 닫혔습니다.'); } else { sessionStorage.setItem('kgmCoachOpen','1'); } } }); }
+bindCoachLock();
+
+window.addEventListener('resize',()=>{ if(!$('result').classList.contains('hidden')){ try{ const s=buildScores(false), ax=axisScores(s), type=classify(s); drawXYZ(s,ax,type); }catch(e){} }});
+renderDomainOverview(); updateHomeButtons();
+
+</script>
+</body>
+</html>
