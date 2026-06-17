@@ -21,6 +21,13 @@
     "source": "https://github.com/dailycoach/LCMS"
   },
   {
+    "title": "킹덤대화카드",
+    "description": "코칭 대화를 바로 시작하도록 돕는 KINGDOM 7단계 초대카드",
+    "category": "cards",
+    "url": "/cards/kingdom/",
+    "source": "local import"
+  },
+  {
     "title": "대화 질문 카드 180",
     "description": "대화를 여는 질문 카드 도구",
     "category": "cards",
