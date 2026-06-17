@@ -1,0 +1,68 @@
+name: Patch live board menu
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/patch-live-board-menu.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index menu
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'index.html';
+          let html = fs.readFileSync(path, 'utf8');
+
+          const replacements = [
+            [
+              '        <a class="nav-link" href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>',
+              `        <div class="nav-group">
+          <button class="nav-button" type="button" aria-haspopup="true">활동도구 <span aria-hidden="true">⌄</span></button>
+          <div class="dropdown" role="menu">
+            <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>
+            <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>
+          </div>
+        </div>`
+            ],
+            [
+              '          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>\n        </article>',
+              '          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>\n          <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>\n        </article>'
+            ],
+            [
+              '          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>\n          <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>',
+              '          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>\n          <a href="/activities/live-board/" data-route="liveBoard">라이브보드</a>\n          <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>'
+            ],
+            [
+              "      wildernessSurvival: '/activities/wilderness-survival/',\n      spiritualHero: '/spiritual/hero/',",
+              "      wildernessSurvival: '/activities/wilderness-survival/',\n      liveBoard: '/activities/live-board/',\n      spiritualHero: '/spiritual/hero/',"
+            ]
+          ];
+
+          for (const [from, to] of replacements) {
+            if (html.includes(to)) continue;
+            if (!html.includes(from)) {
+              throw new Error(`Expected menu marker not found: ${from.slice(0, 80)}`);
+            }
+            html = html.replace(from, to);
+          }
+
+          fs.writeFileSync(path, html);
+          NODE
+      - name: Commit patched menu
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Add live board to activity menu"
+          git push
