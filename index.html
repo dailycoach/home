@@ -755,13 +755,88 @@
       .intent-rail a,
       .intent-rail button { min-height: 66px; padding: 14px 16px; }
       .slider-ui { grid-template-columns: 1fr; }
-      .panel-card { border-radius: 24px; }
-      .panel-head { padding: 18px; align-items: flex-start; }
-      .panel-grid { grid-template-columns: 1fr; padding: 16px 18px 22px; }
+      .menu-panel {
+        padding: 0;
+        background: rgba(3, 16, 34, .72);
+      }
+      .panel-card {
+        width: 100%;
+        max-height: 100svh;
+        min-height: 100svh;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+      .panel-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+        gap: 14px;
+        padding: 18px 16px 14px;
+      }
+      .panel-title {
+        font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+        font-size: clamp(1.48rem, 7vw, 2.1rem);
+        line-height: 1.16;
+        letter-spacing: -0.055em;
+        word-break: keep-all;
+        overflow-wrap: normal;
+      }
+      .panel-head p {
+        margin-top: 8px;
+        max-width: 18rem;
+        font-size: .86rem;
+        line-height: 1.55;
+        word-break: keep-all;
+      }
+      .panel-close {
+        width: auto;
+        min-width: 88px;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 999px;
+        font-size: .92rem;
+      }
+      .panel-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 14px 16px 24px;
+      }
+      .category {
+        padding: 16px;
+        border-radius: 20px;
+      }
+      .category h3 {
+        font-size: 1.02rem;
+      }
+      .category p {
+        margin-bottom: 12px;
+        font-size: .84rem;
+        word-break: keep-all;
+      }
+      .category a {
+        min-height: 46px;
+        padding: 0 12px;
+        font-size: .94rem;
+      }
       .micro-inner { grid-template-columns: 1fr; }
       .micro-actions { justify-content: stretch; }
       .footer-inner { grid-template-columns: 1fr; padding: 28px 0; }
       .footer-links { grid-template-columns: 1fr; }
+    }
+
+
+    @media (max-width: 390px) {
+      .panel-head {
+        grid-template-columns: 1fr;
+      }
+      .panel-close {
+        justify-self: stretch;
+        width: 100%;
+      }
+      .panel-title {
+        font-size: clamp(1.42rem, 8vw, 1.85rem);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -793,33 +868,33 @@
         <div class="nav-group">
           <button class="nav-button" type="button" aria-haspopup="true">브랜드 <span aria-hidden="true">⌄</span></button>
           <div class="dropdown" role="menu">
-            <a href="company/" data-route="companyIntro">기업소개 <small>→</small></a>
-            <a href="coach/" data-route="coachIntro">코치소개 <small>→</small></a>
+            <a href="/company/" data-route="companyIntro">기업소개 <small>→</small></a>
+            <a href="/coach/" data-route="coachIntro">코치소개 <small>→</small></a>
           </div>
         </div>
         <a class="nav-link" href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">1:1 코칭</a>
         <div class="nav-group">
           <button class="nav-button" type="button" aria-haspopup="true">검사도구 <span aria-hidden="true">⌄</span></button>
           <div class="dropdown" role="menu">
-            <a href="tests/self/" data-route="selfTest">자기이해 검사 <small>→</small></a>
-            <a href="tests/color-psychology/" data-route="colorPsychology">컬러 심리 검사 <small>→</small></a>
-            <a href="tests/vakd/" data-route="vakd">VAKD 학습유형 <small>→</small></a>
-            <a href="tests/learning/" data-route="learning">학습 진단 <small>→</small></a>
-            <a href="tests/icf8/" data-route="icf8">ICF8 검사 <small>→</small></a>
-            <a href="tests/kca8/" data-route="kca8">KCA8 검사 <small>→</small></a>
+            <a href="/tests/self/" data-route="selfTest">자기이해 검사 <small>→</small></a>
+            <a href="/tests/color-psychology/" data-route="colorPsychology">컬러 심리 검사 <small>→</small></a>
+            <a href="/tests/vakd/" data-route="vakd">VAKD 학습유형 <small>→</small></a>
+            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>
+            <a href="/tests/icf8/" data-route="icf8">ICF8 검사 <small>→</small></a>
+            <a href="/tests/kca8/" data-route="kca8">KCA8 검사 <small>→</small></a>
           </div>
         </div>
         <div class="nav-group">
           <button class="nav-button" type="button" aria-haspopup="true">카드도구 <span aria-hidden="true">⌄</span></button>
           <div class="dropdown" role="menu">
-            <a href="cards/talkcard180/" data-route="talkcard180">톡카드 180 <small>→</small></a>
-            <a href="cards/grow88/" data-route="grow88">Grow 88 <small>→</small></a>
-            <a href="cards/mindset120/" data-route="mindset120">Mindset 120 <small>→</small></a>
+            <a href="/cards/talkcard180/" data-route="talkcard180">톡카드 180 <small>→</small></a>
+            <a href="/cards/grow88/" data-route="grow88">Grow 88 <small>→</small></a>
+            <a href="/cards/mindset120/" data-route="mindset120">Mindset 120 <small>→</small></a>
           </div>
         </div>
-        <a class="nav-link" href="lcms/" data-route="lcms">LCMS</a>
-        <a class="nav-link" href="activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
-        <a class="nav-link" href="spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
+        <a class="nav-link" href="/lcms/" data-route="lcms">LCMS</a>
+        <a class="nav-link" href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
+        <a class="nav-link" href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
       </nav>
 
       <div class="header-actions">
@@ -863,11 +938,11 @@
               <strong>카드도구 <span aria-hidden="true">⌄</span></strong>
               <small>톡카드·Grow·Mindset</small>
             </button>
-            <a href="lcms/" data-route="lcms">
+            <a href="/lcms/" data-route="lcms">
               <strong>LCMS <span aria-hidden="true">→</span></strong>
               <small>데이터 기반 진로교육 인프라</small>
             </a>
-            <a href="spiritual/hero/" data-route="spiritualHero">
+            <a href="/spiritual/hero/" data-route="spiritualHero">
               <strong>콘텐츠 <span aria-hidden="true">→</span></strong>
               <small>Spiritual Hero 콘텐츠</small>
             </a>
@@ -904,8 +979,8 @@
         <article class="category" data-category="brand">
           <h3>브랜드</h3>
           <p>기업소개와 코치소개는 별도 페이지로 분리합니다.</p>
-          <a href="company/" data-route="companyIntro">기업소개 <small>→</small></a>
-          <a href="coach/" data-route="coachIntro">코치소개 <small>→</small></a>
+          <a href="/company/" data-route="companyIntro">기업소개 <small>→</small></a>
+          <a href="/coach/" data-route="coachIntro">코치소개 <small>→</small></a>
         </article>
 
         <article class="category" data-category="coaching">
@@ -917,41 +992,41 @@
         <article class="category" data-category="tests">
           <h3>검사도구</h3>
           <p>자기이해, 학습, 관계, 성장 진단 페이지입니다.</p>
-          <a href="tests/self/" data-route="selfTest">자기이해 검사 <small>→</small></a>
-          <a href="tests/color-psychology/" data-route="colorPsychology">컬러 심리 검사 <small>→</small></a>
-          <a href="tests/vakd/" data-route="vakd">VAKD 학습유형 <small>→</small></a>
-          <a href="tests/learning/" data-route="learning">학습 진단 <small>→</small></a>
-          <a href="tests/child-learning/" data-route="childLearning">아동 학습 진단 <small>→</small></a>
-          <a href="tests/elementary-self-learning/" data-route="elementarySelfLearning">초등 자기주도학습 <small>→</small></a>
-          <a href="tests/icf8/" data-route="icf8">ICF8 검사 <small>→</small></a>
-          <a href="tests/kca8/" data-route="kca8">KCA8 검사 <small>→</small></a>
+          <a href="/tests/self/" data-route="selfTest">자기이해 검사 <small>→</small></a>
+          <a href="/tests/color-psychology/" data-route="colorPsychology">컬러 심리 검사 <small>→</small></a>
+          <a href="/tests/vakd/" data-route="vakd">VAKD 학습유형 <small>→</small></a>
+          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>
+          <a href="/tests/child-learning/" data-route="childLearning">아동 학습 진단 <small>→</small></a>
+          <a href="/tests/elementary-self-learning/" data-route="elementarySelfLearning">초등 자기주도학습 <small>→</small></a>
+          <a href="/tests/icf8/" data-route="icf8">ICF8 검사 <small>→</small></a>
+          <a href="/tests/kca8/" data-route="kca8">KCA8 검사 <small>→</small></a>
         </article>
 
         <article class="category" data-category="cards">
           <h3>카드도구</h3>
           <p>대화, 성장, 마인드셋 카드 콘텐츠입니다.</p>
-          <a href="cards/talkcard180/" data-route="talkcard180">톡카드 180 <small>→</small></a>
-          <a href="cards/grow88/" data-route="grow88">Grow 88 <small>→</small></a>
-          <a href="cards/mindset120/" data-route="mindset120">Mindset 120 <small>→</small></a>
+          <a href="/cards/talkcard180/" data-route="talkcard180">톡카드 180 <small>→</small></a>
+          <a href="/cards/grow88/" data-route="grow88">Grow 88 <small>→</small></a>
+          <a href="/cards/mindset120/" data-route="mindset120">Mindset 120 <small>→</small></a>
         </article>
 
         <article class="category" data-category="program">
           <h3>교육·프로그램</h3>
           <p>LCMS와 데이터 기반 교육 인프라로 이동합니다.</p>
-          <a href="lcms/" data-route="lcms">LCMS 진로교육 인프라 <small>→</small></a>
+          <a href="/lcms/" data-route="lcms">LCMS 진로교육 인프라 <small>→</small></a>
         </article>
 
         <article class="category" data-category="activities">
           <h3>활동도구</h3>
           <p>교육과 코칭 장면에서 바로 활용할 수 있는 진행 도구입니다.</p>
-          <a href="activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>
+          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>
         </article>
 
         <article class="category" data-category="contents">
           <h3>콘텐츠</h3>
           <p>콘텐츠 실험실과 운영 데이터 확인 링크입니다.</p>
-          <a href="spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
-          <a href="pages.json" data-route="pagesJson">pages.json <small>→</small></a>
+          <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
+          <a href="/pages.json" data-route="pagesJson">pages.json <small>→</small></a>
         </article>
       </div>
     </div>
@@ -972,13 +1047,13 @@
       <div class="footer-col">
         <h3>Quick Links</h3>
         <div class="footer-links">
-          <a href="company/" data-route="companyIntro">기업소개</a>
-          <a href="coach/" data-route="coachIntro">코치소개</a>
-          <a href="tests/self/" data-route="selfTest">검사도구</a>
-          <a href="cards/talkcard180/" data-route="talkcard180">카드도구</a>
-          <a href="lcms/" data-route="lcms">LCMS</a>
-          <a href="activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
-          <a href="spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
+          <a href="/company/" data-route="companyIntro">기업소개</a>
+          <a href="/coach/" data-route="coachIntro">코치소개</a>
+          <a href="/tests/self/" data-route="selfTest">검사도구</a>
+          <a href="/cards/talkcard180/" data-route="talkcard180">카드도구</a>
+          <a href="/lcms/" data-route="lcms">LCMS</a>
+          <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
+          <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
         </div>
       </div>
     </div>
@@ -1008,24 +1083,24 @@
 
     const DAILYCOACHING_ROUTES = Object.freeze({
       home: '#top',
-      companyIntro: 'company/',
-      coachIntro: 'coach/',
+      companyIntro: '/company/',
+      coachIntro: '/coach/',
       booking: 'https://smartstore.naver.com/nalbitcoaching',
-      lcms: 'lcms/',
-      talkcard180: 'cards/talkcard180/',
-      grow88: 'cards/grow88/',
-      mindset120: 'cards/mindset120/',
-      selfTest: 'tests/self/',
-      colorPsychology: 'tests/color-psychology/',
-      vakd: 'tests/vakd/',
-      learning: 'tests/learning/',
-      childLearning: 'tests/child-learning/',
-      elementarySelfLearning: 'tests/elementary-self-learning/',
-      icf8: 'tests/icf8/',
-      kca8: 'tests/kca8/',
-      wildernessSurvival: 'activities/wilderness-survival/',
-      spiritualHero: 'spiritual/hero/',
-      pagesJson: 'pages.json'
+      lcms: '/lcms/',
+      talkcard180: '/cards/talkcard180/',
+      grow88: '/cards/grow88/',
+      mindset120: '/cards/mindset120/',
+      selfTest: '/tests/self/',
+      colorPsychology: '/tests/color-psychology/',
+      vakd: '/tests/vakd/',
+      learning: '/tests/learning/',
+      childLearning: '/tests/child-learning/',
+      elementarySelfLearning: '/tests/elementary-self-learning/',
+      icf8: '/tests/icf8/',
+      kca8: '/tests/kca8/',
+      wildernessSurvival: '/activities/wilderness-survival/',
+      spiritualHero: '/spiritual/hero/',
+      pagesJson: '/pages.json'
     });
 
     const SLIDE_CONTENT = Object.freeze([
