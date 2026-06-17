@@ -1,0 +1,3853 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>색채심리 코칭</title>
+  <meta name="description" content="입력은 3장 카드 선택만. 세 장을 바탕으로 현재 알아차림을 돕는 색채심리 코칭 해설을 제공합니다."/>
+  <style>
+    :root{
+      --bg:#0b0e14;
+      --panel:#121827;
+      --panel2:#0f1422;
+      --line:rgba(255,255,255,.10);
+      --text:#e9eefc;
+      --muted:rgba(233,238,252,.72);
+      --muted2:rgba(233,238,252,.52);
+      --accent:#7C6CFF;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --r:16px;
+      --r2:22px;
+    }
+    [data-theme="light"]{
+      --bg:#f6f7fb;
+      --panel:#ffffff;
+      --panel2:#f1f3fb;
+      --line:rgba(8,15,35,.10);
+      --text:#0b1020;
+      --muted:rgba(11,16,32,.70);
+      --muted2:rgba(11,16,32,.52);
+      --shadow: 0 10px 26px rgba(12,18,35,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(124,108,255,.18), transparent 55%),
+                  radial-gradient(1200px 800px at 80% 30%, rgba(245,140,217,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    .topbar{
+      position: sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(10,14,20,.82), rgba(10,14,20,.28));
+      border-bottom: 1px solid var(--line);
+    }
+    [data-theme="light"] .topbar{
+      background: linear-gradient(to bottom, rgba(246,247,251,.90), rgba(246,247,251,.35));
+    }
+    .topbarInner{
+      max-width:860px; margin:0 auto;
+      padding: 12px 14px;
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+    }
+    .brand{display:flex; gap:10px; align-items:center}
+    .dot{width:12px;height:12px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 6px rgba(124,108,255,.18)}
+    .brand h1{font-size:14.5px;margin:0;line-height:1.1;letter-spacing:-0.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    .actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    button{
+      border: 1px solid var(--line);
+      background: linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 750;
+      letter-spacing: -0.2px;
+      transition: transform .06s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    [data-theme="light"] button{
+      background: linear-gradient(to bottom, rgba(15,25,50,.06), rgba(15,25,50,.02));
+    }
+    button:active{transform: translateY(1px)}
+    button:disabled{opacity:.55; cursor:not-allowed; filter:saturate(.9)}
+    button.primary{
+      border-color: rgba(124,108,255,.40);
+      background: linear-gradient(to bottom, rgba(124,108,255,.30), rgba(124,108,255,.12));
+    }
+    button.ghost{background:transparent}
+    button.small{padding:8px 10px; border-radius:10px; font-size:12.5px}
+
+    .wrap{max-width:860px; margin:0 auto; padding: 18px 14px 90px}
+
+    .card{
+      background: linear-gradient(to bottom, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: var(--r2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    [data-theme="light"] .card{background: linear-gradient(to bottom, rgba(15,25,50,.05), rgba(15,25,50,.02))}
+    .cardHd{padding:14px 14px 10px; border-bottom:1px solid var(--line)}
+    .cardHd h2{margin:0; font-size:14.5px; letter-spacing:-0.25px}
+    .cardHd .sub{margin-top:6px; font-size:12.5px; color:var(--muted); line-height:1.4}
+    .cardBd{padding:14px}
+
+    label{display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px; font-weight:750; letter-spacing:-0.2px}
+    select{
+      width:100%;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 12px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    [data-theme="light"] select{background: rgba(15,25,50,.04)}
+
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-start}
+    .row > *{flex:1}
+
+    .preview{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 620px){
+      .preview{grid-template-columns: repeat(3, 1fr)}
+    }
+    .slot{
+      border: 1px dashed rgba(255,255,255,.18);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.08);
+      min-height: 112px;
+      position:relative;
+    }
+    [data-theme="light"] .slot{background: rgba(15,25,50,.03); border-color: rgba(11,16,32,.18)}
+    .mini{display:flex; gap:10px; align-items:flex-start}
+    .swatch{width:18px; height:18px; border-radius:8px; border:1px solid rgba(255,255,255,.18); flex:0 0 auto; box-shadow:0 8px 22px rgba(0,0,0,.22)}
+    [data-theme="light"] .swatch{border-color: rgba(11,16,32,.16)}
+    .cardName{margin:0; font-size:13.5px; font-weight:900; letter-spacing:-0.2px; line-height:1.2}
+    .cardMeta{margin-top:6px; font-size:12px; color:var(--muted); line-height:1.35}
+
+    .divider{height:1px; background: var(--line); margin: 14px 0}
+     .hint{font-size:12px; color:var(--muted2); line-height:1.5; margin-top:10px}
+
+    /* 고민 선택 칩(모바일 빠른 선택) */
+    .chipbar{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+    .chip{
+      appearance:none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .06s ease, background .15s ease, border-color .15s ease;
+    }
+    .chip:active{transform: translateY(1px)}
+    .chip.active{
+      border-color: rgba(124,108,255,.45);
+      background: rgba(124,108,255,.14);
+      color: var(--text);
+    }
+    [data-theme="light"] .chip{background: rgba(15,25,50,.03)}
+
+    .block{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(0,0,0,.08);
+      margin-top: 12px;
+    }
+    [data-theme="light"] .block{background: rgba(15,25,50,.03)}
+    .sectionTitle{font-weight: 950; letter-spacing: -0.35px; margin: 0 0 8px; font-size: 14px}
+    .block p{margin:0; line-height: 1.72; font-size: 14px; white-space: pre-line}
+
+    .tagNote{display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid var(--line); background: rgba(255,255,255,.04); color: var(--muted); font-size:12px; font-weight:800; letter-spacing:-0.2px}
+
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    .toast{
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: rgba(10,14,20,.88);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.40);
+      opacity: 0; pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 999;
+      font-size: 13px;
+    }
+    [data-theme="light"] .toast{
+      background: rgba(255,255,255,.92);
+      border-color: rgba(11,16,32,.12);
+      color: #0b1020;
+    }
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(-2px)}
+  
+
+    /* Jung / psychodynamic lens helpers */
+    details.detailsBox{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.03);
+      margin-top: 8px;
+    }
+    [data-theme="light"] details.detailsBox{background: rgba(15,25,50,.02)}
+    details.detailsBox > summary{
+      cursor: pointer;
+      font-weight: 950;
+      letter-spacing: -0.25px;
+      list-style: none;
+    }
+    details.detailsBox > summary::-webkit-details-marker{display:none}
+    .detailsBody{margin-top:10px; color: var(--text);}
+    .miniP{margin: 0 0 10px; line-height: 1.72; font-size: 14px; white-space: pre-line;}
+    .miniP b{font-weight: 950}
+    .chipRow{display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px}
+    .chip{display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid var(--line); background: rgba(255,255,255,.04); font-size:12px; font-weight:850; color: var(--muted)}
+
+
+    /* UX v20 additions */
+    .wrap{padding-bottom: 160px;} /* space for sticky bar */
+    .progressWrap{margin: 2px 0 14px;}
+    .progressTop{display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap}
+    .progressText{font-weight: 950; letter-spacing:-0.25px; font-size: 13.5px;}
+    .progressHint{font-size:12px; color:var(--muted2)}
+    .progressBar{height:10px; border-radius:999px; background: rgba(255,255,255,.06); border:1px solid var(--line); overflow:hidden}
+    [data-theme="light"] .progressBar{background: rgba(15,25,50,.04)}
+    .progressFill{height:100%; width:0%; border-radius:999px; background: linear-gradient(90deg, rgba(124,108,255,.55), rgba(245,140,217,.35)); transition: width .22s ease}
+
+    .detailsBox{border:1px solid var(--line); border-radius: 16px; background: rgba(0,0,0,.06); margin: 10px 0 14px; overflow:hidden}
+    [data-theme="light"] .detailsBox{background: rgba(15,25,50,.02)}
+    .detailsBox > summary{cursor:pointer; list-style:none; padding: 12px 12px; font-weight: 900; color: var(--text);}
+    .detailsBox > summary::-webkit-details-marker{display:none}
+    .detailsBody{padding: 12px; border-top:1px solid var(--line)}
+    .searchRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .searchRow input[type="search"]{flex:1; min-width: 220px}
+    .searchResults{margin-top:10px; display:grid; gap:8px; grid-template-columns: 1fr}
+    @media (min-width: 720px){ .searchResults{grid-template-columns: 1fr 1fr} }
+    .resultItem{display:flex; gap:10px; align-items:center; justify-content:flex-start; text-align:left; padding: 10px 12px; border-radius: 14px}
+    .swatchSmall{width:16px; height:16px; border-radius: 7px; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 8px 18px rgba(0,0,0,.22)}
+    [data-theme="light"] .swatchSmall{border-color: rgba(11,16,32,.14)}
+    .resultText{font-size: 13px; font-weight: 850; letter-spacing:-0.2px}
+
+    .labelRow{display:flex; justify-content:space-between; gap:10px; align-items:center}
+    .tinyBtn{padding: 7px 9px; border-radius: 10px; font-size: 12px; font-weight: 850}
+    .warnBox{border:1px solid rgba(239,68,68,.28); background: rgba(239,68,68,.10); border-radius: 14px; padding: 10px 12px; margin-top: 10px; font-size: 12.5px; color: var(--text); line-height:1.45}
+    .error{border-color: rgba(239,68,68,.55) !important; box-shadow: 0 0 0 3px rgba(239,68,68,.14)}
+
+    .concernTop{display:flex; justify-content:space-between; gap:10px; align-items:center}
+    .hintRow{display:flex; justify-content:space-between; gap:10px; align-items:center; margin-top: 8px}
+    .chip.more{display:none}
+    .chipbar.showMore .chip.more{display:inline-block}
+
+    .stickyCta{position: fixed; left:0; right:0; bottom:0; z-index: 60;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(10,14,20,.92), rgba(10,14,20,.35));
+      border-top: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+    [data-theme="light"] .stickyCta{background: linear-gradient(to top, rgba(246,247,251,.95), rgba(246,247,251,.45)); border-top-color: rgba(11,16,32,.12)}
+    .stickyInner{max-width: 980px; margin: 0 auto; display:flex; gap:10px; align-items:center}
+    .stickyMeta{flex:1; min-width: 140px}
+    .stickyTitle{font-weight: 950; letter-spacing:-0.25px; font-size: 13.5px}
+    .stickySub{font-size: 12px; color: var(--muted2); margin-top: 3px}
+    .stickyBtns{display:flex; gap:8px; align-items:center}
+    .big{padding: 12px 14px; border-radius: 16px; font-weight: 900}
+
+    @media (max-width: 520px){
+      .stickyBtns{flex-wrap:wrap; justify-content:flex-end}
+      .stickyBtns button{width:auto}
+    }
+
+
+
+    /* UX v21: tile picker + bottom sheet */
+    .pickGrid{display:grid; gap:12px; grid-template-columns: 1fr; margin-top: 10px}
+    @media (min-width: 720px){ .pickGrid{grid-template-columns: repeat(3, 1fr)} }
+    .pickTile{border:1px solid var(--line); border-radius: 18px; padding: 12px;
+      background: rgba(0,0,0,.06); box-shadow: 0 10px 26px rgba(0,0,0,.18)}
+    [data-theme="light"] .pickTile{background: rgba(15,25,50,.02); box-shadow: 0 10px 22px rgba(12,18,35,.08)}
+    .pickTile.error{border-color: rgba(239,68,68,.55); box-shadow: 0 0 0 3px rgba(239,68,68,.12), 0 10px 26px rgba(0,0,0,.18)}
+    .pickLabelRow{display:flex; justify-content:space-between; align-items:center; gap:10px}
+    .pickLabel{font-size: 12.5px; color: var(--muted); font-weight: 950; letter-spacing:-0.2px}
+    .pickMain{margin-top: 8px; width:100%; display:flex; gap:12px; align-items:flex-start; text-align:left;
+      padding: 8px 0 2px; border:0; background: transparent; color: inherit; cursor:pointer}
+    .swatchBig{width: 34px; height: 34px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 22px rgba(0,0,0,.24); flex:0 0 auto}
+    [data-theme="light"] .swatchBig{border-color: rgba(11,16,32,.14)}
+    .pickName{display:block; font-weight: 950; letter-spacing:-0.25px; font-size: 14.5px; line-height: 1.2}
+    .pickMeta{display:block; margin-top: 6px; font-size: 12px; color: var(--muted2); line-height: 1.4}
+
+    .sheet{position: fixed; inset:0; display:none; z-index: 80}
+    .sheet.show{display:block}
+    .sheetBackdrop{position:absolute; inset:0; background: rgba(0,0,0,.55)}
+    [data-theme="light"] .sheetBackdrop{background: rgba(11,16,32,.45)}
+    .sheetPanel{position:absolute; left:0; right:0; bottom:0; max-height: 82vh;
+      background: var(--panel); border-top-left-radius: 22px; border-top-right-radius: 22px;
+      border: 1px solid var(--line); box-shadow: 0 -22px 55px rgba(0,0,0,.55); overflow:hidden}
+    [data-theme="light"] .sheetPanel{box-shadow: 0 -20px 45px rgba(12,18,35,.22)}
+    .sheetHd{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding: 12px 12px; border-bottom: 1px solid var(--line)}
+    .sheetTitle{font-weight: 950; letter-spacing:-0.25px; font-size: 14px; margin:0}
+    .sheetSub{margin-top: 4px; font-size: 12px; color: var(--muted)}
+    .sheetBd{padding: 12px}
+    .sheetBd input[type="search"]{width:100%}
+    .sheetList{margin-top: 10px; display:grid; gap:8px; overflow:auto; max-height: calc(82vh - 160px)}
+    .sheetItem{display:flex; align-items:center; justify-content:space-between; gap:10px; padding: 10px 12px; border-radius: 14px}
+    .sheetLeft{display:flex; align-items:center; gap:10px; min-width: 0}
+    .sheetName{font-size: 13px; font-weight: 900; letter-spacing:-0.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .sheetBadge{font-size: 11px; font-weight: 900; padding: 3px 7px; border-radius: 999px; border:1px solid var(--line); color: var(--muted);
+      background: rgba(255,255,255,.04)}
+    .sheetBadge.on{border-color: rgba(124,108,255,.45); background: rgba(124,108,255,.14); color: var(--text)}
+
+    @media (prefers-reduced-motion: reduce){
+      .progressFill{transition:none}
+      button{transition:none}
+    }
+
+  
+
+    /* Sentence completion + letter */
+    .completionList{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .completionItem{border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(0,0,0,.06)}
+    [data-theme="light"] .completionItem{background:rgba(15,25,50,.03)}
+    .completionPrompt{font-weight:900;letter-spacing:-0.25px;font-size:13.5px;line-height:1.45}
+    .blank{display:inline-block;padding:0 6px;margin:0 2px;border-bottom:2px dotted var(--line);color:var(--muted2)}
+    .completionInput{margin-top:10px}
+    .completionInput textarea{width:100%;min-height:56px;resize:vertical;border:1px solid var(--line);background:rgba(0,0,0,.10);color:var(--text);border-radius:14px;padding:12px;font-size:14px;line-height:1.45;outline:none}
+    [data-theme="light"] .completionInput textarea{background:rgba(15,25,50,.04)}
+    .completionInput textarea:focus{border-color:rgba(124,108,255,.55);box-shadow:0 0 0 4px rgba(124,108,255,.16)}
+    .completionHint{margin-top:8px;font-size:12px;color:var(--muted2);line-height:1.45}
+    .prelike{white-space:pre-wrap;line-height:1.75;font-size:14px;color:var(--text)}
+
+  </style>
+</head>
+
+<body data-theme="dark">
+  <div class="topbar">
+    <div class="topbarInner">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>
+          <h1>색채심리 코칭</h1>
+          <p>입력은 ‘뽑은 카드 3장’만</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="small ghost" id="btnTheme">테마</button>
+        <button class="small ghost" id="btnReset">리셋</button>
+        <button class="small primary" id="btnInterpret" disabled>해설 보기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="cardHd">
+        <h2>카드 3장 선택</h2>
+        <div class="sub">
+          실물로 뽑은 3장의 카드를 아래에서 선택해 주세요. 나머지는 카드가 대신 말해줍니다.
+        </div>
+      </div>
+      <div class="cardBd">
+        <div style="margin-bottom:12px">
+          <div class="concernTop">
+            <label for="concernSel" style="margin:0">요즘 가장 닮은 고민</label>
+            <div class="row fit" style="gap:8px">
+              <button class="small ghost" id="btnMoreConcerns" type="button">더보기</button>
+              <button class="small ghost" id="btnClearConcern" type="button">선택 해제</button>
+            </div>
+          </div>
+          <div class="chipbar" id="concernChips" role="radiogroup" aria-label="2030 고민 선택"></div>
+          <!-- 내부 저장(호환/접근성): 칩 클릭 시 이 select를 업데이트 -->
+          <select id="concernSel" style="display:none"></select>
+          <div class="hintRow">
+            <div class="tiny" id="concernPickedText">선택: 없음</div>
+            <div class="tiny">* 선택은 선택사항입니다. 카드만 골라도 해설이 나와요.</div>
+          </div>
+        </div>
+
+        <div class="progressWrap" aria-label="카드 선택 진행률">
+          <div class="progressTop">
+            <div class="progressText" id="progressText">0/3 선택됨</div>
+            <div class="progressHint" id="progressHint">세 장을 모두 선택하면 해설이 열려요.</div>
+          </div>
+          <div class="progressBar" aria-hidden="true"><div class="progressFill" id="progressFill"></div></div>
+        </div>
+
+        <details class="detailsBox" id="quickSearchBox">
+          <summary>빠르게 찾기(검색)</summary>
+          <div class="detailsBody">
+            <div class="searchRow">
+              <label for="deckSearch" class="tiny" style="margin:0">카드 이름/ID 검색</label>
+              <input id="deckSearch" type="search" placeholder="예: R1, 핑크, 에메랄드, 블루그린" autocomplete="off"/>
+            </div>
+            <div class="searchResults" id="searchResults" aria-live="polite"></div>
+            <div class="hint">* 검색 결과를 탭하면, 비어있는 카드 칸(또는 마지막으로 선택한 칸)에 자동으로 들어갑니다.</div>
+          </div>
+        </details>
+
+
+        <div class="pickGrid" id="pickGrid">
+          <div class="pickTile" data-slot="0" id="tile0">
+            <div class="pickLabelRow">
+              <div class="pickLabel">첫 번째 카드</div>
+              <button class="tinyBtn ghost" type="button" data-clear-slot="0">비우기</button>
+            </div>
+            <button class="pickMain" type="button" data-open-slot="0" aria-label="첫 번째 카드 선택">
+              <span class="swatchBig" id="sw0" style="background:transparent"></span>
+              <span>
+                <span class="pickName" id="nm0">선택 전</span>
+                <span class="pickMeta" id="mt0">탭해서 카드 이름을 선택해 주세요.</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="pickTile" data-slot="1" id="tile1">
+            <div class="pickLabelRow">
+              <div class="pickLabel">두 번째 카드</div>
+              <button class="tinyBtn ghost" type="button" data-clear-slot="1">비우기</button>
+            </div>
+            <button class="pickMain" type="button" data-open-slot="1" aria-label="두 번째 카드 선택">
+              <span class="swatchBig" id="sw1" style="background:transparent"></span>
+              <span>
+                <span class="pickName" id="nm1">선택 전</span>
+                <span class="pickMeta" id="mt1">탭해서 카드 이름을 선택해 주세요.</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="pickTile" data-slot="2" id="tile2">
+            <div class="pickLabelRow">
+              <div class="pickLabel">세 번째 카드</div>
+              <button class="tinyBtn ghost" type="button" data-clear-slot="2">비우기</button>
+            </div>
+            <button class="pickMain" type="button" data-open-slot="2" aria-label="세 번째 카드 선택">
+              <span class="swatchBig" id="sw2" style="background:transparent"></span>
+              <span>
+                <span class="pickName" id="nm2">선택 전</span>
+                <span class="pickMeta" id="mt2">탭해서 카드 이름을 선택해 주세요.</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+
+        <div class="warnBox" id="dupWarn" style="display:none"></div>
+        <div class="btnRow">
+          <button id="btnCopy" disabled>텍스트 복사</button>
+          <button id="btnShare" disabled>공유(카톡)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div class="cardHd">
+        <h2>색채심리 코칭 해설</h2>
+        <div class="sub">색으로 읽는 지금-여기 · 마음의 패턴 · 오늘의 작은 실험</div>
+      </div>
+      <div class="cardBd" id="resultArea">
+        <div class="block">
+          <p style="color:var(--muted)">해설이 여기에 표시됩니다.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card" style="margin-top:14px" id="completionCard">
+      <div class="cardHd">
+        <h2>관계 문장완성 5</h2>
+      </div>
+      <div class="cardBd">
+        <div class="completionList" id="completionList"></div>
+
+        <div class="btnRow" style="margin-top:12px">
+          <button class="primary" id="btnBuildLetter" disabled>내가 나에게 쓰는 편지</button>
+          <button id="btnCopyAll" disabled>전체 복사</button>
+        </div>
+        <div id="letterArea" style="margin-top:12px"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="cardHd"><h2>주의</h2></div>
+      <div class="cardBd">
+        <div class="hint" style="margin-top:0">
+          이 도구는 의료/법률/투자 조언이 아닙니다. 위기(자해 위험, 폭력, 즉각적 안전 위협)가 느껴지면
+          가까운 전문기관/응급 서비스/주변 도움을 우선하세요.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stickyCta" id="stickyCta" role="region" aria-label="빠른 실행">
+    <div class="stickyInner">
+      <div class="stickyMeta">
+        <div class="stickyTitle">카드 선택: <span id="stickyCount">0/3</span></div>
+        <div class="stickySub" id="stickySub">세 장을 모두 고르면 해설이 열려요.</div>
+      </div>
+      <div class="stickyBtns">
+        <button class="primary big" id="stickyInterpret" disabled>해설 보기</button>
+        <button class="small ghost" id="stickyCopy" disabled>복사</button>
+        <button class="small ghost" id="stickyShare" disabled>공유</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet" id="pickerSheet" aria-hidden="true">
+    <div class="sheetBackdrop" data-close="1"></div>
+    <div class="sheetPanel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="sheetHd">
+        <div>
+          <div class="sheetTitle" id="sheetTitle">카드 선택</div>
+          <div class="sheetSub" id="sheetSub">—</div>
+        </div>
+        <button class="small ghost" id="sheetClose" type="button">닫기</button>
+      </div>
+      <div class="sheetBd">
+        <label for="sheetSearch" class="tiny" style="margin:0">검색(이름/ID)</label>
+        <input id="sheetSearch" type="search" placeholder="예: R1, 핑크, 에메랄드, 블루그린" autocomplete="off"/>
+        <div class="sheetList" id="sheetList" aria-live="polite"></div>
+        <div class="hint" style="margin-top:10px">* 이미 다른 칸에 선택된 카드라면 <b>자동으로 교체(스왑)</b>됩니다.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="toast" id="toast">복사됨</div>
+
+  <script>
+    /***********************
+     * Theme
+     ***********************/
+    const LS = { theme: "colorTarot.participant.theme" };
+    // 일부 환경(인앱 브라우저/파일 열기/프라이빗 모드)에서는 localStorage가 막힐 수 있어요.
+    const STORE = {
+      get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+      set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+    };
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    function toast(msg){
+      const el = $("#toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      setTimeout(()=> el.classList.remove("show"), 1400);
+    }
+
+    function loadTheme(){
+      const t = STORE.get(LS.theme) || "dark";
+      document.body.setAttribute("data-theme", t);
+    }
+    function toggleTheme(){
+      const cur = document.body.getAttribute("data-theme") || "dark";
+      const next = cur === "dark" ? "light" : "dark";
+      document.body.setAttribute("data-theme", next);
+      STORE.set(LS.theme, next);
+      toast(next === "dark" ? "다크 모드" : "라이트 모드");
+    }
+
+    /***********************
+     * Main deck (36)
+     ***********************/
+    const MAIN_DECK = [
+  {
+    "id": "R1",
+    "group": "RED",
+    "tone": 1,
+    "name": "소프트 레드",
+    "hex": "#FFD6D6",
+    "keywords": [
+      "열정",
+      "시작",
+      "에너지(미세)"
+    ],
+    "felt_sense": [
+      "가슴이 따뜻해짐",
+      "손끝이 간질",
+      "숨이 조금 빨라짐"
+    ],
+    "emotion": [
+      "설렘",
+      "기대",
+      "긴장(가벼움)"
+    ],
+    "need": [
+      "표현",
+      "인정",
+      "첫걸음"
+    ],
+    "think_tag": [
+      "개인화"
+    ],
+    "language_inner": [
+      "내가 잘해야 분위기가 좋아져",
+      "내가 먼저 움직이면 달라질 거야"
+    ],
+    "language_outer": [
+      "나 이거 해보고 싶어",
+      "일단 시작해볼래"
+    ],
+    "resource": [
+      "작게 시작하는 용기",
+      "진짜 욕구를 말하는 힘"
+    ],
+    "micro_action": "10분: 지금 하고 싶은 것 1개를 ‘첫 동작’으로 바꿔 적고 바로 실행(예: 문서 열기/메시지 초안)",
+    "coach_questions": [
+      "지금 에너지가 가리키는 ‘진짜 욕구’는 뭐야?",
+      "첫 동작을 1%로 줄이면 뭐가 될까?"
+    ],
+    "journal_prompt": "오늘 ‘시작’이 필요한 순간에 내가 나에게 한 말 1문장 기록하기"
+  },
+  {
+    "id": "R2",
+    "group": "RED",
+    "tone": 2,
+    "name": "코어 레드",
+    "hex": "#FF4D4D",
+    "keywords": [
+      "결단",
+      "추진",
+      "주도"
+    ],
+    "felt_sense": [
+      "턱에 힘",
+      "시선이 고정됨",
+      "가슴이 뜨거움"
+    ],
+    "emotion": [
+      "결의",
+      "자신감",
+      "초조(동반 가능)"
+    ],
+    "need": [
+      "주도권",
+      "속도",
+      "명확한 선택"
+    ],
+    "think_tag": [
+      "당위"
+    ],
+    "language_inner": [
+      "지금 해야 해",
+      "미루면 안 돼"
+    ],
+    "language_outer": [
+      "이 방향으로 가자",
+      "결정하자—지금"
+    ],
+    "resource": [
+      "결단을 ‘요청’으로 바꾸는 기술",
+      "속도 조절"
+    ],
+    "micro_action": "10분: ‘해야 해’ 문장 1개를 ‘나는 원해/선택해’로 바꿔서 말해보기",
+    "coach_questions": [
+      "내가 ‘해야 한다’고 말할 때 숨은 두려움은?",
+      "속도(추진)와 관계(배려) 중 지금 균형은?"
+    ],
+    "journal_prompt": "오늘 ‘해야 해’가 나온 순간, 그 뒤에 숨은 욕구 1개 적기"
+  },
+  {
+    "id": "R3",
+    "group": "RED",
+    "tone": 3,
+    "name": "딥 레드",
+    "hex": "#7A0F0F",
+    "keywords": [
+      "공격성",
+      "과열",
+      "경계(날카로움)"
+    ],
+    "felt_sense": [
+      "어금니 긴장",
+      "얼굴 열감",
+      "숨이 짧아짐"
+    ],
+    "emotion": [
+      "분노",
+      "짜증",
+      "억울함"
+    ],
+    "need": [
+      "존중",
+      "경계",
+      "정당함"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "이건 틀렸어",
+      "지금 바로 바로잡아야 해"
+    ],
+    "language_outer": [
+      "너는 왜 항상 그래?",
+      "당장 바꿔"
+    ],
+    "resource": [
+      "경계를 공격이 아니라 ‘요청’으로 말하기"
+    ],
+    "micro_action": "10분: 말하기 전 60초 멈춤 + ‘나는-느낌-요청’ 한 문장 만들기",
+    "coach_questions": [
+      "내가 지키려는 경계는 정확히 무엇?",
+      "비난 대신 요청으로 바꾸면 첫 문장은?"
+    ],
+    "journal_prompt": "오늘 가장 날카로운 문장을 ‘나는-느낌-요청’으로 재작성하기"
+  },
+  {
+    "id": "O1",
+    "group": "ORANGE",
+    "tone": 1,
+    "name": "소프트 오렌지",
+    "hex": "#FFE7D1",
+    "keywords": [
+      "친화",
+      "활력(부드러움)",
+      "사교성(가벼움)"
+    ],
+    "felt_sense": [
+      "입꼬리가 올라감",
+      "몸이 가벼움",
+      "숨이 편안함"
+    ],
+    "emotion": [
+      "반가움",
+      "호기심",
+      "편안함"
+    ],
+    "need": [
+      "연결",
+      "놀이",
+      "가벼운 소통"
+    ],
+    "think_tag": [
+      "마음읽기"
+    ],
+    "language_inner": [
+      "상대가 좋아할까?",
+      "분위기만 깨지지 않으면 좋겠다"
+    ],
+    "language_outer": [
+      "괜찮으면 같이 해볼래?",
+      "편하게 이야기해도 돼"
+    ],
+    "resource": [
+      "관계를 열되, 나를 잃지 않는 균형"
+    ],
+    "micro_action": "10분: ‘내가 원하는 것 1개’ + ‘상대에게 묻는 질문 1개’ 작성",
+    "coach_questions": [
+      "나는 지금 ‘연결’에서 무엇을 얻고 싶지?",
+      "상대의 반응을 추측 대신 질문으로 바꾸면?"
+    ],
+    "journal_prompt": "오늘 내가 ‘추측’으로 처리한 대화 1개를 ‘질문’으로 바꿔 적기"
+  },
+  {
+    "id": "O2",
+    "group": "ORANGE",
+    "tone": 2,
+    "name": "코어 오렌지",
+    "hex": "#FF8A00",
+    "keywords": [
+      "자신감",
+      "현장감",
+      "사교성(주도)"
+    ],
+    "felt_sense": [
+      "말이 빨라짐",
+      "손짓이 늘어남",
+      "시선이 활발함"
+    ],
+    "emotion": [
+      "활력",
+      "대담함",
+      "즐거움"
+    ],
+    "need": [
+      "표현",
+      "확장",
+      "인정"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "이 정도면 다 될 거야",
+      "나는 분위기를 살려야 해"
+    ],
+    "language_outer": [
+      "좋아, 해보자!",
+      "금방 해결될 거야"
+    ],
+    "resource": [
+      "활력을 ‘현실 체크’와 함께 쓰기"
+    ],
+    "micro_action": "10분: ‘사실 3개/추측 3개’ 나누기 + 다음 행동 1개만 고르기",
+    "coach_questions": [
+      "내가 지금 과하게 낙관하는 지점은?",
+      "확장을 유지하면서도 리스크를 줄일 1개는?"
+    ],
+    "journal_prompt": "오늘 ‘괜히 크게 말한’ 문장 1개를 ‘작은 약속’으로 줄여쓰기"
+  },
+  {
+    "id": "O3",
+    "group": "ORANGE",
+    "tone": 3,
+    "name": "딥 오렌지",
+    "hex": "#7A3A00",
+    "keywords": [
+      "과열",
+      "과잉개입",
+      "흥분"
+    ],
+    "felt_sense": [
+      "몸이 들뜸",
+      "숨이 거칠어짐",
+      "집중이 분산됨"
+    ],
+    "emotion": [
+      "조급함",
+      "들뜸",
+      "불안(섞임)"
+    ],
+    "need": [
+      "확신",
+      "영향력",
+      "통제감"
+    ],
+    "think_tag": [
+      "재앙화"
+    ],
+    "language_inner": [
+      "지금 놓치면 끝이야",
+      "이 분위기 아니면 안 돼"
+    ],
+    "language_outer": [
+      "지금 당장 해야 해",
+      "빨리빨리 가자"
+    ],
+    "resource": [
+      "속도를 줄여 ‘선택’을 회복하기"
+    ],
+    "micro_action": "10분: 타이머 2분 호흡 + ‘오늘 꼭 1개’만 남기기",
+    "coach_questions": [
+      "내가 두려워하는 ‘놓침’은 정확히 뭐야?",
+      "지금 속도를 30% 줄이면 지키는 건 무엇?"
+    ],
+    "journal_prompt": "오늘 조급함이 올라올 때 몸 신호 1개와 그때 나온 말 1문장 적기"
+  },
+  {
+    "id": "Y1",
+    "group": "YELLOW",
+    "tone": 1,
+    "name": "소프트 옐로",
+    "hex": "#FFF7CC",
+    "keywords": [
+      "희망(미세)",
+      "호기심",
+      "지적 활동(부드러움)"
+    ],
+    "felt_sense": [
+      "눈이 또렷해짐",
+      "이마가 가벼움",
+      "숨이 맑아짐"
+    ],
+    "emotion": [
+      "호기심",
+      "희망",
+      "가벼운 설렘"
+    ],
+    "need": [
+      "이해",
+      "의미",
+      "학습"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "내가 알아내면 괜찮아질 거야",
+      "정리만 되면 해결돼"
+    ],
+    "language_outer": [
+      "이거 왜 그런 걸까?",
+      "조금만 더 생각해보자"
+    ],
+    "resource": [
+      "호기심을 ‘현재 체감’으로 연결하기"
+    ],
+    "micro_action": "10분: ‘머리(생각) 3줄’ + ‘몸(감각) 1줄’ 같이 쓰기",
+    "coach_questions": [
+      "내가 지금 알고 싶은 건 사실이야, 안심이야?",
+      "생각 말고 지금 몸이 말하는 건?"
+    ],
+    "journal_prompt": "오늘 ‘알아야 안심’이 나온 순간, 몸감각 1개를 같이 기록하기"
+  },
+  {
+    "id": "Y2",
+    "group": "YELLOW",
+    "tone": 2,
+    "name": "코어 옐로",
+    "hex": "#FFC400",
+    "keywords": [
+      "소통",
+      "자존감",
+      "명료한 사고"
+    ],
+    "felt_sense": [
+      "목이 열림",
+      "말이 정리됨",
+      "시야가 넓어짐"
+    ],
+    "emotion": [
+      "명료함",
+      "자신감",
+      "가벼운 기쁨"
+    ],
+    "need": [
+      "인정",
+      "표현",
+      "명확성"
+    ],
+    "think_tag": [
+      "마음읽기"
+    ],
+    "language_inner": [
+      "내가 말하면 이해해줄 거야",
+      "내 진짜 의도를 알아줬으면 해"
+    ],
+    "language_outer": [
+      "내가 말하고 싶은 건 이거야",
+      "지금은 이렇게 느껴"
+    ],
+    "resource": [
+      "명료하게 말하되 부드럽게 요청하기"
+    ],
+    "micro_action": "10분: ‘사실-느낌-요청’ 3줄 문장 만들기",
+    "coach_questions": [
+      "내 메시지에서 ‘사실’과 ‘요청’은 뭐야?",
+      "상대가 모를 수 있다는 가능성을 열면?"
+    ],
+    "journal_prompt": "오늘 가장 좋은 소통 1번의 ‘첫 문장’을 그대로 적어보기"
+  },
+  {
+    "id": "Y3",
+    "group": "YELLOW",
+    "tone": 3,
+    "name": "딥 옐로",
+    "hex": "#6B5600",
+    "keywords": [
+      "과사고",
+      "완벽주의",
+      "자존감 흔들림"
+    ],
+    "felt_sense": [
+      "눈가 긴장",
+      "속이 울렁",
+      "숨이 얕아짐"
+    ],
+    "emotion": [
+      "불안",
+      "초조",
+      "예민함"
+    ],
+    "need": [
+      "확실함",
+      "통제감",
+      "안전"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "완벽해야 해",
+      "이건 실패야"
+    ],
+    "language_outer": [
+      "이것만 아니면 돼",
+      "무조건 이렇게 해야 해"
+    ],
+    "resource": [
+      "‘충분함’의 기준을 세우기"
+    ],
+    "micro_action": "10분: ‘충분 기준 1줄’ 쓰고 70점 행동 1개 실행",
+    "coach_questions": [
+      "완벽을 요구하는 목소리는 무엇을 보호하려고 하지?",
+      "70점으로도 괜찮은 영역은 어디야?"
+    ],
+    "journal_prompt": "오늘 ‘충분함’ 기준 1줄 + 그 기준으로 한 행동 1개 적기"
+  },
+  {
+    "id": "G1",
+    "group": "GREEN",
+    "tone": 1,
+    "name": "소프트 그린",
+    "hex": "#DFFBE8",
+    "keywords": [
+      "치유(미세)",
+      "안정",
+      "회복"
+    ],
+    "felt_sense": [
+      "숨이 길어짐",
+      "배가 편안",
+      "어깨가 내려감"
+    ],
+    "emotion": [
+      "안도",
+      "차분함",
+      "따뜻함"
+    ],
+    "need": [
+      "회복",
+      "안전",
+      "휴식"
+    ],
+    "think_tag": [
+      "개인화"
+    ],
+    "language_inner": [
+      "내가 잘하면 다 괜찮아질 거야",
+      "내가 돌봐야 해"
+    ],
+    "language_outer": [
+      "괜찮아, 내가 할게",
+      "너 힘들었지"
+    ],
+    "resource": [
+      "돌봄과 경계의 균형"
+    ],
+    "micro_action": "10분: ‘내가 책임질 것/아닌 것’ 2칸 나누기",
+    "coach_questions": [
+      "내가 떠안는 부분 중 내려놓을 1개는?",
+      "돌봄이 아니라 ‘요청’이 필요한 지점은?"
+    ],
+    "journal_prompt": "오늘 ‘내가 해야지’가 나온 순간, 내려놓을 1개 적기"
+  },
+  {
+    "id": "G2",
+    "group": "GREEN",
+    "tone": 2,
+    "name": "코어 그린",
+    "hex": "#22C55E",
+    "keywords": [
+      "조화",
+      "성장",
+      "안정된 변화"
+    ],
+    "felt_sense": [
+      "호흡이 고르게",
+      "가슴이 편안",
+      "발이 단단"
+    ],
+    "emotion": [
+      "평온",
+      "균형",
+      "신뢰"
+    ],
+    "need": [
+      "지속",
+      "안정",
+      "성장"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "이번엔 꾸준히 할 수 있어",
+      "조금씩이면 된다"
+    ],
+    "language_outer": [
+      "천천히 가도 괜찮아",
+      "한 단계씩 해보자"
+    ],
+    "resource": [
+      "작은 성장의 반복"
+    ],
+    "micro_action": "10분: ‘오늘 1% 성장 행동’ 1개를 캘린더에 고정",
+    "coach_questions": [
+      "지속을 돕는 환경(장치) 1개는?",
+      "지금의 균형을 깨지 않고도 바꿀 1개는?"
+    ],
+    "journal_prompt": "오늘 ‘1% 성장’ 행동 1개와 그때 몸이 느낀 변화 1줄"
+  },
+  {
+    "id": "G3",
+    "group": "GREEN",
+    "tone": 3,
+    "name": "딥 그린",
+    "hex": "#0B4D25",
+    "keywords": [
+      "안전집착",
+      "정체",
+      "변화 회피"
+    ],
+    "felt_sense": [
+      "몸이 무거움",
+      "발이 느려짐",
+      "가슴이 답답"
+    ],
+    "emotion": [
+      "무기력",
+      "불안(숨김)",
+      "피로"
+    ],
+    "need": [
+      "안전",
+      "예측",
+      "보호"
+    ],
+    "think_tag": [
+      "재앙화"
+    ],
+    "language_inner": [
+      "바꾸면 더 망가질 거야",
+      "그냥 이대로가 낫다"
+    ],
+    "language_outer": [
+      "지금은 때가 아니야",
+      "괜히 건드리지 말자"
+    ],
+    "resource": [
+      "변화를 ‘작게’ 만드는 용기"
+    ],
+    "micro_action": "10분: ‘바꿔도 안전한 1%’만 정해서 실행(예: 5분 정리/1통 메일)",
+    "coach_questions": [
+      "내가 두려워하는 최악은 구체적으로 뭐야?",
+      "안전을 해치지 않는 변화 1%는?"
+    ],
+    "journal_prompt": "오늘 ‘회피’가 나온 순간, 내가 보호하려는 것 1개 적기"
+  },
+  {
+    "id": "B1",
+    "group": "BLUE",
+    "tone": 1,
+    "name": "소프트 블루",
+    "hex": "#DCEEFF",
+    "keywords": [
+      "평화",
+      "고요",
+      "내면 청취"
+    ],
+    "felt_sense": [
+      "숨이 깊어짐",
+      "시선이 부드러움",
+      "가슴이 차분"
+    ],
+    "emotion": [
+      "평온",
+      "수용",
+      "안정"
+    ],
+    "need": [
+      "여백",
+      "정리",
+      "내적 소통"
+    ],
+    "think_tag": [
+      "마음읽기"
+    ],
+    "language_inner": [
+      "말하지 않아도 알면 좋겠다",
+      "조용히 있으면 안전해"
+    ],
+    "language_outer": [
+      "조금 생각해볼게",
+      "지금은 듣고 있어"
+    ],
+    "resource": [
+      "침묵을 회피가 아니라 ‘선택’으로 쓰기"
+    ],
+    "micro_action": "10분: 바디스캔 2분 + ‘지금 느끼는 것 3단어’ 적기",
+    "coach_questions": [
+      "지금 침묵이 보호하는 건 뭐야?",
+      "말로 하면 더 안전해지는 1문장은?"
+    ],
+    "journal_prompt": "오늘 ‘말 대신 침묵’을 선택한 순간, 그 이유 1줄"
+  },
+  {
+    "id": "B2",
+    "group": "BLUE",
+    "tone": 2,
+    "name": "코어 블루",
+    "hex": "#2F80ED",
+    "keywords": [
+      "내면 소통",
+      "정서 정렬",
+      "평화로운 대화"
+    ],
+    "felt_sense": [
+      "목이 열림",
+      "숨이 길어짐",
+      "심장이 안정"
+    ],
+    "emotion": [
+      "차분함",
+      "명료함",
+      "공감"
+    ],
+    "need": [
+      "진실",
+      "연결",
+      "정직한 표현"
+    ],
+    "think_tag": [
+      "개인화"
+    ],
+    "language_inner": [
+      "내가 너무 예민한가?",
+      "내가 잘 설명해야 해"
+    ],
+    "language_outer": [
+      "내가 느낀 건 이거야",
+      "사실과 느낌을 나눠 말할게"
+    ],
+    "resource": [
+      "정직한 표현 + 부드러운 경계"
+    ],
+    "micro_action": "10분: ‘사실 1/느낌 1/요청 1’ 문장 완성 후 한 번 말해보기",
+    "coach_questions": [
+      "내가 숨기는 감정 1개는?",
+      "지금 진실을 말하되 관계를 지킬 문장은?"
+    ],
+    "journal_prompt": "오늘 ‘사실-느낌-요청’ 한 번 성공한 사례를 그대로 기록"
+  },
+  {
+    "id": "B3",
+    "group": "BLUE",
+    "tone": 3,
+    "name": "딥 블루",
+    "hex": "#103A88",
+    "keywords": [
+      "거리두기",
+      "고립",
+      "냉각"
+    ],
+    "felt_sense": [
+      "표정 굳음",
+      "숨 멈춤",
+      "어깨가 올라감"
+    ],
+    "emotion": [
+      "서늘함",
+      "외로움",
+      "서운함(숨김)"
+    ],
+    "need": [
+      "안전",
+      "통제",
+      "보호"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "말해도 소용없어",
+      "그냥 끊어버리자"
+    ],
+    "language_outer": [
+      "됐어. 괜찮아.",
+      "그냥 넘어가자"
+    ],
+    "resource": [
+      "거리두기를 ‘표현’으로 전환하기"
+    ],
+    "micro_action": "10분: ‘나는 지금 ___(감정)이라서 ___(욕구)가 필요해’ 한 문장 만들기",
+    "coach_questions": [
+      "내가 닫히는 순간, 몸에서 먼저 오는 신호는?",
+      "닫힘을 유지하면서도 말할 수 있는 1문장은?"
+    ],
+    "journal_prompt": "오늘 ‘괜찮아’ 뒤에 숨은 진짜 문장 1개 적기"
+  },
+  {
+    "id": "I1",
+    "group": "INDIGO",
+    "tone": 1,
+    "name": "소프트 인디고",
+    "hex": "#E9E7FF",
+    "keywords": [
+      "직감(미세)",
+      "예감",
+      "깊어짐"
+    ],
+    "felt_sense": [
+      "이마가 맑아짐",
+      "시야가 선명",
+      "숨이 고요"
+    ],
+    "emotion": [
+      "직감",
+      "차분한 놀람",
+      "집중"
+    ],
+    "need": [
+      "의미",
+      "패턴 이해",
+      "통찰"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "뭔가 느낌이 있어",
+      "이건 연결돼 있어"
+    ],
+    "language_outer": [
+      "조금 더 보면 알 것 같아",
+      "패턴을 정리해볼래"
+    ],
+    "resource": [
+      "직감을 ‘검증 가능한 언어’로 만들기"
+    ],
+    "micro_action": "10분: ‘직감 1개’ → ‘근거(사실) 2개’로 바꿔 적기",
+    "coach_questions": [
+      "이 직감의 근거(사실)는 뭐야?",
+      "확신이 아니라 가설이라면 어떻게 표현할까?"
+    ],
+    "journal_prompt": "오늘 ‘예감’이 왔던 순간, 사실/해석을 분리해 기록"
+  },
+  {
+    "id": "I2",
+    "group": "INDIGO",
+    "tone": 2,
+    "name": "코어 인디고",
+    "hex": "#7C6CFF",
+    "keywords": [
+      "통찰",
+      "깊은 의식",
+      "패턴 파악"
+    ],
+    "felt_sense": [
+      "집중이 모임",
+      "숨이 고름",
+      "몸이 단단"
+    ],
+    "emotion": [
+      "명확함",
+      "통찰",
+      "차분한 확신"
+    ],
+    "need": [
+      "진실",
+      "정리",
+      "의미"
+    ],
+    "think_tag": [
+      "마음읽기"
+    ],
+    "language_inner": [
+      "저 사람도 불안한 거야",
+      "내가 다 알아챘어"
+    ],
+    "language_outer": [
+      "내가 보기엔 이런 패턴이 있어",
+      "확인해보고 싶어"
+    ],
+    "resource": [
+      "통찰을 ‘확인 질문’으로 바꾸기"
+    ],
+    "micro_action": "10분: ‘내 해석 1개’를 ‘확인 질문 1개’로 바꿔 말해보기",
+    "coach_questions": [
+      "내 해석을 사실처럼 말하는 순간은 언제야?",
+      "확인 질문으로 바꾸면 문장이 어떻게 되지?"
+    ],
+    "journal_prompt": "오늘 ‘내가 안다’고 느낀 순간, 확인 질문 1개로 재작성"
+  },
+  {
+    "id": "I3",
+    "group": "INDIGO",
+    "tone": 3,
+    "name": "딥 인디고",
+    "hex": "#221A6B",
+    "keywords": [
+      "과몰입",
+      "의심",
+      "해석 과잉"
+    ],
+    "felt_sense": [
+      "눈이 고정됨",
+      "숨이 얕아짐",
+      "어깨가 뻣뻣"
+    ],
+    "emotion": [
+      "의심",
+      "불안",
+      "긴장"
+    ],
+    "need": [
+      "확실함",
+      "통제",
+      "안전"
+    ],
+    "think_tag": [
+      "재앙화"
+    ],
+    "language_inner": [
+      "이건 분명 뭔가 있어",
+      "다 망가지기 전에 막아야 해"
+    ],
+    "language_outer": [
+      "그건 의도가 있는 거야",
+      "지금 확인해야 해"
+    ],
+    "resource": [
+      "해석을 줄이고 ‘사실’로 돌아오기"
+    ],
+    "micro_action": "10분: ‘사실 3개만’ 적기(평가/추측 금지)",
+    "coach_questions": [
+      "지금 확실히 아는 사실은 무엇?",
+      "내가 통제할 수 있는 1개는?"
+    ],
+    "journal_prompt": "오늘 ‘의심’이 강해진 순간, 사실/추측을 3:3으로 나누기"
+  },
+  {
+    "id": "V1",
+    "group": "VIOLET",
+    "tone": 1,
+    "name": "소프트 바이올렛",
+    "hex": "#F2E6FF",
+    "keywords": [
+      "품위",
+      "영감(미세)",
+      "고귀함(부드러움)"
+    ],
+    "felt_sense": [
+      "등이 펴짐",
+      "숨이 안정",
+      "시선이 위로"
+    ],
+    "emotion": [
+      "존중",
+      "영감",
+      "차분한 자신감"
+    ],
+    "need": [
+      "의미",
+      "가치",
+      "기준"
+    ],
+    "think_tag": [
+      "개인화"
+    ],
+    "language_inner": [
+      "내가 모범을 보여야 해",
+      "내가 흔들리면 안 돼"
+    ],
+    "language_outer": [
+      "내 기준을 말해볼게",
+      "가치를 지키고 싶어"
+    ],
+    "resource": [
+      "기준을 강요가 아니라 ‘선언’으로 말하기"
+    ],
+    "micro_action": "10분: ‘내 가치 1개’ + ‘오늘 1% 실천’ 적기",
+    "coach_questions": [
+      "내 기준이 나를 돕는 지점과 묶는 지점은?",
+      "가치와 사람을 분리하면 문장이 어떻게 변해?"
+    ],
+    "journal_prompt": "오늘 ‘가치’가 작동한 순간 1개 기록"
+  },
+  {
+    "id": "V2",
+    "group": "VIOLET",
+    "tone": 2,
+    "name": "코어 바이올렛",
+    "hex": "#B56BFF",
+    "keywords": [
+      "권위",
+      "지도력",
+      "상징적 영향력"
+    ],
+    "felt_sense": [
+      "말이 단단해짐",
+      "시선이 또렷",
+      "몸이 중심 잡힘"
+    ],
+    "emotion": [
+      "확신",
+      "책임감",
+      "존엄"
+    ],
+    "need": [
+      "영향력",
+      "일관성",
+      "존중"
+    ],
+    "think_tag": [
+      "당위"
+    ],
+    "language_inner": [
+      "이건 이렇게 해야 맞아",
+      "내가 책임져야 해"
+    ],
+    "language_outer": [
+      "원칙은 이거야",
+      "우리는 이렇게 하자"
+    ],
+    "resource": [
+      "원칙을 ‘협의’로 확장하기"
+    ],
+    "micro_action": "10분: ‘원칙 1개’에 대해 ‘예외/선택지 2개’ 적기",
+    "coach_questions": [
+      "내 원칙이 지키려는 것은 무엇?",
+      "원칙은 유지하되 관계를 살릴 선택지는?"
+    ],
+    "journal_prompt": "오늘 ‘원칙’이 나온 순간, 협의 가능한 부분 1개 적기"
+  },
+  {
+    "id": "V3",
+    "group": "VIOLET",
+    "tone": 3,
+    "name": "딥 바이올렛",
+    "hex": "#3D0B78",
+    "keywords": [
+      "통제",
+      "훈계",
+      "우월감(그림자)"
+    ],
+    "felt_sense": [
+      "턱에 힘",
+      "목이 굳음",
+      "시선이 날카로움"
+    ],
+    "emotion": [
+      "짜증",
+      "우월감",
+      "불안(숨김)"
+    ],
+    "need": [
+      "질서",
+      "통제",
+      "안전"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "내가 맞아",
+      "이건 틀렸어"
+    ],
+    "language_outer": [
+      "그건 원래 안 돼",
+      "내 말대로 해"
+    ],
+    "resource": [
+      "권위를 ‘안내’로 바꾸기"
+    ],
+    "micro_action": "10분: ‘훈계 문장 1개’를 ‘안내/선택’ 문장으로 바꾸기",
+    "coach_questions": [
+      "내가 통제하려는 건 무엇을 두려워해서야?",
+      "선택을 남기는 문장은 어떻게 될까?"
+    ],
+    "journal_prompt": "오늘 ‘맞다/틀리다’ 언어가 나온 순간 1개를 ‘관찰’로 재작성"
+  },
+  {
+    "id": "W2",
+    "group": "WHITE",
+    "tone": 2,
+    "name": "화이트(정화)",
+    "hex": "#FFFFFF",
+    "keywords": [
+      "순수",
+      "정화",
+      "새 시작"
+    ],
+    "felt_sense": [
+      "가슴이 맑아짐",
+      "숨이 시원",
+      "머리가 정리됨"
+    ],
+    "emotion": [
+      "리셋",
+      "안도",
+      "가벼움"
+    ],
+    "need": [
+      "정리",
+      "명료함",
+      "새 출발"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "다 지우고 새로 시작하면 돼",
+      "완벽히 정리해야 해"
+    ],
+    "language_outer": [
+      "처음부터 다시 해보자",
+      "핵심만 남기자"
+    ],
+    "resource": [
+      "리셋을 ‘현실적인 한 걸음’으로 만들기"
+    ],
+    "micro_action": "10분: ‘지금 필요한 것 1개’만 남기고 나머지는 내일로 미루기",
+    "coach_questions": [
+      "새 시작이 필요한 이유는 뭐야?",
+      "오늘 가능한 한 걸음은 무엇?"
+    ],
+    "journal_prompt": "오늘 ‘정리’가 필요한 영역 1개와 ‘핵심 1개’ 적기"
+  },
+  {
+    "id": "W3",
+    "group": "WHITE",
+    "tone": 3,
+    "name": "화이트 글로우(개안)",
+    "hex": "#F5F6FF",
+    "keywords": [
+      "확장",
+      "깨달음",
+      "관점 전환"
+    ],
+    "felt_sense": [
+      "눈이 맑아짐",
+      "숨이 넓어짐",
+      "몸이 가벼움"
+    ],
+    "emotion": [
+      "통찰",
+      "해방감",
+      "평온"
+    ],
+    "need": [
+      "관점",
+      "여백",
+      "선택지"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "이게 아니면 안 돼",
+      "완벽해야 깨끗해"
+    ],
+    "language_outer": [
+      "정답은 이거야",
+      "깔끔하게 끝내자"
+    ],
+    "resource": [
+      "정답 대신 ‘선택지’"
+    ],
+    "micro_action": "10분: ‘선택지 3개’ 만들고, 그중 가장 작은 1개만 실행",
+    "coach_questions": [
+      "정답을 찾으려는 마음은 무엇을 보호해?",
+      "선택지가 생기면 몸은 어떻게 달라져?"
+    ],
+    "journal_prompt": "오늘 ‘정답’ 집착이 올라온 순간, 선택지 3개 써보기"
+  },
+  {
+    "id": "K1",
+    "group": "BLACK",
+    "tone": 1,
+    "name": "소프트 블랙(경계)",
+    "hex": "#1A1F2B",
+    "keywords": [
+      "보호",
+      "경계 설정",
+      "거리 조절"
+    ],
+    "felt_sense": [
+      "어깨가 올라감",
+      "숨이 멈칫",
+      "눈이 경계함"
+    ],
+    "emotion": [
+      "조심스러움",
+      "경계",
+      "긴장"
+    ],
+    "need": [
+      "안전",
+      "공간",
+      "보호"
+    ],
+    "think_tag": [
+      "재앙화"
+    ],
+    "language_inner": [
+      "또 다칠지도 몰라",
+      "미리 막아야 해"
+    ],
+    "language_outer": [
+      "지금은 어렵습니다",
+      "선은 지키고 싶어요"
+    ],
+    "resource": [
+      "경계를 ‘분명하고 부드럽게’ 말하기"
+    ],
+    "micro_action": "10분: 경계 한 줄 쓰기—‘지금은 ___은/는 어렵고, ___은/는 가능해요’",
+    "coach_questions": [
+      "내가 지키려는 안전은 무엇?",
+      "경계를 유지하면서도 연결을 남기는 문장은?"
+    ],
+    "journal_prompt": "오늘 ‘불편함’이 왔던 순간, 경계 문장 1개 적기"
+  },
+  {
+    "id": "K2",
+    "group": "BLACK",
+    "tone": 2,
+    "name": "코어 블랙(결단)",
+    "hex": "#0B0E14",
+    "keywords": [
+      "권위",
+      "결정",
+      "단호함"
+    ],
+    "felt_sense": [
+      "몸이 단단",
+      "말이 짧아짐",
+      "시선이 고정"
+    ],
+    "emotion": [
+      "단호함",
+      "차분한 결의",
+      "긴장"
+    ],
+    "need": [
+      "결정",
+      "명확성",
+      "통제"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "여기서 끝내야 해",
+      "이건 안 돼"
+    ],
+    "language_outer": [
+      "결정했어",
+      "여기까지야"
+    ],
+    "resource": [
+      "결단을 ‘선언+책임’으로 마무리하기"
+    ],
+    "micro_action": "10분: ‘결정 1개’ + ‘그 결정의 비용/이득’ 1줄씩 적기",
+    "coach_questions": [
+      "내 결단이 지키는 가치는 무엇?",
+      "결정 이후 내가 책임질 한 가지는?"
+    ],
+    "journal_prompt": "오늘 ‘No’가 필요했던 순간, 내가 지키려는 가치 1개 적기"
+  },
+  {
+    "id": "SKY",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "하늘색(SKY)",
+    "hex": "#7DD3FC",
+    "keywords": [
+      "자유",
+      "개방",
+      "소통의 여지"
+    ],
+    "felt_sense": [
+      "가슴이 트임",
+      "숨이 넓어짐",
+      "목이 열림"
+    ],
+    "emotion": [
+      "가벼움",
+      "해방감",
+      "희망"
+    ],
+    "need": [
+      "자유",
+      "공간",
+      "선택"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "내가 갇힌 건 아닐까?",
+      "열어두면 길이 보여"
+    ],
+    "language_outer": [
+      "다른 방법도 있어",
+      "가능성을 열어보자"
+    ],
+    "resource": [
+      "닫힘을 ‘여지’로 바꾸는 힘"
+    ],
+    "micro_action": "10분: 지금 상황에서 가능한 선택지 5개 쓰기(말도 안 되는 것 포함)",
+    "coach_questions": [
+      "내가 닫아버린 선택지는 뭐야?",
+      "자유를 지키면서도 현실적인 한 걸음은?"
+    ],
+    "journal_prompt": "오늘 ‘열림’이 생긴 순간, 그때 바뀐 말 1문장 적기"
+  },
+  {
+    "id": "PINK",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "분홍(PINK)",
+    "hex": "#F58CD9",
+    "keywords": [
+      "사랑",
+      "부드러움",
+      "돌봄"
+    ],
+    "felt_sense": [
+      "가슴이 따뜻",
+      "표정이 풀림",
+      "숨이 부드러움"
+    ],
+    "emotion": [
+      "애정",
+      "연민",
+      "따뜻함"
+    ],
+    "need": [
+      "돌봄",
+      "연결",
+      "안전한 친밀감"
+    ],
+    "think_tag": [
+      "개인화"
+    ],
+    "language_inner": [
+      "내가 더 잘 돌봤어야 했어",
+      "내가 참으면 편해질 거야"
+    ],
+    "language_outer": [
+      "괜찮아, 내가 맞출게",
+      "네가 편하면 됐어"
+    ],
+    "resource": [
+      "돌봄과 자기보호를 함께 두기"
+    ],
+    "micro_action": "10분: ‘나를 위한 돌봄 1개’와 ‘상대에게 요청 1개’ 적기",
+    "coach_questions": [
+      "돌봄이 희생으로 바뀌는 순간은 언제야?",
+      "나는 지금 무엇을 요청하고 싶지?"
+    ],
+    "journal_prompt": "오늘 ‘참았다’가 나온 순간, 요청 문장으로 바꿔 적기"
+  },
+  {
+    "id": "GOLD",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "금색(GOLD)",
+    "hex": "#D4AF37",
+    "keywords": [
+      "성공",
+      "풍요",
+      "완성"
+    ],
+    "felt_sense": [
+      "가슴이 부풂",
+      "시야가 위로",
+      "몸이 당당"
+    ],
+    "emotion": [
+      "자부심",
+      "기쁨",
+      "압박(동반 가능)"
+    ],
+    "need": [
+      "성취",
+      "인정",
+      "가치"
+    ],
+    "think_tag": [
+      "당위"
+    ],
+    "language_inner": [
+      "결과를 내야 가치가 있어",
+      "성공해야 해"
+    ],
+    "language_outer": [
+      "성과로 보여줄게",
+      "끝까지 해낼게"
+    ],
+    "resource": [
+      "성과와 존재 가치를 분리하기"
+    ],
+    "micro_action": "10분: ‘성과’ 말고 ‘가치 기반 행동 1개’ 선택해 실행",
+    "coach_questions": [
+      "성공이 내게 의미하는 가치는?",
+      "성과가 아니어도 내가 자랑스러운 지점은?"
+    ],
+    "journal_prompt": "오늘 ‘가치로 한 행동’ 1개를 기록"
+  },
+  {
+    "id": "GRAY",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "회색(GRAY)",
+    "hex": "#7F8E8B",
+    "keywords": [
+      "중립",
+      "정지",
+      "우울/무감각"
+    ],
+    "felt_sense": [
+      "몸이 무거움",
+      "표정이 굳음",
+      "숨이 얕아짐"
+    ],
+    "emotion": [
+      "무기력",
+      "무감각",
+      "우울감"
+    ],
+    "need": [
+      "회복",
+      "안전",
+      "작은 자극"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "어차피 안 바뀌어",
+      "나는 늘 이래"
+    ],
+    "language_outer": [
+      "모르겠어",
+      "그냥…"
+    ],
+    "resource": [
+      "정지에서 ‘작은 움직임’으로"
+    ],
+    "micro_action": "10분: 산책 5분 + ‘몸이 느끼는 것 3단어’ 적기",
+    "coach_questions": [
+      "지금 필요한 건 해결이야, 회복이야?",
+      "오늘 가능한 ‘최소 움직임’은?"
+    ],
+    "journal_prompt": "오늘 ‘멈춤’이 왔던 순간, 할 수 있는 1% 행동 1개 적기"
+  },
+  {
+    "id": "SILVER",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "은색(SILVER)",
+    "hex": "#C0C0C0",
+    "keywords": [
+      "감수성",
+      "잠재의식",
+      "미세 신호"
+    ],
+    "felt_sense": [
+      "소름",
+      "가슴이 찡함",
+      "눈물이 고임"
+    ],
+    "emotion": [
+      "예민함",
+      "감동",
+      "불안(미세)"
+    ],
+    "need": [
+      "안전",
+      "표현",
+      "이해받음"
+    ],
+    "think_tag": [
+      "마음읽기"
+    ],
+    "language_inner": [
+      "저 사람이 나를 싫어하는 걸까?",
+      "내가 너무 과민한가?"
+    ],
+    "language_outer": [
+      "괜히 신경 쓰이네",
+      "내가 예민한가 봐"
+    ],
+    "resource": [
+      "민감함을 약점이 아니라 ‘정보’로 쓰기"
+    ],
+    "micro_action": "10분: ‘내가 느낀 것(감각/정서) 2개’와 ‘사실 2개’ 분리 기록",
+    "coach_questions": [
+      "내 감수성이 알려주는 경계/욕구는 무엇?",
+      "추측 대신 확인 질문은?"
+    ],
+    "journal_prompt": "오늘 가장 미세했던 감정 1개를 정확한 단어로 적기"
+  },
+  {
+    "id": "COPPER",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "구리색(COPPER)",
+    "hex": "#B87333",
+    "keywords": [
+      "실용성",
+      "접지력",
+      "현실 적용"
+    ],
+    "felt_sense": [
+      "발이 단단",
+      "배가 안정",
+      "숨이 고름"
+    ],
+    "emotion": [
+      "안정감",
+      "현실감",
+      "차분함"
+    ],
+    "need": [
+      "구체성",
+      "실행",
+      "정리"
+    ],
+    "think_tag": [
+      "당위"
+    ],
+    "language_inner": [
+      "실행해야 의미가 있어",
+      "말보다 행동이야"
+    ],
+    "language_outer": [
+      "구체적으로 하자",
+      "오늘 뭐부터 할까?"
+    ],
+    "resource": [
+      "실행을 ‘강요’가 아니라 ‘선택’으로"
+    ],
+    "micro_action": "10분: 할 일 1개를 ‘첫 동작’으로 쪼개서 바로 실행",
+    "coach_questions": [
+      "지금 내가 통제 가능한 한 가지는?",
+      "실행을 방해하는 말(내적 문장)은?"
+    ],
+    "journal_prompt": "오늘 실행을 도운 ‘첫 동작’ 1개 기록"
+  },
+  {
+    "id": "EMERALD",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "에메랄드(EMERALD)",
+    "hex": "#10B981",
+    "keywords": [
+      "성장",
+      "치유",
+      "회복 탄력성"
+    ],
+    "felt_sense": [
+      "가슴이 편안",
+      "숨이 고름",
+      "몸이 탄력"
+    ],
+    "emotion": [
+      "신뢰",
+      "희망",
+      "안정된 기쁨"
+    ],
+    "need": [
+      "성장",
+      "지속",
+      "균형"
+    ],
+    "think_tag": [
+      "과일반화"
+    ],
+    "language_inner": [
+      "조금씩이면 돼",
+      "나는 회복할 수 있어"
+    ],
+    "language_outer": [
+      "천천히 해도 괜찮아",
+      "우리 다시 맞춰보자"
+    ],
+    "resource": [
+      "회복 탄력성(다시 돌아오는 힘)"
+    ],
+    "micro_action": "10분: ‘회복을 돕는 루틴 1개’(물/스트레칭/정리) 실행",
+    "coach_questions": [
+      "내가 회복될 때 반복하는 작은 습관은?",
+      "지속을 위해 덜어낼 1개는?"
+    ],
+    "journal_prompt": "오늘 ‘회복 신호’(몸감각/정서) 1개 기록"
+  },
+  {
+    "id": "TRANS",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "반투명(TRANSLUCENCY)",
+    "hex": "rgba(255,255,255,0)",
+    "keywords": [
+      "보류",
+      "무형",
+      "아직 말이 안 됨"
+    ],
+    "felt_sense": [
+      "멍함",
+      "숨이 멈칫",
+      "말이 안 나옴"
+    ],
+    "emotion": [
+      "혼란",
+      "불확실",
+      "두려움(미세)"
+    ],
+    "need": [
+      "안전",
+      "시간",
+      "정리"
+    ],
+    "think_tag": [
+      "재앙화"
+    ],
+    "language_inner": [
+      "말하면 더 커질까 봐",
+      "정리되기 전엔 못 말해"
+    ],
+    "language_outer": [
+      "잘 모르겠어",
+      "지금은 말이 안 나와"
+    ],
+    "resource": [
+      "보류를 ‘회피’가 아니라 ‘정리 시간’으로"
+    ],
+    "micro_action": "10분: ‘지금 말로 못 하는 것’ 3단어만 적기(문장 금지)",
+    "coach_questions": [
+      "지금 말이 안 되는 이유는 안전이야, 혼란이야?",
+      "3단어로만 말한다면 뭐라고 할까?"
+    ],
+    "journal_prompt": "오늘 ‘말이 안 됨’을 느낀 순간, 3단어만 남기기"
+  },
+  {
+    "id": "OCHER",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "황토(OCHER)",
+    "hex": "#C79B3A",
+    "keywords": [
+      "현실감",
+      "체화",
+      "기초"
+    ],
+    "felt_sense": [
+      "배가 단단",
+      "발이 안정",
+      "숨이 깊어짐"
+    ],
+    "emotion": [
+      "차분함",
+      "현실감",
+      "안정"
+    ],
+    "need": [
+      "기초",
+      "질서",
+      "생활 리듬"
+    ],
+    "think_tag": [
+      "당위"
+    ],
+    "language_inner": [
+      "기본부터 해야 해",
+      "원칙대로 하면 돼"
+    ],
+    "language_outer": [
+      "기초를 다지자",
+      "하나씩 정리하자"
+    ],
+    "resource": [
+      "기초를 ‘나를 살리는 루틴’으로"
+    ],
+    "micro_action": "10분: 생활 기초 1개(정리/물/식사/수면)만 바로 복구",
+    "coach_questions": [
+      "지금 내 삶의 ‘바닥’이 무너진 부분은?",
+      "기초를 살리는 가장 작은 행동은?"
+    ],
+    "journal_prompt": "오늘 ‘기초’가 회복된 순간 1개 기록"
+  },
+  {
+    "id": "BLUE_GREEN",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "블루그린(BLUE GREEN)",
+    "hex": "#2DD4BF",
+    "keywords": [
+      "창의성",
+      "정서 해방",
+      "흐름"
+    ],
+    "felt_sense": [
+      "가슴이 트임",
+      "숨이 시원",
+      "몸이 가벼움"
+    ],
+    "emotion": [
+      "해방감",
+      "유연함",
+      "호기심"
+    ],
+    "need": [
+      "표현",
+      "자유",
+      "흐름"
+    ],
+    "think_tag": [
+      "개인화"
+    ],
+    "language_inner": [
+      "내가 맞춰야 흐름이 생겨",
+      "내가 풀어야 한다"
+    ],
+    "language_outer": [
+      "다르게 해보자",
+      "새롭게 표현해볼까?"
+    ],
+    "resource": [
+      "정서의 흐름을 ‘창작/표현’으로 바꾸기"
+    ],
+    "micro_action": "10분: 말 대신 ‘형태’로 표현(메모/그림/목소리) 1개 남기기",
+    "coach_questions": [
+      "내 감정이 형태를 가진다면 어떤 모습일까?",
+      "표현을 방해하는 내 문장은?"
+    ],
+    "journal_prompt": "오늘 ‘표현’이 쉬워진 순간의 조건 1개 적기"
+  },
+  {
+    "id": "RAINBOW",
+    "group": "SINGLE",
+    "tone": null,
+    "name": "무지개(RAINBOW)",
+    "hex": "linear-gradient(90deg, #FF4D4D, #FF8A00, #FFC400, #22C55E, #2F80ED, #7C6CFF, #B56BFF)",
+    "keywords": [
+      "통합",
+      "전체성",
+      "다중감정 수용"
+    ],
+    "felt_sense": [
+      "가슴이 넓어짐",
+      "숨이 깊어짐",
+      "몸이 유연"
+    ],
+    "emotion": [
+      "수용",
+      "감사",
+      "평온"
+    ],
+    "need": [
+      "통합",
+      "이해",
+      "균형"
+    ],
+    "think_tag": [
+      "흑백논리"
+    ],
+    "language_inner": [
+      "이것도 맞고 저것도 맞아",
+      "한 가지로만 결론내릴 필요 없어"
+    ],
+    "language_outer": [
+      "둘 다 중요해",
+      "지금은 통합해서 보자"
+    ],
+    "resource": [
+      "모순을 담는 그릇"
+    ],
+    "micro_action": "10분: 내 안의 ‘A 욕구 vs B 욕구’ 두 가지를 나란히 적고 둘을 살리는 1문장 만들기",
+    "coach_questions": [
+      "내 안의 두 욕구는 무엇이고 각각 무엇을 지키려 해?",
+      "둘을 동시에 살리는 선택지는?"
+    ],
+    "journal_prompt": "오늘 ‘모순’을 수용한 순간 1개 기록"
+  }
+];
+
+    /***********************
+     * State
+     ***********************/
+    let picked = { c1:null, c2:null, c3:null };
+    let lastResultText = "";
+    let lastLetterText = "";
+    let lastCombinedText = "";
+    let completionAnswers = ["","","","",""];
+    let lastCompletionPrompts = [];
+    let lastData = null;
+
+
+    /***********************
+     * Helpers
+     ***********************/
+    function uniq(arr){ return Array.from(new Set((arr||[]).filter(Boolean))); }
+
+    function safePick(arr, fallback){
+      if(!Array.isArray(arr) || arr.length === 0) return fallback;
+      return arr[0];
+    }
+
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function nowLocal(){
+      const d = new Date();
+      return d.toLocaleString("ko-KR", { hour12:false });
+    }
+
+    function has3(){ return !!(picked.c1 && picked.c2 && picked.c3); }
+
+    function optionLabel(c){
+      // 짧고 확실하게
+      return `${c.id} · ${c.name}`;
+    }
+
+    /***********************
+     * 2030 고민(선택)
+     * - 피검사자 피로도 줄이기 위해 '선택사항'
+     * - 해설을 더 직관적으로 연결해주는 장치
+     ***********************/
+    const CONCERNS = [
+      { id:"", label:"— 선택 안 함(바로 해설) —", hook:"", nudge:"", q:"" },
+      {
+        id:"career",
+        label:"커리어/이직/방향이 흔들림",
+        hook:`길이 막힌 게 아니라, 길이 ‘정해지지 않은’ 계절일 수 있어요.
+요즘은 ‘무엇을 할지’보다 ‘어떤 사람으로 살지’가 먼저 묻습니다.`,
+        nudge:"오늘은 ‘정답’ 대신, 7일짜리 작은 실험 하나만 잡아보세요.",
+        q:"지금 내 커리어에서 ‘지키고 싶은 가치’는 무엇일까?"
+      },
+      {
+        id:"burnout",
+        label:"번아웃/에너지 고갈",
+        hook:`몸이 먼저 신호를 보내는 날이 있어요.
+마음은 버티는데, 몸이 ‘그만’이라고 말하는 날.`,
+        nudge:"회복은 거창한 계획이 아니라, 오늘의 숨과 리듬을 되찾는 일입니다.",
+        q:"지금 내 에너지를 가장 많이 새게 하는 것은 무엇일까?"
+      },
+      {
+        id:"money",
+        label:"돈/미래 불안(저축·주거·성장)",
+        hook:`돈 걱정은 숫자보다 ‘안전감’의 문제일 때가 많아요.
+내일을 통제하고 싶은 마음이 오늘을 조입니다.`,
+        nudge:"불안을 ‘계획’으로 바꾸기보다, 먼저 불안을 ‘이름’으로 불러보세요.",
+        q:"내가 지금 사고 싶은 건 ‘돈’이 아니라 사실 무엇일까?"
+      },
+      {
+        id:"compare",
+        label:"비교/자존감 하락(뒤처진 느낌)",
+        hook:`타인의 속도가 내 기준이 되는 순간, 마음은 갑자기 좁아집니다.
+비교는 나를 밀어붙이지만, 나를 살리진 못해요.`,
+        nudge:"오늘은 ‘나의 속도’를 한 번만, 조용히 존중해보세요.",
+        q:"내가 진짜로 부러워하는 ‘상태’는 무엇일까?"
+      },
+      {
+        id:"relationship",
+        label:"연애/관계 불안(서운함·거리감)",
+        hook:`관계는 말보다 숨에서 먼저 티가 납니다.
+말이 짧아지거나, 혹은 너무 길어지는 날이 있죠.`,
+        nudge:"상대를 설득하기 전에, 내 마음을 ‘사실-느낌-요청’으로 정리해보세요.",
+        q:"나는 지금 관계에서 무엇을 ‘확인’받고 싶을까?"
+      },
+      {
+        id:"direction",
+        label:"진로/삶의 방향(의미·정체성)",
+        hook:`방향을 잃는 건, 사실 ‘방향을 다시 고르는 시간’일 수 있어요.
+가끔은 멈춤이 길을 만듭니다.`,
+        nudge:"오늘은 큰 결론 대신, ‘지금 내게 중요한 것’ 한 단어만 적어보세요.",
+        q:"내가 최근에 자주 놓치는 ‘나의 기준’은 무엇일까?"
+      },
+      {
+        id:"procrastination",
+        label:"미루기/집중 안 됨(루틴 붕괴)",
+        hook:`해야 할 일은 쌓이는데, 손은 자꾸 다른 곳으로 가죠.
+미루기는 게으름보다 ‘부담’의 신호일 때가 많아요.`,
+        nudge:"오늘은 10분만. ‘끝’이 아니라 ‘시작’만 해봅니다.",
+        q:"내가 미루는 일의 ‘진짜 무게’는 무엇일까?"
+      },
+      {
+        id:"loneliness",
+        label:"외로움/고립감(연결이 약해짐)",
+        hook:`사람이 많아도, 마음이 비는 날이 있어요.
+연결은 수가 아니라 ‘질감’입니다.`,
+        nudge:"오늘은 한 사람에게 ‘안부’ 하나. 관계는 작은 반복으로 살아납니다.",
+        q:"내가 지금 가장 듣고 싶은 말은 무엇일까?"
+      },
+      {
+        id:"family",
+        label:"가족/부모와의 거리(죄책감·의무)",
+        hook:`가족은 사랑이면서, 때로는 가장 큰 부담이 되죠.
+좋은 사람이 되고 싶은 마음이 나를 묶기도 합니다.`,
+        nudge:"오늘은 ‘내 책임’과 ‘타인의 책임’을 한 번만 구분해보세요.",
+        q:"내가 떠안은 짐 중, 사실 내 것이 아닌 것은 무엇일까?"
+      },
+      {
+        id:"communication",
+        label:"대화/소통(말하면 더 꼬임)",
+        hook:`말이 늘어날수록, 마음은 더 멀어지는 날이 있어요.
+그럴 땐 ‘정리된 한 문장’이 관계를 살립니다.`,
+        nudge:"오늘은 ‘내가 느낀 것’부터 말해보세요. 평가보다 경험으로.",
+        q:"내가 상대에게 꼭 전하고 싶은 ‘핵심 한 문장’은 무엇일까?"
+      },
+      {
+        id:"love",
+        label:"사랑/관계 반복 패턴(늘 비슷한 결말)",
+        hook:`같은 장면이 반복되는 것처럼 느껴질 때가 있죠.
+그건 운명보다 ‘패턴’일 수 있어요.`,
+        nudge:"오늘은 상대 분석보다, 내 반응을 하나만 관찰해봅니다.",
+        q:"내가 관계에서 자주 되풀이하는 ‘한 가지 반응’은 무엇일까?"
+      },
+      {
+        id:"study",
+        label:"공부/시험/성취 압박",
+        hook:`성취는 힘이 되지만, 동시에 숨을 막기도 해요.
+‘해야 한다’가 커질수록 마음은 작아집니다.`,
+        nudge:"오늘은 목표를 낮추는 게 아니라, ‘측정 가능한 한 조각’으로 나눠보세요.",
+        q:"내가 지금 달성하고 싶은 건 점수일까, 아니면 인정일까?"
+      },
+      {
+        id:"anxiety",
+        label:"불안/걱정 루프(생각이 멈추지 않음)",
+        hook:`불안은 내일에서 오기보다, 오늘의 숨에서 시작될 때가 많아요.
+머리가 먼저 달리면, 몸이 뒤에서 쫓아옵니다.`,
+        nudge:"오늘은 미래를 풀기보다, 지금의 신호를 단순하게 확인해봅니다.",
+        q:"내가 ‘최악’을 확정해서 얻는 이득은 무엇일까?"
+      },
+      {
+        id:"health",
+        label:"몸/건강 루틴(수면·식사·운동)",
+        hook:`마음은 종종, 몸을 통해 말합니다.
+수면과 식사는 감정의 바닥이에요.`,
+        nudge:"오늘은 의지보다 환경. ‘하나만’ 고쳐도 충분합니다.",
+        q:"내 몸이 지금 가장 먼저 원하는 것은 무엇일까?"
+      },
+      {
+        id:"purpose",
+        label:"삶의 의미/목적(허무·공허)",
+        hook:`허무는 멈춤이 아니라, 방향을 다시 묻는 신호일 수 있어요.
+‘왜’가 흐려지면 ‘어떻게’도 흔들립니다.`,
+        nudge:"오늘은 거창한 의미 말고, ‘나를 살리는 작은 의미’ 하나를 잡아보세요.",
+        q:"요즘 나를 조금이라도 살게 하는 것은 무엇일까?"
+      },
+      {
+        id:"freelance",
+        label:"프리랜서/창업 불안(수입·정체)",
+        hook:`자유는 넓지만, 바닥이 흔들리는 날이 있죠.
+불안은 ‘나 혼자’라는 감각에서 커집니다.`,
+        nudge:"오늘은 큰 계획보다, 수입/가치/관계 중 ‘한 축’만 정리해보세요.",
+        q:"내 일이 지금 증명해야 하는 건 ‘성과’일까 ‘신뢰’일까?"
+      }
+    ];
+
+    function populateConcerns(){
+      const sel = $("#concernSel");
+      sel.innerHTML = "";
+      CONCERNS.forEach(c=>{
+        const opt = document.createElement("option");
+        opt.value = c.id;
+        opt.textContent = c.label;
+        sel.appendChild(opt);
+      });
+    }
+
+    function syncConcernChips(){
+      const sel = $("#concernSel");
+      const cur = (sel?.value ?? "");
+      $$("#concernChips .chip").forEach(btn=>{
+        const id = btn.dataset.id || "";
+        const active = (id === cur) || (!cur && !id);
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-checked", active ? "true" : "false");
+      });
+      updateConcernPickedText();
+    }
+
+    function updateConcernPickedText(){
+      const el = $("#concernPickedText");
+      if(!el) return;
+      const c = getConcern();
+      el.textContent = (c && c.id) ? ("선택: " + c.label) : "선택: 없음";
+    }
+
+    const VISIBLE_CONCERN_CHIPS = 8; // 기본 노출 개수(선택안함 포함)
+
+    function toggleMoreConcerns(){
+      const wrap = $("#concernChips");
+      if(!wrap) return;
+      const on = wrap.classList.toggle("showMore");
+      const b = $("#btnMoreConcerns");
+      if(b) b.textContent = on ? "접기" : "더보기";
+    }
+
+    function clearConcern(){
+      const sel = $("#concernSel");
+      if(!sel) return;
+      sel.value = "";
+      syncConcernChips();
+      sel.dispatchEvent(new Event("change"));
+      toast("고민 선택 해제");
+    }
+
+    function buildConcernChips(){
+      const wrap = $("#concernChips");
+      const sel = $("#concernSel");
+      if(!wrap || !sel) return;
+
+      wrap.classList.remove("showMore");
+      wrap.innerHTML = "";
+
+      CONCERNS.forEach((c, idx)=>{
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip";
+        if(idx >= VISIBLE_CONCERN_CHIPS) btn.classList.add("more");
+        btn.dataset.id = c.id;
+        btn.setAttribute("role", "radio");
+        btn.setAttribute("aria-checked", "false");
+        btn.textContent = c.id ? c.label : "선택 안 함";
+        btn.title = c.id ? c.label : "고민 선택 없이 바로 진행";
+
+        btn.addEventListener("click", ()=>{
+          const cur = sel.value || "";
+          const next = (cur === (c.id||"")) ? "" : (c.id||"");
+          sel.value = next;
+          syncConcernChips();
+          sel.dispatchEvent(new Event("change"));
+          toast(next ? ("고민 선택: " + (c.label || "")) : "고민 선택 해제");
+        });
+
+        wrap.appendChild(btn);
+      });
+
+      syncConcernChips();
+    }
+
+    function getConcern(){
+      const id = $("#concernSel").value;
+      return CONCERNS.find(c=>c.id===id) || CONCERNS[0];
+    }
+
+    function concernBlockText(d, c){
+      if(!c || !c.id) return "";
+      const why = `이 고민 앞에서, 내 몸은 ${d.SENSE} 쪽으로 먼저 기울 수 있어요.
+마음은 ${d.EMO}로 색을 드러내고,
+그 밑에는 ${d.NEED}이라는 바람이 숨어 있습니다.`;
+      const q = c.q || d.Q1;
+      return `당신이 고른 고민: ${c.label}
+
+${c.hook}
+
+${why}
+
+${c.nudge}
+
+작은 질문: ${q}`;
+    }
+
+    /***********************
+     * UI
+     ***********************/
+
+    /***********************
+     * UI (v21 tile picker)
+     ***********************/
+    let activeSlot = 0; // 0..2
+    let picks = ["","",""]; // card ids
+
+    function slotLabel(i){
+      return ["첫 번째 카드","두 번째 카드","세 번째 카드"][i] || `카드 ${i+1}`;
+    }
+
+    function cardById(id){
+      return MAIN_DECK.find(c=>c.id===id) || null;
+    }
+
+    function selectedCount(){
+      return picks.filter(Boolean).length;
+    }
+
+    function uniqueOk(){
+      const ids = picks.filter(Boolean);
+      return new Set(ids).size === ids.length;
+    }
+
+    function has3(){
+      return picks.every(Boolean);
+    }
+
+    function setPickedFromPicks(){
+      picked.c1 = cardById(picks[0]);
+      picked.c2 = cardById(picks[1]);
+      picked.c3 = cardById(picks[2]);
+    }
+
+    function tileMeta(card){
+      if(!card) return "탭해서 카드 이름을 선택해 주세요.";
+      const emo = uniq(card.emotion).slice(0,2).join(" · ");
+      const need = uniq(card.need).slice(0,2).join(" · ");
+      const tag = uniq(card.think_tag).slice(0,1).join("");
+      const parts = [];
+      if(emo) parts.push(`정서: ${emo}`);
+      if(need) parts.push(`욕구: ${need}`);
+      if(tag) parts.push(`사고태그: ${tag}`);
+      return parts.join(" / ") || "—";
+    }
+
+    function renderTiles(){
+      // clear error
+      [0,1,2].forEach(i=>{
+        const t = $("#tile"+i);
+        if(t) t.classList.remove("error");
+      });
+
+      [0,1,2].forEach(i=>{
+        const c = cardById(picks[i]);
+        const sw = $("#sw"+i);
+        const nm = $("#nm"+i);
+        const mt = $("#mt"+i);
+        if(sw) sw.style.background = c?.hex || "transparent";
+        if(nm) nm.textContent = c?.name || "선택 전";
+        if(mt) mt.textContent = tileMeta(c);
+      });
+
+      // safety duplicate UI
+      if(!uniqueOk()){
+        const ids = picks.filter(Boolean);
+        const seen = {};
+        ids.forEach(id=> seen[id] = (seen[id]||0) + 1);
+        picks.forEach((id,i)=>{
+          if(id && seen[id] > 1){
+            const t = $("#tile"+i);
+            if(t) t.classList.add("error");
+          }
+        });
+      }
+    }
+
+    function markDuplicateUI(){
+      const warn = $("#dupWarn");
+      if(uniqueOk()){
+        if(warn){ warn.style.display = "none"; warn.textContent = ""; }
+        return true;
+      }
+      if(warn){
+        warn.style.display = "block";
+        warn.textContent = "같은 카드는 한 번만 선택해 주세요. (중복 선택됨)";
+      }
+      return false;
+    }
+
+    function updateButtons(){
+      const ok = has3() && uniqueOk();
+      $("#btnInterpret").disabled = !ok;
+      $("#stickyInterpret").disabled = !ok;
+
+      const canIO = ok && !!lastResultText;
+      $("#btnCopy").disabled = !canIO;
+      $("#btnShare").disabled = !canIO;
+      $("#stickyCopy").disabled = !canIO;
+      $("#stickyShare").disabled = !canIO;
+    }
+
+    function updateProgressUI(){
+      const filled = selectedCount();
+      const pt = $("#progressText");
+      const pf = $("#progressFill");
+      const sc = $("#stickyCount");
+      if(pt) pt.textContent = `${filled}/3 선택됨`;
+      if(pf) pf.style.width = `${Math.round((filled/3)*100)}%`;
+      if(sc) sc.textContent = `${filled}/3`;
+
+      const okUnique = markDuplicateUI();
+      const ok = has3() && okUnique;
+      const sub = $("#stickySub");
+      if(sub) sub.textContent = ok ? "준비됐어요. 해설을 열어볼까요?" : "세 장을 모두 고르면 해설이 열려요.";
+      updateButtons();
+    }
+
+    function setSlot(slotIdx, cardId){
+      if(slotIdx == null) slotIdx = 0;
+      slotIdx = Math.max(0, Math.min(2, Number(slotIdx)));
+      cardId = (cardId || "").trim();
+
+      if(cardId && !cardById(cardId)){
+        toast("카드를 찾지 못했어요");
+        return;
+      }
+
+      // clear
+      if(!cardId){
+        picks[slotIdx] = "";
+        setPickedFromPicks();
+        renderTiles();
+        lastResultText = "";
+        updateProgressUI();
+        return;
+      }
+
+      // swap/move if already selected elsewhere
+      const other = picks.findIndex((id,i)=> id === cardId && i !== slotIdx);
+      const prev = picks[slotIdx];
+      if(other >= 0){
+        if(!prev){
+          picks[other] = "";
+          picks[slotIdx] = cardId;
+          toast(`${slotLabel(other)}에서 ${slotLabel(slotIdx)}로 옮겼어요`);
+        }else{
+          picks[other] = prev;
+          picks[slotIdx] = cardId;
+          toast(`${slotLabel(other)} ↔ ${slotLabel(slotIdx)} 교체했어요`);
+        }
+      }else{
+        picks[slotIdx] = cardId;
+      }
+
+      activeSlot = slotIdx;
+      setPickedFromPicks();
+      renderTiles();
+      lastResultText = "";
+      updateProgressUI();
+    }
+
+    function chooseTargetSlot(){
+      const empty = picks.findIndex(id=>!id);
+      if(empty >= 0) return empty;
+      return activeSlot || 0;
+    }
+
+    function applyCardToSlot(cardId){
+      const idx = chooseTargetSlot();
+      setSlot(idx, cardId);
+    }
+
+    function renderSearchResults(items){
+      const box = $("#searchResults");
+      if(!box) return;
+      if(!items.length){
+        box.innerHTML = `<div class="tiny" style="color:var(--muted2)">검색 결과가 없어요.</div>`;
+        return;
+      }
+      box.innerHTML = items.map(c=>{
+        const usedIdx = picks.indexOf(c.id);
+        const badge = usedIdx >= 0 ? `<span class="sheetBadge on">선택됨 ${usedIdx+1}</span>` : ``;
+        return `
+          <button type="button" class="resultItem" data-id="${c.id}">
+            <span class="swatchSmall" style="background:${c.hex}"></span>
+            <span class="resultText">${escapeHtml(optionLabel(c))}</span>
+            ${badge}
+          </button>`;
+      }).join("");
+      box.querySelectorAll(".resultItem").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const id = btn.getAttribute("data-id");
+          if(id) applyCardToSlot(id);
+          const inp = $("#deckSearch");
+          if(inp) inp.value = "";
+          box.innerHTML = "";
+        });
+      });
+    }
+
+    function setupSearch(){
+      const inp = $("#deckSearch");
+      if(!inp) return;
+      inp.addEventListener("input", ()=>{
+        const q = (inp.value || "").trim().toLowerCase();
+        const box = $("#searchResults");
+        if(!q){ if(box) box.innerHTML = ""; return; }
+
+        const matches = MAIN_DECK.filter(c=>{
+          const id = (c.id||"").toLowerCase();
+          const nm = (c.name||"").toLowerCase();
+          const grp = (c.group||"").toLowerCase();
+          return id.includes(q) || nm.includes(q) || grp.includes(q);
+        }).slice(0, 12);
+
+        renderSearchResults(matches);
+      });
+    }
+
+    // Bottom sheet picker
+    function openSheet(slotIdx){
+      activeSlot = Math.max(0, Math.min(2, Number(slotIdx)));
+      const sheet = $("#pickerSheet");
+      if(!sheet) return;
+      sheet.classList.add("show");
+      sheet.setAttribute("aria-hidden", "false");
+      $("#sheetSub").textContent = slotLabel(activeSlot);
+      const inp = $("#sheetSearch");
+      if(inp){ inp.value = ""; }
+      renderSheetList(MAIN_DECK);
+      setTimeout(()=>{ try{ inp?.focus(); }catch(e){} }, 20);
+    }
+
+    function closeSheet(){
+      const sheet = $("#pickerSheet");
+      if(!sheet) return;
+      sheet.classList.remove("show");
+      sheet.setAttribute("aria-hidden", "true");
+    }
+
+    function renderSheetList(items){
+      const box = $("#sheetList");
+      if(!box) return;
+      if(!items.length){
+        box.innerHTML = `<div class="tiny" style="color:var(--muted2)">검색 결과가 없어요.</div>`;
+        return;
+      }
+      box.innerHTML = items.map(c=>{
+        const usedIdx = picks.indexOf(c.id);
+        const badge = usedIdx >= 0 ? `<span class="sheetBadge on">선택됨 ${usedIdx+1}</span>` : `<span class="sheetBadge">선택</span>`;
+        return `
+          <button type="button" class="sheetItem" data-id="${c.id}">
+            <span class="sheetLeft">
+              <span class="swatchSmall" style="background:${c.hex}"></span>
+              <span class="sheetName">${escapeHtml(optionLabel(c))}</span>
+            </span>
+            ${badge}
+          </button>`;
+      }).join("");
+
+      box.querySelectorAll(".sheetItem").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const id = btn.getAttribute("data-id");
+          if(id) setSlot(activeSlot, id);
+          closeSheet();
+        });
+      });
+    }
+
+    function setupSheet(){
+      const sheet = $("#pickerSheet");
+      if(!sheet) return;
+      const closeBtn = $("#sheetClose");
+      closeBtn?.addEventListener("click", closeSheet);
+      sheet.querySelectorAll("[data-close]").forEach(el=>{
+        el.addEventListener("click", closeSheet);
+      });
+      const inp = $("#sheetSearch");
+      inp?.addEventListener("input", ()=>{
+        const q = (inp.value || "").trim().toLowerCase();
+        if(!q){ renderSheetList(MAIN_DECK); return; }
+        const matches = MAIN_DECK.filter(c=>{
+          const id = (c.id||"").toLowerCase();
+          const nm = (c.name||"").toLowerCase();
+          const grp = (c.group||"").toLowerCase();
+          return id.includes(q) || nm.includes(q) || grp.includes(q);
+        }).slice(0, 36);
+        renderSheetList(matches);
+      });
+
+      // escape to close
+      document.addEventListener("keydown", (e)=>{
+        if(e.key === "Escape" && sheet.classList.contains("show")) closeSheet();
+      });
+    }
+
+    function resetAll(silent=false){
+      picks = ["","",""];
+      picked = { c1:null, c2:null, c3:null };
+      $("#concernSel").value = "";
+      syncConcernChips();
+      lastResultText = "";
+      lastLetterText = "";
+      lastCombinedText = "";
+      completionAnswers = ["","","","",""];
+      lastCompletionPrompts = [];
+      lastData = null;
+      renderLetterPlaceholder();
+      renderCompletions();
+      updateCombinedText();
+
+      renderTiles();
+      $("#resultArea").innerHTML = `<div class="block"><p style="color:var(--muted)">해설이 여기에 표시됩니다.</p></div>`;
+      updateProgressUI();
+      if(!silent) toast("리셋 완료");
+    }
+
+
+    /***********************
+     * Interpretation (Ryushihwa-ish tone)
+     ***********************/
+    function buildData(){
+      const c1 = picked.c1, c2 = picked.c2, c3 = picked.c3;
+
+      const SENSE = safePick(c1?.felt_sense, "몸에서 어떤 신호가 올라오는지");
+      const EMO   = safePick(c1?.emotion, "어떤 감정");
+      const NEED  = safePick(c1?.need, "무엇이 필요함");
+
+      const TAG   = safePick(c2?.think_tag, "해석 패턴");
+      const INNER = safePick(c3?.language_inner, "나는 나에게 어떤 말을 하는가");
+      const OUTER = safePick(c3?.language_outer, "관계에서 어떤 말이 나오는가");
+
+      const ACTION = safePick(c3?.micro_action, safePick(c2?.micro_action, safePick(c1?.micro_action, "10분: 숨을 길게 내쉬고, 마음에 남은 한 문장을 적기")));
+
+      // 질문 2개는 카드들에서 최대한 뽑기
+      const qPool = []
+        .concat(c1?.coach_questions||[])
+        .concat(c2?.coach_questions||[])
+        .concat(c3?.coach_questions||[])
+        .filter(Boolean);
+      const Q1 = qPool[0] || "지금 내가 확실히 아는 사실 1개는 무엇일까?";
+      const Q2 = qPool[1] || "지금 내가 진짜 원하는 것은 무엇일까?";
+
+      const JOURNAL = safePick(c3?.journal_prompt, safePick(c2?.journal_prompt, safePick(c1?.journal_prompt, "오늘 내가 나에게 한 말 중 가장 거친 문장 1개를 더 부드럽게 바꿔 적기")));
+
+      const REFRAME =
+        `나는 지금 ${SENSE}라는 신호를 느끼며, ${EMO}라는 감정을 알아차린다.\n`+
+        `생각은 ‘${TAG}’ 쪽으로 급해졌고,\n`+
+        `말은 “${OUTER}” 같은 모양으로 굳어지려 했다.\n`+
+        `하지만 내 속의 진짜 바람은 ${NEED}이다.`;
+
+      const concern = getConcern();
+
+      return {
+        when: nowLocal(),
+        concern,
+        cards:[c1, c2, c3],
+        SENSE, EMO, NEED, TAG, INNER, OUTER, ACTION, Q1, Q2, JOURNAL, REFRAME
+      };
+    }
+
+    function block(title, text){
+      return `<div class="block"><div class="sectionTitle">${escapeHtml(title)}</div><p>${escapeHtml(text)}</p></div>`;
+    }
+
+
+    // Raw-HTML block (for <details> etc.)
+    function blockHtml(title, rawHtml){
+      return `<div class="block"><div class="sectionTitle">${escapeHtml(title)}</div>${rawHtml}</div>`;
+    }
+
+    /***********************
+     * Jung / Psychodynamic lens (hypothesis-based)
+     * - 색채심리 '단정'이 아니라, 의미를 붙이는 프레임입니다.
+     * - 융/정신역동 언어(그림자·투사·보호전략)는 "가능성"으로만 제시합니다.
+     ***********************/
+    const TAG_TO_LENS = {
+      "마음읽기": {
+        name: "투사(상대에게 붙여 보기)",
+        cue: "내 두려움/바람이 상대의 마음인 것처럼 보이는 순간",
+        tryIt: "‘저 사람은 분명 ___’을 ‘나는 ___이 두렵다/원한다’로 바꿔 말해보기"
+      },
+      "흑백논리": {
+        name: "흑백으로 자르기(분열)",
+        cue: "회색 지대를 지우고 둘 중 하나로 정리해 불안을 줄이는 방식",
+        tryIt: "‘항상/절대’를 ‘지금은/가끔은’으로 바꿔 말해보기"
+      },
+      "당위": {
+        name: "‘해야 해’로 누르기(통제)",
+        cue: "불안을 규칙과 정답으로 눌러두려는 마음",
+        tryIt: "‘해야 해’를 ‘원해/선택해’로 바꿔 첫 문장 만들기"
+      },
+      "개인화": {
+        name: "내 탓으로 끌어오기(내면화)",
+        cue: "관계의 무게를 내 쪽으로 가져와 스스로를 지키는 방식",
+        tryIt: "‘내 탓’ → ‘상황/영향/선택’ 3칸으로 나누기"
+      },
+      "재앙화": {
+        name: "최악부터 확정하기(불안 시뮬레이션)",
+        cue: "최악을 먼저 확정해 대비하려는 마음",
+        tryIt: "최악/최선/가장가능 3가지를 1줄씩 적기"
+      },
+      "과잉일반화": {
+        name: "나를 한 단어로 찍기(낙인)",
+        cue: "한 번의 실패를 전체로 확장해 고통을 단순화하는 방식",
+        tryIt: "예외 1개(달랐던 순간)만 찾아 적기"
+      }
+    };
+
+    function dynPickHypotheses(cards){
+      const tags = uniq(cards.flatMap(c => c?.think_tag || [])).filter(Boolean);
+      const hyps = [];
+      for(const t of tags){
+        if(TAG_TO_LENS[t]) hyps.push({ tag:t, ...TAG_TO_LENS[t] });
+      }
+      // 1~2개만 (피로도↓)
+      return hyps.slice(0,2);
+    }
+
+    function dynShadowText(d){
+      const [c1,c2,c3] = d.cards;
+      const s1 = basePsy(c1).shadow;
+      const s2 = basePsy(c2).shadow;
+      const s3 = basePsy(c3).shadow;
+
+      return (
+        `그림자는 ‘나를 지키려는 방식’으로 나타나요.
+`+
+        `지금은 ${escapeHtml(d.NEED)}을(를) 지키려는 마음이 급해지면서,
+`+
+        `생각은 ‘${escapeHtml(d.TAG)}’로 잠기고, 말은 “${escapeHtml(d.OUTER)}”로 단단해지기 쉬워요.
+
+`+
+        `세 색의 그늘 힌트:
+`+
+        `- ${escapeHtml(s1)}
+`+
+        `- ${escapeHtml(s2)}
+`+
+        `- ${escapeHtml(s3)}`
+      );
+    }
+
+    function dynProjectionText(d, hyps){
+      const hasProj = hyps.some(h => h.name.includes("투사"));
+      const lead = hasProj
+        ? `심리학에서는 이런 순간을 ‘투사’라고도 불러요. 지금은 ‘마음읽기’가 켜졌을 가능성이 있어요.`
+        : `심리학에서는 누구나 관계 앞에서 ‘마음읽기’가 켜질 수 있다고 말해요.`;
+      return (
+        `${lead}
+`+
+        `투사 체크(30초):
+`+
+        `- ‘상대는 분명 ___일 거야’가 올라오면,
+`+
+        `  문장을 ‘나는 ___이 두렵다/원한다’로 바꿔 말해보세요.
+`+
+        `- 그리고 한 번만 질문으로 확인해요: “내가 맞게 이해했을까?”`
+      );
+    }
+
+    function dynHypothesisText(hyps){
+      if(!hyps.length){
+        return (
+          `지금은 마음이 ‘안전’을 확보하려고 서두르는 시기일 수 있어요.
+`+
+          `내가 쓰는 보호전략은 보통 ‘익숙함’의 형태로 나타납니다.
+`+
+          `오늘은 고치기보다, 알아차림부터 해볼게요.`
+        );
+      }
+      const lines = [];
+      for(const h of hyps){
+        lines.push(
+          `• ${h.name} — ${h.cue}
+  └ 오늘의 실험: ${h.tryIt}`
+        );
+      }
+      return lines.join("\n\n");
+    }
+
+    function dynValidityText(){
+      return (
+        `이 부분은 ‘정답’이 아니라 ‘가설’입니다.
+`+
+        `맞으면 쓰고, 아니면 조용히 내려놓아도 돼요.
+`+
+        `내 체감으로 0~10점 중 몇 점인가요? (7↑면 오늘은 충분히 맞닿은 것)`
+      );
+    }
+
+    function dynOneLine(d){
+      // 톤: 짧고 부드럽게
+      return (
+        `오늘 내 마음의 그림자는 나를 지키려다 말이 거칠어졌을 뿐이다.
+`+
+        `나는 ${escapeHtml(d.SENSE)}를 느끼며, ${escapeHtml(d.NEED)}을(를) 잃지 않기로 한다.`
+      );
+    }
+
+    function dynExplain(d){
+      const hyps = dynPickHypotheses(d.cards);
+      const tags = uniq(d.cards.flatMap(c => c?.think_tag || [])).filter(Boolean).slice(0,4);
+      const chips = tags.map(t => `<span class="chip">#${escapeHtml(t)}</span>`).join("");
+
+      const body = [
+        `<div class="miniP"><b>이 해석이 맞나요?</b> — ${escapeHtml(dynValidityText())}</div>`,
+        tags.length ? `<div class="chipRow">${chips}</div>` : "",
+        `<div class="miniP"><b>그림자(숨겨둔 마음)</b> — ${dynShadowText(d)}</div>`,
+        `<div class="miniP"><b>마음을 지키는 습관(가설)</b> — ${escapeHtml(dynHypothesisText(hyps))}</div>`,
+        `<div class="miniP"><b>관계에서 붙여본 말(투사)</b> — ${escapeHtml(dynProjectionText(d, hyps))}</div>`,
+        `<div class="miniP"><b>오늘의 작은 문장</b> — ${escapeHtml(dynOneLine(d))}</div>`
+      ].filter(Boolean).join("");
+
+      return `
+        <details class="detailsBox">
+          <summary>심리학에서는 이렇게 말해요 — 더 보기(선택)</summary>
+          <div class="detailsBody">${body}</div>
+        </details>
+      `;
+    }
+
+    function dynSummaryText(d){
+      const hyps = dynPickHypotheses(d.cards);
+      const h1 = hyps[0] ? `${hyps[0].name}` : "보호전략(가설)";
+      return [
+        `- 숨겨둔 마음(그림자): ${d.TAG}로 급해지며 말이 단단해질 수 있음`,
+        `- 마음을 지키는 습관(가설): ${h1}`,
+        `- 관계에서 붙여본 말(투사): ‘상대는 ___’ → ‘나는 ___이 두렵다/원한다’`
+      ].join("\n");
+    }
+
+
+    /***********************
+     * Color psychology (intuitive rationale)
+     * - 과학 ‘단정’이 아니라, 현장에서 이해를 돕는 해석 프레임
+     ***********************/
+    const SINGLE_LABELS = {
+      SKY:"하늘색", PINK:"분홍", GOLD:"금색", GRAY:"회색", SILVER:"은색", COPPER:"구리색",
+      EMERALD:"에메랄드", TRANSLUCENCY:"반투명", OCHER:"오커", BLUE_GREEN:"블루그린", RAINBOW:"무지개"
+    };
+
+    function koColorName(card){
+      if(!card) return "색";
+      const g = card.group;
+      if(g === "RED") return "빨강";
+      if(g === "ORANGE") return "주황";
+      if(g === "YELLOW") return "노랑";
+      if(g === "GREEN") return "초록";
+      if(g === "BLUE") return "파랑";
+      if(g === "INDIGO") return "남색";
+      if(g === "VIOLET") return "보라";
+      if(g === "WHITE") return "화이트";
+      if(g === "BLACK") return "블랙";
+      if(g === "SINGLE") return SINGLE_LABELS[card.id] || "단일색";
+      return g || "색";
+    }
+
+    
+    // --- Color psychology helpers (temperature / lightness / saturation)
+    function hexToRgb(hex){
+      if(!hex) return null;
+      let h = String(hex).trim();
+      if(h.startsWith("#")) h = h.slice(1);
+      if(h.length === 3){
+        h = h.split("").map(ch => ch+ch).join("");
+      }
+      if(h.length !== 6) return null;
+      const num = parseInt(h, 16);
+      if(Number.isNaN(num)) return null;
+      return { r:(num>>16)&255, g:(num>>8)&255, b:num&255 };
+    }
+
+    function rgbToHsl(r,g,b){
+      r/=255; g/=255; b/=255;
+      const max = Math.max(r,g,b), min = Math.min(r,g,b);
+      let h=0, s=0;
+      const l = (max+min)/2;
+      const d = max-min;
+      if(d !== 0){
+        s = d / (1 - Math.abs(2*l - 1));
+        switch(max){
+          case r: h = ((g-b)/d) % 6; break;
+          case g: h = (b-r)/d + 2; break;
+          case b: h = (r-g)/d + 4; break;
+        }
+        h = Math.round(h * 60);
+        if(h < 0) h += 360;
+      }
+      return { h, s: Math.round(s*100), l: Math.round(l*100) };
+    }
+
+    function colorTraits(hex){
+      const rgb = hexToRgb(hex);
+      if(!rgb) return { temp:"중간", light:"중간", sat:"중간", hsl:{h:0,s:0,l:0} };
+      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+      const h = hsl.h, s = hsl.s, l = hsl.l;
+
+      // warm/cool (soft heuristic)
+      let temp = "중간";
+      if(h < 75 || h >= 330) temp = "따뜻함";           // red/orange/yellow
+      else if(h >= 75 && h < 165) temp = "중간";         // green-ish
+      else temp = "차가움";                               // cyan/blue/indigo/violet
+
+      const light = (l >= 70) ? "밝음" : ((l <= 35) ? "어두움" : "중간");
+      const sat = (s >= 65) ? "선명함" : ((s <= 35) ? "부드러움" : "중간");
+      return { temp, light, sat, hsl };
+    }
+
+    function whyFromHex(hex){
+      const t = colorTraits(hex);
+
+      const tempMsg =
+        (t.temp === "따뜻함") ? "따뜻한 색은 흔히 몸의 속도를 올려 ‘해보자/지켜야지’ 같은 추진 신호를 키우기 쉬워요" :
+        (t.temp === "차가움") ? "차가운 색은 흔히 숨을 낮추고 ‘거리두기/정리/생각하기’ 같은 진정 신호를 부르기 쉬워요" :
+                               "따뜻함·차가움이 섞여 있어서 ‘균형/조율’ 쪽으로 느껴지기 쉬워요";
+
+      const lightMsg =
+        (t.light === "밝음") ? "밝을수록 가벼운 개방감·가능성이" :
+        (t.light === "어두움") ? "어두울수록 경계·깊이·무게감이" :
+                                 "명도는 중간이라";
+
+      const satMsg =
+        (t.sat === "선명함") ? "선명할수록 욕구/관심이 또렷해지고" :
+        (t.sat === "부드러움") ? "부드러울수록 보류/여지/피로 신호가 섞이기 쉽고" :
+                                 "채도는 중간이라";
+
+      return `${tempMsg}. (${lightMsg} 느껴지고, ${satMsg} 있어요)`;
+    }
+
+    function triadSummary(cards){
+      const traits = (cards||[]).map(c => colorTraits(c?.hex));
+      const count = (key, val) => traits.filter(t => t[key] === val).length;
+
+      const warm = count("temp","따뜻함"), cool = count("temp","차가움"), midT = traits.length - warm - cool;
+      const bright = count("light","밝음"), dark = count("light","어두움"), midL = traits.length - bright - dark;
+      const vivid = count("sat","선명함"), muted = count("sat","부드러움"), midS = traits.length - vivid - muted;
+
+      const tLine = `온도: 따뜻함 ${warm} / 차가움 ${cool}${midT ? " / 중간 " + midT : ""}`;
+      const lLine = `밝기: 밝음 ${bright} / 어두움 ${dark}${midL ? " / 중간 " + midL : ""}`;
+      const sLine = `선명도: 선명 ${vivid} / 부드러움 ${muted}${midS ? " / 중간 " + midS : ""}`;
+      return `${tLine}\n${lLine}\n${sLine}`;
+    }
+
+function toneNote(card){
+      const g = card?.group;
+      const t = card?.tone;
+      if(t == null) return "";
+
+      if(g === "WHITE"){
+        return t === 2 ? "톤2: 정리·여백" : "톤3: 리셋·정화";
+      }
+      if(g === "BLACK"){
+        return t === 1 ? "톤1: 경계 설정" : "톤2: 보호 강화";
+      }
+
+      if(["RED","ORANGE","YELLOW"].includes(g)){
+        return t === 1 ? "톤1: 살짝 켜짐(여지)" : (t === 2 ? "톤2: 선명함(결정)" : "톤3: 과열·고착(쉬기 필요)");
+      }
+      if(g === "GREEN"){
+        return t === 1 ? "톤1: 회복 시작" : (t === 2 ? "톤2: 균형·조율" : "톤3: 정체·붙잡힘(놓기 필요)");
+      }
+      if(["BLUE","INDIGO","VIOLET"].includes(g)){
+        return t === 1 ? "톤1: 조용히 안으로" : (t === 2 ? "톤2: 집중·통찰" : "톤3: 깊은 잠수(고립 주의)");
+      }
+      return "";
+    }
+
+    function basePsy(card){
+      const g = card?.group;
+      const id = card?.id;
+
+      // 기본 7색
+      if(g === "RED")    return { core:"각성·추진(‘지금!’의 에너지)", shadow:"말이 빨라지고 밀어붙이기 쉬움" };
+      if(g === "ORANGE") return { core:"자신감·관계 가열(‘해보자’의 활력)", shadow:"인정 욕구가 과해져 과장/과속" };
+      if(g === "YELLOW") return { core:"생각·소통 점등(‘이해하고 싶다’)", shadow:"과해석·걱정으로 머리가 과열" };
+      if(g === "GREEN")  return { core:"회복·조화(‘괜찮아지고 싶다’)", shadow:"갈등을 피하며 멈춰 서기" };
+      if(g === "BLUE")   return { core:"진정·내면 대화(‘잠깐 숨’)", shadow:"거리두기/침묵으로 고립" };
+      if(g === "INDIGO") return { core:"직관·통찰(‘깊이 보기’)", shadow:"의심/추측이 늘어 과몰입" };
+      if(g === "VIOLET") return { core:"의미·권위(‘나는 왜를 원해’)", shadow:"완벽/우월 기준으로 스스로를 압박" };
+
+      // 무채색
+      if(g === "WHITE")  return { core:"정리·초기화(‘비우기’)", shadow:"감정을 지워버리며 무감각해질 수 있음" };
+      if(g === "BLACK")  return { core:"경계·보호(‘여기까지’)", shadow:"차단이 습관이 되어 관계가 딱딱해짐" };
+
+      // 단일 컬러 11
+      if(g === "SINGLE"){
+        if(id === "SKY") return { core:"개방·가능성(‘창문을 여는 느낌’)", shadow:"결정이 미뤄져 떠다니기" };
+        if(id === "PINK") return { core:"돌봄·연결(‘부드럽게 다가가기’)", shadow:"거절을 못해 에너지가 새기" };
+        if(id === "GOLD") return { core:"성취·가치(‘잘 해내고 싶다’)", shadow:"성과 압박으로 숨이 가빠짐" };
+        if(id === "GRAY") return { core:"중립·정지(‘아무것도 안 느끼는 듯’)", shadow:"감정이 얼어 선택이 멈춤" };
+        if(id === "SILVER") return { core:"감수성·잠재의식(‘미세한 신호’)", shadow:"생각이 안쪽에서 맴돌며 반추" };
+        if(id === "COPPER") return { core:"현실감·접지(‘지금 할 수 있는 것’)", shadow:"안전만 택해 기회가 작아짐" };
+        if(id === "EMERALD") return { core:"활력 있는 안정(‘마음이 단단해짐’)", shadow:"소유/비교로 질투가 스침" };
+        if(id === "TRANSLUCENCY") return { core:"과도기·모호함(‘아직 말이 안 됨’)", shadow:"확실함을 못 얻어 불안이 증폭" };
+        if(id === "OCHER") return { core:"따뜻한 현실지혜(‘천천히 확실하게’)", shadow:"고집/완강함으로 굳어짐" };
+        if(id === "BLUE_GREEN") return { core:"정서적 해방·흐름(‘풀리고 싶다’)", shadow:"감정 기복/충동으로 흔들림" };
+        if(id === "RAINBOW") return { core:"통합·수용(‘이것도 저것도 나’)", shadow:"너무 많은 것을 동시에 잡아 산만" };
+      }
+
+      return { core:"현재 신호를 비추는 색", shadow:"과하면 한쪽으로 치우침" };
+    }
+
+    function psyExplainLong(card){
+      const colorName = koColorName(card);
+      const base = basePsy(card);
+      const tone = toneNote(card);
+      const emo = safePick(card?.emotion, "");
+      const need = safePick(card?.need, "");
+      const sense = safePick(card?.felt_sense, "");
+      const kw = (card?.keywords||[]).slice(0,3).join(" · ");
+
+      const head = `${card.name} (${colorName})`;
+      const why = `- 왜 이렇게 읽힐까(힌트): ${whyFromHex(card.hex)}`;
+      const line1 = `- 색채심리(핵심): ${base.core}${tone ? " · " + tone : ""}`;
+      const line2 = `- 그늘(과부하 신호): ${base.shadow} (결함이 아니라 ‘지켜내려는 방식’일 수 있어요)`;
+      const line3 = `- 몸/마음 힌트: ${sense} / ${emo} → 사실은 ${need}을(를) 찾는 중일 수 있어요.`;
+      const line4 = kw ? `- 키워드: ${kw}` : "";
+      const line5 = `- 내 기준 질문: 이 색을 보면 떠오르는 장면/사람/기억 1개는?`;
+      return [head, why, line1, line2, line3, line4, line5].filter(Boolean).join("\n");
+    }
+
+
+    function psyExplainShort(card){
+      const colorName = koColorName(card);
+      const base = basePsy(card);
+      const tone = toneNote(card);
+      return `${card.name}(${colorName}) — ${base.core}${tone ? " / " + tone : ""}`;
+    }
+
+    function blendExplain(cards){
+      const em = uniq(cards.flatMap(c => c?.emotion || [])).slice(0,4);
+      const nd = uniq(cards.flatMap(c => c?.need || [])).slice(0,4);
+      const cs = cards.map(c=>koColorName(c)).join(" + ");
+      const emTxt = em.length ? em.join(" · ") : "여러 감정";
+      const ndTxt = nd.length ? nd.join(" · ") : "무엇인가 필요한 마음";
+      const tri = triadSummary(cards);
+      return `세 색(${cs})이 한꺼번에 말하는 건, 지금 내 안에 ${emTxt}가 섞여 있고, 그래서 ${ndTxt}이(가) 필요하다는 사실이에요.
+
+세 색의 ‘느낌 요약’(온도·밝기·선명도):
+${tri}`;
+    }
+
+
+    function interpret(){
+      if(!has3()){
+        toast("카드 3장을 모두 선택해 주세요");
+        return;
+      }
+      if(!uniqueOk()){
+        toast("같은 카드는 한 번만 선택해 주세요");
+        return;
+      }
+
+      const d = buildData();
+      const [c1,c2,c3] = d.cards;
+
+      const titleLine = `세 장: ${c1.name} · ${c2.name} · ${c3.name}`;
+
+      const psy =
+        `색은 마음의 ‘알림음’ 같아요. 말이 늦을 때, 색이 먼저 몸에 신호를 보냅니다.
+심리학에서는 색을 대체로 세 층으로 바라봐요.
+- 1) 몸의 속도: 각성 ↔ 진정
+- 2) 기억의 연상: 경험·문화·취향
+- 3) 상징의 언어: 말로 못한 마음의 표정
+그래서 아래 해설은 정답이 아니라, ‘현재를 읽는 가설’이에요.
+
+` +
+        `① ${psyExplainLong(c1)}
+
+` +
+        `② ${psyExplainLong(c2)}
+
+` +
+        `③ ${psyExplainLong(c3)}
+
+` +
+        `세 색을 합치면: ${blendExplain([c1,c2,c3])}`;
+
+      const scene =
+        `지금 당신의 몸은 ${d.SENSE} 쪽으로 기울어 있습니다.\n`+
+        `마음의 색은 ${d.EMO}.\n`+
+        `당신이 지키고 싶은 것은 ${d.NEED}.`;
+
+      const mind =
+        `생각은 가끔, 빨리 결론을 내리려고 합니다.\n`+
+        `오늘의 습관은 ‘${d.TAG}’.\n`+
+        `그 습관이 켜질수록, 사실보다 해석이 먼저 앞서갑니다.`;
+
+      const language =
+        `마음속에는 이런 말이 반복될 수 있어요.\n`+
+        `“${d.INNER}”\n`+
+        `그리고 관계에서는 이런 말이 튀어나오기도 합니다.\n`+
+        `“${d.OUTER}”\n`+
+        `— 말이 먼저 달릴 때, 마음은 뒤에서 헐떡입니다.`;
+
+      const action =
+        `딱 10분이면 충분합니다.\n`+
+        `${d.ACTION}`;
+
+      const questions =
+        `• ${d.Q1}\n`+
+        `• ${d.Q2}\n\n`+
+        `기록(한 줄): ${d.JOURNAL}`;
+
+      const con = d.concern;
+      const conText = concernBlockText(d, con);
+      const conBlock = conText ? block("내 고민에 붙여보기", conText) : "";
+
+      const html =
+        block("오늘의 카드", titleLine) +
+        conBlock +
+        block("색채심리 근거(직관)", psy) +
+        blockHtml("심리학에서는 이렇게 말해요", dynExplain(d)) +
+        block("지금의 풍경", scene) +
+        block("생각의 결", mind) +
+        block("말의 모양", language) +
+        block("현재를 붙잡는 한 문장", d.REFRAME) +
+        block("작은 행동", action) +
+        block("질문 · 기록", questions);
+
+      $("#resultArea").innerHTML = html;
+
+      // UX: 결과로 이동
+      try{ $("#resultArea").scrollIntoView({ behavior: "smooth", block: "start" }); }catch(e){}
+
+      lastResultText = buildShareText(d);
+      lastData = d;
+      // 새 해설이 생기면 편지는 다시 만들 수 있게 초기화
+      lastLetterText = "";
+      renderLetterPlaceholder();
+      renderCompletions();
+      updateCombinedText();
+
+      updateProgressUI();
+      updateButtons();
+      toast("해설 완료");
+    }
+
+    function buildShareText(d){
+      const [c1,c2,c3] = d.cards;
+      return [
+        `【색채심리 코칭 · 현재 알아차림】`,
+        `시간: ${d.when}`,        d.concern && d.concern.id ? `고민(선택): ${d.concern.label}` : `고민(선택): 없음`,        ``,
+        `카드(3장):`,
+        `1) ${c1.name} (${c1.id})`,
+        `2) ${c2.name} (${c2.id})`,
+        `3) ${c3.name} (${c3.id})`,
+        ``,
+        `색채심리 근거(한 줄):`,
+        `- 1) ${psyExplainShort(c1)}`,
+        `- 2) ${psyExplainShort(c2)}`,
+        `- 3) ${psyExplainShort(c3)}`,
+        ``,
+        `심리학에서는 이렇게 말해요(가설):`,
+        `${dynSummaryText(d)}`,
+        ``,
+        `지금의 풍경:`,
+        `- 몸: ${d.SENSE}`,
+        `- 마음: ${d.EMO}`,
+        `- 바람: ${d.NEED}`,
+        ``,
+        `생각의 결: ${d.TAG}`,
+        `말의 모양:`,
+        `- 내면: ${d.INNER}`,
+        `- 관계: ${d.OUTER}`,
+        ``,
+        `현재를 붙잡는 한 문장:`,
+        d.REFRAME,
+        ``,
+        `작은 행동(10분): ${d.ACTION}`,
+        ``,
+        `질문:`,
+        `- ${d.Q1}`,
+        `- ${d.Q2}`,
+        ``,
+        `기록: ${d.JOURNAL}`
+      ].join("\n");
+    }
+
+/***********************
+     * Sentence completion + letter (participant)
+     * - relationship-centered prompts
+     * - TA 용어/라벨을 직접 노출하지 않습니다.
+     ***********************/
+    const SET_LABEL = {
+      career:"커리어/일",
+      anxiety:"불안",
+      burnout:"번아웃/회복",
+      compare:"비교/자존감",
+      relationship:"관계/소통",
+      love:"연애 반복 패턴",
+      money:"돈/안전감",
+      boundary:"경계/거절",
+      perfection:"완벽주의/통제",
+      procrastination:"미루기/집중",
+      loneliness:"외로움/연결",
+      identity:"정체성/의미"
+    };
+
+    const COMPLETION_SETS = {
+      career:[
+        "요즘 내 일 앞에서 나는 ____이(가) 가장 두렵다.",
+        "내가 계속 망설이는 선택은 사실 ____을(를) 지키려는 것이다.",
+        "내가 진짜 원하는 방향은 ____ 쪽이다.",
+        "누군가 나를 ‘괜찮다’고 말해준다면 나는 ____을(를) 듣고 싶다.",
+        "이번 주 나는 ____을(를) 아주 작게 실험해볼 수 있다."
+      ],
+      anxiety:[
+        "불안이 올라올 때 내 머리는 ____을(를) 계속 상상한다.",
+        "그 상상을 멈추지 못하는 이유는 ____이(가) 필요해서다.",
+        "사실 내가 지금 확실히 아는 건 ____이다.",
+        "지금 나에게 필요한 안심의 말은 ____이다.",
+        "오늘 내가 할 수 있는 작은 확인은 ____이다."
+      ],
+      burnout:[
+        "내 몸이 지금 보내는 신호는 ____이다.",
+        "나는 요즘 ____에서 가장 많이 소진된다.",
+        "회복을 위해 나는 ____을(를) 잠깐 내려놓아도 된다.",
+        "나를 살리는 작은 리듬은 ____이다.",
+        "오늘 10분 동안 나는 ____만 해도 충분하다."
+      ],
+      compare:[
+        "내가 비교하는 대상은 사실 ____을(를) 상징한다.",
+        "비교한 뒤 내 마음에 남는 감정은 ____이다.",
+        "나는 나의 속도를 ____처럼 다루고 있다.",
+        "내가 진짜로 인정받고 싶은 부분은 ____이다.",
+        "오늘은 ____을(를) 내 기준으로 삼겠다."
+      ],
+      relationship:[
+        "내가 상대에게 말하고 싶었지만 삼킨 문장은 ‘____’이다.",
+        "그 말 뒤에 숨은 내 마음은 ____이다.",
+        "내가 관계에서 지키고 싶은 경계는 ____이다.",
+        "내가 진짜 원하는 반응은 ____이다.",
+        "다음 대화에서 나는 이렇게 말해볼 수 있다: ____"
+      ],
+      love:[
+        "나는 연애에서 자주 ____이(가) 되곤 한다.",
+        "그때 내 마음은 ____을(를) 확인하려 한다.",
+        "내가 반복하는 반응은 결국 ____을(를) 피하려는 것이다.",
+        "내가 정말 원하는 사랑의 방식은 ____이다.",
+        "이번에는 ____을(를) 다르게 해볼 수 있다."
+      ],
+      money:[
+        "돈을 생각하면 내 마음에 가장 먼저 떠오르는 건 ____이다.",
+        "내가 ‘안전하다’고 느끼는 기준은 ____이다.",
+        "나는 돈을 통해 사실 ____을(를) 얻고 싶다.",
+        "지금 나에게 필요한 현실적인 한 걸음은 ____이다.",
+        "이번 달 나는 ____을(를) 한 번만 더 의식해보겠다."
+      ],
+      boundary:[
+        "나는 ‘싫다’고 말할 때 ____이(가) 가장 걱정된다.",
+        "그래서 나는 ____을(를) 대신 떠안는다.",
+        "사실 내 책임은 ____까지다.",
+        "내가 지키고 싶은 나의 선은 ____이다.",
+        "오늘 나는 ‘지금은 ____은/는 어렵습니다’라고 말해볼 수 있다."
+      ],
+      perfection:[
+        "나는 ____이(가) 완벽해야 안심한다.",
+        "그 기준은 ____에게서 배웠다(혹은 닮았다).",
+        "70점이어도 괜찮은 부분은 ____이다.",
+        "지금 내게 필요한 건 완벽이 아니라 ____이다.",
+        "오늘 나는 ____을(를) ‘충분히’로 끝내겠다."
+      ],
+      procrastination:[
+        "내가 미루는 일은 사실 ____을(를) 건드린다.",
+        "시작이 어려운 이유는 ____이(가) 부담이라서다.",
+        "나는 지금 ____을(를) 피하고 있다.",
+        "가장 작은 시작 동작은 ____이다.",
+        "오늘 10분만 한다면 ____까지 해볼 수 있다."
+      ],
+      loneliness:[
+        "외로움이 올라올 때 나는 ____을(를) 가장 원한다.",
+        "요즘 내가 진짜 듣고 싶은 말은 ____이다.",
+        "나는 사람들과 함께 있어도 ____을(를) 숨긴다.",
+        "나를 편하게 만드는 연결은 ____이다.",
+        "오늘 나는 ____에게 안부를 건네볼 수 있다."
+      ],
+      identity:[
+        "요즘 ‘나’라는 느낌이 ____처럼 흐릿하다.",
+        "그럼에도 내가 놓치고 싶지 않은 가치는 ____이다.",
+        "내 안의 오래된 목소리는 나에게 ____라고 말한다.",
+        "지금 나를 살리는 작은 의미는 ____이다.",
+        "앞으로 7일 동안 나는 ____을(를) 기준으로 살아보고 싶다."
+      ]
+    };
+
+    const LENS_PARAS = {
+      career: "요즘의 너는 ‘능력’보다 ‘정체성’이 먼저 흔들릴 수 있어.\n무엇을 하느냐보다, 어떤 마음으로 일하고 싶었는지가 다시 묻히는 시기니까.",
+      anxiety: "불안은 미래의 문제가 아니라, 현재의 숨이 흔들릴 때 커지곤 해.\n그래서 해답보다 먼저, ‘지금 내가 무엇을 두려워하는지’가 밝혀져야 해.",
+      burnout: "회복은 의지의 문제가 아니라, 리듬의 문제야.\n몸이 먼저 보내는 신호를 무시할수록 마음은 더 큰 소리로 울리거든.",
+      compare: "비교는 나를 채찍질하지만, 나를 살리진 못해.\n그럼에도 비교가 멈추지 않는 건, 네 안에 ‘인정받고 싶은 자리’가 남아있어서야.",
+      relationship: "관계는 말보다 숨에서 먼저 티가 나.\n내가 무엇을 원하고, 무엇을 지키고 싶은지가 분명해질수록 대화는 덜 꼬여.",
+      love: "반복되는 연애 장면이 있다면, 그것은 운명보다 ‘반응의 습관’일 수 있어.\n같은 마음으로 다른 결말을 바라기는 어렵지.",
+      money: "돈은 종종 숫자보다 ‘안전감’의 문제로 다가와.\n그래서 계획을 세우기 전에, 내 안의 불안을 먼저 이름 붙이는 게 도움이 돼.",
+      boundary: "좋은 사람이 되고 싶은 마음이, 나를 묶는 날이 있어.\n경계는 차가움이 아니라, 관계를 오래 살리는 ‘선’이기도 해.",
+      perfection: "완벽은 불안을 잠깐 잠재우지만, 삶을 숨 막히게 만들기도 해.\n지금 필요한 건 100점이 아니라, ‘멈출 줄 아는 충분함’일 수 있어.",
+      procrastination: "미루기는 게으름이라기보다 부담의 신호일 때가 많아.\n시작을 1%로 줄이면, 마음은 생각보다 쉽게 움직이기도 해.",
+      loneliness: "외로움은 ‘사람의 수’가 아니라 ‘연결의 질감’에서 자라거나 사라져.\n오늘은 한 사람에게, 한 문장만 건네도 충분할 수 있어.",
+      identity: "방향을 잃는 건, 방향을 다시 고르는 시간일 수 있어.\n큰 결론 대신 작은 기준 하나를 잡는 날, 길은 다시 생겨나.",
+    };
+
+    function completionSetIdFromConcern(){
+      const cid = ($("#concernSel")?.value || "");
+      if(!cid) return "identity";
+      switch(cid){
+        case "career":
+        case "freelance": return "career";
+        case "money": return "money";
+        case "compare": return "compare";
+        case "burnout":
+        case "health": return "burnout";
+        case "anxiety": return "anxiety";
+        case "procrastination": return "procrastination";
+        case "loneliness": return "loneliness";
+        case "love": return "love";
+        case "relationship":
+        case "communication": return "relationship";
+        case "family": return "boundary";
+        case "study": return "perfection";
+        case "direction":
+        case "purpose": return "identity";
+        default: return "identity";
+      }
+    }
+
+    function renderLetterPlaceholder(){
+      const wrap = $("#letterArea");
+      if(!wrap) return;
+      wrap.innerHTML = `<div class="block"><p style="color:var(--muted)">문장을 몇 개 적고 <b>내가 나에게 쓰는 편지</b>를 눌러보세요.</p></div>`;
+    }
+
+    function renderCompletions(){
+      const list = $("#completionList");
+      if(!list) return;
+
+      const setId = completionSetIdFromConcern();
+      const prompts = (COMPLETION_SETS[setId] || COMPLETION_SETS.identity).slice();
+      lastCompletionPrompts = prompts;
+
+      list.innerHTML = prompts.map((p,i)=>{
+        const safe = escapeHtml(p);
+        const promptHtml = safe.replace("____", `<span class="blank">____</span>`);
+        return `
+          <div class="completionItem">
+            <div class="completionPrompt">${i+1}) ${promptHtml}</div>
+            <div class="completionInput"><textarea rows="2" data-idx="${i}" placeholder="____ 부분을 채워보세요(짧게)"></textarea></div>
+            <div class="completionHint">* 막히면 단어 하나만 적어도 괜찮아요.</div>
+          </div>
+        `;
+      }).join("");
+
+      // restore values + bind
+      $$("#completionList textarea").forEach(ta=>{
+        const idx = Number(ta.dataset.idx||"0");
+        ta.value = completionAnswers[idx] || "";
+        ta.addEventListener("input", ()=>{
+          completionAnswers[idx] = ta.value;
+          // 편지는 입력이 바뀌면 다시 만드는 게 안전
+          lastLetterText = "";
+          renderLetterPlaceholder();
+          updateCompletionButtons();
+          updateCombinedText();
+        });
+      });
+
+      updateCompletionButtons();
+      updateCombinedText();
+    }
+
+    function buildCompletionText(){
+      const setId = completionSetIdFromConcern();
+      const title = `【관계 문장완성 5 · ${SET_LABEL[setId] || ""}】`;
+      const prompts = (lastCompletionPrompts && lastCompletionPrompts.length)
+        ? lastCompletionPrompts
+        : (COMPLETION_SETS[setId] || COMPLETION_SETS.identity);
+      const lines = [title];
+      for(let i=0;i<5;i++){
+        const p = prompts[i] || "";
+        const a = (completionAnswers[i]||"").trim();
+        const filled = a ? p.replace("____", a) : p;
+        lines.push(`${i+1}) ${filled}`);
+      }
+      return lines.join("\n");
+    }
+
+    function buildCombinedText(){
+      const parts = [];
+      if(lastResultText) parts.push(lastResultText);
+
+      const anyAns = completionAnswers.some(a=>a.trim().length>0);
+      if(anyAns || lastLetterText){
+        parts.push("");
+        parts.push(buildCompletionText());
+      }
+
+      if(lastLetterText){
+        parts.push("");
+        parts.push("【내가 나에게 쓰는 편지】");
+        parts.push(lastLetterText);
+      }
+
+      return parts.join("\n").trim();
+    }
+
+    function updateCombinedText(){
+      lastCombinedText = buildCombinedText();
+      const btn = $("#btnCopyAll");
+      if(btn) btn.disabled = !lastCombinedText;
+    }
+
+    function updateCompletionButtons(){
+      const any = completionAnswers.some(a=>a.trim().length>0);
+      const btn = $("#btnBuildLetter");
+      if(btn) btn.disabled = !any;
+      const copy = $("#btnCopyAll");
+      if(copy) copy.disabled = !buildCombinedText();
+    }
+
+    function pickClosingLine(d, filledLines){
+      const x = (filledLines||[]).find(s=>s && s.trim().length>0);
+      if(x) return x.replace(/\s+/g," ").trim();
+      return `나는 지금 ${d.NEED}을(를) 소중히 여긴다.`;
+    }
+
+    function makeLetter(d){
+      const setId = completionSetIdFromConcern();
+      const lens = LENS_PARAS[setId] || LENS_PARAS.identity;
+      const prompts = (lastCompletionPrompts && lastCompletionPrompts.length)
+        ? lastCompletionPrompts
+        : (COMPLETION_SETS[setId] || COMPLETION_SETS.identity);
+
+      const filledLines = [];
+      for(let i=0;i<5;i++){
+        const a = (completionAnswers[i]||"").trim();
+        if(!a) continue;
+        filledLines.push(prompts[i].replace("____", a));
+      }
+      if(filledLines.length == 0){
+        filledLines.push(`지금 내 마음은 ${d.EMO} 쪽으로 기울어 있다.`);
+        filledLines.push(`나는 나에게 ${d.NEED}이(가) 필요하다.`);
+      }
+
+      const cardsLine = d.cards.map(c=>c.name).join(" · ");
+      const close = pickClosingLine(d, filledLines);
+
+      return [
+        "나에게,",
+        "",
+        `오늘 뽑은 세 가지 색은 ${cardsLine}였어.`,
+        "색은 말을 하지 않지만, 마음의 방향을 은근히 가리키지.",
+        "",
+        lens,
+        "",
+        "내가 채운 문장들:",
+        ...filledLines.map(x=>"- "+x),
+        "",
+        "심리학에서는 이렇게 말해요.",
+        "우리는 관계 속에서 배운 말투와 시선을 마음속에 들여놓고 살아요.",
+        "그래서 어떤 날은 ‘지금의 나’보다 ‘예전의 목소리’가 먼저 나를 부르기도 해요.",
+        "하지만 나는 오늘, 그 목소리 옆에 새로운 문장을 하나 더 둘 수 있어.",
+        "",
+        "현재를 붙잡는 한 문장:",
+        d.REFRAME,
+        "",
+        `10분이면 충분해. ${d.ACTION}`,
+        "",
+        "마지막으로, 오늘의 나는 나에게 이렇게 말해주고 싶어.",
+        `“${close}”`
+      ].join("\n");
+    }
+
+    function buildLetter(){
+      if(!(picked.c1 && picked.c2 && picked.c3)){
+        toast("먼저 카드 3장을 선택하세요");
+        return;
+      }
+      const d = (lastData && lastData.cards) ? lastData : buildData();
+      lastData = d;
+      const letter = makeLetter(d);
+      lastLetterText = letter;
+
+      const wrap = $("#letterArea");
+      if(wrap){
+        wrap.innerHTML = blockHtml("내가 나에게 쓰는 편지", `<div class="prelike">${escapeHtml(letter).replace(/\n/g,"<br/>")}</div>`);
+      }
+
+      updateCombinedText();
+      updateCompletionButtons();
+      try{ $("#letterArea").scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){}
+      toast("편지 완성");
+    }
+
+
+    async function copyText(){
+      updateCombinedText();
+      if(!lastCombinedText){ toast("먼저 해설을 생성하거나 문장을 적어주세요"); return; }
+      try{
+        await navigator.clipboard.writeText(lastCombinedText);
+        toast("복사됨");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = lastCombinedText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        toast("복사됨");
+      }
+    }
+
+    async function shareText(){
+      updateCombinedText();
+      if(!lastCombinedText){ toast("먼저 해설을 생성하거나 문장을 적어주세요"); return; }
+      if(navigator.share){
+        try{
+          await navigator.share({ text: lastCombinedText });
+          toast("공유 열림");
+        }catch(e){
+          toast("공유 취소/실패");
+        }
+      }else{
+        await copyText();
+        toast("공유 미지원: 복사로 대체");
+      }
+    }
+    function init(){
+      loadTheme();
+
+      populateConcerns();
+      buildConcernChips();
+      updateConcernPickedText();
+
+      // 고민: 선택/더보기/해제
+      $("#concernSel").addEventListener("change", ()=>{
+        syncConcernChips();
+        lastResultText = "";
+        updateProgressUI();
+        lastLetterText = "";
+        completionAnswers = ["","","","",""];
+        renderLetterPlaceholder();
+        renderCompletions();
+        updateCombinedText();
+      });
+      const moreBtn = $("#btnMoreConcerns");
+      if(moreBtn) moreBtn.addEventListener('click', toggleMoreConcerns);
+      const clrBtn = $("#btnClearConcern");
+      if(clrBtn) clrBtn.addEventListener('click', clearConcern);
+
+      // 타일 오픈/비우기
+      $$('[data-open-slot]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const n = btn.getAttribute('data-open-slot');
+          openSheet(Number(n));
+        });
+      });
+      $$('[data-clear-slot]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const n = btn.getAttribute('data-clear-slot');
+          setSlot(Number(n), '');
+          toast('카드 선택 해제');
+        });
+      });
+
+      // 검색(옵션)
+      setupSearch();
+      setupSheet();
+
+      // 상단 버튼들
+      $("#btnTheme").addEventListener("click", toggleTheme);
+      $("#btnReset").addEventListener("click", ()=>resetAll(false));
+      $("#btnInterpret").addEventListener("click", interpret);
+      $("#btnCopy").addEventListener("click", copyText);
+      $("#btnShare").addEventListener("click", shareText);
+
+      // 문장완성/편지
+      const b1 = $("#btnBuildLetter");
+      if(b1) b1.addEventListener("click", buildLetter);
+      const b2 = $("#btnCopyAll");
+      if(b2) b2.addEventListener("click", copyText);
+
+      renderLetterPlaceholder();
+      renderCompletions();
+
+      // 하단 스티키 버튼들
+      $("#stickyInterpret").addEventListener("click", interpret);
+      $("#stickyCopy").addEventListener("click", copyText);
+      $("#stickyShare").addEventListener("click", shareText);
+
+      // 초기화(무토스트)
+      resetAll(true);
+    }
+
+    init();
+  </script>
+</body>
+</html>
+
