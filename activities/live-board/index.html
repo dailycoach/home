@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="refresh" content="0; url=https://dailycoach.github.io/live-board/" />
+  <title>라이브보드로 이동</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #1f2a24;
+      background: #f4f7f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      text-align: center;
+    }
+    main {
+      width: min(520px, 100%);
+      padding: 32px;
+      border: 1px solid #dbe4dd;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 22px 70px rgba(28, 41, 33, .14);
+    }
+    h1 { margin: 0; font-size: 30px; line-height: 1.2; }
+    p { margin: 14px 0 0; color: #6d756e; line-height: 1.6; }
+    a {
+      display: inline-flex;
+      justify-content: center;
+      margin-top: 22px;
+      padding: 13px 18px;
+      border-radius: 8px;
+      color: #fff;
+      background: #214c3a;
+      font-weight: 850;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>라이브보드로 이동합니다</h1>
+    <p>자동으로 이동하지 않으면 아래 버튼을 눌러주세요.</p>
+    <a href="https://dailycoach.github.io/live-board/">라이브보드 열기</a>
+  </main>
+  <script>
+    window.location.replace("https://dailycoach.github.io/live-board/");
+  </script>
+</body>
+</html>
