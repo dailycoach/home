@@ -117,5 +117,12 @@
     "category": "activities",
     "url": "/activities/wilderness-survival/",
     "source": "local import"
+  },
+  {
+    "title": "라이브보드",
+    "description": "강의·코칭·워크숍 참여 응답을 실시간으로 모으는 라이브보드",
+    "category": "activities",
+    "url": "/activities/live-board/",
+    "source": "https://github.com/dailycoach/live-board"
   }
 ]
