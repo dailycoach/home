@@ -9,22 +9,20 @@
   <link rel="preconnect" href="https://ddaycoach.wordpress.com" crossorigin />
   <link rel="dns-prefetch" href="//ddaycoach.wordpress.com" />
 
-  <!-- RESPONSIVE IMAGE SLOT coachIntro: 긴 이미지는 모바일, 와이드 이미지는 PC 전환용 대표 이미지 -->
+  <!-- IMAGE SLOT coachIntro: 단일 대표 이미지 -->
   <link
     rel="preload"
     as="image"
-    href="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png"
-    imagesrcset="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-1.png 767w, https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png 1440w"
-    imagesizes="100vw"
+    href="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4ed9b84-03_00_21.png"
     fetchpriority="high"
   />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="코치소개 | DAILYCOACHING" />
   <meta property="og:description" content="문제보다 존재를 먼저 보는 데일리코칭의 코치소개 페이지입니다." />
-  <meta property="og:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png" />
+  <meta property="og:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4ed9b84-03_00_21.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png" />
+  <meta name="twitter:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4ed9b84-03_00_21.png" />
 
   <style>
     :root {
@@ -125,14 +123,10 @@
       background: var(--ivory);
     }
 
-    .coach-picture,
-    .coach-picture img {
+    .coach-image {
       width: 100%;
-      display: block;
-    }
-
-    .coach-picture img {
       height: auto;
+      display: block;
       object-fit: contain;
       object-position: top center;
       filter: saturate(.98) contrast(1.02);
@@ -231,26 +225,15 @@
   </header>
 
   <main class="coach-page">
-    <!-- RESPONSIVE IMAGE SLOT coachIntro: 모바일=긴 버전, PC=와이드 버전으로 1장만 출력 -->
+    <!-- IMAGE SLOT coachIntro: 단일 대표 이미지 -->
     <section class="coach-responsive-section" aria-label="데일리코칭 코치소개 이미지">
-      <picture class="coach-picture">
-        <!-- mobile image -->
-        <source
-          media="(max-width: 767px)"
-          srcset="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-1.png"
-        />
-        <!-- pc/tablet image -->
-        <source
-          media="(min-width: 768px)"
-          srcset="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png"
-        />
-        <img
-          src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png"
-          alt="데일리코칭 코치소개 이미지"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </picture>
+      <img
+        class="coach-image"
+        src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4ed9b84-03_00_21.png"
+        alt="데일리코칭 코치소개 이미지"
+        fetchpriority="high"
+        decoding="async"
+      />
     </section>
   </main>
 
@@ -275,8 +258,7 @@
 
   <script>
     const DAILYCOACHING_IMAGES = Object.freeze({
-      coachIntroDesktop: 'https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-2.png',
-      coachIntroMobile: 'https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-09_46_27-1.png'
+      coachIntro: 'https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4ed9b84-03_00_21.png'
     });
     const DAILYCOACHING_ROUTES = Object.freeze({
       home: '/',
