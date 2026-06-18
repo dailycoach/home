@@ -1,17 +1,17 @@
 [
   {
     "title": "기업소개",
-    "description": "데일리코칭의 철학과 서비스 구조를 소개하는 페이지",
+    "description": "데일리코칭의 철학과 서비스 이미지를 전체 화면으로 소개하는 기업소개 페이지",
     "category": "brand",
     "url": "/company/",
-    "source": "local placeholder"
+    "source": "local import"
   },
   {
     "title": "코치소개",
-    "description": "코치 프로필과 코칭 방식을 소개하는 페이지",
+    "description": "김철웅 코치와 데일리코칭의 코칭 철학, 경력, 활동을 소개하는 페이지",
     "category": "brand",
     "url": "/coach/",
-    "source": "local placeholder"
+    "source": "local import"
   },
   {
     "title": "LCMS",
