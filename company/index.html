@@ -4,85 +4,223 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>기업소개 | DAILYCOACHING</title>
+  <meta name="description" content="데일리코칭은 문제보다 존재를 먼저 보고, 깊이 듣고 정리하며 삶의 방향을 함께 세우는 코칭 스튜디오입니다." />
+  <meta name="theme-color" content="#061528" />
+  <link rel="preconnect" href="https://ddaycoach.wordpress.com" crossorigin />
+  <link rel="dns-prefetch" href="//ddaycoach.wordpress.com" />
+  <link rel="preload" as="image" href="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-06_12_52.png" fetchpriority="high" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="기업소개 | DAILYCOACHING" />
+  <meta property="og:description" content="조용히 듣고, 깊게 정리하며, 사람의 다음 성장지점을 함께 찾는 데일리코칭입니다." />
+  <meta property="og:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-06_12_52.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-06_12_52.png" />
+
   <style>
     :root {
-      --bg: #f7f4ee;
-      --ink: #152033;
-      --muted: rgba(21, 32, 51, .68);
-      --line: rgba(21, 32, 51, .12);
-      --brand: #c49a57;
+      --navy-980: #031022;
+      --navy-950: #061528;
+      --navy-900: #071b33;
+      --ink: #111827;
+      --ivory: #fffaf2;
+      --cream: #f8f0e4;
+      --gold: #c49a57;
+      --gold-2: #e0c281;
+      --line-dark: rgba(12, 41, 74, .14);
+      --line-light: rgba(255, 255, 255, .18);
+      --header-h: 76px;
+      --max: 1180px;
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(circle at 16% 10%, rgba(196, 154, 87, .22), transparent 28%),
-        linear-gradient(140deg, #fffaf0 0%, var(--bg) 52%, #ecf2f8 100%);
+      background: var(--ivory);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      letter-spacing: -0.035em;
     }
-    main {
-      width: min(100% - 36px, 860px);
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--header-h);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: rgba(3, 16, 34, .74);
+      backdrop-filter: blur(18px);
+      color: #fff;
+    }
+    .header-inner {
+      width: min(var(--max), calc(100% - 40px));
+      height: 100%;
       margin: 0 auto;
-      padding: 72px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
-    .eyebrow {
-      margin: 0 0 14px;
-      color: var(--brand);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1rem, 1.5vw, 1.38rem);
+      font-weight: 700;
+      letter-spacing: .18em;
+      white-space: nowrap;
     }
-    h1 {
-      margin: 0;
-      font-size: clamp(2.3rem, 8vw, 5rem);
-      line-height: 1.05;
+    .brand::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .9;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .95rem;
+      font-weight: 700;
       letter-spacing: -.02em;
     }
-    p {
-      max-width: 620px;
-      margin: 24px 0 0;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 34px;
-    }
-    a {
+    .nav a {
+      min-height: 42px;
+      padding: 0 13px;
       display: inline-flex;
-      min-height: 46px;
       align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      border: 1px solid var(--line);
       border-radius: 999px;
-      color: inherit;
-      text-decoration: none;
-      font-weight: 800;
-      background: rgba(255, 255, 255, .56);
+      color: rgba(255,255,255,.82);
     }
-    a.primary {
-      border-color: transparent;
-      background: var(--ink);
+    .nav a:hover { background: rgba(255,255,255,.10); color: #fff; }
+    .nav .cta {
+      margin-left: 8px;
+      color: var(--navy-980);
+      background: linear-gradient(135deg, #efd38e, #c49148);
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 16px 34px rgba(3, 16, 34, .24);
+    }
+
+    .company-visual {
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(196,154,87,.10), transparent 34%),
+        linear-gradient(180deg, #061528 0%, #0b1d35 44%, #fffaf2 44%, #fffaf2 100%);
+      overflow: visible;
+      display: block;
+      padding: 0;
+    }
+
+    .company-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      object-position: top center;
+      filter: saturate(.98) contrast(1.02);
+    }
+
+    .footer {
+      background: var(--navy-950);
       color: #fff;
+      padding: 46px 0;
+    }
+    .footer-inner {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: rgba(255,255,255,.72);
+      font-size: .92rem;
+      font-weight: 700;
+    }
+    .footer strong {
+      display: block;
+      color: #fff;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: .2em;
+      margin-bottom: 8px;
+    }
+    .footer-links { display:flex; gap: 18px; flex-wrap:wrap; justify-content:flex-end; }
+    .footer-links a { color: rgba(255,255,255,.76); }
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 920px) {
+      .nav { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    @media (max-width: 540px) {
+      :root { --header-h: 66px; }
+      .header-inner { width: calc(100% - 28px); }
+      .brand { font-size: .92rem; letter-spacing: .14em; }
+      .brand::before { width: 22px; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <p class="eyebrow">DAILYCOACHING</p>
-    <h1>기업소개</h1>
-    <p>데일리코칭의 철학, 교육 서비스, 운영 구조를 담는 소개 페이지입니다. 현재는 메인 사이트 통합을 위해 경로를 먼저 열어두었습니다.</p>
-    <div class="actions">
-      <a class="primary" href="../">첫 화면으로</a>
-      <a href="../lcms/">LCMS 보기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="데일리코칭 홈으로 이동">DAILYCOACHING</a>
+      <nav class="nav" aria-label="기업소개 페이지 메뉴">
+        <a href="/company/" aria-current="page">기업소개</a>
+        <a href="/coach/">코치소개</a>
+        <a href="/tests/self/">검사도구</a>
+        <a href="/cards/talkcard180/">카드도구</a>
+        <a href="/lcms/">LCMS</a>
+        <a class="cta" href="https://smartstore.naver.com/nalbitcoaching" target="_blank" rel="noopener noreferrer">코칭 신청</a>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <!-- IMAGE SLOT companyIntroHero: WordPress 직접 URL 적용 / 이미지 전체 표시 -->
+    <section class="company-visual" aria-label="데일리코칭 기업소개 대표 이미지">
+      <img src="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-06_12_52.png" alt="데일리코칭 기업소개 대표 이미지" width="2400" height="1500" fetchpriority="high" decoding="async" />
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <strong>DAILYCOACHING</strong>
+        <span>© <span id="year">2026</span> DAILYCOACHING. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="/">홈</a>
+        <a href="/coach/">코치소개</a>
+        <a href="https://smartstore.naver.com/nalbitcoaching" target="_blank" rel="noopener noreferrer">스마트스토어 날빛코칭</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const DAILYCOACHING_IMAGES = Object.freeze({
+      companyIntroHero: 'https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-18ec9dbc-ec98a4eca084-06_12_52.png'
+    });
+    const DAILYCOACHING_ROUTES = Object.freeze({
+      home: '/',
+      companyIntro: '/company/',
+      coachIntro: '/coach/',
+      booking: 'https://smartstore.naver.com/nalbitcoaching',
+      lcms: '/lcms/',
+      talkcard180: '/cards/talkcard180/',
+      selfTest: '/tests/self/'
+    });
+    const year = document.querySelector('#year');
+    if (year) year.textContent = new Date().getFullYear();
+    window.DAILYCOACHING_IMAGES = DAILYCOACHING_IMAGES;
+    window.DAILYCOACHING_ROUTES = DAILYCOACHING_ROUTES;
+  </script>
 </body>
 </html>
