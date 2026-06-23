@@ -1,0 +1,77 @@
+name: Apply JLPT N2 menu link once
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-jlpt-menu-once.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Patch homepage menu
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          changed = False
+
+          replacements = [
+              (
+                  '<a class="nav-link" href="/lcms/" data-route="lcms">LCMS</a>',
+                  '<a class="nav-link" href="/lcms/" data-route="lcms">LCMS</a>\n        <a class="nav-link" href="/jlpt-n2/" data-route="jlptN2">JLPT N2</a>',
+              ),
+              (
+                  '<a href="/lcms/" data-route="lcms">LCMS 진로교육 인프라 <small>→</small></a>',
+                  '<a href="/lcms/" data-route="lcms">LCMS 진로교육 인프라 <small>→</small></a>\n          <a href="/jlpt-n2/" data-route="jlptN2">JLPT N2 모바일 단어장 <small>→</small></a>',
+              ),
+              (
+                  '<a href="/lcms/" data-route="lcms">LCMS</a>',
+                  '<a href="/lcms/" data-route="lcms">LCMS</a>\n          <a href="/jlpt-n2/" data-route="jlptN2">JLPT N2</a>',
+              ),
+              (
+                  "      lcms: '/lcms/',",
+                  "      lcms: '/lcms/',\n      jlptN2: '/jlpt-n2/',",
+              ),
+          ]
+
+          for old, new in replacements:
+              if new in text:
+                  continue
+              if old not in text:
+                  raise SystemExit(f'Missing expected anchor: {old}')
+              text = text.replace(old, new, 1)
+              changed = True
+
+          if changed:
+              path.write_text(text, encoding='utf-8')
+
+          workflow = Path('.github/workflows/apply-jlpt-menu-once.yml')
+          if workflow.exists():
+              workflow.unlink()
+              changed = True
+
+          if not changed:
+              print('No menu changes needed.')
+          PY
+
+      - name: Commit patched menu
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/apply-jlpt-menu-once.yml
+          git commit -m "Add JLPT N2 link to homepage menu"
+          git push
