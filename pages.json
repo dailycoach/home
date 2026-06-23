@@ -21,13 +21,6 @@
     "source": "https://github.com/dailycoach/LCMS"
   },
   {
-    "title": "JLPT N2 모바일 단어장",
-    "description": "브라우저에서 바로 쓰는 JLPT N2 단어 카드·객관식·입력 퀴즈",
-    "category": "education",
-    "url": "/jlpt-n2/",
-    "source": "local import"
-  },
-  {
     "title": "킹덤대화카드",
     "description": "코칭 대화를 바로 시작하도록 돕는 KINGDOM 7단계 초대카드",
     "category": "cards",
