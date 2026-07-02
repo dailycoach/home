@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KGM210 성장코칭 도구 · 목록형 v2.1</title>
+  <title>KGM210 성장검사 · 고객화면 정리 v2.7</title>
   <style>
 :root{--bg:#090d16;--card:rgba(18,25,42,.82);--ink:#f7f1e6;--muted:#bdb5a8;--line:rgba(255,255,255,.12);--gold:#d9b665;--gold2:#a8732d;--soft:rgba(255,255,255,.06);--deep:#0e1424;--green:#9fd6b4;--blue:#98b9ff;--red:#e9a6a6}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#29324c 0,#101626 42%,#070a11 100%);color:var(--ink);word-break:keep-all}.ambient{position:fixed;border-radius:999px;filter:blur(50px);opacity:.28;pointer-events:none}.a1{width:360px;height:360px;background:#d9b665;top:-120px;right:-90px}.a2{width:300px;height:300px;background:#6177d8;bottom:-100px;left:-90px}.app{max-width:1120px;margin:0 auto;padding:22px;position:relative}.topbar{display:flex;align-items:center;gap:12px;padding:14px 0}.brandMark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:grid;place-items:center;color:#171107;font-weight:1000}.topbar b{display:block}.topbar span{display:block;color:var(--muted);font-size:12px}.topbar button{margin-left:auto}.hero{padding:8px 0 24px}.heroPanel{display:grid;grid-template-columns:1.45fr .75fr;gap:22px;align-items:stretch;padding:34px;border:1px solid var(--line);border-radius:34px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.025));box-shadow:0 24px 80px rgba(0,0,0,.28);overflow:hidden}.eyebrow{letter-spacing:.18em;color:var(--gold);font-size:12px;font-weight:900;text-transform:uppercase}.hero h1{font-size:54px;letter-spacing:-.04em;margin:8px 0 12px}.hero p{max-width:720px;color:var(--muted);line-height:1.75;font-size:17px}.heroActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.glassStats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.glassStats div,.card{background:var(--card);border:1px solid var(--line);backdrop-filter:blur(16px);box-shadow:0 20px 70px rgba(0,0,0,.24)}.glassStats div{border-radius:24px;padding:20px;display:flex;flex-direction:column;justify-content:center;min-height:112px}.glassStats strong{font-size:38px;color:var(--gold);letter-spacing:-.04em}.glassStats span{color:var(--muted)}.card{padding:30px;border-radius:28px;margin-bottom:22px}.hidden{display:none!important}.sectionHead,.testTop,.resultHead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.pill,.tag{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(217,182,101,.13);border:1px solid rgba(217,182,101,.28);color:#f2d798;font-size:12px;font-weight:800}.notice,.reportNotice{background:linear-gradient(135deg,rgba(217,182,101,.12),rgba(255,255,255,.04));border-left:4px solid var(--gold);padding:17px;border-radius:16px;line-height:1.75;color:#e5ded0}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.field{display:block;color:var(--muted);font-weight:700}input{width:100%;margin-top:8px;padding:15px 16px;background:rgba(5,8,16,.55);border:1px solid var(--line);border-radius:15px;color:var(--ink);font-size:16px;outline:none}input:focus{border-color:rgba(217,182,101,.7);box-shadow:0 0 0 4px rgba(217,182,101,.1)}.checkGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0;color:var(--muted)}.checkGrid label{background:rgba(255,255,255,.04);padding:12px;border-radius:14px;border:1px solid var(--line)}button{border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--ink);padding:13px 18px;border-radius:15px;font-weight:900;cursor:pointer;transition:.18s}button:hover{transform:translateY(-1px);border-color:rgba(217,182,101,.45)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#171107;border:0}.ghost{background:rgba(255,255,255,.04)}.big{padding:15px 22px}.wide{width:100%;font-size:17px}.progressBox{text-align:right}.progressBox b{display:block;font-size:26px;color:var(--gold)}.progressBox small{color:var(--muted)}.bar{height:12px;background:rgba(0,0,0,.25);border-radius:99px;overflow:hidden;margin:16px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:.25s}.domainStrip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:18px}.domainStrip button{padding:8px 6px;border-radius:11px;font-size:12px;color:var(--muted)}.domainStrip button.on{background:rgba(217,182,101,.18);color:var(--gold);border-color:rgba(217,182,101,.42)}.domainStrip button.done{color:var(--green)}.question{background:rgba(3,7,15,.38);border:1px solid var(--line);border-radius:24px;padding:28px}.meta{color:#f0d48c;font-weight:900;margin-bottom:12px}#qText{font-size:27px;line-height:1.55;margin:0 0 26px;letter-spacing:-.02em}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.scale button{min-height:92px;background:rgba(255,255,255,.055)}.scale button.active{outline:3px solid rgba(217,182,101,.9);background:rgba(217,182,101,.16);box-shadow:0 12px 30px rgba(0,0,0,.18)}.scale b{display:block;font-size:24px;color:var(--gold);margin-bottom:5px}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}.small{color:var(--muted);line-height:1.65}.resultActions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.resultGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch;margin:18px 0}canvas{width:100%;height:auto;background:rgba(3,7,15,.4);border:1px solid var(--line);border-radius:22px}.summary{display:grid;gap:12px}.summary div,.domainCard,.subScores>div,.coachQuestions>div,.narrative{background:rgba(3,7,15,.36);border:1px solid var(--line);border-radius:20px;padding:17px}.summary b,.subScores b,.coachQuestions b{display:block;color:var(--gold);margin-bottom:8px}.narrative{line-height:1.85;color:#e6dfd2}.domainCards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.domainCard h4{margin:0 0 8px;color:var(--gold);font-size:20px}.scoreLine{display:flex;align-items:center;gap:10px}.score{font-size:32px;font-weight:1000;letter-spacing:-.04em}.meter{height:9px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden;flex:1}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold))}.domainCard p{line-height:1.72}.subScores{display:grid;grid-template-columns:1fr 1fr;gap:12px;color:var(--muted)}.scoreRows{display:grid;gap:9px}.scoreRow{display:grid;grid-template-columns:100px 1fr 46px;gap:8px;align-items:center}.coachQuestions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:820px){.app{padding:14px}.heroPanel,.formGrid,.checkGrid,.resultGrid,.domainCards,.subScores,.coachQuestions{grid-template-columns:1fr}.hero h1{font-size:39px}.glassStats{grid-template-columns:1fr 1fr}.scale{grid-template-columns:1fr}#qText{font-size:21px}.sectionHead,.testTop,.resultHead{flex-direction:column}.progressBox{text-align:left}.domainStrip{grid-template-columns:repeat(2,1fr)}}@media print{body{background:white;color:#111}.ambient,.hero,#intro,#test,.nav,button{display:none!important}.app{max-width:none;padding:0}.card{box-shadow:none;border:0;background:white;padding:0}.reportNotice,.small,.domainCard,.summary div,.subScores>div,.coachQuestions>div,.narrative{color:#111;background:#fff;border:1px solid #ddd}.resultGrid{grid-template-columns:1fr}.domainCards{grid-template-columns:1fr 1fr}.eyebrow,.domainCard h4,.summary b{color:#7a581d}canvas{border:1px solid #ddd;background:white;max-height:420px;width:auto;max-width:100%}}
-.domainOverview{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:18px}.domainOverviewCard{min-height:118px;text-align:left;background:rgba(3,7,15,.34);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:7px}.domainOverviewCard span{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:.06em}.domainOverviewCard b{font-size:17px}.domainOverviewCard em{font-style:normal;color:var(--muted);font-size:12px}.domainOverviewCard i{display:block;height:7px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden;margin-top:auto}.domainOverviewCard u{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));text-decoration:none}.domainOverviewCard.on{border-color:rgba(217,182,101,.55);background:rgba(217,182,101,.11)}.domainOverviewCard.complete b,.domainOverviewCard.complete em{color:var(--green)}.domainGuide{padding:14px 16px;margin:0 0 14px;background:rgba(217,182,101,.09);border:1px solid rgba(217,182,101,.18);border-radius:16px;color:var(--muted);line-height:1.65}.domainGuide b{color:var(--gold)}.domainGuide span{font-size:13px}.domainStrip button{display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;pointer-events:none}.domainStrip button b{font-size:13px;color:var(--gold)}.domainStrip small{font-size:11px;color:inherit}.totalBar{height:6px;margin-top:-8px;opacity:.55}.domainBar:before{content:'현재 영역 진행률';position:absolute;transform:translateY(-18px);font-size:11px;color:var(--muted)}.bar{position:relative}.domainFinishScore{display:flex;align-items:center;gap:12px;margin-bottom:14px}.domainFinishScore b{font-size:44px;color:var(--gold);letter-spacing:-.04em}.domainCompleteCard{max-width:760px;margin-left:auto;margin-right:auto}@media(max-width:820px){.domainOverview{grid-template-columns:1fr 1fr}.domainOverviewCard{min-height:98px}}@media print{.domainOverview,.domainGuide,.domainCompleteCard,.totalBar{display:none!important}}
+.domainOverview{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:18px}.domainOverviewCard{min-height:118px;text-align:left;background:rgba(3,7,15,.34);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:7px}.domainOverviewCard span{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:.06em}.domainOverviewCard b{font-size:17px}.domainOverviewCard em{font-style:normal;color:var(--muted);font-size:12px}.domainOverviewCard i{display:block;height:7px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden;margin-top:auto}.domainOverviewCard u{display:block;height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));text-decoration:none}.domainOverviewCard.on{border-color:rgba(217,182,101,.55);background:rgba(217,182,101,.11)}.domainOverviewCard.complete b,.domainOverviewCard.complete em{color:var(--green)}.domainGuide{padding:14px 16px;margin:0 0 14px;background:rgba(217,182,101,.09);border:1px solid rgba(217,182,101,.18);border-radius:16px;color:var(--muted);line-height:1.65}.domainGuide b{color:var(--gold)}.domainGuide span{font-size:13px}.domainStrip button{display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;pointer-events:none}.domainStrip button b{font-size:13px;color:var(--gold)}.domainStrip small{font-size:11px;color:inherit}.totalBar{height:6px;margin-top:-8px;opacity:.55}.domainBar:before{content:'현재 문 진행률';position:absolute;transform:translateY(-18px);font-size:11px;color:var(--muted)}.bar{position:relative}.domainFinishScore{display:flex;align-items:center;gap:12px;margin-bottom:14px}.domainFinishScore b{font-size:44px;color:var(--gold);letter-spacing:-.04em}.domainCompleteCard{max-width:760px;margin-left:auto;margin-right:auto}@media(max-width:820px){.domainOverview{grid-template-columns:1fr 1fr}.domainOverviewCard{min-height:98px}}@media print{.domainOverview,.domainGuide,.domainCompleteCard,.totalBar{display:none!important}}
 .growthIdentity{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.growthIdentity>div{background:linear-gradient(135deg,rgba(217,182,101,.18),rgba(255,255,255,.04));border:1px solid rgba(217,182,101,.26);border-radius:22px;padding:20px}.growthIdentity span{display:block;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.08em}.growthIdentity b{display:block;font-size:32px;color:var(--gold);letter-spacing:-.04em;margin:5px 0}.growthIdentity em{font-style:normal;color:#e6dfd2;line-height:1.5}.growthMap{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:14px 0 20px}.mapNode{min-height:190px;position:relative;overflow:hidden;background:rgba(3,7,15,.36);border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;justify-content:flex-end}.mapNode strong{position:absolute;top:13px;left:14px;width:34px;height:34px;border-radius:12px;background:rgba(217,182,101,.14);display:grid;place-items:center;color:var(--gold);z-index:2}.mapNode b{font-size:19px;z-index:2}.mapNode span{color:var(--muted);z-index:2}.mapNode i{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(217,182,101,.45),rgba(217,182,101,.05));z-index:1}.mapNode.strength{border-color:rgba(159,214,180,.45)}.mapNode.priority{border-color:rgba(233,166,166,.45)}.reliabilityBox,.practitionerReport{margin-bottom:18px}.reliabilityBox .summary{grid-template-columns:1fr}.prGrid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:12px}.prGrid>div{background:rgba(3,7,15,.36);border:1px solid var(--line);border-radius:20px;padding:17px}.prGrid b{display:block;color:var(--gold);margin-bottom:8px}.prGrid p{color:var(--muted);line-height:1.55}.tag.priority{background:rgba(233,166,166,.13);border-color:rgba(233,166,166,.32);color:#f1b8b8}.tag.check{background:rgba(217,182,101,.13);border-color:rgba(217,182,101,.32);color:#f2d798}.tag.stable{background:rgba(152,185,255,.13);border-color:rgba(152,185,255,.32);color:#bdd0ff}.tag.strength{background:rgba(159,214,180,.13);border-color:rgba(159,214,180,.32);color:#b8e6c8}@media(max-width:820px){.growthIdentity,.growthMap,.prGrid{grid-template-columns:1fr}.mapNode{min-height:100px}}@media print{.growthIdentity>div,.mapNode,.prGrid>div{background:#fff;border:1px solid #ddd;color:#111}.growthIdentity b,.mapNode strong,.prGrid b{color:#7a581d}.growthMap{grid-template-columns:repeat(7,1fr)}.mapNode{min-height:120px}.mapNode i{background:#eee}.resultActions,#backToTestBtn,#resetBtn{display:none!important}}
 
 /* v2.3 coaching-tool update */
@@ -18,7 +18,7 @@
 .coachingWheelFlow{margin:14px 0 24px}.wheelShell{display:grid;grid-template-columns:430px 1fr;gap:18px;align-items:stretch}.wheelBoard{position:relative;min-height:430px;border:1px solid rgba(217,182,101,.24);border-radius:32px;background:radial-gradient(circle at center,rgba(217,182,101,.14),rgba(255,255,255,.035) 38%,rgba(3,7,15,.36) 72%);overflow:hidden}.wheelRing{position:absolute;inset:54px;border:1px dashed rgba(217,182,101,.32);border-radius:999px}.wheelRing:before,.wheelRing:after{content:"";position:absolute;inset:54px;border:1px solid rgba(255,255,255,.08);border-radius:999px}.wheelRing:after{inset:108px;border-style:dashed}.wheelNode{position:absolute;left:50%;top:50%;width:118px;min-height:86px;transform:rotate(var(--deg)) translate(154px) rotate(calc(-1 * var(--deg))) translate(-50%,-50%);border:1px solid var(--line);border-radius:18px;background:rgba(7,13,25,.88);padding:12px;text-align:center;box-shadow:0 16px 35px rgba(0,0,0,.18);overflow:hidden}.wheelNode:after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--pct);background:linear-gradient(0deg,rgba(217,182,101,.24),rgba(217,182,101,.04));z-index:0}.wheelNode b,.wheelNode span,.wheelNode em{position:relative;z-index:1}.wheelNode b{display:grid;place-items:center;margin:0 auto 6px;width:30px;height:30px;border-radius:11px;background:rgba(217,182,101,.16);color:var(--gold)}.wheelNode span{display:block;font-weight:900;font-size:13px}.wheelNode em{display:block;font-style:normal;color:var(--muted);font-size:11px;margin-top:4px}.wheelNode.strength{border-color:rgba(159,214,180,.45)}.wheelNode.priority{border-color:rgba(233,166,166,.42)}.wheelHub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:148px;height:148px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,rgba(217,182,101,.24),rgba(159,214,180,.12));border:1px solid rgba(217,182,101,.4);box-shadow:0 20px 50px rgba(0,0,0,.25)}.wheelHub small{color:var(--muted);font-weight:900;letter-spacing:.08em}.wheelHub b{color:var(--gold);font-size:24px;letter-spacing:-.04em;margin:5px 0}.wheelHub span{color:#e6dfd2}.wheelPanel{border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.045);padding:22px}.coachFlowTitle{margin-bottom:14px}.coachFlowTitle span{display:inline-block;color:var(--gold);font-size:12px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}.coachFlowTitle b{display:block;font-size:24px;letter-spacing:-.03em;line-height:1.25}.wheelSteps{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wheelSteps>div{position:relative;border:1px solid var(--line);border-radius:20px;padding:16px;background:rgba(3,7,15,.32);min-height:150px}.wheelSteps strong{display:grid;place-items:center;width:32px;height:32px;border-radius:12px;background:rgba(217,182,101,.16);color:var(--gold);margin-bottom:10px}.wheelSteps b{display:block;color:#fff;margin-bottom:6px}.wheelSteps p{margin:0;color:var(--muted);line-height:1.6}.wheelCoachCards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.wheelCoachCards>div{border:1px solid rgba(159,214,180,.22);border-radius:18px;background:rgba(159,214,180,.07);padding:14px;line-height:1.55;color:#e6dfd2}.wheelCoachCards b{display:block;color:var(--green);margin-bottom:6px}@media(max-width:980px){.wheelShell{grid-template-columns:1fr}.wheelBoard{min-height:380px}.wheelNode{transform:rotate(var(--deg)) translate(132px) rotate(calc(-1 * var(--deg))) translate(-50%,-50%);width:102px}.wheelSteps,.wheelCoachCards{grid-template-columns:1fr}}@media(max-width:560px){.wheelBoard{min-height:520px}.wheelRing{display:none}.wheelNode{position:relative;left:auto;top:auto;transform:none!important;width:auto;min-height:70px;margin:8px}.wheelHub{position:relative;left:auto;top:auto;transform:none;width:auto;height:auto;border-radius:22px;margin:10px}.wheelBoard{display:grid;grid-template-columns:1fr 1fr;padding:10px}.wheelHub{grid-column:1/-1;grid-row:1}.wheelPanel{padding:16px}.coachFlowTitle b{font-size:20px}}@media print{.wheelShell{grid-template-columns:1fr}.wheelBoard,.wheelPanel,.wheelSteps>div,.wheelCoachCards>div,.wheelNode,.wheelHub{background:#fff!important;border:1px solid #ddd;color:#111}.wheelHub b,.wheelNode b,.coachFlowTitle span,.wheelSteps strong,.wheelCoachCards b{color:#7a581d}.wheelSteps p,.wheelNode em{color:#333}.wheelCoachCards{grid-template-columns:1fr 1fr 1fr}}
 
 
-/* v2.5 XYZ 3D growth model */
+/* XYZ 3D growth model */
 .xyzModel{display:grid;grid-template-columns:minmax(420px,1.25fr) minmax(280px,.8fr);gap:18px;margin:12px 0 26px;align-items:stretch}.xyzModel canvas{width:100%;height:auto;border:1px solid rgba(217,182,101,.24);border-radius:28px;background:radial-gradient(circle at 62% 18%,rgba(152,185,255,.16),transparent 30%),linear-gradient(135deg,rgba(3,7,15,.62),rgba(255,255,255,.04));box-shadow:0 20px 60px rgba(0,0,0,.22)}.xyzLegend{display:flex;flex-direction:column;gap:12px}.xyzText,.xyzAxisCards>div,.xyzCoordTable{border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.05);padding:17px}.xyzText b{display:block;color:var(--gold);font-size:18px;margin-bottom:8px}.xyzText p{color:var(--muted);line-height:1.7;margin:8px 0}.xyzText strong{color:#e6dfd2}.xyzAxisCards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.xyzAxisCards span{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(217,182,101,.15);color:var(--gold);font-weight:1000;margin-bottom:8px}.xyzAxisCards b{display:block}.xyzAxisCards em{display:block;color:#f2d798;font-style:normal;font-weight:900;margin:4px 0}.xyzAxisCards p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.xyzCoordTable{display:grid;gap:8px}.xyzCoordTable>div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:7px}.xyzCoordTable>div:last-child{border-bottom:0;padding-bottom:0}.xyzCoordTable b{color:#f7f1e6}.xyzCoordTable span{color:var(--muted);font-size:13px;white-space:nowrap}@media(max-width:980px){.xyzModel{grid-template-columns:1fr}.xyzAxisCards{grid-template-columns:1fr 1fr 1fr}}@media(max-width:560px){.xyzAxisCards{grid-template-columns:1fr}.xyzCoordTable>div{display:block}.xyzModel canvas{min-height:320px;object-fit:cover}}@media print{.xyzModel{grid-template-columns:1fr}.xyzModel canvas,.xyzText,.xyzAxisCards>div,.xyzCoordTable{background:#fff!important;border:1px solid #ddd;color:#111;box-shadow:none}.xyzText b,.xyzAxisCards span,.xyzAxisCards em{color:#7a581d}.xyzText p,.xyzAxisCards p,.xyzCoordTable span{color:#333}.xyzAxisCards{grid-template-columns:repeat(3,1fr)}}
 
 /* v2.6 growth cycle engine */
@@ -60,6 +60,65 @@
 /* KGM210 검사 UI v2.1 · 영역별 30문항 목록형 */
 .testListCard{padding-bottom:92px}.listTestTop{position:relative}.listModeNote{margin:6px 0 0}.questionList{display:grid;gap:14px;margin-top:18px}.listQuestion{position:relative;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:19px 20px 18px;scroll-margin-top:24px;transition:.18s}.listQuestion.answered{border-color:rgba(217,182,101,.28);background:linear-gradient(135deg,rgba(217,182,101,.09),rgba(255,255,255,.03))}.listQuestion.missing.pulse{animation:kgmPulse 1.2s ease 0s 2;border-color:rgba(217,182,101,.75)}@keyframes kgmPulse{0%,100%{box-shadow:0 0 0 rgba(217,182,101,0)}50%{box-shadow:0 0 0 5px rgba(217,182,101,.16)}}.listQuestionHead{display:flex;align-items:flex-start;gap:12px}.qNo{flex:0 0 auto;min-width:38px;height:30px;border-radius:999px;display:grid;place-items:center;background:rgba(217,182,101,.12);border:1px solid rgba(217,182,101,.26);color:var(--gold);font-weight:1000;font-size:13px}.qTextList{margin:0;font-size:19px;line-height:1.62;letter-spacing:-.02em;color:var(--ink);font-weight:760}.scaleHint{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px auto 7px;max-width:520px;color:var(--muted);font-size:11px;font-weight:800}.scaleHint span:nth-child(2){text-align:center}.scaleHint span:nth-child(3){text-align:right}.circleScale{display:flex;justify-content:center;align-items:center;gap:18px;min-height:46px}.circleChoice{width:42px;height:42px;border-radius:999px;padding:0;display:grid;place-items:center;background:rgba(255,255,255,.045);border:2px solid rgba(255,255,255,.22);color:transparent;box-shadow:inset 0 0 0 8px rgba(9,13,22,.92);position:relative}.circleChoice::after{content:attr(data-val);position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:1000;color:rgba(247,241,230,.42)}.circleChoice:hover{transform:translateY(-1px);border-color:rgba(217,182,101,.58);background:rgba(217,182,101,.08)}.circleChoice.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(217,182,101,.13), inset 0 0 0 9px #151827}.circleChoice.active::after{color:var(--gold)}.circleChoice.v1,.circleChoice.v5{width:50px;height:50px}.circleChoice.v2,.circleChoice.v4{width:46px;height:46px}.domainGuide{display:block}.domainGuide .modeBadge{display:inline-block;margin-right:8px;padding:4px 9px;border-radius:999px;background:rgba(217,182,101,.14);border:1px solid rgba(217,182,101,.24);color:var(--gold);font-size:11px;font-weight:1000}.listNav{position:sticky;bottom:12px;z-index:5;background:linear-gradient(180deg,rgba(9,13,22,.12),rgba(9,13,22,.92) 28%,rgba(9,13,22,.98));padding-top:16px;margin-top:24px}.listNav #nextBtn.ready{box-shadow:0 0 0 4px rgba(217,182,101,.12)}.listNav #nextBtn.blocked{opacity:.86;background:rgba(255,255,255,.08);color:var(--ink);border:1px solid rgba(217,182,101,.28)}@media(max-width:820px){.testListCard{padding:18px 14px 88px}.listTestTop{gap:8px}.listModeNote{font-size:12px}.questionList{gap:11px;margin-top:14px}.listQuestion{border-radius:18px;padding:15px 13px 14px}.listQuestionHead{gap:9px}.qNo{min-width:32px;height:27px;font-size:12px}.qTextList{font-size:16.5px;line-height:1.58;font-weight:760}.scaleHint{max-width:330px;margin-top:12px;font-size:10px}.circleScale{gap:13px;min-height:40px}.circleChoice{width:35px;height:35px;box-shadow:inset 0 0 0 7px rgba(9,13,22,.92)}.circleChoice.v1,.circleChoice.v5{width:40px;height:40px}.circleChoice.v2,.circleChoice.v4{width:37px;height:37px}.circleChoice::after{font-size:10px}.domainStrip{display:none}.progressBox b{font-size:24px}.bar{height:9px;margin:12px 0}.domainGuide{font-size:12px;padding:12px 13px}.listNav{left:0;right:0;bottom:0;margin-left:-14px;margin-right:-14px;padding:13px 14px 14px;border-top:1px solid rgba(255,255,255,.08)}.listNav button{padding:13px 14px;border-radius:14px}.listNav #nextBtn{min-width:138px}.heroPanel{padding:26px}.hero h1{font-size:36px}}@media(min-width:821px){.questionList{grid-template-columns:1fr}.listQuestion{padding-left:28px;padding-right:28px}.qTextList{font-size:21px}.circleScale{gap:20px}.circleChoice{width:44px;height:44px}.circleChoice.v1,.circleChoice.v5{width:54px;height:54px}.circleChoice.v2,.circleChoice.v4{width:49px;height:49px}}@media print{.testListCard{display:none!important}}
 
+
+/* v2.4 user-friendly flow patch */
+.answerEcho{margin:10px auto 0;max-width:520px;text-align:center;color:var(--muted);font-size:12px;font-weight:800;min-height:18px}
+.answerEcho.done{color:var(--green)}
+.circleChoice{touch-action:manipulation}
+.kgmToast{position:fixed;left:50%;bottom:88px;transform:translate(-50%,18px);z-index:50;max-width:calc(100vw - 32px);padding:11px 15px;border-radius:999px;background:rgba(13,19,32,.96);border:1px solid rgba(159,214,180,.35);color:#e9fff0;font-weight:900;font-size:13px;box-shadow:0 18px 45px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.22s}
+.kgmToast.show{opacity:1;transform:translate(-50%,0)}
+.autoScrollToggle.off{color:var(--muted);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.035)}
+.pauseBtn{white-space:nowrap}
+.listNav{display:grid;grid-template-columns:auto auto auto 1fr;align-items:center}
+.listNav #nextBtn{justify-self:end}
+@media(max-width:820px){
+  .listNav{grid-template-columns:1fr 1fr;gap:8px}
+  .listNav #nextBtn{grid-column:1/-1;width:100%;justify-self:stretch}
+  .autoScrollToggle,.pauseBtn{font-size:12px;padding:11px 10px}
+  .answerEcho{max-width:330px;font-size:11px}
+  .circleChoice{width:39px;height:39px}
+  .circleChoice.v1,.circleChoice.v5{width:44px;height:44px}
+  .circleChoice.v2,.circleChoice.v4{width:41px;height:41px}
+}
+@media print{.kgmToast,.autoScrollToggle,.pauseBtn{display:none!important}}
+
+/* v2.3 mobile answer auto-scroll */
+.listQuestion.autoNextFocus{border-color:rgba(159,214,180,.62);box-shadow:0 0 0 4px rgba(159,214,180,.12)}
+.listQuestion.autoNextFocus .qNo{background:rgba(159,214,180,.14);border-color:rgba(159,214,180,.3);color:var(--green)}
+.nextBtnNudge{animation:kgmNextNudge .9s ease 0s 2}
+@keyframes kgmNextNudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(max-width:820px){
+  .listQuestion.autoNextFocus{scroll-margin-top:18px}
+}
+
+
+/* v2.6 · 7문 비균등 혼합형 정식검사 */
+.roundMeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;color:var(--muted);font-size:12px;font-weight:800}
+.roundMeta span{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);border-radius:999px;padding:6px 10px}
+.roundGate{margin-top:12px;border:1px solid rgba(217,182,101,.22);background:linear-gradient(135deg,rgba(217,182,101,.10),rgba(255,255,255,.035));border-radius:16px;padding:12px 14px;line-height:1.65;color:#e8dfcf}
+.roundGate b{color:var(--gold)}
+.mixTag{display:inline-flex;align-items:center;gap:6px;margin:0 0 8px 0;border:1px solid rgba(217,182,101,.22);background:rgba(217,182,101,.08);color:#f2d798;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;letter-spacing:.02em}
+.listQuestion .qTextList{margin-top:4px}
+.roundFlowLine{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.roundFlowLine span{display:inline-block;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 7px;color:var(--muted);font-size:11px;font-weight:900;background:rgba(255,255,255,.035)}
+.listNav{grid-template-columns:auto auto 1fr!important}
+.listNav #nextBtn{justify-self:end}
+@media(max-width:820px){.listNav{grid-template-columns:1fr 1fr!important}.listNav #nextBtn{grid-column:1/-1;width:100%;justify-self:stretch}.roundMeta{font-size:11px}.roundGate{font-size:12px}.mixTag{font-size:10px}.listQuestion{scroll-margin-top:18px}}
+@media print{.roundMeta,.roundGate,.mixTag,.roundFlowLine{display:none!important}}
+
+
+/* v2.7 customer-facing hide rules */
+.techOnly{display:none!important}
+.userHiddenTechnical{display:none!important}
+body.show-technical .userHiddenTechnical{display:block!important}
+body.show-technical details.userHiddenTechnical{display:block!important}
+.userHiddenMeta{display:none!important}
+.roundFlowLine,.modeBadge{display:none!important}
+.listQuestion .mixTag{display:none!important}
+#domainStrip,.compactOnly{display:none!important}
+.customerOnlyHint{border:1px solid rgba(159,214,180,.22);background:rgba(159,214,180,.07);border-radius:16px;padding:12px 14px;color:#d8f4e2;line-height:1.6;margin:10px 0 14px;font-size:13px}
+@media print{.userHiddenTechnical{display:none!important}.techOnly{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -76,18 +135,18 @@
       <div class="heroPanel">
         <div>
           <div class="eyebrow">KINGDOM · KGM210</div>
-          <h1>KINGDOM 성장진단</h1>
-          <p>나의 성장지도를 확인해보세요. 약 20~30분 동안 210개 질문에 답하면, 결과는 쉬운 성장 이야기로 정리됩니다.</p>
+          <h1>KGM210 성장검사</h1>
+          <p>7개의 문을 지나며 지금의 나를 천천히 살펴봅니다. 문항을 읽고 현재 나와 가장 가까운 쪽을 선택해주세요.</p>
           <div class="heroActions simpleHeroActions">
-            <button id="heroStartBtn" class="primary big">검사 시작</button>
+            <button id="heroStartBtn" class="primary big">210문항 시작</button>
             <button id="sampleResultBtn" class="ghost big hardHidden" aria-hidden="true" tabindex="-1" style="display:none"></button>
           </div>
         </div>
         <div class="glassStats hardHidden" aria-hidden="true">
           <div><strong>210</strong><span>성장질문</span></div>
-          <div><strong>7</strong><span>KINGDOM 영역</span></div>
-          <div><strong>3</strong><span>XYZ 과정층위</span></div>
-          <div><strong>10</strong><span>Z 구현수준</span></div>
+          <div><strong>7</strong><span>KINGDOM 여정</span></div>
+          <div><strong>3</strong><span>성장 흐름</span></div>
+          <div><strong>10</strong><span>성장 깊이</span></div>
         </div>
       </div>
     </section>
@@ -97,24 +156,24 @@
         <div class="sectionHead">
           <div>
             <div class="eyebrow">Before Test</div>
-            <h2>검사 전 확인</h2>
+            <h2>시작 전 확인</h2>
           </div>
           <span class="pill">약 20~30분</span>
         </div>
         <div class="notice simpleNotice">
-          이 도구는 사람을 판단하거나 진단하지 않습니다. 답변 후에는 <b>성장이야기</b>, <b>성장지도</b>, <b>이번 주 작은 실험</b>만 먼저 보여드립니다.
+          이 도구는 사람을 판단하기 위한 검사가 아닙니다. 지금의 나를 천천히 살펴보고, 코칭 대화에서 함께 볼 이야기를 준비하는 시간입니다.
         </div>
         <div class="formGrid">
           <label class="field">이름 또는 별칭 <input id="name" placeholder="예: 김철웅" /></label>
-          <label class="field">검사 메모 <input id="memo" placeholder="예: 1차 파일럿 / 청소년용 / 자기점검" /></label>
+          <label class="field techOnly">운영 메모 <input id="memo" placeholder="운영자용 메모" /></label>
         </div>
         <div class="checkGrid">
-          <label><input id="agree1" type="checkbox" /> KGM210은 진단·치료·선발 목적이 아닌 성장코칭 도구임을 확인합니다.</label>
-          <label><input id="agree2" type="checkbox" /> 결과는 코치와 함께 실제 삶의 장면을 떠올리며 사용합니다.</label>
+          <label><input id="agree1" type="checkbox" /> 이 검사는 나를 평가하거나 단정하기 위한 도구가 아님을 확인합니다.</label>
+          <label><input id="agree2" type="checkbox" /> 결과는 실제 삶의 장면을 떠올리며 천천히 살펴봅니다.</label>
         </div>
         <div id="domainOverview" class="domainOverview hardHidden" aria-hidden="true"></div>
         <div class="homeActions">
-          <button id="startBtn" class="primary wide">검사 시작</button>
+          <button id="startBtn" class="primary wide">210문항 시작</button>
           <button id="introResumeBtn" class="ghost wide">이어하기</button>
           <button id="introJourneyBtn" class="ghost wide">성장여정 보기</button>
         </div>
@@ -126,7 +185,7 @@
           <div>
             <div class="eyebrow" id="sectionLabel">K 주도성</div>
             <h2 id="qTitle">영역별 성장질문</h2>
-            <p class="small listModeNote">한 영역의 30개 문항을 한 번에 확인하고, 각 문항 아래 동그라미를 선택합니다.</p>
+            <p class="small listModeNote">7개의 문을 순서대로 통과합니다. 각 문에는 여러 방향의 질문이 섞여 있으며, 끝까지 응답하면 성장보고서가 완성됩니다.</p>
           </div>
           <div class="progressBox"><b><span id="progressNow">0</span>/<span id="progressTotal">30</span></b><small id="answeredText">전체 0/210</small></div>
         </div>
@@ -135,19 +194,20 @@
         <div id="domainGuide" class="domainGuide"></div>
         <div id="questionList" class="questionList" aria-live="polite"></div>
         <div class="nav listNav">
-          <button id="prevBtn">이전 영역</button>
+          <button id="prevBtn">이전 문</button>
+          <button id="autoScrollToggle" class="ghost autoScrollToggle" type="button">자동넘김 켜짐</button>
           <button id="saveBtn" class="hardHidden" aria-hidden="true" tabindex="-1" style="display:none"></button>
-          <button id="nextBtn" class="primary">다음 영역</button>
+          <button id="nextBtn" class="primary">다음 문</button>
         </div>
       </section>
 
       <section id="domainComplete" class="card hidden domainCompleteCard">
-        <div class="eyebrow">Domain Complete</div>
-        <h2 id="completeTitle">영역 완료</h2>
+        <div class="eyebrow">Gate Complete</div>
+        <h2 id="completeTitle">문 완료</h2>
         <p id="completeMeta" class="small"></p>
         <div id="completeBody"></div>
         <div class="nav">
-          <button id="reviewDomainBtn">이 영역 다시 보기</button>
+          <button id="reviewDomainBtn">이 문 다시 보기</button>
           <button id="continueDomainBtn" class="primary">계속 진행</button>
         </div>
       </section>
@@ -157,7 +217,7 @@
       <section id="result" class="card hidden">
         <div class="resultHead simplifiedResultHead">
           <div>
-            <div class="eyebrow">KGM210 Result</div>
+            <div class="eyebrow">Growth Report</div>
             <h2 id="resultTitle">나의 성장보고서</h2>
             <p id="reportMeta" class="small"></p>
           </div>
@@ -180,8 +240,8 @@
         <h3>이번 주 작은 성장실험</h3>
         <div id="actionCards" class="actionCards mainActions"></div>
 
-        <details class="advancedBlock">
-          <summary>자세히 보기</summary>
+        <details class="advancedBlock userHiddenTechnical" aria-hidden="true">
+          <summary>코치와 함께 자세히 보기</summary>
           <div id="growthIdentity" class="growthIdentity"></div>
           <h3>코칭수레바퀴 세션 흐름</h3>
           <div id="coachingWheelFlow" class="coachingWheelFlow"></div>
@@ -200,14 +260,14 @@
           <div id="growthTracker" class="growthTracker"></div>
         </details>
 
-        <details class="coachOnlyBlock">
-          <summary>코치전용 보기</summary>
+        <details class="coachOnlyBlock userHiddenTechnical" aria-hidden="true">
+          <summary>코치전용 분석 보기</summary>
           <h3>XYZ 입체 성장모형</h3>
           <div id="xyzModel" class="xyzModel">
             <canvas id="xyzCanvas" width="860" height="560"></canvas>
             <div id="xyzLegend" class="xyzLegend"></div>
           </div>
-          <h3>XYZ 과정·Z 구현수준</h3>
+          <h3>XYZ 과정·성장 깊이</h3>
           <div id="subScores" class="subScores"></div>
           <h3>응답신뢰도</h3>
           <div id="reliabilityBox" class="reliabilityBox"></div>
@@ -286,7 +346,7 @@ window.KGM_QUESTIONS = [
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 내가 주도적으로 움직이는 순간과 끌려가는 순간을 구분할 수 있다."
+    "text": "나는 내가 주도적으로 움직이는 순간을 알아차린다."
   },
   {
     "no": 8,
@@ -302,7 +362,7 @@ window.KGM_QUESTIONS = [
     "process": "알아차림",
     "z": "Z9",
     "zLabel": "전이",
-    "text": "나는 상황에 따라 내 선택이 왜 흔들렸는지 파악하기 어려울 때가 있다."
+    "text": "나는 비슷한 상황에서 내 선택이 왜 흔들렸는지 알아차린다."
   },
   {
     "no": 10,
@@ -310,7 +370,7 @@ window.KGM_QUESTIONS = [
     "process": "알아차림",
     "z": "Z10",
     "zLabel": "상호적 기여",
-    "text": "나는 상황에 휩쓸릴 때 내가 선택할 수 있는 부분을 놓칠 때가 있다."
+    "text": "나는 내 선택이 관계나 상황에 미치는 영향을 알아차린다."
   },
   {
     "no": 11,
@@ -382,7 +442,7 @@ window.KGM_QUESTIONS = [
     "process": "세우기",
     "z": "Z9",
     "zLabel": "전이",
-    "text": "나는 주변 분위기에 따라 결정하면서 내 기준을 충분히 확인하지 못할 때가 있다."
+    "text": "나는 비슷한 상황이 반복될 때 내 선택 기준을 다시 확인한다."
   },
   {
     "no": 20,
@@ -390,7 +450,7 @@ window.KGM_QUESTIONS = [
     "process": "세우기",
     "z": "Z10",
     "zLabel": "상호적 기여",
-    "text": "나는 중요한 선택 앞에서 내 생각을 충분히 정리하지 못하고 지나갈 때가 있다."
+    "text": "나는 중요한 선택이 관계에 미칠 영향을 생각하며 내 기준을 정리한다."
   },
   {
     "no": 21,
@@ -406,7 +466,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z2",
     "zLabel": "맥락이해",
-    "text": "나는 어려운 상황에서도 내가 선택할 수 있는 부분을 찾으려 한다."
+    "text": "나는 어려운 상황에서도 선택 가능한 행동 하나를 실행해본다."
   },
   {
     "no": 23,
@@ -422,7 +482,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z4",
     "zLabel": "현실인정",
-    "text": "나는 내 선택의 이유를 스스로 살펴보려 한다."
+    "text": "나는 선택한 뒤 그 이유를 짧게 기록해본다."
   },
   {
     "no": 25,
@@ -430,7 +490,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z5",
     "zLabel": "선택",
-    "text": "나는 작은 일이라도 내가 정한 방향대로 해보려 한다."
+    "text": "나는 작은 일에서 내가 정한 방향대로 행동해본다."
   },
   {
     "no": 26,
@@ -438,7 +498,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 내 기준과 맞지 않는 상황에서 조율하려 한다."
+    "text": "나는 내 기준과 맞지 않는 상황에서 조율 행동을 하나 시도한다."
   },
   {
     "no": 27,
@@ -446,7 +506,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 선택 후에 내가 왜 그렇게 선택했는지 돌아본다."
+    "text": "나는 선택 후 배운 점을 다음 선택에 반영한다."
   },
   {
     "no": 28,
@@ -454,7 +514,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 상황이 바뀌어도 내가 참여하거나 선택할 수 있는 부분을 다시 찾아본다."
+    "text": "나는 상황이 바뀌면 내가 참여할 수 있는 행동을 다시 시도한다."
   },
   {
     "no": 29,
@@ -462,7 +522,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z9",
     "zLabel": "전이",
-    "text": "나는 상황이 어려워지면 내가 선택할 수 있는 부분을 놓칠 때가 있다."
+    "text": "나는 어려운 상황에서도 내가 선택할 수 있는 작은 행동을 시도한다."
   },
   {
     "no": 30,
@@ -470,11 +530,11 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z10",
     "zLabel": "상호적 기여",
-    "text": "나는 내 기준보다 순간적인 반응대로 움직일 때가 많다."
+    "text": "나는 순간 반응보다 내 기준과 상대에게 미칠 영향을 살펴 행동한다."
   },
   {
     "no": 31,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z1",
     "zLabel": "인식",
@@ -482,7 +542,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 32,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -490,15 +550,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 33,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z3",
     "zLabel": "구분",
-    "text": "나는 사람들 앞에서 보이는 나와 혼자 있을 때의 나를 구분할 수 있다."
+    "text": "나는 사람들 앞의 내 모습과 혼자 있을 때의 내 모습을 구분한다."
   },
   {
     "no": 34,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -506,7 +566,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 35,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z5",
     "zLabel": "선택",
@@ -514,7 +574,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 36,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z6",
     "zLabel": "정렬",
@@ -522,39 +582,39 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 37,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 지금의 내가 어떤 역할과 관계 속에 있는지 정리해볼 수 있다."
+    "text": "나는 지금 내가 맡고 있는 역할과 관계를 알아차린다."
   },
   {
     "no": 38,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 상황에 따라 달라지는 내 모습을 이해하기 어려울 때가 있다."
+    "text": "나는 상황에 따라 내 모습이 달라지는 이유를 살펴본다."
   },
   {
     "no": 39,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z9",
     "zLabel": "전이",
-    "text": "나는 남들이 보는 나와 내가 느끼는 나의 차이를 알아차릴 수 있다."
+    "text": "나는 다른 관계에서도 남이 보는 나와 내가 느끼는 나의 차이를 알아차린다."
   },
   {
     "no": 40,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "알아차림",
     "z": "Z10",
     "zLabel": "상호적 기여",
-    "text": "나는 앞으로도 이어가고 싶은 나의 모습이나 가치를 떠올릴 수 있다."
+    "text": "나는 내가 이어가고 싶은 모습을 관계 속에서 떠올린다."
   },
   {
     "no": 41,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z1",
     "zLabel": "인식",
@@ -562,7 +622,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 42,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -570,7 +630,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 43,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z3",
     "zLabel": "구분",
@@ -578,7 +638,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 44,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -586,7 +646,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 45,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z5",
     "zLabel": "선택",
@@ -594,7 +654,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 46,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -602,7 +662,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 47,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -610,7 +670,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 48,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -618,7 +678,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 49,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z9",
     "zLabel": "전이",
@@ -626,7 +686,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 50,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "세우기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -634,7 +694,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 51,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z1",
     "zLabel": "인식",
@@ -642,7 +702,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 52,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -650,7 +710,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 53,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z3",
     "zLabel": "구분",
@@ -658,7 +718,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 54,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -666,7 +726,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 55,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z5",
     "zLabel": "선택",
@@ -674,7 +734,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 56,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -682,7 +742,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 57,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -690,15 +750,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 58,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 내가 중요하게 여기는 방향을 일상에서 반복해보려 한다."
+    "text": "나는 내가 중요하게 여기는 방향을 일상 행동으로 반복한다."
   },
   {
     "no": 59,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z9",
     "zLabel": "전이",
@@ -706,7 +766,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 60,
-    "domain": "I 정체성",
+    "domain": "I 존재초점",
     "process": "적용하기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -766,7 +826,7 @@ window.KGM_QUESTIONS = [
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 지금의 이야기가 앞으로 어떤 선택으로 이어질 수 있는지 생각해본다."
+    "text": "나는 지금의 이야기가 내 선택에 미치는 영향을 알아차린다."
   },
   {
     "no": 68,
@@ -934,7 +994,7 @@ window.KGM_QUESTIONS = [
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 내 경험을 나눌 때 상대에게 도움이 되는 방식인지 살펴본다."
+    "text": "나는 내 경험을 나눌 때 상대가 이해할 수 있는 표현을 사용해본다."
   },
   {
     "no": 89,
@@ -954,7 +1014,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 91,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z1",
     "zLabel": "인식",
@@ -962,7 +1022,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 92,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -970,7 +1030,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 93,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z3",
     "zLabel": "구분",
@@ -978,7 +1038,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 94,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -986,7 +1046,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 95,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z5",
     "zLabel": "선택",
@@ -994,7 +1054,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 96,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z6",
     "zLabel": "정렬",
@@ -1002,15 +1062,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 97,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 잘하는 것뿐 아니라 관심이 살아나는 조건도 함께 살펴본다."
+    "text": "나는 내 관심이 살아나는 조건을 살펴본다."
   },
   {
     "no": 98,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1018,7 +1078,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 99,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z9",
     "zLabel": "전이",
@@ -1026,7 +1086,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 100,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "알아차림",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1034,7 +1094,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 101,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1042,7 +1102,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 102,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1050,7 +1110,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 103,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1058,7 +1118,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 104,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1066,7 +1126,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 105,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z5",
     "zLabel": "선택",
@@ -1074,7 +1134,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 106,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -1082,15 +1142,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 107,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 다른 사람과 비교하기보다 나에게 잘 맞는 방식과 조건을 찾아본다."
+    "text": "나는 나에게 맞는 방식과 조건을 정리한다."
   },
   {
     "no": 108,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1098,7 +1158,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 109,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1106,7 +1166,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 110,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "세우기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1114,7 +1174,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 111,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1122,7 +1182,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 112,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1130,15 +1190,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 113,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z3",
     "zLabel": "구분",
-    "text": "나는 내가 좋아하는 활동을 일상 속에 조금씩 넣어본다."
+    "text": "나는 좋아하는 활동을 일상 일정에 넣어 실행해본다."
   },
   {
     "no": 114,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1146,15 +1206,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 115,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z5",
     "zLabel": "선택",
-    "text": "나는 내 강점이 잘 맞지 않는 상황에서는 다른 방식을 찾아본다."
+    "text": "나는 강점이 잘 맞지 않는 상황에서 다른 역할을 시도한다."
   },
   {
     "no": 116,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -1162,7 +1222,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 117,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1170,7 +1230,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 118,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1178,7 +1238,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 119,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1186,7 +1246,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 120,
-    "domain": "G 강점",
+    "domain": "G 고유성",
     "process": "적용하기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1194,15 +1254,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 121,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z1",
     "zLabel": "인식",
-    "text": "나는 내가 맡을 수 있는 일과 맡기 어려운 일을 구분하려 한다."
+    "text": "나는 맡을 수 있는 일과 조정이 필요한 일을 구분한다."
   },
   {
     "no": 122,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1210,7 +1270,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 123,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z3",
     "zLabel": "구분",
@@ -1218,7 +1278,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 124,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1226,7 +1286,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 125,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z5",
     "zLabel": "선택",
@@ -1234,15 +1294,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 126,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 내가 책임질 부분과 함께 나누어야 할 부분을 구분해본다."
+    "text": "나는 내가 책임질 부분과 나눌 부분을 구분한다."
   },
   {
     "no": 127,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1250,7 +1310,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 128,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1258,7 +1318,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 129,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z9",
     "zLabel": "전이",
@@ -1266,7 +1326,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 130,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "알아차림",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1274,7 +1334,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 131,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1282,7 +1342,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 132,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1290,7 +1350,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 133,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1298,7 +1358,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 134,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1306,47 +1366,47 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 135,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z5",
     "zLabel": "선택",
-    "text": "나는 내 행동의 영향과 의도를 구분해본다."
+    "text": "나는 내 행동이 만든 영향을 정리한다."
   },
   {
     "no": 136,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 맡은 일을 이어가기 위해 필요한 조건과 도움을 함께 생각해본다."
+    "text": "나는 맡은 일을 이어가기 위해 필요한 도움을 정리한다."
   },
   {
     "no": 137,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 내 선택이 다른 사람에게 미칠 영향을 살피되, 내 필요와 한계도 함께 생각해본다."
+    "text": "나는 내 선택이 다른 사람에게 미칠 영향을 기준에 넣어본다."
   },
   {
     "no": 138,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 내가 응답해야 할 일과 조정해야 할 일을 구분하는 기준을 세워본다."
+    "text": "나는 응답할 일과 조정할 일을 구분하는 기준을 세운다."
   },
   {
     "no": 139,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z9",
     "zLabel": "전이",
-    "text": "나는 혼자 해볼 부분과 도움을 요청할 부분을 나누어 계획해본다."
+    "text": "나는 비슷한 상황에서도 도움을 요청할 부분을 계획한다."
   },
   {
     "no": 140,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "세우기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1354,7 +1414,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 141,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1362,7 +1422,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 142,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1370,7 +1430,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 143,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1378,15 +1438,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 144,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z4",
     "zLabel": "현실인정",
-    "text": "나는 다른 사람의 몫까지 대신하지 않으려 노력한다."
+    "text": "나는 다른 사람의 몫을 확인하고 내 역할 안에서 행동한다."
   },
   {
     "no": 145,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z5",
     "zLabel": "선택",
@@ -1394,7 +1454,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 146,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -1402,7 +1462,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 147,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1410,7 +1470,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 148,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1418,7 +1478,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 149,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1426,7 +1486,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 150,
-    "domain": "D 책임영역",
+    "domain": "D 책임경계",
     "process": "적용하기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1434,7 +1494,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 151,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z1",
     "zLabel": "인식",
@@ -1442,7 +1502,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 152,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1450,7 +1510,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 153,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z3",
     "zLabel": "구분",
@@ -1458,7 +1518,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 154,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1466,7 +1526,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 155,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z5",
     "zLabel": "선택",
@@ -1474,47 +1534,47 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 156,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 현재 조건에서 만들 수 있는 기회와 주변에 요청할 수 있는 자원을 함께 살펴본다."
+    "text": "나는 현재 조건에서 만들 수 있는 작은 기회를 알아차린다."
   },
   {
     "no": 157,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 실행이 어려울 때 의지뿐 아니라 조건·자원·두려움·시간도 함께 살펴본다."
+    "text": "나는 실행이 막힐 때 먼저 조정할 조건을 알아차린다."
   },
   {
     "no": 158,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 실패할까 봐 시작하지 못하는 순간을 알아차린다."
+    "text": "나는 시작을 망설이는 순간을 알아차린다."
   },
   {
     "no": 159,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z9",
     "zLabel": "전이",
-    "text": "나는 내가 행동할 수 있는 안전한 범위를 살펴본다."
+    "text": "나는 다른 상황에서도 행동 가능한 안전 범위를 알아차린다."
   },
   {
     "no": 160,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "알아차림",
     "z": "Z10",
     "zLabel": "상호적 기여",
-    "text": "나는 기회가 생겼을 때 내가 준비된 부분과 더 필요한 조건을 확인한다."
+    "text": "나는 기회가 생겼을 때 다른 사람과 함께 준비할 부분을 확인한다."
   },
   {
     "no": 161,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1522,7 +1582,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 162,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1530,7 +1590,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 163,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1538,7 +1598,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 164,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1546,7 +1606,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 165,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z5",
     "zLabel": "선택",
@@ -1554,23 +1614,23 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 166,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 실행 중에 상황이 달라지면 목표와 방법을 조정할 수 있는지 생각해본다."
+    "text": "나는 실행 중 상황이 달라지면 조정할 방법을 정한다."
   },
   {
     "no": 167,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z7",
     "zLabel": "실험실천",
-    "text": "나는 실패하거나 막혔을 때 다시 시도할 조건과 도움을 계획해본다."
+    "text": "나는 막혔을 때 다시 시도할 조건을 정한다."
   },
   {
     "no": 168,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1578,7 +1638,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 169,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1586,7 +1646,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 170,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "세우기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1594,7 +1654,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 171,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1602,7 +1662,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 172,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1610,7 +1670,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 173,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1618,7 +1678,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 174,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1626,7 +1686,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 175,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z5",
     "zLabel": "선택",
@@ -1634,7 +1694,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 176,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -1642,7 +1702,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 177,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1650,7 +1710,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 178,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1658,7 +1718,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 179,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1666,7 +1726,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 180,
-    "domain": "O 기회실행",
+    "domain": "O 실행기회",
     "process": "적용하기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1674,7 +1734,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 181,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z1",
     "zLabel": "인식",
@@ -1682,7 +1742,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 182,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1690,15 +1750,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 183,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z3",
     "zLabel": "구분",
-    "text": "나는 성공한 일과 어려웠던 일을 함께 돌아본다."
+    "text": "나는 경험에서 잘된 점과 어려웠던 점을 구분한다."
   },
   {
     "no": 184,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1706,7 +1766,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 185,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z5",
     "zLabel": "선택",
@@ -1714,15 +1774,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 186,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 경험에서 배울 점이 있는지, 아직 정리되지 않은 점은 무엇인지 함께 살펴본다."
+    "text": "나는 경험에서 아직 정리되지 않은 점을 알아차린다."
   },
   {
     "no": 187,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1730,15 +1790,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 188,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 후회되는 경험도 사실·감정·배울 점으로 나누어 살펴본다."
+    "text": "나는 후회되는 경험에서 배울 점을 알아차린다."
   },
   {
     "no": 189,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z9",
     "zLabel": "전이",
@@ -1746,15 +1806,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 190,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "알아차림",
     "z": "Z10",
     "zLabel": "상호적 기여",
-    "text": "나는 내가 배운 것과 아직 모르는 것을 구분해본다."
+    "text": "나는 내가 배운 것이 다른 사람과의 관계에 어떤 도움이 되는지 알아차린다."
   },
   {
     "no": 191,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1762,7 +1822,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 192,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1770,7 +1830,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 193,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1778,7 +1838,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 194,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z4",
     "zLabel": "현실인정",
@@ -1786,7 +1846,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 195,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z5",
     "zLabel": "선택",
@@ -1794,7 +1854,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 196,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z6",
     "zLabel": "정렬",
@@ -1802,7 +1862,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 197,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1810,15 +1870,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 198,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z8",
     "zLabel": "유지·복귀",
-    "text": "나는 과거의 실수가 반복되지 않도록 필요한 조건과 도움을 계획해본다."
+    "text": "나는 실수가 반복되지 않도록 필요한 도움을 계획한다."
   },
   {
     "no": 199,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1826,7 +1886,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 200,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "세우기",
     "z": "Z10",
     "zLabel": "상호적 기여",
@@ -1834,7 +1894,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 201,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z1",
     "zLabel": "인식",
@@ -1842,7 +1902,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 202,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z2",
     "zLabel": "맥락이해",
@@ -1850,7 +1910,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 203,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z3",
     "zLabel": "구분",
@@ -1858,15 +1918,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 204,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z4",
     "zLabel": "현실인정",
-    "text": "나는 배운 내용을 기록하거나 정리해 다시 확인한다."
+    "text": "나는 배운 내용을 기록하고 다음 행동에서 확인한다."
   },
   {
     "no": 205,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z5",
     "zLabel": "선택",
@@ -1874,15 +1934,15 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 206,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z6",
     "zLabel": "정렬",
-    "text": "나는 실패가 반복될 때 원인과 조건을 살펴보고 다른 방법을 시도해본다."
+    "text": "나는 실패가 반복될 때 다른 방법을 시도해본다."
   },
   {
     "no": 207,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z7",
     "zLabel": "실험실천",
@@ -1890,7 +1950,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 208,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z8",
     "zLabel": "유지·복귀",
@@ -1898,7 +1958,7 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 209,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z9",
     "zLabel": "전이",
@@ -1906,30 +1966,29 @@ window.KGM_QUESTIONS = [
   },
   {
     "no": 210,
-    "domain": "M 의미통합",
+    "domain": "M 성장통합",
     "process": "적용하기",
     "z": "Z10",
     "zLabel": "상호적 기여",
     "text": "나는 내가 배운 것이 실제로 도움이 되었는지 점검해본다."
   }
-];
-
-</script>
+];</script>
   <script>
 const Q = window.KGM_QUESTIONS || [];
 const labels = ['전혀 아니다','아니다','보통이다','그렇다','매우 그렇다'];
 const $ = id => document.getElementById(id);
+try{ if(new URLSearchParams(location.search).get('coach')==='1' || new URLSearchParams(location.search).get('detail')==='1'){ document.body.classList.add('show-technical'); } }catch(e){}
 const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0;
 const today = () => new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
 
 const DOMAIN = {
   'K 주도성': {short:'K', title:'주도성', easy:'내 선택 잡기', desc:'상황에 끌려가기보다 내가 선택할 수 있는 부분을 찾는 힘입니다.', high:'내 선택을 비교적 잘 알고 움직이는 힘이 보입니다.', low:'내가 선택할 수 있는 부분을 다시 찾는 대화가 필요합니다.', q:'최근에 내 선택을 놓쳤던 장면은 언제였나요?'},
-  'I 정체성': {short:'I', title:'정체성', easy:'나답게 서기', desc:'역할과 기대 속에서 나의 가치와 방향을 세우는 힘입니다.', high:'나의 가치와 역할을 연결해 설명하는 힘이 보입니다.', low:'남의 기대와 나의 기준을 나누어 보는 시간이 필요합니다.', q:'요즘 내가 나답지 않다고 느낀 순간은 언제였나요?'},
+  'I 존재초점': {short:'I', title:'존재초점', easy:'내가 지키고 싶은 나', desc:'역할과 기대 속에서 나의 가치와 방향을 세우는 힘입니다.', high:'나의 가치와 역할을 연결해 설명하는 힘이 보입니다.', low:'남의 기대와 나의 기준을 나누어 보는 시간이 필요합니다.', q:'요즘 내가 나답지 않다고 느낀 순간은 언제였나요?'},
   'N 자기이야기': {short:'N', title:'자기이야기', easy:'내 이야기 다시 쓰기', desc:'경험을 해석하고 나의 이야기로 새롭게 정리하는 힘입니다.', high:'경험을 의미 있는 이야기로 정리하는 힘이 있습니다.', low:'반복되는 생각과 다른 해석을 함께 찾아볼 필요가 있습니다.', q:'내가 나에게 자주 들려주는 이야기는 무엇인가요?'},
-  'G 강점': {short:'G', title:'강점', easy:'가진 힘 찾기', desc:'내 안의 자원과 강점을 발견하고 적절히 쓰는 힘입니다.', high:'내가 가진 힘을 알아차리고 쓰는 감각이 살아 있습니다.', low:'강점은 증명해야 할 능력이 아니라 찾아야 할 자원입니다.', q:'작지만 이미 잘하고 있는 것은 무엇인가요?'},
-  'D 책임영역': {short:'D', title:'책임영역', easy:'내 몫 정하기', desc:'내가 감당할 수 있는 책임과 타인의 몫을 구분하는 힘입니다.', high:'내 몫과 타인의 몫을 비교적 잘 나누는 힘이 보입니다.', low:'내 책임과 남의 책임을 나누는 대화가 중요합니다.', q:'내가 너무 많이 짊어진 것은 무엇인가요?'},
-  'O 기회실행': {short:'O', title:'기회실행', easy:'작게 해보기', desc:'생각을 작은 행동으로 옮기고 실제로 확인하는 힘입니다.', high:'생각을 행동으로 옮기며 배우는 힘이 보입니다.', low:'큰 결심보다 아주 작은 행동부터 정하는 것이 좋습니다.', q:'오늘 바로 해볼 수 있는 가장 작은 행동은 무엇인가요?'},
-  'M 의미통합': {short:'M', title:'의미통합', easy:'배움으로 묶기', desc:'흩어진 경험을 돌아보고 삶의 방향과 의미로 묶는 힘입니다.', high:'경험을 돌아보고 삶의 방향과 연결하는 힘이 있습니다.', low:'지난 경험을 평가보다 배움의 언어로 다시 정리할 시간이 필요합니다.', q:'이번 경험에서 내가 가져갈 배움은 무엇인가요?'}
+  'G 고유성': {short:'G', title:'고유성', easy:'나에게 잘 맞는 순간', desc:'내 안의 자원과 강점을 발견하고 적절히 쓰는 힘입니다.', high:'내가 가진 힘을 알아차리고 쓰는 감각이 살아 있습니다.', low:'강점은 증명해야 할 능력이 아니라 찾아야 할 자원입니다.', q:'작지만 이미 잘하고 있는 것은 무엇인가요?'},
+  'D 책임경계': {short:'D', title:'책임경계', easy:'맡을 것과 나눌 것', desc:'내가 감당할 수 있는 책임과 타인의 몫을 구분하는 힘입니다.', high:'내 몫과 타인의 몫을 비교적 잘 나누는 힘이 보입니다.', low:'내 책임과 남의 책임을 나누는 대화가 중요합니다.', q:'내가 너무 많이 짊어진 것은 무엇인가요?'},
+  'O 실행기회': {short:'O', title:'실행기회', easy:'작게 해볼 수 있는 것', desc:'생각을 작은 행동으로 옮기고 실제로 확인하는 힘입니다.', high:'생각을 행동으로 옮기며 배우는 힘이 보입니다.', low:'큰 결심보다 아주 작은 행동부터 정하는 것이 좋습니다.', q:'오늘 바로 해볼 수 있는 가장 작은 행동은 무엇인가요?'},
+  'M 성장통합': {short:'M', title:'성장통합', easy:'다음에 다시 사용할 배움', desc:'흩어진 경험을 돌아보고 삶의 방향과 의미로 묶는 힘입니다.', high:'경험을 돌아보고 삶의 방향과 연결하는 힘이 있습니다.', low:'지난 경험을 평가보다 배움의 언어로 다시 정리할 시간이 필요합니다.', q:'이번 경험에서 내가 가져갈 배움은 무엇인가요?'}
 };
 const PROCESS_AXIS = {'알아차림':'X','세우기':'Y','적용하기':'Z'};
 const AXIS = {X:['알아차림','지금 무슨 일이 일어나는지 보는 힘'], Y:['세우기','나의 기준과 방향을 정하는 힘'], Z:['해보기','작은 행동으로 옮기고 돌아보는 힘']};
@@ -1966,9 +2025,50 @@ function renderDomainStrip(){ const el=$('domainStrip'); if(!el)return; el.inner
 function requireAgree(){ if(!$('agree1').checked || !$('agree2').checked){ alert('검사 시작 전 안내 항목을 확인해 주세요.'); return false;} return true; }
 function updateHomeButtons(){ const hasAnswers=answeredCount()>0 && !completed(); const hasHistory=getHistory().length>0; if($('resumeBtn')){ $('resumeBtn').textContent=completed()?'결과 보기':'이어하기'; $('resumeBtn').style.display=(hasAnswers||completed())?'inline-flex':'none'; } if($('journeyBtn')) $('journeyBtn').style.display=hasHistory?'inline-flex':'none'; if($('introResumeBtn')) $('introResumeBtn').style.display=hasAnswers?'inline-flex':'none'; if($('introJourneyBtn')) $('introJourneyBtn').style.display=hasHistory?'inline-flex':'none'; }
 function start(skip=false){ if(skip){ if(completed()) return showResult(false); if(answeredCount()===0){ alert('이어갈 검사가 없습니다. 새 검사를 시작해 주세요.'); return; } } else { if(!requireAgree())return; if(answeredCount()>0 && !completed() && !confirm('진행 중인 응답이 있습니다. 새 검사로 시작할까요?')) return; clearCurrentTest(); } const first=Q.findIndex(q=>!answers[q.no]); idx=first>=0?first:0; save(); hideAll(); $('test').classList.remove('hidden'); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
-function updateTestProgress(d=currentDomain()){ const pr=domainProgress(d), di=domainIndex(d)+1, info=DOMAIN[d]; $('sectionLabel').textContent=`${di}번째 성장대화 · ${info.easy}`; $('qTitle').textContent=`${dTitle(d)} ${pr.done}/30`; $('progressNow').textContent=pr.done; $('progressTotal').textContent='30'; $('answeredText').textContent=`전체 ${answeredCount()}/${TOTAL} · 목록형 v2.1`; $('barFill').style.width=clamp(pr.done/30*100,0,100)+'%'; $('totalBarFill').style.width=clamp(answeredCount()/TOTAL*100,0,100)+'%'; $('domainGuide').innerHTML=`<span class="modeBadge">검사지형 v2.1</span><b>${info.easy}</b> · ${info.desc}<br><span>문항 아래 동그라미를 선택하세요. 30개 완료 후 다음 영역으로 이동합니다.</span>`; const nd=nextDomainName(d), pd=prevDomainName(d), next=$('nextBtn'); $('prevBtn').disabled=!pd; next.classList.toggle('ready',pr.complete); next.classList.toggle('blocked',!pr.complete); next.disabled=false; next.textContent=pr.complete?(nd?'다음 영역':'코칭 리포트 보기'):`미응답 ${pr.total-pr.done}개 확인`; renderDomainStrip(); renderDomainOverview(); }
-function renderQ(){ if(completed()){ idx=TOTAL-1; return showResult(false); } idx=clamp(idx,0,TOTAL-1); const q=Q[idx]; if(!q){ return showIntro(); } const d=q.domain, qs=domainQuestions(d); updateTestProgress(d); const list=$('questionList'); list.innerHTML=qs.map((item,i)=>{ const val=answers[item.no]; return `<section class="listQuestion ${val?'answered':'missing'}" id="qitem-${item.no}" data-no="${item.no}"><div class="listQuestionHead"><span class="qNo">${String(i+1).padStart(2,'0')}</span><p class="qTextList">${item.text}</p></div><div class="scaleHint"><span>전혀 아니다</span><span>보통이다</span><span>매우 그렇다</span></div><div class="circleScale" role="radiogroup" aria-label="${i+1}번 응답">${labels.map((l,li)=>{const v=li+1; return `<button type="button" class="circleChoice v${v} ${val===v?'active':''}" data-no="${item.no}" data-val="${v}" aria-label="${v} ${l}" aria-pressed="${val===v?'true':'false'}"></button>`}).join('')}</div></section>`; }).join(''); list.querySelectorAll('.circleChoice').forEach(btn=>btn.onclick=()=>selectListAnswer(Number(btn.dataset.no),Number(btn.dataset.val))); }
-function selectListAnswer(no,val){ answers[no]=val; setCompleted(false); save(); const item=document.getElementById('qitem-'+no); if(item){ item.classList.remove('missing','pulse'); item.classList.add('answered'); item.querySelectorAll('.circleChoice').forEach(b=>{const on=Number(b.dataset.val)===val; b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false');}); } const q=Q.find(x=>x.no===no); if(q) updateTestProgress(q.domain); }
+function updateTestProgress(d=currentDomain()){ const pr=domainProgress(d), di=domainIndex(d)+1, info=DOMAIN[d]; $('sectionLabel').textContent=`${di}번째 성장대화 · ${info.easy}`; $('qTitle').textContent=`${dTitle(d)} ${pr.done}/30`; $('progressNow').textContent=pr.done; $('progressTotal').textContent='30'; $('answeredText').textContent=`전체 ${answeredCount()}/${TOTAL}`; $('barFill').style.width=clamp(pr.done/30*100,0,100)+'%'; $('totalBarFill').style.width=clamp(answeredCount()/TOTAL*100,0,100)+'%'; $('domainGuide').innerHTML=`<span class="modeBadge">7문 비균등 혼합형</span><b>${info.easy}</b> · ${info.desc}<br><span>동그라미를 누르면 저장되고 다음 질문으로 이동합니다. 불편하면 아래에서 자동넘김을 끌 수 있습니다.</span>`; const nd=nextDomainName(d), pd=prevDomainName(d), next=$('nextBtn'); $('prevBtn').disabled=!pd; next.classList.toggle('ready',pr.complete); next.classList.toggle('blocked',!pr.complete); next.disabled=false; next.textContent=pr.complete?(nd?'다음 영역':'코칭 리포트 보기'):`미응답 ${pr.total-pr.done}개 확인`; updateAutoScrollToggle(); renderDomainStrip(); renderDomainOverview(); }
+function renderQ(){ if(completed()){ idx=TOTAL-1; return showResult(false); } idx=clamp(idx,0,TOTAL-1); const q=Q[idx]; if(!q){ return showIntro(); } const d=q.domain, qs=domainQuestions(d); updateTestProgress(d); const list=$('questionList'); list.innerHTML=qs.map((item,i)=>{ const val=answers[item.no]; return `<section class="listQuestion ${val?'answered':'missing'}" id="qitem-${item.no}" data-no="${item.no}"><div class="listQuestionHead"><span class="qNo">${String(i+1).padStart(2,'0')}</span><p class="qTextList">${item.text}</p></div><div class="scaleHint"><span>전혀 아니다</span><span>보통이다</span><span>매우 그렇다</span></div><div class="circleScale" role="radiogroup" aria-label="${i+1}번 응답">${labels.map((l,li)=>{const v=li+1; return `<button type="button" class="circleChoice v${v} ${val===v?'active':''}" data-no="${item.no}" data-val="${v}" aria-label="${v} ${l}" aria-pressed="${val===v?'true':'false'}"></button>`}).join('')}</div><div class="answerEcho ${val?'done':''}" id="answerEcho-${item.no}">${val?`선택됨 · ${val} ${labels[val-1]}`:'가까운 쪽을 하나 고르세요'}</div></section>`; }).join(''); list.querySelectorAll('.circleChoice').forEach(btn=>btn.onclick=()=>selectListAnswer(Number(btn.dataset.no),Number(btn.dataset.val),{autoScroll:true})); }
+const AUTO_SCROLL_KEY='kgm210_auto_scroll';
+function isAutoScrollEnabled(){ return localStorage.getItem(AUTO_SCROLL_KEY)!=='false'; }
+function updateAutoScrollToggle(){ const b=$('autoScrollToggle'); if(!b)return; const on=isAutoScrollEnabled(); b.textContent=on?'자동넘김 켜짐':'자동넘김 꺼짐'; b.classList.toggle('off',!on); b.setAttribute('aria-pressed',on?'true':'false'); }
+function toggleAutoScroll(){ localStorage.setItem(AUTO_SCROLL_KEY,isAutoScrollEnabled()?'false':'true'); updateAutoScrollToggle(); showToast(isAutoScrollEnabled()?'자동넘김을 켰어요':'자동넘김을 껐어요'); }
+function showToast(msg){ let t=$('kgmToast'); if(!t){ t=document.createElement('div'); t.id='kgmToast'; t.className='kgmToast'; document.body.appendChild(t); } t.textContent=msg; t.classList.add('show'); clearTimeout(showToast._timer); showToast._timer=setTimeout(()=>t.classList.remove('show'),1500); }
+function updateAnswerEcho(no,val){ const el=$('answerEcho-'+no); if(!el)return; el.textContent=`선택됨 · ${val} ${labels[val-1]}`; el.classList.add('done'); }
+function isMobileAnswerFlow(){ return window.matchMedia('(max-width:820px)').matches || ('ontouchstart' in window) || (navigator.maxTouchPoints||0)>0; }
+function smoothScrollToElement(el, offset=16){ if(!el)return; const top=el.getBoundingClientRect().top + window.scrollY - offset; window.scrollTo({top:Math.max(0,top),behavior:'smooth'}); }
+function highlightNextItem(el){ if(!el)return; document.querySelectorAll('.listQuestion.autoNextFocus').forEach(x=>x.classList.remove('autoNextFocus')); el.classList.add('autoNextFocus'); setTimeout(()=>el.classList.remove('autoNextFocus'),1300); }
+function scrollToNextListItem(no){
+  const q=Q.find(x=>x.no===no); if(!q)return;
+  const qs=domainQuestions(q.domain); const pos=qs.findIndex(x=>x.no===no);
+  let next = qs.slice(pos+1).find(x=>!answers[x.no]) || qs[pos+1] || qs.find(x=>!answers[x.no] && x.no!==no);
+  setTimeout(()=>{
+    if(next){ const el=document.getElementById('qitem-'+next.no); highlightNextItem(el); smoothScrollToElement(el,14); return; }
+    const btn=$('nextBtn'); if(btn){ btn.classList.add('nextBtnNudge'); btn.scrollIntoView({behavior:'smooth',block:'end'}); setTimeout(()=>btn.classList.remove('nextBtnNudge'),1600); }
+  },140);
+}
+function selectListAnswer(no,val,opts={}){
+  const wasAnswered=!!answers[no];
+  answers[no]=val;
+  setCompleted(false);
+  save();
+  const item=document.getElementById('qitem-'+no);
+  if(item){
+    item.classList.remove('missing','pulse');
+    item.classList.add('answered');
+    item.querySelectorAll('.circleChoice').forEach(b=>{
+      const on=Number(b.dataset.val)===val;
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+    });
+  }
+  updateAnswerEcho(no,val);
+  const q=Q.find(x=>x.no===no);
+  if(q){
+    updateTestProgress(q.domain);
+    const pr=domainProgress(q.domain);
+    showToast(`저장됨 · ${val} ${labels[val-1]} · ${pr.done}/30`);
+  }
+  if(opts.autoScroll && !wasAnswered && isAutoScrollEnabled() && isMobileAnswerFlow()) scrollToNextListItem(no);
+}
 function firstMissingInCurrentDomain(){ const d=currentDomain(); return domainQuestions(d).find(q=>!answers[q.no]) || null; }
 function scrollToQuestion(no,withAlert=false){ const el=document.getElementById('qitem-'+no); if(el){el.classList.add('pulse'); el.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>el.classList.remove('pulse'),1800);} if(withAlert) setTimeout(()=>alert('아직 응답하지 않은 성장질문이 있습니다.'),120); }
 function goNextDomain(){ const d=currentDomain(), nd=nextDomainName(d); if(!nd){ if(answeredCount()>=TOTAL){ setCompleted(true); return showResult(false); } return moveToFirstMissing(true); } idx=Q.findIndex(q=>q.domain===nd); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
@@ -1977,7 +2077,7 @@ function next(){ const miss=firstMissingInCurrentDomain(); if(miss){ scrollToQue
 function advanceAfterAnswer(){ updateTestProgress(currentDomain()); }
 function showDomainComplete(d){ goNextDomain(); }
 
-function sampleValue(q){ const m={'K 주도성':3.8,'I 정체성':3.25,'N 자기이야기':3.6,'G 강점':4.15,'D 책임영역':3.05,'O 기회실행':2.85,'M 의미통합':3.75}; return Math.max(1,Math.min(5,(m[q.domain]||3.3)+((parseInt(q.z.replace('Z',''))%3)-1)*.1)); }
+function sampleValue(q){ const m={'K 주도성':3.8,'I 존재초점':3.25,'N 자기이야기':3.6,'G 고유성':4.15,'D 책임경계':3.05,'O 실행기회':2.85,'M 성장통합':3.75}; return Math.max(1,Math.min(5,(m[q.domain]||3.3)+((parseInt(q.z.replace('Z',''))%3)-1)*.1)); }
 function buildScores(sample=false){ const val=q=>sample?sampleValue(q):answers[q.no]; const pick=f=>Q.filter(f).map(q=>val(q)).filter(Boolean); const domainAxes=domains().map(d=>({name:d,X:avg(pick(q=>q.domain===d&&q.process==='알아차림')),Y:avg(pick(q=>q.domain===d&&q.process==='세우기')),Z:avg(pick(q=>q.domain===d&&q.process==='적용하기'))})); return {domains:domains().map(d=>({name:d,avg:avg(pick(q=>q.domain===d)),n:pick(q=>q.domain===d).length})), processes:['알아차림','세우기','적용하기'].map(p=>({name:p,avg:avg(pick(q=>q.process===p))})), zs:[...new Set(Q.map(q=>q.z+' '+q.zLabel))].map(z=>({name:z,avg:avg(pick(q=>(q.z+' '+q.zLabel)===z))})), domainAxes}; }
 function axisScores(scores){ const g=n=>scores.processes.find(x=>x.name===n)?.avg||0; return {X:g('알아차림'),Y:g('세우기'),Z:g('적용하기')}; }
 function std(a){ const m=avg(a); return Math.sqrt(avg(a.map(x=>(x-m)**2))); }
@@ -1997,9 +2097,9 @@ function classify(scores){
   if(dsd<.35 && overall>=3.35) return {name:'이음형',badge:'영역 연결 우수',desc:'한 영역만 튀기보다 여러 영역이 서로 이어지며 작동하는 편입니다.',guide:'이미 연결된 힘을 실제 생활 장면 하나에 더 선명하게 적용합니다.'};
   if(range>=.9 || dsd>=.85) return {name:'전환형',badge:'성장전환기',desc:'어떤 부분은 앞서가고 어떤 부분은 따라오는 중입니다. 지금은 성장방식이 바뀌는 시기일 수 있습니다.',guide:'가장 강한 자원 하나와 가장 약한 성장지점 하나를 연결해 작은 실험을 정합니다.'};
   if(overall<2.8 || vals.every(weak)) return {name:'씨앗형',badge:'성장 시작단계',desc:'아직 충분히 드러나지 않았지만 작은 가능성이 시작되고 있습니다.',guide:'큰 목표보다 안전하고 쉬운 행동 하나로 시작합니다.'};
-  if(domainAvg('D 책임영역')>=3.7 || domainAvg('M 의미통합')>=3.7 || top==='D 책임영역' || top==='M 의미통합') return {name:'연결형',badge:'관계와 의미를 통해 성장',desc:'책임, 의미, 관계의 장면 속에서 성장의 힘이 잘 살아납니다.',guide:'중요한 사람이나 의미 있는 역할 안에서 다음 행동을 정합니다.'};
-  if(domainAvg('O 기회실행')>=3.7 || domainAvg('G 강점')>=3.8 || top==='O 기회실행') return {name:'확장형',badge:'도전과 확장',desc:'새로운 시도와 강점 활용을 통해 성장할 수 있는 힘이 보입니다.',guide:'기회를 더 크게 만들기보다 이번 주에 반복 가능한 작은 도전을 고릅니다.'};
-  if(strong(ax.Z) || domainAvg('M 의미통합')>=3.8) return {name:'통합형',badge:'삶으로 연결되는 성장',desc:'배운 것을 돌아보고 삶의 방향으로 묶는 힘이 자라고 있습니다.',guide:'좋은 깨달음을 일상 습관으로 연결할 작은 장치를 만듭니다.'};
+  if(domainAvg('D 책임경계')>=3.7 || domainAvg('M 성장통합')>=3.7 || top==='D 책임경계' || top==='M 성장통합') return {name:'연결형',badge:'관계와 의미를 통해 성장',desc:'책임, 의미, 관계의 장면 속에서 성장의 힘이 잘 살아납니다.',guide:'중요한 사람이나 의미 있는 역할 안에서 다음 행동을 정합니다.'};
+  if(domainAvg('O 실행기회')>=3.7 || domainAvg('G 고유성')>=3.8 || top==='O 실행기회') return {name:'확장형',badge:'도전과 확장',desc:'새로운 시도와 강점 활용을 통해 성장할 수 있는 힘이 보입니다.',guide:'기회를 더 크게 만들기보다 이번 주에 반복 가능한 작은 도전을 고릅니다.'};
+  if(strong(ax.Z) || domainAvg('M 성장통합')>=3.8) return {name:'통합형',badge:'삶으로 연결되는 성장',desc:'배운 것을 돌아보고 삶의 방향으로 묶는 힘이 자라고 있습니다.',guide:'좋은 깨달음을 일상 습관으로 연결할 작은 장치를 만듭니다.'};
   return {name:'개척형',badge:'실행 시작',desc:'아직 완전히 자리잡지는 않았지만 움직이기 시작한 성장상태입니다.',guide:'완벽하게 준비하려 하기보다 오늘 바로 가능한 첫 행동을 선택합니다.'};
 }
 function level(scores){ const p=Math.round(avg(scores.domains.map(d=>d.avg))/5*100); if(p<=20)return {name:'Seed',pct:p,desc:'성장 인식이 시작되는 단계'}; if(p<=40)return {name:'Root',pct:p,desc:'기초를 다시 세우는 단계'}; if(p<=60)return {name:'Branch',pct:p,desc:'여러 영역으로 뻗어가는 단계'}; if(p<=80)return {name:'Forest',pct:p,desc:'경험과 행동이 연결되는 단계'}; return {name:'Kingdom',pct:p,desc:'자기주도 성장과 기여가 작동하는 단계'}; }
@@ -2113,8 +2213,160 @@ function renderCoachDashboard(scores,sorted,low,type,lv,ax,selected){
 
 function resultText(){ const s=buildScores(false); const sorted=[...s.domains].sort((a,b)=>b.avg-a.avg), low=[...s.domains].sort((a,b)=>a.avg-b.avg), type=classify(s), lv=level(s), ax=axisScores(s); return `KGM210 성장코칭 요약\n오늘의 코칭 주제: ${type.name}\n성장 단계: ${lv.name} (${lv.pct}/100)\n성장 흐름: 알아차림 ${ax.X.toFixed(1)} / 세우기 ${ax.Y.toFixed(1)} / 해보기 ${ax.Z.toFixed(1)}\n대화의 출발점: ${sorted.slice(0,2).map(x=>`${dTitle(x.name)} ${x.avg.toFixed(1)}`).join(', ')}\n우선 대화주제: ${low.slice(0,2).map(x=>`${dTitle(x.name)} ${x.avg.toFixed(1)}`).join(', ')}\n기억할 점: 이 결과는 판정이 아니라 코칭 대화를 여는 지도입니다.`; }
 
+
+
+/* v2.6 · 7문 비균등 혼합형 정식검사 엔진 */
+const MIXED_PHASES = ['알아차림','세우기','적용하기'];
+const MIXED_ZS = ['Z1','Z2','Z3','Z4','Z5','Z6','Z7','Z8','Z9','Z10'];
+const MIXED_DOMAIN_ORDER = ['K 주도성','I 존재초점','N 자기이야기','G 고유성','D 책임경계','O 실행기회','M 성장통합'];
+const GATE_BLOCK_PATTERN = [3,6,3,9,3,3,3];
+const GATE_META = [
+  {name:'입장의 문', short:'입장', size:21, tone:'현재의 나를 천천히 바라보는 구간입니다.', guide:'너무 깊게 고민하기보다 지금 나와 가까운 쪽을 고릅니다.'},
+  {name:'거울의 문', short:'거울', size:42, tone:'반복되는 반응과 이야기를 비추는 구간입니다.', guide:'비슷해 보이는 문항도 조금씩 다른 장면을 비춥니다.'},
+  {name:'기준의 문', short:'기준', size:21, tone:'내가 지키고 싶은 기준을 살펴보는 구간입니다.', guide:'정답보다 나에게 중요한 것에 가까운 답을 고릅니다.'},
+  {name:'중심의 문', short:'중심', size:63, tone:'조금 더 깊이 들어가는 핵심 구간입니다.', guide:'이 구간은 21문항짜리 세 마디로 진행됩니다. 한 문항씩 현재의 나와 가까운 쪽을 선택합니다.'},
+  {name:'경계의 문', short:'경계', size:21, tone:'내가 맡을 것과 나눌 것을 정리하는 구간입니다.', guide:'모든 것을 혼자 떠안지 않아도 된다는 기준으로 답합니다.'},
+  {name:'실행의 문', short:'실행', size:21, tone:'생각을 작은 행동으로 옮길 준비를 하는 구간입니다.', guide:'큰 결심보다 실제로 해볼 수 있는 작은 움직임을 떠올립니다.'},
+  {name:'통합의 문', short:'통합', size:21, tone:'지금까지의 응답을 성장지도와 연결하는 마지막 구간입니다.', guide:'끝까지 온 응답 자체가 중요한 성장자료입니다.'}
+];
+let MIXED_BLOCKS_CACHE = null;
+let MIXED_FLOW_CACHE = null;
+function mixedDomains(){ return MIXED_DOMAIN_ORDER.filter(d=>Q.some(q=>q.domain===d)); }
+function domains(){ return mixedDomains(); }
+function flowBlocks(){
+  if(MIXED_BLOCKS_CACHE) return MIXED_BLOCKS_CACHE;
+  const blocks=[]; let blockNo=0; const ds=mixedDomains();
+  MIXED_PHASES.forEach(process=>{
+    MIXED_ZS.forEach(z=>{
+      const rotated = ds.slice(blockNo % ds.length).concat(ds.slice(0, blockNo % ds.length));
+      const block = rotated.map(domain=>Q.find(x=>x.domain===domain && x.process===process && x.z===z)).filter(Boolean);
+      if(block.length) blocks.push(block);
+      blockNo++;
+    });
+  });
+  // 안전장치: 혹시 구조 밖 문항이 있으면 마지막 블록에 보존한다.
+  const used = new Set(blocks.flat().map(q=>q.no));
+  const extras = Q.filter(q=>!used.has(q.no));
+  if(extras.length) blocks.push(extras);
+  MIXED_BLOCKS_CACHE = blocks;
+  return blocks;
+}
+function flowQuestions(){
+  if(MIXED_FLOW_CACHE) return MIXED_FLOW_CACHE;
+  MIXED_FLOW_CACHE = flowBlocks().flat();
+  return MIXED_FLOW_CACHE;
+}
+function gateStartBlock(gate){ return GATE_BLOCK_PATTERN.slice(0,gate).reduce((a,b)=>a+b,0); }
+function gateEndBlock(gate){ return gateStartBlock(gate) + (GATE_BLOCK_PATTERN[gate]||0); }
+function gateStartPos(gate){ return gateStartBlock(gate)*7; }
+function gateEndPos(gate){ return Math.min(flowQuestions().length, gateEndBlock(gate)*7); }
+function gateIndexForBlock(block){
+  let acc=0;
+  for(let i=0;i<GATE_BLOCK_PATTERN.length;i++){ acc += GATE_BLOCK_PATTERN[i]; if(block < acc) return i; }
+  return GATE_BLOCK_PATTERN.length-1;
+}
+function blockIndexForPos(pos){ return Math.floor(clamp(pos,0,TOTAL-1)/7); }
+function currentRoundIndex(){ return gateIndexForBlock(blockIndexForPos(idx)); }
+function totalRounds(){ return GATE_BLOCK_PATTERN.length; }
+function roundQuestions(round=currentRoundIndex()){ return flowQuestions().slice(gateStartPos(round), gateEndPos(round)); }
+function currentGateBlock(round=currentRoundIndex()){
+  const block = blockIndexForPos(idx);
+  return clamp(block, gateStartBlock(round), Math.max(gateStartBlock(round), gateEndBlock(round)-1));
+}
+function currentGateBeat(round=currentRoundIndex()){
+  return currentGateBlock(round) - gateStartBlock(round) + 1;
+}
+function currentBlockQuestions(){ return flowBlocks()[currentGateBlock()] || []; }
+function roundIndexForNo(no){
+  const pos=flowQuestions().findIndex(q=>q.no===no);
+  if(pos<0)return 0;
+  return gateIndexForBlock(blockIndexForPos(pos));
+}
+function phaseNameForPos(pos){ return flowQuestions()[pos]?.process || ''; }
+function currentDomain(){ return `GATE_${currentRoundIndex()}`; }
+function domainQuestions(d){
+  if(String(d).startsWith('GATE_')) return roundQuestions(Number(String(d).replace('GATE_','')));
+  return Q.filter(q=>q.domain===d);
+}
+function roundProgress(round=currentRoundIndex()){
+  const qs=roundQuestions(round); const done=qs.filter(q=>answers[q.no]).length;
+  return {done,total:qs.length,pct:qs.length?Math.round(done/qs.length*100):0,complete:qs.length>0 && done===qs.length};
+}
+function missingQuestions(){ return flowQuestions().filter(q=>!answers[q.no]); }
+function renderDomainStrip(){ const el=$('domainStrip'); if(el) el.innerHTML=''; }
+function renderDomainOverview(){ const el=$('domainOverview'); if(el) el.innerHTML=''; }
+function gateMessage(round=currentRoundIndex()){
+  const m=GATE_META[round] || GATE_META[0];
+  if(round===0) return `<b>정식검사 시작</b> · ${m.tone} ${m.guide}`;
+  if(round===1) return `<b>두 번째 문</b> · ${m.tone} ${m.guide}`;
+  if(round===2) return `<b>세 번째 문</b> · ${m.tone} ${m.guide}`;
+  if(round===3) return `<b>검사의 중심부</b> · ${m.tone} ${m.guide}`;
+  if(round===4) return `<b>정리의 문</b> · ${m.tone} ${m.guide}`;
+  if(round===5) return `<b>실행의 문</b> · ${m.tone} ${m.guide}`;
+  return `<b>마지막 문</b> · ${m.tone} ${m.guide}`;
+}
+function updateHomeButtons(){
+  const hasAnswers=answeredCount()>0 && !completed(); const hasHistory=getHistory().length>0; const miss=missingQuestions()[0]; const r=miss?roundIndexForNo(miss.no)+1:1;
+  const label=GATE_META[r-1]?.name || '다음 문';
+  if($('resumeBtn')){ $('resumeBtn').textContent=completed()?'결과 보기':`${r}번째 문부터 계속`; $('resumeBtn').style.display=(hasAnswers||completed())?'inline-flex':'none'; }
+  if($('journeyBtn')) $('journeyBtn').style.display=hasHistory?'inline-flex':'none';
+  if($('introResumeBtn')){ $('introResumeBtn').textContent=`${r}번째 문 · ${label}부터 계속`; $('introResumeBtn').style.display=hasAnswers?'inline-flex':'none'; }
+  if($('introJourneyBtn')) $('introJourneyBtn').style.display=hasHistory?'inline-flex':'none';
+}
+function moveToFirstMissing(message=true){
+  const m=missingQuestions(); if(!m.length)return false;
+  idx=flowQuestions().findIndex(q=>q.no===m[0].no); setCompleted(false); hideAll(); $('test').classList.remove('hidden'); renderQ();
+  setTimeout(()=>{ const el=document.getElementById('qitem-'+m[0].no); if(el){el.classList.add('pulse'); el.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>el.classList.remove('pulse'),1800);} if(message) alert(`아직 ${m.length}개 문항이 남았습니다. 첫 미응답 문항으로 이동합니다.`); },80);
+  return true;
+}
+function start(skip=false){
+  if(skip){ if(completed()) return showResult(false); if(answeredCount()===0){ alert('이어갈 응답이 없습니다. 새 검사를 시작해 주세요.'); return; } }
+  else { if(!requireAgree())return; if(answeredCount()>0 && !completed() && !confirm('진행 중인 응답이 있습니다. 새 검사로 시작할까요?')) return; clearCurrentTest(); }
+  const first=flowQuestions().findIndex(q=>!answers[q.no]); idx=first>=0?first:0; save(); hideAll(); $('test').classList.remove('hidden'); renderQ(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function updateTestProgress(){
+  const round=currentRoundIndex(), no=round+1, meta=GATE_META[round]||GATE_META[0], pr=roundProgress(round), qs=roundQuestions(round), beat=currentGateBeat(round), totalBeats=GATE_BLOCK_PATTERN[round]||1, blockQs=currentBlockQuestions();
+  $('sectionLabel').textContent=`${no}번째 문 · ${meta.name}`;
+  $('qTitle').textContent=`7개의 문 중 ${no}번째`;
+  $('progressNow').textContent=pr.done; $('progressTotal').textContent=pr.total;
+  $('answeredText').textContent=`전체 ${answeredCount()}/${TOTAL}`;
+  $('barFill').style.width=clamp(pr.done/Math.max(1,pr.total)*100,0,100)+'%'; $('totalBarFill').style.width=clamp(answeredCount()/TOTAL*100,0,100)+'%';
+  $('domainGuide').innerHTML=`<b>${meta.name}</b><br><span>${meta.tone} ${meta.guide} 응답은 자동으로 보호됩니다.</span><div class="roundMeta"><span>${beat}/${totalBeats}마디</span><span>이 문 ${pr.done}/${pr.total}</span><span>전체 ${answeredCount()}/${TOTAL}</span></div><div class="roundGate">${gateMessage(round)}</div>`;
+  const next=$('nextBtn'); $('prevBtn').disabled=round<=0; $('prevBtn').textContent='이전 문';
+  next.classList.toggle('ready',pr.complete); next.classList.toggle('blocked',!pr.complete); next.disabled=false; next.textContent=pr.complete?(no>=totalRounds()?'결과 리포트 보기':'다음 문으로'):`미응답 ${pr.total-pr.done}개 확인`;
+  renderDomainStrip(); updateAutoScrollToggle();
+}
+function renderQ(){
+  if(completed()){ idx=TOTAL-1; return showResult(false); }
+  idx=clamp(idx,0,TOTAL-1); const flow=flowQuestions(); const q=flow[idx]; if(!q){ return showIntro(); }
+  const round=currentRoundIndex(), qs=roundQuestions(round); updateTestProgress();
+  const list=$('questionList');
+  list.innerHTML=qs.map((item,i)=>{ const val=answers[item.no]; const info=DOMAIN[item.domain]||{short:item.domain[0],easy:item.domain}; return `<section class="listQuestion ${val?'answered':'missing'}" id="qitem-${item.no}" data-no="${item.no}"><div class="listQuestionHead"><span class="qNo">${String(i+1).padStart(2,'0')}</span><div><span class="mixTag userHiddenMeta" aria-hidden="true">${info.short}</span><p class="qTextList">${item.text}</p></div></div><div class="scaleHint"><span>전혀 아니다</span><span>보통이다</span><span>매우 그렇다</span></div><div class="circleScale" role="radiogroup" aria-label="${i+1}번 응답">${labels.map((l,li)=>{const v=li+1; return `<button type="button" class="circleChoice v${v} ${val===v?'active':''}" data-no="${item.no}" data-val="${v}" aria-label="${v} ${l}" aria-pressed="${val===v?'true':'false'}"></button>`}).join('')}</div><div class="answerEcho ${val?'done':''}" id="answerEcho-${item.no}">${val?`선택됨 · ${val} ${labels[val-1]}`:'가까운 쪽을 하나 고르세요'}</div></section>`; }).join('');
+  list.querySelectorAll('.circleChoice').forEach(btn=>btn.onclick=()=>selectListAnswer(Number(btn.dataset.no),Number(btn.dataset.val),{autoScroll:true}));
+}
+function updateAnswerEcho(no,val){ const el=$('answerEcho-'+no); if(!el)return; el.textContent=`선택됨 · ${val} ${labels[val-1]}`; el.classList.add('done'); }
+function firstMissingInCurrentDomain(){ return roundQuestions(currentRoundIndex()).find(q=>!answers[q.no]) || null; }
+function scrollToNextListItem(no){
+  const flow=flowQuestions(); const pos=flow.findIndex(x=>x.no===no); if(pos<0)return; const gate=roundIndexForNo(no); const start=gateStartPos(gate), end=gateEndPos(gate); const qslice=flow.slice(start,end);
+  const next = flow.slice(pos+1,end).find(x=>!answers[x.no]) || flow.slice(pos+1,end)[0] || qslice.find(x=>!answers[x.no] && x.no!==no);
+  setTimeout(()=>{ if(next){ const el=document.getElementById('qitem-'+next.no); highlightNextItem(el); smoothScrollToElement(el,14); return; } const btn=$('nextBtn'); if(btn){ btn.classList.add('nextBtnNudge'); btn.scrollIntoView({behavior:'smooth',block:'end'}); setTimeout(()=>btn.classList.remove('nextBtnNudge'),1600); } },140);
+}
+function selectListAnswer(no,val,opts={}){
+  const wasAnswered=!!answers[no]; answers[no]=val; setCompleted(false); save();
+  const item=document.getElementById('qitem-'+no); if(item){ item.classList.remove('missing','pulse'); item.classList.add('answered'); item.querySelectorAll('.circleChoice').forEach(b=>{ const on=Number(b.dataset.val)===val; b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false'); }); }
+  updateAnswerEcho(no,val); const gate=roundIndexForNo(no); updateTestProgress(); const pr=roundProgress(gate); showToast(`자동 보호됨 · ${val} ${labels[val-1]} · ${pr.done}/${pr.total}`);
+  if(pr.complete && !wasAnswered){ const gno=gate+1; const meta=GATE_META[gate]; setTimeout(()=>showToast(`${gno}번째 문 완료 · ${meta?.name||'다음 문'} 통과`),900); }
+  if(opts.autoScroll && !wasAnswered && isAutoScrollEnabled() && isMobileAnswerFlow()) scrollToNextListItem(no);
+}
+function goNextDomain(){ const gate=currentRoundIndex(); if(gate>=totalRounds()-1){ if(answeredCount()>=TOTAL){ setCompleted(true); return showResult(false); } return moveToFirstMissing(true); } idx=gateStartPos(gate+1); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
+function goPrevDomain(){ const gate=currentRoundIndex(); if(gate<=0)return; idx=gateStartPos(gate-1); renderQ(); window.scrollTo({top:0,behavior:'smooth'}); }
+function next(){ const miss=firstMissingInCurrentDomain(); if(miss){ scrollToQuestion(miss.no,true); return; } goNextDomain(); }
+function advanceAfterAnswer(){ updateTestProgress(); }
+function showDomainComplete(d){ goNextDomain(); }
+
 $('startBtn').onclick=()=>start(false);
 $('heroStartBtn').onclick=()=>{ if(!requireAgree()) return; start(false); };
+$('autoScrollToggle') && ($('autoScrollToggle').onclick=toggleAutoScroll);
 $('resumeBtn').onclick=()=>{ if(completed()) showResult(false); else start(true); };
 $('introResumeBtn') && ($('introResumeBtn').onclick=()=>start(true));
 $('journeyBtn') && ($('journeyBtn').onclick=showJourney);
@@ -2123,13 +2375,13 @@ $('sampleResultBtn').onclick=()=>showResult(true); $('nextBtn').onclick=next; $(
 $('backToTestBtn').textContent='처음으로'; $('backToTestBtn').onclick=showIntro;
 $('resetBtn').textContent='새 검사 시작'; $('resetBtn').onclick=()=>{if(confirm('새 검사로 시작할까요? 이전 성장여정 기록은 유지됩니다.')){clearCurrentTest(); save(); showIntro(); updateHomeButtons();}};
 $('name').value=localStorage.getItem('kgm210_name')||''; $('memo').value=localStorage.getItem('kgm210_memo')||'';
-document.addEventListener('keydown',e=>{if($('test').classList.contains('hidden'))return; if(completed())return showResult(false); const d=currentDomain(); if(e.key>='1'&&e.key<='5'){const miss=domainQuestions(d).find(q=>!answers[q.no]); if(miss){selectListAnswer(miss.no,Number(e.key)); const nextMiss=domainQuestions(d).find(q=>!answers[q.no]); if(nextMiss) setTimeout(()=>document.getElementById('qitem-'+nextMiss.no)?.scrollIntoView({behavior:'smooth',block:'center'}),80);}} if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')goPrevDomain();});
+document.addEventListener('keydown',e=>{if($('test').classList.contains('hidden'))return; if(completed())return showResult(false); if(e.key>='1'&&e.key<='5'){const miss=roundQuestions(currentRoundIndex()).find(q=>!answers[q.no]); if(miss){selectListAnswer(miss.no,Number(e.key),{autoScroll:true}); const nextMiss=roundQuestions(currentRoundIndex()).find(q=>!answers[q.no]); if(nextMiss) setTimeout(()=>document.getElementById('qitem-'+nextMiss.no)?.scrollIntoView({behavior:'smooth',block:'center'}),80);}} if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')goPrevDomain();});
 
 function bindCoachLock(){ const d=document.querySelector('.coachOnlyBlock'); if(!d || d.dataset.lockBound)return; d.dataset.lockBound='1'; d.addEventListener('toggle',()=>{ if(d.open && sessionStorage.getItem('kgmCoachOpen')!=='1'){ const v=prompt('코치전용 보기 비밀번호를 입력하세요.'); if(v!=='KGM210'){ d.open=false; alert('코치전용 보기가 닫혔습니다.'); } else { sessionStorage.setItem('kgmCoachOpen','1'); } } }); }
 bindCoachLock();
 
-window.addEventListener('resize',()=>{ if(!$('result').classList.contains('hidden')){ try{ const s=buildScores(false), ax=axisScores(s), type=classify(s); drawXYZ(s,ax,type); }catch(e){} }});
-renderDomainOverview(); updateHomeButtons();
+window.addEventListener('resize',()=>{ if(!$('result').classList.contains('hidden')){ try{ const s=buildScores(false), ax=axisScores(s), type=classify(s); drawXYZ(s,ax,type); }catch(e){} } });
+renderDomainOverview(); updateAutoScrollToggle(); updateHomeButtons();
 
 </script>
 </body>
