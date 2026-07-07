@@ -3719,8 +3719,9 @@ renderDomainOverview(); updateAutoScrollToggle(); updateHomeButtons();
 
 <script>
 /* KGM210 v3.11 · low-friction research metadata + Notion payload readiness */
-window.KGM_ENABLE_NOTION_SUBMIT = true;
-window.KGM_NOTION_SUBMIT_ENDPOINT = '/wp-json/kgm210/v1/submit';
+window.KGM_GOOGLE_SHEETS_ENDPOINT = '';
+window.KGM_ENABLE_NOTION_SUBMIT = Boolean(window.KGM_GOOGLE_SHEETS_ENDPOINT);
+window.KGM_NOTION_SUBMIT_ENDPOINT = window.KGM_GOOGLE_SHEETS_ENDPOINT;
 (function(){
   const VERSION='KGM210 v3.11 research-preflight';
   const CONSENT_VERSION='KGM210-ANON-2026-07-v1';
@@ -3832,7 +3833,7 @@ window.KGM_NOTION_SUBMIT_ENDPOINT = '/wp-json/kgm210/v1/submit';
     if(!notice) return;
     let box=$id('researchSaveStatus');
     if(!box){box=document.createElement('div'); box.id='researchSaveStatus'; box.className='researchSaveStatus'; notice.insertAdjacentElement('afterend',box);}
-    const msg = state==='sent' ? '검사 결과가 안전하게 저장되었습니다.' : state==='skipped' ? '결과는 화면에 표시되었습니다. 저장은 잠시 후 다시 확인됩니다.' : '검사 결과 저장을 준비하고 있습니다.';
+    const msg = state==='sent' ? '검사 결과가 안전하게 저장되었습니다.' : state==='skipped' ? '결과는 화면에 표시되었습니다. 저장은 잠시 후 다시 확인됩니다.' : 'Google Sheets 저장 URL 연결 대기 중입니다.';
     const use = payload.researchUseStatus==='제외' ? '익명 통계 분석 제외' : '익명 통계 분석 가능';
     box.innerHTML=`<b>${msg}</b><br>익명연구ID ${payload.anonymousResearchId} · ${use} · 응답 ${payload.answerCount}/210`;
   }
@@ -3841,6 +3842,16 @@ window.KGM_NOTION_SUBMIT_ENDPOINT = '/wp-json/kgm210/v1/submit';
     if(!endpoint){ renderResearchStatus(payload,'skipped'); return {ok:false,skipped:true,reason:'no_endpoint'}; }
     const last=safeGet('kgm210_last_submission_id','');
     if(last===payload.submissionId){ renderResearchStatus(payload,'sent'); return {ok:true,skipped:true,reason:'already_submitted'}; }
+    if(/^https:\/\/script\.google\.com\/macros\/s\//.test(endpoint)){
+      const form=new FormData();
+      form.append('action','kgm210Submit');
+      form.append('submissionId',payload.submissionId);
+      form.append('payload',JSON.stringify(payload));
+      await fetch(endpoint,{method:'POST',mode:'no-cors',body:form});
+      safeSet('kgm210_last_submission_id',payload.submissionId);
+      renderResearchStatus(payload,'sent');
+      return {ok:true,opaque:true,target:'google_sheets'};
+    }
     const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const data=await res.json().catch(()=>({}));
     if(res.ok && data.ok!==false){ safeSet('kgm210_last_submission_id',payload.submissionId); renderResearchStatus(payload,'sent'); return {ok:true,data}; }
