@@ -6,6 +6,12 @@ Cloudflare Worker endpoint for saving completed KGM210 results to Notion.
 
 - `POST https://daily-coach-ing.com/api/kgm210-submit`
 - Compatibility route: `POST https://daily-coach-ing.com/wp-json/kgm210/v1/submit`
+- Wide CSV export: `GET https://daily-coach-ing.com/wp-json/kgm210/v1/export-wide-csv`
+- Long CSV export: `GET https://daily-coach-ing.com/wp-json/kgm210/v1/export-long-csv`
+- Wide alias: `GET https://daily-coach-ing.com/wp-json/kgm210/v1/export-csv`
+- Serverless aliases:
+  - `GET https://daily-coach-ing.com/api/kgm210-export-wide`
+  - `GET https://daily-coach-ing.com/api/kgm210-export-long`
 
 ## Environment
 
@@ -45,13 +51,43 @@ The Worker queries Notion by `제출ID`. If the same `submissionId` already exis
 { "ok": true, "duplicate": true }
 ```
 
+## Research CSV Export
+
+Export queries only records that match all of these conditions:
+
+- `연구사용상태 = 사용가능`
+- `완료여부 = true`
+- `응답수 = 210`
+- `문항응답JSON` exists
+- `익명연구ID` exists
+
+Wide CSV includes anonymous metadata, score columns, and `Q001` through `Q210`.
+
+Long CSV includes one row per item response:
+
+- `제출ID`
+- `익명연구ID`
+- `제출일시`
+- `검사버전`
+- `척도`
+- `문항번호`
+- `영역`
+- `과정`
+- `Z지표`
+- `응답값`
+
+The export intentionally excludes direct contact fields such as `이름` and `연락처`.
+
+After a record is exported successfully, the Worker updates Notion `스프레드시트동기화` to `완료`. If a matching record cannot be converted because its item JSON is invalid, the Worker updates that page to `실패`. Non-exportable records are not touched.
+
 ## Local Mock Test
 
 ```bash
 node workers/kgm210-notion-submit/test-worker.mjs
+node workers/kgm210-notion-submit/test-export.mjs
 ```
 
-This test does not call Notion. It stubs Notion API responses and checks validation, create, duplicate, and origin handling.
+These tests do not call Notion. They stub Notion API responses and check validation, create, duplicate, origin handling, wide export, long export, score preservation, anonymous-only CSV columns, and sync status updates.
 
 ## Live Smoke Test Shape
 
