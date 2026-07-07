@@ -1,0 +1,13 @@
+name = "kgm210-notion-submit"
+main = "worker.mjs"
+compatibility_date = "2026-07-08"
+
+routes = [
+  { pattern = "daily-coach-ing.com/api/kgm210-submit", zone_name = "daily-coach-ing.com" },
+  { pattern = "daily-coach-ing.com/wp-json/kgm210/v1/submit", zone_name = "daily-coach-ing.com" }
+]
+
+[vars]
+NOTION_KGM210_DATA_SOURCE_ID = "367cc114-9118-43e4-9920-0decf9ae3e75"
+KGM210_ALLOWED_ORIGIN = "https://daily-coach-ing.com"
+

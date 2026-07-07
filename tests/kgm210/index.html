@@ -3719,8 +3719,8 @@ renderDomainOverview(); updateAutoScrollToggle(); updateHomeButtons();
 
 <script>
 /* KGM210 v3.11 · low-friction research metadata + Notion payload readiness */
-window.KGM_ENABLE_NOTION_SUBMIT = false;
-window.KGM_NOTION_SUBMIT_ENDPOINT = '';
+window.KGM_ENABLE_NOTION_SUBMIT = true;
+window.KGM_NOTION_SUBMIT_ENDPOINT = '/wp-json/kgm210/v1/submit';
 (function(){
   const VERSION='KGM210 v3.11 research-preflight';
   const CONSENT_VERSION='KGM210-ANON-2026-07-v1';
@@ -3832,7 +3832,7 @@ window.KGM_NOTION_SUBMIT_ENDPOINT = '';
     if(!notice) return;
     let box=$id('researchSaveStatus');
     if(!box){box=document.createElement('div'); box.id='researchSaveStatus'; box.className='researchSaveStatus'; notice.insertAdjacentElement('afterend',box);}
-    const msg = state==='sent' ? 'Notion 저장 요청 완료' : state==='skipped' ? '저장 API 연결 대기' : '연구용 payload 준비 완료';
+    const msg = state==='sent' ? '검사 결과가 안전하게 저장되었습니다.' : state==='skipped' ? '결과는 화면에 표시되었습니다. 저장은 잠시 후 다시 확인됩니다.' : '검사 결과 저장을 준비하고 있습니다.';
     const use = payload.researchUseStatus==='제외' ? '익명 통계 분석 제외' : '익명 통계 분석 가능';
     box.innerHTML=`<b>${msg}</b><br>익명연구ID ${payload.anonymousResearchId} · ${use} · 응답 ${payload.answerCount}/210`;
   }
