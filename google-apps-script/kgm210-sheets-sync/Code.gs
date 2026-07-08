@@ -7282,8 +7282,9 @@ function unique_(values) {
 
 function styleWorkbook_(sheets) {
   Object.keys(sheets).forEach(function(key) {
+    if (key === 'ss') return;
     const sheet = sheets[key];
-    if (!sheet || !sheet.getRange) return;
+    if (!sheet || !sheet.getRange || !sheet.getLastColumn) return;
     const lastCol = Math.max(1, sheet.getLastColumn());
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, lastCol).setFontWeight('bold').setBackground('#1F2937').setFontColor('#FFFFFF');
