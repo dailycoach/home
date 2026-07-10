@@ -957,7 +957,13 @@
             <a href="/activities/live-board/" data-route="liveBoard">라이브보드 <small>→</small></a>
           </div>
         </div>
-        <a class="nav-link" href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
+        <div class="nav-group">
+          <button class="nav-button" type="button" aria-haspopup="true">콘텐츠 <span aria-hidden="true">⌄</span></button>
+          <div class="dropdown" role="menu">
+            <a href="/maum-library/" data-route="maumLibrary">마음서재 <small>NEW</small></a>
+            <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
+          </div>
+        </div>
       </nav>
 
       <div class="header-actions">
@@ -1090,7 +1096,8 @@
 
         <article class="category" data-category="contents">
           <h3>콘텐츠</h3>
-          <p>콘텐츠 실험실과 운영 데이터 확인 링크입니다.</p>
+          <p>마음을 돌보고 일상의 성장을 돕는 콘텐츠입니다.</p>
+          <a href="/maum-library/" data-route="maumLibrary">마음서재 <small>NEW</small></a>
           <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
           <a href="/pages.json" data-route="pagesJson">pages.json <small>→</small></a>
         </article>
@@ -1121,6 +1128,7 @@
           <a href="/lcms/" data-route="lcms">LCMS</a>
           <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
           <a href="/activities/live-board/" data-route="liveBoard">라이브보드</a>
+          <a href="/maum-library/" data-route="maumLibrary">마음서재</a>
           <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
         </div>
       </div>
@@ -1170,6 +1178,7 @@
       kca8: '/tests/kca8/',
       wildernessSurvival: '/activities/wilderness-survival/',
       liveBoard: '/activities/live-board/',
+      maumLibrary: '/maum-library/',
       spiritualHero: '/spiritual/hero/',
       pagesJson: '/pages.json'
     });

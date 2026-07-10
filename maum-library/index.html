@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f3ecdf" />
+  <meta name="description" content="지식을 더해야 한다는 독서의 강제성을 내려놓고, 내가 먼저 즐거워지는 문장 하나부터 시작하는 토스 독서 미니앱 마음서재." />
+  <meta name="keywords" content="독서, 독서기록, 독서모임, 독서노트, 문장기록, 마음기록, 자기성찰, 책갈피, 마음서재" />
+  <meta property="og:title" content="마음서재 — 오늘의 독서 입장권" />
+  <meta property="og:description" content="책이 싫었던 게 아닙니다. 읽어야 한다는 마음을 풀고, 내가 먼저 즐거운 독서로 들어가보세요." />
+  <meta property="og:url" content="https://daily-coach-ing.com/maum-library/" />
+  <link rel="canonical" href="https://daily-coach-ing.com/maum-library/" />
+  <title>마음서재 | 오늘의 독서 입장권</title>
+  <style>
+    :root {
+      --paper:#f3ecdf; --paper-strong:#fffaf1; --paper-soft:#ebe0cf;
+      --ink:#241b15; --ink-soft:#5f4c3e; --brown:#5d3f2d;
+      --brown-dark:#342218; --gold:#a17c4d; --gold-soft:#d6bf99;
+      --sage:#75806d; --brick:#935f4b; --line:rgba(76,52,35,.18);
+      --line-strong:rgba(76,52,35,.32); --shadow:0 28px 80px rgba(42,29,20,.12);
+      --shadow-soft:0 14px 36px rgba(42,29,20,.08); --radius-xl:34px;
+      --radius-lg:24px; --max:1160px; --safe-bottom:env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{
+      margin:0;color:var(--ink);
+      background:
+        linear-gradient(rgba(255,255,255,.14),rgba(255,255,255,.14)),
+        repeating-linear-gradient(0deg,rgba(93,63,45,.022) 0,rgba(93,63,45,.022) 1px,transparent 1px,transparent 6px),
+        var(--paper);
+      font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+      word-break:keep-all;-webkit-font-smoothing:antialiased;overflow-x:hidden
+    }
+    body::before{
+      content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;z-index:999;
+      background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.9) 0 1px,transparent 1.4px),
+      radial-gradient(circle at 80% 35%,rgba(93,63,45,.13) 0 1px,transparent 1.4px);
+      background-size:11px 13px,17px 19px;mix-blend-mode:multiply
+    }
+    a{color:inherit} button,a{-webkit-tap-highlight-color:transparent} p,h1,h2,h3{margin:0}
+    .serif{font-family:"Noto Serif KR","AppleMyungjo","Batang",serif}
+    .skip-link{position:absolute;left:-9999px;top:0;padding:10px 14px;background:var(--ink);color:#fff;z-index:2000}
+    .skip-link:focus{left:12px;top:12px}
+    .site-header{position:fixed;z-index:100;inset:0 0 auto;padding:14px 18px;transition:.25s;border-bottom:1px solid transparent}
+    .site-header.is-scrolled{background:rgba(243,236,223,.88);backdrop-filter:blur(14px);border-color:var(--line);box-shadow:0 8px 26px rgba(42,29,20,.05)}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand-lockup{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .brand-mark{width:34px;height:34px;border:1px solid var(--line-strong);border-radius:9px;display:grid;place-items:center;position:relative;background:rgba(255,250,241,.68)}
+    .brand-mark::before{content:"";width:16px;height:12px;border:1.5px solid var(--brown);border-radius:1px 1px 5px 5px;transform:skewY(-6deg);box-shadow:inset 0 -4px 0 rgba(161,124,77,.16)}
+    .brand-mark::after{content:"";position:absolute;width:1px;height:13px;background:var(--brown);top:9px}
+    .brand-text strong{display:block;font-size:15px;letter-spacing:-.03em}
+    .brand-text span{display:block;margin-top:1px;font-size:10px;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase}
+    .header-cta{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 17px;border-radius:999px;color:#fff9ef;background:var(--brown);text-decoration:none;font-size:13px;font-weight:750;box-shadow:0 8px 18px rgba(93,63,45,.16)}
+    .hero{min-height:100svh;padding:118px 20px 72px;display:grid;align-items:center;position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(214,191,153,.30),rgba(214,191,153,0) 68%);right:-180px;top:-80px}
+    .hero::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(117,128,109,.12),rgba(117,128,109,0) 70%);left:-160px;bottom:-170px}
+    .hero-inner{max-width:var(--max);width:100%;margin:0 auto;display:grid;grid-template-columns:1.04fr .96fr;gap:64px;align-items:center;position:relative;z-index:2}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--brown);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:32px;height:1px;background:var(--gold)}
+    .hero h1{margin-top:22px;font-size:clamp(52px,8vw,94px);line-height:.98;letter-spacing:-.075em;font-weight:700}
+    .hero-title-en{display:block;margin-top:11px;font-family:Georgia,"Times New Roman",serif;font-size:12px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase}
+    .hero-lead{margin-top:31px;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:clamp(22px,3.2vw,36px);line-height:1.52;letter-spacing:-.045em}
+    .hero-desc{margin-top:20px;max-width:560px;color:var(--ink-soft);font-size:16px;line-height:1.8;letter-spacing:-.025em}
+    .hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:13px}
+    .cta-primary,.cta-secondary{display:inline-flex;justify-content:center;align-items:center;min-height:54px;border-radius:999px;padding:0 24px;text-decoration:none;font-size:15px;font-weight:800;border:1px solid transparent;transition:.2s}
+    .cta-primary{background:var(--brown-dark);color:#fffaf1;box-shadow:0 14px 30px rgba(52,34,24,.18)}
+    .cta-secondary{border-color:var(--line-strong);background:rgba(255,250,241,.54);color:var(--brown)}
+    .cta-primary:hover,.cta-secondary:hover{transform:translateY(-2px)}
+    .hero-note{margin-top:14px;font-size:12px;color:rgba(36,27,21,.62)}
+    .pack-stage{position:relative;min-height:610px;display:grid;place-items:center}
+    .archive-pack{width:min(100%,470px);min-height:550px;position:relative;border-radius:28px;padding:24px;border:1px solid var(--line-strong);background:linear-gradient(135deg,rgba(255,255,255,.52),transparent 44%),var(--paper-strong);box-shadow:var(--shadow);transform:rotate(1.2deg)}
+    .archive-pack::before,.archive-pack::after{content:"";position:absolute;inset:10px;border:1px solid rgba(161,124,77,.28);border-radius:20px;pointer-events:none}
+    .archive-pack::after{inset:auto 26px 22px 26px;height:1px;border:0;border-top:1px dashed rgba(93,63,45,.35);border-radius:0}
+    .pack-code{display:flex;justify-content:space-between;gap:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.08em;color:rgba(36,27,21,.55);text-transform:uppercase}
+    .pack-head{margin-top:64px;padding:0 24px}.pack-label{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:.18em;text-transform:uppercase}
+    .pack-title{margin-top:12px;font-size:clamp(38px,5.2vw,60px);line-height:1.06;letter-spacing:-.065em}
+    .pack-subtitle{margin-top:14px;color:var(--ink-soft);font-size:14px;line-height:1.7}
+    .catalog-card{margin:40px 24px 0;padding:24px 22px 20px;border-radius:16px;background:repeating-linear-gradient(0deg,transparent 0 32px,rgba(93,63,45,.11) 32px 33px),#f9f2e7;border:1px solid rgba(93,63,45,.24);box-shadow:var(--shadow-soft);transform:rotate(-1.2deg)}
+    .catalog-card .small{font-size:10px;font-weight:800;color:var(--brick);letter-spacing:.16em}
+    .catalog-card blockquote{margin:17px 0 0;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:20px;line-height:1.62;letter-spacing:-.04em}
+    .catalog-meta{margin-top:28px;display:flex;justify-content:space-between;gap:14px;font-size:10px;color:rgba(36,27,21,.55);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .seal{position:absolute;right:18px;bottom:42px;width:76px;height:76px;border:1px solid rgba(147,95,75,.56);border-radius:50%;display:grid;place-items:center;color:rgba(147,95,75,.78);font-size:10px;font-weight:800;text-align:center;transform:rotate(-9deg);letter-spacing:.06em;background:rgba(243,236,223,.7)}
+
+    .trust-strip{
+      padding:0 20px 24px;
+      position:relative;
+      z-index:3;
+    }
+    .trust-panel{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:26px 28px;
+      border:1px solid var(--line-strong);
+      border-radius:22px;
+      background:rgba(255,250,241,.72);
+      box-shadow:var(--shadow-soft);
+      display:grid;
+      grid-template-columns:1.15fr 1.85fr;
+      gap:28px;
+      align-items:center;
+    }
+    .trust-copy .trust-kicker{
+      color:var(--brick);
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .trust-copy h2{
+      margin-top:10px;
+      font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;
+      font-size:clamp(25px,3.4vw,40px);
+      line-height:1.35;
+      letter-spacing:-.05em;
+    }
+    .trust-copy p{
+      margin-top:13px;
+      color:var(--ink-soft);
+      font-size:14px;
+      line-height:1.75;
+    }
+    .trust-points{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    .trust-point{
+      min-height:118px;
+      padding:18px 16px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:rgba(243,236,223,.66);
+    }
+    .trust-point strong{
+      display:block;
+      font-size:14px;
+      letter-spacing:-.035em;
+    }
+    .trust-point span{
+      display:block;
+      margin-top:9px;
+      color:var(--ink-soft);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+
+    .reading-card-note{padding:0 20px 38px;position:relative;z-index:3}
+    .reading-card-inner{max-width:880px;margin:0 auto;position:relative;padding:28px 30px 24px;border:1px solid rgba(93,63,45,.26);border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,.46),transparent 30%),repeating-linear-gradient(0deg,transparent 0 34px,rgba(93,63,45,.045) 34px 35px),#f8efde;box-shadow:0 18px 42px rgba(42,29,20,.085);overflow:hidden}
+    .reading-card-inner::before{content:"";position:absolute;inset:10px;border:1px solid rgba(161,124,77,.18);pointer-events:none}
+    .reading-card-inner::after{content:"";position:absolute;top:0;bottom:0;left:22px;width:1px;background:rgba(147,95,75,.18);pointer-events:none}
+    .reading-card-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .reading-card-label,.reading-card-number{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+    .reading-card-label{color:rgba(147,95,75,.86);font-weight:850}.reading-card-number{color:rgba(36,27,21,.48)}
+    .reading-card-divider{position:relative;z-index:1;height:1px;margin-top:13px;background:rgba(93,63,45,.22)}
+    .reading-card-title{position:relative;z-index:1;margin-top:22px;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:clamp(28px,4vw,42px);line-height:1.34;letter-spacing:-.052em;color:var(--brown-dark)}
+    .reading-card-body{position:relative;z-index:1;max-width:760px;margin-top:20px;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:18px;line-height:1.92;letter-spacing:-.032em;color:#3f2a1b}
+    .reading-card-body p + p{margin-top:14px}
+    .reading-card-signature{position:relative;z-index:1;margin-top:24px;text-align:right;font-size:14px;color:rgba(36,27,21,.68)}
+    .reading-card-footer{position:relative;z-index:1;margin-top:18px;padding-top:12px;border-top:1px solid rgba(93,63,45,.18);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.12em;color:rgba(36,27,21,.48)}
+
+    .section{padding:112px 20px;position:relative}.section-inner{max-width:var(--max);margin:0 auto}.section-head{max-width:760px}
+    .section-index{display:inline-flex;align-items:center;gap:10px;color:var(--brick);font-size:11px;font-weight:850;letter-spacing:.15em;text-transform:uppercase}
+    .section-index::after{content:"";width:46px;height:1px;background:currentColor;opacity:.5}
+    .section h2{margin-top:18px;font-size:clamp(34px,5vw,62px);line-height:1.16;letter-spacing:-.065em;font-weight:680}
+    .section-lead{margin-top:22px;color:var(--ink-soft);font-size:17px;line-height:1.86;letter-spacing:-.03em}
+    .pressure-grid{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .pressure-card{min-height:226px;padding:26px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,250,241,.58);position:relative;box-shadow:var(--shadow-soft)}
+    .pressure-card::before{content:attr(data-no);position:absolute;right:22px;top:18px;font-family:Georgia,serif;color:var(--gold-soft);font-size:38px}
+    .pressure-card h3{margin-top:74px;font-size:20px;letter-spacing:-.04em}
+    .pressure-card p{margin-top:13px;color:var(--ink-soft);font-size:14px;line-height:1.7}
+    .definition-panel{margin-top:54px;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-strong);border-radius:var(--radius-xl);overflow:hidden;background:rgba(255,250,241,.7);box-shadow:var(--shadow)}
+    .definition-copy{padding:48px;display:flex;flex-direction:column;justify-content:center}
+    .definition-copy .quote{font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:clamp(27px,4vw,46px);line-height:1.48;letter-spacing:-.055em}
+    .definition-copy .body{margin-top:22px;color:var(--ink-soft);font-size:15px;line-height:1.8}
+    .definition-visual{min-height:470px;padding:34px;background:linear-gradient(145deg,rgba(93,63,45,.94),rgba(52,34,24,.98));display:grid;align-items:center;position:relative;overflow:hidden}
+    .definition-visual::before{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(214,191,153,.22);border-radius:50%;right:-60px;top:-70px}
+    .library-card{max-width:420px;margin:auto;padding:28px;border-radius:14px;background:#f7edda;border:1px solid rgba(214,191,153,.62);box-shadow:0 24px 60px rgba(0,0,0,.22);transform:rotate(1deg)}
+    .library-card-top{display:flex;justify-content:space-between;align-items:center;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:var(--brick);text-transform:uppercase}
+    .library-card h3{margin-top:24px;font-size:30px;letter-spacing:-.05em}.library-card p{margin-top:14px;font-size:15px;line-height:1.75;color:var(--ink-soft)}
+    .card-lines{margin-top:26px;display:grid;gap:12px}.card-lines span{height:1px;background:rgba(93,63,45,.19)}
+    .flow-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .flow-card{min-height:360px;position:relative;padding:27px;border-radius:var(--radius-lg);border:1px solid var(--line);background:rgba(255,250,241,.62);box-shadow:var(--shadow-soft);overflow:hidden}
+    .flow-card::after{content:"";position:absolute;inset:auto -30px -50px auto;width:140px;height:140px;border:1px solid rgba(161,124,77,.18);border-radius:50%}
+    .flow-pack{display:inline-flex;min-width:50px;height:24px;padding:0 10px;align-items:center;justify-content:center;border:1px solid var(--line-strong);border-radius:6px;font-family:ui-monospace,monospace;font-size:10px;color:var(--brick);background:var(--paper-strong)}
+    .flow-card h3{margin-top:82px;font-size:24px;letter-spacing:-.05em}.flow-card p{margin-top:15px;color:var(--ink-soft);font-size:14px;line-height:1.75}
+    .flow-rule{margin-top:36px;height:1px;background:linear-gradient(90deg,var(--line-strong),transparent)}
+    .ticket-section{background:var(--brown-dark);color:#fffaf1;overflow:hidden}.ticket-section .section-index{color:#d4b184}.ticket-section .section-lead{color:rgba(255,250,241,.68)}
+    .ticket-shell{margin-top:58px;display:grid;grid-template-columns:.84fr 1.16fr;gap:30px;align-items:center}
+    .ticket-copy h3{font-size:clamp(28px,4vw,46px);line-height:1.35;letter-spacing:-.055em}.ticket-copy p{margin-top:18px;color:rgba(255,250,241,.68);font-size:15px;line-height:1.8}
+    .ticket-card{position:relative;padding:34px;border-radius:26px;color:var(--ink);background:repeating-linear-gradient(0deg,transparent 0 34px,rgba(93,63,45,.075) 34px 35px),#f7ecd9;border:1px solid rgba(214,191,153,.62);box-shadow:0 36px 80px rgba(0,0,0,.28)}
+    .ticket-card::before,.ticket-card::after{content:"";position:absolute;top:50%;width:26px;height:52px;border-radius:50%;background:var(--brown-dark);transform:translateY(-50%)}.ticket-card::before{left:-13px}.ticket-card::after{right:-13px}
+    .ticket-card .ticket-meta{display:flex;justify-content:space-between;font-family:ui-monospace,monospace;font-size:10px;color:var(--brick);letter-spacing:.12em}
+    .ticket-card .ticket-title{margin-top:28px;font-size:15px;color:var(--brown);font-weight:850;letter-spacing:.08em}
+    .ticket-question{margin-top:16px;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:clamp(25px,4vw,43px);line-height:1.46;letter-spacing:-.055em}
+    .ticket-message{margin-top:26px;padding-top:24px;border-top:1px dashed rgba(93,63,45,.34);color:var(--ink-soft);font-size:14px;line-height:1.72}
+    .shelf-grid{margin-top:52px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .shelf-card{min-height:330px;border:1px solid var(--line);background:rgba(255,250,241,.6);border-radius:14px 14px 22px 22px;padding:22px 18px;position:relative;overflow:hidden;box-shadow:var(--shadow-soft)}
+    .shelf-card::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:var(--shelf-color,var(--gold))}
+    .shelf-no{font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;color:var(--brick)}
+    .shelf-card h3{margin-top:60px;font-size:23px;letter-spacing:-.05em}.shelf-card .tagline{margin-top:14px;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:16px;line-height:1.55;letter-spacing:-.035em}
+    .shelf-card .desc{margin-top:18px;color:var(--ink-soft);font-size:13px;line-height:1.72}.shelf-card .catalog-id{position:absolute;left:18px;right:18px;bottom:18px;padding-top:12px;border-top:1px solid var(--line);font-family:ui-monospace,monospace;font-size:9px;color:rgba(36,27,21,.48)}
+    .bookmark-layout{margin-top:56px;display:grid;grid-template-columns:1fr .9fr;gap:34px;align-items:center}
+    .bookmark-book{min-height:490px;position:relative;display:grid;place-items:center;border-radius:var(--radius-xl);overflow:hidden;background:linear-gradient(145deg,#eadcc8,#cdb392);border:1px solid var(--line-strong);box-shadow:var(--shadow)}
+    .bookmark-book::before{content:"";position:absolute;width:60%;height:64%;border-radius:10px 24px 24px 10px;background:#4e392a;box-shadow:-18px 20px 0 rgba(62,44,31,.18),0 30px 56px rgba(42,29,20,.25);transform:rotate(-5deg)}
+    .bookmark-strip{position:relative;z-index:2;width:min(60%,230px);min-height:320px;padding:40px 24px 34px;background:#f8ebd1;border:1px solid rgba(161,124,77,.48);box-shadow:0 20px 44px rgba(42,29,20,.18);transform:translateX(18px) rotate(2deg)}
+    .bookmark-strip::after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);border-left:28px solid transparent;border-right:28px solid transparent;border-bottom:24px solid #cdb392}
+    .bookmark-strip .label{font-size:10px;font-weight:850;color:var(--brick);letter-spacing:.13em;text-transform:uppercase}
+    .bookmark-strip blockquote{margin:42px 0 0;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:22px;line-height:1.68;letter-spacing:-.04em}
+    .bookmark-copy h3{font-size:clamp(30px,4vw,48px);line-height:1.38;letter-spacing:-.055em}.bookmark-copy p{margin-top:20px;color:var(--ink-soft);font-size:15px;line-height:1.85}
+    .joy-note{margin-top:28px;padding:22px 24px;border-left:3px solid var(--gold);background:rgba(255,250,241,.56);font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:18px;line-height:1.65}
+    .audience-list{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .audience-item{display:flex;align-items:flex-start;gap:14px;padding:19px 20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,250,241,.46);font-size:15px;line-height:1.65}
+    .audience-item::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;margin-top:8px;background:var(--gold)}
+    .invitation-section{padding-top:36px}.invitation-letter{max-width:840px;margin:0 auto;padding:62px 66px 56px;border-radius:4px;position:relative;background:linear-gradient(180deg,rgba(255,255,255,.5),transparent 28%),#f8efde;border:1px solid rgba(93,63,45,.24);box-shadow:var(--shadow)}
+    .invitation-letter::before{content:"";position:absolute;inset:14px;border:1px solid rgba(161,124,77,.26);pointer-events:none}
+    .invitation-letter .from{color:var(--brick);font-size:11px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+    .invitation-letter h2{margin-top:22px;font-size:clamp(38px,5vw,64px)}
+    .invitation-letter .letter-body{margin-top:28px;font-family:"Noto Serif KR","AppleMyungjo","Batang",serif;font-size:20px;line-height:1.9;letter-spacing:-.035em}
+    .invitation-letter .signature{margin-top:34px;text-align:right;color:var(--ink-soft);font-size:14px}.invitation-letter .letter-action{margin-top:34px;text-align:center}
+    .site-footer{padding:54px 20px 110px;border-top:1px solid var(--line)}.footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;gap:32px;align-items:flex-start}
+    .footer-brand strong{display:block;font-size:18px;letter-spacing:-.04em}.footer-brand p,.footer-meta{margin-top:11px;color:rgba(36,27,21,.58);font-size:12px;line-height:1.7}.footer-meta{text-align:right}
+    .sticky-cta{position:fixed;left:50%;bottom:calc(14px + var(--safe-bottom));transform:translate(-50%,130%);width:min(calc(100% - 28px),560px);z-index:90;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 10px 10px 18px;border-radius:999px;color:#fffaf1;background:rgba(52,34,24,.94);backdrop-filter:blur(12px);box-shadow:0 18px 42px rgba(25,17,12,.28);transition:transform .32s ease}
+    .sticky-cta.is-visible{transform:translate(-50%,0)}.sticky-cta-text strong{display:block;font-size:13px}.sticky-cta-text span{display:block;margin-top:2px;color:rgba(255,250,241,.62);font-size:10px}
+    .sticky-cta a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:42px;padding:0 18px;border-radius:999px;background:#f5e7cf;color:var(--brown-dark);text-decoration:none;font-size:12px;font-weight:850}
+    [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}[data-reveal].is-visible{opacity:1;transform:none}
+    @media(max-width:980px){.hero-inner,.definition-panel,.ticket-shell,.bookmark-layout{grid-template-columns:1fr}.pack-stage{min-height:560px}.archive-pack{width:min(100%,500px)}.pressure-grid,.flow-grid{grid-template-columns:1fr}.shelf-grid{grid-template-columns:repeat(2,1fr)}.definition-visual{min-height:420px}.ticket-copy{max-width:680px}.bookmark-copy{order:-1}}
+    @media(max-width:680px){
+      .reading-card-note{padding:0 18px 16px}
+      .reading-card-inner{padding:22px 20px 19px}
+      .reading-card-title{font-size:30px}
+      .reading-card-body{font-size:16px;line-height:1.84}
+      .reading-card-footer{font-size:9px}
+
+      .site-header{padding:12px 14px}.header-cta{min-height:36px;padding:0 14px;font-size:12px}.brand-text span{display:none}
+      .hero{min-height:auto;padding:100px 18px 64px}.hero-inner{gap:44px}.hero h1{font-size:58px}.hero-lead{font-size:25px}.hero-desc{font-size:15px}.hero-actions{align-items:stretch;flex-direction:column}.cta-primary,.cta-secondary{width:100%}
+      .pack-stage{min-height:495px}.archive-pack{min-height:480px;padding:20px}.pack-head{margin-top:54px;padding:0 15px}.pack-title{font-size:42px}.catalog-card{margin:32px 15px 0;padding:20px}.catalog-card blockquote{font-size:18px}.seal{width:62px;height:62px;bottom:34px}
+      .section{padding:84px 18px}.section h2{font-size:38px}.section-lead{font-size:15px}.pressure-grid,.flow-grid{margin-top:38px}.pressure-card{min-height:196px}.definition-copy{padding:34px 24px}.definition-visual{padding:22px;min-height:360px}.library-card{padding:22px}.flow-card{min-height:320px}
+      .ticket-shell{margin-top:42px}.ticket-card{padding:27px 24px}.ticket-question{font-size:27px}.shelf-grid{grid-template-columns:1fr}.shelf-card{min-height:250px}.shelf-card h3{margin-top:44px}
+      .bookmark-book{min-height:420px}.bookmark-strip{min-height:280px;width:62%;padding:34px 20px 28px}.bookmark-strip blockquote{font-size:19px}.audience-list{grid-template-columns:1fr}
+      .invitation-letter{padding:46px 28px 40px}.invitation-letter h2{font-size:40px}.invitation-letter .letter-body{font-size:17px}.footer-inner{flex-direction:column}.footer-meta{text-align:left}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}[data-reveal]{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a class="brand-lockup" href="#top" aria-label="마음서재 처음으로">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><strong>마음서재</strong><span>Reading Entry Library</span></span>
+    </a>
+    <a class="header-cta" href="https://minion.toss.im/7KNQwHZn">입장하기</a>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">읽어야 하는 마음에서, 읽고 싶은 마음으로</span>
+        <h1 class="serif">마음서재</h1>
+        <span class="hero-title-en">MAUM LIBRARY · ENTRY PACK 01</span>
+        <p class="hero-lead">책이 싫었던 게 아닙니다.<br>읽어서 더 나아져야 한다는 마음이<br>독서를 멀게 했습니다.</p>
+        <p class="hero-desc">지식을 더해야 한다는 강제성을 잠시 내려놓고, 오늘 내가 좋아하는 문장 하나부터 시작해보세요. 마음서재는 ‘읽어야 하는 독서’를 ‘내가 먼저 즐거운 독서’로 바꾸는 작은 입구입니다.</p>
+        <div class="hero-actions">
+          <a class="cta-primary" href="https://minion.toss.im/7KNQwHZn">읽고 싶은 마음으로 입장하기</a>
+          <a class="cta-secondary" href="#flow">이용 흐름 먼저 보기</a>
+        </div>
+        <p class="hero-note">지식을 얻기 위한 책보다, 오늘 마음이 가는 책 한 권이면 충분합니다.</p>
+      </div>
+      <div class="pack-stage" aria-label="마음서재 입장권 패키지 미리 보기">
+        <article class="archive-pack">
+          <div class="pack-code"><span>NL-ML / ENTRY PASS</span><span>NO. 0001</span></div>
+          <div class="pack-head">
+            <p class="pack-label">Library Entry Pack</p>
+            <h2 class="pack-title serif">오늘의<br>독서 입장권</h2>
+            <p class="pack-subtitle">지식을 쌓는 팩이 아니라,<br>읽고 싶은 마음을 다시 여는 팩.</p>
+          </div>
+          <div class="catalog-card">
+            <p class="small">오늘의 질문</p>
+            <blockquote>“오늘 나는 어떤 문장과<br>즐겁게 만나고 싶은가?”</blockquote>
+            <div class="catalog-meta"><span>SHELF / 나침반</span><span>DATE / TODAY</span></div>
+          </div>
+          <div class="seal">MAUM<br>LIBRARY<br>OPEN</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="reading-card-note" aria-labelledby="reading-card-title">
+    <article class="reading-card-inner" data-reveal>
+      <div class="reading-card-head">
+        <span class="reading-card-label">열람 안내</span>
+        <span class="reading-card-number">CARD 01</span>
+      </div>
+
+      <div class="reading-card-divider" aria-hidden="true"></div>
+
+      <h2 id="reading-card-title" class="reading-card-title">마음서재 이용에 앞서</h2>
+
+      <div class="reading-card-body">
+        <p>마음서재는 무엇을 사게 하려는 곳이 아니라, 책을 다시 좋아하게 만드는 작은 독서문화 프로젝트입니다.</p>
+        <p>특정 책이나 프로그램을 권하기보다, 오늘 마음이 가는 책 한 권으로 가볍게 독서를 시작할 수 있도록 돕고 싶었습니다.</p>
+        <p>부담 없이 둘러보셔도 괜찮습니다. 이 서재는 당신이 책과 조금 더 편안하게 가까워지도록 돕기 위해 열려 있습니다.</p>
+      </div>
+
+      <p class="reading-card-signature">마음서재 드림</p>
+      <div class="reading-card-footer">MAUM LIBRARY READING CARD · 01</div>
+    </article>
+  </section>
+
+
+  <section class="section" id="why">
+    <div class="section-inner">
+      <div class="section-head" data-reveal>
+        <span class="section-index">Archive 01</span>
+        <h2 class="serif">책이 싫었던 게 아니라,<br>읽어야 한다는 마음이 버거웠습니다.</h2>
+        <p class="section-lead">지식을 쌓기 위해, 뒤처지지 않기 위해, 더 나은 사람이 되기 위해 책을 펼칠 때 독서는 또 하나의 과제가 됩니다. 마음은 과제 앞에서 자연스럽게 저항합니다.</p>
+      </div>
+      <div class="pressure-grid">
+        <article class="pressure-card" data-no="01" data-reveal><h3>더 알아야 한다는 압박</h3><p>책을 읽을 때마다 무엇인가를 얻어야 한다면, 독서는 배움보다 의무에 가까워집니다.</p></article>
+        <article class="pressure-card" data-no="02" data-reveal><h3>끝까지 읽어야 한다는 압박</h3><p>완독이 목적이 되는 순간, 마음은 책장을 넘기기 전부터 지치기 시작합니다.</p></article>
+        <article class="pressure-card" data-no="03" data-reveal><h3>남는 것이 있어야 한다는 압박</h3><p>정리와 성과를 먼저 요구하면, 책과 노는 즐거움은 가장 먼저 사라집니다.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="definition-panel" data-reveal>
+        <div class="definition-copy">
+          <span class="section-index">Archive 02</span>
+          <p class="quote">지식을 더하는 독서에서,<br>내가 먼저 즐거워지는 독서로.</p>
+          <p class="body">마음서재는 책을 얼마나 이해했는지 묻지 않습니다. 읽어야 한다는 저항을 풀고, 지금 내가 끌리는 문장과 마음이 좋아하는 속도로 책을 읽게 합니다. 즐거움이 먼저 살아나면 독서는 비로소 내 것이 됩니다.</p>
+        </div>
+        <div class="definition-visual" aria-hidden="true">
+          <div class="library-card">
+            <div class="library-card-top"><span>National Reading Record</span><span>MAUM / 2026</span></div>
+            <h3 class="serif">마음이 좋아하는 독서</h3>
+            <p>더 많이 아는 것보다,<br>내가 먼저 즐거워지는 것이 시작입니다.</p>
+            <div class="card-lines"><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="flow">
+    <div class="section-inner">
+      <div class="section-head" data-reveal>
+        <span class="section-index">Pack Sequence</span>
+        <h2 class="serif">읽어야 한다는 마음을 풀고,<br>즐거운 독서로 들어오는 방법</h2>
+        <p class="section-lead">억지로 동기를 만들 필요는 없습니다. 마음이 가는 책을 고르고, 끌리는 질문을 만나고, 즐거웠던 문장을 책갈피로 남기면 됩니다.</p>
+      </div>
+      <div class="flow-grid">
+        <article class="flow-card" data-reveal><span class="flow-pack">PACK 01</span><h3>마음이 가는 책으로 입장하기</h3><p>읽어야 할 책보다, 오늘 내가 먼저 펼치고 싶은 책을 고릅니다.</p><div class="flow-rule"></div></article>
+        <article class="flow-card" data-reveal><span class="flow-pack">PACK 02</span><h3>마음이 고른 질문 받기</h3><p>지식을 확인하는 질문이 아니라, 오늘의 나를 즐겁게 깨우는 질문을 받습니다.</p><div class="flow-rule"></div></article>
+        <article class="flow-card" data-reveal><span class="flow-pack">PACK 03</span><h3>즐거웠던 문장을 책갈피로 남기기</h3><p>가장 마음에 남은 문장과, 그 문장이 열어준 작은 한 걸음을 기록합니다.</p><div class="flow-rule"></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ticket-section">
+    <div class="section-inner">
+      <div class="section-head" data-reveal>
+        <span class="section-index">Entry Ticket</span>
+        <h2 class="serif">오늘의 책이<br>당신에게 질문을 건넵니다.</h2>
+        <p class="section-lead">마음서재의 입장권에는 오늘의 서가, 방, 질문, 미션, 그리고 마음서재가 건네는 한마디가 담깁니다.</p>
+      </div>
+      <div class="ticket-shell">
+        <div class="ticket-copy" data-reveal>
+          <h3 class="serif">정답을 서두르지 않고,<br>오늘 오래 품고 싶은 물음 하나를 받습니다.</h3>
+          <p>입장권은 당신을 분석하는 결과지가 아닙니다. 오늘 어떤 방식으로 책 앞에 머물고 싶은지를 보여주는 하루의 독서 방향입니다.</p>
+          <div style="margin-top:28px;"><a class="cta-primary" href="https://minion.toss.im/7KNQwHZn">나의 독서 입장권 받기</a></div>
+        </div>
+        <article class="ticket-card" data-reveal>
+          <div class="ticket-meta"><span>MAUM LIBRARY PASS</span><span>NO. 0519</span></div>
+          <p class="ticket-title">오늘의 책이 당신에게 건넨 질문</p>
+          <blockquote class="ticket-question">오늘 이 책은 ‘선택’이라는 삶의 장면 앞에서 묻습니다.<br><br>“나는 어떤 방향으로 응답해야 하는가?”</blockquote>
+          <p class="ticket-message">길을 찾는 시간에는 서두르지 않는 질문이 필요합니다. 오늘은 답보다, 오래 품고 싶은 물음 하나를 만나보세요.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="shelves">
+    <div class="section-inner">
+      <div class="section-head" data-reveal>
+        <span class="section-index">Shelf Index</span>
+        <h2 class="serif">오늘의 마음은<br>어느 서가에 머물게 될까요?</h2>
+        <p class="section-lead">서가는 사람을 분류하는 유형이 아닙니다. 오늘 어떤 방식으로 책 앞에 머물고 싶은지를 보여주는 하루의 독서 방향입니다.</p>
+      </div>
+      <div class="shelf-grid">
+        <article class="shelf-card" style="--shelf-color:#b18a6d;" data-reveal><span class="shelf-no">SHELF 01</span><h3>온기 서가</h3><p class="tagline">나를 덜 외롭게 하는 문장</p><p class="desc">위로와 다정함이 필요한 날, 마음이 기대어 쉴 문장을 만납니다.</p><p class="catalog-id">CLASS / WARMTH</p></article>
+        <article class="shelf-card" style="--shelf-color:#7b7569;" data-reveal><span class="shelf-no">SHELF 02</span><h3>정돈 서가</h3><p class="tagline">마음의 실마리를 찾는 문장</p><p class="desc">흩어진 생각을 천천히 살펴보고, 오늘 붙잡을 기준 하나를 찾습니다.</p><p class="catalog-id">CLASS / ORDER</p></article>
+        <article class="shelf-card" style="--shelf-color:#9a5943;" data-reveal><span class="shelf-no">SHELF 03</span><h3>불씨 서가</h3><p class="tagline">다시 시작하게 하는 문장</p><p class="desc">큰 결심보다, 오늘 옮겨볼 작은 한 걸음을 발견합니다.</p><p class="catalog-id">CLASS / SPARK</p></article>
+        <article class="shelf-card" style="--shelf-color:#74817a;" data-reveal><span class="shelf-no">SHELF 04</span><h3>숨결 서가</h3><p class="tagline">마음의 속도를 늦추는 문장</p><p class="desc">책을 끝내려 애쓰기보다, 문장 사이의 여백에 잠시 머뭅니다.</p><p class="catalog-id">CLASS / BREATH</p></article>
+        <article class="shelf-card" style="--shelf-color:#7c6849;" data-reveal><span class="shelf-no">SHELF 05</span><h3>나침반 서가</h3><p class="tagline">오래 품을 질문을 남기는 문장</p><p class="desc">정답을 서두르기보다, 다음 걸음을 비추는 질문 하나를 만납니다.</p><p class="catalog-id">CLASS / COMPASS</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bookmark">
+    <div class="section-inner">
+      <div class="bookmark-layout">
+        <div class="bookmark-book" data-reveal aria-label="책 사이에 꽂힌 오늘의 책갈피 예시">
+          <div class="bookmark-strip"><p class="label">오늘의 책갈피</p><blockquote>나는 오늘,<br>큰 결심보다<br>조용히 시작하는 한 걸음을<br>선택합니다.</blockquote></div>
+        </div>
+        <div class="bookmark-copy" data-reveal>
+          <span class="section-index">Bookmark</span>
+          <h3 class="serif">독서가 끝난 뒤,<br>오늘의 응답을 책갈피로 남깁니다.</h3>
+          <p>책에서 만난 문장은 그 순간의 마음과 함께 남습니다. 마음서재는 독서 후 작성한 응답을 ‘오늘의 책갈피’로 다시 건넵니다. 다음에 새로운 책을 펼칠 때, 이전의 문장 하나가 다시 조용히 말을 걸어올 수 있습니다.</p>
+          <div class="joy-note">마음서재는<br>오늘 발견한 한 걸음을 함께 기뻐합니다.</div>
+          <div style="margin-top:28px;"><a class="cta-primary" href="https://minion.toss.im/7KNQwHZn">오늘의 책갈피 만나기</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="for-whom">
+    <div class="section-inner">
+      <div class="section-head" data-reveal>
+        <span class="section-index">Reader Note</span>
+        <h2 class="serif">마음서재는<br>이런 분에게 잘 맞습니다.</h2>
+        <p class="section-lead">어려운 책을 가져오지 않아도 괜찮습니다. 오늘 마음이 가는 책 한 권이면 충분합니다.</p>
+      </div>
+      <div class="audience-list">
+        <div class="audience-item" data-reveal>책을 읽고 싶지만 시작이 잘 되지 않는 분</div>
+        <div class="audience-item" data-reveal>완독에 대한 부담이 있는 분</div>
+        <div class="audience-item" data-reveal>독서 후 무엇을 남겨야 할지 막막한 분</div>
+        <div class="audience-item" data-reveal>책을 통해 지금의 마음을 이해하고 싶은 분</div>
+        <div class="audience-item" data-reveal>좋은 문장을 실제 삶의 한 걸음으로 이어가고 싶은 분</div>
+        <div class="audience-item" data-reveal>조용히 혼자 참여할 수 있는 독서 경험을 원하는 분</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section invitation-section">
+    <div class="section-inner">
+      <article class="invitation-letter" data-reveal>
+        <p class="from">마음서재로부터</p>
+        <h2 class="serif">오늘의 책으로 들어오세요.</h2>
+        <div class="letter-body">책을 읽어야 한다는 마음을 잠시 내려놓아도 괜찮습니다.<br><br>오늘 내가 먼저 즐거워지는 문장 하나와,<br>그 문장이 열어주는 작은 한 걸음을 만나보세요.<br><br>천천히 들어오셔도 괜찮습니다.<br>오늘의 독서가 당신에게 다시 즐거운 일이 되길 바랍니다.</div>
+        <p class="signature">마음서재 드림</p>
+        <div class="letter-action"><a class="cta-primary" href="https://minion.toss.im/7KNQwHZn">읽고 싶은 마음으로 입장하기</a></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><strong>마음서재</strong><p>독서를 더 가볍고 즐겁게 시작하도록 돕는 콘텐츠입니다.<br>심리검사·진단·치료를 제공하지 않습니다.</p></div>
+    <div class="footer-meta"><div>운영 · <a href="/">DAILYCOACHING</a></div><div style="margin-top:8px;">문의 · <a href="mailto:hello@daily-coach-ing.com">hello@daily-coach-ing.com</a></div><div style="margin-top:8px;">© <span id="year"></span> MAUM LIBRARY</div></div>
+  </div>
+</footer>
+
+<aside class="sticky-cta" id="stickyCta" aria-label="마음서재 고정 입장 버튼">
+  <div class="sticky-cta-text"><strong>읽고 싶은 마음으로 입장하기</strong><span>오늘 마음이 가는 책 한 권이면 충분합니다.</span></div>
+  <a href="https://minion.toss.im/7KNQwHZn">독서 시작하기</a>
+</aside>
+
+<script>
+(() => {
+  "use strict";
+  const header=document.getElementById("siteHeader");
+  const stickyCta=document.getElementById("stickyCta");
+  const hero=document.querySelector(".hero");
+  const year=document.getElementById("year");
+  const revealItems=document.querySelectorAll("[data-reveal]");
+  year.textContent=new Date().getFullYear();
+  const onScroll=()=>header.classList.toggle("is-scrolled",window.scrollY>20);
+  onScroll(); window.addEventListener("scroll",onScroll,{passive:true});
+  if("IntersectionObserver" in window){
+    const revealObserver=new IntersectionObserver((entries,observer)=>{
+      entries.forEach((entry)=>{
+        if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}
+      });
+    },{threshold:.13});
+    revealItems.forEach((item)=>revealObserver.observe(item));
+    const heroObserver=new IntersectionObserver((entries)=>{
+      entries.forEach((entry)=>stickyCta.classList.toggle("is-visible",!entry.isIntersecting));
+    },{threshold:.08});
+    heroObserver.observe(hero);
+  }else{
+    revealItems.forEach((item)=>item.classList.add("is-visible"));
+    stickyCta.classList.add("is-visible");
+  }
+})();
+</script>
+</body>
+</html>

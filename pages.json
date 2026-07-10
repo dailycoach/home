@@ -112,6 +112,13 @@
     "source": "https://github.com/dailycoach/8"
   },
   {
+    "title": "마음서재",
+    "description": "읽어야 한다는 부담을 내려놓고 오늘 마음이 가는 문장 하나로 시작하는 독서 콘텐츠",
+    "category": "contents",
+    "url": "/maum-library/",
+    "source": "maum_library_toss_landing_single_v5_reading_card.html"
+  },
+  {
     "title": "말씀 묵상 셀프코칭 감사",
     "description": "말씀과 묵상, 셀프코칭과 감사를 위한 페이지",
     "category": "spiritual",
