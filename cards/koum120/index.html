@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#090b10">
+  <title>KOUM Christian Conversation Deck 120</title>
+  <meta name="description" content="Talitha Koum 말씀을 따라 삶과 신앙을 나누는 120개의 대화 질문 카드">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="app">
+    <div class="shell" role="application" aria-label="KOUM Christian Conversation Deck 120">
+      <header>
+        <div class="brand">
+          <h1 class="brandTitle"><span class="brandDot" aria-hidden="true"></span>KOUM Christian Conversation Deck 120</h1>
+          <p class="brandSub">내가 네게 말하노니 일어나라. Talitha Koum (Mk 5:41)</p>
+        </div>
+        <div class="progress" aria-label="진행 상황"><span>진행</span><strong id="progress">0</strong><span>/</span><strong id="total">120</strong></div>
+      </header>
+      <main>
+        <section class="card" id="card" tabindex="-1" aria-live="polite">
+          <div class="cardChips" id="cardChips">
+            <div class="chip" id="cardProgress"><span>진행</span><strong id="cardProgressText">0 / 120</strong></div>
+            <div class="chip chipAccent" id="badge"><span class="chipDot" aria-hidden="true"></span><span class="labelText" id="badgeText">K · KEPT</span></div>
+          </div>
+          <div class="welcome" id="welcome">
+            <p class="welcomeEyebrow">TALITHA KOUM</p>
+            <h2>한 장의 질문으로, 대화를 천천히 엽니다</h2>
+            <p class="welcomeLead">설명하려 애쓰지 않으셔도 괜찮습니다.<br>마음에 닿는 만큼만 말씀하시고, 먼저 들어주셔도 충분합니다.</p>
+            <div class="rules">
+              <h3>대화 룰</h3>
+              <div class="ruleGrid">
+                <div class="ruleItem"><strong>패스 가능</strong><span>어려우면 가볍게 지나가셔도 됩니다.</span></div>
+                <div class="ruleItem"><strong>조언보다 경청</strong><span>먼저 듣고, 서둘러 고치지 않습니다.</span></div>
+                <div class="ruleItem"><strong>짧고 진실하게</strong><span>한 사람의 숨도 남겨 둡니다.</span></div>
+                <div class="ruleItem"><strong>여기까지의 이야기</strong><span>동의 없이 밖으로 옮기지 않습니다.</span></div>
+              </div>
+            </div>
+            <button class="btn btnPrimary welcomeStart" id="btnStart" type="button">시작</button>
+          </div>
+          <div class="questionView" id="questionView"><p class="questionText" id="questionText"></p></div>
+          <div class="metaView" id="metaView">
+            <p class="metaKicker" id="metaKicker"></p>
+            <h2 class="metaTitle" id="metaTitle"></h2>
+            <p class="metaBody" id="metaBody"></p>
+          </div>
+          <div class="error" id="errorBox">
+            <h3>카드 데이터를 불러오지 못했습니다.</h3>
+            <p id="errorText">파일을 다시 열거나 최신 버전으로 교체해 주세요.</p>
+          </div>
+        </section>
+        <div class="actions">
+          <button class="btn" id="btnNext" type="button" disabled>다음</button>
+          <div class="rightActions">
+            <button class="btn btnGhost" id="btnSkip" type="button" disabled>세션 이동</button>
+            <button class="btn" id="btnDone" type="button" disabled>완료(종료)</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="overlay" id="guideOverlay" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="sheet">
+      <div class="sheetHead">
+        <div class="sheetBadge" id="guideBadge"><span class="chipDot" aria-hidden="true"></span><span id="guideBadgeText">GUIDE</span></div>
+        <h2 class="sheetTitle" id="guideTitle">안내</h2>
+        <p class="sheetText" id="guideSub">문장이 하나씩 나타납니다.</p>
+      </div>
+      <div class="sheetBody" id="guideBody"></div>
+      <div class="sheetActions">
+        <button class="btn btnPrimary" id="btnGuideAction" type="button" disabled>계속</button>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" id="moveOverlay" role="dialog" aria-modal="true" aria-labelledby="moveTitle">
+    <div class="sheet">
+      <div class="sheetHead">
+        <div class="sheetBadge"><span class="chipDot" aria-hidden="true"></span><span>SESSION MOVE</span></div>
+        <h2 class="sheetTitle" id="moveTitle">세션을 이동할까요?</h2>
+        <p class="sheetText" id="moveText">남은 질문을 건너뛰고 다음 세션으로 이동합니다.</p>
+      </div>
+      <div class="sheetActions">
+        <button class="btn btnGhost" id="btnCancelMove" type="button">취소</button>
+        <button class="btn btnPrimary" id="btnConfirmMove" type="button">이동</button>
+      </div>
+    </div>
+  </div>
+
+<script src="./data-meta.js"></script>
+<script src="./data-k.js"></script>
+<script src="./data-o.js"></script>
+<script src="./data-u.js"></script>
+<script src="./data-m.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
