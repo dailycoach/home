@@ -1,0 +1,53 @@
+name: Rename Grow88 to KINGDOM22
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/rename-grow88-kingdom22.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update site labels
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          text = text.replace('>Grow 88 <small>→</small></a>', '>KINGDOM22 · KAC Practice <small>NEW</small></a>')
+          text = text.replace('<small>킹덤·KOUM·톡카드·Grow</small>', '<small>킹덤·KOUM·KINGDOM22</small>')
+          index.write_text(text, encoding='utf-8')
+
+          pages = Path('pages.json')
+          if pages.exists():
+              data = json.loads(pages.read_text(encoding='utf-8-sig'))
+              for item in data:
+                  if item.get('url') == '/cards/grow88/':
+                      item['title'] = 'KINGDOM22 · KAC Practice'
+                      item['description'] = '한국코치협회 KAC 실습을 위한 KINGDOM 7단계 앵커·선택 질문과 관찰 피드백 도구'
+                      item['source'] = 'https://github.com/dailycoach/grow88'
+              pages.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+      - name: Commit updates
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html pages.json; then
+            echo "No site update required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html pages.json
+          git commit -m "Rename Grow88 to KINGDOM22 KAC Practice"
+          git push
