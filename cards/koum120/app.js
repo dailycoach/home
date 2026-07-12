@@ -97,10 +97,16 @@ function buildBalancedDeck(session) {
       lastDomain=ordered[ordered.length-1].domain;
     }
   }
+  const easyIndex=result.findIndex(item=>item.depth===1);
+  if(easyIndex>0) {
+    const [easyFirst]=result.splice(easyIndex,1);
+    result.unshift(easyFirst);
+  }
   return result;
 }
 function validateData() {
   const problems=[];
+  const dependentStarts=["그 일","그 말씀","그 감정","그 관계"];
   if(!Array.isArray(SESSIONS)||SESSIONS.length!==4) problems.push("세션 수가 4개가 아닙니다.");
   let totalQuestions=0;
   const texts=[];
@@ -113,6 +119,8 @@ function validateData() {
       domainCount[item.domain]=(domainCount[item.domain]||0)+1;
       totalQuestions++;
       texts.push(item.text);
+      if(!String(item.text||"").trim().endsWith("?")) problems.push(`${item.id}: 질문 문장 끝에 물음표가 없습니다.`);
+      if(dependentStarts.some(prefix=>String(item.text||"").trim().startsWith(prefix))) problems.push(`${item.id}: 앞 카드의 맥락이 필요한 문장입니다.`);
     });
     (session.domains||[]).forEach(d=>{ if(domainCount[d]!==5) problems.push(`${session.key}/${d}: 질문 수가 5개가 아닙니다.`); });
   });
