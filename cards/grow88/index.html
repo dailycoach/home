@@ -7,440 +7,71 @@
   <meta name="theme-color" content="#080a0f" />
   <title>KINGDOM22 · KAC Practice</title>
   <style>
-    :root{
-      --bg:#07090d;
-      --panel:#101319;
-      --panel2:#151922;
-      --ink:#f7f8fb;
-      --muted:#aeb6c5;
-      --line:rgba(255,255,255,.09);
-      --accent:#b56a7a;
-      --accent-rgb:181,106,122;
-      --radius:26px;
-    }
-    *{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%}
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--ink);
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-      background:
-        radial-gradient(900px 560px at 16% 8%,rgba(var(--accent-rgb),.17),transparent 58%),
-        linear-gradient(180deg,#07090d,#0b0e14 55%,#07090d);
-      transition:background .35s ease;
-    }
-    button{font:inherit;cursor:pointer}
-    .app{width:min(980px,100%);margin:0 auto;padding:16px 14px calc(28px + env(safe-area-inset-bottom))}
-    .shell{
-      min-height:calc(100vh - 44px);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg,rgba(17,20,27,.97),rgba(8,10,14,.99));
-      box-shadow:0 28px 80px rgba(0,0,0,.42);
-      overflow:hidden;
-    }
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:17px 18px;
-      border-bottom:1px solid var(--line);
-    }
-    .brand strong{display:block;font-size:16px;letter-spacing:-.03em}
-    .brand span{display:block;margin-top:5px;color:var(--muted);font-size:11.5px}
-    .progressText{font-size:12px;font-weight:900;color:#fff;white-space:nowrap}
-    .progressTrack{height:4px;background:rgba(255,255,255,.06)}
-    .progressBar{display:block;width:0;height:100%;background:linear-gradient(90deg,rgba(var(--accent-rgb),.55),rgb(var(--accent-rgb)));transition:width .3s ease}
-    main{padding:18px}
-    .welcome,.questionScreen{display:none}
-    .welcome.show,.questionScreen.show{display:block}
-    .welcomeCard{
-      min-height:560px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:34px 22px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:
-        radial-gradient(720px 380px at 50% 0%,rgba(var(--accent-rgb),.18),transparent 60%),
-        linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.01));
-    }
-    .eyebrow{margin:0 0 13px;color:rgb(var(--accent-rgb));font-size:12px;font-weight:900;letter-spacing:.22em}
-    .welcomeCard h1{margin:0;font-size:clamp(34px,7vw,58px);line-height:1.15;letter-spacing:-.055em}
-    .welcomeCard p{max-width:650px;margin:20px auto 0;color:#d3d9e4;font-size:15px;line-height:1.8}
-    .welcomeCard .notice{color:#858f9f;font-size:11px;line-height:1.6}
-    .questionCard{
-      position:relative;
-      min-height:560px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:84px 28px 34px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:
-        radial-gradient(820px 430px at 18% 8%,rgba(var(--accent-rgb),.21),transparent 58%),
-        linear-gradient(180deg,var(--panel2),var(--panel));
-      overflow:hidden;
-    }
-    .cardTop{
-      position:absolute;
-      top:17px;
-      left:17px;
-      right:17px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-    }
-    .chip{
-      padding:8px 11px;
-      border:1px solid rgba(var(--accent-rgb),.48);
-      border-radius:999px;
-      background:rgba(4,6,10,.56);
-      font-size:11px;
-      font-weight:900;
-    }
-    .type{color:var(--muted);border-color:var(--line)}
-    .questionWrap{width:min(820px,100%);text-align:center}
-    .question{
-      margin:0;
-      font-size:clamp(29px,5.3vw,47px);
-      line-height:1.52;
-      letter-spacing:-.05em;
-      word-break:keep-all;
-    }
-    .subline{margin:18px 0 0;color:var(--muted);font-size:12.5px;line-height:1.6}
-    .controls{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-    .group{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{
-      min-height:50px;
-      padding:12px 16px;
-      border:1px solid var(--line);
-      border-radius:15px;
-      background:rgba(255,255,255,.045);
-      color:#fff;
-      font-weight:850;
-    }
-    .btn.primary{
-      background:linear-gradient(135deg,rgba(var(--accent-rgb),.9),rgba(255,255,255,.08));
-      border-color:rgba(var(--accent-rgb),.45);
-    }
-    .btn.subtle{color:var(--muted)}
-    .btn:disabled{opacity:.34;cursor:not-allowed}
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:50;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      background:rgba(0,0,0,.72);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-    }
-    .modal.show{display:flex}
-    .dialog{
-      width:min(620px,100%);
-      max-height:min(82vh,760px);
-      overflow:auto;
-      padding:24px;
-      border:1px solid rgba(var(--accent-rgb),.34);
-      border-radius:24px;
-      background:linear-gradient(180deg,#171b23,#0e1117);
-      box-shadow:0 28px 90px rgba(0,0,0,.5);
-    }
-    .modalBadge{margin:0 0 10px;color:rgb(var(--accent-rgb));font-size:11px;font-weight:900;letter-spacing:.15em}
-    .dialog h2{margin:0;font-size:25px;line-height:1.35;letter-spacing:-.035em}
-    .modalBody{margin-top:17px;color:#d7dce6;font-size:14px;line-height:1.82;white-space:pre-line}
-    .guideGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
-    .guideBox{padding:13px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.03)}
-    .guideBox b{display:block;color:rgb(var(--accent-rgb));font-size:11px;letter-spacing:.05em}
-    .guideBox p{margin:7px 0 0;color:#d5dbe5;font-size:12.5px;line-height:1.65}
-    .modalActions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:21px}
-    .footer{padding:0 18px 18px;color:#768092;font-size:10.5px;text-align:center;line-height:1.55}
-    @media(max-width:680px){
-      header{align-items:flex-start}
-      .welcomeCard,.questionCard{min-height:calc(100vh - 190px)}
-      .questionCard{padding:82px 18px 26px}
-      .question{font-size:clamp(27px,8.5vw,38px)}
-      .controls>.btn,.group{width:100%}
-      .group .btn{flex:1}
-      .guideGrid{grid-template-columns:1fr}
-      .dialog{padding:21px}
-    }
+    :root{--panel:#101319;--panel2:#151922;--ink:#f7f8fb;--muted:#aeb6c5;--line:rgba(255,255,255,.09);--accent:#b56a7a;--accent-rgb:181,106,122;--radius:26px}
+    *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+    body{margin:0;min-height:100vh;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:radial-gradient(900px 560px at 16% 8%,rgba(var(--accent-rgb),.17),transparent 58%),linear-gradient(180deg,#07090d,#0b0e14 55%,#07090d);transition:background .35s ease}
+    button{font:inherit;cursor:pointer}.app{width:min(980px,100%);margin:0 auto;padding:16px 14px calc(28px + env(safe-area-inset-bottom))}
+    .shell{min-height:calc(100vh - 44px);border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(17,20,27,.97),rgba(8,10,14,.99));box-shadow:0 28px 80px rgba(0,0,0,.42);overflow:hidden}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 18px;border-bottom:1px solid var(--line)}
+    .brand strong{display:block;font-size:16px;letter-spacing:-.03em}.brand span{display:block;margin-top:5px;color:var(--muted);font-size:11.5px}.progressText{font-size:12px;font-weight:900;color:#fff;white-space:nowrap}
+    .progressTrack{height:4px;background:rgba(255,255,255,.06)}.progressBar{display:block;width:0;height:100%;background:linear-gradient(90deg,rgba(var(--accent-rgb),.55),rgb(var(--accent-rgb)));transition:width .3s ease}
+    main{padding:18px}.welcome,.questionScreen{display:none}.welcome.show,.questionScreen.show{display:block}
+    .welcomeCard{min-height:560px;display:grid;place-items:center;text-align:center;padding:34px 22px;border:1px solid var(--line);border-radius:var(--radius);background:radial-gradient(720px 380px at 50% 0%,rgba(var(--accent-rgb),.18),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.01))}
+    .eyebrow{margin:0 0 13px;color:rgb(var(--accent-rgb));font-size:12px;font-weight:900;letter-spacing:.22em}.welcomeCard h1{margin:0;font-size:clamp(34px,7vw,58px);line-height:1.15;letter-spacing:-.055em}.welcomeCard p{max-width:650px;margin:20px auto 0;color:#d3d9e4;font-size:15px;line-height:1.8}.welcomeCard .notice{color:#858f9f;font-size:11px;line-height:1.6}
+    .questionCard{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;padding:84px 28px 34px;border:1px solid var(--line);border-radius:var(--radius);background:radial-gradient(820px 430px at 18% 8%,rgba(var(--accent-rgb),.21),transparent 58%),linear-gradient(180deg,var(--panel2),var(--panel));overflow:hidden}
+    .cardTop{position:absolute;top:17px;left:17px;right:17px;display:flex;justify-content:space-between;gap:10px;align-items:center}.chip{padding:8px 11px;border:1px solid rgba(var(--accent-rgb),.48);border-radius:999px;background:rgba(4,6,10,.56);font-size:11px;font-weight:900}.timeChip{color:var(--muted);border-color:var(--line)}
+    .questionWrap{width:min(820px,100%);text-align:center}.question{margin:0;font-size:clamp(29px,5.3vw,47px);line-height:1.52;letter-spacing:-.05em;word-break:keep-all}.subline{margin:18px 0 0;color:var(--muted);font-size:12.5px;line-height:1.6}
+    .controls{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}.group{display:flex;gap:8px;flex-wrap:wrap}.btn{min-height:50px;padding:12px 16px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.045);color:#fff;font-weight:850}.btn.primary{background:linear-gradient(135deg,rgba(var(--accent-rgb),.9),rgba(255,255,255,.08));border-color:rgba(var(--accent-rgb),.45)}.btn.subtle{color:var(--muted)}.btn:disabled{opacity:.34;cursor:not-allowed}
+    .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.74);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.modal.show{display:flex}.dialog{width:min(650px,100%);max-height:min(84vh,780px);overflow:auto;padding:24px;border:1px solid rgba(var(--accent-rgb),.34);border-radius:24px;background:linear-gradient(180deg,#171b23,#0e1117);box-shadow:0 28px 90px rgba(0,0,0,.5)}
+    .modalBadge{margin:0 0 10px;color:rgb(var(--accent-rgb));font-size:11px;font-weight:900;letter-spacing:.15em}.dialog h2{margin:0;font-size:25px;line-height:1.35;letter-spacing:-.035em}.modalBody{margin-top:17px;color:#d7dce6;font-size:14px;line-height:1.82;white-space:pre-line}.coachBox{margin-top:17px;padding:15px;border:1px solid rgba(var(--accent-rgb),.24);border-radius:17px;background:rgba(var(--accent-rgb),.06)}.coachBox b{display:block;color:rgb(var(--accent-rgb));font-size:11px;letter-spacing:.08em}.coachBox p{margin:8px 0 0;color:#d8dde7;font-size:13px;line-height:1.72;white-space:pre-line}
+    .principles{display:grid;gap:8px;margin-top:17px;padding:0;list-style:none}.principles li{padding:11px 12px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);color:#d4dae4;font-size:12.5px;line-height:1.55}.modalActions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:21px}.footer{padding:0 18px 18px;color:#768092;font-size:10.5px;text-align:center;line-height:1.55}
+    @media(max-width:680px){header{align-items:flex-start}.welcomeCard,.questionCard{min-height:calc(100vh - 190px)}.questionCard{padding:82px 18px 26px}.question{font-size:clamp(27px,8.5vw,38px)}.controls>.btn,.group{width:100%}.group .btn{flex:1}.dialog{padding:21px}}
   </style>
 </head>
 <body>
-<div class="app">
-  <div class="shell">
-    <header>
-      <div class="brand"><strong>KINGDOM22 · KAC Practice</strong><span>한국코치협회 KAC 실습 대비 핵심질문</span></div>
-      <div class="progressText"><span id="currentNo">0</span> / 22</div>
-    </header>
-    <div class="progressTrack"><i class="progressBar" id="progressBar"></i></div>
-    <main>
-      <section class="welcome show" id="welcome">
-        <div class="welcomeCard">
-          <div>
-            <p class="eyebrow">KINGDOM 7 STAGES · 22 QUESTIONS</p>
-            <h1>질문보다 고객을<br>먼저 봅니다</h1>
-            <p>22개의 질문을 KINGDOM 순서대로 한 장씩 확인합니다.<br>질문 후에는 고객의 말에 충분히 머문 뒤 다음으로 이동합니다.</p>
-            <div style="margin-top:27px"><button class="btn primary" id="startBtn">실습 시작</button></div>
-            <p class="notice">본 도구는 한국코치협회의 공식 교재나 공식 승인 도구가 아닙니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="questionScreen" id="questionScreen">
-        <div class="questionCard">
-          <div class="cardTop">
-            <div class="chip" id="stageChip"></div>
-            <div class="chip type" id="typeChip"></div>
-          </div>
-          <div class="questionWrap">
-            <p class="question" id="questionText"></p>
-            <p class="subline">질문을 던진 뒤, 고객의 답을 충분히 듣습니다.</p>
-          </div>
-        </div>
-        <div class="controls">
-          <button class="btn subtle" id="exitBtn">종료</button>
-          <div class="group">
-            <button class="btn" id="prevBtn">이전</button>
-            <button class="btn" id="guideBtn">코치 가이드</button>
-            <button class="btn primary" id="nextBtn">다음</button>
-          </div>
-        </div>
-      </section>
-    </main>
-    <div class="footer">공개 기준과 코칭 원리에 기반한 독립 실습도구</div>
-  </div>
-</div>
-
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="dialog">
-    <p class="modalBadge" id="modalBadge"></p>
-    <h2 id="modalTitle"></h2>
-    <div class="modalBody" id="modalBody"></div>
-    <div class="guideGrid" id="guideGrid" style="display:none">
-      <div class="guideBox"><b>질문의 의도</b><p id="intentText"></p></div>
-      <div class="guideBox"><b>고객에게서 들을 것</b><p id="listenText"></p></div>
-      <div class="guideBox"><b>질문 후 코치 행동</b><p id="afterText"></p></div>
-      <div class="guideBox"><b>피해야 할 개입</b><p id="avoidText"></p></div>
-    </div>
-    <div class="modalActions" id="modalActions"></div>
-  </div>
-</div>
-
+<div class="app"><div class="shell">
+  <header><div class="brand"><strong>KINGDOM22 · KAC Practice</strong><span>20분 코칭 실습 흐름</span></div><div class="progressText"><span id="currentNo">0</span> / 22</div></header>
+  <div class="progressTrack"><i class="progressBar" id="progressBar"></i></div>
+  <main>
+    <section class="welcome show" id="welcome"><div class="welcomeCard"><div><p class="eyebrow">KINGDOM · GROW · 20 MINUTES</p><h1>고객의 답에서<br>다음 질문을 찾습니다</h1><p>주제와 목표를 정렬하고, 실제 장면을 듣고, 고객의 힘을 실행으로 연결하는 22개의 핵심 질문입니다.</p><div style="margin-top:27px"><button class="btn primary" id="startBtn">실습 시작</button></div><p class="notice">본 도구는 한국코치협회의 공식 교재나 공식 승인 도구가 아닙니다.</p></div></div></section>
+    <section class="questionScreen" id="questionScreen"><div class="questionCard"><div class="cardTop"><div class="chip" id="stageChip"></div><div class="chip timeChip" id="timeChip"></div></div><div class="questionWrap"><p class="question" id="questionText"></p><p class="subline">한 번에 하나만 묻고, 다음 질문보다 반영과 요약을 먼저 사용합니다.</p></div></div><div class="controls"><button class="btn subtle" id="exitBtn">종료</button><div class="group"><button class="btn" id="prevBtn">이전</button><button class="btn primary" id="nextBtn">다음</button></div></div></section>
+  </main>
+  <div class="footer">공개 기준과 코칭 원리에 기반한 독립 실습도구</div>
+</div></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><p class="modalBadge" id="modalBadge"></p><h2 id="modalTitle"></h2><div class="modalBody" id="modalBody"></div><div class="coachBox" id="coachBox" style="display:none"><b>코치 행동</b><p id="coachText"></p></div><ul class="principles" id="principles" style="display:none"></ul><div class="modalActions" id="modalActions"></div></div></div>
 <script>
 const STAGES={
-  K:{name:'주도권 열기',color:'#b56a7a',rgb:'181,106,122',guide:'코치가 방향을 정하기 전에 고객이 말하고 싶은 자리를 엽니다.\n대화의 범위와 안전을 고객과 함께 확인합니다.\n주도권은 고객에게 있습니다.'},
-  I:{name:'존재초점 세우기',color:'#8e7cc3',rgb:'142,124,195',guide:'고객이 원하는 결과와 지금 중요한 초점을 합의합니다.\n목표는 코치의 문장이 아니라 고객의 언어로 확인합니다.'},
-  N:{name:'이야기 깊이 듣기',color:'#5d6bb3',rgb:'93,107,179',guide:'사건만 듣지 않고 생각과 감정, 의도와 욕구를 함께 듣습니다.\n다음 질문보다 재진술과 확인, 침묵이 먼저입니다.'},
-  G:{name:'고유성 비추기',color:'#b99555',rgb:'185,149,85',guide:'고객이 자신의 강점과 새로운 관점을 스스로 발견하도록 돕습니다.\n코치가 통찰을 설명하지 않고 고객의 알아차림을 기다립니다.'},
-  D:{name:'책임경계 조율하기',color:'#b8714e',rgb:'184,113,78',guide:'고객이 선택할 수 있는 것과 내려놓아도 되는 것을 구분합니다.\n과도한 책임도, 책임 회피도 코치가 대신 결정하지 않습니다.'},
-  O:{name:'실행기회 열기',color:'#4b9b96',rgb:'75,155,150',guide:'고객이 선택지를 만들고 첫 행동을 스스로 정하도록 돕습니다.\n조언보다 선택권과 실행 조건을 확인합니다.'},
-  M:{name:'성장통합하기',color:'#5b9b70',rgb:'91,155,112',guide:'대화에서 얻은 성과와 배움을 고객의 언어로 확인합니다.\n실행과 종료 모두 고객의 동의를 통해 마무리합니다.'}
+ K:{name:'주도권 열기',time:'0–3분 · Goal',color:'#b56a7a',rgb:'181,106,122',guide:'주제 → 원하는 변화 → 성공 기준을 고객의 말로 정렬합니다.',coach:'첫 답을 해결과제로 좁히지 않습니다.\n고객이 원하는 변화와 성공 기준을 고객의 표현으로 짧게 확인합니다.'},
+ I:{name:'존재초점 세우기',time:'3–5분 · Goal',color:'#8e7cc3',rgb:'142,124,195',guide:'K에서 정한 변화를 고객의 가치와 원하는 모습에 연결합니다.',coach:'고객의 말에서 지키고 싶은 기준과 중요성을 반영합니다.\n원하는 모습을 코치의 언어로 바꾸지 않습니다.'},
+ N:{name:'이야기 깊이 듣기',time:'5–10분 · Reality',color:'#5d6bb3',rgb:'93,107,179',guide:'I에서 확인한 모습을 현재의 실제 장면으로 내려옵니다.',coach:'장면 → 생각 → 감정 → 반복을 한 번에 하나씩 묻고 기다립니다.\n핵심 단어와 에너지 변화를 반영하고 코치의 해석은 고객에게 확인합니다.'},
+ G:{name:'고유성 비추기',time:'10–12분 · Reality',color:'#b99555',rgb:'185,149,85',guide:'기존 시도에서 작동한 점과 고객이 이미 사용한 힘을 찾습니다.',coach:'문제를 바로 해결하려 하지 않습니다.\n도움이 되었던 시도와 그때 드러난 힘을 구체적으로 인정합니다.'},
+ D:{name:'책임경계 조율하기',time:'12–14분 · Reality→Options',color:'#b8714e',rgb:'184,113,78',guide:'G에서 찾은 힘을 사람·관계·환경 속에서 작동하도록 조율합니다.',coach:'조율할 대상과 바꿀 조건을 탐색합니다.\n코치가 대안을 주지 않고 고객이 움직일 초점을 정하도록 기다립니다.'},
+ O:{name:'실행기회 열기',time:'14–18분 · Options→Will',color:'#4b9b96',rgb:'75,155,150',guide:'D에서 정한 초점을 기준으로 대안을 넓히고 선택을 행동으로 구체화합니다.',coach:'첫 방법에서 멈추지 않고 코치의 답을 질문 속에 넣지 않습니다.\n선택한 행동을 시점·장소·첫 행동까지 구체화합니다.'},
+ M:{name:'성장통합하기',time:'18–20분 · Wrap-up',color:'#5b9b70',rgb:'91,155,112',guide:'고객이 변화와 배움, 실행을 자신의 언어로 통합하도록 돕습니다.',coach:'코치가 대신 결론 내리지 않습니다.\n처음의 목표와 비교한 변화, 고객의 실제 선택과 자원을 확인하고 종료 동의를 구합니다.'}
 };
-
 const QUESTIONS=[
- {id:'K01',stage:'K',kind:'앵커',q:'이 시간에 어떤 이야기를 나누고 싶으신가요?',intent:'고객이 주제를 먼저 정하도록 합니다.',listen:'고객이 실제로 말하고 싶은 주제',after:'첫 문장을 끊지 않고 고객의 표현을 그대로 듣습니다.',avoid:'코치가 주제를 정하거나 좁혀 주기'},
- {id:'K02',stage:'K',kind:'선택',q:'이 대화가 편안하게 진행되려면 제가 무엇을 유의하면 좋을까요?',intent:'안전감과 파트너십을 형성합니다.',listen:'속도, 질문 방식, 민감한 경계',after:'고객이 요청한 진행 방식을 실제 세션에 반영합니다.',avoid:'형식적으로 묻고 반영하지 않기'},
- {id:'K03',stage:'K',kind:'선택',q:'이 주제에서 어디까지 다루면 충분할까요?',intent:'대화 범위와 고객의 경계를 합의합니다.',listen:'고객이 원하는 깊이와 한계',after:'다룰 범위를 고객의 말로 짧게 확인합니다.',avoid:'원하지 않는 영역까지 확장하기'},
- {id:'I04',stage:'I',kind:'앵커',q:'이 대화가 끝날 때 무엇을 얻고 싶으신가요?',intent:'고객이 원하는 세션 결과를 확인합니다.',listen:'결정, 정리, 이해, 감정 변화',after:'고객의 표현을 재진술하고 맞는지 확인합니다.',avoid:'코치가 목표 문장을 대신 완성하기'},
- {id:'I05',stage:'I',kind:'선택',q:'그 결과를 얻었다는 것을 어떻게 알 수 있을까요?',intent:'목표의 성공 기준을 구체화합니다.',listen:'고객이 체감할 변화와 확인 기준',after:'숫자보다 고객이 알아차릴 변화 장면을 확인합니다.',avoid:'측정 가능한 숫자만 강요하기'},
- {id:'I06',stage:'I',kind:'선택',q:'지금 가장 중요하게 다루고 싶은 초점은 무엇인가요?',intent:'여러 이야기 가운데 핵심 초점을 합의합니다.',listen:'고객이 반복하거나 강조하는 말',after:'세션 초점을 고객의 말로 다시 확인합니다.',avoid:'코치가 중요하다고 판단한 것을 선택하기'},
- {id:'N07',stage:'N',kind:'앵커',q:'그 상황을 조금 더 들려주시겠어요?',intent:'섣불리 해결하지 않고 맥락을 듣습니다.',listen:'사건, 사람, 시간, 반복되는 패턴',after:'고객의 속도에 맞추고 핵심 표현을 반영합니다.',avoid:'답변 중간에 다음 질문 던지기'},
- {id:'N08',stage:'N',kind:'선택',q:'그때 어떤 생각이 가장 먼저 들었나요?',intent:'고객의 생각과 해석을 확인합니다.',listen:'판단, 가정, 기대, 두려움',after:'추측하지 말고 고객이 사용한 단어를 확인합니다.',avoid:'코치의 해석을 사실처럼 말하기'},
- {id:'N09',stage:'N',kind:'선택',q:'그때 어떤 감정이 가장 컸나요?',intent:'감정 경험을 명료하게 듣습니다.',listen:'감정의 종류와 강도',after:'감정을 단정하지 않고 반영한 뒤 맞는지 묻습니다.',avoid:'감정을 대신 이름 붙여 확정하기'},
- {id:'N10',stage:'N',kind:'선택',q:'그 상황에서 정말 바라는 것은 무엇인가요?',intent:'말 아래에 있는 욕구와 의도를 듣습니다.',listen:'인정, 안전, 관계, 선택, 변화',after:'욕구를 해결책으로 바꾸기 전에 충분히 머뭅니다.',avoid:'욕구를 곧바로 실행계획으로 전환하기'},
- {id:'G11',stage:'G',kind:'앵커',q:'말씀하시면서 새롭게 보이는 것은 무엇인가요?',intent:'고객 스스로 알아차림을 표현하게 합니다.',listen:'변화한 관점, 새롭게 연결된 의미',after:'고객의 통찰을 짧게 반영하고 의미를 더 묻습니다.',avoid:'코치가 먼저 통찰을 설명하기'},
- {id:'G12',stage:'G',kind:'선택',q:'이 상황을 다른 관점에서 보면 무엇이 보이나요?',intent:'기존 해석 밖의 가능성을 탐색합니다.',listen:'예외, 새로운 선택, 상대 관점',after:'고객이 만든 관점을 존중하고 선택권을 남깁니다.',avoid:'코치가 원하는 관점으로 유도하기'},
- {id:'G13',stage:'G',kind:'선택',q:'지금까지 잘해온 점은 무엇인가요?',intent:'고객의 강점과 자원을 발견합니다.',listen:'이미 사용한 능력, 버텨온 힘, 성공 경험',after:'관찰된 사실에 근거해 인정합니다.',avoid:'근거 없는 칭찬이나 과장'},
- {id:'D14',stage:'D',kind:'앵커',q:'이 가운데 내가 선택할 수 있는 것은 무엇인가요?',intent:'고객이 영향력을 행사할 수 있는 영역을 찾습니다.',listen:'고객의 선택과 행동 가능성',after:'타인의 행동이 아닌 고객의 선택을 구체화합니다.',avoid:'타인을 바꾸는 계획에 머물기'},
- {id:'D15',stage:'D',kind:'선택',q:'내가 책임질 부분은 어디까지인가요?',intent:'고객 자신의 몫을 분명하게 합니다.',listen:'감당할 책임과 결정',after:'고객이 정한 책임 범위를 존중합니다.',avoid:'더 많은 책임을 지도록 압박하기'},
- {id:'D16',stage:'D',kind:'선택',q:'내가 내려놓아도 되는 것은 무엇인가요?',intent:'과도한 책임과 통제에서 분리합니다.',listen:'타인의 선택, 지나간 일, 통제 불가능한 조건',after:'내려놓음과 회피의 차이를 고객과 확인합니다.',avoid:'무책임이나 회피를 권하는 질문으로 사용하기'},
- {id:'O17',stage:'O',kind:'앵커',q:'가능한 방법에는 무엇이 있나요?',intent:'고객이 선택지를 직접 만들어내게 합니다.',listen:'현실적 방법과 자유로운 아이디어',after:'첫 답에서 멈추지 않고 충분한 선택지를 기다립니다.',avoid:'코치가 먼저 해결책 제안하기'},
- {id:'O18',stage:'O',kind:'선택',q:'그중 가장 먼저 해보고 싶은 것은 무엇인가요?',intent:'고객이 자신의 선택을 결정하게 합니다.',listen:'흥미, 의지, 실행 가능성',after:'선택 이유와 고객의 의지를 확인합니다.',avoid:'코치가 가장 좋은 방법을 고르기'},
- {id:'O19',stage:'O',kind:'선택',q:'실행을 도와줄 사람이나 환경은 무엇인가요?',intent:'후원 체계와 실행 조건을 마련합니다.',listen:'지원자, 시간, 장소, 도구, 점검 방식',after:'실행을 돕는 구체적인 환경을 확인합니다.',avoid:'실행을 의지 문제로만 해석하기'},
- {id:'O20',stage:'O',kind:'선택',q:'무엇을 언제 시작하시겠어요?',intent:'행동을 구체적인 약속으로 전환합니다.',listen:'첫 행동, 시점, 실행 기준',after:'고객이 정한 행동과 시점을 다시 확인합니다.',avoid:'코치가 기한이나 행동량을 정하기'},
- {id:'M21',stage:'M',kind:'앵커',q:'이 대화에서 가장 중요하게 얻은 것은 무엇인가요?',intent:'고객이 성과와 배움을 자신의 언어로 통합합니다.',listen:'알아차림, 감정 변화, 선택, 행동 의지',after:'고객의 성과와 변화를 짧게 인정합니다.',avoid:'코치가 세션 성과를 대신 요약하기'},
- {id:'M22',stage:'M',kind:'선택',q:'이제 대화를 마무리해도 괜찮을까요?',intent:'종료 시점에도 고객의 동의를 확인합니다.',listen:'남은 이야기, 추가로 필요한 확인',after:'남은 내용이 없는지 확인하고 고객의 동의로 닫습니다.',avoid:'시간만을 이유로 일방적으로 종료하기'}
+ {id:'K01',stage:'K',q:'오늘 어떤 이야기를 나누고 싶으신가요?'},{id:'K02',stage:'K',q:'이 대화가 끝나면 무엇이 달라지면 좋을까요?'},{id:'K03',stage:'K',q:'그 변화가 일어났다는 것을 어떻게 알 수 있을까요?'},
+ {id:'I04',stage:'I',q:'그 변화가 왜 중요하신가요?'},{id:'I05',stage:'I',q:'그 변화가 이루어지면 어떤 모습일까요?'},
+ {id:'N06',stage:'N',q:'그 모습을 지키기 어려웠던 최근 장면은 언제였나요?'},{id:'N07',stage:'N',q:'그때 무슨 일이 있었나요?'},{id:'N08',stage:'N',q:'그때 어떤 생각이 들었나요?'},{id:'N09',stage:'N',q:'그때 어떤 감정이 있었나요?'},{id:'N10',stage:'N',q:'반복해서 나타나는 것이 있나요?'},
+ {id:'G11',stage:'G',q:'지금까지 무엇을 해보셨나요?'},{id:'G12',stage:'G',q:'무엇이 도움이 되었나요?'},{id:'G13',stage:'G',q:'그때 자신의 어떤 힘이 드러났나요?'},
+ {id:'D14',stage:'D',q:'그 힘을 이 상황에 어떻게 써볼 수 있을까요?'},{id:'D15',stage:'D',q:'누구와 무엇을 조율하면 좋을까요?'},
+ {id:'O16',stage:'O',q:'그 지점을 움직일 방법에는 무엇이 있나요?'},{id:'O17',stage:'O',q:'또 다른 방법은 무엇이 있나요?'},{id:'O18',stage:'O',q:'그중 무엇을 선택하시겠어요?'},{id:'O19',stage:'O',q:'언제, 어디서, 무엇부터 하시겠어요?'},
+ {id:'M20',stage:'M',q:'오늘 무엇을 새롭게 알게 되셨나요?'},{id:'M21',stage:'M',q:'처음과 비교해 무엇이 달라졌나요?'},{id:'M22',stage:'M',q:'가져갈 한 문장은 무엇인가요?'}
 ];
-
-const welcome=document.getElementById('welcome');
-const questionScreen=document.getElementById('questionScreen');
-const currentNo=document.getElementById('currentNo');
-const progressBar=document.getElementById('progressBar');
-const stageChip=document.getElementById('stageChip');
-const typeChip=document.getElementById('typeChip');
-const questionText=document.getElementById('questionText');
-const prevBtn=document.getElementById('prevBtn');
-const nextBtn=document.getElementById('nextBtn');
-const modal=document.getElementById('modal');
-const modalBadge=document.getElementById('modalBadge');
-const modalTitle=document.getElementById('modalTitle');
-const modalBody=document.getElementById('modalBody');
-const guideGrid=document.getElementById('guideGrid');
-const modalActions=document.getElementById('modalActions');
+const welcome=document.getElementById('welcome'),questionScreen=document.getElementById('questionScreen'),currentNo=document.getElementById('currentNo'),progressBar=document.getElementById('progressBar'),stageChip=document.getElementById('stageChip'),timeChip=document.getElementById('timeChip'),questionText=document.getElementById('questionText'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),modal=document.getElementById('modal'),modalBadge=document.getElementById('modalBadge'),modalTitle=document.getElementById('modalTitle'),modalBody=document.getElementById('modalBody'),coachBox=document.getElementById('coachBox'),coachText=document.getElementById('coachText'),principles=document.getElementById('principles'),modalActions=document.getElementById('modalActions');
 let index=0;
-
-function applyStage(stageKey){
-  const stage=STAGES[stageKey];
-  document.documentElement.style.setProperty('--accent',stage.color);
-  document.documentElement.style.setProperty('--accent-rgb',stage.rgb);
-}
-
-function render(){
-  const item=QUESTIONS[index];
-  const stage=STAGES[item.stage];
-  applyStage(item.stage);
-  currentNo.textContent=String(index+1);
-  progressBar.style.width=((index+1)/QUESTIONS.length*100)+'%';
-  stageChip.textContent=item.stage+' · '+stage.name;
-  typeChip.textContent=item.id+' · '+item.kind;
-  questionText.textContent=item.q;
-  prevBtn.disabled=index===0;
-  nextBtn.textContent=index===QUESTIONS.length-1?'마무리':'다음';
-}
-
-function openModal({badge,title,body,guide=false,primary='확인',secondary='',onPrimary,onSecondary}){
-  modalBadge.textContent=badge||'';
-  modalTitle.textContent=title||'';
-  modalBody.textContent=body||'';
-  guideGrid.style.display=guide?'grid':'none';
-  modalActions.innerHTML='';
-  if(secondary){
-    const back=document.createElement('button');
-    back.className='btn subtle';
-    back.textContent=secondary;
-    back.onclick=()=>{closeModal();if(onSecondary)onSecondary();};
-    modalActions.appendChild(back);
-  }
-  const ok=document.createElement('button');
-  ok.className='btn primary';
-  ok.textContent=primary;
-  ok.onclick=()=>{closeModal();if(onPrimary)onPrimary();};
-  modalActions.appendChild(ok);
-  modal.classList.add('show');
-  setTimeout(()=>ok.focus(),0);
-}
-
-function closeModal(){modal.classList.remove('show');}
-
-function showStageGuide(stageKey,onContinue){
-  const stage=STAGES[stageKey];
-  applyStage(stageKey);
-  openModal({
-    badge:stageKey+' · KINGDOM STAGE',
-    title:stage.name,
-    body:stage.guide,
-    primary:'질문 시작',
-    onPrimary:onContinue
-  });
-}
-
-function showQuestionGuide(){
-  const item=QUESTIONS[index];
-  const stage=STAGES[item.stage];
-  applyStage(item.stage);
-  document.getElementById('intentText').textContent=item.intent;
-  document.getElementById('listenText').textContent=item.listen;
-  document.getElementById('afterText').textContent=item.after;
-  document.getElementById('avoidText').textContent=item.avoid;
-  openModal({
-    badge:item.id+' · '+stage.name,
-    title:item.q,
-    body:'',
-    guide:true,
-    primary:'질문으로 돌아가기'
-  });
-}
-
-function startFlow(){
-  welcome.classList.remove('show');
-  questionScreen.classList.add('show');
-  index=0;
-  showStageGuide('K',render);
-}
-
-function goNext(){
-  if(index===QUESTIONS.length-1){
-    openModal({
-      badge:'SESSION CLOSED',
-      title:'22개의 질문을 모두 확인했습니다',
-      body:'질문의 수보다 고객의 말과 알아차림이 더 많았는지 돌아봅니다.\n고객이 얻은 것과 실행할 한 걸음을 확인한 뒤 대화를 마무리합니다.',
-      primary:'처음으로',
-      onPrimary:reset
-    });
-    return;
-  }
-  const nextIndex=index+1;
-  const currentStage=QUESTIONS[index].stage;
-  const nextStage=QUESTIONS[nextIndex].stage;
-  if(currentStage!==nextStage){
-    showStageGuide(nextStage,()=>{index=nextIndex;render();});
-  }else{
-    index=nextIndex;
-    render();
-  }
-}
-
-function goPrev(){
-  if(index===0)return;
-  index--;
-  render();
-}
-
-function reset(){
-  index=0;
-  currentNo.textContent='0';
-  progressBar.style.width='0';
-  questionScreen.classList.remove('show');
-  welcome.classList.add('show');
-  applyStage('K');
-}
-
-document.getElementById('startBtn').onclick=()=>{
-  openModal({
-    badge:'KAC PRACTICE GUIDE',
-    title:'실습을 시작하기 전에',
-    body:'22개의 질문은 순서대로 제시됩니다.\n모든 질문을 실제 세션에서 반드시 사용해야 하는 것은 아닙니다.\n한 질문 후 고객의 답을 충분히 듣고, 재진술·요약·확인이 필요하면 다음 질문보다 먼저 사용합니다.',
-    primary:'KINGDOM 시작',
-    onPrimary:startFlow
-  });
-};
-document.getElementById('guideBtn').onclick=showQuestionGuide;
-document.getElementById('nextBtn').onclick=goNext;
-document.getElementById('prevBtn').onclick=goPrev;
-document.getElementById('exitBtn').onclick=()=>{
-  openModal({
-    badge:'SESSION EXIT',
-    title:'실습을 종료할까요?',
-    body:'현재 진행 내용은 저장되지 않습니다.',
-    secondary:'계속하기',
-    primary:'종료',
-    onPrimary:reset
-  });
-};
-
-document.addEventListener('keydown',e=>{
-  if(modal.classList.contains('show'))return;
-  if(!questionScreen.classList.contains('show'))return;
-  if(e.key==='ArrowRight'||e.key==='Enter'){e.preventDefault();goNext();}
-  if(e.key==='ArrowLeft'){e.preventDefault();goPrev();}
-});
+function applyStage(stageKey){const s=STAGES[stageKey];document.documentElement.style.setProperty('--accent',s.color);document.documentElement.style.setProperty('--accent-rgb',s.rgb)}
+function render(){const item=QUESTIONS[index],s=STAGES[item.stage];applyStage(item.stage);currentNo.textContent=String(index+1);progressBar.style.width=((index+1)/QUESTIONS.length*100)+'%';stageChip.textContent=item.stage+' · '+s.name;timeChip.textContent=s.time;questionText.textContent=item.q;prevBtn.disabled=index===0;nextBtn.textContent=index===QUESTIONS.length-1?'마무리':'다음'}
+function openModal({badge,title,body,coach='',items=[],primary='확인',secondary='',onPrimary,onSecondary}){modalBadge.textContent=badge||'';modalTitle.textContent=title||'';modalBody.textContent=body||'';if(coach){coachBox.style.display='block';coachText.textContent=coach}else{coachBox.style.display='none';coachText.textContent=''}principles.innerHTML='';if(items.length){principles.style.display='grid';items.forEach(t=>{const li=document.createElement('li');li.textContent=t;principles.appendChild(li)})}else{principles.style.display='none'}modalActions.innerHTML='';if(secondary){const back=document.createElement('button');back.className='btn subtle';back.textContent=secondary;back.onclick=()=>{closeModal();if(onSecondary)onSecondary()};modalActions.appendChild(back)}const ok=document.createElement('button');ok.className='btn primary';ok.textContent=primary;ok.onclick=()=>{closeModal();if(onPrimary)onPrimary()};modalActions.appendChild(ok);modal.classList.add('show');setTimeout(()=>ok.focus(),0)}
+function closeModal(){modal.classList.remove('show')}
+function showStageGuide(stageKey,onContinue){const s=STAGES[stageKey];applyStage(stageKey);openModal({badge:stageKey+' · '+s.time,title:s.name,body:s.guide,coach:s.coach,primary:'질문 시작',onPrimary:onContinue})}
+function startFlow(){welcome.classList.remove('show');questionScreen.classList.add('show');index=0;showStageGuide('K',render)}
+function goNext(){if(index===QUESTIONS.length-1){openModal({badge:'SESSION CLOSING',title:'대화를 마무리합니다',body:'오늘 더 나누고 싶거나 빠뜨린 이야기가 있으신가요?\n오늘 대화는 여기에서 마무리해도 괜찮을까요?\n함께 이야기해주셔서 감사합니다.',primary:'처음으로',onPrimary:reset});return}const nextIndex=index+1,currentStage=QUESTIONS[index].stage,nextStage=QUESTIONS[nextIndex].stage;if(currentStage!==nextStage){showStageGuide(nextStage,()=>{index=nextIndex;render()})}else{index=nextIndex;render()}}
+function goPrev(){if(index===0)return;index--;render()}
+function reset(){index=0;currentNo.textContent='0';progressBar.style.width='0';questionScreen.classList.remove('show');welcome.classList.add('show');applyStage('K')}
+document.getElementById('startBtn').onclick=()=>openModal({badge:'첫인사 · 안내',title:'실습을 시작하기 전에',body:'안녕하세요. 오늘 함께할 코치입니다. 만나 뵙게 되어 반갑습니다.\n먼저, 지금 이 자리에 오신 마음은 어떠신가요?\n오늘은 약 20분 동안 고객님이 다루고 싶은 주제를 중심으로 함께 대화하겠습니다.\n오늘 나누시는 내용은 한국코치협회 윤리규정에 따라 비밀을 지켜드리오니, 편안하게 말씀하실 수 있는 범위에서 이야기해 주세요.\n이렇게 진행해도 괜찮으실까요?',items:['실습에서는 질문을 모두 사용하지 않습니다.','다음 질문은 고객의 답에서 찾습니다.','질문보다 반영과 요약을 먼저 사용합니다.','한 번에 하나만 묻습니다.','조언을 질문 속에 숨기지 않습니다.'],primary:'KINGDOM 시작',onPrimary:startFlow});
+document.getElementById('nextBtn').onclick=goNext;document.getElementById('prevBtn').onclick=goPrev;document.getElementById('exitBtn').onclick=()=>openModal({badge:'SESSION EXIT',title:'실습을 종료할까요?',body:'현재 진행 위치는 저장되지 않습니다.',secondary:'계속하기',primary:'종료',onPrimary:reset});
+document.addEventListener('keydown',e=>{if(modal.classList.contains('show')||!questionScreen.classList.contains('show'))return;if(e.key==='ArrowRight'||e.key==='Enter'){e.preventDefault();goNext()}if(e.key==='ArrowLeft'){e.preventDefault();goPrev()}});
 </script>
 </body>
 </html>
