@@ -1,0 +1,54 @@
+name: Patch KGM210 profile v3.14
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/kgm210-growth-journey-v1
+    paths:
+      - tests/kgm210/kgm210-profile-engine-v314.js
+      - tests/kgm210/kgm210-profile-engine-v314.test.js
+      - tests/kgm210/kgm210-profile-ui-v314.js
+      - tests/kgm210/kgm210-profile-v314.css
+      - scripts/patch_kgm210_profile_v314.py
+      - .github/workflows/patch-kgm210-profile-v314.yml
+
+permissions:
+  contents: write
+
+jobs:
+  test-and-patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/kgm210-growth-journey-v1
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate profile engine
+        run: node tests/kgm210/kgm210-profile-engine-v314.test.js
+
+      - name: Validate browser scripts
+        run: |
+          node --check tests/kgm210/kgm210-profile-engine-v314.js
+          node --check tests/kgm210/kgm210-profile-ui-v314.js
+
+      - name: Inject profile assets into KGM210
+        run: python scripts/patch_kgm210_profile_v314.py
+
+      - name: Commit generated index
+        run: |
+          if git diff --quiet -- tests/kgm210/index.html; then
+            echo "No generated index changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/kgm210/index.html
+          git commit -m "feat: inject KGM210 profile v3.14 assets"
+          git push origin HEAD:feature/kgm210-growth-journey-v1
