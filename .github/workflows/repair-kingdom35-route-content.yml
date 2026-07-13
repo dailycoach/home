@@ -1,0 +1,55 @@
+name: Repair KINGDOM35 route content
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/repair-kingdom35-route-content.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore KINGDOM35 app from source repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p cards/kingdom35 cards/grow88
+          curl -fsSL "https://raw.githubusercontent.com/dailycoach/grow88/main/index.html" -o cards/kingdom35/index.html
+          cat > cards/grow88/index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="ko">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="refresh" content="0; url=/cards/kingdom35/">
+            <link rel="canonical" href="https://daily-coach-ing.com/cards/kingdom35/">
+            <title>KINGDOM35로 이동합니다</title>
+            <script>location.replace('/cards/kingdom35/' + location.search + location.hash);</script>
+          </head>
+          <body>
+            <p><a href="/cards/kingdom35/">KINGDOM35 · KAC Practice로 이동</a></p>
+          </body>
+          </html>
+          HTML
+
+      - name: Commit repair
+        shell: bash
+        run: |
+          if git diff --quiet -- cards/kingdom35/index.html cards/grow88/index.html; then
+            echo "Route content already repaired."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards/kingdom35/index.html cards/grow88/index.html
+          git commit -m "Restore KINGDOM35 app at new route"
+          git push
