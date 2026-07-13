@@ -1,0 +1,3 @@
+KGM210 v3.15.4 operating release
+Target: https://daily-coach-ing.com/tests/kgm210/
+Requested: 2026-07-14 Asia/Seoul
