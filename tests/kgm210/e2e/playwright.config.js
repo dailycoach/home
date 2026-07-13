@@ -1,4 +1,5 @@
 'use strict';
+const path=require('path');
 const {defineConfig,devices}=require('@playwright/test');
 
 module.exports=defineConfig({
@@ -21,6 +22,7 @@ module.exports=defineConfig({
   }],
   webServer:{
     command:'python3 -m http.server 4173 --bind 127.0.0.1',
+    cwd:path.resolve(__dirname,'../../..'),
     url:'http://127.0.0.1:4173/tests/kgm210/index.html',
     timeout:120000,
     reuseExistingServer:true
