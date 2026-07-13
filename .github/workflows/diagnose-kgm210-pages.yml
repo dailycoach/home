@@ -1,5 +1,6 @@
 name: Diagnose KGM210 Pages
 
+# Temporary diagnostic workflow for the KGM210 live route.
 on:
   pull_request:
     branches: [main]
