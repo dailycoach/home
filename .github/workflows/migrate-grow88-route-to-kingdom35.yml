@@ -1,0 +1,81 @@
+name: Migrate grow88 route to kingdom35
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/migrate-grow88-route-to-kingdom35.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create KINGDOM35 route and redirect old route
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p cards/kingdom35 cards/grow88
+          cp cards/grow88/index.html cards/kingdom35/index.html
+          cat > cards/grow88/index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="ko">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="refresh" content="0; url=/cards/kingdom35/">
+            <link rel="canonical" href="https://daily-coach-ing.com/cards/kingdom35/">
+            <title>KINGDOM35로 이동합니다</title>
+            <script>location.replace('/cards/kingdom35/' + location.search + location.hash);</script>
+          </head>
+          <body>
+            <p><a href="/cards/kingdom35/">KINGDOM35 · KAC Practice로 이동</a></p>
+          </body>
+          </html>
+          HTML
+
+      - name: Update homepage and page registry
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          index_path = Path('index.html')
+          text = index_path.read_text(encoding='utf-8')
+          text = text.replace('/cards/grow88/', '/cards/kingdom35/')
+          text = text.replace('data-route="grow88"', 'data-route="kingdom35"')
+          text = text.replace('KINGDOM22 · KAC Practice', 'KINGDOM35 · KAC Practice')
+          text = text.replace('킹덤·KOUM·KINGDOM22', '킹덤·KOUM·KINGDOM35')
+          index_path.write_text(text, encoding='utf-8')
+
+          pages_path = Path('pages.json')
+          data = json.loads(pages_path.read_text(encoding='utf-8-sig'))
+          for item in data:
+              if item.get('url') == '/cards/grow88/' or item.get('title') in {'KINGDOM22 · KAC Practice', 'KINGDOM35 · KAC Practice'}:
+                  item['title'] = 'KINGDOM35 · KAC Practice'
+                  item['description'] = '한국코치협회 KAC 실습을 위한 KINGDOM 7단계 35개 선택 질문과 세션 성찰 도구'
+                  item['url'] = '/cards/kingdom35/'
+                  item['source'] = 'https://github.com/dailycoach/grow88'
+          pages_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit migration
+        shell: bash
+        run: |
+          if git diff --quiet -- cards/kingdom35/index.html cards/grow88/index.html index.html pages.json; then
+            echo "Migration already applied."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards/kingdom35/index.html cards/grow88/index.html index.html pages.json
+          git commit -m "Migrate Grow88 route to KINGDOM35"
+          git push
