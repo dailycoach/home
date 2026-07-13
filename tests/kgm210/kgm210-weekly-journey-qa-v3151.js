@@ -1,5 +1,6 @@
-(function boot(attempt=0){
+(function boot(attempt){
   'use strict';
+  attempt=Number(attempt)||0;
   const engine=window.KGMWeeklyJourneyV315;
   const weeklyUi=window.KGM_WEEKLY_JOURNEY_V315;
   if(!engine||!weeklyUi){
@@ -162,4 +163,4 @@
     separateViewedWeek:true,
     storageKey:engine.STORAGE_KEY
   };
-})();
+})(0);
