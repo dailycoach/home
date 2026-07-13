@@ -9,16 +9,18 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   issues: write
 
 jobs:
   deploy-and-verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Verify merged KGM210 source
         run: |
@@ -36,23 +38,22 @@ jobs:
           RESPONSE=$(gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" 2>&1)
           STATUS=$?
           set -e
+          RESPONSE_ONE_LINE=$(printf '%s' "$RESPONSE" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g')
           echo "status=$STATUS" >> "$GITHUB_OUTPUT"
-          {
-            echo 'response<<EOF'
-            echo "$RESPONSE"
-            echo 'EOF'
-          } >> "$GITHUB_OUTPUT"
+          echo "response=$RESPONSE_ONE_LINE" >> "$GITHUB_OUTPUT"
           echo "$RESPONSE"
 
       - name: Wait for live KGM210 v3.15.4
         id: live
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
           BASE='https://daily-coach-ing.com/tests/kgm210'
           PASS=0
           TITLE=''
-          for TRY in $(seq 1 48); do
+          ATTEMPTS=0
+          for TRY in $(seq 1 24); do
+            ATTEMPTS=$TRY
             TOKEN="${GITHUB_SHA}-${TRY}-$(date +%s)"
             HTML=$(curl -fsSL --retry 2 --connect-timeout 10 \
               -H 'Cache-Control: no-cache, no-store, max-age=0' \
@@ -64,9 +65,9 @@ jobs:
             if printf '%s' "$HTML" | grep -q '유형매핑·7주여정 v3.15' \
               && printf '%s' "$HTML" | grep -q 'data-kgm-profile-v314="style"' \
               && printf '%s' "$HTML" | grep -q 'data-kgm-weekly-qa-v3151="script"'; then
-              PROFILE=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-engine-v314.js?deploy=${TOKEN}")
-              WEEKLY=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?deploy=${TOKEN}")
-              QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?deploy=${TOKEN}")
+              PROFILE=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-engine-v314.js?deploy=${TOKEN}" || true)
+              WEEKLY=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?deploy=${TOKEN}" || true)
+              QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?deploy=${TOKEN}" || true)
               if printf '%s' "$PROFILE" | grep -q 'KGM_WEEKLY_V315_BOOTSTRAP' \
                 && printf '%s' "$WEEKLY" | grep -q 'KGM210 weekly journey UI v3.15.2' \
                 && printf '%s' "$QA" | grep -q 'KGM210 weekly journey QA v3.15.4'; then
@@ -79,13 +80,51 @@ jobs:
 
           echo "pass=$PASS" >> "$GITHUB_OUTPUT"
           echo "title=$TITLE" >> "$GITHUB_OUTPUT"
-          if [ "$PASS" -ne 1 ]; then
-            echo 'Live KGM210 did not reach v3.15.4 within the verification window.' >&2
-            exit 1
+          echo "attempts=$ATTEMPTS" >> "$GITHUB_OUTPUT"
+
+      - name: Persist deployment verification status
+        if: always()
+        env:
+          PAGE_STATUS: ${{ steps.pages.outputs.status }}
+          PAGE_RESPONSE: ${{ steps.pages.outputs.response }}
+          LIVE_PASS: ${{ steps.live.outputs.pass }}
+          LIVE_TITLE: ${{ steps.live.outputs.title }}
+          LIVE_ATTEMPTS: ${{ steps.live.outputs.attempts }}
+        run: |
+          mkdir -p docs/status
+          if [ "$LIVE_PASS" = '1' ]; then RESULT='PASS'; else RESULT='FAIL'; fi
+          cat > docs/status/KGM210_LIVE_DEPLOY_STATUS.md <<EOF
+          # KGM210 실서비스 배포 상태
+
+          - 결과: **${RESULT}**
+          - 검수 시각(UTC): $(date -u '+%Y-%m-%dT%H:%M:%SZ')
+          - 검수 커밋: \`${GITHUB_SHA}\`
+          - GitHub Pages 재빌드 요청 상태: \`${PAGE_STATUS:-unknown}\`
+          - GitHub Pages 응답: \`${PAGE_RESPONSE:-none}\`
+          - 실서비스 제목: \`${LIVE_TITLE:-none}\`
+          - 확인 시도: \`${LIVE_ATTEMPTS:-0}\`
+          - 확인 URL: https://daily-coach-ing.com/tests/kgm210/
+
+          ## 확인 기준
+
+          - v3.15 HTML 제목
+          - 프로필 엔진 부트스트랩
+          - 7주 성장여정 UI v3.15.2
+          - 저장·재방문 QA v3.15.4
+          EOF
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/status/KGM210_LIVE_DEPLOY_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'Deployment status file is unchanged.'
+          else
+            git commit -m "chore: record KGM210 live deployment status ${RESULT}"
+            git push
           fi
 
       - name: Report live verification success
-        if: success()
+        if: steps.live.outputs.pass == '1'
         env:
           GH_TOKEN: ${{ github.token }}
           PAGE_STATUS: ${{ steps.pages.outputs.status }}
@@ -93,7 +132,7 @@ jobs:
         run: |
           gh issue comment 1 --body "## 실서비스 배포 검수 통과 · KGM210 v3.15.4
 
-- main 병합 커밋: \`${GITHUB_SHA}\`
+- 검수 커밋: \`${GITHUB_SHA}\`
 - GitHub Pages 재빌드 요청 상태: \`${PAGE_STATUS}\`
 - 실서비스 제목: \`${LIVE_TITLE}\`
 - 프로필 엔진: 로드 확인
@@ -104,7 +143,7 @@ jobs:
 캐시 우회 요청으로 HTML과 핵심 외부 자산을 직접 확인했습니다."
 
       - name: Report live verification failure
-        if: failure()
+        if: steps.live.outputs.pass != '1'
         env:
           GH_TOKEN: ${{ github.token }}
           PAGE_STATUS: ${{ steps.pages.outputs.status }}
@@ -120,3 +159,7 @@ jobs:
 - 확인 URL: https://daily-coach-ing.com/tests/kgm210/
 
 main에는 새 코드가 있으나 실서비스가 검수 시간 안에 갱신되지 않았습니다. Pages 배포 소스와 캐시를 추가 점검해야 합니다."
+
+      - name: Fail when live verification did not pass
+        if: steps.live.outputs.pass != '1'
+        run: exit 1
