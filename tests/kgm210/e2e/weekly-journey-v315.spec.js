@@ -1,6 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 
+// KGM210 v3.15.1 mobile regression: start, restore, re-enter, complete, and print.
 const APP='/tests/kgm210/index.html';
 
 async function waitForWeeklyAssets(page){
