@@ -1,0 +1,65 @@
+name: Verify KGM210 v3.15.4 operating live
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-kgm210-v3154-operating-live.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Request Pages rebuild
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
+          echo "pages_build_request_status=$?"
+          set -e
+
+      - name: Verify cache-busted live release
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='https://daily-coach-ing.com/tests/kgm210'
+          PASS=0
+          for TRY in $(seq 1 36); do
+            TOKEN="${GITHUB_SHA}-${TRY}-$(date +%s)"
+            HTML=$(curl -fsSL --retry 2 --connect-timeout 10 \
+              -H 'Cache-Control: no-cache, no-store, max-age=0' \
+              -H 'Pragma: no-cache' \
+              "${BASE}/?release=${TOKEN}" || true)
+            TITLE=$(printf '%s' "$HTML" | grep -o '<title>[^<]*</title>' | head -n 1 || true)
+            echo "Attempt ${TRY}: ${TITLE:-no-title}"
+
+            if printf '%s' "$HTML" | grep -q '<title>KGM210 성장검사 · 유형매핑·7주여정 v3.15.4 운영판</title>' \
+              && ! printf '%s' "$HTML" | grep -q '### 7일 성장기록'; then
+              PROFILE_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-ui-v314.js?release=${TOKEN}" || true)
+              WEEKLY_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?release=${TOKEN}" || true)
+              WEEKLY_QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?release=${TOKEN}" || true)
+              if printf '%s' "$PROFILE_UI" | grep -q '유형매핑·7주여정 v3.15.4' \
+                && printf '%s' "$WEEKLY_UI" | grep -q 'KGM210 weekly journey UI v3.15.2' \
+                && printf '%s' "$WEEKLY_QA" | grep -q 'KGM210 weekly journey QA v3.15.4'; then
+                PASS=1
+                break
+              fi
+            fi
+            sleep 8
+          done
+
+          if [ "$PASS" -ne 1 ]; then
+            echo 'KGM210 v3.15.4 operating release was not confirmed on the live route.' >&2
+            exit 1
+          fi
+
+          echo 'KGM210 v3.15.4 operating release confirmed.'
