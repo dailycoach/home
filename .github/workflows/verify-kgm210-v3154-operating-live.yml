@@ -14,52 +14,93 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
-      - name: Request Pages rebuild
+      - name: Build Pages and verify live operating release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          set +e
-          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
-          echo "pages_build_request_status=$?"
-          set -e
-
-      - name: Verify cache-busted live release
         shell: bash
         run: |
-          set -euo pipefail
+          set +e
+          REPORT="$RUNNER_TEMP/kgm210-v3154-live.txt"
           BASE='https://daily-coach-ing.com/tests/kgm210'
+          MAIN_SHA=$(gh api "repos/${GITHUB_REPOSITORY}/commits/main" --jq '.sha')
           PASS=0
-          for TRY in $(seq 1 36); do
-            TOKEN="${GITHUB_SHA}-${TRY}-$(date +%s)"
-            HTML=$(curl -fsSL --retry 2 --connect-timeout 10 \
-              -H 'Cache-Control: no-cache, no-store, max-age=0' \
-              -H 'Pragma: no-cache' \
-              "${BASE}/?release=${TOKEN}" || true)
-            TITLE=$(printf '%s' "$HTML" | grep -o '<title>[^<]*</title>' | head -n 1 || true)
-            echo "Attempt ${TRY}: ${TITLE:-no-title}"
 
-            if printf '%s' "$HTML" | grep -q '<title>KGM210 성장검사 · 유형매핑·7주여정 v3.15.4 운영판</title>' \
-              && ! printf '%s' "$HTML" | grep -q '### 7일 성장기록'; then
-              PROFILE_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-ui-v314.js?release=${TOKEN}" || true)
-              WEEKLY_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?release=${TOKEN}" || true)
-              WEEKLY_QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?release=${TOKEN}" || true)
-              if printf '%s' "$PROFILE_UI" | grep -q '유형매핑·7주여정 v3.15.4' \
-                && printf '%s' "$WEEKLY_UI" | grep -q 'KGM210 weekly journey UI v3.15.2' \
-                && printf '%s' "$WEEKLY_QA" | grep -q 'KGM210 weekly journey QA v3.15.4'; then
-                PASS=1
+          {
+            echo "main_sha=$MAIN_SHA"
+            echo '=== PAGES SETTINGS ==='
+            gh api "repos/${GITHUB_REPOSITORY}/pages"
+            echo "pages_settings_status=$?"
+            echo
+
+            echo '=== REQUEST PAGES BUILD ==='
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
+            echo "pages_build_request_status=$?"
+            echo
+
+            echo '=== POLL LATEST PAGES BUILD ==='
+            for TRY in $(seq 1 30); do
+              BUILD=$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" 2>&1)
+              BUILD_STATUS=$?
+              BUILD_STATE=$(printf '%s' "$BUILD" | jq -r '.status // "unknown"' 2>/dev/null)
+              BUILD_COMMIT=$(printf '%s' "$BUILD" | jq -r '.commit // "unknown"' 2>/dev/null)
+              echo "build_try=$TRY api_status=$BUILD_STATUS state=$BUILD_STATE commit=$BUILD_COMMIT"
+              if [ "$BUILD_STATUS" -eq 0 ] && [ "$BUILD_STATE" = 'built' ] && [ "$BUILD_COMMIT" = "$MAIN_SHA" ]; then
                 break
               fi
-            fi
-            sleep 8
-          done
+              sleep 8
+            done
+            echo
 
-          if [ "$PASS" -ne 1 ]; then
+            echo '=== POLL LIVE RELEASE ==='
+            for TRY in $(seq 1 24); do
+              TOKEN="${GITHUB_SHA}-${TRY}-$(date +%s)"
+              HTML=$(curl -fsSL --retry 2 --connect-timeout 10 \
+                -H 'Cache-Control: no-cache, no-store, max-age=0' \
+                -H 'Pragma: no-cache' \
+                "${BASE}/?release=${TOKEN}" 2>/dev/null)
+              TITLE=$(printf '%s' "$HTML" | grep -o '<title>[^<]*</title>' | head -n 1)
+              echo "live_try=$TRY title=${TITLE:-no-title}"
+
+              if printf '%s' "$HTML" | grep -q '<title>KGM210 성장검사 · 유형매핑·7주여정 v3.15.4 운영판</title>' \
+                && ! printf '%s' "$HTML" | grep -q '### 7일 성장기록'; then
+                PROFILE_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-ui-v314.js?release=${TOKEN}" 2>/dev/null)
+                WEEKLY_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?release=${TOKEN}" 2>/dev/null)
+                WEEKLY_QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?release=${TOKEN}" 2>/dev/null)
+                if printf '%s' "$PROFILE_UI" | grep -q '유형매핑·7주여정 v3.15.4' \
+                  && printf '%s' "$WEEKLY_UI" | grep -q 'KGM210 weekly journey UI v3.15.2' \
+                  && printf '%s' "$WEEKLY_QA" | grep -q 'KGM210 weekly journey QA v3.15.4'; then
+                  PASS=1
+                  echo 'live_assets=pass'
+                  break
+                fi
+              fi
+              sleep 8
+            done
+
+            echo "result=$PASS"
+          } > "$REPORT" 2>&1
+
+          cat "$REPORT"
+          cp "$REPORT" kgm210-v3154-live.txt
+          echo "pass=$PASS" >> "$GITHUB_ENV"
+          set -e
+
+      - name: Upload live verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kgm210-v3154-live-report
+          path: kgm210-v3154-live.txt
+          retention-days: 7
+
+      - name: Enforce live release verification
+        run: |
+          if [ "${pass:-0}" != '1' ]; then
             echo 'KGM210 v3.15.4 operating release was not confirmed on the live route.' >&2
             exit 1
           fi
-
           echo 'KGM210 v3.15.4 operating release confirmed.'
