@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 
-// KGM210 v3.15.1 mobile regression: start, restore, re-enter, complete, and print.
+// KGM210 v3.15.2 mobile regression: start, restore, re-enter, revise, complete, and print.
 const APP='/tests/kgm210/index.html';
 
 async function waitForWeeklyAssets(page){
@@ -83,16 +83,51 @@ test.describe('KGM210 7주 성장여정 모바일 회귀검수',()=>{
 
     const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('kgm210:seven-week-journey:v1')));
     expect(stored.status).toBe('completed');
-    expect(stored.weeks.filter(w=>w.completedAt).length).toBe(7);
-    expect(stored.weeks.map(w=>w.key)).toEqual(['K','I','N','G','D','O','M']);
+    expect(stored.weeks.filter(week=>week.completedAt).length).toBe(7);
+    expect(stored.weeks.map(week=>week.key)).toEqual(['K','I','N','G','D','O','M']);
 
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
     expect(overflow).toBeLessThanOrEqual(1);
 
     await page.emulateMedia({media:'print'});
     await expect(page.locator('#weeklyJourneyScreenV315')).toBeVisible();
-    const buttonDisplay=await page.locator('#weeklyJourneyScreenV315 button').first().evaluate(el=>getComputedStyle(el).display);
+    const buttonDisplay=await page.locator('#weeklyJourneyScreenV315 button').first().evaluate(element=>getComputedStyle(element).display);
     expect(buttonDisplay).toBe('none');
+  });
+
+  test('이전 주차를 수정해도 현재 진행주차는 뒤로 돌아가지 않음',async({page})=>{
+    await page.evaluate(()=>{
+      const engine=window.KGMWeeklyJourneyV315;
+      let journey=engine.createJourney({growthTheme:'이전 기록 수정',successCriterion:'4주차 진행을 유지한다'});
+      for(let week=1;week<=3;week++){
+        journey=engine.savePost(journey,week,{
+          insight:`${week}주차 배움`,phrase:`${week}주차 원문`,action:`${week}주차 행동`,returnPhrase:'다시 돌아온다',nextCheck:'다음 장면'
+        });
+        journey=engine.completeWeek(journey,week,`2026-07-${String(week).padStart(2,'0')}T00:00:00.000Z`).journey;
+      }
+      localStorage.setItem(engine.STORAGE_KEY,JSON.stringify(journey));
+    });
+
+    await openJourney(page,'progress-regression');
+    await expect(page.locator('#weeklyJourneyScreenV315 h2')).toContainText('4주차');
+    expect(await page.evaluate(()=>window.KGM_WEEKLY_JOURNEY_V315.separateViewedWeek)).toBe(true);
+
+    await page.locator('.weeklyStepNavV315 button[data-week="1"]').click();
+    await expect(page.locator('#weeklyJourneyScreenV315 h2')).toContainText('1주차');
+    await expect(page.locator('#weeklyCompleteWeekV315')).toContainText('현재 주차로');
+    await page.locator('#weeklyPostPhraseV315').fill('1주차 수정 문장');
+    await expect(page.locator('#weeklyAutosaveV3151')).toHaveText('이 기기에 자동 저장됨',{timeout:5000});
+
+    const state=await page.evaluate(()=>{
+      const journey=JSON.parse(localStorage.getItem('kgm210:seven-week-journey:v1'));
+      return {currentWeek:journey.currentWeek,phrase:journey.weeks[0].post.phrase};
+    });
+    expect(state.currentWeek).toBe(4);
+    expect(state.phrase).toBe('1주차 수정 문장');
+
+    await expect(page.locator('.weeklyStepNavV315 button[data-week="4"]')).toBeEnabled();
+    await page.locator('.weeklyStepNavV315 button[data-week="4"]').click();
+    await expect(page.locator('#weeklyJourneyScreenV315 h2')).toContainText('4주차');
   });
 
   test('성장여정에서 한 번만 열리고 닫으면 원래 성장여정 화면으로 복귀',async({page})=>{
@@ -105,6 +140,7 @@ test.describe('KGM210 7주 성장여정 모바일 회귀검수',()=>{
       const probe=document.createElement('button');
       probe.id='weeklyOpenReturnProbe';
       probe.className='weeklyOpenV315';
+      probe.dataset.weeklySource='journey';
       probe.textContent='이번 주 기록하기';
       journey.appendChild(probe);
     });
