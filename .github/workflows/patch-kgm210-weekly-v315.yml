@@ -1,0 +1,60 @@
+name: Patch KGM210 seven-week journey v3.15
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/kgm210-growth-journey-v1
+    paths:
+      - tests/kgm210/kgm210-weekly-journey-engine-v315.js
+      - tests/kgm210/kgm210-weekly-journey-engine-v315.test.js
+      - tests/kgm210/kgm210-weekly-journey-ui-v315.js
+      - tests/kgm210/kgm210-weekly-journey-v315.css
+      - scripts/patch_kgm210_weekly_v315.py
+      - .github/workflows/patch-kgm210-weekly-v315.yml
+
+permissions:
+  contents: write
+
+jobs:
+  test-and-patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/kgm210-growth-journey-v1
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate seven-week journey engine
+        run: node tests/kgm210/kgm210-weekly-journey-engine-v315.test.js
+
+      - name: Validate browser scripts
+        run: |
+          node --check tests/kgm210/kgm210-weekly-journey-engine-v315.js
+          node --check tests/kgm210/kgm210-weekly-journey-ui-v315.js
+
+      - name: Inject seven-week journey assets
+        run: python scripts/patch_kgm210_weekly_v315.py
+
+      - name: Verify injected assets
+        run: |
+          grep -q 'data-kgm-weekly-v315="style"' tests/kgm210/index.html
+          grep -q 'data-kgm-weekly-v315="engine"' tests/kgm210/index.html
+          grep -q 'data-kgm-weekly-v315="ui"' tests/kgm210/index.html
+
+      - name: Commit generated index
+        run: |
+          if git diff --quiet -- tests/kgm210/index.html; then
+            echo "No generated index changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/kgm210/index.html
+          git commit -m "feat: inject KGM210 seven-week journey v3.15 assets"
+          git push origin HEAD:feature/kgm210-growth-journey-v1
