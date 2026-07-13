@@ -18,39 +18,65 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Inspect repository source
-        run: |
-          echo '=== LOCAL TITLE ==='
-          grep -o '<title>[^<]*</title>' tests/kgm210/index.html | head -n 1
-          echo '=== LOCAL ASSETS ==='
-          grep -o 'kgm210-[^" ]*' tests/kgm210/index.html | sort -u
-
-      - name: Inspect GitHub Pages settings and builds
+      - name: Generate diagnostic report
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
           set +e
-          echo '=== PAGES SETTINGS ==='
-          gh api "repos/${GITHUB_REPOSITORY}/pages"
-          echo "pages_settings_status=$?"
-          echo '=== LATEST PAGES BUILD ==='
-          gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest"
-          echo "latest_build_status=$?"
-          echo '=== REQUEST NEW PAGES BUILD ==='
-          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
-          echo "request_build_status=$?"
-          set -e
-
-      - name: Inspect live route without cache
-        run: |
+          REPORT="$RUNNER_TEMP/kgm210-pages-diagnostics.txt"
           TOKEN="${GITHUB_SHA}-$(date +%s)"
           URL="https://daily-coach-ing.com/tests/kgm210/?diagnose=${TOKEN}"
-          echo "url=$URL"
-          curl -sSIL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL"
-          echo '=== LIVE TITLE ==='
-          curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
-            | grep -o '<title>[^<]*</title>' | head -n 1
-          echo '=== LIVE ASSET MARKERS ==='
-          curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
-            | grep -Eo 'data-kgm-(profile-v314|weekly-qa-v3151)="[^"]+"|7일 성장기록|7주 성장여정' \
-            | sort -u || true
+
+          {
+            echo '=== LOCAL TITLE ==='
+            grep -o '<title>[^<]*</title>' tests/kgm210/index.html | head -n 1
+            echo
+            echo '=== LOCAL ASSETS ==='
+            grep -o 'kgm210-[^" ]*' tests/kgm210/index.html | sort -u
+            echo
+
+            echo '=== PAGES SETTINGS ==='
+            gh api "repos/${GITHUB_REPOSITORY}/pages"
+            echo "pages_settings_status=$?"
+            echo
+
+            echo '=== LATEST PAGES BUILD ==='
+            gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest"
+            echo "latest_build_status=$?"
+            echo
+
+            echo '=== REQUEST NEW PAGES BUILD ==='
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
+            echo "request_build_status=$?"
+            echo
+
+            echo '=== LIVE URL ==='
+            echo "$URL"
+            echo
+
+            echo '=== LIVE HEADERS ==='
+            curl -sSIL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL"
+            echo
+
+            echo '=== LIVE TITLE ==='
+            curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
+              | grep -o '<title>[^<]*</title>' | head -n 1
+            echo
+
+            echo '=== LIVE ASSET MARKERS ==='
+            curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
+              | grep -Eo 'data-kgm-(profile-v314|weekly-qa-v3151)="[^"]+"|7일 성장기록|7주 성장여정' \
+              | sort -u || true
+          } > "$REPORT" 2>&1
+
+          cat "$REPORT"
+          cp "$REPORT" kgm210-pages-diagnostics.txt
+          set -e
+
+      - name: Upload diagnostic report
+        uses: actions/upload-artifact@v4
+        with:
+          name: kgm210-pages-diagnostics
+          path: kgm210-pages-diagnostics.txt
+          retention-days: 7
