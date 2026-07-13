@@ -59,8 +59,23 @@
     document.querySelectorAll('.trackerStartPanel').forEach(el=>{if(!el.querySelector('.weeklyBridgeV315'))el.style.display='none';});
   }
 
+  function openSource(button){
+    if(button.closest('#result'))return 'result';
+    if(button.closest('#journey'))return 'journey';
+    return 'intro';
+  }
+
+  function interceptWeeklyOpen(event){
+    const button=event.target.closest?.('.weeklyOpenV315');
+    if(!button)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    weeklyUi.open(openSource(button));
+  }
+
   function run(){visibleTextCleanup(document);hideLegacyDailyControls();addConversationPreview(document);}
 
+  document.addEventListener('click',interceptWeeklyOpen,true);
   document.addEventListener('input',e=>{if(e.target.closest?.('#weeklyJourneyScreenV315')&&(e.target.matches('textarea')||e.target.matches('select')))scheduleSave();},true);
   document.addEventListener('change',e=>{if(e.target.closest?.('#weeklyJourneyScreenV315'))scheduleSave();},true);
   document.addEventListener('click',e=>{if(e.target.closest?.('#weeklyCloseV315,#weeklyCompleteWeekV315,#weeklySavePreV315,#weeklySavePostV315'))saveNow();},true);
@@ -70,5 +85,5 @@
   try{new MutationObserver(()=>{clearTimeout(window.__kgmWeeklyQaTimer);window.__kgmWeeklyQaTimer=setTimeout(run,120);}).observe(document.body,{childList:true,subtree:true});}catch(e){}
 
   run();
-  window.KGM_WEEKLY_QA_V3151={ok:true,version:VERSION,attempts:attempt,autosave:true,beforeUnloadSave:true,legacyDailyHidden:true,reentryPreview:true,visibleSevenDayTermsRewritten:true,storageKey:engine.STORAGE_KEY};
+  window.KGM_WEEKLY_QA_V3151={ok:true,version:VERSION,attempts:attempt,autosave:true,beforeUnloadSave:true,legacyDailyHidden:true,reentryPreview:true,visibleSevenDayTermsRewritten:true,duplicateOpenGuard:true,storageKey:engine.STORAGE_KEY};
 })();
