@@ -1,7 +1,14 @@
-(function(){
+(function boot(attempt=0){
   'use strict';
   const engine=window.KGMWeeklyJourneyV315;
-  if(!engine)return;
+  const weeklyUi=window.KGM_WEEKLY_JOURNEY_V315;
+  if(!engine||!weeklyUi){
+    if(attempt<80){setTimeout(()=>boot(attempt+1),125);return;}
+    console.warn('[KGM v3.15.1] weekly QA initialization timed out');
+    return;
+  }
+  if(window.KGM_WEEKLY_QA_V3151?.ok)return;
+
   const VERSION='KGM210 weekly journey QA v3.15.1';
   const by=id=>document.getElementById(id);
   const safeJson=(v,d)=>{try{return JSON.parse(v)}catch(e){return d}};
@@ -62,5 +69,6 @@
   document.addEventListener('DOMContentLoaded',()=>{run();[500,1500,3500,7000].forEach(ms=>setTimeout(run,ms));});
   try{new MutationObserver(()=>{clearTimeout(window.__kgmWeeklyQaTimer);window.__kgmWeeklyQaTimer=setTimeout(run,120);}).observe(document.body,{childList:true,subtree:true});}catch(e){}
 
-  window.KGM_WEEKLY_QA_V3151={ok:true,version:VERSION,autosave:true,beforeUnloadSave:true,legacyDailyHidden:true,reentryPreview:true,visibleSevenDayTermsRewritten:true,storageKey:engine.STORAGE_KEY};
+  run();
+  window.KGM_WEEKLY_QA_V3151={ok:true,version:VERSION,attempts:attempt,autosave:true,beforeUnloadSave:true,legacyDailyHidden:true,reentryPreview:true,visibleSevenDayTermsRewritten:true,storageKey:engine.STORAGE_KEY};
 })();
