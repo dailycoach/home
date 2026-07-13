@@ -1,0 +1,148 @@
+name: Enrich KINGDOM35 stage guides
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/enrich-kingdom35-guides.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enrich model and stage guidance
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('cards/grow88/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          stage_meta = {
+            'K': {
+              'why': '대화 초반에 주제와 원하는 결과를 합의하지 않으면 이후 탐색이 깊어도 고객이 원한 세션과 멀어질 수 있습니다.',
+              'composition': [
+                '1번은 고객이 오늘 다루고 싶은 주제를 엽니다.',
+                '2번은 대화 후 원하는 변화를 확인합니다.',
+                '3번은 변화가 일어났음을 알 수 있는 성공 기준을 묻습니다.',
+                '4번은 오늘 반드시 다룰 우선 초점을 좁힙니다.',
+                '5번은 대화의 범위와 충분함을 고객과 합의합니다.'
+              ],
+              'flow': 'K에서 대화의 방향을 고객과 합의한 뒤, I에서 그 변화가 왜 중요한지와 고객이 원하는 모습을 확인합니다.'
+            },
+            'I': {
+              'why': '목표가 해야 할 과제로만 남지 않고 고객의 가치와 원하는 존재 모습에 연결될 때 대화의 동기와 주도성이 살아납니다.',
+              'composition': [
+                '1번은 변화가 중요한 이유를 확인합니다.',
+                '2번은 변화가 이루어진 모습을 그리게 합니다.',
+                '3번은 그 모습에서 지키고 싶은 것을 찾습니다.',
+                '4번은 고객의 핵심 기준을 선명하게 합니다.',
+                '5번은 변화가 자신과 주변에 갖는 의미를 확장합니다.'
+              ],
+              'flow': 'K에서 합의한 목표를 I에서 고객의 가치와 연결한 뒤, N에서 그 모습이 어려웠던 실제 장면으로 내려갑니다.'
+            },
+            'N': {
+              'why': '막연한 문제 설명을 실제 장면으로 바꾸어야 고객의 생각·감정·욕구와 반복 패턴을 정확히 들을 수 있습니다.',
+              'composition': [
+                '1번은 탐색할 최근 장면을 선택합니다.',
+                '2번은 평가를 빼고 실제로 일어난 일을 듣습니다.',
+                '3번은 그 장면에서의 생각과 해석을 확인합니다.',
+                '4번은 감정과 에너지의 변화를 듣습니다.',
+                '5번은 말 아래에 있는 욕구와 바람을 확인합니다.'
+              ],
+              'flow': 'I의 원하는 모습과 N의 실제 현실 사이 간격을 충분히 들은 뒤, G에서 이미 작동한 힘과 자원을 찾습니다.'
+            },
+            'G': {
+              'why': '문제를 곧바로 해결하기보다 고객이 이미 시도한 것과 작동한 힘을 발견해야 실행이 고객의 자원 위에 세워집니다.',
+              'composition': [
+                '1번은 고객이 이미 해본 시도를 확인합니다.',
+                '2번은 그중 도움이 된 요소를 찾습니다.',
+                '3번은 잘되지 않은 경험에서 배운 점을 발견합니다.',
+                '4번은 실제 장면에서 드러난 고객의 힘을 비춥니다.',
+                '5번은 활용 가능한 사람·경험·환경 자원을 확인합니다.'
+              ],
+              'flow': 'N에서 현실을 충분히 들은 뒤 G에서 고객의 힘과 자원을 찾고, D에서 그 힘을 어디에 어떻게 사용할지 조율합니다.'
+            },
+            'D': {
+              'why': '고객이 통제할 수 있는 것과 없는 것을 구분하고 책임의 경계를 정해야 에너지가 실제로 움직일 수 있는 곳에 모입니다.',
+              'composition': [
+                '1번은 발견한 힘을 현재 상황에 적용합니다.',
+                '2번은 고객이 선택할 수 있는 영역을 찾습니다.',
+                '3번은 고객이 책임질 범위를 분명히 합니다.',
+                '4번은 내려놓아도 되는 통제와 부담을 구분합니다.',
+                '5번은 관계와 환경에서 필요한 조율 대상을 찾습니다.'
+              ],
+              'flow': 'G에서 발견한 힘을 D에서 선택 가능한 초점으로 바꾼 뒤, O에서 대안을 넓히고 실제 행동을 선택합니다.'
+            },
+            'O': {
+              'why': '알아차림이 좋은 결론으로만 끝나지 않도록 고객이 직접 대안을 만들고 자신에게 맞는 행동을 선택하게 합니다.',
+              'composition': [
+                '1번은 가능한 방법을 자유롭게 엽니다.',
+                '2번은 첫 답을 넘어 선택지를 더 확장합니다.',
+                '3번은 현재 조건에서 현실적인 방법을 살핍니다.',
+                '4번은 고객이 실행할 방법을 직접 선택합니다.',
+                '5번은 시점·장소·첫 행동까지 구체화합니다.'
+              ],
+              'flow': 'D에서 정한 초점을 O에서 행동으로 구체화한 뒤, M에서 배움·변화·실행을 고객의 언어로 통합합니다.'
+            },
+            'M': {
+              'why': '세션 성과와 고객의 성장을 확인하고 실행에 필요한 지원을 점검해야 대화가 고객의 다음 삶으로 이어집니다.',
+              'composition': [
+                '1번은 세션에서 새롭게 알게 된 것을 확인합니다.',
+                '2번은 처음 목표와 비교해 달라진 점을 살핍니다.',
+                '3번은 고객이 선택한 실행을 다시 확인합니다.',
+                '4번은 필요한 도움과 점검 방법을 마련합니다.',
+                '5번은 대화 전체를 고객의 한 문장으로 통합합니다.'
+              ],
+              'flow': 'O에서 선택한 행동을 M에서 배움과 성장으로 통합하고, 남은 이야기와 종료 동의를 확인하며 세션을 닫습니다.'
+            }
+          }
+
+          for key, meta in stage_meta.items():
+              pattern = re.compile(r"(\{key:'" + key + r"'.*?coach:'[^']*',)(q:\[)")
+              def repl(match, meta=meta):
+                  comp = '[' + ','.join("'" + item + "'" for item in meta['composition']) + ']'
+                  return (match.group(1)
+                          + "why:'" + meta['why'] + "',"
+                          + "composition:" + comp + ","
+                          + "flow:'" + meta['flow'] + "',"
+                          + match.group(2))
+              text, count = pattern.subn(repl, text, count=1)
+              if count != 1:
+                  raise SystemExit(f'Could not enrich stage {key}')
+
+          old_guide = "function stageGuide(i,done){const s=STAGES[i];apply(i);openModal({badge:s.key+' · '+s.time,title:s.name,body:s.guide,coach:s.coach,primary:'질문 선택',ok:done})}"
+          new_guide = "function stageGuide(i,done){const s=STAGES[i];apply(i);openModal({badge:s.key+' · '+s.time,title:s.name,body:s.guide,coach:s.coach,sections:[{title:'이 구간을 사용하는 이유',items:[s.why]},{title:'다섯 질문의 구성',items:s.composition},{title:'KINGDOM 앞뒤 흐름',items:[s.flow]}],primary:'질문 선택',ok:done})}"
+          if old_guide not in text:
+              raise SystemExit('stageGuide function not found')
+          text = text.replace(old_guide, new_guide, 1)
+
+          opening = """$('startBtn').onclick=()=>openModal({badge:'첫인사 · 실습 안내',title:'왜 KINGDOM 흐름을 사용하는가',body:'KINGDOM은 질문을 순서대로 모두 읽는 대본이 아닙니다. 고객의 주도권을 지키면서도 20분 안에 목표·현실·자원·선택·실행·성장을 놓치지 않도록 코치에게 대화의 지도를 제공합니다.\n\n각 구간의 다섯 질문은 모두 사용해야 하는 문항이 아니라, 고객의 답에 따라 선택하는 질문 후보입니다. 먼저 듣고 반영한 뒤 필요한 질문만 선택합니다.',sections:[{title:'KINGDOM 모델을 사용하는 이유',items:['문제보다 고객의 존재·가치·선택을 먼저 보기 위해 사용합니다.','질문 목록에 끌려가지 않으면서도 대화의 전체 흐름을 잃지 않게 합니다.','목표 합의에서 현실 탐색, 자원 발견, 책임 조율, 실행과 성장 통합까지 연결합니다.','짧은 실습에서도 코치가 답을 주지 않고 고객의 주도성을 유지하도록 돕습니다.']},{title:'KINGDOM 전체 흐름',items:['K 주도권 열기: 주제·원하는 변화·성공 기준을 합의합니다.','I 존재초점 세우기: 변화의 중요성과 원하는 모습을 확인합니다.','N 이야기 깊이 듣기: 실제 장면의 생각·감정·욕구를 듣습니다.','G 고유성 비추기: 이미 작동한 힘과 자원을 발견합니다.','D 책임경계 조율하기: 선택 가능한 영역과 책임의 경계를 정합니다.','O 실행기회 열기: 대안을 넓히고 첫 행동을 구체화합니다.','M 성장통합하기: 배움·변화·실행을 통합하고 종료를 합의합니다.']},{title:'브릿지 질문',items:['조금 더 들려주시겠어요?','그 말에서 가장 중요한 부분은 무엇인가요?','제가 이해한 것이 맞을까요?','지금 이야기와 처음 정한 목표는 어떻게 연결되나요?','그 알아차림을 다음 선택으로 옮기면 무엇이 될까요?']},{title:'경청 스킬',items:['페이싱: 말속도와 톤을 맞춥니다.','백트래킹: 고객의 핵심어를 그대로 되돌려줍니다.','재진술·요약 후 맞게 이해했는지 확인합니다.','감정과 의도를 추측하지 않고 확인합니다.','침묵으로 생각할 시간을 둡니다.','한 번에 하나만 묻고 충분히 듣습니다.']}],primary:'KINGDOM 시작',ok:()=>stageGuide(0,renderStage)});"""
+
+          text, count = re.subn(r"\$\('startBtn'\)\.onclick=.*?;\n", opening + "\n", text, count=1)
+          if count != 1:
+              raise SystemExit('Opening guide handler not found')
+
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit enriched guidance
+        shell: bash
+        run: |
+          if git diff --quiet -- cards/grow88/index.html; then
+            echo "No guidance change required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards/grow88/index.html
+          git commit -m "Enrich KINGDOM35 model and stage guidance"
+          git push
