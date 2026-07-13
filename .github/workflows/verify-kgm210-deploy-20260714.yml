@@ -1,0 +1,76 @@
+name: Verify KGM210 deployment 2026-07-14
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-kgm210-deploy-20260714.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild Pages and verify live KGM210
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='https://daily-coach-ing.com/tests/kgm210'
+          MAIN_SHA=$(gh api "repos/${GITHUB_REPOSITORY}/commits/main" --jq '.sha')
+          echo "main_sha=$MAIN_SHA"
+
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/tmp/pages-build.json
+          cat /tmp/pages-build.json
+
+          BUILT=0
+          for TRY in $(seq 1 30); do
+            BUILD=$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest")
+            STATE=$(jq -r '.status // "unknown"' <<< "$BUILD")
+            COMMIT=$(jq -r '.commit // "unknown"' <<< "$BUILD")
+            echo "build_try=$TRY state=$STATE commit=$COMMIT"
+            if [[ "$STATE" == 'built' && "$COMMIT" == "$MAIN_SHA" ]]; then
+              BUILT=1
+              break
+            fi
+            sleep 6
+          done
+          [[ "$BUILT" == '1' ]]
+
+          LIVE=0
+          for TRY in $(seq 1 24); do
+            TOKEN="${GITHUB_SHA}-${TRY}-$(date +%s)"
+            HTML=$(curl -fsSL --retry 2 --connect-timeout 10 \
+              -H 'Cache-Control: no-cache, no-store, max-age=0' \
+              -H 'Pragma: no-cache' \
+              "${BASE}/?deploy=${TOKEN}")
+            TITLE=$(sed -n 's:.*\(<title>[^<]*</title>\).*:\1:p' <<< "$HTML" | head -n 1)
+            echo "live_try=$TRY title=${TITLE:-no-title}"
+
+            if [[ "$HTML" == *'<title>KGM210 성장검사 · 유형매핑·7주여정 v3.15.4 운영판</title>'* ]] \
+              && [[ "$HTML" != *'### 7일 성장기록'* ]]; then
+              PROFILE=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-engine-v314.js?deploy=${TOKEN}")
+              PROFILE_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-ui-v314.js?deploy=${TOKEN}")
+              WEEKLY=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?deploy=${TOKEN}")
+              QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?deploy=${TOKEN}")
+              if [[ "$PROFILE" == *'KGM210 profile engine v3.14.0'* ]] \
+                && [[ "$PROFILE_UI" == *'유형매핑·7주여정 v3.15.4'* ]] \
+                && [[ "$WEEKLY" == *'KGM210 weekly journey UI v3.15.2'* ]] \
+                && [[ "$QA" == *'KGM210 weekly journey QA v3.15.4'* ]]; then
+                LIVE=1
+                break
+              fi
+            fi
+            sleep 6
+          done
+
+          [[ "$LIVE" == '1' ]]
+          echo 'KGM210 v3.15.4 live deployment verified.'
