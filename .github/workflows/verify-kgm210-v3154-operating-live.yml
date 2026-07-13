@@ -14,7 +14,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
@@ -42,43 +42,43 @@ jobs:
             echo
 
             echo '=== POLL LATEST PAGES BUILD ==='
-            for TRY in $(seq 1 30); do
+            for TRY in $(seq 1 20); do
               BUILD=$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" 2>&1)
               BUILD_STATUS=$?
-              BUILD_STATE=$(printf '%s' "$BUILD" | jq -r '.status // "unknown"' 2>/dev/null)
-              BUILD_COMMIT=$(printf '%s' "$BUILD" | jq -r '.commit // "unknown"' 2>/dev/null)
+              BUILD_STATE=$(jq -r '.status // "unknown"' <<< "$BUILD" 2>/dev/null)
+              BUILD_COMMIT=$(jq -r '.commit // "unknown"' <<< "$BUILD" 2>/dev/null)
               echo "build_try=$TRY api_status=$BUILD_STATUS state=$BUILD_STATE commit=$BUILD_COMMIT"
               if [ "$BUILD_STATUS" -eq 0 ] && [ "$BUILD_STATE" = 'built' ] && [ "$BUILD_COMMIT" = "$MAIN_SHA" ]; then
                 break
               fi
-              sleep 8
+              sleep 6
             done
             echo
 
             echo '=== POLL LIVE RELEASE ==='
-            for TRY in $(seq 1 24); do
+            for TRY in $(seq 1 12); do
               TOKEN="${GITHUB_SHA}-${TRY}-$(date +%s)"
               HTML=$(curl -fsSL --retry 2 --connect-timeout 10 \
                 -H 'Cache-Control: no-cache, no-store, max-age=0' \
                 -H 'Pragma: no-cache' \
                 "${BASE}/?release=${TOKEN}" 2>/dev/null)
-              TITLE=$(printf '%s' "$HTML" | grep -o '<title>[^<]*</title>' | head -n 1)
+              TITLE=$(sed -n 's:.*\(<title>[^<]*</title>\).*:\1:p' <<< "$HTML" | head -n 1)
               echo "live_try=$TRY title=${TITLE:-no-title}"
 
-              if printf '%s' "$HTML" | grep -q '<title>KGM210 성장검사 · 유형매핑·7주여정 v3.15.4 운영판</title>' \
-                && ! printf '%s' "$HTML" | grep -q '### 7일 성장기록'; then
+              if [[ "$HTML" == *'<title>KGM210 성장검사 · 유형매핑·7주여정 v3.15.4 운영판</title>'* ]] \
+                && [[ "$HTML" != *'### 7일 성장기록'* ]]; then
                 PROFILE_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-ui-v314.js?release=${TOKEN}" 2>/dev/null)
                 WEEKLY_UI=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?release=${TOKEN}" 2>/dev/null)
                 WEEKLY_QA=$(curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?release=${TOKEN}" 2>/dev/null)
-                if printf '%s' "$PROFILE_UI" | grep -q '유형매핑·7주여정 v3.15.4' \
-                  && printf '%s' "$WEEKLY_UI" | grep -q 'KGM210 weekly journey UI v3.15.2' \
-                  && printf '%s' "$WEEKLY_QA" | grep -q 'KGM210 weekly journey QA v3.15.4'; then
+                if [[ "$PROFILE_UI" == *'유형매핑·7주여정 v3.15.4'* ]] \
+                  && [[ "$WEEKLY_UI" == *'KGM210 weekly journey UI v3.15.2'* ]] \
+                  && [[ "$WEEKLY_QA" == *'KGM210 weekly journey QA v3.15.4'* ]]; then
                   PASS=1
                   echo 'live_assets=pass'
                   break
                 fi
               fi
-              sleep 8
+              sleep 6
             done
 
             echo "result=$PASS"
