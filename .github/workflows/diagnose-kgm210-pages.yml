@@ -1,0 +1,55 @@
+name: Diagnose KGM210 Pages
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-kgm210-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inspect repository source
+        run: |
+          echo '=== LOCAL TITLE ==='
+          grep -o '<title>[^<]*</title>' tests/kgm210/index.html | head -n 1
+          echo '=== LOCAL ASSETS ==='
+          grep -o 'kgm210-[^" ]*' tests/kgm210/index.html | sort -u
+
+      - name: Inspect GitHub Pages settings and builds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          echo '=== PAGES SETTINGS ==='
+          gh api "repos/${GITHUB_REPOSITORY}/pages"
+          echo "pages_settings_status=$?"
+          echo '=== LATEST PAGES BUILD ==='
+          gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest"
+          echo "latest_build_status=$?"
+          echo '=== REQUEST NEW PAGES BUILD ==='
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
+          echo "request_build_status=$?"
+          set -e
+
+      - name: Inspect live route without cache
+        run: |
+          TOKEN="${GITHUB_SHA}-$(date +%s)"
+          URL="https://daily-coach-ing.com/tests/kgm210/?diagnose=${TOKEN}"
+          echo "url=$URL"
+          curl -sSIL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL"
+          echo '=== LIVE TITLE ==='
+          curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
+            | grep -o '<title>[^<]*</title>' | head -n 1
+          echo '=== LIVE ASSET MARKERS ==='
+          curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
+            | grep -Eo 'data-kgm-(profile-v314|weekly-qa-v3151)="[^"]+"|7일 성장기록|7주 성장여정' \
+            | sort -u || true
