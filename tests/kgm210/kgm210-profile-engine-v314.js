@@ -45,3 +45,14 @@
   function buildProfile(input={}){const scores=normalizeScores(input.scores),evidence=input.evidence||{},axes=input.axes||{},average=mean(scores.map(x=>x.avg)),max=Math.max(...scores.map(x=>x.avg)),min=Math.min(...scores.map(x=>x.avg)),spread=max-min,isBalanced=spread<=TIE_THRESHOLD,domains=scores.map(s=>({...s,meta:DOMAIN_META[s.key],state:stateBand(s.avg)}));if(isBalanced){const b=balancedName(average),axis=lowAxis(axes);return {version:VERSION,kind:'balanced',displayName:b.name,profileCode:b.code,stateSentence:b.sentence,average:round(average),spread:round(spread),primary:null,secondary:null,focus:null,lowAxis:axis,topTied:true,bottomTied:true,domains};}const ranked=[...scores].sort((a,b)=>compareDesc(a,b,evidence)),primary=ranked[0],secondary=ranked[1],remaining=scores.filter(s=>s.key!==primary.key&&s.key!==secondary.key).sort((a,b)=>compareAsc(a,b,evidence)),focus=remaining[0],pairCode=`${primary.key}-${secondary.key}`,displayName=PAIR_NAMES[pairCode]||`${DOMAIN_META[primary.key].type} · ${DOMAIN_META[secondary.key].type}`;return {version:VERSION,kind:'profile',displayName,profileCode:`${pairCode}/${focus.key}`,stateSentence:profileSentence(primary.key,secondary.key,focus.key),average:round(average),spread:round(spread),primary:{...primary,meta:DOMAIN_META[primary.key],state:stateBand(primary.avg)},secondary:{...secondary,meta:DOMAIN_META[secondary.key],state:stateBand(secondary.avg)},focus:{...focus,meta:DOMAIN_META[focus.key],state:stateBand(focus.avg)},lowAxis:lowAxis(axes),topTied:Math.abs(primary.avg-secondary.avg)<=TIE_THRESHOLD,bottomTied:remaining.length>1&&Math.abs(remaining[0].avg-remaining[1].avg)<=TIE_THRESHOLD,domains};}
   return {VERSION,ORDER,TIE_THRESHOLD,DOMAIN_META,PAIR_NAMES,keyOf,normalizeScores,stateBand,buildProfile};
 });
+
+(function bootstrapWeeklyJourneyV315(){
+  if(typeof document==='undefined'||window.KGM_WEEKLY_V315_BOOTSTRAP)return;
+  window.KGM_WEEKLY_V315_BOOTSTRAP=true;
+  const current=document.currentScript;
+  const base=current&&current.src?current.src.replace(/[^/]+$/,''):'';
+  function addStyle(){if(document.querySelector('[data-kgm-weekly-v315="style"]'))return;const link=document.createElement('link');link.rel='stylesheet';link.href=base+'kgm210-weekly-journey-v315.css';link.dataset.kgmWeeklyV315='style';document.head.appendChild(link);}
+  function addScript(name,role,onload){const found=document.querySelector(`[data-kgm-weekly-v315="${role}"]`);if(found){if(onload){if(role==='engine'&&window.KGMWeeklyJourneyV315)onload();else found.addEventListener('load',onload,{once:true});}return;}const script=document.createElement('script');script.src=base+name;script.dataset.kgmWeeklyV315=role;if(onload)script.onload=onload;document.head.appendChild(script);}
+  addStyle();
+  addScript('kgm210-weekly-journey-engine-v315.js','engine',()=>addScript('kgm210-weekly-journey-ui-v315.js','ui'));
+})();
