@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - tests/kgm210/index.html
       - tests/kgm210/kgm210-profile-engine-v314.js
       - tests/kgm210/kgm210-weekly-journey-engine-v315.js
       - tests/kgm210/kgm210-weekly-journey-engine-v315.test.js
@@ -11,12 +12,14 @@ on:
       - tests/kgm210/kgm210-weekly-journey-v315.css
       - tests/kgm210/kgm210-weekly-journey-qa-v3151.js
       - tests/kgm210/kgm210-weekly-journey-qa-v3151.css
+      - tests/kgm210/e2e/**
       - scripts/patch_kgm210_weekly_v315.py
       - .github/workflows/patch-kgm210-weekly-v315.yml
   push:
     branches:
       - feature/kgm210-growth-journey-v1
     paths:
+      - tests/kgm210/index.html
       - tests/kgm210/kgm210-profile-engine-v314.js
       - tests/kgm210/kgm210-weekly-journey-engine-v315.js
       - tests/kgm210/kgm210-weekly-journey-engine-v315.test.js
@@ -24,6 +27,7 @@ on:
       - tests/kgm210/kgm210-weekly-journey-v315.css
       - tests/kgm210/kgm210-weekly-journey-qa-v3151.js
       - tests/kgm210/kgm210-weekly-journey-qa-v3151.css
+      - tests/kgm210/e2e/**
       - scripts/patch_kgm210_weekly_v315.py
       - .github/workflows/patch-kgm210-weekly-v315.yml
 
@@ -52,6 +56,8 @@ jobs:
           node --check tests/kgm210/kgm210-weekly-journey-engine-v315.js
           node --check tests/kgm210/kgm210-weekly-journey-ui-v315.js
           node --check tests/kgm210/kgm210-weekly-journey-qa-v3151.js
+          node --check tests/kgm210/e2e/weekly-journey-v315.spec.js
+          node --check tests/kgm210/e2e/playwright.config.js
 
       - name: Inject or verify seven-week journey assets
         run: python scripts/patch_kgm210_weekly_v315.py
@@ -76,3 +82,33 @@ jobs:
           git add tests/kgm210/index.html
           git commit -m "feat: inject KGM210 seven-week QA v3.15.1 assets"
           git push origin HEAD:feature/kgm210-growth-journey-v1
+
+  mobile-e2e:
+    needs: test-and-patch
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'feature/kgm210-growth-journey-v1' }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save @playwright/test
+          npx playwright install --with-deps chromium
+
+      - name: Run mobile seven-week regression
+        run: npx playwright test -c tests/kgm210/e2e/playwright.config.js
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kgm210-weekly-playwright-report
+          path: tests/kgm210/e2e/playwright-report
+          if-no-files-found: ignore
+          retention-days: 7
