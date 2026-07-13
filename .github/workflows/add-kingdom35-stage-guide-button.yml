@@ -1,0 +1,56 @@
+name: Add KINGDOM35 stage guide button
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/add-kingdom35-stage-guide-button.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add stage guide replay button
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('cards/grow88/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          if 'id="stageGuideBtn"' not in text:
+              old = '<div class="controls"><button class="btn subtle" id="exitBtn">종료</button><div class="group"><button class="btn" id="prevBtn">이전 구간</button><button class="btn primary" id="nextBtn">다음 구간</button></div></div>'
+              new = '<div class="controls"><button class="btn subtle" id="exitBtn">종료</button><div class="group"><button class="btn" id="stageGuideBtn">구간 안내</button><button class="btn" id="prevBtn">이전 구간</button><button class="btn primary" id="nextBtn">다음 구간</button></div></div>'
+              if old not in text:
+                  raise SystemExit('Stage control markup not found')
+              text = text.replace(old, new, 1)
+
+          handler = "$('stageGuideBtn').onclick=()=>stageGuide(stageIndex,renderStage);"
+          if handler not in text:
+              needle = "$('nextBtn').onclick=next;$('prevBtn').onclick=prev;"
+              if needle not in text:
+                  raise SystemExit('Stage handler insertion point not found')
+              text = text.replace(needle, handler + needle, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit patch
+        shell: bash
+        run: |
+          if git diff --quiet -- cards/grow88/index.html; then
+            echo "Stage guide button is already present."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards/grow88/index.html
+          git commit -m "Add stage guide replay button to KINGDOM35"
+          git push
