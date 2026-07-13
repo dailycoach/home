@@ -5,16 +5,17 @@
   const weeklyUi=window.KGM_WEEKLY_JOURNEY_V315;
   if(!engine||!weeklyUi){
     if(attempt<80){setTimeout(()=>boot(attempt+1),125);return;}
-    console.warn('[KGM v3.15.3] weekly QA initialization timed out');
+    console.warn('[KGM v3.15.4] weekly QA initialization timed out');
     return;
   }
   if(window.KGM_WEEKLY_QA_V3151?.ok)return;
 
-  const VERSION='KGM210 weekly journey QA v3.15.3';
+  const VERSION='KGM210 weekly journey QA v3.15.4';
   const by=id=>document.getElementById(id);
   const safeJson=(value,fallback)=>{try{return JSON.parse(value)}catch(error){return fallback}};
   const read=()=>engine.normalize(safeJson(localStorage.getItem(engine.STORAGE_KEY)||'null',null));
   const write=journey=>{try{localStorage.setItem(engine.STORAGE_KEY,JSON.stringify(journey));return true}catch(error){return false}};
+  const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[char]));
   let timer=null;
   let returnSource='intro';
 
@@ -115,6 +116,42 @@
     timer=setTimeout(saveNow,550);
   }
 
+  function entryCardHtml(journey){
+    const progress=engine.progress(journey);
+    const stage=engine.stage(journey.currentWeek);
+    return `<div class="weeklyBridgeV315 active"><div><span>WEEK ${journey.currentWeek} · ${stage.key}</span><b>${journey.currentWeek}주차 · ${esc(stage.title)}</b><p>${esc(journey.growthTheme)} · ${progress.completed}/7회 완료</p><i><u style="width:${progress.pct}%"></u></i></div><button class="primary weeklyOpenV315" data-weekly-source="intro">이번 주 기록하기</button></div>`;
+  }
+
+  function ensureIntroEntry(){
+    const journey=read();
+    const intro=by('intro');
+    if(!journey||!intro||intro.classList.contains('hidden'))return;
+    let panel=by('weeklyEntryV315');
+    if(!panel){
+      panel=document.createElement('div');
+      panel.id='weeklyEntryV315';
+      const anchor=by('resultEntryPanel')||intro.querySelector('.simpleNotice');
+      if(anchor)anchor.insertAdjacentElement('afterend',panel);
+      else intro.prepend(panel);
+    }
+    if(!panel.querySelector('.weeklyBridgeV315'))panel.innerHTML=entryCardHtml(journey);
+  }
+
+  function ensureJourneyEntry(){
+    const journey=read();
+    const root=by('journey');
+    if(!journey||!root||root.classList.contains('hidden'))return;
+    let panel=by('weeklyJourneySummaryV315');
+    if(!panel){
+      panel=document.createElement('div');
+      panel.id='weeklyJourneySummaryV315';
+      const head=root.querySelector('.sectionHead');
+      if(head)head.insertAdjacentElement('afterend',panel);
+      else root.prepend(panel);
+    }
+    if(!panel.querySelector('.weeklyBridgeV315'))panel.innerHTML=entryCardHtml(journey).replace('data-weekly-source="intro"','data-weekly-source="journey"');
+  }
+
   function addConversationPreview(root=document){
     const journey=read();
     if(!journey||journey.status==='completed')return;
@@ -190,6 +227,8 @@
   function run(){
     visibleTextCleanup(document);
     hideLegacyDailyControls();
+    ensureIntroEntry();
+    ensureJourneyEntry();
     addConversationPreview(document);
   }
 
@@ -232,6 +271,7 @@
     separateViewedWeek:true,
     immediateAddedTextCleanup:true,
     returnViewRefresh:true,
+    entryRebuild:true,
     storageKey:engine.STORAGE_KEY
   };
 })(0);
