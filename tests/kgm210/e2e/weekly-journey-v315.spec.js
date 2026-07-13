@@ -95,6 +95,29 @@ test.describe('KGM210 7주 성장여정 모바일 회귀검수',()=>{
     expect(buttonDisplay).toBe('none');
   });
 
+  test('성장여정에서 한 번만 열리고 닫으면 원래 성장여정 화면으로 복귀',async({page})=>{
+    await page.evaluate(()=>{
+      const engine=window.KGMWeeklyJourneyV315;
+      localStorage.setItem(engine.STORAGE_KEY,JSON.stringify(engine.createJourney({growthTheme:'복귀 경로 검수',successCriterion:'원래 화면으로 돌아온다'})));
+      ['intro','result','test','domainComplete','resultTransition'].forEach(id=>document.getElementById(id)?.classList.add('hidden'));
+      const journey=document.getElementById('journey');
+      journey.classList.remove('hidden');
+      const probe=document.createElement('button');
+      probe.id='weeklyOpenReturnProbe';
+      probe.className='weeklyOpenV315';
+      probe.textContent='이번 주 기록하기';
+      journey.appendChild(probe);
+    });
+
+    expect(await page.evaluate(()=>window.KGM_WEEKLY_QA_V3151.duplicateOpenGuard)).toBe(true);
+    await page.locator('#weeklyOpenReturnProbe').click();
+    await expect(page.locator('#weeklyJourneyScreenV315')).toBeVisible();
+    await page.locator('#weeklyCloseV315').click();
+    await expect(page.locator('#weeklyJourneyScreenV315')).toBeHidden();
+    await expect(page.locator('#journey')).toBeVisible();
+    await expect(page.locator('#intro')).toBeHidden();
+  });
+
   test('고객 화면의 7일 문구는 7주로 바꾸고 이전 단기기록 표기는 보존',async({page})=>{
     const qaAttempts=await page.evaluate(()=>window.KGM_WEEKLY_QA_V3151.attempts);
     expect(qaAttempts).toBeGreaterThanOrEqual(0);
