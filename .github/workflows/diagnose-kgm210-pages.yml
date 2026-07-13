@@ -26,7 +26,8 @@ jobs:
           set +e
           REPORT="$RUNNER_TEMP/kgm210-pages-diagnostics.txt"
           TOKEN="${GITHUB_SHA}-$(date +%s)"
-          URL="https://daily-coach-ing.com/tests/kgm210/?diagnose=${TOKEN}"
+          BASE='https://daily-coach-ing.com/tests/kgm210'
+          URL="${BASE}/?diagnose=${TOKEN}"
 
           {
             echo '=== LOCAL TITLE ==='
@@ -68,6 +69,30 @@ jobs:
             curl -fsSL -H 'Cache-Control: no-cache, no-store, max-age=0' -H 'Pragma: no-cache' "$URL" \
               | grep -Eo 'data-kgm-(profile-v314|weekly-qa-v3151)="[^"]+"|7일 성장기록|7주 성장여정' \
               | sort -u || true
+            echo
+
+            echo '=== LIVE PROFILE ENGINE ==='
+            curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-profile-engine-v314.js?diagnose=${TOKEN}" \
+              | grep -Eo 'KGM210 profile engine v3\.14\.0|KGM_WEEKLY_V315_BOOTSTRAP' \
+              | sort -u
+            echo
+
+            echo '=== LIVE WEEKLY ENGINE ==='
+            curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-engine-v315.js?diagnose=${TOKEN}" \
+              | grep -Eo 'KGM210 weekly journey engine v3\.15\.0|KGM210:seven-week-journey:v1|kgm210:seven-week-journey:v1' \
+              | sort -u
+            echo
+
+            echo '=== LIVE WEEKLY UI ==='
+            curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-ui-v315.js?diagnose=${TOKEN}" \
+              | grep -Eo 'KGM210 weekly journey UI v3\.15\.2|separateViewedWeek:true' \
+              | sort -u
+            echo
+
+            echo '=== LIVE WEEKLY QA ==='
+            curl -fsSL -H 'Cache-Control: no-cache' "${BASE}/kgm210-weekly-journey-qa-v3151.js?diagnose=${TOKEN}" \
+              | grep -Eo 'KGM210 weekly journey QA v3\.15\.4|entryRebuild:true|immediateAddedTextCleanup:true' \
+              | sort -u
           } > "$REPORT" 2>&1
 
           cat "$REPORT"
