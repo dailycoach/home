@@ -5,29 +5,64 @@
   const weeklyUi=window.KGM_WEEKLY_JOURNEY_V315;
   if(!engine||!weeklyUi){
     if(attempt<80){setTimeout(()=>boot(attempt+1),125);return;}
-    console.warn('[KGM v3.15.2] weekly QA initialization timed out');
+    console.warn('[KGM v3.15.3] weekly QA initialization timed out');
     return;
   }
   if(window.KGM_WEEKLY_QA_V3151?.ok)return;
 
-  const VERSION='KGM210 weekly journey QA v3.15.2';
+  const VERSION='KGM210 weekly journey QA v3.15.3';
   const by=id=>document.getElementById(id);
   const safeJson=(value,fallback)=>{try{return JSON.parse(value)}catch(error){return fallback}};
   const read=()=>engine.normalize(safeJson(localStorage.getItem(engine.STORAGE_KEY)||'null',null));
   const write=journey=>{try{localStorage.setItem(engine.STORAGE_KEY,JSON.stringify(journey));return true}catch(error){return false}};
   let timer=null;
+  let returnSource='intro';
+
+  function replacementPairs(){
+    return [
+      ['7일 성장기록','7주 성장여정'],
+      ['7일 기록 시작','7주 성장여정 시작'],
+      ['7일 기록','7주 성장여정'],
+      ['오늘 기록하기','이번 주 기록하기'],
+      ['7일 동안','7주 동안'],
+      ['7일 완료','7주 성장통합']
+    ];
+  }
+
+  function canReplace(node){
+    return !node.parentElement?.closest('script,style,noscript,template,textarea,.weeklyLegacyV315');
+  }
+
+  function replaceTextNode(node){
+    if(!node||node.nodeType!==Node.TEXT_NODE||!canReplace(node))return false;
+    let value=node.nodeValue;
+    replacementPairs().forEach(([before,after])=>value=value.split(before).join(after));
+    if(value===node.nodeValue)return false;
+    node.nodeValue=value;
+    return true;
+  }
 
   function visibleTextCleanup(root=document){
-    const pairs=[['7일 성장기록','7주 성장여정'],['7일 기록 시작','7주 성장여정 시작'],['7일 기록','7주 성장여정'],['오늘 기록하기','이번 주 기록하기'],['7일 동안','7주 동안'],['7일 완료','7주 성장통합']];
+    if(root?.nodeType===Node.TEXT_NODE){
+      replaceTextNode(root);
+      return;
+    }
+    if(!root||typeof document.createTreeWalker!=='function')return;
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     const nodes=[];
     while(walker.nextNode())nodes.push(walker.currentNode);
-    nodes.forEach(node=>{
-      if(node.parentElement?.closest('script,style,noscript,template,textarea,.weeklyLegacyV315'))return;
-      let value=node.nodeValue;
-      pairs.forEach(([before,after])=>value=value.split(before).join(after));
-      if(value!==node.nodeValue)node.nodeValue=value;
-    });
+    nodes.forEach(replaceTextNode);
+  }
+
+  function cleanupAddedNode(node){
+    if(!node)return;
+    if(node.nodeType===Node.TEXT_NODE){
+      replaceTextNode(node);
+      return;
+    }
+    if(node.nodeType===Node.ELEMENT_NODE||node.nodeType===Node.DOCUMENT_FRAGMENT_NODE){
+      visibleTextCleanup(node);
+    }
   }
 
   function values(){
@@ -85,7 +120,7 @@
     if(!journey||journey.status==='completed')return;
     const stage=engine.stage(journey.currentWeek);
     const week=engine.getWeek(journey,journey.currentWeek);
-    root.querySelectorAll('.weeklyBridgeV315').forEach(card=>{
+    root.querySelectorAll?.('.weeklyBridgeV315').forEach(card=>{
       let preview=card.querySelector('.weeklyConversationPreviewV3151');
       if(!preview){
         preview=document.createElement('div');
@@ -94,7 +129,8 @@
       }
       const phrase=week?.post?.phrase||week?.pre?.agenda||'이번 대화에서 확인할 한 문장을 아직 정하지 않았습니다.';
       const action=week?.post?.action||'이번 주 작은 행동을 코칭 후에 정합니다.';
-      preview.innerHTML=`<span>이번 주 대화 준비</span><b>${stage.key} · ${stage.title}</b><p>${phrase}</p><small>${action}</small>`;
+      const html=`<span>이번 주 대화 준비</span><b>${stage.key} · ${stage.title}</b><p>${phrase}</p><small>${action}</small>`;
+      if(preview.innerHTML!==html)preview.innerHTML=html;
     });
   }
 
@@ -106,7 +142,18 @@
     });
   }
 
+  function normalizeSource(source){
+    return ['result','journey','intro'].includes(source)?source:'intro';
+  }
+
+  const originalOpen=weeklyUi.open.bind(weeklyUi);
+  weeklyUi.open=function(source){
+    returnSource=normalizeSource(source);
+    return originalOpen(source);
+  };
+
   function openSource(button){
+    if(button.dataset.weeklySource)return normalizeSource(button.dataset.weeklySource);
     if(button.closest('#result'))return 'result';
     if(button.closest('#journey'))return 'journey';
     return 'intro';
@@ -117,7 +164,27 @@
     if(!button)return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    weeklyUi.open(button.dataset.weeklySource||openSource(button));
+    weeklyUi.open(openSource(button));
+  }
+
+  function restoreReturnView(){
+    const screen=by('weeklyJourneyScreenV315');
+    if(!screen||screen.classList.contains('hidden'))return;
+    saveNow();
+    screen.classList.add('hidden');
+    if(returnSource==='result'&&typeof showResult==='function')showResult(false);
+    else if(returnSource==='journey'&&typeof showJourney==='function')showJourney();
+    else if(typeof showIntro==='function')showIntro();
+    else by('intro')?.classList.remove('hidden');
+    [0,80,240,600].forEach(delay=>setTimeout(run,delay));
+  }
+
+  function interceptWeeklyClose(event){
+    const button=event.target.closest?.('#weeklyCloseV315');
+    if(!button)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    restoreReturnView();
   }
 
   function run(){
@@ -126,6 +193,7 @@
     addConversationPreview(document);
   }
 
+  document.addEventListener('click',interceptWeeklyClose,true);
   document.addEventListener('click',interceptWeeklyOpen,true);
   document.addEventListener('input',event=>{
     if(event.target.closest?.('#weeklyJourneyScreenV315')&&(event.target.matches('textarea')||event.target.matches('select')))scheduleSave();
@@ -134,7 +202,7 @@
     if(event.target.closest?.('#weeklyJourneyScreenV315'))scheduleSave();
   },true);
   document.addEventListener('click',event=>{
-    if(event.target.closest?.('#weeklyCloseV315,#weeklyCompleteWeekV315,#weeklySavePreV315,#weeklySavePostV315'))saveNow();
+    if(event.target.closest?.('#weeklyCompleteWeekV315,#weeklySavePreV315,#weeklySavePostV315'))saveNow();
   },true);
   window.addEventListener('beforeunload',saveNow);
   window.addEventListener('beforeprint',run);
@@ -143,9 +211,10 @@
     [500,1500,3500,7000].forEach(delay=>setTimeout(run,delay));
   });
   try{
-    new MutationObserver(()=>{
+    new MutationObserver(mutations=>{
+      mutations.forEach(mutation=>mutation.addedNodes.forEach(cleanupAddedNode));
       clearTimeout(window.__kgmWeeklyQaTimer);
-      window.__kgmWeeklyQaTimer=setTimeout(run,120);
+      window.__kgmWeeklyQaTimer=setTimeout(run,80);
     }).observe(document.body,{childList:true,subtree:true});
   }catch(error){}
 
@@ -161,6 +230,8 @@
     visibleSevenDayTermsRewritten:true,
     duplicateOpenGuard:true,
     separateViewedWeek:true,
+    immediateAddedTextCleanup:true,
+    returnViewRefresh:true,
     storageKey:engine.STORAGE_KEY
   };
 })(0);
