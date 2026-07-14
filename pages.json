@@ -84,6 +84,13 @@
     "source": "local import"
   },
   {
+    "title": "DISC16 행동스타일 코칭검사",
+    "description": "순위선택형 DISC 행동분포와 관계장면을 16가지 유형으로 해석하는 코칭검사",
+    "category": "tests",
+    "url": "/tests/disc16/",
+    "source": "local import"
+  },
+  {
     "title": "자기주도학습 역량검사",
     "description": "청소년 및 학습자를 위한 자기주도학습 역량검사",
     "category": "tests",
