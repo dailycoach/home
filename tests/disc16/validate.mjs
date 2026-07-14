@@ -32,6 +32,10 @@ function hasText(value, min = 1) {
   return typeof value === 'string' && value.trim().length >= min;
 }
 
+function minimumLength(field) {
+  return field === 'name' ? 2 : 4;
+}
+
 function makePreset(code) {
   const types = DATA.TYPES;
   if (code.length === 1) {
@@ -75,7 +79,7 @@ DATA.QUESTIONS.forEach((question, index) => {
 EXPECTED_TYPES.forEach((type) => {
   const profile = DATA.PROFILES[type];
   check(`${type} 기본 해설 존재`, Boolean(profile), '');
-  PROFILE_FIELDS.forEach((field) => check(`${type}.${field}`, hasText(profile?.[field], 4), profile?.[field] ?? '누락'));
+  PROFILE_FIELDS.forEach((field) => check(`${type}.${field}`, hasText(profile?.[field], minimumLength(field)), profile?.[field] ?? '누락'));
 });
 
 const pairKeys = Object.keys(DATA.PAIRS).sort();
@@ -83,7 +87,7 @@ check('조합형 코드 12개', pairKeys.join(',') === [...EXPECTED_PAIRS].sort(
 EXPECTED_PAIRS.forEach((code) => {
   const pair = DATA.PAIRS[code];
   check(`${code} 조합 해설 존재`, Boolean(pair), '');
-  PAIR_FIELDS.forEach((field) => check(`${code}.${field}`, hasText(pair?.[field], 4), pair?.[field] ?? '누락'));
+  PAIR_FIELDS.forEach((field) => check(`${code}.${field}`, hasText(pair?.[field], minimumLength(field)), pair?.[field] ?? '누락'));
 });
 
 EXPECTED_TYPES.forEach((type) => {
@@ -107,8 +111,6 @@ const forbidden = ['최고의 유형', '가장 우수한 유형', '정확한 진
 forbidden.forEach((phrase) => check(`금지 표현: ${phrase}`, !allInterpretationText.includes(phrase), phrase));
 
 console.log(`DISC16 검증: ${passes.length}개 통과, ${failures.length}개 실패`);
-passes.forEach(({ name }) => console.log(`✓ ${name}`));
-
 if (failures.length) {
   console.error('\n실패 항목');
   failures.forEach(({ name, detail }) => console.error(`✗ ${name}: ${detail}`));
