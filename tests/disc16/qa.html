@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>DISC16 내부 QA 콘솔</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090c11;--panel:#151b24;--line:#303847;--text:#f4efe6;--muted:#aeb7c7;--gold:#d8b56b;--ok:#67ad82;--bad:#e15e5b}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Pretendard,"Noto Sans KR",sans-serif;line-height:1.55}.wrap{width:min(1200px,100%);margin:auto;padding:24px}.head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:20px}.head h1{margin:0 0 6px;font-size:28px}.head p{margin:0;color:var(--muted)}.back{color:var(--gold);text-decoration:none;white-space:nowrap}.grid{display:grid;grid-template-columns:380px 1fr;gap:18px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.metric{border:1px solid var(--line);border-radius:13px;padding:12px}.metric small{display:block;color:var(--muted)}.metric strong{font-size:22px}.checks{display:grid;gap:8px}.check{border:1px solid var(--line);border-radius:12px;padding:10px 12px}.check.ok{border-left:4px solid var(--ok)}.check.fail{border-left:4px solid var(--bad)}.check b{display:block}.check span{color:var(--muted);font-size:13px}.types{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 18px}.type-btn{border:1px solid var(--line);background:#111720;color:var(--text);border-radius:12px;padding:12px 8px;font-weight:800;cursor:pointer}.type-btn:hover{border-color:var(--gold)}.viewer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.viewer-head h2{margin:0;font-size:19px}.viewer-head span{color:var(--muted);font-size:13px}iframe{width:100%;height:900px;border:1px solid var(--line);border-radius:14px;background:#0c1016}@media(max-width:900px){.grid{grid-template-columns:1fr}.types{grid-template-columns:repeat(2,1fr)}iframe{height:760px}.head{display:block}.back{display:inline-block;margin-top:10px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <div><h1>DISC16 내부 QA 콘솔</h1><p>문항·채점·해설 데이터의 구조를 자동 검사하고 16개 결과를 즉시 재현합니다.</p></div>
+    <a class="back" href="./">검사 화면으로 돌아가기</a>
+  </header>
+  <div class="grid">
+    <section class="panel">
+      <div id="summary" class="summary"></div>
+      <h2>자동 검증</h2>
+      <div id="checks" class="checks"></div>
+      <h2>결과 미리보기</h2>
+      <p style="color:var(--muted);font-size:13px">버튼을 누르면 합성 응답을 생성해 오른쪽에서 결과지를 바로 엽니다. 실제 응답 저장값은 덮어씁니다.</p>
+      <div id="types" class="types"></div>
+      <button id="clear" class="type-btn" type="button" style="width:100%">QA 응답 삭제</button>
+    </section>
+    <section class="panel">
+      <div class="viewer-head"><h2 id="viewerTitle">결과 미리보기</h2><span>내부 검수용 · noindex</span></div>
+      <iframe id="viewer" title="DISC16 결과 미리보기"></iframe>
+    </section>
+  </div>
+</main>
+<script src="./data.js"></script>
+<script src="./qa.js"></script>
+</body>
+</html>
