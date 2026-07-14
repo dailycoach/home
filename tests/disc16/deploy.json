@@ -1,5 +1,6 @@
 {
   "path": "/tests/disc16/",
-  "deployed_at": "2026-07-14T12:50:00+09:00",
-  "source_commit": "474bdc85d5ac6e0052a6249a81002a7a0491ba41"
+  "deployed_at": "2026-07-14T13:23:54+09:00",
+  "source_commit": "f46a51c0f0f8c697d2708d63f08912ecf13e603a",
+  "version": "2.0"
 }
