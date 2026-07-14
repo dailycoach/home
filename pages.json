@@ -91,6 +91,13 @@
     "source": "local import"
   },
   {
+    "title": "DISC16 청소년 관계행동검사",
+    "description": "가정환경과 또래집단 상호작용 장면으로 관계반응을 살펴보는 청소년용 검사",
+    "category": "tests",
+    "url": "/tests/disc16-youth/",
+    "source": "local import"
+  },
+  {
     "title": "자기주도학습 역량검사",
     "description": "청소년 및 학습자를 위한 자기주도학습 역량검사",
     "category": "tests",
