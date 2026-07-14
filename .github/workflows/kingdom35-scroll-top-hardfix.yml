@@ -1,0 +1,57 @@
+name: KINGDOM35 hard scroll-top fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kingdom35-scroll-top-hardfix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply robust mobile scroll reset
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('cards/kingdom35/index.html')
+          s=p.read_text(encoding='utf-8')
+          old="function scrollTopNow(){window.scrollTo({top:0,left:0,behavior:'auto'})}"
+          new="function scrollTopNow(){const run=()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0;window.scrollTo(0,0);const app=document.querySelector('.app');if(app)app.scrollIntoView({block:'start',inline:'nearest',behavior:'auto'})};run();requestAnimationFrame(()=>{run();requestAnimationFrame(run)});setTimeout(run,80);setTimeout(run,220)}"
+          if old not in s:
+              raise SystemExit('scrollTopNow anchor missing')
+          s=s.replace(old,new,1)
+
+          old=".modal{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:18px;"
+          new=".modal{position:fixed;inset:0;z-index:40;display:none;align-items:flex-start;justify-content:center;padding:18px;overflow-y:auto;"
+          if old not in s:
+              raise SystemExit('modal css anchor missing')
+          s=s.replace(old,new,1)
+
+          old="const dialog=$('modal').querySelector('.dialog');if(dialog)dialog.scrollTop=0;setTimeout(()=>a.focus(),0)"
+          new="const dialog=$('modal').querySelector('.dialog');if(dialog){dialog.scrollTop=0;dialog.scrollIntoView({block:'start',inline:'nearest',behavior:'auto'})}setTimeout(()=>{scrollTopNow();a.focus({preventScroll:true})},0)"
+          if old not in s:
+              raise SystemExit('modal open anchor missing')
+          s=s.replace(old,new,1)
+
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit
+        shell: bash
+        run: |
+          if git diff --quiet -- cards/kingdom35/index.html; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards/kingdom35/index.html
+          git commit -m "Hard-fix KINGDOM35 top scroll on mobile"
+          git push
