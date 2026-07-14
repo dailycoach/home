@@ -88,7 +88,9 @@
           current += 1;
           renderQuestion();
           window.scrollTo(0, 0);
-        } else showResult();
+        } else {
+          showResult();
+        }
       }, 450);
     }
   }
@@ -128,6 +130,8 @@
 
     const r = calculateResult();
     const { sorted, first, second, third, fourth, code, pair, headline, scale, x, y, spread } = r;
+    const primary = PROFILES[first];
+
     result.style.setProperty('--mainColor', COLORS[first]);
     result.style.setProperty('--subColor', COLORS[second]);
     result.style.setProperty('--tone1', `${COLORS[first]}20`);
@@ -144,14 +148,17 @@
 
     result.innerHTML = `
       <div class="result-head"><div class="type-code">${codeHtml}</div><div class="type-name">${headline.name}</div><p class="lead">${headline.summary}</p></div>
+      <div class="interpretation-note"><b>이 결과를 읽는 기준</b><p>DISC는 사람을 네 종류로 고정하는 진단이 아닙니다. 현재의 관계와 환경에서 상대적으로 익숙하게 사용하는 행동의 순서를 보여줍니다. 모든 성향에는 강점과 과도사용이 함께 있으며, 상황과 역할에 따라 다른 성향을 사용할 수 있습니다.</p></div>
       <div class="rank-three">${rankCard(1,'중심 성향',first,roleText[first])}${rankCard(2,'보조 성향',second,secondText[second])}${rankCard(3,'조절 성향',third,thirdText[third])}</div>
-      <div class="section"><h2>세 가지 성향 종합분석</h2><div class="summary-box"><p><b>${first}가 행동의 출발점을 만듭니다.</b> ${PROFILES[first].core}</p><p><b>${second}가 그 행동의 방식을 조절합니다.</b> ${PROFILES[second].tagline}이 더해져 ${pair.name}의 모습이 나타납니다.</p><p><b>${third}는 상황 대응의 세 번째 자원입니다.</b> ${thirdInsight}</p><p><b>상대적으로 낮은 ${fourth} 성향</b>은 약점이 아닙니다. 다만 ${PROFILES[fourth].tagline}을 의식적으로 요청하거나 연습해야 할 가능성이 있습니다.</p></div></div>
+      <div class="section"><h2>세 가지 성향 종합분석</h2><div class="summary-box"><p><b>${first}가 행동의 출발점을 만듭니다.</b> ${primary.core}</p><p><b>${second}가 그 행동의 방식을 조절합니다.</b> ${PROFILES[second].tagline}이 더해져 ${pair.name}의 모습이 나타납니다.</p><p><b>${third}는 상황 대응의 세 번째 자원입니다.</b> ${thirdInsight}</p><p><b>상대적으로 낮은 ${fourth} 성향</b>은 약점이 아닙니다. 다만 ${PROFILES[fourth].tagline}을 의식적으로 요청하거나 연습해야 할 가능성이 있습니다.</p></div></div>
+      <div class="section"><h2>1순위 성향 심층 해설</h2><div class="deep-grid">${deepCard('행동을 움직이는 동기',primary.motivation)}${deepCard('마음속에서 피하고 싶은 것',primary.fear)}${deepCard('잘 작동하는 환경',primary.preferred)}${deepCard('일할 때 나타나는 모습',primary.work)}${deepCard('가까운 관계에서',primary.relationship)}${deepCard('대화하는 방식',primary.communication)}${deepCard('갈등을 만났을 때',primary.conflict)}${deepCard('강점이 과해지는 순간',primary.overuse)}</div><div class="coaching-focus"><b>이 성향의 핵심 코칭질문</b><p>${primary.coaching}</p></div></div>
+      <div class="section"><h2>1·2순위 조합의 작동 방식</h2><div class="pair-panel" style="--pairColor:${COLORS[first]}"><div class="pair-title"><span>${first}${second}</span><div><b>${pair.name}</b><p>${pair.summary}</p></div></div><div class="deep-grid pair-grid">${deepCard('관계와 조직에 주는 기여',pair.contribution)}${deepCard('이 조합이 원하는 것',pair.motivation)}${deepCard('두 성향이 충돌하는 지점',pair.tension)}${deepCard('대화와 설득 방식',pair.communication)}${deepCard('편안하게 작동하는 조건',pair.needs)}${deepCard('압박받을 때',pair.pressure)}</div><div class="meaning next"><b>이 조합의 성장선택</b>${pair.growth}</div><div class="coaching-focus"><b>조합형 코칭질문</b><p>${pair.coaching}</p></div></div></div>
       <div class="section"><h2>행동에너지 분포</h2><div class="score-list">${TYPES.map((type)=>scoreRow(type,scale[type])).join('')}</div><div class="map-wrap"><div class="axis-note vertical">과제와 성과를 우선하는 방향 ↑</div><canvas id="map" width="700" height="700"></canvas><div class="axis-note"><span>← 신중하게 살핌</span><span>빠르게 표현함 →</span></div><div class="axis-note vertical">↓ 관계와 안정을 우선하는 방향</div></div><span class="pill">1순위 ${first}</span><span class="pill">2순위 ${second}</span><span class="pill">3순위 ${third}</span><span class="pill">${spread}</span></div>
       <div class="section"><h2>관계 장면에서 나타나는 모습</h2><div class="scene"><strong>회의와 협업에서</strong>${pair.meeting}</div><div class="scene"><strong>가까운 관계에서</strong>${pair.close}</div><div class="scene"><strong>압박을 받을 때</strong>${pair.pressure}</div></div>
-      <div class="section"><h2>좋은 의도와 새로운 선택</h2><div class="meaning-grid"><div class="meaning intent"><b>당신이 지키려는 것</b>${PROFILES[first].tagline}을 통해 상황과 관계에 기여하려 합니다.</div><div class="meaning other"><b>상대가 다르게 경험할 수 있는 것</b>${PROFILES[first].seen}</div><div class="meaning next"><b>이번 관계에서 시도할 것</b>${pair.growth}</div></div></div>
-      <div class="section"><h2>네 성격의 특징과 대인관계 교류</h2><div class="trait-grid">${sorted.map(([type],index)=>traitCard(type,index+1,scale[type])).join('')}</div></div>
+      <div class="section"><h2>좋은 의도와 새로운 선택</h2><div class="meaning-grid"><div class="meaning intent"><b>당신이 지키려는 것</b>${primary.tagline}을 통해 상황과 관계에 기여하려 합니다.</div><div class="meaning other"><b>상대가 다르게 경험할 수 있는 것</b>${primary.seen}</div><div class="meaning next"><b>이번 관계에서 시도할 것</b>${pair.growth}</div></div></div>
+      <div class="section"><h2>네 성향의 특징과 대인관계 교류</h2><div class="trait-grid">${sorted.map(([type],index)=>traitCard(type,index+1,scale[type])).join('')}</div></div>
       <div class="section"><h2>다른 성향과 교류할 때</h2><div class="interaction-list">${TYPES.map((type)=>interactionCard(first,type)).join('')}</div></div>
-      <div class="section"><h2>코칭질문</h2><div class="question-list">${coachingQuestions().map((question,index)=>`<div class="coach-q"><span>0${index+1}</span><p>${question}</p></div>`).join('')}</div></div>
+      <div class="section"><h2>코칭질문</h2><div class="question-list">${coachingQuestions(primary,pair).map((question,index)=>`<div class="coach-q"><span>0${index+1}</span><p>${question}</p></div>`).join('')}</div></div>
       <button class="ghost" id="printBtn" type="button" style="margin-top:28px">결과 인쇄하기</button><button class="ghost" id="again" type="button" style="margin-top:10px">다시 검사하기</button>
       <p class="notice">각 점수는 능력이나 우수성을 뜻하지 않습니다. 네 행동 중 상대적으로 더 익숙하게 사용하는 순서를 보여줍니다. 본 결과는 진단이나 채용판정이 아닌 자기이해와 코칭대화를 위한 참고자료입니다.</p>`;
 
@@ -163,9 +170,24 @@
 
   const rankCard = (rank,role,type,text) => `<div class="rank-card" style="--rankColor:${COLORS[type]}"><small>${rank}순위 · ${role}</small><strong>${type} ${PROFILES[type].name}</strong><p>${text}</p></div>`;
   const scoreRow = (type,score) => `<div class="score-row"><div class="score-label" style="color:${COLORS[type]}">${type}</div><div><div class="score-copy">${COPY[type]}</div><div class="track"><div class="fill" style="width:${score*10}%;background:${COLORS[type]}"></div></div></div><div class="score-value">${score.toFixed(1)}</div></div>`;
-  function traitCard(type,rank,score){const p=PROFILES[type];return `<article class="trait-card" style="--traitColor:${COLORS[type]}"><span class="score-tag">${rank}순위 · ${type} ${p.name} · ${score.toFixed(1)}</span><h3>${p.tagline}</h3><dl><dt>기본 특징</dt><dd>${p.core}</dd><dt>잘 작동할 때</dt><dd>${p.strength}</dd><dt>압박받을 때</dt><dd>${p.pressure}</dd><dt>대인관계에서 보이는 모습</dt><dd>${p.seen}</dd><dt>편안한 교류 조건</dt><dd>${p.needs}</dd><dt>성장 방향</dt><dd>${p.growth}</dd></dl></article>`;}
+  const deepCard = (title,text) => `<article class="deep-card"><h3>${title}</h3><p>${text}</p></article>`;
+
+  function traitCard(type,rank,score){
+    const p=PROFILES[type];
+    return `<article class="trait-card" style="--traitColor:${COLORS[type]}"><span class="score-tag">${rank}순위 · ${type} ${p.name} · ${score.toFixed(1)}</span><h3>${p.tagline}</h3><dl><dt>행동의 동기</dt><dd>${p.motivation}</dd><dt>두려움과 민감지점</dt><dd>${p.fear}</dd><dt>선호환경</dt><dd>${p.preferred}</dd><dt>잘 작동할 때</dt><dd>${p.strength}</dd><dt>업무장면</dt><dd>${p.work}</dd><dt>대인관계</dt><dd>${p.relationship}</dd><dt>의사소통</dt><dd>${p.communication}</dd><dt>갈등반응</dt><dd>${p.conflict}</dd><dt>강점의 남용</dt><dd>${p.overuse}</dd><dt>편안한 교류 조건</dt><dd>${p.needs}</dd><dt>성장 방향</dt><dd>${p.growth}</dd></dl></article>`;
+  }
+
   const interactionCard = (primary,target) => `<div class="interaction" style="--targetColor:${COLORS[target]}"><strong>${target} ${PROFILES[target].name}과 대화할 때</strong><p><b>상대에게 필요한 것:</b> ${TARGET_NEEDS[target]}</p><p><b>내가 주의할 것:</b> ${SELF_WATCH[primary][target]}</p></div>`;
-  const coachingQuestions = () => ['최근 1순위 성향이 가장 강하게 드러난 관계 장면은 언제였습니까?','그 장면에서 2순위 성향은 당신의 행동을 어떻게 보완했습니까?','3순위 성향을 조금 더 사용했다면 관계가 어떻게 달라졌을까요?','상대적으로 낮은 성향을 다른 사람에게 요청하거나 연습할 방법은 무엇입니까?','다음 관계에서 한 가지 행동을 10% 다르게 한다면 무엇을 선택하겠습니까?'];
+
+  const coachingQuestions = (profile,pair) => [
+    profile.coaching,
+    pair.coaching,
+    '최근 내 강점이 상대에게는 부담으로 경험된 장면은 언제였습니까?',
+    '그 장면에서 내가 지키고 싶었던 욕구와 상대가 지키고 싶었던 욕구는 각각 무엇이었습니까?',
+    '내가 두려워한 상황 때문에 행동이 더 강해지거나 작아진 순간은 언제였습니까?',
+    '3순위 성향을 조금 더 사용했다면 관계가 어떻게 달라졌을까요?',
+    '다음 관계에서 한 가지 행동을 10% 다르게 한다면 무엇을 선택하겠습니까?'
+  ];
 
   function drawMap(x,y,spread,first,second,third){
     const canvas=$('#map'),ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,p=64,plot=w-p*2;
