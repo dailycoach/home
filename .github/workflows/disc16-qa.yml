@@ -1,0 +1,32 @@
+name: DISC16 QA
+
+on:
+  pull_request:
+    paths:
+      - 'tests/disc16/**'
+      - '.github/workflows/disc16-qa.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'tests/disc16/**'
+      - '.github/workflows/disc16-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate DISC16 data
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run DISC16 validator
+        run: node tests/disc16/validate.mjs
