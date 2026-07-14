@@ -1,0 +1,83 @@
+name: KINGDOM35 scroll to top
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kingdom35-scroll-top.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch page and modal scroll behavior
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('cards/kingdom35/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          old = "const $=id=>document.getElementById(id),screens=['welcome','stageScreen','reviewScreen'];let stageIndex=0;const selected=STAGES.map(()=>new Set());"
+          new = "const $=id=>document.getElementById(id),screens=['welcome','stageScreen','reviewScreen'];let stageIndex=0;const selected=STAGES.map(()=>new Set());function scrollTopNow(){window.scrollTo({top:0,left:0,behavior:'auto'})}"
+          if old not in text:
+              raise SystemExit('state declaration anchor not found')
+          text = text.replace(old, new, 1)
+
+          old = "$('modalActions').appendChild(a);$('modal').classList.add('show');setTimeout(()=>a.focus(),0)}function closeModal()"
+          new = "$('modalActions').appendChild(a);scrollTopNow();$('modal').classList.add('show');const dialog=$('modal').querySelector('.dialog');if(dialog)dialog.scrollTop=0;setTimeout(()=>a.focus(),0)}function closeModal()"
+          if old not in text:
+              raise SystemExit('modal anchor not found')
+          text = text.replace(old, new, 1)
+
+          old = "function next(){if(stageIndex===6){renderReview();return}stageGuide(stageIndex+1,()=>{stageIndex++;renderStage()})}function prev(){if(!stageIndex)return;stageGuide(stageIndex-1,()=>{stageIndex--;renderStage()})}"
+          new = "function next(){if(stageIndex===6){renderReview();return}stageGuide(stageIndex+1,()=>{stageIndex++;renderStage();scrollTopNow()})}function prev(){if(!stageIndex)return;stageGuide(stageIndex-1,()=>{stageIndex--;renderStage();scrollTopNow()})}"
+          if old not in text:
+              raise SystemExit('navigation anchor not found')
+          text = text.replace(old, new, 1)
+
+          old = "function renderReview(){showingReview=true;show('reviewScreen');"
+          new = "function renderReview(){showingReview=true;show('reviewScreen');scrollTopNow();"
+          if old not in text:
+              raise SystemExit('review anchor not found')
+          text = text.replace(old, new, 1)
+
+          old = "function reset(){stageIndex=0;selected.forEach(s=>s.clear());showingReview=false;show('welcome');apply(0);$('stageNow').textContent='0';$('totalSelected').textContent='0';$('bar').style.width='0'}"
+          new = "function reset(){stageIndex=0;selected.forEach(s=>s.clear());showingReview=false;show('welcome');apply(0);$('stageNow').textContent='0';$('totalSelected').textContent='0';$('bar').style.width='0';scrollTopNow()}"
+          if old not in text:
+              raise SystemExit('reset anchor not found')
+          text = text.replace(old, new, 1)
+
+          old = "ok:()=>stageGuide(0,renderStage)})"
+          new = "ok:()=>stageGuide(0,()=>{renderStage();scrollTopNow()})})"
+          if old not in text:
+              raise SystemExit('start anchor not found')
+          text = text.replace(old, new, 1)
+
+          old = "$('backToM').onclick=()=>{stageIndex=6;renderStage()};"
+          new = "$('backToM').onclick=()=>{stageIndex=6;renderStage();scrollTopNow()};"
+          if old not in text:
+              raise SystemExit('backToM anchor not found')
+          text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit patch
+        shell: bash
+        run: |
+          if git diff --quiet -- cards/kingdom35/index.html; then
+            echo "No change required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cards/kingdom35/index.html
+          git commit -m "Scroll KINGDOM35 to top on dialogs and page changes"
+          git push
