@@ -30,6 +30,7 @@ jobs:
           node --check tests/self/assets/self-v9.js
           node --check tests/self/assets/self-v9-hotfix.js
           node --check tests/self/assets/self-v9-coach.js
+          node --check tests/self/assets/self-v9-coach-score.js
 
       - name: Request Pages build and verify live page
         id: deploy
@@ -39,6 +40,7 @@ jobs:
           SOURCE_SHA: ${{ github.sha }}
           LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
           COACH_JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach.js
+          SCORE_JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-score.js
         run: |
           set +e
 
@@ -76,9 +78,13 @@ jobs:
           live_title=""
           live_has_button=0
           live_has_coach_script=0
+          live_has_score_script=0
           coach_js_code=0
           coach_js_marker=0
+          score_js_code=0
+          score_js_marker=0
           live_status="not_verified"
+
           for attempt in $(seq 1 36); do
             sleep 5
             live_code=$(curl --silent --show-error --location \
@@ -86,6 +92,7 @@ jobs:
               --write-out "%{http_code}" \
               --header "Cache-Control: no-cache" \
               "${LIVE_URL}?deploy=${SOURCE_SHA}&attempt=${attempt}")
+
             live_title=$(python - <<'PY'
           import re
           from pathlib import Path
@@ -94,20 +101,34 @@ jobs:
           print(re.sub(r'\s+', ' ', match.group(1)).strip() if match else '')
           PY
             )
+
             live_has_button=$(grep -c 'id="coachViewBtn"' /tmp/self-live.html 2>/dev/null || true)
-            live_has_coach_script=$(grep -c 'self-v9-coach.js?v=9.2.0' /tmp/self-live.html 2>/dev/null || true)
+            live_has_coach_script=$(grep -c 'self-v9-coach.js?v=9.3.0' /tmp/self-live.html 2>/dev/null || true)
+            live_has_score_script=$(grep -c 'self-v9-coach-score.js?v=9.3.0' /tmp/self-live.html 2>/dev/null || true)
+
             coach_js_code=$(curl --silent --show-error --location \
               --output /tmp/self-coach.js \
               --write-out "%{http_code}" \
               --header "Cache-Control: no-cache" \
               "${COACH_JS_URL}?deploy=${SOURCE_SHA}&attempt=${attempt}")
             coach_js_marker=$(grep -c 'KINGDOM 7단계 코칭질문' /tmp/self-coach.js 2>/dev/null || true)
+
+            score_js_code=$(curl --silent --show-error --location \
+              --output /tmp/self-coach-score.js \
+              --write-out "%{http_code}" \
+              --header "Cache-Control: no-cache" \
+              "${SCORE_JS_URL}?deploy=${SOURCE_SHA}&attempt=${attempt}")
+            score_js_marker=$(grep -c '현재 점수 기반 KINGDOM 질문' /tmp/self-coach-score.js 2>/dev/null || true)
+
             if [ "${live_code}" = "200" ] \
               && [ "${live_title}" = "SELF INC. | 자존감 운영 점검" ] \
               && [ "${live_has_button}" -gt 0 ] \
               && [ "${live_has_coach_script}" -gt 0 ] \
+              && [ "${live_has_score_script}" -gt 0 ] \
               && [ "${coach_js_code}" = "200" ] \
-              && [ "${coach_js_marker}" -gt 0 ]; then
+              && [ "${coach_js_marker}" -gt 0 ] \
+              && [ "${score_js_code}" = "200" ] \
+              && [ "${score_js_marker}" -gt 0 ]; then
               live_status="verified"
               break
             fi
@@ -122,8 +143,11 @@ jobs:
           export LIVE_TITLE="${live_title}"
           export LIVE_HAS_BUTTON="${live_has_button}"
           export LIVE_HAS_COACH_SCRIPT="${live_has_coach_script}"
+          export LIVE_HAS_SCORE_SCRIPT="${live_has_score_script}"
           export COACH_JS_CODE="${coach_js_code}"
           export COACH_JS_MARKER="${coach_js_marker}"
+          export SCORE_JS_CODE="${score_js_code}"
+          export SCORE_JS_MARKER="${score_js_marker}"
           export LIVE_STATUS="${live_status}"
 
           python - <<'PY'
@@ -138,6 +162,7 @@ jobs:
 
           live_path = Path('/tmp/self-live.html')
           coach_path = Path('/tmp/self-coach.js')
+          score_path = Path('/tmp/self-coach-score.js')
           payload = {
               'workflow': 'deploy-self-test',
               'repository': os.environ['REPOSITORY'],
@@ -154,10 +179,14 @@ jobs:
                   'title': os.environ.get('LIVE_TITLE', ''),
                   'coachButton': int(os.environ.get('LIVE_HAS_BUTTON', '0')) > 0,
                   'coachScriptLinked': int(os.environ.get('LIVE_HAS_COACH_SCRIPT', '0')) > 0,
+                  'scoreCoachScriptLinked': int(os.environ.get('LIVE_HAS_SCORE_SCRIPT', '0')) > 0,
                   'coachScriptHttpStatus': int(os.environ.get('COACH_JS_CODE', '0')),
                   'coachContentMarker': int(os.environ.get('COACH_JS_MARKER', '0')) > 0,
+                  'scoreCoachScriptHttpStatus': int(os.environ.get('SCORE_JS_CODE', '0')),
+                  'scoreCoachContentMarker': int(os.environ.get('SCORE_JS_MARKER', '0')) > 0,
                   'sha256': hashlib.sha256(live_path.read_bytes()).hexdigest() if live_path.exists() else None,
                   'coachScriptSha256': hashlib.sha256(coach_path.read_bytes()).hexdigest() if coach_path.exists() else None,
+                  'scoreCoachScriptSha256': hashlib.sha256(score_path.read_bytes()).hexdigest() if score_path.exists() else None,
               },
               'checkedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
           }
