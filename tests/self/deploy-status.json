@@ -1,7 +1,7 @@
 {
   "workflow": "deploy-self-test",
   "repository": "dailycoach/home",
-  "sourceSha": "bf0c9069d0670f6a64d23b94af0563041b26f005",
+  "sourceSha": "db3b355fea1eb05d081c32c5313ba1e8319b05fa",
   "requestHttpStatus": 201,
   "requestResponse": {
     "status": "queued",
@@ -10,7 +10,7 @@
   "latestBuildHttpStatus": 200,
   "latestBuildStatus": "built",
   "latestBuild": {
-    "url": "https://api.github.com/repos/dailycoach/home/pages/builds/1095954322",
+    "url": "https://api.github.com/repos/dailycoach/home/pages/builds/1095957643",
     "status": "built",
     "error": {
       "message": null
@@ -36,17 +36,22 @@
       "user_view_type": "public",
       "site_admin": false
     },
-    "commit": "bf0c9069d0670f6a64d23b94af0563041b26f005",
-    "duration": 20343,
-    "created_at": "2026-07-15T02:00:33Z",
-    "updated_at": "2026-07-15T02:00:53Z"
+    "commit": "db3b355fea1eb05d081c32c5313ba1e8319b05fa",
+    "duration": 23249,
+    "created_at": "2026-07-15T02:02:58Z",
+    "updated_at": "2026-07-15T02:03:21Z"
   },
   "liveCheck": {
     "url": "https://daily-coach-ing.com/tests/self/index.html",
     "httpStatus": 200,
     "status": "verified",
     "title": "SELF INC. | 자존감 운영 점검",
-    "sha256": "f17c803c2b7ce3ee7a20d1f0506cba65411932db91be1654d9903263b48cd438"
+    "coachButton": true,
+    "coachScriptLinked": true,
+    "coachScriptHttpStatus": 200,
+    "coachContentMarker": true,
+    "sha256": "f17c803c2b7ce3ee7a20d1f0506cba65411932db91be1654d9903263b48cd438",
+    "coachScriptSha256": "ec13f7ba8a856a3eac0b6e059109ca098ec8745accc8619a475e1a4cc17b9fcc"
   },
-  "checkedAt": "2026-07-15T02:01:00.623380+00:00"
+  "checkedAt": "2026-07-15T02:03:31.645684+00:00"
 }
