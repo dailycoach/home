@@ -4,36 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>DAILYCOACHING</title>
-  <meta name="robots" content="index,follow">
-  <style>html,body{margin:0;min-height:100%;background:#061528;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center}.loading p{opacity:.72}</style>
+  <style>html,body{margin:0;background:#061528;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center}.loading p{opacity:.7}</style>
 </head>
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-  (() => {
-    const source = '/index-source-disc.html?v=20260715-disc-menu-v2';
-    const adult = '<a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>';
-    const youth = '<a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>';
-    const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
-    const routeAnchor = "      kgm210: '/tests/kgm210/',";
-    fetch(source, { cache: 'no-store' })
-      .then(response => {
-        if (!response.ok) throw new Error('source load failed');
-        return response.text();
-      })
+    fetch('/index-source-disc.html?v=20260715', {cache:'no-store'})
+      .then(r => r.text())
       .then(html => {
-        if (!html.includes('data-route="disc16"')) {
-          html = html.split(anchor).join(`${anchor}\n            ${adult}\n            ${youth}`);
-        }
-        if (!html.includes("disc16: '/tests/disc16/'")) {
-          html = html.replace(routeAnchor, `${routeAnchor}\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',`);
-        }
-        document.open();
-        document.write(html);
-        document.close();
-      })
-      .catch(() => location.replace(source));
-  })();
+        const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
+        const links = `${anchor}\n            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>\n            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>`;
+        html = html.replaceAll(anchor, links);
+        html = html.replace("      kgm210: '/tests/kgm210/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
+        document.open(); document.write(html); document.close();
+      });
   </script>
 </body>
 </html>
