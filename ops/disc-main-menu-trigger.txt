@@ -1,2 +1,3 @@
 Trigger permanent DISC adult and youth menu enforcement.
-Run: 2026-07-15T12:00:00+09:00
+Run: 2026-07-15T12:10:00+09:00
+Mode: pull-request-merge
