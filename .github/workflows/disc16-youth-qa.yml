@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validate:
@@ -30,3 +30,77 @@ jobs:
           node-version: '22'
       - name: Run youth validator
         run: node tests/disc16-youth/validate.mjs
+
+  sync-main-menu:
+    name: Sync DISC entries to main menu
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Patch index menu
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          if 'data-route="disc16Youth"' not in text:
+              replacements = [
+                  (
+                      '''            <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>''',
+                      '''            <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 <small>NEW</small></a>
+            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계 <small>NEW</small></a>
+            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+                  ),
+                  (
+                      '''          <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>''',
+                      '''          <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+          <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>
+          <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>
+          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+                  ),
+                  (
+                      '''      kgm210: '/tests/kgm210/',
+      learning: '/tests/learning/',''',
+                      '''      kgm210: '/tests/kgm210/',
+      disc16: '/tests/disc16/',
+      disc16Youth: '/tests/disc16-youth/',
+      learning: '/tests/learning/','''
+                  )
+              ]
+              for old, new in replacements:
+                  if old not in text:
+                      raise SystemExit(f'메뉴 기준 문자열 누락: {old[:60]}')
+                  text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding='utf-8')
+
+          probe = Path('__tmp_probe.txt')
+          if probe.exists():
+              probe.unlink()
+          PY
+
+      - name: Verify and commit
+        run: |
+          grep -q 'data-route="disc16"' index.html
+          grep -q 'data-route="disc16Youth"' index.html
+          grep -q "disc16Youth: '/tests/disc16-youth/'" index.html
+          if git diff --quiet; then
+            echo 'Main menu already synchronized.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git add -u __tmp_probe.txt || true
+          git commit -m 'fix: expose DISC adult and youth tools in main menus'
+          git push origin main
