@@ -10,6 +10,8 @@ on:
       - "tests/disc16/**"
       - "tests/disc16-youth/**"
       - "ops/disc-main-menu-trigger.txt"
+  issues:
+    types: [opened]
   workflow_dispatch:
 
 permissions:
@@ -22,7 +24,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.actor != 'github-actions[bot]'
+    if: github.actor != 'github-actions[bot]' && (github.event_name != 'issues' || contains(github.event.issue.title, '[deploy-disc-menu]'))
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
