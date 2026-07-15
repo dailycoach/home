@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - '.github/workflows/sync-disc-main-menu.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/sync-disc-main-menu.yml'
   workflow_dispatch:
 
 permissions:
