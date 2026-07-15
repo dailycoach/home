@@ -11,6 +11,23 @@
   <link rel="stylesheet" href="./ux-core.css" />
   <link rel="stylesheet" href="./ux-course.css" />
   <link rel="stylesheet" href="./ux-lesson.css" />
+  <script>
+    (() => {
+      const query = new URLSearchParams(location.search);
+      if (query.has('module') || query.has('video')) return;
+      try {
+        const progress = JSON.parse(localStorage.getItem('rsedu-academy-progress:v1') || '{}');
+        const courseId = query.get('course') || 'lmc-lifetime-management-counselor';
+        const last = progress.lastViewed?.[courseId];
+        const moduleMatch = /^module-(\d+)$/.exec(last || '');
+        if (moduleMatch) query.set('module', String(Math.max(0, Number(moduleMatch[1]) - 1)));
+        else if (last) query.set('video', last);
+        if (last) history.replaceState(null, '', `${location.pathname}?${query.toString()}`);
+      } catch (error) {
+        console.warn('[LMC Academy] resume restore skipped:', error);
+      }
+    })();
+  </script>
   <script src="./academy.js" defer></script>
 </head>
 <body class="academy-page" data-academy-page="lesson">
