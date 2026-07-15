@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Career Intelligence Platform Academy · RS에듀컨설팅 동영상 교육과정" />
+  <title>Academy | Career Intelligence Platform</title>
+  <link rel="stylesheet" href="../shared-platform-shell.css" />
+  <link rel="stylesheet" href="./academy.css" />
+  <script src="./academy.js" defer></script>
+</head>
+<body class="academy-page" data-academy-page="index">
+  <div class="cip-shell">
+    <header class="cip-header">
+      <div class="cip-header-inner">
+        <a class="cip-brand" href="../platform.html" aria-label="Career Intelligence Platform 홈">
+          <span class="cip-brand-mark" aria-hidden="true"></span>
+          <span class="cip-brand-copy">CAREER INTELLIGENCE PLATFORM<small>RS EDU CONSULTING · 데이터 기반 평생 커리어 인프라</small></span>
+        </a>
+
+        <nav class="cip-nav" aria-label="Career Intelligence Platform 주 메뉴">
+          <a href="../platform.html">Platform</a>
+          <a href="../business-achievements.html">사업실적</a>
+          <a href="./index.html" aria-current="page">Academy</a>
+        </nav>
+
+        <a class="cip-utility" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/" target="_blank" rel="noopener noreferrer" aria-label="Career Intelligence Platform 원본을 새 창에서 열기">원본 열기 ↗</a>
+      </div>
+    </header>
+
+    <main class="academy-main cip-container">
+      <div class="academy-viewport">
+        <section class="academy-hero" aria-labelledby="academy-title">
+          <div class="academy-hero-copy">
+            <span class="academy-eyebrow">RS EDU Academy</span>
+            <h1 id="academy-title">배운 내용을 지나치지 않고<br /><span>성장기록으로 연결합니다</span></h1>
+            <p>유튜브에 업로드된 강의를 과정과 차시로 구조화하고, 핵심 내용·성찰 질문·학습기록을 Career Intelligence Platform 안에서 하나의 학습여정으로 제공합니다.</p>
+            <div class="academy-hero-note">영상 시청 → 핵심 정리 → 성찰 질문 → 작은 행동 → 성장기록</div>
+          </div>
+
+          <div class="academy-hero-visual academy-path" aria-hidden="true">
+            <div class="path-line"></div>
+            <div class="path-node one"><strong>강의 시청</strong><small>YouTube Video</small></div>
+            <div class="path-node two"><strong>핵심 정리</strong><small>Course Note</small></div>
+            <div class="path-node three"><strong>성찰 기록</strong><small>Reflection</small></div>
+            <div class="path-node four"><strong>학습 완료</strong><small>Progress</small></div>
+          </div>
+        </section>
+
+        <div class="academy-body">
+          <div class="cip-breadcrumb academy-breadcrumb" aria-label="현재 위치">
+            <a href="../platform.html">Career Intelligence Platform</a>
+            <span>/</span>
+            <strong>Academy</strong>
+          </div>
+
+          <section class="academy-section" aria-labelledby="courses-title">
+            <div class="academy-section-head">
+              <div>
+                <span class="cip-kicker">Course Catalog</span>
+                <h2 id="courses-title">교육과정</h2>
+              </div>
+              <p>과정마다 유튜브 재생목록을 연결합니다. 새로운 영상을 재생목록에 추가하면 차시 순서와 제목이 Academy에 자동 반영됩니다.</p>
+            </div>
+            <div class="course-grid" id="courseGrid" aria-live="polite"></div>
+          </section>
+
+          <section class="academy-section" aria-labelledby="status-title">
+            <div class="academy-section-head">
+              <div>
+                <span class="cip-kicker">Learning Status</span>
+                <h2 id="status-title">현재 Academy 상태</h2>
+              </div>
+              <p>초기 MVP에서는 이 브라우저에 학습진도와 한 문장을 저장합니다. 회원 시스템이 연결되면 사용자 계정 기반 기록으로 이전할 수 있습니다.</p>
+            </div>
+            <div class="academy-status-panel" id="academyStatus"></div>
+          </section>
+
+          <footer class="academy-footer">
+            <span>RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · ACADEMY</span>
+            <a href="../platform.html">Platform →</a>
+          </footer>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
