@@ -1,5 +1,6 @@
 name: Sync DISC Main Menu
 
+# PR trigger used to apply the current menu sync to main.
 on:
   push:
     paths:
