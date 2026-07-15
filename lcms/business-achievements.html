@@ -3,501 +3,187 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="RS에듀컨설팅 Career Intelligence Platform 주요 사업실적" />
-  <title>사업실적 | RS에듀컨설팅 Career Intelligence Platform</title>
+  <meta name="description" content="Career Intelligence Platform의 기반이 된 RS에듀컨설팅 주요 사업실적" />
+  <title>Project Experience | Career Intelligence Platform</title>
   <link rel="stylesheet" href="./shared-platform-shell.css" />
-  <style>
-    .experience-main { padding: 34px 0 96px; }
-
-    .experience-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(300px, .82fr);
-      gap: 50px;
-      align-items: end;
-      padding: 38px 0 44px;
-      border-bottom: 1px solid var(--rs-line);
-    }
-
-    .experience-head h1 {
-      max-width: 760px;
-      margin: 18px 0 20px;
-      font-size: clamp(38px, 6.3vw, 74px);
-      line-height: 1.08;
-      letter-spacing: -.062em;
-      text-wrap: balance;
-    }
-
-    .experience-head h1 span {
-      color: var(--rs-cyan);
-      text-shadow: 0 0 36px rgba(84, 212, 255, .13);
-    }
-
-    .experience-lead {
-      max-width: 720px;
-      margin: 0;
-      color: var(--rs-muted);
-      font-size: clamp(16px, 1.8vw, 19px);
-      line-height: 1.82;
-    }
-
-    .head-data {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .data-card {
-      min-height: 112px;
-      padding: 20px;
-      border: 1px solid var(--rs-line);
-      border-radius: 18px;
-      background: linear-gradient(145deg, rgba(13, 25, 50, .78), rgba(7, 14, 29, .72));
-    }
-
-    .data-card:first-child { grid-column: 1 / -1; }
-
-    .data-card span {
-      display: block;
-      color: var(--rs-subtle);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .data-card strong {
-      display: block;
-      margin-top: 9px;
-      font-size: clamp(27px, 3.8vw, 42px);
-      line-height: 1;
-      letter-spacing: -.05em;
-    }
-
-    .data-card small {
-      display: block;
-      margin-top: 7px;
-      color: var(--rs-muted);
-      font-size: 12px;
-    }
-
-    .section-block { padding-top: 72px; }
-
-    .section-title {
-      display: grid;
-      grid-template-columns: minmax(0, .8fr) minmax(300px, 1.2fr);
-      gap: 40px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-
-    .section-title h2 {
-      margin: 12px 0 0;
-      font-size: clamp(29px, 4vw, 46px);
-      line-height: 1.15;
-      letter-spacing: -.05em;
-    }
-
-    .section-title p {
-      margin: 0;
-      color: var(--rs-muted);
-      font-size: 16px;
-      line-height: 1.75;
-    }
-
-    .flagship {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(250px, .7fr);
-      gap: 42px;
-      overflow: hidden;
-      padding: clamp(28px, 5vw, 56px);
-      border: 1px solid var(--rs-line-strong);
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at 88% 8%, rgba(84, 212, 255, .17), transparent 32%),
-        linear-gradient(145deg, rgba(13, 27, 55, .96), rgba(6, 13, 28, .95));
-      box-shadow: var(--rs-shadow);
-    }
-
-    .flagship::after {
-      content: "2010";
-      position: absolute;
-      right: -10px;
-      bottom: -36px;
-      color: rgba(255, 255, 255, .035);
-      font-size: clamp(140px, 23vw, 300px);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -.09em;
-      pointer-events: none;
-    }
-
-    .flagship-copy,
-    .flagship-meta { position: relative; z-index: 1; }
-
-    .system-label {
-      display: inline-flex;
-      align-items: center;
-      min-height: 31px;
-      padding: 0 12px;
-      border: 1px solid rgba(84, 212, 255, .30);
-      border-radius: 999px;
-      color: var(--rs-cyan);
-      background: rgba(84, 212, 255, .06);
-      font-size: 10px;
-      font-weight: 850;
-      letter-spacing: .09em;
-    }
-
-    .flagship h3 {
-      max-width: 760px;
-      margin: 22px 0 18px;
-      font-size: clamp(31px, 4.8vw, 58px);
-      line-height: 1.16;
-      letter-spacing: -.054em;
-      text-wrap: balance;
-    }
-
-    .flagship h3 strong { color: var(--rs-cyan); }
-
-    .flagship-copy p {
-      max-width: 720px;
-      margin: 0;
-      color: var(--rs-muted);
-      font-size: 16px;
-      line-height: 1.84;
-    }
-
-    .flagship-meta {
-      display: grid;
-      align-content: end;
-      gap: 17px;
-      padding-left: 34px;
-      border-left: 1px solid var(--rs-line);
-    }
-
-    .meta-item span {
-      display: block;
-      color: var(--rs-subtle);
-      font-size: 10px;
-      font-weight: 850;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .meta-item strong {
-      display: block;
-      margin-top: 5px;
-      font-size: 16px;
-      line-height: 1.55;
-    }
-
-    .record-list {
-      position: relative;
-      display: grid;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .record {
-      display: grid;
-      grid-template-columns: 92px minmax(0, 1fr) minmax(180px, .32fr);
-      gap: 24px;
-      align-items: center;
-      padding: 23px 25px;
-      border: 1px solid var(--rs-line);
-      border-radius: 19px;
-      background: linear-gradient(145deg, rgba(11, 21, 42, .78), rgba(6, 12, 25, .74));
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-
-    .record:hover {
-      transform: translateY(-2px);
-      border-color: var(--rs-line-strong);
-      background: linear-gradient(145deg, rgba(14, 28, 55, .90), rgba(7, 15, 30, .84));
-    }
-
-    .record-year {
-      color: var(--rs-cyan);
-      font-size: 13px;
-      font-weight: 850;
-      line-height: 1.35;
-    }
-
-    .record h3 {
-      margin: 0 0 7px;
-      font-size: clamp(19px, 2.2vw, 25px);
-      line-height: 1.38;
-      letter-spacing: -.035em;
-    }
-
-    .record p {
-      margin: 0;
-      color: var(--rs-muted);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .record-side {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-      text-align: right;
-    }
-
-    .agency {
-      color: #fff;
-      font-size: 13px;
-      font-weight: 780;
-    }
-
-    .role {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0 10px;
-      border: 1px solid rgba(91, 130, 255, .27);
-      border-radius: 999px;
-      color: #c0ceff;
-      background: rgba(91, 130, 255, .07);
-      font-size: 10px;
-      font-weight: 820;
-      white-space: nowrap;
-    }
-
-    .platform-bridge {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 30px;
-      align-items: center;
-      margin-top: 72px;
-      padding: clamp(28px, 5vw, 50px);
-      border: 1px solid rgba(84, 212, 255, .24);
-      border-radius: 25px;
-      background:
-        radial-gradient(circle at 88% 20%, rgba(84, 212, 255, .11), transparent 30%),
-        linear-gradient(145deg, rgba(12, 24, 47, .80), rgba(6, 13, 27, .76));
-    }
-
-    .platform-bridge h2 {
-      margin: 10px 0 10px;
-      font-size: clamp(27px, 3.8vw, 43px);
-      line-height: 1.2;
-      letter-spacing: -.048em;
-    }
-
-    .platform-bridge p {
-      max-width: 730px;
-      margin: 0;
-      color: var(--rs-muted);
-      line-height: 1.72;
-    }
-
-    .bridge-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      padding: 0 21px;
-      border-radius: 999px;
-      color: #fff;
-      background: linear-gradient(135deg, var(--rs-blue), var(--rs-blue-2));
-      box-shadow: 0 16px 40px rgba(49, 95, 255, .23);
-      font-size: 13px;
-      font-weight: 850;
-      white-space: nowrap;
-    }
-
-    .page-footer {
-      margin-top: 70px;
-      padding-top: 24px;
-      border-top: 1px solid var(--rs-line);
-      color: var(--rs-subtle);
-      font-size: 11px;
-      text-align: center;
-    }
-
-    @media (max-width: 900px) {
-      .experience-head,
-      .section-title,
-      .flagship { grid-template-columns: 1fr; }
-      .experience-head { gap: 30px; }
-      .flagship-meta {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        padding: 24px 0 0;
-        border-top: 1px solid var(--rs-line);
-        border-left: 0;
-      }
-      .record { grid-template-columns: 78px minmax(0, 1fr); }
-      .record-side {
-        grid-column: 2;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        text-align: left;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .rs-wrap { width: min(100% - 28px, var(--rs-max)); }
-      .experience-main { padding-top: 18px; }
-      .experience-head { padding-top: 26px; }
-      .experience-head h1 { font-size: clamp(38px, 12vw, 56px); }
-      .head-data { grid-template-columns: 1fr; }
-      .data-card:first-child { grid-column: auto; }
-      .section-block { padding-top: 58px; }
-      .flagship { padding: 27px 22px; border-radius: 21px; }
-      .flagship-meta { grid-template-columns: 1fr; }
-      .record {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 21px 19px;
-      }
-      .record-side {
-        grid-column: 1;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .platform-bridge { grid-template-columns: 1fr; border-radius: 21px; }
-      .bridge-button { width: 100%; }
-    }
-  </style>
+  <link rel="stylesheet" href="./business-achievements.css" />
 </head>
-<body>
-  <div class="rs-shell">
-    <header class="rs-header">
-      <div class="rs-header-inner">
-        <a class="rs-brand" href="./platform.html" aria-label="RS에듀컨설팅 Career Intelligence Platform 홈">
-          <span class="rs-brand-mark" aria-hidden="true"></span>
-          <span>RS EDU CONSULTING<small>CAREER INTELLIGENCE PLATFORM</small></span>
+<body class="cip-experience-page">
+  <div class="cip-shell">
+    <header class="cip-header">
+      <div class="cip-header-inner">
+        <a class="cip-brand" href="./platform.html" aria-label="Career Intelligence Platform 홈">
+          <span class="cip-brand-mark" aria-hidden="true"></span>
+          <span class="cip-brand-copy">RS EDU CONSULTING<small>CAREER INTELLIGENCE PLATFORM</small></span>
         </a>
 
-        <nav class="rs-nav" aria-label="Career Intelligence Platform 메뉴">
+        <nav class="cip-nav" aria-label="Career Intelligence Platform 주 메뉴">
           <a href="./platform.html">Platform</a>
           <a href="./business-achievements.html" aria-current="page">사업실적</a>
         </nav>
 
-        <a class="rs-open-platform" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/" target="_blank" rel="noopener noreferrer">전체 플랫폼 ↗</a>
+        <a class="cip-utility" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/" target="_blank" rel="noopener noreferrer" aria-label="Career Intelligence Platform 원본을 새 창에서 열기">원본 열기 ↗</a>
       </div>
     </header>
 
-    <main class="experience-main rs-wrap">
-      <div class="rs-breadcrumb" aria-label="현재 위치">
+    <main class="cip-experience-main cip-container">
+      <div class="cip-breadcrumb" aria-label="현재 위치">
         <a href="./platform.html">Career Intelligence Platform</a>
         <span>/</span>
         <strong>Project Experience</strong>
       </div>
 
-      <section class="experience-head" aria-labelledby="experience-title">
+      <section class="experience-hero" aria-labelledby="experience-title">
         <div>
-          <span class="rs-kicker">Project Experience</span>
-          <h1 id="experience-title">검증된 수행 경험이<br /><span>플랫폼의 기반</span>입니다</h1>
-          <p class="experience-lead">
-            RS에듀컨설팅은 진로교육 현장에서 축적한 검사 시스템, 콘텐츠, 원격 프로그램과 데이터 운영 경험을
-            Career Intelligence Platform의 설계 기반으로 연결합니다.
+          <span class="cip-kicker">Project Experience</span>
+          <h1 id="experience-title">현장에서 축적한 경험을<br /><span>커리어 데이터 인프라</span>로</h1>
+          <p>
+            Career Intelligence Platform은 개념만으로 설계되지 않았습니다. 심리검사 시스템 구축, 진로교육 콘텐츠,
+            원격 프로그램, 대학 입시 지원과 디지털 커리어 데이터 협력까지 실제 수행 경험이 플랫폼의 구조를 만들었습니다.
           </p>
         </div>
 
-        <div class="head-data" aria-label="사업실적 요약">
-          <div class="data-card"><span>Operating Since</span><strong>2010</strong><small>진로교육 인프라 사업 시작</small></div>
-          <div class="data-card"><span>Project Records</span><strong>8</strong><small>대표 수행·협력 실적</small></div>
-          <div class="data-card"><span>Connected Sectors</span><strong>5</strong><small>공공·대학·미디어·출판·기술</small></div>
+        <div class="experience-metrics" aria-label="사업실적 요약">
+          <div class="metric-tile"><span>Operating Since</span><strong>2010</strong><small>진로교육 인프라 사업 시작</small></div>
+          <div class="metric-tile"><span>Project Records</span><strong>8</strong><small>대표 수행·협력 기록</small></div>
+          <div class="metric-tile"><span>Connected Sectors</span><strong>5</strong><small>공공·대학·미디어·출판·기술</small></div>
         </div>
       </section>
 
-      <section class="section-block" aria-labelledby="flagship-title">
-        <div class="section-title">
+      <section class="module-section" aria-labelledby="system-record-title">
+        <div class="module-heading">
           <div>
-            <span class="rs-kicker">Flagship Operation</span>
-            <h2 id="flagship-title">대표 장기 수행 사업</h2>
+            <span class="cip-kicker">System Record 01</span>
+            <h2 id="system-record-title">대표 장기 운영 시스템</h2>
           </div>
-          <p>단기 프로그램 공급을 넘어 검사 시스템 구축과 현장 운영을 장기간 이어온 경험입니다.</p>
+          <p>일회성 콘텐츠 공급이 아니라 검사 시스템의 구축과 장기 운영까지 연결한 대표 수행 기록입니다.</p>
         </div>
 
-        <article class="flagship">
-          <div class="flagship-copy">
-            <span class="system-label">ASSESSMENT SYSTEM · BUILD &amp; OPERATION</span>
-            <h3>서울시 관내 <strong>모든 초·중·고 학생</strong>을 위한 심리검사 시스템</h3>
-            <p>
-              서울시 관내 모든 초·중·고 학생을 대상으로 진로적성, 학습유형, 스트레스 검사 시스템을 구축하고 운영해 온
-              RS에듀컨설팅의 대표 장기 수행 사업입니다.
-            </p>
+        <article class="system-record">
+          <div class="system-record-bar">
+            <span>ASSESSMENT INFRASTRUCTURE · SEOUL</span>
+            <span class="system-status">ACTIVE OPERATION</span>
           </div>
 
-          <div class="flagship-meta" aria-label="대표 사업 정보">
-            <div class="meta-item"><span>Project</span><strong>서울진로진학정보센터<br />심리검사 사업</strong></div>
-            <div class="meta-item"><span>Client</span><strong>서울특별시교육청</strong></div>
-            <div class="meta-item"><span>Period</span><strong>2010.03–현재</strong></div>
+          <div class="system-record-body">
+            <div class="system-record-copy">
+              <span class="system-code">SYSTEM BUILD · DATA OPERATION</span>
+              <h3>서울시 관내 <strong>모든 초·중·고 학생</strong>을 위한 심리검사 시스템</h3>
+              <p>
+                서울시 관내 모든 초·중·고 학생을 대상으로 진로적성, 학습유형, 스트레스 검사 시스템을 구축하고 운영해 온
+                RS에듀컨설팅의 대표 장기 수행 사업입니다. 학교 현장에서 활용되는 검사 경험과 운영 데이터는
+                Career Intelligence Platform의 진단·해석·성장경로 설계 기반으로 이어집니다.
+              </p>
+              <div class="system-tags" aria-label="대표 시스템 구성">
+                <span>진로적성</span>
+                <span>학습유형</span>
+                <span>스트레스</span>
+                <span>전 학교급</span>
+                <span>장기 운영</span>
+              </div>
+            </div>
+
+            <div class="system-meta" aria-label="대표 사업 정보">
+              <div class="system-meta-item"><span>Project</span><strong>서울진로진학정보센터<br />심리검사 사업</strong></div>
+              <div class="system-meta-item"><span>Client</span><strong>서울특별시교육청</strong></div>
+              <div class="system-meta-item"><span>Period</span><strong>2010.03–현재</strong></div>
+            </div>
           </div>
         </article>
       </section>
 
-      <section class="section-block" aria-labelledby="records-title">
-        <div class="section-title">
+      <section class="module-section" aria-labelledby="capability-title">
+        <div class="module-heading">
           <div>
-            <span class="rs-kicker">Selected Records</span>
-            <h2 id="records-title">주요 수행·협력 기록</h2>
+            <span class="cip-kicker">Capability Map</span>
+            <h2 id="capability-title">수행경험이 만든 다섯 가지 기반</h2>
           </div>
-          <p>심리검사에서 진로교육 콘텐츠, 원격 멘토링, 대학 프로그램과 디지털 커리어 데이터까지 사업영역을 확장했습니다.</p>
+          <p>각 사업은 별개의 이력이 아니라 CIP 안에서 검사, 콘텐츠, 전달, 기록과 증명을 연결하는 역량으로 축적됐습니다.</p>
         </div>
 
-        <div class="record-list">
-          <article class="record">
-            <div class="record-year">2012.03<br />–2013.12</div>
+        <div class="capability-grid">
+          <article class="capability-card"><span>01 · ASSESSMENT</span><h3>검사 시스템</h3><p>진로적성·학습유형·스트레스 검사를 학교 현장에 공급하고 장기간 운영한 경험</p></article>
+          <article class="capability-card"><span>02 · CONTENT</span><h3>진로교육 콘텐츠</h3><p>지역 센터 프로그램과 검정교과서 집필을 통해 교육 콘텐츠를 구조화한 경험</p></article>
+          <article class="capability-card"><span>03 · REMOTE</span><h3>원격 전달체계</h3><p>진로멘토링·화상면접·온라인 프로그램을 기관 단위로 운영한 경험</p></article>
+          <article class="capability-card"><span>04 · PARTNERSHIP</span><h3>기관 협력운영</h3><p>교육청·공공기관·대학·미디어와 공동 및 위탁 방식으로 사업을 수행한 경험</p></article>
+          <article class="capability-card"><span>05 · CREDENTIAL</span><h3>커리어 데이터 증명</h3><p>디지털 ID·배지와 커리어 데이터를 연결해 성장이력의 증명 구조로 확장하는 경험</p></article>
+        </div>
+      </section>
+
+      <section class="module-section" aria-labelledby="project-index-title">
+        <div class="module-heading">
+          <div>
+            <span class="cip-kicker">Project Index</span>
+            <h2 id="project-index-title">주요 수행·협력 기록</h2>
+          </div>
+          <p>공급, 집필, 공동수행, 위탁운영과 기술협력 등 각 사업에서 맡은 역할을 구분해 기록합니다.</p>
+        </div>
+
+        <div class="project-index">
+          <article class="project-row">
+            <div class="project-period">2012.03<br />–2013.12</div>
             <div><h3>진로직업체험지원센터 프로그램 공급</h3><p>지역 청소년을 위한 진로교육 프로그램 공급 및 운영</p></div>
-            <div class="record-side"><span class="agency">성동구 진로직업체험지원센터</span><span class="role">프로그램 공급·운영</span></div>
+            <div class="project-side"><span class="project-client">성동구 진로직업체험지원센터</span><span class="project-role">프로그램 공급·운영</span></div>
           </article>
 
-          <article class="record">
-            <div class="record-year">2013<br />–2014</div>
+          <article class="project-row">
+            <div class="project-period">2013<br />–2014</div>
             <div><h3>고등학교 「진로와 직업」 교과서 집필</h3><p>고등학교 「진로와 직업」 검정교과서 집필 참여</p></div>
-            <div class="record-side"><span class="agency">도서출판 씨마스</span><span class="role">검정교과서 집필</span></div>
+            <div class="project-side"><span class="project-client">도서출판 씨마스</span><span class="project-role">검정교과서 집필</span></div>
           </article>
 
-          <article class="record">
-            <div class="record-year">2015.03<br />–2015.12</div>
+          <article class="project-row">
+            <div class="project-period">2015.03<br />–2015.12</div>
             <div><h3>원격영상 진로멘토링 사업</h3><p>한화 S&amp;C와 함께 교육부 산하 발주사업의 위탁기관으로 참여</p></div>
-            <div class="record-side"><span class="agency">한국직업능력개발원</span><span class="role">공동 위탁 수행</span></div>
+            <div class="project-side"><span class="project-client">한국직업능력개발원</span><span class="project-role">공동 위탁 수행</span></div>
           </article>
 
-          <article class="record">
-            <div class="record-year">2015</div>
-            <div><h3>온라인 화상멘토링 프로그램</h3><p>대학 입학처 주관 온라인 화상멘토링 프로그램 위탁 운영</p></div>
-            <div class="record-side"><span class="agency">한국해양대학교 입학처</span><span class="role">위탁 운영</span></div>
+          <article class="project-row">
+            <div class="project-period">2015</div>
+            <div><h3>온라인 화상멘토링 프로그램</h3><p>한국해양대학교 입학처 주관 온라인 화상멘토링 프로그램 위탁 운영</p></div>
+            <div class="project-side"><span class="project-client">한국해양대학교 입학처</span><span class="project-role">위탁 운영</span></div>
           </article>
 
-          <article class="record">
-            <div class="record-year">2016.03<br />–2018.03</div>
+          <article class="project-row">
+            <div class="project-period">2016.03<br />–2018.03</div>
             <div><h3>EBS커리어 사업</h3><p>EBS미디어 진로적성교육 브랜드 ‘EBS커리어’ 위탁사업 수행</p></div>
-            <div class="record-side"><span class="agency">EBS미디어</span><span class="role">브랜드 위탁사업</span></div>
+            <div class="project-side"><span class="project-client">EBS미디어</span><span class="project-role">브랜드 위탁사업</span></div>
           </article>
 
-          <article class="record">
-            <div class="record-year">2018</div>
+          <article class="project-row">
+            <div class="project-period">2018</div>
             <div><h3>온라인 화상면접 지원 프로그램</h3><p>제주대학교 입학처 온라인 화상면접 프로그램 위탁 운영</p></div>
-            <div class="record-side"><span class="agency">제주대학교</span><span class="role">입시 프로그램 위탁</span></div>
+            <div class="project-side"><span class="project-client">제주대학교</span><span class="project-role">입시 프로그램 위탁</span></div>
           </article>
 
-          <article class="record">
-            <div class="record-year">2026</div>
-            <div><h3>디지털 ID·배지 기반 커리어 데이터 관리 협력</h3><p>블록체인 기반 디지털 ID·배지와 커리어 데이터 연계 협력</p></div>
-            <div class="record-side"><span class="agency">라온시큐어</span><span class="role">디지털 기술 협력</span></div>
+          <article class="project-row">
+            <div class="project-period">2026</div>
+            <div><h3>디지털 ID·디지털 배지 기반 커리어 데이터 관리 협력</h3><p>블록체인 기반 디지털 ID·배지와 커리어 데이터 연계 협력</p></div>
+            <div class="project-side"><span class="project-client">라온시큐어</span><span class="project-role">디지털 기술 협력</span></div>
           </article>
         </div>
       </section>
 
-      <section class="platform-bridge" aria-labelledby="bridge-title">
-        <div>
-          <span class="rs-kicker">Connected Platform</span>
-          <h2 id="bridge-title">수행 경험을 데이터 기반 커리어 인프라로 연결합니다</h2>
-          <p>검사, 교육 콘텐츠, 운영 시스템과 커리어 데이터를 하나의 성장 경험으로 연결하는 Career Intelligence Platform을 확인하세요.</p>
+      <section class="module-section" aria-labelledby="experience-flow-title">
+        <div class="module-heading">
+          <div>
+            <span class="cip-kicker">Experience to Platform</span>
+            <h2 id="experience-flow-title">수행경험이 CIP로 연결되는 방식</h2>
+          </div>
+          <p>사업실적은 과거 이력을 보여주기 위한 장식이 아니라 플랫폼이 어떤 근거로 설계됐는지를 설명하는 증거입니다.</p>
         </div>
-        <a class="bridge-button" href="./platform.html">Platform으로 돌아가기 →</a>
+
+        <div class="experience-flow">
+          <article class="flow-card" data-step="01"><span>FIELD</span><h3>현장 경험 축적</h3><p>학교와 기관에서 검사·교육·멘토링 프로그램을 실제 운영하며 사용자 장면과 운영조건을 축적합니다.</p></article>
+          <article class="flow-card" data-step="02"><span>STRUCTURE</span><h3>데이터와 콘텐츠 구조화</h3><p>검사결과, 프로그램, 학습자료와 커리어 이력을 하나의 데이터 흐름으로 재구성합니다.</p></article>
+          <article class="flow-card" data-step="03"><span>PLATFORM</span><h3>성장경로로 연결</h3><p>진단에서 끝나지 않고 교육, 코칭, 기록과 디지털 증명으로 이어지는 Career Intelligence Platform을 만듭니다.</p></article>
+        </div>
       </section>
 
-      <footer class="page-footer">RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · PROJECT EXPERIENCE</footer>
+      <footer class="experience-footer">
+        <span>RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · PROJECT EXPERIENCE</span>
+        <a href="./platform.html">Platform으로 돌아가기 →</a>
+      </footer>
     </main>
   </div>
 </body>
