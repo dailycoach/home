@@ -1,0 +1,113 @@
+name: Finalize DISC menu static deployment
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: finalize-disc-menu-static
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Restore source and patch menus
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          source = Path('index-source-disc.html')
+          target = Path('index.html')
+          if source.exists():
+              text = source.read_text(encoding='utf-8')
+          else:
+              text = target.read_text(encoding='utf-8')
+
+          anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>'
+          adult = '<a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>'
+          youth = '<a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>'
+
+          if 'href="/tests/disc16/" data-route="disc16"' not in text:
+              count = text.count(anchor)
+              if count < 2:
+                  raise SystemExit(f'KGM210 menu anchor count too low: {count}')
+              text = text.replace(anchor, f'{anchor}\n            {adult}\n            {youth}')
+
+          route_anchor = "      kgm210: '/tests/kgm210/',"
+          if "disc16: '/tests/disc16/'" not in text:
+              if route_anchor not in text:
+                  raise SystemExit('route anchor not found')
+              text = text.replace(
+                  route_anchor,
+                  route_anchor + "\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',",
+                  1,
+              )
+
+          required = {
+              'adult menu': text.count('href="/tests/disc16/" data-route="disc16"') >= 2,
+              'youth menu': text.count('href="/tests/disc16-youth/" data-route="disc16Youth"') >= 2,
+              'adult route': "disc16: '/tests/disc16/'" in text,
+              'youth route': "disc16Youth: '/tests/disc16-youth/'" in text,
+          }
+          missing = [name for name, ok in required.items() if not ok]
+          if missing:
+              raise SystemExit('validation failed: ' + ', '.join(missing))
+
+          target.write_text(text, encoding='utf-8')
+          if source.exists():
+              source.unlink()
+          PY
+
+      - name: Remove one-time workflow
+        run: rm -f .github/workflows/finalize-disc-menu-scheduled.yml
+
+      - name: Commit static page
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html index-source-disc.html .github/workflows/finalize-disc-menu-scheduled.yml || true
+          git commit -m "fix: statically expose DISC adult and youth menus [skip ci]"
+          git push origin main
+
+      - name: Request GitHub Pages build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          code=$(curl -sS -L -o /tmp/pages-request.json -w "%{http_code}" -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPOSITORY}/pages/builds")
+          cat /tmp/pages-request.json || true
+          test "$code" = "201"
+
+      - name: Verify live menu
+        env:
+          LIVE_URL: https://daily-coach-ing.com/
+        run: |
+          status=0
+          for attempt in $(seq 1 48); do
+            sleep 5
+            curl -fsSL -H 'Cache-Control: no-cache' "${LIVE_URL}?disc-static=${GITHUB_SHA}-${attempt}" -o /tmp/live.html || continue
+            adult=$(grep -c '/tests/disc16/' /tmp/live.html || true)
+            youth=$(grep -c '/tests/disc16-youth/' /tmp/live.html || true)
+            if [ "$adult" -ge 2 ] && [ "$youth" -ge 2 ]; then
+              status=1
+              break
+            fi
+          done
+          test "$status" = "1"
