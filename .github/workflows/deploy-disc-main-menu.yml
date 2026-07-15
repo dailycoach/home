@@ -1,6 +1,10 @@
 name: Deploy DISC main menu entries
 
 on:
+  pull_request:
+    paths:
+      - "ops/disc-main-menu-pr-trigger.txt"
+      - ".github/workflows/deploy-disc-main-menu.yml"
   push:
     branches: ["main"]
     paths:
@@ -24,7 +28,9 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.actor != 'github-actions[bot]' && (github.event_name != 'issues' || contains(github.event.issue.title, '[deploy-disc-menu]'))
+    if: >-
+      github.actor != 'github-actions[bot]' &&
+      (github.event_name != 'issues' || startsWith(github.event.issue.title, '[deploy-disc-menu]'))
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
