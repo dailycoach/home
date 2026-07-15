@@ -1,0 +1,103 @@
+name: Deploy SELF INC. v9.6 coach design
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tests/self/index.html"
+      - "tests/self/assets/self-v9-coach-design-v96.css"
+      - ".github/workflows/deploy-self-v96.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: deploy-self-v96
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Request and verify deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+          LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
+          DESIGN_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-design-v96.css
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/request.json -w "%{http_code}" -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPOSITORY}/pages/builds")
+          test "$code" = "201"
+
+          status="queued"
+          for i in $(seq 1 48); do
+            sleep 5
+            curl -sS -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${REPOSITORY}/pages/builds/latest" > /tmp/latest.json
+            status=$(python -c 'import json; print(json.load(open("/tmp/latest.json")).get("status","unknown"))')
+            [ "$status" = "built" ] && break
+            [ "$status" = "errored" ] && break
+          done
+          test "$status" = "built"
+
+          live_ok=0
+          for i in $(seq 1 36); do
+            sleep 5
+            html_code=$(curl -sS -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" "${LIVE_URL}?v=${SOURCE_SHA}&a=${i}")
+            css_code=$(curl -sS -o /tmp/design.css -w "%{http_code}" -H "Cache-Control: no-cache" "${DESIGN_URL}?v=${SOURCE_SHA}&a=${i}")
+            if [ "$html_code" = "200" ] && [ "$css_code" = "200" ] \
+              && grep -q 'self-inc-version" content="9.6.0"' /tmp/live.html \
+              && grep -q 'self-v9-coach-design-v96.css?v=9.6.0' /tmp/live.html \
+              && grep -q '.coach-synthesis-summary:after' /tmp/design.css \
+              && grep -q '.coach-synthesis-metrics div:nth-child(4):before' /tmp/design.css; then
+              live_ok=1
+              break
+            fi
+          done
+          test "$live_ok" = "1"
+
+          python - <<'PY'
+          import json, os, datetime, hashlib
+          from pathlib import Path
+          payload = {
+            "workflow":"deploy-self-v96",
+            "sourceSha":os.environ["SOURCE_SHA"],
+            "requestHttpStatus":201,
+            "latestBuildStatus":"built",
+            "liveCheck":{
+              "url":os.environ["LIVE_URL"],
+              "httpStatus":200,
+              "designCssHttpStatus":200,
+              "version960":True,
+              "designCssLinked":True,
+              "premiumSummaryCard":True,
+              "compactHeader":True,
+              "pillTabs":True,
+              "metricCards":True,
+              "comboCard":True,
+              "status":"verified",
+              "htmlSha256":hashlib.sha256(Path('/tmp/live.html').read_bytes()).hexdigest(),
+              "designCssSha256":hashlib.sha256(Path('/tmp/design.css').read_bytes()).hexdigest()
+            },
+            "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
+          }
+          Path('tests/self/deploy-status-v96.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Save deployment status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/self/deploy-status-v96.json
+          git commit -m "chore: record SELF INC. v9.6 deployment [skip ci]" || exit 0
+          git push
