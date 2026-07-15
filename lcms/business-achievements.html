@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="RS에듀컨설팅 주요 사업실적 — 교육청, 공공기관, 대학, 미디어, 출판, 기술기업과 함께 구축해 온 진로교육 프로젝트" />
+  <title>주요 사업실적 | RS에듀컨설팅</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070d;
+      --bg-soft: #0a0f1b;
+      --panel: rgba(14, 20, 35, 0.78);
+      --panel-strong: rgba(18, 27, 48, 0.94);
+      --line: rgba(152, 177, 255, 0.17);
+      --line-strong: rgba(152, 177, 255, 0.34);
+      --text: #f7f8fc;
+      --muted: rgba(230, 235, 249, 0.66);
+      --subtle: rgba(230, 235, 249, 0.43);
+      --blue: #6f95ff;
+      --blue-strong: #3d6fff;
+      --gold: #d7b974;
+      --max: 1180px;
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(62, 105, 255, 0.15), transparent 27%),
+        radial-gradient(circle at 86% 18%, rgba(215, 185, 116, 0.08), transparent 22%),
+        linear-gradient(180deg, #060912 0%, var(--bg) 48%, #06080e 100%);
+      color: var(--text);
+      font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      letter-spacing: -0.018em;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, summary { font: inherit; }
+
+    .page-shell {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .page-shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 84%);
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 7px rgba(111,149,255,.10), 0 0 28px rgba(111,149,255,.6);
+    }
+
+    .top-link {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      transition: color .2s ease;
+    }
+
+    .top-link:hover,
+    .top-link:focus-visible { color: #fff; }
+
+    .hero {
+      padding: clamp(80px, 12vw, 156px) 0 clamp(68px, 9vw, 112px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    .hero h1 {
+      max-width: 920px;
+      margin-bottom: 30px;
+      font-size: clamp(43px, 7.2vw, 88px);
+      line-height: 1.05;
+      letter-spacing: -.067em;
+      font-weight: 840;
+      text-wrap: balance;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-bottom: 52px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.82;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 760px;
+    }
+
+    .stat {
+      min-height: 126px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.025);
+      backdrop-filter: blur(18px);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -.055em;
+    }
+
+    .stat span {
+      color: var(--subtle);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section {
+      padding: clamp(68px, 9vw, 116px) 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(300px, 1.15fr);
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 46px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -.055em;
+    }
+
+    .section-heading p {
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .feature-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr);
+      gap: 46px;
+      overflow: hidden;
+      padding: clamp(30px, 5vw, 62px);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 87% 15%, rgba(111,149,255,.18), transparent 33%),
+        linear-gradient(145deg, rgba(22,31,53,.98), rgba(9,13,24,.94));
+      box-shadow: var(--shadow);
+    }
+
+    .feature-card::after {
+      content: "2010";
+      position: absolute;
+      right: -16px;
+      bottom: -44px;
+      color: rgba(255,255,255,.035);
+      font-size: clamp(150px, 25vw, 330px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.09em;
+      pointer-events: none;
+    }
+
+    .feature-content,
+    .feature-meta { position: relative; z-index: 1; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid rgba(215,185,116,.34);
+      border-radius: 999px;
+      color: var(--gold);
+      background: rgba(215,185,116,.06);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .feature-card h3 {
+      max-width: 720px;
+      margin: 24px 0 22px;
+      font-size: clamp(31px, 4.8vw, 60px);
+      line-height: 1.16;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+
+    .feature-card h3 strong { color: var(--gold); }
+
+    .feature-description {
+      max-width: 720px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .feature-meta {
+      display: grid;
+      align-content: end;
+      gap: 18px;
+      padding-left: 38px;
+      border-left: 1px solid rgba(255,255,255,.09);
+    }
+
+    .meta-block span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--subtle);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .meta-block strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .timeline-shell {
+      position: relative;
+      margin-top: 50px;
+    }
+
+    .timeline-shell::before {
+      content: "";
+      position: absolute;
+      left: 109px;
+      top: 22px;
+      bottom: 22px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--line-strong) 7%, var(--line-strong) 93%, transparent);
+    }
+
+    .record {
+      position: relative;
+      display: grid;
+      grid-template-columns: 84px 24px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      padding: 16px 0;
+    }
+
+    .record-year {
+      padding-top: 26px;
+      color: var(--blue);
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: -.02em;
+      text-align: right;
+    }
+
+    .record-dot {
+      position: relative;
+      z-index: 1;
+      width: 11px;
+      height: 11px;
+      margin: 33px auto 0;
+      border: 2px solid #08101f;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(111,149,255,.13);
+    }
+
+    .record-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(180px, .33fr);
+      gap: 34px;
+      padding: 27px 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, rgba(17,24,41,.78), rgba(8,12,21,.78));
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+
+    .record-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      background: linear-gradient(145deg, rgba(20,29,49,.9), rgba(9,14,25,.86));
+    }
+
+    .record-card h3 {
+      margin-bottom: 10px;
+      font-size: clamp(20px, 2.3vw, 27px);
+      line-height: 1.38;
+      letter-spacing: -.038em;
+    }
+
+    .record-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .record-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      text-align: right;
+    }
+
+    .agency {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 780;
+    }
+
+    .role {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border: 1px solid rgba(111,149,255,.24);
+      border-radius: 999px;
+      color: #b9caff;
+      background: rgba(111,149,255,.055);
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .cta {
+      padding: clamp(62px, 9vw, 110px) 0 clamp(92px, 12vw, 150px);
+    }
+
+    .cta-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(34px, 6vw, 72px);
+      border: 1px solid rgba(215,185,116,.22);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 85% 20%, rgba(215,185,116,.11), transparent 30%),
+        rgba(255,255,255,.024);
+      text-align: center;
+    }
+
+    .cta-card h2 {
+      max-width: 760px;
+      margin: 0 auto 18px;
+      font-size: clamp(31px, 4.7vw, 56px);
+      line-height: 1.2;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+
+    .cta-card p {
+      max-width: 680px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 23px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7298ff, #3b6dff);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 850;
+      box-shadow: 0 14px 38px rgba(55,102,255,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 48px rgba(55,102,255,.34);
+    }
+
+    .footer {
+      padding: 25px 0 40px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      color: var(--subtle);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .section-heading,
+      .feature-card { grid-template-columns: 1fr; }
+      .section-heading { gap: 24px; }
+      .feature-meta {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 26px 0 0;
+        border-top: 1px solid rgba(255,255,255,.09);
+        border-left: 0;
+      }
+      .record-card { grid-template-columns: 1fr; gap: 20px; }
+      .record-side {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .topbar { padding: 18px 0; }
+      .top-link { display: none; }
+      .hero { padding-top: 76px; }
+      .hero h1 { font-size: clamp(40px, 13vw, 62px); }
+      .stats { grid-template-columns: 1fr; }
+      .stat { min-height: auto; padding: 20px 22px; }
+      .section { padding-block: 66px; }
+      .feature-card { padding: 29px 23px 30px; border-radius: 23px; }
+      .feature-meta { grid-template-columns: 1fr; gap: 14px; }
+      .timeline-shell::before { left: 8px; }
+      .record {
+        grid-template-columns: 18px minmax(0, 1fr);
+        gap: 12px;
+        padding-block: 12px;
+      }
+      .record-year {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 0 0 2px;
+        text-align: left;
+      }
+      .record-dot {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        margin-top: 7px;
+      }
+      .record-card {
+        grid-column: 2;
+        grid-row: 2;
+        padding: 22px 20px;
+        border-radius: 17px;
+      }
+      .record-side {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .cta-card { padding-inline: 23px; border-radius: 23px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="wrap topbar">
+      <a class="brand" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/" aria-label="RS에듀컨설팅 Career Intelligence Platform으로 이동">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>RS EDU · Career Intelligence</span>
+      </a>
+      <a class="top-link" href="#project-records">주요 사업실적 ↓</a>
+    </header>
+
+    <main>
+      <section class="hero wrap" aria-labelledby="page-title">
+        <span class="eyebrow">Project Experience</span>
+        <h1 id="page-title">진로교육의 현장과 시스템을<br /><em>함께 만들어 온 기록</em></h1>
+        <p class="hero-copy">
+          RS에듀컨설팅은 교육청, 공공기관, 대학, 미디어, 출판사, 기술기업과 함께
+          심리검사 시스템, 진로교육 프로그램, 원격 멘토링, 교과서, 디지털 커리어 데이터 사업을 수행해 왔습니다.
+        </p>
+        <div class="stats" aria-label="사업실적 요약">
+          <div class="stat"><strong>2010</strong><span>진로교육 인프라 사업 시작</span></div>
+          <div class="stat"><strong>8</strong><span>대표 수행·협력 실적</span></div>
+          <div class="stat"><strong>5</strong><span>교육·공공·대학·미디어·기술 영역</span></div>
+        </div>
+      </section>
+
+      <section class="section wrap" aria-labelledby="flagship-title">
+        <div class="section-heading">
+          <h2 id="flagship-title">대표 장기 수행 사업</h2>
+          <p>
+            일회성 프로그램 공급을 넘어, 검사 시스템의 구축부터 현장 운영까지 이어 온 경험입니다.
+          </p>
+        </div>
+
+        <article class="feature-card">
+          <div class="feature-content">
+            <span class="pill">SYSTEM BUILD &amp; OPERATION</span>
+            <h3>서울시 관내 <strong>모든 초·중·고 학생</strong>을 위한 심리검사 시스템</h3>
+            <p class="feature-description">
+              서울시 관내 모든 초·중·고 학생을 대상으로 진로적성, 학습유형, 스트레스 검사 시스템을 구축하고 운영해 온
+              RS에듀컨설팅의 대표 장기 수행 사업입니다.
+            </p>
+          </div>
+          <div class="feature-meta" aria-label="대표 사업 정보">
+            <div class="meta-block"><span>사업명</span><strong>서울진로진학정보센터<br />심리검사 사업</strong></div>
+            <div class="meta-block"><span>발주기관</span><strong>서울특별시교육청</strong></div>
+            <div class="meta-block"><span>수행기간</span><strong>2010.03–현재</strong></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section wrap" id="project-records" aria-labelledby="records-title">
+        <div class="section-heading">
+          <h2 id="records-title">주요 수행·협력 기록</h2>
+          <p>
+            심리검사에서 진로교육 콘텐츠, 원격 프로그램, 대학 입시 지원, 디지털 커리어 데이터까지 사업영역을 확장해 왔습니다.
+          </p>
+        </div>
+
+        <div class="timeline-shell">
+          <article class="record">
+            <div class="record-year">2012–2013</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>진로직업체험지원센터 프로그램 공급</h3>
+                <p>성동구 진로직업체험지원센터 진로교육 프로그램 운영</p>
+              </div>
+              <div class="record-side"><span class="agency">성동구 진로직업체험지원센터</span><span class="role">프로그램 공급·운영</span></div>
+            </div>
+          </article>
+
+          <article class="record">
+            <div class="record-year">2013–2014</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>고등학교 「진로와 직업」 교과서 집필</h3>
+                <p>고등학교 「진로와 직업」 검정교과서 집필 참여</p>
+              </div>
+              <div class="record-side"><span class="agency">도서출판 씨마스</span><span class="role">검정교과서 집필</span></div>
+            </div>
+          </article>
+
+          <article class="record">
+            <div class="record-year">2015</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>원격영상 진로멘토링 사업</h3>
+                <p>교육부 산하 한국직업능력개발원 발주 사업에 한화 S&amp;C와 함께 위탁기관으로 참여</p>
+              </div>
+              <div class="record-side"><span class="agency">한국직업능력개발원</span><span class="role">공동 위탁 수행</span></div>
+            </div>
+          </article>
+
+          <article class="record">
+            <div class="record-year">2015</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>온라인 화상멘토링 프로그램</h3>
+                <p>한국해양대학교 입학처 주관 온라인 화상멘토링 프로그램 위탁사업자로 선정</p>
+              </div>
+              <div class="record-side"><span class="agency">한국해양대학교 입학처</span><span class="role">위탁 운영</span></div>
+            </div>
+          </article>
+
+          <article class="record">
+            <div class="record-year">2016–2018</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>EBS커리어 사업</h3>
+                <p>EBS미디어가 출범한 진로적성교육 브랜드 ‘EBS커리어’의 위탁사업자로 선정되어 사업 수행</p>
+              </div>
+              <div class="record-side"><span class="agency">EBS미디어</span><span class="role">브랜드 위탁사업</span></div>
+            </div>
+          </article>
+
+          <article class="record">
+            <div class="record-year">2018</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>온라인 화상면접 지원 프로그램</h3>
+                <p>제주대학교 입학처 온라인 면접 프로그램 위탁사업자로 선정</p>
+              </div>
+              <div class="record-side"><span class="agency">제주대학교</span><span class="role">입시 프로그램 위탁</span></div>
+            </div>
+          </article>
+
+          <article class="record">
+            <div class="record-year">2026</div>
+            <span class="record-dot" aria-hidden="true"></span>
+            <div class="record-card">
+              <div>
+                <h3>디지털 ID·디지털 배지 기반 커리어 데이터 관리 협력</h3>
+                <p>라온시큐어의 블록체인 기반 디지털 배지 서비스 사업 협력업체로 선정</p>
+              </div>
+              <div class="record-side"><span class="agency">라온시큐어</span><span class="role">디지털 기술 협력</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta wrap" aria-labelledby="cta-title">
+        <div class="cta-card">
+          <h2 id="cta-title">수행 경험을 다음 세대의 커리어 인프라로 연결합니다</h2>
+          <p>검사, 교육 콘텐츠, 운영 시스템과 커리어 데이터를 하나의 성장 경험으로 연결하는 RS에듀컨설팅의 플랫폼을 확인해 보세요.</p>
+          <a class="cta-button" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/">Career Intelligence Platform 보기 →</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer wrap">RS EDU CONSULTING · PROJECT EXPERIENCE</footer>
+  </div>
+</body>
+</html>
