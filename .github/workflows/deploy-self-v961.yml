@@ -1,0 +1,109 @@
+name: Deploy SELF INC. v9.6.1 detail design
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tests/self/index.html"
+      - "tests/self/assets/self-v9-coach-design-v961.css"
+      - ".github/workflows/deploy-self-v961.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: "deploy-self-v961"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Request Pages build and verify v9.6.1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -e
+          request_code=$(curl -sS -L -o /tmp/request.json -w "%{http_code}" -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPOSITORY}/pages/builds")
+
+          build_status="queued"
+          for attempt in $(seq 1 48); do
+            sleep 5
+            curl -sS -L \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${REPOSITORY}/pages/builds/latest" > /tmp/build.json
+            build_status=$(python -c 'import json; print(json.load(open("/tmp/build.json")).get("status","unknown"))')
+            [ "$build_status" = "built" ] && break
+            [ "$build_status" = "errored" ] && exit 1
+          done
+
+          live_status="not_verified"
+          for attempt in $(seq 1 36); do
+            sleep 5
+            html_code=$(curl -sS -L -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" \
+              "https://daily-coach-ing.com/tests/self/index.html?deploy=${SOURCE_SHA}&attempt=${attempt}")
+            css_code=$(curl -sS -L -o /tmp/v961.css -w "%{http_code}" -H "Cache-Control: no-cache" \
+              "https://daily-coach-ing.com/tests/self/assets/self-v9-coach-design-v961.css?deploy=${SOURCE_SHA}&attempt=${attempt}")
+            if [ "$html_code" = "200" ] \
+              && [ "$css_code" = "200" ] \
+              && grep -q 'content="9.6.1"' /tmp/live.html \
+              && grep -q 'self-v9-coach-design-v961.css?v=9.6.1' /tmp/live.html \
+              && grep -q '.coach-state-analysis' /tmp/v961.css \
+              && grep -q '.coach-state-toggle' /tmp/v961.css \
+              && grep -q '.coach-current-kingdom' /tmp/v961.css \
+              && grep -q '.kingdom-item' /tmp/v961.css; then
+              live_status="verified"
+              break
+            fi
+          done
+
+          export REQUEST_CODE="$request_code" BUILD_STATUS="$build_status" LIVE_STATUS="$live_status" SOURCE_SHA
+          python - <<'PY'
+          import datetime, hashlib, json, os
+          from pathlib import Path
+          html = Path('/tmp/live.html')
+          css = Path('/tmp/v961.css')
+          payload = {
+            'workflow': 'deploy-self-v961',
+            'sourceSha': os.environ['SOURCE_SHA'],
+            'requestHttpStatus': int(os.environ['REQUEST_CODE']),
+            'latestBuildStatus': os.environ['BUILD_STATUS'],
+            'liveCheck': {
+              'url': 'https://daily-coach-ing.com/tests/self/index.html',
+              'version961': 'content="9.6.1"' in html.read_text(encoding='utf-8', errors='ignore'),
+              'detailDesignCssLinked': 'self-v9-coach-design-v961.css?v=9.6.1' in html.read_text(encoding='utf-8', errors='ignore'),
+              'threePerspectiveCards': '.coach-state-analysis' in css.read_text(encoding='utf-8', errors='ignore'),
+              'stateToggle': '.coach-state-toggle' in css.read_text(encoding='utf-8', errors='ignore'),
+              'kingdomTimeline': '.coach-current-kingdom' in css.read_text(encoding='utf-8', errors='ignore'),
+              'status': os.environ['LIVE_STATUS'],
+              'htmlSha256': hashlib.sha256(html.read_bytes()).hexdigest(),
+              'cssSha256': hashlib.sha256(css.read_bytes()).hexdigest(),
+            },
+            'checkedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          }
+          Path('tests/self/deploy-status-v961.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          PY
+
+          test "$request_code" = "201"
+          test "$build_status" = "built"
+          test "$live_status" = "verified"
+
+      - name: Save status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/self/deploy-status-v961.json
+          git commit -m "chore: record SELF INC. v9.6.1 deployment [skip ci]" || exit 0
+          git push
