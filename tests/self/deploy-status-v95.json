@@ -1,0 +1,21 @@
+{
+  "workflow": "deploy-self-v95",
+  "sourceSha": "c08c7e28f5c1bd19849e82f4bb74da10cf7438ef",
+  "requestHttpStatus": 201,
+  "latestBuildStatus": "built",
+  "liveCheck": {
+    "url": "https://daily-coach-ing.com/tests/self/index.html",
+    "httpStatus": 200,
+    "synthesisScriptHttpStatus": 200,
+    "version950": true,
+    "synthesisScriptLinked": true,
+    "fiveDomainSynthesis": true,
+    "lowestPairAnalysis": true,
+    "onePageCoachBrief": true,
+    "kingdomFiveQuestions": true,
+    "status": "verified",
+    "htmlSha256": "72c055d38bb5b76a9af90679b880ffdd72071ab4f9402cc478f6090459e5fc75",
+    "synthesisScriptSha256": "54efd868ee71b3588bea2fde510c607baa9fbc4091c3b03cf6578f25a5067d49"
+  },
+  "checkedAt": "2026-07-15T03:05:26.323260+00:00"
+}
