@@ -1,0 +1,147 @@
+name: Deploy SELF INC. v9.4 three-perspective analysis
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/deploy-self-v94.yml"
+      - "tests/self/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: "deploy-self-v94"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate scripts
+        run: |
+          node --check tests/self/assets/self-v9-data.js
+          node --check tests/self/assets/self-v9.js
+          node --check tests/self/assets/self-v9-hotfix.js
+          node --check tests/self/assets/self-v9-coach.js
+          node --check tests/self/assets/self-v9-coach-score.js
+
+      - name: Build and verify v9.4
+        id: verify
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+          LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
+          SCORE_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-score.js
+        run: |
+          set +e
+          request_code=$(curl -sS -L -o /tmp/request.json -w "%{http_code}" -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPOSITORY}/pages/builds")
+
+          build_status="not_checked"
+          build_body=""
+          for attempt in $(seq 1 48); do
+            sleep 5
+            build_code=$(curl -sS -L -o /tmp/build.json -w "%{http_code}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${REPOSITORY}/pages/builds/latest")
+            build_body=$(cat /tmp/build.json 2>/dev/null || true)
+            if [ "${build_code}" = "200" ]; then
+              build_status=$(python -c 'import json; print(json.load(open("/tmp/build.json", encoding="utf-8")).get("status", "unknown"))' 2>/dev/null || echo unknown)
+              [ "${build_status}" = "built" ] && break
+              [ "${build_status}" = "errored" ] && break
+            fi
+          done
+
+          live_status="not_verified"
+          live_code=0
+          score_code=0
+          version_marker=0
+          analysis_linked=0
+          analysis_marker=0
+          coaching_marker=0
+          psychology_marker=0
+          development_marker=0
+          for attempt in $(seq 1 36); do
+            sleep 5
+            live_code=$(curl -sS -L -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" "${LIVE_URL}?v=${SOURCE_SHA}&a=${attempt}")
+            score_code=$(curl -sS -L -o /tmp/score.js -w "%{http_code}" -H "Cache-Control: no-cache" "${SCORE_URL}?v=${SOURCE_SHA}&a=${attempt}")
+            version_marker=$(grep -c 'self-inc-version" content="9.4.0' /tmp/live.html 2>/dev/null || true)
+            analysis_linked=$(grep -c 'self-v9-coach-score.js?v=9.4.0' /tmp/live.html 2>/dev/null || true)
+            analysis_marker=$(grep -c '3가지 관점의 피검사자 상태분석' /tmp/score.js 2>/dev/null || true)
+            coaching_marker=$(grep -c '코칭학 관점' /tmp/score.js 2>/dev/null || true)
+            psychology_marker=$(grep -c '심리학 관점' /tmp/score.js 2>/dev/null || true)
+            development_marker=$(grep -c '교육발달학 관점' /tmp/score.js 2>/dev/null || true)
+            if [ "${live_code}" = "200" ] && [ "${score_code}" = "200" ] \
+              && [ "${version_marker}" -gt 0 ] && [ "${analysis_linked}" -gt 0 ] \
+              && [ "${analysis_marker}" -gt 0 ] && [ "${coaching_marker}" -gt 0 ] \
+              && [ "${psychology_marker}" -gt 0 ] && [ "${development_marker}" -gt 0 ]; then
+              live_status="verified"
+              break
+            fi
+          done
+
+          export REQUEST_CODE="${request_code}" BUILD_STATUS="${build_status}" BUILD_BODY="${build_body}"
+          export LIVE_CODE="${live_code}" SCORE_CODE="${score_code}" LIVE_STATUS="${live_status}"
+          export VERSION_MARKER="${version_marker}" ANALYSIS_LINKED="${analysis_linked}" ANALYSIS_MARKER="${analysis_marker}"
+          export COACHING_MARKER="${coaching_marker}" PSYCHOLOGY_MARKER="${psychology_marker}" DEVELOPMENT_MARKER="${development_marker}"
+          python - <<'PY'
+          import datetime, hashlib, json, os
+          from pathlib import Path
+          def decode(value):
+              try: return json.loads(value)
+              except Exception: return value
+          html = Path('/tmp/live.html')
+          score = Path('/tmp/score.js')
+          payload = {
+              'workflow': 'deploy-self-v94',
+              'sourceSha': os.environ['SOURCE_SHA'],
+              'requestHttpStatus': int(os.environ.get('REQUEST_CODE', '0')),
+              'latestBuildStatus': os.environ.get('BUILD_STATUS', 'unknown'),
+              'latestBuild': decode(os.environ.get('BUILD_BODY', '')),
+              'liveCheck': {
+                  'url': os.environ['LIVE_URL'],
+                  'httpStatus': int(os.environ.get('LIVE_CODE', '0')),
+                  'scoreScriptHttpStatus': int(os.environ.get('SCORE_CODE', '0')),
+                  'version940': int(os.environ.get('VERSION_MARKER', '0')) > 0,
+                  'scoreScriptLinked': int(os.environ.get('ANALYSIS_LINKED', '0')) > 0,
+                  'threePerspectiveAnalysis': int(os.environ.get('ANALYSIS_MARKER', '0')) > 0,
+                  'coachingAnalysis': int(os.environ.get('COACHING_MARKER', '0')) > 0,
+                  'psychologyAnalysis': int(os.environ.get('PSYCHOLOGY_MARKER', '0')) > 0,
+                  'developmentAnalysis': int(os.environ.get('DEVELOPMENT_MARKER', '0')) > 0,
+                  'status': os.environ.get('LIVE_STATUS', 'not_verified'),
+                  'htmlSha256': hashlib.sha256(html.read_bytes()).hexdigest() if html.exists() else None,
+                  'scoreScriptSha256': hashlib.sha256(score.read_bytes()).hexdigest() if score.exists() else None,
+              },
+              'checkedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          }
+          Path('tests/self/deploy-status-v94.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+          PY
+          echo "request_code=${request_code}" >> "$GITHUB_OUTPUT"
+          echo "build_status=${build_status}" >> "$GITHUB_OUTPUT"
+          echo "live_status=${live_status}" >> "$GITHUB_OUTPUT"
+
+      - name: Record status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/self/deploy-status-v94.json
+          git commit -m "chore: record SELF INC. v9.4 deployment [skip ci]" || exit 0
+          git push
+
+      - name: Verify
+        run: |
+          test "${{ steps.verify.outputs.request_code }}" = "201"
+          test "${{ steps.verify.outputs.build_status }}" = "built"
+          test "${{ steps.verify.outputs.live_status }}" = "verified"
