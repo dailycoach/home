@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="../shared-platform-shell.css" />
   <link rel="stylesheet" href="./academy.css" />
   <link rel="stylesheet" href="./lmc.css" />
+  <link rel="stylesheet" href="./ux-core.css" />
+  <link rel="stylesheet" href="./ux-course.css" />
+  <link rel="stylesheet" href="./ux-lesson.css" />
   <script src="./academy.js" defer></script>
 </head>
 <body class="academy-page" data-academy-page="index">
@@ -18,13 +21,11 @@
           <span class="cip-brand-mark" aria-hidden="true"></span>
           <span class="cip-brand-copy">CAREER INTELLIGENCE PLATFORM<small>RS EDU CONSULTING · 데이터 기반 평생 커리어 인프라</small></span>
         </a>
-
         <nav class="cip-nav" aria-label="Career Intelligence Platform 주 메뉴">
           <a href="../platform.html">Platform</a>
           <a href="../business-achievements.html">사업실적</a>
           <a href="./index.html" aria-current="page">Academy</a>
         </nav>
-
         <a class="cip-utility" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/" target="_blank" rel="noopener noreferrer" aria-label="Career Intelligence Platform 원본을 새 창에서 열기">원본 열기 ↗</a>
       </div>
     </header>
@@ -35,42 +36,32 @@
           <div class="academy-hero-copy">
             <span class="academy-eyebrow">LMC Professional Academy</span>
             <h1 id="academy-title">인간의 다양성을 이해하고<br /><span>평생의 진로를 돕습니다</span></h1>
-            <p>RS에듀컨설팅 LMC 과정은 상담코칭에 필요한 심리학 이론과 심리측정 실습을 12주 동안 연결하여, 사람의 성격·적성·관계·정서·발달을 통합적으로 이해하도록 돕는 전문과정입니다.</p>
+            <p>심리학 이론과 심리측정 실습을 12주 동안 연결하여, 사람의 성격·적성·관계·정서·발달을 통합적으로 이해하고 상담코칭 장면에 적용하는 RS에듀컨설팅 전문과정입니다.</p>
             <div class="academy-hero-note lmc-hero-note">심리학 이론 → 심리측정 실습 → 상담코칭 적용 → 수료시험</div>
+            <div class="academy-hero-actions">
+              <a class="hero-primary" id="academyPrimaryCta" href="./course.html?course=lmc-lifetime-management-counselor">LMC 과정 살펴보기 →</a>
+              <a class="hero-secondary" id="academyResumeCta" href="./lesson.html?course=lmc-lifetime-management-counselor&module=0" hidden>학습 이어가기</a>
+              <div class="hero-progress-copy" id="academyHeroProgress" aria-live="polite"></div>
+            </div>
           </div>
 
           <div class="academy-hero-visual lmc-credential-visual" aria-hidden="true">
-            <div class="lmc-seal">
-              <div>
-                <strong>LMC</strong>
-                <span>LIFETIME MANAGEMENT COUNSELOR</span>
-                <small>민간자격 제2013-1058호<br />평생진로상담사 전문과정</small>
-              </div>
-            </div>
-            <div class="lmc-orbit">
-              <span>성격<br />적성</span>
-              <span>정서<br />건강</span>
-              <span>관계<br />소통</span>
-              <span>발달<br />진로</span>
-            </div>
+            <div class="lmc-seal"><div><strong>LMC</strong><span>LIFETIME MANAGEMENT COUNSELOR</span><small>민간자격 제2013-1058호<br />평생진로상담사 전문과정</small></div></div>
+            <div class="lmc-orbit"><span>성격<br />적성</span><span>정서<br />건강</span><span>관계<br />소통</span><span>발달<br />진로</span></div>
           </div>
         </section>
 
         <div class="academy-body">
-          <div class="cip-breadcrumb academy-breadcrumb" aria-label="현재 위치">
-            <a href="../platform.html">Career Intelligence Platform</a>
-            <span>/</span>
-            <strong>LMC Academy</strong>
-          </div>
+          <div class="cip-breadcrumb academy-breadcrumb" aria-label="현재 위치"><a href="../platform.html">Career Intelligence Platform</a><span>/</span><strong>LMC Academy</strong></div>
 
-          <section class="academy-section" aria-labelledby="overview-title">
-            <div class="academy-section-head">
-              <div>
-                <span class="cip-kicker">Course Overview</span>
-                <h2 id="overview-title">LMC 과정 한눈에 보기</h2>
-              </div>
-              <p>2025 과정안내 자료의 핵심 구조를 현재 Academy 운영 방식에 맞게 재정리했습니다. 특정 개강일과 교육비는 기수별 모집 공지에서 별도로 안내합니다.</p>
-            </div>
+          <nav class="academy-jump-nav" aria-label="LMC Academy 빠른 이동">
+            <a href="#overview">과정 개요</a>
+            <a href="#course">LMC 전문과정</a>
+            <a href="#status">내 학습현황</a>
+          </nav>
+
+          <section class="academy-section" id="overview" aria-labelledby="overview-title">
+            <div class="academy-section-head"><div><span class="cip-kicker">Course Overview</span><h2 id="overview-title">LMC 과정 한눈에 보기</h2></div><p>특정 개강일과 교육비는 기수별 모집 공지에서 안내합니다. 여기서는 과정의 구조와 학습경험을 먼저 확인할 수 있습니다.</p></div>
             <div class="lmc-overview-grid">
               <article class="lmc-overview-card" data-number="12"><span>Duration</span><strong>12주 과정</strong><p>주 1회, 회차당 2시간의 이론·실습 구성</p></article>
               <article class="lmc-overview-card" data-number="24"><span>Learning Time</span><strong>총 24시간</strong><p>심리학 개요에서 수료시험까지 단계적 학습</p></article>
@@ -79,32 +70,17 @@
             </div>
           </section>
 
-          <section class="academy-section" aria-labelledby="courses-title">
-            <div class="academy-section-head">
-              <div>
-                <span class="cip-kicker">LMC Certification Course</span>
-                <h2 id="courses-title">평생진로상담사 전문과정</h2>
-              </div>
-              <p>유튜브 재생목록을 연결하면 12주 차시의 영상·제목·순서가 자동으로 반영됩니다. 영상 업로드 전에도 전체 이론·실습 커리큘럼과 차시별 학습기록을 사용할 수 있습니다.</p>
-            </div>
-            <div class="course-grid" id="courseGrid" aria-live="polite"></div>
+          <section class="academy-section" id="course" aria-labelledby="courses-title">
+            <div class="academy-section-head"><div><span class="cip-kicker">LMC Certification Course</span><h2 id="courses-title">평생진로상담사 전문과정</h2></div><p>영상 업로드 전에도 12주 전체 커리큘럼, 차시별 이론·실습, 학습완료와 한 문장 기록을 사용할 수 있습니다.</p></div>
+            <div class="course-grid" id="courseGrid" aria-live="polite"><div class="academy-loading" aria-label="과정정보 불러오는 중"><div class="academy-loading-bar"></div><div class="academy-loading-bar"></div><div class="academy-loading-bar"></div></div></div>
           </section>
 
-          <section class="academy-section" aria-labelledby="status-title">
-            <div class="academy-section-head">
-              <div>
-                <span class="cip-kicker">My LMC Learning</span>
-                <h2 id="status-title">학습현황</h2>
-              </div>
-              <p>초기 MVP에서는 이 브라우저에 완료 차시와 강의별 한 문장을 저장합니다. 이후 회원 시스템이 연결되면 개인 계정 기반 학습이력으로 확장합니다.</p>
-            </div>
+          <section class="academy-section" id="status" aria-labelledby="status-title">
+            <div class="academy-section-head"><div><span class="cip-kicker">My LMC Learning</span><h2 id="status-title">내 학습현황</h2></div><p>현재 브라우저에 완료 차시와 강의별 한 문장을 저장합니다. 다음 방문에는 마지막 학습지점에서 이어갈 수 있습니다.</p></div>
             <div class="academy-status-panel" id="academyStatus"></div>
           </section>
 
-          <footer class="academy-footer">
-            <span>RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · LMC ACADEMY</span>
-            <a href="../platform.html">Platform →</a>
-          </footer>
+          <footer class="academy-footer"><span>RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · LMC ACADEMY</span><a href="../platform.html">Platform →</a></footer>
         </div>
       </div>
     </main>
