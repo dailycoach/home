@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-07-15",
+  "organization": "RS에듀컨설팅",
+  "sectionTitle": "주요 사업실적",
+  "summary": {
+    "since": 2010,
+    "representativeProjects": 8,
+    "sectors": ["교육청·공공기관", "대학", "미디어", "출판", "기술기업"]
+  },
+  "projects": [
+    {
+      "number": 1,
+      "featured": true,
+      "businessName": "서울진로진학정보센터 심리검사 사업",
+      "organization": "서울특별시교육청",
+      "period": "2010.03–현재",
+      "role": "시스템 구축·운영",
+      "task": "서울시 관내 모든 초·중·고 학생을 대상으로 진로적성, 학습유형, 스트레스 검사 시스템 구축 및 운영"
+    },
+    {
+      "number": 2,
+      "featured": false,
+      "businessName": "EBS커리어 사업",
+      "organization": "EBS미디어",
+      "period": "2016.03–2018.03",
+      "role": "브랜드 위탁사업",
+      "task": "EBS계열사 EBS미디어가 런칭한 진로적성교육 브랜드 EBS커리어의 위탁사업자로 선정"
+    },
+    {
+      "number": 3,
+      "featured": false,
+      "businessName": "원격영상 진로멘토링 사업",
+      "organization": "한국직업능력개발원",
+      "period": "2015.03–2015.12",
+      "role": "공동 위탁 수행",
+      "task": "교육부 산하 한국직업능력개발원에서 발주한 원격영상 진로멘토링 사업에 한화 S&C와 함께 위탁기관으로 참여"
+    },
+    {
+      "number": 4,
+      "featured": false,
+      "businessName": "진로직업체험지원센터 프로그램 공급",
+      "organization": "성동구 진로직업체험지원센터",
+      "period": "2012.03–2013.12",
+      "role": "프로그램 공급·운영",
+      "task": "성동구 진로직업체험지원센터 진로교육 프로그램 운영"
+    },
+    {
+      "number": 5,
+      "featured": false,
+      "businessName": "고등학교 「진로와 직업」 교과서 집필",
+      "organization": "도서출판 씨마스",
+      "period": "2013–2014",
+      "role": "검정교과서 집필",
+      "task": "고등학교 「진로와 직업」 검정교과서 집필"
+    },
+    {
+      "number": 6,
+      "featured": false,
+      "businessName": "온라인 화상멘토링 프로그램",
+      "organization": "한국해양대학교 입학처",
+      "period": "2015",
+      "role": "위탁 운영",
+      "task": "한국해양대학교 입학처 주관 온라인 화상멘토링 프로그램의 위탁사업자로 선정"
+    },
+    {
+      "number": 7,
+      "featured": false,
+      "businessName": "온라인 화상면접 지원 프로그램",
+      "organization": "제주대학교",
+      "period": "2018",
+      "role": "입시 프로그램 위탁",
+      "task": "제주대학교 입학처 온라인 면접 위탁사업자로 선정"
+    },
+    {
+      "number": 8,
+      "featured": false,
+      "businessName": "디지털 ID·디지털 배지 기반 커리어 데이터 관리 협력",
+      "organization": "라온시큐어",
+      "period": "2026",
+      "role": "디지털 기술 협력",
+      "task": "라온시큐어의 블록체인 기반 디지털 배지 서비스 사업 협력업체로 선정"
+    }
+  ]
+}
