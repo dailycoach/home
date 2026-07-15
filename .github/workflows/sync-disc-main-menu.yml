@@ -1,0 +1,86 @@
+name: Sync DISC Main Menu
+
+on:
+  push:
+    paths:
+      - '.github/workflows/sync-disc-main-menu.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-menu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add DISC menus and routes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          if 'data-route="disc16Youth"' not in text:
+              dropdown_anchor = '''            <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+              dropdown_replacement = '''            <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 <small>NEW</small></a>
+            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계 <small>NEW</small></a>
+            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+              if dropdown_anchor not in text:
+                  raise SystemExit('상단 검사 드롭다운 기준 문자열을 찾지 못했습니다.')
+              text = text.replace(dropdown_anchor, dropdown_replacement, 1)
+
+              panel_anchor = '''          <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+              panel_replacement = '''          <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
+          <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>
+          <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>
+          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+              if panel_anchor not in text:
+                  raise SystemExit('모바일 전체 메뉴 기준 문자열을 찾지 못했습니다.')
+              text = text.replace(panel_anchor, panel_replacement, 1)
+
+              route_anchor = '''      kgm210: '/tests/kgm210/',
+      learning: '/tests/learning/','''
+              route_replacement = '''      kgm210: '/tests/kgm210/',
+      disc16: '/tests/disc16/',
+      disc16Youth: '/tests/disc16-youth/',
+      learning: '/tests/learning/','''
+              if route_anchor not in text:
+                  raise SystemExit('라우트 맵 기준 문자열을 찾지 못했습니다.')
+              text = text.replace(route_anchor, route_replacement, 1)
+
+          path.write_text(text, encoding='utf-8')
+
+          probe = Path('__tmp_probe.txt')
+          if probe.exists():
+              probe.unlink()
+          PY
+
+      - name: Verify menu entries
+        run: |
+          grep -q 'data-route="disc16"' index.html
+          grep -q 'data-route="disc16Youth"' index.html
+          grep -q "disc16Youth: '/tests/disc16-youth/'" index.html
+
+      - name: Commit menu patch
+        run: |
+          if git diff --quiet; then
+            echo 'No menu changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git add -u __tmp_probe.txt || true
+          git commit -m 'fix: expose DISC adult and youth tools in main menus'
+          git push origin main
