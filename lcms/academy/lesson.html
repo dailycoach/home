@@ -8,38 +8,42 @@
   <link rel="stylesheet" href="../shared-platform-shell.css" />
   <link rel="stylesheet" href="./academy.css" />
   <link rel="stylesheet" href="./lmc.css" />
+  <link rel="stylesheet" href="./ux-core.css" />
+  <link rel="stylesheet" href="./ux-course.css" />
+  <link rel="stylesheet" href="./ux-lesson.css" />
+  <script>
+    (() => {
+      const query = new URLSearchParams(location.search);
+      if (query.has('module') || query.has('video')) return;
+      try {
+        const progress = JSON.parse(localStorage.getItem('rsedu-academy-progress:v1') || '{}');
+        const courseId = query.get('course') || 'lmc-lifetime-management-counselor';
+        const last = progress.lastViewed?.[courseId];
+        const moduleMatch = /^module-(\d+)$/.exec(last || '');
+        if (moduleMatch) query.set('module', String(Math.max(0, Number(moduleMatch[1]) - 1)));
+        else if (last) query.set('video', last);
+        if (last) history.replaceState(null, '', `${location.pathname}?${query.toString()}`);
+      } catch (error) {
+        console.warn('[LMC Academy] resume restore skipped:', error);
+      }
+    })();
+  </script>
   <script src="./academy.js" defer></script>
 </head>
 <body class="academy-page" data-academy-page="lesson">
   <div class="cip-shell">
     <header class="cip-header">
       <div class="cip-header-inner">
-        <a class="cip-brand" href="../platform.html" aria-label="Career Intelligence Platform 홈">
-          <span class="cip-brand-mark" aria-hidden="true"></span>
-          <span class="cip-brand-copy">CAREER INTELLIGENCE PLATFORM<small>RS EDU CONSULTING · 데이터 기반 평생 커리어 인프라</small></span>
-        </a>
-
-        <nav class="cip-nav" aria-label="Career Intelligence Platform 주 메뉴">
-          <a href="../platform.html">Platform</a>
-          <a href="../business-achievements.html">사업실적</a>
-          <a href="./index.html" aria-current="page">Academy</a>
-        </nav>
-
+        <a class="cip-brand" href="../platform.html" aria-label="Career Intelligence Platform 홈"><span class="cip-brand-mark" aria-hidden="true"></span><span class="cip-brand-copy">CAREER INTELLIGENCE PLATFORM<small>RS EDU CONSULTING · 데이터 기반 평생 커리어 인프라</small></span></a>
+        <nav class="cip-nav" aria-label="Career Intelligence Platform 주 메뉴"><a href="../platform.html">Platform</a><a href="../business-achievements.html">사업실적</a><a href="./index.html" aria-current="page">Academy</a></nav>
         <a class="cip-utility" href="https://rsedu-career-platform.dailycoaching.chatgpt.site/" target="_blank" rel="noopener noreferrer" aria-label="Career Intelligence Platform 원본을 새 창에서 열기">원본 열기 ↗</a>
       </div>
     </header>
-
     <main class="academy-main cip-container">
       <div class="academy-viewport">
         <div class="academy-body">
-          <div id="lessonApp" aria-live="polite">
-            <div class="empty-state"><strong>LMC 강의실을 준비하고 있습니다.</strong><span>영상과 12주 학습기록을 불러오는 중입니다.</span></div>
-          </div>
-
-          <footer class="academy-footer">
-            <span>RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · LMC ACADEMY</span>
-            <a href="./index.html">LMC Academy →</a>
-          </footer>
+          <div id="lessonApp" aria-live="polite"><div class="academy-loading" aria-label="LMC 강의실 불러오는 중"><div class="academy-loading-bar"></div><div class="academy-loading-bar"></div><div class="academy-loading-bar"></div></div></div>
+          <footer class="academy-footer"><span>RS EDU CONSULTING · CAREER INTELLIGENCE PLATFORM · LMC ACADEMY</span><a href="./index.html">LMC Academy →</a></footer>
         </div>
       </div>
     </main>
