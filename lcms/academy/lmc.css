@@ -1,0 +1,364 @@
+/* RS EDU Academy · LMC Professional Course */
+.lmc-hero {
+  min-height: 500px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(125,242,194,.26), transparent 19%),
+    radial-gradient(circle at 48% 4%, rgba(255,139,24,.35), transparent 20%),
+    linear-gradient(90deg, #071c43 0%, #0d2d67 48%, #0a3b55 100%);
+}
+
+.lmc-hero .academy-hero-copy h1 span { color: var(--cip-mint); }
+
+.lmc-hero-note {
+  border-color: rgba(125,242,194,.52);
+  background: rgba(6,31,59,.54);
+}
+
+.lmc-credential-visual {
+  position: relative;
+  min-height: 350px;
+  display: grid;
+  place-items: center;
+}
+
+.lmc-seal {
+  position: relative;
+  z-index: 2;
+  width: min(330px, 78%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 50px;
+  border: 4px solid rgba(125,242,194,.78);
+  border-radius: 50%;
+  color: #fff;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255,255,255,.16), transparent 48%),
+    linear-gradient(145deg, rgba(13,45,103,.92), rgba(7,28,67,.98));
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.26),
+    0 0 0 18px rgba(125,242,194,.06),
+    inset 0 0 50px rgba(125,242,194,.10);
+  text-align: center;
+}
+
+.lmc-seal::before,
+.lmc-seal::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.lmc-seal::before { inset: 22px; }
+.lmc-seal::after { inset: -25px; border-color: rgba(125,242,194,.20); }
+
+.lmc-seal strong {
+  display: block;
+  font-size: clamp(46px, 8vw, 78px);
+  line-height: .95;
+  letter-spacing: -.06em;
+}
+.lmc-seal span {
+  display: block;
+  margin-top: 15px;
+  color: var(--cip-mint);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+.lmc-seal small {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,.72);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.lmc-orbit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.lmc-orbit span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  border: 3px solid rgba(255,255,255,.82);
+  border-radius: 24px;
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(0,0,0,.22);
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+}
+.lmc-orbit span:nth-child(1) { left: 3%; top: 12%; background: linear-gradient(180deg, #ff9b33, #ff7b00); }
+.lmc-orbit span:nth-child(2) { right: 1%; top: 20%; background: linear-gradient(180deg, #35df82, #0caf58); }
+.lmc-orbit span:nth-child(3) { left: 5%; bottom: 7%; background: linear-gradient(180deg, #42a1ff, #1f5ee6); }
+.lmc-orbit span:nth-child(4) { right: 5%; bottom: 2%; background: linear-gradient(180deg, #6257bb, #443b9d); }
+
+.lmc-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lmc-overview-card {
+  position: relative;
+  min-height: 156px;
+  overflow: hidden;
+  padding: 23px;
+  border: 1px solid rgba(16,46,92,.08);
+  border-radius: 22px;
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--cip-soft-shadow);
+}
+.lmc-overview-card::after {
+  content: attr(data-number);
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+  color: rgba(13,45,103,.045);
+  font-size: 92px;
+  font-weight: 900;
+  line-height: 1;
+}
+.lmc-overview-card span {
+  color: var(--cip-muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.lmc-overview-card strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 17px;
+  color: var(--cip-navy);
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.08;
+  letter-spacing: -.05em;
+}
+.lmc-overview-card p {
+  position: relative;
+  z-index: 1;
+  margin: 9px 0 0;
+  color: var(--cip-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.course-grid { grid-template-columns: 1fr; }
+.course-card[data-course="lmc"] {
+  grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr);
+  min-height: 340px;
+}
+.course-card[data-course="lmc"] .course-cover {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(125,242,194,.22), transparent 24%),
+    radial-gradient(circle at 30% 10%, rgba(255,139,24,.27), transparent 22%),
+    linear-gradient(145deg, #071c43, #0d2d67 56%, #0d4b5c);
+}
+.course-card[data-course="lmc"] .course-cover::after {
+  content: "12 WEEK";
+  position: absolute;
+  right: 18px;
+  bottom: 12px;
+  color: rgba(255,255,255,.08);
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -.06em;
+}
+
+.lmc-card-credential {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  margin-top: 16px;
+  padding: 0 11px;
+  border-radius: 999px;
+  color: #0a5130;
+  background: #e3faee;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.lmc-card-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 20px;
+}
+.lmc-card-fact {
+  padding: 13px;
+  border: 1px solid rgba(16,46,92,.08);
+  border-radius: 15px;
+  background: #f7fbff;
+}
+.lmc-card-fact span {
+  display: block;
+  color: var(--cip-muted);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.lmc-card-fact strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--cip-navy);
+  font-size: 13px;
+  line-height: 1.42;
+}
+
+.lmc-qualification-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+.lmc-qualification-item {
+  padding: 16px;
+  border: 1px solid rgba(16,46,92,.08);
+  border-radius: 16px;
+  background: rgba(255,255,255,.86);
+}
+.lmc-qualification-item span {
+  display: block;
+  color: var(--cip-muted);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.lmc-qualification-item strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--cip-navy);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.lmc-curriculum-item {
+  grid-template-columns: 54px minmax(190px, .9fr) minmax(220px, 1fr) 92px;
+  align-items: stretch;
+}
+.lmc-curriculum-main,
+.lmc-curriculum-practice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lmc-curriculum-main small,
+.lmc-curriculum-practice small {
+  display: block;
+  margin-top: 6px;
+  color: var(--cip-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.lmc-curriculum-practice {
+  padding-left: 18px;
+  border-left: 1px solid var(--cip-line);
+}
+.lmc-curriculum-practice em {
+  color: var(--cip-green);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.lmc-side-card,
+.lmc-full-card {
+  overflow: hidden;
+  border: 1px solid rgba(16,46,92,.08);
+  border-radius: 22px;
+  background: rgba(255,255,255,.94);
+  box-shadow: var(--cip-soft-shadow);
+}
+.lmc-side-card { padding: 24px; }
+.lmc-full-card { padding: 28px; margin-top: 18px; }
+
+.lmc-benefit-list,
+.lmc-instructor-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+.lmc-benefit-item,
+.lmc-instructor-item {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+  color: var(--cip-ink);
+  font-size: 13px;
+  line-height: 1.58;
+}
+.lmc-benefit-item::before,
+.lmc-instructor-item::before {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(180deg, #2deb86, #0fc568);
+  box-shadow: 0 8px 18px rgba(22,214,111,.22);
+  font-size: 12px;
+  font-weight: 900;
+}
+.lmc-benefit-item::before { content: "✓"; }
+.lmc-instructor-item::before { content: "人"; background: linear-gradient(180deg, var(--cip-blue), var(--cip-navy-2)); }
+.lmc-instructor-item strong { display: block; font-size: 15px; }
+.lmc-instructor-item small { display: block; margin-top: 3px; color: var(--cip-muted); }
+
+.lmc-ethics-note {
+  margin-top: 18px;
+  padding: 18px;
+  border-left: 4px solid var(--cip-orange);
+  border-radius: 0 16px 16px 0;
+  color: #554534;
+  background: #fff6e9;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.lmc-lesson-theory,
+.lmc-lesson-practice {
+  min-height: 180px;
+}
+.lmc-lesson-practice { border-top: 5px solid var(--cip-green); }
+.lmc-lesson-theory { border-top: 5px solid var(--cip-navy-2); }
+.lmc-lesson-copy {
+  margin: 0;
+  color: var(--cip-muted);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+@media (max-width: 1040px) {
+  .lmc-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .course-card[data-course="lmc"] { grid-template-columns: 1fr; }
+  .lmc-curriculum-item { grid-template-columns: 52px minmax(0, 1fr) 86px; }
+  .lmc-curriculum-practice { grid-column: 2; padding: 12px 0 0; border-top: 1px solid var(--cip-line); border-left: 0; }
+  .lmc-curriculum-item .lesson-status { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+}
+
+@media (max-width: 720px) {
+  .lmc-hero { min-height: 0; }
+  .lmc-credential-visual { min-height: 310px; }
+  .lmc-seal { width: 240px; padding: 38px; }
+  .lmc-orbit span { width: 62px; height: 62px; border-radius: 19px; font-size: 9px; }
+  .lmc-overview-grid,
+  .lmc-card-facts,
+  .lmc-qualification-strip { grid-template-columns: 1fr; }
+  .lmc-curriculum-item { grid-template-columns: 46px minmax(0, 1fr); }
+  .lmc-curriculum-practice { grid-column: 2; }
+  .lmc-curriculum-item .lesson-status { grid-column: 2; grid-row: auto; justify-self: start; }
+}
