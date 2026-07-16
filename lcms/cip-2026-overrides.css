@@ -1,0 +1,176 @@
+/* CIP 2026 · page-specific trend overrides */
+
+/* Dynamic text strips without extra markup */
+body.cip-experience-page .art-experience-hero,
+body.academy-page .art-academy-hero { padding-bottom: 104px; }
+
+body.cip-experience-page .art-hero-index::after,
+body.academy-page .academy-art-poster::after {
+  position: absolute;
+  left: -120%;
+  bottom: -62px;
+  width: 250%;
+  overflow: hidden;
+  color: #071c43;
+  background: #b9ff66;
+  border-block: 1px solid rgba(7,28,67,.18);
+  box-shadow: 0 12px 28px rgba(7,28,67,.13);
+  font-size: clamp(12px,1.3vw,17px);
+  font-weight: 950;
+  letter-spacing: .035em;
+  line-height: 44px;
+  white-space: nowrap;
+  transform: rotate(-1deg);
+  animation: cip-strip-shift 14s ease-in-out infinite alternate;
+}
+body.cip-experience-page .art-hero-index::after {
+  content: "FIELD EXPERIENCE  ✦  PUBLIC EDUCATION  ✦  DATA INFRASTRUCTURE  ✦  HUMAN GROWTH  ✦  2010—NOW  ✦  FIELD EXPERIENCE";
+}
+body.academy-page .academy-art-poster::after {
+  content: "LEARN  ✦  REFLECT  ✦  APPLY  ✦  RECORD  ✦  LMC 12 WEEKS  ✦  LEARN  ✦  REFLECT  ✦  APPLY";
+}
+@keyframes cip-strip-shift {
+  from { transform: translateX(-1.5%) rotate(-1deg); }
+  to { transform: translateX(2.5%) rotate(.6deg); }
+}
+
+/* Human annotation cards */
+body.cip-experience-page .art-index-card:first-child,
+body.academy-page .academy-poster-main { overflow: visible; }
+body.cip-experience-page .art-index-card:first-child::after,
+body.academy-page .academy-poster-main::after {
+  position: absolute;
+  z-index: 7;
+  width: 168px;
+  padding: 13px 14px;
+  color: #071c43;
+  border: 1px solid rgba(7,28,67,.2);
+  box-shadow: 8px 8px 0 rgba(7,28,67,.13);
+  font-family: Georgia,"Times New Roman",serif;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.45;
+}
+body.cip-experience-page .art-index-card:first-child::after {
+  content: "Field note — 기록은 다음 시스템을 설계하는 근거가 된다.";
+  right: -18px;
+  bottom: -24px;
+  background: #ffe7d7;
+  transform: rotate(3deg);
+}
+body.academy-page .academy-poster-main::after {
+  content: "Learning note — 배움은 한 문장을 남기는 순간부터 오래 지속된다.";
+  left: -28px;
+  bottom: 32px;
+  background: #eaffcf;
+  transform: rotate(-4deg);
+}
+
+/* Reality-warp depth replaces flat grid monotony */
+body.cip-experience-page .art-experience-hero::after,
+body.academy-page .art-academy-hero::after {
+  inset: auto;
+  width: clamp(220px,30vw,470px);
+  aspect-ratio: 1;
+  right: -10%;
+  top: -18%;
+  border-radius: 37% 63% 51% 49% / 42% 31% 69% 58%;
+  background: conic-gradient(from 40deg,rgba(88,229,255,.56),rgba(118,86,255,.38),rgba(255,118,87,.42),rgba(185,255,102,.46),rgba(88,229,255,.56));
+  filter: blur(24px) saturate(1.3);
+  opacity: .53;
+  mask-image: none;
+  animation: cip-blob-warp 12s ease-in-out infinite alternate;
+}
+@keyframes cip-blob-warp {
+  to { transform: translate(-8%,13%) rotate(27deg) scale(1.13); border-radius: 62% 38% 30% 70% / 58% 65% 35% 42%; }
+}
+
+/* Tactile surfaces with deliberate imperfect offsets */
+body.cip-experience-page :is(.project-card,.capability-card,.art-index-card,.art-time),
+body.academy-page :is(.lmc-overview-card,.status-card,.course-card,.lmc-phase-card,.lesson-content-card) {
+  transform-style: preserve-3d;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s ease;
+}
+body.cip-experience-page :is(.project-card,.capability-card,.art-index-card,.art-time):hover,
+body.academy-page :is(.lmc-overview-card,.status-card,.course-card,.lmc-phase-card,.lesson-content-card):hover {
+  transform: translateY(-5px) rotate(.35deg);
+  border-color: rgba(7,28,67,.28);
+  box-shadow: 0 28px 70px rgba(7,28,67,.17),7px 7px 0 rgba(7,28,67,.08);
+}
+body.cip-experience-page .capability-card:nth-child(even):hover { transform: translateY(18px) rotate(-.45deg); }
+
+body.cip-experience-page :is(.project-card,.art-index-card),
+body.academy-page :is(.lmc-overview-card,.status-card,.lesson-content-card) { position: relative; }
+body.cip-experience-page :is(.project-card,.art-index-card)::before,
+body.academy-page :is(.lmc-overview-card,.status-card,.lesson-content-card)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .22;
+  background: linear-gradient(125deg,rgba(255,255,255,.7),transparent 25%),repeating-linear-gradient(0deg,rgba(7,28,67,.045) 0 1px,transparent 1px 5px);
+  mix-blend-mode: multiply;
+}
+body.cip-experience-page :is(.project-card,.art-index-card)>*,
+body.academy-page :is(.lmc-overview-card,.status-card,.lesson-content-card)>* { position: relative; z-index: 1; }
+
+/* Typographic friction and mixed editorial voices */
+body.cip-experience-page :is(.project-period,.art-time strong),
+body.academy-page :is(.lmc-phase-index,.lesson-step-count) {
+  font-family: Georgia,"Times New Roman",serif;
+  font-style: italic;
+}
+body.cip-experience-page .archive-header p,
+body.academy-page .academy-section-head p {
+  position: relative;
+  padding-left: 18px;
+}
+body.cip-experience-page .archive-header p::before,
+body.academy-page .academy-section-head p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .25em;
+  bottom: .25em;
+  width: 4px;
+  background: linear-gradient(var(--trend-coral),var(--trend-violet));
+  transform: rotate(2deg);
+}
+
+/* Micro feedback */
+body.academy-page :is(.hero-primary,.lesson-complete-button,.mobile-complete),
+body.cip-experience-page .closing-link { position: relative; overflow: hidden; }
+body.academy-page :is(.hero-primary,.lesson-complete-button,.mobile-complete)::after,
+body.cip-experience-page .closing-link::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(115deg,transparent 35%,rgba(255,255,255,.58) 48%,transparent 62%);
+  transform: translateX(-78%);
+  transition: transform .65s ease;
+}
+body.academy-page :is(.hero-primary,.lesson-complete-button,.mobile-complete):hover::after,
+body.cip-experience-page .closing-link:hover::after { transform: translateX(78%); }
+
+@media(max-width:760px){
+  body.cip-experience-page .art-experience-hero,
+  body.academy-page .art-academy-hero { padding-bottom: 88px; }
+  body.cip-experience-page .art-hero-index::after,
+  body.academy-page .academy-art-poster::after { left: -30%; width: 160%; bottom: -52px; line-height: 38px; }
+  body.cip-experience-page .art-index-card:first-child::after,
+  body.academy-page .academy-poster-main::after { width: 145px; font-size: 10px; }
+  body.cip-experience-page .art-index-card:first-child::after { right: 4px; bottom: -34px; }
+  body.academy-page .academy-poster-main::after { left: 8px; bottom: -32px; }
+  body.cip-experience-page .art-experience-hero::after,
+  body.academy-page .art-academy-hero::after { width: 260px; right: -30%; top: -4%; opacity: .35; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.cip-experience-page .art-hero-index::after,
+  body.academy-page .academy-art-poster::after,
+  body.cip-experience-page .art-experience-hero::after,
+  body.academy-page .art-academy-hero::after { animation: none; }
+  body.cip-experience-page :is(.project-card,.capability-card,.art-index-card,.art-time),
+  body.academy-page :is(.lmc-overview-card,.status-card,.course-card,.lmc-phase-card,.lesson-content-card) { transition: none; }
+}
