@@ -9,6 +9,7 @@ on:
       - "lcms/cip-art-direction.css"
       - "lcms/cip-2026-trends.css"
       - "lcms/cip-2026-overrides.css"
+      - "lcms/cip-micro-polish.css"
       - "scripts/check-lmc-academy.mjs"
       - "scripts/check-cip-art.mjs"
       - ".github/workflows/check-lmc-academy.yml"
@@ -21,6 +22,7 @@ on:
       - "lcms/cip-art-direction.css"
       - "lcms/cip-2026-trends.css"
       - "lcms/cip-2026-overrides.css"
+      - "lcms/cip-micro-polish.css"
       - "scripts/check-lmc-academy.mjs"
       - "scripts/check-cip-art.mjs"
       - ".github/workflows/check-lmc-academy.yml"
@@ -37,7 +39,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
       - name: Check JavaScript syntax
         run: node --check lcms/academy/academy.js
       - name: Check LMC Academy structure
