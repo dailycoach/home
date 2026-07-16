@@ -10,6 +10,8 @@ const assert = (condition, message) => {
 const html = read('lcms/business-achievements.html');
 const sharedCss = read('lcms/cip-art-direction.css');
 const businessCss = read('lcms/business-art.css');
+const trendCss = read('lcms/cip-2026-trends.css');
+const overridesCss = read('lcms/cip-2026-overrides.css');
 
 assert(html.includes('./cip-art-direction.css'), 'Project Experience is missing shared CIP art direction');
 assert(html.includes('./business-art.css'), 'Project Experience is missing business art direction');
@@ -31,4 +33,13 @@ for (const selector of ['.art-experience-hero', '.archive-grid', '.art-timeline'
   assert(businessCss.includes(selector), `Business art selector missing: ${selector}`);
 }
 
-console.log('CIP contemporary art direction checks passed.');
+assert(sharedCss.includes('cip-2026-trends.css'), 'Shared art system is missing the 2026 trend layer import');
+assert(sharedCss.includes('cip-2026-overrides.css'), 'Shared art system is missing 2026 page overrides');
+for (const token of ['--trend-acid', 'trend-type-breathe', 'repeating-radial-gradient', 'prefers-reduced-motion']) {
+  assert(trendCss.includes(token), `2026 trend token missing: ${token}`);
+}
+for (const token of ['FIELD EXPERIENCE', 'Field note', 'cip-strip-shift', 'cip-blob-warp']) {
+  assert(overridesCss.includes(token), `Project archive trend treatment missing: ${token}`);
+}
+
+console.log('CIP 2026 project archive design checks passed.');
