@@ -44,6 +44,42 @@ body[data-academy-page="lesson"] .mobile-learning-bar a {
   font-size: 17px;
 }
 
+/* Wide mobile / small tablet: archive must already be one full-width column. */
+@media (max-width: 900px) {
+  body.cip-experience-page .archive-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+  }
+  body.cip-experience-page .archive-grid .project-card,
+  body.cip-experience-page .archive-grid .project-card:last-child {
+    grid-column: 1 / -1 !important;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    min-height: 0;
+  }
+  body.cip-experience-page .archive-grid .project-card-cap {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding-inline: 20px;
+  }
+  body.cip-experience-page .archive-grid .project-card-body {
+    padding: 26px 22px 28px;
+  }
+  body.cip-experience-page .archive-grid .project-card h3 {
+    max-width: 20ch;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.08;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+  body.cip-experience-page .archive-grid .project-card p,
+  body.cip-experience-page .archive-grid .project-client {
+    word-break: keep-all;
+  }
+}
+
 @media (max-width: 760px) {
   body::before { opacity: .07; }
 
@@ -63,4 +99,13 @@ body[data-academy-page="lesson"] .mobile-learning-bar a {
   }
 
   body.cip-experience-page .archive-section { padding-top: 78px; }
+  body.cip-experience-page .archive-grid .project-card-cap {
+    min-height: 64px;
+    padding-block: 10px;
+    font-size: 10px;
+  }
+  body.cip-experience-page .archive-grid .project-card h3 {
+    max-width: none;
+    font-size: clamp(27px, 8.4vw, 35px);
+  }
 }
