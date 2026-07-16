@@ -1,0 +1,258 @@
+/* CIP · 2026 trend layer
+   Human texture + kinetic type + dimensional editorial motion */
+:root {
+  --trend-ink: #071c43;
+  --trend-paper: #f4f0e8;
+  --trend-acid: #b9ff66;
+  --trend-coral: #ff7657;
+  --trend-cyan: #58e5ff;
+  --trend-violet: #7656ff;
+  --trend-shadow-hard: 10px 10px 0 rgba(7, 28, 67, .12);
+  --trend-shadow-soft: 0 28px 70px rgba(7, 28, 67, .17);
+  --pointer-x: 50%;
+  --pointer-y: 20%;
+}
+
+body {
+  position: relative;
+  background:
+    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(88,229,255,.12), transparent 25rem),
+    radial-gradient(circle at 84% 12%, rgba(185,255,102,.11), transparent 24rem),
+    #eef4fb;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  opacity: .16;
+  mix-blend-mode: multiply;
+  background-image:
+    repeating-radial-gradient(circle at 23% 31%, rgba(7,28,67,.25) 0 .45px, transparent .7px 3px),
+    repeating-linear-gradient(93deg, rgba(255,255,255,.34) 0 1px, transparent 1px 7px);
+  background-size: 7px 7px, 13px 13px;
+}
+
+/* kinetic editorial ribbon */
+.trend-marquee {
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  border-block: 1px solid rgba(7,28,67,.16);
+  color: var(--trend-ink);
+  background: var(--trend-acid);
+  transform: rotate(-.7deg) scale(1.015);
+  box-shadow: 0 12px 28px rgba(7,28,67,.12);
+}
+.trend-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: trend-marquee 28s linear infinite;
+}
+.trend-marquee span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding-inline: 18px;
+  font-size: clamp(13px, 1.5vw, 18px);
+  font-weight: 950;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+}
+.trend-marquee span::after {
+  content: "✦";
+  margin-left: 34px;
+  font-size: .75em;
+}
+@keyframes trend-marquee { to { transform: translateX(-50%); } }
+
+/* type that behaves like an identity rather than a heading */
+.art-hero-word,
+.academy-art-word {
+  transform-origin: left top;
+  animation: trend-type-breathe 8s ease-in-out infinite alternate;
+  text-shadow: .02em .02em 0 rgba(255,255,255,.12);
+}
+@keyframes trend-type-breathe {
+  0% { letter-spacing: -.095em; transform: scaleX(.96) skewX(-1deg); }
+  100% { letter-spacing: -.055em; transform: scaleX(1.035) skewX(1deg); }
+}
+
+/* human notes / editorial annotations */
+.trend-note {
+  position: absolute;
+  z-index: 8;
+  width: min(190px, 34vw);
+  padding: 14px 15px 13px;
+  border: 1px solid rgba(7,28,67,.18);
+  color: var(--trend-ink);
+  background: var(--trend-paper);
+  box-shadow: var(--trend-shadow-hard);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.45;
+  transform: rotate(var(--note-rotate, -3deg));
+}
+.trend-note::before {
+  content: attr(data-index);
+  display: block;
+  margin-bottom: 9px;
+  font-family: Pretendard, system-ui, sans-serif;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.trend-note.business-note { right: 3.5%; bottom: 8%; --note-rotate: 3deg; background: #ffe8da; }
+.trend-note.academy-note { right: 4%; bottom: 7%; --note-rotate: -4deg; background: #e8ffd0; }
+
+/* tactile dimensional cards */
+.project-card,
+.capability-card,
+.lmc-overview-card,
+.status-card,
+.lmc-phase-card,
+.lesson-content-card,
+.course-card,
+.art-index-card,
+.timeline-item {
+  transform-style: preserve-3d;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;
+  will-change: transform;
+}
+.project-card:hover,
+.capability-card:hover,
+.lmc-overview-card:hover,
+.status-card:hover,
+.lmc-phase-card:hover,
+.lesson-content-card:hover,
+.course-card:hover,
+.art-index-card:hover,
+.timeline-item:hover {
+  border-color: rgba(7,28,67,.28);
+  box-shadow: var(--trend-shadow-soft), 7px 7px 0 rgba(7,28,67,.08);
+}
+
+.project-card::before,
+.lmc-overview-card::before,
+.lesson-content-card::before,
+.status-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .25;
+  background:
+    linear-gradient(125deg, rgba(255,255,255,.72), transparent 25%),
+    repeating-linear-gradient(0deg, rgba(7,28,67,.045) 0 1px, transparent 1px 5px);
+  mix-blend-mode: multiply;
+}
+
+/* reality-warp blobs: decorative, not structural */
+.art-experience-hero::after,
+.art-academy-hero::after {
+  content: "";
+  position: absolute;
+  width: clamp(180px, 28vw, 420px);
+  aspect-ratio: 1;
+  right: -8%;
+  top: -20%;
+  border-radius: 37% 63% 51% 49% / 42% 31% 69% 58%;
+  background: conic-gradient(from 40deg, rgba(88,229,255,.55), rgba(118,86,255,.35), rgba(255,118,87,.42), rgba(185,255,102,.44), rgba(88,229,255,.55));
+  filter: blur(22px) saturate(1.25);
+  opacity: .55;
+  animation: trend-blob 13s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes trend-blob {
+  to { transform: translate(-9%, 12%) rotate(28deg) scale(1.12); border-radius: 62% 38% 30% 70% / 58% 65% 35% 42%; }
+}
+
+/* deliberate friction: offset labels and mixed serif */
+.section-head h2,
+.academy-section-head h2,
+.course-detail-copy h1,
+.lesson-title-row h1 {
+  text-wrap: balance;
+}
+.section-head h2::first-letter,
+.academy-section-head h2::first-letter {
+  color: var(--trend-violet);
+}
+.cip-kicker,
+.hero-eyebrow,
+.academy-eyebrow {
+  border-radius: 3px 999px 999px 3px;
+  transform: rotate(-1deg);
+}
+.project-period,
+.timeline-year,
+.lmc-phase-index,
+.lesson-step-count {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+/* scroll reveal */
+.trend-reveal {
+  opacity: 0;
+  transform: translateY(28px) rotate(.25deg);
+  transition: opacity .72s ease, transform .72s cubic-bezier(.18,.86,.28,1);
+}
+.trend-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+/* highlighted active states feel printed, not generic */
+.lesson-list-item.is-active,
+.lmc-phase-card[open],
+.academy-jump-nav a:first-child,
+.course-quicknav a:first-child {
+  box-shadow: 5px 5px 0 rgba(88,229,255,.18);
+}
+.lesson-complete-button,
+.mobile-complete,
+.hero-primary,
+.closing-link {
+  position: relative;
+  overflow: hidden;
+}
+.lesson-complete-button::after,
+.mobile-complete::after,
+.hero-primary::after,
+.closing-link::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.52) 48%, transparent 62%);
+  transform: translateX(-75%);
+  transition: transform .65s ease;
+}
+.lesson-complete-button:hover::after,
+.mobile-complete:hover::after,
+.hero-primary:hover::after,
+.closing-link:hover::after { transform: translateX(75%); }
+
+@media (max-width: 760px) {
+  body::before { opacity: .1; }
+  .trend-marquee { transform: rotate(-.45deg) scale(1.01); }
+  .trend-marquee span { min-height: 40px; padding-inline: 14px; }
+  .trend-note { position: relative; inset: auto !important; width: min(100%, 320px); margin: -12px 18px 22px auto; }
+  .art-experience-hero::after,
+  .art-academy-hero::after { width: 260px; right: -28%; top: -8%; opacity: .38; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trend-marquee-track,
+  .art-hero-word,
+  .academy-art-word,
+  .art-experience-hero::after,
+  .art-academy-hero::after { animation: none !important; }
+  .trend-reveal { opacity: 1; transform: none; transition: none; }
+  .project-card,.capability-card,.lmc-overview-card,.status-card,.lmc-phase-card,.lesson-content-card,.course-card,.art-index-card,.timeline-item { transition: none; }
+}
