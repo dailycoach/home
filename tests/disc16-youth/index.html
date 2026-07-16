@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="description" content="가정환경과 또래집단 상호작용을 살펴보는 청소년용 DISC16 관계행동검사" />
+  <meta name="description" content="집과 학교, 친구 사이의 관계반응을 살펴보는 청소년용 DISC16 관계행동검사" />
   <title>DISC16 청소년 관계행동검사</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
@@ -16,12 +16,12 @@
   <div class="bar" aria-hidden="true"><i id="progressBar"></i></div>
 
   <section id="start" class="card start-card">
-    <span class="eyebrow">가정환경 × 또래집단</span>
-    <h1>나는 집과 친구 사이에서<br />어떻게 반응하는가?</h1>
-    <p class="lead">부모·보호자, 가족, 친구와 실제로 겪을 수 있는 16개의 장면을 읽고 그 순간 나와 가까운 행동부터 선택합니다.</p>
+    <span class="eyebrow">청소년 관계행동검사</span>
+    <h1>나는 여러 관계 속에서<br />어떻게 반응하는가?</h1>
+    <p class="lead">집과 학교, 친구 사이에서 실제로 겪을 수 있는 16개의 장면을 읽고 그 순간 나와 가까운 행동부터 선택합니다.</p>
     <div class="guide">
-      <div><b>가정 장면 8개</b><span>규칙, 기대, 갈등, 도움 요청, 사생활</span></div>
-      <div><b>또래 장면 8개</b><span>친구관계, 단체활동, 소속감, 또래 압력</span></div>
+      <div><b>내 입장을 표현할 때</b><span>규칙, 기대, 선택, 거절 상황에서의 반응</span></div>
+      <div><b>사람과 관계를 맺을 때</b><span>친밀감, 갈등, 소속감, 협력 상황에서의 반응</span></div>
       <div><b>1·2·3·4순위</b><span>정답보다 평소의 실제 반응을 선택합니다.</span></div>
     </div>
     <button class="primary" id="startBtn" type="button">나의 관계 반응 알아보기</button>
@@ -29,10 +29,10 @@
   </section>
 
   <section id="test" class="card hidden" aria-live="polite">
-    <div class="domain" id="domainLabel"></div>
     <div class="scene-box"><p id="sceneText" class="scene-text"></p></div>
     <p class="instruction">이 장면에서 내가 먼저 보일 반응부터 선택하세요.</p>
     <div id="options" class="options"></div>
+    <p class="encourage">선택한 항목을 다시 누르면 그 순위부터 다시 고를 수 있습니다.</p>
     <div class="nav">
       <button class="ghost" id="prevBtn" type="button">이전 장면</button>
       <button class="ghost" id="resetBtn" type="button">다시 선택</button>
@@ -42,6 +42,7 @@
   <section id="result" class="card hidden"></section>
 </main>
 <script src="./data.js"></script>
+<script src="./patch.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>
