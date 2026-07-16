@@ -32,7 +32,7 @@ for (const file of ['lcms/academy/index.html', 'lcms/academy/course.html', 'lcms
 const academyIndex = read('lcms/academy/index.html');
 assert(academyIndex.includes('academy-art-word'), 'Academy typographic hero is missing');
 assert(academyIndex.includes('academy-art-poster'), 'Academy editorial poster is missing');
-assert(academyIndex.includes('12 WEEKS'), 'Academy 12-week poster data is missing');
+assert(academyIndex.includes('12<br />WEEKS') || academyIndex.includes('12 WEEKS'), 'Academy 12-week poster data is missing');
 
 const academySource = [
   academyIndex,
