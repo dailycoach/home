@@ -30,9 +30,20 @@ for (const file of ['lcms/academy/index.html', 'lcms/academy/course.html', 'lcms
 }
 
 const academyIndex = read('lcms/academy/index.html');
+const sharedCss = read('lcms/cip-art-direction.css');
+const trendCss = read('lcms/cip-2026-trends.css');
+const overridesCss = read('lcms/cip-2026-overrides.css');
+
 assert(academyIndex.includes('academy-art-word'), 'Academy typographic hero is missing');
 assert(academyIndex.includes('academy-art-poster'), 'Academy editorial poster is missing');
 assert(academyIndex.includes('12<br />WEEKS') || academyIndex.includes('12 WEEKS'), 'Academy 12-week poster data is missing');
+assert(sharedCss.includes('cip-2026-trends.css'), 'Academy is missing the shared 2026 trend import');
+assert(sharedCss.includes('cip-2026-overrides.css'), 'Academy is missing the 2026 override import');
+assert(trendCss.includes('trend-type-breathe'), 'Kinetic typography treatment is missing');
+assert(trendCss.includes('prefers-reduced-motion'), 'Reduced motion fallback is missing');
+for (const token of ['LMC 12 WEEKS', 'Learning note', 'cip-strip-shift', 'cip-blob-warp']) {
+  assert(overridesCss.includes(token), `Academy 2026 treatment missing: ${token}`);
+}
 
 const academySource = [
   academyIndex,
@@ -51,4 +62,4 @@ assert(academySource.includes('course-quicknav'), 'Course quick navigation is mi
 assert(academySource.includes('note-save-status'), 'Autosave status UI is missing');
 assert(academySource.includes('art-academy-hero'), 'Academy contemporary art hero class is missing');
 
-console.log('LMC Academy quality checks passed.');
+console.log('LMC Academy 2026 trend quality checks passed.');
