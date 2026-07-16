@@ -1,0 +1,43 @@
+name: Capture CIP Visual Audit
+
+on:
+  pull_request:
+    paths:
+      - "lcms/**"
+      - "scripts/capture-cip-visuals.mjs"
+      - ".github/workflows/capture-cip-visuals.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 > /tmp/cip-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/lcms/academy/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/cip-http.log
+          exit 1
+      - name: Capture responsive pages
+        run: node scripts/capture-cip-visuals.mjs
+      - name: Upload visual audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: cip-visual-audit
+          path: artifacts/cip-visual-audit
+          retention-days: 7
