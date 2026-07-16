@@ -21,18 +21,25 @@ course.modules.forEach((module, index) => {
   assert(module.title && module.theory && module.practice, `Week ${index + 1} is missing title, theory, or practice`);
 });
 
-const requiredStyles = ['./ux-core.css', './ux-course.css', './ux-lesson.css'];
+const requiredStyles = ['./ux-core.css', './ux-course.css', './ux-lesson.css', './art-direction.css'];
 for (const file of ['lcms/academy/index.html', 'lcms/academy/course.html', 'lcms/academy/lesson.html']) {
   const html = read(file);
   for (const style of requiredStyles) assert(html.includes(style), `${file} is missing ${style}`);
+  assert(html.includes('../cip-art-direction.css'), `${file} is missing shared CIP art direction`);
   assert(html.includes('./academy.js'), `${file} is missing academy.js`);
 }
 
+const academyIndex = read('lcms/academy/index.html');
+assert(academyIndex.includes('academy-art-word'), 'Academy typographic hero is missing');
+assert(academyIndex.includes('academy-art-poster'), 'Academy editorial poster is missing');
+assert(academyIndex.includes('12<br />WEEKS') || academyIndex.includes('12 WEEKS'), 'Academy 12-week poster data is missing');
+
 const academySource = [
-  read('lcms/academy/index.html'),
+  academyIndex,
   read('lcms/academy/course.html'),
   read('lcms/academy/lesson.html'),
   read('lcms/academy/academy.js'),
+  read('lcms/academy/art-direction.css'),
   read('lcms/academy/data/courses.json')
 ].join('\n');
 
@@ -42,5 +49,6 @@ assert(academySource.includes('LMC 평생진로상담사'), 'LMC course identity
 assert(academySource.includes('mobile-learning-bar'), 'Mobile learning controls are missing');
 assert(academySource.includes('course-quicknav'), 'Course quick navigation is missing');
 assert(academySource.includes('note-save-status'), 'Autosave status UI is missing');
+assert(academySource.includes('art-academy-hero'), 'Academy contemporary art hero class is missing');
 
 console.log('LMC Academy quality checks passed.');
