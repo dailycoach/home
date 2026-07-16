@@ -1,0 +1,66 @@
+/* CIP micro polish · based on 1440 / 1024 / 390 visual audit */
+
+body::before { opacity: .1; }
+
+/* Project Experience */
+body.cip-experience-page .art-experience-hero h1 {
+  font-size: clamp(52px, 6vw, 90px);
+  line-height: .94;
+  letter-spacing: -.07em;
+}
+body.cip-experience-page .art-flagship .info-card h3 strong { color: #07985b; }
+body.cip-experience-page .art-index-card:first-child::after {
+  right: 12px;
+  bottom: 12px;
+  width: 152px;
+  transform: rotate(2deg);
+}
+
+/* Academy hero and poster */
+body.academy-page .art-academy-hero h1 {
+  font-size: clamp(54px, 6.6vw, 96px);
+  line-height: .92;
+}
+body.academy-page .art-academy-hero .academy-hero-copy h1 span { color: #0a9f68; }
+body.academy-page .academy-poster-tile strong {
+  font-size: clamp(30px, 3.6vw, 52px);
+  letter-spacing: -.07em;
+  white-space: nowrap;
+}
+body.academy-page .academy-poster-main::after {
+  left: -20px;
+  top: 88px;
+  bottom: auto;
+  width: 156px;
+  transform: rotate(-3deg);
+}
+
+/* Course and lesson spacing */
+body[data-academy-page="course"] .academy-breadcrumb,
+body[data-academy-page="lesson"] .academy-breadcrumb { margin-bottom: 12px; }
+body[data-academy-page="lesson"] .mobile-learning-bar a {
+  border: 1px solid rgba(7,28,67,.1);
+  background: #e2ebf6;
+  font-size: 17px;
+}
+
+@media (max-width: 760px) {
+  body::before { opacity: .07; }
+
+  body.cip-experience-page .art-index-card:first-child::after,
+  body.academy-page .academy-poster-main::after { display: none; }
+
+  body.academy-page .academy-poster-tile { padding: 16px 12px; }
+  body.academy-page .academy-poster-tile strong { font-size: 26px; }
+
+  body[data-academy-page="course"] .course-detail-copy h1 {
+    font-size: 44px;
+    line-height: .92;
+  }
+  body[data-academy-page="lesson"] .lesson-title-row h1 {
+    font-size: 40px;
+    line-height: .92;
+  }
+
+  body.cip-experience-page .archive-section { padding-top: 78px; }
+}
