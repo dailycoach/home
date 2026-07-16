@@ -23,7 +23,7 @@ body.academy-page .art-academy-hero h1 {
 }
 body.academy-page .art-academy-hero .academy-hero-copy h1 span { color: #0a9f68; }
 body.academy-page .academy-poster-tile strong {
-  font-size: clamp(30px, 3.6vw, 52px);
+  font-size: clamp(30px, 3.6vw, 49px);
   letter-spacing: -.07em;
   white-space: nowrap;
 }
