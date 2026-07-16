@@ -87,7 +87,10 @@ for (const viewport of viewports) {
         .filter((element) => {
           const style = getComputedStyle(element);
           if (style.display === 'none' || style.visibility === 'hidden') return false;
-          return element.scrollWidth > element.clientWidth + 2 || element.scrollHeight > element.clientHeight + 2;
+          const horizontal = element.scrollWidth > element.clientWidth + 2;
+          const verticalClipped = ['hidden', 'clip'].includes(style.overflowY)
+            && element.scrollHeight > element.clientHeight + 2;
+          return horizontal || verticalClipped;
         })
         .slice(0, 40)
         .map((element) => ({
@@ -102,7 +105,7 @@ for (const viewport of viewports) {
 
       return {
         title: document.title,
-        viewport: { width: doc.clientWidth, height: window.innerHeight },
+        viewportMetrics: { width: doc.clientWidth, height: window.innerHeight },
         document: { width: doc.scrollWidth, height: doc.scrollHeight },
         horizontalOverflow: doc.scrollWidth > doc.clientWidth + 1,
         elements,
@@ -113,7 +116,8 @@ for (const viewport of viewports) {
     report.push({
       page: target.name,
       url: target.url,
-      viewport,
+      viewportName: viewport.name,
+      captureViewport: { width: viewport.width, height: viewport.height },
       consoleErrors,
       ...metrics
     });
@@ -129,10 +133,10 @@ await fs.writeFile(path.join(outputDir, 'report.json'), JSON.stringify(report, n
 
 const summary = report.map((item) => ({
   page: item.page,
-  viewport: item.viewport.name,
+  viewport: item.viewportName,
   horizontalOverflow: item.horizontalOverflow,
   documentWidth: item.document.width,
-  viewportWidth: item.viewport.width,
+  viewportWidth: item.viewportMetrics.width,
   consoleErrors: item.consoleErrors.length,
   clippedElements: item.elements.filter((element) => element.clippedLeft || element.clippedRight).length,
   textOverflow: item.textOverflow.length
