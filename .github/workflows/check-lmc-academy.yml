@@ -1,16 +1,24 @@
-name: Check LMC Academy
+name: Check CIP Experience and Academy
 
 on:
   pull_request:
     paths:
       - "lcms/academy/**"
+      - "lcms/business-achievements.html"
+      - "lcms/business-art.css"
+      - "lcms/cip-art-direction.css"
       - "scripts/check-lmc-academy.mjs"
+      - "scripts/check-cip-art.mjs"
       - ".github/workflows/check-lmc-academy.yml"
   push:
     branches: ["main"]
     paths:
       - "lcms/academy/**"
+      - "lcms/business-achievements.html"
+      - "lcms/business-art.css"
+      - "lcms/cip-art-direction.css"
       - "scripts/check-lmc-academy.mjs"
+      - "scripts/check-cip-art.mjs"
       - ".github/workflows/check-lmc-academy.yml"
   workflow_dispatch:
 
@@ -30,3 +38,5 @@ jobs:
         run: node --check lcms/academy/academy.js
       - name: Check LMC Academy structure
         run: node scripts/check-lmc-academy.mjs
+      - name: Check CIP project archive art direction
+        run: node scripts/check-cip-art.mjs
