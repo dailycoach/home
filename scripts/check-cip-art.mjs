@@ -12,6 +12,7 @@ const sharedCss = read('lcms/cip-art-direction.css');
 const businessCss = read('lcms/business-art.css');
 const trendCss = read('lcms/cip-2026-trends.css');
 const overridesCss = read('lcms/cip-2026-overrides.css');
+const microCss = read('lcms/cip-micro-polish.css');
 
 assert(html.includes('./cip-art-direction.css'), 'Project Experience is missing shared CIP art direction');
 assert(html.includes('./business-art.css'), 'Project Experience is missing business art direction');
@@ -35,11 +36,15 @@ for (const selector of ['.art-experience-hero', '.archive-grid', '.art-timeline'
 
 assert(sharedCss.includes('cip-2026-trends.css'), 'Shared art system is missing the 2026 trend layer import');
 assert(sharedCss.includes('cip-2026-overrides.css'), 'Shared art system is missing 2026 page overrides');
+assert(sharedCss.includes('cip-micro-polish.css'), 'Shared art system is missing screenshot-driven micro polish');
 for (const token of ['--trend-acid', 'trend-type-breathe', 'repeating-radial-gradient', 'prefers-reduced-motion']) {
   assert(trendCss.includes(token), `2026 trend token missing: ${token}`);
 }
 for (const token of ['FIELD EXPERIENCE', 'Field note', 'cip-strip-shift', 'cip-blob-warp']) {
   assert(overridesCss.includes(token), `Project archive trend treatment missing: ${token}`);
 }
+for (const token of ['Screenshot-driven micro polish', 'academy-poster-tile', 'lesson-title-row h1', 'display: none']) {
+  assert(microCss.includes(token), `Micro polish treatment missing: ${token}`);
+}
 
-console.log('CIP 2026 project archive design checks passed.');
+console.log('CIP 2026 project archive and micro polish checks passed.');
