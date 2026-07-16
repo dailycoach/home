@@ -43,7 +43,7 @@ for (const token of ['--trend-acid', 'trend-type-breathe', 'repeating-radial-gra
 for (const token of ['FIELD EXPERIENCE', 'Field note', 'cip-strip-shift', 'cip-blob-warp']) {
   assert(overridesCss.includes(token), `Project archive trend treatment missing: ${token}`);
 }
-for (const token of ['Screenshot-driven micro polish', 'academy-poster-tile', 'lesson-title-row h1', 'display: none']) {
+for (const token of ['CIP micro polish', 'academy-poster-tile', 'lesson-title-row h1', 'display: none']) {
   assert(microCss.includes(token), `Micro polish treatment missing: ${token}`);
 }
 
