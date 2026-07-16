@@ -2,7 +2,7 @@
   'use strict';
   const DATA=window.DISC16_YOUTH_DATA;
   const {TYPES,COLORS,COPY,DISPLAY,QUESTIONS,PROFILES,PAIRS}=DATA;
-  const STORAGE_KEY='disc16:youth:answers:v1';
+  const STORAGE_KEY='disc16:youth:answers:v2';
   const $=(s)=>document.querySelector(s);
   const start=$('#start'),test=$('#test'),result=$('#result'),startBtn=$('#startBtn');
   let current=0,timer=null,answers=load();
@@ -18,8 +18,6 @@
     const q=QUESTIONS[current],order=answers[current]||[];
     $('#progressText').textContent=`${current+1} / ${QUESTIONS.length}`;
     $('#progressBar').style.width=`${((current+1)/QUESTIONS.length)*100}%`;
-    $('#domainLabel').textContent=q.domain==='family'?'가정환경 장면':'또래집단 장면';
-    $('#domainLabel').className=`domain${q.domain==='peer'?' peer':''}`;
     $('#sceneText').textContent=q.scene;
     const box=$('#options');box.innerHTML='';
     DISPLAY[current].forEach(index=>{
@@ -37,7 +35,7 @@
     cancel();let order=[...(answers[current]||[])],at=order.indexOf(type);
     if(at>=0)order=order.slice(0,at);else if(order.length<4)order.push(type);
     answers[current]=order;save();renderQuestion();
-    if(order.length===4)timer=setTimeout(()=>{timer=null;if(current<QUESTIONS.length-1){current+=1;renderQuestion();scrollTo(0,0)}else showResult()},450);
+    if(order.length===4)timer=setTimeout(()=>{timer=null;if(current<QUESTIONS.length-1){current+=1;renderQuestion();scrollTo(0,0)}else showResult()},700);
   }
 
   function calculate(){
