@@ -5,18 +5,21 @@
   const STORAGE_KEY='disc16:youth:answers:v2';
   const $=(s)=>document.querySelector(s);
   const start=$('#start'),test=$('#test'),result=$('#result'),startBtn=$('#startBtn');
-  let current=0,timer=null,answers=load();
+  let timer=null,answers=load();
+  let current=findResumeIndex();
 
   function load(){try{const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(value)?value.slice(0,QUESTIONS.length).map(a=>Array.isArray(a)?[...new Set(a.filter(t=>TYPES.includes(t)))].slice(0,4):[]):[]}catch{return[]}}
   function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(answers))}
   function cancel(){if(timer){clearTimeout(timer);timer=null}}
   function complete(){return answers.length===QUESTIONS.length&&answers.every(a=>Array.isArray(a)&&a.length===4)}
   function clamp(v){return Math.max(0,Math.min(10,v))}
+  function findResumeIndex(){const index=QUESTIONS.findIndex((_,i)=>(answers[i]||[]).length<4);return index<0?0:index}
+  function answeredCount(){return answers.filter(a=>Array.isArray(a)&&a.length===4).length}
 
-  function openTest(){start.classList.add('hidden');test.classList.remove('hidden');renderQuestion()}
+  function openTest(){current=findResumeIndex();start.classList.add('hidden');test.classList.remove('hidden');renderQuestion();scrollTo(0,0)}
   function renderQuestion(){
     const q=QUESTIONS[current],order=answers[current]||[];
-    $('#progressText').textContent=`${current+1} / ${QUESTIONS.length}`;
+    $('#progressText').textContent=`${current+1} / ${QUESTIONS.length} · ${order.length}/4 선택`;
     $('#progressBar').style.width=`${((current+1)/QUESTIONS.length)*100}%`;
     $('#sceneText').textContent=q.scene;
     const box=$('#options');box.innerHTML='';
@@ -25,10 +28,12 @@
       const b=document.createElement('button');b.type='button';b.className=`option${rank?' selected':''}`;
       if(rank)b.dataset.rank=String(rank);
       b.setAttribute('aria-pressed',rank?'true':'false');
-      b.innerHTML=`${label}${rank?`<span class="rank" aria-label="${rank}순위">${rank}</span>`:''}`;
+      b.setAttribute('aria-label',rank?`${label}, ${rank}순위로 선택됨`:label);
+      b.innerHTML=`${label}${rank?`<span class="rank" aria-hidden="true">${rank}</span>`:''}`;
       b.addEventListener('click',()=>pick(type));box.appendChild(b);
     });
     $('#prevBtn').disabled=current===0;
+    $('#resetBtn').disabled=order.length===0;
   }
 
   function pick(type){
@@ -72,7 +77,7 @@
       <button class="ghost" id="printBtn" type="button" style="margin-top:28px">결과 인쇄하기</button><button class="ghost" id="again" type="button" style="margin-top:10px">다시 검사하기</button>
       <p class="notice">이 결과는 누가 더 좋은지를 평가하지 않습니다. 집과 친구 사이에서 내가 자주 사용하는 반응을 이해하고 새로운 선택을 찾기 위한 자료입니다.</p>`;
     drawMap(x,y,first,second,third);
-    $('#printBtn').addEventListener('click',()=>window.print());$('#again').addEventListener('click',()=>{localStorage.removeItem(STORAGE_KEY);location.reload()});scrollTo(0,0);
+    $('#printBtn').addEventListener('click',()=>window.print());$('#again').addEventListener('click',()=>{if(confirm('저장된 응답을 지우고 처음부터 다시 검사할까요?')){localStorage.removeItem(STORAGE_KEY);location.reload()}});scrollTo(0,0);
   }
 
   const rankCard=(rank,role,type,text)=>`<div class="rank-card" style="--rankColor:${COLORS[type]}"><small>${rank}순위 · ${role}</small><strong>${type} ${PROFILES[type].name}</strong><p>${text}</p></div>`;
@@ -82,6 +87,15 @@
 
   function drawMap(x,y,first,second,third){const c=$('#map'),g=c.getContext('2d'),w=c.width,h=c.height,p=64,plot=w-p*2;g.clearRect(0,0,w,h);g.fillStyle='#101725';g.fillRect(0,0,w,h);g.strokeStyle='#2a3850';for(let i=0;i<=10;i++){const k=p+plot*i/10;g.beginPath();g.moveTo(k,p);g.lineTo(k,h-p);g.stroke();g.beginPath();g.moveTo(p,k);g.lineTo(w-p,k);g.stroke()}g.strokeStyle='#687895';g.lineWidth=2;g.beginPath();g.moveTo(w/2,p);g.lineTo(w/2,h-p);g.moveTo(p,h/2);g.lineTo(w-p,h/2);g.stroke();g.font='bold 29px sans-serif';g.fillStyle=COLORS.C;g.fillText('C',p+18,p+40);g.fillStyle=COLORS.D;g.fillText('D',w-p-42,p+40);g.fillStyle=COLORS.S;g.fillText('S',p+18,h-p-18);g.fillStyle=COLORS.I;g.fillText('I',w-p-38,h-p-18);const px=p+plot*x/10,py=h-p-plot*y/10;g.globalAlpha=.2;g.fillStyle=COLORS[first];g.beginPath();g.arc(px,py,58,0,Math.PI*2);g.fill();g.globalAlpha=1;[first,second,third].forEach((t,i)=>{g.strokeStyle=COLORS[t];g.lineWidth=5-i;g.beginPath();g.arc(px,py,20-i*5,(Math.PI*2/3)*i,(Math.PI*2/3)*(i+1));g.stroke()});g.fillStyle='#fff';g.beginPath();g.arc(px,py,5,0,Math.PI*2);g.fill()}
 
-  $('#prevBtn').addEventListener('click',()=>{cancel();if(current>0){current-=1;renderQuestion();scrollTo(0,0)}});$('#resetBtn').addEventListener('click',()=>{cancel();answers[current]=[];save();renderQuestion()});
-  if(complete()){startBtn.textContent='저장된 결과 이어보기';startBtn.addEventListener('click',()=>{start.classList.add('hidden');showResult()},{once:true})}else startBtn.addEventListener('click',openTest);
+  $('#prevBtn').addEventListener('click',()=>{cancel();if(current>0){current-=1;renderQuestion();scrollTo(0,0)}});
+  $('#resetBtn').addEventListener('click',()=>{cancel();if((answers[current]||[]).length===0)return;answers[current]=[];save();renderQuestion()});
+
+  if(complete()){
+    startBtn.textContent='저장된 결과 보기';
+    startBtn.addEventListener('click',()=>{start.classList.add('hidden');showResult()},{once:true});
+  }else{
+    const done=answeredCount();
+    if(done>0)startBtn.textContent=`이어서 검사하기 · ${done}/${QUESTIONS.length}`;
+    startBtn.addEventListener('click',openTest);
+  }
 })();
