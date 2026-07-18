@@ -84,6 +84,13 @@
     "source": "local import"
   },
   {
+    "title": "플로리싱 × 알아차림 성장검사",
+    "description": "PERMA 5요소와 알아차림 코칭 5역량을 연결해 현재의 성장상태와 7주 실험을 설계하는 자기점검 도구",
+    "category": "tests",
+    "url": "/tests/flourish-awareness/",
+    "source": "local import"
+  },
+  {
     "title": "DISC16 행동스타일 코칭검사",
     "description": "순위선택형 DISC 행동분포와 관계장면을 16가지 유형으로 해석하는 코칭검사",
     "category": "tests",
