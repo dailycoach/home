@@ -49,9 +49,12 @@ jobs:
           exit 1
 
       - name: Capture result and coach reports
+        id: visual_audit
+        continue-on-error: true
         run: node scripts/capture-self-coach-visuals.mjs
 
       - name: Upload visual audit
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: self-editorial-visual-audit-v980
@@ -59,9 +62,25 @@ jobs:
           retention-days: 7
 
       - name: Save visual audit status
+        if: always()
         run: |
+          test -f tests/self/visual-audit-status-v980.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add tests/self/visual-audit-status-v980.json
           git commit -m "chore: record SELF INC. v9.8 visual audit [skip ci]" || exit 0
           git push
+
+      - name: Verify visual audit
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('tests/self/visual-audit-status-v980.json')
+          if not path.exists():
+              raise SystemExit('visual audit status file missing')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          if not data.get('passed'):
+              raise SystemExit('visual audit failed; inspect artifact and status JSON')
+          PY
