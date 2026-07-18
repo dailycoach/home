@@ -5,7 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "tests/self/**"
-      - "scripts/capture-self-coach-visuals.mjs"
+      - "scripts/capture-self-editorial-audit.mjs"
       - ".github/workflows/capture-self-coach-visuals.yml"
   workflow_dispatch:
 
@@ -36,7 +36,7 @@ jobs:
         run: |
           node --check tests/self/assets/self-v9-coach-clean.js
           node --check tests/self/assets/self-v9-coach-interaction.js
-          node --check scripts/capture-self-coach-visuals.mjs
+          node --check scripts/capture-self-editorial-audit.mjs
 
       - name: Start local site
         run: |
@@ -51,7 +51,7 @@ jobs:
       - name: Capture result and coach reports
         id: visual_audit
         continue-on-error: true
-        run: node scripts/capture-self-coach-visuals.mjs
+        run: node scripts/capture-self-editorial-audit.mjs
 
       - name: Upload visual audit
         if: always()
