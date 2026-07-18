@@ -415,25 +415,39 @@ function renderResult(result) {
   const flourishKeys = sortedKeys(result, "flourish");
   const awarenessKeys = sortedKeys(result, "awareness");
   const strengthKey = flourishKeys[0];
-  const growthKey = flourishKeys.at(-1);
-  const leverKey = awarenessKeys.at(-1);
+  const flourishDomainKeys = ["P", "E", "R", "M", "A"];
+  const awarenessDomainKeys = ["SN", "NM", "PT", "VL", "CH"];
+  const maxFlourish = Math.max(...flourishDomainKeys.map((key) => result.domainScores[key]));
+  const minFlourish = Math.min(...flourishDomainKeys.map((key) => result.domainScores[key]));
+  const minAwareness = Math.min(...awarenessDomainKeys.map((key) => result.domainScores[key]));
+  const strengthTies = flourishDomainKeys.filter((key) => Math.abs(result.domainScores[key] - maxFlourish) < .11);
+  const growthTies = flourishDomainKeys.filter((key) => Math.abs(result.domainScores[key] - minFlourish) < .11);
+  const leverTies = awarenessDomainKeys.filter((key) => Math.abs(result.domainScores[key] - minAwareness) < .11);
+  const growthKey = growthTies[0];
+  const leverKey = leverTies[0];
   const stateInfo = STATE_DATA[result.stateKey];
   const displayName = result.name ? `${escapeHtml(result.name)}님의` : "당신의";
 
   $("#result-title").innerHTML = `${displayName}<br>성장 지도를 읽었습니다.`;
-  $("#result-date").textContent = `${new Intl.DateTimeFormat("ko-KR", { dateStyle: "long" }).format(new Date(result.createdAt))} · ${contextLabel(result.context)}`;
+  $("#result-date").textContent = `${new Intl.DateTimeFormat("ko-KR", { dateStyle: "long", timeZone: "Asia/Seoul" }).format(new Date(result.createdAt))} · ${contextLabel(result.context)}`;
   $("#state-code").textContent = stateInfo.code;
   $("#state-name").textContent = stateInfo.name;
   $("#state-summary").textContent = stateInfo.summary;
   $("#flourish-score").textContent = result.flourish.toFixed(1);
   $("#awareness-score").textContent = result.awareness.toFixed(1);
 
-  $("#strength-title").textContent = `${DOMAINS[strengthKey].name}이 삶을 받치고 있습니다.`;
-  $("#strength-copy").textContent = `${DOMAINS[strengthKey].desc}이 현재 가장 선명합니다. 이 점수가 높다는 사실보다, 이 힘이 살아나는 조건을 다른 장면에도 옮겨 쓰는 것이 중요합니다.`;
-  $("#growth-title").textContent = `${DOMAINS[growthKey].name}에 먼저 여백이 필요합니다.`;
-  $("#growth-copy").textContent = `${DOMAINS[growthKey].desc}이 부족하다는 판정이 아닙니다. 지금의 생활에서 이 경험이 상대적으로 덜 확보되어 있음을 뜻합니다.`;
-  $("#lever-title").textContent = `${DOMAINS[leverKey].name}부터 연결합니다.`;
-  $("#lever-copy").textContent = `${DOMAINS[leverKey].desc}을 보완하면 ${DOMAINS[growthKey].name}을 의지로 밀어붙이지 않고 실제 장면에서 다룰 수 있습니다.`;
+  $("#strength-title").textContent = strengthTies.length > 1 ? "여러 요소가 함께 삶을 받치고 있습니다." : `현재 삶을 받치는 힘은 ${DOMAINS[strengthKey].name}입니다.`;
+  $("#strength-copy").textContent = strengthTies.length > 1
+    ? `${strengthTies.map((key) => DOMAINS[key].name).join("·")} 영역이 비슷한 수준으로 작동합니다. 한 가지 강점에 의존하기보다 여러 자원이 함께 움직이는 조건을 살펴보는 것이 중요합니다.`
+    : `${DOMAINS[strengthKey].desc}이 현재 가장 선명합니다. 이 점수가 높다는 사실보다, 이 힘이 살아나는 조건을 다른 장면에도 옮겨 쓰는 것이 중요합니다.`;
+  $("#growth-title").textContent = growthTies.length > 1 ? "한 영역보다 공통 생활조건을 먼저 봅니다." : `${DOMAINS[growthKey].name} 영역에 먼저 여백이 필요합니다.`;
+  $("#growth-copy").textContent = growthTies.length > 1
+    ? `${growthTies.map((key) => DOMAINS[key].name).join("·")} 영역의 점수가 같습니다. 어느 하나를 결함으로 정하기보다 피로, 시간 압박, 환경처럼 여러 영역을 함께 낮추는 조건을 확인해야 합니다.`
+    : `${DOMAINS[growthKey].desc}이 부족하다는 판정이 아닙니다. 지금의 생활에서 이 경험이 상대적으로 덜 확보되어 있음을 뜻합니다.`;
+  $("#lever-title").textContent = leverTies.length > 1 ? "알아차림의 첫 단계부터 차례로 연결합니다." : `${DOMAINS[leverKey].name} 역량부터 연결합니다.`;
+  $("#lever-copy").textContent = leverTies.length > 1
+    ? `${leverTies.map((key) => DOMAINS[key].name).join("·")} 역량이 같은 수준입니다. 이때는 신호 포착에서 시작해 명명, 패턴, 고유성, 선택으로 이어지는 순서를 따라가는 것이 안정적입니다.`
+    : `${DOMAINS[leverKey].desc}입니다. 이 역량을 보완하면 ${DOMAINS[growthKey].name} 영역을 의지로 밀어붙이지 않고 실제 장면에서 다룰 수 있습니다.`;
 
   renderRadar(result);
   renderLegend(result);
@@ -500,7 +514,7 @@ function openHistory() {
   const list = $("#history-list");
   list.innerHTML = records.length ? records.map((record, index) => `
     <article class="history-item">
-      <div><h3>${escapeHtml(record.name || "이름 없는 기록")} · ${STATE_DATA[record.stateKey]?.name || "성장 지도"}</h3><p>${new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium" }).format(new Date(record.createdAt))} · ${contextLabel(record.context)}</p></div>
+      <div><h3>${escapeHtml(record.name || "이름 없는 기록")} · ${STATE_DATA[record.stateKey]?.name || "성장 지도"}</h3><p>${new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeZone: "Asia/Seoul" }).format(new Date(record.createdAt))} · ${contextLabel(record.context)}</p></div>
       <div class="history-scores"><span>${record.flourish.toFixed(1)} / ${record.awareness.toFixed(1)}</span><button type="button" data-history-index="${index}">보기</button></div>
     </article>`).join("") : `<p class="empty-history">아직 저장된 기록이 없습니다.</p>`;
   list.querySelectorAll("button[data-history-index]").forEach((button) => button.addEventListener("click", () => {
