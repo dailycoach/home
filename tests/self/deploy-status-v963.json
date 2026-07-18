@@ -1,0 +1,23 @@
+{
+  "workflow": "deploy-self-v963",
+  "sourceSha": "8ca9b7f3edaddba161e52cac379bf7a2c58d13fb",
+  "requestHttpStatus": 201,
+  "latestBuildStatus": "built",
+  "liveCheck": {
+    "url": "https://daily-coach-ing.com/tests/self/index.html",
+    "httpStatus": 200,
+    "interactionScriptHttpStatus": 200,
+    "interactionCssHttpStatus": 200,
+    "version963": true,
+    "compactStatusPanel": true,
+    "detailsToggle": true,
+    "inlineSelectionValues": true,
+    "tabsSpacingFixed": true,
+    "mobileSelectedBadgeHidden": true,
+    "status": "verified",
+    "htmlSha256": "93beca47b2a1a95db956019794001bfa1170df32f1d588a5220ba625670a386b",
+    "interactionScriptSha256": "20db33c0b3e35e3478b4e1897e9b8694e01eba79512ee9084925faf9fab5b28a",
+    "interactionCssSha256": "88daf5d0ba52542ad6cb11d00cdac4a5737758cada82fe85376ba749e4fb558a"
+  },
+  "checkedAt": "2026-07-18T15:26:03.461704+00:00"
+}
