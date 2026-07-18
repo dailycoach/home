@@ -1,0 +1,25 @@
+{
+  "workflow": "deploy-self-v980",
+  "sourceSha": "2eeedb64bd59c121b7f9638f40b971ae04f1214d",
+  "requestHttpStatus": 201,
+  "latestBuildStatus": "built",
+  "liveCheck": {
+    "url": "https://daily-coach-ing.com/tests/self/index.html",
+    "httpStatus": 200,
+    "cleanScriptHttpStatus": 200,
+    "editorialCssHttpStatus": 200,
+    "version980": true,
+    "kingdomIdentityPreserved": true,
+    "originalFunctionsPreserved": true,
+    "editorialReportLayer": true,
+    "magazineResultLayout": true,
+    "fiveDomainIndexLayout": true,
+    "editorialCoachLayout": true,
+    "reducedMotionSupport": true,
+    "status": "verified",
+    "htmlSha256": "f34620ce4296eeebd3156aed088bd3a831708775c2c1cf534a414eabfd9b7dfe",
+    "cleanScriptSha256": "b56e2c5e5f4c2bd1db2f5aa7f18e6eae49b7f6d06f2002965f2dbe1f5bc24ff8",
+    "editorialCssSha256": "836195651c2bf2ddaf11abae285233b3ebb1c192cfb074c5b7ffdb7202090f5f"
+  },
+  "checkedAt": "2026-07-18T17:04:15.809798+00:00"
+}
