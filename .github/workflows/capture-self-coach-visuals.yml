@@ -1,4 +1,4 @@
-name: Capture SELF INC. Coach Visual Audit
+name: Capture SELF INC. Editorial Visual Audit
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: self-coach-visual-audit-v971
+  group: self-editorial-visual-audit-v980
   cancel-in-progress: true
 
 jobs:
@@ -48,13 +48,13 @@ jobs:
           cat /tmp/self-http.log
           exit 1
 
-      - name: Capture and audit coach view
+      - name: Capture result and coach reports
         run: node scripts/capture-self-coach-visuals.mjs
 
       - name: Upload visual audit
         uses: actions/upload-artifact@v4
         with:
-          name: self-coach-visual-audit-v971
+          name: self-editorial-visual-audit-v980
           path: artifacts/self-coach-visual-audit
           retention-days: 7
 
@@ -62,6 +62,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/visual-audit-status-v971.json
-          git commit -m "chore: record SELF INC. v9.7.1 visual audit [skip ci]" || exit 0
+          git add tests/self/visual-audit-status-v980.json
+          git commit -m "chore: record SELF INC. v9.8 visual audit [skip ci]" || exit 0
           git push
