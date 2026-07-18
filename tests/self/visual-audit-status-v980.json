@@ -1,0 +1,334 @@
+{
+  "version": "9.8.0",
+  "audit": "editorial-result-and-kingdom-coach-report",
+  "passed": false,
+  "viewportCount": 4,
+  "resultPassCount": 4,
+  "coachPassCount": 0,
+  "horizontalOverflowCount": 0,
+  "clippedCount": 0,
+  "textOverflowCount": 12,
+  "consoleErrorCount": 0,
+  "interactionPassCount": 4,
+  "identityPassCount": 4,
+  "functionPassCount": 4,
+  "viewports": [
+    {
+      "viewport": "mobile",
+      "capture": {
+        "width": 390,
+        "height": 844
+      },
+      "detailsInitiallyCollapsed": true,
+      "initialDomain": "자기존중",
+      "changedDomain": "자기기준",
+      "tabInteractionChanged": true,
+      "highStateChanged": true,
+      "consoleErrors": [],
+      "result": {
+        "viewportWidth": 390,
+        "documentWidth": 390,
+        "horizontalOverflow": false,
+        "reportClipped": false,
+        "resultBodyOverflow": false,
+        "domainCount": 5,
+        "insightCount": 2,
+        "dayCount": 7,
+        "editorialCardRadius": 4,
+        "flatDomainRadius": 0,
+        "flatExperimentRadius": 0,
+        "sectionTopRule": 3,
+        "coverEditorialWord": true,
+        "textOverflow": []
+      },
+      "coach": {
+        "viewportWidth": 390,
+        "documentWidth": 390,
+        "horizontalOverflow": false,
+        "sheetClipped": false,
+        "contentOverflow": false,
+        "activeTabClipped": false,
+        "synthesisCardCount": 2,
+        "perspectiveCardCount": 3,
+        "sessionQuestionCount": 5,
+        "detailExists": true,
+        "flourishFlowAbsent": true,
+        "identityRestored": true,
+        "selectedBadgeCount": 1,
+        "minTabHeight": 46,
+        "closeTarget": 36,
+        "coachGuideReady": true,
+        "flatSynthesisRadius": 0,
+        "flatSynthesisCardRadius": 0,
+        "flatStateCardRadius": 0,
+        "textOverflow": [
+          {
+            "selector": ".coach-state-card p",
+            "text": "영역 간 차이가 작은 균형형입니다. 자기기준 50점은 전체 50점과의 관계 속에서 강점과 취약영역을 연결하는 조절 영역으로 볼 수 있습니다. 코치는 이 점수를 독",
+            "clientWidth": 326,
+            "scrollWidth": 326,
+            "clientHeight": 63,
+            "scrollHeight": 127
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 사회비교, 조건부 자기가치, 평가 민감성과 자기기준과 관련된 영역입니다. 현재 50점은 적응적 반응과 취약 반응이 장면에 따라 교차하는 전환 구간으로 ",
+            "clientWidth": 326,
+            "scrollWidth": 326,
+            "clientHeight": 63,
+            "scrollHeight": 190
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 또래 영향, 정체성 탐색, 미디어·성과 환경 속 자기기준 형성과 관련됩니다. 현재 결과는 완전한 보호나 방임보다 선택 범위를 제한해 스스로 결정하게 하",
+            "clientWidth": 326,
+            "scrollWidth": 326,
+            "clientHeight": 63,
+            "scrollHeight": 211
+          }
+        ]
+      },
+      "resultPassed": true,
+      "coachPassed": false,
+      "passed": false
+    },
+    {
+      "viewport": "mobile-wide",
+      "capture": {
+        "width": 430,
+        "height": 932
+      },
+      "detailsInitiallyCollapsed": true,
+      "initialDomain": "자기존중",
+      "changedDomain": "자기기준",
+      "tabInteractionChanged": true,
+      "highStateChanged": true,
+      "consoleErrors": [],
+      "result": {
+        "viewportWidth": 430,
+        "documentWidth": 430,
+        "horizontalOverflow": false,
+        "reportClipped": false,
+        "resultBodyOverflow": false,
+        "domainCount": 5,
+        "insightCount": 2,
+        "dayCount": 7,
+        "editorialCardRadius": 4,
+        "flatDomainRadius": 0,
+        "flatExperimentRadius": 0,
+        "sectionTopRule": 3,
+        "coverEditorialWord": true,
+        "textOverflow": []
+      },
+      "coach": {
+        "viewportWidth": 430,
+        "documentWidth": 430,
+        "horizontalOverflow": false,
+        "sheetClipped": false,
+        "contentOverflow": false,
+        "activeTabClipped": false,
+        "synthesisCardCount": 2,
+        "perspectiveCardCount": 3,
+        "sessionQuestionCount": 5,
+        "detailExists": true,
+        "flourishFlowAbsent": true,
+        "identityRestored": true,
+        "selectedBadgeCount": 1,
+        "minTabHeight": 46,
+        "closeTarget": 36,
+        "coachGuideReady": true,
+        "flatSynthesisRadius": 0,
+        "flatSynthesisCardRadius": 0,
+        "flatStateCardRadius": 0,
+        "textOverflow": [
+          {
+            "selector": ".coach-state-card p",
+            "text": "영역 간 차이가 작은 균형형입니다. 자기기준 50점은 전체 50점과의 관계 속에서 강점과 취약영역을 연결하는 조절 영역으로 볼 수 있습니다. 코치는 이 점수를 독",
+            "clientWidth": 366,
+            "scrollWidth": 366,
+            "clientHeight": 63,
+            "scrollHeight": 106
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 사회비교, 조건부 자기가치, 평가 민감성과 자기기준과 관련된 영역입니다. 현재 50점은 적응적 반응과 취약 반응이 장면에 따라 교차하는 전환 구간으로 ",
+            "clientWidth": 366,
+            "scrollWidth": 366,
+            "clientHeight": 63,
+            "scrollHeight": 169
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 또래 영향, 정체성 탐색, 미디어·성과 환경 속 자기기준 형성과 관련됩니다. 현재 결과는 완전한 보호나 방임보다 선택 범위를 제한해 스스로 결정하게 하",
+            "clientWidth": 366,
+            "scrollWidth": 366,
+            "clientHeight": 63,
+            "scrollHeight": 190
+          }
+        ]
+      },
+      "resultPassed": true,
+      "coachPassed": false,
+      "passed": false
+    },
+    {
+      "viewport": "tablet",
+      "capture": {
+        "width": 1024,
+        "height": 900
+      },
+      "detailsInitiallyCollapsed": true,
+      "initialDomain": "자기존중",
+      "changedDomain": "자기기준",
+      "tabInteractionChanged": true,
+      "highStateChanged": true,
+      "consoleErrors": [],
+      "result": {
+        "viewportWidth": 1024,
+        "documentWidth": 1024,
+        "horizontalOverflow": false,
+        "reportClipped": false,
+        "resultBodyOverflow": false,
+        "domainCount": 5,
+        "insightCount": 2,
+        "dayCount": 7,
+        "editorialCardRadius": 8,
+        "flatDomainRadius": 0,
+        "flatExperimentRadius": 0,
+        "sectionTopRule": 3,
+        "coverEditorialWord": true,
+        "textOverflow": []
+      },
+      "coach": {
+        "viewportWidth": 1024,
+        "documentWidth": 1024,
+        "horizontalOverflow": false,
+        "sheetClipped": false,
+        "contentOverflow": false,
+        "activeTabClipped": false,
+        "synthesisCardCount": 2,
+        "perspectiveCardCount": 3,
+        "sessionQuestionCount": 5,
+        "detailExists": true,
+        "flourishFlowAbsent": true,
+        "identityRestored": true,
+        "selectedBadgeCount": 1,
+        "minTabHeight": 50,
+        "closeTarget": 38,
+        "coachGuideReady": true,
+        "flatSynthesisRadius": 0,
+        "flatSynthesisCardRadius": 0,
+        "flatStateCardRadius": 0,
+        "textOverflow": [
+          {
+            "selector": ".coach-state-card p",
+            "text": "영역 간 차이가 작은 균형형입니다. 자기기준 50점은 전체 50점과의 관계 속에서 강점과 취약영역을 연결하는 조절 영역으로 볼 수 있습니다. 코치는 이 점수를 독",
+            "clientWidth": 253,
+            "scrollWidth": 253,
+            "clientHeight": 63,
+            "scrollHeight": 169
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 사회비교, 조건부 자기가치, 평가 민감성과 자기기준과 관련된 영역입니다. 현재 50점은 적응적 반응과 취약 반응이 장면에 따라 교차하는 전환 구간으로 ",
+            "clientWidth": 253,
+            "scrollWidth": 253,
+            "clientHeight": 63,
+            "scrollHeight": 232
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 또래 영향, 정체성 탐색, 미디어·성과 환경 속 자기기준 형성과 관련됩니다. 현재 결과는 완전한 보호나 방임보다 선택 범위를 제한해 스스로 결정하게 하",
+            "clientWidth": 253,
+            "scrollWidth": 253,
+            "clientHeight": 63,
+            "scrollHeight": 274
+          }
+        ]
+      },
+      "resultPassed": true,
+      "coachPassed": false,
+      "passed": false
+    },
+    {
+      "viewport": "desktop",
+      "capture": {
+        "width": 1440,
+        "height": 1000
+      },
+      "detailsInitiallyCollapsed": true,
+      "initialDomain": "자기존중",
+      "changedDomain": "자기기준",
+      "tabInteractionChanged": true,
+      "highStateChanged": true,
+      "consoleErrors": [],
+      "result": {
+        "viewportWidth": 1440,
+        "documentWidth": 1440,
+        "horizontalOverflow": false,
+        "reportClipped": false,
+        "resultBodyOverflow": false,
+        "domainCount": 5,
+        "insightCount": 2,
+        "dayCount": 7,
+        "editorialCardRadius": 8,
+        "flatDomainRadius": 0,
+        "flatExperimentRadius": 0,
+        "sectionTopRule": 3,
+        "coverEditorialWord": true,
+        "textOverflow": []
+      },
+      "coach": {
+        "viewportWidth": 1440,
+        "documentWidth": 1440,
+        "horizontalOverflow": false,
+        "sheetClipped": false,
+        "contentOverflow": false,
+        "activeTabClipped": false,
+        "synthesisCardCount": 2,
+        "perspectiveCardCount": 3,
+        "sessionQuestionCount": 5,
+        "detailExists": true,
+        "flourishFlowAbsent": true,
+        "identityRestored": true,
+        "selectedBadgeCount": 1,
+        "minTabHeight": 50,
+        "closeTarget": 38,
+        "coachGuideReady": true,
+        "flatSynthesisRadius": 0,
+        "flatSynthesisCardRadius": 0,
+        "flatStateCardRadius": 0,
+        "textOverflow": [
+          {
+            "selector": ".coach-state-card p",
+            "text": "영역 간 차이가 작은 균형형입니다. 자기기준 50점은 전체 50점과의 관계 속에서 강점과 취약영역을 연결하는 조절 영역으로 볼 수 있습니다. 코치는 이 점수를 독",
+            "clientWidth": 253,
+            "scrollWidth": 253,
+            "clientHeight": 63,
+            "scrollHeight": 169
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 사회비교, 조건부 자기가치, 평가 민감성과 자기기준과 관련된 영역입니다. 현재 50점은 적응적 반응과 취약 반응이 장면에 따라 교차하는 전환 구간으로 ",
+            "clientWidth": 253,
+            "scrollWidth": 253,
+            "clientHeight": 63,
+            "scrollHeight": 232
+          },
+          {
+            "selector": ".coach-state-card p",
+            "text": "자기기준은 또래 영향, 정체성 탐색, 미디어·성과 환경 속 자기기준 형성과 관련됩니다. 현재 결과는 완전한 보호나 방임보다 선택 범위를 제한해 스스로 결정하게 하",
+            "clientWidth": 253,
+            "scrollWidth": 253,
+            "clientHeight": 63,
+            "scrollHeight": 274
+          }
+        ]
+      },
+      "resultPassed": true,
+      "coachPassed": false,
+      "passed": false
+    }
+  ],
+  "checkedAt": "2026-07-18T17:07:37.915Z"
+}
