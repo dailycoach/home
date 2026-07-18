@@ -373,33 +373,58 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
 const mean = (numbers) => numbers.reduce((a, b) => a + b, 0) / numbers.length;
 const round1 = (n) => Math.round(n * 10) / 10;
-const escapeHtml = (value = "") => value.replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+const escapeHtml = (value = "") => String(value).replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+
+function parseStoredArray(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch { return []; }
+}
+
+function isValidResultRecord(record) {
+  return Boolean(record && record.domainScores && GROUP_ORDER.every((key) => Number.isFinite(record.domainScores[key])) && Number.isFinite(record.flourish) && Number.isFinite(record.awareness) && record.createdAt && !Number.isNaN(new Date(record.createdAt).getTime()));
+}
+
+function resultRecordKey(result) {
+  return result?.id || result?.createdAt || null;
+}
 
 function getRecords() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
-  catch { return []; }
+  return parseStoredArray(STORAGE_KEY).filter(isValidResultRecord);
 }
 
 function saveRecord(record) {
   const records = getRecords();
   records.unshift(record);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records.slice(0, 12)));
-  updateHistoryCount();
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records.slice(0, 12)));
+    updateHistoryCount();
+    return true;
+  } catch {
+    showToast("결과를 이 브라우저에 저장하지 못했지만 화면에서는 계속 확인할 수 있습니다");
+    return false;
+  }
 }
 
 function getLetters() {
-  try { return JSON.parse(localStorage.getItem(LETTER_STORAGE_KEY) || "[]"); }
-  catch { return []; }
+  return parseStoredArray(LETTER_STORAGE_KEY).filter((entry) => entry && entry.resultId && typeof entry.letter === "string" && Array.isArray(entry.answers));
 }
 
-function getLetterForResult(resultId) {
-  return getLetters().find((entry) => entry.resultId === resultId) || null;
+function getLetterForResult(result) {
+  const resultId = resultRecordKey(result);
+  return resultId ? getLetters().find((entry) => entry.resultId === resultId) || null : null;
 }
 
 function saveLetterRecord(entry) {
   const letters = getLetters().filter((item) => item.resultId !== entry.resultId);
   letters.unshift(entry);
-  localStorage.setItem(LETTER_STORAGE_KEY, JSON.stringify(letters.slice(0, 24)));
+  try {
+    localStorage.setItem(LETTER_STORAGE_KEY, JSON.stringify(letters.slice(0, 24)));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function updateHistoryCount() { $("#history-count").textContent = getRecords().length; }
@@ -438,6 +463,7 @@ function renderPage() {
   }));
   $("#progress-step").textContent = `${String(state.page + 1).padStart(2, "0")} / 07`;
   $("#progress-bar").style.width = `${((state.page + 1) / 7) * 100}%`;
+  $("#test-progress").setAttribute("aria-valuenow", String(state.page + 1));
   $("#progress-copy").textContent = state.page < 5 ? "현재의 장면을 떠올려 주세요" : state.page === 5 ? "반복되는 방식을 살펴봅니다" : "선택과 행동을 확인합니다";
   $("#prev-button").disabled = state.page === 0;
   $("#next-button span:first-child").textContent = state.page === 6 ? "결과 보기" : "다음";
@@ -514,14 +540,19 @@ function loopScore(result, loopKey) {
   return round1(mean([result.domainScores[loop.flourish], result.domainScores[loop.awareness]]));
 }
 
+function loopPriorityScore(result, loopKey) {
+  const loop = INTEGRATED_LOOPS[loopKey];
+  return Math.min(result.domainScores[loop.flourish], result.domainScores[loop.awareness]);
+}
+
 function sortedLoopKeys(result) {
   return Object.keys(INTEGRATED_LOOPS).sort((a, b) => loopScore(result, a) - loopScore(result, b));
 }
 
 function choosePrimaryLoop(result) {
-  const ordered = sortedLoopKeys(result);
-  const lowest = loopScore(result, ordered[0]);
-  const ties = ordered.filter((key) => Math.abs(loopScore(result, key) - lowest) < .11);
+  const ordered = Object.keys(INTEGRATED_LOOPS).sort((a, b) => loopPriorityScore(result, a) - loopPriorityScore(result, b) || loopScore(result, a) - loopScore(result, b));
+  const lowest = loopPriorityScore(result, ordered[0]);
+  const ties = ordered.filter((key) => Math.abs(loopPriorityScore(result, key) - lowest) < .11);
   const contextPreference = ({ life: "M", work: "E", relationship: "R", change: "A" })[result.context] || "M";
   return ties.includes(contextPreference) ? contextPreference : ties[0];
 }
@@ -535,15 +566,15 @@ function loopReading(result, loopKey) {
     return `${DOMAINS[loop.flourish].name}의 체감과 ${DOMAINS[loop.awareness].name}의 손잡이가 함께 충분하지 않은 때입니다. 큰 변화를 만들기보다 한 장면에서 신호 하나를 보고 작은 선택 하나를 끝내는 것부터 시작하세요.`;
   }
   if (gap >= .8) {
-    return `${DOMAINS[loop.flourish].name}은 어느 정도 경험하고 있지만 ${DOMAINS[loop.awareness].name}이 상대적으로 늦게 따라옵니다. 잘되는 순간을 우연으로 지나치지 말고, 그때의 조건과 신호를 붙잡아 재현하는 것이 우선입니다.`;
+    return `${DOMAINS[loop.flourish].name} 영역은 어느 정도 경험하고 있지만 ${DOMAINS[loop.awareness].name} 역량이 상대적으로 늦게 따라옵니다. 잘되는 순간을 우연으로 지나치지 말고, 그때의 조건과 신호를 붙잡아 재현하는 것이 우선입니다.`;
   }
   if (gap <= -.8) {
-    return `${DOMAINS[loop.awareness].name} 역량은 비교적 살아 있지만 ${DOMAINS[loop.flourish].name}의 실제 체감으로 아직 충분히 이어지지 않을 수 있습니다. 더 분석하기보다 알아차린 내용을 생활 조건과 작은 행동으로 번역하세요.`;
+    return `${DOMAINS[loop.awareness].name} 역량은 비교적 살아 있지만 ${DOMAINS[loop.flourish].name} 영역의 실제 체감으로 아직 충분히 이어지지 않을 수 있습니다. 더 분석하기보다 알아차린 내용을 생활 조건과 작은 행동으로 번역하세요.`;
   }
   if (loopScore(result, loopKey) >= 5) {
     return `${DOMAINS[loop.flourish].name}의 경험과 ${DOMAINS[loop.awareness].name}의 역량이 함께 비교적 안정적으로 작동합니다. 이 연결이 살아나는 조건을 다른 장면에도 의식적으로 옮겨 쓰면 좋은 자원이 됩니다.`;
   }
-  return `${DOMAINS[loop.flourish].name}과 ${DOMAINS[loop.awareness].name}이 상황에 따라 함께 흔들릴 수 있습니다. 잘되는 날과 어려운 날을 비교해 두 점수가 동시에 달라지는 실제 조건을 찾는 것이 중요합니다.`;
+  return `${DOMAINS[loop.flourish].name} 영역과 ${DOMAINS[loop.awareness].name} 역량이 상황에 따라 함께 흔들릴 수 있습니다. 잘되는 날과 어려운 날을 비교해 두 점수가 동시에 달라지는 실제 조건을 찾는 것이 중요합니다.`;
 }
 
 function buildReflectionSteps(loopKey) {
@@ -630,7 +661,7 @@ function renderIntegratedLoops(result, primaryLoopKey) {
         <h3>${loop.label}</h3>
         <p>${loop.title}</p>
         <div class="loop-pair-scores"><span>${DOMAINS[loop.flourish].name} ${lifeScore.toFixed(1)}</span><i aria-hidden="true">↔</i><span>${DOMAINS[loop.awareness].name} ${awarenessScore.toFixed(1)}</span></div>
-        <button type="button" data-action="choose-loop" data-loop-key="${key}">${key === primaryLoopKey ? "추천 루프로 적용" : "이 루프로 적용"}<span aria-hidden="true">→</span></button>
+        <button type="button" data-action="choose-loop" data-loop-key="${key}" aria-pressed="${key === primaryLoopKey}">${key === primaryLoopKey ? "추천 루프로 적용" : "이 루프로 적용"}<span aria-hidden="true">→</span></button>
       </article>`;
   }).join("");
 }
@@ -705,11 +736,11 @@ function renderResult(result) {
 }
 
 function initializeReflection(result, defaultLoopKey) {
-  const saved = getLetterForResult(result.id);
+  const saved = getLetterForResult(result);
   const loopKey = saved?.loopKey && INTEGRATED_LOOPS[saved.loopKey] ? saved.loopKey : defaultLoopKey;
   state.reflection = {
     step: 0,
-    answers: saved?.answers?.length === 8 ? [...saved.answers] : Array(8).fill(""),
+    answers: saved?.answers?.length === 8 ? saved.answers.map((answer) => String(answer ?? "")) : Array(8).fill(""),
     steps: buildReflectionSteps(loopKey),
     loopKey,
     letter: saved?.letter || "",
@@ -718,6 +749,7 @@ function initializeReflection(result, defaultLoopKey) {
   };
   renderReflectionFocus();
   renderReflection();
+  if (saved) selectIntegratedLoop(loopKey, false);
 }
 
 function renderReflectionFocus() {
@@ -748,7 +780,9 @@ function renderReflection() {
 
 function formatKoreanDate(value) {
   if (!value) return "";
-  return new Intl.DateTimeFormat("ko-KR", { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Seoul" }).format(new Date(value));
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "저장 시각 확인 불가";
+  return new Intl.DateTimeFormat("ko-KR", { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Seoul" }).format(date);
 }
 
 function renderReflectionStep() {
@@ -756,6 +790,7 @@ function renderReflectionStep() {
   const step = state.reflection.steps[index];
   $("#reflection-step").textContent = `${String(index + 1).padStart(2, "0")} / ${String(state.reflection.steps.length).padStart(2, "0")}`;
   $("#reflection-progress-bar").style.width = `${((index + 1) / state.reflection.steps.length) * 100}%`;
+  $("#reflection-progress-track").setAttribute("aria-valuenow", String(index + 1));
   $("#reflection-phase").textContent = step.phase;
   $("#reflection-stem").textContent = step.stem;
   $("#reflection-guide-copy").textContent = step.guide;
@@ -878,14 +913,18 @@ function saveLetter() {
   }
   state.reflection.letter = letter;
   state.reflection.savedAt = new Date().toISOString();
-  saveLetterRecord({
-    resultId: state.result.id,
+  const didSave = saveLetterRecord({
+    resultId: resultRecordKey(state.result),
     resultCreatedAt: state.result.createdAt,
     savedAt: state.reflection.savedAt,
     loopKey: state.reflection.loopKey,
     answers: [...state.reflection.answers],
     letter
   });
+  if (!didSave) {
+    showToast("저장 공간을 확인해 주세요. 편지 내용은 현재 화면에 남아 있습니다");
+    return;
+  }
   state.reflection.mode = "complete";
   renderReflection();
   scrollToReflection();
@@ -896,7 +935,7 @@ function copyLetter() {
   const visibleDraft = state.reflection.mode === "letter" ? $("#self-letter").value.trim() : "";
   const letter = visibleDraft || state.reflection.letter;
   if (!letter) return;
-  navigator.clipboard.writeText(letter).then(() => showToast("나에게 보내는 편지를 복사했습니다")).catch(() => showToast("복사하지 못했습니다"));
+  copyText(letter, "나에게 보내는 편지를 복사했습니다");
 }
 
 function printLetter() {
@@ -961,15 +1000,27 @@ function renderExperiment(key) {
 
 function selectIntegratedLoop(key, shouldScroll = true) {
   if (!INTEGRATED_LOOPS[key] || !state.result) return;
+  const reflectionHasContent = state.reflection.answers.some((answer) => String(answer).trim()) || ["letter", "complete"].includes(state.reflection.mode);
+  if (reflectionHasContent && key !== state.reflection.loopKey) {
+    $("#focus-select").value = state.reflection.loopKey;
+    showToast("문장과 편지의 일관성을 위해 작성 시작 후에는 적용 초점을 바꿀 수 없습니다");
+    return;
+  }
   state.result.selectedLoopKey = key;
   $("#focus-select").value = key;
   renderExperiment(key);
   renderBridge(state.result, key);
-  $$(".integrated-loop-card").forEach((card) => card.classList.toggle("selected", card.querySelector("[data-loop-key]")?.dataset.loopKey === key));
-  if (state.reflection.mode === "intro" && !state.reflection.answers.some((answer) => answer.trim())) {
+  $$(".integrated-loop-card").forEach((card) => {
+    const button = card.querySelector("[data-loop-key]");
+    const isSelected = button?.dataset.loopKey === key;
+    card.classList.toggle("selected", isSelected);
+    button?.setAttribute("aria-pressed", String(isSelected));
+  });
+  if (["intro", "writing"].includes(state.reflection.mode) && !reflectionHasContent) {
     state.reflection.loopKey = key;
     state.reflection.steps = buildReflectionSteps(key);
     renderReflectionFocus();
+    if (state.reflection.mode === "writing") renderReflectionStep();
   }
   if (shouldScroll) $(".experiment-section").scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -1005,7 +1056,29 @@ function copySummary() {
   const loopKey = r.selectedLoopKey || r.primaryLoopKey;
   const selectedLoop = INTEGRATED_LOOPS[loopKey];
   const summary = `[플로리싱 × 알아차림 성장지도]\n${r.name ? `${r.name} · ` : ""}${contextLabel(r.context)}\n현재 상태: ${STATE_DATA[r.stateKey].name}\n삶의 플로리싱 ${r.flourish.toFixed(1)} / 알아차림 역량 ${r.awareness.toFixed(1)}\n현재 선택한 통합 성장 루프: ${selectedLoop.label} · ${loopScore(r, loopKey).toFixed(1)}\n실제 장면: ${selectedLoop.scene}\n알아차릴 것: ${selectedLoop.notice}\n작은 선택: ${selectedLoop.action}\n\n이 결과는 진단이 아닌 성장 대화용 자기점검입니다.`;
-  navigator.clipboard.writeText(summary).then(() => showToast("결과 요약을 복사했습니다")).catch(() => showToast("복사하지 못했습니다"));
+  copyText(summary, "결과 요약을 복사했습니다");
+}
+
+async function copyText(text, successMessage) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const helper = document.createElement("textarea");
+      helper.value = text;
+      helper.setAttribute("readonly", "");
+      helper.style.position = "fixed";
+      helper.style.opacity = "0";
+      document.body.appendChild(helper);
+      helper.select();
+      const copied = document.execCommand?.("copy");
+      helper.remove();
+      if (!copied) throw new Error("copy unavailable");
+    }
+    showToast(successMessage);
+  } catch {
+    showToast("자동 복사가 제한되었습니다. 텍스트를 직접 선택해 복사해 주세요");
+  }
 }
 
 function showToast(message) {
@@ -1060,9 +1133,9 @@ $("#self-letter").addEventListener("input", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (!$("#test-view").hidden && /^[1-7]$/.test(event.key)) {
-    const activeItem = ITEMS[state.page * PAGE_SIZE];
-    const target = document.querySelector(`input[name="q${activeItem.id}"][value="${event.key}"]`);
+  const activeInput = document.activeElement;
+  if (!$("#test-view").hidden && /^[1-7]$/.test(event.key) && activeInput?.matches?.(".scale input")) {
+    const target = document.querySelector(`input[name="${activeInput.name}"][value="${event.key}"]`);
     if (target) { target.checked = true; target.dispatchEvent(new Event("change", { bubbles: true })); }
   }
 });
