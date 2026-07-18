@@ -1,0 +1,67 @@
+name: Capture SELF INC. Coach Visual Audit
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tests/self/**"
+      - "scripts/capture-self-coach-visuals.mjs"
+      - ".github/workflows/capture-self-coach-visuals.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: self-coach-visual-audit-v970
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Validate JavaScript
+        run: |
+          node --check tests/self/assets/self-v9-coach-clean.js
+          node --check tests/self/assets/self-v9-coach-interaction.js
+          node --check scripts/capture-self-coach-visuals.mjs
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 > /tmp/self-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/tests/self/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/self-http.log
+          exit 1
+
+      - name: Capture and audit coach view
+        run: node scripts/capture-self-coach-visuals.mjs
+
+      - name: Upload visual audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: self-coach-visual-audit-v970
+          path: artifacts/self-coach-visual-audit
+          retention-days: 7
+
+      - name: Save visual audit status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/self/visual-audit-status-v970.json
+          git commit -m "chore: record SELF INC. v9.7 visual audit [skip ci]" || exit 0
+          git push
