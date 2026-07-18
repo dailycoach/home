@@ -10,6 +10,8 @@
   let scheduled = false;
   let lastSignature = '';
 
+  const cleanText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+
   function activeTab() {
     return tabs.querySelector('.coach-tab.is-active');
   }
@@ -18,19 +20,13 @@
     return content.querySelector('[data-coach-state].is-active');
   }
 
-  function cleanText(value) {
-    return String(value || '').replace(/\s+/g, ' ').trim();
-  }
-
   function readSelection() {
     const tab = activeTab();
     const stateButton = activeStateButton();
     const domain = cleanText(tab?.childNodes?.[0]?.textContent || tab?.textContent).replace(/선택됨/g, '').trim();
     const score = cleanText(tab?.querySelector('small')?.textContent);
     const state = stateButton?.dataset.coachState === 'high' ? '높을 때의 해석' : '낮을 때의 해석';
-    const questionMode = content.querySelector('.coach-current-kingdom')
-      ? '현재 점수 기반 질문'
-      : '패턴별 질문';
+    const questionMode = content.querySelector('.coach-current-kingdom') ? '현재 점수 기반 질문' : '패턴별 질문';
     return { tab, stateButton, domain: domain || '영역', score, state, questionMode };
   }
 
@@ -69,9 +65,13 @@
       const isHigh = button.dataset.coachState === 'high';
       const selected = button === selection.stateButton;
       const label = isHigh ? '높을 때의 해석' : '낮을 때의 해석';
+      const signature = `${button.dataset.coachState}:${selected ? 'selected' : 'idle'}`;
 
       button.setAttribute('aria-pressed', String(selected));
       button.setAttribute('aria-label', selected ? `${label}, 현재 보기` : `${label}으로 전환`);
+
+      if (button.dataset.interactionState === signature) return;
+      button.dataset.interactionState = signature;
       button.innerHTML = `
         <span class="coach-state-check" aria-hidden="true">${selected ? '✓' : '↗'}</span>
         <span class="coach-state-copy"><b>${label}</b><small>${selected ? '현재 보기' : '누르면 해석·질문 변경'}</small></span>
