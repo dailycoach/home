@@ -1,12 +1,12 @@
-name: Deploy SELF INC. v9.6.3 compact interaction panel
+name: Deploy SELF INC. v9.6.4 coach clean view
 
 on:
   push:
     branches: ["main"]
     paths:
       - "tests/self/index.html"
-      - "tests/self/assets/self-v9-coach-interaction.js"
-      - "tests/self/assets/self-v9-coach-interaction.css"
+      - "tests/self/assets/self-v9-coach-clean.js"
+      - "tests/self/assets/self-v9-coach-clean.css"
       - ".github/workflows/deploy-self-v962.yml"
   workflow_dispatch:
 
@@ -15,7 +15,7 @@ permissions:
   pages: write
 
 concurrency:
-  group: deploy-self-v963
+  group: deploy-self-v964
   cancel-in-progress: true
 
 jobs:
@@ -25,8 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate interaction JavaScript
-        run: node --check tests/self/assets/self-v9-coach-interaction.js
+      - name: Validate coach clean JavaScript
+        run: |
+          node --check tests/self/assets/self-v9-coach-clean.js
+          node --check tests/self/assets/self-v9-coach-interaction.js
 
       - name: Build and verify
         env:
@@ -34,8 +36,8 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           SOURCE_SHA: ${{ github.sha }}
           LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
-          JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-interaction.js
-          CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-interaction.css
+          CLEAN_JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-clean.js
+          CLEAN_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-clean.css
         run: |
           set -e
           request_code=$(curl -sSL -o /tmp/request.json -w "%{http_code}" -X POST \
@@ -61,23 +63,23 @@ jobs:
           for attempt in $(seq 1 36); do
             sleep 5
             html_code=$(curl -sSL -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" "${LIVE_URL}?v=${SOURCE_SHA}-${attempt}")
-            js_code=$(curl -sSL -o /tmp/interaction.js -w "%{http_code}" -H "Cache-Control: no-cache" "${JS_URL}?v=${SOURCE_SHA}-${attempt}")
-            css_code=$(curl -sSL -o /tmp/interaction.css -w "%{http_code}" -H "Cache-Control: no-cache" "${CSS_URL}?v=${SOURCE_SHA}-${attempt}")
+            js_code=$(curl -sSL -o /tmp/clean.js -w "%{http_code}" -H "Cache-Control: no-cache" "${CLEAN_JS_URL}?v=${SOURCE_SHA}-${attempt}")
+            css_code=$(curl -sSL -o /tmp/clean.css -w "%{http_code}" -H "Cache-Control: no-cache" "${CLEAN_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
 
             if [ "${html_code}" = "200" ] \
               && [ "${js_code}" = "200" ] \
               && [ "${css_code}" = "200" ] \
-              && grep -q 'self-inc-version" content="9.6.3' /tmp/live.html \
-              && grep -q 'self-v9-coach-interaction.js?v=9.6.3' /tmp/live.html \
-              && grep -q 'self-v9-coach-interaction.css?v=9.6.3' /tmp/live.html \
-              && grep -q 'coach-status-toggle' /tmp/interaction.js \
-              && grep -q '상세 보기' /tmp/interaction.js \
-              && grep -q 'coach-status-inline' /tmp/interaction.js \
-              && grep -q 'coach-status-details' /tmp/interaction.js \
-              && grep -q 'margin:8px 12px 2px' /tmp/interaction.css \
-              && grep -q '.coach-status-toggle' /tmp/interaction.css \
-              && grep -q '.coach-status-details\[hidden\]' /tmp/interaction.css \
-              && grep -q 'min-height:56px' /tmp/interaction.css; then
+              && grep -q 'self-inc-version" content="9.6.4' /tmp/live.html \
+              && grep -q 'self-v9-coach-clean.js?v=9.6.4' /tmp/live.html \
+              && grep -q 'self-v9-coach-clean.css?v=9.6.4' /tmp/live.html \
+              && grep -q '핵심 상태와 이번 회기 질문을 빠르게 확인합니다.' /tmp/live.html \
+              && grep -q '상세 해석과 추가 질문' /tmp/clean.js \
+              && grep -q '5영역 브리핑' /tmp/clean.js \
+              && grep -q '3관점 상태분석' /tmp/clean.js \
+              && grep -q '이번 회기 질문' /tmp/clean.js \
+              && grep -q '.coach-clean-details' /tmp/clean.css \
+              && grep -q '.coach-score-metrics,.coach-score-narrative,.coach-score-profile-grid' /tmp/clean.css \
+              && ! grep -q '집중 병목형' /tmp/clean.js; then
               live_status="verified"
               break
             fi
@@ -92,29 +94,30 @@ jobs:
               p=Path(path)
               return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
           payload={
-            "workflow":"deploy-self-v963",
+            "workflow":"deploy-self-v964",
             "sourceSha":os.environ["SOURCE_SHA"],
             "requestHttpStatus":int(os.environ["REQUEST_CODE"]),
             "latestBuildStatus":os.environ["BUILD_STATUS"],
             "liveCheck":{
               "url":"https://daily-coach-ing.com/tests/self/index.html",
               "httpStatus":int(os.environ["HTML_CODE"]),
-              "interactionScriptHttpStatus":int(os.environ["JS_CODE"]),
-              "interactionCssHttpStatus":int(os.environ["CSS_CODE"]),
-              "version963":True,
-              "compactStatusPanel":True,
-              "detailsToggle":True,
-              "inlineSelectionValues":True,
-              "tabsSpacingFixed":True,
-              "mobileSelectedBadgeHidden":True,
+              "cleanScriptHttpStatus":int(os.environ["JS_CODE"]),
+              "cleanCssHttpStatus":int(os.environ["CSS_CODE"]),
+              "version964":True,
+              "coachBriefing":True,
+              "threePerspectiveCore":True,
+              "sessionQuestionsCore":True,
+              "advancedDetailsCollapsed":True,
+              "duplicateScoreBlocksHidden":True,
+              "copyReduced":True,
               "status":os.environ["LIVE_STATUS"],
               "htmlSha256":sha("/tmp/live.html"),
-              "interactionScriptSha256":sha("/tmp/interaction.js"),
-              "interactionCssSha256":sha("/tmp/interaction.css")
+              "cleanScriptSha256":sha("/tmp/clean.js"),
+              "cleanCssSha256":sha("/tmp/clean.css")
             },
             "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
           }
-          Path("tests/self/deploy-status-v963.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          Path("tests/self/deploy-status-v964.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
 
           test "${request_code}" = "201"
@@ -125,6 +128,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/deploy-status-v963.json
-          git commit -m "chore: record SELF INC. v9.6.3 deployment [skip ci]" || exit 0
+          git add tests/self/deploy-status-v964.json
+          git commit -m "chore: record SELF INC. v9.6.4 deployment [skip ci]" || exit 0
           git push
