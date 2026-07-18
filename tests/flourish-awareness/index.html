@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#11120f">
   <meta name="description" content="PERMA 플로리싱과 알아차림 코칭을 연결한 성장 자기점검 웹검사">
   <title>FLOURISH / NOTICE — 플로리싱 알아차림 검사</title>
-  <link rel="stylesheet" href="styles.css?v=20260718-integrated1">
+  <link rel="stylesheet" href="styles.css?v=20260718-micro1">
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -21,7 +21,7 @@
   </header>
 
   <main id="app" tabindex="-1">
-    <section id="intro-view" class="view intro-view">
+    <section id="intro-view" class="view intro-view" tabindex="-1">
       <div class="hero-kicker">FLOURISHING × AWARENESS COACHING</div>
       <h1 class="hero-title"><span>잘 살고 있는가</span><span class="outline">보다,</span><span>무엇을 알아차리는가.</span></h1>
       <div class="hero-grid">
@@ -52,10 +52,10 @@
       </div>
     </section>
 
-    <section id="test-view" class="view test-view" hidden>
+    <section id="test-view" class="view test-view" tabindex="-1" hidden>
       <div class="progress-wrap" aria-live="polite">
         <div class="progress-meta"><span id="progress-step">01 / 07</span><span id="progress-copy">현재의 장면을 떠올려 주세요</span></div>
-        <div class="progress-track"><span id="progress-bar"></span></div>
+        <div id="test-progress" class="progress-track" role="progressbar" aria-label="검사 진행률" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1"><span id="progress-bar"></span></div>
       </div>
       <div class="test-heading">
         <p>최근 한 달의 실제 모습을 기준으로 답해 주세요.</p>
@@ -69,7 +69,7 @@
       </div>
     </section>
 
-    <section id="result-view" class="view result-view" hidden>
+    <section id="result-view" class="view result-view" tabindex="-1" hidden>
       <div class="result-hero">
         <div>
           <p class="eyebrow">YOUR FLOURISHING MAP</p>
@@ -111,7 +111,7 @@
           <button class="primary-button compact no-print" type="button" data-action="apply-primary-loop"><span>이 연결로 7주 실험하기</span><span aria-hidden="true">↓</span></button>
         </article>
         <div id="integrated-loop-list" class="integrated-loop-list" aria-label="다섯 개 통합 성장 루프"></div>
-        <p class="loop-method-note">통합 참고점수는 연결된 두 점수의 평균입니다. 다섯 연결은 삶에 적용하기 쉽도록 구성한 이 도구의 코칭 프레임이며, 고정된 심리학적 대응 관계나 별도의 진단 척도를 뜻하지 않습니다.</p>
+        <p class="loop-method-note">통합 참고점수는 연결된 두 점수의 평균입니다. 우선 루프는 평균만으로 정하지 않고 두 점수 중 더 낮은 값과 사용자가 선택한 생활 맥락을 함께 반영합니다. 다섯 연결은 삶에 적용하기 위한 코칭 프레임이며, 고정된 심리학적 대응 관계나 별도의 진단 척도를 뜻하지 않습니다.</p>
       </section>
 
       <section class="map-section">
@@ -187,14 +187,14 @@
               <li><span>03</span>실제 필요와 알아차림 손잡이</li>
               <li><span>04</span>작은 선택과 7주 문장</li>
             </ol>
-            <button class="primary-button" type="button" data-action="start-reflection"><span>문장완성 시작</span><span aria-hidden="true">→</span></button>
+            <button class="primary-button no-print" type="button" data-action="start-reflection"><span>문장완성 시작</span><span aria-hidden="true">→</span></button>
           </div>
         </div>
 
         <div id="reflection-workspace" class="reflection-workspace" hidden>
           <div class="reflection-progress">
             <span id="reflection-step">01 / 08</span>
-            <div><span id="reflection-progress-bar"></span></div>
+            <div id="reflection-progress-track" role="progressbar" aria-label="문장완성 진행률" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1"><span id="reflection-progress-bar"></span></div>
             <strong id="reflection-phase">몸과 감정의 신호</strong>
           </div>
           <div class="reflection-grid">
@@ -230,7 +230,7 @@
             <div id="self-letter-print" class="self-letter-print" aria-hidden="true"></div>
           </div>
           <div class="letter-actions no-print">
-            <button class="secondary-button" type="button" data-action="edit-reflection">문장 다시 보기</button>
+            <button class="secondary-button" type="button" data-action="edit-reflection" title="문장을 수정하고 다시 완료하면 편지 초안이 새로 만들어집니다">문장 다시 보기</button>
             <button class="secondary-button" type="button" data-action="copy-letter">편지 복사</button>
             <button class="secondary-button" type="button" data-action="print-letter">편지 PDF 저장</button>
             <button class="primary-button compact" type="button" data-action="save-letter"><span>편지 저장하고 마치기</span><span aria-hidden="true">✓</span></button>
@@ -306,6 +306,6 @@
   </dialog>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20260718-integrated1"></script>
+  <script src="app.js?v=20260718-micro1"></script>
 </body>
 </html>
