@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 
 const root = 'http://127.0.0.1:4173';
 const outputDir = path.resolve('artifacts/self-coach-visual-audit');
-const statusPath = path.resolve('tests/self/visual-audit-status-v980.json');
+const statusPath = path.resolve('tests/self/visual-audit-status-v981.json');
 const viewports = [
   { name: 'mobile', width: 390, height: 844 },
   { name: 'mobile-wide', width: 430, height: 932 },
@@ -15,6 +15,29 @@ const viewports = [
 await fs.mkdir(outputDir, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const report = [];
+
+async function readDetailSnapshot(page) {
+  return page.evaluate(() => {
+    const details = document.querySelector('.coach-clean-details');
+    const active = document.querySelector('[data-coach-state].is-active');
+    const low = document.querySelector('[data-coach-state="low"]');
+    const high = document.querySelector('[data-coach-state="high"]');
+    const question = document.querySelector('.coach-kingdom-title + .kingdom-list .kingdom-item:first-child p');
+    return {
+      detailsOpen: Boolean(details?.open),
+      activeState: active?.dataset.coachState || '',
+      title: document.querySelector('.coach-summary strong')?.textContent?.trim() || '',
+      coachingLens: document.querySelector('.coach-lenses .coach-lens:first-child p')?.textContent?.trim() || '',
+      observation: document.querySelector('.coach-practice-card:first-child li')?.textContent?.trim() || '',
+      kingdomQuestion: question?.textContent?.trim() || '',
+      sheetScrollTop: document.querySelector('.coach-sheet')?.scrollTop || 0,
+      lowBackground: low ? getComputedStyle(low).backgroundColor : '',
+      highBackground: high ? getComputedStyle(high).backgroundColor : '',
+      genzBlue: getComputedStyle(document.documentElement).getPropertyValue('--genz-blue').trim(),
+      genzLime: getComputedStyle(document.documentElement).getPropertyValue('--genz-lime').trim()
+    };
+  });
+}
 
 for (const viewport of viewports) {
   const context = await browser.newContext({
@@ -71,6 +94,8 @@ for (const viewport of viewports) {
       experimentRadius: experiment ? Number.parseFloat(getComputedStyle(experiment).borderRadius) : 99,
       sectionRule: sectionTitle ? Number.parseFloat(getComputedStyle(sectionTitle).borderTopWidth) : 0,
       coverWord: getComputedStyle(document.querySelector('.result-cover'), '::after').content.includes('REPORT'),
+      genzBlue: getComputedStyle(document.documentElement).getPropertyValue('--genz-blue').trim(),
+      genzLime: getComputedStyle(document.documentElement).getPropertyValue('--genz-lime').trim(),
       textOverflow
     };
   });
@@ -90,11 +115,39 @@ for (const viewport of viewports) {
   const changedDomain = (await page.locator('.coach-status-main strong').textContent())?.trim() || '';
   const tabInteractionChanged = Boolean(initialDomain && changedDomain && initialDomain !== changedDomain);
 
-  await page.locator('.coach-clean-details > summary').click();
+  const details = page.locator('.coach-clean-details');
+  await details.locator('> summary').click();
+  await page.waitForSelector('.coach-clean-details[open] [data-coach-state="low"]', { timeout: 4000 });
+  await details.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
+
+  const lowBefore = await readDetailSnapshot(page);
   const highButton = page.locator('[data-coach-state="high"]');
   await highButton.click();
-  await page.waitForTimeout(350);
-  const highStateChanged = await highButton.getAttribute('aria-pressed') === 'true';
+  await page.waitForSelector('.coach-clean-details[open] [data-coach-state="high"].is-active', { timeout: 5000 });
+  await page.waitForTimeout(400);
+  const highAfter = await readDetailSnapshot(page);
+
+  const highContentChanged = lowBefore.title !== highAfter.title
+    && lowBefore.coachingLens !== highAfter.coachingLens
+    && lowBefore.kingdomQuestion !== highAfter.kingdomQuestion;
+  const detailsStayedOpenAfterHigh = highAfter.detailsOpen;
+  const scrollPreservedAfterHigh = Math.abs(highAfter.sheetScrollTop - lowBefore.sheetScrollTop) <= 12;
+  const highColorFeedback = highAfter.highBackground === 'rgb(49, 87, 255)';
+
+  const lowButton = page.locator('[data-coach-state="low"]');
+  await lowButton.click();
+  await page.waitForSelector('.coach-clean-details[open] [data-coach-state="low"].is-active', { timeout: 5000 });
+  await page.waitForTimeout(400);
+  const lowAfter = await readDetailSnapshot(page);
+
+  const lowRoundTrip = lowAfter.detailsOpen
+    && lowAfter.title === lowBefore.title
+    && lowAfter.coachingLens === lowBefore.coachingLens
+    && lowAfter.kingdomQuestion === lowBefore.kingdomQuestion;
+  const lowColorFeedback = lowAfter.lowBackground === 'rgb(255, 91, 99)';
+  const genzPaletteLoaded = lowAfter.genzBlue === '#3157ff' && lowAfter.genzLime === '#c7ff3d';
+
   await page.screenshot({ path: path.join(outputDir, `self-coach-${viewport.name}-interaction.png`), fullPage: false });
 
   const coach = await page.evaluate(() => {
@@ -124,12 +177,14 @@ for (const viewport of viewports) {
       perspectiveExpanderCount: document.querySelectorAll('.coach-state-card .coach-card-expand').length,
       sessionQuestionCount: document.querySelectorAll('.coach-session-question').length,
       detailExists: Boolean(document.querySelector('.coach-clean-details')),
+      detailOpen: Boolean(document.querySelector('.coach-clean-details')?.open),
       flourishFlowAbsent: !document.querySelector('.coach-flourish-flow'),
       identityRestored: document.querySelector('.coach-sheet-head .eyebrow')?.textContent?.trim() === 'KINGDOM COACH GUIDE',
       selectedCount: document.querySelectorAll('.coach-tab[aria-pressed="true"]').length,
       minTabHeight: tabHeights.length ? Math.min(...tabHeights) : 0,
       closeTarget: closeRect ? Math.min(closeRect.width, closeRect.height) : 0,
       guideReady: document.querySelector('#coachContent')?.dataset.coachGuideReady === 'true',
+      detailStateReady: document.querySelector('#coachContent')?.dataset.coachDetailOpen === 'true',
       synthesisRadius: Number.parseFloat(getComputedStyle(document.querySelector('.coach-synthesis')).borderRadius),
       synthesisCardRadius: Number.parseFloat(getComputedStyle(document.querySelector('.coach-synthesis-card')).borderRadius),
       stateCardRadius: Number.parseFloat(getComputedStyle(document.querySelector('.coach-state-card')).borderRadius),
@@ -140,17 +195,46 @@ for (const viewport of viewports) {
   const resultPassed = !result.horizontalOverflow && !result.cardClipped && !result.bodyOverflow
     && result.domainCount === 5 && result.insightCount === 2 && result.dayCount === 7
     && result.cardRadius <= 8 && result.domainRadius === 0 && result.experimentRadius === 0
-    && result.sectionRule >= 3 && result.coverWord && result.textOverflow.length === 0;
+    && result.sectionRule >= 3 && result.coverWord && result.genzBlue === '#3157ff'
+    && result.genzLime === '#c7ff3d' && result.textOverflow.length === 0;
+
+  const stateSwitchPassed = highContentChanged && detailsStayedOpenAfterHigh && scrollPreservedAfterHigh
+    && highColorFeedback && lowRoundTrip && lowColorFeedback && genzPaletteLoaded;
 
   const coachPassed = !coach.horizontalOverflow && !coach.sheetClipped && !coach.contentOverflow && !coach.activeTabClipped
     && coach.synthesisCardCount >= 2 && coach.perspectiveCardCount === 3 && coach.perspectiveExpanderCount === 3
-    && coach.sessionQuestionCount === 5 && coach.detailExists && coach.flourishFlowAbsent && coach.identityRestored
-    && coach.selectedCount === 1 && coach.minTabHeight >= 35 && coach.closeTarget >= 32 && coach.guideReady
+    && coach.sessionQuestionCount === 5 && coach.detailExists && coach.detailOpen && coach.detailStateReady
+    && coach.flourishFlowAbsent && coach.identityRestored && coach.selectedCount === 1
+    && coach.minTabHeight >= 35 && coach.closeTarget >= 32 && coach.guideReady
     && coach.synthesisRadius === 0 && coach.synthesisCardRadius === 0 && coach.stateCardRadius === 0
-    && coach.textOverflow.length === 0 && detailsInitiallyCollapsed && tabInteractionChanged && highStateChanged;
+    && coach.textOverflow.length === 0 && detailsInitiallyCollapsed && tabInteractionChanged && stateSwitchPassed;
 
   const passed = resultPassed && coachPassed && consoleErrors.length === 0;
-  report.push({ viewport: viewport.name, capture: viewport, result, coach, detailsInitiallyCollapsed, initialDomain, changedDomain, tabInteractionChanged, highStateChanged, consoleErrors, resultPassed, coachPassed, passed });
+  report.push({
+    viewport: viewport.name,
+    capture: viewport,
+    result,
+    coach,
+    detailsInitiallyCollapsed,
+    initialDomain,
+    changedDomain,
+    tabInteractionChanged,
+    lowBefore,
+    highAfter,
+    lowAfter,
+    highContentChanged,
+    detailsStayedOpenAfterHigh,
+    scrollPreservedAfterHigh,
+    highColorFeedback,
+    lowRoundTrip,
+    lowColorFeedback,
+    genzPaletteLoaded,
+    stateSwitchPassed,
+    consoleErrors,
+    resultPassed,
+    coachPassed,
+    passed
+  });
   await page.close();
   await context.close();
 }
@@ -158,20 +242,36 @@ for (const viewport of viewports) {
 await browser.close();
 const passed = report.every((item) => item.passed);
 const status = {
-  version: '9.8.0', audit: 'editorial-result-and-kingdom-coach-report', passed,
+  version: '9.8.1',
+  audit: 'low-high-detail-switch-and-genz-editorial-color',
+  passed,
   viewportCount: report.length,
   resultPassCount: report.filter((item) => item.resultPassed).length,
   coachPassCount: report.filter((item) => item.coachPassed).length,
+  stateSwitchPassCount: report.filter((item) => item.stateSwitchPassed).length,
+  detailOpenPreservationCount: report.filter((item) => item.detailsStayedOpenAfterHigh && item.lowAfter.detailsOpen).length,
+  contentChangePassCount: report.filter((item) => item.highContentChanged && item.lowRoundTrip).length,
+  colorFeedbackPassCount: report.filter((item) => item.highColorFeedback && item.lowColorFeedback && item.genzPaletteLoaded).length,
   horizontalOverflowCount: report.filter((item) => item.result.horizontalOverflow || item.coach.horizontalOverflow).length,
   clippedCount: report.filter((item) => item.result.cardClipped || item.coach.sheetClipped).length,
   textOverflowCount: report.reduce((sum, item) => sum + item.result.textOverflow.length + item.coach.textOverflow.length, 0),
   consoleErrorCount: report.reduce((sum, item) => sum + item.consoleErrors.length, 0),
-  interactionPassCount: report.filter((item) => item.tabInteractionChanged && item.highStateChanged).length,
-  identityPassCount: report.filter((item) => item.coach.identityRestored).length,
-  functionPassCount: report.filter((item) => item.coach.flourishFlowAbsent && item.coach.synthesisCardCount >= 2 && item.coach.perspectiveCardCount === 3 && item.coach.sessionQuestionCount === 5).length,
-  viewports: report, checkedAt: new Date().toISOString()
+  viewports: report,
+  checkedAt: new Date().toISOString()
 };
 await fs.writeFile(path.join(outputDir, 'report.json'), JSON.stringify(status, null, 2));
 await fs.writeFile(statusPath, `${JSON.stringify(status, null, 2)}\n`);
-console.table(report.map((item) => ({ viewport: item.viewport, passed: item.passed, resultPassed: item.resultPassed, coachPassed: item.coachPassed, resultTextOverflow: item.result.textOverflow.length, coachTextOverflow: item.coach.textOverflow.length, tabInteraction: item.tabInteractionChanged, stateInteraction: item.highStateChanged, consoleErrors: item.consoleErrors.length })));
+console.table(report.map((item) => ({
+  viewport: item.viewport,
+  passed: item.passed,
+  resultPassed: item.resultPassed,
+  coachPassed: item.coachPassed,
+  stateSwitchPassed: item.stateSwitchPassed,
+  detailOpen: item.detailsStayedOpenAfterHigh,
+  highContentChanged: item.highContentChanged,
+  lowRoundTrip: item.lowRoundTrip,
+  highColor: item.highColorFeedback,
+  lowColor: item.lowColorFeedback,
+  consoleErrors: item.consoleErrors.length
+})));
 if (!passed) process.exitCode = 1;
