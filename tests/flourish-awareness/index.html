@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#11120f">
   <meta name="description" content="PERMA 플로리싱과 알아차림 코칭을 연결한 성장 자기점검 웹검사">
   <title>FLOURISH / NOTICE — 플로리싱 알아차림 검사</title>
-  <link rel="stylesheet" href="styles.css?v=20260718-letter1">
+  <link rel="stylesheet" href="styles.css?v=20260718-integrated1">
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -90,13 +90,32 @@
           <p id="state-summary" class="state-summary"></p>
         </div>
         <div class="dual-score">
-          <div><span>삶의 플로리싱</span><strong id="flourish-score">0.0</strong><small>/ 7.0</small></div>
-          <div><span>알아차림 역량</span><strong id="awareness-score">0.0</strong><small>/ 7.0</small></div>
+          <div><span>삶의 상태 · 플로리싱</span><strong id="flourish-score">0.0</strong><small>/ 7.0</small></div>
+          <div><span>변화 손잡이 · 알아차림</span><strong id="awareness-score">0.0</strong><small>/ 7.0</small></div>
         </div>
       </section>
 
+      <section class="loop-section">
+        <div class="section-heading"><p class="eyebrow">MY INTEGRATED GROWTH LOOP</p><h2>삶의 한 영역을<br>알아차림의 손잡이로 다룹니다.</h2></div>
+        <article class="primary-loop-card">
+          <div class="primary-loop-heading">
+            <div><span>지금 먼저 적용할 연결</span><h3 id="primary-loop-title"></h3></div>
+            <div class="loop-score"><span>통합 참고점수</span><strong id="primary-loop-score">0.0</strong><small>/ 7.0</small></div>
+          </div>
+          <p id="primary-loop-reading" class="primary-loop-reading"></p>
+          <div class="application-path">
+            <div><span>01 · 실제 장면</span><strong id="primary-loop-scene"></strong></div>
+            <div><span>02 · 알아차릴 것</span><strong id="primary-loop-notice"></strong></div>
+            <div><span>03 · 작은 선택</span><strong id="primary-loop-action"></strong></div>
+          </div>
+          <button class="primary-button compact no-print" type="button" data-action="apply-primary-loop"><span>이 연결로 7주 실험하기</span><span aria-hidden="true">↓</span></button>
+        </article>
+        <div id="integrated-loop-list" class="integrated-loop-list" aria-label="다섯 개 통합 성장 루프"></div>
+        <p class="loop-method-note">통합 참고점수는 연결된 두 점수의 평균입니다. 다섯 연결은 삶에 적용하기 쉽도록 구성한 이 도구의 코칭 프레임이며, 고정된 심리학적 대응 관계나 별도의 진단 척도를 뜻하지 않습니다.</p>
+      </section>
+
       <section class="map-section">
-        <div class="section-heading"><p class="eyebrow">10-DIMENSION MAP</p><h2>삶의 상태와 변화 역량을<br>한 장에서 봅니다.</h2></div>
+        <div class="section-heading"><p class="eyebrow">10 SOURCE SCORES</p><h2>개인 성장 루프를 만든<br>열 개의 근거 점수입니다.</h2></div>
         <div class="radar-panel">
           <div class="radar-wrap"><svg id="radar-chart" viewBox="0 0 600 600" role="img" aria-label="10개 영역 점수 방사형 차트"></svg></div>
           <div id="score-legend" class="score-legend"></div>
@@ -104,11 +123,11 @@
       </section>
 
       <section class="reading-section">
-        <div class="section-heading"><p class="eyebrow">PERSONAL READING</p><h2>점수보다 중요한 것은<br>점수 사이의 관계입니다.</h2></div>
+        <div class="section-heading"><p class="eyebrow">PERSONAL APPLICATION</p><h2>설명을 늘리기보다<br>내 장면에 적용합니다.</h2></div>
         <div class="reading-grid">
-          <article class="reading-card bright"><span>잘 작동하는 힘</span><h3 id="strength-title"></h3><p id="strength-copy"></p></article>
-          <article class="reading-card"><span>먼저 볼 장면</span><h3 id="growth-title"></h3><p id="growth-copy"></p></article>
-          <article class="reading-card"><span>연결할 알아차림</span><h3 id="lever-title"></h3><p id="lever-copy"></p></article>
+          <article class="reading-card bright"><span>이미 잘 작동하는 연결</span><h3 id="strength-title"></h3><p id="strength-copy"></p></article>
+          <article class="reading-card"><span>지금 우선 적용할 연결</span><h3 id="growth-title"></h3><p id="growth-copy"></p></article>
+          <article class="reading-card"><span>오늘의 1분 행동</span><h3 id="lever-title"></h3><p id="lever-copy"></p></article>
         </div>
       </section>
 
@@ -118,7 +137,7 @@
       </section>
 
       <section class="domain-deep-section">
-        <div class="section-heading"><p class="eyebrow">10-DOMAIN COMMENTARY</p><h2>각 점수가 실제 삶에서<br>어떻게 나타나는지 읽습니다.</h2></div>
+        <div class="section-heading"><p class="eyebrow">DEEPER COMMENTARY</p><h2>통합 루프를 더 깊이 볼 때<br>각 구성요소를 펼쳐 읽습니다.</h2></div>
         <div class="band-guide" aria-label="점수 구간 해석 기준">
           <div><span>1.0–3.4</span><strong>확보가 필요한 상태</strong><p>지금의 생활에서 이 경험이나 역량이 충분히 작동하기 어려운 상태</p></div>
           <div><span>3.5–4.9</span><strong>상황에 따라 흔들리는 상태</strong><p>조건이 맞으면 작동하지만 압박이나 피로 속에서는 쉽게 약해지는 상태</p></div>
@@ -144,6 +163,10 @@
           <span class="ticket-label">MY 7-WEEK EXPERIMENT</span>
           <h3 id="experiment-title"></h3>
           <p id="experiment-action"></p>
+          <div class="experiment-bridge">
+            <div><span>알아차릴 신호</span><p id="experiment-notice"></p></div>
+            <div><span>그때의 작은 선택</span><p id="experiment-choice"></p></div>
+          </div>
           <div class="ticket-checks" aria-label="7주 실천 체크"><span>1주</span><span>2주</span><span>3주</span><span>4주</span><span>5주</span><span>6주</span><span>7주</span></div>
           <div class="experiment-question"><span>관찰 질문</span><p id="experiment-question"></p></div>
         </article>
@@ -156,12 +179,13 @@
             <h2>결과를 읽었으니,<br>이제 내 문장으로 마무리합니다.</h2>
           </div>
           <div class="reflection-intro-copy">
-            <p>몸이 먼저 보내는 신호부터 반복되는 생각과 행동, 실제 필요, 나다운 다음 선택까지 8개의 문장을 완성합니다. 잘 쓴 답보다 오늘의 실제 장면에 가까운 답이면 충분합니다.</p>
+            <div class="reflection-loop-cue"><span>나의 적용 초점</span><strong id="reflection-loop-title"></strong><p id="reflection-loop-copy"></p></div>
+            <p>내 결과에서 선택된 삶의 영역과 알아차림 역량을 한 장면 안에서 연결하며 8개의 문장을 완성합니다. 잘 쓴 답보다 오늘의 실제 모습에 가까운 답이면 충분합니다.</p>
             <ol class="reflection-phases" aria-label="알아차림 기록 네 단계">
-              <li><span>01</span>몸과 감정의 신호</li>
-              <li><span>02</span>반복되는 생각과 행동</li>
-              <li><span>03</span>실제 필요와 나다운 기준</li>
-              <li><span>04</span>다음 장면의 작은 선택</li>
+              <li><span>01</span>삶의 영역이 살아나는 장면</li>
+              <li><span>02</span>흐려지는 신호와 반복 패턴</li>
+              <li><span>03</span>실제 필요와 알아차림 손잡이</li>
+              <li><span>04</span>작은 선택과 7주 문장</li>
             </ol>
             <button class="primary-button" type="button" data-action="start-reflection"><span>문장완성 시작</span><span aria-hidden="true">→</span></button>
           </div>
@@ -249,6 +273,7 @@
     <div class="dialog-body">
       <p>PERMA는 웰빙을 긍정정서, 몰입, 관계, 의미, 성취의 다섯 요소로 설명합니다. 이 검사는 이 이론을 개념적 기반으로 삼되, 기존 PERMA Profiler 문항을 사용하지 않고 코칭 목적의 문항을 독립적으로 구성했습니다.</p>
       <p>알아차림 영역은 신호 포착, 경험 명명, 반복 패턴 이해, 고유성 정렬, 선택과 조정의 다섯 역량을 봅니다. 고유성 정렬은 타인의 기대와 자기 기준을 구분하고, 자신의 강점·방식·가치를 선택에 반영하는 힘입니다. 플로리싱이 삶의 현재 상태라면, 알아차림은 그 상태를 다룰 수 있는 변화 역량입니다.</p>
+      <p>개인 적용에서는 긍정정서–신호 포착, 몰입–패턴 이해, 관계–경험 명명, 의미–고유성 정렬, 성취–선택과 조정의 다섯 성장 루프로 함께 읽습니다. 이는 두 이론이 원래부터 일대일로 대응한다는 뜻이 아니라, 사용자가 자신의 생활 장면에서 ‘무엇을 경험하고 무엇을 알아차릴지’를 쉽게 연결하도록 만든 이 도구의 코칭 프레임입니다.</p>
       <p>결과 뒤의 문장완성 과정은 몸의 신호, 자동적인 생각과 행동, 실제 필요, 자기 기준, 다음 행동을 일상 언어로 기록하도록 돕습니다. 이는 임상적 문장완성검사나 투사검사가 아니며, 작성한 문장을 해석해 성격이나 심리상태를 판정하지 않습니다.</p>
       <ul>
         <li>35문항, 7점 자기보고 척도</li>
@@ -281,6 +306,6 @@
   </dialog>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20260718-letter1"></script>
+  <script src="app.js?v=20260718-integrated1"></script>
 </body>
 </html>
