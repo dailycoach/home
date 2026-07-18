@@ -13,9 +13,9 @@
       .then(r => r.text())
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
-        const links = `${anchor}\n            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>\n            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>`;
+        const links = `${anchor}\n            <a href="/tests/flourish-awareness/" data-route="flourishAwareness">플로리싱 × 알아차림 <small>NEW</small></a>\n            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>\n            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>`;
         html = html.replaceAll(anchor, links);
-        html = html.replace("      kgm210: '/tests/kgm210/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
+        html = html.replace("      kgm210: '/tests/kgm210/',\n      flourishAwareness: '/tests/flourish-awareness/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
         document.open(); document.write(html); document.close();
       });
   </script>
