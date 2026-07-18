@@ -961,7 +961,7 @@
         <div class="nav-group">
           <button class="nav-button" type="button" aria-haspopup="true">콘텐츠 <span aria-hidden="true">⌄</span></button>
           <div class="dropdown" role="menu">
-            <a href="/maum-library/" data-route="maumLibrary">마음서재 <small>NEW</small></a>
+            <a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재 <small>NEW</small></a>
             <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
           </div>
         </div>
@@ -1099,7 +1099,7 @@
         <article class="category" data-category="contents">
           <h3>콘텐츠</h3>
           <p>마음을 돌보고 일상의 성장을 돕는 콘텐츠입니다.</p>
-          <a href="/maum-library/" data-route="maumLibrary">마음서재 <small>NEW</small></a>
+          <a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재 <small>NEW</small></a>
           <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
           <a href="/pages.json" data-route="pagesJson">pages.json <small>→</small></a>
         </article>
@@ -1131,7 +1131,7 @@
           <a href="/lcms/" data-route="lcms">LCMS</a>
           <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
           <a href="/activities/live-board/" data-route="liveBoard">라이브보드</a>
-          <a href="/maum-library/" data-route="maumLibrary">마음서재</a>
+          <a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재</a>
           <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
         </div>
       </div>
@@ -1182,7 +1182,7 @@
       kca8: '/tests/kca8/',
       wildernessSurvival: '/activities/wilderness-survival/',
       liveBoard: '/activities/live-board/',
-      maumLibrary: '/maum-library/',
+      maumLibrary: 'https://maeum-library-talk.dailycoaching.chatgpt.site',
       spiritualHero: '/spiritual/hero/',
       pagesJson: '/pages.json'
     });
@@ -1354,7 +1354,9 @@
         event?.preventDefault();
         window.open(target, '_blank', 'noopener,noreferrer');
         closeMenu();
-        showToast('스마트스토어 날빛코칭으로 이동합니다.');
+        showToast(routeKey === 'booking'
+          ? '스마트스토어 날빛코칭으로 이동합니다.'
+          : '새 탭에서 마음서재를 엽니다.');
         return;
       }
 
