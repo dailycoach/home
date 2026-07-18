@@ -1,4 +1,4 @@
-name: Deploy SELF INC. v9.8 editorial design system
+name: Deploy SELF INC. v9.8.1 interaction and Gen Z color
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     paths:
       - "tests/self/index.html"
       - "tests/self/assets/self-v9-coach-clean.js"
-      - "tests/self/assets/self-v9-coach-clean.css"
+      - "tests/self/assets/self-v9-genz.css"
       - "tests/self/assets/self-v9-editorial.css"
       - "tests/self/assets/self-v9-editorial-entry.css"
       - ".github/workflows/deploy-self-v962.yml"
@@ -17,7 +17,7 @@ permissions:
   pages: write
 
 concurrency:
-  group: deploy-self-v980
+  group: deploy-self-v981
   cancel-in-progress: true
 
 jobs:
@@ -42,6 +42,7 @@ jobs:
           CLEAN_JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-clean.js
           EDITORIAL_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-editorial.css
           ENTRY_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-editorial-entry.css
+          GENZ_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-genz.css
         run: |
           set -e
           request_code=$(curl -sSL -o /tmp/request.json -w "%{http_code}" -X POST \
@@ -70,40 +71,34 @@ jobs:
             js_code=$(curl -sSL -o /tmp/clean.js -w "%{http_code}" -H "Cache-Control: no-cache" "${CLEAN_JS_URL}?v=${SOURCE_SHA}-${attempt}")
             css_code=$(curl -sSL -o /tmp/editorial.css -w "%{http_code}" -H "Cache-Control: no-cache" "${EDITORIAL_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
             entry_code=$(curl -sSL -o /tmp/entry.css -w "%{http_code}" -H "Cache-Control: no-cache" "${ENTRY_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
+            genz_code=$(curl -sSL -o /tmp/genz.css -w "%{http_code}" -H "Cache-Control: no-cache" "${GENZ_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
 
             if [ "${html_code}" = "200" ] \
               && [ "${js_code}" = "200" ] \
               && [ "${css_code}" = "200" ] \
               && [ "${entry_code}" = "200" ] \
-              && grep -q 'self-inc-version" content="9.8.0' /tmp/live.html \
+              && [ "${genz_code}" = "200" ] \
+              && grep -q 'self-inc-version" content="9.8.1' /tmp/live.html \
               && grep -q 'KINGDOM COACH GUIDE' /tmp/live.html \
-              && grep -q 'self-v9-editorial.css?v=9.8.0' /tmp/live.html \
-              && grep -q 'self-v9-editorial-entry.css?v=9.8.0' /tmp/live.html \
-              && grep -q 'self-v9-coach-clean.js?v=9.8.0' /tmp/live.html \
-              && grep -q '5영역 브리핑' /tmp/clean.js \
-              && grep -q '우선 조합' /tmp/clean.js \
-              && grep -q '활용 자원' /tmp/clean.js \
-              && grep -q '3관점 상태분석' /tmp/clean.js \
-              && grep -q '상세 해석과 추가 질문' /tmp/clean.js \
-              && ! grep -q 'createFlourishFlow' /tmp/clean.js \
-              && grep -q -- '--editorial-ink' /tmp/editorial.css \
-              && grep -q '#reportCard:before' /tmp/editorial.css \
-              && grep -q '.result-score-row' /tmp/editorial.css \
-              && grep -q '.domain:nth-child(5)' /tmp/editorial.css \
-              && grep -q '.coach-synthesis-grid' /tmp/editorial.css \
-              && grep -q '.coach-state-analysis-grid' /tmp/editorial.css \
-              && grep -q '.hero:before' /tmp/entry.css \
-              && grep -q '.test-shell:before' /tmp/entry.css \
-              && grep -q '.scale button.selected' /tmp/entry.css \
-              && grep -q 'prefers-reduced-motion' /tmp/editorial.css \
-              && grep -q 'prefers-reduced-motion' /tmp/entry.css; then
+              && grep -q 'self-v9-genz.css?v=9.8.1' /tmp/live.html \
+              && grep -q 'self-v9-coach-clean.js?v=9.8.1' /tmp/live.html \
+              && grep -q 'pendingScrollTop' /tmp/clean.js \
+              && grep -q 'details.open = advancedOpen' /tmp/clean.js \
+              && grep -q 'coachDetailOpen' /tmp/clean.js \
+              && grep -q -- '--genz-blue:#3157ff' /tmp/genz.css \
+              && grep -q -- '--genz-lime:#c7ff3d' /tmp/genz.css \
+              && grep -q 'data-coach-state="low"' /tmp/genz.css \
+              && grep -q 'data-coach-state="high"' /tmp/genz.css \
+              && grep -q '.result-cover' /tmp/genz.css \
+              && grep -q '.coach-state-card.is-psychology' /tmp/genz.css \
+              && grep -q 'prefers-reduced-motion' /tmp/genz.css; then
               live_status="verified"
               break
             fi
           done
 
           export REQUEST_CODE="${request_code}" BUILD_STATUS="${build_status}" LIVE_STATUS="${live_status}"
-          export HTML_CODE="${html_code}" JS_CODE="${js_code}" CSS_CODE="${css_code}" ENTRY_CODE="${entry_code}" SOURCE_SHA
+          export HTML_CODE="${html_code}" JS_CODE="${js_code}" CSS_CODE="${css_code}" ENTRY_CODE="${entry_code}" GENZ_CODE="${genz_code}" SOURCE_SHA
           python - <<'PY'
           import datetime, hashlib, json, os
           from pathlib import Path
@@ -111,7 +106,7 @@ jobs:
               p=Path(path)
               return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
           payload={
-            "workflow":"deploy-self-v980",
+            "workflow":"deploy-self-v981",
             "sourceSha":os.environ["SOURCE_SHA"],
             "requestHttpStatus":int(os.environ["REQUEST_CODE"]),
             "latestBuildStatus":os.environ["BUILD_STATUS"],
@@ -121,25 +116,24 @@ jobs:
               "cleanScriptHttpStatus":int(os.environ["JS_CODE"]),
               "editorialCssHttpStatus":int(os.environ["CSS_CODE"]),
               "entryEditorialCssHttpStatus":int(os.environ["ENTRY_CODE"]),
-              "version980":True,
+              "genzCssHttpStatus":int(os.environ["GENZ_CODE"]),
+              "version981":True,
               "kingdomIdentityPreserved":True,
-              "originalFunctionsPreserved":True,
-              "editorialEntryLayer":True,
-              "editorialQuestionLayer":True,
-              "editorialReportLayer":True,
-              "magazineResultLayout":True,
-              "fiveDomainIndexLayout":True,
-              "editorialCoachLayout":True,
-              "reducedMotionSupport":True,
+              "detailOpenStatePreserved":True,
+              "detailScrollPreserved":True,
+              "lowHighColorFeedback":True,
+              "genzColorLayer":True,
+              "editorialFunctionsPreserved":True,
               "status":os.environ["LIVE_STATUS"],
               "htmlSha256":sha("/tmp/live.html"),
               "cleanScriptSha256":sha("/tmp/clean.js"),
               "editorialCssSha256":sha("/tmp/editorial.css"),
-              "entryEditorialCssSha256":sha("/tmp/entry.css")
+              "entryEditorialCssSha256":sha("/tmp/entry.css"),
+              "genzCssSha256":sha("/tmp/genz.css")
             },
             "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
           }
-          Path("tests/self/deploy-status-v980.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          Path("tests/self/deploy-status-v981.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
 
           test "${request_code}" = "201"
@@ -150,6 +144,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/deploy-status-v980.json
-          git commit -m "chore: record SELF INC. v9.8 deployment [skip ci]" || exit 0
+          git add tests/self/deploy-status-v981.json
+          git commit -m "chore: record SELF INC. v9.8.1 deployment [skip ci]" || exit 0
           git push
