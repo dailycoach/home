@@ -1,4 +1,4 @@
-name: Deploy SELF INC. v9.7 flourishing awareness coach view
+name: Deploy SELF INC. v9.7.1 design-only coach view
 
 on:
   push:
@@ -15,7 +15,7 @@ permissions:
   pages: write
 
 concurrency:
-  group: deploy-self-v970
+  group: deploy-self-v971
   cancel-in-progress: true
 
 jobs:
@@ -70,18 +70,21 @@ jobs:
             if [ "${html_code}" = "200" ] \
               && [ "${js_code}" = "200" ] \
               && [ "${css_code}" = "200" ] \
-              && grep -q 'self-inc-version" content="9.7.0' /tmp/live.html \
-              && grep -q 'FLOURISHING × AWARENESS' /tmp/live.html \
-              && grep -q 'self-v9-coach-clean.js?v=9.7.0' /tmp/live.html \
-              && grep -q 'self-v9-coach-clean.css?v=9.7.0' /tmp/live.html \
-              && grep -q 'coach-flourish-flow' /tmp/clean.js \
-              && grep -q '생활 장면' /tmp/clean.js \
-              && grep -q '알아차릴 신호' /tmp/clean.js \
-              && grep -q '작은 선택' /tmp/clean.js \
-              && grep -q '7일 성장실험' /tmp/clean.js \
+              && grep -q 'self-inc-version" content="9.7.1' /tmp/live.html \
+              && grep -q 'KINGDOM COACH GUIDE' /tmp/live.html \
+              && grep -q 'self-v9-coach-clean.js?v=9.7.1' /tmp/live.html \
+              && grep -q 'self-v9-coach-clean.css?v=9.7.1' /tmp/live.html \
+              && grep -q '5영역 브리핑' /tmp/clean.js \
+              && grep -q '우선 조합' /tmp/clean.js \
+              && grep -q '활용 자원' /tmp/clean.js \
+              && grep -q '3관점 상태분석' /tmp/clean.js \
+              && grep -q '상세 해석과 추가 질문' /tmp/clean.js \
+              && ! grep -q 'createFlourishFlow' /tmp/clean.js \
+              && ! grep -q 'coach-flourish-flow' /tmp/clean.js \
               && grep -q -- '--flourish-sage' /tmp/clean.css \
-              && grep -q '.coach-flourish-grid' /tmp/clean.css \
+              && grep -q '.coach-synthesis-grid{display:grid' /tmp/clean.css \
               && grep -q '.coach-tab:nth-child(4):before' /tmp/clean.css \
+              && grep -q '.coach-flourish-flow{display:none' /tmp/clean.css \
               && grep -q 'prefers-reduced-motion' /tmp/clean.css; then
               live_status="verified"
               break
@@ -97,7 +100,7 @@ jobs:
               p=Path(path)
               return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
           payload={
-            "workflow":"deploy-self-v970",
+            "workflow":"deploy-self-v971",
             "sourceSha":os.environ["SOURCE_SHA"],
             "requestHttpStatus":int(os.environ["REQUEST_CODE"]),
             "latestBuildStatus":os.environ["BUILD_STATUS"],
@@ -106,13 +109,12 @@ jobs:
               "httpStatus":int(os.environ["HTML_CODE"]),
               "cleanScriptHttpStatus":int(os.environ["JS_CODE"]),
               "cleanCssHttpStatus":int(os.environ["CSS_CODE"]),
-              "version970":True,
-              "flourishingAwarenessHeader":True,
-              "lifeSceneStep":True,
-              "awarenessSignalStep":True,
-              "smallChoiceStep":True,
-              "sevenDayExperimentStep":True,
-              "fiveDomainColorRhythm":True,
+              "version971":True,
+              "kingdomIdentityRestored":True,
+              "originalCoachFunctionsRestored":True,
+              "flourishingFlowRemoved":True,
+              "flourishingPaletteApplied":True,
+              "fiveDomainColorTabs":True,
               "reducedMotionSupport":True,
               "status":os.environ["LIVE_STATUS"],
               "htmlSha256":sha("/tmp/live.html"),
@@ -121,7 +123,7 @@ jobs:
             },
             "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
           }
-          Path("tests/self/deploy-status-v970.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          Path("tests/self/deploy-status-v971.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
 
           test "${request_code}" = "201"
@@ -132,6 +134,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/deploy-status-v970.json
-          git commit -m "chore: record SELF INC. v9.7 deployment [skip ci]" || exit 0
+          git add tests/self/deploy-status-v971.json
+          git commit -m "chore: record SELF INC. v9.7.1 deployment [skip ci]" || exit 0
           git push
