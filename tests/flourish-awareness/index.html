@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11120f">
+  <meta name="description" content="PERMA 플로리싱과 알아차림 코칭을 연결한 성장 자기점검 웹검사">
+  <title>FLOURISH / NOTICE — 플로리싱 알아차림 검사</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <button class="wordmark" type="button" data-action="home" aria-label="첫 화면으로 이동">
+      <span>DAILY</span><span>COACHING</span>
+    </button>
+    <div class="header-actions">
+      <button class="text-button" type="button" data-action="method">검사 안내</button>
+      <button class="text-button" type="button" data-action="history">이전 기록 <span id="history-count">0</span></button>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1">
+    <section id="intro-view" class="view intro-view">
+      <div class="hero-kicker">FLOURISHING × AWARENESS COACHING</div>
+      <h1 class="hero-title"><span>잘 살고 있는가</span><span class="outline">보다,</span><span>무엇을 알아차리는가.</span></h1>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p>플로리싱은 지금 삶이 어떻게 작동하는지를 보여줍니다. 알아차림은 그 삶에 어떻게 개입할 수 있는지를 보여줍니다.</p>
+          <p class="muted">35문항 · 약 6분 · 7점 척도</p>
+        </div>
+        <div class="start-panel">
+          <label class="field-label" for="participant-name">결과지에 표시할 이름 <span>선택</span></label>
+          <input id="participant-name" class="line-input" type="text" maxlength="20" autocomplete="name" placeholder="이름 또는 별칭">
+          <fieldset class="context-fieldset">
+            <legend>지금 가장 살펴보고 싶은 장면</legend>
+            <div class="context-options">
+              <label><input type="radio" name="context" value="life" checked><span>삶 전체</span></label>
+              <label><input type="radio" name="context" value="work"><span>일과 성장</span></label>
+              <label><input type="radio" name="context" value="relationship"><span>관계</span></label>
+              <label><input type="radio" name="context" value="change"><span>변화 과제</span></label>
+            </div>
+          </fieldset>
+          <button class="primary-button" type="button" data-action="start"><span>검사 시작</span><span aria-hidden="true">↗</span></button>
+          <p class="privacy-note">응답과 결과는 이 기기에만 저장됩니다. 이 검사는 심리진단이나 의료적 평가가 아닙니다.</p>
+        </div>
+      </div>
+      <div class="concept-strip" aria-label="검사의 두 축">
+        <article><span class="concept-index">01</span><h2>FLOURISH</h2><p>긍정정서 · 몰입 · 관계 · 의미 · 성취</p></article>
+        <article><span class="concept-index">02</span><h2>NOTICE</h2><p>신호 · 명명 · 패턴 · 고유성 · 선택</p></article>
+        <article class="accent-card"><span class="concept-index">03</span><h2>MOVE</h2><p>알아차림을 한 주의 작은 행동으로</p></article>
+      </div>
+    </section>
+
+    <section id="test-view" class="view test-view" hidden>
+      <div class="progress-wrap" aria-live="polite">
+        <div class="progress-meta"><span id="progress-step">01 / 07</span><span id="progress-copy">현재의 장면을 떠올려 주세요</span></div>
+        <div class="progress-track"><span id="progress-bar"></span></div>
+      </div>
+      <div class="test-heading">
+        <p>최근 한 달의 실제 모습을 기준으로 답해 주세요.</p>
+        <h2>맞는 답보다<br><em>나에게 가까운 답.</em></h2>
+      </div>
+      <form id="question-form" class="question-list"></form>
+      <div class="test-navigation">
+        <button id="prev-button" class="secondary-button" type="button" data-action="prev">이전</button>
+        <p id="answer-status" role="status">5개 문항에 모두 응답해 주세요</p>
+        <button id="next-button" class="primary-button compact" type="button" data-action="next"><span>다음</span><span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section id="result-view" class="view result-view" hidden>
+      <div class="result-hero">
+        <div>
+          <p class="eyebrow">YOUR FLOURISHING MAP</p>
+          <h1 id="result-title">지금의 성장 지도를 읽었습니다.</h1>
+          <p id="result-date" class="muted"></p>
+        </div>
+        <div class="result-actions no-print">
+          <button class="secondary-button" type="button" data-action="copy">요약 복사</button>
+          <button class="primary-button compact" type="button" data-action="print"><span>결과 저장</span><span aria-hidden="true">↗</span></button>
+        </div>
+      </div>
+
+      <section class="state-section">
+        <div class="state-code" id="state-code">01</div>
+        <div>
+          <p class="eyebrow">CURRENT STATE</p>
+          <h2 id="state-name"></h2>
+          <p id="state-summary" class="state-summary"></p>
+        </div>
+        <div class="dual-score">
+          <div><span>삶의 플로리싱</span><strong id="flourish-score">0.0</strong><small>/ 7.0</small></div>
+          <div><span>알아차림 역량</span><strong id="awareness-score">0.0</strong><small>/ 7.0</small></div>
+        </div>
+      </section>
+
+      <section class="map-section">
+        <div class="section-heading"><p class="eyebrow">10-DIMENSION MAP</p><h2>삶의 상태와 변화 역량을<br>한 장에서 봅니다.</h2></div>
+        <div class="radar-panel">
+          <div class="radar-wrap"><svg id="radar-chart" viewBox="0 0 600 600" role="img" aria-label="10개 영역 점수 방사형 차트"></svg></div>
+          <div id="score-legend" class="score-legend"></div>
+        </div>
+      </section>
+
+      <section class="reading-section">
+        <div class="section-heading"><p class="eyebrow">PERSONAL READING</p><h2>점수보다 중요한 것은<br>점수 사이의 관계입니다.</h2></div>
+        <div class="reading-grid">
+          <article class="reading-card bright"><span>잘 작동하는 힘</span><h3 id="strength-title"></h3><p id="strength-copy"></p></article>
+          <article class="reading-card"><span>먼저 볼 장면</span><h3 id="growth-title"></h3><p id="growth-copy"></p></article>
+          <article class="reading-card"><span>연결할 알아차림</span><h3 id="lever-title"></h3><p id="lever-copy"></p></article>
+        </div>
+      </section>
+
+      <section class="bridge-section">
+        <div class="bridge-intro"><p class="eyebrow">COACHING BRIDGE</p><h2>해석에서 멈추지 않고<br>질문으로 건너갑니다.</h2><p id="bridge-copy"></p></div>
+        <div id="coaching-questions" class="question-stack"></div>
+      </section>
+
+      <section class="experiment-section">
+        <div>
+          <p class="eyebrow">7-WEEK EXPERIMENT</p>
+          <h2>일곱 주 동안,<br>한 가지를 키웁니다.</h2>
+          <label for="focus-select">성장 초점 바꾸기</label>
+          <select id="focus-select"></select>
+        </div>
+        <article class="experiment-ticket">
+          <span class="ticket-label">MY SMALL EXPERIMENT</span>
+          <h3 id="experiment-title"></h3>
+          <p id="experiment-action"></p>
+          <div class="ticket-checks" aria-label="7주 실천 체크"><span>1주</span><span>2주</span><span>3주</span><span>4주</span><span>5주</span><span>6주</span><span>7주</span></div>
+          <div class="experiment-question"><span>관찰 질문</span><p id="experiment-question"></p></div>
+        </article>
+      </section>
+
+      <section class="notice-section">
+        <p><strong>결과를 읽는 기준</strong></p>
+        <p>이 결과는 규준집단과 비교한 백분위나 성격 유형이 아닙니다. 현재의 자기평가를 10개 성장영역으로 정리한 대화 자료입니다. 낮은 점수는 결함이 아니라 지금 관심을 둘 수 있는 장면을 뜻합니다.</p>
+      </section>
+
+      <div class="result-footer no-print">
+        <button class="secondary-button" type="button" data-action="home">처음으로</button>
+        <button class="primary-button compact" type="button" data-action="restart"><span>다시 검사</span><span aria-hidden="true">↻</span></button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="method-dialog" class="info-dialog">
+    <button class="dialog-close" type="button" data-action="close-dialog" aria-label="닫기">×</button>
+    <p class="eyebrow">ABOUT THIS TOOL</p>
+    <h2>플로리싱과 알아차림을<br>왜 함께 보나요?</h2>
+    <div class="dialog-body">
+      <p>PERMA는 웰빙을 긍정정서, 몰입, 관계, 의미, 성취의 다섯 요소로 설명합니다. 이 검사는 이 이론을 개념적 기반으로 삼되, 기존 PERMA Profiler 문항을 사용하지 않고 코칭 목적의 문항을 독립적으로 구성했습니다.</p>
+      <p>알아차림 영역은 신호 포착, 경험 명명, 반복 패턴 이해, 고유성 정렬, 선택과 조정의 다섯 역량을 봅니다. 고유성 정렬은 타인의 기대와 자기 기준을 구분하고, 자신의 강점·방식·가치를 선택에 반영하는 힘입니다. 플로리싱이 삶의 현재 상태라면, 알아차림은 그 상태를 다룰 수 있는 변화 역량입니다.</p>
+      <ul>
+        <li>35문항, 7점 자기보고 척도</li>
+        <li>PERMA 5영역 × 4문항, 알아차림 5영역 × 3문항</li>
+        <li>일부 역채점 문항 포함</li>
+        <li>규준화·타당화 전 개발 버전</li>
+      </ul>
+      <p class="source-note">이론 근거: Martin Seligman의 PERMA 웰빙 이론, Butler & Kern의 다차원적 플로리싱 측정 연구. 본 도구는 두 저자 및 기관의 공식 검사가 아닙니다.</p>
+    </div>
+  </dialog>
+
+  <dialog id="history-dialog" class="info-dialog history-dialog">
+    <button class="dialog-close" type="button" data-action="close-dialog" aria-label="닫기">×</button>
+    <p class="eyebrow">LOCAL HISTORY</p>
+    <h2>이전 기록</h2>
+    <div id="history-list" class="history-list"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
