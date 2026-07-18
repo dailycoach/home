@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#11120f">
   <meta name="description" content="PERMA 플로리싱과 알아차림 코칭을 연결한 성장 자기점검 웹검사">
   <title>FLOURISH / NOTICE — 플로리싱 알아차림 검사</title>
-  <link rel="stylesheet" href="styles.css?v=20260718-expert3">
+  <link rel="stylesheet" href="styles.css?v=20260718-letter1">
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -149,6 +149,87 @@
         </article>
       </section>
 
+      <section id="reflection-section" class="reflection-section">
+        <div id="reflection-intro" class="reflection-intro">
+          <div>
+            <p class="eyebrow">문장완성형 알아차림 기록 · AWARENESS COMPLETION</p>
+            <h2>결과를 읽었으니,<br>이제 내 문장으로 마무리합니다.</h2>
+          </div>
+          <div class="reflection-intro-copy">
+            <p>몸이 먼저 보내는 신호부터 반복되는 생각과 행동, 실제 필요, 나다운 다음 선택까지 8개의 문장을 완성합니다. 잘 쓴 답보다 오늘의 실제 장면에 가까운 답이면 충분합니다.</p>
+            <ol class="reflection-phases" aria-label="알아차림 기록 네 단계">
+              <li><span>01</span>몸과 감정의 신호</li>
+              <li><span>02</span>반복되는 생각과 행동</li>
+              <li><span>03</span>실제 필요와 나다운 기준</li>
+              <li><span>04</span>다음 장면의 작은 선택</li>
+            </ol>
+            <button class="primary-button" type="button" data-action="start-reflection"><span>문장완성 시작</span><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <div id="reflection-workspace" class="reflection-workspace" hidden>
+          <div class="reflection-progress">
+            <span id="reflection-step">01 / 08</span>
+            <div><span id="reflection-progress-bar"></span></div>
+            <strong id="reflection-phase">몸과 감정의 신호</strong>
+          </div>
+          <div class="reflection-grid">
+            <div class="reflection-guide">
+              <p class="eyebrow">NOTICE THE SCENE</p>
+              <h2>설명하려 애쓰기보다<br>한 장면을 적어 보세요.</h2>
+              <p id="reflection-guide-copy">최근 일주일 안에 실제로 있었던 작은 순간을 떠올리면 쉽습니다.</p>
+            </div>
+            <div class="reflection-card">
+              <label id="reflection-stem" for="reflection-answer"></label>
+              <textarea id="reflection-answer" rows="5" maxlength="500" placeholder="여기에 문장을 이어 써 주세요"></textarea>
+              <div class="everyday-examples">
+                <span>예를 들면</span>
+                <ul id="reflection-examples"></ul>
+              </div>
+              <p id="reflection-answer-status" class="reflection-answer-status" role="status">한 문장만 적어도 충분합니다.</p>
+            </div>
+          </div>
+          <div class="reflection-navigation no-print">
+            <button id="reflection-prev" class="secondary-button" type="button" data-action="reflection-prev">이전</button>
+            <button id="reflection-next" class="primary-button compact" type="button" data-action="reflection-next"><span>다음 문장</span><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <div id="letter-workspace" class="letter-workspace" hidden>
+          <div class="letter-heading">
+            <div><p class="eyebrow">LETTER TO MYSELF</p><h2>지금의 나에게<br>보내는 편지</h2></div>
+            <p>여덟 개의 답을 한 통의 편지로 엮었습니다. 어색한 말은 고치고, 더 하고 싶은 말은 자유롭게 덧붙이세요. 저장하는 순간 오늘의 검사가 끝납니다.</p>
+          </div>
+          <div class="letter-paper">
+            <label for="self-letter">편지 내용</label>
+            <textarea id="self-letter" rows="24" maxlength="6000"></textarea>
+            <div id="self-letter-print" class="self-letter-print" aria-hidden="true"></div>
+          </div>
+          <div class="letter-actions no-print">
+            <button class="secondary-button" type="button" data-action="edit-reflection">문장 다시 보기</button>
+            <button class="secondary-button" type="button" data-action="copy-letter">편지 복사</button>
+            <button class="secondary-button" type="button" data-action="print-letter">편지 PDF 저장</button>
+            <button class="primary-button compact" type="button" data-action="save-letter"><span>편지 저장하고 마치기</span><span aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+
+        <div id="reflection-complete" class="reflection-complete" hidden>
+          <p class="completion-mark" aria-hidden="true">✓</p>
+          <p class="eyebrow">COMPLETED FOR TODAY</p>
+          <h2>오늘의 나에게<br>편지를 보냈습니다.</h2>
+          <p id="letter-saved-date"></p>
+          <div id="letter-preview" class="letter-preview"></div>
+          <div class="letter-actions no-print">
+            <button class="secondary-button" type="button" data-action="edit-letter">편지 수정</button>
+            <button class="secondary-button" type="button" data-action="copy-letter">편지 복사</button>
+            <button class="secondary-button" type="button" data-action="print-letter">편지 PDF 저장</button>
+            <button class="primary-button compact" type="button" data-action="home"><span>처음으로</span><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <p class="reflection-disclaimer"><strong>사용 안내</strong> 이 과정은 임상적·투사적 문장완성검사가 아니라, 검사 결과를 자신의 생활 장면과 연결하는 코칭용 자기성찰 기록입니다. 답의 의미를 자동으로 진단하거나 성격을 판정하지 않습니다.</p>
+      </section>
+
       <section class="notice-section">
         <p><strong>결과를 읽는 기준</strong></p>
         <p>이 결과는 규준집단과 비교한 백분위나 성격 유형이 아닙니다. 현재의 자기평가를 10개 성장영역으로 정리한 대화 자료입니다. 낮은 점수는 결함이 아니라 지금 관심을 둘 수 있는 장면을 뜻합니다.</p>
@@ -168,6 +249,7 @@
     <div class="dialog-body">
       <p>PERMA는 웰빙을 긍정정서, 몰입, 관계, 의미, 성취의 다섯 요소로 설명합니다. 이 검사는 이 이론을 개념적 기반으로 삼되, 기존 PERMA Profiler 문항을 사용하지 않고 코칭 목적의 문항을 독립적으로 구성했습니다.</p>
       <p>알아차림 영역은 신호 포착, 경험 명명, 반복 패턴 이해, 고유성 정렬, 선택과 조정의 다섯 역량을 봅니다. 고유성 정렬은 타인의 기대와 자기 기준을 구분하고, 자신의 강점·방식·가치를 선택에 반영하는 힘입니다. 플로리싱이 삶의 현재 상태라면, 알아차림은 그 상태를 다룰 수 있는 변화 역량입니다.</p>
+      <p>결과 뒤의 문장완성 과정은 몸의 신호, 자동적인 생각과 행동, 실제 필요, 자기 기준, 다음 행동을 일상 언어로 기록하도록 돕습니다. 이는 임상적 문장완성검사나 투사검사가 아니며, 작성한 문장을 해석해 성격이나 심리상태를 판정하지 않습니다.</p>
       <ul>
         <li>35문항, 7점 자기보고 척도</li>
         <li>PERMA 5영역 × 4문항, 알아차림 5영역 × 3문항</li>
@@ -199,6 +281,6 @@
   </dialog>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20260718-expert3"></script>
+  <script src="app.js?v=20260718-letter1"></script>
 </body>
 </html>
