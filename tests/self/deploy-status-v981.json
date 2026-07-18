@@ -1,0 +1,28 @@
+{
+  "workflow": "deploy-self-v981",
+  "sourceSha": "df0ae0b5523cbf067868f24bfd6db2bc2ab58bc9",
+  "requestHttpStatus": 201,
+  "latestBuildStatus": "built",
+  "liveCheck": {
+    "url": "https://daily-coach-ing.com/tests/self/index.html",
+    "httpStatus": 200,
+    "cleanScriptHttpStatus": 200,
+    "editorialCssHttpStatus": 200,
+    "entryEditorialCssHttpStatus": 200,
+    "genzCssHttpStatus": 200,
+    "version981": true,
+    "kingdomIdentityPreserved": true,
+    "detailOpenStatePreserved": true,
+    "detailScrollPreserved": true,
+    "lowHighColorFeedback": true,
+    "genzColorLayer": true,
+    "editorialFunctionsPreserved": true,
+    "status": "verified",
+    "htmlSha256": "f97606fca9ce79067bfa05e6a17067e5cc8264d2b7bfd4d4ed3f16b385f267b7",
+    "cleanScriptSha256": "e0afab49ad44174eba4f58cf052a3704fe57e7c9211d6ed0c6e016b686bbc593",
+    "editorialCssSha256": "836195651c2bf2ddaf11abae285233b3ebb1c192cfb074c5b7ffdb7202090f5f",
+    "entryEditorialCssSha256": "ffffde43553d38149db594703289ceab2338435495627526e43ff5a8b84891c9",
+    "genzCssSha256": "4bcdc7d313afc3894b38d7013cef5e8829b4c4c087df6322acd65bda48ab4ee6"
+  },
+  "checkedAt": "2026-07-18T17:22:44.168370+00:00"
+}
