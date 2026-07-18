@@ -3,11 +3,14 @@
   const tabs = document.querySelector('#coachTabs');
   const openButton = document.querySelector('#coachViewBtn');
   const headerIntro = document.querySelector('.coach-sheet-intro');
+  const sheet = document.querySelector('.coach-sheet');
 
   if (!content || !tabs || !openButton) return;
 
   const CLEAN_INTRO = '핵심 상태와 이번 회기 질문을 빠르게 확인합니다.';
   let scheduled = false;
+  let advancedOpen = false;
+  let pendingScrollTop = null;
 
   function replaceProhibitedWord(root) {
     const blocked = '\uBCD1\uBAA9';
@@ -89,12 +92,16 @@
 
     const details = document.createElement('details');
     details.className = 'coach-clean-details';
+    details.open = advancedOpen;
     details.innerHTML = `
       <summary>상세 해석과 추가 질문</summary>
       <div class="coach-clean-details-body"></div>
     `;
     const body = details.querySelector('.coach-clean-details-body');
     nodes.forEach((node) => body.appendChild(node));
+    details.addEventListener('toggle', () => {
+      advancedOpen = details.open;
+    });
     content.appendChild(details);
   }
 
@@ -119,6 +126,15 @@
     delete content.dataset.flourishAwareness;
   }
 
+  function restoreAdvancedPosition() {
+    if (pendingScrollTop === null || !sheet) return;
+    const targetScrollTop = pendingScrollTop;
+    pendingScrollTop = null;
+    requestAnimationFrame(() => {
+      sheet.scrollTop = targetScrollTop;
+    });
+  }
+
   function enhance() {
     scheduled = false;
     if (!content.querySelector('.coach-synthesis') || !content.querySelector('.coach-score-profile')) return;
@@ -127,6 +143,8 @@
     addPerspectiveExpanders();
     createAdvancedDetails();
     content.dataset.coachGuideReady = 'true';
+    content.dataset.coachDetailOpen = String(advancedOpen);
+    restoreAdvancedPosition();
   }
 
   function schedule() {
@@ -135,8 +153,20 @@
     requestAnimationFrame(enhance);
   }
 
+  content.addEventListener('click', (event) => {
+    const stateButton = event.target.closest('[data-coach-state]');
+    if (!stateButton) return;
+    const details = content.querySelector('.coach-clean-details');
+    advancedOpen = Boolean(details?.open);
+    if (advancedOpen && sheet) pendingScrollTop = sheet.scrollTop;
+  }, true);
+
   new MutationObserver(schedule).observe(content, { childList: true, subtree: true });
   tabs.addEventListener('click', schedule);
-  openButton.addEventListener('click', () => setTimeout(schedule, 0));
+  openButton.addEventListener('click', () => {
+    advancedOpen = false;
+    pendingScrollTop = null;
+    setTimeout(schedule, 0);
+  });
   schedule();
 })();
