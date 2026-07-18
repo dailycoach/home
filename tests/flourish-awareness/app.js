@@ -201,7 +201,8 @@ const STATE_DATA = {
   aligned: { code: "01", name: "성장을 설계하는 플로리셔", summary: "삶의 여러 영역에서 웰빙이 비교적 안정적으로 작동하고, 자신의 경험을 읽어 다음 선택으로 연결하는 힘도 살아 있습니다. 지금은 부족함을 고치는 시기보다 잘되는 조건을 의식적으로 재현하고 주변으로 확장할 시기입니다." },
   momentum: { code: "02", name: "잘 살아가지만 신호를 놓치기 쉬운 상태", summary: "삶의 성과와 만족은 비교적 잘 유지되지만, 속도가 빠를수록 몸과 감정의 신호를 뒤늦게 볼 수 있습니다. 현재의 좋은 흐름을 오래 이어 가려면 더 노력하기보다 내적 신호를 읽는 정교함이 필요합니다." },
   observer: { code: "03", name: "변화를 준비하는 관찰자", summary: "삶의 만족감은 아직 충분히 차오르지 않았지만, 무엇이 일어나고 있는지 읽어낼 수 있는 힘이 있습니다. 알아차림을 분석에만 머물게 하지 않고 작은 행동으로 옮기면 변화의 감각이 빠르게 살아날 수 있습니다." },
-  restore: { code: "04", name: "회복의 바닥을 고르는 시기", summary: "삶의 에너지와 자신을 관찰하는 여유가 함께 낮아진 때일 수 있습니다. 많은 것을 바꾸려 하기보다 한 가지 신호를 알아차리고, 실패하기 어려운 최소 행동을 반복하는 것이 먼저입니다." }
+  restore: { code: "04", name: "회복의 바닥을 고르는 시기", summary: "삶의 에너지와 자신을 관찰하는 여유가 함께 낮아진 때일 수 있습니다. 많은 것을 바꾸려 하기보다 한 가지 신호를 알아차리고, 실패하기 어려운 최소 행동을 반복하는 것이 먼저입니다." },
+  developing: { code: "05", name: "성장 조건을 조율하는 중", summary: "삶의 여러 요소와 알아차림 역량이 완전히 멈춘 것은 아니지만, 상황과 에너지에 따라 작동 수준이 달라질 수 있습니다. 부족함을 단정하기보다 잘되는 날과 어려운 날의 조건 차이를 찾아 한 가지씩 안정시키는 시기입니다." }
 };
 
 const GROUP_ORDER = ["P", "E", "R", "M", "A", "SN", "NM", "PT", "VL", "CH"];
@@ -303,8 +304,7 @@ function calculateResult() {
   });
   const flourish = round1(mean(["P", "E", "R", "M", "A"].map((key) => domainScores[key])));
   const awareness = round1(mean(["SN", "NM", "PT", "VL", "CH"].map((key) => domainScores[key])));
-  const threshold = 4.7;
-  const stateKey = flourish >= threshold && awareness >= threshold ? "aligned" : flourish >= threshold ? "momentum" : awareness >= threshold ? "observer" : "restore";
+  const stateKey = classifyState(flourish, awareness);
   return { id: crypto.randomUUID?.() || `${Date.now()}`, createdAt: new Date().toISOString(), name: state.name, context: state.context, domainScores, flourish, awareness, stateKey };
 }
 
@@ -321,6 +321,14 @@ function sortedKeys(result, group) {
 
 function contextLabel(context) {
   return ({ life: "삶 전체", work: "일과 성장", relationship: "관계", change: "변화 과제" })[context] || "삶 전체";
+}
+
+function classifyState(flourish, awareness) {
+  if (flourish < 3.5 && awareness < 3.5) return "restore";
+  if (flourish >= 5 && awareness >= 5) return "aligned";
+  if (flourish >= 5 && awareness < 5) return "momentum";
+  if (flourish < 5 && awareness >= 5) return "observer";
+  return "developing";
 }
 
 function scoreBand(score) {
@@ -357,7 +365,7 @@ function pairMechanism(growthKey, leverKey) {
   return `현재의 우선 전략은 ${target}입니다. ${route}`;
 }
 
-function renderExpertLenses(result, strengthKey, growthKey, leverKey) {
+function renderExpertLenses(result, strengthKey, growthKey, leverKey, leverTieCount) {
   const flourishValues = ["P", "E", "R", "M", "A"].map((key) => result.domainScores[key]);
   const spread = round1(Math.max(...flourishValues) - Math.min(...flourishValues));
   const balanceTitle = spread >= 1.5 ? `${DOMAINS[strengthKey].name}에 기대어 버티는 비대칭이 보입니다.` : "다섯 플로리싱 요소의 간격이 비교적 크지 않습니다.";
@@ -365,8 +373,10 @@ function renderExpertLenses(result, strengthKey, growthKey, leverKey) {
     ? `가장 높은 영역과 낮은 영역의 차이는 ${spread.toFixed(1)}점입니다. 총점만 보면 가려질 수 있는 차이로, ${DOMAINS[strengthKey].name}의 힘이 ${DOMAINS[growthKey].name}의 부족한 체감을 보완하고 있을 가능성이 있습니다. 강점을 줄이기보다 그 작동 조건을 다음 성장영역으로 옮기는 접근이 적절합니다.`
     : `다섯 영역의 최대 차이는 ${spread.toFixed(1)}점입니다. 특정 한 영역이 삶 전체를 떠받치기보다 여러 요소가 비슷한 수준으로 움직이고 있습니다. 이때는 가장 낮은 한 점수보다 전체 수준을 끌어내리는 공통 생활조건을 찾는 편이 유용합니다.`;
   const actionGap = result.awareness - result.flourish;
-  const regulationTitle = leverKey === "CH" && actionGap > .4 ? "이해는 앞서 있지만 행동 번역이 늦을 수 있습니다." : `${DOMAINS[leverKey].name}이 변화 과정의 첫 연결점입니다.`;
-  const regulationCopy = `${awarenessProcessCopy(leverKey)} 현재 ${DOMAINS[leverKey].name} 점수는 ${result.domainScores[leverKey].toFixed(1)}점이며, 알아차림 전체의 다른 역량보다 상대적으로 먼저 다룰 필요가 있습니다.`;
+  const regulationTitle = leverTieCount > 1 ? "알아차림은 첫 단계인 신호 포착부터 연결합니다." : leverKey === "CH" && actionGap > .4 ? "이해는 앞서 있지만 행동 번역이 늦을 수 있습니다." : `${DOMAINS[leverKey].name}이 변화 과정의 첫 연결점입니다.`;
+  const regulationCopy = leverTieCount > 1
+    ? `${awarenessProcessCopy(leverKey)} 현재 다섯 알아차림 역량이 같은 수준이므로 특정 역량의 부족을 단정하지 않고 신호-명명-패턴-고유성-선택의 순서로 점검합니다.`
+    : `${awarenessProcessCopy(leverKey)} 현재 ${DOMAINS[leverKey].name} 점수는 ${result.domainScores[leverKey].toFixed(1)}점이며, 알아차림 전체의 다른 역량보다 상대적으로 먼저 다룰 필요가 있습니다.`;
   $("#expert-lenses").innerHTML = `
     <article class="expert-lens">
       <span class="lens-index">01</span><span class="lens-field">긍정심리학 관점</span>
@@ -378,7 +388,7 @@ function renderExpertLenses(result, strengthKey, growthKey, leverKey) {
     </article>
     <article class="expert-lens coaching">
       <span class="lens-index">03</span><span class="lens-field">코칭학 관점</span>
-      <h3>${DOMAINS[growthKey].name}을 ${DOMAINS[leverKey].name}으로 연결합니다.</h3><p>${pairMechanism(growthKey, leverKey)}</p>
+      <h3>${DOMAINS[growthKey].name} 영역을 ${DOMAINS[leverKey].name} 역량으로 연결합니다.</h3><p>${pairMechanism(growthKey, leverKey)}</p>
     </article>`;
 }
 
@@ -425,6 +435,7 @@ function renderResult(result) {
   const leverTies = awarenessDomainKeys.filter((key) => Math.abs(result.domainScores[key] - minAwareness) < .11);
   const growthKey = growthTies[0];
   const leverKey = leverTies[0];
+  result.stateKey = classifyState(result.flourish, result.awareness);
   const stateInfo = STATE_DATA[result.stateKey];
   const displayName = result.name ? `${escapeHtml(result.name)}님의` : "당신의";
 
@@ -451,7 +462,7 @@ function renderResult(result) {
 
   renderRadar(result);
   renderLegend(result);
-  renderExpertLenses(result, strengthKey, growthKey, leverKey);
+  renderExpertLenses(result, strengthKey, growthKey, leverKey, leverTies.length);
   renderDomainExplanations(result, growthKey, leverKey);
   renderBridge(result, growthKey, leverKey);
   renderFocusOptions(result, growthKey);
@@ -514,7 +525,7 @@ function openHistory() {
   const list = $("#history-list");
   list.innerHTML = records.length ? records.map((record, index) => `
     <article class="history-item">
-      <div><h3>${escapeHtml(record.name || "이름 없는 기록")} · ${STATE_DATA[record.stateKey]?.name || "성장 지도"}</h3><p>${new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeZone: "Asia/Seoul" }).format(new Date(record.createdAt))} · ${contextLabel(record.context)}</p></div>
+      <div><h3>${escapeHtml(record.name || "이름 없는 기록")} · ${STATE_DATA[classifyState(record.flourish, record.awareness)]?.name || "성장 지도"}</h3><p>${new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeZone: "Asia/Seoul" }).format(new Date(record.createdAt))} · ${contextLabel(record.context)}</p></div>
       <div class="history-scores"><span>${record.flourish.toFixed(1)} / ${record.awareness.toFixed(1)}</span><button type="button" data-history-index="${index}">보기</button></div>
     </article>`).join("") : `<p class="empty-history">아직 저장된 기록이 없습니다.</p>`;
   list.querySelectorAll("button[data-history-index]").forEach((button) => button.addEventListener("click", () => {
