@@ -1,4 +1,4 @@
-name: Deploy SELF INC. v9.7.1 design-only coach view
+name: Deploy SELF INC. v9.8 editorial report design
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
       - "tests/self/index.html"
       - "tests/self/assets/self-v9-coach-clean.js"
       - "tests/self/assets/self-v9-coach-clean.css"
+      - "tests/self/assets/self-v9-editorial.css"
       - ".github/workflows/deploy-self-v962.yml"
   workflow_dispatch:
 
@@ -15,7 +16,7 @@ permissions:
   pages: write
 
 concurrency:
-  group: deploy-self-v971
+  group: deploy-self-v980
   cancel-in-progress: true
 
 jobs:
@@ -38,7 +39,7 @@ jobs:
           SOURCE_SHA: ${{ github.sha }}
           LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
           CLEAN_JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-clean.js
-          CLEAN_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-clean.css
+          EDITORIAL_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-editorial.css
         run: |
           set -e
           request_code=$(curl -sSL -o /tmp/request.json -w "%{http_code}" -X POST \
@@ -65,27 +66,28 @@ jobs:
             sleep 5
             html_code=$(curl -sSL -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" "${LIVE_URL}?v=${SOURCE_SHA}-${attempt}")
             js_code=$(curl -sSL -o /tmp/clean.js -w "%{http_code}" -H "Cache-Control: no-cache" "${CLEAN_JS_URL}?v=${SOURCE_SHA}-${attempt}")
-            css_code=$(curl -sSL -o /tmp/clean.css -w "%{http_code}" -H "Cache-Control: no-cache" "${CLEAN_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
+            css_code=$(curl -sSL -o /tmp/editorial.css -w "%{http_code}" -H "Cache-Control: no-cache" "${EDITORIAL_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
 
             if [ "${html_code}" = "200" ] \
               && [ "${js_code}" = "200" ] \
               && [ "${css_code}" = "200" ] \
-              && grep -q 'self-inc-version" content="9.7.1' /tmp/live.html \
+              && grep -q 'self-inc-version" content="9.8.0' /tmp/live.html \
               && grep -q 'KINGDOM COACH GUIDE' /tmp/live.html \
-              && grep -q 'self-v9-coach-clean.js?v=9.7.1' /tmp/live.html \
-              && grep -q 'self-v9-coach-clean.css?v=9.7.1' /tmp/live.html \
+              && grep -q 'self-v9-editorial.css?v=9.8.0' /tmp/live.html \
+              && grep -q 'self-v9-coach-clean.js?v=9.8.0' /tmp/live.html \
               && grep -q '5영역 브리핑' /tmp/clean.js \
               && grep -q '우선 조합' /tmp/clean.js \
               && grep -q '활용 자원' /tmp/clean.js \
               && grep -q '3관점 상태분석' /tmp/clean.js \
               && grep -q '상세 해석과 추가 질문' /tmp/clean.js \
               && ! grep -q 'createFlourishFlow' /tmp/clean.js \
-              && ! grep -q 'coach-flourish-flow' /tmp/clean.js \
-              && grep -q -- '--flourish-sage' /tmp/clean.css \
-              && grep -q '.coach-synthesis-grid{display:grid' /tmp/clean.css \
-              && grep -q '.coach-tab:nth-child(4):before' /tmp/clean.css \
-              && grep -q '.coach-flourish-flow{display:none' /tmp/clean.css \
-              && grep -q 'prefers-reduced-motion' /tmp/clean.css; then
+              && grep -q -- '--editorial-ink' /tmp/editorial.css \
+              && grep -q '#reportCard:before' /tmp/editorial.css \
+              && grep -q '.result-score-row' /tmp/editorial.css \
+              && grep -q '.domain:nth-child(5)' /tmp/editorial.css \
+              && grep -q '.coach-synthesis-grid' /tmp/editorial.css \
+              && grep -q '.coach-state-analysis-grid' /tmp/editorial.css \
+              && grep -q 'prefers-reduced-motion' /tmp/editorial.css; then
               live_status="verified"
               break
             fi
@@ -100,7 +102,7 @@ jobs:
               p=Path(path)
               return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
           payload={
-            "workflow":"deploy-self-v971",
+            "workflow":"deploy-self-v980",
             "sourceSha":os.environ["SOURCE_SHA"],
             "requestHttpStatus":int(os.environ["REQUEST_CODE"]),
             "latestBuildStatus":os.environ["BUILD_STATUS"],
@@ -108,22 +110,23 @@ jobs:
               "url":"https://daily-coach-ing.com/tests/self/index.html",
               "httpStatus":int(os.environ["HTML_CODE"]),
               "cleanScriptHttpStatus":int(os.environ["JS_CODE"]),
-              "cleanCssHttpStatus":int(os.environ["CSS_CODE"]),
-              "version971":True,
-              "kingdomIdentityRestored":True,
-              "originalCoachFunctionsRestored":True,
-              "flourishingFlowRemoved":True,
-              "flourishingPaletteApplied":True,
-              "fiveDomainColorTabs":True,
+              "editorialCssHttpStatus":int(os.environ["CSS_CODE"]),
+              "version980":True,
+              "kingdomIdentityPreserved":True,
+              "originalFunctionsPreserved":True,
+              "editorialReportLayer":True,
+              "magazineResultLayout":True,
+              "fiveDomainIndexLayout":True,
+              "editorialCoachLayout":True,
               "reducedMotionSupport":True,
               "status":os.environ["LIVE_STATUS"],
               "htmlSha256":sha("/tmp/live.html"),
               "cleanScriptSha256":sha("/tmp/clean.js"),
-              "cleanCssSha256":sha("/tmp/clean.css")
+              "editorialCssSha256":sha("/tmp/editorial.css")
             },
             "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
           }
-          Path("tests/self/deploy-status-v971.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          Path("tests/self/deploy-status-v980.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
 
           test "${request_code}" = "201"
@@ -134,6 +137,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/deploy-status-v971.json
-          git commit -m "chore: record SELF INC. v9.7.1 deployment [skip ci]" || exit 0
+          git add tests/self/deploy-status-v980.json
+          git commit -m "chore: record SELF INC. v9.8 deployment [skip ci]" || exit 0
           git push
