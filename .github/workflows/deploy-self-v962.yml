@@ -1,4 +1,4 @@
-name: Deploy SELF INC. v9.6.2 interactions
+name: Deploy SELF INC. v9.6.3 compact interaction panel
 
 on:
   push:
@@ -15,7 +15,7 @@ permissions:
   pages: write
 
 concurrency:
-  group: deploy-self-v962
+  group: deploy-self-v963
   cancel-in-progress: true
 
 jobs:
@@ -67,14 +67,17 @@ jobs:
             if [ "${html_code}" = "200" ] \
               && [ "${js_code}" = "200" ] \
               && [ "${css_code}" = "200" ] \
-              && grep -q 'self-inc-version" content="9.6.2' /tmp/live.html \
-              && grep -q 'id="coachInteractionStatus"' /tmp/live.html \
-              && grep -q 'self-v9-coach-interaction.js?v=9.6.2' /tmp/live.html \
-              && grep -q 'self-v9-coach-interaction.css?v=9.6.2' /tmp/live.html \
-              && grep -q '현재 상호작용 값' /tmp/interaction.js \
-              && grep -q 'coach-selected-badge' /tmp/interaction.js \
-              && grep -q 'aria-pressed' /tmp/interaction.js \
-              && grep -q '.coach-interaction-status' /tmp/interaction.css; then
+              && grep -q 'self-inc-version" content="9.6.3' /tmp/live.html \
+              && grep -q 'self-v9-coach-interaction.js?v=9.6.3' /tmp/live.html \
+              && grep -q 'self-v9-coach-interaction.css?v=9.6.3' /tmp/live.html \
+              && grep -q 'coach-status-toggle' /tmp/interaction.js \
+              && grep -q '상세 보기' /tmp/interaction.js \
+              && grep -q 'coach-status-inline' /tmp/interaction.js \
+              && grep -q 'coach-status-details' /tmp/interaction.js \
+              && grep -q 'margin:8px 12px 2px' /tmp/interaction.css \
+              && grep -q '.coach-status-toggle' /tmp/interaction.css \
+              && grep -q '.coach-status-details\[hidden\]' /tmp/interaction.css \
+              && grep -q 'min-height:56px' /tmp/interaction.css; then
               live_status="verified"
               break
             fi
@@ -89,7 +92,7 @@ jobs:
               p=Path(path)
               return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
           payload={
-            "workflow":"deploy-self-v962",
+            "workflow":"deploy-self-v963",
             "sourceSha":os.environ["SOURCE_SHA"],
             "requestHttpStatus":int(os.environ["REQUEST_CODE"]),
             "latestBuildStatus":os.environ["BUILD_STATUS"],
@@ -98,12 +101,12 @@ jobs:
               "httpStatus":int(os.environ["HTML_CODE"]),
               "interactionScriptHttpStatus":int(os.environ["JS_CODE"]),
               "interactionCssHttpStatus":int(os.environ["CSS_CODE"]),
-              "version962":True,
-              "currentSelectionStatus":True,
-              "selectedBadge":True,
-              "pressedState":True,
-              "changeScopeStatus":True,
-              "contentTransition":True,
+              "version963":True,
+              "compactStatusPanel":True,
+              "detailsToggle":True,
+              "inlineSelectionValues":True,
+              "tabsSpacingFixed":True,
+              "mobileSelectedBadgeHidden":True,
               "status":os.environ["LIVE_STATUS"],
               "htmlSha256":sha("/tmp/live.html"),
               "interactionScriptSha256":sha("/tmp/interaction.js"),
@@ -111,7 +114,7 @@ jobs:
             },
             "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
           }
-          Path("tests/self/deploy-status-v962.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          Path("tests/self/deploy-status-v963.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           PY
 
           test "${request_code}" = "201"
@@ -122,6 +125,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/deploy-status-v962.json
-          git commit -m "chore: record SELF INC. v9.6.2 deployment [skip ci]" || exit 0
+          git add tests/self/deploy-status-v963.json
+          git commit -m "chore: record SELF INC. v9.6.3 deployment [skip ci]" || exit 0
           git push
