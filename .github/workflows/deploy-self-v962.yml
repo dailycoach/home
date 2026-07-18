@@ -77,9 +77,9 @@ jobs:
               && grep -q '5영역 브리핑' /tmp/clean.js \
               && grep -q '3관점 상태분석' /tmp/clean.js \
               && grep -q '이번 회기 질문' /tmp/clean.js \
+              && grep -q '집중 조율형' /tmp/clean.js \
               && grep -q '.coach-clean-details' /tmp/clean.css \
-              && grep -q '.coach-score-metrics,.coach-score-narrative,.coach-score-profile-grid' /tmp/clean.css \
-              && ! grep -q '집중 병목형' /tmp/clean.js; then
+              && grep -q '.coach-score-metrics,.coach-score-narrative,.coach-score-profile-grid' /tmp/clean.css; then
               live_status="verified"
               break
             fi
