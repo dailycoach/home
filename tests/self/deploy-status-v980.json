@@ -1,6 +1,6 @@
 {
   "workflow": "deploy-self-v980",
-  "sourceSha": "c090302a9dcf9685b34397e0adcdca2b8a032148",
+  "sourceSha": "34ccef032806a07d7198a6c33110b417236b8456",
   "requestHttpStatus": 201,
   "latestBuildStatus": "built",
   "liveCheck": {
@@ -21,9 +21,9 @@
     "reducedMotionSupport": true,
     "status": "verified",
     "htmlSha256": "201dc0ecbcb20ae4846c9b0b87a068a60b0e2cb4595ea4bb3fa891592d940178",
-    "cleanScriptSha256": "b56e2c5e5f4c2bd1db2f5aa7f18e6eae49b7f6d06f2002965f2dbe1f5bc24ff8",
+    "cleanScriptSha256": "e0afab49ad44174eba4f58cf052a3704fe57e7c9211d6ed0c6e016b686bbc593",
     "editorialCssSha256": "836195651c2bf2ddaf11abae285233b3ebb1c192cfb074c5b7ffdb7202090f5f",
     "entryEditorialCssSha256": "ffffde43553d38149db594703289ceab2338435495627526e43ff5a8b84891c9"
   },
-  "checkedAt": "2026-07-18T17:11:07.440342+00:00"
+  "checkedAt": "2026-07-18T17:19:44.294910+00:00"
 }
