@@ -1,4 +1,4 @@
-name: Deploy SELF INC. v9.8 editorial report design
+name: Deploy SELF INC. v9.8 editorial design system
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
       - "tests/self/assets/self-v9-coach-clean.js"
       - "tests/self/assets/self-v9-coach-clean.css"
       - "tests/self/assets/self-v9-editorial.css"
+      - "tests/self/assets/self-v9-editorial-entry.css"
       - ".github/workflows/deploy-self-v962.yml"
   workflow_dispatch:
 
@@ -40,6 +41,7 @@ jobs:
           LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
           CLEAN_JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-clean.js
           EDITORIAL_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-editorial.css
+          ENTRY_CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-editorial-entry.css
         run: |
           set -e
           request_code=$(curl -sSL -o /tmp/request.json -w "%{http_code}" -X POST \
@@ -67,13 +69,16 @@ jobs:
             html_code=$(curl -sSL -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" "${LIVE_URL}?v=${SOURCE_SHA}-${attempt}")
             js_code=$(curl -sSL -o /tmp/clean.js -w "%{http_code}" -H "Cache-Control: no-cache" "${CLEAN_JS_URL}?v=${SOURCE_SHA}-${attempt}")
             css_code=$(curl -sSL -o /tmp/editorial.css -w "%{http_code}" -H "Cache-Control: no-cache" "${EDITORIAL_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
+            entry_code=$(curl -sSL -o /tmp/entry.css -w "%{http_code}" -H "Cache-Control: no-cache" "${ENTRY_CSS_URL}?v=${SOURCE_SHA}-${attempt}")
 
             if [ "${html_code}" = "200" ] \
               && [ "${js_code}" = "200" ] \
               && [ "${css_code}" = "200" ] \
+              && [ "${entry_code}" = "200" ] \
               && grep -q 'self-inc-version" content="9.8.0' /tmp/live.html \
               && grep -q 'KINGDOM COACH GUIDE' /tmp/live.html \
               && grep -q 'self-v9-editorial.css?v=9.8.0' /tmp/live.html \
+              && grep -q 'self-v9-editorial-entry.css?v=9.8.0' /tmp/live.html \
               && grep -q 'self-v9-coach-clean.js?v=9.8.0' /tmp/live.html \
               && grep -q '5영역 브리핑' /tmp/clean.js \
               && grep -q '우선 조합' /tmp/clean.js \
@@ -87,14 +92,18 @@ jobs:
               && grep -q '.domain:nth-child(5)' /tmp/editorial.css \
               && grep -q '.coach-synthesis-grid' /tmp/editorial.css \
               && grep -q '.coach-state-analysis-grid' /tmp/editorial.css \
-              && grep -q 'prefers-reduced-motion' /tmp/editorial.css; then
+              && grep -q '.hero:before' /tmp/entry.css \
+              && grep -q '.test-shell:before' /tmp/entry.css \
+              && grep -q '.scale button.selected' /tmp/entry.css \
+              && grep -q 'prefers-reduced-motion' /tmp/editorial.css \
+              && grep -q 'prefers-reduced-motion' /tmp/entry.css; then
               live_status="verified"
               break
             fi
           done
 
           export REQUEST_CODE="${request_code}" BUILD_STATUS="${build_status}" LIVE_STATUS="${live_status}"
-          export HTML_CODE="${html_code}" JS_CODE="${js_code}" CSS_CODE="${css_code}" SOURCE_SHA
+          export HTML_CODE="${html_code}" JS_CODE="${js_code}" CSS_CODE="${css_code}" ENTRY_CODE="${entry_code}" SOURCE_SHA
           python - <<'PY'
           import datetime, hashlib, json, os
           from pathlib import Path
@@ -111,9 +120,12 @@ jobs:
               "httpStatus":int(os.environ["HTML_CODE"]),
               "cleanScriptHttpStatus":int(os.environ["JS_CODE"]),
               "editorialCssHttpStatus":int(os.environ["CSS_CODE"]),
+              "entryEditorialCssHttpStatus":int(os.environ["ENTRY_CODE"]),
               "version980":True,
               "kingdomIdentityPreserved":True,
               "originalFunctionsPreserved":True,
+              "editorialEntryLayer":True,
+              "editorialQuestionLayer":True,
               "editorialReportLayer":True,
               "magazineResultLayout":True,
               "fiveDomainIndexLayout":True,
@@ -122,7 +134,8 @@ jobs:
               "status":os.environ["LIVE_STATUS"],
               "htmlSha256":sha("/tmp/live.html"),
               "cleanScriptSha256":sha("/tmp/clean.js"),
-              "editorialCssSha256":sha("/tmp/editorial.css")
+              "editorialCssSha256":sha("/tmp/editorial.css"),
+              "entryEditorialCssSha256":sha("/tmp/entry.css")
             },
             "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
           }
