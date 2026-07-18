@@ -208,8 +208,67 @@ const STATE_DATA = {
 const GROUP_ORDER = ["P", "E", "R", "M", "A", "SN", "NM", "PT", "VL", "CH"];
 const PAGE_SIZE = 5;
 const STORAGE_KEY = "dailycoaching_flourish_notice_v1";
+const LETTER_STORAGE_KEY = "dailycoaching_flourish_letters_v1";
 
-const state = { page: 0, answers: {}, name: "", context: "life", result: null };
+const REFLECTION_STEPS = [
+  {
+    phase: "몸과 감정의 신호",
+    stem: "요즘 내가 조금 편안해지는 순간은 …",
+    guide: "최근 일주일 안에 마음이나 몸의 힘이 조금 풀렸던 순간을 떠올려 보세요.",
+    examples: ["퇴근 후 불을 낮추고 혼자 차를 마실 때", "아무 말 없이 천천히 동네를 걸을 때"]
+  },
+  {
+    phase: "몸과 감정의 신호",
+    stem: "반대로 내 몸이 먼저 긴장하는 순간은 …",
+    guide: "생각으로 판단하기 전 몸이 먼저 보낸 신호를 적어 보세요. 어깨, 숨, 배, 표정도 좋은 단서입니다.",
+    examples: ["회의에서 바로 답을 요구받으면 어깨가 굳는다", "휴대폰 알림이 계속 울리면 숨이 짧아진다"]
+  },
+  {
+    phase: "반복되는 생각과 행동",
+    stem: "그 순간 내 머릿속에서 가장 먼저 떠오르는 말은 …",
+    guide: "사실인지 따지기보다 자동으로 스쳐 가는 짧은 말을 그대로 붙잡아 보세요.",
+    examples: ["또 실수하면 안 돼", "내가 그냥 처리하는 게 빠르다"]
+  },
+  {
+    phase: "반복되는 생각과 행동",
+    stem: "그래서 나도 모르게 반복하는 행동은 …",
+    guide: "그 생각 다음에 자주 이어지는 행동을 적어 보세요. 미루기, 참기, 혼자 하기처럼 평범한 행동이면 됩니다.",
+    examples: ["도움을 청하지 않고 혼자 붙잡고 있는 것", "대답을 미루고 연락을 피하는 것"]
+  },
+  {
+    phase: "실제 필요와 나다운 기준",
+    stem: "사실 그때 내가 필요했던 것은 …",
+    guide: "‘더 열심히’보다 시간, 휴식, 도움, 경계, 이해처럼 나를 실제로 돕는 조건을 찾아보세요.",
+    examples: ["정답보다 잠깐 생각할 시간", "조언보다 내 말을 끝까지 들어주는 사람"]
+  },
+  {
+    phase: "실제 필요와 나다운 기준",
+    stem: "남의 기대를 잠시 내려놓으면, 나는 …",
+    guide: "잘 보이기 위한 답이 아니라 내 방식과 속도에 가까운 바람을 적어 보세요.",
+    examples: ["내 속도로 한 가지씩 끝내고 싶다", "괜찮은 척보다 솔직하게 어렵다고 말하고 싶다"]
+  },
+  {
+    phase: "다음 장면의 작은 선택",
+    stem: "비슷한 장면이 다시 오면, 가장 먼저 …",
+    guide: "의지나 결심보다 1분 안에 시작할 수 있는 첫 행동을 적으면 실천하기 쉽습니다.",
+    examples: ["숨을 길게 내쉬고 확인된 사실부터 적겠다", "혼자 결정하기 전에 한 사람에게 도움을 묻겠다"]
+  },
+  {
+    phase: "다음 장면의 작은 선택",
+    stem: "앞으로 7주 동안 내가 자주 기억하고 싶은 문장은 …",
+    guide: "힘든 날에도 나를 몰아붙이지 않고 방향을 되찾게 해 줄 한 문장을 만들어 보세요.",
+    examples: ["빨리보다 나답게 끝내는 것이 중요하다", "감정은 멈추라는 명령이 아니라 살펴보라는 신호다"]
+  }
+];
+
+const state = {
+  page: 0,
+  answers: {},
+  name: "",
+  context: "life",
+  result: null,
+  reflection: { step: 0, answers: Array(REFLECTION_STEPS.length).fill(""), letter: "", mode: "intro", savedAt: null }
+};
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -228,6 +287,21 @@ function saveRecord(record) {
   records.unshift(record);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(records.slice(0, 12)));
   updateHistoryCount();
+}
+
+function getLetters() {
+  try { return JSON.parse(localStorage.getItem(LETTER_STORAGE_KEY) || "[]"); }
+  catch { return []; }
+}
+
+function getLetterForResult(resultId) {
+  return getLetters().find((entry) => entry.resultId === resultId) || null;
+}
+
+function saveLetterRecord(entry) {
+  const letters = getLetters().filter((item) => item.resultId !== entry.resultId);
+  letters.unshift(entry);
+  localStorage.setItem(LETTER_STORAGE_KEY, JSON.stringify(letters.slice(0, 24)));
 }
 
 function updateHistoryCount() { $("#history-count").textContent = getRecords().length; }
@@ -466,6 +540,198 @@ function renderResult(result) {
   renderDomainExplanations(result, growthKey, leverKey);
   renderBridge(result, growthKey, leverKey);
   renderFocusOptions(result, growthKey);
+  initializeReflection(result);
+}
+
+function initializeReflection(result) {
+  const saved = getLetterForResult(result.id);
+  state.reflection = {
+    step: 0,
+    answers: saved?.answers?.length === REFLECTION_STEPS.length ? [...saved.answers] : Array(REFLECTION_STEPS.length).fill(""),
+    letter: saved?.letter || "",
+    mode: saved ? "complete" : "intro",
+    savedAt: saved?.savedAt || null
+  };
+  renderReflection();
+}
+
+function renderReflection() {
+  const panels = {
+    intro: $("#reflection-intro"),
+    writing: $("#reflection-workspace"),
+    letter: $("#letter-workspace"),
+    complete: $("#reflection-complete")
+  };
+  Object.entries(panels).forEach(([key, panel]) => { panel.hidden = key !== state.reflection.mode; });
+
+  if (state.reflection.mode === "writing") renderReflectionStep();
+  if (state.reflection.mode === "letter" || state.reflection.mode === "complete") {
+    $("#self-letter").value = state.reflection.letter;
+    $("#self-letter-print").textContent = state.reflection.letter;
+  }
+  if (state.reflection.mode === "complete") {
+    $("#letter-saved-date").textContent = `${formatKoreanDate(state.reflection.savedAt)} 저장 · 이 편지는 이 브라우저에 보관됩니다.`;
+    $("#letter-preview").textContent = state.reflection.letter;
+  }
+}
+
+function formatKoreanDate(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("ko-KR", { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Seoul" }).format(new Date(value));
+}
+
+function renderReflectionStep() {
+  const index = state.reflection.step;
+  const step = REFLECTION_STEPS[index];
+  $("#reflection-step").textContent = `${String(index + 1).padStart(2, "0")} / ${String(REFLECTION_STEPS.length).padStart(2, "0")}`;
+  $("#reflection-progress-bar").style.width = `${((index + 1) / REFLECTION_STEPS.length) * 100}%`;
+  $("#reflection-phase").textContent = step.phase;
+  $("#reflection-stem").textContent = step.stem;
+  $("#reflection-guide-copy").textContent = step.guide;
+  $("#reflection-answer").value = state.reflection.answers[index] || "";
+  $("#reflection-examples").innerHTML = step.examples.map((example) => `<li>“${example}”</li>`).join("");
+  $("#reflection-prev").disabled = index === 0;
+  $("#reflection-next span:first-child").textContent = index === REFLECTION_STEPS.length - 1 ? "편지 만들기" : "다음 문장";
+  updateReflectionAnswerStatus();
+}
+
+function updateReflectionAnswerStatus() {
+  const answer = $("#reflection-answer").value.trim();
+  $("#reflection-next").disabled = !answer;
+  $("#reflection-answer-status").textContent = answer ? `${answer.length}자 기록했습니다.` : "한 문장만 적어도 충분합니다.";
+}
+
+function scrollToReflection() {
+  $("#reflection-section").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function startReflection() {
+  state.reflection.mode = "writing";
+  state.reflection.step = state.reflection.answers.findIndex((answer) => !answer.trim());
+  if (state.reflection.step < 0) state.reflection.step = 0;
+  renderReflection();
+  scrollToReflection();
+  setTimeout(() => $("#reflection-answer").focus(), 350);
+}
+
+function previousReflection() {
+  if (state.reflection.step === 0) return;
+  state.reflection.step -= 1;
+  renderReflectionStep();
+  $("#reflection-answer").focus();
+}
+
+function nextReflection() {
+  const answer = $("#reflection-answer").value.trim();
+  if (!answer) {
+    showToast("지금 떠오르는 장면을 한 문장으로 적어 주세요");
+    return;
+  }
+  state.reflection.answers[state.reflection.step] = answer;
+  if (state.reflection.step < REFLECTION_STEPS.length - 1) {
+    state.reflection.step += 1;
+    renderReflectionStep();
+    $("#reflection-answer").focus();
+    return;
+  }
+  state.reflection.letter = buildLetter();
+  state.reflection.mode = "letter";
+  renderReflection();
+  scrollToReflection();
+  setTimeout(() => $("#self-letter").focus(), 350);
+}
+
+function buildLetter() {
+  const answers = state.reflection.answers;
+  const result = state.result;
+  const recipient = result?.name ? `${result.name}에게,` : "지금의 나에게,";
+  const stateName = STATE_DATA[result?.stateKey]?.name || "성장 조건을 살피는 중";
+  const writtenDate = new Intl.DateTimeFormat("ko-KR", { dateStyle: "long", timeZone: "Asia/Seoul" }).format(new Date());
+  return `${recipient}
+
+오늘 검사를 마치고, 지금의 나를 서두르지 않고 바라본다.
+오늘의 성장 지도에 붙은 이름은 “${stateName}”. 점수보다 내가 살아온 실제 장면을 기억하려 한다.
+
+내가 조금 편안해지는 순간
+${answers[0]}
+
+내 몸이 먼저 긴장하는 순간
+${answers[1]}
+
+그때 가장 먼저 떠오르는 말
+“${answers[2]}”
+
+그 말 뒤에 나도 모르게 반복하는 행동
+${answers[3]}
+
+이제는 안다. 그때 내게 정말 필요했던 것은
+${answers[4]}
+
+남의 기대를 잠시 내려놓은 내 마음
+${answers[5]}
+
+비슷한 장면이 다시 오면 가장 먼저
+${answers[6]}
+
+앞으로 7주 동안 나는 이 말을 자주 기억하자.
+“${answers[7]}”
+
+완벽하게 바뀌지 않아도 괜찮다. 신호를 조금 일찍 알아차리고, 나에게 맞는 작은 선택을 한 번 더 해보면 된다. 오늘 적은 문장은 나를 평가하는 답안이 아니라 다시 나에게 돌아오는 길이다.
+
+${writtenDate}의 내가.`;
+}
+
+function editReflection() {
+  state.reflection.letter = $("#self-letter").value.trim() || state.reflection.letter;
+  state.reflection.mode = "writing";
+  state.reflection.step = REFLECTION_STEPS.length - 1;
+  renderReflection();
+  scrollToReflection();
+}
+
+function editLetter() {
+  state.reflection.mode = "letter";
+  renderReflection();
+  scrollToReflection();
+}
+
+function saveLetter() {
+  const letter = $("#self-letter").value.trim();
+  if (!letter) {
+    showToast("편지 내용을 한 문장 이상 남겨 주세요");
+    return;
+  }
+  state.reflection.letter = letter;
+  state.reflection.savedAt = new Date().toISOString();
+  saveLetterRecord({
+    resultId: state.result.id,
+    resultCreatedAt: state.result.createdAt,
+    savedAt: state.reflection.savedAt,
+    answers: [...state.reflection.answers],
+    letter
+  });
+  state.reflection.mode = "complete";
+  renderReflection();
+  scrollToReflection();
+  showToast("편지를 저장했습니다. 오늘의 검사를 마칩니다");
+}
+
+function copyLetter() {
+  const visibleDraft = state.reflection.mode === "letter" ? $("#self-letter").value.trim() : "";
+  const letter = visibleDraft || state.reflection.letter;
+  if (!letter) return;
+  navigator.clipboard.writeText(letter).then(() => showToast("나에게 보내는 편지를 복사했습니다")).catch(() => showToast("복사하지 못했습니다"));
+}
+
+function printLetter() {
+  if (state.reflection.mode === "letter") state.reflection.letter = $("#self-letter").value.trim() || state.reflection.letter;
+  $("#self-letter").value = state.reflection.letter;
+  $("#self-letter-print").textContent = state.reflection.letter;
+  document.body.classList.add("letter-print-mode");
+  const cleanup = () => document.body.classList.remove("letter-print-mode");
+  window.addEventListener("afterprint", cleanup, { once: true });
+  window.print();
+  setTimeout(cleanup, 2000);
 }
 
 function pointFor(index, radius, count = 10, center = 300) {
@@ -522,10 +788,11 @@ function closeDialogs() { $$('dialog[open]').forEach((dialog) => dialog.close())
 
 function openHistory() {
   const records = getRecords();
+  const letterResultIds = new Set(getLetters().map((entry) => entry.resultId));
   const list = $("#history-list");
   list.innerHTML = records.length ? records.map((record, index) => `
     <article class="history-item">
-      <div><h3>${escapeHtml(record.name || "이름 없는 기록")} · ${STATE_DATA[classifyState(record.flourish, record.awareness)]?.name || "성장 지도"}</h3><p>${new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeZone: "Asia/Seoul" }).format(new Date(record.createdAt))} · ${contextLabel(record.context)}</p></div>
+      <div><h3>${escapeHtml(record.name || "이름 없는 기록")} · ${STATE_DATA[classifyState(record.flourish, record.awareness)]?.name || "성장 지도"}</h3><p>${new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeZone: "Asia/Seoul" }).format(new Date(record.createdAt))} · ${contextLabel(record.context)}${letterResultIds.has(record.id) ? " · 나에게 보낸 편지 저장됨" : ""}</p></div>
       <div class="history-scores"><span>${record.flourish.toFixed(1)} / ${record.awareness.toFixed(1)}</span><button type="button" data-history-index="${index}">보기</button></div>
     </article>`).join("") : `<p class="empty-history">아직 저장된 기록이 없습니다.</p>`;
   list.querySelectorAll("button[data-history-index]").forEach((button) => button.addEventListener("click", () => {
@@ -570,8 +837,25 @@ document.addEventListener("click", (event) => {
     history: openHistory,
     "close-dialog": closeDialogs,
     copy: copySummary,
-    print: () => window.print()
+    print: () => window.print(),
+    "start-reflection": startReflection,
+    "reflection-prev": previousReflection,
+    "reflection-next": nextReflection,
+    "edit-reflection": editReflection,
+    "edit-letter": editLetter,
+    "save-letter": saveLetter,
+    "copy-letter": copyLetter,
+    "print-letter": printLetter
   })[action]?.();
+});
+
+$("#reflection-answer").addEventListener("input", (event) => {
+  state.reflection.answers[state.reflection.step] = event.target.value;
+  updateReflectionAnswerStatus();
+});
+
+$("#self-letter").addEventListener("input", (event) => {
+  state.reflection.letter = event.target.value;
 });
 
 document.addEventListener("keydown", (event) => {
