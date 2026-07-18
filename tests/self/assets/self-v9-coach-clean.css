@@ -1,0 +1,95 @@
+:root{--coach-clean-navy:#102740;--coach-clean-gold:#b8893e;--coach-clean-line:rgba(23,32,45,.1);--coach-clean-muted:#66717f}
+
+/* Coach-first header */
+.coach-sheet-head{padding-bottom:11px}
+.coach-sheet-intro{max-width:none;margin-top:5px;font-size:10px;line-height:1.45;color:#727b86}
+.coach-tabs{margin-bottom:6px}
+
+/* Keep selection visible without turning it into another report */
+.coach-interaction-status{margin:0 10px 8px;padding:8px 10px;border:1px solid rgba(184,137,62,.2);border-radius:13px;background:#fffdf8;color:var(--coach-clean-navy);box-shadow:0 5px 14px rgba(12,31,53,.05)}
+.coach-status-label{background:#f1e6d0;color:#876022}
+.coach-status-main strong{font-size:13px}
+.coach-status-main em{color:#9b6b27}
+.coach-status-inline span{background:#f5efe4;border-color:rgba(23,32,45,.07);color:#586471}
+.coach-status-toggle,.coach-status-details{display:none!important}
+.coach-status-notice{display:none!important}
+
+/* One clear content rhythm */
+.coach-body{padding-top:5px}
+.coach-synthesis{margin-bottom:14px;padding:16px}
+.coach-synthesis-kicker{display:none}
+.coach-synthesis-head h3{margin-top:0;font-size:20px}
+.coach-synthesis-summary{margin-top:11px;padding:15px 16px}
+.coach-synthesis-summary strong{font-size:14px;line-height:1.58}
+.coach-synthesis-summary p{display:none}
+.coach-synthesis-card b{font-size:11px}
+.coach-synthesis-card p{font-size:11px;line-height:1.6}
+.coach-synthesis-caution,.coach-synthesis-action{display:none}
+.coach-session-plan{margin-top:11px;padding:14px}
+.coach-session-plan-head{margin-bottom:8px}
+.coach-session-plan-head b{font-size:13px}
+.coach-session-plan-head span{display:none}
+.coach-session-question{padding:10px 11px}
+.coach-session-question p{font-size:11px;line-height:1.58}
+
+/* Remove duplicated score report blocks; retain only the coach decision layer */
+.coach-score-profile{margin-bottom:13px;padding:15px 16px;background:#fff;border-color:var(--coach-clean-line);box-shadow:0 8px 22px rgba(12,31,53,.05)}
+.coach-score-kicker{margin-bottom:10px}
+.coach-score-kicker b{font-size:13px;color:var(--coach-clean-navy)}
+.coach-score-metrics,.coach-score-narrative,.coach-score-profile-grid{display:none!important}
+.coach-score-priority{margin-top:9px;padding:11px 13px}
+.coach-score-priority b{font-size:11px}
+.coach-score-priority p{font-size:11px;line-height:1.58}
+
+/* Three lenses are the core analysis product */
+.coach-state-analysis{margin-top:10px;padding:14px;background:#fbfaf7}
+.coach-state-analysis-head{align-items:center}
+.coach-state-analysis-head span{display:none}
+.coach-state-analysis-head h4{margin:0;font-size:15px;color:var(--coach-clean-navy)}
+.coach-state-analysis-head small{font-size:9px}
+.coach-state-analysis-intro{display:none}
+.coach-state-analysis-grid{gap:8px;margin-top:10px}
+.coach-state-card{position:relative;padding:13px 13px 11px 16px;background:#fff;border-color:rgba(23,32,45,.08);box-shadow:none}
+.coach-state-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:16px 0 0 16px;background:#d6c19b}
+.coach-state-card.is-coaching:before{background:#d46a60}
+.coach-state-card.is-psychology:before{background:#6f7fae}
+.coach-state-card.is-development:before{background:#6e9f91}
+.coach-state-label{margin-bottom:6px}
+.coach-state-label span{width:22px;height:22px;border-radius:8px;font-size:9px}
+.coach-state-label b{font-size:11px}
+.coach-state-card p{font-size:11px;line-height:1.65;color:#5d6774}
+.coach-state-card:not(.is-expanded) p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.coach-card-expand{margin-top:7px;padding:0;background:transparent;color:#8b682f;font-size:9px;font-weight:900;cursor:pointer}
+
+/* Everything useful but nonessential is one intentional disclosure */
+.coach-clean-details{margin:14px 0 5px;border:1px solid rgba(23,32,45,.1);border-radius:17px;background:#fff;overflow:hidden}
+.coach-clean-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:0 14px;cursor:pointer;list-style:none;color:var(--coach-clean-navy);font-size:12px;font-weight:900}
+.coach-clean-details>summary::-webkit-details-marker{display:none}
+.coach-clean-details>summary:after{content:"＋";color:#9b6b27;font-size:17px;font-weight:500}
+.coach-clean-details[open]>summary{border-bottom:1px solid var(--coach-clean-line);background:#faf6ee}
+.coach-clean-details[open]>summary:after{content:"−"}
+.coach-clean-details-body{padding:13px}
+.coach-clean-details-body>.coach-mid-note:first-child{margin-top:0}
+.coach-clean-details .coach-current-note{display:none}
+.coach-clean-details .coach-current-title,.coach-clean-details .coach-pattern-title,.coach-clean-details .coach-lens-title,.coach-clean-details .coach-practice-title{margin:20px 0 9px;font-size:14px}
+.coach-clean-details .coach-current-title:first-child{margin-top:0}
+.coach-clean-details .coach-footer-note{margin-top:14px;padding:11px 12px;font-size:9px;line-height:1.55}
+
+@media(max-width:700px){
+  .coach-sheet-head{padding:13px 13px 10px}
+  .coach-sheet-title{font-size:22px}
+  .coach-sheet-intro{font-size:9px}
+  .coach-interaction-status{margin:0 9px 7px;padding:7px 9px}
+  .coach-status-inline{gap:4px}
+  .coach-status-inline span{font-size:8px}
+  .coach-body{padding:4px 9px 22px}
+  .coach-synthesis{padding:14px}
+  .coach-synthesis-head h3{font-size:17px}
+  .coach-session-question{grid-template-columns:25px 1fr;gap:8px}
+  .coach-session-question>span{width:25px;height:25px}
+  .coach-score-profile{padding:13px}
+  .coach-state-analysis{padding:12px}
+  .coach-state-analysis-head{align-items:flex-start;flex-direction:row;justify-content:space-between}
+}
+
+@media print{.coach-clean-details{display:none}.coach-card-expand{display:none}}
