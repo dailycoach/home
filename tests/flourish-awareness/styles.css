@@ -86,6 +86,9 @@ button { color: inherit; }
 .test-navigation > p { text-align: center; color: var(--muted); font-size: 12px; }
 .test-navigation .primary-button { min-width: 0; }
 button:disabled { opacity: .35; cursor: not-allowed; transform: none !important; }
+button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+.context-options input:focus-visible + span { outline: 2px solid var(--acid); outline-offset: 3px; }
+.reflection-card textarea:focus-visible, .letter-paper textarea:focus-visible { outline-color: var(--violet); }
 
 .result-view { padding: 70px 0 110px; }
 .result-hero { display: flex; justify-content: space-between; align-items: end; gap: 30px; padding-bottom: 55px; }
@@ -428,6 +431,7 @@ button:disabled { opacity: .35; cursor: not-allowed; transform: none !important;
   .experiment-ticket { background: #f2f2ed; border: 1px solid #aaa; }
   .primary-loop-card { background: #e8f7aa; }
   .integrated-loop-list, .integrated-loop-card, .application-path, .application-path > div, .experiment-bridge, .experiment-bridge > div { border-color: #bbb; }
+  .integrated-loop-card button { display: none; }
   .experiment-ticket::before, .experiment-ticket::after { display: none; }
   body.letter-print-mode .result-view > * { display: none !important; }
   body.letter-print-mode .result-view > .reflection-section { display: block !important; padding: 0; border: 0; }
