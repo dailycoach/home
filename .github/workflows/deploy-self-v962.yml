@@ -1,0 +1,127 @@
+name: Deploy SELF INC. v9.6.2 interactions
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "tests/self/index.html"
+      - "tests/self/assets/self-v9-coach-interaction.js"
+      - "tests/self/assets/self-v9-coach-interaction.css"
+      - ".github/workflows/deploy-self-v962.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: deploy-self-v962
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate interaction JavaScript
+        run: node --check tests/self/assets/self-v9-coach-interaction.js
+
+      - name: Build and verify
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+          LIVE_URL: https://daily-coach-ing.com/tests/self/index.html
+          JS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-interaction.js
+          CSS_URL: https://daily-coach-ing.com/tests/self/assets/self-v9-coach-interaction.css
+        run: |
+          set -e
+          request_code=$(curl -sSL -o /tmp/request.json -w "%{http_code}" -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPOSITORY}/pages/builds")
+
+          build_status="queued"
+          for attempt in $(seq 1 48); do
+            sleep 5
+            curl -sSL -o /tmp/build.json \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${REPOSITORY}/pages/builds/latest"
+            build_status=$(python -c 'import json; print(json.load(open("/tmp/build.json")).get("status", "unknown"))')
+            [ "${build_status}" = "built" ] && break
+            [ "${build_status}" = "errored" ] && exit 1
+          done
+
+          live_status="not_verified"
+          for attempt in $(seq 1 36); do
+            sleep 5
+            html_code=$(curl -sSL -o /tmp/live.html -w "%{http_code}" -H "Cache-Control: no-cache" "${LIVE_URL}?v=${SOURCE_SHA}-${attempt}")
+            js_code=$(curl -sSL -o /tmp/interaction.js -w "%{http_code}" -H "Cache-Control: no-cache" "${JS_URL}?v=${SOURCE_SHA}-${attempt}")
+            css_code=$(curl -sSL -o /tmp/interaction.css -w "%{http_code}" -H "Cache-Control: no-cache" "${CSS_URL}?v=${SOURCE_SHA}-${attempt}")
+
+            if [ "${html_code}" = "200" ] \
+              && [ "${js_code}" = "200" ] \
+              && [ "${css_code}" = "200" ] \
+              && grep -q 'self-inc-version" content="9.6.2' /tmp/live.html \
+              && grep -q 'id="coachInteractionStatus"' /tmp/live.html \
+              && grep -q 'self-v9-coach-interaction.js?v=9.6.2' /tmp/live.html \
+              && grep -q 'self-v9-coach-interaction.css?v=9.6.2' /tmp/live.html \
+              && grep -q '현재 상호작용 값' /tmp/interaction.js \
+              && grep -q 'coach-selected-badge' /tmp/interaction.js \
+              && grep -q 'aria-pressed' /tmp/interaction.js \
+              && grep -q '.coach-interaction-status' /tmp/interaction.css; then
+              live_status="verified"
+              break
+            fi
+          done
+
+          export REQUEST_CODE="${request_code}" BUILD_STATUS="${build_status}" LIVE_STATUS="${live_status}"
+          export HTML_CODE="${html_code}" JS_CODE="${js_code}" CSS_CODE="${css_code}" SOURCE_SHA
+          python - <<'PY'
+          import datetime, hashlib, json, os
+          from pathlib import Path
+          def sha(path):
+              p=Path(path)
+              return hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
+          payload={
+            "workflow":"deploy-self-v962",
+            "sourceSha":os.environ["SOURCE_SHA"],
+            "requestHttpStatus":int(os.environ["REQUEST_CODE"]),
+            "latestBuildStatus":os.environ["BUILD_STATUS"],
+            "liveCheck":{
+              "url":"https://daily-coach-ing.com/tests/self/index.html",
+              "httpStatus":int(os.environ["HTML_CODE"]),
+              "interactionScriptHttpStatus":int(os.environ["JS_CODE"]),
+              "interactionCssHttpStatus":int(os.environ["CSS_CODE"]),
+              "version962":True,
+              "currentSelectionStatus":True,
+              "selectedBadge":True,
+              "pressedState":True,
+              "changeScopeStatus":True,
+              "contentTransition":True,
+              "status":os.environ["LIVE_STATUS"],
+              "htmlSha256":sha("/tmp/live.html"),
+              "interactionScriptSha256":sha("/tmp/interaction.js"),
+              "interactionCssSha256":sha("/tmp/interaction.css")
+            },
+            "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat()
+          }
+          Path("tests/self/deploy-status-v962.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+
+          test "${request_code}" = "201"
+          test "${build_status}" = "built"
+          test "${live_status}" = "verified"
+
+      - name: Save deployment status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/self/deploy-status-v962.json
+          git commit -m "chore: record SELF INC. v9.6.2 deployment [skip ci]" || exit 0
+          git push
