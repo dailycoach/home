@@ -210,55 +210,153 @@ const PAGE_SIZE = 5;
 const STORAGE_KEY = "dailycoaching_flourish_notice_v1";
 const LETTER_STORAGE_KEY = "dailycoaching_flourish_letters_v1";
 
-const REFLECTION_STEPS = [
-  {
-    phase: "몸과 감정의 신호",
-    stem: "요즘 내가 조금 편안해지는 순간은 …",
-    guide: "최근 일주일 안에 마음이나 몸의 힘이 조금 풀렸던 순간을 떠올려 보세요.",
-    examples: ["퇴근 후 불을 낮추고 혼자 차를 마실 때", "아무 말 없이 천천히 동네를 걸을 때"]
+const INTEGRATED_LOOPS = {
+  P: {
+    flourish: "P", awareness: "SN", label: "긍정정서 ↔ 신호 포착",
+    title: "좋은 감정을 만들기보다 편안함이 시작되는 신호를 붙잡습니다.",
+    connection: "긍정정서는 생각으로 강요할수록 멀어질 수 있습니다. 숨이 길어짐, 어깨가 풀림, 표정이 부드러워짐처럼 몸이 먼저 반응한 작은 순간을 등록하면 실제 만족과 회복의 조건을 찾기 쉬워집니다.",
+    scene: "괜찮은 순간이 있어도 바로 다음 걱정이나 할 일로 넘어가는 때",
+    notice: "숨·어깨·표정이 아주 조금 편안해지는 최초의 변화",
+    action: "좋았던 장면에 20초 머물며 감정과 몸의 변화를 한 문장으로 적기",
+    experiment: {
+      title: "편안함 신호에서 긍정정서를 키우는 7주",
+      action: "매주 세 번, 조금 괜찮았던 장면에 20초 더 머물고 ‘무슨 일이 있었는지–몸이 어떻게 달라졌는지’를 한 문장으로 기록하세요.",
+      notice: "숨이 길어짐, 어깨가 내려감, 미소, 따뜻함처럼 좋은 감정이 시작되는 신체 신호",
+      choice: "다음 일로 바로 넘어가기 전에 20초 머물고 감정 이름 하나 붙이기",
+      observe: "내가 실제로 편안함을 느끼기 쉬운 시간·장소·사람에는 어떤 공통점이 있었습니까?"
+    },
+    questions: ["최근 좋았던 일을 몸이 먼저 알아본 순간은 언제였습니까?", "괜찮은 순간을 너무 빨리 지나치게 하는 생각은 무엇입니까?", "이번 주 반복하고 싶은 편안함의 조건 하나는 무엇입니까?", "그 장면에서 20초 더 머물면 무엇이 달라집니까?"],
+    examples: [
+      ["출근길 햇빛을 받을 때 숨이 조금 길어졌다", "가족과 웃던 순간 어깨의 힘이 빠졌다"],
+      ["좋은 말을 들어도 다음 걱정 때문에 가슴이 답답해진다", "쉬는 중에도 할 일이 떠올라 턱에 힘이 들어간다"],
+      ["이 정도로 만족하면 뒤처질 거야", "곧 또 문제가 생길 텐데"],
+      ["좋았던 순간을 축소하고 바로 다음 일을 찾는다", "괜찮다는 느낌을 무시하고 휴대폰부터 본다"],
+      ["문제가 없는 20초를 그대로 인정하는 것", "죄책감 없이 쉬어도 된다는 허락"],
+      ["내 숨이 길어졌다는 작은 변화", "나는 조용한 시간에 회복이 빠르다는 사실"],
+      ["20초 머물고 지금 감정을 한 단어로 적겠다", "다음 일을 시작하기 전에 어깨를 한 번 풀겠다"],
+      ["좋은 순간도 충분히 내 삶의 일부다", "회복은 더 하는 일이 아니라 이미 온 신호를 보는 일이다"]
+    ]
   },
-  {
-    phase: "몸과 감정의 신호",
-    stem: "반대로 내 몸이 먼저 긴장하는 순간은 …",
-    guide: "생각으로 판단하기 전 몸이 먼저 보낸 신호를 적어 보세요. 어깨, 숨, 배, 표정도 좋은 단서입니다.",
-    examples: ["회의에서 바로 답을 요구받으면 어깨가 굳는다", "휴대폰 알림이 계속 울리면 숨이 짧아진다"]
+  E: {
+    flourish: "E", awareness: "PT", label: "몰입 ↔ 패턴 이해",
+    title: "집중력을 탓하기보다 몰입이 열리고 닫히는 반복 조건을 찾습니다.",
+    connection: "몰입은 의지만의 문제가 아닙니다. 과제 난이도, 강점 사용, 방해 요소, 시작 시간처럼 집중을 살리거나 끊는 패턴을 알면 ‘나는 집중을 못 한다’는 평가 대신 재현 가능한 조건을 설계할 수 있습니다.",
+    scene: "해야 할 일 앞에서 자꾸 다른 창을 열거나 시작만 반복하는 때",
+    notice: "집중이 끊기기 직전의 과제 난이도·알림·피로·자동 회피 행동",
+    action: "방해 요소 하나를 치우고 25분 집중한 뒤 잘된 조건 한 가지 기록하기",
+    experiment: {
+      title: "내 몰입 패턴을 찾아 재현하는 7주",
+      action: "매주 한 번, 집중이 필요한 일 하나를 골라 방해 요소를 하나 치우고 25분 실행하세요. 끝난 뒤 집중이 살아난 조건과 끊긴 조건을 각각 한 가지씩 적습니다.",
+      notice: "집중 직전의 에너지, 과제 난이도, 알림, 주변 소리, 다른 일을 열고 싶은 충동",
+      choice: "막연한 과제를 25분짜리 한 단계로 줄이고 방해 요소 하나만 제거하기",
+      observe: "집중이 잘된 날과 어려운 날의 시작 조건에는 어떤 반복 차이가 있었습니까?"
+    },
+    questions: ["최근 20분 이상 자연스럽게 집중한 장면의 조건은 무엇이었습니까?", "집중이 끊어지기 직전에 반복되는 행동은 무엇입니까?", "내 강점이 쓰일 때와 쓰이지 않을 때 주의는 어떻게 달라집니까?", "다음 몰입을 위해 없앨 방해 요소 하나는 무엇입니까?"],
+    examples: [
+      ["자료를 구조화할 때 시간 가는 줄 몰랐다", "조용한 오전에 글을 쓸 때 집중이 살아났다"],
+      ["과제가 막연하면 자꾸 새 창을 연다", "알림이 한 번 울리면 다시 집중하기 어렵다"],
+      ["완벽하게 할 수 없으면 시작하지 말자", "일단 메일부터 확인해야 마음이 놓여"],
+      ["준비만 늘리고 핵심 작업을 미룬다", "어려운 부분이 나오면 휴대폰을 본다"],
+      ["완료 기준이 분명한 25분짜리 과제", "강점을 쓸 수 있는 조용한 시간"],
+      ["막연함이 회피를 시작하게 한다는 패턴", "오전에는 생각하는 일이 더 잘된다는 조건"],
+      ["할 일을 한 문장으로 줄이고 타이머를 켜겠다", "알림을 끄고 필요한 창 하나만 열겠다"],
+      ["집중은 의지가 아니라 조건에서 시작된다", "완벽한 준비보다 25분의 실제 시작"]
+    ]
   },
-  {
-    phase: "반복되는 생각과 행동",
-    stem: "그 순간 내 머릿속에서 가장 먼저 떠오르는 말은 …",
-    guide: "사실인지 따지기보다 자동으로 스쳐 가는 짧은 말을 그대로 붙잡아 보세요.",
-    examples: ["또 실수하면 안 돼", "내가 그냥 처리하는 게 빠르다"]
+  R: {
+    flourish: "R", awareness: "NM", label: "관계 ↔ 경험 명명",
+    title: "관계를 판단하기보다 사실·감정·필요를 분명한 말로 연결합니다.",
+    connection: "관계가 어려울 때 ‘서운하다’는 한 덩어리 안에는 관찰한 사실, 해석, 감정, 원하는 것이 섞여 있습니다. 경험을 나누어 이름 붙이면 상대를 공격하거나 혼자 참는 대신 구체적으로 요청할 수 있습니다.",
+    scene: "상대의 반응을 미리 짐작해 말하지 않거나 한꺼번에 폭발하는 때",
+    notice: "관찰한 사실과 내가 붙인 해석, 그때의 감정과 필요의 차이",
+    action: "한 사람에게 ‘사실–내 느낌–바라는 것’을 세 문장으로 전하기",
+    experiment: {
+      title: "감정과 필요를 말로 연결하는 7주",
+      action: "매주 한 번, 중요한 관계의 작은 장면을 골라 ‘실제로 일어난 일–내 감정–바라는 것’을 각각 한 문장으로 적고 가능한 경우 상대에게 구체적으로 전하세요.",
+      notice: "상대의 말과 내가 추측한 의도, 내 감정과 실제로 원했던 도움의 차이",
+      choice: "비난이나 침묵 대신 지금의 사실·감정·요청을 짧게 나누기",
+      observe: "내 경험을 정확히 말했을 때 예상했던 반응과 실제 반응은 어떻게 달랐습니까?"
+    },
+    questions: ["최근 관계에서 실제로 일어난 사실은 무엇입니까?", "그 사실에 내가 붙인 해석과 감정은 각각 무엇입니까?", "그때 말하지 못한 필요나 부탁은 무엇입니까?", "누구에게 어떤 한 문장을 먼저 전할 수 있습니까?"],
+    examples: [
+      ["친구가 먼저 안부를 물었을 때 안심됐다", "동료가 내 말을 끊지 않고 들을 때 가까워졌다"],
+      ["답장이 늦으면 가슴이 답답해지고 말을 줄인다", "회의에서 말이 끊기면 얼굴이 뜨거워진다"],
+      ["나를 중요하게 생각하지 않는 거야", "말해 봐야 부담만 줄 거야"],
+      ["괜찮은 척하고 연락을 피한다", "도움을 청하지 않고 혼자 처리한다"],
+      ["조언보다 끝까지 들어주는 것", "오늘은 어렵다고 솔직히 말할 수 있는 안전감"],
+      ["답장이 늦은 사실과 거절당했다는 해석은 다르다", "내 감정은 화보다 서운함에 가깝다"],
+      ["사실과 내 느낌을 나누어 한 문장으로 말하겠다", "필요한 도움을 구체적으로 한 가지 부탁하겠다"],
+      ["추측보다 확인, 참기보다 구체적인 요청", "내 마음을 정확히 말하는 것도 관계를 돌보는 일이다"]
+    ]
   },
-  {
-    phase: "반복되는 생각과 행동",
-    stem: "그래서 나도 모르게 반복하는 행동은 …",
-    guide: "그 생각 다음에 자주 이어지는 행동을 적어 보세요. 미루기, 참기, 혼자 하기처럼 평범한 행동이면 됩니다.",
-    examples: ["도움을 청하지 않고 혼자 붙잡고 있는 것", "대답을 미루고 연락을 피하는 것"]
+  M: {
+    flourish: "M", awareness: "VL", label: "의미 ↔ 고유성 정렬",
+    title: "해야 하는 이유와 내가 동의하는 이유를 구분해 나다운 방향을 찾습니다.",
+    connection: "의미는 거창한 사명보다 지금 쓰는 시간이 내가 중요하게 여기는 가치와 이어져 있다는 감각입니다. 타인의 기대와 자기 기준을 구분하면 같은 일도 ‘끌려가는 의무’인지 ‘내가 선택한 기여’인지 다시 볼 수 있습니다.",
+    scene: "바쁘게 움직이지만 왜 하는지 모르거나 남의 기대만 남는 때",
+    notice: "선택 앞에서 가장 먼저 떠오른 외부 기대와 내가 지키고 싶은 가치",
+    action: "이번 주 일정 하나를 고르고 ‘이 일에서 지킬 내 가치’를 한 문장으로 정하기",
+    experiment: {
+      title: "내 가치가 시간표에 보이게 만드는 7주",
+      action: "매주 한 번, 중요한 일정 하나를 골라 ‘남이 기대하는 것–내가 동의하는 것–내 방식으로 바꿀 한 가지’를 적고 작은 조정을 실행하세요.",
+      notice: "결정할 때 먼저 떠오르는 타인의 기대, 반복해 힘이 났던 자기 방식, 지키고 싶은 가치",
+      choice: "요구를 모두 버리지 않고 내 가치와 강점이 보이도록 방식 하나 조정하기",
+      observe: "내 기준을 반영한 선택 뒤에는 활력·납득감·지속성 중 무엇이 달라졌습니까?"
+    },
+    questions: ["요즘 시간을 많이 쓰지만 의미가 흐린 일은 무엇입니까?", "그 일에서 남의 기대와 내가 동의하는 부분은 각각 무엇입니까?", "그동안 나답게 잘해 온 방식이나 강점은 무엇입니까?", "이번 주 일정 하나에 내 가치를 어떻게 보이게 할 수 있습니까?"],
+    examples: [
+      ["후배가 성장하도록 도왔을 때 일이 의미 있게 느껴졌다", "가족과 약속을 지켰을 때 내 삶답다고 느꼈다"],
+      ["요청을 거절하려 하면 배가 무거워진다", "일정표를 볼 때 내가 빠진 느낌에 숨이 막힌다"],
+      ["좋은 사람이라면 이 정도는 해야 해", "인정받으려면 남들 방식대로 해야 해"],
+      ["내 우선순위를 미루고 모든 요청을 받는다", "잘해 온 내 방식을 버리고 비교부터 한다"],
+      ["내가 동의하는 이유를 확인할 시간", "요구 속에서도 지킬 내 가치 한 가지"],
+      ["나는 사람을 연결할 때 강점이 살아난다", "내게 중요한 기준은 속도보다 정직함이다"],
+      ["요청을 받으면 내 기준을 확인한 뒤 답하겠다", "일정 하나를 내 강점이 쓰이는 방식으로 바꾸겠다"],
+      ["남의 기대 속에서도 내 이유를 선택할 수 있다", "나답다는 느낌은 방향을 알려 주는 자료다"]
+    ]
   },
-  {
-    phase: "실제 필요와 나다운 기준",
-    stem: "사실 그때 내가 필요했던 것은 …",
-    guide: "‘더 열심히’보다 시간, 휴식, 도움, 경계, 이해처럼 나를 실제로 돕는 조건을 찾아보세요.",
-    examples: ["정답보다 잠깐 생각할 시간", "조언보다 내 말을 끝까지 들어주는 사람"]
-  },
-  {
-    phase: "실제 필요와 나다운 기준",
-    stem: "남의 기대를 잠시 내려놓으면, 나는 …",
-    guide: "잘 보이기 위한 답이 아니라 내 방식과 속도에 가까운 바람을 적어 보세요.",
-    examples: ["내 속도로 한 가지씩 끝내고 싶다", "괜찮은 척보다 솔직하게 어렵다고 말하고 싶다"]
-  },
-  {
-    phase: "다음 장면의 작은 선택",
-    stem: "비슷한 장면이 다시 오면, 가장 먼저 …",
-    guide: "의지나 결심보다 1분 안에 시작할 수 있는 첫 행동을 적으면 실천하기 쉽습니다.",
-    examples: ["숨을 길게 내쉬고 확인된 사실부터 적겠다", "혼자 결정하기 전에 한 사람에게 도움을 묻겠다"]
-  },
-  {
-    phase: "다음 장면의 작은 선택",
-    stem: "앞으로 7주 동안 내가 자주 기억하고 싶은 문장은 …",
-    guide: "힘든 날에도 나를 몰아붙이지 않고 방향을 되찾게 해 줄 한 문장을 만들어 보세요.",
-    examples: ["빨리보다 나답게 끝내는 것이 중요하다", "감정은 멈추라는 명령이 아니라 살펴보라는 신호다"]
+  A: {
+    flourish: "A", awareness: "CH", label: "성취 ↔ 선택과 조정",
+    title: "큰 결심보다 지금 선택할 최소 행동과 다음 조정을 연결합니다.",
+    connection: "성취감은 큰 결과만이 아니라 선택한 행동을 끝내고 피드백을 얻는 과정에서 생깁니다. 알아차린 내용을 특정 장면의 작은 행동으로 바꾸고, 결과에 맞춰 조정하면 의지 부족이라는 자책에서 벗어날 수 있습니다.",
+    scene: "문제를 잘 알고도 첫 행동이 크거나 모호해 시작하지 못하는 때",
+    notice: "계획이 멈추는 구체적 상황과 ‘이 정도로는 부족하다’는 자동 기준",
+    action: "할 일을 10분 안에 끝낼 첫 단계로 줄여 실행하고 다음 조정 한 줄 남기기",
+    experiment: {
+      title: "최소 행동과 조정을 쌓아 성취를 회복하는 7주",
+      action: "매주 한 가지 목표를 10분 안에 시작할 행동으로 줄여 실행하세요. 끝난 뒤 성공 여부보다 ‘무엇이 쉬웠고 다음에는 무엇을 바꿀지’를 한 줄로 남깁니다.",
+      notice: "시작을 미루는 순간, 너무 큰 완료 기준, 방해 상황, 실행 뒤의 자책이나 피드백",
+      choice: "완벽한 계획 대신 10분짜리 첫 행동을 하고 결과를 다음 계획의 자료로 쓰기",
+      observe: "작은 완료를 반복했을 때 자신감과 다음 행동의 선명함은 어떻게 달라졌습니까?"
+    },
+    questions: ["지금 미루는 일의 첫 10분 행동은 무엇입니까?", "시작을 막는 완료 기준이 실제로 너무 크지는 않습니까?", "실행을 방해하는 상황이 오면 어떤 대안을 쓸 수 있습니까?", "결과에서 배운 조정점 한 가지는 무엇입니까?"],
+    examples: [
+      ["자료 제목과 목차만 만들었을 때 시작감이 생겼다", "미뤘던 전화를 한 통 끝내고 마음이 가벼워졌다"],
+      ["할 일 전체를 떠올리면 몸이 무거워진다", "마감 생각에 손이 굳고 자료만 다시 본다"],
+      ["제대로 못 할 거면 시작하지 말자", "이 정도 작은 행동은 아무 의미 없어"],
+      ["계획을 계속 고치고 실제 시작을 미룬다", "한 번 놓치면 이번 주 전체를 포기한다"],
+      ["성공하기 쉬운 10분짜리 첫 단계", "실패가 아니라 조정할 자료로 보는 태도"],
+      ["완료 기준이 너무 커서 시작이 멈춘다", "나는 작게 끝낼 때 다음 행동이 더 선명해진다"],
+      ["파일을 열고 제목 한 줄부터 쓰겠다", "실행 뒤 잘된 점과 바꿀 점을 한 줄씩 적겠다"],
+      ["작은 완료도 분명한 전진이다", "계획의 목적은 나를 평가하는 것이 아니라 움직이게 하는 것이다"]
+    ]
   }
+};
+
+const REFLECTION_PHASES = [
+  "삶의 영역이 살아나는 장면", "흐려지기 시작하는 신호", "자동으로 떠오르는 생각", "반복되는 행동",
+  "실제로 필요한 조건", "알아차림으로 다시 보기", "다음 장면의 작은 선택", "7주 동안 기억할 문장"
+];
+
+const REFLECTION_GUIDES = [
+  "최근 일주일 안에 이 삶의 영역이 조금이라도 살아났던 실제 순간을 떠올려 보세요.",
+  "생각으로 판단하기 전 몸과 감정이 먼저 보낸 작은 신호를 적어 보세요.",
+  "사실인지 따지기보다 그 장면에서 자동으로 스쳐 간 짧은 말을 붙잡아 보세요.",
+  "그 생각 다음에 자주 이어지는 미루기, 참기, 과하게 하기 같은 행동을 적어 보세요.",
+  "‘더 열심히’보다 시간, 도움, 경계, 휴식처럼 실제로 도움이 되는 조건을 찾아보세요.",
+  "나의 알아차림 손잡이를 사용하면 같은 장면에서 무엇이 새롭게 보이는지 적어 보세요.",
+  "의지나 결심보다 1분에서 10분 안에 시작할 수 있는 첫 행동을 적어 보세요.",
+  "힘든 날에도 나를 몰아붙이지 않고 방향을 되찾게 해 줄 한 문장을 만들어 보세요."
 ];
 
 const state = {
@@ -267,7 +365,7 @@ const state = {
   name: "",
   context: "life",
   result: null,
-  reflection: { step: 0, answers: Array(REFLECTION_STEPS.length).fill(""), letter: "", mode: "intro", savedAt: null }
+  reflection: { step: 0, answers: Array(8).fill(""), steps: [], loopKey: "P", letter: "", mode: "intro", savedAt: null }
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -411,6 +509,65 @@ function scoreBand(score) {
   return { key: "high", label: "현재 잘 활용되는 상태" };
 }
 
+function loopScore(result, loopKey) {
+  const loop = INTEGRATED_LOOPS[loopKey];
+  return round1(mean([result.domainScores[loop.flourish], result.domainScores[loop.awareness]]));
+}
+
+function sortedLoopKeys(result) {
+  return Object.keys(INTEGRATED_LOOPS).sort((a, b) => loopScore(result, a) - loopScore(result, b));
+}
+
+function choosePrimaryLoop(result) {
+  const ordered = sortedLoopKeys(result);
+  const lowest = loopScore(result, ordered[0]);
+  const ties = ordered.filter((key) => Math.abs(loopScore(result, key) - lowest) < .11);
+  const contextPreference = ({ life: "M", work: "E", relationship: "R", change: "A" })[result.context] || "M";
+  return ties.includes(contextPreference) ? contextPreference : ties[0];
+}
+
+function loopReading(result, loopKey) {
+  const loop = INTEGRATED_LOOPS[loopKey];
+  const lifeScore = result.domainScores[loop.flourish];
+  const awarenessScore = result.domainScores[loop.awareness];
+  const gap = round1(lifeScore - awarenessScore);
+  if (lifeScore < 3.5 && awarenessScore < 3.5) {
+    return `${DOMAINS[loop.flourish].name}의 체감과 ${DOMAINS[loop.awareness].name}의 손잡이가 함께 충분하지 않은 때입니다. 큰 변화를 만들기보다 한 장면에서 신호 하나를 보고 작은 선택 하나를 끝내는 것부터 시작하세요.`;
+  }
+  if (gap >= .8) {
+    return `${DOMAINS[loop.flourish].name}은 어느 정도 경험하고 있지만 ${DOMAINS[loop.awareness].name}이 상대적으로 늦게 따라옵니다. 잘되는 순간을 우연으로 지나치지 말고, 그때의 조건과 신호를 붙잡아 재현하는 것이 우선입니다.`;
+  }
+  if (gap <= -.8) {
+    return `${DOMAINS[loop.awareness].name} 역량은 비교적 살아 있지만 ${DOMAINS[loop.flourish].name}의 실제 체감으로 아직 충분히 이어지지 않을 수 있습니다. 더 분석하기보다 알아차린 내용을 생활 조건과 작은 행동으로 번역하세요.`;
+  }
+  if (loopScore(result, loopKey) >= 5) {
+    return `${DOMAINS[loop.flourish].name}의 경험과 ${DOMAINS[loop.awareness].name}의 역량이 함께 비교적 안정적으로 작동합니다. 이 연결이 살아나는 조건을 다른 장면에도 의식적으로 옮겨 쓰면 좋은 자원이 됩니다.`;
+  }
+  return `${DOMAINS[loop.flourish].name}과 ${DOMAINS[loop.awareness].name}이 상황에 따라 함께 흔들릴 수 있습니다. 잘되는 날과 어려운 날을 비교해 두 점수가 동시에 달라지는 실제 조건을 찾는 것이 중요합니다.`;
+}
+
+function buildReflectionSteps(loopKey) {
+  const loop = INTEGRATED_LOOPS[loopKey];
+  const life = DOMAINS[loop.flourish].name;
+  const awareness = DOMAINS[loop.awareness].name;
+  const stems = [
+    `최근 ‘${life}’ 영역이 조금 살아났던 순간은 …`,
+    `‘${life}’ 영역이 흐려지기 시작할 때, 내 몸과 감정의 신호는 …`,
+    "그 장면에서 자동으로 떠오르는 생각은 …",
+    `그 생각 때문에 ‘${life}’ 영역을 어렵게 만드는 내 행동은 …`,
+    `사실 ‘${life}’ 영역을 회복하기 위해 내가 필요했던 것은 …`,
+    `‘${awareness}’의 관점으로 다시 보면, 내가 놓치고 있던 것은 …`,
+    "비슷한 장면이 다시 오면, 나는 가장 먼저 …",
+    `앞으로 7주 동안 ‘${life}’ 영역을 위해 기억할 나다운 문장은 …`
+  ];
+  return stems.map((stem, index) => ({
+    phase: REFLECTION_PHASES[index],
+    stem,
+    guide: REFLECTION_GUIDES[index],
+    examples: loop.examples[index]
+  }));
+}
+
 function awarenessProcessCopy(key) {
   return ({
     SN: "변화는 해석보다 먼저 몸과 에너지의 초기 신호를 포착하는 데서 시작됩니다. 신호를 늦게 보면 선택도 늦어지므로, 감정이 커지기 전 반복되는 전조 하나를 찾는 것이 핵심입니다.",
@@ -421,36 +578,24 @@ function awarenessProcessCopy(key) {
   })[key];
 }
 
-function pairMechanism(growthKey, leverKey) {
-  const target = ({
-    P: "긍정정서를 억지로 높이기보다 실제로 안도·감사·희망이 생기는 장면을 확보하는 것",
-    E: "집중력을 탓하기보다 강점·과제 난이도·환경이 맞는 몰입 조건을 다시 설계하는 것",
-    R: "관계를 늘리기보다 안전하게 도움을 주고받을 수 있는 한 장면을 만드는 것",
-    M: "거창한 사명을 추가하기보다 현재의 시간 사용을 자기 가치와 다시 연결하는 것",
-    A: "더 큰 목표를 세우기보다 완료 가능한 최소 행동으로 유능감의 피드백을 복원하는 것"
-  })[growthKey];
-  const route = ({
-    SN: "그 과정에서 몸과 에너지의 초기 신호를 먼저 관찰하십시오.",
-    NM: "그 과정에서 사실·해석·감정·욕구를 정확히 나누어 말해 보십시오.",
-    PT: "그 과정에서 반복되는 촉발 조건과 자동반응을 한 장면씩 연결해 보십시오.",
-    VL: "그 과정에서 타인의 기대와 자신의 강점·방식·가치를 분리해 보십시오.",
-    CH: "그 과정에서 언제·어디서 실행할지 정한 최소 행동을 실제로 시험해 보십시오."
-  })[leverKey];
-  return `현재의 우선 전략은 ${target}입니다. ${route}`;
-}
-
-function renderExpertLenses(result, strengthKey, growthKey, leverKey, leverTieCount) {
+function renderExpertLenses(result, strongestLoopKey, primaryLoopKey) {
+  const strongestLoop = INTEGRATED_LOOPS[strongestLoopKey];
+  const primaryLoop = INTEGRATED_LOOPS[primaryLoopKey];
   const flourishValues = ["P", "E", "R", "M", "A"].map((key) => result.domainScores[key]);
   const spread = round1(Math.max(...flourishValues) - Math.min(...flourishValues));
-  const balanceTitle = spread >= 1.5 ? `${DOMAINS[strengthKey].name}에 기대어 버티는 비대칭이 보입니다.` : "다섯 플로리싱 요소의 간격이 비교적 크지 않습니다.";
-  const balanceCopy = spread >= 1.5
-    ? `가장 높은 영역과 낮은 영역의 차이는 ${spread.toFixed(1)}점입니다. 총점만 보면 가려질 수 있는 차이로, ${DOMAINS[strengthKey].name}의 힘이 ${DOMAINS[growthKey].name}의 부족한 체감을 보완하고 있을 가능성이 있습니다. 강점을 줄이기보다 그 작동 조건을 다음 성장영역으로 옮기는 접근이 적절합니다.`
-    : `다섯 영역의 최대 차이는 ${spread.toFixed(1)}점입니다. 특정 한 영역이 삶 전체를 떠받치기보다 여러 요소가 비슷한 수준으로 움직이고 있습니다. 이때는 가장 낮은 한 점수보다 전체 수준을 끌어내리는 공통 생활조건을 찾는 편이 유용합니다.`;
-  const actionGap = result.awareness - result.flourish;
-  const regulationTitle = leverTieCount > 1 ? "알아차림은 첫 단계인 신호 포착부터 연결합니다." : leverKey === "CH" && actionGap > .4 ? "이해는 앞서 있지만 행동 번역이 늦을 수 있습니다." : `${DOMAINS[leverKey].name}이 변화 과정의 첫 연결점입니다.`;
-  const regulationCopy = leverTieCount > 1
-    ? `${awarenessProcessCopy(leverKey)} 현재 다섯 알아차림 역량이 같은 수준이므로 특정 역량의 부족을 단정하지 않고 신호-명명-패턴-고유성-선택의 순서로 점검합니다.`
-    : `${awarenessProcessCopy(leverKey)} 현재 ${DOMAINS[leverKey].name} 점수는 ${result.domainScores[leverKey].toFixed(1)}점이며, 알아차림 전체의 다른 역량보다 상대적으로 먼저 다룰 필요가 있습니다.`;
+  const lifeScore = result.domainScores[primaryLoop.flourish];
+  const awarenessScore = result.domainScores[primaryLoop.awareness];
+  const gap = round1(lifeScore - awarenessScore);
+  const loopValues = Object.keys(INTEGRATED_LOOPS).map((key) => loopScore(result, key));
+  const loopSpread = round1(Math.max(...loopValues) - Math.min(...loopValues));
+  const balanceTitle = loopSpread < .2 ? "다섯 통합 성장 루프가 비슷한 수준입니다." : `${strongestLoop.label} 연결이 현재 활용 가능한 자원입니다.`;
+  const balanceCopy = loopSpread < .2
+    ? `특정 연결 하나가 두드러지기보다 다섯 루프가 함께 움직이고 있습니다. ${contextLabel(result.context)} 맥락에서 먼저 체감하고 싶은 ${primaryLoop.label} 연결을 우선 루프로 삼아 실제 장면의 차이를 관찰합니다.`
+    : `이 연결의 참고점수는 ${loopScore(result, strongestLoopKey).toFixed(1)}점입니다. ${strongestLoop.connection} 잘 작동하는 조건을 우선 루프의 생활 장면에도 옮겨 쓰면 약점을 고치는 접근보다 자기 자원을 활용하는 변화가 가능합니다.`;
+  const regulationTitle = Math.abs(gap) < .8
+    ? `${primaryLoop.label} 두 축이 비슷한 수준으로 움직입니다.`
+    : gap > 0 ? `${DOMAINS[primaryLoop.flourish].name}보다 ${DOMAINS[primaryLoop.awareness].name}의 포착이 늦을 수 있습니다.` : `${DOMAINS[primaryLoop.awareness].name}보다 ${DOMAINS[primaryLoop.flourish].name}의 생활 체감이 낮습니다.`;
+  const regulationCopy = `${loopReading(result, primaryLoopKey)} 현재 두 점수는 ${lifeScore.toFixed(1)}점과 ${awarenessScore.toFixed(1)}점이며, 통합 참고점수는 ${loopScore(result, primaryLoopKey).toFixed(1)}점입니다.`;
   $("#expert-lenses").innerHTML = `
     <article class="expert-lens">
       <span class="lens-index">01</span><span class="lens-field">긍정심리학 관점</span>
@@ -462,8 +607,32 @@ function renderExpertLenses(result, strengthKey, growthKey, leverKey, leverTieCo
     </article>
     <article class="expert-lens coaching">
       <span class="lens-index">03</span><span class="lens-field">코칭학 관점</span>
-      <h3>${DOMAINS[growthKey].name} 영역을 ${DOMAINS[leverKey].name} 역량으로 연결합니다.</h3><p>${pairMechanism(growthKey, leverKey)}</p>
+      <h3>${primaryLoop.title}</h3><p>관찰할 장면은 “${primaryLoop.scene}”입니다. 그때 ${primaryLoop.notice}을 확인하고, 첫 행동으로 ${primaryLoop.action}를 적용합니다.</p>
     </article>`;
+}
+
+function renderIntegratedLoops(result, primaryLoopKey) {
+  const primary = INTEGRATED_LOOPS[primaryLoopKey];
+  $("#primary-loop-title").textContent = primary.label;
+  $("#primary-loop-score").textContent = loopScore(result, primaryLoopKey).toFixed(1);
+  $("#primary-loop-reading").textContent = loopReading(result, primaryLoopKey);
+  $("#primary-loop-scene").textContent = primary.scene;
+  $("#primary-loop-notice").textContent = primary.notice;
+  $("#primary-loop-action").textContent = primary.action;
+
+  $("#integrated-loop-list").innerHTML = Object.keys(INTEGRATED_LOOPS).map((key, index) => {
+    const loop = INTEGRATED_LOOPS[key];
+    const lifeScore = result.domainScores[loop.flourish];
+    const awarenessScore = result.domainScores[loop.awareness];
+    return `
+      <article class="integrated-loop-card ${key === primaryLoopKey ? "priority selected" : ""}">
+        <div class="loop-card-top"><span>${String(index + 1).padStart(2, "0")}</span><b>${loopScore(result, key).toFixed(1)}</b></div>
+        <h3>${loop.label}</h3>
+        <p>${loop.title}</p>
+        <div class="loop-pair-scores"><span>${DOMAINS[loop.flourish].name} ${lifeScore.toFixed(1)}</span><i aria-hidden="true">↔</i><span>${DOMAINS[loop.awareness].name} ${awarenessScore.toFixed(1)}</span></div>
+        <button type="button" data-action="choose-loop" data-loop-key="${key}">${key === primaryLoopKey ? "추천 루프로 적용" : "이 루프로 적용"}<span aria-hidden="true">→</span></button>
+      </article>`;
+  }).join("");
 }
 
 function renderDomainExplanations(result, growthKey, leverKey) {
@@ -496,20 +665,14 @@ function renderDomainExplanations(result, growthKey, leverKey) {
 }
 
 function renderResult(result) {
-  const flourishKeys = sortedKeys(result, "flourish");
-  const awarenessKeys = sortedKeys(result, "awareness");
-  const strengthKey = flourishKeys[0];
-  const flourishDomainKeys = ["P", "E", "R", "M", "A"];
-  const awarenessDomainKeys = ["SN", "NM", "PT", "VL", "CH"];
-  const maxFlourish = Math.max(...flourishDomainKeys.map((key) => result.domainScores[key]));
-  const minFlourish = Math.min(...flourishDomainKeys.map((key) => result.domainScores[key]));
-  const minAwareness = Math.min(...awarenessDomainKeys.map((key) => result.domainScores[key]));
-  const strengthTies = flourishDomainKeys.filter((key) => Math.abs(result.domainScores[key] - maxFlourish) < .11);
-  const growthTies = flourishDomainKeys.filter((key) => Math.abs(result.domainScores[key] - minFlourish) < .11);
-  const leverTies = awarenessDomainKeys.filter((key) => Math.abs(result.domainScores[key] - minAwareness) < .11);
-  const growthKey = growthTies[0];
-  const leverKey = leverTies[0];
+  const loopKeys = sortedLoopKeys(result);
+  const primaryLoopKey = choosePrimaryLoop(result);
+  const strongestLoopKey = loopKeys.at(-1);
+  const primaryLoop = INTEGRATED_LOOPS[primaryLoopKey];
+  const strongestLoop = INTEGRATED_LOOPS[strongestLoopKey];
   result.stateKey = classifyState(result.flourish, result.awareness);
+  result.primaryLoopKey = primaryLoopKey;
+  result.selectedLoopKey = primaryLoopKey;
   const stateInfo = STATE_DATA[result.stateKey];
   const displayName = result.name ? `${escapeHtml(result.name)}님의` : "당신의";
 
@@ -521,38 +684,46 @@ function renderResult(result) {
   $("#flourish-score").textContent = result.flourish.toFixed(1);
   $("#awareness-score").textContent = result.awareness.toFixed(1);
 
-  $("#strength-title").textContent = strengthTies.length > 1 ? "여러 요소가 함께 삶을 받치고 있습니다." : `현재 삶을 받치는 힘은 ${DOMAINS[strengthKey].name}입니다.`;
-  $("#strength-copy").textContent = strengthTies.length > 1
-    ? `${strengthTies.map((key) => DOMAINS[key].name).join("·")} 영역이 비슷한 수준으로 작동합니다. 한 가지 강점에 의존하기보다 여러 자원이 함께 움직이는 조건을 살펴보는 것이 중요합니다.`
-    : `${DOMAINS[strengthKey].desc}이 현재 가장 선명합니다. 이 점수가 높다는 사실보다, 이 힘이 살아나는 조건을 다른 장면에도 옮겨 쓰는 것이 중요합니다.`;
-  $("#growth-title").textContent = growthTies.length > 1 ? "한 영역보다 공통 생활조건을 먼저 봅니다." : `${DOMAINS[growthKey].name} 영역에 먼저 여백이 필요합니다.`;
-  $("#growth-copy").textContent = growthTies.length > 1
-    ? `${growthTies.map((key) => DOMAINS[key].name).join("·")} 영역의 점수가 같습니다. 어느 하나를 결함으로 정하기보다 피로, 시간 압박, 환경처럼 여러 영역을 함께 낮추는 조건을 확인해야 합니다.`
-    : `${DOMAINS[growthKey].desc}이 부족하다는 판정이 아닙니다. 지금의 생활에서 이 경험이 상대적으로 덜 확보되어 있음을 뜻합니다.`;
-  $("#lever-title").textContent = leverTies.length > 1 ? "알아차림의 첫 단계부터 차례로 연결합니다." : `${DOMAINS[leverKey].name} 역량부터 연결합니다.`;
-  $("#lever-copy").textContent = leverTies.length > 1
-    ? `${leverTies.map((key) => DOMAINS[key].name).join("·")} 역량이 같은 수준입니다. 이때는 신호 포착에서 시작해 명명, 패턴, 고유성, 선택으로 이어지는 순서를 따라가는 것이 안정적입니다.`
-    : `${DOMAINS[leverKey].desc}입니다. 이 역량을 보완하면 ${DOMAINS[growthKey].name} 영역을 의지로 밀어붙이지 않고 실제 장면에서 다룰 수 있습니다.`;
+  const loopSpread = round1(loopScore(result, loopKeys.at(-1)) - loopScore(result, loopKeys[0]));
+  $("#strength-title").textContent = loopSpread < .2 ? "다섯 연결이 비슷한 수준입니다." : strongestLoop.label;
+  $("#strength-copy").textContent = loopSpread < .2
+    ? `특정 강점에만 기대기보다 ${contextLabel(result.context)}에서 가장 먼저 바꾸고 싶은 장면을 기준으로 ${primaryLoop.label} 연결을 선택했습니다.`
+    : `${strongestLoop.connection} 이 연결이 살아나는 실제 조건을 우선 성장 루프에도 옮겨 써 보세요.`;
+  $("#growth-title").textContent = primaryLoop.label;
+  $("#growth-copy").textContent = loopReading(result, primaryLoopKey);
+  $("#lever-title").textContent = primaryLoop.action;
+  $("#lever-copy").textContent = `“${primaryLoop.scene}”이 나타날 때 “${primaryLoop.notice}”을 먼저 확인하면 플로리싱과 알아차림이 같은 장면 안에서 연결됩니다.`;
 
+  renderIntegratedLoops(result, primaryLoopKey);
   renderRadar(result);
   renderLegend(result);
-  renderExpertLenses(result, strengthKey, growthKey, leverKey, leverTies.length);
-  renderDomainExplanations(result, growthKey, leverKey);
-  renderBridge(result, growthKey, leverKey);
-  renderFocusOptions(result, growthKey);
-  initializeReflection(result);
+  renderExpertLenses(result, strongestLoopKey, primaryLoopKey);
+  renderDomainExplanations(result, primaryLoop.flourish, primaryLoop.awareness);
+  renderBridge(result, primaryLoopKey);
+  renderFocusOptions(result, primaryLoopKey);
+  initializeReflection(result, primaryLoopKey);
 }
 
-function initializeReflection(result) {
+function initializeReflection(result, defaultLoopKey) {
   const saved = getLetterForResult(result.id);
+  const loopKey = saved?.loopKey && INTEGRATED_LOOPS[saved.loopKey] ? saved.loopKey : defaultLoopKey;
   state.reflection = {
     step: 0,
-    answers: saved?.answers?.length === REFLECTION_STEPS.length ? [...saved.answers] : Array(REFLECTION_STEPS.length).fill(""),
+    answers: saved?.answers?.length === 8 ? [...saved.answers] : Array(8).fill(""),
+    steps: buildReflectionSteps(loopKey),
+    loopKey,
     letter: saved?.letter || "",
     mode: saved ? "complete" : "intro",
     savedAt: saved?.savedAt || null
   };
+  renderReflectionFocus();
   renderReflection();
+}
+
+function renderReflectionFocus() {
+  const loop = INTEGRATED_LOOPS[state.reflection.loopKey];
+  $("#reflection-loop-title").textContent = loop.label;
+  $("#reflection-loop-copy").textContent = `${loop.scene}에 ${loop.notice}을 확인하고, ${loop.action}로 이어 가는 기록입니다.`;
 }
 
 function renderReflection() {
@@ -582,16 +753,16 @@ function formatKoreanDate(value) {
 
 function renderReflectionStep() {
   const index = state.reflection.step;
-  const step = REFLECTION_STEPS[index];
-  $("#reflection-step").textContent = `${String(index + 1).padStart(2, "0")} / ${String(REFLECTION_STEPS.length).padStart(2, "0")}`;
-  $("#reflection-progress-bar").style.width = `${((index + 1) / REFLECTION_STEPS.length) * 100}%`;
+  const step = state.reflection.steps[index];
+  $("#reflection-step").textContent = `${String(index + 1).padStart(2, "0")} / ${String(state.reflection.steps.length).padStart(2, "0")}`;
+  $("#reflection-progress-bar").style.width = `${((index + 1) / state.reflection.steps.length) * 100}%`;
   $("#reflection-phase").textContent = step.phase;
   $("#reflection-stem").textContent = step.stem;
   $("#reflection-guide-copy").textContent = step.guide;
   $("#reflection-answer").value = state.reflection.answers[index] || "";
   $("#reflection-examples").innerHTML = step.examples.map((example) => `<li>“${example}”</li>`).join("");
   $("#reflection-prev").disabled = index === 0;
-  $("#reflection-next span:first-child").textContent = index === REFLECTION_STEPS.length - 1 ? "편지 만들기" : "다음 문장";
+  $("#reflection-next span:first-child").textContent = index === state.reflection.steps.length - 1 ? "편지 만들기" : "다음 문장";
   updateReflectionAnswerStatus();
 }
 
@@ -628,7 +799,7 @@ function nextReflection() {
     return;
   }
   state.reflection.answers[state.reflection.step] = answer;
-  if (state.reflection.step < REFLECTION_STEPS.length - 1) {
+  if (state.reflection.step < state.reflection.steps.length - 1) {
     state.reflection.step += 1;
     renderReflectionStep();
     $("#reflection-answer").focus();
@@ -644,6 +815,9 @@ function nextReflection() {
 function buildLetter() {
   const answers = state.reflection.answers;
   const result = state.result;
+  const loop = INTEGRATED_LOOPS[state.reflection.loopKey];
+  const life = DOMAINS[loop.flourish].name;
+  const awareness = DOMAINS[loop.awareness].name;
   const recipient = result?.name ? `${result.name}에게,` : "지금의 나에게,";
   const stateName = STATE_DATA[result?.stateKey]?.name || "성장 조건을 살피는 중";
   const writtenDate = new Intl.DateTimeFormat("ko-KR", { dateStyle: "long", timeZone: "Asia/Seoul" }).format(new Date());
@@ -651,11 +825,12 @@ function buildLetter() {
 
 오늘 검사를 마치고, 지금의 나를 서두르지 않고 바라본다.
 오늘의 성장 지도에 붙은 이름은 “${stateName}”. 점수보다 내가 살아온 실제 장면을 기억하려 한다.
+내가 지금 함께 연결해 볼 것은 “${loop.label}”. 내 삶의 ${life} 영역을 ${awareness}의 손잡이로 다뤄 보려 한다.
 
-내가 조금 편안해지는 순간
+내 ${life} 영역이 조금 살아나는 순간
 ${answers[0]}
 
-내 몸이 먼저 긴장하는 순간
+그 영역이 흐려질 때 몸과 감정이 보내는 신호
 ${answers[1]}
 
 그때 가장 먼저 떠오르는 말
@@ -667,7 +842,7 @@ ${answers[3]}
 이제는 안다. 그때 내게 정말 필요했던 것은
 ${answers[4]}
 
-남의 기대를 잠시 내려놓은 내 마음
+${awareness}의 관점으로 다시 보니 놓치고 있던 것
 ${answers[5]}
 
 비슷한 장면이 다시 오면 가장 먼저
@@ -684,7 +859,7 @@ ${writtenDate}의 내가.`;
 function editReflection() {
   state.reflection.letter = $("#self-letter").value.trim() || state.reflection.letter;
   state.reflection.mode = "writing";
-  state.reflection.step = REFLECTION_STEPS.length - 1;
+  state.reflection.step = state.reflection.steps.length - 1;
   renderReflection();
   scrollToReflection();
 }
@@ -707,6 +882,7 @@ function saveLetter() {
     resultId: state.result.id,
     resultCreatedAt: state.result.createdAt,
     savedAt: state.reflection.savedAt,
+    loopKey: state.reflection.loopKey,
     answers: [...state.reflection.answers],
     letter
   });
@@ -761,26 +937,45 @@ function renderLegend(result) {
     </div>`).join("");
 }
 
-function renderBridge(result, growthKey, leverKey) {
-  const gap = Math.abs(result.flourish - result.awareness);
-  const gapCopy = gap < .6 ? "두 축의 간격이 크지 않습니다. 현재의 알아차림을 실제 생활의 반복 가능한 조건으로 만드는 데 초점을 둡니다." : result.flourish > result.awareness ? "삶은 비교적 잘 굴러가지만 내면의 신호를 읽는 속도가 뒤따르지 못할 수 있습니다. 멈춤과 명명이 현재의 흐름을 보호합니다." : "자신을 읽는 힘에 비해 삶의 체감이 아직 따라오지 않을 수 있습니다. 분석을 줄이고 완료 가능한 행동 하나로 옮기는 것이 중요합니다.";
-  $("#bridge-copy").textContent = gapCopy;
-  const questions = [DOMAINS[growthKey].questions[0], DOMAINS[leverKey].questions[0], DOMAINS[growthKey].questions[1], DOMAINS[leverKey].questions[1]];
-  $("#coaching-questions").innerHTML = questions.map((question, i) => `<div class="coaching-question"><span>Q${i + 1}</span><p>${question}</p></div>`).join("");
+function renderBridge(result, loopKey) {
+  const loop = INTEGRATED_LOOPS[loopKey];
+  $("#bridge-copy").textContent = `${loop.label} 연결을 점수가 아니라 자신의 실제 장면으로 확인하는 질문입니다. 답이 추상적이면 최근 일주일의 한 순간으로 더 작게 좁혀 보세요.`;
+  $("#coaching-questions").innerHTML = loop.questions.map((question, i) => `<div class="coaching-question"><span>Q${i + 1}</span><p>${question}</p></div>`).join("");
 }
 
 function renderFocusOptions(result, initialKey) {
   const select = $("#focus-select");
-  select.innerHTML = ["P", "E", "R", "M", "A"].map((key) => `<option value="${key}" ${key === initialKey ? "selected" : ""}>${DOMAINS[key].name} · ${result.domainScores[key].toFixed(1)}</option>`).join("");
-  select.onchange = () => renderExperiment(select.value);
+  select.innerHTML = Object.keys(INTEGRATED_LOOPS).map((key) => `<option value="${key}" ${key === initialKey ? "selected" : ""}>${INTEGRATED_LOOPS[key].label} · ${loopScore(result, key).toFixed(1)}</option>`).join("");
+  select.onchange = () => selectIntegratedLoop(select.value, false);
   renderExperiment(initialKey);
 }
 
 function renderExperiment(key) {
-  const domain = DOMAINS[key];
-  $("#experiment-title").textContent = domain.experiment[0];
-  $("#experiment-action").textContent = domain.experiment[1];
-  $("#experiment-question").textContent = domain.observe;
+  const loop = INTEGRATED_LOOPS[key];
+  $("#experiment-title").textContent = loop.experiment.title;
+  $("#experiment-action").textContent = loop.experiment.action;
+  $("#experiment-notice").textContent = loop.experiment.notice;
+  $("#experiment-choice").textContent = loop.experiment.choice;
+  $("#experiment-question").textContent = loop.experiment.observe;
+}
+
+function selectIntegratedLoop(key, shouldScroll = true) {
+  if (!INTEGRATED_LOOPS[key] || !state.result) return;
+  state.result.selectedLoopKey = key;
+  $("#focus-select").value = key;
+  renderExperiment(key);
+  renderBridge(state.result, key);
+  $$(".integrated-loop-card").forEach((card) => card.classList.toggle("selected", card.querySelector("[data-loop-key]")?.dataset.loopKey === key));
+  if (state.reflection.mode === "intro" && !state.reflection.answers.some((answer) => answer.trim())) {
+    state.reflection.loopKey = key;
+    state.reflection.steps = buildReflectionSteps(key);
+    renderReflectionFocus();
+  }
+  if (shouldScroll) $(".experiment-section").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function applyPrimaryLoop() {
+  selectIntegratedLoop(state.result?.primaryLoopKey);
 }
 
 function openMethod() { $("#method-dialog").showModal(); }
@@ -807,9 +1002,9 @@ function openHistory() {
 function copySummary() {
   if (!state.result) return;
   const r = state.result;
-  const flourishKeys = sortedKeys(r, "flourish");
-  const awarenessKeys = sortedKeys(r, "awareness");
-  const summary = `[플로리싱 × 알아차림 성장지도]\n${r.name ? `${r.name} · ` : ""}${contextLabel(r.context)}\n현재 상태: ${STATE_DATA[r.stateKey].name}\n삶의 플로리싱 ${r.flourish.toFixed(1)} / 알아차림 역량 ${r.awareness.toFixed(1)}\n잘 작동하는 힘: ${DOMAINS[flourishKeys[0]].name}\n먼저 볼 장면: ${DOMAINS[flourishKeys.at(-1)].name}\n연결할 알아차림: ${DOMAINS[awarenessKeys.at(-1)].name}\n\n이 결과는 진단이 아닌 성장 대화용 자기점검입니다.`;
+  const loopKey = r.selectedLoopKey || r.primaryLoopKey;
+  const selectedLoop = INTEGRATED_LOOPS[loopKey];
+  const summary = `[플로리싱 × 알아차림 성장지도]\n${r.name ? `${r.name} · ` : ""}${contextLabel(r.context)}\n현재 상태: ${STATE_DATA[r.stateKey].name}\n삶의 플로리싱 ${r.flourish.toFixed(1)} / 알아차림 역량 ${r.awareness.toFixed(1)}\n현재 선택한 통합 성장 루프: ${selectedLoop.label} · ${loopScore(r, loopKey).toFixed(1)}\n실제 장면: ${selectedLoop.scene}\n알아차릴 것: ${selectedLoop.notice}\n작은 선택: ${selectedLoop.action}\n\n이 결과는 진단이 아닌 성장 대화용 자기점검입니다.`;
   navigator.clipboard.writeText(summary).then(() => showToast("결과 요약을 복사했습니다")).catch(() => showToast("복사하지 못했습니다"));
 }
 
@@ -825,8 +1020,13 @@ function goHome() { closeDialogs(); showView("intro-view"); }
 function restart() { state.page = 0; state.answers = {}; renderPage(); showView("test-view"); }
 
 document.addEventListener("click", (event) => {
-  const action = event.target.closest("[data-action]")?.dataset.action;
+  const trigger = event.target.closest("[data-action]");
+  const action = trigger?.dataset.action;
   if (!action) return;
+  if (action === "choose-loop") {
+    selectIntegratedLoop(trigger.dataset.loopKey);
+    return;
+  }
   ({
     home: goHome,
     start: startTest,
@@ -845,7 +1045,8 @@ document.addEventListener("click", (event) => {
     "edit-letter": editLetter,
     "save-letter": saveLetter,
     "copy-letter": copyLetter,
-    "print-letter": printLetter
+    "print-letter": printLetter,
+    "apply-primary-loop": applyPrimaryLoop
   })[action]?.();
 });
 
