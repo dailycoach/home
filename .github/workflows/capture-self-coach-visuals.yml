@@ -1,4 +1,4 @@
-name: Capture SELF INC. Editorial Visual Audit
+name: Capture SELF INC. v9.8.1 Detail Switch Audit
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: self-editorial-visual-audit-v980
+  group: self-detail-switch-audit-v981
   cancel-in-progress: true
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
           cat /tmp/self-http.log
           exit 1
 
-      - name: Capture result and coach reports
+      - name: Capture result and detailed coach switch
         id: visual_audit
         continue-on-error: true
         run: node scripts/capture-self-editorial-audit.mjs
@@ -57,18 +57,18 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: self-editorial-visual-audit-v980
+          name: self-detail-switch-audit-v981
           path: artifacts/self-coach-visual-audit
           retention-days: 7
 
       - name: Save visual audit status
         if: always()
         run: |
-          test -f tests/self/visual-audit-status-v980.json
+          test -f tests/self/visual-audit-status-v981.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tests/self/visual-audit-status-v980.json
-          git commit -m "chore: record SELF INC. v9.8 visual audit [skip ci]" || exit 0
+          git add tests/self/visual-audit-status-v981.json
+          git commit -m "chore: record SELF INC. v9.8.1 switch audit [skip ci]" || exit 0
           git push
 
       - name: Verify visual audit
@@ -77,10 +77,10 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          path = Path('tests/self/visual-audit-status-v980.json')
+          path = Path('tests/self/visual-audit-status-v981.json')
           if not path.exists():
               raise SystemExit('visual audit status file missing')
           data = json.loads(path.read_text(encoding='utf-8'))
           if not data.get('passed'):
-              raise SystemExit('visual audit failed; inspect artifact and status JSON')
+              raise SystemExit('detail switch audit failed; inspect artifact and status JSON')
           PY
