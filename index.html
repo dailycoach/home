@@ -9,15 +9,28 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260718-maeum', {cache:'no-store'})
-      .then(r => r.text())
+    fetch('/index-source-disc.html?v=20260719-operator', {cache:'no-store'})
+      .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
         const links = `${anchor}\n            <a href="/tests/flourish-awareness/" data-route="flourishAwareness">플로리싱 × 알아차림 <small>NEW</small></a>\n            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>\n            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>`;
         html = html.replaceAll(anchor, links);
         html = html.replace("      kgm210: '/tests/kgm210/',\n      flourishAwareness: '/tests/flourish-awareness/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
+
+        const maeumFooterLink = '<a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재</a>';
+        const operatorFooterLink = `${maeumFooterLink}\n          <a href="/operator/" aria-label="마음서재 운영자 전용 관문">운영자</a>`;
+        if (!html.includes('href="/operator/"')) html = html.replace(maeumFooterLink, operatorFooterLink);
+
         document.open(); document.write(html); document.close();
+      })
+      .catch(() => {
+        document.body.innerHTML = '<div class="loading"><p>페이지를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.</p></div>';
       });
+
+    function textOrThrow(response) {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.text();
+    }
   </script>
 </body>
 </html>
