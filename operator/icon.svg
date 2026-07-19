@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">마음서재 운영실</title>
+  <desc id="desc">책장과 열린 책을 단순화한 마음서재 운영자 아이콘</desc>
+  <rect width="512" height="512" rx="112" fill="#2f2119"/>
+  <rect x="88" y="90" width="336" height="332" rx="34" fill="#f7efe1"/>
+  <path d="M130 158h110v206H130z" fill="#8c2335"/>
+  <path d="M272 158h110v206H272z" fill="#c9ad78"/>
+  <path d="M256 163v202" stroke="#2f2119" stroke-width="14" stroke-linecap="round"/>
+  <path d="M154 198h62M154 232h62M296 198h62M296 232h62" stroke="#f7efe1" stroke-width="12" stroke-linecap="round" opacity=".9"/>
+  <path d="M143 384h226" stroke="#2f2119" stroke-width="16" stroke-linecap="round"/>
+</svg>
