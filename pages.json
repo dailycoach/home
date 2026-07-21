@@ -154,6 +154,13 @@
     "source": "https://github.com/dailycoach/hero"
   },
   {
+    "title": "내 직업을 맞춰봐!",
+    "description": "중학생이 5 대 5 팀 대전으로 80가지 직업의 특징을 질문하고 추리하는 진로 탐색 웹게임",
+    "category": "activities",
+    "url": "https://career-deduction-game.dailycoaching.chatgpt.site",
+    "source": "OpenAI Sites"
+  },
+  {
     "title": "광야 서바이벌 활동도구",
     "description": "광야 서바이벌 활동을 위한 웹카드형 진행 도구",
     "category": "activities",
