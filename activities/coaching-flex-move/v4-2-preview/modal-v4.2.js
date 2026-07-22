@@ -17,9 +17,14 @@ function init(){
  document.body.appendChild(wrap);
  const actions=qs('.cfm42-actions',wrap);
  const close=document.createElement('button');
- close.type='button';close.id='cfm42Close';close.className='cfm42-modal-close';close.textContent='닫기 ×';
+ close.type='button';close.id='cfm42Close';close.className='cfm42-modal-close';close.textContent='닫기';
  close.setAttribute('aria-label','오프닝 닫기');
  actions?.appendChild(close);
+ const stage=qs('.cfm42-stage',wrap);
+ const skipText=document.createElement('button');
+ skipText.type='button';skipText.className='cfm42-skip-text';skipText.textContent='건너뛰기';
+ skipText.setAttribute('aria-label','오프닝을 건너뛰고 유연성 선택 화면 보기');
+ stage?.appendChild(skipText);
  const hero=qs('#intro .integrated-hero');
  const reopen=document.createElement('button');
  reopen.type='button';reopen.id='cfm42Reopen';reopen.className='cfm42-reopen';reopen.textContent='120노드 사고망 다시 보기';reopen.hidden=true;
@@ -29,13 +34,14 @@ function init(){
  function openModal(replay=true){
   wrap.classList.remove('cfm42-modal-hidden');reopen.hidden=true;lock();
   if(replay)qs('#cfm42Replay',wrap)?.click();
-  setTimeout(()=>{(qs('#cfm42Skip',wrap)||close||wrap).focus({preventScroll:true})},40);
+  setTimeout(()=>close.focus({preventScroll:true}),40);
  }
  function closeModal(focus=true){
   wrap.classList.add('cfm42-modal-hidden');unlock();reopen.hidden=false;
   if(focus)setTimeout(()=>reopen.focus({preventScroll:true}),30);
  }
  close.addEventListener('click',()=>closeModal(true));
+ skipText.addEventListener('click',()=>qs('#cfm42Skip',wrap)?.click());
  reopen.addEventListener('click',()=>openModal(true));
  qs('#cfm42Self',wrap)?.addEventListener('click',()=>closeModal(false),true);
  qs('#cfm42Live',wrap)?.addEventListener('click',()=>closeModal(false),true);
