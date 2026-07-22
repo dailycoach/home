@@ -29,7 +29,7 @@ html,body{margin:0;min-height:100%;background:#090a0b;color:#f7f4ec;font-family:
  const bin=atob(chunks.join(''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
  let html=await new Response(stream).text();
- const asset='/activities/coaching-flex-move/v4-2-preview/';
+ const asset='/activities/coaching-flex-move/v4-2/';
  html=html.replace('</head>',`<link rel="canonical" href="https://daily-coach-ing.com/activities/coaching-flex-move/"><link rel="stylesheet" href="${asset}intro-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}modal-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}modal-v4.2-fix.css?v=${version}"><link rel="stylesheet" href="${asset}impact-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}entry-guide-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}capture-rhythm-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}emotion-return-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}live-return-v4.2.css?v=${version}"></head>`);
  html=html.replace('</body>',`<script src="${asset}intro-v4.2.js?v=${version}"><\/script><script src="${asset}modal-v4.2.js?v=${version}"><\/script><script src="${asset}entry-guide-v4.2.js?v=${version}"><\/script><script src="${asset}capture-rhythm-v4.2.js?v=${version}"><\/script><script src="${asset}emotion-return-v4.2.js?v=${version}"><\/script><script src="${asset}live-return-v4.2.js?v=${version}"><\/script></body>`);
  document.open();document.write(html);document.close();
