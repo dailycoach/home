@@ -32,6 +32,9 @@ function build(mode,target){
  if(target.anchor)target.anchor.insertAdjacentElement('afterend',el);else target.host.prepend(el);
  const count=$('.cfm-capture-count',el),copy=$('.cfm-capture-copy b',el),status=$('.cfm-capture-status',el),input=$('textarea',el),toggle=$('.cfm-capture-toggle',el);
  const record={id:`${mode}-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,mode,context:contextFor(mode),createdAt:new Date().toISOString(),text:''};
+ el.dataset.captureId=record.id;
+ try{sessionStorage.setItem(`cfm-v4-active-capture-${mode}`,record.id)}catch{}
+ window.dispatchEvent(new CustomEvent('cfm:capture-created',{detail:{mode,id:record.id,context:record.context}}));
  let saveTimer=0;
  const setCount=(value,label)=>{count.textContent=value;copy.textContent=label};
  setTimeout(()=>setCount('2','첫 번째 표현을 고르지 말고, 먼저 나타난 것을 봅니다.'),900);
