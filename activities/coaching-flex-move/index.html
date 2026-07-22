@@ -17,7 +17,7 @@
 <script>
 (async()=>{try{
  if(!('DecompressionStream' in window)) throw new Error('unsupported');
- const names=['./cfm-v3.1.part1.txt?v=20260722','./cfm-v3.1.part2.txt?v=20260722','./cfm-v3.1.part3.txt?v=20260722','./cfm-v3.1.part4.txt?v=20260722','./cfm-v3.1.part5.txt?v=20260722'];
+ const names=['./cfm-v3.1.part1.txt?v=20260722','./cfm-v3.1.part2.txt?v=20260722','./cfm-v3.1.part3.txt?v=20260722','./cfm-v3.1.part4a.txt?v=20260722','./cfm-v3.1.part4b.txt?v=20260722','./cfm-v3.1.part4c.txt?v=20260722','./cfm-v3.1.part4d.txt?v=20260722','./cfm-v3.1.part5.txt?v=20260722'];
  const chunks=await Promise.all(names.map(async name=>{const r=await fetch(name,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}));
  const bin=atob(chunks.join(''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
