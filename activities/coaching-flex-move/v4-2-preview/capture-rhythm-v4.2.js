@@ -45,6 +45,8 @@ function build(mode,target){
 }
 function tryInject(){pending=false;for(const mode of ['self','live']){if(!armed[mode])continue;const target=targetFor(mode);if(!target)continue;if(target.host.querySelector(`.cfm-capture-rhythm[data-mode="${mode}"]`)){armed[mode]=false;continue}build(mode,target);armed[mode]=false;shown[mode]++}}
 function schedule(){if(pending)return;pending=true;requestAnimationFrame(tryInject)}
-window.addEventListener('cfm:entry-proceed',e=>{const mode=e.detail?.mode;if(mode!=='self'&&mode!=='live')return;armed[mode]=true;schedule();setTimeout(schedule,50);setTimeout(schedule,180)});
+function arm(mode){if(mode!=='self'&&mode!=='live')return;armed[mode]=true;schedule();setTimeout(schedule,50);setTimeout(schedule,180)}
+document.addEventListener('click',e=>{if(!e.target.closest?.('#cfmEntryStart'))return;arm($('#cfmEntryGuide')?.dataset.mode)},true);
+window.addEventListener('cfm:entry-proceed',e=>arm(e.detail?.mode));
 new MutationObserver(schedule).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
 })();
