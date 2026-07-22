@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080808">
 <title>COACHING FLEX MOVE — 셀프코칭 × 현장코칭</title>
-<meta name="description" content="내 생각과 감정의 자동성을 풀어보는 SELF FLEX 셀프코칭과 고객 반응에 맞춰 내적 규칙과 개입을 함께 수정하는 LIVE FLEX 현장코칭을 통합한 코칭 시뮬레이션">
+<meta name="description" content="복잡한 사고망에서 첫 반응을 포착하고, SELF FLEX와 LIVE FLEX를 통과한 뒤 감정과 코치 반응의 변화를 알아차리는 통합 코칭 훈련">
 <link rel="canonical" href="https://daily-coach-ing.com/activities/coaching-flex-move/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="COACHING FLEX MOVE — 셀프코칭 × 현장코칭">
-<meta property="og:description" content="나를 유연하게, 대화를 유연하게. SELF FLEX와 LIVE FLEX를 하나의 이중 루프로 연습합니다.">
+<meta property="og:description" content="오프닝 사고망, 3초 첫 반응 포착, SELF·LIVE 변화 체크를 하나의 유연성 훈련으로 연결합니다.">
 <meta property="og:url" content="https://daily-coach-ing.com/activities/coaching-flex-move/">
 <style>
 html,body{margin:0;min-height:100%;background:#090a0b;color:#f7f4ec;font-family:system-ui,sans-serif}
@@ -19,18 +19,22 @@ html,body{margin:0;min-height:100%;background:#090a0b;color:#f7f4ec;font-family:
 </style>
 </head>
 <body>
-<div class="load"><div><b>COACHING FLEX MOVE</b><p id="status">SELF FLEX와 LIVE FLEX를 불러오는 중입니다.</p></div></div>
+<div class="load"><div><b>COACHING FLEX MOVE</b><p id="status">오프닝과 SELF·LIVE 유연성 훈련을 불러오는 중입니다.</p></div></div>
 <script>
 (async()=>{try{
- if(!('DecompressionStream' in window)) throw new Error('unsupported');
- const names=['./cfm-v4.part1.txt?v=20260722-v4-integrated','./cfm-v4.part2.txt?v=20260722-v4-integrated','./cfm-v4.part3.txt?v=20260722-v4-integrated','./cfm-v4.part4.txt?v=20260722-v4-integrated','./cfm-v4.part5.txt?v=20260722-v4-integrated','./cfm-v4.part6.txt?v=20260722-v4-integrated','./cfm-v4.part7.txt?v=20260722-v4-integrated'];
- const chunks=await Promise.all(names.map(async name=>{const r=await fetch(name,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}));
+ if(!('DecompressionStream' in window))throw new Error('unsupported');
+ const version='20260723-public1';
+ const names=['./cfm-v4.part1.txt','./cfm-v4.part2.txt','./cfm-v4.part3.txt','./cfm-v4.part4.txt','./cfm-v4.part5.txt','./cfm-v4.part6.txt','./cfm-v4.part7.txt'];
+ const chunks=await Promise.all(names.map(async name=>{const r=await fetch(name+'?v='+version,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}));
  const bin=atob(chunks.join(''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
- const html=await new Response(stream).text();
+ let html=await new Response(stream).text();
+ const asset='/activities/coaching-flex-move/v4-2-preview/';
+ html=html.replace('</head>',`<link rel="canonical" href="https://daily-coach-ing.com/activities/coaching-flex-move/"><link rel="stylesheet" href="${asset}intro-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}modal-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}modal-v4.2-fix.css?v=${version}"><link rel="stylesheet" href="${asset}impact-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}entry-guide-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}capture-rhythm-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}emotion-return-v4.2.css?v=${version}"><link rel="stylesheet" href="${asset}live-return-v4.2.css?v=${version}"></head>`);
+ html=html.replace('</body>',`<script src="${asset}intro-v4.2.js?v=${version}"><\/script><script src="${asset}modal-v4.2.js?v=${version}"><\/script><script src="${asset}entry-guide-v4.2.js?v=${version}"><\/script><script src="${asset}capture-rhythm-v4.2.js?v=${version}"><\/script><script src="${asset}emotion-return-v4.2.js?v=${version}"><\/script><script src="${asset}live-return-v4.2.js?v=${version}"><\/script></body>`);
  document.open();document.write(html);document.close();
 }catch(e){
- document.getElementById('status').innerHTML='통합형 페이지를 불러오지 못했습니다.<br>브라우저를 최신 버전으로 업데이트한 뒤 다시 시도해 주세요.<br><a href="./legacy-v3.html">기존 전문가 사고 학습 버전 열기</a><br><a href="/">데일리코칭 홈으로 돌아가기</a>';
+ document.getElementById('status').innerHTML='통합형 페이지를 불러오지 못했습니다.<br>브라우저를 최신 버전으로 업데이트한 뒤 다시 시도해 주세요.<br><a href="./?intro=off">오프닝 없이 다시 시도</a><br><a href="./legacy-v3.html">기존 전문가 사고 학습 버전 열기</a><br><a href="/">데일리코칭 홈으로 돌아가기</a>';
  console.error(e);
 }})();
 </script>
