@@ -1,0 +1,81 @@
+/* v4.2 mobile impact pass */
+.cfm42-wrap.cfm42-modal-mode{display:grid!important;place-items:center!important;padding:clamp(10px,2.2vw,26px)!important;background:rgba(2,3,4,.82)!important;-webkit-backdrop-filter:blur(12px) saturate(.72)!important;backdrop-filter:blur(12px) saturate(.72)!important}
+.cfm42-modal-mode .cfm42-stage{position:relative!important;width:min(1120px,calc(100vw - clamp(20px,4vw,52px)))!important;height:min(840px,calc(100dvh - clamp(20px,4vw,52px)))!important;min-height:0!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:clamp(22px,3vw,34px)!important;overflow:hidden!important;background:#050708!important;box-shadow:0 42px 150px rgba(0,0,0,.74),0 0 0 1px rgba(220,255,69,.035) inset!important}
+.cfm42-modal-mode .cfm42-top{left:50%!important;right:auto!important;top:clamp(10px,2vw,22px)!important;width:min(1060px,calc(100vw - clamp(42px,8vw,92px)))!important;transform:translateX(-50%)!important;padding:0!important;border:0!important;background:none!important;pointer-events:none!important}
+.cfm42-modal-mode .cfm42-top>span{opacity:.72!important;font-size:9px!important}
+.cfm42-modal-mode .cfm42-actions{margin-left:auto!important;pointer-events:auto!important}
+.cfm42-modal-mode #cfm42Skip,.cfm42-modal-mode #cfm42Replay{display:none!important}
+.cfm42-modal-mode .cfm42-modal-close{width:40px!important;height:40px!important;min-height:40px!important;padding:0!important;border-radius:50%!important;font-size:0!important;background:rgba(6,8,9,.82)!important;border-color:rgba(255,255,255,.22)!important;color:#fff!important}
+.cfm42-modal-mode .cfm42-modal-close:after{content:'×';font-size:22px;line-height:1}
+.cfm42-modal-mode .cfm42-network{inset:0!important;filter:saturate(1.18) contrast(1.12)!important}
+.cfm42-modal-mode .cfm42-grid{opacity:.28!important}
+.cfm42-modal-mode .cfm42-label.major{background:rgba(4,6,7,.64)!important;border-color:rgba(255,255,255,.2)!important;box-shadow:0 7px 22px rgba(0,0,0,.32)!important}
+.cfm42-modal-mode .cfm42-meter{right:18px!important;bottom:18px!important;padding:7px 9px!important;transform:scale(.78)!important;transform-origin:right bottom!important;opacity:.7!important}
+.cfm42-modal-mode.rule-phase .cfm42-meter,.cfm42-modal-mode.complete .cfm42-meter{opacity:0!important}
+.cfm42-modal-mode .cfm42-one{padding:78px clamp(20px,4vw,52px) 26px!important}
+.cfm42-modal-mode .cfm42-copy{max-width:680px!important;padding:17px 20px 16px!important;background:linear-gradient(90deg,rgba(4,6,7,.9),rgba(4,6,7,.38) 74%,transparent)!important}
+.cfm42-modal-mode .cfm42-copy h2{font-size:clamp(42px,6vw,78px)!important}
+.cfm42-modal-mode .cfm42-two{padding:76px 20px 28px!important}
+.cfm42-modal-mode .cfm42-orbit{width:min(82vw,660px)!important;height:min(54dvh,430px)!important}
+.cfm42-modal-mode .cfm42-rulebox{width:min(76vw,620px)!important;max-height:48dvh!important;padding:clamp(24px,4vw,34px) clamp(22px,4vw,34px)!important;border-radius:26px!important;background:linear-gradient(145deg,rgba(220,255,69,.075),rgba(8,11,9,.94) 58%)!important}
+.cfm42-modal-mode .cfm42-rulebox strong{display:flex!important;justify-content:center!important;align-items:center!important;gap:.22em!important;max-width:100%!important;font-size:clamp(42px,6.2vw,66px)!important;line-height:1.02!important;letter-spacing:-.065em!important;word-break:keep-all!important;overflow-wrap:normal!important;white-space:normal!important;text-wrap:balance!important}
+.cfm42-modal-mode .cfm42-rulebox strong span{white-space:nowrap!important}
+.cfm42-modal-mode .cfm42-rulebox p{max-width:470px!important;margin-inline:auto!important}
+.cfm42-modal-mode.rule-phase .cfm42-network{opacity:.26!important;filter:saturate(1.25) contrast(1.1)!important}
+.cfm42-modal-mode.complete .cfm42-network{opacity:.08!important}
+.cfm42-modal-mode .cfm42-three{padding:58px 18px 16px!important}
+.cfm42-modal-mode .cfm42-final{width:min(100%,900px)!important;min-height:calc(min(840px,100dvh) - 86px)!important;gap:8px!important}
+.cfm42-modal-mode .cfm42-final-title h2{font-size:clamp(30px,4.2vw,48px)!important}
+.cfm42-modal-mode .cfm42-final-title p{display:none!important}
+.cfm42-modal-mode .cfm42-core article{padding:10px!important}
+.cfm42-modal-mode .cfm42-center{padding:11px!important}
+.cfm42-modal-mode .cfm42-move{padding:6px!important}
+.cfm42-modal-mode .cfm42-route{padding:10px!important}
+.cfm42-modal-mode .cfm42-result{padding:8px!important}
+.cfm42-modal-mode .cfm42-micro{display:none!important}
+.cfm42-modal-mode .cfm42-choices{margin-top:3px!important}
+.cfm42-modal-mode .cfm42-choices button{min-height:46px!important}
+.cfm42-skip-text{position:absolute;z-index:45;right:clamp(18px,3vw,34px);bottom:clamp(16px,2.6vw,28px);border:0;background:none;color:rgba(242,242,235,.62);font-size:11px;font-weight:800;letter-spacing:.02em;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.cfm42-wrap.complete .cfm42-skip-text{display:none}
+.cfm42-wrap.play .cfm42-one{animation:cfm42OneImpact 3.35s both!important}
+.cfm42-wrap.play .cfm42-two{animation:cfm42TwoImpact 3.1s both 3.45s!important}
+.cfm42-wrap.play .cfm42-three{animation:cfm42ThreeImpact .65s both 6.75s!important}
+.cfm42-wrap.play .cfm42-network{animation:cfm42SettleImpact 1s both 6.45s!important}
+@keyframes cfm42OneImpact{0%{opacity:0;transform:translateY(20px)}12%,76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-12px)}}
+@keyframes cfm42TwoImpact{0%{opacity:0;transform:scale(.96)}16%,78%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.02)}}
+@keyframes cfm42ThreeImpact{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes cfm42SettleImpact{to{opacity:.08;filter:blur(1px);transform:scale(.975)}}
+@media(max-width:760px){
+ .cfm42-wrap.cfm42-modal-mode{padding:10px!important}
+ .cfm42-modal-mode .cfm42-stage{width:calc(100vw - 20px)!important;height:calc(100dvh - 20px)!important;border-radius:24px!important}
+ .cfm42-modal-mode .cfm42-top{top:12px!important;width:calc(100vw - 46px)!important}
+ .cfm42-modal-mode .cfm42-top>span{font-size:7px!important;max-width:110px!important}
+ .cfm42-modal-mode .cfm42-modal-close{width:36px!important;height:36px!important;min-height:36px!important}
+ .cfm42-modal-mode .cfm42-one{padding:64px 12px 20px!important}
+ .cfm42-modal-mode .cfm42-copy{width:min(90%,340px)!important;padding:13px 13px 12px!important}
+ .cfm42-modal-mode .cfm42-copy h2{font-size:clamp(33px,10.5vw,44px)!important}
+ .cfm42-modal-mode .cfm42-copy p{font-size:10px!important}
+ .cfm42-modal-mode .cfm42-label.major{font-size:8px!important;padding:4px 6px!important}
+ .cfm42-modal-mode .cfm42-meter{right:8px!important;bottom:8px!important;transform:scale(.65)!important}
+ .cfm42-modal-mode .cfm42-two{padding:58px 10px 22px!important}
+ .cfm42-modal-mode .cfm42-orbit{width:100%!important;height:56dvh!important}
+ .cfm42-modal-mode .cfm42-rulebox{width:min(84vw,430px)!important;max-height:44dvh!important;padding:24px 20px!important;border-radius:24px!important}
+ .cfm42-modal-mode .cfm42-rulebox strong{display:grid!important;gap:2px!important;font-size:clamp(38px,10.8vw,48px)!important;line-height:1.04!important}
+ .cfm42-modal-mode .cfm42-rulebox p{font-size:12px!important;line-height:1.5!important}
+ .cfm42-modal-mode .cfm42-three{padding:50px 10px 12px!important}
+ .cfm42-modal-mode .cfm42-final{min-height:calc(100dvh - 82px)!important;padding-top:0!important;gap:6px!important}
+ .cfm42-modal-mode .cfm42-final-title h2{font-size:25px!important}
+ .cfm42-modal-mode .cfm42-core article{padding:8px 3px!important}
+ .cfm42-modal-mode .cfm42-core strong{font-size:10px!important}
+ .cfm42-modal-mode .cfm42-center{padding:8px!important}
+ .cfm42-modal-mode .cfm42-center strong{font-size:18px!important}
+ .cfm42-modal-mode .cfm42-move{grid-template-columns:repeat(3,1fr)!important;padding:5px!important}
+ .cfm42-modal-mode .cfm42-move span{font-size:7px!important;padding:5px 2px!important}
+ .cfm42-modal-mode .cfm42-route{padding:8px!important}
+ .cfm42-modal-mode .cfm42-route strong{font-size:14px!important}
+ .cfm42-modal-mode .cfm42-result{padding:7px!important}
+ .cfm42-modal-mode .cfm42-result strong{font-size:18px!important}
+ .cfm42-modal-mode .cfm42-choices{grid-template-columns:1fr 1fr!important;gap:6px!important}
+ .cfm42-modal-mode .cfm42-choices button{font-size:10px!important;padding:8px!important;min-height:42px!important}
+ .cfm42-skip-text{right:18px;bottom:16px;font-size:10px}
+}
