@@ -9,7 +9,7 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260722-career-v2', {cache:'no-store'})
+    fetch('/index-source-disc.html?v=20260722-cfm-v4', {cache:'no-store'})
       .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
@@ -25,8 +25,8 @@
         const desktopCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐! <small>V2</small></a>`;
         const panelCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐! · 보너스 러시 <small>V2</small></a>`;
         const footerCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐</a>`;
-        const flexMoveLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE <small>NEW</small></a>';
-        const flexMovePanelLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE · 전문가 사고 학습 <small>NEW</small></a>';
+        const flexMoveLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE <small>V4</small></a>';
+        const flexMovePanelLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE · 셀프코칭 × 현장코칭 <small>V4</small></a>';
         const flexMoveFooterLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE</a>';
 
         if (!html.includes(`${desktopCareerLink}\n            ${desktopActivityAnchor}`)) {
