@@ -161,6 +161,13 @@
     "source": "OpenAI Sites"
   },
   {
+    "title": "COACHING FLEX MOVE",
+    "description": "전문가가 고객의 언어·감정·침묵을 읽고, 고객 반응에 맞춰 가장 작은 개입을 수정하는 과정을 단계적으로 학습하는 코칭 시뮬레이션",
+    "category": "activities",
+    "url": "/activities/coaching-flex-move/",
+    "source": "local import"
+  },
+  {
     "title": "광야 서바이벌 활동도구",
     "description": "광야 서바이벌 활동을 위한 웹카드형 진행 도구",
     "category": "activities",
