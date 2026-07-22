@@ -9,7 +9,7 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260722-coaching-flex-move', {cache:'no-store'})
+    fetch('/index-source-disc.html?v=20260722-career-v2', {cache:'no-store'})
       .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
@@ -17,14 +17,14 @@
         html = html.replaceAll(anchor, links);
         html = html.replace("      kgm210: '/tests/kgm210/',\n      flourishAwareness: '/tests/flourish-awareness/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
 
-        const careerGameUrl = 'https://career-deduction-game.dailycoaching.chatgpt.site';
+        const careerGameUrl = '/activities/career-deduction-game/';
         const desktopActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>';
         const panelActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>';
         const footerActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>';
 
-        const desktopCareerLink = `<a href="${careerGameUrl}" target="_blank" rel="noopener noreferrer">내 직업을 맞춰봐! <small>NEW</small></a>`;
-        const panelCareerLink = `<a href="${careerGameUrl}" target="_blank" rel="noopener noreferrer">내 직업을 맞춰봐! <small>NEW</small></a>`;
-        const footerCareerLink = `<a href="${careerGameUrl}" target="_blank" rel="noopener noreferrer">내 직업을 맞춰봐</a>`;
+        const desktopCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐! <small>V2</small></a>`;
+        const panelCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐! · 보너스 러시 <small>V2</small></a>`;
+        const footerCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐</a>`;
         const flexMoveLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE <small>NEW</small></a>';
         const flexMovePanelLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE · 전문가 사고 학습 <small>NEW</small></a>';
         const flexMoveFooterLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE</a>';
