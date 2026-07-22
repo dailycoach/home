@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071a35">
+  <title>내 직업을 맞춰봐! v2</title>
+  <link rel="stylesheet" href="./style.css?v=20260722">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark"></span><span>내 직업을 맞춰봐!<small>CAREER DEDUCTION · V2 SPRINT</small></span></div>
+    <button class="ghost-btn" id="resetBtn" type="button">처음부터</button>
+  </header>
+
+  <main>
+    <section class="screen" id="setupScreen">
+      <div class="hero">
+        <span class="eyebrow">3–8 Players · 80 Jobs · Bonus Rush</span>
+        <h1>질문은 짧게,<br><span>추리는 빠르게.</span></h1>
+        <p class="hero-copy">참가 인원을 직접 정하고, 30초 턴과 세 번의 보너스 게이트로 템포를 끌어올린 직업 추리 게임입니다. 한 명은 AGENT, 나머지는 TEAM이 되어 서로의 직업을 먼저 밝혀냅니다.</p>
+        <div class="feature-row">
+          <div class="feature"><strong>인원 자동 조정</strong><span>3명부터 8명까지 이름과 라운드 수를 자동 구성합니다.</span></div>
+          <div class="feature"><strong>30초 스프린트</strong><span>질문·단서·추측을 한 번에 하나만 선택해 턴을 빠르게 넘깁니다.</span></div>
+          <div class="feature"><strong>보너스 게이트</strong><span>초성·키워드·OX·객관식 퀴즈로 중간 흐름을 다시 점화합니다.</span></div>
+        </div>
+      </div>
+
+      <div class="setup-grid">
+        <section class="panel light">
+          <div class="section-title"><div><h2>플레이어 설정</h2><p>고정 5명이 아니라 현장 인원에 맞춥니다.</p></div></div>
+          <div class="counter"><button type="button" id="minusPlayer" aria-label="인원 줄이기">−</button><strong id="playerCountText">5</strong><button type="button" id="plusPlayer" aria-label="인원 늘리기">＋</button></div>
+          <div class="names" id="nameInputs"></div>
+        </section>
+
+        <section class="panel light">
+          <div class="section-title"><div><h2>게임 템포</h2><p>현장 시간에 맞춰 압축할 수 있습니다.</p></div></div>
+          <div class="options">
+            <div class="field"><label for="roundMode">라운드 구성</label><select id="roundMode"><option value="all">모두 한 번씩 AGENT</option><option value="3">빠른 3라운드</option><option value="1">체험 1라운드</option></select></div>
+            <div class="field"><label>턴 제한 시간</label><div class="choice-row"><div class="choice"><input id="t20" name="timer" type="radio" value="20"><label for="t20">20초<br>초고속</label></div><div class="choice"><input id="t30" name="timer" type="radio" value="30" checked><label for="t30">30초<br>권장</label></div><div class="choice"><input id="t45" name="timer" type="radio" value="45"><label for="t45">45초<br>여유</label></div></div></div>
+            <div class="field"><label>보너스 퀴즈 빈도</label><div class="choice-row"><div class="choice"><input id="b2" name="bonus" type="radio" value="2"><label for="b2">2회<br>가볍게</label></div><div class="choice"><input id="b3" name="bonus" type="radio" value="3" checked><label for="b3">3회<br>권장</label></div><div class="choice"><input id="b4" name="bonus" type="radio" value="4"><label for="b4">4회<br>박진감</label></div></div></div>
+            <button class="primary" id="startSetup" type="button">게임 만들기 →</button>
+            <button class="secondary resume hidden" id="resumeBtn" type="button">저장된 게임 이어하기</button>
+          </div>
+        </section>
+      </div>
+      <p class="footer-note">이 도구는 직업의 서열이나 적성을 판정하지 않습니다. 직업이 하는 일·대상·장소·역량을 질문으로 탐색하는 교육용 게임입니다.</p>
+    </section>
+
+    <section class="screen hidden" id="dealScreen">
+      <div class="deal-head"><div><span class="round-badge" id="dealRoundBadge">ROUND 1</span><h1 id="dealTitle" style="margin:12px 0 0;font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.08em">비밀 카드를 확인하세요</h1></div><button class="ghost-btn" id="dealBack" type="button">설정으로</button></div>
+      <div class="deal-grid">
+        <article class="panel role-card agent"><div><span class="eyebrow">AGENT</span><h3 id="agentNameDeal">플레이어 1</h3><p>다른 사람은 화면을 보지 않도록 하고, AGENT만 자기 직업을 확인합니다.</p></div><button class="secondary" id="showAgentCard" type="button">AGENT 비밀 카드 보기</button></article>
+        <article class="panel role-card team"><div><span class="eyebrow">TEAM</span><h3 id="teamCountDeal">TEAM 4명</h3><p>AGENT가 화면을 보지 않도록 한 뒤 TEAM이 같은 직종의 카드들을 함께 확인합니다.</p></div><button class="secondary" id="showTeamCards" type="button">TEAM 카드 함께 보기</button></article>
+      </div>
+      <div class="hint-strip">둘 다 확인한 뒤 시작하세요. TEAM은 서로의 직업을 알고 시작하지만, AGENT의 직업은 모릅니다. AGENT는 자신의 직업만 알고 TEAM의 직업은 모릅니다.</div>
+      <button class="primary" id="beginRound" type="button" style="margin-top:16px" disabled>두 진영 확인 후 라운드 시작</button>
+    </section>
+
+    <section class="screen hidden" id="playScreen">
+      <div class="play-head"><div><span class="round-badge" id="playRoundBadge">ROUND 1 / 5</span><h1 style="margin:10px 0 0;font-size:clamp(2.2rem,5vw,4.5rem);letter-spacing:-.08em">포털까지 먼저 도착하라</h1></div><div class="scoreboard" id="scoreboard"></div></div>
+      <div class="game-grid">
+        <section class="panel board-panel">
+          <div class="track" id="track"></div>
+          <div class="turn-panel">
+            <div class="turn-top"><div><span class="eyebrow" id="turnEyebrow">CURRENT TURN</span><div class="turn-side" id="turnSideText">AGENT TURN</div><p class="micro" id="turnGuide" style="margin:6px 0 0">한 가지 행동만 선택하세요.</p></div><div class="timer" id="turnTimer">30</div></div>
+            <div class="actions">
+              <button class="action-btn" data-action="clue" type="button">간접 단서 요청<span>도구·대상·장소·필요 역량 중 하나를 말합니다.</span></button>
+              <button class="action-btn" data-action="question" type="button">예·아니오 질문<span>직업명을 빼고 범위를 좁히는 질문 하나만 합니다.</span></button>
+              <button class="action-btn" data-action="guess" type="button">직업 추측<span>정답이라고 생각하는 직업 하나를 선언합니다.</span></button>
+              <button class="action-btn" data-action="ability" type="button">능력 사용<span>진영별 랜덤 능력을 즉시 발동합니다.</span></button>
+            </div>
+          </div>
+        </section>
+        <aside class="side-panel">
+          <section class="panel"><div class="section-title"><h2 style="font-size:1.3rem">보너스 게이트</h2><p>정답 진영 +1칸</p></div><div class="bonus-status" id="bonusStatus"></div></section>
+          <section class="panel"><div class="section-title"><h2 style="font-size:1.3rem">막힐 때 질문</h2><p>눌러서 크게 보기</p></div><div class="question-bank" id="questionBank"></div></section>
+          <section class="panel"><div class="section-title"><h2 style="font-size:1.3rem">게임 기록</h2><p>최근 행동</p></div><div class="log" id="gameLog"></div></section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="screen hidden" id="roundEndScreen">
+      <div class="result-hero"><div class="trophy" id="roundTrophy">🏁</div><span class="eyebrow" id="roundEndEyebrow">ROUND COMPLETE</span><h1 id="roundEndTitle" style="font-size:clamp(3rem,9vw,7rem);letter-spacing:-.09em;margin:18px 0 10px">TEAM 승리!</h1><p class="hero-copy" id="roundEndCopy" style="margin:0 auto">정답을 공개합니다.</p></div>
+      <div class="deal-grid" id="roundReveal"></div>
+      <button class="primary" id="nextRoundBtn" type="button" style="margin-top:16px">다음 라운드 →</button>
+    </section>
+
+    <section class="screen hidden" id="gameEndScreen">
+      <div class="result-hero"><div class="trophy">🏆</div><span class="eyebrow">FINAL RANKING</span><h1 style="font-size:clamp(3rem,9vw,7rem);letter-spacing:-.09em;margin:18px 0 10px">최종 탐정은?</h1><p class="hero-copy" style="margin:0 auto">승리 점수와 보너스 활약을 합산한 결과입니다.</p></div>
+      <section class="panel"><div class="ranking" id="finalRanking"></div></section>
+      <div class="setup-grid" style="margin-top:16px"><button class="primary" id="restartSame" type="button">같은 인원으로 다시 하기</button><button class="secondary" id="newGame" type="button">새 게임 설정</button></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal hidden" id="secretModal" role="dialog" aria-modal="true"><div class="modal-card light"><div class="modal-head"><div><span class="eyebrow" id="secretEyebrow">SECRET CARD</span><h2 id="secretTitle">비밀 직업</h2></div><button class="close" data-close="secretModal" type="button">×</button></div><div id="secretContent"></div><button class="primary" data-close="secretModal" type="button">확인 완료 · 화면 가리기</button></div></div>
+
+<div class="modal hidden" id="actionModal" role="dialog" aria-modal="true"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow">ONE ACTION</span><h2 id="actionTitle">행동 안내</h2></div><button class="close" data-close="actionModal" type="button">×</button></div><div class="action-detail" id="actionContent"></div><button class="primary" id="completeAction" type="button">행동 완료 · 1칸 이동</button></div></div>
+
+<div class="modal hidden" id="guessModal" role="dialog" aria-modal="true"><div class="modal-card light"><div class="modal-head"><div><span class="eyebrow">CAREER GUESS</span><h2 id="guessTitle">직업 하나를 추측하세요</h2></div><button class="close" data-close="guessModal" type="button">×</button></div><div class="guess-grid"><div class="field hidden" id="targetField"><label for="guessTarget">대상 팀원</label><select id="guessTarget"></select></div><div class="field"><label for="guessJob">추측 직업</label><select id="guessJob"></select></div><p class="micro">정답 판정은 앱이 자동으로 처리합니다. 틀리면 즉시 턴이 넘어갑니다.</p><button class="primary" id="submitGuess" type="button">이 직업으로 추측</button></div></div></div>
+
+<div class="modal hidden" id="bonusModal" role="dialog" aria-modal="true"><div class="modal-card bonus-card"><div class="modal-head"><div><div class="bonus-title">★ BONUS GATE <span id="bonusType">초성 스피드</span></div><h2 style="margin:10px 0 0">먼저 외치는 진영이 부스터를 얻습니다</h2></div><div class="bonus-timer" id="bonusTimer">15초</div></div><div class="bonus-question" id="bonusQuestion"></div><div class="bonus-options" id="bonusOptions"></div><button class="secondary" id="revealBonus" type="button" style="width:100%;margin:10px 0">정답 공개</button><div class="answer-box hidden" id="bonusAnswer"></div><div class="bonus-award hidden" id="bonusAward"><button class="team" data-bonus-winner="TEAM" type="button">TEAM 정답 +1칸</button><button class="agent" data-bonus-winner="AGENT" type="button">AGENT 정답 +1칸</button><button class="none" data-bonus-winner="NONE" type="button">정답 없음</button></div></div></div>
+
+<div class="modal hidden" id="portalModal" role="dialog" aria-modal="true"><div class="modal-card light"><div class="modal-head"><div><span class="eyebrow">FINAL GUESS</span><h2>포털 결승 추측</h2></div></div><p id="portalCopy" style="line-height:1.7;color:#536079">먼저 도착한 진영부터 최종 추측합니다. 실제 대화 결과에 맞춰 승자를 선택하세요.</p><div class="winner-actions"><button class="team-win" data-round-winner="TEAM" type="button">TEAM 정답</button><button class="agent-win" data-round-winner="AGENT" type="button">AGENT 정답</button><button class="draw" data-round-winner="DRAW" type="button">둘 다 실패 · 재대결</button></div></div></div>
+
+<script src="./app.js?v=20260722" defer></script>
+</body>
+</html>
