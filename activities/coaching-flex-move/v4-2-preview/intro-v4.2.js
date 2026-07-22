@@ -44,7 +44,7 @@ const addEdge=(a,b,type='inner',max=.46)=>{
 for(let c=0;c<6;c++){
  const base=c*20;
  for(let i=0;i<20;i++)addEdge(base+i,base+(i+1)%20,'inner',.3);
- for(let i=0;i<16;i++)addEdge(base+i,base+(i+2+(i%3))%20,'inner',.32);
+ for(let i=0;i<8;i++)addEdge(base+i,base+(i+2+(i%3))%20,'inner',.32);
 }
 let attempts=0;
 while(edges.filter(e=>e.type==='cross').length<34&&attempts++<2000){
