@@ -1,10 +1,12 @@
 (async () => {
-  const version = '20260723-v6-micro';
+  const version = '20260724-v7-question';
 
-  const polishStyle = document.createElement('link');
-  polishStyle.rel = 'stylesheet';
-  polishStyle.href = `./micro-polish-v6.css?v=${version}`;
-  document.head.appendChild(polishStyle);
+  for (const styleFile of ['micro-polish-v6.css', 'question-engine-v7.css']) {
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.href = `./${styleFile}?v=${version}`;
+    document.head.appendChild(style);
+  }
 
   async function loadScript(file) {
     await new Promise((resolve, reject) => {
@@ -16,7 +18,15 @@
     });
   }
 
-  for (const file of ['data.js', 'core.js', 'game.js', 'end.js', 'micro-polish-v6.js']) {
+  for (const file of [
+    'data.js',
+    'core.js',
+    'game.js',
+    'end.js',
+    'micro-polish-v6.js',
+    'job-content-v7.js',
+    'question-engine-v7.js'
+  ]) {
     await loadScript(file);
   }
 })().catch(error => {
