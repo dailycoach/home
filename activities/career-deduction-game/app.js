@@ -1,6 +1,12 @@
 (async () => {
-  const version = '20260723-v5-quality';
-  for (const file of ['data.js', 'core.js', 'game.js', 'end.js']) {
+  const version = '20260723-v6-micro';
+
+  const polishStyle = document.createElement('link');
+  polishStyle.rel = 'stylesheet';
+  polishStyle.href = `./micro-polish-v6.css?v=${version}`;
+  document.head.appendChild(polishStyle);
+
+  async function loadScript(file) {
     await new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = `./${file}?v=${version}`;
@@ -8,6 +14,10 @@
       script.onerror = () => reject(new Error(`${file} 로드 실패`));
       document.head.appendChild(script);
     });
+  }
+
+  for (const file of ['data.js', 'core.js', 'game.js', 'end.js', 'micro-polish-v6.js']) {
+    await loadScript(file);
   }
 })().catch(error => {
   console.error(error);
