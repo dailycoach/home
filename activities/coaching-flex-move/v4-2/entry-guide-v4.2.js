@@ -45,6 +45,7 @@ let modal=null,lastTrigger=null,bypassId='';
 function readNum(key){try{return Math.max(0,Number(localStorage.getItem(key)||0)||0)}catch{return 0}}
 function write(key,val){try{localStorage.setItem(key,String(val))}catch{}}
 function stageFor(count){return count<3?'full':count<10?'compact':'ritual'}
+function isHelpTrigger(trigger){return Boolean(trigger?.classList?.contains('cfm-entry-help'))}
 function build(){
  if(modal)return modal;
  const el=document.createElement('div');
@@ -85,7 +86,7 @@ function open(mode,trigger,{increment=true}={}){
  $('#cfmEntryBody',el).textContent=stage==='full'?data.full:stage==='compact'?'먼저 떠오른 반응을 기록하고, 설명과 판단은 그다음에 합니다.':'';
  $('#cfmEntryVariant',el).textContent=data.variants[variantIndex];
  $('#cfmEntryNote',el).textContent=stage==='full'?data.note:'';
- $('#cfmEntryStart',el).textContent=trigger?.id==='selfResume'||trigger?.id==='resume'?'훈련 이어가기':data.button;
+ $('#cfmEntryStart',el).textContent=isHelpTrigger(trigger)?'안내 닫기':trigger?.id==='selfResume'||trigger?.id==='resume'?'훈련 이어가기':data.button;
  requestAnimationFrame(()=>el.classList.add('is-open'));
  setTimeout(()=>$('#cfmEntryStart',el)?.focus({preventScroll:true}),40);
 }
@@ -99,8 +100,11 @@ function close(restore=false){
 function proceed(){
  const trigger=lastTrigger;
  if(!trigger){close(false);return;}
+ if(isHelpTrigger(trigger)){close(true);return;}
+ const mode=modeFor(trigger.id);
  bypassId=trigger.id;
  close(false);
+ window.dispatchEvent(new CustomEvent('cfm:entry-proceed',{detail:{mode,triggerId:trigger.id}}));
  setTimeout(()=>trigger.click(),30);
 }
 function trapFocus(e){
