@@ -12,7 +12,7 @@
 <script>
 (async()=>{try{
  if(!('DecompressionStream' in window))throw new Error('unsupported');
- const base='../',version='20260723-public1';
+ const base='../',version='20260723-public2';
  const names=['cfm-v4.part1.txt','cfm-v4.part2.txt','cfm-v4.part3.txt','cfm-v4.part4.txt','cfm-v4.part5.txt','cfm-v4.part6.txt','cfm-v4.part7.txt'];
  const chunks=await Promise.all(names.map(async n=>{const r=await fetch(base+n+'?v='+version,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}));
  const bin=atob(chunks.join(''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
