@@ -1,0 +1,8 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v6 classroom/mobile micro polish
+Merged commits:
+- 886b065e706ca8e8f32f30880baddee3c8b091b1
+- b27369cd6518e90ce7f47c590d54b65c062820e8
+Triggered: 2026-07-23 Asia/Seoul
