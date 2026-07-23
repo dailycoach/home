@@ -1,10 +1,11 @@
 (async () => {
-  const version = '20260724-v7-1-stability';
+  const version = '20260724-v7-2-deduction';
 
   for (const styleFile of [
     'micro-polish-v6.css',
     'question-engine-v7.css',
-    'stability-v7-1.css'
+    'stability-v7-1.css',
+    'deduction-engine-v7-2.css'
   ]) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
@@ -30,7 +31,8 @@
     'micro-polish-v6.js',
     'job-content-v7.js',
     'question-engine-v7.js',
-    'stability-v7-1.js'
+    'stability-v7-1.js',
+    'deduction-engine-v7-2.js'
   ]) {
     await loadScript(file);
   }
