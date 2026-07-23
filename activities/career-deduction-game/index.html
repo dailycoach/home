@@ -4,106 +4,236 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#10172f">
-  <meta name="description" content="팀당 인원을 정해 진행하는 중학생용 직업 추리 팀 배틀">
-  <title>내 직업을 맞춰봐! TEAM JOB BATTLE</title>
-  <link rel="stylesheet" href="./style.css?v=20260722-v4">
+  <meta name="description" content="팀별 인원을 설정해 진행하는 중학생용 직업 추리 배틀 게임">
+  <title>내 직업을 맞춰봐! JOB BATTLE</title>
+  <link rel="stylesheet" href="./style.css?v=20260723-v5">
 </head>
 <body>
 <div class="arcade-bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="app">
   <header class="topbar">
-    <a class="brand" href="/" aria-label="데일리코칭 홈"><span class="brand-mark">J!</span><span><b>TEAM JOB BATTLE</b><small>내 직업을 맞춰봐!</small></span></a>
+    <a class="brand" href="/" aria-label="데일리코칭 홈">
+      <span class="brand-mark">J!</span>
+      <span><b>JOB BATTLE</b><small>내 직업을 맞춰봐!</small></span>
+    </a>
     <button class="ghost-btn" id="resetBtn" type="button">↻ 처음부터</button>
   </header>
 
   <main>
     <section class="screen" id="setupScreen">
-      <div class="hero arcade-hero compact-hero">
+      <div class="hero arcade-hero">
         <div class="hero-copybox">
-          <div class="badge-row"><span class="game-badge yellow">2–6 PER TEAM</span><span class="game-badge blue">80 JOBS</span><span class="game-badge pink">TEAM VS TEAM</span></div>
+          <div class="badge-row">
+            <span class="game-badge yellow">2–6 PER TEAM</span>
+            <span class="game-badge blue">80 JOBS</span>
+            <span class="game-badge pink">BONUS HINT</span>
+          </div>
           <p class="eyebrow">CAREER DEDUCTION TEAM BATTLE</p>
-          <h1>우리 팀 직업은<br><span>끝까지 비밀!</span></h1>
-          <p class="hero-copy">각 팀원이 비밀 직업 하나씩 받습니다. 질문과 추측으로 상대 팀의 직업을 모두 먼저 밝히면 승리!</p>
-          <div class="hero-rule"><b>승리 조건</b><span>상대 팀원의 직업을 전부 먼저 맞히기</span></div>
+          <h1>질문은 짧게,<br><span>추리는 빠르게!</span></h1>
+          <p class="hero-copy">각 팀원이 비밀 직업 하나씩 받습니다. 상대 팀의 직업을 모두 먼저 맞히면 승리!</p>
+          <div class="hero-rule"><b>보너스 승리</b><span>상대 직업 카드에 강력한 힌트 1개 저장</span></div>
         </div>
-        <div class="hero-visual" aria-hidden="true"><div class="floating-card card-a"><small>TEAM BLUE</small><strong>5</strong><span>SECRET JOBS</span></div><div class="floating-card card-b"><small>TEAM ORANGE</small><strong>5</strong><span>SECRET JOBS</span></div><div class="versus">VS</div></div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="floating-card card-a"><small>TEAM BLUE</small><strong>?</strong><span>SECRET JOB</span></div>
+          <div class="floating-card card-b"><small>BONUS HINT</small><strong>★</strong><span>CHOOSE 1 OF 3</span></div>
+          <div class="versus">VS</div>
+        </div>
       </div>
 
-      <section class="team-setup-arena">
-        <article class="panel setup-card team-setup blue">
-          <div class="team-header"><div><span class="step-label">TEAM A</span><input class="team-name-input" id="teamNameA" value="TEAM BLUE" maxlength="16" aria-label="A팀 이름"></div><span class="mini-sticker">BLUE</span></div>
-          <div class="member-counter"><button id="minusA" type="button" aria-label="A팀 인원 줄이기">−</button><div><strong id="countA">5</strong><small>명</small></div><button id="plusA" type="button" aria-label="A팀 인원 늘리기">＋</button></div>
-          <p class="counter-guide">팀당 2명부터 6명까지</p>
-          <div class="names" id="namesA"></div>
+      <section class="setup-arena">
+        <article class="team-setup blue">
+          <div class="team-header">
+            <div><span class="step-label">TEAM A</span><input class="team-name-input" id="teamNameA" value="TEAM BLUE" maxlength="16" aria-label="A팀 이름"></div>
+            <span class="mini-sticker">BLUE</span>
+          </div>
+          <div class="member-counter">
+            <button id="minusA" type="button" aria-label="A팀 인원 줄이기">−</button>
+            <div><strong id="countA">5</strong><small>명</small></div>
+            <button id="plusA" type="button" aria-label="A팀 인원 늘리기">＋</button>
+          </div>
+          <details class="member-editor">
+            <summary>팀원 이름 설정 <span>선택</span></summary>
+            <div class="names" id="namesA"></div>
+          </details>
         </article>
 
         <div class="setup-versus">VS</div>
 
-        <article class="panel setup-card team-setup orange">
-          <div class="team-header"><div><span class="step-label">TEAM B</span><input class="team-name-input" id="teamNameB" value="TEAM ORANGE" maxlength="16" aria-label="B팀 이름"></div><span class="mini-sticker orange-sticker">ORANGE</span></div>
-          <div class="member-counter"><button id="minusB" type="button" aria-label="B팀 인원 줄이기">−</button><div><strong id="countB">5</strong><small>명</small></div><button id="plusB" type="button" aria-label="B팀 인원 늘리기">＋</button></div>
-          <p class="counter-guide">두 팀의 인원이 달라도 진행 가능</p>
-          <div class="names" id="namesB"></div>
+        <article class="team-setup orange">
+          <div class="team-header">
+            <div><span class="step-label">TEAM B</span><input class="team-name-input" id="teamNameB" value="TEAM ORANGE" maxlength="16" aria-label="B팀 이름"></div>
+            <span class="mini-sticker orange-sticker">ORANGE</span>
+          </div>
+          <div class="member-counter">
+            <button id="minusB" type="button" aria-label="B팀 인원 줄이기">−</button>
+            <div><strong id="countB">5</strong><small>명</small></div>
+            <button id="plusB" type="button" aria-label="B팀 인원 늘리기">＋</button>
+          </div>
+          <details class="member-editor">
+            <summary>팀원 이름 설정 <span>선택</span></summary>
+            <div class="names" id="namesB"></div>
+          </details>
         </article>
       </section>
 
-      <section class="panel battle-settings">
-        <div class="section-title"><div><span class="step-label">BATTLE OPTION</span><h2>게임 속도 정하기</h2></div><span class="mini-sticker">READY?</span></div>
-        <div class="setting-columns">
-          <div class="field"><label>턴 제한 시간</label><div class="choice-row"><div class="choice"><input id="t20" name="timer" type="radio" value="20"><label for="t20">⚡ 20초<small>초고속</small></label></div><div class="choice"><input id="t30" name="timer" type="radio" value="30" checked><label for="t30">🎮 30초<small>추천</small></label></div><div class="choice"><input id="t45" name="timer" type="radio" value="45"><label for="t45">🧠 45초<small>생각형</small></label></div></div></div>
-          <div class="field"><label>보너스 타임</label><div class="choice-row"><div class="choice"><input id="b2" name="bonus" type="radio" value="2"><label for="b2">★ 2회<small>가볍게</small></label></div><div class="choice"><input id="b3" name="bonus" type="radio" value="3" checked><label for="b3">★★ 3회<small>추천</small></label></div><div class="choice"><input id="b4" name="bonus" type="radio" value="4"><label for="b4">★★★ 4회<small>박진감</small></label></div></div></div>
+      <section class="battle-settings">
+        <div class="section-title">
+          <div><span class="step-label">BATTLE OPTION</span><h2>게임 속도만 정하면 끝!</h2></div>
+          <span class="mini-sticker">READY?</span>
         </div>
-        <button class="primary mega-btn" id="startSetup" type="button">🎮 팀 배틀 만들기 →</button>
+        <div class="setting-columns">
+          <div class="field">
+            <label>턴 제한 시간</label>
+            <div class="choice-row">
+              <div class="choice"><input id="t20" name="timer" type="radio" value="20"><label for="t20">⚡ 20초<small>초고속</small></label></div>
+              <div class="choice"><input id="t30" name="timer" type="radio" value="30" checked><label for="t30">🎮 30초<small>추천</small></label></div>
+              <div class="choice"><input id="t45" name="timer" type="radio" value="45"><label for="t45">🧠 45초<small>생각형</small></label></div>
+            </div>
+          </div>
+          <div class="field">
+            <label>보너스 게임 횟수</label>
+            <div class="choice-row">
+              <div class="choice"><input id="b2" name="bonus" type="radio" value="2"><label for="b2">★ 2회<small>가볍게</small></label></div>
+              <div class="choice"><input id="b3" name="bonus" type="radio" value="3" checked><label for="b3">★★ 3회<small>추천</small></label></div>
+              <div class="choice"><input id="b4" name="bonus" type="radio" value="4"><label for="b4">★★★ 4회<small>박진감</small></label></div>
+            </div>
+          </div>
+        </div>
+        <button class="primary mega-btn" id="startSetup" type="button">🎮 팀 배틀 시작 준비 →</button>
         <button class="secondary resume hidden" id="resumeBtn" type="button">저장된 배틀 이어하기</button>
       </section>
-      <p class="footer-note">직업의 서열이나 적성을 판정하는 도구가 아닙니다. 직업의 일·도구·대상·장소·역량을 질문으로 탐색하는 교육용 게임입니다.</p>
+      <p class="footer-note">직업의 서열이나 적성을 판정하지 않습니다. 직업의 일·도구·대상·장소·역량을 질문으로 탐색하는 교육용 게임입니다.</p>
     </section>
 
     <section class="screen hidden" id="dealScreen">
-      <div class="screen-head"><div><span class="round-badge">SECRET CARD CHECK</span><h1>각 팀의 비밀 직업을 확인!</h1><p>상대 팀은 화면을 보지 마세요.</p></div><button class="ghost-btn" id="dealBack" type="button">설정으로</button></div>
-      <div class="deal-grid">
-        <article class="panel role-card team-a"><div class="role-top"><span class="role-icon">🔵</span><span class="role-label">TEAM A SECRET</span></div><h3 id="dealTeamA">TEAM BLUE · 5명</h3><p>A팀만 모여 자기 팀의 비밀 직업 카드를 확인합니다.</p><button class="secondary role-button" id="showTeamA" type="button">A팀 카드 열기</button></article>
-        <article class="panel role-card team-b"><div class="role-top"><span class="role-icon">🟠</span><span class="role-label">TEAM B SECRET</span></div><h3 id="dealTeamB">TEAM ORANGE · 5명</h3><p>B팀만 모여 자기 팀의 비밀 직업 카드를 확인합니다.</p><button class="secondary role-button" id="showTeamB" type="button">B팀 카드 열기</button></article>
+      <div class="screen-head">
+        <div><span class="round-badge">SECRET CARD CHECK</span><h1>우리 팀 직업을 확인!</h1><p>상대 팀은 화면을 보지 마세요.</p></div>
+        <button class="ghost-btn" id="dealBack" type="button">설정으로</button>
       </div>
-      <div class="hint-strip"><b>화면 가리기 필수!</b> 각 팀은 자기 팀원의 직업은 공유하지만 상대 팀 직업은 볼 수 없습니다.</div>
+      <div class="deal-grid">
+        <article class="role-card team-a">
+          <div class="role-top"><span class="role-icon">🔵</span><span class="role-label">TEAM A SECRET</span></div>
+          <h3 id="dealTeamA">TEAM BLUE · 5명</h3>
+          <p>A팀만 모여 자기 팀의 비밀 직업을 확인합니다.</p>
+          <button class="secondary role-button" id="showTeamA" type="button">A팀 카드 열기</button>
+        </article>
+        <article class="role-card team-b">
+          <div class="role-top"><span class="role-icon">🟠</span><span class="role-label">TEAM B SECRET</span></div>
+          <h3 id="dealTeamB">TEAM ORANGE · 5명</h3>
+          <p>B팀만 모여 자기 팀의 비밀 직업을 확인합니다.</p>
+          <button class="secondary role-button" id="showTeamB" type="button">B팀 카드 열기</button>
+        </article>
+      </div>
+      <div class="hint-strip"><b>화면 가리기 필수!</b> 자기 팀 직업은 공유해도 되지만 상대 팀에게는 끝까지 비밀입니다.</div>
       <button class="primary mega-btn" id="beginMatch" type="button" disabled>두 팀 확인 후 배틀 시작</button>
     </section>
 
     <section class="screen hidden" id="playScreen">
-      <div class="battle-header"><span class="round-badge">TEAM BATTLE</span><div class="team-score blue-score"><small id="scoreNameA">TEAM BLUE</small><strong id="scoreA">0 / 5</strong><span>상대 직업 발견</span></div><div class="battle-vs">VS</div><div class="team-score orange-score"><small id="scoreNameB">TEAM ORANGE</small><strong id="scoreB">0 / 5</strong><span>상대 직업 발견</span></div></div>
-
-      <section class="target-board-grid">
-        <article class="target-panel blue-target"><div class="target-head"><div><small>TEAM BLUE TARGET</small><h2 id="targetTitleA">오렌지팀 직업을 밝혀라!</h2></div><span id="remainingA">5개 남음</span></div><div class="target-cards" id="targetBoardA"></div></article>
-        <article class="target-panel orange-target"><div class="target-head"><div><small>TEAM ORANGE TARGET</small><h2 id="targetTitleB">블루팀 직업을 밝혀라!</h2></div><span id="remainingB">5개 남음</span></div><div class="target-cards" id="targetBoardB"></div></article>
-      </section>
+      <div class="battle-header">
+        <div class="team-score blue-score" id="scoreCardA"><small id="scoreNameA">TEAM BLUE</small><strong id="scoreA">0 / 5</strong><span>직업 발견</span></div>
+        <div class="battle-vs">VS</div>
+        <div class="team-score orange-score" id="scoreCardB"><small id="scoreNameB">TEAM ORANGE</small><strong id="scoreB">0 / 5</strong><span>직업 발견</span></div>
+      </div>
 
       <section class="turn-stage">
-        <div class="bonus-track"><span>★ BONUS</span><div id="bonusStatus"></div></div>
-        <div class="turn-spotlight" id="turnSpotlight"><div><span class="turn-kicker">YOUR TURN</span><div class="turn-side" id="turnSideText">TEAM BLUE TURN</div><p id="turnGuide">상대 팀원 한 명을 골라 행동하세요.</p></div><div class="timer-wrap"><span>TIME</span><div class="timer" id="turnTimer">30</div></div></div>
-        <div class="actions"><button class="action-btn clue" data-action="clue" type="button"><span class="action-icon">🔍</span><b>단서 받기</b><small>상대 한 명에게 단서 요청</small></button><button class="action-btn question" data-action="question" type="button"><span class="action-icon">❓</span><b>질문하기</b><small>예·아니오 질문 하나</small></button><button class="action-btn guess" data-action="guess" type="button"><span class="action-icon">🎯</span><b>정답 찍기</b><small>팀원과 상의 후 직업 추측</small></button><button class="action-btn ability" data-action="ability" type="button"><span class="action-icon">⚡</span><b>스캔 쓰기</b><small>상대 한 명의 직종 공개</small></button></div>
+        <div class="turn-topline">
+          <div class="bonus-track"><span>★ BONUS</span><div id="bonusStatus"></div></div>
+          <span class="battle-mode">한 턴 · 한 행동</span>
+        </div>
+        <div class="turn-spotlight" id="turnSpotlight">
+          <div><span class="turn-kicker">YOUR TURN</span><div class="turn-side" id="turnSideText">TEAM BLUE TURN</div><p id="turnGuide">행동 하나를 선택하세요.</p></div>
+          <div class="timer-wrap"><span>TIME</span><div class="timer" id="turnTimer">30</div></div>
+        </div>
+        <div class="actions">
+          <button class="action-btn clue" data-action="clue" type="button"><span class="action-icon">🔍</span><b>단서 받기</b><small>도구·장소·대상 중 하나</small></button>
+          <button class="action-btn question" data-action="question" type="button"><span class="action-icon">❓</span><b>질문하기</b><small>예·아니오 질문 하나</small></button>
+          <button class="action-btn guess" data-action="guess" type="button"><span class="action-icon">🎯</span><b>정답 찍기</b><small>상대 직업 하나 추측</small></button>
+          <button class="action-btn chance" data-action="chance" type="button"><span class="action-icon">⚡</span><b>팀 찬스</b><small>게임당 한 번 · 키워드 2개</small></button>
+        </div>
       </section>
 
-      <div class="info-drawer-grid"><details class="info-drawer" open><summary>💡 막힐 때 질문 <span>열기</span></summary><div class="question-bank" id="questionBank"></div></details><details class="info-drawer"><summary>📝 게임 기록 <span>열기</span></summary><div class="log" id="gameLog"></div></details></div>
+      <section class="target-panel" id="targetPanel">
+        <div class="target-head">
+          <div><small><span id="activeTeamName">TEAM BLUE</span> TARGET</small><h2 id="targetTitle"><span id="enemyTeamName">TEAM ORANGE</span>의 비밀 직업을 밝혀라!</h2></div>
+          <span id="remainingCount">5개 남음</span>
+        </div>
+        <div class="target-cards" id="targetBoard"></div>
+      </section>
+
+      <div class="info-drawer-grid">
+        <details class="info-drawer" open><summary>💡 막힐 때 질문 <span>열기</span></summary><div class="question-bank" id="questionBank"></div></details>
+        <details class="info-drawer"><summary>📝 게임 기록 <span>열기</span></summary><div class="log" id="gameLog"></div></details>
+      </div>
     </section>
 
     <section class="screen hidden" id="gameEndScreen">
       <div class="result-hero"><div class="trophy">🏆</div><span class="eyebrow">TEAM BATTLE COMPLETE</span><h1 id="gameEndTitle">TEAM BLUE 승리!</h1><p class="hero-copy" id="gameEndCopy">상대 팀의 모든 직업을 먼저 밝혔습니다.</p></div>
-      <div class="deal-grid result-grid" id="finalReveal"></div>
-      <div class="setup-grid result-actions"><button class="primary" id="restartSame" type="button">같은 팀으로 다시 하기</button><button class="secondary" id="newGame" type="button">팀 다시 설정</button></div>
+      <div class="result-grid" id="finalReveal"></div>
+      <div class="result-actions"><button class="primary" id="restartSame" type="button">같은 팀으로 다시 하기</button><button class="secondary" id="newGame" type="button">팀 다시 설정</button></div>
     </section>
   </main>
 </div>
 
-<div class="modal hidden" id="secretModal" role="dialog" aria-modal="true"><div class="modal-card light secret-modal-card"><div class="modal-head"><div><span class="eyebrow">TEAM SECRET</span><h2 id="secretTitle">비밀 직업 카드</h2></div><button class="close" data-close="secretModal" type="button">×</button></div><div id="secretContent"></div><button class="primary" data-close="secretModal" type="button">확인 완료 · 화면 가리기</button></div></div>
+<div class="modal hidden" id="secretModal" role="dialog" aria-modal="true">
+  <div class="modal-card light secret-modal-card">
+    <div class="modal-head"><div><span class="eyebrow">TEAM SECRET</span><h2 id="secretTitle">비밀 직업 카드</h2></div><button class="close" data-close="secretModal" type="button">×</button></div>
+    <div id="secretContent"></div>
+    <button class="primary" data-close="secretModal" type="button">확인 완료 · 화면 가리기</button>
+  </div>
+</div>
 
-<div class="modal hidden" id="actionModal" role="dialog" aria-modal="true"><div class="modal-card action-modal-card"><div class="modal-head"><div><span class="eyebrow">ONE ACTION</span><h2 id="actionTitle">행동 안내</h2></div><button class="close" data-close="actionModal" type="button">×</button></div><div class="action-detail" id="actionContent"></div><button class="primary" id="completeAction" type="button">행동 완료 · 턴 넘기기 →</button></div></div>
+<div class="modal hidden" id="actionModal" role="dialog" aria-modal="true">
+  <div class="modal-card action-modal-card">
+    <div class="modal-head"><div><span class="eyebrow">ONE ACTION</span><h2 id="actionTitle">행동 안내</h2></div><button class="close" data-close="actionModal" type="button">×</button></div>
+    <div class="action-detail" id="actionContent"></div>
+    <button class="primary" id="completeAction" type="button">행동 완료 · 턴 넘기기 →</button>
+  </div>
+</div>
 
-<div class="modal hidden" id="guessModal" role="dialog" aria-modal="true"><div class="modal-card light"><div class="modal-head"><div><span class="eyebrow">FINAL ANSWER?</span><h2>상대 직업을 맞혀봐!</h2></div><button class="close" data-close="guessModal" type="button">×</button></div><div class="guess-grid"><div class="field"><label for="guessTarget">누구의 직업?</label><select id="guessTarget"></select></div><div class="field"><label for="guessJob">정답 직업</label><select id="guessJob"></select></div><div class="risk-banner">정답이면 상대 카드 공개! 오답이면 턴 종료.</div><button class="primary guess-submit" id="submitGuess" type="button">🎯 정답 제출</button></div></div></div>
+<div class="modal hidden" id="guessModal" role="dialog" aria-modal="true">
+  <div class="modal-card light">
+    <div class="modal-head"><div><span class="eyebrow">FINAL ANSWER?</span><h2>상대 직업을 맞혀봐!</h2></div><button class="close" data-close="guessModal" type="button">×</button></div>
+    <div class="guess-grid">
+      <div class="field"><label for="guessTarget">누구의 직업?</label><select id="guessTarget"></select></div>
+      <div class="field"><label for="guessJob">정답 직업</label><select id="guessJob"></select></div>
+      <div class="risk-banner">정답이면 카드 공개! 오답이면 턴 종료.</div>
+      <button class="primary guess-submit" id="submitGuess" type="button">🎯 정답 제출</button>
+    </div>
+  </div>
+</div>
 
-<div class="modal hidden" id="feedbackModal" role="alertdialog" aria-modal="true" aria-labelledby="feedbackTitle"><div class="feedback-card" id="feedbackCard"><div class="feedback-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="feedback-icon" id="feedbackIcon">✓</div><span class="feedback-kicker" id="feedbackKicker">NICE!</span><h2 id="feedbackTitle">정답!</h2><p id="feedbackMessage">상대 직업을 정확히 맞혔어요.</p><button class="feedback-button" id="feedbackButton" type="button">계속하기 →</button></div></div>
+<div class="modal hidden" id="feedbackModal" role="alertdialog" aria-modal="true" aria-labelledby="feedbackTitle">
+  <div class="feedback-card" id="feedbackCard">
+    <div class="feedback-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="feedback-icon" id="feedbackIcon">✓</div><span class="feedback-kicker" id="feedbackKicker">NICE!</span><h2 id="feedbackTitle">정답!</h2><p id="feedbackMessage">상대 직업을 정확히 맞혔어요.</p><button class="feedback-button" id="feedbackButton" type="button">계속하기 →</button>
+  </div>
+</div>
 
-<div class="modal hidden" id="bonusModal" role="dialog" aria-modal="true"><div class="modal-card bonus-card"><div class="bonus-banner">★ BONUS TIME ★</div><div class="modal-head"><div><span class="bonus-type" id="bonusType">초성 스피드</span><h2>먼저 외친 팀이 스캔 획득!</h2></div><div class="bonus-timer" id="bonusTimer">15초</div></div><div class="bonus-question" id="bonusQuestion"></div><div class="bonus-options" id="bonusOptions"></div><button class="secondary reveal-btn" id="revealBonus" type="button">정답 공개</button><div class="answer-box hidden" id="bonusAnswer"></div><div class="bonus-award hidden" id="bonusAward"><button class="team" data-bonus-winner="A" type="button">BLUE 승리 · 스캔</button><button class="agent" data-bonus-winner="B" type="button">ORANGE 승리 · 스캔</button><button class="none" data-bonus-winner="NONE" type="button">정답 없음</button></div></div></div>
+<div class="modal hidden" id="bonusModal" role="dialog" aria-modal="true">
+  <div class="modal-card bonus-card">
+    <div class="bonus-banner"><span id="bonusRoundLabel">BONUS 1 / 3</span><b>★ BONUS TIME ★</b></div>
+    <div class="modal-head"><div><span class="bonus-type" id="bonusType">초성 스피드</span><h2>먼저 맞힌 팀이 힌트를 획득!</h2></div><div class="bonus-timer" id="bonusTimer">15</div></div>
+    <div class="bonus-question" id="bonusQuestion"></div>
+    <div class="bonus-options" id="bonusOptions"></div>
+    <button class="secondary reveal-btn" id="revealBonus" type="button">정답 공개</button>
+    <div class="answer-box hidden" id="bonusAnswer"></div>
+    <div class="bonus-award hidden" id="bonusAward">
+      <button class="team" id="bonusTeamA" data-bonus-winner="A" type="button">TEAM BLUE 승리</button>
+      <button class="agent" id="bonusTeamB" data-bonus-winner="B" type="button">TEAM ORANGE 승리</button>
+      <button class="none" data-bonus-winner="NONE" type="button">정답 없음</button>
+    </div>
+  </div>
+</div>
 
-<script src="./app.js?v=20260722-v4" defer></script>
+<div class="modal hidden" id="hintModal" role="dialog" aria-modal="true">
+  <div class="modal-card hint-card">
+    <div class="hint-reward-title"><span>★ BONUS REWARD</span><h2 id="hintWinnerLabel">TEAM BLUE BONUS REWARD</h2><p>상대 팀원 한 명과 받고 싶은 힌트 카드를 선택하세요.</p></div>
+    <div class="field hint-target-field"><label for="hintTarget">힌트를 받을 상대 카드</label><select id="hintTarget"></select></div>
+    <div class="hint-choice-grid" id="hintChoices"></div>
+    <p class="hint-save-note">선택한 힌트는 해당 직업 카드에 계속 저장됩니다.</p>
+  </div>
+</div>
+
+<script src="./app.js?v=20260723-v5" defer></script>
 </body>
 </html>
