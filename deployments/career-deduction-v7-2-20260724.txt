@@ -1,0 +1,12 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.2 question deduction engine
+Merge commit: fb20b160c42324f5af1168df4714abf7a4f3b447
+Features:
+- 28-question answer guide across 80 jobs
+- candidate count and likely career categories
+- top candidate review panel
+- information-gain question recommendations
+- secret-card answer guide
+Triggered: 2026-07-24 Asia/Seoul
