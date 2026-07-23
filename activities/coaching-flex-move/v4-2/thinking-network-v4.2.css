@@ -1,0 +1,16 @@
+/* Replace the first explanatory copy with a kinetic THINKING NETWORK wordmark. */
+.cfm42-one .cfm42-copy{display:none!important}
+.cfm42-modal-mode .cfm42-one{place-items:center!important;padding:56px 20px 24px!important}
+.cfm42-thinking-network{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;gap:.32em;pointer-events:none;opacity:1;transform:translateY(0) scale(1);transition:opacity .42s ease,transform .52s cubic-bezier(.2,.8,.2,1);isolation:isolate}
+.cfm42-thinking-network:before{content:'';position:absolute;left:50%;top:50%;width:min(72vw,760px);height:1px;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(102,221,255,.28),rgba(220,255,69,.42),transparent);box-shadow:0 0 28px rgba(102,221,255,.1);opacity:.42}
+.cfm42-thinking-line{position:relative;display:flex;align-items:center;justify-content:center;gap:.065em;white-space:nowrap}
+.cfm42-thinking-line b{display:inline-block;min-width:.58em;color:#ecefe9;font-size:clamp(34px,5.4vw,72px);font-weight:950;line-height:.92;letter-spacing:.055em;text-align:center;opacity:0;transform:translateY(14px) scale(.92);filter:blur(7px);text-shadow:0 0 22px rgba(102,221,255,.08);transition:opacity .34s ease,transform .42s cubic-bezier(.2,.8,.2,1),filter .42s ease,color .42s ease}
+.cfm42-thinking-line.network b{color:#dcff45;text-shadow:0 0 26px rgba(220,255,69,.13)}
+.cfm42-thinking-line b.is-on{opacity:1;transform:none;filter:none}
+.cfm42-thinking-network.is-complete .cfm42-thinking-line b{letter-spacing:.075em}
+.cfm42-thinking-network.is-leaving{opacity:0;transform:translateY(-8px) scale(.975)}
+.cfm42-wrap.rule-phase .cfm42-thinking-network,.cfm42-wrap.complete .cfm42-thinking-network{opacity:0!important;visibility:hidden!important}
+@media(max-width:760px){.cfm42-modal-mode .cfm42-one{padding:50px 12px 18px!important}.cfm42-thinking-network{display:grid;align-content:center;gap:5px}.cfm42-thinking-network:before{width:82vw}.cfm42-thinking-line{gap:.025em}.cfm42-thinking-line b{min-width:.6em;font-size:clamp(31px,9.2vw,46px);letter-spacing:.07em}}
+@media(max-width:390px){.cfm42-thinking-line b{font-size:clamp(28px,8.9vw,38px)}}
+@media(prefers-reduced-motion:reduce){.cfm42-thinking-network{display:none!important}}
+@media print{.cfm42-thinking-network{display:none!important}}
