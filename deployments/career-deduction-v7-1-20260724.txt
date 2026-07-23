@@ -1,0 +1,13 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.1 question correction and save stability
+Merge commit: 7366d90186e6cb4f71020c285dfe1b5c20ffbff0
+Features:
+- aligned public and internal cache versions
+- edit or delete recorded question answers
+- undo last question
+- return from answer stage to question selection
+- duplicate question warning
+- saved-state normalization and autosave
+Triggered: 2026-07-24 Asia/Seoul
