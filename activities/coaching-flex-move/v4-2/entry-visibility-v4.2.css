@@ -1,0 +1,2 @@
+/* Keep the opening modal truly hidden after SELF/LIVE selection. Loaded after impact-v4.2.css. */
+.cfm42-wrap.cfm42-modal-mode.cfm42-modal-hidden{display:none!important;visibility:hidden!important;pointer-events:none!important}
