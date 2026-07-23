@@ -62,12 +62,12 @@ function doGet(e) {
 }
 
 function cleanText_(value) {
-  let text = String(value || '').replace(/[\\u0000-\\u001f\\u007f]/g, ' ').replace(/\\s+/g, ' ').trim().slice(0, 700);
-  text = text.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/gi, '[이메일 삭제]');
-  text = text.replace(/(?:https?:\\/\\/|www\\.)\\S+/gi, '[링크 삭제]');
-  text = text.replace(/(?:\\+?82[-. ]?)?0?1[016789][-. ]?\\d{3,4}[-. ]?\\d{4}/g, '[연락처 삭제]');
-  text = text.replace(/\\b\\d{6}[- ]?[1-4]\\d{6}\\b/g, '[식별번호 삭제]');
-  return /^[=+\\-@]/.test(text) ? "'" + text : text;
+  let text = String(value || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 700);
+  text = text.replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[이메일 삭제]');
+  text = text.replace(/(?:https?:\/\/|www\.)\S+/gi, '[링크 삭제]');
+  text = text.replace(/(?:\+?82[-. ]?)?0?1[016789][-. ]?\d{3,4}[-. ]?\d{4}/g, '[연락처 삭제]');
+  text = text.replace(/\b\d{6}[- ]?[1-4]\d{6}\b/g, '[식별번호 삭제]');
+  return /^[=+\-@]/.test(text) ? "'" + text : text;
 }
 function score_(value) { const n = Number(value); return Number.isFinite(n) && n >= 1 && n <= 10 ? n : 0; }
 function date_(value) { const d = new Date(String(value || '')); return isNaN(d.getTime()) ? null : d; }
