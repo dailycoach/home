@@ -67,7 +67,6 @@ function targetCardHtml(entry, index) {
 function renderTargetBoard() {
   const enemySide = opponent(state.turn);
   $('#activeTeamName').textContent = teamLabel(state.turn);
-  $('#enemyTeamName').textContent = teamLabel(enemySide);
   $('#targetTitle').textContent = `${teamLabel(enemySide)}의 비밀 직업을 밝혀라!`;
   $('#remainingCount').textContent = `${remaining(state.turn)}개 남음`;
   $('#targetBoard').innerHTML = state.rosters[enemySide].map(targetCardHtml).join('');
