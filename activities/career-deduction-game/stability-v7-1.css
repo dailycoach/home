@@ -1,0 +1,24 @@
+/* JOB BATTLE v7.1 stability controls */
+.jb71-history-button{width:100%;min-height:40px;margin-top:10px;border:1px solid rgba(255,216,77,.45);border-radius:12px;background:rgba(255,216,77,.1);color:#fff4b8;font-weight:900;cursor:pointer}
+.target-card.revealed .jb71-history-button{display:none}
+.jb71-history-modal{width:min(760px,100%)}
+.jb71-history-summary{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 16px;padding:12px 14px;border-radius:15px;background:#f1f4fb;color:#35415d}
+.jb71-history-list{display:grid;gap:10px;margin:14px 0 18px}
+.jb71-history-item{padding:14px;border:1px solid #dfe5f0;border-radius:17px;background:#fff}
+.jb71-history-item header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.jb71-history-item header small{display:block;color:#7a859c;font-weight:850;margin-bottom:4px}
+.jb71-history-item header b{display:block;color:#1d2944;line-height:1.45}
+.jb71-answer-edit{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.jb71-answer-edit button{min-height:42px;border:1px solid #dce2ee;border-radius:12px;background:#f6f8fc;color:#43506b;font-weight:900;cursor:pointer}
+.jb71-answer-edit button.active.yes{background:#dcfce7;border-color:#22c55e;color:#166534}
+.jb71-answer-edit button.active.no{background:#fee2e2;border-color:#ef4444;color:#991b1b}
+.jb71-answer-edit button.active.maybe{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+.jb71-note-edit{display:grid;grid-template-columns:90px 1fr;gap:8px;align-items:center;margin-top:9px;color:#6a758c;font-size:.82rem;font-weight:850}
+.jb71-note-edit input{min-height:42px;border:1px solid #dce2ee;border-radius:12px;padding:0 11px;font-size:16px;color:#1d2944}
+.jb71-delete-question{border:0;background:#fff0f1;color:#c23545;border-radius:10px;min-width:42px;min-height:38px;font-weight:950;cursor:pointer}
+.jb71-history-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.jb71-undo-last{min-height:50px;border:1px solid #f3b7bf;border-radius:14px;background:#fff4f5;color:#ba3142;font-weight:950;cursor:pointer}
+.jb71-back-question{width:100%;min-height:48px;margin-top:10px;border:1px solid rgba(255,255,255,.24);border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-weight:950;cursor:pointer}
+.jb71-duplicate-warning{display:block;margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff0e8;color:#a64219;font-size:.84rem;font-weight:850}
+.jb71-release-badge{display:inline-flex;align-items:center;min-height:28px;padding:0 9px;border-radius:999px;background:rgba(43,214,155,.13);border:1px solid rgba(43,214,155,.35);color:#baffea;font-size:.7rem;font-weight:950;letter-spacing:.06em}
+@media(max-width:600px){.jb71-answer-edit,.jb71-history-actions{grid-template-columns:1fr}.jb71-note-edit{grid-template-columns:1fr}.jb71-history-item header{align-items:flex-start}.jb71-history-modal{padding:16px}}

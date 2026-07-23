@@ -1,7 +1,11 @@
 (async () => {
-  const version = '20260724-v7-question';
+  const version = '20260724-v7-1-stability';
 
-  for (const styleFile of ['micro-polish-v6.css', 'question-engine-v7.css']) {
+  for (const styleFile of [
+    'micro-polish-v6.css',
+    'question-engine-v7.css',
+    'stability-v7-1.css'
+  ]) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = `./${styleFile}?v=${version}`;
@@ -25,7 +29,8 @@
     'end.js',
     'micro-polish-v6.js',
     'job-content-v7.js',
-    'question-engine-v7.js'
+    'question-engine-v7.js',
+    'stability-v7-1.js'
   ]) {
     await loadScript(file);
   }
