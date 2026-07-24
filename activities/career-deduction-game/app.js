@@ -1,11 +1,12 @@
 (async () => {
-  const version = '20260724-v7-2-deduction';
+  const version = '20260724-v7-3-job-content';
 
   for (const styleFile of [
     'micro-polish-v6.css',
     'question-engine-v7.css',
     'stability-v7-1.css',
-    'deduction-engine-v7-2.css'
+    'deduction-engine-v7-2.css',
+    'job-profiles-v7-3.css'
   ]) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
@@ -30,6 +31,11 @@
     'end.js',
     'micro-polish-v6.js',
     'job-content-v7.js',
+    'job-profiles-v7-3-ab.js',
+    'job-profiles-v7-3-cd.js',
+    'job-profiles-v7-3-ef.js',
+    'job-profiles-v7-3-gh.js',
+    'job-profiles-v7-3.js',
     'question-engine-v7.js',
     'stability-v7-1.js',
     'deduction-engine-v7-2.js'
