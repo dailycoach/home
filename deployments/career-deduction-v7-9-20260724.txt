@@ -1,0 +1,14 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.9 guided clue card activity
+Merge commit: 6245c6551cc35ca7225384e66ae15bc4e6e24216
+Features:
+- guided clue card flow
+- five selectable clue categories
+- automatic clue generation from job profiles
+- duplicate clue prevention per target
+- separate clue reveal and save steps
+- clue progress on target cards
+- clearer distinction between questions and clues
+Triggered: 2026-07-24 Asia/Seoul
