@@ -1,0 +1,12 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.3 individualized job content
+Merge commit: 66dd0f3480980d274c2556cd9cfd4eaa6fba786b
+Features:
+- 80 individualized job profiles
+- unique work, tools, places, people, strengths, subjects and pathways
+- social contribution and middle-school try-now activity
+- richer secret cards and job discovery modal
+- profile coverage audit
+Triggered: 2026-07-24 Asia/Seoul
