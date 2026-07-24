@@ -1,0 +1,13 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.5 onboarding and detailed game rules
+Merge commit: ba556034882b9c8751333c4988cfba21e122941d
+Features:
+- mission briefing on the first screen
+- interactive five-step turn demonstration
+- detailed explanation of four turn actions
+- sudden bonus and hint reward rules
+- speed, full and timed match explanations
+- detailed rules, strategy and ready-check guide
+Triggered: 2026-07-24 Asia/Seoul
