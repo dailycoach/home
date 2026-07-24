@@ -1,5 +1,5 @@
 (async () => {
-  const version = '20260724-v7-8-meaning-layer';
+  const version = '20260724-v7-9-clue-cards';
 
   for (const styleFile of [
     'micro-polish-v6.css',
@@ -11,7 +11,8 @@
     'onboarding-v7-5.css',
     'onboarding-v7-6-modal.css',
     'tutorial-v7-7.css',
-    'meaning-layer-v7-8.css'
+    'meaning-layer-v7-8.css',
+    'clue-cards-v7-9.css'
   ]) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
@@ -50,7 +51,8 @@
     'onboarding-v7-5.js',
     'onboarding-v7-6-modal.js',
     'tutorial-v7-7.js',
-    'meaning-layer-v7-8.js'
+    'meaning-layer-v7-8.js',
+    'clue-cards-v7-9.js'
   ]) {
     await loadScript(file);
   }
