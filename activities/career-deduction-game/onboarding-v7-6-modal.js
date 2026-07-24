@@ -13,6 +13,7 @@
     button.type = 'button';
     button.setAttribute('aria-haspopup', 'dialog');
     button.setAttribute('aria-controls', 'jb76HowToModal');
+    button.setAttribute('aria-expanded', 'false');
     button.innerHTML = '<span aria-hidden="true">?</span><b>사용법<br>다시보기</b>';
     document.body.appendChild(button);
   }
@@ -89,6 +90,13 @@
     if (details) details.open = false;
   }
 
+  function syncPrimaryAction() {
+    const button = document.querySelector('.jb76-howto-start');
+    if (!button) return;
+    const playing = typeof state !== 'undefined' && state.phase === 'play';
+    button.textContent = playing ? '사용법 닫고 경기 계속 →' : '확인 완료 · 게임 준비 시작 →';
+  }
+
   function openTutorial({ automatic = false } = {}) {
     const modal = document.querySelector('#jb76HowToModal');
     if (!modal || !modal.classList.contains('hidden')) return;
@@ -96,6 +104,7 @@
     previousFocus = document.activeElement;
     pauseGameForTutorial();
     resetTutorialView();
+    syncPrimaryAction();
     if (typeof openModal === 'function') openModal('jb76HowToModal');
     else modal.classList.remove('hidden');
     document.body.classList.add('jb76-tutorial-open');
@@ -135,14 +144,20 @@
   function bindEvents() {
     document.querySelector('#jb76HowToReplay')?.addEventListener('click', () => openTutorial());
     document.querySelector('.jb76-howto-close')?.addEventListener('click', () => closeTutorial());
-    document.querySelector('.jb76-howto-start')?.addEventListener('click', () => closeTutorial({ moveToSetup: true }));
+    document.querySelector('.jb76-howto-start')?.addEventListener('click', () => {
+      const moveToSetup = typeof state === 'undefined' || state.phase === 'setup';
+      closeTutorial({ moveToSetup });
+    });
 
     const modal = document.querySelector('#jb76HowToModal');
     modal?.addEventListener('click', event => {
       if (event.target === modal) closeTutorial();
     });
 
-    document.querySelector('#jb75GoSetup')?.addEventListener('click', () => closeTutorial({ moveToSetup: true }), true);
+    document.querySelector('#jb75GoSetup')?.addEventListener('click', () => {
+      const moveToSetup = typeof state === 'undefined' || state.phase === 'setup';
+      closeTutorial({ moveToSetup });
+    }, true);
 
     window.addEventListener('keydown', event => {
       if (event.key === 'Escape' && !modal?.classList.contains('hidden')) closeTutorial();
