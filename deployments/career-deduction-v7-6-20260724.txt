@@ -1,0 +1,13 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.6 tutorial modal and replay button
+Merge commit: 1da82afbf6d587bf12f0968e66f8e8d71e290263
+Features:
+- automatic tutorial modal on first session entry
+- detailed v7.5 rules moved out of the setup page
+- fixed tutorial replay button on the screen edge
+- mobile bottom-right replay control
+- play timer pause and resume while reading the guide
+- replay button hidden behind active game modals
+Triggered: 2026-07-24 Asia/Seoul
