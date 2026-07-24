@@ -1,0 +1,14 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.7 WHY hook and interactive practice round
+Merge commit: 5cd021ed45b6240a628bc37b7302a4a9c271014e
+Features:
+- career WHY hook before game rules
+- problem-solving view of jobs
+- 90-second interactive tutorial
+- direct target, question, answer, narrowing, guess and bonus practice
+- wrong-answer consequence practice
+- final comprehension check
+- live turn help and tabbed rule guide
+Triggered: 2026-07-24 Asia/Seoul
