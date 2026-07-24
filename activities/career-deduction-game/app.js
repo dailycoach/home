@@ -1,5 +1,5 @@
 (async () => {
-  const version = '20260724-v7-5-onboarding';
+  const version = '20260724-v7-6-tutorial-modal';
 
   for (const styleFile of [
     'micro-polish-v6.css',
@@ -8,7 +8,8 @@
     'deduction-engine-v7-2.css',
     'job-profiles-v7-3.css',
     'operations-v7-4.css',
-    'onboarding-v7-5.css'
+    'onboarding-v7-5.css',
+    'onboarding-v7-6-modal.css'
   ]) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
@@ -44,7 +45,8 @@
     'operations-v7-4.js',
     'operations-v7-4-state.js',
     'operations-v7-4-runtime.js',
-    'onboarding-v7-5.js'
+    'onboarding-v7-5.js',
+    'onboarding-v7-6-modal.js'
   ]) {
     await loadScript(file);
   }
