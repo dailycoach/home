@@ -1,0 +1,13 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.8 meaning-centered questions and career clue reflection
+Merge commit: b6cf486dacd53938bf6782a38801b6ee69a10ad5
+Features:
+- meaning-centered question wording
+- who it helps, what it solves and strengths mapping
+- richer secret and revealed cards
+- meaning map in job details
+- post-game career clue selection
+- local reflection state recovery
+Triggered: 2026-07-24 Asia/Seoul
