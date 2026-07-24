@@ -41,7 +41,8 @@
     'stability-v7-1.js',
     'deduction-engine-v7-2.js',
     'operations-v7-4.js',
-    'operations-v7-4-state.js'
+    'operations-v7-4-state.js',
+    'operations-v7-4-runtime.js'
   ]) {
     await loadScript(file);
   }
