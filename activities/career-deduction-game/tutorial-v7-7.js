@@ -7,6 +7,7 @@
 
   const tutorial = {
     scene: 0,
+    whyCorrect: false,
     selectedProblem: null,
     selectedTarget: null,
     goodQuestion: false,
@@ -129,6 +130,7 @@
   function resetTutorial() {
     Object.assign(tutorial, {
       scene: 0,
+      whyCorrect: false,
       selectedProblem: null,
       selectedTarget: null,
       goodQuestion: false,
@@ -535,7 +537,7 @@
   function bindStageEvents() {
     const stage = document.querySelector('#jb77Stage');
     if (!stage) return;
-    stage.addEventListener('click', handleStageClick, { once: true });
+    stage.onclick = handleStageClick;
     if (tutorial.mode === 'rules') renderRulePanel(0);
   }
 
@@ -548,7 +550,6 @@
         render();
       } else {
         setFeedback(value === 'fast' ? '중학생 때 꿈이 선명하지 않아도 괜찮아. 먼저 여러 길을 아는 것이 중요해.' : '돈도 중요하지만 직업은 세상에 참여하고 문제를 해결하는 방식이기도 해.', 'warning');
-        bindStageEvents();
       }
       return;
     }
@@ -563,7 +564,6 @@
       if (question.dataset.question === 'good') { tutorial.goodQuestion = true; render(); }
       else {
         setFeedback(question.dataset.question === 'vague' ? '“멋진가요?”는 사람마다 답이 달라서 직업을 줄이기 어려워.' : '직업명을 바로 묻는 건 금지! 특징을 모은 뒤 정답 공격에서 맞혀야 해.', 'warning');
-        bindStageEvents();
       }
       return;
     }
@@ -581,7 +581,7 @@
     const bonus = event.target.closest('[data-bonus]');
     if (bonus) {
       if (bonus.dataset.bonus === 'correct') { tutorial.bonusSolved = true; render(); }
-      else { setFeedback('아쉽다! 초성과 힌트를 다시 연결해보자.', 'warning'); bindStageEvents(); }
+      else { setFeedback('아쉽다! 초성과 힌트를 다시 연결해보자.', 'warning'); }
       return;
     }
 
@@ -607,7 +607,7 @@
     if (event.target.closest('[data-help-close]')) { closeModalShell(); return; }
 
     const ruleTab = event.target.closest('[data-rule-tab]');
-    if (ruleTab) { renderRulePanel(Number(ruleTab.dataset.ruleTab)); bindStageEvents(); }
+    if (ruleTab) renderRulePanel(Number(ruleTab.dataset.ruleTab));
   }
 
   function nextScene() {
