@@ -1,12 +1,13 @@
 (async () => {
-  const version = '20260724-v7-3-job-content';
+  const version = '20260724-v7-4-operations';
 
   for (const styleFile of [
     'micro-polish-v6.css',
     'question-engine-v7.css',
     'stability-v7-1.css',
     'deduction-engine-v7-2.css',
-    'job-profiles-v7-3.css'
+    'job-profiles-v7-3.css',
+    'operations-v7-4.css'
   ]) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
@@ -38,7 +39,10 @@
     'job-profiles-v7-3.js',
     'question-engine-v7.js',
     'stability-v7-1.js',
-    'deduction-engine-v7-2.js'
+    'deduction-engine-v7-2.js',
+    'operations-v7-4.js',
+    'operations-v7-4-state.js',
+    'operations-v7-4-runtime.js'
   ]) {
     await loadScript(file);
   }
