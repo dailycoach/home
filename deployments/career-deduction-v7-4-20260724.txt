@@ -1,0 +1,13 @@
+Production deployment trigger
+Site: https://daily-coach-ing.com/activities/career-deduction-game/
+Source: dailycoach/home main
+Release: JOB BATTLE v7.4 operations and host control
+Merge commit: ba304da99f09776d092f8280214036a175ddf6a7
+Features:
+- speed, full and timed match modes
+- 5/8/10 minute timed matches with overtime
+- host pause, resume and force-next controls
+- immediate or skipped bonus control
+- secret-card recheck and forced match finish
+- modal-safe pause and saved-state recovery
+Triggered: 2026-07-24 Asia/Seoul
