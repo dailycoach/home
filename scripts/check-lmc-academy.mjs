@@ -41,19 +41,19 @@ for (const file of ['lcms/academy/course.html', 'lcms/academy/lesson.html']) {
 
 const entry = read('lcms/academy/enter.html');
 assert(entry.includes('academyEntryForm'), 'Student entry form is missing');
-assert(entry.includes('Google 계정 이메일'), 'Student entry Google account field is missing');
+assert(entry.includes('등록 이메일'), 'Student entry email field is missing');
+assert(entry.includes('Vimeo 계정이나 별도의 영상 로그인은 필요하지 않습니다'), 'Vimeo learner guidance is missing');
 assert(entry.includes('8자리 입장코드'), 'Student entry access-code field is missing');
 assert(entry.includes('./access-config.js') && entry.includes('./access.js'), 'Student entry auth scripts are missing');
 
 const mediaCatalog = JSON.parse(read('lcms/academy/data/media-catalog.json'));
 const media = mediaCatalog.courses?.[course.id]?.media || [];
-assert(media.length === 2, 'Initial Drive catalog must contain the verified week 8 and 9 videos only');
-assert(media.map((item) => item.week).join(',') === '8,9', 'Drive media weeks must be mapped by week, not list index');
-assert(media.every((item) => item.provider === 'DRIVE'), 'Initial media must use Google Drive');
-assert(media.every((item) => item.accessPolicy === 'RESTRICTED'), 'Drive media must remain restricted');
-assert(media.every((item) => item.status === 'published'), 'Verified Drive media must be published in the catalog');
-assert(media[0].fileId === '1qu3q3BD4JfNeXmj1cgANwsjnzdoZnKeI', 'Week 8 Drive ID changed unexpectedly');
-assert(media[1].fileId === '1GLYAPV9N7GRvEognYXJVYTVgz971WmYW', 'Week 9 Drive ID changed unexpectedly');
+assert(media.length === 12, 'Vimeo catalog must contain one mapping slot for each of the 12 weeks');
+assert(media.map((item) => item.week).join(',') === '1,2,3,4,5,6,7,8,9,10,11,12', 'Vimeo media must be mapped by week');
+assert(media.every((item) => item.provider === 'VIMEO'), 'Paid course media must use Vimeo');
+assert(media.every((item) => item.accessPolicy === 'EMBED_ONLY_SPECIFIC_DOMAIN'), 'Vimeo media must use domain-restricted embedding policy');
+assert(media.every((item) => item.status === 'pending_upload' || item.status === 'published'), 'Vimeo media status must be pending_upload or published');
+assert(media.every((item) => !item.fileId), 'Google Drive file IDs must not remain in the public media catalog');
 
 const academyIndex = read('lcms/academy/index.html');
 const sharedCss = read('lcms/cip-art-direction.css');
@@ -75,11 +75,17 @@ const academyJs = read('lcms/academy/academy.js');
 const accessJs = read('lcms/academy/access.js');
 const accessConfig = read('lcms/academy/access-config.js');
 const accessCss = read('lcms/academy/access.css');
-assert(academyJs.includes("const MEDIA_PATH = './data/media-catalog.json'"), 'Academy is not using the Drive media catalog');
+const lessonCss = read('lcms/academy/ux-lesson.css');
+assert(academyJs.includes("const MEDIA_PATH = './data/media-catalog.json'"), 'Academy is not using the media catalog');
 assert(!academyJs.includes('youtube-cache.json'), 'Legacy YouTube cache is still the primary media source');
-assert(academyJs.includes("provider === 'drive'"), 'Drive player branch is missing');
+assert(academyJs.includes("provider === 'vimeo'"), 'Vimeo player branch is missing');
 assert(academyJs.includes("provider === 'youtube_public'"), 'Public-only YouTube branch is missing');
-assert(academyJs.includes('drive.google.com/file/d/'), 'Drive preview player is missing');
+assert(academyJs.includes('https://player.vimeo.com/video/'), 'Vimeo embed player is missing');
+assert(academyJs.includes('https://player.vimeo.com/api/player.js'), 'Vimeo Player SDK loader is missing');
+assert(academyJs.includes("player.on('timeupdate'"), 'Vimeo playback-position tracking is missing');
+assert(academyJs.includes("player.on('ended'"), 'Vimeo completion event is missing');
+assert(!academyJs.includes('drive.google.com/file/d/'), 'Drive preview player remains in Academy');
+assert(lessonCss.includes('.vimeo-video-frame'), 'Vimeo responsive player style is missing');
 assert(academyJs.includes('RSEduAcademyAccess.guard'), 'Protected Academy guard is missing');
 assert(accessJs.includes("action', action"), 'Access API request builder is missing');
 assert(accessJs.includes('localStorage'), 'Access session storage is missing');
@@ -92,13 +98,14 @@ const appScript = appScriptFiles.map((file) => read(`lcms/academy/apps-script/${
 assert(exists('lcms/academy/apps-script/appsscript.json'), 'Apps Script manifest is missing');
 const appScriptManifest = JSON.parse(read('lcms/academy/apps-script/appsscript.json'));
 assert(appScriptManifest.oauthScopes?.includes('https://www.googleapis.com/auth/script.container.ui'), 'Apps Script UI scope is missing');
+assert(!appScriptManifest.oauthScopes?.includes('https://www.googleapis.com/auth/drive'), 'Unused Drive OAuth scope remains after Vimeo migration');
 assert(exists('lcms/academy/apps-script/README.md'), 'Apps Script installation guide is missing');
 assert(exists('lcms/academy/SMARTSTORE_COPY.md'), 'SmartStore registration copy is missing');
 for (const fn of ['setupAcademyAutomation', 'handleFormSubmit', 'handlePaymentEdit', 'provisionStudentRow_', 'expireStudentAccesses', 'ensureExpiryTrigger_', 'doGet', 'doPost']) {
   assert(appScript.includes(`function ${fn}`), `Apps Script function is missing: ${fn}`);
 }
-assert(appScript.includes('addViewer(email)'), 'Drive permission grant is missing');
-assert(appScript.includes('revokePermissions(email)'), 'Drive permission revoke is missing');
+assert(!appScript.includes('addViewer(email)'), 'Drive permission grant remains after Vimeo migration');
+assert(!appScript.includes('revokePermissions(email)'), 'Drive permission revoke remains after Vimeo migration');
 assert(appScript.includes('.timeBased()'), 'Daily expiration trigger is missing');
 assert(appScript.includes('ACCESS_EXPIRE'), 'Expiration audit log is missing');
 assert(appScript.includes('setConfirmationMessage'), 'Google Form completion message is missing');
@@ -123,4 +130,4 @@ assert(academySource.includes('course-quicknav'), 'Course quick navigation is mi
 assert(academySource.includes('note-save-status'), 'Autosave status UI is missing');
 assert(academySource.includes('art-academy-hero'), 'Academy contemporary art hero class is missing');
 
-console.log('LMC Academy Drive access and automation quality checks passed.');
+console.log('LMC Academy Vimeo access and automation quality checks passed.');
