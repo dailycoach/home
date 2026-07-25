@@ -299,6 +299,7 @@ for (const viewport of viewports) {
       courseId,
       exercisePlayback,
       expiredSession,
+      mockMedia,
       progressKey,
       sessionKey,
       studentId
@@ -330,6 +331,22 @@ for (const viewport of viewports) {
           }));
         }
       }
+      if (mockMedia) {
+        const mediaSources = new WeakMap();
+        try {
+          Object.defineProperty(HTMLMediaElement.prototype, 'src', {
+            configurable: true,
+            get() { return mediaSources.get(this) || ''; },
+            set(value) { mediaSources.set(this, String(value || '')); }
+          });
+          Object.defineProperty(HTMLMediaElement.prototype, 'readyState', {
+            configurable: true,
+            get() { return 1; }
+          });
+        } catch {
+          /* The visual assertions will report a missing player if this browser cannot install the media stub. */
+        }
+      }
       if (exercisePlayback) {
         const mediaTimes = new WeakMap();
         try {
@@ -351,6 +368,7 @@ for (const viewport of viewports) {
       courseId: COURSE_ID,
       exercisePlayback: Boolean(target.exercisePlayback),
       expiredSession: Boolean(target.expiredSession),
+      mockMedia: Boolean(target.expectVideo),
       progressKey: PROGRESS_KEY,
       sessionKey: SESSION_KEY,
       studentId: STUDENT_ID
