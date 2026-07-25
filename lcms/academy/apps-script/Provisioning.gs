@@ -1,4 +1,4 @@
-/** Vimeo 강의실 입장코드 발급, 이용정지, 만료, 메일 전송 */
+/** Cloudflare R2 강의실 입장코드 발급, 이용정지, 만료, 메일 전송 */
 
 function provisionStudentRow_(ss, rowNumber, options) {
   const lock = LockService.getScriptLock();
@@ -122,7 +122,7 @@ function sendAccessEmail_(course, student, code, expiresAt) {
     `강의실: ${course.entryUrl}`,
     `수강기간: ${expiry}까지`,
     '',
-    '강의는 별도의 Vimeo 로그인 없이 LMC 강의실 안에서 재생됩니다.',
+    '강의는 별도의 영상 서비스 로그인 없이 LMC 강의실 안에서 비공개 Cloudflare R2 방식으로 재생됩니다.',
     '입장코드와 강의실 주소를 타인에게 공유하지 마세요.'
   ].join('\n');
 
@@ -141,7 +141,7 @@ function sendAccessEmail_(course, student, code, expiresAt) {
           <tr><td style="padding:10px 0;color:#68738a">등록 이메일</td><td style="padding:10px 0;text-align:right;font-weight:800">${escapeHtml_(student.email)}</td></tr>
           <tr><td style="padding:10px 0;color:#68738a">수강 만료일</td><td style="padding:10px 0;text-align:right;font-weight:800">${escapeHtml_(expiry)}</td></tr>
         </table>
-        <p style="margin:24px 0 0;padding:16px;background:#f7f7f4;color:#58647a;font-size:12px;line-height:1.7">Vimeo 계정은 필요하지 않습니다. 강의실 입장 후 영상이 보이지 않으면 브라우저의 콘텐츠 차단 기능을 확인하고, 문제가 계속되면 이 메일에 회신해 주세요. 입장코드와 강의실 주소의 타인 공유는 허용되지 않습니다.</p>
+        <p style="margin:24px 0 0;padding:16px;background:#f7f7f4;color:#58647a;font-size:12px;line-height:1.7">별도 영상 계정은 필요하지 않습니다. 강의실 입장 후 영상이 보이지 않으면 브라우저를 새로고침하고, 문제가 계속되면 이 메일에 회신해 주세요. 입장코드와 강의실 주소의 타인 공유는 허용되지 않습니다.</p>
       </div>
     </div>`;
 
