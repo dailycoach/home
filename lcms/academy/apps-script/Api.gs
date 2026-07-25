@@ -105,7 +105,7 @@ function healthResponse_() {
     version: RSEDU_ACADEMY.VERSION,
     courseId: course.courseId,
     formReady: Boolean(PropertiesService.getScriptProperties().getProperty('FORM_ID')),
-    driveReady: Boolean(course.driveFolderId),
+    playbackMode: 'CLOUDFLARE_R2_WORKER',
     timestamp: new Date().toISOString()
   };
 }
