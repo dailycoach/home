@@ -594,8 +594,9 @@
     const noteField = document.querySelector('#lessonNote');
     const noteStatus = document.querySelector('#noteSaveStatus');
     const persistNote = () => {
-      progress.notes[noteKey] = (noteField?.value || '').trim();
-      saveProgress(progress);
+      const currentProgress = getProgress();
+      currentProgress.notes[noteKey] = (noteField?.value || '').trim();
+      saveProgress(currentProgress);
       if (noteStatus) { noteStatus.textContent = '자동 저장됨'; noteStatus.classList.add('is-saved'); }
     };
     noteField?.addEventListener('input', () => {
