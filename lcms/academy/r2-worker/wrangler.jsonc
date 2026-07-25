@@ -7,8 +7,7 @@
   "vars": {
     "COURSE_ID": "lmc-lifetime-management-counselor",
     "ALLOWED_ORIGINS": "https://daily-coach-ing.com,https://www.daily-coach-ing.com",
-    "PLAYBACK_TTL_SECONDS": "14400",
-    "ACCESS_API_URL": "SET_AFTER_APPS_SCRIPT_DEPLOYMENT"
+    "PLAYBACK_TTL_SECONDS": "14400"
   },
   "r2_buckets": [
     {
