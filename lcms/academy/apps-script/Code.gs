@@ -1,12 +1,12 @@
 /**
- * RS에듀컨설팅 LMC Academy 구매→신청→결제확인→Vimeo 강의실 입장 자동화
+ * RS에듀컨설팅 LMC Academy 구매→신청→결제확인→Cloudflare R2 강의실 입장 자동화
  *
  * 설치 위치: 운영DB 스프레드시트 > 확장 프로그램 > Apps Script
  * 운영DB: RS 온라인강의 자동화 운영DB v1.0
  */
 
 const RSEDU_ACADEMY = Object.freeze({
-  VERSION: '1.1.0',
+  VERSION: '1.2.0',
   DEFAULT_SPREADSHEET_ID: '1qmeLbGeQZSrOJAoXtger_Wi6Ii7jO0n4kghq8ab2rDc',
   DEFAULT_COURSE_ID: 'lmc-lifetime-management-counselor',
   HEADER_ROW: 2,
@@ -117,7 +117,7 @@ function setupAcademyAutomation() {
       formUrl: form.getPublishedUrl(),
       formEditUrl: form.getEditUrl(),
       webAppUrl: ScriptApp.getService().getUrl() || '',
-      message: 'Google Form과 Vimeo 강의실 입장 자동화 트리거가 준비되었습니다.'
+      message: 'Google Form과 Cloudflare R2 강의실 입장 자동화 트리거가 준비되었습니다.'
     };
     console.log(JSON.stringify(result));
     showUiMessage_('LMC 자동화 설치', `${result.message}\n\n신청서: ${result.formUrl}\n\n다음 단계: 웹앱으로 배포한 뒤 “웹앱 배포 URL 동기화”를 실행하세요.`);
@@ -135,7 +135,7 @@ function syncDeploymentUrl() {
   setSettingValue_(ss, 'APPS_SCRIPT_WEB_APP_URL', url);
   updateInstallStatus_(ss, 3, '완료');
   updateInstallStatus_(ss, 4, '진행중');
-  showUiMessage_('웹앱 URL 동기화', `설정 시트에 기록했습니다.\n\n${url}\n\n이 URL을 사이트 access-config.js의 apiUrl에 입력해야 실제 로그인이 활성화됩니다.`);
+  showUiMessage_('웹앱 URL 동기화', `설정 시트에 기록했습니다.\n\n${url}\n\n이 URL을 사이트 access-config.js의 apiUrl과 Cloudflare Worker ACCESS_API_URL Secret에 입력해야 실제 로그인이 활성화됩니다.`);
   return url;
 }
 
@@ -227,7 +227,7 @@ function provisionSelectedStudent() {
   target.sheet.getRange(target.row, RSEDU_ACADEMY.STUDENT.PAYMENT_STATUS).setValue('확인완료');
   target.sheet.getRange(target.row, RSEDU_ACADEMY.STUDENT.PAYMENT_AT).setValue(new Date());
   const result = provisionStudentRow_(target.ss, target.row, { forceNewCode: false, source: 'MANUAL_MENU' });
-  showUiMessage_('수강권한 발급', `${result.studentName}님에게 Vimeo 강의실 입장코드를 발급했습니다.`);
+  showUiMessage_('수강권한 발급', `${result.studentName}님에게 R2 강의실 입장코드를 발급했습니다.`);
   return result;
 }
 
