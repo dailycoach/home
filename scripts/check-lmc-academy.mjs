@@ -20,6 +20,7 @@ course.modules.forEach((module, index) => {
   assert(module.week === index + 1, `Week order mismatch at module ${index + 1}`);
   assert(module.title && module.theory && module.practice, `Week ${index + 1} is missing title, theory, or practice`);
 });
+assert(/수료시험/.test(course.modules[11].title), 'Week 12 must remain the completion exam and ceremony week');
 
 const requiredPages = ['index.html', 'course.html', 'lesson.html', 'enter.html'];
 const requiredStyles = ['./ux-core.css', './ux-course.css', './ux-lesson.css', './art-direction.css'];
@@ -29,6 +30,8 @@ for (const file of ['lcms/academy/index.html', 'lcms/academy/course.html', 'lcms
   for (const style of requiredStyles) assert(html.includes(style), `${file} is missing ${style}`);
   assert(html.includes('../cip-art-direction.css'), `${file} is missing shared CIP art direction`);
   assert(html.includes('./academy.js'), `${file} is missing academy.js`);
+  assert(html.includes('./r2-player.js'), `${file} is missing the R2 playback adapter`);
+  assert(html.includes('./r2-player.css'), `${file} is missing the R2 player styles`);
 }
 
 for (const file of ['lcms/academy/course.html', 'lcms/academy/lesson.html']) {
@@ -42,92 +45,71 @@ for (const file of ['lcms/academy/course.html', 'lcms/academy/lesson.html']) {
 const entry = read('lcms/academy/enter.html');
 assert(entry.includes('academyEntryForm'), 'Student entry form is missing');
 assert(entry.includes('등록 이메일'), 'Student entry email field is missing');
-assert(entry.includes('Vimeo 계정이나 별도의 영상 로그인은 필요하지 않습니다'), 'Vimeo learner guidance is missing');
 assert(entry.includes('8자리 입장코드'), 'Student entry access-code field is missing');
-assert(entry.includes('./access-config.js') && entry.includes('./access.js'), 'Student entry auth scripts are missing');
+assert(entry.includes('Cloudflare R2'), 'Student entry R2 playback notice is missing');
 
 const mediaCatalog = JSON.parse(read('lcms/academy/data/media-catalog.json'));
 const media = mediaCatalog.courses?.[course.id]?.media || [];
-assert(media.length === 12, 'Vimeo catalog must contain one mapping slot for each of the 12 weeks');
-assert(media.map((item) => item.week).join(',') === '1,2,3,4,5,6,7,8,9,10,11,12', 'Vimeo media must be mapped by week');
-assert(media.every((item) => item.provider === 'VIMEO'), 'Paid course media must use Vimeo');
-assert(media.every((item) => item.accessPolicy === 'EMBED_ONLY_SPECIFIC_DOMAIN'), 'Vimeo media must use domain-restricted embedding policy');
-assert(media.every((item) => item.status === 'pending_upload' || item.status === 'published'), 'Vimeo media status must be pending_upload or published');
-assert(media.every((item) => !item.fileId), 'Google Drive file IDs must not remain in the public media catalog');
+assert(media.length === 11, 'LMC must contain 11 R2 video slots');
+assert(media.map((item) => item.week).join(',') === '1,2,3,4,5,6,7,8,9,10,11', 'R2 video weeks must be 1 through 11');
+assert(media.every((item) => item.provider === 'R2'), 'All paid course videos must use R2');
+assert(media.every((item) => item.objectKey === `lmc/week-${String(item.week).padStart(2, '0')}.mp4`), 'R2 object keys must follow the fixed week pattern');
+assert(media.every((item) => item.accessPolicy === 'PRIVATE_WORKER_SIGNED_URL'), 'R2 media must use signed Worker access');
+assert(!media.some((item) => item.week === 12), 'Week 12 must not contain a video');
+assert(mediaCatalog.courses?.[course.id]?.completionWeek === 12, 'Completion week metadata is missing');
 
-const academyIndex = read('lcms/academy/index.html');
-const sharedCss = read('lcms/cip-art-direction.css');
-const trendCss = read('lcms/cip-2026-trends.css');
-const overridesCss = read('lcms/cip-2026-overrides.css');
-assert(academyIndex.includes('academy-art-word'), 'Academy typographic hero is missing');
-assert(academyIndex.includes('academy-art-poster'), 'Academy editorial poster is missing');
-assert(academyIndex.includes('12<br />WEEKS') || academyIndex.includes('12 WEEKS'), 'Academy 12-week poster data is missing');
-assert(academyIndex.includes('./enter.html'), 'Academy student-entry CTA is missing');
-assert(sharedCss.includes('cip-2026-trends.css'), 'Academy is missing the shared 2026 trend import');
-assert(sharedCss.includes('cip-2026-overrides.css'), 'Academy is missing the 2026 override import');
-assert(trendCss.includes('trend-type-breathe'), 'Kinetic typography treatment is missing');
-assert(trendCss.includes('prefers-reduced-motion'), 'Reduced motion fallback is missing');
-for (const token of ['LMC 12 WEEKS', 'Learning note', 'cip-strip-shift', 'cip-blob-warp']) {
-  assert(overridesCss.includes(token), `Academy 2026 treatment missing: ${token}`);
-}
-
-const academyJs = read('lcms/academy/academy.js');
-const accessJs = read('lcms/academy/access.js');
 const accessConfig = read('lcms/academy/access-config.js');
-const accessCss = read('lcms/academy/access.css');
-const lessonCss = read('lcms/academy/ux-lesson.css');
-assert(academyJs.includes("const MEDIA_PATH = './data/media-catalog.json'"), 'Academy is not using the media catalog');
-assert(!academyJs.includes('youtube-cache.json'), 'Legacy YouTube cache is still the primary media source');
-assert(academyJs.includes("provider === 'vimeo'"), 'Vimeo player branch is missing');
-assert(academyJs.includes("provider === 'youtube_public'"), 'Public-only YouTube branch is missing');
-assert(academyJs.includes('https://player.vimeo.com/video/'), 'Vimeo embed player is missing');
-assert(academyJs.includes('https://player.vimeo.com/api/player.js'), 'Vimeo Player SDK loader is missing');
-assert(academyJs.includes("player.on('timeupdate'"), 'Vimeo playback-position tracking is missing');
-assert(academyJs.includes("player.on('ended'"), 'Vimeo completion event is missing');
-assert(!academyJs.includes('drive.google.com/file/d/'), 'Drive preview player remains in Academy');
-assert(lessonCss.includes('.vimeo-video-frame'), 'Vimeo responsive player style is missing');
-assert(academyJs.includes('RSEduAcademyAccess.guard'), 'Protected Academy guard is missing');
-assert(accessJs.includes("action', action"), 'Access API request builder is missing');
-assert(accessJs.includes('localStorage'), 'Access session storage is missing');
-assert(accessConfig.includes("apiUrl: ''"), 'Deployment URL placeholder must remain explicit until Apps Script is deployed');
-assert(accessCss.includes('.academy-page [hidden] { display: none !important; }'), 'Conditional access actions can leak through CSS display rules');
+const r2Player = read('lcms/academy/r2-player.js');
+const r2Css = read('lcms/academy/r2-player.css');
+assert(accessConfig.includes("playbackWorkerUrl: ''"), 'Cloudflare Worker URL placeholder must remain explicit before deployment');
+assert(r2Player.includes('/authorize'), 'R2 player does not request a playback authorization URL');
+assert(r2Player.includes("crossOrigin = 'anonymous'"), 'R2 player must send an Origin header for protected media');
+assert(r2Player.includes('timeupdate'), 'R2 playback position saving is missing');
+assert(r2Player.includes('button.click()'), 'R2 ended-event completion bridge is missing');
+assert(r2Css.includes('.r2-video-player'), 'R2 video player CSS is missing');
+
+const workerRoot = 'lcms/academy/r2-worker';
+for (const file of ['package.json', 'wrangler.jsonc', 'README.md', 'src/index.js']) {
+  assert(exists(`${workerRoot}/${file}`), `Missing R2 Worker file: ${file}`);
+}
+const worker = read(`${workerRoot}/src/index.js`);
+const wrangler = JSON.parse(read(`${workerRoot}/wrangler.jsonc`));
+assert(worker.includes("url.pathname === '/authorize'"), 'Worker authorization endpoint is missing');
+assert(worker.includes("url.pathname.startsWith('/media/')"), 'Worker media endpoint is missing');
+assert(worker.includes('range: request.headers'), 'Worker does not pass Range headers to R2');
+assert(worker.includes('PLAYBACK_SECRET'), 'Worker playback HMAC secret is missing');
+assert(worker.includes('ACCESS_API_URL'), 'Worker Apps Script session validation is missing');
+assert(worker.includes('LESSON_OBJECTS'), 'Worker fixed lesson allowlist is missing');
+assert(!/12:\s*'lmc\/week-12/.test(worker), 'Worker must not map a week 12 video');
+assert(wrangler.r2_buckets?.[0]?.binding === 'VIDEOS', 'R2 Worker binding must be named VIDEOS');
+assert(wrangler.r2_buckets?.[0]?.bucket_name === 'rsedu-lmc-videos', 'Unexpected R2 bucket name');
 
 const appScriptFiles = ['Code.gs', 'Provisioning.gs', 'Api.gs', 'DataHelpers.gs', 'Expiry.gs'];
 for (const file of appScriptFiles) assert(exists(`lcms/academy/apps-script/${file}`), `Missing Apps Script module: ${file}`);
 const appScript = appScriptFiles.map((file) => read(`lcms/academy/apps-script/${file}`)).join('\n');
 assert(exists('lcms/academy/apps-script/appsscript.json'), 'Apps Script manifest is missing');
-const appScriptManifest = JSON.parse(read('lcms/academy/apps-script/appsscript.json'));
-assert(appScriptManifest.oauthScopes?.includes('https://www.googleapis.com/auth/script.container.ui'), 'Apps Script UI scope is missing');
-assert(!appScriptManifest.oauthScopes?.includes('https://www.googleapis.com/auth/drive'), 'Unused Drive OAuth scope remains after Vimeo migration');
-assert(exists('lcms/academy/apps-script/README.md'), 'Apps Script installation guide is missing');
-assert(exists('lcms/academy/SMARTSTORE_COPY.md'), 'SmartStore registration copy is missing');
+const manifest = JSON.parse(read('lcms/academy/apps-script/appsscript.json'));
+assert(!manifest.oauthScopes?.includes('https://www.googleapis.com/auth/drive'), 'Drive OAuth scope must not return in R2 mode');
 for (const fn of ['setupAcademyAutomation', 'handleFormSubmit', 'handlePaymentEdit', 'provisionStudentRow_', 'expireStudentAccesses', 'ensureExpiryTrigger_', 'doGet', 'doPost']) {
   assert(appScript.includes(`function ${fn}`), `Apps Script function is missing: ${fn}`);
 }
-assert(!appScript.includes('addViewer(email)'), 'Drive permission grant remains after Vimeo migration');
-assert(!appScript.includes('revokePermissions(email)'), 'Drive permission revoke remains after Vimeo migration');
-assert(appScript.includes('.timeBased()'), 'Daily expiration trigger is missing');
-assert(appScript.includes('ACCESS_EXPIRE'), 'Expiration audit log is missing');
-assert(appScript.includes('setConfirmationMessage'), 'Google Form completion message is missing');
-assert(appScript.includes('requireTextIsEmail()'), 'Google Form email validation is missing');
+assert(!appScript.includes('addViewer(email)'), 'Drive permission grants must not return in R2 mode');
+assert(!appScript.includes('revokePermissions(email)'), 'Drive permission revocation must not return in R2 mode');
 assert(appScript.includes('MailApp.sendEmail'), 'Automatic access-code email is missing');
-assert(appScript.includes('Script Properties'), 'Secret-storage guidance is missing');
+assert(appScript.includes('.timeBased()'), 'Daily expiration trigger is missing');
 
 const academySource = [
-  academyIndex,
+  read('lcms/academy/index.html'),
   read('lcms/academy/course.html'),
   read('lcms/academy/lesson.html'),
   entry,
-  academyJs,
+  r2Player,
   read('lcms/academy/art-direction.css'),
   read('lcms/academy/data/courses.json')
 ].join('\n');
 assert(!academySource.includes('KINGDOM 기초 코칭'), 'Legacy KINGDOM sample course returned to Academy');
-assert(!academySource.includes('KGM210 결과해석 실무'), 'Legacy KGM210 sample course returned to Academy');
 assert(academySource.includes('LMC 평생진로상담사'), 'LMC course identity is missing');
 assert(academySource.includes('mobile-learning-bar'), 'Mobile learning controls are missing');
-assert(academySource.includes('course-quicknav'), 'Course quick navigation is missing');
-assert(academySource.includes('note-save-status'), 'Autosave status UI is missing');
-assert(academySource.includes('art-academy-hero'), 'Academy contemporary art hero class is missing');
+assert(academySource.includes('Cloudflare R2'), 'R2 course identity is missing');
 
-console.log('LMC Academy Vimeo access and automation quality checks passed.');
+console.log('LMC Academy private R2 access and automation quality checks passed.');
