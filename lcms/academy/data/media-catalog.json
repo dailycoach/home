@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-07-26",
+  "source": "Google Drive restricted sharing",
+  "policy": {
+    "drive": "Only the Google account registered by an approved learner receives viewer permission.",
+    "youtube": "YouTube is accepted only when the video is public. Unlisted and private videos are excluded from the course player."
+  },
+  "courses": {
+    "lmc-lifetime-management-counselor": {
+      "media": [
+        {
+          "week": 8,
+          "provider": "DRIVE",
+          "fileId": "1qu3q3BD4JfNeXmj1cgANwsjnzdoZnKeI",
+          "title": "8차시 우울과 우울검사",
+          "description": "우울 관련 경험과 검사도구의 활용 범위를 이해하는 강의",
+          "accessPolicy": "RESTRICTED",
+          "status": "published"
+        },
+        {
+          "week": 9,
+          "provider": "DRIVE",
+          "fileId": "1GLYAPV9N7GRvEognYXJVYTVgz971WmYW",
+          "title": "9차시 이상심리와 정신병리척도",
+          "description": "이상심리와 정신병리척도의 기본 개념 및 상담코칭 활용 범위를 이해하는 강의",
+          "accessPolicy": "RESTRICTED",
+          "status": "published"
+        }
+      ]
+    }
+  }
+}
