@@ -4,7 +4,6 @@
   "source": "Cloudflare R2 private bucket via authenticated Worker gateway",
   "policy": {
     "r2": "Paid course videos stay in a private R2 bucket and are served only through short-lived Worker playback URLs after LMC session validation.",
-    "youtube": "YouTube is accepted only when the video is public and used for free previews or public orientation content.",
     "secrets": "Do not store Cloudflare API tokens, R2 credentials, Worker secrets, or direct object URLs in this public catalog."
   },
   "courses": {

@@ -5,6 +5,7 @@ on:
     paths:
       - "lcms/**"
       - "scripts/capture-cip-visuals.mjs"
+      - "scripts/capture-lmc-academy-visuals.mjs"
       - ".github/workflows/capture-cip-visuals.yml"
   workflow_dispatch:
 
@@ -34,10 +35,14 @@ jobs:
           cat /tmp/cip-http.log
           exit 1
       - name: Capture responsive pages
-        run: node scripts/capture-cip-visuals.mjs
+        run: |
+          node scripts/capture-cip-visuals.mjs
+          node scripts/capture-lmc-academy-visuals.mjs
       - name: Upload visual audit
         uses: actions/upload-artifact@v4
         with:
           name: cip-visual-audit
-          path: artifacts/cip-visual-audit
+          path: |
+            artifacts/cip-visual-audit
+            artifacts/lmc-academy-visual-audit
           retention-days: 7

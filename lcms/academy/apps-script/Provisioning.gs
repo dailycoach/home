@@ -16,9 +16,17 @@ function provisionStudentRow_(ss, rowNumber, options) {
     }
 
     const course = getCourseSettings_(ss, student.courseId || RSEDU_ACADEMY.DEFAULT_COURSE_ID);
-    const code = generateAccessCode_();
+    if (course.accessDays !== RSEDU_ACADEMY.ACCESS_DAYS) {
+      throw new Error(`과정설정의 수강기간을 ${RSEDU_ACADEMY.ACCESS_DAYS}일로 맞춰 주세요.`);
+    }
     const now = new Date();
-    const expiresAt = new Date(now.getTime() + course.accessDays * 24 * 60 * 60 * 1000);
+    const expiresAt = resolveProvisioningExpiry_(
+      student,
+      now.getTime(),
+      course.accessDays,
+      forceNewCode
+    );
+    const code = generateAccessCode_();
     const codeHash = hashAccessCode_(student.email, course.courseId, code);
     const codeHint = `${code.slice(0, 2)}••••${code.slice(-2)}`;
 
@@ -56,16 +64,49 @@ function provisionStudentRow_(ss, rowNumber, options) {
   }
 }
 
+/**
+ * A code reissue or mail retry must never restart the 180-day term.
+ * Previously issued, expired, or suspended access requires a new paid
+ * enrollment instead of being revived through the reissue path.
+ */
+function resolveProvisioningExpiry_(student, nowMs, accessDays, forceNewCode) {
+  const now = Number(nowMs);
+  const existingExpiry = timestampMs_(student && student.accessExpiresAt);
+  const hasExistingTerm = Number.isFinite(existingExpiry)
+    || Boolean(student && (student.codeHash || student.codeIssuedAt));
+  const hasActiveTerm = Boolean(
+    student
+    && student.accessStatus === '활성'
+    && Number.isFinite(existingExpiry)
+    && existingExpiry > now
+  );
+
+  if (hasActiveTerm) return new Date(existingExpiry);
+  if (forceNewCode) {
+    throw new Error('활성 수강기간 내에서만 입장코드를 재발급할 수 있습니다.');
+  }
+  if (hasExistingTerm) {
+    throw new Error('기존 수강기간이 만료되었거나 정지되었습니다. 새 결제를 확인해 주세요.');
+  }
+  return new Date(now + Number(accessDays) * 24 * 60 * 60 * 1000);
+}
+
 function suspendStudentRow_(ss, rowNumber, reason) {
-  const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
-  const values = sheet.getRange(rowNumber, 1, 1, 23).getValues()[0];
-  const student = studentObject_(values, rowNumber);
-  invalidateStudentSessions_(ss, student.id, reason || '접근 정지');
-  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.CODE_HINT, 1, 2).clearContent();
-  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.ACCESS_STATUS).setValue('정지');
-  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.NOTE).setValue(reason || '관리자 정지');
-  writeLog_(ss, student.id, student.orderNo, student.email, 'ACCESS_SUSPEND', 'SUCCESS', '', 0);
-  return { ok: true, studentId: student.id, studentName: student.studentName };
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
+    const values = sheet.getRange(rowNumber, 1, 1, 23).getValues()[0];
+    const student = studentObject_(values, rowNumber);
+    invalidateStudentSessions_(ss, student.id, reason || '접근 정지');
+    sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.CODE_HINT, 1, 2).clearContent();
+    sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.ACCESS_STATUS).setValue('정지');
+    sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.NOTE).setValue(reason || '관리자 정지');
+    writeLog_(ss, student.id, student.orderNo, student.email, 'ACCESS_SUSPEND', 'SUCCESS', '', 0);
+    return { ok: true, studentId: student.id, studentName: student.studentName };
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function expireStudentRow_(ss, rowNumber, reason) {

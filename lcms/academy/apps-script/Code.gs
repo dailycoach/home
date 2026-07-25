@@ -6,11 +6,13 @@
  */
 
 const RSEDU_ACADEMY = Object.freeze({
-  VERSION: '1.2.0',
+  VERSION: '1.3.0',
   DEFAULT_SPREADSHEET_ID: '1qmeLbGeQZSrOJAoXtger_Wi6Ii7jO0n4kghq8ab2rDc',
   DEFAULT_COURSE_ID: 'lmc-lifetime-management-counselor',
   HEADER_ROW: 2,
   DATA_START_ROW: 3,
+  ACCESS_DAYS: 180,
+  SESSION_HOURS: 12,
   SHEETS: Object.freeze({
     STUDENTS: '수강생',
     COURSES: '과정설정',
@@ -74,7 +76,7 @@ function onOpen() {
     SpreadsheetApp.getUi()
       .createMenu('LMC 자동화')
       .addItem('① 최초 설치·신청서 생성', 'setupAcademyAutomation')
-      .addItem('② 웹앱 배포 URL 동기화', 'syncDeploymentUrl')
+      .addItem('② 웹앱 배포 URL 확인', 'syncDeploymentUrl')
       .addSeparator()
       .addItem('선택 수강생 결제확인·권한발급', 'provisionSelectedStudent')
       .addItem('선택 수강생 입장코드 재발급', 'reissueSelectedStudentCode')
@@ -98,10 +100,12 @@ function setupAcademyAutomation() {
     ensureSecretProperty_('CODE_PEPPER');
     ensureSecretProperty_('SESSION_PEPPER');
     ensureSecretProperty_('SYNC_SECRET');
+    ensureSecretProperty_('WORKER_SHARED_SECRET');
 
     const ss = getSpreadsheet_();
     validateRequiredSheets_(ss);
     const course = getCourseSettings_(ss, RSEDU_ACADEMY.DEFAULT_COURSE_ID);
+    validateCoursePlaybackSettings_(course);
     const form = getOrCreateRegistrationForm_(ss, course);
     installAutomationTriggers_(ss, form);
     ensureExpiryTrigger_();
@@ -116,7 +120,6 @@ function setupAcademyAutomation() {
       version: RSEDU_ACADEMY.VERSION,
       formUrl: form.getPublishedUrl(),
       formEditUrl: form.getEditUrl(),
-      webAppUrl: ScriptApp.getService().getUrl() || '',
       message: 'Google Form과 Cloudflare R2 강의실 입장 자동화 트리거가 준비되었습니다.'
     };
     console.log(JSON.stringify(result));
@@ -127,15 +130,17 @@ function setupAcademyAutomation() {
   }
 }
 
-/** 웹앱 배포 후 실행: 배포 URL을 설정 시트에 기록. */
+/** 웹앱 배포 후 실행: URL을 Sheet에 저장하지 않고 Cloudflare Secret 입력만 안내. */
 function syncDeploymentUrl() {
   const url = ScriptApp.getService().getUrl();
   if (!url) throw new Error('웹앱 배포 URL을 찾지 못했습니다. 먼저 새 배포 > 웹앱 배포를 완료해 주세요.');
   const ss = getSpreadsheet_();
-  setSettingValue_(ss, 'APPS_SCRIPT_WEB_APP_URL', url);
   updateInstallStatus_(ss, 3, '완료');
   updateInstallStatus_(ss, 4, '진행중');
-  showUiMessage_('웹앱 URL 동기화', `설정 시트에 기록했습니다.\n\n${url}\n\n이 URL을 사이트 access-config.js의 apiUrl과 Cloudflare Worker ACCESS_API_URL Secret에 입력해야 실제 로그인이 활성화됩니다.`);
+  showUiMessage_(
+    '웹앱 URL 확인',
+    `웹앱 URL은 시트에 저장하지 않습니다.\n\n${url}\n\n이 URL은 Cloudflare Worker ACCESS_API_URL Secret 입력창에만 붙여 넣으세요. 정적 access-config.js에는 Worker 공개주소만 입력합니다.\nApps Script의 WORKER_SHARED_SECRET과 Worker ACCESS_API_SECRET도 동일하게 설정해야 실제 로그인과 R2 재생 승인이 활성화됩니다.`
+  );
   return url;
 }
 
@@ -171,13 +176,13 @@ function handleFormSubmit(event) {
     row[RSEDU_ACADEMY.STUDENT.ID - 1] = id;
     row[RSEDU_ACADEMY.STUDENT.APPLIED_AT - 1] = event.response.getTimestamp() || now;
     row[RSEDU_ACADEMY.STUDENT.COURSE_ID - 1] = course.courseId;
-    row[RSEDU_ACADEMY.STUDENT.ORDER_NO - 1] = orderNo;
+    row[RSEDU_ACADEMY.STUDENT.ORDER_NO - 1] = sheetSafeText_(orderNo);
     row[RSEDU_ACADEMY.STUDENT.CHANNEL - 1] = '스마트스토어';
-    row[RSEDU_ACADEMY.STUDENT.BUYER_NAME - 1] = buyerName;
-    row[RSEDU_ACADEMY.STUDENT.STUDENT_NAME - 1] = studentName;
-    row[RSEDU_ACADEMY.STUDENT.EMAIL - 1] = email;
-    row[RSEDU_ACADEMY.STUDENT.PHONE - 1] = phone;
-    row[RSEDU_ACADEMY.STUDENT.CONSENT - 1] = '동의';
+    row[RSEDU_ACADEMY.STUDENT.BUYER_NAME - 1] = sheetSafeText_(buyerName);
+    row[RSEDU_ACADEMY.STUDENT.STUDENT_NAME - 1] = sheetSafeText_(studentName);
+    row[RSEDU_ACADEMY.STUDENT.EMAIL - 1] = sheetSafeText_(email);
+    row[RSEDU_ACADEMY.STUDENT.PHONE - 1] = sheetSafeText_(phone);
+    row[RSEDU_ACADEMY.STUDENT.CONSENT - 1] = sheetSafeText_('동의');
     row[RSEDU_ACADEMY.STUDENT.PAYMENT_STATUS - 1] = '결제대기';
     row[RSEDU_ACADEMY.STUDENT.ACCESS_STATUS - 1] = '대기';
     row[RSEDU_ACADEMY.STUDENT.MAIL_STATUS - 1] = '미발송';

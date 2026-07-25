@@ -11,6 +11,7 @@ on:
       - "lcms/cip-2026-overrides.css"
       - "lcms/cip-micro-polish.css"
       - "scripts/check-lmc-academy.mjs"
+      - "scripts/test-lmc-progress-scope.mjs"
       - "scripts/check-cip-art.mjs"
       - ".github/workflows/check-lmc-academy.yml"
   push:
@@ -24,6 +25,7 @@ on:
       - "lcms/cip-2026-overrides.css"
       - "lcms/cip-micro-polish.css"
       - "scripts/check-lmc-academy.mjs"
+      - "scripts/test-lmc-progress-scope.mjs"
       - "scripts/check-cip-art.mjs"
       - ".github/workflows/check-lmc-academy.yml"
   workflow_dispatch:
@@ -34,15 +36,33 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
       - name: Check JavaScript syntax
-        run: node --check lcms/academy/academy.js
+        run: |
+          node --check lcms/academy/academy.js
+          node --check lcms/academy/access.js
+          node --check lcms/academy/r2-player.js
+          for file in lcms/academy/apps-script/*.gs; do
+            node --check < "$file"
+          done
       - name: Check LMC Academy structure
         run: node scripts/check-lmc-academy.mjs
+      - name: Test Apps Script access decisions
+        run: node lcms/academy/apps-script/test-access-validation.mjs
+      - name: Test per-student browser progress isolation
+        run: node scripts/test-lmc-progress-scope.mjs
+      - name: Install Worker dependencies
+        working-directory: lcms/academy/r2-worker
+        run: npm ci
+      - name: Test and validate Cloudflare Worker
+        working-directory: lcms/academy/r2-worker
+        run: |
+          npm test
+          npm run check
       - name: Check CIP project archive art direction
         run: node scripts/check-cip-art.mjs

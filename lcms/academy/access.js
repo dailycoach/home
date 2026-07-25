@@ -5,7 +5,6 @@
   const STORAGE_KEY = config.storageKey || 'rsedu-academy-access:v1';
   const ENTRY_PATH = config.entryPath || './enter.html';
   const DEFAULT_NEXT = config.defaultNext || './course.html?course=lmc-lifetime-management-counselor';
-  const CALLBACK_PREFIX = '__rseduAcademyJsonp';
 
   const safeText = (value = '') => String(value)
     .replaceAll('&', '&amp;')
@@ -16,9 +15,18 @@
 
   const normalizeEmail = (value = '') => String(value).trim().toLowerCase();
   const normalizeCode = (value = '') => String(value).toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const normalizeStudentId = (value = '') => {
+    const studentId = String(value).trim();
+    return /^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$/.test(studentId) ? studentId : '';
+  };
 
   function isConfigured() {
-    return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec(?:\?.*)?$/.test(String(config.apiUrl || '').trim());
+    try {
+      const url = new URL(String(config.playbackWorkerUrl || '').trim());
+      return url.protocol === 'https:' && Boolean(url.hostname) && !url.username && !url.password;
+    } catch {
+      return false;
+    }
   }
 
   function loadSession() {
@@ -26,22 +34,30 @@
       const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
       if (!value || !value.token || !value.expiresAt) return null;
       if (new Date(value.expiresAt).getTime() <= Date.now()) {
-        localStorage.removeItem(STORAGE_KEY);
+        clearSession();
         return null;
       }
       return value;
     } catch {
-      localStorage.removeItem(STORAGE_KEY);
+      clearSession();
       return null;
     }
   }
 
   function saveSession(session) {
+    let previous = null;
+    try {
+      previous = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    } catch { /* Invalid prior data is replaced below. */ }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+    if (previous?.token !== session?.token || previous?.studentId !== session?.studentId) {
+      window.dispatchEvent(new CustomEvent('rsedu-academy:session-changed'));
+    }
   }
 
   function clearSession() {
     localStorage.removeItem(STORAGE_KEY);
+    window.dispatchEvent(new CustomEvent('rsedu-academy:session-cleared'));
   }
 
   function safeNext(rawValue) {
@@ -71,48 +87,39 @@
   function apiCall(action, payload = {}) {
     if (!isConfigured()) return Promise.reject(new Error('강의실 인증 서버가 아직 연결되지 않았습니다.'));
 
-    return new Promise((resolve, reject) => {
-      const id = `${CALLBACK_PREFIX}_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-      const script = document.createElement('script');
-      const timeoutMs = Number(config.requestTimeoutMs) || 12000;
-      let finished = false;
-
-      const cleanup = () => {
-        if (finished) return;
-        finished = true;
-        clearTimeout(timer);
-        script.remove();
-        try { delete window[id]; } catch { window[id] = undefined; }
-      };
-
-      const timer = setTimeout(() => {
-        cleanup();
-        reject(new Error('인증 서버 응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요.'));
-      }, timeoutMs);
-
-      window[id] = (result) => {
-        cleanup();
-        if (result?.ok) resolve(result);
-        else reject(new Error(result?.message || '입장 정보를 확인하지 못했습니다.'));
-      };
-
-      const url = new URL(config.apiUrl);
-      url.searchParams.set('action', action);
-      url.searchParams.set('callback', id);
-      url.searchParams.set('_', String(Date.now()));
-      Object.entries(payload).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && String(value) !== '') url.searchParams.set(key, String(value));
-      });
-
-      script.src = url.href;
-      script.async = true;
-      script.referrerPolicy = 'no-referrer';
-      script.onerror = () => {
-        cleanup();
-        reject(new Error('인증 서버에 연결하지 못했습니다. 네트워크를 확인해 주세요.'));
-      };
-      document.head.appendChild(script);
+    const controller = new AbortController();
+    const timeoutMs = Number(config.requestTimeoutMs) || 12000;
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const gateway = new URL('/access', String(config.playbackWorkerUrl).trim()).href;
+    const body = { action };
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && String(value) !== '') body[key] = value;
     });
+
+    return fetch(gateway, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller.signal
+    }).then(async (response) => {
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result?.ok) {
+        throw new Error(result?.message || '입장 정보를 확인하지 못했습니다.');
+      }
+      return result;
+    }).catch((error) => {
+      if (error?.name === 'AbortError') {
+        throw new Error('인증 서버 응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요.');
+      }
+      if (error instanceof TypeError) {
+        throw new Error('인증 서버에 연결하지 못했습니다. 네트워크를 확인해 주세요.');
+      }
+      throw error;
+    }).finally(() => clearTimeout(timer));
   }
 
   async function login(email, code) {
@@ -127,9 +134,12 @@
       courseId: config.courseId || 'lmc-lifetime-management-counselor',
       ua: navigator.userAgent.slice(0, 240)
     });
+    const studentId = normalizeStudentId(result.studentId);
+    if (!studentId) throw new Error('수강생 식별정보를 확인하지 못했습니다. 운영자에게 문의해 주세요.');
 
     const session = {
       token: result.token,
+      studentId,
       email: normalizedEmail,
       studentName: result.studentName || '',
       courseId: result.courseId || config.courseId,
@@ -148,8 +158,13 @@
         courseId: session.courseId || config.courseId,
         ua: navigator.userAgent.slice(0, 240)
       });
+      const studentId = normalizeStudentId(result.studentId);
+      if (!studentId || (session.studentId && studentId !== session.studentId)) {
+        throw new Error('수강생 식별정보가 일치하지 않습니다. 다시 로그인해 주세요.');
+      }
       const refreshed = {
         ...session,
+        studentId,
         studentName: result.studentName || session.studentName || '',
         expiresAt: result.expiresAt || session.expiresAt
       };
@@ -175,7 +190,7 @@
       <section class="access-setup-state" role="status">
         <span>ACADEMY ACCESS</span>
         <strong>입장 인증 연결 준비 중입니다.</strong>
-        <p>Google Apps Script 웹앱 배포 후 <code>access-config.js</code>의 <code>apiUrl</code>을 입력하면 수강생 로그인이 활성화됩니다.</p>
+        <p>Cloudflare Worker 배포 후 <code>access-config.js</code>의 <code>playbackWorkerUrl</code>을 입력하면 수강생 로그인이 활성화됩니다.</p>
         <a href="./index.html">LMC 과정 안내로 돌아가기 →</a>
       </section>`;
   }

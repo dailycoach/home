@@ -1,1 +1,172 @@
-.r2-video-player{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;object-fit:contain}.r2-player-state{position:absolute;inset:0;display:grid;place-content:center;gap:10px;padding:28px;text-align:center;color:#fff;background:radial-gradient(circle at 75% 20%,rgba(125,242,194,.2),transparent 24%),linear-gradient(135deg,#071c43,#0d2d67)}.r2-player-state strong{font-size:clamp(18px,2.5vw,28px);font-weight:900}.r2-player-state span{color:rgba(255,255,255,.68);font-size:12px;line-height:1.65}.r2-player-state.is-error{background:linear-gradient(135deg,#4d1420,#071c43)}
+.r2-video-player {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+  object-fit: contain;
+}
+
+.r2-player-state {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 28px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(125,242,194,.2), transparent 24%),
+    linear-gradient(135deg, #071c43, #0d2d67);
+  text-align: center;
+}
+
+.r2-player-state strong {
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-weight: 900;
+}
+
+.r2-player-state span {
+  color: rgba(255,255,255,.68);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.r2-player-state.is-error {
+  background: linear-gradient(135deg, #4d1420, #071c43);
+}
+
+.completion-stage {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  min-height: 360px;
+  padding: clamp(28px, 5vw, 56px);
+  color: #fff;
+  background:
+    radial-gradient(circle at 82% 14%, rgba(125,242,194,.26), transparent 25%),
+    radial-gradient(circle at 15% 90%, rgba(255,139,24,.22), transparent 28%),
+    linear-gradient(135deg, #071c43, #0d2d67 58%, #0a4350);
+  box-shadow: var(--art-shadow);
+}
+
+.completion-stage::after {
+  content: "12";
+  position: absolute;
+  right: clamp(14px, 4vw, 48px);
+  bottom: -42px;
+  color: rgba(255,255,255,.07);
+  font-size: clamp(140px, 24vw, 280px);
+  font-weight: 950;
+  line-height: .8;
+  letter-spacing: -.09em;
+  pointer-events: none;
+}
+
+.completion-stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+.completion-stage > strong {
+  max-width: 760px;
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -.06em;
+}
+
+.completion-stage > p {
+  max-width: 680px;
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.completion-stage-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.completion-stage-flow span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.82);
+  background: rgba(255,255,255,.06);
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.completion-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 14px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  color: #071c43;
+  background: var(--cip-mint);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.completion-action.is-disabled {
+  border-color: rgba(16,46,92,.12);
+  color: #68748a;
+  background: #edf2f7;
+  cursor: not-allowed;
+}
+
+.completion-stage .completion-action.is-disabled {
+  border-color: rgba(255,255,255,.16);
+  color: rgba(255,255,255,.66);
+  background: rgba(255,255,255,.08);
+}
+
+.completion-card-kicker {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--cip-green);
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.completion-reflection-card {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 760px) {
+  .video-ratio {
+    aspect-ratio: 16 / 9;
+  }
+
+  .completion-stage {
+    min-height: 0;
+    padding: 34px 22px;
+  }
+
+  .completion-stage > strong {
+    font-size: clamp(34px, 11vw, 48px);
+  }
+
+  .completion-stage-flow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .completion-stage-flow span {
+    justify-content: center;
+  }
+}

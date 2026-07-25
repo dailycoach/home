@@ -30,15 +30,20 @@ Apps Script에서 **배포 → 새 배포 → 웹 앱**을 선택합니다.
 - 실행 사용자: **본인**
 - 액세스 권한: **모든 사용자**
 
-배포 후 `syncDeploymentUrl()`을 실행합니다. 운영DB `설정` 시트의 `APPS_SCRIPT_WEB_APP_URL`에 URL이 기록됩니다.
+배포 후 `syncDeploymentUrl()`을 실행합니다. 함수가 표시하는 URL은 운영DB나 소스에 저장하지 않고 Cloudflare의 Secret 입력창으로만 옮깁니다.
 
-그 URL을 사이트 `lcms/academy/access-config.js`의 `apiUrl`과 Cloudflare Worker `wrangler.jsonc`의 `ACCESS_API_URL`에 동일하게 입력합니다.
+그 URL은 Cloudflare Worker Secret `ACCESS_API_URL`에만 입력합니다. 정적
+`access-config.js`에는 Apps Script 주소를 넣지 않습니다. 브라우저 로그인 요청도
+Worker의 `POST /access`를 거쳐 Apps Script `doPost`로 전달되므로 이메일,
+입장코드, 세션토큰이 URL이나 JSONP 스크립트 주소에 남지 않습니다.
+
+사이트 `lcms/academy/access-config.js`에는 공개 가능한 Worker 주소만 입력합니다.
 
 ```js
-apiUrl: 'https://script.google.com/macros/s/배포_ID/exec'
+playbackWorkerUrl: 'https://배포한-Worker-주소'
 ```
 
-웹앱 URL이 비어 있는 상태에서는 입장 페이지가 “인증 서버 연결 준비 중”으로 표시되며 실제 로그인이 열리지 않습니다.
+Worker 주소가 비어 있는 상태에서는 입장 페이지가 “인증 서버 연결 준비 중”으로 표시되며 실제 로그인이 열리지 않습니다.
 
 ## 3. Cloudflare R2 Worker 연결
 
@@ -46,8 +51,16 @@ apiUrl: 'https://script.google.com/macros/s/배포_ID/exec'
 
 1. 비공개 R2 버킷 `rsedu-lmc-videos` 생성
 2. R2 Worker 배포
-3. `PLAYBACK_SECRET`을 Wrangler Secret으로 등록
-4. 배포된 Worker 주소를 `access-config.js`에 입력
+3. Apps Script의 Script Properties에 생성된 `WORKER_SHARED_SECRET` 값(32자 이상)을 Cloudflare Worker의 `ACCESS_API_SECRET` Wrangler Secret으로 동일하게 등록
+4. `PLAYBACK_SECRET`을 별도의 Wrangler Secret으로 등록
+5. 배포된 Worker 주소를 `access-config.js`에 입력
+
+`WORKER_SHARED_SECRET`은 **Apps Script → 프로젝트 설정 → 스크립트 속성**에서 확인합니다. 값을 시트나 소스에 옮기지 말고 Cloudflare의 Secret 입력창에만 붙여 넣습니다.
+
+```bash
+cd lcms/academy/r2-worker
+npx wrangler secret put ACCESS_API_SECRET
+```
 
 ```js
 playbackWorkerUrl: 'https://lmc-r2-video-gateway.<계정>.workers.dev'
@@ -65,9 +78,29 @@ Naver Commerce API를 연결하기 전에도 운영할 수 있습니다.
 6. 수강생은 입장 페이지에서 이메일·코드로 로그인합니다.
 7. 강의실이 Worker에 현재 세션을 확인시킨 뒤 짧은 R2 재생주소를 발급받습니다.
 
+Worker는 Apps Script 웹앱에 JSON `POST` 요청을 보냅니다.
+
+```json
+{
+  "action": "workerValidate",
+  "token": "수강 세션",
+  "courseId": "lmc-lifetime-management-counselor",
+  "workerSecret": "ACCESS_API_SECRET",
+  "userAgent": "브라우저 사용자 에이전트"
+}
+```
+
+Apps Script는 공유 비밀값, 활성 세션, 세션 만료시각, 결제상태, 접근상태, 수강기간, 과정코드, 로그인 브라우저 지문을 모두 확인합니다. 정상일 때만 `valid: true`와 최소한의 수강정보를 반환하며, 실패 응답에는 수강생 식별정보를 넣지 않습니다.
+
 `취소` 또는 `환불`로 변경하면 입장코드와 활성 세션을 회수합니다. 수강기간이 끝난 계정은 로그인·세션 확인 시 즉시 만료되며, 매일 새벽 자동점검에서도 다시 확인합니다.
 
 ## 5. 테스트
+
+저장소에서 결정론적 접근 판정과 원문 비저장 회귀검사를 먼저 실행합니다.
+
+```bash
+node lcms/academy/apps-script/test-access-validation.mjs
+```
 
 실제 운영 전에 테스트 주문 1건으로 전체 흐름을 검수합니다.
 
@@ -90,7 +123,8 @@ Naver Commerce API를 연결하기 전에도 운영할 수 있습니다.
 - R2 버킷은 Public access를 켜지 않습니다.
 - 입장코드 원문은 시트에 저장하지 않고 해시와 힌트만 저장합니다.
 - 세션 토큰 원문도 시트에 저장하지 않습니다.
-- `CODE_PEPPER`, `SESSION_PEPPER`, `SYNC_SECRET`은 Apps Script Properties에만 저장합니다.
+- `CODE_PEPPER`, `SESSION_PEPPER`, `SYNC_SECRET`, `WORKER_SHARED_SECRET`은 Apps Script Properties에만 저장합니다.
+- Worker의 `ACCESS_API_SECRET`은 Apps Script의 `WORKER_SHARED_SECRET`과 같은 값으로 설정하며, 어느 시트에도 기록하지 않습니다.
 - `PLAYBACK_SECRET`은 Cloudflare Wrangler Secret에만 저장합니다.
 - Naver Client Secret은 시트나 정적 웹페이지에 넣지 않습니다.
 - Worker는 1~11주의 고정 object key만 허용합니다.

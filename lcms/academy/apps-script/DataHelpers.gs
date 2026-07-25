@@ -122,11 +122,14 @@ function findStudentByOrder_(ss, orderNo) {
   const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
   const lastRow = sheet.getLastRow();
   if (lastRow < RSEDU_ACADEMY.DATA_START_ROW) return null;
-  const range = sheet.getRange(RSEDU_ACADEMY.DATA_START_ROW, RSEDU_ACADEMY.STUDENT.ORDER_NO, lastRow - RSEDU_ACADEMY.HEADER_ROW, 1);
-  const cell = range.createTextFinder(String(orderNo)).matchEntireCell(true).findNext();
-  if (!cell) return null;
-  const rowNumber = cell.getRow();
-  return studentObject_(sheet.getRange(rowNumber, 1, 1, 23).getValues()[0], rowNumber);
+  const values = sheet
+    .getRange(RSEDU_ACADEMY.DATA_START_ROW, 1, lastRow - RSEDU_ACADEMY.HEADER_ROW, 23)
+    .getValues();
+  for (let index = values.length - 1; index >= 0; index -= 1) {
+    const student = studentObject_(values[index], RSEDU_ACADEMY.DATA_START_ROW + index);
+    if (student.orderNo === String(orderNo)) return student;
+  }
+  return null;
 }
 
 function studentObject_(row, rowNumber) {
@@ -135,16 +138,17 @@ function studentObject_(row, rowNumber) {
     id: String(row[RSEDU_ACADEMY.STUDENT.ID - 1] || ''),
     appliedAt: row[RSEDU_ACADEMY.STUDENT.APPLIED_AT - 1],
     courseId: String(row[RSEDU_ACADEMY.STUDENT.COURSE_ID - 1] || ''),
-    orderNo: String(row[RSEDU_ACADEMY.STUDENT.ORDER_NO - 1] || ''),
+    orderNo: readSheetSafeText_(row[RSEDU_ACADEMY.STUDENT.ORDER_NO - 1]),
     channel: String(row[RSEDU_ACADEMY.STUDENT.CHANNEL - 1] || ''),
-    buyerName: String(row[RSEDU_ACADEMY.STUDENT.BUYER_NAME - 1] || ''),
-    studentName: String(row[RSEDU_ACADEMY.STUDENT.STUDENT_NAME - 1] || ''),
-    email: normalizeEmail_(row[RSEDU_ACADEMY.STUDENT.EMAIL - 1]),
-    phone: String(row[RSEDU_ACADEMY.STUDENT.PHONE - 1] || ''),
+    buyerName: readSheetSafeText_(row[RSEDU_ACADEMY.STUDENT.BUYER_NAME - 1]),
+    studentName: readSheetSafeText_(row[RSEDU_ACADEMY.STUDENT.STUDENT_NAME - 1]),
+    email: normalizeEmail_(readSheetSafeText_(row[RSEDU_ACADEMY.STUDENT.EMAIL - 1])),
+    phone: readSheetSafeText_(row[RSEDU_ACADEMY.STUDENT.PHONE - 1]),
     paymentStatus: String(row[RSEDU_ACADEMY.STUDENT.PAYMENT_STATUS - 1] || ''),
     paymentAt: row[RSEDU_ACADEMY.STUDENT.PAYMENT_AT - 1],
     codeHint: String(row[RSEDU_ACADEMY.STUDENT.CODE_HINT - 1] || ''),
     codeHash: String(row[RSEDU_ACADEMY.STUDENT.CODE_HASH - 1] || ''),
+    codeIssuedAt: row[RSEDU_ACADEMY.STUDENT.CODE_ISSUED_AT - 1],
     accessExpiresAt: row[RSEDU_ACADEMY.STUDENT.ACCESS_EXPIRES_AT - 1],
     accessStatus: String(row[RSEDU_ACADEMY.STUDENT.ACCESS_STATUS - 1] || ''),
     mailStatus: String(row[RSEDU_ACADEMY.STUDENT.MAIL_STATUS - 1] || '')
@@ -173,7 +177,7 @@ function getCourseSettings_(ss, courseId) {
         courseName: String(row[1]),
         entryUrl: String(row[2]),
         formUrl: String(row[3] || ''),
-        accessDays: Number(row[4] || 180),
+        accessDays: Number(row[4] || RSEDU_ACADEMY.ACCESS_DAYS),
         senderName: String(row[5] || 'RS에듀컨설팅 LMC Academy'),
         replyEmail: normalizeEmail_(row[6]),
         mediaProvider: String(row[7] || 'R2'),
@@ -183,6 +187,16 @@ function getCourseSettings_(ss, courseId) {
     }
   }
   throw new Error(`과정설정에서 과정코드 ${courseId}를 찾지 못했습니다.`);
+}
+
+function validateCoursePlaybackSettings_(course) {
+  if (!course || String(course.mediaProvider).toUpperCase() !== 'R2') {
+    throw new Error('과정설정의 영상방식을 R2로 맞춰 주세요.');
+  }
+  if (String(course.accessPolicy) !== 'PRIVATE_WORKER_SIGNED_URL') {
+    throw new Error('과정설정의 접근정책을 PRIVATE_WORKER_SIGNED_URL로 맞춰 주세요.');
+  }
+  return true;
 }
 
 function getSettingValue_(ss, key) {
@@ -266,12 +280,27 @@ function runAcademySelfTest() {
   try { validateRequiredSheets_(ss); checks.push('필수 시트: 정상'); } catch (error) { checks.push('필수 시트: 실패 · ' + error.message); }
   try {
     const course = getCourseSettings_(ss, RSEDU_ACADEMY.DEFAULT_COURSE_ID);
+    validateCoursePlaybackSettings_(course);
     checks.push(`과정설정: 정상 · ${course.courseName}`);
-    checks.push('영상방식: Cloudflare R2 비공개 Worker 게이트');
+    checks.push(
+      course.accessDays === RSEDU_ACADEMY.ACCESS_DAYS
+        ? `수강기간: ${RSEDU_ACADEMY.ACCESS_DAYS}일`
+        : `수강기간: 확인필요 · ${course.accessDays}일`
+    );
+    checks.push('영상방식: 정상 · Cloudflare R2 / PRIVATE_WORKER_SIGNED_URL');
   } catch (error) { checks.push('과정설정: 실패 · ' + error.message); }
 
   const props = PropertiesService.getScriptProperties();
   checks.push(props.getProperty('FORM_ID') ? 'Google Form: 생성됨' : 'Google Form: 미생성');
+  const workerSecret = props.getProperty('WORKER_SHARED_SECRET') || '';
+  checks.push(workerSecret.length >= 32 ? 'Worker 공유 비밀값: 설정됨' : 'Worker 공유 비밀값: 미설정 또는 너무 짧음');
+  const sessionHoursValue = getSettingValue_(ss, 'SESSION_HOURS');
+  const sessionHours = sessionHoursValue === '' ? RSEDU_ACADEMY.SESSION_HOURS : Number(sessionHoursValue);
+  checks.push(
+    sessionHours === RSEDU_ACADEMY.SESSION_HOURS
+      ? `로그인 세션: ${RSEDU_ACADEMY.SESSION_HOURS}시간`
+      : `로그인 세션: 확인필요 · ${sessionHoursValue}시간`
+  );
   checks.push(ScriptApp.getService().getUrl() ? '웹앱 배포: URL 확인됨' : '웹앱 배포: 미완료');
   checks.push(`자동화 트리거: ${ScriptApp.getProjectTriggers().length}개`);
   const message = checks.join('\n');
@@ -283,14 +312,14 @@ function runAcademySelfTest() {
 function writeLog_(ss, studentId, orderNo, email, template, result, error, retryCount) {
   const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.LOGS);
   sheet.appendRow([
-    createId_('LOG'),
+    sheetSafeText_(createId_('LOG')),
     new Date(),
-    studentId || '',
-    orderNo || '',
-    email || '',
-    template || '',
-    result || '',
-    error || '',
+    sheetSafeText_(studentId || ''),
+    sheetSafeText_(orderNo || ''),
+    sheetSafeText_(email || ''),
+    sheetSafeText_(template || ''),
+    sheetSafeText_(result || ''),
+    sheetSafeText_(error || ''),
     Number(retryCount || 0)
   ]);
 }
@@ -315,6 +344,11 @@ function hashAccessCode_(email, courseId, code) {
 
 function hashSessionToken_(token) {
   return hmacSha256_(String(token), getRequiredProperty_('SESSION_PEPPER'));
+}
+
+function userAgentHash_(userAgent) {
+  const normalized = normalizeUserAgent_(userAgent);
+  return normalized ? sha256_(normalized) : '';
 }
 
 function ensureSecretProperty_(key) {
@@ -359,13 +393,10 @@ function constantTimeEqual_(left, right) {
   return diff === 0;
 }
 
-function output_(payload, callback) {
-  const json = JSON.stringify(payload);
-  const callbackName = String(callback || '');
-  if (/^[A-Za-z_$][0-9A-Za-z_$.]{0,90}$/.test(callbackName)) {
-    return ContentService.createTextOutput(`${callbackName}(${json});`).setMimeType(ContentService.MimeType.JAVASCRIPT);
-  }
-  return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
+function jsonOutput_(payload) {
+  return ContentService
+    .createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function publicErrorMessage_(error) {
@@ -375,7 +406,16 @@ function publicErrorMessage_(error) {
   if (code === 'ACCESS_EXPIRED') return '수강기간이 만료되었습니다. 운영자에게 문의해 주세요.';
   if (code === 'ACCESS_INACTIVE') return '현재 수강권한이 활성 상태가 아닙니다.';
   if (code === 'SESSION_INVALID' || code === 'SESSION_EXPIRED') return '로그인 시간이 만료되었습니다. 다시 입장해 주세요.';
-  if (/Unauthorized/.test(code)) return '인증되지 않은 요청입니다.';
+  if (
+    code === 'COURSE_MISMATCH' ||
+    code === 'STUDENT_NOT_FOUND' ||
+    code === 'USER_AGENT_MISMATCH'
+  ) return '로그인 시간이 만료되었습니다. 다시 입장해 주세요.';
+  if (
+    code === 'WORKER_UNAUTHORIZED' ||
+    code === 'WORKER_SECRET_MISCONFIGURED' ||
+    code === 'WEBHOOK_UNAUTHORIZED'
+  ) return '인증되지 않은 요청입니다.';
   return '요청을 처리하지 못했습니다. 잠시 후 다시 시도하거나 운영자에게 문의해 주세요.';
 }
 
@@ -384,11 +424,33 @@ function cleanText_(value) {
   return String(value == null ? '' : value).trim();
 }
 
+/**
+ * Google Sheets treats leading =, +, -, and @ as formula-like input.
+ * Prefix only the stored copy with an apostrophe; validation and matching keep
+ * using the normalized value prepared before the Sheet write.
+ */
+function sheetSafeText_(value) {
+  const text = cleanText_(value);
+  return /^[=+\-@]/.test(text) ? `'${text}` : text;
+}
+
+function readSheetSafeText_(value) {
+  const text = String(value == null ? '' : value);
+  return /^'[=+\-@]/.test(text) ? text.slice(1) : text;
+}
+
 function normalizeEmail_(value) { return cleanText_(value).toLowerCase(); }
 function normalizeCode_(value) { return cleanText_(value).toUpperCase().replace(/[^A-Z0-9]/g, ''); }
 function normalizeOrderNo_(value) { return cleanText_(value).replace(/\s+/g, ''); }
 function normalizePhone_(value) { return cleanText_(value).replace(/[^0-9+\-]/g, ''); }
+function normalizeUserAgent_(value) { return cleanText_(value).slice(0, 240); }
 function isValidEmail_(value) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '')); }
+function timestampMs_(value) {
+  if (value instanceof Date) return value.getTime();
+  if (typeof value === 'number') return value;
+  const text = String(value == null ? '' : value).trim();
+  return text ? new Date(text).getTime() : NaN;
+}
 function createId_(prefix) { return `${prefix}-${Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyyyMMddHHmmss')}-${Utilities.getUuid().slice(0, 8).toUpperCase()}`; }
 function escapeHtml_(value) { return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
 
