@@ -2,7 +2,7 @@
   'use strict';
 
   const DATA_PATH = './data/courses.json';
-  const CACHE_PATH = './data/youtube-cache.json';
+  const MEDIA_PATH = './data/media-catalog.json';
   const STORAGE_KEY = 'rsedu-academy-progress:v1';
   const params = new URLSearchParams(window.location.search);
   const pad = (value) => String(value).padStart(2, '0');
@@ -32,11 +32,11 @@
   }
 
   async function loadData() {
-    const [catalog, cache] = await Promise.all([
+    const [catalog, mediaCatalog] = await Promise.all([
       fetchJson(DATA_PATH, { courses: [] }),
-      fetchJson(CACHE_PATH, { courses: {}, syncedAt: null })
+      fetchJson(MEDIA_PATH, { courses: {}, updatedAt: null })
     ]);
-    return { catalog, cache };
+    return { catalog, mediaCatalog };
   }
 
   function getProgress() {
@@ -58,9 +58,33 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
   }
 
-  function videosFor(cache, courseId) {
-    const entry = cache?.courses?.[courseId];
-    return Array.isArray(entry?.videos) ? entry.videos : [];
+  function normalizeProvider(value = '') {
+    const provider = String(value).trim().toUpperCase();
+    if (provider === 'DRIVE') return 'drive';
+    if (provider === 'YOUTUBE_PUBLIC') return 'youtube_public';
+    return 'none';
+  }
+
+  function mediaFor(mediaCatalog, courseId) {
+    const entry = mediaCatalog?.courses?.[courseId];
+    const media = Array.isArray(entry?.media) ? entry.media : [];
+    return media.map((asset) => ({
+      ...asset,
+      week: Number(asset.week),
+      provider: normalizeProvider(asset.provider),
+      status: String(asset.status || '').toLowerCase()
+    }));
+  }
+
+  function isPlayableMedia(value) {
+    if (!value || value.status !== 'published') return false;
+    if (value.provider === 'drive') return Boolean(value.driveFileId || value.fileId);
+    if (value.provider === 'youtube_public') return Boolean(value.youtubeVideoId || value.videoId);
+    return false;
+  }
+
+  function availableMedia(mediaCatalog, courseId) {
+    return mediaFor(mediaCatalog, courseId).filter(isPlayableMedia);
   }
 
   function phaseForWeek(week = 1) {
@@ -78,6 +102,8 @@
           moduleId: `module-${pad(week)}`,
           moduleIndex: index,
           source: 'planned',
+          provider: 'none',
+          mediaStatus: 'planned',
           week,
           phase,
           title: module,
@@ -92,6 +118,8 @@
         moduleId,
         moduleIndex: index,
         source: 'planned',
+        provider: 'none',
+        mediaStatus: 'planned',
         week,
         phase,
         title: module.title || `제 ${week}차시`,
@@ -102,44 +130,29 @@
     });
   }
 
-  function lessonsFor(course, cache) {
-    const planned = plannedLessons(course);
-    const videos = videosFor(cache, course.id);
-    if (!videos.length) return planned;
+  function lessonsFor(course, mediaCatalog) {
+    const assets = mediaFor(mediaCatalog, course.id);
+    return plannedLessons(course).map((module) => {
+      const asset = assets.find((item) => item.week === module.week);
+      if (!asset) return module;
 
-    const merged = planned.map((module, index) => {
-      const video = videos[index];
-      if (!video) return module;
-      return {
+      const provider = asset.provider;
+      const driveFileId = asset.fileId || asset.driveFileId || '';
+      const youtubeVideoId = asset.videoId || asset.youtubeVideoId || '';
+      const enriched = {
         ...module,
-        ...video,
-        id: video.videoId,
-        videoId: video.videoId,
-        moduleId: module.id,
-        source: 'youtube',
-        title: video.title || module.title,
-        description: video.description || module.theory
+        source: provider,
+        provider,
+        mediaStatus: asset.status,
+        accessPolicy: asset.accessPolicy || '',
+        driveFileId,
+        youtubeVideoId,
+        mediaTitle: asset.title || '',
+        description: asset.description || module.theory
       };
+      if (asset.title) enriched.title = asset.title;
+      return enriched;
     });
-
-    videos.slice(planned.length).forEach((video, offset) => {
-      const index = planned.length + offset;
-      const week = index + 1;
-      merged.push({
-        ...video,
-        id: video.videoId,
-        videoId: video.videoId,
-        moduleId: null,
-        moduleIndex: index,
-        source: 'youtube',
-        week,
-        phase: phaseForWeek(Math.min(week, 12)),
-        theory: video.description || '',
-        practice: '영상강의의 안내에 따라 실습합니다.',
-        recommendedFor: 'LMC 과정 참여자'
-      });
-    });
-    return merged;
   }
 
   function completedSet(progress, courseId) {
@@ -159,7 +172,6 @@
 
   function lessonUrl(course, lesson) {
     if (!lesson) return `./course.html?course=${encodeURIComponent(course.id)}`;
-    if (lesson.videoId) return `./lesson.html?course=${encodeURIComponent(course.id)}&video=${encodeURIComponent(lesson.videoId)}`;
     return `./lesson.html?course=${encodeURIComponent(course.id)}&module=${lesson.moduleIndex}`;
   }
 
@@ -179,8 +191,8 @@
     return remain ? `약 ${hours}시간 ${remain}분` : `약 ${hours}시간`;
   }
 
-  function statusLabel(course, videos) {
-    if (videos.length) return `${videos.length}개 영상강의 공개`;
+  function statusLabel(course, assets) {
+    if (assets.length) return `${assets.length}개 Drive 영상강의 연결`;
     if (course.status === 'published') return '온라인 과정 공개';
     return `${course.estimatedLessons || course.modules?.length || 0}주 커리큘럼 준비 완료`;
   }
@@ -189,13 +201,13 @@
     return `<div class="progress-track"><div class="progress-fill" style="width:${summary.percent}%"></div></div>`;
   }
 
-  function buildCourseCard(course, cache, progress) {
-    const videos = videosFor(cache, course.id);
-    const lessons = lessonsFor(course, cache);
+  function buildCourseCard(course, mediaCatalog, progress) {
+    const assets = availableMedia(mediaCatalog, course.id);
+    const lessons = lessonsFor(course, mediaCatalog);
     const summary = courseProgress(progress, course.id, lessons);
     const resume = resumeLesson(course, lessons, progress);
-    const actionLabel = summary.completed > 0 ? '학습 이어가기 →' : 'LMC 과정 보기 →';
-    const actionUrl = summary.completed > 0 ? lessonUrl(course, resume) : `./course.html?course=${encodeURIComponent(course.id)}`;
+    const actionLabel = summary.completed > 0 ? '인증 후 학습 이어가기 →' : '수강생 입장 →';
+    const actionUrl = summary.completed > 0 ? lessonUrl(course, resume) : './enter.html';
 
     return `
       <article class="course-card" data-accent="${escapeHtml(course.accent || 'green')}" data-course="lmc">
@@ -207,7 +219,7 @@
           </div>
         </div>
         <div class="course-card-body">
-          <div class="course-meta"><span>${escapeHtml(course.category)}</span><span>${escapeHtml(course.level)}</span><span>${summary.completed ? `${summary.percent}% 학습` : '12주 커리큘럼 공개'}</span></div>
+          <div class="course-meta"><span>${escapeHtml(course.category)}</span><span>${escapeHtml(course.level)}</span><span>${assets.length ? `${assets.length}개 영상 연결` : '12주 커리큘럼'}</span></div>
           <h3>${escapeHtml(course.title)}</h3>
           <p>${escapeHtml(course.subtitle)}</p>
           <div class="lmc-card-credential">${escapeHtml(course.qualificationNumber || '')} · ${escapeHtml(course.qualificationName || '')}</div>
@@ -217,15 +229,15 @@
             <div class="lmc-card-fact"><span>Credential</span><strong>수료시험·발급요건</strong></div>
           </div>
           <div class="lmc-card-progress">
-            <div class="lmc-card-progress-head"><span>내 학습진도</span><strong>${summary.completed}/${summary.total} · ${summary.percent}%</strong></div>
+            <div class="lmc-card-progress-head"><span>이 기기의 학습진도</span><strong>${summary.completed}/${summary.total} · ${summary.percent}%</strong></div>
             ${progressMarkup(summary)}
           </div>
-          <div class="course-card-footer"><span class="course-count">${lessons.length}차시 · ${escapeHtml(statusLabel(course, videos))}</span><a class="course-link" href="${actionUrl}">${actionLabel}</a></div>
+          <div class="course-card-footer"><span class="course-count">${lessons.length}차시 · ${escapeHtml(statusLabel(course, assets))}</span><a class="course-link" href="${actionUrl}">${actionLabel}</a></div>
         </div>
       </article>`;
   }
 
-  function renderIndex(catalog, cache, progress) {
+  function renderIndex(catalog, mediaCatalog, progress) {
     const courseGrid = document.querySelector('#courseGrid');
     const statusPanel = document.querySelector('#academyStatus');
     const courses = Array.isArray(catalog.courses) ? catalog.courses : [];
@@ -233,11 +245,12 @@
     if (!courseGrid) return;
 
     courseGrid.innerHTML = courses.length
-      ? courses.map((item) => buildCourseCard(item, cache, progress)).join('')
+      ? courses.map((item) => buildCourseCard(item, mediaCatalog, progress)).join('')
       : '<div class="empty-state"><strong>등록된 LMC 과정이 없습니다.</strong><span>과정 데이터를 확인해 주세요.</span></div>';
 
     if (!course) return;
-    const lessons = lessonsFor(course, cache);
+    const lessons = lessonsFor(course, mediaCatalog);
+    const assets = availableMedia(mediaCatalog, course.id);
     const summary = courseProgress(progress, course.id, lessons);
     const resume = resumeLesson(course, lessons, progress);
     const resumeCta = document.querySelector('#academyResumeCta');
@@ -245,31 +258,40 @@
 
     if (resumeCta && summary.completed > 0 && resume) {
       resumeCta.hidden = false;
-      resumeCta.href = lessonUrl(course, resume);
-      resumeCta.textContent = `${resume.week || resume.moduleIndex + 1}주차 이어가기`;
+      resumeCta.href = './enter.html';
+      resumeCta.textContent = `${resume.week || resume.moduleIndex + 1}주차 인증 후 이어가기`;
     }
-    if (heroProgress && summary.completed > 0) {
+    if (heroProgress) {
       heroProgress.classList.add('is-visible');
-      heroProgress.textContent = `${summary.completed}개 차시 완료 · 전체 진행률 ${summary.percent}%`;
+      heroProgress.textContent = summary.completed > 0
+        ? `${summary.completed}개 차시 완료 · 이 기기 진행률 ${summary.percent}%`
+        : `${assets.length}개 Drive 영상 연결 · 입장코드 인증 후 학습`;
     }
 
     if (statusPanel) {
       statusPanel.innerHTML = `
         <article class="status-card"><span>LMC Curriculum</span><strong>${lessons.length}개 차시</strong><p>심리학 이론·심리측정 실습·수료시험</p></article>
-        <article class="status-card"><span>Qualification</span><strong>${escapeHtml(course.qualificationNumber || 'LMC')}</strong><p>${escapeHtml(course.qualificationName || '평생진로상담사')}</p></article>
-        <article class="status-card"><span>My Learning</span><strong>${summary.completed}개 완료</strong><p>진행률 ${summary.percent}% · 다음 방문에도 이어집니다</p></article>`;
+        <article class="status-card"><span>Protected Media</span><strong>${assets.length}개 연결</strong><p>등록 Google 계정에 제한공유</p></article>
+        <article class="status-card"><span>My Learning</span><strong>${summary.completed}개 완료</strong><p>이 기기 진행률 ${summary.percent}% · 입장 인증 별도</p></article>`;
     }
   }
 
   function curriculumRow(course, lesson, progress) {
     const completed = completedSet(progress, course.id);
     const done = isLessonComplete(completed, lesson);
+    const playable = isPlayableMedia({
+      provider: lesson.provider,
+      status: lesson.mediaStatus,
+      fileId: lesson.driveFileId,
+      videoId: lesson.youtubeVideoId
+    });
+    const state = done ? '완료' : (playable ? '영상 학습' : '내용 보기');
     return `
       <a class="curriculum-item lmc-curriculum-item${done ? ' is-complete' : ''}" href="${lessonUrl(course, lesson)}">
         <span class="curriculum-number">${done ? '✓' : pad(lesson.week)}</span>
         <span class="lmc-curriculum-main"><strong>${escapeHtml(lesson.title)}</strong><small>${escapeHtml(lesson.theory)}</small></span>
-        <span class="lmc-curriculum-practice"><em>Practice</em><small>${escapeHtml(lesson.practice)}</small></span>
-        <span class="lesson-status">${done ? '완료' : '학습하기'}</span>
+        <span class="lmc-curriculum-practice"><em>${playable ? 'Drive Video' : 'Practice'}</em><small>${escapeHtml(lesson.practice)}</small></span>
+        <span class="lesson-status">${state}</span>
       </a>`;
   }
 
@@ -285,7 +307,7 @@
     }).join('')}</div>`;
   }
 
-  function renderCourse(catalog, cache, progress) {
+  function renderCourse(catalog, mediaCatalog, progress) {
     const app = document.querySelector('#courseApp');
     if (!app) return;
     const courseId = params.get('course') || catalog.courses?.[0]?.id;
@@ -295,8 +317,8 @@
       return;
     }
 
-    const videos = videosFor(cache, course.id);
-    const lessons = lessonsFor(course, cache);
+    const assets = availableMedia(mediaCatalog, course.id);
+    const lessons = lessonsFor(course, mediaCatalog);
     const summary = courseProgress(progress, course.id, lessons);
     const resume = resumeLesson(course, lessons, progress);
     const delivery = (course.deliveryOptions || []).join(' · ');
@@ -315,7 +337,7 @@
           <div class="lmc-qualification-strip">
             <div class="lmc-qualification-item"><span>Qualification</span><strong>${escapeHtml(course.qualificationNumber)}</strong></div>
             <div class="lmc-qualification-item"><span>Program</span><strong>${escapeHtml(course.scheduleSummary)}</strong></div>
-            <div class="lmc-qualification-item"><span>Delivery</span><strong>${escapeHtml(delivery)}</strong></div>
+            <div class="lmc-qualification-item"><span>Protected Media</span><strong>${assets.length}개 Drive 영상</strong></div>
           </div>
           <div class="lmc-resume-panel"><div><span>Next Learning</span><strong>${escapeHtml(resume?.title || '1주차부터 시작합니다')}</strong></div><a class="primary-action" href="${lessonUrl(course, resume)}">${resumeLabel} →</a></div>
           <div class="course-actions"><a class="secondary-action" href="#curriculum">커리큘럼 먼저 보기</a><a class="secondary-action" href="./index.html">LMC Academy</a></div>
@@ -328,7 +350,8 @@
             <div class="summary-row"><span>강사·운영</span><strong>${escapeHtml(course.instructor)}</strong></div>
             <div class="summary-row"><span>차시</span><strong>${lessons.length}개</strong></div>
             <div class="summary-row"><span>학습시간</span><strong>${durationLabel(course.estimatedMinutes)}</strong></div>
-            <div class="summary-row"><span>상태</span><strong>${escapeHtml(statusLabel(course, videos))}</strong></div>
+            <div class="summary-row"><span>제공방식</span><strong>${escapeHtml(delivery)}</strong></div>
+            <div class="summary-row"><span>영상 상태</span><strong>${escapeHtml(statusLabel(course, assets))}</strong></div>
             <div class="summary-row"><span>내 진도</span><strong>${summary.completed}/${summary.total}</strong></div>
             <div style="margin-top:18px">${progressMarkup(summary)}<div class="progress-copy"><span>진행률</span><span>${summary.percent}%</span></div></div>
           </div>
@@ -354,7 +377,10 @@
       const classes = ['lesson-list-item'];
       if (lesson.id === activeId) classes.push('is-active');
       if (done) classes.push('is-complete');
-      return `<a class="${classes.join(' ')}" href="${lessonUrl(course, lesson)}"><span class="lesson-number">${done ? '✓' : pad(lesson.week)}</span><span><strong>${escapeHtml(lesson.title)}</strong><small>${done ? '학습 완료' : `${lesson.phase.label} · ${lesson.phase.title}`}</small></span></a>`;
+      const mediaCopy = isPlayableMedia({ provider: lesson.provider, status: lesson.mediaStatus, fileId: lesson.driveFileId, videoId: lesson.youtubeVideoId })
+        ? ' · 영상 공개'
+        : '';
+      return `<a class="${classes.join(' ')}" href="${lessonUrl(course, lesson)}"><span class="lesson-number">${done ? '✓' : pad(lesson.week)}</span><span><strong>${escapeHtml(lesson.title)}</strong><small>${done ? '학습 완료' : `${lesson.phase.label} · ${lesson.phase.title}${mediaCopy}`}</small></span></a>`;
     }).join('');
   }
 
@@ -372,7 +398,33 @@
     showStatus.timer = setTimeout(() => { toast.style.opacity = '0'; }, 1800);
   }
 
-  function renderLesson(catalog, cache, progress) {
+  function mediaMarkup(active) {
+    const media = {
+      provider: active.provider,
+      status: active.mediaStatus,
+      fileId: active.driveFileId,
+      videoId: active.youtubeVideoId
+    };
+    if (!isPlayableMedia(media)) {
+      return `<div class="video-placeholder"><div class="video-placeholder-card"><span class="video-week-mark">LMC WEEK ${pad(active.week)}</span><strong>${escapeHtml(active.title)}</strong><p>${escapeHtml(active.theory)}</p><span class="video-placeholder-hint">영상 연결 전에도 이론·실습·학습기록을 사용할 수 있습니다.</span></div></div>`;
+    }
+
+    if (active.provider === 'drive') {
+      const fileId = encodeURIComponent(active.driveFileId);
+      const title = escapeHtml(`${active.week}주차 ${active.title}`);
+      return `<iframe class="drive-video-frame" src="https://drive.google.com/file/d/${fileId}/preview" title="${title}" allow="autoplay; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><a class="drive-video-fallback" href="https://drive.google.com/file/d/${fileId}/view" target="_blank" rel="noopener noreferrer">재생이 안 되면 Drive에서 열기 ↗</a>`;
+    }
+
+    return '<div id="youtubePlayer" style="position:absolute;inset:0"></div>';
+  }
+
+  function sourceKicker(active) {
+    if (active.provider === 'drive' && active.mediaStatus === 'published') return 'LMC Protected Drive Lesson';
+    if (active.provider === 'youtube_public' && active.mediaStatus === 'published') return 'LMC Public Video Lesson';
+    return `LMC Week ${pad(active.week)}`;
+  }
+
+  function renderLesson(catalog, mediaCatalog, progress) {
     const app = document.querySelector('#lessonApp');
     if (!app) return;
     const courseId = params.get('course') || catalog.courses?.[0]?.id;
@@ -382,10 +434,12 @@
       return;
     }
 
-    const lessons = lessonsFor(course, cache);
+    const lessons = lessonsFor(course, mediaCatalog);
     const requestedVideo = params.get('video');
-    const requestedModule = Number(params.get('module'));
-    let activeIndex = requestedVideo ? lessons.findIndex((lesson) => lesson.videoId === requestedVideo) : (Number.isFinite(requestedModule) ? requestedModule : -1);
+    const requestedModule = params.has('module') ? Number(params.get('module')) : NaN;
+    let activeIndex = requestedVideo
+      ? lessons.findIndex((lesson) => lesson.youtubeVideoId === requestedVideo || lesson.id === requestedVideo)
+      : (Number.isFinite(requestedModule) ? requestedModule : -1);
     if (activeIndex < 0 || activeIndex >= lessons.length) {
       const resume = resumeLesson(course, lessons, progress);
       activeIndex = Math.max(0, lessons.findIndex((lesson) => lesson.id === resume?.id));
@@ -401,6 +455,7 @@
     const completed = completedSet(progress, course.id);
     const done = isLessonComplete(completed, active);
     const description = active.description || active.theory || 'LMC 차시 정보를 불러오고 있습니다.';
+    const playable = isPlayableMedia({ provider: active.provider, status: active.mediaStatus, fileId: active.driveFileId, videoId: active.youtubeVideoId });
 
     progress.lastViewed[course.id] = activeId;
     saveProgress(progress);
@@ -415,12 +470,10 @@
       <section class="lesson-layout">
         <div>
           <div class="lesson-workspace-head"><div class="lesson-context"><span>${active.phase.label}</span><span>${escapeHtml(active.phase.title)}</span><span>${active.week}주차</span></div><div class="lesson-step-count">${activeIndex + 1} / ${lessons.length}</div></div>
-          <div class="video-stage${active.videoId ? '' : ' no-video'}">
-            <div class="video-ratio" id="videoRatio">
-              ${active.videoId ? '<div id="youtubePlayer" style="position:absolute;inset:0"></div>' : `<div class="video-placeholder"><div class="video-placeholder-card"><span class="video-week-mark">LMC WEEK ${pad(active.week)}</span><strong>${escapeHtml(active.title)}</strong><p>${escapeHtml(active.theory)}</p><span class="video-placeholder-hint">영상 연결 전에도 이론·실습·학습기록을 사용할 수 있습니다.</span></div></div>`}
-            </div>
+          <div class="video-stage${playable ? '' : ' no-video'}">
+            <div class="video-ratio" id="videoRatio">${mediaMarkup(active)}</div>
           </div>
-          <div class="lesson-title-row"><span class="cip-kicker">${active.videoId ? 'LMC Video Lesson' : `LMC Week ${pad(active.week)}`}</span><h1>${escapeHtml(active.title)}</h1><p>${escapeHtml(description)}</p><div class="course-meta" style="margin-top:16px"><span>${escapeHtml(active.recommendedFor || 'LMC 과정 참여자')}</span></div></div>
+          <div class="lesson-title-row"><span class="cip-kicker">${sourceKicker(active)}</span><h1>${escapeHtml(active.title)}</h1><p>${escapeHtml(description)}</p><div class="course-meta" style="margin-top:16px"><span>${escapeHtml(active.recommendedFor || 'LMC 과정 참여자')}</span>${active.provider === 'drive' ? '<span>등록 Google 계정 제한공유</span>' : ''}</div></div>
 
           <div class="lesson-content-grid">
             <article class="lesson-content-card lmc-lesson-theory" data-card-index="01"><h2 class="card-title">이론 핵심</h2><p class="lmc-lesson-copy">${escapeHtml(active.theory || description)}</p></article>
@@ -468,7 +521,7 @@
       }
       progress.completed[course.id] = [...set];
       saveProgress(progress);
-      renderLesson(catalog, cache, progress);
+      renderLesson(catalog, mediaCatalog, progress);
       showStatus(isLessonComplete(set, active) ? '학습 완료로 기록했습니다.' : '완료 기록을 취소했습니다.');
     }));
 
@@ -479,16 +532,18 @@
       event.currentTarget.textContent = collapsed ? '⌄' : '⌃';
     });
 
-    if (active.videoId) createYouTubePlayer(active.videoId, () => {
-      const set = completedSet(progress, course.id);
-      if (!isLessonComplete(set, active)) {
-        set.add(active.id);
-        progress.completed[course.id] = [...set];
-        saveProgress(progress);
-        renderLesson(catalog, cache, progress);
-        showStatus('영상 시청을 완료했습니다.');
-      }
-    });
+    if (active.provider === 'youtube_public' && active.youtubeVideoId && active.mediaStatus === 'published') {
+      createYouTubePlayer(active.youtubeVideoId, () => {
+        const set = completedSet(progress, course.id);
+        if (!isLessonComplete(set, active)) {
+          set.add(active.id);
+          progress.completed[course.id] = [...set];
+          saveProgress(progress);
+          renderLesson(catalog, mediaCatalog, progress);
+          showStatus('영상 시청을 완료했습니다.');
+        }
+      });
+    }
   }
 
   function createYouTubePlayer(videoId, onEnded) {
@@ -514,13 +569,33 @@
     }
   }
 
+  function renderAccessFailure(page, message) {
+    const target = document.querySelector(page === 'course' ? '#courseApp' : '#lessonApp');
+    if (!target) return;
+    target.innerHTML = `<section class="access-setup-state"><span>ACADEMY ACCESS</span><strong>강의실 인증을 시작하지 못했습니다.</strong><p>${escapeHtml(message || '입장 페이지에서 다시 로그인해 주세요.')}</p><a href="./enter.html">수강생 입장으로 이동 →</a></section>`;
+  }
+
   async function init() {
     const page = document.body.dataset.academyPage;
-    const { catalog, cache } = await loadData();
+    if (page === 'course' || page === 'lesson') {
+      if (!window.RSEduAcademyAccess) {
+        renderAccessFailure(page, '인증 스크립트가 로드되지 않았습니다.');
+        return;
+      }
+      try {
+        const session = await window.RSEduAcademyAccess.guard({ target: document.querySelector(page === 'course' ? '#courseApp' : '#lessonApp') });
+        if (!session) return;
+      } catch (error) {
+        renderAccessFailure(page, error.message);
+        return;
+      }
+    }
+
+    const { catalog, mediaCatalog } = await loadData();
     const progress = getProgress();
-    if (page === 'index') renderIndex(catalog, cache, progress);
-    if (page === 'course') renderCourse(catalog, cache, progress);
-    if (page === 'lesson') renderLesson(catalog, cache, progress);
+    if (page === 'index') renderIndex(catalog, mediaCatalog, progress);
+    if (page === 'course') renderCourse(catalog, mediaCatalog, progress);
+    if (page === 'lesson') renderLesson(catalog, mediaCatalog, progress);
   }
 
   document.addEventListener('DOMContentLoaded', init);
