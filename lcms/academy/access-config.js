@@ -3,6 +3,7 @@
 
   window.RSEDU_ACADEMY_ACCESS = Object.freeze({
     apiUrl: '',
+    playbackWorkerUrl: '',
     courseId: 'lmc-lifetime-management-counselor',
     entryPath: './enter.html',
     defaultNext: './course.html?course=lmc-lifetime-management-counselor',
