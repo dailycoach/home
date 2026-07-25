@@ -84,7 +84,7 @@ assert(accessJs.includes("action', action"), 'Access API request builder is miss
 assert(accessJs.includes('localStorage'), 'Access session storage is missing');
 assert(accessConfig.includes("apiUrl: ''"), 'Deployment URL placeholder must remain explicit until Apps Script is deployed');
 
-const appScriptFiles = ['Code.gs', 'Provisioning.gs', 'Api.gs', 'DataHelpers.gs'];
+const appScriptFiles = ['Code.gs', 'Provisioning.gs', 'Api.gs', 'DataHelpers.gs', 'Expiry.gs'];
 for (const file of appScriptFiles) assert(exists(`lcms/academy/apps-script/${file}`), `Missing Apps Script module: ${file}`);
 const appScript = appScriptFiles.map((file) => read(`lcms/academy/apps-script/${file}`)).join('\n');
 assert(exists('lcms/academy/apps-script/appsscript.json'), 'Apps Script manifest is missing');
@@ -92,11 +92,13 @@ const appScriptManifest = JSON.parse(read('lcms/academy/apps-script/appsscript.j
 assert(appScriptManifest.oauthScopes?.includes('https://www.googleapis.com/auth/script.container.ui'), 'Apps Script UI scope is missing');
 assert(exists('lcms/academy/apps-script/README.md'), 'Apps Script installation guide is missing');
 assert(exists('lcms/academy/SMARTSTORE_COPY.md'), 'SmartStore registration copy is missing');
-for (const fn of ['setupAcademyAutomation', 'handleFormSubmit', 'handlePaymentEdit', 'provisionStudentRow_', 'doGet', 'doPost']) {
+for (const fn of ['setupAcademyAutomation', 'handleFormSubmit', 'handlePaymentEdit', 'provisionStudentRow_', 'expireStudentAccesses', 'ensureExpiryTrigger_', 'doGet', 'doPost']) {
   assert(appScript.includes(`function ${fn}`), `Apps Script function is missing: ${fn}`);
 }
 assert(appScript.includes('addViewer(email)'), 'Drive permission grant is missing');
 assert(appScript.includes('revokePermissions(email)'), 'Drive permission revoke is missing');
+assert(appScript.includes(".timeBased()"), 'Daily expiration trigger is missing');
+assert(appScript.includes("ACCESS_EXPIRE"), 'Expiration audit log is missing');
 assert(appScript.includes('setConfirmationMessage'), 'Google Form completion message is missing');
 assert(appScript.includes('requireTextIsEmail()'), 'Google Form email validation is missing');
 assert(appScript.includes('MailApp.sendEmail'), 'Automatic access-code email is missing');
