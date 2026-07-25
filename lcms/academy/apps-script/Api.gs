@@ -45,7 +45,7 @@ function loginResponse_(params) {
   const actual = hashAccessCode_(email, courseId, code);
   if (!student || !constantTimeEqual_(expected, actual)) throw new Error('INVALID_CREDENTIALS');
   if (student.accessExpiresAt && new Date(student.accessExpiresAt).getTime() <= Date.now()) {
-    expireStudent_(ss, student.row);
+    expireStudentRow_(ss, student.row, '로그인 시 수강기간 만료 확인');
     throw new Error('ACCESS_EXPIRED');
   }
 
@@ -73,7 +73,7 @@ function validateResponse_(params) {
   const student = findStudentById_(ss, session.studentId);
   if (!student || student.accessStatus !== '활성' || student.paymentStatus !== '확인완료') throw new Error('ACCESS_INACTIVE');
   if (student.accessExpiresAt && new Date(student.accessExpiresAt).getTime() <= Date.now()) {
-    expireStudent_(ss, student.row);
+    expireStudentRow_(ss, student.row, '세션 확인 시 수강기간 만료');
     updateSessionStatus_(ss, session.row, '만료');
     throw new Error('ACCESS_EXPIRED');
   }
