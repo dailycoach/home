@@ -65,10 +65,57 @@ function suspendStudentRow_(ss, rowNumber, reason) {
   const course = getCourseSettings_(ss, student.courseId || RSEDU_ACADEMY.DEFAULT_COURSE_ID);
   revokeDriveAccess_(ss, course, student.email);
   invalidateStudentSessions_(ss, student.id, reason || '접근 정지');
+  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.CODE_HINT, 1, 2).clearContent();
   sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.ACCESS_STATUS).setValue('정지');
   sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.NOTE).setValue(reason || '관리자 정지');
   writeLog_(ss, student.id, student.orderNo, student.email, 'ACCESS_SUSPEND', 'SUCCESS', '', 0);
   return { ok: true, studentId: student.id, studentName: student.studentName };
+}
+
+function expireStudentRow_(ss, rowNumber, reason) {
+  const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
+  const values = sheet.getRange(rowNumber, 1, 1, 23).getValues()[0];
+  const student = studentObject_(values, rowNumber);
+  if (!student.id || student.accessStatus !== '활성') return { ok: true, skipped: true };
+
+  const course = getCourseSettings_(ss, student.courseId || RSEDU_ACADEMY.DEFAULT_COURSE_ID);
+  revokeDriveAccess_(ss, course, student.email);
+  invalidateStudentSessions_(ss, student.id, reason || '수강기간 만료');
+  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.CODE_HINT, 1, 2).clearContent();
+  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.ACCESS_STATUS).setValue('만료');
+  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.NOTE).setValue(reason || '수강기간 만료');
+  writeLog_(ss, student.id, student.orderNo, student.email, 'ACCESS_EXPIRE', 'SUCCESS', '', 0);
+  return { ok: true, studentId: student.id, studentName: student.studentName };
+}
+
+/** 매일 새벽 installable trigger로 만료된 Drive 권한과 세션을 회수합니다. */
+function expireStudentAccesses() {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    const ss = getSpreadsheet_();
+    const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
+    const lastRow = sheet.getLastRow();
+    if (lastRow < RSEDU_ACADEMY.DATA_START_ROW) return { ok: true, expired: 0 };
+
+    const values = sheet.getRange(RSEDU_ACADEMY.DATA_START_ROW, 1, lastRow - RSEDU_ACADEMY.HEADER_ROW, 23).getValues();
+    let expired = 0;
+    values.forEach(function(row, index) {
+      const student = studentObject_(row, RSEDU_ACADEMY.DATA_START_ROW + index);
+      const expiresAt = student.accessExpiresAt ? new Date(student.accessExpiresAt).getTime() : NaN;
+      if (student.accessStatus !== '활성' || !Number.isFinite(expiresAt) || expiresAt > Date.now()) return;
+      try {
+        expireStudentRow_(ss, student.row, '수강기간 자동 만료');
+        expired += 1;
+      } catch (error) {
+        sheet.getRange(student.row, RSEDU_ACADEMY.STUDENT.ERROR).setValue(`자동 만료 처리 실패: ${error.message}`);
+        writeLog_(ss, student.id, student.orderNo, student.email, 'ACCESS_EXPIRE', 'ERROR', error.message, 0);
+      }
+    });
+    return { ok: true, expired: expired };
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function grantDriveAccess_(ss, course, email) {
