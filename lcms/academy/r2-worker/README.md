@@ -15,21 +15,27 @@ npx wrangler r2 bucket create rsedu-lmc-videos
 
 R2 버킷은 **Public access를 켜지 않습니다.** Worker의 `VIDEOS` binding만 버킷에 접근합니다.
 
-## 2. Worker 설정
+## 2. Worker 비밀값 설정
 
-`wrangler.jsonc`의 `ACCESS_API_URL`을 배포된 Google Apps Script 웹앱 URL로 바꿉니다.
+배포된 Google Apps Script 웹앱 URL을 Worker Secret으로 등록합니다.
 
-```json
-"ACCESS_API_URL": "https://script.google.com/macros/s/배포_ID/exec"
+```bash
+npx wrangler secret put ACCESS_API_URL
 ```
 
-재생주소 서명 비밀값을 등록합니다.
+입력값:
+
+```text
+https://script.google.com/macros/s/배포_ID/exec
+```
+
+재생주소 서명 비밀값도 등록합니다.
 
 ```bash
 npx wrangler secret put PLAYBACK_SECRET
 ```
 
-32자 이상의 무작위 문자열을 입력합니다. GitHub, 스프레드시트, 정적 JS에는 저장하지 않습니다.
+32자 이상의 무작위 문자열을 입력합니다. 두 값 모두 GitHub, 스프레드시트, 정적 JS에는 저장하지 않습니다.
 
 ## 3. Worker 배포
 
@@ -107,7 +113,7 @@ LMC 영상 총량이 4GB 미만이면 R2 무료 저장 10GB-month 범위 안입�
 
 - R2 버킷 Public access 금지
 - `PLAYBACK_SECRET`은 Wrangler Secret만 사용
-- `ACCESS_API_URL`은 Apps Script 인증 웹앱만 사용
+- `ACCESS_API_URL`도 Wrangler Secret으로 등록
 - 영상 object key를 임의 입력받지 않고 Worker 내부 1~11주 매핑만 허용
 - 재생주소는 최대 4시간 후 만료
 - 허용 Origin은 `daily-coach-ing.com`만 유지
