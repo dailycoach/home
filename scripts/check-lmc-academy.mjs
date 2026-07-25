@@ -91,6 +91,7 @@ assert(!/jsonp|callback_prefix|config\.apiUrl/i.test(accessJs), 'Browser authent
 assert(accessJs.includes('studentId'), 'Authenticated browser sessions must retain the opaque student id');
 assert(academyJs.includes("PROGRESS_KEY_PREFIX = 'rsedu-academy-progress:v2'"), 'Academy progress must use the per-student v2 namespace');
 assert(academyJs.includes('setAuthenticatedStudent(session?.studentId'), 'Academy progress must bind to the validated student session');
+assert(academyJs.includes('status: asset.status'), 'Published R2 media status must propagate to lesson UI state');
 assert(r2Player.includes("PROGRESS_KEY_PREFIX = 'rsedu-academy-progress:v2'"), 'R2 resume state must use the per-student v2 namespace');
 assert(read('lcms/academy/index.html').includes('./access.js'), 'Public Academy index must load session state before showing learner progress');
 assert(!read('lcms/academy/lesson.html').includes('rsedu-academy-progress:v1'), 'Lesson resume must not read unscoped legacy progress before authentication');

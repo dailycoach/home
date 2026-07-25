@@ -217,6 +217,7 @@
         ...module,
         source: provider,
         provider,
+        status: asset.status,
         mediaStatus: asset.status,
         accessPolicy: asset.accessPolicy || '',
         objectKey: String(asset.objectKey || '').trim(),

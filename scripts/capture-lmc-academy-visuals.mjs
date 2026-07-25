@@ -504,6 +504,8 @@ for (const viewport of viewports) {
         overflowingElements,
         clippedElements: inspected.filter((item) => item.clippedLeft || item.clippedRight),
         legacyCopy: /vimeo|google\s*drive|drive-video/i.test(bodyText),
+        hasPublishedMediaCopy: /R2 영상 공개/.test(bodyText),
+        hasUnexpectedPendingCopy: /업로드 준비/.test(bodyText),
         expectVideo,
         expectCompletion,
         expectEntryRedirect,
@@ -544,6 +546,9 @@ for (const viewport of viewports) {
     if (metrics.clippedElements.length) failures.push(`clipped elements: ${metrics.clippedElements.length}`);
     if (metrics.legacyCopy) failures.push('legacy Vimeo/Drive copy');
     if (metrics.expectVideo && !metrics.hasVideo) failures.push('R2 video element missing');
+    if (metrics.expectVideo && (!metrics.hasPublishedMediaCopy || metrics.hasUnexpectedPendingCopy)) {
+      failures.push('published R2 lesson is labeled as pending upload');
+    }
     if (metrics.expectCompletion && (!metrics.hasCompletion || metrics.hasVideo)) failures.push('week 12 video/completion branch mismatch');
     if (metrics.expectPending && (!metrics.hasPendingState || metrics.hasVideo)) failures.push('pending-upload state mismatch');
     if (metrics.expectEntryRedirect && !metrics.currentPath.endsWith('/enter.html')) failures.push('protected lesson did not redirect to entry');
