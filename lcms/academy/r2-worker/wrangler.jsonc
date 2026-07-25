@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lmc-r2-video-gateway",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-26",
+  "workers_dev": true,
+  "vars": {
+    "COURSE_ID": "lmc-lifetime-management-counselor",
+    "ALLOWED_ORIGINS": "https://daily-coach-ing.com,https://www.daily-coach-ing.com",
+    "PLAYBACK_TTL_SECONDS": "14400",
+    "ACCESS_API_URL": "SET_AFTER_APPS_SCRIPT_DEPLOYMENT"
+  },
+  "r2_buckets": [
+    {
+      "binding": "VIDEOS",
+      "bucket_name": "rsedu-lmc-videos"
+    }
+  ]
+}
