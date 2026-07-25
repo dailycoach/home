@@ -11,6 +11,9 @@
   let activeVideo = null;
 
   const pad = (value) => String(value).padStart(2, '0');
+  const setText = (node, value) => {
+    if (node && node.textContent !== value) node.textContent = value;
+  };
 
   function config() {
     return window.RSEDU_ACADEMY_ACCESS || {};
@@ -26,11 +29,10 @@
 
   function loadCatalog() {
     if (!catalogPromise) {
-      catalogPromise = fetch(MEDIA_PATH, { cache: 'no-store' })
-        .then((response) => {
-          if (!response.ok) throw new Error(`R2 media catalog: ${response.status}`);
-          return response.json();
-        });
+      catalogPromise = fetch(MEDIA_PATH, { cache: 'no-store' }).then((response) => {
+        if (!response.ok) throw new Error(`R2 media catalog: ${response.status}`);
+        return response.json();
+      });
     }
     return catalogPromise;
   }
@@ -64,9 +66,7 @@
   }
 
   function statusCopy(published, total) {
-    return published === total
-      ? `${published}개 R2 영상 연결`
-      : `${published}/${total}개 R2 영상 연결`;
+    return published === total ? `${published}개 R2 영상 연결` : `${published}/${total}개 R2 영상 연결`;
   }
 
   function patchOverview(media) {
@@ -80,46 +80,38 @@
       const hero = document.querySelector('#academyHeroProgress');
       if (hero) {
         hero.classList.add('is-visible');
-        hero.textContent = completed
+        setText(hero, completed
           ? `${completed}개 차시 완료 · 이 기기 진행률 ${Math.round((completed / 12) * 100)}% · ${copy}`
-          : `${copy} · 입장코드 인증 후 학습`;
+          : `${copy} · 입장코드 인증 후 학습`);
       }
 
-      const cardMeta = document.querySelector('.course-card .course-meta span:last-child');
-      if (cardMeta) cardMeta.textContent = copy;
-      const courseCount = document.querySelector('.course-card .course-count');
-      if (courseCount) courseCount.textContent = `12차시 · ${copy}`;
+      setText(document.querySelector('.course-card .course-meta span:last-child'), copy);
+      setText(document.querySelector('.course-card .course-count'), `12차시 · ${copy}`);
 
       const protectedCard = [...document.querySelectorAll('#academyStatus .status-card')]
         .find((card) => /Protected Media|Video|Vimeo|Drive/i.test(card.textContent || ''));
       if (protectedCard) {
-        const strong = protectedCard.querySelector('strong');
-        const paragraph = protectedCard.querySelector('p');
-        if (strong) strong.textContent = copy;
-        if (paragraph) paragraph.textContent = '비공개 R2 · 인증된 강의실에서만 재생';
+        setText(protectedCard.querySelector('strong'), copy);
+        setText(protectedCard.querySelector('p'), '비공개 R2 · 인증된 강의실에서만 재생');
       }
     }
 
     if (PAGE === 'course') {
       const qualification = [...document.querySelectorAll('.lmc-qualification-item')]
         .find((item) => /Protected Media/i.test(item.textContent || ''));
-      if (qualification?.querySelector('strong')) qualification.querySelector('strong').textContent = copy;
+      setText(qualification?.querySelector('strong'), copy);
 
       [...document.querySelectorAll('.summary-row')].forEach((row) => {
-        if (/영상 상태/.test(row.querySelector('span')?.textContent || '')) {
-          const strong = row.querySelector('strong');
-          if (strong) strong.textContent = copy;
-        }
+        if (/영상 상태/.test(row.querySelector('span')?.textContent || '')) setText(row.querySelector('strong'), copy);
       });
 
-      const curriculumItems = [...document.querySelectorAll('.lmc-curriculum-item')];
-      curriculumItems.forEach((item, index) => {
+      [...document.querySelectorAll('.lmc-curriculum-item')].forEach((item, index) => {
         const asset = media.find((entry) => entry.week === index + 1);
         if (!asset) return;
-        const em = item.querySelector('.lmc-curriculum-practice em');
-        const state = item.querySelector('.lesson-status');
-        if (em) em.textContent = asset.status === 'published' ? 'R2 Video' : 'Upload Ready';
-        if (state && !item.classList.contains('is-complete')) state.textContent = asset.status === 'published' ? '영상 학습' : '업로드 준비';
+        setText(item.querySelector('.lmc-curriculum-practice em'), asset.status === 'published' ? 'R2 Video' : 'Upload Ready');
+        if (!item.classList.contains('is-complete')) {
+          setText(item.querySelector('.lesson-status'), asset.status === 'published' ? '영상 학습' : '업로드 준비');
+        }
       });
     }
   }
@@ -140,6 +132,9 @@
   function renderPlayerState(message, type = '') {
     const ratio = document.querySelector('#videoRatio');
     if (!ratio) return;
+    const signature = `${type}:${message}`;
+    if (ratio.dataset.r2State === signature) return;
+    ratio.dataset.r2State = signature;
     ratio.innerHTML = `<div class="r2-player-state${type ? ` is-${type}` : ''}"><strong>${message}</strong><span>${type === 'error' ? '강의실을 새로고침하거나 운영자에게 문의해 주세요.' : '수강권한과 영상 재생주소를 확인하고 있습니다.'}</span></div>`;
   }
 
@@ -169,8 +164,8 @@
   function mountVideo(asset, authorization) {
     const ratio = document.querySelector('#videoRatio');
     if (!ratio) return;
-    const stage = ratio.closest('.video-stage');
-    stage?.classList.remove('no-video');
+    ratio.dataset.r2State = '';
+    ratio.closest('.video-stage')?.classList.remove('no-video');
 
     const video = document.createElement('video');
     video.id = 'r2VideoPlayer';
@@ -185,8 +180,7 @@
     ratio.replaceChildren(video);
     activeVideo = video;
 
-    const kicker = document.querySelector('.lesson-title-row .cip-kicker');
-    if (kicker) kicker.textContent = 'LMC Protected R2 Lesson';
+    setText(document.querySelector('.lesson-title-row .cip-kicker'), 'LMC Protected R2 Lesson');
     const meta = document.querySelector('.lesson-title-row .course-meta');
     if (meta && !/R2 비공개/.test(meta.textContent || '')) {
       const chip = document.createElement('span');
@@ -223,9 +217,7 @@
       if (button && !button.classList.contains('is-complete')) button.click();
     });
 
-    video.addEventListener('error', () => {
-      renderPlayerState('영상을 재생하지 못했습니다.', 'error');
-    });
+    video.addEventListener('error', () => renderPlayerState('영상을 재생하지 못했습니다.', 'error'));
   }
 
   async function patchLesson(media) {
