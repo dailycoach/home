@@ -1,111 +1,106 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
   "updatedAt": "2026-07-26",
-  "source": "Vimeo protected embedding",
+  "source": "Cloudflare R2 private bucket via authenticated Worker gateway",
   "policy": {
-    "vimeo": "Paid course videos must use Vimeo Embed only visibility with embedding restricted to daily-coach-ing.com.",
+    "r2": "Paid course videos stay in a private R2 bucket and are served only through short-lived Worker playback URLs after LMC session validation.",
     "youtube": "YouTube is accepted only when the video is public and used for free previews or public orientation content.",
-    "secrets": "Do not store Vimeo API tokens, account credentials, or private download links in this public catalog."
+    "secrets": "Do not store Cloudflare API tokens, R2 credentials, Worker secrets, or direct object URLs in this public catalog."
   },
   "courses": {
     "lmc-lifetime-management-counselor": {
+      "videoWeeks": 11,
+      "completionWeek": 12,
+      "completionType": "수료시험·학기말 수료식",
       "media": [
         {
           "week": 1,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-01.mp4",
           "title": "상담사와 코치를 위한 심리학 개요",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 2,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-02.mp4",
           "title": "진로적성 파악과 자녀지도",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 3,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-03.mp4",
           "title": "성격에 대한 이해",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 4,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-04.mp4",
           "title": "의사소통 유형을 통한 타인 이해",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 5,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-05.mp4",
           "title": "스트레스에 대한 심리학적 이해",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 6,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-06.mp4",
           "title": "MBTI와 학습유형",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 7,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-07.mp4",
           "title": "살면서 느끼는 정서적 문제",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 8,
-          "provider": "VIMEO",
-          "videoId": "",
-          "title": "8차시 우울과 우울검사",
+          "provider": "R2",
+          "objectKey": "lmc/week-08.mp4",
+          "title": "우울과 우울검사",
           "description": "우울 관련 경험과 검사도구의 활용 범위를 이해하는 강의",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 9,
-          "provider": "VIMEO",
-          "videoId": "",
-          "title": "9차시 이상심리와 정신병리척도",
+          "provider": "R2",
+          "objectKey": "lmc/week-09.mp4",
+          "title": "이상심리와 정신병리척도",
           "description": "이상심리와 정신병리척도의 기본 개념 및 상담코칭 활용 범위를 이해하는 강의",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 10,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-10.mp4",
           "title": "만족하는 부부·커플 관계의 요인",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         },
         {
           "week": 11,
-          "provider": "VIMEO",
-          "videoId": "",
+          "provider": "R2",
+          "objectKey": "lmc/week-11.mp4",
           "title": "아동청소년과 성인기 발달",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
-          "status": "pending_upload"
-        },
-        {
-          "week": 12,
-          "provider": "VIMEO",
-          "videoId": "",
-          "title": "수료시험 및 과정 통합",
-          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
           "status": "pending_upload"
         }
       ]
