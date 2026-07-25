@@ -1,31 +1,112 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "updatedAt": "2026-07-26",
-  "source": "Google Drive restricted sharing",
+  "source": "Vimeo protected embedding",
   "policy": {
-    "drive": "Only the Google account registered by an approved learner receives viewer permission.",
-    "youtube": "YouTube is accepted only when the video is public. Unlisted and private videos are excluded from the course player."
+    "vimeo": "Paid course videos must use Vimeo Embed only visibility with embedding restricted to daily-coach-ing.com.",
+    "youtube": "YouTube is accepted only when the video is public and used for free previews or public orientation content.",
+    "secrets": "Do not store Vimeo API tokens, account credentials, or private download links in this public catalog."
   },
   "courses": {
     "lmc-lifetime-management-counselor": {
       "media": [
         {
+          "week": 1,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "상담사와 코치를 위한 심리학 개요",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 2,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "진로적성 파악과 자녀지도",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 3,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "성격에 대한 이해",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 4,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "의사소통 유형을 통한 타인 이해",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 5,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "스트레스에 대한 심리학적 이해",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 6,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "MBTI와 학습유형",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 7,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "살면서 느끼는 정서적 문제",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
           "week": 8,
-          "provider": "DRIVE",
-          "fileId": "1qu3q3BD4JfNeXmj1cgANwsjnzdoZnKeI",
+          "provider": "VIMEO",
+          "videoId": "",
           "title": "8차시 우울과 우울검사",
           "description": "우울 관련 경험과 검사도구의 활용 범위를 이해하는 강의",
-          "accessPolicy": "RESTRICTED",
-          "status": "published"
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
         },
         {
           "week": 9,
-          "provider": "DRIVE",
-          "fileId": "1GLYAPV9N7GRvEognYXJVYTVgz971WmYW",
+          "provider": "VIMEO",
+          "videoId": "",
           "title": "9차시 이상심리와 정신병리척도",
           "description": "이상심리와 정신병리척도의 기본 개념 및 상담코칭 활용 범위를 이해하는 강의",
-          "accessPolicy": "RESTRICTED",
-          "status": "published"
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 10,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "만족하는 부부·커플 관계의 요인",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 11,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "아동청소년과 성인기 발달",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
+        },
+        {
+          "week": 12,
+          "provider": "VIMEO",
+          "videoId": "",
+          "title": "수료시험 및 과정 통합",
+          "accessPolicy": "EMBED_ONLY_SPECIFIC_DOMAIN",
+          "status": "pending_upload"
         }
       ]
     }
