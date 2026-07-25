@@ -347,22 +347,6 @@ for (const viewport of viewports) {
           /* The visual assertions will report a missing player if this browser cannot install the media stub. */
         }
       }
-      if (exercisePlayback) {
-        const mediaTimes = new WeakMap();
-        try {
-          Object.defineProperty(HTMLMediaElement.prototype, 'duration', {
-            configurable: true,
-            get() { return 120; }
-          });
-          Object.defineProperty(HTMLMediaElement.prototype, 'currentTime', {
-            configurable: true,
-            get() { return mediaTimes.get(this) || 0; },
-            set(value) { mediaTimes.set(this, Number(value) || 0); }
-          });
-        } catch {
-          /* CI will report the resume assertion if this browser cannot install the deterministic media clock. */
-        }
-      }
     }, {
       authenticated: Boolean(target.authenticated),
       courseId: COURSE_ID,
@@ -389,9 +373,22 @@ for (const viewport of viewports) {
       // though production Chrome/Safari can play the required MP4 profile.
       // Range delivery is covered by Worker tests; visual QA deterministically
       // emits metadata so the client-side resume listener is still exercised.
-      await page.evaluate(() => {
-        document.querySelector('#r2VideoPlayer')?.dispatchEvent(new Event('loadedmetadata'));
-      });
+      await page.evaluate(({ exercisePlayback }) => {
+        const video = document.querySelector('#r2VideoPlayer');
+        if (!video) return;
+        if (exercisePlayback) {
+          let currentTime = 0;
+          Object.defineProperties(video, {
+            duration: { configurable: true, get: () => 120 },
+            currentTime: {
+              configurable: true,
+              get: () => currentTime,
+              set: (value) => { currentTime = Number(value) || 0; }
+            }
+          });
+        }
+        video.dispatchEvent(new Event('loadedmetadata'));
+      }, { exercisePlayback: Boolean(target.exercisePlayback) });
     }
     let playbackLifecycle = null;
     if (target.exercisePlayback) {
@@ -407,7 +404,18 @@ for (const viewport of viewports) {
       await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
       await page.waitForSelector('#r2VideoPlayer', { state: 'visible', timeout: 10000 });
       await page.evaluate(() => {
-        document.querySelector('#r2VideoPlayer')?.dispatchEvent(new Event('loadedmetadata'));
+        const video = document.querySelector('#r2VideoPlayer');
+        if (!video) return;
+        let currentTime = 0;
+        Object.defineProperties(video, {
+          duration: { configurable: true, get: () => 120 },
+          currentTime: {
+            configurable: true,
+            get: () => currentTime,
+            set: (value) => { currentTime = Number(value) || 0; }
+          }
+        });
+        video.dispatchEvent(new Event('loadedmetadata'));
       });
       await page.waitForTimeout(250);
       const afterRefresh = await page.evaluate(({ courseId, progressKey }) => {
@@ -473,11 +481,27 @@ for (const viewport of viewports) {
         };
       }));
 
+      const overflowingElements = [...document.body.querySelectorAll('*')]
+        .map((element) => {
+          const rect = element.getBoundingClientRect();
+          return {
+            element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${element.classList.length ? `.${[...element.classList].join('.')}` : ''}`,
+            left: Math.round(rect.left),
+            right: Math.round(rect.right),
+            width: Math.round(rect.width),
+            scrollWidth: element.scrollWidth,
+            clientWidth: element.clientWidth
+          };
+        })
+        .filter((item) => item.left < -1 || item.right > doc.clientWidth + 1)
+        .slice(0, 12);
+
       return {
         title: document.title,
         documentWidth: doc.scrollWidth,
         viewportWidth: doc.clientWidth,
         horizontalOverflow: doc.scrollWidth > doc.clientWidth + 1,
+        overflowingElements,
         clippedElements: inspected.filter((item) => item.clippedLeft || item.clippedRight),
         legacyCopy: /vimeo|google\s*drive|drive-video/i.test(bodyText),
         expectVideo,
@@ -508,11 +532,15 @@ for (const viewport of viewports) {
     });
 
     const failures = [];
-    const unexpectedConsoleErrors = target.expectMediaError
+    const expectedHttpFailure = target.expectMediaError || target.authorizationFailure;
+    const unexpectedConsoleErrors = expectedHttpFailure
       ? consoleErrors.filter((message) => !/Failed to load resource/i.test(message))
       : consoleErrors;
     if (unexpectedConsoleErrors.length) failures.push(`console: ${unexpectedConsoleErrors.join(' | ')}`);
-    if (metrics.horizontalOverflow) failures.push(`horizontal overflow ${metrics.documentWidth}/${metrics.viewportWidth}`);
+    if (metrics.horizontalOverflow) {
+      const offenders = metrics.overflowingElements.map((item) => item.element).join(', ');
+      failures.push(`horizontal overflow ${metrics.documentWidth}/${metrics.viewportWidth}${offenders ? `: ${offenders}` : ''}`);
+    }
     if (metrics.clippedElements.length) failures.push(`clipped elements: ${metrics.clippedElements.length}`);
     if (metrics.legacyCopy) failures.push('legacy Vimeo/Drive copy');
     if (metrics.expectVideo && !metrics.hasVideo) failures.push('R2 video element missing');
@@ -586,7 +614,9 @@ if (failed.length) {
   console.error(JSON.stringify(failed.map((item) => ({
     page: item.page,
     viewport: item.viewport,
-    failures: item.failures
+    failures: item.failures,
+    playbackLifecycle: item.playbackLifecycle,
+    overflowingElements: item.overflowingElements
   })), null, 2));
   process.exitCode = 1;
 }
