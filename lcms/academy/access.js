@@ -69,9 +69,7 @@
   }
 
   function apiCall(action, payload = {}) {
-    if (!isConfigured()) {
-      return Promise.reject(new Error('강의실 인증 서버가 아직 연결되지 않았습니다.'));
-    }
+    if (!isConfigured()) return Promise.reject(new Error('강의실 인증 서버가 아직 연결되지 않았습니다.'));
 
     return new Promise((resolve, reject) => {
       const id = `${CALLBACK_PREFIX}_${Date.now()}_${Math.random().toString(36).slice(2)}`;
@@ -120,7 +118,7 @@
   async function login(email, code) {
     const normalizedEmail = normalizeEmail(email);
     const normalizedCode = normalizeCode(code);
-    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) throw new Error('신청서에 입력한 Google 계정 이메일을 확인해 주세요.');
+    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) throw new Error('수강생 신청서에 입력한 이메일을 확인해 주세요.');
     if (normalizedCode.length !== 8) throw new Error('메일로 받은 8자리 입장코드를 입력해 주세요.');
 
     const result = await apiCall('login', {
@@ -247,9 +245,7 @@
       } catch { /* login form remains available */ }
     }
 
-    if (!isConfigured()) {
-      setFormState(form, '인증 서버 배포 전입니다. 운영자 설정이 완료되면 입장할 수 있습니다.', 'warning');
-    }
+    if (!isConfigured()) setFormState(form, '인증 서버 배포 전입니다. 운영자 설정이 완료되면 입장할 수 있습니다.', 'warning');
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
