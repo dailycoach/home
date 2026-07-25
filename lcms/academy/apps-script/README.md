@@ -8,7 +8,7 @@
 
 1. 운영DB 스프레드시트를 엽니다.
 2. **확장 프로그램 → Apps Script**를 엽니다.
-3. Apps Script 프로젝트에 `Code.gs`, `Provisioning.gs`, `Api.gs`, `DataHelpers.gs` 파일을 만들고 이 폴더의 동명 소스를 붙여 넣습니다.
+3. Apps Script 프로젝트에 `Code.gs`, `Provisioning.gs`, `Api.gs`, `DataHelpers.gs`, `Expiry.gs` 파일을 만들고 이 폴더의 동명 소스를 붙여 넣습니다.
 4. 프로젝트 설정에서 `appsscript.json` 표시를 켠 뒤 이 폴더의 manifest로 교체합니다.
 5. `setupAcademyAutomation()`을 1회 실행하고 요청 권한을 승인합니다.
 
@@ -20,6 +20,7 @@
 - 신청완료 메시지에 `https://daily-coach-ing.com/lcms/academy/enter.html` 삽입
 - Form 제출 트리거 설치
 - 수강생 시트 결제상태 변경 트리거 설치
+- 매일 새벽 수강기간 만료 계정을 찾아 Drive 권한·세션을 회수하는 트리거 설치
 - 과정설정 시트와 스마트스토어 구매안내 문구에 신청서 URL 입력
 
 ## 2. 웹앱 배포
@@ -51,7 +52,7 @@ Naver Commerce API를 연결하기 전에도 운영할 수 있습니다.
 6. 8자리 입장코드를 생성하고 이메일로 발송합니다.
 7. 수강생은 입장 페이지에서 이메일·코드로 로그인합니다.
 
-`취소` 또는 `환불`로 변경하면 Drive 권한과 활성 세션을 회수합니다.
+`취소` 또는 `환불`로 변경하면 Drive 권한과 활성 세션을 회수합니다. 수강기간이 끝난 계정은 로그인·세션 확인 시 즉시 회수되며, 매일 새벽 자동점검에서도 다시 확인합니다.
 
 ## 4. 테스트
 
@@ -65,8 +66,9 @@ Naver Commerce API를 연결하기 전에도 운영할 수 있습니다.
 - 다른 Google 계정에서 영상 차단
 - 로그아웃·세션만료
 - `환불` 변경 후 접근 회수
+- 수강종료일을 과거로 변경한 테스트 계정의 Drive 권한 자동 회수
 
-스프레드시트 메뉴 **LMC 자동화 → 자동화 자체점검**으로 기본 설정과 Drive 매핑을 점검할 수 있습니다.
+스프레드시트 메뉴 **LMC 자동화 → 자동화 자체점검**으로 기본 설정과 Drive 매핑을 점검할 수 있습니다. **만료권한 지금 점검** 메뉴로 예정된 일일 회수 작업을 즉시 시험할 수 있습니다.
 
 ## 5. 보안 원칙
 
@@ -77,6 +79,7 @@ Naver Commerce API를 연결하기 전에도 운영할 수 있습니다.
 - `CODE_PEPPER`, `SESSION_PEPPER`, `SYNC_SECRET`은 Script Properties에만 저장합니다.
 - Naver Client Secret은 시트나 정적 웹페이지에 넣지 않습니다.
 - Drive 재생은 입장코드 인증과 Google 계정 권한을 함께 요구합니다.
+- 취소·환불·수강기간 만료 시 코드 해시를 폐기하고 Drive 권한과 세션을 회수합니다.
 
 ## 6. 완전 자동 결제확인
 
