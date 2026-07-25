@@ -1,12 +1,12 @@
 /**
- * RS에듀컨설팅 LMC Academy 구매→신청→결제확인→입장 자동화
+ * RS에듀컨설팅 LMC Academy 구매→신청→결제확인→Vimeo 강의실 입장 자동화
  *
  * 설치 위치: 운영DB 스프레드시트 > 확장 프로그램 > Apps Script
  * 운영DB: RS 온라인강의 자동화 운영DB v1.0
  */
 
 const RSEDU_ACADEMY = Object.freeze({
-  VERSION: '1.0.0',
+  VERSION: '1.1.0',
   DEFAULT_SPREADSHEET_ID: '1qmeLbGeQZSrOJAoXtger_Wi6Ii7jO0n4kghq8ab2rDc',
   DEFAULT_COURSE_ID: 'lmc-lifetime-management-counselor',
   HEADER_ROW: 2,
@@ -63,7 +63,7 @@ const RSEDU_ACADEMY = Object.freeze({
     ORDER_NO: '스마트스토어 상품주문번호를 입력해 주세요.',
     BUYER_NAME: '스마트스토어 주문자명을 입력해 주세요.',
     STUDENT_NAME: '수강생 성함을 입력해 주세요.',
-    EMAIL: '입장코드를 받고 Drive 강의를 재생할 Google 계정 이메일을 입력해 주세요.',
+    EMAIL: '입장코드를 받을 이메일을 입력해 주세요.',
     PHONE: '휴대전화 번호를 입력해 주세요.',
     CONSENT: '개인정보 수집·이용에 동의합니다.'
   })
@@ -94,9 +94,7 @@ function setupAcademyAutomation() {
   lock.waitLock(30000);
   try {
     const props = PropertiesService.getScriptProperties();
-    if (!props.getProperty('SPREADSHEET_ID')) {
-      props.setProperty('SPREADSHEET_ID', RSEDU_ACADEMY.DEFAULT_SPREADSHEET_ID);
-    }
+    if (!props.getProperty('SPREADSHEET_ID')) props.setProperty('SPREADSHEET_ID', RSEDU_ACADEMY.DEFAULT_SPREADSHEET_ID);
     ensureSecretProperty_('CODE_PEPPER');
     ensureSecretProperty_('SESSION_PEPPER');
     ensureSecretProperty_('SYNC_SECRET');
@@ -119,7 +117,7 @@ function setupAcademyAutomation() {
       formUrl: form.getPublishedUrl(),
       formEditUrl: form.getEditUrl(),
       webAppUrl: ScriptApp.getService().getUrl() || '',
-      message: 'Google Form과 자동화 트리거가 준비되었습니다.'
+      message: 'Google Form과 Vimeo 강의실 입장 자동화 트리거가 준비되었습니다.'
     };
     console.log(JSON.stringify(result));
     showUiMessage_('LMC 자동화 설치', `${result.message}\n\n신청서: ${result.formUrl}\n\n다음 단계: 웹앱으로 배포한 뒤 “웹앱 배포 URL 동기화”를 실행하세요.`);
@@ -154,13 +152,11 @@ function handleFormSubmit(event) {
     const orderNo = normalizeOrderNo_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.ORDER_NO, '상품주문번호', '주문번호']));
     const buyerName = cleanText_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.BUYER_NAME, '주문자명']));
     const studentName = cleanText_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.STUDENT_NAME, '수강생명', '수강생 이름']));
-    const email = normalizeEmail_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.EMAIL, 'Google 계정 이메일', '이메일']));
+    const email = normalizeEmail_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.EMAIL, '등록 이메일', '이메일']));
     const phone = normalizePhone_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.PHONE, '휴대전화']));
     const consent = cleanText_(answerByAliases_(answers, [RSEDU_ACADEMY.FORM_TITLES.CONSENT, '개인정보동의']));
 
-    if (!orderNo || !buyerName || !studentName || !isValidEmail_(email) || !phone) {
-      throw new Error('필수 신청정보가 누락되었거나 이메일 형식이 올바르지 않습니다.');
-    }
+    if (!orderNo || !buyerName || !studentName || !isValidEmail_(email) || !phone) throw new Error('필수 신청정보가 누락되었거나 이메일 형식이 올바르지 않습니다.');
     if (!/동의/.test(consent)) throw new Error('개인정보 수집·이용 동의가 확인되지 않았습니다.');
 
     const duplicate = findStudentByOrder_(ss, orderNo);
@@ -231,7 +227,7 @@ function provisionSelectedStudent() {
   target.sheet.getRange(target.row, RSEDU_ACADEMY.STUDENT.PAYMENT_STATUS).setValue('확인완료');
   target.sheet.getRange(target.row, RSEDU_ACADEMY.STUDENT.PAYMENT_AT).setValue(new Date());
   const result = provisionStudentRow_(target.ss, target.row, { forceNewCode: false, source: 'MANUAL_MENU' });
-  showUiMessage_('수강권한 발급', `${result.studentName}님에게 Drive 권한과 입장코드를 발급했습니다.`);
+  showUiMessage_('수강권한 발급', `${result.studentName}님에게 Vimeo 강의실 입장코드를 발급했습니다.`);
   return result;
 }
 
@@ -245,6 +241,6 @@ function reissueSelectedStudentCode() {
 function suspendSelectedStudent() {
   const target = selectedStudentRow_();
   const result = suspendStudentRow_(target.ss, target.row, '관리자 정지');
-  showUiMessage_('접근 정지', `${result.studentName}님의 세션을 종료하고 Drive 접근권한을 회수했습니다.`);
+  showUiMessage_('접근 정지', `${result.studentName}님의 입장코드와 활성 세션을 종료했습니다.`);
   return result;
 }
