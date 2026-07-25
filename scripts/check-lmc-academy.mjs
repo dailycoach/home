@@ -59,6 +59,7 @@ assert(!media.some((item) => item.week === 12), 'Week 12 must not contain a vide
 assert(mediaCatalog.courses?.[course.id]?.completionWeek === 12, 'Completion week metadata is missing');
 
 const accessConfig = read('lcms/academy/access-config.js');
+const academyJs = read('lcms/academy/academy.js');
 const r2Player = read('lcms/academy/r2-player.js');
 const r2Css = read('lcms/academy/r2-player.css');
 assert(accessConfig.includes("playbackWorkerUrl: ''"), 'Cloudflare Worker URL placeholder must remain explicit before deployment');
@@ -103,6 +104,7 @@ const academySource = [
   read('lcms/academy/course.html'),
   read('lcms/academy/lesson.html'),
   entry,
+  academyJs,
   r2Player,
   read('lcms/academy/art-direction.css'),
   read('lcms/academy/data/courses.json')
