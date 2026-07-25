@@ -7,6 +7,11 @@ function getOrCreateRegistrationForm_(ss, course) {
     try {
       const existingForm = FormApp.openById(existingId);
       existingForm.setPublished(true);
+      existingForm.setConfirmationMessage(registrationConfirmationMessage_(course));
+      existingForm.getItems(FormApp.ItemType.TEXT).forEach(function(item) {
+        const textItem = item.asTextItem();
+        if (textItem.getTitle() === RSEDU_ACADEMY.FORM_TITLES.EMAIL) textItem.setValidation(registrationEmailValidation_());
+      });
       return existingForm;
     } catch (error) {
       console.warn('Saved FORM_ID is unavailable:', error);
@@ -22,18 +27,17 @@ function getOrCreateRegistrationForm_(ss, course) {
   ].join('\n'));
   form.setCollectEmail(false);
   form.setProgressBar(true);
-  form.setConfirmationMessage([
-    '신청이 완료되었습니다.',
-    '결제·주문 확인 후 입장코드가 입력한 Google 계정 이메일로 발송됩니다.',
-    '강의실 입장: ' + course.entryUrl,
-    '메일이 보이지 않으면 스팸함과 프로모션함을 확인해 주세요.'
-  ].join('\n\n'));
+  form.setConfirmationMessage(registrationConfirmationMessage_(course));
 
   form.addListItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.COURSE).setChoiceValues([course.courseName]).setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.ORDER_NO).setHelpText('스마트스토어 주문상세의 상품주문번호를 공백 없이 입력해 주세요.').setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.BUYER_NAME).setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.STUDENT_NAME).setRequired(true);
-  form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.EMAIL).setHelpText('실제 Drive 영상을 재생할 Google 계정이어야 합니다.').setRequired(true);
+  form.addTextItem()
+    .setTitle(RSEDU_ACADEMY.FORM_TITLES.EMAIL)
+    .setHelpText('실제 Drive 영상을 재생할 Google 계정이어야 합니다.')
+    .setValidation(registrationEmailValidation_())
+    .setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.PHONE).setRequired(true);
   form.addCheckboxItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.CONSENT).setChoiceValues(['동의합니다']).setRequired(true);
   form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
@@ -41,6 +45,22 @@ function getOrCreateRegistrationForm_(ss, course) {
   props.setProperty('FORM_ID', form.getId());
   props.setProperty('FORM_URL', form.getPublishedUrl());
   return form;
+}
+
+function registrationConfirmationMessage_(course) {
+  return [
+    '신청이 완료되었습니다.',
+    '결제·주문 확인 후 입장코드가 입력한 Google 계정 이메일로 발송됩니다.',
+    '강의실 입장: ' + course.entryUrl,
+    '메일이 보이지 않으면 스팸함과 프로모션함을 확인해 주세요.'
+  ].join('\n\n');
+}
+
+function registrationEmailValidation_() {
+  return FormApp.createTextValidation()
+    .setHelpText('Google 계정으로 사용하는 올바른 이메일 주소를 입력해 주세요.')
+    .requireTextIsEmail()
+    .build();
 }
 
 function installAutomationTriggers_(ss, form) {
