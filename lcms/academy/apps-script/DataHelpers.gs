@@ -34,7 +34,7 @@ function getOrCreateRegistrationForm_(ss, course) {
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.STUDENT_NAME).setRequired(true);
   form.addTextItem()
     .setTitle(RSEDU_ACADEMY.FORM_TITLES.EMAIL)
-    .setHelpText('입장코드를 받고 강의실에 로그인할 이메일 주소입니다. Vimeo 계정은 필요하지 않습니다.')
+    .setHelpText('입장코드와 수강안내를 받을 이메일 주소입니다.')
     .setValidation(registrationEmailValidation_())
     .setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.PHONE).setRequired(true);
@@ -50,7 +50,7 @@ function registrationDescription_(course) {
   return [
     '스마트스토어 구매 후 작성하는 수강생 등록 신청서입니다.',
     '결제 확인 후 아래 이메일로 8자리 입장코드를 보내드립니다.',
-    'Vimeo 계정이나 Google 계정 로그인이 필요하지 않습니다.',
+    '강의는 승인된 수강생이 비공개 Cloudflare R2 재생 게이트를 통해 시청합니다.',
     `수강 과정: ${course.courseName}`
   ].join('\n');
 }
@@ -176,8 +176,8 @@ function getCourseSettings_(ss, courseId) {
         accessDays: Number(row[4] || 180),
         senderName: String(row[5] || 'RS에듀컨설팅 LMC Academy'),
         replyEmail: normalizeEmail_(row[6]),
-        mediaProvider: String(row[7] || 'VIMEO'),
-        accessPolicy: String(row[8] || 'EMBED_ONLY_SPECIFIC_DOMAIN'),
+        mediaProvider: String(row[7] || 'R2'),
+        accessPolicy: String(row[8] || 'PRIVATE_WORKER_SIGNED_URL'),
         status: String(row[9] || '준비중')
       };
     }
@@ -267,16 +267,8 @@ function runAcademySelfTest() {
   try {
     const course = getCourseSettings_(ss, RSEDU_ACADEMY.DEFAULT_COURSE_ID);
     checks.push(`과정설정: 정상 · ${course.courseName}`);
-    const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.MEDIA);
-    const lastRow = sheet.getLastRow();
-    const values = lastRow >= RSEDU_ACADEMY.DATA_START_ROW
-      ? sheet.getRange(RSEDU_ACADEMY.DATA_START_ROW, 1, lastRow - RSEDU_ACADEMY.HEADER_ROW, 9).getValues()
-      : [];
-    const mapped = values.filter(function(row) {
-      return String(row[0]) === course.courseId && String(row[3]).toUpperCase() === 'VIMEO' && String(row[4]).trim() && String(row[7]).trim() !== '중지';
-    });
-    checks.push(`Vimeo 영상 매핑: ${mapped.length}개`);
-  } catch (error) { checks.push('과정·Vimeo 설정: 실패 · ' + error.message); }
+    checks.push('영상방식: Cloudflare R2 비공개 Worker 게이트');
+  } catch (error) { checks.push('과정설정: 실패 · ' + error.message); }
 
   const props = PropertiesService.getScriptProperties();
   checks.push(props.getProperty('FORM_ID') ? 'Google Form: 생성됨' : 'Google Form: 미생성');
@@ -289,9 +281,17 @@ function runAcademySelfTest() {
 }
 
 function writeLog_(ss, studentId, orderNo, email, template, result, error, retryCount) {
-  ss.getSheetByName(RSEDU_ACADEMY.SHEETS.LOGS).appendRow([
-    createId_('LOG'), new Date(), studentId || '', orderNo || '', email || '',
-    template || '', result || '', error || '', Number(retryCount || 0)
+  const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.LOGS);
+  sheet.appendRow([
+    createId_('LOG'),
+    new Date(),
+    studentId || '',
+    orderNo || '',
+    email || '',
+    template || '',
+    result || '',
+    error || '',
+    Number(retryCount || 0)
   ]);
 }
 
@@ -305,9 +305,17 @@ function enforceLoginRateLimit_(email) {
   cache.put(key, String(count + 1), 600);
 }
 
-function clearLoginRateLimit_(email) { CacheService.getScriptCache().remove('login:' + sha256_(email).slice(0, 32)); }
-function hashAccessCode_(email, courseId, code) { return hmacSha256_([normalizeEmail_(email), String(courseId), normalizeCode_(code)].join('|'), getRequiredProperty_('CODE_PEPPER')); }
-function hashSessionToken_(token) { return hmacSha256_(String(token), getRequiredProperty_('SESSION_PEPPER')); }
+function clearLoginRateLimit_(email) {
+  CacheService.getScriptCache().remove('login:' + sha256_(email).slice(0, 32));
+}
+
+function hashAccessCode_(email, courseId, code) {
+  return hmacSha256_([normalizeEmail_(email), String(courseId), normalizeCode_(code)].join('|'), getRequiredProperty_('CODE_PEPPER'));
+}
+
+function hashSessionToken_(token) {
+  return hmacSha256_(String(token), getRequiredProperty_('SESSION_PEPPER'));
+}
 
 function ensureSecretProperty_(key) {
   const props = PropertiesService.getScriptProperties();
@@ -328,9 +336,19 @@ function generateAccessCode_() {
   return code;
 }
 
-function randomToken_() { return [Utilities.getUuid(), Utilities.getUuid(), Utilities.getUuid()].join('').replace(/-/g, ''); }
-function hmacSha256_(value, key) { return Utilities.base64EncodeWebSafe(Utilities.computeHmacSha256Signature(String(value), String(key), Utilities.Charset.UTF_8)).replace(/=+$/g, ''); }
-function sha256_(value) { return Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(value), Utilities.Charset.UTF_8)).replace(/=+$/g, ''); }
+function randomToken_() {
+  return [Utilities.getUuid(), Utilities.getUuid(), Utilities.getUuid()].join('').replace(/-/g, '');
+}
+
+function hmacSha256_(value, key) {
+  const bytes = Utilities.computeHmacSha256Signature(String(value), String(key), Utilities.Charset.UTF_8);
+  return Utilities.base64EncodeWebSafe(bytes).replace(/=+$/g, '');
+}
+
+function sha256_(value) {
+  const bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(value), Utilities.Charset.UTF_8);
+  return Utilities.base64EncodeWebSafe(bytes).replace(/=+$/g, '');
+}
 
 function constantTimeEqual_(left, right) {
   const a = String(left || '');
@@ -344,7 +362,9 @@ function constantTimeEqual_(left, right) {
 function output_(payload, callback) {
   const json = JSON.stringify(payload);
   const callbackName = String(callback || '');
-  if (/^[A-Za-z_$][0-9A-Za-z_$.]{0,90}$/.test(callbackName)) return ContentService.createTextOutput(`${callbackName}(${json});`).setMimeType(ContentService.MimeType.JAVASCRIPT);
+  if (/^[A-Za-z_$][0-9A-Za-z_$.]{0,90}$/.test(callbackName)) {
+    return ContentService.createTextOutput(`${callbackName}(${json});`).setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
   return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
 }
 
@@ -359,7 +379,11 @@ function publicErrorMessage_(error) {
   return '요청을 처리하지 못했습니다. 잠시 후 다시 시도하거나 운영자에게 문의해 주세요.';
 }
 
-function cleanText_(value) { return Array.isArray(value) ? value.join(', ').trim() : String(value == null ? '' : value).trim(); }
+function cleanText_(value) {
+  if (Array.isArray(value)) return value.join(', ').trim();
+  return String(value == null ? '' : value).trim();
+}
+
 function normalizeEmail_(value) { return cleanText_(value).toLowerCase(); }
 function normalizeCode_(value) { return cleanText_(value).toUpperCase().replace(/[^A-Z0-9]/g, ''); }
 function normalizeOrderNo_(value) { return cleanText_(value).replace(/\s+/g, ''); }
