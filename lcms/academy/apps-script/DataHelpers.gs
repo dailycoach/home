@@ -7,10 +7,14 @@ function getOrCreateRegistrationForm_(ss, course) {
     try {
       const existingForm = FormApp.openById(existingId);
       existingForm.setPublished(true);
+      existingForm.setDescription(registrationDescription_(course));
       existingForm.setConfirmationMessage(registrationConfirmationMessage_(course));
       existingForm.getItems(FormApp.ItemType.TEXT).forEach(function(item) {
         const textItem = item.asTextItem();
-        if (textItem.getTitle() === RSEDU_ACADEMY.FORM_TITLES.EMAIL) textItem.setValidation(registrationEmailValidation_());
+        if (textItem.getTitle() === RSEDU_ACADEMY.FORM_TITLES.EMAIL) {
+          textItem.setHelpText('입장코드를 받을 이메일 주소를 정확히 입력해 주세요.');
+          textItem.setValidation(registrationEmailValidation_());
+        }
       });
       return existingForm;
     } catch (error) {
@@ -20,22 +24,17 @@ function getOrCreateRegistrationForm_(ss, course) {
 
   const form = FormApp.create(`${course.courseName} 수강생 등록 신청서`);
   form.setPublished(true);
-  form.setDescription([
-    '스마트스토어 구매 후 작성하는 수강생 등록 신청서입니다.',
-    'Drive 강의는 아래에 입력한 Google 계정에만 제한공유됩니다.',
-    '상품주문번호와 Google 계정 이메일을 정확히 입력해 주세요.'
-  ].join('\n'));
+  form.setDescription(registrationDescription_(course));
   form.setCollectEmail(false);
   form.setProgressBar(true);
   form.setConfirmationMessage(registrationConfirmationMessage_(course));
-
   form.addListItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.COURSE).setChoiceValues([course.courseName]).setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.ORDER_NO).setHelpText('스마트스토어 주문상세의 상품주문번호를 공백 없이 입력해 주세요.').setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.BUYER_NAME).setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.STUDENT_NAME).setRequired(true);
   form.addTextItem()
     .setTitle(RSEDU_ACADEMY.FORM_TITLES.EMAIL)
-    .setHelpText('실제 Drive 영상을 재생할 Google 계정이어야 합니다.')
+    .setHelpText('입장코드를 받고 강의실에 로그인할 이메일 주소입니다. Vimeo 계정은 필요하지 않습니다.')
     .setValidation(registrationEmailValidation_())
     .setRequired(true);
   form.addTextItem().setTitle(RSEDU_ACADEMY.FORM_TITLES.PHONE).setRequired(true);
@@ -47,10 +46,19 @@ function getOrCreateRegistrationForm_(ss, course) {
   return form;
 }
 
+function registrationDescription_(course) {
+  return [
+    '스마트스토어 구매 후 작성하는 수강생 등록 신청서입니다.',
+    '결제 확인 후 아래 이메일로 8자리 입장코드를 보내드립니다.',
+    'Vimeo 계정이나 Google 계정 로그인이 필요하지 않습니다.',
+    `수강 과정: ${course.courseName}`
+  ].join('\n');
+}
+
 function registrationConfirmationMessage_(course) {
   return [
     '신청이 완료되었습니다.',
-    '결제·주문 확인 후 입장코드가 입력한 Google 계정 이메일로 발송됩니다.',
+    '결제·주문 확인 후 입장코드가 입력한 이메일로 발송됩니다.',
     '강의실 입장: ' + course.entryUrl,
     '메일이 보이지 않으면 스팸함과 프로모션함을 확인해 주세요.'
   ].join('\n\n');
@@ -58,7 +66,7 @@ function registrationConfirmationMessage_(course) {
 
 function registrationEmailValidation_() {
   return FormApp.createTextValidation()
-    .setHelpText('Google 계정으로 사용하는 올바른 이메일 주소를 입력해 주세요.')
+    .setHelpText('입장코드를 받을 올바른 이메일 주소를 입력해 주세요.')
     .requireTextIsEmail()
     .build();
 }
@@ -144,8 +152,7 @@ function studentObject_(row, rowNumber) {
 }
 
 function expireStudent_(ss, rowNumber) {
-  const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
-  sheet.getRange(rowNumber, RSEDU_ACADEMY.STUDENT.ACCESS_STATUS).setValue('만료');
+  ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS).getRange(rowNumber, RSEDU_ACADEMY.STUDENT.ACCESS_STATUS).setValue('만료');
 }
 
 function getSpreadsheet_() {
@@ -169,8 +176,8 @@ function getCourseSettings_(ss, courseId) {
         accessDays: Number(row[4] || 180),
         senderName: String(row[5] || 'RS에듀컨설팅 LMC Academy'),
         replyEmail: normalizeEmail_(row[6]),
-        driveFolderId: String(row[7] || ''),
-        accessPolicy: String(row[8] || 'RESTRICTED'),
+        mediaProvider: String(row[7] || 'VIMEO'),
+        accessPolicy: String(row[8] || 'EMBED_ONLY_SPECIFIC_DOMAIN'),
         status: String(row[9] || '준비중')
       };
     }
@@ -260,14 +267,16 @@ function runAcademySelfTest() {
   try {
     const course = getCourseSettings_(ss, RSEDU_ACADEMY.DEFAULT_COURSE_ID);
     checks.push(`과정설정: 정상 · ${course.courseName}`);
-    if (!course.driveFolderId) throw new Error('Drive폴더ID 없음');
-    DriveApp.getFolderById(course.driveFolderId).getName();
-    checks.push('Drive 폴더: 접근 가능');
-    const ids = getDriveMediaFileIds_(ss, course.courseId);
-    checks.push(`Drive 영상 매핑: ${ids.length}개`);
-    ids.forEach(function(id) { DriveApp.getFileById(id).getName(); });
-    checks.push('Drive 파일: 접근 가능');
-  } catch (error) { checks.push('과정·Drive: 실패 · ' + error.message); }
+    const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.MEDIA);
+    const lastRow = sheet.getLastRow();
+    const values = lastRow >= RSEDU_ACADEMY.DATA_START_ROW
+      ? sheet.getRange(RSEDU_ACADEMY.DATA_START_ROW, 1, lastRow - RSEDU_ACADEMY.HEADER_ROW, 9).getValues()
+      : [];
+    const mapped = values.filter(function(row) {
+      return String(row[0]) === course.courseId && String(row[3]).toUpperCase() === 'VIMEO' && String(row[4]).trim() && String(row[7]).trim() !== '중지';
+    });
+    checks.push(`Vimeo 영상 매핑: ${mapped.length}개`);
+  } catch (error) { checks.push('과정·Vimeo 설정: 실패 · ' + error.message); }
 
   const props = PropertiesService.getScriptProperties();
   checks.push(props.getProperty('FORM_ID') ? 'Google Form: 생성됨' : 'Google Form: 미생성');
@@ -280,17 +289,9 @@ function runAcademySelfTest() {
 }
 
 function writeLog_(ss, studentId, orderNo, email, template, result, error, retryCount) {
-  const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.LOGS);
-  sheet.appendRow([
-    createId_('LOG'),
-    new Date(),
-    studentId || '',
-    orderNo || '',
-    email || '',
-    template || '',
-    result || '',
-    error || '',
-    Number(retryCount || 0)
+  ss.getSheetByName(RSEDU_ACADEMY.SHEETS.LOGS).appendRow([
+    createId_('LOG'), new Date(), studentId || '', orderNo || '', email || '',
+    template || '', result || '', error || '', Number(retryCount || 0)
   ]);
 }
 
@@ -304,17 +305,9 @@ function enforceLoginRateLimit_(email) {
   cache.put(key, String(count + 1), 600);
 }
 
-function clearLoginRateLimit_(email) {
-  CacheService.getScriptCache().remove('login:' + sha256_(email).slice(0, 32));
-}
-
-function hashAccessCode_(email, courseId, code) {
-  return hmacSha256_([normalizeEmail_(email), String(courseId), normalizeCode_(code)].join('|'), getRequiredProperty_('CODE_PEPPER'));
-}
-
-function hashSessionToken_(token) {
-  return hmacSha256_(String(token), getRequiredProperty_('SESSION_PEPPER'));
-}
+function clearLoginRateLimit_(email) { CacheService.getScriptCache().remove('login:' + sha256_(email).slice(0, 32)); }
+function hashAccessCode_(email, courseId, code) { return hmacSha256_([normalizeEmail_(email), String(courseId), normalizeCode_(code)].join('|'), getRequiredProperty_('CODE_PEPPER')); }
+function hashSessionToken_(token) { return hmacSha256_(String(token), getRequiredProperty_('SESSION_PEPPER')); }
 
 function ensureSecretProperty_(key) {
   const props = PropertiesService.getScriptProperties();
@@ -335,19 +328,9 @@ function generateAccessCode_() {
   return code;
 }
 
-function randomToken_() {
-  return [Utilities.getUuid(), Utilities.getUuid(), Utilities.getUuid()].join('').replace(/-/g, '');
-}
-
-function hmacSha256_(value, key) {
-  const bytes = Utilities.computeHmacSha256Signature(String(value), String(key), Utilities.Charset.UTF_8);
-  return Utilities.base64EncodeWebSafe(bytes).replace(/=+$/g, '');
-}
-
-function sha256_(value) {
-  const bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(value), Utilities.Charset.UTF_8);
-  return Utilities.base64EncodeWebSafe(bytes).replace(/=+$/g, '');
-}
+function randomToken_() { return [Utilities.getUuid(), Utilities.getUuid(), Utilities.getUuid()].join('').replace(/-/g, ''); }
+function hmacSha256_(value, key) { return Utilities.base64EncodeWebSafe(Utilities.computeHmacSha256Signature(String(value), String(key), Utilities.Charset.UTF_8)).replace(/=+$/g, ''); }
+function sha256_(value) { return Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(value), Utilities.Charset.UTF_8)).replace(/=+$/g, ''); }
 
 function constantTimeEqual_(left, right) {
   const a = String(left || '');
@@ -361,9 +344,7 @@ function constantTimeEqual_(left, right) {
 function output_(payload, callback) {
   const json = JSON.stringify(payload);
   const callbackName = String(callback || '');
-  if (/^[A-Za-z_$][0-9A-Za-z_$.]{0,90}$/.test(callbackName)) {
-    return ContentService.createTextOutput(`${callbackName}(${json});`).setMimeType(ContentService.MimeType.JAVASCRIPT);
-  }
+  if (/^[A-Za-z_$][0-9A-Za-z_$.]{0,90}$/.test(callbackName)) return ContentService.createTextOutput(`${callbackName}(${json});`).setMimeType(ContentService.MimeType.JAVASCRIPT);
   return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
 }
 
@@ -378,11 +359,7 @@ function publicErrorMessage_(error) {
   return '요청을 처리하지 못했습니다. 잠시 후 다시 시도하거나 운영자에게 문의해 주세요.';
 }
 
-function cleanText_(value) {
-  if (Array.isArray(value)) return value.join(', ').trim();
-  return String(value == null ? '' : value).trim();
-}
-
+function cleanText_(value) { return Array.isArray(value) ? value.join(', ').trim() : String(value == null ? '' : value).trim(); }
 function normalizeEmail_(value) { return cleanText_(value).toLowerCase(); }
 function normalizeCode_(value) { return cleanText_(value).toUpperCase().replace(/[^A-Z0-9]/g, ''); }
 function normalizeOrderNo_(value) { return cleanText_(value).replace(/\s+/g, ''); }
