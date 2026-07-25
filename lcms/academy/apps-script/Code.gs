@@ -79,6 +79,7 @@ function onOpen() {
       .addItem('선택 수강생 결제확인·권한발급', 'provisionSelectedStudent')
       .addItem('선택 수강생 입장코드 재발급', 'reissueSelectedStudentCode')
       .addItem('선택 수강생 접근정지', 'suspendSelectedStudent')
+      .addItem('만료권한 지금 점검', 'expireStudentAccesses')
       .addSeparator()
       .addItem('자동화 자체점검', 'runAcademySelfTest')
       .addToUi();
@@ -105,6 +106,7 @@ function setupAcademyAutomation() {
     const course = getCourseSettings_(ss, RSEDU_ACADEMY.DEFAULT_COURSE_ID);
     const form = getOrCreateRegistrationForm_(ss, course);
     installAutomationTriggers_(ss, form);
+    ensureExpiryTrigger_();
     writeRegistrationUrls_(ss, course, form);
     updateInstallStatus_(ss, 1, '완료');
     updateInstallStatus_(ss, 2, '완료');
