@@ -1,5 +1,7 @@
 /* RS EDU Academy · authenticated entry and member state */
 
+.academy-page [hidden] { display: none !important; }
+
 .academy-entry-page {
   min-height: 100vh;
   background:
