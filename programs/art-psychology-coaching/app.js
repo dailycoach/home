@@ -1,6 +1,25 @@
 (() => {
   const config = window.SITE_CONFIG || {};
   const formUrl = (config.formUrl || "").trim();
+
+  // Keep the facilitator slide page discoverable across all public pages
+  // without duplicating navigation markup in every HTML file.
+  document.querySelectorAll(".main-nav").forEach((nav) => {
+    if (nav.querySelector('a[href="slides.html"]')) return;
+    const link = document.createElement("a");
+    link.href = "slides.html";
+    link.textContent = "진행 슬라이드";
+    const cta = nav.querySelector(".nav-cta");
+    nav.insertBefore(link, cta || null);
+  });
+  document.querySelectorAll(".footer-links").forEach((footer) => {
+    if (footer.querySelector('a[href="slides.html"]')) return;
+    const link = document.createElement("a");
+    link.href = "slides.html";
+    link.textContent = "진행 슬라이드";
+    const apply = footer.querySelector("[data-apply-link]");
+    footer.insertBefore(link, apply || null);
+  });
   const applyLinks = [...document.querySelectorAll("[data-apply-link]")];
   const dialog = document.querySelector("[data-link-dialog]");
   const validFormUrl = /^https:\/\/(docs\.google\.com\/forms|forms\.gle)\//i.test(formUrl);
