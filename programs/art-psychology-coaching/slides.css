@@ -1,0 +1,157 @@
+/* Facilitator slides page */
+.slide-rule-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.2rem
+}
+.slide-rule{
+  min-height:250px;
+  background:var(--paper);
+  border:1px solid rgba(16,24,40,.08);
+  padding:1.8rem
+}
+.slide-rule span{
+  display:block;
+  margin-bottom:3rem;
+  color:var(--orange);
+  font-size:.72rem;
+  font-weight:900
+}
+.slide-rule p{color:var(--muted);margin:0}
+
+.slide-flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:.75rem
+}
+.slide-flow div{
+  min-height:118px;
+  background:var(--paper);
+  border:1px solid rgba(16,24,40,.08);
+  padding:1rem
+}
+.slide-flow strong{
+  display:block;
+  margin-bottom:1.9rem;
+  color:var(--teal);
+  font-size:.76rem
+}
+.slide-flow span{
+  font-weight:780;
+  line-height:1.35
+}
+
+.facilitator-week-list{
+  display:grid;
+  gap:1.2rem
+}
+.facilitator-week{
+  background:var(--paper);
+  border:1px solid rgba(16,24,40,.09);
+  padding:1.8rem
+}
+.week-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:1rem;
+  margin-bottom:1.4rem
+}
+.week-meta span{
+  font-size:.82rem;
+  font-weight:900;
+  color:var(--orange)
+}
+.week-meta small{
+  color:var(--muted);
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.12em
+}
+.slide-question{
+  max-width:860px;
+  font-size:1.28rem;
+  font-weight:820;
+  line-height:1.35;
+  letter-spacing:-.03em
+}
+.slide-columns{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:1.4rem;
+  border-top:1px solid var(--line);
+  padding-top:1.4rem
+}
+.slide-columns h4{
+  margin:0 0 .7rem;
+  font-size:.82rem;
+  letter-spacing:.08em;
+  color:var(--teal)
+}
+.slide-columns p{
+  margin:0;
+  color:var(--muted)
+}
+
+.slide-download-ready{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6vw;
+  align-items:start
+}
+.slide-download-ready p,
+.slide-download-ready li{
+  color:rgba(255,255,255,.68)
+}
+.slide-download-ready ul{
+  margin:1rem 0 0;
+  padding-left:1.1rem
+}
+
+@media (max-width:980px){
+  .slide-rule-grid,
+  .slide-flow,
+  .slide-columns,
+  .slide-download-ready{
+    grid-template-columns:1fr
+  }
+}
+
+/* Password gate for facilitator slides */
+html.slides-auth-pending,
+html.slides-auth-pending body{background:var(--ink)}
+.slides-gate{
+  position:relative;min-height:100svh;display:grid;place-items:center;
+  padding:5rem 1.5rem;background:var(--ink);color:#fff;overflow:hidden
+}
+.slides-gate[hidden]{display:none}
+.slides-gate-noise{
+  position:absolute;inset:0;opacity:.25;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:38px 38px;mask-image:linear-gradient(#000,transparent 96%)
+}
+.slides-gate-panel{position:relative;z-index:1;width:min(100%,620px)}
+.slides-gate-brand{margin-bottom:6rem;color:#fff}
+.slides-gate h1{font-size:clamp(3rem,8vw,6.8rem);margin:0 0 1.5rem}
+.slides-gate-copy{max-width:520px;color:rgba(255,255,255,.64);font-size:1.05rem}
+.slides-password-form{margin-top:2.4rem}
+.slides-password-form label{display:block;margin-bottom:.6rem;font-size:.76rem;font-weight:850;letter-spacing:.08em;color:rgba(255,255,255,.58)}
+.slides-password-row{display:grid;grid-template-columns:1fr auto;gap:.75rem}
+.slides-password-row input{
+  width:100%;min-height:56px;border:1px solid rgba(255,255,255,.3);border-radius:999px;
+  padding:.8rem 1.2rem;background:rgba(255,255,255,.07);color:#fff;font-size:1.15rem;letter-spacing:.16em;outline:none
+}
+.slides-password-row input:focus{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(244,206,70,.15)}
+.slides-password-row button:disabled{opacity:.55;cursor:wait;transform:none}
+.slides-auth-status{min-height:1.6rem;margin:.65rem .4rem 0;color:var(--yellow);font-size:.85rem}
+.slides-gate-back{display:inline-block;margin-top:4rem;color:rgba(255,255,255,.55);font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.25)}
+.nav-lock{border:0;background:none;color:inherit;font-size:.82rem;font-weight:700;cursor:pointer;opacity:.65;padding:.4rem}
+.nav-lock:hover{opacity:1}
+@media(max-width:760px){
+  .slides-gate{padding:3rem 1rem}
+  .slides-gate-brand{margin-bottom:4rem}
+  .slides-password-row{grid-template-columns:1fr}
+  .slides-password-row .button{width:100%}
+  .nav-lock{width:100%;text-align:left;padding:1.05rem .3rem;border-bottom:1px solid var(--line);font-size:1.1rem;opacity:1}
+}
