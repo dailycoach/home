@@ -1,11 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>그림으로 읽고, 말로 연결하고, 삶으로 옮기다 | DAILYCOACHING</title>
-  <meta name="description" content="말보다 먼저 나타나는 마음의 장면을 색과 선으로 만나고 자신의 언어로 다시 읽어 삶의 선택으로 옮기는 6주 미술심리코칭 과정입니다.">
-  <meta name="theme-color" content="#101828">
+  <title>다양한 빛깔, 나만의 존재감 | DAILYCOACHING 미술심리코칭</title>
+  <meta name="description" content="정해진 틀보다 고유한 결을 발견하는 6주 미술심리코칭. 색과 형태로 표현하고, 자신의 언어로 읽고, 다음 행동으로 연결합니다.">
+  <meta name="theme-color" content="#232735">
+  <link rel="preload" href="assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script src="config.js"></script>
   <script src="app.js" defer></script>
@@ -25,81 +26,242 @@
   </div>
 </header>
 <main id="main">
-  <section class="hero hero-kinetic dark-section">
-    <div class="noise-grid" aria-hidden="true"></div>
-    <div class="hero-backword" aria-hidden="true">DRAW · READ · MOVE</div>
-    <div class="container hero-grid">
-      <div class="hero-copy reveal">
-        <p class="eyebrow light">ART / PSYCHOLOGY / COACHING / 6 WEEKS</p>
-        <h1>그림으로 읽고,<br>말로 연결하고,<br><em>삶으로 옮기다.</em></h1>
-        <p class="hero-lead">말보다 먼저 나타나는 마음의 장면을 색과 선으로 만나고, 자신의 언어로 다시 읽어 삶의 선택으로 옮기는 6주 미술심리코칭 과정입니다.</p>
-        <div class="hero-actions">
-          <a class="button button-accent" href="#" data-apply-link>현재 모집 확인 ↗</a>
-          <a class="button button-ghost" href="journey.html">6주 과정 보기</a>
+  <section class="identity-hero dark-section" aria-labelledby="identity-hero-title">
+    <div class="identity-grid" aria-hidden="true"></div>
+    <div class="identity-backword" aria-hidden="true">INDIVIDUAL</div>
+    <div class="container identity-hero-layout">
+      <div class="identity-hero-copy reveal">
+        <p class="identity-label-row">
+          <span class="identity-label label-pink">COLOR</span>
+          <span class="identity-label label-lime">VOICE</span>
+          <span class="identity-label label-coral">STORY</span>
+        </p>
+        <h1 id="identity-hero-title">다양한 빛깔,<br><span>나만의 존재감</span></h1>
+        <p class="identity-hero-lead">정해진 틀에 나를 맞추는 대신,<br>내 안의 여러 색과 이야기를 발견합니다.</p>
+        <p class="identity-principle">그림으로 읽고 · 말로 연결하고 · 삶으로 옮기다</p>
+        <div class="identity-hero-actions">
+          <a class="button button-accent" href="journey.html">과정 살펴보기 <span aria-hidden="true">→</span></a>
+          <a class="button button-ghost" href="#" data-apply-link>나의 색을 발견하기</a>
         </div>
-        <p class="micro-note">일정·장소·참여비는 신청 페이지에서만 확인합니다.</p>
+        <p class="micro-note">6주 동안 표현하고, 자신의 언어로 읽고, 다음 행동을 선택합니다.</p>
       </div>
-      <div class="hero-stack reveal">
-        <div class="stack-card card-a"><span class="stack-label">SCENE 01</span><strong>내면아이와 지금의 내가 만나는 자리</strong></div>
-        <div class="stack-card card-b"><span class="stack-label">SCENE 03</span><strong>무엇을 이루는가보다 어떻게 살고 싶은가</strong></div>
-        <div class="stack-card card-c"><span class="stack-label">SCENE 05</span><strong>흔들릴 때 무엇으로 나를 다시 세울 것인가</strong></div>
+
+      <div class="identity-collage reveal" aria-hidden="true">
+        <div class="collage-paper collage-paper-back"></div>
+        <div class="collage-art">
+          <img src="assets/hero-identity-collage.webp" alt="" width="1000" height="1250" fetchpriority="high">
+        </div>
+        <span class="collage-note collage-note-one">NOT<br>ONE COLOR</span>
+        <span class="collage-note collage-note-two">나답게<br>표현하기</span>
+        <span class="collage-index">01—06</span>
+        <span class="collage-line"></span>
       </div>
     </div>
+    <a class="identity-scroll-cue" href="#difference">
+      <span>SCROLL TO DISCOVER</span>
+      <i aria-hidden="true"></i>
+    </a>
   </section>
 
-  <section class="section section-paper" id="difference">
+  <section class="section identity-why" id="difference" aria-labelledby="identity-why-title">
     <div class="container">
-      <div class="section-kicker reveal">
-        <p class="eyebrow">NOT A TEST</p>
-        <h2>그림의 뜻을 맞히는 시간이 아니라<br><span>자신의 장면을 자신의 언어로 읽는 시간</span></h2>
+      <div class="identity-why-heading reveal">
+        <div>
+          <p class="eyebrow">WHY / LAYERED SELF</p>
+          <h2 id="identity-why-title">나는 왜<br><span>한 가지 모습으로 설명되지 않을까?</span></h2>
+        </div>
+        <p>겉으로 드러나는 모습과 혼자 있을 때의 감정은 늘 같지 않습니다. 어느 하나를 정답으로 고르기보다, 서로 다른 모습을 한 사람의 이야기 안에서 바라봅니다.</p>
       </div>
-      <div class="difference-grid">
-        <article class="difference-card reveal"><span class="num">01</span><h3>먼저 그립니다</h3><p>말을 정리하기 전에 색, 선, 거리, 빈 공간으로 현재의 장면을 표현합니다.</p></article>
-        <article class="difference-card reveal"><span class="num">02</span><h3>직접 읽습니다</h3><p>누군가가 의미를 확정하지 않습니다. 그림 속 주인공이 되어 자신의 이야기를 말합니다.</p></article>
-        <article class="difference-card reveal"><span class="num">03</span><h3>삶으로 옮깁니다</h3><p>발견한 감정과 욕구를 일상에서 실행할 수 있는 작은 행동으로 번역합니다.</p></article>
+
+      <div class="identity-layer-stage reveal">
+        <div class="identity-polarity polarity-outside">
+          <span>OUTSIDE</span>
+          <p>사람들 앞에서<br><strong>보이는 나</strong></p>
+        </div>
+        <div class="identity-polarity polarity-inside">
+          <span>INSIDE</span>
+          <p>혼자 있을 때<br><strong>느끼는 나</strong></p>
+        </div>
+        <div class="identity-overlap">
+          <span>MANY / ME</span>
+          <p>나는 하나의 색으로<br>설명되지 않습니다.</p>
+        </div>
+        <div class="identity-fragment fragment-expectation">기대에 맞추는 나</div>
+        <div class="identity-fragment fragment-unspoken">아직 꺼내지 못한 나</div>
+        <div class="identity-fragment fragment-growing">새롭게 자라는 나</div>
+        <svg class="identity-free-line" viewBox="0 0 440 170" aria-hidden="true">
+          <path d="M7 109C79 11 140 165 219 67c50-62 111-54 209 14" pathLength="1"/>
+        </svg>
+      </div>
+
+      <div class="identity-value-composition">
+        <article class="identity-value value-expression reveal">
+          <span class="value-number">01</span>
+          <div>
+            <p class="value-label">EXPRESS</p>
+            <h3>먼저 그립니다</h3>
+            <p>말을 정리하기 전에 색, 선, 거리와 빈 공간으로 지금의 장면을 표현합니다.</p>
+          </div>
+        </article>
+        <article class="identity-value value-voice reveal">
+          <span class="value-number">02</span>
+          <div>
+            <p class="value-label">VOICE</p>
+            <h3>직접 읽습니다</h3>
+            <p>누군가가 의미를 확정하지 않습니다. 보이는 장면을 자신의 말로 천천히 읽습니다.</p>
+          </div>
+        </article>
+        <article class="identity-value value-move reveal">
+          <span class="value-number">03</span>
+          <div>
+            <p class="value-label">MOVE</p>
+            <h3>삶으로 옮깁니다</h3>
+            <p>발견한 감정과 욕구를 지금의 삶에서 시작할 수 있는 작은 행동으로 번역합니다.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="section dark-section strip-section">
+  <section class="section journey-teaser dark-section" aria-labelledby="journey-teaser-title">
+    <div class="journey-word" aria-hidden="true">SIX SCENES</div>
     <div class="container">
-      <div class="strip-head reveal"><p class="eyebrow light">THE WHOLE ARC</p><h2>1주 도착 + 5장면 자기서사</h2></div>
-      <div class="strip-line reveal">
-        <div><small>WEEK 01</small><strong>도착</strong></div><i></i>
-        <div><small>SCENE 01</small><strong>마주봄</strong></div><i></i>
-        <div><small>SCENE 02</small><strong>다시 이름 짓기</strong></div><i></i>
-        <div><small>SCENE 03</small><strong>바라는 장면</strong></div><i></i>
-        <div><small>SCENE 04</small><strong>행동 번역</strong></div><i></i>
-        <div><small>SCENE 05</small><strong>내적 지지</strong></div>
+      <div class="journey-teaser-head reveal">
+        <div>
+          <p class="eyebrow light">6-WEEK COLOR JOURNEY</p>
+          <h2 id="journey-teaser-title">서로 다른 여섯 장면이<br><span>한 사람의 다음 이야기로 이어집니다.</span></h2>
+        </div>
+        <p>매주 같은 틀을 반복하지 않습니다. 지금의 상태에서 출발해 바라는 장면과 다음 행동까지, 질문의 초점과 표현 방식이 조금씩 달라집니다.</p>
       </div>
-      <div class="cta-row reveal"><a class="button button-outline" href="journey.html">6주 전체 흐름 자세히 보기 →</a></div>
+      <div class="journey-peek-grid">
+        <article class="journey-peek peek-01 reveal">
+          <span class="peek-no">01</span><p class="peek-label">ARRIVAL</p>
+          <h3>지금의 나에게 도착하기</h3><p>현재의 감정과 몸의 리듬을 한 장면으로 바라봅니다.</p>
+        </article>
+        <article class="journey-peek peek-02 reveal">
+          <span class="peek-no">02</span><p class="peek-label">ENCOUNTER</p>
+          <h3>오래전의 나와 마주보기</h3><p>떠오른 장면을 사실로 확정하지 않고, 그 안의 거리와 목소리를 살핍니다.</p>
+        </article>
+        <article class="journey-peek peek-03 reveal">
+          <span class="peek-no">03</span><p class="peek-label">RENAME</p>
+          <h3>지금의 나를 다시 이름 짓기</h3><p>나를 지켜온 힘과 이제 내려놓을 역할을 구분합니다.</p>
+        </article>
+        <article class="journey-peek peek-04 reveal">
+          <span class="peek-no">04</span><p class="peek-label">DESIRE</p>
+          <h3>원하는 삶의 장면 발견하기</h3><p>성취 목록보다 어떤 감각으로 살고 싶은지를 먼저 그립니다.</p>
+        </article>
+        <article class="journey-peek peek-05 reveal">
+          <span class="peek-no">05</span><p class="peek-label">TRANSLATE</p>
+          <h3>장면을 행동으로 번역하기</h3><p>바라는 변화가 오늘 시작할 수 있는 5% 행동이 됩니다.</p>
+        </article>
+        <article class="journey-peek peek-06 reveal">
+          <span class="peek-no">06</span><p class="peek-label">INTEGRATE</p>
+          <h3>나만의 색과 다음 행동 통합하기</h3><p>여섯 작품을 연결해 흔들릴 때 돌아올 자기지지 문장을 만듭니다.</p>
+        </article>
+      </div>
+      <div class="journey-teaser-action reveal">
+        <span>120 MIN × 6 WEEKS</span>
+        <a class="button button-outline" href="journey.html">6주 전체 흐름 자세히 보기 <span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </section>
 
-  <section class="section section-cream expression-section">
+  <section class="section artwork-experience" id="artwork" aria-labelledby="artwork-title">
     <div class="container">
-      <div class="section-kicker reveal"><p class="eyebrow">EXPRESSION SAMPLES</p><h2>활동 표현 예시</h2><p class="section-copy">아래 이미지는 실제 후기나 정답이 아니라, 각 장면에서 나타날 수 있는 표현 방식을 재현한 예시입니다.</p></div>
-      <div class="expression-grid">
-        <figure class="expression-card wide reveal">
-          <div class="sketch sketch-encounter"><span class="person large left"></span><span class="person small right"></span><span class="dashed-line"></span></div>
-          <figcaption><span>SCENE 01 · 마주봄</span><blockquote>“아이는 아직 가까이 오기보다 기다려주기를 바랐습니다.”</blockquote></figcaption>
+      <div class="artwork-heading reveal">
+        <div>
+          <p class="eyebrow">ARTWORK / PROCESS TRACE</p>
+          <h2 id="artwork-title">잘 그리는 것보다<br><span>나답게 표현하는 것이 먼저입니다.</span></h2>
+        </div>
+        <p>반듯한 결과보다 머뭇거린 선, 여러 번 덧칠한 색, 남겨둔 빈 공간을 함께 바라봅니다. 아래 이미지는 활동의 결을 보여주기 위해 재구성한 예시이며 실제 후기나 해석의 정답이 아닙니다.</p>
+      </div>
+      <div class="artwork-collage">
+        <figure class="artwork-piece piece-self reveal">
+          <img src="assets/artwork-self-layers.webp" alt="색연필과 크레용으로 서로 다른 두 모습을 표현한 활동 예시" width="1200" height="900" loading="lazy">
+          <figcaption><span>SCENE 02 / LAYERS</span><p>보이는 나와 느끼는 나 사이에<br>생각보다 넓은 공간이 있었습니다.</p></figcaption>
         </figure>
-        <figure class="expression-card reveal">
-          <div class="sketch sketch-desire"><span class="window-box"></span><span class="sun"></span><span class="desk"></span></div>
-          <figcaption><span>SCENE 03 · 바라는 장면</span><blockquote>“내가 원한 것은 성공보다 서두르지 않아도 되는 하루였습니다.”</blockquote></figcaption>
+        <figure class="artwork-piece piece-future reveal">
+          <img src="assets/artwork-future-scene.webp" alt="색종이와 색연필로 미래의 평범한 하루를 표현한 콜라주 활동 예시" width="1000" height="1250" loading="lazy">
+          <figcaption><span>SCENE 04 / DESIRE</span><p>원한 것은 더 빠른 성공보다<br>서두르지 않아도 되는 하루였습니다.</p></figcaption>
         </figure>
-        <figure class="expression-card reveal">
-          <div class="sketch sketch-support"><span class="wave-line"></span><span class="lighthouse"></span><span class="beam"></span></div>
-          <figcaption><span>SCENE 05 · 내적 지지</span><blockquote>“흔들려도 돌아올 수 있는 방향을 그림 안에 남겼습니다.”</blockquote></figcaption>
+        <figure class="artwork-piece piece-support reveal">
+          <img src="assets/artwork-support-symbol.webp" alt="크레용과 종이 조각으로 자신을 지지하는 방향을 표현한 활동 예시" width="1200" height="900" loading="lazy">
+          <figcaption><span>SCENE 06 / SUPPORT</span><p>흔들리지 않는 사람이 아니라<br>다시 돌아올 방향을 가진 사람이 되고 싶었습니다.</p></figcaption>
         </figure>
+        <p class="artwork-pencil-note" aria-hidden="true">imperfect<br>is personal</p>
       </div>
     </div>
   </section>
 
-  <section class="section final-banner dark-section">
-    <div class="container final-banner-grid reveal">
-      <div><p class="eyebrow light">BEGIN WITH A SCENE</p><h2>아직 선명한 답이<br>없어도 괜찮습니다.</h2></div>
-      <div><p>색 하나, 선 하나, 비어 있는 자리 하나에서 지금의 자신에게 필요한 이야기가 시작될 수 있습니다.</p><a class="button button-accent" href="#" data-apply-link>참여 신청 ↗</a></div>
+  <section class="section voice-notes" aria-labelledby="voice-notes-title">
+    <div class="container">
+      <div class="voice-notes-head reveal">
+        <p class="eyebrow">VOICE NOTES</p>
+        <h2 id="voice-notes-title">한 가지 결론보다<br><span>서로 다른 목소리가 남습니다.</span></h2>
+        <p>실제 효과를 단정하는 후기가 아니라, 과정에서 나올 수 있는 발화의 결을 재구성한 예시입니다.</p>
+      </div>
+      <div class="voice-note-field">
+        <blockquote class="voice-note voice-note-a reveal">
+          <span aria-hidden="true">“</span>
+          <p>왜 늘 같은 선택을 하는지 설명하려 했는데, 그림을 보고 나니 먼저 지키고 싶었던 것이 보였습니다.</p>
+          <footer>VOICE 01 · 자기이해</footer>
+        </blockquote>
+        <blockquote class="voice-note voice-note-b reveal">
+          <span aria-hidden="true">“</span>
+          <p>빈 공간도 표현이라는 말을 듣고, 아무것도 채우지 않은 자리를 오래 바라봤습니다.</p>
+          <footer>VOICE 02 · 여백</footer>
+        </blockquote>
+        <blockquote class="voice-note voice-note-c reveal">
+          <span aria-hidden="true">“</span>
+          <p>정답을 듣는 대신 제가 직접 작품의 제목을 바꿨습니다. 그 문장이 다음 행동을 정하는 기준이 됐습니다.</p>
+          <footer>VOICE 03 · 선택</footer>
+        </blockquote>
+        <blockquote class="voice-note voice-note-d reveal">
+          <span aria-hidden="true">“</span>
+          <p>여러 모습 중 하나를 없애는 것이 아니라, 언제 어떤 색이 필요한지 알아가는 시간이었습니다.</p>
+          <footer>VOICE 04 · 통합</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section landing-facilitator dark-section" aria-labelledby="facilitator-title">
+    <div class="facilitator-word" aria-hidden="true">ASK, DON'T DEFINE</div>
+    <div class="container landing-facilitator-grid">
+      <div class="facilitator-manifesto reveal">
+        <p class="eyebrow light">FACILITATOR / KIM CHEOLWOONG</p>
+        <h2 id="facilitator-title">작품을 대신<br><span>해석하지 않습니다.</span></h2>
+        <p class="facilitator-quote">“문제보다 존재, 답보다 질문, 변화보다 성장.”</p>
+      </div>
+      <div class="facilitator-role-panel reveal">
+        <p class="role">DAILYCOACHING 대표 · KPC</p>
+        <h3>질문과 성찰로<br>자기 의미를 발견하도록 돕습니다.</h3>
+        <p>진행자는 색이나 상징에 고정된 뜻을 붙이지 않습니다. 참여자가 관찰한 단서와 자신의 언어를 연결하고, 그 의미가 현재의 선택으로 이어지도록 과정을 설계합니다.</p>
+        <ul>
+          <li><strong>11년</strong><span>코칭 현장</span></li>
+          <li><strong>5,000h+</strong><span>1:1 코칭</span></li>
+          <li><strong>1,200+</strong><span>강의·세션</span></li>
+        </ul>
+        <a class="text-arrow-link" href="guide.html#facilitator">진행 철학과 참여 원칙 보기 <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section identity-final-cta" aria-labelledby="final-cta-title">
+    <div class="final-color-piece final-color-pink" aria-hidden="true"></div>
+    <div class="final-color-piece final-color-lime" aria-hidden="true"></div>
+    <div class="container identity-final-grid reveal">
+      <div>
+        <p class="eyebrow">BEGIN WITH YOUR COLOR</p>
+        <h2 id="final-cta-title">당신은 한 가지 색으로<br><span>설명될 수 없습니다.</span></h2>
+      </div>
+      <div>
+        <p>내 안의 서로 다른 빛깔을 만나고,<br>그 색으로 다음 장면을 그려보세요.</p>
+        <div class="identity-final-actions">
+          <a class="button button-accent" href="#" data-apply-link>미술심리코칭 참여 신청 <span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="journey.html">과정 상세보기 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
