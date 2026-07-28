@@ -141,6 +141,24 @@ for (const [fileName, width, height, lazy] of imageSpecs) {
   else assert(tagAttribute(tag, "fetchpriority") === "high", `${fileName}: Hero 우선 로딩 누락`);
 }
 
+const facilitatorImageName = "facilitator-park-jia-profile.webp";
+const facilitatorImagePath = path.join(siteRoot, "assets", facilitatorImageName);
+assert(fs.existsSync(facilitatorImagePath), `담당 코치 이미지 자산 누락: ${facilitatorImageName}`);
+if (fs.existsSync(facilitatorImagePath)) {
+  assert(
+    fs.statSync(facilitatorImagePath).size < 100_000,
+    `담당 코치 이미지 최적화 필요: ${facilitatorImageName}`,
+  );
+}
+for (const [pageLabel, html] of [["랜딩", landing], ["참여 안내", guide]]) {
+  const tag =
+    html.match(new RegExp(`<img\\b[^>]*${facilitatorImageName}[^>]*>`, "i"))?.[0] || "";
+  assert(tagAttribute(tag, "width") === "1536", `${pageLabel} 담당 코치 이미지 width 불일치`);
+  assert(tagAttribute(tag, "height") === "646", `${pageLabel} 담당 코치 이미지 height 불일치`);
+  assert(tagAttribute(tag, "loading") === "lazy", `${pageLabel} 담당 코치 이미지 lazy loading 누락`);
+  assert(Boolean(tagAttribute(tag, "alt")), `${pageLabel} 담당 코치 이미지 대체 텍스트 누락`);
+}
+
 assert(
   (journey.match(/class="journey-week journey-week-\d{2}/g) || []).length === 6,
   "6주 과정의 주차 섹션이 6개가 아님",
@@ -163,6 +181,17 @@ for (const required of [
 }
 assert(landing.includes("FACILITATOR / PARK JIA"), "랜딩 담당 코치 영문 표기 누락");
 assert(landing.includes("담당 코치 · 박지아"), "랜딩 담당 코치 한글 표기 누락");
+for (const required of [
+  "심리검사기관",
+  "인지행동심리상담사",
+  "관계 심리",
+  "1:1 맞춤",
+]) {
+  assert(
+    landing.includes(required) && guide.includes(required),
+    `담당 코치 전문 정보 누락: ${required}`,
+  );
+}
 assert(!`${landing}\n${guide}`.includes("김철웅"), "이전 담당 코치 이름이 공개 화면에 남아 있음");
 assert(
   !`${landing}\n${guide}`.includes("5,000시간+") &&
