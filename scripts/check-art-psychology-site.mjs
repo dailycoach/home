@@ -154,7 +154,7 @@ for (const [pageLabel, html] of [["랜딩", landing], ["참여 안내", guide]])
   const tag =
     html.match(new RegExp(`<img\\b[^>]*${facilitatorImageName}[^>]*>`, "i"))?.[0] || "";
   assert(tagAttribute(tag, "width") === "1536", `${pageLabel} 담당 코치 이미지 width 불일치`);
-  assert(tagAttribute(tag, "height") === "646", `${pageLabel} 담당 코치 이미지 height 불일치`);
+  assert(tagAttribute(tag, "height") === "1024", `${pageLabel} 담당 코치 이미지 height 불일치`);
   assert(tagAttribute(tag, "loading") === "lazy", `${pageLabel} 담당 코치 이미지 lazy loading 누락`);
   assert(Boolean(tagAttribute(tag, "alt")), `${pageLabel} 담당 코치 이미지 대체 텍스트 누락`);
 }
