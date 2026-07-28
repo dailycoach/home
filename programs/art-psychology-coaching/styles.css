@@ -595,7 +595,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{
   border:6px solid var(--lime);border-radius:50%;mix-blend-mode:screen
 }
 .facilitator-profile-shot{
-  position:relative;aspect-ratio:1536/646;overflow:hidden;background:#0d1118;
+  position:relative;aspect-ratio:3/2;overflow:hidden;background:#0d1118;
   border:1px solid rgba(247,241,240,.22);box-shadow:18px 18px 0 var(--cobalt)
 }
 .facilitator-profile-shot img{width:100%;height:100%;object-fit:cover}
@@ -892,7 +892,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{
   clip-path:polygon(5% 0,100% 6%,93% 100%,0 91%)
 }
 .guide-facilitator-portrait img{
-  position:absolute;left:-19%;top:-2%;width:auto;height:175%;max-width:none
+  position:absolute;inset:0;width:100%;height:100%;max-width:100%;
+  object-fit:cover;object-position:32% center
 }
 .guide-facilitator-portrait span{
   position:absolute;z-index:2;right:7%;bottom:8%;color:var(--lime);
@@ -1079,7 +1080,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{
   .facilitator-profile-media:after{right:-3%;bottom:14%;width:24%;border-width:4px}
   .facilitator-profile-shot{aspect-ratio:.92;box-shadow:10px 10px 0 var(--cobalt)}
   .facilitator-profile-shot img{
-    position:absolute;left:-19%;top:-2%;width:auto;height:175%;max-width:none
+    position:static;width:100%;height:100%;max-width:100%;
+    object-fit:cover;object-position:35% center
   }
   .facilitator-profile-shot>span{right:.7rem;top:.7rem;font-size:.56rem}
   .facilitator-profile-media figcaption{align-items:start;margin-top:1.2rem}
