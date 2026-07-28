@@ -154,11 +154,21 @@ for (const required of [
   "참여자 워크북",
   "말하지 않을 권리",
   'id="facilitator"',
+  "박지아 코치",
+  "instagram.com/nalbit_coaching/",
   "작품을 대신 해석",
   "자주 묻는 질문",
 ]) {
   assert(guide.includes(required), `참여 안내 핵심 내용 누락: ${required}`);
 }
+assert(landing.includes("FACILITATOR / PARK JIA"), "랜딩 담당 코치 영문 표기 누락");
+assert(landing.includes("담당 코치 · 박지아"), "랜딩 담당 코치 한글 표기 누락");
+assert(!`${landing}\n${guide}`.includes("김철웅"), "이전 담당 코치 이름이 공개 화면에 남아 있음");
+assert(
+  !`${landing}\n${guide}`.includes("5,000시간+") &&
+    !`${landing}\n${guide}`.includes("1,200회+"),
+  "이전 담당 코치의 경력 수치가 공개 화면에 남아 있음",
+);
 
 assert(
   (slides.match(/class="facilitator-week reveal"/g) || []).length === 6,
