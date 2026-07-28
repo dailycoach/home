@@ -1,6 +1,20 @@
 (() => {
   const STORAGE_KEY = "dc-art-facilitator-slides-unlocked";
   const EXPECTED_HASH = "5cb9895aab221167f4d7fddc7ec0028de028d56d947583149860465cd97df446";
+  const DOWNLOADS = {
+    complete: "downloads/complete-package-v1.0.zip",
+    "master-pptx": "downloads/art-psychology-coaching-6week-master-v1.0.pptx",
+    "master-pdf": "downloads/art-psychology-coaching-6week-master-v1.0.pdf",
+    week01: "downloads/week01-arrival-v1.0.pptx",
+    week02: "downloads/week02-encounter-v1.0.pptx",
+    week03: "downloads/week03-rename-v1.0.pptx",
+    week04: "downloads/week04-future-scene-v1.0.pptx",
+    week05: "downloads/week05-action-translation-v1.0.pptx",
+    week06: "downloads/week06-integration-v1.0.pptx",
+    script: "downloads/facilitator-script-v1.0.txt",
+    "contact-sheet": "downloads/slide-contact-sheet-v1.0.pdf",
+    "qa-report": "downloads/qa-report-v1.0.md",
+  };
   const root = document.documentElement;
   const gate = document.querySelector("[data-slides-gate]");
   const content = document.querySelector("[data-protected-content]");
@@ -15,8 +29,18 @@
     return [...new Uint8Array(result)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
   };
 
+  const hydrateDownloads = () => {
+    document.querySelectorAll("[data-download-key]").forEach((link) => {
+      const downloadUrl = DOWNLOADS[link.dataset.downloadKey];
+      if (downloadUrl) {
+        link.href = downloadUrl;
+      }
+    });
+  };
+
   const showProtectedContent = () => {
     sessionStorage.setItem(STORAGE_KEY, "1");
+    hydrateDownloads();
     gate.hidden = true;
     content.hidden = false;
     root.classList.remove("slides-auth-pending");
