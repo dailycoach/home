@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>전자확인 결과 안내 | DAILYCOACHING</title>
+  <meta name="description" content="DAILYCOACHING 코칭계약 전자확인 결과 확인 안내">
+  <meta name="theme-color" content="#061528">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <link rel="stylesheet" href="/coaching/assets/agreement.css">
+  <script src="/coaching/assets/runtime-config.js" defer></script>
+  <script src="/coaching/assets/sign-gateway.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#successMain">본문 바로가기</a>
+
+  <header class="agreement-header">
+    <div class="agreement-header__inner">
+      <a class="agreement-brand" href="/" aria-label="DAILYCOACHING 홈">DAILYCOACHING</a>
+      <div class="agreement-header__links">
+        <a href="/coaching/">코칭안내</a>
+        <a href="mailto:hello@daily-coach-ing.com" data-operator-email-link>운영 문의</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="successMain" data-contract-success>
+    <section class="agreement-intro" aria-labelledby="successPageTitle">
+      <div class="agreement-intro__inner">
+        <div>
+          <p class="agreement-kicker">Electronic confirmation result</p>
+          <h1 id="successPageTitle">계약 상태는<br>완료 메일에서 확인합니다.</h1>
+        </div>
+        <p class="agreement-intro__copy">이 정적 주소만으로 전자계약 완료 여부를 증명하지 않습니다. 정상적으로 완료된 계약은 등록 이메일로 발송된 역할별 PDF와 안내에서 확인해 주세요.</p>
+      </div>
+    </section>
+
+    <div class="agreement-shell">
+      <section class="system-banner" data-state="ready" aria-live="polite">
+        <span class="system-banner__mark" aria-hidden="true">✓</span>
+        <div>
+          <strong>개인정보 없이 결과 확인 방법을 안내합니다.</strong>
+          <p>이 화면에는 계약번호, 이메일, 코칭 목표 또는 계약 상태를 표시하지 않습니다. 메일이 도착하지 않으면 운영 이메일로 문의해 주세요.</p>
+        </div>
+      </section>
+
+      <section class="agreement-card" aria-labelledby="managementTitle">
+        <header class="agreement-card__head">
+          <div>
+            <p class="agreement-kicker">Contract management</p>
+            <h2 id="managementTitle">체결 이후의 요청도<br>같은 위치에서 찾습니다.</h2>
+          </div>
+          <p>청약철회, 중도종료, 계약 변경, 선택동의 철회와 개인정보 권리요청은 계약 체결보다 찾기 어렵게 만들지 않습니다.</p>
+        </header>
+        <div class="agreement-card__body">
+          <div class="completion-grid">
+            <article class="completion-card">
+              <h3>계약 상태 확인</h3>
+              <p>Apps Script가 모든 필수 당사자의 확인과 최종 문서 생성을 마친 경우에만 완료 메일과 역할별 PDF를 발송합니다.</p>
+              <button class="button button--primary" type="button" disabled>완료 메일·PDF 확인</button>
+            </article>
+            <article class="completion-card">
+              <h3>계약 변경</h3>
+              <p>목표, 회기, 비용, 정보공유 범위 등 중요한 변경은 기존 계약을 덮어쓰지 않고 별도 절차로 요청합니다.</p>
+              <button class="button button--secondary" type="button" data-management-action="amendment" disabled>계약 변경 관문 준비 전</button>
+            </article>
+            <article class="completion-card">
+              <h3>청약철회·중도종료</h3>
+              <p>관계 법령과 확정된 운영정책에 따른 철회·종료·정산 요청 경로입니다.</p>
+              <button class="button button--secondary" type="button" data-management-action="termination" disabled>계약 철회·종료 관문 준비 전</button>
+            </article>
+            <article class="completion-card">
+              <h3>선택동의 철회</h3>
+              <p>녹음, 전사, AI, 사례·홍보·마케팅 등 별도 선택 동의가 있었다면 철회를 요청할 수 있습니다.</p>
+              <button class="button button--secondary" type="button" data-management-action="consent" disabled>선택동의 관리 관문 준비 전</button>
+            </article>
+            <article class="completion-card">
+              <h3>개인정보 권리요청</h3>
+              <p>관계 법령에 따른 열람·정정·삭제·처리정지 등 권리행사 요청 경로입니다.</p>
+              <button class="button button--secondary" type="button" data-management-action="privacy" disabled>개인정보 관리 관문 준비 전</button>
+            </article>
+            <article class="completion-card">
+              <h3>운영 이메일 문의</h3>
+              <p id="managementStatus">온라인 계약 관리 endpoint가 연결되기 전에는 운영 이메일로 요청을 접수합니다.</p>
+              <a class="button button--gold" href="mailto:hello@daily-coach-ing.com" data-operator-email-link data-operator-email-text>hello@daily-coach-ing.com</a>
+            </article>
+          </div>
+
+          <p class="consent-note">현재 Google 처리위탁 및 국외이전 관련 운영 검토가 확정되지 않아 온라인 계약 관리 기능을 활성화하지 않습니다. 이메일 문의 시 상세 코칭 대화나 불필요한 민감정보를 보내지 마세요.</p>
+
+          <div class="step-actions">
+            <a class="button button--secondary" href="/coaching/">코칭안내</a>
+            <div class="step-actions__end">
+              <a class="button button--primary" href="/">DAILYCOACHING 홈</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

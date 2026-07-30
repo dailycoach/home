@@ -1,0 +1,178 @@
+/**
+ * 검토된 실제 값만 입력한 뒤 이 파일을 Config.gs로 복사해 1회 실행합니다.
+ * 빈 값, 임시 URL 또는 추정한 사업자정보가 하나라도 있으면 실행하지 않습니다.
+ */
+function configureReviewedCoachingContractValues() {
+  var scriptProperties = {
+    WEB_APP_EXEC_URL: '',
+    ALLOWED_PARENT_ORIGINS: JSON.stringify(['https://daily-coach-ing.com']),
+    ADMIN_EMAIL_ALLOWLIST: JSON.stringify([])
+  };
+
+  var reviewedSettings = {
+    SERVICE_NAME: '',
+    REPRESENTATIVE: '',
+    COACH_NAME: '',
+    COACH_CREDENTIAL: '',
+    BUSINESS_REGISTRATION_NUMBER: '',
+    BUSINESS_ADDRESS: '',
+    CONTACT_PHONE: '',
+    CONTACT_EMAIL: '',
+    TAX_NOTICE: '',
+    JURISDICTION: '',
+    CANCELLATION_POLICY_DEFAULT: '',
+    NO_SHOW_POLICY_DEFAULT: '',
+    REFUND_POLICY_DEFAULT: '',
+    PAYMENT_METHOD_DEFAULT: '',
+    PRIVACY_CONTACT: '',
+    RETENTION_MONTHS: '',
+    DESTRUCTION_METHOD: '',
+    GOOGLE_PROCESSOR_NAME: '',
+    GOOGLE_PROCESSING_PURPOSE: '',
+    GOOGLE_PROCESSING_ITEMS: '',
+    GOOGLE_PROCESSING_RETENTION: '',
+    GOOGLE_PROCESSOR_DISCLOSURE_CONFIRMED: '',
+    CROSS_BORDER_RECIPIENT: '',
+    CROSS_BORDER_COUNTRY: '',
+    CROSS_BORDER_TRANSFER_METHOD: '',
+    CROSS_BORDER_TRANSFER_PURPOSE: '',
+    CROSS_BORDER_TRANSFER_ITEMS: '',
+    CROSS_BORDER_RETENTION: '',
+    CROSS_BORDER_TRANSFER_REVIEW_CONFIRMED: '',
+    LEGAL_REVIEW_CONFIRMED: '',
+    RECORDING_AI_MODE: '',
+    OFFER_RECORDING_CONSENT: '',
+    OFFER_TRANSCRIPTION_CONSENT: '',
+    OFFER_AI_SUMMARY_CONSENT: '',
+    SESSION_PROCESSING_NOTICE_VERSION: '',
+    RECORDING_PURPOSE: '',
+    RECORDING_SCOPE: '',
+    RECORDING_RETENTION: '',
+    TRANSCRIPTION_PROVIDER: '',
+    TRANSCRIPTION_PURPOSE: '',
+    TRANSCRIPTION_SCOPE: '',
+    TRANSCRIPTION_RETENTION: '',
+    AI_SUMMARY_PROVIDER: '',
+    AI_SUMMARY_PURPOSE: '',
+    AI_SUMMARY_SCOPE: '',
+    AI_SUMMARY_RETENTION: '',
+    OFFER_RESEARCH_CONSENT: '',
+    OFFER_ANONYMOUS_CASE_CONSENT: '',
+    OFFER_TESTIMONIAL_CONSENT: '',
+    OFFER_MARKETING_EMAIL_CONSENT: '',
+    OFFER_MARKETING_SMS_CONSENT: '',
+    OFFER_THIRD_PARTY_TRANSFER_CONSENT: '',
+    OPTIONAL_CONSENT_NOTICE_VERSION: '',
+    RESEARCH_PURPOSE: '',
+    RESEARCH_ITEMS: '',
+    RESEARCH_RETENTION: '',
+    ANONYMOUS_CASE_PURPOSE: '',
+    ANONYMOUS_CASE_ITEMS: '',
+    ANONYMOUS_CASE_RETENTION: '',
+    TESTIMONIAL_PURPOSE: '',
+    TESTIMONIAL_ITEMS: '',
+    TESTIMONIAL_RETENTION: '',
+    MARKETING_EMAIL_SENDER: '',
+    MARKETING_EMAIL_PURPOSE: '',
+    MARKETING_EMAIL_ITEMS: '',
+    MARKETING_EMAIL_RETENTION: '',
+    MARKETING_SMS_SENDER: '',
+    MARKETING_SMS_PURPOSE: '',
+    MARKETING_SMS_ITEMS: '',
+    MARKETING_SMS_RETENTION: '',
+    THIRD_PARTY_RECIPIENT: '',
+    THIRD_PARTY_PURPOSE: '',
+    THIRD_PARTY_ITEMS: '',
+    THIRD_PARTY_RETENTION: '',
+    SIGN_PAGE_BASE_URL: '',
+    CONTRACT_ACCEPTANCE_DAYS: '',
+    INFORMATION_SHARING_VERSION: '',
+    SPONSOR_PROVISION_NOTICE_VERSION: '',
+    SPONSOR_INFORMATION_RETENTION: '',
+    SPONSOR_PROVISION_REFUSAL_NOTICE: '',
+    WITHDRAWAL_POLICY: '',
+    CONTRACT_CHANGE_POLICY: '',
+    CONSENT_WITHDRAWAL_POLICY: '',
+    PRIVACY_RIGHTS_REQUEST_POLICY: '',
+    CONTRACT_MANAGEMENT_CONTACT: '',
+    CONTRACT_MANAGEMENT_REVIEW_CONFIRMED: ''
+  };
+
+  var unresolvedProperty = Object.keys(scriptProperties).some(function (key) {
+    return !String(scriptProperties[key] || '').trim() ||
+      (key === 'ADMIN_EMAIL_ALLOWLIST' &&
+        JSON.parse(scriptProperties[key]).length === 0);
+  });
+  var requiredSettingKeys = DC.Schema.SETTING_DEFINITIONS
+    .filter(function (definition) { return definition[3] === true; })
+    .map(function (definition) { return definition[0]; });
+  var conditionalSettingKeys = [];
+  if (reviewedSettings.RECORDING_AI_MODE === 'SEPARATE_CONSENT_ENABLED') {
+    conditionalSettingKeys.push('SESSION_PROCESSING_NOTICE_VERSION');
+    if (reviewedSettings.OFFER_RECORDING_CONSENT === 'YES') {
+      conditionalSettingKeys = conditionalSettingKeys.concat([
+        'RECORDING_PURPOSE', 'RECORDING_SCOPE', 'RECORDING_RETENTION'
+      ]);
+    }
+    if (reviewedSettings.OFFER_TRANSCRIPTION_CONSENT === 'YES') {
+      conditionalSettingKeys = conditionalSettingKeys.concat([
+        'TRANSCRIPTION_PROVIDER', 'TRANSCRIPTION_PURPOSE',
+        'TRANSCRIPTION_SCOPE', 'TRANSCRIPTION_RETENTION'
+      ]);
+    }
+    if (reviewedSettings.OFFER_AI_SUMMARY_CONSENT === 'YES') {
+      conditionalSettingKeys = conditionalSettingKeys.concat([
+        'AI_SUMMARY_PROVIDER', 'AI_SUMMARY_PURPOSE',
+        'AI_SUMMARY_SCOPE', 'AI_SUMMARY_RETENTION'
+      ]);
+    }
+  }
+  [
+    ['OFFER_RESEARCH_CONSENT', ['RESEARCH_PURPOSE', 'RESEARCH_ITEMS', 'RESEARCH_RETENTION']],
+    ['OFFER_ANONYMOUS_CASE_CONSENT', [
+      'ANONYMOUS_CASE_PURPOSE', 'ANONYMOUS_CASE_ITEMS', 'ANONYMOUS_CASE_RETENTION'
+    ]],
+    ['OFFER_TESTIMONIAL_CONSENT', [
+      'TESTIMONIAL_PURPOSE', 'TESTIMONIAL_ITEMS', 'TESTIMONIAL_RETENTION'
+    ]],
+    ['OFFER_MARKETING_EMAIL_CONSENT', [
+      'MARKETING_EMAIL_SENDER', 'MARKETING_EMAIL_PURPOSE',
+      'MARKETING_EMAIL_ITEMS', 'MARKETING_EMAIL_RETENTION'
+    ]],
+    ['OFFER_MARKETING_SMS_CONSENT', [
+      'MARKETING_SMS_SENDER', 'MARKETING_SMS_PURPOSE',
+      'MARKETING_SMS_ITEMS', 'MARKETING_SMS_RETENTION'
+    ]],
+    ['OFFER_THIRD_PARTY_TRANSFER_CONSENT', [
+      'THIRD_PARTY_RECIPIENT', 'THIRD_PARTY_PURPOSE',
+      'THIRD_PARTY_ITEMS', 'THIRD_PARTY_RETENTION'
+    ]]
+  ].forEach(function (offer) {
+    if (reviewedSettings[offer[0]] === 'YES') {
+      conditionalSettingKeys.push('OPTIONAL_CONSENT_NOTICE_VERSION');
+      conditionalSettingKeys = conditionalSettingKeys.concat(offer[1]);
+    }
+  });
+  var unresolvedSetting = requiredSettingKeys.concat(conditionalSettingKeys)
+    .some(function (key) {
+    return !String(reviewedSettings[key] || '').trim();
+  });
+  if (unresolvedProperty || unresolvedSetting) {
+    throw new Error('검토되지 않은 운영값이 남아 있어 설정을 중단했습니다.');
+  }
+
+  DC.Config.requireAdmin();
+  PropertiesService.getScriptProperties().setProperties(scriptProperties, false);
+  DC.Storage.withScriptLock(function () {
+    Object.keys(reviewedSettings).forEach(function (key) {
+      var row = DC.Storage.findRow('SETTINGS', 'key', key);
+      if (!row) throw new Error('SETTINGS 키가 없습니다: ' + key);
+      DC.Storage.updateRow('SETTINGS', row.__rowNumber, {
+        value: reviewedSettings[key],
+        updatedAt: DC.Storage.nowIso(),
+        updatedBy: DC.Config.activeEmail()
+      });
+    });
+  });
+  return DC.Config.health();
+}

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>코칭계약서 | 라이프·비즈니스·커리어 | DAILYCOACHING</title>
+  <meta name="description" content="라이프·비즈니스·커리어 코칭계약 조건과 주요 조항을 확인하고 서버 전송 없이 초안을 미리보거나 A4 PDF로 저장합니다.">
+  <meta name="theme-color" content="#061528">
+  <link rel="canonical" href="https://daily-coach-ing.com/coaching/agreement/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="DAILYCOACHING">
+  <meta property="og:title" content="코칭계약서 | DAILYCOACHING">
+  <meta property="og:description" content="라이프·비즈니스·커리어 코칭계약서를 확인하고 작성하는 계약 안내 시스템">
+  <meta property="og:url" content="https://daily-coach-ing.com/coaching/agreement/">
+  <meta property="og:image" content="https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/dailycoaching-og-cover.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/coaching/assets/agreement.css">
+  <style>
+    .type-choice__title {
+      margin: 48px 0 12px;
+      font-size: 1.35rem;
+    }
+    .type-choice__description {
+      color: var(--ag-muted);
+      font-size: .92rem;
+      line-height: 1.68;
+    }
+    .type-choice input:checked + label .type-choice__description {
+      color: rgba(255, 255, 255, .68);
+    }
+    .key-confirmations__legend {
+      margin: 0 0 14px;
+      color: var(--ag-navy-950);
+      font-size: 1.04rem;
+      font-weight: 760;
+    }
+    @media (max-width: 900px) {
+      .type-choice__title {
+        margin-top: 28px;
+      }
+    }
+  </style>
+  <script src="/coaching/assets/contract-templates.js" defer></script>
+  <script src="/coaching/assets/runtime-config.js" defer></script>
+  <script src="/coaching/assets/agreement.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#agreementMain">본문 바로가기</a>
+
+  <header class="agreement-header">
+    <div class="agreement-header__inner">
+      <a class="agreement-brand" href="/" aria-label="DAILYCOACHING 홈">DAILYCOACHING</a>
+      <nav class="agreement-header__links" aria-label="계약서 보조 메뉴">
+        <a href="/coaching/">코칭안내</a>
+        <a href="mailto:hello@daily-coach-ing.com" data-operator-email-link>운영 문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="agreementMain">
+    <section class="agreement-intro" aria-labelledby="agreementPageTitle">
+      <div class="agreement-intro__inner">
+        <div>
+          <p class="agreement-kicker">Coaching agreement studio</p>
+          <h1 id="agreementPageTitle">관계와 기준을<br>먼저 확인합니다.</h1>
+        </div>
+        <p class="agreement-intro__copy">계약 유형과 조건을 입력하고 주요 조항을 확인하면, 현재 브라우저 안에서만 초안을 미리보고 A4로 인쇄하거나 PDF로 저장할 수 있습니다. 이 공개 작성기는 전자계약을 체결하지 않습니다.</p>
+      </div>
+      <p class="privacy-pulse">현재 입력 내용은 서버로 전송되거나 브라우저 저장소에 자동 저장되지 않습니다. 페이지를 새로고침하거나 벗어나면 작성 내용은 초기화됩니다.</p>
+      <p class="agreement-standards">본 계약서는 ICF 윤리강령, 한국코치협회 윤리규정 및 국내 관련 법령의 주요 원칙을 참고하여 DAILYCOACHING의 실제 코칭 운영에 맞게 구성했습니다. 각 기관이 직접 승인하거나 인증한 계약서는 아닙니다.</p>
+    </section>
+
+    <div class="agreement-shell">
+      <section class="system-banner" id="systemBanner" data-state="draft" aria-live="polite">
+        <span class="system-banner__mark" aria-hidden="true">i</span>
+        <div>
+          <strong id="systemBannerTitle">초안 작성 모드</strong>
+          <p id="systemBannerMessage">공개 페이지에서는 초안 미리보기와 인쇄·PDF 저장만 가능합니다.</p>
+        </div>
+      </section>
+
+      <nav class="stepper" aria-label="계약서 작성 단계">
+        <button type="button" data-step-button="0" aria-current="step">
+          <span class="stepper__number">1</span><span class="stepper__label">유형 선택</span>
+        </button>
+        <button type="button" data-step-button="1" disabled>
+          <span class="stepper__number">2</span><span class="stepper__label">조건 입력</span>
+        </button>
+        <button type="button" data-step-button="2" disabled>
+          <span class="stepper__number">3</span><span class="stepper__label">조항 확인</span>
+        </button>
+        <button type="button" data-step-button="3" disabled>
+          <span class="stepper__number">4</span><span class="stepper__label">초안 미리보기</span>
+        </button>
+        <button type="button" data-step-button="4" disabled>
+          <span class="stepper__number">5</span><span class="stepper__label">저장·안내</span>
+        </button>
+      </nav>
+
+      <section class="error-summary" id="errorSummary" role="alert" tabindex="-1" hidden>
+        <h2>입력 내용을 확인해 주세요.</h2>
+        <ul id="errorSummaryList"></ul>
+      </section>
+
+      <form id="agreementForm" novalidate autocomplete="off">
+        <article class="agreement-card">
+          <header class="agreement-card__head">
+            <div>
+              <p class="agreement-kicker" id="stepEyebrow">Step 01 / Contract type</p>
+              <h2 id="stepTitle" tabindex="-1">어떤 코칭을<br>시작하나요?</h2>
+            </div>
+            <p id="stepDescription">현재 가장 먼저 다루고 싶은 장면을 기준으로 계약 유형을 선택하세요.</p>
+          </header>
+
+          <div class="agreement-card__body">
+            <section class="step-panel" data-step-panel="0" aria-labelledby="typeStepTitle">
+              <h3 class="visually-hidden" id="typeStepTitle">계약 유형 선택</h3>
+              <div class="type-grid" id="contractTypeGroup" role="radiogroup" aria-required="true" aria-describedby="contractTypeError">
+                <div class="type-choice">
+                  <input type="radio" name="contractType" id="contractTypeLife" value="life" required>
+                  <label for="contractTypeLife">
+                    <span class="type-choice__code">01 / LIFE</span>
+                    <strong class="type-choice__title">라이프 코칭</strong>
+                    <span class="type-choice__description">삶의 방향, 자기이해, 관계, 생활습관, 자기조절과 가치·우선순위를 다룹니다.</span>
+                  </label>
+                </div>
+                <div class="type-choice">
+                  <input type="radio" name="contractType" id="contractTypeBusiness" value="business" required>
+                  <label for="contractTypeBusiness">
+                    <span class="type-choice__code">02 / BUSINESS</span>
+                    <strong class="type-choice__title">비즈니스 코칭</strong>
+                    <span class="type-choice__description">리더십, 사업 운영, 의사결정, 역할 전환과 팀 관계를 다룹니다.</span>
+                  </label>
+                </div>
+                <div class="type-choice">
+                  <input type="radio" name="contractType" id="contractTypeCareer" value="career" required>
+                  <label for="contractTypeCareer">
+                    <span class="type-choice__code">03 / CAREER</span>
+                    <strong class="type-choice__title">커리어 코칭</strong>
+                    <span class="type-choice__description">진로탐색, 취업·이직, 경력전환, 강점과 경력 로드맵을 다룹니다.</span>
+                  </label>
+                </div>
+              </div>
+              <p class="field__error" id="contractTypeError" hidden></p>
+
+              <div class="step-actions">
+                <span></span>
+                <div class="step-actions__end">
+                  <button class="button button--primary" type="submit" data-next-step>조건 입력하기 <span aria-hidden="true">→</span></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="step-panel" data-step-panel="1" aria-labelledby="detailsStepTitle" hidden>
+              <h3 class="visually-hidden" id="detailsStepTitle">계약 조건 입력</h3>
+
+              <section class="field-section" aria-labelledby="providerHeading">
+                <div class="field-section__heading">
+                  <h3 id="providerHeading">코칭 제공자 정보</h3>
+                  <p>확인되지 않은 운영정보는 임의로 채우지 않습니다.</p>
+                </div>
+                <div class="provider-summary" id="providerSummary"></div>
+              </section>
+
+              <fieldset class="field-section" id="businessModeSection" hidden>
+                <legend class="visually-hidden">비즈니스 계약 방식</legend>
+                <div class="field-section__heading">
+                  <h3>비즈니스 계약 방식</h3>
+                  <p>실제 코칭 고객과 비용을 부담하는 스폰서를 구분합니다.</p>
+                </div>
+                <div class="mode-options">
+                  <div class="mode-option">
+                    <input type="radio" name="businessMode" id="businessModeIndividual" value="individual" checked>
+                    <label for="businessModeIndividual"><strong>개인 사업자·리더 코칭</strong><span>코칭 제공자와 고객이 확인하는 2자 계약</span></label>
+                  </div>
+                  <div class="mode-option">
+                    <input type="radio" name="businessMode" id="businessModeSponsored" value="sponsored">
+                    <label for="businessModeSponsored"><strong>조직 지원 코칭</strong><span>고객과 스폰서가 각자의 역할과 공유범위를 확인하는 3자 계약</span></label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <section class="field-section" aria-labelledby="clientHeading">
+                <div class="field-section__heading">
+                  <h3 id="clientHeading">고객 정보</h3>
+                  <p><span class="required-mark" aria-hidden="true">*</span> 표시는 초안 구성에 필요한 항목입니다.</p>
+                </div>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="clientName">성명 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="clientName" name="clientName" maxlength="80" autocomplete="name" aria-describedby="clientNameError" required>
+                    <p class="field__error" id="clientNameError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="clientRole">계약상 역할 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="clientRole" name="clientRole" maxlength="80" placeholder="예: 코칭 고객, 조직 리더" aria-describedby="clientRoleError" required>
+                    <p class="field__error" id="clientRoleError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="clientEmail">이메일 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="email" id="clientEmail" name="clientEmail" maxlength="160" autocomplete="email" inputmode="email" aria-describedby="clientEmailError" required>
+                    <p class="field__error" id="clientEmailError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="clientPhone">휴대전화번호 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="tel" id="clientPhone" name="clientPhone" maxlength="30" autocomplete="tel" inputmode="tel" aria-describedby="clientPhoneError" required>
+                    <p class="field__error" id="clientPhoneError" hidden></p>
+                  </div>
+                  <div class="field" id="clientOrganizationField" hidden>
+                    <label for="clientOrganization">소속</label>
+                    <input type="text" id="clientOrganization" name="clientOrganization" maxlength="120" autocomplete="organization">
+                  </div>
+                  <div class="field" id="clientTitleField" hidden>
+                    <label for="clientTitle">직책</label>
+                    <input type="text" id="clientTitle" name="clientTitle" maxlength="100" autocomplete="organization-title">
+                  </div>
+                  <div class="field field--full">
+                    <label for="goalSummary">코칭 목표 요약 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="goalSummary" name="goalSummary" maxlength="300" aria-describedby="goalSummaryHelp goalSummaryError" required></textarea>
+                    <p class="field__help" id="goalSummaryHelp">한두 문장으로 작성하세요. 진단명, 치료기록, 주민등록번호 등 민감한 정보는 입력하지 마세요.</p>
+                    <p class="field__error" id="goalSummaryError" hidden></p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="field-section" id="sponsorSection" aria-labelledby="sponsorHeading" hidden>
+                <div class="field-section__heading">
+                  <h3 id="sponsorHeading">스폰서 정보</h3>
+                  <p>조직 지원 코칭에서 비용 부담자와 실제 고객을 구분합니다.</p>
+                </div>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="sponsorOrganization">조직명 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="sponsorOrganization" name="sponsorOrganization" maxlength="150" autocomplete="organization" aria-describedby="sponsorOrganizationError" required>
+                    <p class="field__error" id="sponsorOrganizationError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="sponsorName">담당자 성명 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="sponsorName" name="sponsorName" maxlength="80" aria-describedby="sponsorNameError" required>
+                    <p class="field__error" id="sponsorNameError" hidden></p>
+                  </div>
+                  <div class="field field--full">
+                    <label for="sponsorEmail">담당자 이메일 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="email" id="sponsorEmail" name="sponsorEmail" maxlength="160" inputmode="email" aria-describedby="sponsorEmailError" required>
+                    <p class="field__error" id="sponsorEmailError" hidden></p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="field-section" aria-labelledby="conditionsHeading">
+                <div class="field-section__heading">
+                  <h3 id="conditionsHeading">코칭 조건</h3>
+                  <p>입력값은 제안 초안이며 최종 전자계약 조건이 아닙니다.</p>
+                </div>
+                <div class="field-grid field-grid--three">
+                  <div class="field field--full">
+                    <label for="coachingPurpose">코칭 목적 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="coachingPurpose" name="coachingPurpose" maxlength="300" aria-describedby="coachingPurposeHelp coachingPurposeError" required></textarea>
+                    <p class="field__help" id="coachingPurposeHelp">이 계약으로 다룰 큰 방향을 한두 문장으로 작성하세요. 구체적인 진단명, 치료기록이나 주민등록번호 등 민감한 정보는 입력하지 마세요.</p>
+                    <p class="field__error" id="coachingPurposeError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="sessions">전체 회기 수 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="number" id="sessions" name="sessions" min="1" max="200" step="1" inputmode="numeric" aria-describedby="sessionsError" required>
+                    <p class="field__error" id="sessionsError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="sessionMinutes">회기당 시간(분) <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="number" id="sessionMinutes" name="sessionMinutes" min="1" max="480" step="1" inputmode="numeric" aria-describedby="sessionMinutesError" required>
+                    <p class="field__error" id="sessionMinutesError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="deliveryMode">진행 방식 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <select id="deliveryMode" name="deliveryMode" aria-describedby="deliveryModeError" required>
+                      <option value="">선택하세요</option>
+                      <option value="온라인">온라인</option>
+                      <option value="오프라인">오프라인</option>
+                      <option value="온라인·오프라인 혼합">혼합</option>
+                    </select>
+                    <p class="field__error" id="deliveryModeError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="startDate">시작 예정일 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="date" id="startDate" name="startDate" aria-describedby="startDateError" required>
+                    <p class="field__error" id="startDateError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="endDate">종료 예정일 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="date" id="endDate" name="endDate" aria-describedby="endDateError" required>
+                    <p class="field__error" id="endDateError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="deliveryLocation">장소 또는 화상도구 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="deliveryLocation" name="deliveryLocation" maxlength="160" placeholder="예: Zoom, 서울 ○○센터" aria-describedby="deliveryLocationError" required>
+                    <p class="field__error" id="deliveryLocationError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="totalFee">총 계약금액(원) <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="totalFee" name="totalFee" maxlength="18" inputmode="numeric" placeholder="예: 1500000" aria-describedby="totalFeeHelp totalFeeError" required>
+                    <p class="field__help" id="totalFeeHelp">무료 코칭은 0으로 입력할 수 있습니다.</p>
+                    <p class="field__error" id="totalFeeError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="feePerSession">회기당 금액(원) <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="feePerSession" name="feePerSession" maxlength="18" inputmode="numeric" placeholder="예: 150000" aria-describedby="feePerSessionError" required>
+                    <p class="field__error" id="feePerSessionError" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="paymentMethod">결제방법 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <input type="text" id="paymentMethod" name="paymentMethod" maxlength="120" placeholder="실제 운영방법을 입력" aria-describedby="paymentMethodError" required>
+                    <p class="field__error" id="paymentMethodError" hidden></p>
+                  </div>
+                  <div class="field field--full">
+                    <label for="paymentSchedule">결제일정 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="paymentSchedule" name="paymentSchedule" maxlength="500" aria-describedby="paymentScheduleError" required></textarea>
+                    <p class="field__error" id="paymentScheduleError" hidden></p>
+                  </div>
+                  <div class="field field--full">
+                    <label for="reschedulePolicy">일정변경 기준 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="reschedulePolicy" name="reschedulePolicy" maxlength="1000" aria-describedby="reschedulePolicyError" required></textarea>
+                    <p class="field__error" id="reschedulePolicyError" hidden></p>
+                  </div>
+                  <div class="field field--full">
+                    <label for="noShowPolicy">노쇼 기준 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="noShowPolicy" name="noShowPolicy" maxlength="1000" aria-describedby="noShowPolicyError" required></textarea>
+                    <p class="field__error" id="noShowPolicyError" hidden></p>
+                  </div>
+                  <div class="field field--full">
+                    <label for="refundPolicy">중도종료 및 환불 기준 <span class="required-mark" aria-hidden="true">*</span></label>
+                    <textarea id="refundPolicy" name="refundPolicy" maxlength="1500" aria-describedby="refundPolicyHelp refundPolicyError" required></textarea>
+                    <p class="field__help" id="refundPolicyHelp">‘어떠한 경우에도 환불 불가’ 같은 포괄 문구를 기본값으로 사용하지 마세요. 실제 운영정책과 관계 법령을 확인해 작성하세요.</p>
+                    <p class="field__error" id="refundPolicyError" hidden></p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="field-section" id="sharingSection" aria-labelledby="sharingHeading" hidden>
+                <div class="field-section__heading">
+                  <h3 id="sharingHeading">스폰서 정보공유 별도 선택</h3>
+                  <p>스폰서 공유는 기본 계약과 분리된 고객의 선택이며, 선택 가능한 항목은 모두 비공유가 기본입니다.</p>
+                </div>
+                <p class="consent-note" id="sharingHelp">세션의 구체적인 대화와 개인적인 감정·고민은 공유 선택을 열지 않고 비공개로 잠급니다. 법적 의무나 임박한 중대한 위험 관련 정보는 필요한 최소 범위만 다룹니다.</p>
+                <table class="sharing-table">
+                  <caption class="visually-hidden">고객과 스폰서의 정보공유 범위</caption>
+                  <thead>
+                    <tr><th scope="col">정보 유형</th><th scope="col">고객</th><th scope="col">스폰서 공유</th></tr>
+                  </thead>
+                  <tbody id="sharingTableBody"></tbody>
+                </table>
+                <div class="sharing-cards" id="sharingCards" role="group" aria-labelledby="sharingHeading"></div>
+
+                <section class="privacy-notice" aria-labelledby="sponsorDisclosureHeading">
+                  <h3 id="sponsorDisclosureHeading">스폰서 정보제공 별도 동의 안내</h3>
+                  <dl>
+                    <dt>제공받는 자</dt>
+                    <dd id="sponsorDisclosureRecipient">입력한 스폰서 조직</dd>
+                    <dt>제공 목적</dt>
+                    <dd>코칭 참여 여부와 고객이 별도로 선택한 합의된 운영현황을 스폰서가 확인하기 위함</dd>
+                    <dt>선택 제공항목</dt>
+                    <dd id="sponsorDisclosureItems">선택한 제공항목 없음</dd>
+                    <dt>제외 정보</dt>
+                    <dd>세션의 구체적인 대화, 개인적인 감정·고민과 고객이 제공한 비공개 자료</dd>
+                    <dt>보유기간</dt>
+                    <dd>운영자가 관계 법령과 실제 조직 지원 계약 정책을 검토해 확정할 기간. 확정 전에는 전자계약을 발행하지 않습니다.</dd>
+                    <dt>거부권</dt>
+                    <dd>고객은 스폰서 정보제공을 거부할 수 있습니다. 거부하면 선택 정보는 제공하지 않으며, 3자 계약의 운영 방식은 당사자가 다시 협의합니다.</dd>
+                  </dl>
+                  <div class="check-row" id="sponsorDisclosureConsentRow" hidden>
+                    <input type="checkbox" id="sponsorDisclosureConsent" name="sponsorDisclosureConsent" aria-describedby="sponsorDisclosureConsentError" required>
+                    <label for="sponsorDisclosureConsent">위 내용을 확인하고 선택한 범위에 한해 스폰서에게 정보를 제공하는 데 별도로 동의합니다.</label>
+                  </div>
+                  <p class="field__error" id="sponsorDisclosureConsentError" hidden></p>
+                </section>
+              </section>
+
+              <div class="step-actions">
+                <button class="button button--secondary" type="button" data-prev-step>이전</button>
+                <div class="step-actions__end">
+                  <button class="button button--primary" type="submit" data-next-step>조항 확인하기 <span aria-hidden="true">→</span></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="step-panel" data-step-panel="2" aria-labelledby="termsStepTitle" hidden>
+              <h3 class="visually-hidden" id="termsStepTitle">계약 조항 확인</h3>
+
+              <div class="clause-toolbar" role="group" aria-label="계약 조항 보기 조절">
+                <button class="text-button" type="button" data-open-clauses>전체 펼치기</button>
+                <button class="text-button" type="button" data-close-clauses>전체 접기</button>
+              </div>
+              <div class="clause-list" id="clauseList"></div>
+
+              <fieldset class="key-confirmations" aria-describedby="acknowledgementError">
+                <legend class="key-confirmations__legend">주요 조항 개별 확인</legend>
+                <div class="check-row">
+                  <input type="checkbox" id="ackScope" name="ackScope" required>
+                  <label for="ackScope">코칭의 정의와 전문서비스의 범위를 확인했습니다.</label>
+                </div>
+                <div class="check-row">
+                  <input type="checkbox" id="ackFees" name="ackFees" required>
+                  <label for="ackFees">비용, 일정변경, 취소·중도종료·환불 기준을 확인했습니다.</label>
+                </div>
+                <div class="check-row">
+                  <input type="checkbox" id="ackConfidentiality" name="ackConfidentiality" required>
+                  <label for="ackConfidentiality">비밀보장 원칙과 제한된 예외 범위를 확인했습니다.</label>
+                </div>
+                <div class="check-row">
+                  <input type="checkbox" id="ackPrivacy" name="ackPrivacy" required>
+                  <label for="ackPrivacy">개인정보 처리 목적·항목·권리 안내를 확인했습니다.</label>
+                </div>
+                <div class="check-row">
+                  <input type="checkbox" id="ackNoGuarantee" name="ackNoGuarantee" required>
+                  <label for="ackNoGuarantee">코칭이 특정 결과를 보장하지 않는다는 점을 확인했습니다.</label>
+                </div>
+                <p class="field__error" id="acknowledgementError" hidden></p>
+              </fieldset>
+
+              <section class="privacy-notice" aria-labelledby="privacyNoticeHeading">
+                <h3 id="privacyNoticeHeading">개인정보 처리 안내</h3>
+                <dl id="privacyNoticeList"></dl>
+              </section>
+
+              <p class="consent-note" id="consentOperationalNote">현재 DAILYCOACHING은 별도 합의 없이 코칭 세션을 녹음하거나 AI 전사·요약 도구에 입력하지 않습니다.</p>
+              <fieldset class="optional-consents" id="optionalConsents" hidden>
+                <legend class="visually-hidden">별도 선택 동의</legend>
+              </fieldset>
+
+              <div class="step-actions">
+                <button class="button button--secondary" type="button" data-prev-step>이전</button>
+                <div class="step-actions__end">
+                  <button class="button button--primary" type="submit" data-next-step>초안 미리보기 <span aria-hidden="true">→</span></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="step-panel" data-step-panel="3" aria-labelledby="previewStepTitle" hidden>
+              <h3 class="visually-hidden" id="previewStepTitle">계약서 초안 미리보기</h3>
+              <p class="preview-help">아래 문서는 전자확인 전 초안입니다. 입력한 내용은 이 화면을 구성하는 데만 사용되며, 인쇄본에는 <strong>DRAFT · 전자확인 전</strong> 표시가 유지됩니다.</p>
+              <div id="previewHost" aria-live="off"></div>
+
+              <div class="step-actions">
+                <button class="button button--secondary" type="button" data-prev-step>이전</button>
+                <div class="step-actions__end">
+                  <button class="button button--secondary" type="button" data-print-draft>인쇄·PDF 저장</button>
+                  <button class="button button--primary" type="submit" data-next-step>저장·계약 안내 <span aria-hidden="true">→</span></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="step-panel" data-step-panel="4" aria-labelledby="actionStepTitle" hidden>
+              <h3 class="visually-hidden" id="actionStepTitle">초안 저장과 전자계약 안내</h3>
+              <div class="completion-grid">
+                <article class="completion-card">
+                  <h3>초안 인쇄·PDF 저장</h3>
+                  <p>브라우저의 인쇄 기능으로 A4 초안을 저장합니다. 최종 전자계약 발행본이 아니며 DRAFT 표시가 유지됩니다.</p>
+                  <button class="button button--primary" type="button" data-print-draft>인쇄·PDF 저장</button>
+                </article>
+                <article class="completion-card">
+                  <h3>전자계약 체결</h3>
+                  <p id="electronicActionDescription">전자계약은 코치가 발행한 개별 초대 링크와 이메일 인증을 통해서만 진행됩니다.</p>
+                  <button class="button button--secondary" type="button" data-electronic-action disabled>전자계약 운영 검토 전</button>
+                </article>
+                <article class="completion-card">
+                  <h3>계약 변경·청약철회·중도종료</h3>
+                  <p>계약 변경과 종료 요청은 계약 체결만큼 쉽게 찾을 수 있어야 합니다. 전용 관리 관문이 연결되기 전에는 운영 이메일로 요청하세요.</p>
+                  <button class="button button--secondary" type="button" data-management-action="contract" disabled>계약 변경·종료 관리 준비 전</button>
+                </article>
+                <article class="completion-card">
+                  <h3>선택동의 철회·개인정보 권리요청</h3>
+                  <p>선택동의 철회와 열람·정정·삭제·처리정지 요청도 계약 관리 범위에 포함됩니다.</p>
+                  <button class="button button--secondary" type="button" data-management-action="privacy" disabled>동의·개인정보 관리 준비 전</button>
+                </article>
+              </div>
+              <p class="consent-note">현재 Google 처리위탁 및 국외이전 관련 운영 검토가 확정되지 않아 전자계약과 온라인 계약 관리를 활성화하지 않습니다. 문의: <a href="mailto:hello@daily-coach-ing.com" data-operator-email-link data-operator-email-text>hello@daily-coach-ing.com</a></p>
+
+              <div class="step-actions">
+                <button class="button button--secondary" type="button" data-prev-step>이전</button>
+                <div class="step-actions__end">
+                  <button class="button button--primary" type="button" data-print-draft>인쇄·PDF 저장</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <div class="reset-row">
+          <button class="reset-button" type="button" data-reset-draft>작성 내용 초기화</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="agreement-header" aria-label="페이지 하단">
+    <div class="agreement-header__inner">
+      <span class="agreement-brand">DAILYCOACHING</span>
+      <div class="agreement-header__links">
+        <a href="/coaching/">코칭안내로 돌아가기</a>
+        <a href="mailto:hello@daily-coach-ing.com" data-operator-email-link>운영 문의</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

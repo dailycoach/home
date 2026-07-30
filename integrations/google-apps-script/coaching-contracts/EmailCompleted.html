@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko">
+  <body style="margin:0;padding:24px;background:#fffaf2;color:#111827;font-family:Arial,sans-serif">
+    <div style="max-width:620px;margin:0 auto;background:#fff;padding:32px;border:1px solid #e0c281">
+      <p style="color:#8b6a34;font-size:12px;letter-spacing:2px">DAILYCOACHING</p>
+      <h1 style="color:#061528;font-size:26px">코칭계약서가 완료되었습니다.</h1>
+      <p><?= recipientName ?>님께 완료된 계약서 사본을 첨부합니다.</p>
+      <p><strong>계약번호</strong> <?= contractId ?></p>
+      <p><strong>계약종류</strong> <?= contractTypeLabel ?> 코칭</p>
+      <p><strong>완료일</strong> <?= completedAt ?></p>
+      <p style="font-size:13px;color:#5f6875">
+        첨부된 PDF는 DAILYCOACHING 전자계약 발행본입니다. 공개 Drive 링크는 제공하지 않습니다.
+      </p>
+      <p style="font-size:13px;color:#5f6875">문의: <?= contactEmail ?></p>
+    </div>
+  </body>
+</html>

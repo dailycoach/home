@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>전자계약 확인 | DAILYCOACHING</title>
+  <meta name="description" content="DAILYCOACHING 코칭계약 전자확인 관문">
+  <meta name="theme-color" content="#061528">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://script.google.com https://script.googleusercontent.com https://*.googleusercontent.com; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <link rel="stylesheet" href="/coaching/assets/agreement.css">
+  <script src="/coaching/assets/runtime-config.js" defer></script>
+  <script src="/coaching/assets/sign-gateway.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#signMain">본문 바로가기</a>
+
+  <header class="agreement-header">
+    <div class="agreement-header__inner">
+      <a class="agreement-brand" href="/" aria-label="DAILYCOACHING 홈">DAILYCOACHING</a>
+      <div class="agreement-header__links">
+        <a href="/coaching/">코칭안내</a>
+        <a href="mailto:hello@daily-coach-ing.com" data-operator-email-link>운영 문의</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="signMain">
+    <section class="agreement-intro" aria-labelledby="signPageTitle">
+      <div class="agreement-intro__inner">
+        <div>
+          <p class="agreement-kicker">Private electronic agreement</p>
+          <h1 id="signPageTitle">초대받은 계약을<br>안전하게 확인합니다.</h1>
+        </div>
+        <p class="agreement-intro__copy">이 페이지는 공개 초안 작성기와 분리된 전자계약 관문입니다. 유효한 개별 초대 링크와 이메일 인증을 거친 뒤 서버에 고정된 계약 전문을 확인합니다.</p>
+      </div>
+      <p class="privacy-pulse">초대 토큰은 브라우저 저장소에 보관하지 않으며 주소에서 즉시 제거합니다. 새로고침하면 링크가 초기화되므로 원본 이메일의 버튼을 다시 눌러야 합니다.</p>
+    </section>
+
+    <div class="agreement-shell">
+      <section class="agreement-card" data-sign-gateway>
+        <header class="agreement-card__head">
+          <div>
+            <p class="agreement-kicker">Verification gateway</p>
+            <h2 id="signGatewayTitle" tabindex="-1">전자계약 운영 상태를 확인합니다.</h2>
+          </div>
+          <p id="signGatewayMessage" role="status" aria-live="polite">초대 링크와 전자계약 운영 설정을 확인하고 있습니다.</p>
+        </header>
+        <div class="agreement-card__body">
+          <div class="system-banner" id="signGatewayStatus" data-state="draft">
+            <span class="system-banner__mark" aria-hidden="true">i</span>
+            <div>
+              <strong id="signGatewayStatusTitle">전자계약 시스템 연결 전</strong>
+              <p id="signGatewayStatusMessage">잠시만 기다려 주세요.</p>
+            </div>
+          </div>
+
+          <div id="signFrameHost" aria-live="off"></div>
+
+          <p class="consent-note" id="signGatewayHelp">계약 당사자 정보, 계약 목표 또는 토큰 오류의 구체적인 사유는 이 외부 관문에서 표시하지 않습니다.</p>
+          <div class="step-actions">
+            <a class="button button--secondary" href="/coaching/">코칭안내로 돌아가기</a>
+            <div class="step-actions__end">
+              <a class="button button--primary" href="mailto:hello@daily-coach-ing.com" data-operator-email-link>운영 이메일 문의</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -210,8 +210,10 @@
       pointer-events: none;
       transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
     }
+    .dropdown.is-wide { width: 292px; }
     .nav-group:hover .dropdown,
-    .nav-group:focus-within .dropdown {
+    .nav-group:focus-within .dropdown,
+    .nav-group.is-open .dropdown {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -927,6 +929,16 @@
             <a href="/coach/" data-route="coachIntro">코치소개 <small>→</small></a>
           </div>
         </div>
+        <div class="nav-group">
+          <button class="nav-button" type="button" aria-haspopup="true">코칭안내 <span aria-hidden="true">⌄</span></button>
+          <div class="dropdown is-wide" role="menu">
+            <a href="/coaching/#definition">코칭이란 <small>→</small></a>
+            <a href="/coaching/#types">나에게 맞는 코칭 <small>→</small></a>
+            <a href="/coaching/#ethics">코칭 윤리와 비밀보장 <small>→</small></a>
+            <a href="/coaching/#process">코칭 진행과정 <small>→</small></a>
+            <a href="/coaching/agreement/" data-route="coachingAgreement">코칭계약서 작성 <small>→</small></a>
+          </div>
+        </div>
         <a class="nav-link" href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">1:1 코칭</a>
         <div class="nav-group">
           <button class="nav-button" type="button" aria-haspopup="true">검사도구 <span aria-hidden="true">⌄</span></button>
@@ -996,9 +1008,9 @@
 
         <div class="hero-controls">
           <div class="intent-rail" aria-label="주요 바로가기">
-            <a href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">
-              <strong>코칭 신청 <span aria-hidden="true">→</span></strong>
-              <small>스마트스토어 날빛코칭으로 연결</small>
+            <a href="/coaching/" data-route="coachingGuide">
+              <strong>코칭안내 <span aria-hidden="true">→</span></strong>
+              <small>코칭 이해·분야 선택·계약서 작성</small>
             </a>
             <button type="button" data-open-menu data-focus-category="tests">
               <strong>검사도구 <span aria-hidden="true">⌄</span></strong>
@@ -1024,10 +1036,10 @@
               <button class="circle-btn" type="button" data-slide-prev aria-label="이전 슬라이드">←</button>
               <button class="circle-btn" type="button" data-slide-next aria-label="다음 슬라이드">→</button>
             </div>
-            <div class="dots" role="tablist" aria-label="슬라이드 선택">
-              <button class="dot is-active" type="button" data-slide-dot="0" aria-label="1번 슬라이드"></button>
-              <button class="dot" type="button" data-slide-dot="1" aria-label="2번 슬라이드"></button>
-              <button class="dot" type="button" data-slide-dot="2" aria-label="3번 슬라이드"></button>
+            <div class="dots" role="group" aria-label="슬라이드 선택">
+              <button class="dot is-active" type="button" data-slide-dot="0" aria-label="1번 슬라이드" aria-pressed="true"></button>
+              <button class="dot" type="button" data-slide-dot="1" aria-label="2번 슬라이드" aria-pressed="false"></button>
+              <button class="dot" type="button" data-slide-dot="2" aria-label="3번 슬라이드" aria-pressed="false"></button>
             </div>
           </div>
         </div>
@@ -1051,6 +1063,15 @@
           <p>기업소개와 코치소개는 별도 페이지로 분리합니다.</p>
           <a href="/company/" data-route="companyIntro">기업소개 <small>→</small></a>
           <a href="/coach/" data-route="coachIntro">코치소개 <small>→</small></a>
+        </article>
+
+        <article class="category" data-category="coaching-guide">
+          <h3>코칭안내</h3>
+          <p>코칭의 범위와 진행방법, 비밀보장과 계약 내용을 확인합니다.</p>
+          <a href="/coaching/#definition">코칭이란 <small>→</small></a>
+          <a href="/coaching/#types">라이프·비즈니스·커리어 코칭 <small>→</small></a>
+          <a href="/coaching/#ethics">윤리와 비밀보장 <small>→</small></a>
+          <a href="/coaching/agreement/" data-route="coachingAgreement">코칭계약서 작성 <small>→</small></a>
         </article>
 
         <article class="category" data-category="coaching">
@@ -1124,6 +1145,8 @@
         <div class="footer-links">
           <a href="/company/" data-route="companyIntro">기업소개</a>
           <a href="/coach/" data-route="coachIntro">코치소개</a>
+          <a href="/coaching/" data-route="coachingGuide">코칭안내</a>
+          <a href="/coaching/agreement/" data-route="coachingAgreement">코칭계약서</a>
           <a href="/tests/self/" data-route="selfTest">검사도구</a>
           <a href="/cards/kingdom/" data-route="kingdomCards">킹덤대화카드</a>
           <a href="/cards/koum120/" data-route="koum120">KOUM 대화카드 120</a>
@@ -1164,6 +1187,8 @@
       home: '#top',
       companyIntro: '/company/',
       coachIntro: '/coach/',
+      coachingGuide: '/coaching/',
+      coachingAgreement: '/coaching/agreement/',
       booking: 'https://smartstore.naver.com/nalbitcoaching',
       lcms: '/lcms/',
       kingdomCards: '/cards/kingdom/',
@@ -1215,8 +1240,10 @@
     const slideEyebrow = document.querySelector('#slideEyebrow');
     const slideTitle = document.querySelector('#slideTitle');
     const slideSubtitle = document.querySelector('#slideSubtitle');
+    const navGroups = [...document.querySelectorAll('.nav-group')];
     let activeSlide = 0;
     let slideTimer = null;
+    let lastMenuTrigger = null;
 
     if (year) year.textContent = new Date().getFullYear();
 
@@ -1289,7 +1316,11 @@
       loadSlideImage(activeSlide);
       window.setTimeout(() => loadSlideImage((activeSlide + 1) % slides.length), 420);
       slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === activeSlide));
-      dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === activeSlide));
+      dots.forEach((dot, dotIndex) => {
+        const selected = dotIndex === activeSlide;
+        dot.classList.toggle('is-active', selected);
+        dot.setAttribute('aria-pressed', String(selected));
+      });
       if (currentSlide) currentSlide.textContent = padNumber(activeSlide);
       const content = SLIDE_CONTENT[activeSlide];
       if (content) {
@@ -1312,8 +1343,9 @@
       window.setTimeout(() => loadSlideImage(1), 1600);
     }
 
-    function openMenu(focusCategory) {
+    function openMenu(focusCategory, trigger) {
       if (!menuPanel) return;
+      lastMenuTrigger = trigger || document.activeElement;
       menuPanel.classList.add('is-open');
       menuPanel.setAttribute('aria-hidden', 'false');
       document.body.classList.add('is-locked');
@@ -1327,13 +1359,43 @@
       }, 80);
     }
 
-    function closeMenu() {
+    function closeMenu(restoreFocus = true) {
       if (!menuPanel) return;
+      const wasOpen = menuPanel.classList.contains('is-open');
       menuPanel.classList.remove('is-open');
       menuPanel.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('is-locked');
       document.querySelectorAll('[data-open-menu]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      if (wasOpen && restoreFocus && lastMenuTrigger instanceof HTMLElement) {
+        lastMenuTrigger.focus({ preventScroll: true });
+      }
+      lastMenuTrigger = null;
     }
+
+    function closeNavGroups(exceptGroup) {
+      navGroups.forEach((group) => {
+        if (group === exceptGroup) return;
+        group.classList.remove('is-open');
+        group.querySelector('.nav-button')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    navGroups.forEach((group, index) => {
+      const button = group.querySelector('.nav-button');
+      const dropdown = group.querySelector('.dropdown');
+      if (!button || !dropdown) return;
+      const dropdownId = `mainNavDropdown${index + 1}`;
+      dropdown.id = dropdownId;
+      dropdown.removeAttribute('role');
+      button.setAttribute('aria-controls', dropdownId);
+      button.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', () => {
+        const open = !group.classList.contains('is-open');
+        closeNavGroups(group);
+        group.classList.toggle('is-open', open);
+        button.setAttribute('aria-expanded', String(open));
+      });
+    });
 
     function navigateToRoute(routeKey, event) {
       const target = DAILYCOACHING_ROUTES[routeKey];
@@ -1381,7 +1443,7 @@
     });
 
     document.querySelectorAll('[data-open-menu]').forEach((button) => {
-      button.addEventListener('click', () => openMenu(button.dataset.focusCategory));
+      button.addEventListener('click', () => openMenu(button.dataset.focusCategory, button));
     });
 
     document.querySelectorAll('[data-close-menu]').forEach((button) => {
@@ -1409,7 +1471,24 @@
 
     window.addEventListener('scroll', setHeaderState, { passive: true });
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeMenu();
+      if (event.key === 'Escape') {
+        closeNavGroups();
+        closeMenu();
+      }
+      if (event.key === 'Tab' && menuPanel?.classList.contains('is-open')) {
+        const focusable = [...menuPanel.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+          .filter((element) => !element.hasAttribute('hidden'));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
       if (event.key === 'ArrowLeft') {
         setSlide(activeSlide - 1);
         startSlider();
@@ -1418,6 +1497,10 @@
         setSlide(activeSlide + 1);
         startSlider();
       }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.nav-group')) closeNavGroups();
     });
 
     setHeaderState();
