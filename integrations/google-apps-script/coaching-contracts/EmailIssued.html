@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <body style="margin:0;padding:24px;background:#fffaf2;color:#111827;font-family:Arial,sans-serif">
+    <div style="max-width:620px;margin:0 auto;background:#fff;padding:32px;border:1px solid #e0c281">
+      <p style="color:#8b6a34;font-size:12px;letter-spacing:2px">DAILYCOACHING</p>
+      <h1 style="color:#061528;font-size:26px">코칭계약서 확인 요청</h1>
+      <p><?= signerName ?>님, 코칭을 시작하기 전 관계와 기준을 확인해 주세요.</p>
+      <p><strong>계약번호</strong> <?= contractId ?></p>
+      <p><strong>계약종류</strong> <?= contractTypeLabel ?> 코칭</p>
+      <p style="margin:28px 0">
+        <a href="<?= signUrl ?>" style="background:#061528;color:#fff;padding:13px 20px;text-decoration:none;border-radius:6px">
+          안전한 전자확인 시작
+        </a>
+      </p>
+      <p style="font-size:13px;color:#5f6875">
+        링크를 타인에게 전달하지 마세요. 새 초대가 발행되면 기존 링크는 사용할 수 없습니다.
+      </p>
+      <p style="font-size:13px;color:#5f6875">문의: <?= contactEmail ?></p>
+    </div>
+  </body>
+</html>

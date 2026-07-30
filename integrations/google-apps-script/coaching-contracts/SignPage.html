@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="referrer" content="no-referrer">
+    <base target="_top">
+    <style>
+      :root {
+        color-scheme: light;
+        --navy: #061528;
+        --dark: #031022;
+        --ivory: #fffaf2;
+        --cream: #f8f0e4;
+        --gold: #c49a57;
+        --ink: #111827;
+        --muted: #5f6875;
+        --danger: #9b2c2c;
+        --line: #d8d2c7;
+      }
+      * { box-sizing: border-box; }
+      html { background: var(--ivory); color: var(--ink); font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+      body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, var(--navy) 0 190px, var(--ivory) 190px); }
+      main { width: min(920px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 72px; }
+      .brand { color: var(--ivory); letter-spacing: .14em; font-size: .78rem; font-weight: 700; margin: 0 0 26px; }
+      .panel { background: #fff; border: 1px solid rgba(196,154,87,.35); border-radius: 18px; padding: clamp(24px, 5vw, 52px); box-shadow: 0 24px 70px rgba(3,16,34,.13); }
+      .panel + .panel { margin-top: 24px; }
+      .eyebrow { color: #8b6a34; font-size: .74rem; font-weight: 800; letter-spacing: .16em; }
+      h1 { color: var(--navy); font-size: clamp(1.8rem, 5vw, 3.2rem); line-height: 1.14; margin: 8px 0 18px; }
+      h2 { color: var(--navy); margin: 30px 0 12px; }
+      h3 { color: var(--navy); margin: 22px 0 8px; }
+      p { line-height: 1.7; }
+      .lead { font-size: 1.08rem; }
+      .muted { color: var(--muted); font-size: .92rem; }
+      .notice { padding: 16px; border-left: 4px solid var(--gold); background: var(--cream); margin: 20px 0; }
+      .error { color: var(--danger); background: #fff1f0; border: 1px solid #efb7b2; padding: 14px; border-radius: 10px; margin: 0 0 18px; }
+      label { display: block; font-weight: 700; margin: 18px 0 7px; }
+      input, select, textarea {
+        width: 100%; min-height: 46px; border: 1px solid #9ca3af; border-radius: 8px;
+        padding: 11px 12px; background: #fff; color: var(--ink); font: inherit;
+      }
+      input:focus, select:focus, textarea:focus, button:focus { outline: 3px solid rgba(196,154,87,.45); outline-offset: 2px; }
+      button {
+        min-height: 46px; border: 0; border-radius: 8px; padding: 11px 18px;
+        background: var(--navy); color: #fff; font: inherit; font-weight: 800;
+        cursor: pointer; margin: 12px 8px 0 0;
+      }
+      button.secondary { background: #fff; color: var(--navy); border: 1px solid var(--navy); }
+      button:disabled { cursor: not-allowed; opacity: .48; }
+      .contract-meta, .summary-list { display: grid; gap: 10px; margin: 20px 0; }
+      .contract-meta > div, .summary-list > div { display: grid; grid-template-columns: minmax(120px, 180px) 1fr; border-bottom: 1px solid var(--line); padding: 9px 0; }
+      dt { color: var(--muted); } dd { margin: 0; overflow-wrap: anywhere; }
+      .clause { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 16px; }
+      .clause-summary { color: #725628; font-weight: 700; }
+      .check-row { display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: start; margin: 13px 0; }
+      .check-row input { width: 20px; min-height: 20px; margin: 2px 0 0; }
+      .check-row label { margin: 0; font-weight: 500; }
+      .consent-grid { display: grid; gap: 12px; }
+      .consent-item { border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+      .consent-item label { margin-top: 0; }
+      [hidden] { display: none !important; }
+      @media (max-width: 600px) {
+        body { background-size: 100% 150px; }
+        main { width: min(100% - 20px, 920px); padding-top: 26px; }
+        .panel { padding: 22px 18px; border-radius: 12px; }
+        .contract-meta > div, .summary-list > div { grid-template-columns: 1fr; gap: 4px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="brand">DAILYCOACHING · SECURE AGREEMENT</p>
+      <div id="global-error" class="error" role="alert" tabindex="-1" hidden></div>
+
+      <section id="gate-panel" class="panel" aria-labelledby="gate-title">
+        <p class="eyebrow">SECURE ENTRY</p>
+        <h1 id="gate-title" tabindex="-1">안전한 계약 확인 페이지를 준비하고 있습니다.</h1>
+        <p id="gate-message" class="lead">
+          DAILYCOACHING의 공식 전자계약 관문에서 열렸는지 확인합니다.
+        </p>
+        <p class="muted">
+          이 화면은 외부 이미지, 외부 폰트 또는 분석도구를 사용하지 않으며 계약 토큰을
+          브라우저 저장소에 보관하지 않습니다.
+        </p>
+      </section>
+
+      <?!= include_('OtpPage'); ?>
+
+      <section id="contract-panel" class="panel" hidden aria-labelledby="contract-title">
+        <p class="eyebrow">REVIEW & ACCEPT</p>
+        <h1 id="contract-title" tabindex="-1">코칭계약서 확인</h1>
+        <p class="notice">
+          본 계약서는 ICF 윤리강령, 한국코치협회 윤리규정 및 국내 관련 법령의
+          주요 원칙을 참고하여 DAILYCOACHING의 실제 코칭 운영에 맞게
+          구성했습니다. ICF 또는 한국코치협회가 승인·인증한 계약서가 아닙니다.
+        </p>
+        <div id="contract-meta" class="contract-meta"></div>
+        <div id="sharing-section" class="notice" hidden>
+          <h2>조직 스폰서 정보공유 및 제공 안내</h2>
+          <div id="sharing-content"></div>
+          <div id="sponsor-provision-confirm-row" class="check-row">
+            <input id="sponsor-provision-confirm" type="checkbox">
+            <label for="sponsor-provision-confirm">
+              제공받는 자, 목적, 선택 제공항목, 보유기간과 거부 안내를 확인했습니다.
+              세션의 구체적인 대화와 개인적인 감정·고민은 제공 대상에서 제외됩니다.
+            </label>
+          </div>
+        </div>
+        <div id="clauses"></div>
+        <div id="privacy-section" class="notice"></div>
+
+        <form id="acceptance-form" novalidate>
+          <h2>핵심 조항 개별 확인</h2>
+          <div class="check-row">
+            <input id="confirm-scope" type="checkbox" required>
+            <label for="confirm-scope">코칭의 정의와 전문서비스의 범위를 확인했습니다.</label>
+          </div>
+          <div class="check-row">
+            <input id="confirm-confidentiality" type="checkbox" required>
+            <label for="confirm-confidentiality">비밀보장 원칙과 필요한 최소 범위의 예외를 확인했습니다.</label>
+          </div>
+          <div class="check-row">
+            <input id="confirm-cancellation" type="checkbox" required>
+            <label for="confirm-cancellation">일정변경·취소·노쇼·중도종료·환불 기준을 확인했습니다.</label>
+          </div>
+          <div class="check-row">
+            <input id="confirm-privacy" type="checkbox" required>
+            <label for="confirm-privacy">개인정보 처리·위탁·국외 이전 안내를 확인했습니다.</label>
+          </div>
+          <div id="optional-consents" class="consent-grid"></div>
+          <label for="signer-name">계약 당사자 성명 직접 입력</label>
+          <input id="signer-name" type="text" maxlength="80" autocomplete="name" required>
+          <div class="check-row">
+            <input id="confirm-electronic" type="checkbox" required>
+            <label for="confirm-electronic">
+              계약 전문을 읽고 이해했으며 전자적으로 계약을 체결합니다.
+            </label>
+          </div>
+          <button id="accept-button" type="submit">전자계약 체결</button>
+        </form>
+      </section>
+
+      <?!= include_('CompletePage'); ?>
+    </main>
+
+    <script>
+      (function () {
+        'use strict';
+        var allowedOrigins = <?!= allowedOriginsJson ?>;
+        var protocolVersion = 1;
+        var messageSource = 'dailycoaching-contracts';
+        var tokenPattern = /^[A-Za-z0-9_-]{22,128}$/;
+        var trustedParent = false;
+        var trustedOrigin = '';
+        var bootstrapStarted = false;
+        var invitationToken = '';
+        var authSessionToken = '';
+        var loadedContract = null;
+        var signerRole = '';
+        var waitingForClient = false;
+        var busy = false;
+        var resendTimer = null;
+        var otpRequestId = '';
+        var verifyRequestId = '';
+        var verifyOtpValue = '';
+        var acceptanceRequestId = '';
+
+        var panels = {
+          gate: document.getElementById('gate-panel'),
+          otp: document.getElementById('otp-panel'),
+          contract: document.getElementById('contract-panel'),
+          complete: document.getElementById('complete-panel')
+        };
+        var panelTitles = {
+          gate: document.getElementById('gate-title'),
+          otp: document.getElementById('otp-title'),
+          contract: document.getElementById('contract-title'),
+          complete: document.getElementById('complete-title')
+        };
+
+        function requestId() {
+          if (window.crypto && window.crypto.randomUUID) {
+            return window.crypto.randomUUID();
+          }
+          var bytes = new Uint8Array(24);
+          window.crypto.getRandomValues(bytes);
+          return Array.prototype.map.call(bytes, function (value) {
+            return value.toString(16).padStart(2, '0');
+          }).join('');
+        }
+
+        function showPanel(name) {
+          Object.keys(panels).forEach(function (key) {
+            panels[key].hidden = key !== name;
+          });
+          var title = panelTitles[name];
+          if (title) {
+            try {
+              title.focus({ preventScroll: true });
+            } catch (error) {
+              title.focus();
+            }
+          }
+          var reduceMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          try {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: reduceMotion ? 'auto' : 'smooth'
+            });
+          } catch (error) {
+            window.scrollTo(0, 0);
+          }
+        }
+
+        function showError(message) {
+          var target = document.getElementById('global-error');
+          target.textContent = message || '요청을 처리하지 못했습니다.';
+          target.hidden = false;
+          target.focus();
+        }
+
+        function clearError() {
+          var target = document.getElementById('global-error');
+          target.textContent = '';
+          target.hidden = true;
+        }
+
+        function setBusy(value) {
+          busy = Boolean(value);
+          Array.prototype.forEach.call(document.querySelectorAll('button'), function (button) {
+            button.disabled = busy || button.dataset.cooldown === 'true';
+          });
+        }
+
+        function failure(error) {
+          setBusy(false);
+          showError(error && error.message ? error.message : '요청을 처리하지 못했습니다.');
+        }
+
+        function postProtocol(type, extra) {
+          if (!trustedParent || !trustedOrigin) return;
+          var payload = {
+            source: messageSource,
+            version: protocolVersion,
+            type: type
+          };
+          Object.keys(extra || {}).forEach(function (key) {
+            payload[key] = extra[key];
+          });
+          window.parent.postMessage(payload, trustedOrigin);
+        }
+
+        function postStatus(status) {
+          postProtocol('DAILYCOACHING_SIGN_STATUS', { status: status });
+        }
+
+        function fatalFailure(error) {
+          failure(error);
+          invitationToken = '';
+          authSessionToken = '';
+          postProtocol('DAILYCOACHING_SIGN_FAILED');
+        }
+
+        function acceptanceFailure(error) {
+          failure(error);
+          postStatus('review');
+        }
+
+        function callBootstrap() {
+          setBusy(true);
+          google.script.run
+            .withSuccessHandler(function (result) {
+              setBusy(false);
+              waitingForClient = result.waitingForClient === true;
+              document.getElementById('masked-email').textContent =
+                waitingForClient
+                  ? '합의된 목표 공유를 위해 고객의 정보제공 확인을 기다리고 있습니다.'
+                  : result.maskedEmail + ' 주소로 인증번호를 전송합니다.';
+              var requestButton = document.getElementById('request-otp-button');
+              requestButton.textContent = waitingForClient
+                ? '고객 확인 상태 다시 확인'
+                : '인증번호 요청';
+              showPanel('otp');
+              postStatus(waitingForClient ? 'waiting' : 'otp');
+            })
+            .withFailureHandler(fatalFailure)
+            .publicBootstrapSign(invitationToken);
+        }
+
+        function maybeBegin() {
+          if (!trustedParent || !invitationToken || bootstrapStarted) return;
+          bootstrapStarted = true;
+          clearError();
+          callBootstrap();
+        }
+
+        function clearFragment() {
+          try {
+            history.replaceState(null, '', location.pathname + location.search);
+          } catch (ignored) {}
+        }
+
+        clearFragment();
+
+        window.addEventListener('message', function (event) {
+          if (event.source !== window.parent) return;
+          if (allowedOrigins.indexOf(event.origin) === -1) return;
+          if (!event.data ||
+              event.data.source !== messageSource ||
+              Number(event.data.version) !== protocolVersion ||
+              event.data.type !== 'DAILYCOACHING_SIGN_TOKEN') return;
+          if (trustedOrigin && trustedOrigin !== event.origin) return;
+          if (!tokenPattern.test(String(event.data.token || ''))) {
+            trustedParent = true;
+            trustedOrigin = event.origin;
+            postProtocol('DAILYCOACHING_SIGN_FAILED');
+            return;
+          }
+          trustedParent = true;
+          trustedOrigin = event.origin;
+          invitationToken = String(event.data.token);
+          postProtocol('DAILYCOACHING_SIGN_TOKEN_RECEIVED');
+          maybeBegin();
+        });
+
+        if (window.parent !== window) {
+          allowedOrigins.forEach(function (origin) {
+            window.parent.postMessage({
+              source: messageSource,
+              version: protocolVersion,
+              type: 'DAILYCOACHING_SIGN_READY'
+            }, origin);
+          });
+        } else {
+          document.getElementById('gate-title').textContent =
+            '공식 전자계약 관문에서 다시 열어주세요.';
+          document.getElementById('gate-message').textContent =
+            '이 주소에서는 계약정보를 직접 표시하지 않습니다.';
+        }
+
+        function startCooldown(seconds) {
+          var remaining = Number(seconds || 60);
+          var button = document.getElementById('resend-otp-button');
+          var timer = document.getElementById('otp-timer');
+          button.dataset.cooldown = 'true';
+          button.disabled = true;
+          if (resendTimer) clearInterval(resendTimer);
+          function tick() {
+            timer.textContent = remaining > 0
+              ? remaining + '초 후 새 인증번호를 요청할 수 있습니다.'
+              : '새 인증번호를 요청할 수 있습니다.';
+            if (remaining <= 0) {
+              clearInterval(resendTimer);
+              resendTimer = null;
+              button.dataset.cooldown = 'false';
+              button.disabled = busy;
+            }
+            remaining -= 1;
+          }
+          tick();
+          resendTimer = setInterval(tick, 1000);
+        }
+
+        function requestOtp() {
+          if (busy) return;
+          if (waitingForClient) {
+            callBootstrap();
+            return;
+          }
+          clearError();
+          setBusy(true);
+          if (!otpRequestId) otpRequestId = requestId();
+          google.script.run
+            .withSuccessHandler(function (result) {
+              otpRequestId = '';
+              setBusy(false);
+              document.getElementById('otp-request-actions').hidden = true;
+              document.getElementById('otp-form').hidden = false;
+              startCooldown(60);
+              document.getElementById('otp-code').focus();
+            })
+            .withFailureHandler(function (error) {
+              otpRequestId = '';
+              failure(error);
+            })
+            .publicRequestOtp(invitationToken, otpRequestId);
+        }
+
+        document.getElementById('request-otp-button')
+          .addEventListener('click', requestOtp);
+        document.getElementById('resend-otp-button')
+          .addEventListener('click', requestOtp);
+
+        function loadVerifiedContract(attempt) {
+          setBusy(true);
+          google.script.run
+            .withSuccessHandler(function (contractResult) {
+              setBusy(false);
+              document.getElementById('retry-contract-load-button').hidden = true;
+              loadedContract = contractResult.contract;
+              signerRole = contractResult.signerRole;
+              renderContract(contractResult);
+              showPanel('contract');
+              postStatus('review');
+            })
+            .withFailureHandler(function (error) {
+              if (attempt < 2) {
+                window.setTimeout(function () {
+                  loadVerifiedContract(attempt + 1);
+                }, (attempt + 1) * 750);
+                return;
+              }
+              failure(error);
+              document.getElementById('retry-contract-load-button').hidden = false;
+              postStatus('otp');
+            })
+            .publicLoadContract(authSessionToken);
+        }
+
+        document.getElementById('retry-contract-load-button')
+          .addEventListener('click', function () {
+            clearError();
+            loadVerifiedContract(0);
+          });
+
+        document.getElementById('otp-form').addEventListener('submit', function (event) {
+          event.preventDefault();
+          if (busy) return;
+          var otp = document.getElementById('otp-code').value.trim();
+          if (!/^\d{6}$/.test(otp)) {
+            showError('6자리 인증번호를 입력하세요.');
+            return;
+          }
+          if (!verifyRequestId || verifyOtpValue !== otp) {
+            verifyRequestId = requestId();
+            verifyOtpValue = otp;
+          }
+          clearError();
+          setBusy(true);
+          google.script.run
+            .withSuccessHandler(function (result) {
+              verifyRequestId = '';
+              verifyOtpValue = '';
+              authSessionToken = result.authSessionToken;
+              invitationToken = '';
+              loadVerifiedContract(0);
+            })
+            .withFailureHandler(failure)
+            .publicVerifyOtp(invitationToken, otp, verifyRequestId);
+        });
+
+        function addDefinition(container, term, description) {
+          var wrapper = document.createElement('div');
+          var dt = document.createElement('dt');
+          var dd = document.createElement('dd');
+          dt.textContent = term;
+          dd.textContent = description;
+          wrapper.appendChild(dt);
+          wrapper.appendChild(dd);
+          container.appendChild(wrapper);
+        }
+
+        function money(value) {
+          return Number(value || 0).toLocaleString('ko-KR') + '원';
+        }
+
+        function renderSharing(snapshot) {
+          var section = document.getElementById('sharing-section');
+          if (snapshot.contractMode !== 'organization') {
+            section.hidden = true;
+            return;
+          }
+          section.hidden = false;
+          var content = document.getElementById('sharing-content');
+          content.textContent = '';
+          var notice = snapshot.informationSharing.provisionNotice;
+          [
+            ['제공받는 자', notice.recipient],
+            ['제공 목적', notice.purpose],
+            ['선택 제공항목', notice.providedItems.length
+              ? notice.providedItems.join(', ')
+              : '선택한 제공 항목 없음'],
+            ['보유·이용기간', notice.retention],
+            ['거부 안내', notice.refusalNotice],
+            ['항상 제외', notice.alwaysExcluded.join(', ')],
+            ['안내 버전', notice.version]
+          ].forEach(function (row) {
+            var p = document.createElement('p');
+            var strong = document.createElement('strong');
+            strong.textContent = row[0] + ' · ';
+            p.appendChild(strong);
+            p.appendChild(document.createTextNode(row[1]));
+            content.appendChild(p);
+          });
+          var provisionRequired = signerRole === 'CLIENT' &&
+            notice.providedItems.length > 0;
+          document.getElementById('sponsor-provision-confirm-row').hidden =
+            !provisionRequired;
+          document.getElementById('sponsor-provision-confirm').required =
+            provisionRequired;
+          document.getElementById('sponsor-provision-confirm').disabled =
+            !provisionRequired;
+        }
+
+        function renderConsents(offerSet, notices, processingStatement) {
+          var container = document.getElementById('optional-consents');
+          container.textContent = '';
+          var statement = document.createElement('p');
+          statement.className = 'notice';
+          statement.textContent = processingStatement;
+          container.appendChild(statement);
+          var labels = {
+            recordingStatus: '코칭 세션 녹음',
+            transcriptionStatus: '음성 전사',
+            aiSummaryStatus: 'AI 요약',
+            researchUseStatus: '연구자료 활용',
+            anonymousCaseUseStatus: '익명 사례 활용',
+            testimonialPublicityStatus: '후기·홍보 활용',
+            marketingEmailStatus: '마케팅 이메일 수신',
+            marketingSmsStatus: '마케팅 문자 수신',
+            thirdPartyTransferStatus: '별도 제3자 자료 전달'
+          };
+          Object.keys(labels).forEach(function (key) {
+            if (!offerSet[key]) return;
+            var wrapper = document.createElement('div');
+            wrapper.className = 'consent-item';
+            var label = document.createElement('label');
+            label.htmlFor = 'consent-' + key;
+            label.textContent = labels[key] + ' (선택)';
+            var select = document.createElement('select');
+            select.id = 'consent-' + key;
+            select.dataset.consentKey = key;
+            var decline = document.createElement('option');
+            decline.value = 'DECLINED';
+            decline.textContent = '동의하지 않음';
+            var accept = document.createElement('option');
+            accept.value = 'ACCEPTED';
+            accept.textContent = '동의함';
+            select.appendChild(decline);
+            select.appendChild(accept);
+            wrapper.appendChild(label);
+            if (notices && notices[key]) {
+              var detail = document.createElement('p');
+              detail.className = 'muted';
+              detail.textContent =
+                '목적: ' + notices[key].purpose +
+                ' · 처리범위: ' + notices[key].scope +
+                ' · 도구/수탁자: ' + notices[key].provider +
+                ' · 보유기간: ' + notices[key].retention +
+                ' · 안내버전: ' + notices[key].version;
+              wrapper.appendChild(detail);
+            }
+            wrapper.appendChild(select);
+            container.appendChild(wrapper);
+          });
+        }
+
+        function renderContract(result) {
+          var snapshot = result.contract;
+          var meta = document.getElementById('contract-meta');
+          meta.textContent = '';
+          addDefinition(meta, '계약번호', snapshot.contractId);
+          addDefinition(meta, '계약 유형', snapshot.contractType);
+          addDefinition(meta, '고객', snapshot.parties.client.name);
+          addDefinition(
+            meta,
+            '고객 계약상 역할',
+            snapshot.parties.client.role
+          );
+          if (snapshot.parties.client.organization) {
+            addDefinition(
+              meta,
+              '고객 소속',
+              snapshot.parties.client.organization
+            );
+          }
+          if (snapshot.parties.client.title) {
+            addDefinition(meta, '고객 직책', snapshot.parties.client.title);
+          }
+          if (snapshot.parties.sponsor) {
+            addDefinition(meta, '스폰서', snapshot.parties.sponsor.organization +
+              ' · ' + snapshot.parties.sponsor.name);
+          }
+          addDefinition(meta, '코칭 목적', snapshot.coaching.purpose);
+          if (result.signerRole !== 'SPONSOR' ||
+              snapshot.coaching.goalSummaryVisibility ===
+                'SPONSOR_SHARED_AFTER_CLIENT_CONSENT') {
+            addDefinition(meta, '코칭 목표', snapshot.coaching.goalSummary);
+          } else {
+            addDefinition(meta, '코칭 목표', '스폰서와 공유하지 않기로 합의된 정보입니다.');
+          }
+          addDefinition(meta, '진행기간', snapshot.coaching.startDate +
+            ' ~ ' + snapshot.coaching.endDate);
+          addDefinition(meta, '회기', snapshot.coaching.sessions + '회 · 회기당 ' +
+            snapshot.coaching.sessionMinutes + '분');
+          addDefinition(meta, '총 계약금액', money(snapshot.payment.totalFee));
+          addDefinition(meta, '내 열람본 SHA-256', result.documentHash);
+
+          renderSharing(snapshot);
+          var clauses = document.getElementById('clauses');
+          clauses.textContent = '';
+          var heading = document.createElement('h2');
+          heading.textContent = '계약 조항';
+          clauses.appendChild(heading);
+          snapshot.clauses.forEach(function (clause, index) {
+            var article = document.createElement('article');
+            article.className = 'clause';
+            var title = document.createElement('h3');
+            title.textContent = (index + 1) + '. ' + clause.title;
+            var summary = document.createElement('p');
+            summary.className = 'clause-summary';
+            summary.textContent = clause.summary;
+            var text = document.createElement('p');
+            text.textContent = clause.text;
+            article.appendChild(title);
+            article.appendChild(summary);
+            article.appendChild(text);
+            clauses.appendChild(article);
+          });
+
+          var privacy = snapshot.privacyNotice;
+          var privacySection = document.getElementById('privacy-section');
+          privacySection.textContent = '';
+          var privacyTitle = document.createElement('h2');
+          privacyTitle.textContent = '개인정보 처리 안내';
+          privacySection.appendChild(privacyTitle);
+          [
+            ['처리 목적', privacy.purpose],
+            ['필수 처리항목', privacy.requiredItems],
+            ['선택 처리항목', privacy.optionalItems],
+            ['처리 근거', privacy.basis],
+            ['보유기간', privacy.retention],
+            ['파기방법', privacy.destruction],
+            ['고객의 권리와 요청방법', privacy.rights],
+            ['필수항목 미제공 영향', privacy.requiredRefusalEffect],
+            ['선택항목 거부 영향', privacy.optionalRefusalEffect],
+            ['문의처', privacy.contact],
+            ['Google 처리위탁', privacy.processor.recipient + ' · ' +
+              privacy.processor.purpose + ' · ' + privacy.processor.items +
+              ' · ' + privacy.processor.retention],
+            ['국외 이전', privacy.crossBorder.recipient + ' · ' +
+              privacy.crossBorder.country + ' · ' + privacy.crossBorder.method +
+              ' · ' + privacy.crossBorder.purpose + ' · ' +
+              privacy.crossBorder.items + ' · ' + privacy.crossBorder.retention]
+          ].forEach(function (row) {
+            var p = document.createElement('p');
+            var strong = document.createElement('strong');
+            strong.textContent = row[0] + ' · ';
+            p.appendChild(strong);
+            p.appendChild(document.createTextNode(row[1]));
+            privacySection.appendChild(p);
+          });
+          var warning = document.createElement('p');
+          warning.textContent = privacy.sensitiveDataWarning;
+          privacySection.appendChild(warning);
+          renderConsents(
+            snapshot.consentOfferSet,
+            snapshot.consentNotices || {},
+            snapshot.sessionProcessingStatement
+          );
+          document.getElementById('signer-name').value = '';
+        }
+
+        function acceptancePayload() {
+          var consents = {};
+          Array.prototype.forEach.call(
+            document.querySelectorAll('[data-consent-key]'),
+            function (select) { consents[select.dataset.consentKey] = select.value; }
+          );
+          return {
+            signerName: document.getElementById('signer-name').value.trim(),
+            confirmations: {
+              scope: document.getElementById('confirm-scope').checked,
+              confidentiality: document.getElementById('confirm-confidentiality').checked,
+              cancellation: document.getElementById('confirm-cancellation').checked,
+              privacy: document.getElementById('confirm-privacy').checked,
+              electronic: document.getElementById('confirm-electronic').checked
+            },
+            consents: consents,
+            sponsorProvisionAccepted:
+              signerRole === 'CLIENT' &&
+              loadedContract.contractMode === 'organization' &&
+              loadedContract.informationSharing.provisionNotice.providedItems.length > 0
+                ? document.getElementById('sponsor-provision-confirm').checked
+                : false
+          };
+        }
+
+        document.getElementById('acceptance-form')
+          .addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (busy || !event.currentTarget.reportValidity()) return;
+            clearError();
+            setBusy(true);
+            postStatus('processing');
+            if (!acceptanceRequestId) acceptanceRequestId = requestId();
+            google.script.run
+              .withSuccessHandler(function (result) {
+                acceptanceRequestId = '';
+                setBusy(false);
+                authSessionToken = '';
+                loadedContract = null;
+                document.getElementById('complete-contract-id').textContent =
+                  result.contractId;
+                document.getElementById('complete-status').textContent = result.status;
+                document.getElementById('complete-pdf-status').textContent =
+                  result.finalizationStatus;
+                document.getElementById('complete-message').textContent =
+                  result.status === 'COMPLETED'
+                    ? '모든 필수 당사자의 전자확인이 완료되었습니다.'
+                    : '본인의 전자확인이 완료되었습니다. 다른 필수 당사자의 확인을 기다립니다.';
+                showPanel('complete');
+                loadManagementInfo();
+                if (result.status === 'COMPLETED') {
+                  postProtocol('DAILYCOACHING_SIGN_COMPLETED');
+                } else {
+                  postStatus('waiting');
+                }
+              })
+              .withFailureHandler(acceptanceFailure)
+              .publicAcceptContract(
+                authSessionToken,
+                acceptancePayload(),
+                acceptanceRequestId
+              );
+          });
+
+        function loadManagementInfo() {
+          google.script.run
+            .withSuccessHandler(function (result) {
+              document.getElementById('management-instruction').textContent =
+                result.instruction;
+              document.getElementById('management-contact').textContent =
+                result.contact;
+              document.getElementById('management-info').hidden = false;
+            })
+            .withFailureHandler(function () {})
+            .publicContractManagementInfo();
+        }
+
+        window.addEventListener('pagehide', function () {
+          invitationToken = '';
+          authSessionToken = '';
+          loadedContract = null;
+          otpRequestId = '';
+          verifyRequestId = '';
+          verifyOtpValue = '';
+          acceptanceRequestId = '';
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -14,6 +14,20 @@
     "source": "local import"
   },
   {
+    "title": "코칭안내",
+    "description": "코칭의 정의, 세 가지 코칭 분야, 진행과정, 윤리와 비밀보장을 안내하는 DAILYCOACHING 공식 안내 페이지",
+    "category": "coaching",
+    "url": "/coaching/",
+    "source": "local import"
+  },
+  {
+    "title": "코칭계약서",
+    "description": "라이프·비즈니스·커리어 코칭계약서를 확인하고 작성하는 계약 안내 시스템",
+    "category": "coaching",
+    "url": "/coaching/agreement/",
+    "source": "local import"
+  },
+  {
     "title": "LCMS",
     "description": "데이터 기반 맞춤형 진로 교육 인프라",
     "category": "education",

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <base target="_top">
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 22px; color: #111827; font-family: Arial, "Apple SD Gothic Neo", sans-serif; }
+      h1 { color: #061528; margin-top: 0; }
+      fieldset { border: 1px solid #d7dce2; border-radius: 10px; margin: 18px 0; padding: 16px; }
+      legend { color: #061528; font-weight: 800; padding: 0 6px; }
+      label { display: block; font-weight: 700; margin: 12px 0 5px; }
+      input, select, textarea {
+        width: 100%; min-height: 42px; border: 1px solid #9099a6; border-radius: 6px;
+        padding: 9px; font: inherit;
+      }
+      textarea { min-height: 90px; resize: vertical; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .check { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; margin: 10px 0; }
+      .check input { width: 18px; min-height: 18px; margin-top: 2px; }
+      .check label { margin: 0; font-weight: 500; }
+      button { min-height: 44px; border: 0; border-radius: 7px; padding: 10px 18px; background: #061528; color: #fff; font-weight: 800; }
+      button:disabled { opacity: .5; }
+      .notice { background: #f8f0e4; border-left: 4px solid #c49a57; padding: 12px; }
+      .error { color: #9b2c2c; }
+      @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <h1>신규 코칭계약 발행</h1>
+    <p class="notice">
+      주민등록번호, 진단명, 치료·상담기록 또는 세션 대화 전문을 입력하지 마세요.
+      발행 후 조건을 바꾸려면 기존 계약을 덮어쓰지 말고 새 계약을 발행합니다.
+    </p>
+    <p id="error" class="error" role="alert"></p>
+
+    <form id="issue-form">
+      <fieldset>
+        <legend>계약 유형</legend>
+        <div class="grid">
+          <div>
+            <label for="contract-type">유형</label>
+            <select id="contract-type" required>
+              <option value="life">라이프 코칭</option>
+              <option value="business">비즈니스 코칭</option>
+              <option value="career">커리어 코칭</option>
+            </select>
+          </div>
+          <div>
+            <label for="contract-mode">비즈니스 계약 모드</label>
+            <select id="contract-mode">
+              <option value="individual">개인 사업자·리더 2자 계약</option>
+              <option value="organization">조직 지원 3자 계약</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>고객</legend>
+        <div class="grid">
+          <div>
+            <label for="client-name">성명</label>
+            <input id="client-name" maxlength="80" required>
+          </div>
+          <div>
+            <label for="client-email">이메일</label>
+            <input id="client-email" type="email" maxlength="254" required>
+          </div>
+        </div>
+        <label for="client-phone">휴대전화번호</label>
+        <input id="client-phone" type="tel" maxlength="30" required>
+        <label for="client-role">계약상 역할</label>
+        <input id="client-role" maxlength="80" placeholder="예: 코칭 고객, 조직 리더" required>
+        <div class="grid" id="client-business-fields" hidden>
+          <div>
+            <label for="client-organization">소속(비즈니스 코칭 선택)</label>
+            <input id="client-organization" maxlength="120">
+          </div>
+          <div>
+            <label for="client-title">직책(비즈니스 코칭 선택)</label>
+            <input id="client-title" maxlength="100">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset id="sponsor-fields" hidden>
+        <legend>조직 스폰서</legend>
+        <div class="grid">
+          <div>
+            <label for="sponsor-name">담당자명</label>
+            <input id="sponsor-name" maxlength="80">
+          </div>
+          <div>
+            <label for="sponsor-email">이메일</label>
+            <input id="sponsor-email" type="email" maxlength="254">
+          </div>
+        </div>
+        <label for="sponsor-organization">조직명</label>
+        <input id="sponsor-organization" maxlength="160">
+        <h2>스폰서 정보공유 범위</h2>
+        <p>
+          모든 일반 공유항목의 기본값은 비공유입니다. 고객이 전자확인 단계에서
+          제공받는 자·목적·항목·보유기간을 별도로 확인해야 하며, 세션 대화와
+          개인적인 고민은 항상 제외됩니다.
+        </p>
+        <div class="check">
+          <input id="share-attendance" type="checkbox">
+          <label for="share-attendance">코칭 참여 여부 공유</label>
+        </div>
+        <div class="check">
+          <input id="share-progress" type="checkbox">
+          <label for="share-progress">일정·진행률 공유</label>
+        </div>
+        <div class="check">
+          <input id="share-goals" type="checkbox">
+          <label for="share-goals">합의된 전체 목표 공유</label>
+        </div>
+        <div class="check">
+          <input id="share-closing" type="checkbox">
+          <label for="share-closing">사전 합의 범위의 종료 요약 공유</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>코칭 조건</legend>
+        <div class="grid">
+          <div>
+            <label for="sessions">전체 회기 수</label>
+            <input id="sessions" type="number" min="1" max="200" value="8" required>
+          </div>
+          <div>
+            <label for="session-minutes">회기당 시간(분)</label>
+            <input id="session-minutes" type="number" min="1" max="480" value="60" required>
+          </div>
+          <div>
+            <label for="start-date">시작 예정일</label>
+            <input id="start-date" type="date" required>
+          </div>
+          <div>
+            <label for="end-date">종료 예정일</label>
+            <input id="end-date" type="date" required>
+          </div>
+          <div>
+            <label for="delivery-mode">진행방식</label>
+            <select id="delivery-mode" required>
+              <option value="online">온라인</option>
+              <option value="offline">오프라인</option>
+              <option value="hybrid">혼합</option>
+            </select>
+          </div>
+          <div>
+            <label for="delivery-location">장소 또는 화상도구</label>
+            <input id="delivery-location" maxlength="200" required>
+          </div>
+        </div>
+        <label for="coaching-purpose">코칭 목적(한두 문장)</label>
+        <textarea id="coaching-purpose" maxlength="300" required></textarea>
+        <label for="goal-summary">코칭 목표(한두 문장)</label>
+        <textarea id="goal-summary" maxlength="300" required></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>비용·변경·환불</legend>
+        <div class="grid">
+          <div>
+            <label for="total-fee">총 계약금액(원)</label>
+            <input id="total-fee" type="number" min="0" max="1000000000" required>
+          </div>
+          <div>
+            <label for="per-session-fee">회기당 금액(원)</label>
+            <input id="per-session-fee" type="number" min="0" max="1000000000" required>
+          </div>
+        </div>
+        <label for="payment-method">결제방법</label>
+        <textarea id="payment-method" maxlength="300" required></textarea>
+        <label for="payment-schedule">결제일정</label>
+        <textarea id="payment-schedule" maxlength="500" required></textarea>
+        <label for="cancellation-policy">일정변경·취소 기준</label>
+        <textarea id="cancellation-policy" maxlength="2000" required></textarea>
+        <label for="no-show-policy">노쇼 기준</label>
+        <textarea id="no-show-policy" maxlength="2000" required></textarea>
+        <label for="refund-policy">중도종료·환불 기준</label>
+        <textarea id="refund-policy" maxlength="2000" required></textarea>
+      </fieldset>
+
+      <button id="submit-button" type="submit">검증 후 계약 발행</button>
+    </form>
+
+    <script>
+      (function () {
+        'use strict';
+        var form = document.getElementById('issue-form');
+        var type = document.getElementById('contract-type');
+        var mode = document.getElementById('contract-mode');
+        var sponsorFields = document.getElementById('sponsor-fields');
+        var clientBusinessFields =
+          document.getElementById('client-business-fields');
+        var issueRequestId = '';
+
+        function requestId() {
+          return window.crypto.randomUUID
+            ? window.crypto.randomUUID()
+            : Array.prototype.map.call(
+              window.crypto.getRandomValues(new Uint8Array(24)),
+              function (value) { return value.toString(16).padStart(2, '0'); }
+            ).join('');
+        }
+
+        function refreshMode() {
+          mode.disabled = type.value !== 'business';
+          if (type.value !== 'business') mode.value = 'individual';
+          clientBusinessFields.hidden = type.value !== 'business';
+          var organization = type.value === 'business' && mode.value === 'organization';
+          sponsorFields.hidden = !organization;
+          ['sponsor-name', 'sponsor-email', 'sponsor-organization'].forEach(function (id) {
+            document.getElementById(id).required = organization;
+          });
+        }
+
+        type.addEventListener('change', refreshMode);
+        mode.addEventListener('change', refreshMode);
+        refreshMode();
+
+        google.script.run
+          .withSuccessHandler(function (defaults) {
+            document.getElementById('payment-method').value = defaults.paymentMethod;
+            document.getElementById('cancellation-policy').value = defaults.cancellationPolicy;
+            document.getElementById('no-show-policy').value = defaults.noShowPolicy;
+            document.getElementById('refund-policy').value = defaults.refundPolicy;
+          })
+          .withFailureHandler(function (error) {
+            document.getElementById('error').textContent = error.message;
+          })
+          .adminGetIssueDefaults();
+
+        function value(id) { return document.getElementById(id).value.trim(); }
+        function checked(id) { return document.getElementById(id).checked; }
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+          var button = document.getElementById('submit-button');
+          var error = document.getElementById('error');
+          error.textContent = '';
+          button.disabled = true;
+          var payload = {
+            contractType: type.value,
+            contractMode: mode.value,
+            clientName: value('client-name'),
+            clientEmail: value('client-email'),
+            clientPhone: value('client-phone'),
+            clientRole: value('client-role'),
+            clientOrganization: value('client-organization'),
+            clientTitle: value('client-title'),
+            sponsorName: value('sponsor-name'),
+            sponsorEmail: value('sponsor-email'),
+            sponsorOrganization: value('sponsor-organization'),
+            sponsorShareAttendance: checked('share-attendance'),
+            sponsorShareScheduleProgress: checked('share-progress'),
+            sponsorShareAgreedGoals: checked('share-goals'),
+            sponsorShareClosingSummary: checked('share-closing'),
+            sessions: value('sessions'),
+            sessionMinutes: value('session-minutes'),
+            startDate: value('start-date'),
+            endDate: value('end-date'),
+            deliveryMode: value('delivery-mode'),
+            deliveryLocation: value('delivery-location'),
+            coachingPurpose: value('coaching-purpose'),
+            goalSummary: value('goal-summary'),
+            totalFee: value('total-fee'),
+            perSessionFee: value('per-session-fee'),
+            paymentMethod: value('payment-method'),
+            paymentSchedule: value('payment-schedule'),
+            cancellationPolicy: value('cancellation-policy'),
+            noShowPolicy: value('no-show-policy'),
+            refundPolicy: value('refund-policy')
+          };
+          if (!issueRequestId) issueRequestId = requestId();
+          google.script.run
+            .withSuccessHandler(function (result) {
+              issueRequestId = '';
+              button.disabled = false;
+              alert('계약번호 ' + result.contractId + ' 발행 처리를 마쳤습니다.');
+              google.script.host.close();
+            })
+            .withFailureHandler(function (failure) {
+              button.disabled = false;
+              error.textContent = failure.message;
+            })
+            .adminIssueContract(payload, issueRequestId);
+        });
+      })();
+    </script>
+  </body>
+</html>
