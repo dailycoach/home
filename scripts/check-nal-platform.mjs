@@ -34,6 +34,54 @@ async function collectHtml(directory, result = []) {
   return result;
 }
 
+async function collectFiles(directory, result = []) {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const full = path.join(directory, entry.name);
+    if (entry.isDirectory()) await collectFiles(full, result);
+    else result.push(full);
+  }
+  return result;
+}
+
+function webpDimensions(buffer) {
+  if (buffer.toString('ascii', 0, 4) !== 'RIFF' || buffer.toString('ascii', 8, 12) !== 'WEBP') return null;
+  let offset = 12;
+  while (offset + 8 <= buffer.length) {
+    const type = buffer.toString('ascii', offset, offset + 4);
+    const length = buffer.readUInt32LE(offset + 4);
+    const data = offset + 8;
+    if (type === 'VP8 ' && data + 10 <= buffer.length) {
+      return { width: buffer.readUInt16LE(data + 6) & 0x3fff, height: buffer.readUInt16LE(data + 8) & 0x3fff };
+    }
+    if (type === 'VP8L' && data + 5 <= buffer.length) {
+      const bits = buffer.readUInt32LE(data + 1);
+      return { width: (bits & 0x3fff) + 1, height: ((bits >>> 14) & 0x3fff) + 1 };
+    }
+    if (type === 'VP8X' && data + 10 <= buffer.length) {
+      return {
+        width: 1 + buffer.readUIntLE(data + 4, 3),
+        height: 1 + buffer.readUIntLE(data + 7, 3)
+      };
+    }
+    offset = data + length + (length % 2);
+  }
+  return null;
+}
+
+async function checkCatalogImage(publicPath, expected, maxBytes, label) {
+  check(typeof publicPath === 'string' && /^\/nal\/assets\/images\/catalog\/[a-z-]+\/[a-z0-9-]+\.webp$/.test(publicPath), `${label} invalid catalog image path`);
+  if (typeof publicPath !== 'string' || !publicPath.startsWith('/')) return;
+  const relative = publicPath.slice(1);
+  check(await exists(relative), `${label} missing file ${relative}`);
+  if (!(await exists(relative))) return;
+  const full = path.join(root, relative);
+  const info = await stat(full);
+  check(info.size <= maxBytes, `${label} exceeds ${maxBytes} bytes (${info.size})`);
+  const dimensions = webpDimensions(await readFile(full));
+  check(Boolean(dimensions), `${label} unreadable WebP dimensions`);
+  if (dimensions) check(dimensions.width === expected[0] && dimensions.height === expected[1], `${label} expected ${expected.join('x')}, found ${dimensions.width}x${dimensions.height}`);
+}
+
 const [{ programs }, { products }, { hosts }, { content }, site] = await Promise.all([
   json('nal/data/programs.json'),
   json('nal/data/products.json'),
@@ -43,17 +91,17 @@ const [{ programs }, { products }, { hosts }, { content }, site] = await Promise
 ]);
 
 const requiredProgram = [
-  'id', 'slug', 'type', 'title', 'subtitle', 'summary', 'description', 'category', 'tags', 'coverImage', 'gallery',
+  'id', 'slug', 'type', 'title', 'subtitle', 'summary', 'description', 'category', 'tags', 'coverImage', 'coverImageMobile', 'coverImageAlt', 'gallery',
   'hostId', 'format', 'location', 'address', 'onlineUrl', 'startDate', 'endDate', 'startTime', 'endTime', 'duration',
   'frequency', 'sessionCount', 'capacity', 'remainingSeats', 'price', 'originalPrice', 'status', 'difficulty', 'materials',
-  'includedItems', 'soloFriendly', 'beginnerFriendly', 'groupChat', 'applicationUrl', 'refundPolicy', 'safetyGuide',
-  'productIds', 'relatedContentIds', 'featured', 'published', 'createdAt', 'updatedAt'
+  'includedItems', 'activities', 'recommendedFor', 'soloFriendly', 'beginnerFriendly', 'groupChat', 'applicationUrl', 'refundPolicy', 'safetyGuide',
+  'productIds', 'relatedContentIds', 'featured', 'featuredOrder', 'published', 'createdAt', 'updatedAt'
 ];
 const requiredProduct = [
-  'id', 'slug', 'title', 'subtitle', 'summary', 'description', 'category', 'tags', 'coverImage', 'gallery', 'price',
+  'id', 'slug', 'title', 'subtitle', 'summary', 'description', 'category', 'tags', 'coverImage', 'coverImageAlt', 'gallery', 'galleryAlts', 'price',
   'originalPrice', 'productType', 'deliveryType', 'stock', 'stockStatus', 'options', 'components', 'cardCount', 'pageCount',
-  'recommendedFor', 'usageIndividual', 'usageCouple', 'usageGroup', 'precautions', 'shippingPolicy', 'exchangePolicy',
-  'refundPolicy', 'relatedProgramIds', 'relatedContentIds', 'featured', 'published', 'createdAt', 'updatedAt'
+  'recommendedFor', 'usageIndividual', 'usageCouple', 'usageGroup', 'precautions', 'visualNote', 'shippingPolicy', 'exchangePolicy',
+  'refundPolicy', 'purchaseUrl', 'relatedProgramIds', 'relatedContentIds', 'featured', 'featuredOrder', 'published', 'createdAt', 'updatedAt'
 ];
 const requiredHost = ['id', 'slug', 'name', 'profileImage', 'headline', 'bio', 'fields', 'credentials', 'experience', 'location', 'programIds', 'contentIds', 'socialLinks', 'featured', 'published'];
 const requiredContent = ['id', 'slug', 'title', 'summary', 'category', 'coverImage', 'authorId', 'publishedAt', 'readingTime', 'body', 'relatedProgramIds', 'relatedProductIds', 'featured', 'published'];
@@ -99,6 +147,64 @@ for (const item of products) {
   }
 }
 
+const gatherTargetIds = new Set([
+  'emotion-card-dialogue-gather',
+  'self-understanding-writing-gather',
+  'coaches-dialogue-practice-gather',
+  'flowing-river-coach-community'
+]);
+const classTargetIds = new Set([
+  'emotion-card-meets-self-class',
+  'art-current-mind-class',
+  'relationship-conversation-style-class',
+  'yearly-direction-collage-class'
+]);
+const productTargetIds = new Set(['emotion-card', 'coaching-question-card', 'relationship-question-card', 'strength-card']);
+const publicPrograms = programs.filter((item) => item.published);
+const publicProducts = products.filter((item) => item.published);
+const targetPrograms = programs.filter((item) => gatherTargetIds.has(item.id) || classTargetIds.has(item.id));
+const targetProducts = products.filter((item) => productTargetIds.has(item.id));
+
+check(publicPrograms.filter((item) => item.type === 'gather').length === 4, 'expected exactly 4 public gathers');
+check(targetPrograms.filter((item) => item.type === 'gather' && item.published).length === 4, 'expected all 4 target gathers public');
+check(targetPrograms.filter((item) => item.type === 'class' && item.published).length === 4, 'expected all 4 target classes public');
+check(publicPrograms.some((item) => item.id === 'art-psychology-coaching-6week'), 'existing art psychology coaching 6-week program must remain public');
+check(publicProducts.length === 4, 'expected exactly 4 public products');
+check(targetProducts.filter((item) => item.published).length === 4, 'expected all 4 target products public');
+
+for (const item of targetPrograms) {
+  check(item.published, `target program ${item.id} must be public`);
+  check(typeof item.coverImageAlt === 'string' && item.coverImageAlt.length >= 12, `target program ${item.id} missing descriptive alt`);
+  check(item.gallery.includes(item.coverImage), `target program ${item.id} gallery must include cover`);
+  check(item.activities.length >= 3, `target program ${item.id} needs activity content`);
+  check(item.recommendedFor.length >= 3, `target program ${item.id} needs recommendedFor content`);
+  for (const key of ['startDate', 'endDate', 'startTime', 'endTime', 'capacity', 'remainingSeats', 'price', 'originalPrice', 'applicationUrl']) {
+    check(item[key] === null, `target program ${item.id} must keep unconfirmed ${key} null`);
+  }
+  await checkCatalogImage(item.coverImage, [1600, 1000], 250 * 1024, `program ${item.id} cover`);
+  await checkCatalogImage(item.coverImageMobile, [900, 1200], 200 * 1024, `program ${item.id} mobile`);
+}
+
+for (const item of targetProducts) {
+  check(item.published, `target product ${item.id} must be public`);
+  check(typeof item.coverImageAlt === 'string' && item.coverImageAlt.length >= 12, `target product ${item.id} missing descriptive alt`);
+  check(item.gallery.length === 3, `target product ${item.id} needs exactly 3 catalog visuals`);
+  check(item.galleryAlts.length === item.gallery.length, `target product ${item.id} gallery alt mismatch`);
+  check(typeof item.visualNote === 'string' && item.visualNote.includes('비주얼 콘셉트'), `target product ${item.id} missing concept disclosure`);
+  for (const key of ['price', 'originalPrice', 'stock', 'purchaseUrl']) check(item[key] === null, `target product ${item.id} must keep unconfirmed ${key} null`);
+  check(item.stockStatus === 'comingSoon', `target product ${item.id} must remain comingSoon`);
+  await checkCatalogImage(item.gallery[0], [1600, 1600], 300 * 1024, `product ${item.id} cover`);
+  await checkCatalogImage(item.gallery[1], [1600, 1100], 300 * 1024, `product ${item.id} use`);
+  await checkCatalogImage(item.gallery[2], [1200, 1500], 250 * 1024, `product ${item.id} detail`);
+}
+
+const catalogFiles = await collectFiles(path.join(root, 'nal/assets/images/catalog'));
+check(catalogFiles.length === 28, `expected exactly 28 catalog images, found ${catalogFiles.length}`);
+for (const file of catalogFiles) {
+  check(file.endsWith('.webp'), `catalog image must be WebP: ${path.relative(root, file)}`);
+  check(/^[a-z0-9-]+\.webp$/.test(path.basename(file)), `catalog filename must use lowercase and hyphens: ${path.basename(file)}`);
+}
+
 for (const item of hosts) {
   for (const id of item.programIds) check(programIds.has(id), `host ${item.id} unknown program ${id}`);
   for (const id of item.contentIds) check(contentIds.has(id), `host ${item.id} unknown content ${id}`);
@@ -126,7 +232,7 @@ for (const file of htmlFiles) {
   check(/<html lang="ko">/.test(source), `${relative} missing lang`);
   check(/<meta name="description" content="[^"]+">/.test(source), `${relative} missing description`);
   check(/<meta property="og:title"/.test(source), `${relative} missing og:title`);
-  check(/<meta property="og:image" content="https:\/\/daily-coach-ing\.com\/nal\/assets\/images\/nal-og\.png">/.test(source), `${relative} missing NAL OG image`);
+  check(/<meta property="og:image" content="https:\/\/daily-coach-ing\.com\/[^\"]+\.(?:png|webp)">/.test(source), `${relative} missing same-origin OG image`);
   check(/<a class="nal-skip-link" href="#main-content">/.test(source), `${relative} missing skip link`);
   check(/<main id="main-content" data-page-root/.test(source), `${relative} missing main root`);
   const canonical = source.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
@@ -158,6 +264,11 @@ check(
   'CSS missing 44px touch target'
 );
 check(runtime.includes('localStorage'), 'runtime missing local wishlist/recently viewed');
+check(runtime.includes('coverImageMobile') && runtime.includes('<picture'), 'runtime missing responsive catalog pictures');
+check(runtime.includes('data-image-fallback'), 'runtime missing image failure fallback');
+check(runtime.includes('nal-relation-grid'), 'runtime missing program-product relation module');
+check(css.includes('.nal-curation-grid'), 'CSS missing curated home grid');
+check(css.includes('.nal-product-gallery'), 'CSS missing product visual gallery');
 check(
   runtime.includes('/nal/data/') ||
     (/DATA_BASE\s*=\s*["']\/nal\/data["']/.test(runtime) && runtime.includes('fetch(`${DATA_BASE}/')),

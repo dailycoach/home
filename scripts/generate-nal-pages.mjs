@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root = path.resolve(process.cwd());
 const canonicalBase = 'https://daily-coach-ing.com';
-const ogImage = `${canonicalBase}/nal/assets/images/nal-og.png`;
+const defaultOgImage = `${canonicalBase}/nal/assets/images/nal-og.png`;
 const [{ programs }, { products }, { hosts }, { content }] = await Promise.all([
   readFile(path.join(root, 'nal/data/programs.json'), 'utf8').then(JSON.parse),
   readFile(path.join(root, 'nal/data/products.json'), 'utf8').then(JSON.parse),
@@ -94,7 +94,12 @@ for (const item of publicItems(programs)) {
     description: text(item, 'summary', 'description'),
     label, heading: item.title,
     copy: '확정되지 않은 일정·가격·정원 정보는 공개하지 않습니다. 현재 등록 상태를 확인해 주세요.',
-    schemaType: 'WebPage'
+    schemaType: 'WebPage',
+    ogImage: item.coverImage,
+    ogImageMobile: item.coverImageMobile,
+    ogImageAlt: item.coverImageAlt || `${item.title} 대표 이미지`,
+    ogImageWidth: 1600,
+    ogImageHeight: 1000
   });
 }
 
@@ -106,7 +111,11 @@ for (const item of publicItems(products)) {
     description: text(item, 'summary', 'description'),
     label: 'NAL SHOP', heading: item.title,
     copy: '가격·재고·배송 정보는 확정된 내용만 공개합니다. 현재 등록 상태를 확인해 주세요.',
-    schemaType: 'Product'
+    schemaType: 'Product',
+    ogImage: item.coverImage,
+    ogImageAlt: item.coverImageAlt || `${item.title} 상품 비주얼 콘셉트`,
+    ogImageWidth: 1600,
+    ogImageHeight: 1600
   });
 }
 
@@ -146,6 +155,7 @@ function jsonLd(page) {
       '@type': 'WebSite', name: '날빛', alternateName: 'NAL', url: `${canonicalBase}/nal/`
     }
   };
+  if (page.ogImage) base.image = absoluteUrl(page.ogImage);
   return JSON.stringify(base).replaceAll('<', '\\u003c');
 }
 
@@ -163,6 +173,26 @@ function itemRoute(collection, item) {
   if (collection === 'products') return `/nal/shop/${item.slug}/`;
   if (collection === 'hosts') return `/nal/host/${item.slug}/`;
   return `/nal/note/${item.slug}/`;
+}
+
+function absoluteUrl(value) {
+  if (!value) return defaultOgImage;
+  try {
+    return new URL(value, canonicalBase).href;
+  } catch {
+    return defaultOgImage;
+  }
+}
+
+function fallbackImage(item, collectionName, eager = false) {
+  if (!item?.coverImage) return '';
+  const alt = item.coverImageAlt || `${item.title ?? item.name} 대표 이미지`;
+  const isProgram = collectionName === 'programs';
+  const width = isProgram ? 1600 : 1600;
+  const height = isProgram ? 1000 : 1600;
+  const image = `<img src="${escapeHtml(item.coverImage)}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="${eager ? 'eager' : 'lazy'}" decoding="async">`;
+  if (!isProgram || !item.coverImageMobile) return image;
+  return `<picture><source media="(max-width: 47.999rem)" srcset="${escapeHtml(item.coverImageMobile)}">${image}</picture>`;
 }
 
 function fallbackExtras(page) {
@@ -190,14 +220,14 @@ function fallbackExtras(page) {
     if (!items.length) {
       return '<section class="nal-section nal-static-fallback"><div class="nal-container"><p class="nal-empty">현재 공개된 항목이 없습니다. 확인된 정보가 준비되면 이곳에 안내합니다.</p></div></section>';
     }
-    return `<section class="nal-section nal-static-fallback" aria-label="공개 항목"><div class="nal-container"><ul class="nal-static-list">${items.map((item) => `<li><a href="${itemRoute(collectionName, item)}"><strong>${escapeHtml(item.title ?? item.name)}</strong><span>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</span></a></li>`).join('')}</ul></div></section>`;
+    return `<section class="nal-section nal-static-fallback" aria-label="공개 항목"><div class="nal-container"><ul class="nal-static-list">${items.map((item) => `<li><a href="${itemRoute(collectionName, item)}">${item.coverImage ? `<span class="nal-static-list__image">${fallbackImage(item, collectionName)}</span>` : ''}<strong>${escapeHtml(item.title ?? item.name)}</strong><span>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</span></a></li>`).join('')}</ul></div></section>`;
   }
 
   if (page.attrs.includes('data-page="detail"') && slug) {
     const item = collections[collectionName].find((entry) => entry.slug === slug && entry.published);
     if (!item) return '';
     const source = item.sourceUrl ? `<a class="nal-button nal-button--secondary" href="${escapeHtml(item.sourceUrl)}">확인된 원문 보기</a>` : '';
-    return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose"><p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}</div></section>`;
+    return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}</div></section>`;
   }
   return '';
 }
@@ -205,6 +235,13 @@ function fallbackExtras(page) {
 function html(page) {
   const heading = escapeHtml(page.heading).split('\n').join('<br>');
   const robots = page.noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large';
+  const socialImage = absoluteUrl(page.ogImage);
+  const socialImageAlt = page.ogImageAlt || 'NAL 커뮤니티·원데이클래스·감정도구 플랫폼';
+  const socialImageWidth = page.ogImageWidth || 1200;
+  const socialImageHeight = page.ogImageHeight || 630;
+  const preload = page.ogImage
+    ? `\n  <link rel="preload" as="image" href="${escapeHtml(page.ogImage)}"${page.ogImageMobile ? ` imagesrcset="${escapeHtml(page.ogImageMobile)} 900w, ${escapeHtml(page.ogImage)} 1600w" imagesizes="(max-width: 47.999rem) 100vw, 55vw"` : ''}>`
+    : '';
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -213,6 +250,7 @@ function html(page) {
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#F5F1E8">
   <meta name="robots" content="${robots}">
+  <script>document.documentElement.classList.add('nal-js')</script>
   <title>${escapeHtml(page.title)}</title>
   <meta name="description" content="${escapeHtml(page.description)}">
   <link rel="canonical" href="${canonicalBase}${page.route}">
@@ -223,12 +261,15 @@ function html(page) {
   <meta property="og:title" content="${escapeHtml(page.title)}">
   <meta property="og:description" content="${escapeHtml(page.description)}">
   <meta property="og:url" content="${canonicalBase}${page.route}">
-  <meta property="og:image" content="${ogImage}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="NAL 커뮤니티·원데이클래스·감정도구 플랫폼">
+  <meta property="og:image" content="${escapeHtml(socialImage)}">
+  <meta property="og:image:width" content="${socialImageWidth}">
+  <meta property="og:image:height" content="${socialImageHeight}">
+  <meta property="og:image:alt" content="${escapeHtml(socialImageAlt)}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/nal/assets/css/nal.css">
+  <meta name="twitter:image" content="${escapeHtml(socialImage)}">
+  <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
+  <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/nal/assets/css/nal.css">${preload}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/app.js" defer></script>
 </head>
