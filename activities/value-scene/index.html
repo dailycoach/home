@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071b33">
+  <title>VALUE SCENE | 가치가 행동이 되는 코칭 여정</title>
+  <meta name="description" content="핵심가치를 발견하고, 방해 경험과 가치 충돌을 살피며, 실제 삶의 장면과 7일 행동으로 연결하는 데일리코칭 코칭도구입니다.">
+  <link rel="canonical" href="https://daily-coach-ing.com/activities/value-scene/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VALUE SCENE | 가치가 행동이 되는 코칭 여정">
+  <meta property="og:description" content="가치를 고르는 데서 끝내지 않고, 실제 장면과 다음 행동까지 연결합니다.">
+  <meta property="og:url" content="https://daily-coach-ing.com/activities/value-scene/">
+  <link rel="stylesheet" href="./styles.css?v=20260801-1">
+</head>
+<body>
+  <a class="skip-link" href="#app">본문으로 바로가기</a>
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="/" aria-label="데일리코칭 홈으로 이동">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>DAILYCOACHING</span>
+    </a>
+    <div class="header-actions">
+      <button class="ghost-button" id="saveStatus" type="button" disabled>자동 저장</button>
+      <button class="ghost-button danger" id="resetButton" type="button">처음부터</button>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1" aria-live="polite"></main>
+
+  <template id="shellTemplate">
+    <section class="tool-shell">
+      <div class="progress-wrap" data-progress-wrap hidden>
+        <div class="progress-meta">
+          <span data-progress-label>여정 진행</span>
+          <strong data-progress-value>0%</strong>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+      </div>
+      <div data-screen></div>
+    </section>
+  </template>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="./data.js?v=20260801-1"></script>
+  <script src="./app.js?v=20260801-1"></script>
+</body>
+</html>
