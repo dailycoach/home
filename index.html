@@ -9,13 +9,36 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260801-value-scene-genz2', {cache:'no-store'})
+    fetch('/index-source-disc.html?v=20260802-nal-menu-v1', {cache:'no-store'})
       .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
         const links = `${anchor}\n            <a href="/tests/flourish-awareness/" data-route="flourishAwareness">플로리싱 × 알아차림 <small>NEW</small></a>\n            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>\n            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>`;
         html = html.replaceAll(anchor, links);
         html = html.replace("      kgm210: '/tests/kgm210/',\n      flourishAwareness: '/tests/flourish-awareness/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
+
+        const nalUrl = '/nal/';
+        const nalTopAnchor = '<a class="nav-link" href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">1:1 코칭</a>';
+        const nalTopLink = `<a class="nav-link" href="${nalUrl}" data-route="nal">NAL</a>`;
+        if (!html.includes('class="nav-link" href="/nal/" data-route="nal"')) {
+          html = html.replace(nalTopAnchor, `${nalTopLink}\n        ${nalTopAnchor}`);
+        }
+
+        const nalPanelAnchor = '        <article class="category" data-category="program">';
+        const nalPanelCategory = `        <article class="category" data-category="nal">\n          <h3>NAL</h3>\n          <p>모임·원데이클래스·감정카드와 자기이해 도구를 한곳에서 만납니다.</p>\n          <a href="/nal/" data-route="nal">NAL 플랫폼 홈 <small>OPEN</small></a>\n          <a href="/nal/gather/">모임 둘러보기 <small>→</small></a>\n          <a href="/nal/class/">원데이클래스 <small>→</small></a>\n          <a href="/nal/shop/">스토어 <small>→</small></a>\n        </article>\n\n`;
+        if (!html.includes('data-category="nal"')) {
+          html = html.replace(nalPanelAnchor, `${nalPanelCategory}${nalPanelAnchor}`);
+        }
+
+        const nalFooterAnchor = '<a href="/company/" data-route="companyIntro">기업소개</a>\n          <a href="/coach/" data-route="coachIntro">코치소개</a>\n          <a href="/tests/self/" data-route="selfTest">검사도구</a>';
+        const nalFooterLinks = '<a href="/company/" data-route="companyIntro">기업소개</a>\n          <a href="/coach/" data-route="coachIntro">코치소개</a>\n          <a href="/nal/" data-route="nal">NAL 플랫폼</a>\n          <a href="/tests/self/" data-route="selfTest">검사도구</a>';
+        if (!html.includes('<a href="/nal/" data-route="nal">NAL 플랫폼</a>')) {
+          html = html.replace(nalFooterAnchor, nalFooterLinks);
+        }
+
+        if (!html.includes("      nal: '/nal/',")) {
+          html = html.replace("      booking: 'https://smartstore.naver.com/nalbitcoaching',\n      lcms: '/lcms/',", "      booking: 'https://smartstore.naver.com/nalbitcoaching',\n      nal: '/nal/',\n      lcms: '/lcms/',");
+        }
 
         const careerGameUrl = '/activities/career-deduction-game/';
         const desktopActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>';
