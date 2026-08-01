@@ -1,0 +1,250 @@
+{
+  "baseUrl": "http://127.0.0.1:43111",
+  "routes": [
+    {
+      "route": "/nal/",
+      "status": 200,
+      "title": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/",
+      "status": 200,
+      "title": "모임 | NAL GATHER · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "status": 200,
+      "title": "원데이클래스 | NAL CLASS · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-psychology-coaching-6week/",
+      "status": 200,
+      "title": "미술심리코칭 6주 과정 | NAL CLASS · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "status": 200,
+      "title": "감정카드·질문카드 | NAL SHOP · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/note/",
+      "status": 200,
+      "title": "콘텐츠 | NAL NOTE · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/note/art-psychology-coaching-guide/",
+      "status": 200,
+      "title": "미술심리코칭 6주 과정 참여 안내 | NAL NOTE · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/host/",
+      "status": 200,
+      "title": "진행자 | NAL HOST · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/host/park-jia/",
+      "status": 200,
+      "title": "박지아 코치 | NAL HOST · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/host/kim-cheol-woong/",
+      "status": 200,
+      "title": "김철웅 코치 | NAL HOST · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "status": 200,
+      "title": "MY NAL | 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "status": 200,
+      "title": "검색 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/notice/",
+      "status": 200,
+      "title": "공지사항 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/faq/",
+      "status": 200,
+      "title": "자주 묻는 질문 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/partnership/",
+      "status": 200,
+      "title": "입점·제휴 문의 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/policy/terms/",
+      "status": 200,
+      "title": "이용약관 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/policy/privacy/",
+      "status": 200,
+      "title": "개인정보처리방침 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/policy/cancellation/",
+      "status": 200,
+      "title": "취소·환불 규정 | NAL · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/policy/shipping/",
+      "status": 200,
+      "title": "배송·교환 안내 | NAL · 날빛",
+      "issues": []
+    }
+  ],
+  "viewports": [
+    {
+      "width": 360,
+      "height": 800,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
+      "bodyFont": "16px",
+      "issues": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
+      "bodyFont": "16px",
+      "issues": []
+    },
+    {
+      "width": 412,
+      "height": 915,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
+      "bodyFont": "16px",
+      "issues": []
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
+      "bodyFont": "16px",
+      "issues": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
+      "bodyFont": "16px",
+      "issues": []
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
+      "bodyFont": "16px",
+      "issues": []
+    }
+  ],
+  "interactions": [
+    {
+      "name": "mobile drawer",
+      "drawerOpen": "false",
+      "drawerClosed": "true",
+      "focusReturned": true
+    },
+    {
+      "name": "class filter",
+      "url": "http://127.0.0.1:43111/nal/class/?status=comingSoon&sort=recommended"
+    },
+    {
+      "name": "local wishlist",
+      "pressed": "true",
+      "visibleInMy": true,
+      "skipLinkState": {
+        "active": false,
+        "top": -54,
+        "bottom": -10,
+        "translate": "0px -150%"
+      }
+    },
+    {
+      "name": "search",
+      "url": "http://127.0.0.1:43111/nal/search/?q=%EB%AF%B8%EC%88%A0",
+      "hasResult": true
+    }
+  ],
+  "noJavaScript": [
+    {
+      "route": "/nal/",
+      "status": 200,
+      "expectedText": "오늘, 조금 다른 사람들과",
+      "passed": true
+    },
+    {
+      "route": "/nal/class/",
+      "status": 200,
+      "expectedText": "미술심리코칭 6주 과정",
+      "passed": true
+    },
+    {
+      "route": "/nal/class/art-psychology-coaching-6week/",
+      "status": 200,
+      "expectedText": "미술심리코칭 6주 과정",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "route": "/nal/",
+      "width": 390,
+      "height": 844,
+      "violations": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 390,
+      "height": 844,
+      "violations": []
+    },
+    {
+      "route": "/nal/class/art-psychology-coaching-6week/",
+      "width": 1440,
+      "height": 1000,
+      "violations": []
+    },
+    {
+      "route": "/nal/faq/",
+      "width": 390,
+      "height": 844,
+      "violations": []
+    }
+  ],
+  "failures": []
+}

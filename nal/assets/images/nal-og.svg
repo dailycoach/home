@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">NAL 커뮤니티·원데이클래스·감정도구</title>
+  <desc id="desc">아이보리 바탕 위에 코발트 NAL 타이포그래피와 라일락, 코랄, 라임 편집 요소가 배치된 공유 이미지</desc>
+  <rect width="1200" height="630" fill="#F5F1E8"/>
+  <rect x="54" y="48" width="1092" height="534" rx="34" fill="#fff" stroke="#202126" stroke-width="3"/>
+  <circle cx="1042" cy="155" r="84" fill="#C8B8EE"/>
+  <path d="M930 461h176v74H930z" fill="#D7F35A" transform="rotate(-4 1018 498)"/>
+  <path d="M71 496c112-81 212-95 301-42 82 49 160 53 237 11" fill="none" stroke="#EF9CA8" stroke-width="42" stroke-linecap="round"/>
+  <text x="102" y="174" fill="#4055D8" font-family="Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="12">CURATED COMMUNITY</text>
+  <text x="92" y="405" fill="#202126" font-family="Arial Black, Arial, sans-serif" font-size="230" font-weight="900" letter-spacing="-18">NAL</text>
+  <text x="747" y="437" fill="#202126" font-family="Arial, sans-serif" font-size="31" font-weight="700">GATHER · CLASS · SHOP</text>
+  <text x="749" y="480" fill="#202126" font-family="Arial, sans-serif" font-size="25" letter-spacing="2">WHERE TASTE AND MIND MEET</text>
+</svg>

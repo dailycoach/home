@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "hosts": [
+    {
+      "id": "park-jia",
+      "slug": "park-jia",
+      "name": "박지아",
+      "profileImage": "/programs/art-psychology-coaching/assets/facilitator-park-jia-profile.webp",
+      "profileImageMobile": "/programs/art-psychology-coaching/assets/facilitator-park-jia-profile-mobile.webp",
+      "headline": "예술적 표현과 코칭의 질문을 잇습니다.",
+      "bio": "관계 심리와 인지행동 관점, 1:1 맞춤 상담·코칭을 바탕으로 참여자의 선·색·형태를 함께 관찰합니다. 작품을 대신 해석하거나 성격과 심리의 증거로 단정하지 않고, 참여자의 언어로 의미를 발견해 현재의 선택과 다음 행동으로 연결합니다.",
+      "fields": [
+        "관계 심리",
+        "미술 표현",
+        "1:1 맞춤 상담·코칭"
+      ],
+      "credentials": [
+        "심리검사기관 센터장",
+        "인지행동심리상담사 1급"
+      ],
+      "experience": [],
+      "location": null,
+      "programIds": [
+        "art-psychology-coaching-6week"
+      ],
+      "contentIds": [
+        "art-psychology-coaching-guide"
+      ],
+      "socialLinks": {
+        "instagram": "https://www.instagram.com/nalbit_coaching/"
+      },
+      "sourceUrl": "/programs/art-psychology-coaching/#facilitator",
+      "featured": true,
+      "published": true
+    },
+    {
+      "id": "kim-cheol-woong",
+      "slug": "kim-cheol-woong",
+      "name": "김철웅",
+      "profileImage": null,
+      "profileImageMobile": null,
+      "headline": "문제보다 존재를 먼저 보는 코칭",
+      "bio": null,
+      "fields": [
+        "코칭"
+      ],
+      "credentials": [],
+      "experience": [],
+      "location": null,
+      "programIds": [],
+      "contentIds": [],
+      "socialLinks": {},
+      "sourceUrl": "/coach/",
+      "featured": false,
+      "published": true
+    }
+  ]
+}
