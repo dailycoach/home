@@ -42,8 +42,10 @@ NAL 기준 경로: `/nal/`
 
 ## 실제 배포 주소
 
-- canonical 및 배포 대상: `https://daily-coach-ing.com/nal/`
-- 이 문서 작성 시점 상태: 작업 브랜치 검수 완료, 운영 브랜치 반영 전
+- 운영 주소: `https://daily-coach-ing.com/nal/`
+- 배포 PR: `https://github.com/dailycoach/home/pull/91`
+- 운영 반영 커밋: `4a378f938bcaae918d95ee480518dca45bf996b5`
+- GitHub Pages에서 19개 물리 라우트의 HTTP 200과 홈·CSS·JavaScript·사이트 데이터·OG 이미지의 배포 소스 해시 일치를 확인했다.
 
 ## 전체 페이지·라우트
 
@@ -163,6 +165,9 @@ NAL 기준 경로: `/nal/`
 - 내부 4xx·5xx, 요청 실패, 이미지 실패, JavaScript 예외, 콘솔 오류 0건
 - 외부 워드프레스 프로필 이미지 의존은 제거하고 촬영 전 플레이스홀더로 처리
 - 공개 화면에 임의의 외부 이미지 요청 없음
+- 운영 GitHub Pages의 19개 라우트도 모두 HTTP 200
+- 운영 서버의 핵심 HTML·CSS·JavaScript·JSON·PNG 해시가 병합 소스와 일치
+- 운영 URL의 원격 Chromium 검수는 실행 환경의 외부 브라우저 네트워크 제한으로 수행하지 못했으며, 동일 소스를 로컬 HTTP Chromium에서 검수하고 운영 서버는 경로·해시로 교차 확인했다.
 
 ## 화면 캡처
 
