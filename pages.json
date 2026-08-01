@@ -14,6 +14,13 @@
     "source": "local import"
   },
   {
+    "title": "NAL",
+    "description": "모임·원데이클래스·감정카드와 자기이해 도구를 연결하는 날빛 커뮤니티 플랫폼",
+    "category": "platform",
+    "url": "/nal/",
+    "source": "local import"
+  },
+  {
     "title": "LCMS",
     "description": "데이터 기반 맞춤형 진로 교육 인프라",
     "category": "education",
