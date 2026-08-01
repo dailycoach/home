@@ -1,0 +1,45 @@
+name = "dailycoaching-coaching-contract-api"
+main = "src/index.ts"
+compatibility_date = "2026-07-31"
+workers_dev = false
+
+# Replace every placeholder before the first deployment. This file contains no
+# account identifiers, production IDs, credentials, retention periods, or legal
+# conclusions.
+routes = [
+  { pattern = "api.daily-coach-ing.com/*", zone_name = "daily-coach-ing.com" }
+]
+
+[vars]
+ALLOWED_ORIGIN = "https://daily-coach-ing.com"
+DATA_ENCRYPTION_KEY_VERSION = "v1"
+LEGAL_REVIEW_STATUS = "LEGAL_REVIEW_REQUIRED"
+LEGAL_REVIEW_REFERENCE = "LEGAL_REVIEW_REQUIRED"
+CONTRACT_RETENTION_POLICY = "LEGAL_REVIEW_REQUIRED"
+PROCESSOR_AND_TRANSFER_POLICY = "LEGAL_REVIEW_REQUIRED"
+DISPUTE_AND_REFUND_POLICY = "LEGAL_REVIEW_REQUIRED"
+APPROVED_TEMPLATE_MANIFESTS = "LEGAL_REVIEW_REQUIRED"
+APPROVED_CONTRACT_POLICY_JSON = "LEGAL_REVIEW_REQUIRED"
+INVITE_TTL_SECONDS = "604800"
+INVITE_SESSION_TTL_SECONDS = "1800"
+FINAL_ACCESS_TTL_SECONDS = "604800"
+FINAL_DOCUMENT_SESSION_TTL_SECONDS = "900"
+OTP_MAX_ATTEMPTS = "5"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "coaching-contracts"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Optional immutable final-document archive. Uncomment only after an R2 bucket
+# and an approved retention/deletion policy are configured.
+# [[r2_buckets]]
+# binding = "DOCUMENTS"
+# bucket_name = "REPLACE_WITH_R2_BUCKET_NAME"
+
+[observability]
+enabled = false
+
+[placement]
+mode = "smart"

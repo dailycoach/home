@@ -1,0 +1,178 @@
+{
+  "templateId": "dailycoaching.contract.life.v1",
+  "templateVersion": "1.0.0",
+  "locale": "ko-KR",
+  "title": "DAILYCOACHING 라이프 코칭계약",
+  "status": "DRAFT_FOR_LEGAL_REVIEW",
+  "contractType": "life",
+  "extends": {
+    "templateId": "dailycoaching.contract.common.v1",
+    "file": "common.v1.json",
+    "includeAllCommonClauses": true,
+    "includeAllOptionalConsents": true
+  },
+  "audience": {
+    "adultsOnly": true,
+    "minimumAge": 19,
+    "minorUseBlocked": true,
+    "adultAffirmationRequired": true,
+    "failureAction": "BLOCK_CONTRACT_CREATION",
+    "notice": "본 계약은 성인 고객을 위한 v1 계약입니다. 미성년자는 법정대리인 확인·동의와 보호자 정보 공유 범위 및 위기 대응 절차가 포함된 별도 계약이 마련되기 전까지 이용할 수 없습니다."
+  },
+  "overview": {
+    "appropriateFor": [
+      "개인 삶의 방향과 목표를 정리하려는 성인",
+      "삶의 균형, 관계와 역할을 성찰하려는 성인",
+      "습관과 실행을 점검하고 작은 행동을 설계하려는 성인",
+      "자기이해를 넓히고 자신의 기준에 따른 선택을 준비하려는 성인"
+    ],
+    "primaryTopics": [
+      "개인 삶의 방향과 목표",
+      "삶의 균형",
+      "관계와 역할",
+      "습관과 실행",
+      "자기이해와 성찰",
+      "고객의 자기결정권"
+    ],
+    "notServices": [
+      "심리치료 또는 정신건강 진단",
+      "의료행위",
+      "법률·세무·투자 자문",
+      "고객을 대신한 의사결정",
+      "특정 변화나 결과의 보장"
+    ]
+  },
+  "parties": [
+    {
+      "role": "coach",
+      "label": "코치",
+      "required": true,
+      "requiredSigner": true,
+      "responsibilities": ["합의된 범위의 코칭 제공", "역할과 한계 설명", "비밀보장과 기록 보호", "범위를 벗어난 요구에 대한 적절한 안내"]
+    },
+    {
+      "role": "client",
+      "label": "고객",
+      "required": true,
+      "requiredSigner": true,
+      "responsibilities": ["목표와 의제 선택", "자발적 참여", "최종 선택과 행동에 대한 자기결정", "우려와 변경 필요 전달"]
+    }
+  ],
+  "contractFieldRequirements": [
+    {
+      "field": "goal_summary",
+      "label": "코칭 목표",
+      "required": true,
+      "maxLength": 2000
+    },
+    {
+      "field": "life_focus_areas",
+      "label": "다룰 삶의 영역",
+      "required": true,
+      "allowedValues": ["direction_and_goals", "life_balance", "relationships_and_roles", "habits_and_action", "self_understanding_and_reflection", "other_specified"]
+    },
+    {
+      "field": "session_count",
+      "label": "회기 수",
+      "required": true
+    },
+    {
+      "field": "session_minutes",
+      "label": "회기 시간",
+      "required": true
+    },
+    {
+      "field": "contract_period",
+      "label": "계약 기간",
+      "required": true
+    },
+    {
+      "field": "fee_and_payment_terms",
+      "label": "비용과 지급 방식",
+      "required": true,
+      "reviewStatus": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "field": "cancellation_and_refund_terms",
+      "label": "일정 변경·취소·환불 기준",
+      "required": true,
+      "autoGenerateProhibited": true,
+      "reviewStatus": "LEGAL_REVIEW_REQUIRED"
+    }
+  ],
+  "clauses": [
+    {
+      "order": 101,
+      "id": "life.focus_and_purpose",
+      "title": "라이프 코칭의 주제와 목적",
+      "summary": "개인 삶의 방향, 균형, 관계, 역할, 습관과 실행을 고객이 선택한 목표에 맞춰 다룹니다.",
+      "body": "라이프 코칭은 {{life_focus_areas}}와 관련하여 고객이 자신의 삶의 방향과 목표, 균형, 관계와 역할, 습관과 실행, 자기이해와 성찰을 탐색하도록 돕습니다. 구체적인 의제와 우선순위는 고객이 선택하며 코치는 질문, 반영, 관점 탐색과 실행 점검을 통해 협력합니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": ["{{life_focus_areas}}"]
+    },
+    {
+      "order": 102,
+      "id": "life.self_determination",
+      "title": "자기결정권",
+      "summary": "고객은 자신의 가치와 상황에 따라 선택하며 코치는 결정을 대신하지 않습니다.",
+      "body": "고객은 다룰 주제, 목표, 행동과 삶의 선택을 자신의 가치와 상황에 따라 결정합니다. 코치는 특정 선택을 강요하거나 고객을 대신해 결정을 내리지 않으며, 고객은 제안된 질문이나 활동을 거절하거나 다른 방식으로 조정해 달라고 요청할 수 있습니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": []
+    },
+    {
+      "order": 103,
+      "id": "life.mental_health_boundary",
+      "title": "심리치료·정신건강·의료 영역과의 구분",
+      "summary": "라이프 코칭은 심리치료, 정신건강 진단이나 의료행위가 아닙니다.",
+      "body": "라이프 코칭은 심리치료, 정신건강 상태의 진단·치료 또는 의료행위가 아닙니다. 코칭 범위를 벗어난 심각한 고통, 기능 저하 또는 자신이나 타인에 대한 위험이 확인되면 코치는 코칭의 지속 가능성을 고객과 논의하고 적절한 의료기관·정신건강 전문기관 또는 긴급지원 이용을 제안할 수 있습니다. 비밀보장 예외와 실제 대응 절차는 공통 조항과 운영 기준에 따릅니다.",
+      "reviewStatus": "LEGAL_REVIEW_REQUIRED",
+      "required": true,
+      "variables": []
+    },
+    {
+      "order": 104,
+      "id": "life.professional_advice_boundary",
+      "title": "법률·세무·투자 자문과의 구분",
+      "summary": "전문 자격과 개별 검토가 필요한 법률·세무·투자 판단을 대신하지 않습니다.",
+      "body": "라이프 코칭에서 관련 주제가 언급되더라도 코치는 법률, 세무 또는 투자 자문을 제공하거나 그 결과를 보장하지 않습니다. 해당 전문 판단이 필요한 경우 고객은 자격 있는 전문가의 독립적인 자문을 받을 수 있으며, 코치는 고객의 요청에 따라 전문가에게 물을 질문이나 의사결정 기준을 정리하도록 도울 수 있습니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": []
+    },
+    {
+      "order": 105,
+      "id": "life.no_guaranteed_change",
+      "title": "특정 변화의 비보장",
+      "summary": "라이프 코칭은 관계, 습관, 감정 또는 삶의 결과를 보장하지 않습니다.",
+      "body": "라이프 코칭은 고객의 성찰과 실행을 지원하지만 관계 개선, 습관 형성, 정서 변화, 갈등 해결 또는 그 밖의 특정한 삶의 결과를 보장하지 않습니다. 코치는 합의한 코칭을 성실하게 제공할 책임이 있으며, 비보장 조항은 그 책임을 면제하거나 결과를 고객에게 일방적으로 전가하기 위한 것이 아닙니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": []
+    }
+  ],
+  "signingRules": {
+    "requiredSignerRoles": ["coach", "client"],
+    "fullySignedWhenAllRequiredSignersComplete": true,
+    "proxySignatureProhibited": true,
+    "coachMayNotSignForClient": true
+  },
+  "consentRules": {
+    "source": "common.v1.json#/optionalConsents",
+    "keys": ["session_recording", "ai_assisted_summary", "anonymized_case_use", "marketing_testimonial"],
+    "independentSelections": true,
+    "defaultAccepted": false,
+    "bulkAcceptProhibited": true,
+    "serviceAvailableWhenDeclined": true,
+    "aiDisabledUntilAllConfigurationPresent": true,
+    "marketingSubSelections": ["disclose_name", "disclose_photo", "disclose_organization", "disclose_testimonial_text", "publication_channels", "publication_period"]
+  },
+  "legalReviewItems": [
+    "심리·정신건강 위기 징후 확인 시 안내와 비밀보장 예외의 경계",
+    "라이프 코칭의 취소·환불과 소비자 보호 기준",
+    "개인정보와 기록의 보유기간",
+    "전자서명 증빙 수준 및 분쟁 조항",
+    "실제 사용하는 녹음·AI·외부 기술 서비스 문구"
+  ]
+}

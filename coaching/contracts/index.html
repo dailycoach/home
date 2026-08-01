@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="라이프·비즈니스·커리어 코칭계약의 대상, 당사자 구조, 주요 항목과 안전한 전자서명 절차를 안내합니다.">
+  <meta name="theme-color" content="#061528">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.daily-coach-ing.com; style-src 'self'; script-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>코칭계약 | DAILYCOACHING</title>
+  <link rel="stylesheet" href="/coaching/contracts/assets/contracts.css">
+  <script src="/coaching/contracts/assets/api.js" defer></script>
+  <script src="/coaching/contracts/assets/contract-admin.js" defer></script>
+</head>
+<body data-contract-hub>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <header class="contract-header">
+    <div class="header-inner">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>DAILYCOACHING</span></a>
+      <span class="header-context">COACHING AGREEMENT</span>
+      <nav class="contract-nav" aria-label="주요 메뉴"><a href="/coaching/">코칭안내</a><a href="/coaching/contracts/privacy/">개인정보 안내</a><a href="/">홈</a></nav>
+    </div>
+  </header>
+
+  <div class="system-banner" data-api-state data-state="checking" role="status" aria-live="polite">
+    <div class="shell"><span class="system-dot" aria-hidden="true"></span><p><strong>계약 API 연결 확인 전</strong> — 안내 페이지는 볼 수 있지만 계약 발행·서명은 보안 API 연결이 확인되어야 사용할 수 있습니다.</p></div>
+  </div>
+
+  <main id="main">
+    <section class="contract-hero" aria-labelledby="hero-title">
+      <div class="shell">
+        <p class="hero-label">AGREEMENT BEFORE CONVERSATION</p>
+        <h1 id="hero-title">좋은 코칭은<br>분명한 합의에서.</h1>
+        <p class="lead">공개 방문자가 빈 계약서를 제출하지 않습니다. 코치와 사전 협의한 뒤 담당 코치가 조건을 작성하고, 고객은 안전한 일회용 초대 링크에서 전문과 선택 동의를 직접 확인합니다.</p>
+        <div class="hero-meta" role="list" aria-label="계약 시스템 핵심 원칙"><span role="listitem">성인 고객 전용</span><span role="listitem">발행 후 원본 고정</span><span role="listitem">선택 동의 4종 분리</span><span role="listitem">서명 그림 미수집</span></div>
+      </div>
+    </section>
+
+    <section class="page-section" aria-labelledby="types-title">
+      <div class="shell">
+        <div class="section-heading"><p class="eyebrow">CHOOSE THE RIGHT AGREEMENT</p><h2 id="types-title">코칭 맥락에 맞는<br>세 가지 계약</h2><p>계약 생성 주체는 모두 담당 코치입니다. 고객은 코치가 발행한 초대 링크를 통해서만 확인하고 서명합니다.</p></div>
+        <div class="contract-type-grid">
+          <article class="contract-type-card" id="life">
+            <p class="type-index">01 / LIFE COACHING</p><h2>라이프 코칭<br>계약 안내</h2><p>개인 삶의 방향과 균형, 관계·역할, 습관과 실행을 다루는 성인 고객에게 적합합니다.</p>
+            <ul class="fact-list"><li><strong>주요 항목</strong><span>목표, 회기, 비용, 비밀보장, 기록·기술 사용</span></li><li><strong>당사자</strong><span>코치 + 실제 고객</span></li><li><strong>확인 시간</strong><span>약 10–15분</span></li><li><strong>생성 주체</strong><span>사전 협의한 담당 코치</span></li></ul>
+            <p class="card-notice">심리치료·의료·법률·세무·투자 자문이 아니며 특정 변화를 보장하지 않습니다.</p>
+            <a class="outline-button" href="#flow-title">라이프 코칭 계약 안내</a>
+          </article>
+          <article class="contract-type-card" id="business">
+            <p class="type-index">02 / BUSINESS COACHING</p><h2>비즈니스 코칭<br>계약 안내</h2><p>조직 스폰서 또는 비용 지급자가 있으며 보고 범위와 이해관계 조율이 필요한 경우에 적합합니다.</p>
+            <ul class="fact-list"><li><strong>주요 항목</strong><span>3자 역할, 보고 범위, 이해충돌, 종료 권한</span></li><li><strong>당사자</strong><span>코치 + 고객 + 스폰서/조직 담당자</span></li><li><strong>확인 시간</strong><span>약 15–20분</span></li><li><strong>생성 주체</strong><span>사전 협의한 담당 코치</span></li></ul>
+            <p class="card-notice">기본 공유 범위는 출석·계약 진행 상태이며, 세션 원문·노트·개인적 발언은 공유하지 않습니다.</p>
+            <a class="outline-button" href="#flow-title">비즈니스 코칭 계약 안내</a>
+          </article>
+          <article class="contract-type-card" id="career">
+            <p class="type-index">03 / CAREER COACHING</p><h2>커리어 코칭<br>계약 안내</h2><p>진로 탐색, 경력 전환, 취업 준비, 직무 선택과 검사 활용을 원하는 성인 고객에게 적합합니다.</p>
+            <ul class="fact-list"><li><strong>주요 항목</strong><span>목표, 정보 시점, 검사 활용, 지원·선택 책임</span></li><li><strong>당사자</strong><span>코치 + 실제 고객</span></li><li><strong>확인 시간</strong><span>약 10–15분</span></li><li><strong>생성 주체</strong><span>사전 협의한 담당 코치</span></li></ul>
+            <p class="card-notice">취업·합격·연봉·승진을 보장하지 않으며, 채용 대행 또는 직업소개 계약이 아닙니다.</p>
+            <a class="outline-button" href="#flow-title">커리어 코칭 계약 안내</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section cream" aria-labelledby="flow-title">
+      <div class="shell"><div class="section-heading"><p class="eyebrow">SECURE SIGNING FLOW</p><h2 id="flow-title">작성은 코치가,<br>확인과 선택은 고객이</h2></div>
+        <div class="flow-grid">
+          <article><h3>사전 협의</h3><p>코칭 범위, 목표, 조건과 당사자를 먼저 확인합니다.</p></article>
+          <article><h3>코치가 초안 생성</h3><p>담당 코치가 보호된 관리자 화면에서 조건을 입력합니다.</p></article>
+          <article><h3>고객 본인 확인</h3><p>일회용 링크와 별도 확인번호로 초대를 검증합니다.</p></article>
+          <article><h3>전문과 요약 확인</h3><p>중요 조건 요약과 숨기지 않은 계약 전문을 함께 봅니다.</p></article>
+          <article><h3>선택 동의 결정</h3><p>녹음·AI·사례·홍보를 각각 동의하거나 거절합니다.</p></article>
+          <article><h3>이름으로 전자서명</h3><p>서명자 이름과 명시적 전자서명 의사를 확인합니다.</p></article>
+          <article><h3>최종본 고정</h3><p>필수 당사자 서명이 끝나면 문서 해시와 함께 고정합니다.</p></article>
+          <article><h3>안전한 열람·저장</h3><p>만료되는 안전한 링크에서 열람하고 브라우저 PDF로 저장합니다.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section navy" aria-labelledby="principles-title">
+      <div class="shell"><div class="section-heading"><p class="eyebrow">DATA &amp; CONSENT PRINCIPLES</p><h2 id="principles-title">서명보다 먼저<br>지켜야 하는 원칙</h2><p>계약 개인정보와 전문은 정적 사이트나 브라우저 저장소에 저장하지 않고, 별도 보안 API에서 암호화·감사기록과 함께 처리하도록 설계했습니다.</p></div>
+        <div class="principle-grid">
+          <article><h3>기본값은 모두 미동의</h3><p>세션 녹음, AI 기반 요약, 익명 사례, 후기·홍보는 일괄 선택하거나 미리 체크하지 않습니다.</p></article>
+          <article><h3>거절해도 코칭 가능</h3><p>선택 동의를 거절해도 기본 코칭 계약 체결과 서비스 이용을 막지 않습니다.</p></article>
+          <article><h3>발행 후 원본 수정 금지</h3><p>변경이 필요하면 기존 계약을 대체 상태로 전환하고 새 버전을 발행합니다.</p></article>
+          <article><h3>브라우저 저장 금지</h3><p>개인정보, 계약 전문, 초대 토큰, 확인번호를 LocalStorage나 SessionStorage에 기록하지 않습니다.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section" aria-labelledby="coach-entry-title">
+      <div class="shell">
+        <div class="admin-entry">
+          <div><p class="eyebrow">COACH-ONLY AUTHORING</p><h2 id="coach-entry-title">코치용 계약 생성</h2><p>공개 비밀번호로 열리지 않습니다. 계약 API와 Cloudflare Access 등 서버 측 관리자 인증이 확인된 세션에서만 생성 화면 링크가 나타납니다.</p></div>
+          <div class="admin-entry-status" data-admin-entry role="status" aria-live="polite">보호 상태 확인 중</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="legal-strip"><div class="shell"><strong>LEGAL_REVIEW_REQUIRED</strong><p>취소·환불, 준거법·분쟁, 개인정보 보유기간, 처리위탁·국외 이전, 전자서명 증빙 수준, 미성년자 제한, 비밀보장 예외, AI 서비스 사용 문구는 법률 검토 전 운영 확정 문구로 보지 않습니다.</p></div></div>
+  </main>
+
+  <footer class="contract-footer"><div class="footer-inner"><div><strong>DAILYCOACHING</strong><p>문제보다 존재 · 답보다 질문 · 변화보다 성장</p></div><nav aria-label="하단 메뉴"><a href="/coaching/">코칭안내</a><a href="/coaching/contracts/privacy/">개인정보 안내</a><a href="/">홈</a></nav></div></footer>
+</body>
+</html>
