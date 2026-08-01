@@ -45,7 +45,7 @@
     savedState = null;
     activeCategory = 'all';
     showAllValues = false;
-    render();
+    render({ scroll: 'top', focusMain: true });
     announce('새 장면을 시작할 준비가 됐어요.');
   });
 
@@ -119,7 +119,8 @@
     }
   }
 
-  function render() {
+  function render({ scroll = 'preserve', focusSelector = '', anchorTop = null, focusMain = false } = {}) {
+    const previousScrollY = window.scrollY;
     const shell = shellTemplate.content.cloneNode(true);
     const progressWrap = shell.querySelector('[data-progress-wrap]');
     const screenRoot = shell.querySelector('[data-screen]');
@@ -137,7 +138,44 @@
     screenRoot.innerHTML = screenMarkup();
     app.replaceChildren(shell);
     bindScreenEvents();
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+
+    if (scroll === 'top') {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+      if (focusMain) app.focus({ preventScroll: true });
+      return;
+    }
+
+    window.scrollTo({ top: previousScrollY, behavior: 'auto' });
+    const focusTarget = focusSelector ? app.querySelector(focusSelector) : null;
+    if (focusTarget && Number.isFinite(anchorTop)) {
+      const offset = focusTarget.getBoundingClientRect().top - anchorTop;
+      window.scrollBy({ top: offset, behavior: 'auto' });
+    }
+    if (focusTarget) focusTarget.focus({ preventScroll: true });
+  }
+
+  function renderFromControl(control) {
+    render({
+      scroll: 'preserve',
+      focusSelector: controlSelector(control),
+      anchorTop: control.getBoundingClientRect().top
+    });
+  }
+
+  function controlSelector(control) {
+    const keys = [
+      'action', 'optionGroup', 'optionValue', 'valueFilter', 'wordKey', 'word',
+      'frictionFocus', 'directionFriction', 'direction', 'realDirection'
+    ];
+    const attributes = keys
+      .filter(key => control.dataset[key] !== undefined)
+      .map(key => `[data-${key.replace(/[A-Z]/g, char => `-${char.toLowerCase()}`)}="${cssEscape(control.dataset[key])}"]`);
+    return attributes.length ? attributes.join('') : '';
+  }
+
+  function cssEscape(value) {
+    if (window.CSS?.escape) return window.CSS.escape(String(value));
+    return String(value).replace(/["\\]/g, '\\$&');
   }
 
   function screenMarkup() {
@@ -341,11 +379,13 @@
     const context = data.contexts.find(item => item.id === state.context)?.title || '삶 전체';
     const sorted = state.core5.map(word => ({ word, ...safeRating(word), gap: safeRating(word).importance - safeRating(word).fulfillment })).sort((a, b) => b.gap - a.gap);
     const focus = sorted[0];
-    const alive = [...sorted].sort((a, b) => b.fulfillment - a.fulfillment)[0];
+    const alive = [...sorted]
+      .sort((a, b) => b.fulfillment - a.fulfillment)
+      .find(item => item.word !== focus.word) || focus;
     const directions = state.friction2.map(name => ({ from: getFrictionMeta(name).label, to: state.directions[name] }));
     const questions = [
-      `‘${focus.word}’이 지금보다 조금 더 보인다면 ${context}의 어떤 장면이 달라질까요?`,
-      `‘${state.conflict.a}’와 ‘${state.conflict.b}’를 둘 다 존중하는 제3의 선택은 무엇일까요?`,
+      `‘${focus.word}’${josa(focus.word, '이', '가')} 지금보다 조금 더 보인다면 ${context}의 어떤 장면이 달라질까요?`,
+      `‘${state.conflict.a}’와 ‘${state.conflict.b}’${josa(state.conflict.b, '을', '를')} 둘 다 존중하는 제3의 선택은 무엇일까요?`,
       `이번 행동 뒤에 어떤 흔적이 남으면 “내 단어대로 움직였다”고 말할 수 있을까요?`
     ];
     state.completedAt = state.completedAt || new Date().toISOString();
@@ -392,6 +432,7 @@
   }
 
   function handleAction(event) {
+    const button = event.currentTarget;
     const action = event.currentTarget.dataset.action;
     if (action === 'start') {
       const mode = state.mode || 'self';
@@ -401,33 +442,34 @@
       state.context = context;
       state.step = 1;
       save();
-      render();
+      render({ scroll: 'top', focusMain: true });
     }
-    if (action === 'resume') { state = migrateState(savedState); render(); }
-    if (action === 'next') { normalizeBeforeNext(); state.step += 1; save(); render(); }
-    if (action === 'back') { state.step = Math.max(0, state.step - 1); save(); render(); }
-    if (action === 'toggle-all-values') { showAllValues = !showAllValues; render(); }
+    if (action === 'resume') { state = migrateState(savedState); render({ scroll: 'top', focusMain: true }); }
+    if (action === 'next') { normalizeBeforeNext(); state.step += 1; save(); render({ scroll: 'top', focusMain: true }); }
+    if (action === 'back') { state.step = Math.max(0, state.step - 1); save(); render({ scroll: 'top', focusMain: true }); }
+    if (action === 'toggle-all-values') { showAllValues = !showAllValues; renderFromControl(button); }
     if (action === 'restore-selection') {
       if (state.step === 2) state.positive10 = [...state.positive18];
       if (state.step === 3) state.core5 = [...state.positive10];
-      save(); render();
+      save(); renderFromControl(button);
     }
     if (action === 'copy-result') copyResult();
     if (action === 'print') window.print();
-    if (action === 'edit-action') { state.step = 8; render(); }
+    if (action === 'edit-action') { state.step = 8; render({ scroll: 'top', focusMain: true }); }
   }
 
   function handleOption(event) {
     const button = event.currentTarget;
     state[button.dataset.optionGroup] = button.dataset.optionValue;
     save();
-    render();
+    renderFromControl(button);
   }
 
   function handleValueFilter(event) {
-    activeCategory = event.currentTarget.dataset.valueFilter;
+    const button = event.currentTarget;
+    activeCategory = button.dataset.valueFilter;
     showAllValues = activeCategory !== 'all';
-    render();
+    renderFromControl(button);
   }
 
   function handleWord(event) {
@@ -435,33 +477,36 @@
     const key = button.dataset.wordKey;
     const word = button.dataset.word;
     const limit = { positive18:18, positive10:18, core5:10, friction5:5 }[key];
-    toggleLimited(state[key], word, limit);
+    if (!toggleLimited(state[key], word, limit)) return;
     if (key === 'friction5') {
       state.friction2 = state.friction2.filter(item => state.friction5.includes(item));
       Object.keys(state.directions).forEach(item => { if (!state.friction5.includes(item)) delete state.directions[item]; });
     }
     save();
-    render();
+    renderFromControl(button);
   }
 
   function handleFrictionFocus(event) {
-    const name = event.currentTarget.dataset.frictionFocus;
-    toggleLimited(state.friction2, name, 2);
+    const button = event.currentTarget;
+    const name = button.dataset.frictionFocus;
+    if (!toggleLimited(state.friction2, name, 2)) return;
     Object.keys(state.directions).forEach(item => { if (!state.friction2.includes(item)) delete state.directions[item]; });
     save();
-    render();
+    renderFromControl(button);
   }
 
   function handleDirection(event) {
-    state.directions[event.currentTarget.dataset.directionFriction] = event.currentTarget.dataset.direction;
+    const button = event.currentTarget;
+    state.directions[button.dataset.directionFriction] = button.dataset.direction;
     save();
-    render();
+    renderFromControl(button);
   }
 
   function handleRealDirection(event) {
-    state.realScene.direction = event.currentTarget.dataset.realDirection;
+    const button = event.currentTarget;
+    state.realScene.direction = button.dataset.realDirection;
     save();
-    render();
+    renderFromControl(button);
   }
 
   function handleRating(event) {
@@ -506,9 +551,6 @@
       state.friction2 = state.friction2.filter(item => state.friction5.includes(item));
       Object.keys(state.directions).forEach(item => { if (!state.friction2.includes(item)) delete state.directions[item]; });
     }
-    if (state.step === 5 && !state.realScene.direction) {
-      state.realScene.direction = state.friction2.map(name => state.directions[name]).find(Boolean) || state.core5[0] || '';
-    }
     if (state.step === 7 && !state.action.scene) state.action.scene = state.realScene.title;
   }
 
@@ -527,7 +569,14 @@
   }
 
   function isActionComplete(action) {
-    return ['scene', 'behavior', 'obstacle', 'support', 'date', 'firstStep'].every(key => String(action?.[key] || '').trim().length > 0);
+    const copyComplete = ['scene', 'behavior', 'obstacle', 'support', 'firstStep']
+      .every(key => String(action?.[key] || '').trim().length > 0);
+    return copyComplete && isActionDateValid(action?.date);
+  }
+
+  function isActionDateValid(value) {
+    const date = String(value || '').trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(date) && date >= todayIso() && date <= addDaysIso(7);
   }
 
   function copyResult() {
@@ -599,13 +648,13 @@
     const rating = safeRating(word);
     state.ratings[word] = rating;
     return `<article class="rating-card"><div class="rating-word"><span>WORD</span><strong>${escapeHtml(word)}</strong></div>
-      <div class="range-wrap"><label>내게 크게 남은 정도 <output>${rating.importance}</output></label><input type="range" min="0" max="10" step="1" value="${rating.importance}" data-rating-word="${escapeAttr(word)}" data-rating-type="importance" aria-label="${escapeAttr(word)}이 내게 크게 남은 정도"></div>
-      <div class="range-wrap"><label>요즘 삶에 보이는 정도 <output>${rating.fulfillment}</output></label><input type="range" min="0" max="10" step="1" value="${rating.fulfillment}" data-rating-word="${escapeAttr(word)}" data-rating-type="fulfillment" aria-label="${escapeAttr(word)}이 요즘 삶에 보이는 정도"></div>
+      <div class="range-wrap"><label>내게 크게 남은 정도 <output>${rating.importance}</output></label><input type="range" min="0" max="10" step="1" value="${rating.importance}" data-rating-word="${escapeAttr(word)}" data-rating-type="importance" aria-label="${escapeAttr(word)}${josa(word, '이', '가')} 내게 크게 남은 정도"></div>
+      <div class="range-wrap"><label>요즘 삶에 보이는 정도 <output>${rating.fulfillment}</output></label><input type="range" min="0" max="10" step="1" value="${rating.fulfillment}" data-rating-word="${escapeAttr(word)}" data-rating-type="fulfillment" aria-label="${escapeAttr(word)}${josa(word, '이', '가')} 요즘 삶에 보이는 정도"></div>
     </article>`;
   }
 
   function radioList(name, selected) {
-    return `<div class="radio-list">${state.core5.map(word => `<label class="radio-option"><input type="radio" name="${name}" value="${escapeAttr(word)}" ${selected === word ? 'checked' : ''}><span>${escapeHtml(word)}</span><b>●</b></label>`).join('')}</div>`;
+    return `<div class="radio-list">${state.core5.map(word => `<label class="radio-option"><input type="radio" name="${name}" value="${escapeAttr(word)}" ${selected === word ? 'checked' : ''}><span>${escapeHtml(word)}</span><b aria-hidden="true">●</b></label>`).join('')}</div>`;
   }
 
   function field(path, label, help, value, placeholder, type = 'text', full = false) {
@@ -634,9 +683,10 @@
 
   function toggleLimited(list, value, limit) {
     const index = list.indexOf(value);
-    if (index >= 0) { list.splice(index, 1); return; }
-    if (list.length >= limit) { announce(`${limit}개까지 남길 수 있어요.`); return; }
+    if (index >= 0) { list.splice(index, 1); return true; }
+    if (list.length >= limit) { announce(`${limit}개까지 남길 수 있어요.`); return false; }
     list.push(value);
+    return true;
   }
 
   function setNested(target, path, value) {
@@ -668,16 +718,22 @@
     return result;
   }
 
+  function localDateIso(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   function todayIso() {
-    const date = new Date();
-    const offset = date.getTimezoneOffset() * 60000;
-    return new Date(date.getTime() - offset).toISOString().slice(0, 10);
+    return localDateIso(new Date());
   }
 
   function addDaysIso(days) {
-    const date = new Date(`${todayIso()}T00:00:00`);
+    const date = new Date();
+    date.setHours(12, 0, 0, 0);
     date.setDate(date.getDate() + days);
-    return date.toISOString().slice(0, 10);
+    return localDateIso(date);
   }
 
   function formatDate(iso) {
@@ -695,6 +751,13 @@
     return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   }
 
+  function josa(word, withBatchim, withoutBatchim) {
+    const text = String(word || '').trim();
+    const last = text.charCodeAt(text.length - 1);
+    const hasBatchim = last >= 0xac00 && last <= 0xd7a3 && (last - 0xac00) % 28 !== 0;
+    return hasBatchim ? withBatchim : withoutBatchim;
+  }
+
   function escapeHtml(value = '') {
     return String(value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
   }
@@ -702,5 +765,5 @@
   function escapeAttr(value = '') { return escapeHtml(value); }
   function nl2br(value = '') { return escapeHtml(value).replace(/\n/g, '<br>'); }
 
-  render();
+  render({ scroll: 'top' });
 })();
