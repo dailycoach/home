@@ -9,7 +9,7 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260801-value-scene', {cache:'no-store'})
+    fetch('/index-source-disc.html?v=20260801-value-scene-genz2', {cache:'no-store'})
       .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
@@ -28,8 +28,8 @@
         const flexMoveLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE <small>V4</small></a>';
         const flexMovePanelLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE · 셀프코칭 × 현장코칭 <small>V4</small></a>';
         const flexMoveFooterLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE</a>';
-        const valueSceneLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE <small>NEW</small></a>';
-        const valueScenePanelLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE · 가치가 행동이 되는 코칭 <small>NEW</small></a>';
+        const valueSceneLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE <small>GEN Z</small></a>';
+        const valueScenePanelLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE · 지금의 나를 움직이는 감각 편집 <small>GEN Z</small></a>';
         const valueSceneFooterLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE</a>';
 
         if (!html.includes(`${desktopCareerLink}\n            ${desktopActivityAnchor}`)) {
