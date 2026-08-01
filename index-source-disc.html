@@ -1011,7 +1011,7 @@
         </div>
 
         <div class="hero-controls">
-          <div class="intent-rail" aria-label="주요 바로가기">
+          <nav class="intent-rail" aria-label="주요 바로가기">
             <a href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">
               <strong>코칭 신청 <span aria-hidden="true">→</span></strong>
               <small>스마트스토어 날빛코칭으로 연결</small>
@@ -1032,9 +1032,9 @@
               <strong>콘텐츠 <span aria-hidden="true">→</span></strong>
               <small>Spiritual Hero 콘텐츠</small>
             </a>
-          </div>
+          </nav>
 
-          <div class="slider-ui" aria-label="슬라이드 제어">
+          <div class="slider-ui" role="group" aria-label="슬라이드 제어">
             <div class="slide-count"><span id="currentSlide">01</span> / 03</div>
             <div class="slider-arrows">
               <button class="circle-btn" type="button" data-slide-prev aria-label="이전 슬라이드">←</button>
@@ -1051,7 +1051,7 @@
     </section>
   </main>
 
-  <section class="menu-panel" id="menuPanel" aria-label="전체 카테고리" aria-hidden="true">
+  <section class="menu-panel" id="menuPanel" aria-label="전체 카테고리" aria-hidden="true" inert>
     <div class="panel-card" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
       <div class="panel-head">
         <div>
@@ -1264,6 +1264,7 @@
     const slideSubtitle = document.querySelector('#slideSubtitle');
     let activeSlide = 0;
     let slideTimer = null;
+    let menuReturnFocus = null;
 
     if (year) year.textContent = new Date().getFullYear();
 
@@ -1361,6 +1362,8 @@
 
     function openMenu(focusCategory) {
       if (!menuPanel) return;
+      menuReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      menuPanel.inert = false;
       menuPanel.classList.add('is-open');
       menuPanel.setAttribute('aria-hidden', 'false');
       document.body.classList.add('is-locked');
@@ -1374,12 +1377,38 @@
       }, 80);
     }
 
-    function closeMenu() {
+    function closeMenu(restoreFocus = true) {
       if (!menuPanel) return;
+      const wasOpen = menuPanel.classList.contains('is-open');
       menuPanel.classList.remove('is-open');
       menuPanel.setAttribute('aria-hidden', 'true');
+      menuPanel.inert = true;
       document.body.classList.remove('is-locked');
       document.querySelectorAll('[data-open-menu]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      if (wasOpen && restoreFocus && menuReturnFocus?.isConnected) {
+        menuReturnFocus.focus({ preventScroll: true });
+      }
+      menuReturnFocus = null;
+    }
+
+    function keepMenuFocus(event) {
+      if (event.key !== 'Tab' || !menuPanel?.classList.contains('is-open')) return;
+      const focusable = [...menuPanel.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )].filter((element) => !element.hidden && element.getClientRects().length > 0);
+      if (!focusable.length) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     function navigateToRoute(routeKey, event) {
@@ -1456,7 +1485,13 @@
 
     window.addEventListener('scroll', setHeaderState, { passive: true });
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeMenu();
+      if (event.key === 'Escape' && menuPanel?.classList.contains('is-open')) {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
+      keepMenuFocus(event);
+      if (menuPanel?.classList.contains('is-open')) return;
       if (event.key === 'ArrowLeft') {
         setSlide(activeSlide - 1);
         startSlider();
