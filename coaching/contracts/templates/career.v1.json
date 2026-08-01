@@ -1,0 +1,209 @@
+{
+  "templateId": "dailycoaching.contract.career.v1",
+  "templateVersion": "1.0.0",
+  "locale": "ko-KR",
+  "title": "DAILYCOACHING 커리어 코칭계약",
+  "status": "DRAFT_FOR_LEGAL_REVIEW",
+  "contractType": "career",
+  "extends": {
+    "templateId": "dailycoaching.contract.common.v1",
+    "file": "common.v1.json",
+    "includeAllCommonClauses": true,
+    "includeAllOptionalConsents": true
+  },
+  "audience": {
+    "adultsOnly": true,
+    "minimumAge": 19,
+    "minorUseBlocked": true,
+    "adultAffirmationRequired": true,
+    "failureAction": "BLOCK_CONTRACT_CREATION",
+    "notice": "본 계약은 성인 고객을 위한 v1 계약입니다. 학교·기관이 참여하는 미성년 진로 코칭에는 법정대리인 동의와 보호자·기관 정보 공유 범위를 갖춘 별도 계약이 필요합니다."
+  },
+  "overview": {
+    "appropriateFor": [
+      "진로 탐색 또는 직무 선택의 기준을 정리하려는 성인",
+      "경력 전환이나 이직을 준비하는 성인",
+      "취업 서류와 면접 준비 과정을 구조화하려는 성인",
+      "직업흥미·강점 검사 결과를 자기이해 자료로 활용하려는 성인"
+    ],
+    "primaryTopics": [
+      "진로 탐색",
+      "경력 전환",
+      "취업 준비",
+      "직무 선택",
+      "이력서·포트폴리오 검토",
+      "면접 준비",
+      "직업흥미·강점 검사 활용"
+    ],
+    "notServices": [
+      "취업·합격·연봉·승진 보장",
+      "채용 대행 또는 직업소개 계약",
+      "검사 결과를 이용한 채용 판정",
+      "고객을 대신한 최종 지원·입사·이직 결정",
+      "법률·노무·세무 자문"
+    ],
+    "defaultPartyModel": "coach_and_client",
+    "sponsoredOrganizationUseRequiresBusinessTemplate": true
+  },
+  "parties": [
+    {
+      "role": "coach",
+      "label": "코치",
+      "required": true,
+      "requiredSigner": true,
+      "responsibilities": ["합의된 커리어 코칭 제공", "정보의 기준 시점과 한계 설명", "검사 결과의 비판정적 활용", "역할과 전문영역 경계 안내"]
+    },
+    {
+      "role": "client",
+      "label": "고객",
+      "required": true,
+      "requiredSigner": true,
+      "responsibilities": ["진로·직무·지원 목표 선택", "서류 내용과 지원 정보의 사실 확인", "최종 지원·이직·입사 결정", "변경·종료 요청"]
+    }
+  ],
+  "contractFieldRequirements": [
+    {
+      "field": "career_goal_summary",
+      "label": "커리어 코칭 목표",
+      "required": true,
+      "maxLength": 2000
+    },
+    {
+      "field": "career_focus_areas",
+      "label": "다룰 커리어 영역",
+      "required": true,
+      "allowedValues": ["career_exploration", "career_transition", "job_search_preparation", "role_selection", "resume_and_portfolio", "interview_preparation", "interest_and_strength_assessment", "other_specified"]
+    },
+    {
+      "field": "assessment_use",
+      "label": "직업흥미·강점 검사 활용 여부와 도구",
+      "required": true,
+      "allowNone": true
+    },
+    {
+      "field": "market_information_reference_date",
+      "label": "시장·채용 정보 기준 시점",
+      "requiredWhen": "market_or_recruiting_information_is_used === true"
+    },
+    {
+      "field": "session_count_and_minutes",
+      "label": "회기 수와 회기 시간",
+      "required": true
+    },
+    {
+      "field": "contract_period",
+      "label": "계약 기간",
+      "required": true
+    },
+    {
+      "field": "fee_and_payment_terms",
+      "label": "비용과 지급 방식",
+      "required": true,
+      "reviewStatus": "LEGAL_REVIEW_REQUIRED"
+    },
+    {
+      "field": "cancellation_and_refund_terms",
+      "label": "일정 변경·취소·환불 기준",
+      "required": true,
+      "autoGenerateProhibited": true,
+      "reviewStatus": "LEGAL_REVIEW_REQUIRED"
+    }
+  ],
+  "clauses": [
+    {
+      "order": 101,
+      "id": "career.focus_and_purpose",
+      "title": "커리어 코칭의 주제와 목적",
+      "summary": "진로 탐색, 경력 전환, 취업 준비와 직무 선택을 고객의 목표에 맞춰 다룹니다.",
+      "body": "커리어 코칭은 {{career_focus_areas}}와 관련하여 고객이 자신의 경험, 가치, 흥미, 강점과 현실 조건을 살피고 진로·경력 목표와 실행 계획을 정리하도록 돕습니다. 이력서·포트폴리오 검토, 면접 준비와 직업정보 탐색은 합의된 범위 안에서 진행하며 고객이 최종 지원과 선택을 결정합니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": ["{{career_focus_areas}}"]
+    },
+    {
+      "order": 102,
+      "id": "career.no_employment_guarantee",
+      "title": "취업·합격·보상 결과의 비보장",
+      "summary": "취업, 합격, 연봉, 승진이나 특정 직무 배치를 보장하지 않습니다.",
+      "body": "커리어 코칭은 고객의 탐색과 준비를 지원하지만 취업, 서류 통과, 면접 합격, 연봉 수준, 승진, 직무 배치 또는 이직 성공을 보장하지 않습니다. 채용 결과는 채용기관의 판단과 시장 상황 등 코치와 고객이 통제할 수 없는 요인의 영향을 받습니다. 이 조항은 코치가 합의한 검토와 피드백을 성실히 제공할 책임을 면제하지 않습니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": []
+    },
+    {
+      "order": 103,
+      "id": "career.not_recruitment_agency",
+      "title": "채용 대행·직업소개와의 구분",
+      "summary": "본 계약은 구인자와 구직자를 알선하는 채용 대행 또는 직업소개 계약이 아닙니다.",
+      "body": "본 계약은 채용 대행, 직업소개, 인재 추천 또는 고용계약의 중개를 목적으로 하지 않습니다. 코치는 특정 기업의 채용 권한을 가진 것으로 표시하지 않고, 일자리 알선이나 채용 대가를 약속하지 않습니다. 실제 운영에 직업소개 또는 채용 중개가 포함될 가능성이 있으면 해당 서비스는 본 계약과 분리하고 관련 자격·신고·법률 요건을 검토해야 합니다.",
+      "reviewStatus": "LEGAL_REVIEW_REQUIRED",
+      "required": true,
+      "variables": []
+    },
+    {
+      "order": 104,
+      "id": "career.assessment_use",
+      "title": "직업흥미·강점 검사 활용",
+      "summary": "검사 결과는 자기이해와 대화의 자료이며 채용 판정 자료가 아닙니다.",
+      "body": "사용하는 검사 또는 도구는 {{assessment_tools}}이며, 결과는 고객의 직업흥미·강점과 가능성을 탐색하기 위한 자기이해 자료로 활용합니다. 검사 결과를 고객의 능력이나 적합성을 단정하는 진단 또는 채용 판정 자료로 사용하지 않습니다. 도구의 목적, 한계, 해석 방법과 개인정보 처리 방식은 실시 전에 안내하며 고객은 검사 참여 여부를 문의하고 결정할 수 있습니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": ["{{assessment_tools}}"]
+    },
+    {
+      "order": 105,
+      "id": "career.market_information",
+      "title": "시장·채용 정보의 시점과 한계",
+      "summary": "시장과 채용 정보는 기준 시점을 표시하며 이후 변경될 수 있습니다.",
+      "body": "커리어 코칭에서 제공하거나 함께 검토하는 시장·채용 정보의 기준 시점은 {{market_information_reference_date}}입니다. 채용 공고, 산업 전망, 직무 요건, 보상 수준과 기업 정보는 시점과 출처에 따라 달라질 수 있으므로 고객은 지원 또는 의사결정 전에 공식 최신 정보를 직접 확인합니다. 코치는 출처와 불확실성을 가능한 범위에서 구분해 안내합니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": ["{{market_information_reference_date}}"]
+    },
+    {
+      "order": 106,
+      "id": "career.application_materials",
+      "title": "지원서류와 면접 준비",
+      "summary": "코치는 검토와 연습을 지원하며 서류의 진실성과 최종 제출은 고객이 확인합니다.",
+      "body": "코치는 이력서·포트폴리오·자기소개서의 구조와 표현을 검토하고 면접 연습을 지원할 수 있습니다. 고객은 경력, 학력, 성과와 자격 등 제출 정보의 사실성과 사용 권리를 최종 확인하며 허위·과장 정보의 작성을 요청하지 않습니다. 코치는 고객을 대신해 지원서를 제출하거나 면접 답변을 보증하지 않습니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": []
+    },
+    {
+      "order": 107,
+      "id": "career.client_decision",
+      "title": "최종 지원과 선택",
+      "summary": "지원, 이직, 입사와 경력 선택은 고객이 자신의 기준과 최신 정보에 따라 결정합니다.",
+      "body": "최종 지원 여부, 지원 문서 제출, 인터뷰 참여, 제안 수락, 퇴사·이직·입사와 경력 선택은 고객이 자신의 가치, 상황, 위험과 최신 정보를 고려해 결정합니다. 코치는 대안을 탐색하고 판단 기준을 정리하도록 돕지만 선택을 대신하거나 특정 결정을 강요하지 않습니다.",
+      "reviewStatus": "CONTENT_READY",
+      "required": true,
+      "variables": []
+    }
+  ],
+  "signingRules": {
+    "requiredSignerRoles": ["coach", "client"],
+    "fullySignedWhenAllRequiredSignersComplete": true,
+    "proxySignatureProhibited": true,
+    "coachMayNotSignForClient": true
+  },
+  "consentRules": {
+    "source": "common.v1.json#/optionalConsents",
+    "keys": ["session_recording", "ai_assisted_summary", "anonymized_case_use", "marketing_testimonial"],
+    "independentSelections": true,
+    "defaultAccepted": false,
+    "bulkAcceptProhibited": true,
+    "serviceAvailableWhenDeclined": true,
+    "aiDisabledUntilAllConfigurationPresent": true,
+    "marketingSubSelections": ["disclose_name", "disclose_photo", "disclose_organization", "disclose_testimonial_text", "publication_channels", "publication_period"]
+  },
+  "legalReviewItems": [
+    "커리어 코칭과 직업소개·채용 대행의 법적 구분",
+    "검사 도구별 개인정보 처리·저작권·사용 자격",
+    "지원서류 검토 범위와 허위 정보 방지 문구",
+    "커리어 코칭의 취소·환불과 소비자 보호 기준",
+    "개인정보와 기록의 보유기간",
+    "전자서명 증빙 수준 및 분쟁 조항",
+    "실제 사용하는 녹음·AI·외부 기술 서비스 문구"
+  ]
+}

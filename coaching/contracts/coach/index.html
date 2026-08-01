@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="서버 측 관리자 인증이 적용된 DAILYCOACHING 코치용 계약 생성 화면입니다.">
+  <meta name="theme-color" content="#061528">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.daily-coach-ing.com; style-src 'self'; script-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>코치용 계약 생성 | DAILYCOACHING</title>
+  <link rel="stylesheet" href="/coaching/contracts/assets/contracts.css">
+  <script src="/coaching/contracts/assets/api.js" defer></script>
+  <script src="/coaching/contracts/assets/contract-validation.js" defer></script>
+  <script src="/coaching/contracts/assets/contract-renderer.js" defer></script>
+  <script src="/coaching/contracts/assets/contract-admin.js" defer></script>
+</head>
+<body data-contract-admin>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <header class="contract-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>DAILYCOACHING</span></a><span class="header-context">PROTECTED COACH AREA</span><nav class="contract-nav" aria-label="주요 메뉴"><a href="/coaching/contracts/">계약 안내</a><a href="/coaching/contracts/privacy/">개인정보 안내</a><a href="/">홈</a></nav></div></header>
+  <main id="main" class="app-page">
+    <div class="app-shell">
+      <div class="app-intro"><p class="eyebrow">COACH-ONLY AUTHORING</p><h1>코칭계약 생성</h1><p>관리자 인증과 보안 API 연결이 확인된 세션에서만 입력 화면이 생성됩니다. 브라우저 저장소에는 입력값이나 계약 전문을 저장하지 않습니다.</p></div>
+      <section class="access-gate" data-admin-gate aria-labelledby="gate-title"><div class="gate-content"><div class="gate-symbol" aria-hidden="true">A</div><h2 id="gate-title">서버 측 접근 보호 확인 중</h2><p>Cloudflare Access 또는 동등한 관리자 인증과 계약 API 응답을 확인합니다.</p><p class="status-line" data-admin-status role="status" aria-live="polite">잠시만 기다려 주세요.</p></div></section>
+      <div data-admin-app hidden></div>
+      <noscript><section class="access-gate"><div class="gate-content"><h2>자바스크립트가 필요합니다.</h2><p>보호 상태 검증과 계약 API 호출을 위해 자바스크립트를 활성화해야 합니다.</p></div></section></noscript>
+    </div>
+  </main>
+</body>
+</html>
