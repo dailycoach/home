@@ -75,7 +75,15 @@ if (!baseUrl) {
 await mkdir(outputDir, { recursive: true });
 const browser = await playwright.chromium.launch({ headless: true });
 const failures = [];
-const results = { baseUrl, routes: [], viewports: [], interactions: [], noJavaScript: [], accessibility: [], failures };
+const results = {
+  baseUrl: process.env.NAL_BASE_URL ? baseUrl : 'http://127.0.0.1:<ephemeral>',
+  routes: [],
+  viewports: [],
+  interactions: [],
+  noJavaScript: [],
+  accessibility: [],
+  failures
+};
 
 function record(condition, message) {
   if (!condition) failures.push(message);
@@ -168,7 +176,7 @@ try {
   await mobile.locator('select[name="status"]').selectOption('comingSoon');
   await mobile.waitForLoadState('networkidle');
   const filterUrl = new URL(mobile.url());
-  results.interactions.push({ name: 'class filter', url: filterUrl.href });
+  results.interactions.push({ name: 'class filter', url: `${filterUrl.pathname}${filterUrl.search}` });
   record(filterUrl.searchParams.get('status') === 'comingSoon', 'class filter state was not written to URL');
 
   await mobile.goto(`${baseUrl}/nal/class/art-psychology-coaching-6week/`, { waitUntil: 'networkidle' });
@@ -197,7 +205,8 @@ try {
   await mobile.locator('[data-search-form]').evaluate((form) => form.requestSubmit());
   await mobile.waitForLoadState('networkidle');
   const searchContent = await mobile.locator('[data-page-root]').textContent();
-  results.interactions.push({ name: 'search', url: mobile.url(), hasResult: searchContent?.includes('미술심리') || false });
+  const searchUrl = new URL(mobile.url());
+  results.interactions.push({ name: 'search', url: `${searchUrl.pathname}${searchUrl.search}`, hasResult: searchContent?.includes('미술심리') || false });
   record(new URL(mobile.url()).searchParams.get('q') === '미술', 'search query was not written to URL');
   record(Boolean(searchContent?.includes('미술심리')), 'search did not return the public art program');
   record(mobileIssues.length === 0, `mobile interaction issues: ${mobileIssues.join('; ')}`);

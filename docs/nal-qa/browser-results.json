@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://127.0.0.1:43111",
+  "baseUrl": "http://127.0.0.1:<ephemeral>",
   "routes": [
     {
       "route": "/nal/",
@@ -181,7 +181,7 @@
     },
     {
       "name": "class filter",
-      "url": "http://127.0.0.1:43111/nal/class/?status=comingSoon&sort=recommended"
+      "url": "/nal/class/?status=comingSoon&sort=recommended"
     },
     {
       "name": "local wishlist",
@@ -196,7 +196,7 @@
     },
     {
       "name": "search",
-      "url": "http://127.0.0.1:43111/nal/search/?q=%EB%AF%B8%EC%88%A0",
+      "url": "/nal/search/?q=%EB%AF%B8%EC%88%A0",
       "hasResult": true
     }
   ],
