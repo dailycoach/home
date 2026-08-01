@@ -1,0 +1,26 @@
+{
+  "name": "@dailycoaching/coaching-contract-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "template:hashes": "node scripts/template-manifests.mjs",
+    "dev": "wrangler dev --local --persist-to .wrangler/state",
+    "db:migrate:local": "wrangler d1 migrations apply coaching-contracts --local",
+    "db:migrate:remote": "wrangler d1 migrations apply coaching-contracts --remote",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.20.1",
+    "@cloudflare/workers-types": "5.20260801.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10",
+    "wrangler": "4.118.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
