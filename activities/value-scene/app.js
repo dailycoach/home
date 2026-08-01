@@ -99,10 +99,10 @@
   }
 
   function introScreen() {
-    const resume = savedState && savedState.step > 0 && savedState.step < 9 ? `
+    const resume = savedState && savedState.step > 0 ? `
       <div class="resume-banner">
-        <p><strong>이어갈 수 있는 기록이 있습니다.</strong><br>${formatDate(savedState.updatedAt)}에 STEP ${savedState.step}까지 진행했습니다.</p>
-        <button type="button" data-action="resume">이어서 하기</button>
+        <p><strong>이어갈 수 있는 기록이 있습니다.</strong><br>${formatDate(savedState.updatedAt)}에 ${savedState.step === 9 ? '결과까지 완료했습니다.' : `STEP ${savedState.step}까지 진행했습니다.`}</p>
+        <button type="button" data-action="resume">${savedState.step === 9 ? '결과 다시 보기' : '이어서 하기'}</button>
       </div>` : '';
     return `${resume}<section class="screen hero">
       <div class="hero-copy">
