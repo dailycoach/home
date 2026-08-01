@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "brand": {
+    "externalSiteName": "날빛",
+    "internalBrand": "NAL",
+    "meaning": null,
+    "basePath": "/nal/"
+  },
+  "metadata": {
+    "defaultTitle": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
+    "defaultDescription": "취향과 마음을 주제로 만나는 커뮤니티와 원데이클래스, 감정카드·질문카드·워크북을 소개하는 NAL 플랫폼입니다.",
+    "canonicalBase": "https://daily-coach-ing.com/nal/",
+    "openGraphImage": "https://daily-coach-ing.com/nal/assets/images/nal-og.png"
+  },
+  "navigation": {
+    "primary": [
+      {
+        "label": "모임",
+        "nalLabel": "NAL GATHER",
+        "href": "/nal/gather/"
+      },
+      {
+        "label": "원데이",
+        "nalLabel": "NAL CLASS",
+        "href": "/nal/class/"
+      },
+      {
+        "label": "스토어",
+        "nalLabel": "NAL SHOP",
+        "href": "/nal/shop/"
+      },
+      {
+        "label": "콘텐츠",
+        "nalLabel": "NAL NOTE",
+        "href": "/nal/note/"
+      },
+      {
+        "label": "진행자",
+        "nalLabel": "NAL HOST",
+        "href": "/nal/host/"
+      },
+      {
+        "label": "MY NAL",
+        "nalLabel": "MY NAL",
+        "href": "/nal/my/"
+      }
+    ],
+    "utility": [
+      {
+        "id": "search",
+        "label": "검색",
+        "availability": "ready"
+      },
+      {
+        "id": "wishlist",
+        "label": "찜",
+        "availability": "local"
+      },
+      {
+        "id": "cart",
+        "label": "장바구니",
+        "availability": "unavailable"
+      },
+      {
+        "id": "login",
+        "label": "로그인",
+        "availability": "unavailable"
+      }
+    ]
+  },
+  "pageLabels": {
+    "gather": "NAL GATHER",
+    "class": "NAL CLASS",
+    "shop": "NAL SHOP",
+    "note": "NAL NOTE",
+    "host": "NAL HOST",
+    "my": "MY NAL",
+    "letter": "NAL LETTER"
+  },
+  "categories": {
+    "gather": [
+      "전체 모임",
+      "정기모임",
+      "시즌모임",
+      "자유모임",
+      "온라인모임",
+      "오프라인모임",
+      "지난 모임"
+    ],
+    "class": [
+      "전체 클래스",
+      "마음·감정",
+      "관계·대화",
+      "미술·창작",
+      "글쓰기",
+      "라이프",
+      "커리어",
+      "코치·진행자"
+    ],
+    "shop": [
+      "감정카드",
+      "질문카드",
+      "관계카드",
+      "강점·가치카드",
+      "워크북",
+      "클래스 키트",
+      "디지털 도구"
+    ],
+    "note": [
+      "마음",
+      "관계",
+      "모임 이야기",
+      "도구 활용법",
+      "진행자 이야기",
+      "참여자 이야기"
+    ]
+  },
+  "statusLabels": {
+    "draft": "초안",
+    "comingSoon": "준비 중",
+    "open": "모집 중",
+    "closing": "마감 임박",
+    "waiting": "대기 신청",
+    "closed": "신청 마감",
+    "completed": "종료"
+  },
+  "externalLinks": {
+    "smartStore": "https://smartstore.naver.com/nalbitcoaching",
+    "application": null,
+    "newsletter": null,
+    "inquiry": "mailto:hello@daily-coach-ing.com"
+  },
+  "features": {
+    "programDiscovery": true,
+    "programApplication": false,
+    "storeCatalog": true,
+    "storePurchase": false,
+    "search": true,
+    "localWishlist": true,
+    "localRecentlyViewed": true,
+    "newsletter": false,
+    "nextScheduleAlert": false,
+    "account": false,
+    "cart": false,
+    "checkout": false,
+    "reviews": false
+  },
+  "designTokens": {
+    "colors": {
+      "warmIvory": "#F5F1E8",
+      "deepCharcoal": "#202126",
+      "electricCobalt": "#4055D8",
+      "softLilac": "#C8B8EE",
+      "coralPink": "#EF9CA8",
+      "acidLime": "#D7F35A",
+      "mistGray": "#DDDCD6",
+      "cleanWhite": "#FFFFFF"
+    },
+    "typography": {
+      "koreanHeading": "Paperlogy, Pretendard Variable, Pretendard, Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, Gowun Batang NAL Fallback, system-ui, sans-serif",
+      "koreanBody": "Pretendard Variable, Pretendard, SUIT Variable, SUIT, Noto Sans KR, Apple SD Gothic Neo, Malgun Gothic, Gowun Batang NAL Fallback, system-ui, sans-serif",
+      "latinNumeric": "Space Grotesk, Archivo, Inter, Gowun Batang NAL Fallback, system-ui, sans-serif",
+      "shortQuote": "MaruBuri, Nanum Myeongjo, Noto Serif KR, Gowun Batang NAL Fallback, Georgia, serif"
+    },
+    "minimumBodyFontSizePx": 16,
+    "minimumTouchTargetPx": 44
+  },
+  "legal": {
+    "operatorName": null,
+    "representative": null,
+    "businessRegistrationNumber": null,
+    "address": null,
+    "contact": null,
+    "termsUrl": "/nal/policy/terms/",
+    "privacyUrl": "/nal/policy/privacy/",
+    "refundUrl": "/nal/policy/cancellation/",
+    "shippingUrl": "/nal/policy/shipping/"
+  }
+}

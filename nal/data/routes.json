@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "routes": [
+    {
+      "path": "/nal/",
+      "title": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
+      "description": "취향과 마음을 주제로 만나는 커뮤니티와 원데이클래스, 감정카드·질문카드·워크북을 소개하는 NAL 플랫폼입니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/gather/",
+      "title": "모임 | NAL GATHER · 날빛",
+      "description": "NAL이 검토한 커뮤니티와 소모임을 주제와 방식에 따라 찾아보세요.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/class/",
+      "title": "원데이클래스 | NAL CLASS · 날빛",
+      "description": "마음, 관계, 미술, 글쓰기, 라이프, 커리어를 주제로 한 NAL 원데이클래스를 살펴보세요.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/",
+      "title": "감정카드·질문카드 | NAL SHOP · 날빛",
+      "description": "감정카드, 질문카드, 관계카드, 강점·가치카드와 워크북을 살펴보세요.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/note/",
+      "title": "콘텐츠 | NAL NOTE · 날빛",
+      "description": "마음, 관계, 모임 이야기와 감정·질문카드 활용법을 전하는 NAL 콘텐츠입니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/host/",
+      "title": "진행자 | NAL HOST · 날빛",
+      "description": "NAL이 검토한 진행자와 그들이 운영하는 프로그램의 방식과 전문 영역을 확인하세요.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/my/",
+      "title": "MY NAL | 날빛",
+      "description": "이 기기에서 찜한 모임과 상품, 최근 본 항목을 확인합니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/search/",
+      "title": "검색 | NAL · 날빛",
+      "description": "NAL 모임, 클래스, 도구, 진행자와 콘텐츠를 검색합니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/note/art-psychology-coaching-guide/",
+      "title": "미술심리코칭 6주 과정 참여 안내 | NAL NOTE · 날빛",
+      "description": "미술심리코칭 6주 과정의 참여 방식, 준비물, 진행자, FAQ와 과정 범위를 안내합니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/class/art-psychology-coaching-6week/",
+      "title": "미술심리코칭 6주 과정 | NAL CLASS · 날빛",
+      "description": "색과 형태로 표현하고 자신의 언어로 읽으며 다음 행동으로 연결하는 6주 과정입니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/host/park-jia/",
+      "title": "박지아 코치 | NAL HOST · 날빛",
+      "description": "예술적 표현을 단정하지 않고 참여자의 언어와 다음 선택으로 연결하는 진행자입니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/host/kim-cheol-woong/",
+      "title": "김철웅 코치 | NAL HOST · 날빛",
+      "description": "코칭 대화와 자기이해 도구를 실제 삶의 다음 행동으로 연결하는 진행자입니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/notice/",
+      "title": "공지사항 | NAL · 날빛",
+      "description": "운영 공지는 확인된 내용만 게시합니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/faq/",
+      "title": "자주 묻는 질문 | NAL · 날빛",
+      "description": "신청·참여·도구 구매 전에 필요한 기준을 확인하세요.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/partnership/",
+      "title": "입점·제휴 문의 | NAL · 날빛",
+      "description": "NAL의 큐레이션 기준에 맞는 프로그램·도구·콘텐츠 협업을 검토합니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/policy/terms/",
+      "title": "이용약관 | NAL · 날빛",
+      "description": "법적 검토와 운영자 정보 확정 후 정식 약관을 공개합니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/policy/privacy/",
+      "title": "개인정보처리방침 | NAL · 날빛",
+      "description": "수집 항목과 처리 주체가 확정되기 전 개인정보 입력을 받지 않습니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/policy/cancellation/",
+      "title": "취소·환불 규정 | NAL · 날빛",
+      "description": "프로그램별 실제 조건과 판매 채널의 정책이 확정된 뒤 공개합니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/policy/shipping/",
+      "title": "배송·교환 안내 | NAL · 날빛",
+      "description": "판매 상품과 배송 운영 방식이 확정된 뒤 공개합니다.",
+      "indexable": false
+    }
+  ]
+}

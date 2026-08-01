@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "content": [
+    {
+      "id": "art-psychology-coaching-guide",
+      "slug": "art-psychology-coaching-guide",
+      "title": "미술심리코칭 6주 과정 참여 안내",
+      "summary": "미술심리코칭 6주 과정의 참여 방식, 준비물, 진행자, FAQ와 과정 범위를 안내합니다.",
+      "category": "도구 활용법",
+      "coverImage": "/programs/art-psychology-coaching/assets/hero-identity-collage.webp",
+      "authorId": "park-jia",
+      "publishedAt": null,
+      "readingTime": null,
+      "body": null,
+      "sourceUrl": "/programs/art-psychology-coaching/guide.html",
+      "relatedProgramIds": [
+        "art-psychology-coaching-6week"
+      ],
+      "relatedProductIds": [
+        "art-psychology-workbook"
+      ],
+      "featured": true,
+      "published": true
+    }
+  ]
+}
