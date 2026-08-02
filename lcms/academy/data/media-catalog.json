@@ -1,0 +1,108 @@
+{
+  "version": "3.0.0",
+  "updatedAt": "2026-07-26",
+  "source": "Cloudflare R2 private bucket via authenticated Worker gateway",
+  "policy": {
+    "r2": "Paid course videos stay in a private R2 bucket and are served only through short-lived Worker playback URLs after LMC session validation.",
+    "secrets": "Do not store Cloudflare API tokens, R2 credentials, Worker secrets, or direct object URLs in this public catalog."
+  },
+  "courses": {
+    "lmc-lifetime-management-counselor": {
+      "videoWeeks": 11,
+      "completionWeek": 12,
+      "completionType": "수료시험·학기말 수료식",
+      "media": [
+        {
+          "week": 1,
+          "provider": "R2",
+          "objectKey": "lmc/week-01.mp4",
+          "title": "상담사와 코치를 위한 심리학 개요",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 2,
+          "provider": "R2",
+          "objectKey": "lmc/week-02.mp4",
+          "title": "진로적성 파악과 자녀지도",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 3,
+          "provider": "R2",
+          "objectKey": "lmc/week-03.mp4",
+          "title": "성격에 대한 이해",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 4,
+          "provider": "R2",
+          "objectKey": "lmc/week-04.mp4",
+          "title": "의사소통 유형을 통한 타인 이해",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 5,
+          "provider": "R2",
+          "objectKey": "lmc/week-05.mp4",
+          "title": "스트레스에 대한 심리학적 이해",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 6,
+          "provider": "R2",
+          "objectKey": "lmc/week-06.mp4",
+          "title": "MBTI와 학습유형",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 7,
+          "provider": "R2",
+          "objectKey": "lmc/week-07.mp4",
+          "title": "살면서 느끼는 정서적 문제",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 8,
+          "provider": "R2",
+          "objectKey": "lmc/week-08.mp4",
+          "title": "우울과 우울검사",
+          "description": "우울 관련 경험과 검사도구의 활용 범위를 이해하는 강의",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 9,
+          "provider": "R2",
+          "objectKey": "lmc/week-09.mp4",
+          "title": "이상심리와 정신병리척도",
+          "description": "이상심리와 정신병리척도의 기본 개념 및 상담코칭 활용 범위를 이해하는 강의",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 10,
+          "provider": "R2",
+          "objectKey": "lmc/week-10.mp4",
+          "title": "만족하는 부부·커플 관계의 요인",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        },
+        {
+          "week": 11,
+          "provider": "R2",
+          "objectKey": "lmc/week-11.mp4",
+          "title": "아동청소년과 성인기 발달",
+          "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
+          "status": "pending_upload"
+        }
+      ]
+    }
+  }
+}
