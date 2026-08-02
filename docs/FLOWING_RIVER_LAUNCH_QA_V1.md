@@ -136,6 +136,6 @@ Google Forms의 관리 화면 일부 설정은 Apps Script API만으로 완전�
 ## 9. GitHub
 
 - 브랜치: `agent/flowing-river-official-launch-v1`
-- 커밋: 생성 예정
-- Draft PR: 생성 예정
+- 원격 커밋: `71e50c34667731df174abd1fcb4434d3e270cb0b`
+- Draft PR: [#98 feat: 흐르는 강물처럼 공식 런칭 시스템 구축](https://github.com/dailycoach/home/pull/98)
 - `main` 병합: 하지 않음
