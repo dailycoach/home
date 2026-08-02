@@ -1,6 +1,6 @@
 (() => {
   const config = window.SITE_CONFIG || {};
-  const formUrl = (config.formUrl || "").trim();
+  const applyUrl = (config.applyUrl || config.formUrl || "").trim();
 
   // Keep the facilitator slide page discoverable across all public pages
   // without duplicating navigation markup in every HTML file.
@@ -22,15 +22,23 @@
       footer.insertBefore(link, apply || null);
     });
   }
+
   const applyLinks = [...document.querySelectorAll("[data-apply-link]")];
   const dialog = document.querySelector("[data-link-dialog]");
-  const validFormUrl = /^https:\/\/(docs\.google\.com\/forms|forms\.gle)\//i.test(formUrl);
+  const validFormUrl = /^https:\/\/(docs\.google\.com\/forms|forms\.gle)\//i.test(applyUrl);
+  const validMailtoUrl = /^mailto:[^\s"'<>]+$/i.test(applyUrl);
+  const validApplyUrl = validFormUrl || validMailtoUrl;
 
   applyLinks.forEach(link => {
-    if (validFormUrl) {
-      link.href = formUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
+    if (validApplyUrl) {
+      link.href = applyUrl;
+      if (validFormUrl) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      } else {
+        link.removeAttribute("target");
+        link.removeAttribute("rel");
+      }
     } else {
       link.href = "#";
       link.addEventListener("click", e => {
