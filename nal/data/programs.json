@@ -12,6 +12,8 @@
       "category": "미술·창작",
       "tags": ["미술", "자기이해", "6주 과정"],
       "coverImage": "/programs/art-psychology-coaching/assets/hero-identity-collage.webp",
+      "coverImageMobile": null,
+      "coverImageAlt": "서로 다른 색과 질감의 종이를 겹쳐 한 사람의 모습을 표현한 콜라주",
       "gallery": [
         "/programs/art-psychology-coaching/assets/artwork-self-layers.webp",
         "/programs/art-psychology-coaching/assets/artwork-future-scene.webp",
@@ -37,6 +39,16 @@
       "difficulty": null,
       "materials": ["개인 스케치북", "색연필"],
       "includedItems": ["참여자 워크북"],
+      "activities": [
+        "매주 다른 질문과 표현 재료로 현재의 장면을 남깁니다.",
+        "작품에서 눈에 들어오는 선·색·형태를 자신의 언어로 기록합니다.",
+        "마지막에는 다음 일상에서 시도할 작은 행동을 고릅니다."
+      ],
+      "recommendedFor": [
+        "말보다 선과 색으로 먼저 표현해 보고 싶은 분",
+        "결과물보다 만드는 과정에서 자신을 관찰하고 싶은 분",
+        "한 번의 체험보다 6주 동안 차근차근 이어가고 싶은 분"
+      ],
       "soloFriendly": null,
       "beginnerFriendly": null,
       "groupChat": null,
@@ -51,6 +63,7 @@
       "relatedContentIds": ["art-psychology-coaching-guide"],
       "sourceUrl": "/programs/art-psychology-coaching/",
       "featured": true,
+      "featuredOrder": 5,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -65,8 +78,12 @@
       "description": "정답을 찾거나 서로를 해석하지 않습니다. 말하고 싶은 만큼만 나누고, 다른 사람의 이야기를 들으며 내 감정의 언어를 넓혀갑니다.",
       "category": "정기모임",
       "tags": ["감정", "대화", "카드", "초보 환영"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-mobile.webp",
+      "coverImageAlt": "나무 테이블 위 여러 감정카드 중 한 장을 천천히 고르는 여러 사람의 손",
+      "gallery": [
+        "/nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-cover.webp"
+      ],
       "hostId": "park-jia",
       "format": null,
       "location": null,
@@ -87,6 +104,16 @@
       "difficulty": "입문",
       "materials": ["감정카드"],
       "includedItems": [],
+      "activities": [
+        "지금 마음에 가까운 카드 한 장을 고릅니다.",
+        "선택한 이유를 짧게 적고 말하고 싶은 만큼만 나눕니다.",
+        "다른 사람의 말을 조언 없이 듣고 새롭게 만난 감정 단어를 남깁니다."
+      ],
+      "recommendedFor": [
+        "감정을 설명할 단어가 바로 떠오르지 않는 분",
+        "낯선 사람과도 부담 없이 대화를 시작해 보고 싶은 분",
+        "말할 범위를 스스로 선택할 수 있는 모임을 찾는 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": null,
@@ -101,6 +128,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 1,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -115,8 +143,12 @@
       "description": "긴 글이나 완성된 에세이를 요구하지 않습니다. 짧은 문장과 실제 장면에서 출발해 내가 중요하게 여기는 것과 다음 방향을 발견합니다.",
       "category": "시즌모임",
       "tags": ["글쓰기", "자기이해", "질문", "기록"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-mobile.webp",
+      "coverImageAlt": "밝은 테이블에 둘러앉아 각자의 펼친 노트에 문장을 적는 여러 사람의 손",
+      "gallery": [
+        "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-cover.webp"
+      ],
       "hostId": "kim-cheol-woong",
       "format": null,
       "location": null,
@@ -137,6 +169,16 @@
       "difficulty": "입문",
       "materials": ["개인 노트", "필기도구"],
       "includedItems": [],
+      "activities": [
+        "한 가지 질문에서 떠오르는 실제 삶의 장면을 고릅니다.",
+        "완성된 글보다 장면에 가까운 짧은 문장을 씁니다.",
+        "읽고 싶은 문장만 나누고 서로의 표현을 평가 없이 듣습니다."
+      ],
+      "recommendedFor": [
+        "긴 글보다 한 문장부터 기록을 시작하고 싶은 분",
+        "생각을 실제 삶의 장면과 연결해 보고 싶은 분",
+        "서로의 문장을 조용히 듣는 시즌 모임을 찾는 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": null,
@@ -151,6 +193,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 2,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -165,8 +208,12 @@
       "description": "이론 강의보다 실제 대화 장면과 선택을 중심에 둡니다. 코칭 후 무엇을 보았고 어떤 질문을 선택했는지 나누며 서로의 관점을 확장합니다.",
       "category": "자유모임",
       "tags": ["코치", "코칭실습", "질문", "피드백"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-mobile.webp",
+      "coverImageAlt": "차콜 톤의 대화 스튜디오에서 노트와 타이머를 두고 코칭 장면을 함께 살펴보는 세 사람",
+      "gallery": [
+        "/nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-cover.webp"
+      ],
       "hostId": "kim-cheol-woong",
       "format": null,
       "location": null,
@@ -187,6 +234,16 @@
       "difficulty": "코칭 경험자",
       "materials": ["실습 노트"],
       "includedItems": [],
+      "activities": [
+        "개인정보를 지운 실제 코칭 장면에서 기억나는 순간을 고릅니다.",
+        "그때 들은 말과 내가 선택한 질문을 차례로 복기합니다.",
+        "다른 선택지를 짧게 실습하고 요청한 범위에서만 피드백을 나눕니다."
+      ],
+      "recommendedFor": [
+        "실제 코칭 이후 자신의 질문을 다시 보고 싶은 코치",
+        "정답 강의보다 동료와 장면을 탐색하고 싶은 분",
+        "질문·경청·개입을 안전하게 연습할 자리를 찾는 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": false,
       "groupChat": null,
@@ -201,6 +258,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 3,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -215,8 +273,12 @@
       "description": "성과 경쟁이나 자격 중심 네트워킹보다, 코치로 살아가며 생기는 질문과 실천을 편안하게 나눕니다. 온라인 대화와 줌 모임, 서울 오프라인 모임을 단계적으로 연결합니다.",
       "category": "정기모임",
       "tags": ["25–45 코치", "커뮤니티", "서울", "온라인"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-mobile.webp",
+      "coverImageAlt": "서울의 도시 조각과 대화 장면을 코발트색 흐르는 선으로 연결한 에디토리얼 콜라주",
+      "gallery": [
+        "/nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-cover.webp"
+      ],
       "hostId": "kim-cheol-woong",
       "format": "hybrid",
       "location": "온라인·서울",
@@ -237,6 +299,16 @@
       "difficulty": "코치·코칭학습자",
       "materials": [],
       "includedItems": [],
+      "activities": [
+        "일상에서 생긴 코칭의 질문과 실천을 온라인 대화로 이어갑니다.",
+        "주제별 온라인 모임에서 서로의 경험과 선택을 나눕니다.",
+        "확정된 회차에 한해 서울 오프라인 모임으로 연결합니다."
+      ],
+      "recommendedFor": [
+        "코치로 살아가는 과정의 질문을 편안하게 나누고 싶은 25–45 코치",
+        "자격이나 성과보다 관계와 실천을 중심에 두는 분",
+        "온라인과 서울 오프라인을 느슨하게 오가고 싶은 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": true,
@@ -251,6 +323,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 4,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -265,8 +338,12 @@
       "description": "감정의 원인을 맞히거나 심리 상태를 진단하지 않습니다. 카드 선택, 짧은 기록, 선택적 나눔을 통해 지금 필요한 감정의 언어를 발견합니다.",
       "category": "마음·감정",
       "tags": ["감정카드", "자기이해", "원데이", "초보 환영"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-mobile.webp",
+      "coverImageAlt": "코럴과 라일락 카드 여러 장 중 지금 마음에 가까운 한 장을 고르는 손",
+      "gallery": [
+        "/nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-cover.webp"
+      ],
       "hostId": "park-jia",
       "format": null,
       "location": null,
@@ -287,6 +364,16 @@
       "difficulty": "입문",
       "materials": ["필기도구"],
       "includedItems": ["클래스용 감정카드"],
+      "activities": [
+        "여러 카드 중 지금 마음과 가까운 한 장을 고릅니다.",
+        "카드를 고른 이유와 떠오른 장면을 짧게 적습니다.",
+        "공유하고 싶은 만큼만 나누고 지금 필요한 한 문장을 남깁니다."
+      ],
+      "recommendedFor": [
+        "감정을 맞히기보다 자신의 언어로 천천히 표현하고 싶은 분",
+        "처음 감정카드를 사용해 보는 분",
+        "90분 동안 한 가지 마음을 차분히 살펴보고 싶은 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": null,
@@ -301,6 +388,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 1,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -315,8 +403,12 @@
       "description": "간단한 드로잉과 색연필 활동을 하고, 작품에서 눈에 들어오는 요소를 자신의 말로 기록합니다. 진행자는 작품을 대신 해석하지 않습니다.",
       "category": "미술·창작",
       "tags": ["미술", "색연필", "자기표현", "원데이"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/class/nal-class-art-current-mind-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-art-current-mind-mobile.webp",
+      "coverImageAlt": "색연필과 오일파스텔로 서로 다른 선과 색을 미완성 종이에 표현하는 여러 사람의 손",
+      "gallery": [
+        "/nal/assets/images/catalog/class/nal-class-art-current-mind-cover.webp"
+      ],
       "hostId": "park-jia",
       "format": null,
       "location": null,
@@ -337,6 +429,16 @@
       "difficulty": "입문",
       "materials": ["개인 스케치북", "색연필"],
       "includedItems": ["활동 기록지"],
+      "activities": [
+        "지금 손이 먼저 고르는 색과 도구로 짧게 표현합니다.",
+        "잘 그렸는지보다 종이에 남은 선·색·형태를 관찰합니다.",
+        "눈에 들어오는 요소를 자신의 말로 적고 필요한 만큼만 나눕니다."
+      ],
+      "recommendedFor": [
+        "그림 실력과 상관없이 선과 색으로 현재를 표현해 보고 싶은 분",
+        "완성 작품보다 만드는 과정에 집중하고 싶은 분",
+        "해석을 듣기보다 자신의 언어로 작품을 보고 싶은 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": null,
@@ -351,6 +453,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 2,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -365,8 +468,12 @@
       "description": "누가 맞는지를 판단하기보다 실제 장면에서 내가 무엇을 보고, 느끼고, 말했는지 구분합니다. 질문카드와 짧은 역할 연습으로 다른 반응을 설계합니다.",
       "category": "관계·대화",
       "tags": ["관계", "대화", "질문카드", "실습"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-mobile.webp",
+      "coverImageAlt": "마주 보는 두 자리 사이 질문카드와 엇갈렸다 다시 이어지는 두 개의 선",
+      "gallery": [
+        "/nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-cover.webp"
+      ],
       "hostId": "kim-cheol-woong",
       "format": null,
       "location": null,
@@ -387,6 +494,16 @@
       "difficulty": "입문",
       "materials": ["필기도구"],
       "includedItems": ["대화 장면 기록지"],
+      "activities": [
+        "최근 반복된 대화에서 기억나는 한 장면을 고릅니다.",
+        "내가 본 사실·느낀 감정·했던 말을 구분해 적습니다.",
+        "질문카드와 짧은 역할 연습으로 다음 반응 한 가지를 설계합니다."
+      ],
+      "recommendedFor": [
+        "상대를 분석하지 않고 실제 대화 장면을 돌아보고 싶은 분",
+        "반복되는 반응 사이에 다른 선택지를 만들어 보고 싶은 분",
+        "개인 사례 공개 범위를 스스로 정하며 실습하고 싶은 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": null,
@@ -401,6 +518,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 3,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -415,8 +533,12 @@
       "description": "해야 할 일 목록을 늘리기보다 마음이 움직이는 이미지와 단어를 수집합니다. 완성한 콜라주에서 이번 달의 작은 행동 한 가지를 선택합니다.",
       "category": "라이프",
       "tags": ["콜라주", "방향", "라이프", "창작"],
-      "coverImage": null,
-      "gallery": [],
+      "coverImage": "/nal/assets/images/catalog/class/nal-class-direction-collage-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-direction-collage-mobile.webp",
+      "coverImageAlt": "가위와 종이 조각을 움직이며 올해의 방향 콜라주를 배열하는 여러 사람의 손",
+      "gallery": [
+        "/nal/assets/images/catalog/class/nal-class-direction-collage-cover.webp"
+      ],
       "hostId": "park-jia",
       "format": null,
       "location": null,
@@ -437,6 +559,16 @@
       "difficulty": "입문",
       "materials": ["가위", "풀", "개인 필기도구"],
       "includedItems": ["콜라주 이미지팩", "활동지"],
+      "activities": [
+        "마음이 움직이는 이미지와 문장 조각을 빠르게 모읍니다.",
+        "완성본을 서두르지 않고 살고 싶은 장면을 여러 방식으로 배열합니다.",
+        "콜라주에서 이번 달에 시도할 작은 행동 한 가지를 고릅니다."
+      ],
+      "recommendedFor": [
+        "목표 목록보다 살고 싶은 장면에서 방향을 찾고 싶은 분",
+        "이미지와 문장을 직접 고르고 배열하는 과정을 좋아하는 분",
+        "거창한 계획보다 이번 달의 작은 행동을 만들고 싶은 분"
+      ],
       "soloFriendly": true,
       "beginnerFriendly": true,
       "groupChat": null,
@@ -451,6 +583,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
+      "featuredOrder": 4,
       "published": true,
       "createdAt": null,
       "updatedAt": null
@@ -466,6 +599,8 @@
       "category": "글쓰기",
       "tags": [],
       "coverImage": null,
+      "coverImageMobile": null,
+      "coverImageAlt": null,
       "gallery": [],
       "hostId": null,
       "format": null,
@@ -487,6 +622,8 @@
       "difficulty": null,
       "materials": [],
       "includedItems": [],
+      "activities": [],
+      "recommendedFor": [],
       "soloFriendly": null,
       "beginnerFriendly": null,
       "groupChat": null,
@@ -497,6 +634,7 @@
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": false,
+      "featuredOrder": null,
       "published": false,
       "createdAt": null,
       "updatedAt": null
