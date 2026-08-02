@@ -82,12 +82,13 @@ async function checkCatalogImage(publicPath, expected, maxBytes, label) {
   if (dimensions) check(dimensions.width === expected[0] && dimensions.height === expected[1], `${label} expected ${expected.join('x')}, found ${dimensions.width}x${dimensions.height}`);
 }
 
-const [{ programs }, { products }, { hosts }, { content }, site] = await Promise.all([
+const [{ programs }, { products }, { hosts }, { content }, site, launches] = await Promise.all([
   json('nal/data/programs.json'),
   json('nal/data/products.json'),
   json('nal/data/hosts.json'),
   json('nal/data/content.json'),
-  json('nal/data/site.json')
+  json('nal/data/site.json'),
+  json('nal/data/launches.json')
 ]);
 
 const requiredProgram = [
@@ -178,8 +179,27 @@ for (const item of targetPrograms) {
   check(item.gallery.includes(item.coverImage), `target program ${item.id} gallery must include cover`);
   check(item.activities.length >= 3, `target program ${item.id} needs activity content`);
   check(item.recommendedFor.length >= 3, `target program ${item.id} needs recommendedFor content`);
-  for (const key of ['startDate', 'endDate', 'startTime', 'endTime', 'capacity', 'remainingSeats', 'price', 'originalPrice', 'applicationUrl']) {
-    check(item[key] === null, `target program ${item.id} must keep unconfirmed ${key} null`);
+  if (item.id === 'flowing-river-coach-community') {
+    check(item.status === 'open', 'flowing river must be open');
+    check(item.startDate === '2026-09-10', 'flowing river first Zoom date mismatch');
+    check(item.startTime === '20:00' && item.endTime === '21:30', 'flowing river Zoom time mismatch');
+    check(item.capacity === 10, 'flowing river capacity must be 10');
+    check(item.price === 10000, 'flowing river monthly fee must be 10000');
+    check(item.format === 'online', 'flowing river format must be online');
+    check(item.location === '카카오톡 단톡방 · Zoom', 'flowing river location mismatch');
+    check(item.onlineUrl === null, 'flowing river must not expose a Zoom URL');
+    check(item.instagramUrl === 'https://www.instagram.com/daily_coach_ing/', 'flowing river Instagram URL mismatch');
+    check(item.flexMoveUrl === '/activities/coaching-flex-move/', 'flowing river FLEX MOVE URL mismatch');
+    check(item.zoomRecording === false, 'flowing river Zoom recording must be disabled');
+    check(item.applicationUrl === null || /^https:\/\/docs\.google\.com\/forms\//.test(item.applicationUrl), 'flowing river applicationUrl must be null or a Google Form URL');
+    check(!String(item.applicationUrl || '').includes('REPLACE_'), 'flowing river applicationUrl contains a placeholder');
+    check(item.monthlyFlow?.length === 4, 'flowing river monthly flow must have four stages');
+    check(item.participationSteps?.length === 7, 'flowing river participation flow must have seven stages');
+    if (item.applicationUrl === null) notes.push('flowing-river-form=pending');
+  } else {
+    for (const key of ['startDate', 'endDate', 'startTime', 'endTime', 'capacity', 'remainingSeats', 'price', 'originalPrice', 'applicationUrl']) {
+      check(item[key] === null, `target program ${item.id} must keep unconfirmed ${key} null`);
+    }
   }
   await checkCatalogImage(item.coverImage, [1600, 1000], 250 * 1024, `program ${item.id} cover`);
   await checkCatalogImage(item.coverImageMobile, [900, 1200], 200 * 1024, `program ${item.id} mobile`);
@@ -269,6 +289,9 @@ check(runtime.includes('data-image-fallback'), 'runtime missing image failure fa
 check(runtime.includes('nal-relation-grid'), 'runtime missing program-product relation module');
 check(css.includes('.nal-curation-grid'), 'CSS missing curated home grid');
 check(css.includes('.nal-product-gallery'), 'CSS missing product visual gallery');
+check(css.includes('.nal-river-launch-hero'), 'CSS missing flowing river launch hero');
+check(runtime.includes('FLOWING_RIVER_ID'), 'runtime missing flowing river official launch renderer');
+check(runtime.includes('renderFlowingRiverDetail'), 'runtime missing flowing river detail renderer');
 check(
   runtime.includes('/nal/data/') ||
     (/DATA_BASE\s*=\s*["']\/nal\/data["']/.test(runtime) && runtime.includes('fetch(`${DATA_BASE}/')),
@@ -292,6 +315,15 @@ for (const phrase of ['날빛 프로그램', '날빛 아카이브', '날빛 도�
 for (const phrase of ['치료한다', '진단한다', '우울증을 개선한다', '트라우마를 치유한다', '심리 문제를 해결한다']) {
   check(!textCorpus.includes(phrase), `forbidden efficacy claim found: ${phrase}`);
 }
+
+const flowingRiver = programs.find((item) => item.id === 'flowing-river-coach-community');
+const flowingRiverCorpus = JSON.stringify({ flowingRiver, launches });
+check(launches.items?.length === 1 && launches.items[0]?.id === 'flowing-river-coach-community', 'NOW OPEN must contain only flowing river');
+check(!/25[–-]45/.test(flowingRiverCorpus), 'flowing river still contains the former age range');
+check(!/mailto:|hello@daily-coach-ing\.com|이메일로/.test(flowingRiverCorpus), 'flowing river launch still contains email guidance');
+check(flowingRiverCorpus.includes('daily_coach_ing'), 'flowing river launch missing Instagram DM path');
+const flowingDetailHtml = await readFile(path.join(root, 'nal/gather/flowing-river-coaches/index.html'), 'utf8');
+check(!/zoom\.us|참여코드\s*[:：]\s*\S+|open\.kakao\.com/.test(flowingDetailHtml), 'flowing river public page exposes a private meeting or chat value');
 
 notes.push(`pages=${htmlFiles.length}`);
 notes.push(`programs=${programs.length} (${programs.filter((x) => x.published).length} public)`);

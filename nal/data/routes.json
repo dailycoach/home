@@ -3,8 +3,8 @@
   "routes": [
     {
       "path": "/nal/",
-      "title": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
-      "description": "취향과 마음을 주제로 만나는 커뮤니티와 원데이클래스, 감정카드·질문카드·워크북을 소개하는 NAL 플랫폼입니다.",
+      "title": "흐르는 강물처럼 | NAL NOW OPEN · 날빛",
+      "description": "코칭을 사랑하는 누구나 참여하는 흐르는 강물처럼 창립 멤버 10명 공식 모집 안내입니다.",
       "indexable": true
     },
     {
@@ -118,7 +118,7 @@
     {
       "path": "/nal/gather/flowing-river-coaches/",
       "title": "흐르는 강물처럼 | NAL GATHER · 날빛",
-      "description": "카카오톡·온라인·서울 오프라인을 오가며 코칭의 삶과 실천을 이어가는 코치 커뮤니티",
+      "description": "카카오톡 단톡방, 주 1회 코칭 미션, 매월 10일 Zoom으로 이어지는 월간 코칭 커뮤니티",
       "indexable": true
     },
     {

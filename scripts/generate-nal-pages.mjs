@@ -10,14 +10,15 @@ const [{ programs }, { products }, { hosts }, { content }] = await Promise.all([
   readFile(path.join(root, 'nal/data/hosts.json'), 'utf8').then(JSON.parse),
   readFile(path.join(root, 'nal/data/content.json'), 'utf8').then(JSON.parse)
 ]);
+const flowingRiver = programs.find((item) => item.id === 'flowing-river-coach-community');
 
 const pages = [
   {
     route: '/nal/', attrs: 'data-page="home"',
-    title: '날빛 | NAL 커뮤니티·원데이클래스·감정카드',
-    description: '취향과 마음을 주제로 만나는 커뮤니티와 원데이클래스, 감정카드·질문카드·워크북을 소개하는 NAL 플랫폼입니다.',
-    label: 'NAL / CURATED COMMUNITY', heading: '오늘, 조금 다른 사람들과\n조금 더 나다운 시간을.',
-    copy: '취향과 마음이 만나는 커뮤니티와 원데이클래스, 그리고 일상에서 사용하는 감정·코칭 도구.', schemaType: 'WebSite'
+    title: '흐르는 강물처럼 | NAL NOW OPEN · 날빛',
+    description: '코칭을 사랑하는 누구나 참여하는 흐르는 강물처럼 창립 멤버 10명 공식 모집 안내입니다.',
+    label: 'NAL / NOW OPEN', heading: '코칭을 사랑하는 사람들이\n오래 연결되는 곳.',
+    copy: '카카오톡 단톡방, 주 1회 코칭 미션, 매월 10일 Zoom으로 이어지는 월간 코칭 커뮤니티입니다.', schemaType: 'WebSite'
   },
   {
     route: '/nal/gather/', attrs: 'data-page="listing" data-collection="programs" data-type="gather"',
@@ -93,7 +94,9 @@ for (const item of publicItems(programs)) {
     title: `${item.title} | ${label} · 날빛`,
     description: text(item, 'summary', 'description'),
     label, heading: item.title,
-    copy: '확정되지 않은 일정·가격·정원 정보는 공개하지 않습니다. 현재 등록 상태를 확인해 주세요.',
+    copy: item.id === 'flowing-river-coach-community'
+      ? '창립 멤버 10명 · 월 10,000원 · 매월 10일 Zoom · 주 1회 카카오톡 미션'
+      : '확정되지 않은 일정·가격·정원 정보는 공개하지 않습니다. 현재 등록 상태를 확인해 주세요.',
     schemaType: 'WebPage',
     ogImage: item.coverImage,
     ogImageMobile: item.coverImageMobile,
@@ -197,13 +200,17 @@ function fallbackImage(item, collectionName, eager = false) {
 
 function fallbackExtras(page) {
   if (page.route === '/nal/') {
-    return `<section class="nal-section nal-static-fallback" aria-label="NAL 핵심 영역">
-      <div class="nal-container">
-        <div class="nal-grid nal-grid--three">
-          <a class="nal-card nal-card--gather" href="/nal/gather/"><span>NAL GATHER</span><strong>커뮤니티와 소모임</strong></a>
-          <a class="nal-card nal-card--class" href="/nal/class/"><span>NAL CLASS</span><strong>원데이클래스와 워크숍</strong></a>
-          <a class="nal-card nal-card--product" href="/nal/shop/"><span>NAL SHOP</span><strong>감정카드와 자기이해 도구</strong></a>
-        </div>
+    if (!flowingRiver) return '';
+    const application = flowingRiver.applicationUrl
+      ? `<a class="nal-button--primary" href="${escapeHtml(flowingRiver.applicationUrl)}">창립 멤버 신청</a>`
+      : '<span class="nal-button--primary is-disabled" role="link" aria-disabled="true">창립 멤버 신청 · 설문 연결 전</span>';
+    return `<section class="nal-section nal-static-fallback" aria-label="흐르는 강물처럼 공식 모집">
+      <div class="nal-container nal-prose">
+        <p><strong>모집 중 · 창립 멤버 10명 · 월 10,000원</strong></p>
+        <p>${escapeHtml(flowingRiver.summary)}</p>
+        <ul><li>카카오톡 단톡방</li><li>매월 10일 오후 8:00~9:30 Zoom</li><li>주 1회 카카오톡 미션</li><li>COACHING FLEX MOVE 활용</li></ul>
+        <p>${application} <a class="nal-button--secondary" href="${escapeHtml(flowingRiver.instagramUrl)}" target="_blank" rel="noopener noreferrer">Instagram으로 문의</a></p>
+        <p><a href="/nal/gather/flowing-river-coaches/">흐르는 강물처럼 운영 방식 보기 →</a></p>
       </div>
     </section>`;
   }
@@ -226,6 +233,12 @@ function fallbackExtras(page) {
   if (page.attrs.includes('data-page="detail"') && slug) {
     const item = collections[collectionName].find((entry) => entry.slug === slug && entry.published);
     if (!item) return '';
+    if (item.id === 'flowing-river-coach-community') {
+      const application = item.applicationUrl
+        ? `<a class="nal-button--primary" href="${escapeHtml(item.applicationUrl)}">창립 멤버 신청</a>`
+        : '<span class="nal-button--primary is-disabled" role="link" aria-disabled="true">창립 멤버 신청 · 설문 연결 전</span>';
+      return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary)}</p><ul><li>창립 멤버 10명</li><li>월 10,000원</li><li>매월 10일 오후 8:00~9:30 Zoom</li><li>주 1회 카카오톡 미션</li><li>COACHING FLEX MOVE 활용</li></ul><p>${application} <a class="nal-button--secondary" href="${escapeHtml(item.instagramUrl)}" target="_blank" rel="noopener noreferrer">@daily_coach_ing DM 문의</a></p></div></section>`;
+    }
     const source = item.sourceUrl ? `<a class="nal-button nal-button--secondary" href="${escapeHtml(item.sourceUrl)}">확인된 원문 보기</a>` : '';
     return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}</div></section>`;
   }
