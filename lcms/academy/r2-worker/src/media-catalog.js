@@ -14,10 +14,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK01_P01_self-concept-and-sources.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "16433b6f9319e77b6c3702ab38991980df3f31996c8c730f90f435b539b0de4e",
+    "sizeBytes": 52392814,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1220.04,
+      "durationDeltaSeconds": 0.04,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w01-p02",
@@ -32,10 +42,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "6b579830f99c49b86b27026b783bcd093a62b44410309f54e133c371e13767cf",
+    "sizeBytes": 37770869,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 840.08,
+      "durationDeltaSeconds": 0.08,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w01-p03",
@@ -50,10 +70,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "402e20159d97528c7fc2c6f5a54c005afef24a15ad999c0f777a1e3831bab2cc",
+    "sizeBytes": 60951914,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1290.16,
+      "durationDeltaSeconds": 0.16,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w01-p04",
@@ -68,10 +98,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK01_P04_impression-formation.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "f942c42fc35fcd6499481e258fc9b3ecd7bcb7dfb9b342861db827a398554760",
+    "sizeBytes": 66154544,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1570.04,
+      "durationDeltaSeconds": 0.04,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w01-p05",
@@ -86,10 +126,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "83123191f944ad3e9c62568f86984581e61503da78ab2cc90b73d5cf2906aa50",
+    "sizeBytes": 65922937,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1433.652993,
+      "durationDeltaSeconds": 0.347007,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p01",
@@ -104,10 +154,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "141f98a77657488c4a96ac93542b0ed522a36f911d57a1e558eb557894065f77",
+    "sizeBytes": 59471350,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1430.88,
+      "durationDeltaSeconds": 0.12,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p02",
@@ -122,10 +182,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "5e4efc01211a6bb533773d2eb2aedda487c4fa18c076c27010af62cf8a6ea6c1",
+    "sizeBytes": 49533445,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1184.76,
+      "durationDeltaSeconds": 0.24,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p03",
@@ -140,10 +210,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "c6356c6a0bc662c9bda2b0c1d3b60910775c9e108e2503f3f36de35f7eccfbbe",
+    "sizeBytes": 46047319,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1040.84,
+      "durationDeltaSeconds": 0.16,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p04",
@@ -158,10 +238,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "63f0fbb047972183f965e2400387896f799e6915ee166f32773e419121d454f4",
+    "sizeBytes": 65450964,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1395.68,
+      "durationDeltaSeconds": 0.32,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p05",
@@ -176,10 +266,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "8ef177e19a60e2adf8a0940d6c8402656440762483342d428e574c64d45132b5",
+    "sizeBytes": 68480591,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1230.56,
+      "durationDeltaSeconds": 0.44,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p06",
@@ -194,10 +294,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P06_member-management-and-data-use.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "c394c849c397ab1e764fd9345e37813032faf8236273c19ef694493d532bc345",
+    "sizeBytes": 35338381,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 681.92,
+      "durationDeltaSeconds": 0.08,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w02-p07",
@@ -212,10 +322,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "1d835369bd186fd86a0f07fed348a2a7c00dafa7d2c4f5354f5228e532f282de",
+    "sizeBytes": 41890171,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 996.925011,
+      "durationDeltaSeconds": 0.074989,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p01",
@@ -230,10 +350,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P01_course-introduction-and-personality-definition.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "2f6041e941f54e80264324bd4e8fb67d9a52cd9b49debf9237db0acc80f9d9b6",
+    "sizeBytes": 35737404,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1116.76,
+      "durationDeltaSeconds": 0.24,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p02",
@@ -248,10 +378,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "c7a7c9160a3a0acb640298c7c8b890fb654f28a3a7f465882e19027f033c8471",
+    "sizeBytes": 26989904,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 905.048984,
+      "durationDeltaSeconds": 0.048984,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p03",
@@ -266,10 +406,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P03_trait-and-process-theories.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "ae78d8e87b3e42fd84bac34db7fb3c0349e8f89167fc698451679e7a41cb337f",
+    "sizeBytes": 30209424,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 915.017031,
+      "durationDeltaSeconds": 0.017031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p04",
@@ -284,10 +434,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P04_personality-perspectives-01.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "80978a97339b48b11d63b7adaa8b6defa610b5825f82a2eb8a6ec1956eaa6d15",
+    "sizeBytes": 30388890,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 904.882031,
+      "durationDeltaSeconds": 0.117969,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p05",
@@ -302,10 +462,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P05_personality-perspectives-02.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "ec72b6b561004fe1e7b0e426728e5a97837114ad49b4d08203a446ec8cf2fd41",
+    "sizeBytes": 31011260,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 909.292969,
+      "durationDeltaSeconds": 0.292969,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p06",
@@ -320,10 +490,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P06_cattell-trait-theory-and-16pf.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "74b8728bdb42f40f1c1afc017922f98bbd41effd15e7668d9fdabc44f041dc6a",
+    "sizeBytes": 40882348,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1117.172031,
+      "durationDeltaSeconds": 0.172031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p07",
@@ -338,10 +518,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "426eab6f40658cb4837666724d1c885b39bb03ece9dd81679795fb284555febe",
+    "sizeBytes": 29758683,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 750.522969,
+      "durationDeltaSeconds": 0.477031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w03-p08",
@@ -356,10 +546,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK03_P08_ai-assisted-interpretation-and-platform.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "c90170926d878ad80d1e758d876b59fbafcf7f206aad48a098bedf4b4c7fd7ee",
+    "sizeBytes": 23676244,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 616.513016,
+      "durationDeltaSeconds": 0.486984,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w04-p01",
@@ -374,10 +574,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK04_P01_communication-concept-and-structure.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "691acafdc2d4e7fb9c3ad2cb9070172638c5e606ed892458c2ee6e9d4d0f166e",
+    "sizeBytes": 36824852,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 936.96,
+      "durationDeltaSeconds": 0.04,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w04-p02",
@@ -392,10 +602,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK04_P02_communication-functions-and-expression.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "947f0542764ce76c9d2bb21853a61ad5341c93084f925b2b54d66970db12d3c9",
+    "sizeBytes": 43806221,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1090.56,
+      "durationDeltaSeconds": 0.44,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w04-p03",
@@ -410,10 +630,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK04_P03_ten-types-and-assessment-criteria.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "1734fec69f9b6b9171aeb3a1c54b5f7a51ec07ad936a1cccc5b674c3d6ac0995",
+    "sizeBytes": 38413165,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 839.68,
+      "durationDeltaSeconds": 0.32,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w04-p04",
@@ -428,10 +658,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK04_P04_type-characteristics-interpretation.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "a888b2f323d5e63926442f16baeb7ab3e29f1082a2d383dad5ff5d83eb2d3081",
+    "sizeBytes": 36459711,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 808.96,
+      "durationDeltaSeconds": 0.04,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w04-p05",
@@ -446,10 +686,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK04_P05_case-application-and-summary.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "a03d75110528f5a6e080b48602786dc1ed89e718b3842cf96024200a80501f4c",
+    "sizeBytes": 54063675,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 675.84,
+      "durationDeltaSeconds": 0.16,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w04-p06",
@@ -464,10 +714,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK04_P06_report-and-platform-use.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "c826fb871fdc665cb9fcb3a5330345267d56d0c92eb3e4a595f56cb295e1de93",
+    "sizeBytes": 22776708,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 428.338005,
+      "durationDeltaSeconds": 0.338005,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p01",
@@ -482,10 +742,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P01_stress-definition-and-core-characteristics.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "5eba957c5a67726ad8999aa14b0bc4e9daa8c3a594dc1b1d0a13eda872302bc0",
+    "sizeBytes": 56899738,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1279.48,
+      "durationDeltaSeconds": 0.48,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p02",
@@ -500,10 +770,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P02_positive-negative-stress-and-theories.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "768cf016d9fd047a3600738503bedda8ebe48b15c75c7f1e86cab34c6c0e70b7",
+    "sizeBytes": 42403494,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 864.082031,
+      "durationDeltaSeconds": 0.082031,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p03",
@@ -518,10 +798,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P03_rs-stress-assessment-causes.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "cf75bbd44105e376b2c049486ad7fcfa38f2431236e5aa3c1512a522d6216875",
+    "sizeBytes": 37483455,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 734.972031,
+      "durationDeltaSeconds": 0.027969,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p04",
@@ -536,10 +826,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P04_stress-symptoms-and-physiological-response.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "3e42504fe9420fefaa3722651f83e7d5f0bcf9987a86c332972223051610943a",
+    "sizeBytes": 52254281,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1018.002969,
+      "durationDeltaSeconds": 0.002969,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p05",
@@ -554,10 +854,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P05_coping-types-and-management-strategies.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "4962ed9898eb7d2899cfdcec56ce632d911462f231c8be478641a933859a1a4e",
+    "sizeBytes": 27716330,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 516.367031,
+      "durationDeltaSeconds": 0.367031,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p06",
@@ -572,10 +882,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P06_stress-case-application-01.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "690d64415056187a72115b255997d3de7485bb06924c86ac32eaa9edf262829d",
+    "sizeBytes": 68516078,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 946.015,
+      "durationDeltaSeconds": 0.015,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p07",
@@ -590,10 +910,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P07_stress-case-application-02.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "92f3dfb2030378c0354958c5fd7df7926f8b39a77a9d84eb2731420f6aa69fd0",
+    "sizeBytes": 74697152,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1099.92,
+      "durationDeltaSeconds": 0.08,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w05-p08",
@@ -608,10 +938,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK05_P08_case-integration-and-result-review.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "0a08394b9ea50de094bf0b0ca948da65bbd5c07742fb5478df0420987879d750",
+    "sizeBytes": 69260556,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 812.419773,
+      "durationDeltaSeconds": 0.419773,
+      "width": 1212,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p01",
@@ -626,10 +966,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P01_course-introduction-and-learning-style.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "0ac9d2e981357a96d97f163329f0cda8b43b7dddb5ce236d3b82a6f2769cc6ae",
+    "sizeBytes": 39668091,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1119.44,
+      "durationDeltaSeconds": 0.44,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p02",
@@ -644,10 +994,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P02_cognitive-affective-environmental-learning-style.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "2d2f0fe85e9bfa7e0579322c24ef4a6e6ec37cce338b9159fafb85ab6947c502",
+    "sizeBytes": 46740085,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1168.257969,
+      "durationDeltaSeconds": 0.257969,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p03",
@@ -662,10 +1022,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P03_five-affective-learning-factors.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "054a3c63cab1646fcc28b3885a8033588e14f0b4fb7c5e5435f3c593f8055eca",
+    "sizeBytes": 31415723,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 721.446016,
+      "durationDeltaSeconds": 0.446016,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p04",
@@ -680,10 +1050,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P04_jungian-learning-personality.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "be2fe2a44972c94f4615b896128bd54d9694f46b357748a57a3d557dffcf260f",
+    "sizeBytes": 26803976,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 667.775,
+      "durationDeltaSeconds": 0.225,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p05",
@@ -698,10 +1078,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P05_learner-types-and-brain-functions.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "0a31d6feefa830ccd6969289ec1ef79baef90fa885960e6cf2b02f6730ff4751",
+    "sizeBytes": 40139674,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 863.845,
+      "durationDeltaSeconds": 0.155,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p06",
@@ -716,10 +1106,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P06_learning-style-report-practice.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "fe40677ee9296b71cb66989af76ed269aa5080c9182d046dc61eec3d85be45ee",
+    "sizeBytes": 57266824,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1077.406016,
+      "durationDeltaSeconds": 0.406016,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w06-p07",
@@ -734,10 +1134,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK06_P07_learning-emotion-and-platform-use.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "65929443eadc4d190686deeee96f28989cf8eefa0d4cdc49399820404956f84c",
+    "sizeBytes": 46525407,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1097.978776,
+      "durationDeltaSeconds": 0.021224,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p01",
@@ -752,10 +1162,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "c203eb564bdd3403e33ce99582976f3f58700a1c484bed7337207bd23c478b80",
+    "sizeBytes": 40128693,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1116.04,
+      "durationDeltaSeconds": 0.04,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p02",
@@ -770,10 +1190,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "771d51a4a09cdfbbb3558a459dd098b65e1b917321c938e4ec1d24c2c6a889c9",
+    "sizeBytes": 36001713,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 986.967969,
+      "durationDeltaSeconds": 0.032031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p03",
@@ -788,10 +1218,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "f8f2b98938fa3e41833e71c24f072fc160c318e934cb0684aac2d70ae2722fbe",
+    "sizeBytes": 43078101,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1198.017031,
+      "durationDeltaSeconds": 0.017031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p04",
@@ -806,10 +1246,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "8decb3ed412f7bbb2d836e89e969b1c3cd4099482d1c6b7da146ecb974f19073",
+    "sizeBytes": 33158173,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 908.82,
+      "durationDeltaSeconds": 0.18,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p05",
@@ -824,10 +1274,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "9eca441ed47a20c709c8067c22c2994cfff861dc261575c1061ea7ef4ad19da4",
+    "sizeBytes": 56721451,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1116.083984,
+      "durationDeltaSeconds": 0.083984,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p06",
@@ -842,10 +1302,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P06_anger-causes-functions-and-effects.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "8f05fd2b20c9d9310ebaf7f3154f9653850de58fb3beef025156b907072bf8c7",
+    "sizeBytes": 51106864,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 977.046016,
+      "durationDeltaSeconds": 0.046016,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w07-p07",
@@ -860,10 +1330,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "48fb9c838669edec3f18440d893b36f8225e460ab781800e944f441cb3eace1e",
+    "sizeBytes": 49528656,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1009.348209,
+      "durationDeltaSeconds": 0.348209,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p01",
@@ -878,10 +1358,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "741aba65d4daa1cf43a657fab410a454aa5ad6db3d8e7cde68ad874ccf41b578",
+    "sizeBytes": 44633024,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1106.08,
+      "durationDeltaSeconds": 0.08,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p02",
@@ -896,10 +1386,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "3db4602c7c569a63163c9ab3804d4517be9355624d2226c9967f03c6ae127f26",
+    "sizeBytes": 35910054,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 895.13,
+      "durationDeltaSeconds": 0.13,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p03",
@@ -914,10 +1414,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "aa6ee0227e78109ed04ae6855814cfe4850ec708ebca78ea237db78f32fb4a8e",
+    "sizeBytes": 20254210,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 569.852969,
+      "durationDeltaSeconds": 0.147031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p04",
@@ -932,10 +1442,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "bfe18c2e6edb80d184fe65fd4a25270a0e878baa1f3963a06cbc3ce75ed41c6b",
+    "sizeBytes": 30136334,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 931.122031,
+      "durationDeltaSeconds": 0.122031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p05",
@@ -950,10 +1470,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "2f1a7e77157aacc3b31db1ae5e9f6240c2a52aa821ec2d26d80b3d9a372c1731",
+    "sizeBytes": 23543523,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 591.375,
+      "durationDeltaSeconds": 0.375,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p06",
@@ -968,10 +1498,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "73b9139de00eb832daad3d5ad8874635430b5a551b7dad924737f9e21a374dad",
+    "sizeBytes": 33794731,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1008.102031,
+      "durationDeltaSeconds": 0.102031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p07",
@@ -986,10 +1526,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P07_symptom-scale-case-application.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "fe5c285e0898d977244618d44a717ee95393753ab04bc4484d08c5addfa5876e",
+    "sizeBytes": 32317780,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 945.301016,
+      "durationDeltaSeconds": 0.301016,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w08-p08",
@@ -1004,10 +1554,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK08_P08_report-and-assessment-platform.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "36e4def16c5ed80c31085a81e67e9d4c5cef847f7563d4df4c6399b31ee5aa47",
+    "sizeBytes": 13090185,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 305.690703,
+      "durationDeltaSeconds": 0.309297,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p01",
@@ -1022,10 +1582,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "637cb5a908197bfe3e0e6fbd6f54aa49332ebcfed054d8984f997df412bf0471",
+    "sizeBytes": 32594542,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1080.12,
+      "durationDeltaSeconds": 0.12,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p02",
@@ -1040,10 +1610,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "f0ab60798942f8fd5e6c004bfd14407fcb7eb36b2fc9a8888864af0fe4a3b17a",
+    "sizeBytes": 36962540,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1080.09,
+      "durationDeltaSeconds": 0.09,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p03",
@@ -1058,10 +1638,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "305c20a2c6e1829c8cd97b54b80b5f978b6c5ff03176de0150288b47ce694b27",
+    "sizeBytes": 25828571,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 833.042969,
+      "durationDeltaSeconds": 0.042969,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p04",
@@ -1076,10 +1666,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "141ee41173d28e81a1c7011c8fbb1263838b613d2eb419da9fa5c02cdd169345",
+    "sizeBytes": 26961739,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 818.577031,
+      "durationDeltaSeconds": 0.422969,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p05",
@@ -1094,10 +1694,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "97c6cd4fdcc0ca55acbf14444acd65e5beef04529910b48d37ce8a1aeecc74ba",
+    "sizeBytes": 40814440,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1204.257031,
+      "durationDeltaSeconds": 0.257031,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p06",
@@ -1112,10 +1722,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "a52bcf775c433976460efa4f85ed886cca09ca01346a58e6108b7c4ee5917884",
+    "sizeBytes": 41752376,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1198.012969,
+      "durationDeltaSeconds": 0.012969,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w09-p07",
@@ -1130,10 +1750,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK09_P07_seven-scales-case-integration.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "51f5dd60f3a107e3bbc6fb5814397c675fe9191df5cd323ce986320a40c819e7",
+    "sizeBytes": 42388217,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1282.832834,
+      "durationDeltaSeconds": 0.167166,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p01",
@@ -1148,10 +1778,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P01_couple-assessment-profile.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "4a2d86f7343d612cfc798ab008e3b65dc8d6eec213c69fc8660ca1ae43e1eafc",
+    "sizeBytes": 43579632,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1112.24,
+      "durationDeltaSeconds": 0.24,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p02",
@@ -1166,10 +1806,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P02_case-strengths-and-relationship-resources.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "676eb2dd29a30de198926a58a75b7dbf546b11bf287e92aa8e97b759dae48053",
+    "sizeBytes": 42969723,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1086.96,
+      "durationDeltaSeconds": 0.04,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p03",
@@ -1184,10 +1834,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P03_case-low-factors-and-adjustment.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "005fa7de75cc4707b837edc0eb5ae3d05f1ea0274863c85f08d32695e049308f",
+    "sizeBytes": 44237127,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1120.2,
+      "durationDeltaSeconds": 0.2,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p04",
@@ -1202,10 +1862,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "cd3258694298c9cdfc2c4544cbcfabbd644673b878aa7c80fd319c68e50d8da3",
+    "sizeBytes": 46131572,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1158.56,
+      "durationDeltaSeconds": 0.44,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p05",
@@ -1220,10 +1890,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "107c43df14674d122a044d8a388ef464b8842742e55d7d9276de6f3077a1fc16",
+    "sizeBytes": 32616862,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 706.72,
+      "durationDeltaSeconds": 0.28,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p06",
@@ -1238,10 +1918,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P06_thirteen-factors-and-criteria.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "cbb8dee529779eace5370ee018e7ac1b17f94628b5d5d92a21c950f0ae9b320d",
+    "sizeBytes": 39015871,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 784.6,
+      "durationDeltaSeconds": 0.4,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w10-p07",
@@ -1256,10 +1946,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK10_P07_report-interpretation-and-platform.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "939ee26ca454efa93b8b9feb762c6a5f84394fbc0267f48e42c384f9cbabcffd",
+    "sizeBytes": 42734754,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 936.729002,
+      "durationDeltaSeconds": 0.270998,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p01",
@@ -1274,10 +1974,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P01_development-profile-and-factors.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "1e484da330f06cd7ea8e14ad897f6868bfb6fc8568863eabcc0b2002cc3914dc",
+    "sizeBytes": 40949312,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1019.64,
+      "durationDeltaSeconds": 0.36,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p02",
@@ -1292,10 +2002,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "9bf1743e8c9a0794712eecfb23ebfc31d05adf6fb4c98830bceb5e681270c1df",
+    "sizeBytes": 42605416,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 1015.2,
+      "durationDeltaSeconds": 0.2,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p03",
@@ -1310,10 +2030,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "18b7a32d0f70be3576aadbcba6ba809e2ef2ce798e0da87ef0dbfc3fcf3b84bb",
+    "sizeBytes": 36385234,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 849.4,
+      "durationDeltaSeconds": 0.4,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p04",
@@ -1328,10 +2058,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "fd5af43e019b222a12dbf072c92fbbc2396663d29f543d7ed6c61a17f1ade4ec",
+    "sizeBytes": 30469169,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 813.8,
+      "durationDeltaSeconds": 0.2,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p05",
@@ -1346,10 +2086,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "f47a310346f9bd7f2c6917df4f7ca1227631769eca4f1f4ab5111230f02a1c7e",
+    "sizeBytes": 33386515,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 861.2,
+      "durationDeltaSeconds": 0.2,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p06",
@@ -1364,10 +2114,20 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "f75d9f5a5ac4070cddaee8395784b193326c98adbe4d78e5b9e12ef08c018656",
+    "sizeBytes": 33665746,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 825.52,
+      "durationDeltaSeconds": 0.48,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   },
   {
     "mediaId": "lmc-w11-p07",
@@ -1382,9 +2142,19 @@ export const MEDIA_CATALOG = new Map([
     "sourceFilename": "LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
     "accessPolicy": "PRIVATE_WORKER_SIGNED_URL",
     "status": "pending_upload",
-    "sha256": null,
-    "sizeBytes": null,
+    "sha256": "3603ae82fc27877c485c52cf9a8e393e1e6db10bf29d90e8f5ca4660aa6ab59b",
+    "sizeBytes": 33918840,
     "publishedAt": null,
-    "captions": []
+    "captions": [],
+    "technical": {
+      "actualDurationSeconds": 896.933991,
+      "durationDeltaSeconds": 0.066009,
+      "width": 1280,
+      "height": 720,
+      "fps": "25/1",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "fastStart": true
+    }
   }
 ].map((item) => [`${item.week}:${item.part}`, item]));

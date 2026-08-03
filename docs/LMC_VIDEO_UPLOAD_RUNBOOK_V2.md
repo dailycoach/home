@@ -1,6 +1,6 @@
 # LMC Video Upload Runbook v2
 
-현재 상태는 업로드 준비 단계입니다. 실제 영상 0개, 공개 영상 0개, 업로드 대기 77개입니다.
+현재 상태는 실영상 사전검수 완료·R2 업로드 대기 단계입니다. 사전검수 77/77, R2 객체 0개, 공개 영상 0개, 업로드 대기 77개입니다.
 
 ## 1. 로컬 사전검사
 
@@ -9,7 +9,11 @@ node lcms/academy/r2-worker/scripts/preflight-segmented-videos.mjs --catalog-onl
 node lcms/academy/r2-worker/scripts/preflight-segmented-videos.mjs /absolute/path/to/77-videos
 ```
 
-실패가 하나라도 있으면 업로드하지 않습니다. 검사결과의 파일명·러닝타임·크기·SHA-256·해상도·FPS를 보관합니다.
+실패가 하나라도 있으면 업로드하지 않습니다. 확정 검사결과는 `video-upload-map.json`, `video-upload-map.csv`, `LMC_77_SHA256SUMS.txt`, `docs/LMC_77_PREFLIGHT_REPORT.md`에 보관합니다. 새 교정본이 생기면 다음 명령으로 확정 매니페스트를 다시 반영합니다.
+
+```bash
+node scripts/apply-lmc-preflight-manifest.mjs /absolute/path/to/LMC_77_UPLOAD_MANIFEST_FINAL.json
+```
 
 ## 2. Cloudflare 준비
 

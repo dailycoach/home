@@ -57,6 +57,11 @@ assert(!media.some((item) => item.week === 12), 'WEEK-12 must not contain media'
 assert(media.every((item) => item.status === 'pending_upload'), 'All 77 media items must remain pending_upload before upload');
 assert(media.every((item) => item.provider === 'R2'), 'All media must use R2');
 assert(media.every((item) => item.accessPolicy === 'PRIVATE_WORKER_SIGNED_URL'), 'All media must use signed Worker access');
+assert(media.every((item) => Number.isInteger(item.sizeBytes) && item.sizeBytes > 0), 'All media must contain preflight sizeBytes');
+assert(media.every((item) => /^[a-f0-9]{64}$/.test(item.sha256 || '')), 'All media must contain preflight SHA-256');
+assert(media.every((item) => item.technical?.videoCodec === 'h264' && item.technical?.audioCodec === 'aac'), 'All media must contain H.264/AAC preflight metadata');
+assert(media.every((item) => item.technical?.fastStart === true), 'All media must pass Fast Start preflight');
+assert(media.every((item) => Math.abs(item.technical?.actualDurationSeconds - item.durationSeconds) <= 2), 'All media must pass the two-second duration tolerance');
 for (let week = 1; week <= 11; week += 1) assert(media.filter((item) => item.week === week).length === expectedCounts[week - 1], `WEEK-${week} media count mismatch`);
 for (const [index, item] of media.entries()) {
   const source = parts[index];
@@ -75,10 +80,14 @@ assert(course.videoDurationSeconds === durationSeconds, 'Course and media total 
 const uploadJson = json('lcms/academy/r2-worker/upload/video-upload-map.json');
 const uploadCsv = read('lcms/academy/r2-worker/upload/video-upload-map.csv').trim().split(/\r?\n/);
 const uploadCommands = read('lcms/academy/r2-worker/upload/upload-commands.sh');
+const checksumLines = read('lcms/academy/r2-worker/upload/LMC_77_SHA256SUMS.txt').trim().split(/\r?\n/);
 assert(uploadJson.length === 77, 'Upload JSON must contain 77 rows');
 assert(uploadCsv.length === 78, 'Upload CSV must contain header plus 77 rows');
-assert(uploadCsv[0] === 'week,part,mediaId,title,localFilename,objectKey,durationSeconds,sizeBytes,sha256,status', 'Upload CSV header mismatch');
+assert(uploadCsv[0] === 'week,part,mediaId,title,localFilename,objectKey,durationSeconds,actualDurationSeconds,durationDeltaSeconds,sizeBytes,sha256,width,height,fps,videoCodec,audioCodec,fastStart,status', 'Upload CSV header mismatch');
 assert(uploadJson.every((row, index) => row.mediaId === media[index].mediaId && row.objectKey === media[index].objectKey), 'Upload map must match catalog order');
+assert(uploadJson.every((row, index) => row.sizeBytes === media[index].sizeBytes && row.sha256 === media[index].sha256), 'Upload map preflight metadata must match catalog');
+assert(checksumLines.length === 77, 'SHA-256 checksum file must contain 77 rows');
+assert(checksumLines.every((line, index) => line === `${media[index].sha256}  ${media[index].sourceFilename}`), 'SHA-256 checksum file must match catalog order');
 assert((uploadCommands.match(/npx wrangler r2 object put/g) || []).length === 77, 'Upload commands must contain 77 Wrangler commands');
 assert(!/(api[_-]?token|access[_-]?key|secret[_-]?key)\s*=/i.test(uploadCommands), 'Upload commands must not contain credentials');
 
