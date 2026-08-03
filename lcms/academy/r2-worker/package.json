@@ -1,0 +1,17 @@
+{
+  "name": "lmc-r2-video-gateway",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "wrangler deploy --dry-run",
+    "test": "node --test test/*.test.js",
+    "preflight:videos": "node scripts/preflight-segmented-videos.mjs",
+    "preflight:catalog": "node scripts/preflight-segmented-videos.mjs --catalog-only"
+  },
+  "devDependencies": {
+    "wrangler": "^4.27.0"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "version": "0.2.0",
-  "updatedAt": "2026-07-16",
+  "version": "0.3.0",
+  "updatedAt": "2026-08-03",
   "organization": "RS에듀컨설팅",
   "platform": "Career Intelligence Platform Academy",
   "academyTitle": "LMC Professional Academy",
@@ -36,17 +36,16 @@
       "qualificationName": "LMC(평생진로상담사) 2급",
       "qualificationNumber": "민간자격 제2013-1058호",
       "credentialNotice": "수료시험 합격 및 발급 요건 충족 시 자격증 발급 대상",
-      "playlistId": "",
       "status": "preparing",
       "accent": "green",
       "coverLabel": "LMC · 제2013-1058호",
-      "estimatedLessons": 12,
+      "estimatedLessons": 77,
       "estimatedMinutes": 1440,
-      "scheduleSummary": "12주 · 주 1회 · 회차당 2시간",
+      "scheduleSummary": "12주 · 공식 교육과정 총 24시간",
       "deliveryOptions": [
-        "오프라인 교육",
-        "RS에듀컨설팅 본사",
-        "온라인 Zoom"
+        "비공개 Cloudflare R2 온라인 강의",
+        "이메일·8자리 입장코드 인증",
+        "결제 확인 후 180일 수강"
       ],
       "cohortNotice": "개강일·장소·교육비는 기수별 모집 공지에서 안내합니다.",
       "learningGoals": [
@@ -61,99 +60,873 @@
         "RS에듀컨설팅 인증 전문가 현판 제공(기수·신규 사용자 조건에 따라 변동 가능)",
         "수료시험 및 과정정리 후 자격증 발급 대상 심사"
       ],
-      "modules": [
-        {
-          "week": 1,
-          "title": "상담사와 코치를 위한 심리학 개요",
-          "theory": "상담코칭 실무자가 알아야 할 심리학의 주요 관점과 기본 개념",
-          "practice": "전문강의를 통한 심리학 전체 지형 이해",
-          "recommendedFor": "상담사와 코치를 위한 심리학 기초"
-        },
-        {
-          "week": 2,
-          "title": "진로적성 파악과 자녀지도",
-          "theory": "진로적성과 개인차를 이해하고 성장경로와 연결하는 방법",
-          "practice": "적성검사의 해석과 활용법",
-          "recommendedFor": "학생을 지도하는 학부모·교사·코치"
-        },
-        {
-          "week": 3,
-          "title": "성격에 대한 이해",
-          "theory": "성격의 구조와 개인차를 이해하는 심리학적 관점",
-          "practice": "MBTI와 성격특질검사의 이해 및 활용",
-          "recommendedFor": "성격과 성격검사에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 4,
-          "title": "의사소통 유형을 통한 타인 이해",
-          "theory": "사람마다 다른 의사소통 방식과 관계 반응 이해",
-          "practice": "심리검사를 통해 의사소통 유형 알아보기",
-          "recommendedFor": "의사소통과 관계에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 5,
-          "title": "스트레스에 대한 심리학적 이해",
-          "theory": "스트레스의 심리적 기제와 생활 장면에서의 반응 이해",
-          "practice": "스트레스 검사 실습과 결과 활용",
-          "recommendedFor": "스트레스의 심리적 기제를 알고자 하는 상담사·코치"
-        },
-        {
-          "week": 6,
-          "title": "MBTI와 학습유형",
-          "theory": "성격 선호와 학습방식의 관계 이해",
-          "practice": "학습유형 파악과 지도 장면 활용법",
-          "recommendedFor": "학생을 지도하는 학부모·교사·코치"
-        },
-        {
-          "week": 7,
-          "title": "살면서 느끼는 정서적 문제",
-          "theory": "일상에서 경험하는 정서적 곤란과 정서조절 이해",
-          "practice": "정서검사를 통한 정서측정방법 이해",
-          "recommendedFor": "정서적 곤란에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 8,
-          "title": "일상생활에서 겪는 우울 이해",
-          "theory": "우울 관련 경험과 심리적 어려움을 이해하는 기본 관점",
-          "practice": "우울 관련 자기점검 도구의 목적과 한계 이해",
-          "recommendedFor": "우울 관련 상담 주제에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 9,
-          "title": "정신병리와 심리건강",
-          "theory": "여러 심리적 어려움과 심리건강의 기본 개념",
-          "practice": "심리건강 검사도구의 활용 범위와 상담 연계",
-          "recommendedFor": "심리건강에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 10,
-          "title": "만족하는 부부·커플 관계의 요인",
-          "theory": "친밀한 관계의 만족도와 갈등에 영향을 주는 심리 요인",
-          "practice": "부부·커플 관계검사를 활용한 관계 점검",
-          "recommendedFor": "결혼심리학과 관계상담에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 11,
-          "title": "아동청소년과 성인기 발달",
-          "theory": "아동청소년 발달과 성인기 발달의 주요 과업 이해",
-          "practice": "발달검사를 활용한 발달 특성 점검",
-          "recommendedFor": "발달의 심리적 개념에 관심 있는 상담사·코치"
-        },
-        {
-          "week": 12,
-          "title": "수료시험 및 과정 통합",
-          "theory": "12주 핵심내용 통합과 전문활용 원칙 정리",
-          "practice": "수료시험·과정정리 간담회·향후 활용계획",
-          "recommendedFor": "자격증 발급 대상 심사"
-        }
-      ],
+      "completion": {
+        "examNotice": "1~11주 핵심내용을 바탕으로 수료시험에 응시합니다. 시험 방식과 응시기간은 기수별 운영 공지에서 안내합니다.",
+        "examUrl": "",
+        "ceremonyNotice": "학기말 수료식 일정과 참여방법은 기수별 공지와 등록 이메일을 통해 안내합니다.",
+        "reflectionQuestions": [
+          "12주 동안 사람을 이해하는 나의 관점은 어떻게 달라졌습니까?",
+          "상담코칭 현장에서 가장 먼저 적용할 한 가지는 무엇입니까?",
+          "검사 결과를 단정하지 않고 사람의 가능성과 연결하기 위해 지킬 원칙은 무엇입니까?"
+        ],
+        "satisfactionSurveyUrl": "",
+        "certificateNotice": "수료시험 합격과 발급 요건 충족 여부를 확인한 뒤 수료 및 자격증 발급 절차를 안내합니다.",
+        "completionApplicationUrl": ""
+      },
       "reflectionQuestions": [
         "오늘 배운 심리학 개념을 실제 상담 장면에서 어떻게 확인할 수 있습니까?",
         "검사 결과를 단정하지 않고 내담자와 함께 확인할 질문은 무엇입니까?",
         "이번 주 상담코칭 장면에서 적용하고 기록할 한 가지는 무엇입니까?"
       ],
       "ethicsNotice": "본 과정의 심리측정 교육은 자기이해와 상담코칭 활용을 위한 교육이며 의료적 진단이나 치료를 대신하지 않습니다.",
-      "resources": []
+      "resources": [],
+      "videoDurationSeconds": 74669,
+      "videoPartCount": 77,
+      "releasePolicy": {
+        "mode": "all_open",
+        "scheduledDates": {}
+      },
+      "weeks": [
+        {
+          "week": 1,
+          "title": "나와 타인 그리고 세상을 보는 눈",
+          "theory": "자기개념과 타인지각을 이해하고 상담코칭 장면에서 관계를 바라보는 기초 관점을 형성합니다.",
+          "practice": "자기이해·타인지각 사례를 통해 핵심 개념을 실제 장면과 연결합니다.",
+          "recommendedFor": "상담사와 코치를 위한 인간이해 기초",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-01-part-01",
+              "title": "자기의 개념·종류·원천",
+              "durationSeconds": 1220,
+              "mediaId": "lmc-w01-p01",
+              "sourceFilename": "LMC_WEEK01_P01_self-concept-and-sources.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-01-part-02",
+              "title": "자기동기와 자아존중감",
+              "durationSeconds": 840,
+              "mediaId": "lmc-w01-p02",
+              "sourceFilename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-01-part-03",
+              "title": "자기방어·자기수용·자기개방",
+              "durationSeconds": 1290,
+              "mediaId": "lmc-w01-p03",
+              "sourceFilename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-01-part-04",
+              "title": "타인에 대한 인상형성",
+              "durationSeconds": 1570,
+              "mediaId": "lmc-w01-p04",
+              "sourceFilename": "LMC_WEEK01_P04_impression-formation.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-01-part-05",
+              "title": "매력의 요인: 유사성과 보상성",
+              "durationSeconds": 1434,
+              "mediaId": "lmc-w01-p05",
+              "sourceFilename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-01",
+          "videoSeconds": 6354,
+          "videoMinutes": 106
+        },
+        {
+          "week": 2,
+          "title": "적성의 다요인 종합분석기법을 활용한 진로적성검사",
+          "theory": "적성의 구성요인과 종합분석 원리를 이해하고 검사결과를 진로 맥락과 연결합니다.",
+          "practice": "종합적성 결과보고서와 CIPP 플랫폼을 활용해 해석 절차를 연습합니다.",
+          "recommendedFor": "진로·적성검사를 활용하는 상담사·교사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-02-part-01",
+              "title": "적성의 구성과 다요인 분석 개요",
+              "durationSeconds": 1431,
+              "mediaId": "lmc-w02-p01",
+              "sourceFilename": "LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-02-part-02",
+              "title": "적성판단의 어려움과 개별검사 종합분석",
+              "durationSeconds": 1185,
+              "mediaId": "lmc-w02-p02",
+              "sourceFilename": "LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-02-part-03",
+              "title": "종합적성분석법과 성격 유형 이론",
+              "durationSeconds": 1041,
+              "mediaId": "lmc-w02-p03",
+              "sourceFilename": "LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-02-part-04",
+              "title": "RS 다중지능·직업가치관검사와 CIPP 플랫폼",
+              "durationSeconds": 1396,
+              "mediaId": "lmc-w02-p04",
+              "sourceFilename": "LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-02-part-05",
+              "title": "종합검사 결과보고서 해석 실습",
+              "durationSeconds": 1231,
+              "mediaId": "lmc-w02-p05",
+              "sourceFilename": "LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-02-part-06",
+              "title": "회원관리·결과조회·데이터 활용",
+              "durationSeconds": 682,
+              "mediaId": "lmc-w02-p06",
+              "sourceFilename": "LMC_WEEK02_P06_member-management-and-data-use.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-02-part-07",
+              "title": "AI를 활용한 진로·적성 해석과 정리",
+              "durationSeconds": 997,
+              "mediaId": "lmc-w02-p07",
+              "sourceFilename": "LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-02",
+          "videoSeconds": 7963,
+          "videoMinutes": 133
+        },
+        {
+          "week": 3,
+          "title": "성격 이해와 16PF 검사 해석",
+          "theory": "성격이론의 주요 흐름과 Cattell 특질론을 바탕으로 16PF의 구조를 이해합니다.",
+          "practice": "16PF 결과보고서를 사례와 맥락 중심으로 읽고 AI 보조 해석의 한계를 점검합니다.",
+          "recommendedFor": "성격과 성격검사에 관심 있는 상담사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-03-part-01",
+              "title": "과정 안내와 성격의 정의",
+              "durationSeconds": 1117,
+              "mediaId": "lmc-w03-p01",
+              "sourceFilename": "LMC_WEEK03_P01_course-introduction-and-personality-definition.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-03-part-02",
+              "title": "성격의 특성과 이해의 필요성",
+              "durationSeconds": 905,
+              "mediaId": "lmc-w03-p02",
+              "sourceFilename": "LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-03-part-03",
+              "title": "성격이론의 두 흐름: 특성이론과 과정이론",
+              "durationSeconds": 915,
+              "mediaId": "lmc-w03-p03",
+              "sourceFilename": "LMC_WEEK03_P03_trait-and-process-theories.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-03-part-04",
+              "title": "성격을 조망하는 다양한 관점 ①",
+              "durationSeconds": 905,
+              "mediaId": "lmc-w03-p04",
+              "sourceFilename": "LMC_WEEK03_P04_personality-perspectives-01.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-03-part-05",
+              "title": "성격을 조망하는 다양한 관점 ②",
+              "durationSeconds": 909,
+              "mediaId": "lmc-w03-p05",
+              "sourceFilename": "LMC_WEEK03_P05_personality-perspectives-02.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-03-part-06",
+              "title": "성격이론 통합과 Cattell 특질론·16PF",
+              "durationSeconds": 1117,
+              "mediaId": "lmc-w03-p06",
+              "sourceFilename": "LMC_WEEK03_P06_cattell-trait-theory-and-16pf.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-03-part-07",
+              "title": "16PF 결과보고서 해석 실습",
+              "durationSeconds": 751,
+              "mediaId": "lmc-w03-p07",
+              "sourceFilename": "LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 8,
+              "id": "week-03-part-08",
+              "title": "AI 보조 해석과 검사 플랫폼 활용",
+              "durationSeconds": 617,
+              "mediaId": "lmc-w03-p08",
+              "sourceFilename": "LMC_WEEK03_P08_ai-assisted-interpretation-and-platform.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-03",
+          "videoSeconds": 7236,
+          "videoMinutes": 121
+        },
+        {
+          "week": 4,
+          "title": "의사소통 유형의 이해와 검사 해석",
+          "theory": "의사소통의 구조와 기능, 유형별 반응 특성을 이해합니다.",
+          "practice": "10개 의사소통 유형과 결과보고서를 사례 중심으로 해석합니다.",
+          "recommendedFor": "의사소통과 관계에 관심 있는 상담사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-04-part-01",
+              "title": "의사소통의 개념과 기본 구조",
+              "durationSeconds": 937,
+              "mediaId": "lmc-w04-p01",
+              "sourceFilename": "LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-04-part-02",
+              "title": "의사소통의 특성·기능과 표현 요소",
+              "durationSeconds": 1091,
+              "mediaId": "lmc-w04-p02",
+              "sourceFilename": "LMC_WEEK04_P02_communication-functions-and-expression.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-04-part-03",
+              "title": "의사소통 10유형의 구조와 진단 기준",
+              "durationSeconds": 840,
+              "mediaId": "lmc-w04-p03",
+              "sourceFilename": "LMC_WEEK04_P03_ten-types-and-assessment-criteria.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-04-part-04",
+              "title": "의사소통 유형별 특성 해석",
+              "durationSeconds": 809,
+              "mediaId": "lmc-w04-p04",
+              "sourceFilename": "LMC_WEEK04_P04_type-characteristics-interpretation.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-04-part-05",
+              "title": "유형 적용 사례와 해석 정리",
+              "durationSeconds": 676,
+              "mediaId": "lmc-w04-p05",
+              "sourceFilename": "LMC_WEEK04_P05_case-application-and-summary.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-04-part-06",
+              "title": "검사 결과보고서와 플랫폼 활용",
+              "durationSeconds": 428,
+              "mediaId": "lmc-w04-p06",
+              "sourceFilename": "LMC_WEEK04_P06_report-and-platform-use.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-04",
+          "videoSeconds": 4781,
+          "videoMinutes": 80
+        },
+        {
+          "week": 5,
+          "title": "스트레스의 이해와 RS-스트레스 검사 활용",
+          "theory": "스트레스의 핵심 특성, 이론, 원인과 증상, 대처기제를 통합적으로 이해합니다.",
+          "practice": "RS-스트레스 검사와 사례를 활용해 결과를 맥락 안에서 해석합니다.",
+          "recommendedFor": "스트레스의 심리적 기제를 알고자 하는 상담사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-05-part-01",
+              "title": "스트레스의 정의와 핵심 특성",
+              "durationSeconds": 1279,
+              "mediaId": "lmc-w05-p01",
+              "sourceFilename": "LMC_WEEK05_P01_stress-definition-and-core-characteristics.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-05-part-02",
+              "title": "긍정·부정 스트레스와 주요 스트레스 이론",
+              "durationSeconds": 864,
+              "mediaId": "lmc-w05-p02",
+              "sourceFilename": "LMC_WEEK05_P02_positive-negative-stress-and-theories.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-05-part-03",
+              "title": "RS-스트레스 검사: 스트레스 원인",
+              "durationSeconds": 735,
+              "mediaId": "lmc-w05-p03",
+              "sourceFilename": "LMC_WEEK05_P03_rs-stress-assessment-causes.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-05-part-04",
+              "title": "스트레스 증상과 생리적 반응",
+              "durationSeconds": 1018,
+              "mediaId": "lmc-w05-p04",
+              "sourceFilename": "LMC_WEEK05_P04_stress-symptoms-and-physiological-response.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-05-part-05",
+              "title": "스트레스 대처 유형과 관리 전략",
+              "durationSeconds": 516,
+              "mediaId": "lmc-w05-p05",
+              "sourceFilename": "LMC_WEEK05_P05_coping-types-and-management-strategies.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-05-part-06",
+              "title": "스트레스 경험 사례 나눔과 적용 ①",
+              "durationSeconds": 946,
+              "mediaId": "lmc-w05-p06",
+              "sourceFilename": "LMC_WEEK05_P06_stress-case-application-01.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-05-part-07",
+              "title": "스트레스 경험 사례 나눔과 적용 ②",
+              "durationSeconds": 1100,
+              "mediaId": "lmc-w05-p07",
+              "sourceFilename": "LMC_WEEK05_P07_stress-case-application-02.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 8,
+              "id": "week-05-part-08",
+              "title": "사례 통합 정리와 검사 결과 확인",
+              "durationSeconds": 812,
+              "mediaId": "lmc-w05-p08",
+              "sourceFilename": "LMC_WEEK05_P08_case-integration-and-result-review.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-05",
+          "videoSeconds": 7270,
+          "videoMinutes": 121
+        },
+        {
+          "week": 6,
+          "title": "학습검사의 이해와 활용: 학습양식 및 학습정서",
+          "theory": "학습양식과 정의적 요소, 성격 및 두뇌 기능의 관계를 다각적으로 이해합니다.",
+          "practice": "학습양식·학습정서 결과보고서를 학습자 맥락과 연결해 해석합니다.",
+          "recommendedFor": "학생을 지도하는 학부모·교사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-06-part-01",
+              "title": "과정 안내와 학습양식의 기본 개념",
+              "durationSeconds": 1119,
+              "mediaId": "lmc-w06-p01",
+              "sourceFilename": "LMC_WEEK06_P01_course-introduction-and-learning-style.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-06-part-02",
+              "title": "학습양식의 다각적 정의: 인지·정의·환경",
+              "durationSeconds": 1168,
+              "mediaId": "lmc-w06-p02",
+              "sourceFilename": "LMC_WEEK06_P02_cognitive-affective-environmental-learning-style.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-06-part-03",
+              "title": "학습 성과를 높이는 5대 정의적 요소",
+              "durationSeconds": 721,
+              "mediaId": "lmc-w06-p03",
+              "sourceFilename": "LMC_WEEK06_P03_five-affective-learning-factors.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-06-part-04",
+              "title": "융 분석심리학 기반 학습 성격 접근",
+              "durationSeconds": 668,
+              "mediaId": "lmc-w06-p04",
+              "sourceFilename": "LMC_WEEK06_P04_jungian-learning-personality.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-06-part-05",
+              "title": "학습자 유형별 학습법과 두뇌 기능 분석",
+              "durationSeconds": 864,
+              "mediaId": "lmc-w06-p05",
+              "sourceFilename": "LMC_WEEK06_P05_learner-types-and-brain-functions.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-06-part-06",
+              "title": "학습양식 검사 결과보고서 해석 실습",
+              "durationSeconds": 1077,
+              "mediaId": "lmc-w06-p06",
+              "sourceFilename": "LMC_WEEK06_P06_learning-style-report-practice.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-06-part-07",
+              "title": "학습정서 결과 해석과 검사 플랫폼 활용",
+              "durationSeconds": 1098,
+              "mediaId": "lmc-w06-p07",
+              "sourceFilename": "LMC_WEEK06_P07_learning-emotion-and-platform-use.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-06",
+          "videoSeconds": 6715,
+          "videoMinutes": 112
+        },
+        {
+          "week": 7,
+          "title": "정서검사의 이해와 활용: 정서척도 및 결과 해석",
+          "theory": "정서검사의 구성과 주요 정서척도를 이해하고 점수·맥락·패턴을 함께 읽습니다.",
+          "practice": "정서검사 사례를 상담·코칭 장면에 적용하되 진단적 단정을 피합니다.",
+          "recommendedFor": "정서적 곤란에 관심 있는 상담사·코치",
+          "safetyNotice": true,
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-07-part-01",
+              "title": "정서검사의 구성과 결과그래프 읽기",
+              "durationSeconds": 1116,
+              "mediaId": "lmc-w07-p01",
+              "sourceFilename": "LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-07-part-02",
+              "title": "정서검사 사례 해석 ① 점수와 반응 이해",
+              "durationSeconds": 987,
+              "mediaId": "lmc-w07-p02",
+              "sourceFilename": "LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-07-part-03",
+              "title": "정서검사 사례 해석 ② 맥락과 정서 패턴",
+              "durationSeconds": 1198,
+              "mediaId": "lmc-w07-p03",
+              "sourceFilename": "LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-07-part-04",
+              "title": "사례 통합과 상담·코칭 적용",
+              "durationSeconds": 909,
+              "mediaId": "lmc-w07-p04",
+              "sourceFilename": "LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-07-part-05",
+              "title": "정서척도 ① 사회적 불안과 외로움",
+              "durationSeconds": 1116,
+              "mediaId": "lmc-w07-p05",
+              "sourceFilename": "LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-07-part-06",
+              "title": "정서척도 ② 분노의 원인·기능·영향",
+              "durationSeconds": 977,
+              "mediaId": "lmc-w07-p06",
+              "sourceFilename": "LMC_WEEK07_P06_anger-causes-functions-and-effects.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-07-part-07",
+              "title": "정서척도 ③ 공격성·무기력·열등감과 결과보고서",
+              "durationSeconds": 1009,
+              "mediaId": "lmc-w07-p07",
+              "sourceFilename": "LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-07",
+          "videoSeconds": 7312,
+          "videoMinutes": 122
+        },
+        {
+          "week": 8,
+          "title": "행복지수(우울)검사의 이해와 활용",
+          "theory": "우울 관련 개념과 증상척도의 구조를 교육적 범위에서 이해합니다.",
+          "practice": "행복지수 결과를 확정적 진단이 아닌 상담·코칭 보조자료로 해석합니다.",
+          "recommendedFor": "우울 관련 상담 주제에 관심 있는 상담사·코치",
+          "safetyNotice": true,
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-08-part-01",
+              "title": "행복지수(우울)검사의 이해와 우울 분류",
+              "durationSeconds": 1106,
+              "mediaId": "lmc-w08-p01",
+              "sourceFilename": "LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-08-part-02",
+              "title": "기분곡선과 우울·조증·경조증 삽화",
+              "durationSeconds": 895,
+              "mediaId": "lmc-w08-p02",
+              "sourceFilename": "LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-08-part-03",
+              "title": "주요우울장애 진단기준과 특성",
+              "durationSeconds": 570,
+              "mediaId": "lmc-w08-p03",
+              "sourceFilename": "LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-08-part-04",
+              "title": "우울의 생물학적·심리사회적 원인",
+              "durationSeconds": 931,
+              "mediaId": "lmc-w08-p04",
+              "sourceFilename": "LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-08-part-05",
+              "title": "우울 증상·검사·치료와 결과구조",
+              "durationSeconds": 591,
+              "mediaId": "lmc-w08-p05",
+              "sourceFilename": "LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-08-part-06",
+              "title": "행복지수 6개 증상척도의 구성과 해석",
+              "durationSeconds": 1008,
+              "mediaId": "lmc-w08-p06",
+              "sourceFilename": "LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-08-part-07",
+              "title": "증상척도 사례 적용과 종합 해석",
+              "durationSeconds": 945,
+              "mediaId": "lmc-w08-p07",
+              "sourceFilename": "LMC_WEEK08_P07_symptom-scale-case-application.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 8,
+              "id": "week-08-part-08",
+              "title": "결과보고서와 검사 플랫폼 활용",
+              "durationSeconds": 306,
+              "mediaId": "lmc-w08-p08",
+              "sourceFilename": "LMC_WEEK08_P08_report-and-assessment-platform.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-08",
+          "videoSeconds": 6352,
+          "videoMinutes": 106
+        },
+        {
+          "week": 9,
+          "title": "심리건강(이상심리)검사의 이해와 활용",
+          "theory": "정상과 이상의 경계, 진단체계와 이론적 관점을 교육적 범위에서 이해합니다.",
+          "practice": "RS 심리건강 척도를 사례와 맥락 안에서 해석하고 전문기관 연계의 경계를 확인합니다.",
+          "recommendedFor": "심리건강에 관심 있는 상담사·코치",
+          "safetyNotice": true,
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-09-part-01",
+              "title": "이상심리학의 이해와 정상·이상의 경계",
+              "durationSeconds": 1080,
+              "mediaId": "lmc-w09-p01",
+              "sourceFilename": "LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-09-part-02",
+              "title": "이상심리 판단기준: 현실판단·적응·통계",
+              "durationSeconds": 1080,
+              "mediaId": "lmc-w09-p02",
+              "sourceFilename": "LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-09-part-03",
+              "title": "사회문화적 기준과 ICD·DSM 진단체계",
+              "durationSeconds": 833,
+              "mediaId": "lmc-w09-p03",
+              "sourceFilename": "LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-09-part-04",
+              "title": "이상심리의 이론적 입장과 치료 접근",
+              "durationSeconds": 819,
+              "mediaId": "lmc-w09-p04",
+              "sourceFilename": "LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-09-part-05",
+              "title": "RS 심리건강 7개 척도 해석 ① 핵심 개념",
+              "durationSeconds": 1204,
+              "mediaId": "lmc-w09-p05",
+              "sourceFilename": "LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-09-part-06",
+              "title": "RS 심리건강 7개 척도 해석 ② 원인과 영향",
+              "durationSeconds": 1198,
+              "mediaId": "lmc-w09-p06",
+              "sourceFilename": "LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-09-part-07",
+              "title": "RS 심리건강 7개 척도 해석 ③ 사례 통합과 활용",
+              "durationSeconds": 1283,
+              "mediaId": "lmc-w09-p07",
+              "sourceFilename": "LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-09",
+          "videoSeconds": 7497,
+          "videoMinutes": 125
+        },
+        {
+          "week": 10,
+          "title": "부부커플검사의 이해와 활용: 결혼만족도 및 결과 해석",
+          "theory": "결혼만족도와 관계 자원·조정 과제를 결과프로파일과 함께 이해합니다.",
+          "practice": "13개 측정요인을 사례에 적용해 관계 맥락 중심으로 통합 해석합니다.",
+          "recommendedFor": "결혼심리학과 관계상담에 관심 있는 상담사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-10-part-01",
+              "title": "RS 부부커플검사 결과프로파일 읽기",
+              "durationSeconds": 1112,
+              "mediaId": "lmc-w10-p01",
+              "sourceFilename": "LMC_WEEK10_P01_couple-assessment-profile.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-10-part-02",
+              "title": "사례 해석 ① 높은 요인과 관계 자원",
+              "durationSeconds": 1087,
+              "mediaId": "lmc-w10-p02",
+              "sourceFilename": "LMC_WEEK10_P02_case-strengths-and-relationship-resources.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-10-part-03",
+              "title": "사례 해석 ② 낮은 요인과 조정 과제",
+              "durationSeconds": 1120,
+              "mediaId": "lmc-w10-p03",
+              "sourceFilename": "LMC_WEEK10_P03_case-low-factors-and-adjustment.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-10-part-04",
+              "title": "사례 통합과 부부상담·코칭 적용",
+              "durationSeconds": 1159,
+              "mediaId": "lmc-w10-p04",
+              "sourceFilename": "LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-10-part-05",
+              "title": "부부커플검사 개요와 결혼만족도 이론",
+              "durationSeconds": 707,
+              "mediaId": "lmc-w10-p05",
+              "sourceFilename": "LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-10-part-06",
+              "title": "13개 측정요인의 의미와 해석기준",
+              "durationSeconds": 785,
+              "mediaId": "lmc-w10-p06",
+              "sourceFilename": "LMC_WEEK10_P06_thirteen-factors-and-criteria.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-10-part-07",
+              "title": "결과보고서 해석과 검사 플랫폼 활용",
+              "durationSeconds": 937,
+              "mediaId": "lmc-w10-p07",
+              "sourceFilename": "LMC_WEEK10_P07_report-interpretation-and-platform.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-10",
+          "videoSeconds": 6907,
+          "videoMinutes": 115
+        },
+        {
+          "week": 11,
+          "title": "발달진단검사의 이해와 활용: 아동·청소년 및 성인",
+          "theory": "아동·청소년과 성인의 생애단계별 발달요인과 검사 구조를 이해합니다.",
+          "practice": "사례와 결과보고서를 활용해 발달요인을 비교하고 통합적으로 해석합니다.",
+          "recommendedFor": "발달의 심리적 개념에 관심 있는 상담사·코치",
+          "parts": [
+            {
+              "part": 1,
+              "id": "week-11-part-01",
+              "title": "발달검사 결과프로파일과 측정요인 개요",
+              "durationSeconds": 1020,
+              "mediaId": "lmc-w11-p01",
+              "sourceFilename": "LMC_WEEK11_P01_development-profile-and-factors.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 2,
+              "id": "week-11-part-02",
+              "title": "아동·청소년 발달요인 ① 신체·자아상·자기조절",
+              "durationSeconds": 1015,
+              "mediaId": "lmc-w11-p02",
+              "sourceFilename": "LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 3,
+              "id": "week-11-part-03",
+              "title": "아동·청소년 발달요인 ② 학업·효능감·정체성·독립성",
+              "durationSeconds": 849,
+              "mediaId": "lmc-w11-p03",
+              "sourceFilename": "LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 4,
+              "id": "week-11-part-04",
+              "title": "성인 발달요인과 발달진단검사 전체 구조",
+              "durationSeconds": 814,
+              "mediaId": "lmc-w11-p04",
+              "sourceFilename": "LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 5,
+              "id": "week-11-part-05",
+              "title": "발달진단검사 구성과 아동·청소년 사례 적용",
+              "durationSeconds": 861,
+              "mediaId": "lmc-w11-p05",
+              "sourceFilename": "LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 6,
+              "id": "week-11-part-06",
+              "title": "생애단계별 발달요인 비교와 통합 해석",
+              "durationSeconds": 826,
+              "mediaId": "lmc-w11-p06",
+              "sourceFilename": "LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
+              "status": "pending_upload"
+            },
+            {
+              "part": 7,
+              "id": "week-11-part-07",
+              "title": "성인 발달요인·결과보고서와 과정 정리",
+              "durationSeconds": 897,
+              "mediaId": "lmc-w11-p07",
+              "sourceFilename": "LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
+              "status": "pending_upload"
+            }
+          ],
+          "id": "week-11",
+          "videoSeconds": 6282,
+          "videoMinutes": 105
+        },
+        {
+          "week": 12,
+          "id": "week-12",
+          "title": "수료시험 및 과정 통합",
+          "theory": "1~11주 핵심내용을 통합하고 상담코칭 현장에서의 전문활용 기준을 정리합니다.",
+          "practice": "수료시험·전체 성찰·만족도 조사·학기말 수료식·수료 및 자격증 발급 절차를 진행합니다.",
+          "recommendedFor": "자격증 발급 대상 심사",
+          "videoSeconds": 0,
+          "videoMinutes": 0,
+          "parts": []
+        }
+      ]
     }
   ]
 }

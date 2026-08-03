@@ -2,15 +2,19 @@
   'use strict';
 
   const DATA_PATH = './data/courses.json';
-  const CACHE_PATH = './data/youtube-cache.json';
-  const STORAGE_KEY = 'rsedu-academy-progress:v1';
+  const MEDIA_PATH = './data/media-catalog.json';
+  const LEGACY_PROGRESS_KEY = 'rsedu-academy-progress:v1';
+  const PROGRESS_KEY_PREFIX = 'rsedu-academy-progress:v2';
+  const PROGRESS_MIGRATION_KEY = 'rsedu-academy-progress:v2:migration';
+  const COURSE_ID = 'lmc-lifetime-management-counselor';
   const params = new URLSearchParams(window.location.search);
   const pad = (value) => String(value).padStart(2, '0');
+  let authenticatedStudentId = '';
 
   const PHASES = [
-    { id: 'foundation', label: 'PART 1', title: '인간이해의 기초', range: '1–4주', summary: '심리학·적성·성격·의사소통의 기본 틀', from: 1, to: 4 },
-    { id: 'adaptation', label: 'PART 2', title: '심리측정과 적응', range: '5–8주', summary: '스트레스·학습유형·정서·우울 관련 이해', from: 5, to: 8 },
-    { id: 'integration', label: 'PART 3', title: '관계·발달·통합', range: '9–12주', summary: '심리건강·관계·발달·수료시험', from: 9, to: 12 }
+    { id: 'foundation', label: 'PART 1', title: '인간이해의 기초', range: '1–4주', summary: '자기·적성·성격·의사소통', from: 1, to: 4 },
+    { id: 'adaptation', label: 'PART 2', title: '심리측정과 적응', range: '5–8주', summary: '스트레스·학습·정서·행복지수', from: 5, to: 8 },
+    { id: 'integration', label: 'PART 3', title: '관계·발달·통합', range: '9–12주', summary: '심리건강·관계·발달·수료', from: 9, to: 12 }
   ];
 
   const escapeHtml = (value = '') => String(value)
@@ -32,496 +36,445 @@
   }
 
   async function loadData() {
-    const [catalog, cache] = await Promise.all([
+    const [catalog, mediaCatalog] = await Promise.all([
       fetchJson(DATA_PATH, { courses: [] }),
-      fetchJson(CACHE_PATH, { courses: {}, syncedAt: null })
+      fetchJson(MEDIA_PATH, { courses: {}, updatedAt: null })
     ]);
-    return { catalog, cache };
+    return { catalog, mediaCatalog };
   }
 
-  function getProgress() {
+  function emptyProgress() {
+    return { completed: {}, notes: {}, lastViewed: {}, playback: {}, finalWeeks: {}, updatedAt: null };
+  }
+
+  function normalizeStudentId(value = '') {
+    const studentId = String(value).trim();
+    return /^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$/.test(studentId) ? studentId : '';
+  }
+
+  function progressStorageKey(studentId = authenticatedStudentId) {
+    const normalized = normalizeStudentId(studentId);
+    return normalized ? `${PROGRESS_KEY_PREFIX}:${encodeURIComponent(normalized)}` : '';
+  }
+
+  function normalizeProgress(value) {
+    const parsed = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+    return {
+      completed: parsed.completed && typeof parsed.completed === 'object' && !Array.isArray(parsed.completed) ? parsed.completed : {},
+      notes: parsed.notes && typeof parsed.notes === 'object' && !Array.isArray(parsed.notes) ? parsed.notes : {},
+      lastViewed: parsed.lastViewed && typeof parsed.lastViewed === 'object' && !Array.isArray(parsed.lastViewed) ? parsed.lastViewed : {},
+      playback: parsed.playback && typeof parsed.playback === 'object' && !Array.isArray(parsed.playback) ? parsed.playback : {},
+      finalWeeks: parsed.finalWeeks && typeof parsed.finalWeeks === 'object' && !Array.isArray(parsed.finalWeeks) ? parsed.finalWeeks : {},
+      updatedAt: typeof parsed.updatedAt === 'string' ? parsed.updatedAt : null
+    };
+  }
+
+  function migrateLegacyProgress(studentId) {
+    const targetKey = progressStorageKey(studentId);
+    if (!targetKey) return;
     try {
-      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      return {
-        completed: parsed.completed || {},
-        notes: parsed.notes || {},
-        lastViewed: parsed.lastViewed || {},
-        updatedAt: parsed.updatedAt || null
-      };
-    } catch {
-      return { completed: {}, notes: {}, lastViewed: {}, updatedAt: null };
+      if (localStorage.getItem(PROGRESS_MIGRATION_KEY)) {
+        localStorage.removeItem(LEGACY_PROGRESS_KEY);
+        return;
+      }
+      const legacy = localStorage.getItem(LEGACY_PROGRESS_KEY);
+      const normalizedLegacy = legacy === null ? null : normalizeProgress(JSON.parse(legacy || '{}'));
+      localStorage.setItem(PROGRESS_MIGRATION_KEY, JSON.stringify({ version: 2, studentId: normalizeStudentId(studentId), migratedAt: new Date().toISOString() }));
+      if (normalizedLegacy && localStorage.getItem(targetKey) === null) localStorage.setItem(targetKey, JSON.stringify(normalizedLegacy));
+      localStorage.removeItem(LEGACY_PROGRESS_KEY);
+    } catch (error) {
+      console.warn('[RS Academy] legacy progress migration skipped:', error);
     }
   }
 
-  function saveProgress(progress) {
-    progress.updatedAt = new Date().toISOString();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  function setAuthenticatedStudent(studentId) {
+    authenticatedStudentId = normalizeStudentId(studentId);
+    if (authenticatedStudentId) migrateLegacyProgress(authenticatedStudentId);
+    return authenticatedStudentId;
   }
 
-  function videosFor(cache, courseId) {
-    const entry = cache?.courses?.[courseId];
-    return Array.isArray(entry?.videos) ? entry.videos : [];
+  function getProgress() {
+    const storageKey = progressStorageKey();
+    if (!storageKey) return emptyProgress();
+    try { return normalizeProgress(JSON.parse(localStorage.getItem(storageKey) || '{}')); } catch { return emptyProgress(); }
   }
+
+  function saveProgress(progress) {
+    const storageKey = progressStorageKey();
+    if (!storageKey) return false;
+    progress.updatedAt = new Date().toISOString();
+    localStorage.setItem(storageKey, JSON.stringify(normalizeProgress(progress)));
+    return true;
+  }
+
+  window.RSEduAcademyProgress = Object.freeze({
+    getStudentId: () => authenticatedStudentId,
+    load: getProgress,
+    save: saveProgress,
+    setAuthenticatedStudent,
+    storageKey: progressStorageKey
+  });
 
   function phaseForWeek(week = 1) {
     return PHASES.find((phase) => week >= phase.from && week <= phase.to) || PHASES[0];
   }
 
-  function plannedLessons(course) {
-    const modules = Array.isArray(course.modules) ? course.modules : [];
-    return modules.map((module, index) => {
-      const week = typeof module === 'string' ? index + 1 : (module.week || index + 1);
-      const phase = phaseForWeek(week);
-      if (typeof module === 'string') {
-        return {
-          id: `module-${pad(week)}`,
-          moduleId: `module-${pad(week)}`,
-          moduleIndex: index,
-          source: 'planned',
-          week,
-          phase,
-          title: module,
-          theory: module,
-          practice: '영상 업로드 후 실습 안내가 연결됩니다.',
-          recommendedFor: ''
-        };
-      }
-      const moduleId = module.id || `module-${pad(week)}`;
-      return {
-        id: moduleId,
-        moduleId,
-        moduleIndex: index,
-        source: 'planned',
-        week,
-        phase,
-        title: module.title || `제 ${week}차시`,
-        theory: module.theory || '',
-        practice: module.practice || '',
-        recommendedFor: module.recommendedFor || ''
-      };
-    });
+  function mediaFor(mediaCatalog, courseId) {
+    const media = mediaCatalog?.courses?.[courseId]?.media;
+    if (!Array.isArray(media)) return [];
+    return media.map((asset) => ({
+      ...asset,
+      week: Number(asset.week),
+      part: Number(asset.part),
+      provider: String(asset.provider || '').trim().toLowerCase(),
+      status: String(asset.status || '').trim().toLowerCase(),
+      objectKey: String(asset.objectKey || '').trim()
+    }));
   }
 
-  function lessonsFor(course, cache) {
-    const planned = plannedLessons(course);
-    const videos = videosFor(cache, course.id);
-    if (!videos.length) return planned;
+  function courseWeeks(course, mediaCatalog) {
+    const media = mediaFor(mediaCatalog, course.id);
+    const weeks = Array.isArray(course.weeks) ? course.weeks : [];
+    return weeks.map((week) => ({
+      ...week,
+      week: Number(week.week),
+      phase: phaseForWeek(Number(week.week)),
+      parts: (Array.isArray(week.parts) ? week.parts : []).map((part) => {
+        const asset = media.find((item) => item.mediaId === part.mediaId || item.partId === part.id);
+        return {
+          ...part,
+          ...(asset || {}),
+          week: Number(week.week),
+          part: Number(part.part),
+          phase: phaseForWeek(Number(week.week)),
+          weekId: week.id,
+          weekTitle: week.title,
+          theory: week.theory || '',
+          practice: week.practice || '',
+          recommendedFor: week.recommendedFor || '',
+          safetyNotice: Boolean(week.safetyNotice)
+        };
+      })
+    }));
+  }
 
-    const merged = planned.map((module, index) => {
-      const video = videos[index];
-      if (!video) return module;
-      return {
-        ...module,
-        ...video,
-        id: video.videoId,
-        videoId: video.videoId,
-        moduleId: module.id,
-        source: 'youtube',
-        title: video.title || module.title,
-        description: video.description || module.theory
-      };
-    });
+  function allVideoParts(weeks) {
+    return weeks.filter((week) => week.week <= 11).flatMap((week) => week.parts);
+  }
 
-    videos.slice(planned.length).forEach((video, offset) => {
-      const index = planned.length + offset;
-      const week = index + 1;
-      merged.push({
-        ...video,
-        id: video.videoId,
-        videoId: video.videoId,
-        moduleId: null,
-        moduleIndex: index,
-        source: 'youtube',
-        week,
-        phase: phaseForWeek(Math.min(week, 12)),
-        theory: video.description || '',
-        practice: '영상강의의 안내에 따라 실습합니다.',
-        recommendedFor: 'LMC 과정 참여자'
-      });
-    });
-    return merged;
+  function isPlayableMedia(part) {
+    return Boolean(part && part.provider === 'r2' && part.status === 'published' && part.objectKey && part.week >= 1 && part.week <= 11 && part.part >= 1);
   }
 
   function completedSet(progress, courseId) {
     return new Set(Array.isArray(progress.completed?.[courseId]) ? progress.completed[courseId] : []);
   }
 
-  function isLessonComplete(completed, lesson) {
-    return completed.has(lesson.id) || Boolean(lesson.moduleId && completed.has(lesson.moduleId));
+  function isPartComplete(completed, part) {
+    return Boolean(part?.id && completed.has(part.id));
   }
 
-  function courseProgress(progress, courseId, lessons) {
-    if (!lessons.length) return { completed: 0, total: 0, percent: 0 };
+  function progressSummary(progress, courseId, parts) {
     const completed = completedSet(progress, courseId);
-    const count = lessons.filter((lesson) => isLessonComplete(completed, lesson)).length;
-    return { completed: count, total: lessons.length, percent: Math.round((count / lessons.length) * 100) };
+    const count = parts.filter((part) => isPartComplete(completed, part)).length;
+    const total = parts.length;
+    return { completed: count, total, percent: total ? Math.round((count / total) * 100) : 0 };
   }
 
-  function lessonUrl(course, lesson) {
-    if (!lesson) return `./course.html?course=${encodeURIComponent(course.id)}`;
-    if (lesson.videoId) return `./lesson.html?course=${encodeURIComponent(course.id)}&video=${encodeURIComponent(lesson.videoId)}`;
-    return `./lesson.html?course=${encodeURIComponent(course.id)}&module=${lesson.moduleIndex}`;
+  function weekSummary(progress, courseId, week) {
+    return progressSummary(progress, courseId, week.parts || []);
   }
 
-  function resumeLesson(course, lessons, progress) {
+  function durationLabel(totalSeconds = 0, approximate = false) {
+    const seconds = Math.max(0, Number(totalSeconds) || 0);
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remain = seconds % 60;
+    const prefix = approximate ? '약 ' : '';
+    if (hours) return `${prefix}${hours}시간${minutes ? ` ${minutes}분` : ''}`;
+    if (minutes) return `${prefix}${minutes}분${remain ? ` ${remain}초` : ''}`;
+    return `${remain}초`;
+  }
+
+  function resumePosition(progress, part) {
+    return Math.max(0, Number(progress.playback?.[`${COURSE_ID}:${part.id}`] || 0));
+  }
+
+  function partUrl(course, part) {
+    if (!part) return `./course.html?course=${encodeURIComponent(course.id)}`;
+    if (part.week === 12) return `./lesson.html?course=${encodeURIComponent(course.id)}&week=12`;
+    return `./lesson.html?course=${encodeURIComponent(course.id)}&week=${part.week}&part=${part.part}`;
+  }
+
+  function releaseState(course, week, progress, weeks) {
+    if (week.week === 12) return { allowed: true, label: '수료 진행' };
+    const mode = course.releasePolicy?.mode || 'all_open';
+    if (mode === 'all_open') return { allowed: true, label: '학습 가능' };
+    if (mode === 'sequential' && week.week > 1) {
+      const previous = weeks.find((item) => item.week === week.week - 1);
+      const previousSummary = previous ? weekSummary(progress, course.id, previous) : { percent: 0 };
+      return previousSummary.percent === 100 ? { allowed: true, label: '학습 가능' } : { allowed: false, label: '접근 제한' };
+    }
+    if (mode === 'scheduled') {
+      const date = course.releasePolicy?.scheduledDates?.[week.id];
+      if (!date) return { allowed: false, label: '공개 준비 중' };
+      return Date.now() >= new Date(date).getTime() ? { allowed: true, label: '학습 가능' } : { allowed: false, label: '공개 준비 중' };
+    }
+    return { allowed: true, label: '학습 가능' };
+  }
+
+  function resumePart(course, weeks, progress) {
+    const parts = allVideoParts(weeks);
     const last = progress.lastViewed?.[course.id];
-    const completed = completedSet(progress, course.id);
-    const viewed = lessons.find((lesson) => lesson.id === last || lesson.moduleId === last);
+    const viewed = parts.find((part) => part.id === last);
     if (viewed) return viewed;
-    return lessons.find((lesson) => !isLessonComplete(completed, lesson)) || lessons[0] || null;
+    const completed = completedSet(progress, course.id);
+    return parts.find((part) => !isPartComplete(completed, part)) || parts[0] || { week: 12, id: 'week-12' };
   }
 
-  function durationLabel(minutes = 0) {
-    if (!minutes) return '시간 추후 공개';
-    const hours = Math.floor(minutes / 60);
-    const remain = minutes % 60;
-    if (!hours) return `약 ${remain}분`;
-    return remain ? `약 ${hours}시간 ${remain}분` : `약 ${hours}시간`;
+  function mediaCounts(mediaCatalog, courseId) {
+    const media = mediaFor(mediaCatalog, courseId).filter((asset) => asset.week >= 1 && asset.week <= 11);
+    return { published: media.filter(isPlayableMedia).length, total: media.length };
   }
 
-  function statusLabel(course, videos) {
-    if (videos.length) return `${videos.length}개 영상강의 공개`;
-    if (course.status === 'published') return '온라인 과정 공개';
-    return `${course.estimatedLessons || course.modules?.length || 0}주 커리큘럼 준비 완료`;
+  function progressMarkup(summary, label = '학습 진행률') {
+    return `<div class="progress-track" role="progressbar" aria-label="${escapeHtml(label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${summary.percent}"><div class="progress-fill" style="width:${summary.percent}%"></div></div>`;
   }
 
-  function progressMarkup(summary) {
-    return `<div class="progress-track"><div class="progress-fill" style="width:${summary.percent}%"></div></div>`;
+  function buildCourseCard(course, mediaCatalog, progress, hasStudentSession) {
+    const weeks = courseWeeks(course, mediaCatalog);
+    const parts = allVideoParts(weeks);
+    const summary = progressSummary(progress, course.id, parts);
+    const media = mediaCounts(mediaCatalog, course.id);
+    const resume = resumePart(course, weeks, progress);
+    const actionUrl = hasStudentSession ? partUrl(course, resume) : './enter.html';
+    const progressPanel = hasStudentSession
+      ? `<div class="lmc-card-progress"><div class="lmc-card-progress-head"><span>내 영상진도</span><strong>${summary.completed}/${summary.total} · ${summary.percent}%</strong></div>${progressMarkup(summary)}</div>`
+      : '<div class="lmc-card-progress"><div class="lmc-card-progress-head"><span>내 영상진도</span><strong>로그인 후 표시</strong></div></div>';
+    return `<article class="course-card" data-accent="${escapeHtml(course.accent || 'green')}" data-course="lmc">
+      <div class="course-cover"><span class="course-label">${escapeHtml(course.coverLabel || 'LMC PROFESSIONAL')}</span><div><div class="course-cover-title">${escapeHtml(course.title)}</div><div class="course-cover-subtitle">${escapeHtml(course.englishTitle || '')}</div></div></div>
+      <div class="course-card-body"><div class="course-meta"><span>12주</span><span>77개 파트</span><span>${media.published}/${media.total}개 공개</span></div><h3>${escapeHtml(course.title)}</h3><p>${escapeHtml(course.subtitle)}</p>
+      <div class="lmc-card-credential">${escapeHtml(course.qualificationNumber || '')} · ${escapeHtml(course.qualificationName || '')}</div>
+      <div class="lmc-card-facts"><div class="lmc-card-fact"><span>Official</span><strong>총 24시간</strong></div><div class="lmc-card-fact"><span>Video</span><strong>${durationLabel(course.videoDurationSeconds, true)}</strong></div><div class="lmc-card-fact"><span>Includes</span><strong>실습·성찰·수료시험</strong></div></div>
+      ${progressPanel}<div class="course-card-footer"><span class="course-count">77개 파트 · 업로드 대기 ${media.total - media.published}개</span><a class="course-link" href="${actionUrl}">${hasStudentSession ? '학습 이어가기 →' : '수강생 입장 →'}</a></div></div></article>`;
   }
 
-  function buildCourseCard(course, cache, progress) {
-    const videos = videosFor(cache, course.id);
-    const lessons = lessonsFor(course, cache);
-    const summary = courseProgress(progress, course.id, lessons);
-    const resume = resumeLesson(course, lessons, progress);
-    const actionLabel = summary.completed > 0 ? '학습 이어가기 →' : 'LMC 과정 보기 →';
-    const actionUrl = summary.completed > 0 ? lessonUrl(course, resume) : `./course.html?course=${encodeURIComponent(course.id)}`;
-
-    return `
-      <article class="course-card" data-accent="${escapeHtml(course.accent || 'green')}" data-course="lmc">
-        <div class="course-cover">
-          <span class="course-label">${escapeHtml(course.coverLabel || 'LMC PROFESSIONAL')}</span>
-          <div>
-            <div class="course-cover-title">${escapeHtml(course.title)}</div>
-            <div class="course-cover-subtitle">${escapeHtml(course.englishTitle || '')}</div>
-          </div>
-        </div>
-        <div class="course-card-body">
-          <div class="course-meta"><span>${escapeHtml(course.category)}</span><span>${escapeHtml(course.level)}</span><span>${summary.completed ? `${summary.percent}% 학습` : '12주 커리큘럼 공개'}</span></div>
-          <h3>${escapeHtml(course.title)}</h3>
-          <p>${escapeHtml(course.subtitle)}</p>
-          <div class="lmc-card-credential">${escapeHtml(course.qualificationNumber || '')} · ${escapeHtml(course.qualificationName || '')}</div>
-          <div class="lmc-card-facts">
-            <div class="lmc-card-fact"><span>Duration</span><strong>${escapeHtml(course.scheduleSummary || '')}</strong></div>
-            <div class="lmc-card-fact"><span>Learning</span><strong>${durationLabel(course.estimatedMinutes)}</strong></div>
-            <div class="lmc-card-fact"><span>Credential</span><strong>수료시험·발급요건</strong></div>
-          </div>
-          <div class="lmc-card-progress">
-            <div class="lmc-card-progress-head"><span>내 학습진도</span><strong>${summary.completed}/${summary.total} · ${summary.percent}%</strong></div>
-            ${progressMarkup(summary)}
-          </div>
-          <div class="course-card-footer"><span class="course-count">${lessons.length}차시 · ${escapeHtml(statusLabel(course, videos))}</span><a class="course-link" href="${actionUrl}">${actionLabel}</a></div>
-        </div>
-      </article>`;
-  }
-
-  function renderIndex(catalog, cache, progress) {
+  function renderIndex(catalog, mediaCatalog, progress, hasStudentSession) {
     const courseGrid = document.querySelector('#courseGrid');
     const statusPanel = document.querySelector('#academyStatus');
-    const courses = Array.isArray(catalog.courses) ? catalog.courses : [];
-    const course = courses[0];
+    const course = catalog.courses?.[0];
     if (!courseGrid) return;
-
-    courseGrid.innerHTML = courses.length
-      ? courses.map((item) => buildCourseCard(item, cache, progress)).join('')
-      : '<div class="empty-state"><strong>등록된 LMC 과정이 없습니다.</strong><span>과정 데이터를 확인해 주세요.</span></div>';
-
+    courseGrid.innerHTML = course ? buildCourseCard(course, mediaCatalog, progress, hasStudentSession) : '<div class="empty-state"><strong>등록된 LMC 과정이 없습니다.</strong></div>';
     if (!course) return;
-    const lessons = lessonsFor(course, cache);
-    const summary = courseProgress(progress, course.id, lessons);
-    const resume = resumeLesson(course, lessons, progress);
+    const weeks = courseWeeks(course, mediaCatalog);
+    const parts = allVideoParts(weeks);
+    const media = mediaCounts(mediaCatalog, course.id);
+    const summary = progressSummary(progress, course.id, parts);
+    const resume = resumePart(course, weeks, progress);
     const resumeCta = document.querySelector('#academyResumeCta');
     const heroProgress = document.querySelector('#academyHeroProgress');
-
-    if (resumeCta && summary.completed > 0 && resume) {
+    if (resumeCta && hasStudentSession) {
       resumeCta.hidden = false;
-      resumeCta.href = lessonUrl(course, resume);
-      resumeCta.textContent = `${resume.week || resume.moduleIndex + 1}주차 이어가기`;
+      resumeCta.href = partUrl(course, resume);
+      resumeCta.textContent = `${resume.week}주차 ${resume.part || ''}파트 이어가기`.replace('  ', ' ');
     }
-    if (heroProgress && summary.completed > 0) {
+    if (heroProgress) {
       heroProgress.classList.add('is-visible');
-      heroProgress.textContent = `${summary.completed}개 차시 완료 · 전체 진행률 ${summary.percent}%`;
+      heroProgress.textContent = hasStudentSession ? `${summary.completed}/77개 파트 완료 · ${summary.percent}%` : '입장코드 인증 후 수강생별 진도 표시';
     }
-
-    if (statusPanel) {
-      statusPanel.innerHTML = `
-        <article class="status-card"><span>LMC Curriculum</span><strong>${lessons.length}개 차시</strong><p>심리학 이론·심리측정 실습·수료시험</p></article>
-        <article class="status-card"><span>Qualification</span><strong>${escapeHtml(course.qualificationNumber || 'LMC')}</strong><p>${escapeHtml(course.qualificationName || '평생진로상담사')}</p></article>
-        <article class="status-card"><span>My Learning</span><strong>${summary.completed}개 완료</strong><p>진행률 ${summary.percent}% · 다음 방문에도 이어집니다</p></article>`;
-    }
+    if (statusPanel) statusPanel.innerHTML = `
+      <article class="status-card"><span>Official Curriculum</span><strong>12주 · 총 24시간</strong><p>영상·실습·성찰·수료시험 포함</p></article>
+      <article class="status-card"><span>Segmented Learning</span><strong>77개 · ${durationLabel(course.videoDurationSeconds, true)}</strong><p>10~26분 파트형 온라인 학습</p></article>
+      <article class="status-card"><span>Protected Media</span><strong>${media.published}/${media.total}개 공개</strong><p>비공개 R2 · 인증된 강의실에서만 재생</p></article>`;
   }
 
-  function curriculumRow(course, lesson, progress) {
+  function partRow(course, part, progress, active = false) {
     const completed = completedSet(progress, course.id);
-    const done = isLessonComplete(completed, lesson);
-    return `
-      <a class="curriculum-item lmc-curriculum-item${done ? ' is-complete' : ''}" href="${lessonUrl(course, lesson)}">
-        <span class="curriculum-number">${done ? '✓' : pad(lesson.week)}</span>
-        <span class="lmc-curriculum-main"><strong>${escapeHtml(lesson.title)}</strong><small>${escapeHtml(lesson.theory)}</small></span>
-        <span class="lmc-curriculum-practice"><em>Practice</em><small>${escapeHtml(lesson.practice)}</small></span>
-        <span class="lesson-status">${done ? '완료' : '학습하기'}</span>
-      </a>`;
+    const done = isPartComplete(completed, part);
+    const position = resumePosition(progress, part);
+    const status = done ? '완료' : (isPlayableMedia(part) ? '학습하기' : '업로드 준비');
+    const resume = !done && position > 0 ? `<small>${durationLabel(position)}부터 이어보기</small>` : '';
+    return `<a class="lmc-part-row${active ? ' is-active' : ''}${done ? ' is-complete' : ''}" href="${partUrl(course, part)}"${active ? ' aria-current="page"' : ''}>
+      <span class="lmc-part-number">${done ? '✓' : `P${pad(part.part)}`}</span><span class="lmc-part-copy"><strong>${escapeHtml(part.title)}</strong><small>${durationLabel(part.durationSeconds)}</small>${resume}</span><span class="lesson-status">${status}</span></a>`;
   }
 
-  function groupedCurriculum(course, lessons, progress, resume) {
+  function weekCard(course, week, progress, weeks, resume) {
+    const summary = weekSummary(progress, course.id, week);
+    const release = releaseState(course, week, progress, weeks);
+    const isFinal = week.week === 12;
+    const open = resume?.week === week.week || week.week === 1 ? ' open' : '';
+    const state = isFinal ? '수료 진행' : (summary.percent === 100 ? '완료' : (summary.completed ? '학습 중' : release.label));
+    const body = isFinal
+      ? `<a class="lmc-final-week-link" href="${partUrl(course, { week: 12 })}"><span>LMC FINAL WEEK</span><strong>수료시험·과정 통합·학기말 수료식</strong><small>영상 없음 · 운영 안내 후 진행</small></a>`
+      : week.parts.map((part) => partRow(course, part, progress)).join('');
+    return `<details class="lmc-week-card"${open}><summary><span class="lmc-week-index">WEEK ${pad(week.week)}</span><span class="lmc-week-title"><strong>${escapeHtml(week.title)}</strong><small>${isFinal ? '영상 없음' : `${week.parts.length}개 파트 · ${durationLabel(week.videoSeconds)}`}</small></span><span class="lmc-week-state"><strong>${state}</strong><small>${isFinal ? '운영자 확인' : `완료 ${summary.completed}/${summary.total} · ${summary.percent}%`}</small></span></summary><div class="lmc-week-progress">${isFinal ? '' : progressMarkup(summary, `${week.week}주차 진행률`)}</div><div class="lmc-week-body">${body}</div></details>`;
+  }
+
+  function groupedCurriculum(course, weeks, progress, resume) {
     return `<div class="lmc-phase-list">${PHASES.map((phase, index) => {
-      const phaseLessons = lessons.filter((lesson) => lesson.week >= phase.from && lesson.week <= phase.to);
+      const phaseWeeks = weeks.filter((week) => week.week >= phase.from && week.week <= phase.to);
       const open = resume?.phase?.id === phase.id || (!resume && index === 0) ? ' open' : '';
-      return `
-        <details class="lmc-phase-card"${open}>
-          <summary><span class="lmc-phase-index">${pad(index + 1)}</span><span class="lmc-phase-title"><strong>${escapeHtml(phase.title)}</strong><small>${escapeHtml(phase.range)} · ${escapeHtml(phase.summary)}</small></span></summary>
-          <div class="lmc-phase-body">${phaseLessons.map((lesson) => curriculumRow(course, lesson, progress)).join('')}</div>
-        </details>`;
+      return `<details class="lmc-phase-card"${open}><summary><span class="lmc-phase-index">${pad(index + 1)}</span><span class="lmc-phase-title"><strong>${escapeHtml(phase.title)}</strong><small>${escapeHtml(phase.range)} · ${escapeHtml(phase.summary)}</small></span></summary><div class="lmc-phase-body lmc-week-list">${phaseWeeks.map((week) => weekCard(course, week, progress, weeks, resume)).join('')}</div></details>`;
     }).join('')}</div>`;
   }
 
-  function renderCourse(catalog, cache, progress) {
+  function renderCourse(catalog, mediaCatalog, progress) {
     const app = document.querySelector('#courseApp');
     if (!app) return;
-    const courseId = params.get('course') || catalog.courses?.[0]?.id;
-    const course = catalog.courses?.find((item) => item.id === courseId);
-    if (!course) {
-      app.innerHTML = '<div class="empty-state"><strong>LMC 과정을 찾을 수 없습니다.</strong><a class="secondary-action" href="./index.html">Academy로 돌아가기</a></div>';
-      return;
-    }
-
-    const videos = videosFor(cache, course.id);
-    const lessons = lessonsFor(course, cache);
-    const summary = courseProgress(progress, course.id, lessons);
-    const resume = resumeLesson(course, lessons, progress);
-    const delivery = (course.deliveryOptions || []).join(' · ');
-    const resumeLabel = summary.completed ? `${resume?.week || 1}주차 학습 이어가기` : '1주차 학습 시작';
-
-    app.innerHTML = `
-      <div class="cip-breadcrumb academy-breadcrumb"><a href="./index.html">LMC Academy</a><span>/</span><strong>${escapeHtml(course.title)}</strong></div>
+    const course = catalog.courses?.find((item) => item.id === (params.get('course') || COURSE_ID));
+    if (!course) { app.innerHTML = '<div class="empty-state"><strong>LMC 과정을 찾을 수 없습니다.</strong></div>'; return; }
+    const weeks = courseWeeks(course, mediaCatalog);
+    const parts = allVideoParts(weeks);
+    const summary = progressSummary(progress, course.id, parts);
+    const media = mediaCounts(mediaCatalog, course.id);
+    const resume = resumePart(course, weeks, progress);
+    app.innerHTML = `<div class="cip-breadcrumb academy-breadcrumb"><a href="./index.html">LMC Academy</a><span>/</span><strong>${escapeHtml(course.title)}</strong></div>
       <nav class="course-quicknav" aria-label="과정 상세 빠른 이동"><a href="#course-overview">과정 개요</a><a href="#curriculum">12주 커리큘럼</a><a href="#benefits">교육 특전</a><a href="#faculty">강사진</a><a href="#qualification">자격 안내</a></nav>
-      <section class="course-detail-hero" id="course-overview">
-        <article class="course-detail-copy">
-          <span class="cip-kicker">${escapeHtml(course.coverLabel || 'LMC Course')}</span>
-          <h1>${escapeHtml(course.title)}</h1>
-          <div class="subtitle">${escapeHtml(course.englishTitle || '')}</div>
-          <p>${escapeHtml(course.description)}</p>
-          <div class="course-meta" style="margin-top:22px">${(course.audience || []).map((item) => `<span>${escapeHtml(item)}</span>`).join('')}</div>
-          <div class="lmc-qualification-strip">
-            <div class="lmc-qualification-item"><span>Qualification</span><strong>${escapeHtml(course.qualificationNumber)}</strong></div>
-            <div class="lmc-qualification-item"><span>Program</span><strong>${escapeHtml(course.scheduleSummary)}</strong></div>
-            <div class="lmc-qualification-item"><span>Delivery</span><strong>${escapeHtml(delivery)}</strong></div>
-          </div>
-          <div class="lmc-resume-panel"><div><span>Next Learning</span><strong>${escapeHtml(resume?.title || '1주차부터 시작합니다')}</strong></div><a class="primary-action" href="${lessonUrl(course, resume)}">${resumeLabel} →</a></div>
-          <div class="course-actions"><a class="secondary-action" href="#curriculum">커리큘럼 먼저 보기</a><a class="secondary-action" href="./index.html">LMC Academy</a></div>
-        </article>
-        <aside class="course-summary-card">
-          <div class="summary-cap"><span>LMC COURSE PROFILE</span><span>${escapeHtml(course.level)}</span></div>
-          <div class="summary-body">
-            <div class="summary-row"><span>부여 자격</span><strong>${escapeHtml(course.qualificationName)}</strong></div>
-            <div class="summary-row"><span>등록번호</span><strong>${escapeHtml(course.qualificationNumber)}</strong></div>
-            <div class="summary-row"><span>강사·운영</span><strong>${escapeHtml(course.instructor)}</strong></div>
-            <div class="summary-row"><span>차시</span><strong>${lessons.length}개</strong></div>
-            <div class="summary-row"><span>학습시간</span><strong>${durationLabel(course.estimatedMinutes)}</strong></div>
-            <div class="summary-row"><span>상태</span><strong>${escapeHtml(statusLabel(course, videos))}</strong></div>
-            <div class="summary-row"><span>내 진도</span><strong>${summary.completed}/${summary.total}</strong></div>
-            <div style="margin-top:18px">${progressMarkup(summary)}<div class="progress-copy"><span>진행률</span><span>${summary.percent}%</span></div></div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="course-detail-grid">
-        <article class="curriculum-card" id="curriculum"><h2 class="card-title">12주 이론·실습 커리큘럼</h2>${groupedCurriculum(course, lessons, progress, resume)}</article>
-        <div class="side-stack">
-          <article class="learning-card"><h2 class="card-title">학습 목표</h2><ul class="learning-list">${(course.learningGoals || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article>
-          <article class="lmc-side-card" id="benefits"><h2 class="card-title">교육 특전</h2><div class="lmc-benefit-list">${(course.benefits || []).map((item) => `<div class="lmc-benefit-item">${escapeHtml(item)}</div>`).join('')}</div></article>
-          <article class="lmc-side-card" id="faculty"><h2 class="card-title">주 강사진</h2><div class="lmc-instructor-list">${(course.instructors || []).map((person) => `<div class="lmc-instructor-item"><div><strong>${escapeHtml(person.name)}</strong><span>${escapeHtml(person.role)}</span><small>${escapeHtml(person.note)}</small></div></div>`).join('')}</div></article>
-          <article class="reflection-card"><h2 class="card-title">과정 성찰 질문</h2><ul class="reflection-list">${(course.reflectionQuestions || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article>
-        </div>
-      </section>
-      <article class="lmc-full-card" id="qualification"><h2 class="card-title">자격 및 운영 안내</h2><p class="lmc-lesson-copy">${escapeHtml(course.credentialNotice || '')}</p><p class="lmc-lesson-copy" style="margin-top:8px">${escapeHtml(course.cohortNotice || '')}</p><div class="lmc-ethics-note">${escapeHtml(course.ethicsNotice || '')}</div></article>`;
+      <section class="course-detail-hero" id="course-overview"><article class="course-detail-copy"><span class="cip-kicker">LMC · 77 PARTS</span><h1>${escapeHtml(course.title)}</h1><div class="subtitle">${escapeHtml(course.englishTitle || '')}</div><p>${escapeHtml(course.description)}</p>
+      <div class="lmc-qualification-strip"><div class="lmc-qualification-item"><span>Official</span><strong>12주 · 총 24시간</strong></div><div class="lmc-qualification-item"><span>Video</span><strong>77개 · ${durationLabel(course.videoDurationSeconds, true)}</strong></div><div class="lmc-qualification-item"><span>Media</span><strong>${media.published}/${media.total}개 공개</strong></div></div>
+      <div class="lmc-resume-panel"><div><span>Next Learning</span><strong>WEEK ${pad(resume.week)} · ${escapeHtml(resume.title || '수료 주차')}</strong></div><a class="primary-action" href="${partUrl(course, resume)}">학습 이어가기 →</a></div></article>
+      <aside class="course-summary-card"><div class="summary-cap"><span>LMC COURSE PROFILE</span><span>${escapeHtml(course.level)}</span></div><div class="summary-body"><div class="summary-row"><span>부여 자격</span><strong>${escapeHtml(course.qualificationName)}</strong></div><div class="summary-row"><span>등록번호</span><strong>${escapeHtml(course.qualificationNumber)}</strong></div><div class="summary-row"><span>영상 파트</span><strong>77개</strong></div><div class="summary-row"><span>실제 영상시간</span><strong>${durationLabel(course.videoDurationSeconds, true)}</strong></div><div class="summary-row"><span>내 영상진도</span><strong>${summary.completed}/${summary.total}</strong></div><div style="margin-top:18px">${progressMarkup(summary)}<div class="progress-copy"><span>진행률</span><span>${summary.percent}%</span></div></div></div></aside></section>
+      <section class="course-detail-grid"><article class="curriculum-card" id="curriculum"><h2 class="card-title">12주 · 77파트 커리큘럼</h2><p class="lmc-curriculum-intro">주차를 펼치면 10~26분 단위 파트와 이어보기 위치를 확인할 수 있습니다.</p>${groupedCurriculum(course, weeks, progress, resume)}</article><div class="side-stack"><article class="learning-card"><h2 class="card-title">학습 목표</h2><ul class="learning-list">${(course.learningGoals || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article><article class="lmc-side-card" id="benefits"><h2 class="card-title">교육 특전</h2><div class="lmc-benefit-list">${(course.benefits || []).map((item) => `<div class="lmc-benefit-item">${escapeHtml(item)}</div>`).join('')}</div></article><article class="lmc-side-card" id="faculty"><h2 class="card-title">주 강사진</h2><div class="lmc-instructor-list">${(course.instructors || []).map((person) => `<div class="lmc-instructor-item"><div><strong>${escapeHtml(person.name)}</strong><span>${escapeHtml(person.role)}</span><small>${escapeHtml(person.note)}</small></div></div>`).join('')}</div></article></div></section>
+      <article class="lmc-full-card" id="qualification"><h2 class="card-title">자격 및 운영 안내</h2><p class="lmc-lesson-copy">${escapeHtml(course.credentialNotice || '')}</p><p class="lmc-lesson-copy">브라우저 진도는 학습 편의를 위한 기록이며 공식 출결·자격증 발급 증거로 단독 사용하지 않습니다.</p><div class="lmc-ethics-note">${escapeHtml(course.ethicsNotice || '')}</div></article>`;
   }
 
-  function lessonListMarkup(course, lessons, progress, activeId) {
-    const completed = completedSet(progress, course.id);
-    return lessons.map((lesson) => {
-      const done = isLessonComplete(completed, lesson);
-      const classes = ['lesson-list-item'];
-      if (lesson.id === activeId) classes.push('is-active');
-      if (done) classes.push('is-complete');
-      return `<a class="${classes.join(' ')}" href="${lessonUrl(course, lesson)}"><span class="lesson-number">${done ? '✓' : pad(lesson.week)}</span><span><strong>${escapeHtml(lesson.title)}</strong><small>${done ? '학습 완료' : `${lesson.phase.label} · ${lesson.phase.title}`}</small></span></a>`;
-    }).join('');
+  function completionAction(url, readyLabel) {
+    try {
+      const target = new URL(String(url || '').trim());
+      if (target.protocol !== 'https:') throw new Error();
+      return `<a class="completion-action" href="${escapeHtml(target.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(readyLabel)} →</a>`;
+    } catch { return '<span class="completion-action is-disabled" aria-disabled="true">운영 준비 중</span>'; }
   }
 
-  function showStatus(message) {
-    let toast = document.querySelector('.academy-toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.className = 'academy-toast';
-      Object.assign(toast.style, { position: 'fixed', left: '50%', bottom: '24px', zIndex: '500', transform: 'translateX(-50%)', padding: '11px 15px', borderRadius: '999px', color: '#fff', background: 'rgba(7,28,67,.94)', boxShadow: '0 14px 36px rgba(7,28,67,.28)', fontSize: '12px', fontWeight: '800', transition: 'opacity .2s ease' });
-      document.body.appendChild(toast);
-    }
-    toast.textContent = message;
-    toast.style.opacity = '1';
-    clearTimeout(showStatus.timer);
-    showStatus.timer = setTimeout(() => { toast.style.opacity = '0'; }, 1800);
+  function completionStageMarkup(course) {
+    const completion = course.completion || {};
+    return `<section class="completion-stage" aria-labelledby="completion-stage-title"><span class="video-week-mark">LMC FINAL WEEK</span><strong id="completion-stage-title">배운 것을 연결하고 전문활용의 기준을 정리합니다.</strong><p>영상 없이 수료시험, 1~11주 과정 통합, 전체 성찰, 만족도 조사, 학기말 수료식과 자격증 발급 절차를 진행합니다.</p><div class="completion-stage-flow"><span>수료시험</span><span>과정 통합</span><span>전체 성찰</span><span>만족도 조사</span><span>학기말 수료식</span><span>자격증 발급</span></div>${completionAction(completion.examUrl, '수료시험 열기')}</section>`;
   }
 
-  function renderLesson(catalog, cache, progress) {
+  function noteCardMarkup(savedNote, index = '03') {
+    return `<article class="lesson-content-card" data-card-index="${index}"><h2 class="card-title">나의 한 문장</h2><textarea class="note-field" id="lessonNote" placeholder="오늘 배운 개념이나 상담 장면에 적용할 한 문장을 기록하세요.">${escapeHtml(savedNote)}</textarea><div class="note-save-line"><span>이 수강생의 브라우저에 자동 저장됩니다.</span><span class="note-save-status" id="noteSaveStatus">${savedNote ? '저장된 기록' : '기록 전'}</span></div></article>`;
+  }
+
+  function ethicsMarkup(course, active) {
+    if (active.week >= 7 && active.week <= 9) return `<div class="lmc-ethics-note is-prominent">본 교육과 검사도구는 자기이해와 상담·코칭 교육을 위한 자료입니다. 의학적 진단이나 치료를 대신하지 않으며, 위기 또는 전문치료가 필요한 경우 관련 전문기관과 의료기관의 도움을 받아야 합니다.</div>`;
+    if (/AI/.test(active.title)) return '<div class="lmc-ethics-note is-prominent">AI 해석은 보조자료입니다. 개인정보 입력에 주의하고, 원자료와 맥락을 함께 검토하며, 검사결과를 단정하지 않습니다. 전문가의 판단을 대신하지 않습니다.</div>';
+    return `<div class="lmc-ethics-note">${escapeHtml(course.ethicsNotice || '')}</div>`;
+  }
+
+  function lessonSidebar(course, week, progress, activeId) {
+    const summary = weekSummary(progress, course.id, week);
+    return `<aside class="lesson-sidebar" id="lessonSidebar"><div class="lesson-sidebar-head"><div><span>WEEK ${pad(week.week)}</span><h2>${escapeHtml(week.title)}</h2></div><button class="lesson-sidebar-toggle" type="button" id="lessonSidebarToggle" aria-expanded="true" aria-controls="lessonList">⌃</button></div><div class="lesson-sidebar-progress">${progressMarkup(summary, `${week.week}주차 진행률`)}<div class="progress-copy"><span>${summary.completed}/${summary.total} 완료</span><span>${summary.percent}%</span></div></div><div class="lesson-list" id="lessonList">${week.parts.map((part) => partRow(course, part, progress, part.id === activeId)).join('')}</div><div class="course-actions" style="margin:0 18px 18px"><a class="secondary-action" href="./course.html?course=${encodeURIComponent(course.id)}#curriculum">전체 12주</a></div></aside>`;
+  }
+
+  function renderLesson(catalog, mediaCatalog, progress) {
     const app = document.querySelector('#lessonApp');
     if (!app) return;
-    const courseId = params.get('course') || catalog.courses?.[0]?.id;
-    const course = catalog.courses?.find((item) => item.id === courseId);
-    if (!course) {
-      app.innerHTML = '<div class="empty-state"><strong>LMC 과정을 찾을 수 없습니다.</strong><a class="secondary-action" href="./index.html">Academy로 돌아가기</a></div>';
+    const course = catalog.courses?.find((item) => item.id === (params.get('course') || COURSE_ID));
+    if (!course) { app.innerHTML = '<div class="empty-state"><strong>LMC 과정을 찾을 수 없습니다.</strong></div>'; return; }
+    const weeks = courseWeeks(course, mediaCatalog);
+    const requestedWeek = Number(params.get('week') || (params.has('module') ? Number(params.get('module')) + 1 : 0));
+    const resume = resumePart(course, weeks, progress);
+    const weekNumber = requestedWeek >= 1 && requestedWeek <= 12 ? requestedWeek : resume.week;
+    const week = weeks.find((item) => item.week === weekNumber) || weeks[0];
+    if (week.week === 12) {
+      const savedNote = progress.notes?.[`${course.id}:week-12`] || '';
+      app.innerHTML = `<div class="cip-breadcrumb academy-breadcrumb"><a href="./index.html">LMC Academy</a><span>/</span><a href="./course.html?course=${encodeURIComponent(course.id)}">${escapeHtml(course.title)}</a><span>/</span><strong>WEEK 12</strong></div>${completionStageMarkup(course)}<div class="lesson-content-grid completion-content-grid"><article class="lesson-content-card completion-card" data-card-index="01"><h2 class="card-title">전체 과정 성찰</h2><ul class="reflection-list">${(course.completion?.reflectionQuestions || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article><article class="lesson-content-card completion-card" data-card-index="02"><h2 class="card-title">만족도 조사</h2><p class="lmc-lesson-copy">담당자의 안내 후 이용할 수 있습니다.</p>${completionAction(course.completion?.satisfactionSurveyUrl, '만족도 조사 열기')}</article><article class="lesson-content-card completion-card" data-card-index="03"><h2 class="card-title">수료 및 자격증 발급</h2><p class="lmc-lesson-copy">${escapeHtml(course.completion?.certificateNotice || '')}</p>${completionAction(course.completion?.completionApplicationUrl, '수료 절차 열기')}</article>${noteCardMarkup(savedNote, '04')}</div><div class="lmc-final-confirmation"><strong>최종 완료는 운영자 확인 후 반영됩니다.</strong><span>브라우저의 학습기록만으로 공식 출결·수료·자격증 발급이 확정되지 않습니다.</span></div><div class="lesson-navigation"><a class="lesson-nav-link prev" href="${partUrl(course, weeks.find((item) => item.week === 11)?.parts.at(-1))}">← 11주차 마지막 파트</a><span></span><a class="lesson-nav-link next" href="./course.html?course=${encodeURIComponent(course.id)}#curriculum">과정 전체 보기 →</a></div>`;
+      bindNote(course, 'week-12');
       return;
     }
-
-    const lessons = lessonsFor(course, cache);
-    const requestedVideo = params.get('video');
-    const requestedModule = Number(params.get('module'));
-    let activeIndex = requestedVideo ? lessons.findIndex((lesson) => lesson.videoId === requestedVideo) : (Number.isFinite(requestedModule) ? requestedModule : -1);
-    if (activeIndex < 0 || activeIndex >= lessons.length) {
-      const resume = resumeLesson(course, lessons, progress);
-      activeIndex = Math.max(0, lessons.findIndex((lesson) => lesson.id === resume?.id));
-    }
-
-    const active = lessons[activeIndex] || lessons[0];
-    const previous = lessons[activeIndex - 1] || null;
-    const next = lessons[activeIndex + 1] || null;
-    const activeId = active.id;
-    const noteKey = `${course.id}:${activeId}`;
-    const savedNote = progress.notes?.[noteKey] || '';
-    const summary = courseProgress(progress, course.id, lessons);
-    const completed = completedSet(progress, course.id);
-    const done = isLessonComplete(completed, active);
-    const description = active.description || active.theory || 'LMC 차시 정보를 불러오고 있습니다.';
-
-    progress.lastViewed[course.id] = activeId;
+    const release = releaseState(course, week, progress, weeks);
+    if (!release.allowed) { app.innerHTML = `<section class="access-setup-state"><span>WEEK ${pad(week.week)}</span><strong>${release.label}</strong><p>현재 공개정책에 따라 이 주차를 이용할 수 없습니다.</p><a href="./course.html?course=${encodeURIComponent(course.id)}#curriculum">커리큘럼으로 이동 →</a></section>`; return; }
+    const requestedPart = Number(params.get('part') || 0);
+    const active = week.parts.find((part) => part.part === requestedPart) || week.parts.find((part) => part.id === resume.id) || week.parts[0];
+    const flat = [...allVideoParts(weeks), { week: 12, id: 'week-12', title: '수료시험 및 과정 통합' }];
+    const activeIndex = flat.findIndex((part) => part.id === active.id);
+    const previous = flat[activeIndex - 1] || null;
+    const next = flat[activeIndex + 1] || null;
+    const noteKey = active.id;
+    const savedNote = progress.notes?.[`${course.id}:${noteKey}`] || '';
+    const courseSummary = progressSummary(progress, course.id, allVideoParts(weeks));
+    const done = isPartComplete(completedSet(progress, course.id), active);
+    progress.lastViewed[course.id] = active.id;
     saveProgress(progress);
+    const playable = isPlayableMedia(active);
+    const stage = `<div class="video-stage${playable ? '' : ' no-video'}"><div class="video-ratio" id="videoRatio">${playable ? '<div class="r2-player-state"><strong>비공개 강의 영상을 불러오는 중입니다.</strong><span>수강권한과 단기 재생주소를 확인하고 있습니다.</span></div>' : `<div class="video-placeholder"><div class="video-placeholder-card"><span class="video-week-mark">WEEK ${pad(active.week)} · PART ${pad(active.part)}</span><strong>영상 업로드 준비 중</strong><p>${escapeHtml(active.title)}</p><span class="video-placeholder-hint">검증된 MP4가 R2에 게시되기 전에는 재생주소를 발급하지 않습니다.</span></div></div>`}</div></div>`;
+    const prevHref = previous ? partUrl(course, previous) : '#';
+    const nextHref = next ? partUrl(course, next) : '#';
+    app.innerHTML = `<div class="cip-breadcrumb academy-breadcrumb"><a href="./index.html">LMC Academy</a><span>/</span><a href="./course.html?course=${encodeURIComponent(course.id)}#curriculum">${escapeHtml(course.title)}</a><span>/</span><strong>W${pad(active.week)} P${pad(active.part)}</strong></div><section class="lesson-layout"><div><div class="lesson-workspace-head"><div class="lesson-context"><span>${active.phase.label}</span><span>WEEK ${pad(active.week)}</span><span>PART ${pad(active.part)}</span></div><div class="lesson-step-count">전체 ${activeIndex + 1} / 77</div></div>${stage}<div class="lesson-title-row"><span class="cip-kicker">LMC PROTECTED LESSON</span><h1>${escapeHtml(active.title)}</h1><p>${escapeHtml(active.theory || active.weekTitle)}</p><div class="course-meta"><span>${durationLabel(active.durationSeconds)}</span><span>${playable ? 'R2 비공개 스트리밍' : '업로드 대기'}</span></div></div><div class="lesson-content-grid"><article class="lesson-content-card" data-card-index="01"><h2 class="card-title">이번 파트의 맥락</h2><p class="lmc-lesson-copy">${escapeHtml(active.practice || '')}</p></article><article class="lesson-content-card" data-card-index="02"><h2 class="card-title">학습 기록</h2><p class="lmc-lesson-copy">90% 이상 시청하면 파트가 자동 완료됩니다. 완료 후에도 다시 학습할 수 있습니다.</p><div class="lesson-part-progress">${progressMarkup(courseSummary, '전체 과정 영상진도')}<span>전체 ${courseSummary.completed}/77 · ${courseSummary.percent}%</span></div></article>${noteCardMarkup(savedNote)}</div>${ethicsMarkup(course, active)}<div class="lesson-navigation"><a class="lesson-nav-link prev${previous ? '' : ' is-disabled'}" href="${prevHref}">← 이전 파트</a><button class="lesson-complete-button${done ? ' is-complete' : ''}" type="button" disabled>${done ? '✓ 파트 완료' : (playable ? '90% 시청 시 자동 완료' : '영상 업로드 대기')}</button><a class="lesson-nav-link next${next ? '' : ' is-disabled'}" href="${nextHref}">다음 파트 →</a></div></div>${lessonSidebar(course, week, progress, active.id)}</section><div class="mobile-learning-bar"><a class="${previous ? '' : 'is-disabled'}" href="${prevHref}" aria-label="이전 파트">←</a><span class="mobile-complete${done ? ' is-complete' : ''}">${done ? '✓ 완료' : `${active.part}/${week.parts.length}`}</span><a class="${next ? '' : 'is-disabled'}" href="${nextHref}" aria-label="다음 파트">→</a></div>`;
+    bindNote(course, noteKey);
+    bindLessonUi();
+  }
 
-    const prevClass = previous ? '' : ' is-disabled';
-    const nextClass = next ? '' : ' is-disabled';
-    const prevHref = previous ? lessonUrl(course, previous) : '#';
-    const nextHref = next ? lessonUrl(course, next) : '#';
-
-    app.innerHTML = `
-      <div class="cip-breadcrumb academy-breadcrumb"><a href="./index.html">LMC Academy</a><span>/</span><a href="./course.html?course=${encodeURIComponent(course.id)}">${escapeHtml(course.title)}</a><span>/</span><strong>${active.week}주차</strong></div>
-      <section class="lesson-layout">
-        <div>
-          <div class="lesson-workspace-head"><div class="lesson-context"><span>${active.phase.label}</span><span>${escapeHtml(active.phase.title)}</span><span>${active.week}주차</span></div><div class="lesson-step-count">${activeIndex + 1} / ${lessons.length}</div></div>
-          <div class="video-stage${active.videoId ? '' : ' no-video'}">
-            <div class="video-ratio" id="videoRatio">
-              ${active.videoId ? '<div id="youtubePlayer" style="position:absolute;inset:0"></div>' : `<div class="video-placeholder"><div class="video-placeholder-card"><span class="video-week-mark">LMC WEEK ${pad(active.week)}</span><strong>${escapeHtml(active.title)}</strong><p>${escapeHtml(active.theory)}</p><span class="video-placeholder-hint">영상 연결 전에도 이론·실습·학습기록을 사용할 수 있습니다.</span></div></div>`}
-            </div>
-          </div>
-          <div class="lesson-title-row"><span class="cip-kicker">${active.videoId ? 'LMC Video Lesson' : `LMC Week ${pad(active.week)}`}</span><h1>${escapeHtml(active.title)}</h1><p>${escapeHtml(description)}</p><div class="course-meta" style="margin-top:16px"><span>${escapeHtml(active.recommendedFor || 'LMC 과정 참여자')}</span></div></div>
-
-          <div class="lesson-content-grid">
-            <article class="lesson-content-card lmc-lesson-theory" data-card-index="01"><h2 class="card-title">이론 핵심</h2><p class="lmc-lesson-copy">${escapeHtml(active.theory || description)}</p></article>
-            <article class="lesson-content-card lmc-lesson-practice" data-card-index="02"><h2 class="card-title">심리측정 실습</h2><p class="lmc-lesson-copy">${escapeHtml(active.practice || '영상강의의 안내에 따라 실습합니다.')}</p></article>
-            <article class="lesson-content-card" data-card-index="03"><h2 class="card-title">오늘의 성찰 질문</h2><ul class="reflection-list">${(course.reflectionQuestions || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></article>
-            <article class="lesson-content-card" data-card-index="04"><h2 class="card-title">나의 한 문장</h2><textarea class="note-field" id="lessonNote" placeholder="오늘 배운 개념이나 상담 장면에 적용할 한 문장을 기록하세요.">${escapeHtml(savedNote)}</textarea><div class="note-save-line"><span>입력 내용은 이 브라우저에 자동 저장됩니다.</span><span class="note-save-status" id="noteSaveStatus">${savedNote ? '저장된 기록' : '기록 전'}</span></div></article>
-          </div>
-          <div class="lmc-ethics-note">${escapeHtml(course.ethicsNotice || '')}</div>
-
-          <div class="lesson-navigation"><a class="lesson-nav-link prev${prevClass}" href="${prevHref}">← 이전 차시</a><button class="lesson-complete-button${done ? ' is-complete' : ''}" type="button" data-action="toggle-complete">${done ? '✓ 학습 완료됨' : '학습 완료'}</button><a class="lesson-nav-link next${nextClass}" href="${nextHref}">${next ? '다음 차시 →' : '과정 완료'}</a></div>
-        </div>
-
-        <aside class="lesson-sidebar" id="lessonSidebar">
-          <div class="lesson-sidebar-head"><h2>12주 전체 차시</h2><button class="lesson-sidebar-toggle" type="button" id="lessonSidebarToggle" aria-expanded="true" aria-controls="lessonList">⌃</button></div>
-          <div class="lesson-sidebar-progress">${progressMarkup(summary)}<div class="progress-copy"><span>${summary.completed}개 완료</span><span>${summary.percent}%</span></div></div>
-          <div class="lesson-list" id="lessonList">${lessonListMarkup(course, lessons, progress, activeId)}</div>
-          <div class="course-actions" style="margin:0 18px 18px"><a class="secondary-action" href="./course.html?course=${encodeURIComponent(course.id)}">과정정보</a></div>
-        </aside>
-      </section>
-
-      <div class="mobile-learning-bar" aria-label="모바일 학습 이동"><a class="${prevClass}" href="${prevHref}" aria-label="이전 차시">←</a><button class="mobile-complete${done ? ' is-complete' : ''}" type="button" data-action="toggle-complete">${done ? '✓ 완료' : '학습 완료'}</button><a class="${nextClass}" href="${nextHref}" aria-label="다음 차시">→</a></div>`;
-
+  function bindNote(course, noteKey) {
     let noteTimer;
     const noteField = document.querySelector('#lessonNote');
     const noteStatus = document.querySelector('#noteSaveStatus');
-    const persistNote = () => {
-      progress.notes[noteKey] = (noteField?.value || '').trim();
-      saveProgress(progress);
+    const persist = () => {
+      const current = getProgress();
+      current.notes[`${course.id}:${noteKey}`] = (noteField?.value || '').trim();
+      saveProgress(current);
       if (noteStatus) { noteStatus.textContent = '자동 저장됨'; noteStatus.classList.add('is-saved'); }
     };
-    noteField?.addEventListener('input', () => {
-      if (noteStatus) { noteStatus.textContent = '저장 중…'; noteStatus.classList.remove('is-saved'); }
-      clearTimeout(noteTimer);
-      noteTimer = setTimeout(persistNote, 500);
-    });
-    noteField?.addEventListener('blur', persistNote);
+    noteField?.addEventListener('input', () => { if (noteStatus) noteStatus.textContent = '저장 중…'; clearTimeout(noteTimer); noteTimer = setTimeout(persist, 500); });
+    noteField?.addEventListener('blur', persist);
+  }
 
-    document.querySelectorAll('[data-action="toggle-complete"]').forEach((button) => button.addEventListener('click', () => {
-      const set = completedSet(progress, course.id);
-      if (isLessonComplete(set, active)) {
-        set.delete(active.id);
-        if (active.moduleId) set.delete(active.moduleId);
-      } else {
-        set.add(active.id);
-      }
-      progress.completed[course.id] = [...set];
-      saveProgress(progress);
-      renderLesson(catalog, cache, progress);
-      showStatus(isLessonComplete(set, active) ? '학습 완료로 기록했습니다.' : '완료 기록을 취소했습니다.');
-    }));
-
+  function bindLessonUi() {
     document.querySelector('#lessonSidebarToggle')?.addEventListener('click', (event) => {
       const sidebar = document.querySelector('#lessonSidebar');
       const collapsed = sidebar?.classList.toggle('is-collapsed');
       event.currentTarget.setAttribute('aria-expanded', String(!collapsed));
       event.currentTarget.textContent = collapsed ? '⌄' : '⌃';
     });
-
-    if (active.videoId) createYouTubePlayer(active.videoId, () => {
-      const set = completedSet(progress, course.id);
-      if (!isLessonComplete(set, active)) {
-        set.add(active.id);
-        progress.completed[course.id] = [...set];
-        saveProgress(progress);
-        renderLesson(catalog, cache, progress);
-        showStatus('영상 시청을 완료했습니다.');
-      }
-    });
   }
 
-  function createYouTubePlayer(videoId, onEnded) {
-    const container = document.querySelector('#youtubePlayer');
-    if (!container || !videoId) return;
-    const mount = () => {
-      if (!window.YT?.Player || !document.querySelector('#youtubePlayer')) return;
-      new window.YT.Player('youtubePlayer', {
-        host: 'https://www.youtube-nocookie.com', videoId, width: '100%', height: '100%',
-        playerVars: { playsinline: 1, rel: 0, enablejsapi: 1, origin: window.location.origin },
-        events: { onStateChange(event) { if (event.data === window.YT.PlayerState.ENDED) onEnded?.(); } }
-      });
-    };
-    if (window.YT?.Player) { mount(); return; }
-    const previousReady = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => { previousReady?.(); mount(); };
-    if (!document.querySelector('script[data-youtube-iframe-api]')) {
-      const script = document.createElement('script');
-      script.src = 'https://www.youtube.com/iframe_api';
-      script.async = true;
-      script.dataset.youtubeIframeApi = 'true';
-      document.head.appendChild(script);
-    }
+  function renderAccessFailure(page, message) {
+    const target = document.querySelector(page === 'course' ? '#courseApp' : '#lessonApp');
+    if (target) target.innerHTML = `<section class="access-setup-state"><span>ACADEMY ACCESS</span><strong>강의실 인증을 시작하지 못했습니다.</strong><p>${escapeHtml(message || '입장 페이지에서 다시 로그인해 주세요.')}</p><a href="./enter.html">수강생 입장으로 이동 →</a></section>`;
   }
 
   async function init() {
     const page = document.body.dataset.academyPage;
-    const { catalog, cache } = await loadData();
+    let session = null;
+    setAuthenticatedStudent('');
+    if (page === 'course' || page === 'lesson') {
+      if (!window.RSEduAcademyAccess) { renderAccessFailure(page, '인증 스크립트가 로드되지 않았습니다.'); return; }
+      try { session = await window.RSEduAcademyAccess.guard({ target: document.querySelector(page === 'course' ? '#courseApp' : '#lessonApp') }); if (!session) return; } catch (error) { renderAccessFailure(page, error.message); return; }
+    } else if (page === 'index' && window.RSEduAcademyAccess?.isConfigured?.() && window.RSEduAcademyAccess?.loadSession?.()) {
+      try { session = await window.RSEduAcademyAccess.guard({ redirect: false }); } catch (error) { console.warn('[RS Academy] public progress session ignored:', error); }
+    }
+    setAuthenticatedStudent(session?.studentId || '');
+    const { catalog, mediaCatalog } = await loadData();
     const progress = getProgress();
-    if (page === 'index') renderIndex(catalog, cache, progress);
-    if (page === 'course') renderCourse(catalog, cache, progress);
-    if (page === 'lesson') renderLesson(catalog, cache, progress);
+    if (page === 'index') renderIndex(catalog, mediaCatalog, progress, Boolean(session?.studentId));
+    if (page === 'course') renderCourse(catalog, mediaCatalog, progress);
+    if (page === 'lesson') renderLesson(catalog, mediaCatalog, progress);
   }
+
+  document.addEventListener('rsedu-academy:part-completed', (event) => {
+    const partId = String(event.detail?.partId || '');
+    if (!/^week-\d{2}-part-\d{2}$/.test(partId)) return;
+    const progress = getProgress();
+    const completed = completedSet(progress, COURSE_ID);
+    if (!completed.has(partId)) {
+      completed.add(partId);
+      progress.completed[COURSE_ID] = [...completed];
+      delete progress.playback[`${COURSE_ID}:${partId}`];
+      saveProgress(progress);
+      const button = document.querySelector('.lesson-complete-button');
+      if (button) { button.classList.add('is-complete'); button.textContent = '✓ 파트 완료'; }
+      const mobile = document.querySelector('.mobile-complete');
+      if (mobile) { mobile.classList.add('is-complete'); mobile.textContent = '✓ 완료'; }
+      const activeRow = document.querySelector('.lmc-part-row[aria-current="page"]');
+      if (activeRow) {
+        activeRow.classList.add('is-complete');
+        const number = activeRow.querySelector('.lmc-part-number');
+        const state = activeRow.querySelector('.lesson-status');
+        if (number) number.textContent = '✓';
+        if (state) state.textContent = '완료';
+      }
+    }
+  });
 
   document.addEventListener('DOMContentLoaded', init);
 })();
