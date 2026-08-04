@@ -20,7 +20,7 @@ const catalogDetails = [
   { route: '/nal/gather/emotion-card-conversation/', id: 'emotion-card-dialogue-gather', title: '감정카드 대화모임', capture: 'gather-detail-1440.png' },
   { route: '/nal/gather/self-understanding-writing/', id: 'self-understanding-writing-gather', title: '자기이해 글쓰기 모임' },
   { route: '/nal/gather/coaches-dialogue-practice/', id: 'coaches-dialogue-practice-gather', title: '코치들의 대화와 실습 모임' },
-  { route: '/nal/gather/flowing-river-coaches/', id: 'flowing-river-coach-community', title: '흐르는 강물처럼' },
+  { route: '/nal/gather/flowing-river-coaches/', id: 'flowing-river-coach-community', title: '흐르는 강물처럼', capture: 'flowing-river-detail-1440.png' },
   { route: '/nal/class/meet-myself-with-emotion-cards/', id: 'emotion-card-meets-self-class', title: '감정카드로 만나는 나' },
   { route: '/nal/class/art-current-mind/', id: 'art-current-mind-class', title: '미술로 그리는 현재의 마음', capture: 'class-detail-1440.png' },
   { route: '/nal/class/relationship-dialogue-style/', id: 'relationship-conversation-style-class', title: '관계 속 나의 대화 방식' },
@@ -210,7 +210,7 @@ try {
 
   const noJsContext = await browser.newContext({ viewport: { width: 1280, height: 900 }, javaScriptEnabled: false });
   for (const [route, expectedText] of [
-    ['/nal/', '오늘, 조금 다른 사람들과'],
+    ['/nal/', '코칭을 사랑하는 사람들이'],
     ['/nal/gather/', '감정카드 대화모임'],
     ['/nal/class/', '미술로 그리는 현재의 마음'],
     ['/nal/shop/', '코칭 질문카드'],
@@ -319,6 +319,20 @@ try {
   results.interactions.push({ name: 'class filter', url: `${filterUrl.pathname}${filterUrl.search}` });
   record(filterUrl.searchParams.get('status') === 'comingSoon', 'class filter state was not written to URL');
 
+  await mobile.goto(`${baseUrl}/nal/gather/flowing-river-coaches/`, { waitUntil: 'networkidle' });
+  const riverContent = await mobile.locator('[data-page-root]').textContent();
+  const riverInstagram = await mobile.locator('a[href="https://www.instagram.com/daily_coach_ing/"]').count();
+  const riverPrivateLeak = await mobile.locator('body').evaluate((node) => /zoom\.us|open\.kakao\.com|참여코드\s*[:：]\s*\S+/.test(node.textContent || ''));
+  const riverApplication = await mobile.locator('a[href*="docs.google.com/forms/"]').count();
+  const riverPending = await mobile.locator('[aria-disabled="true"]').filter({ hasText: '설문 연결 전' }).count();
+  results.interactions.push({ name: 'flowing river launch', instagramLinks: riverInstagram, applicationLinks: riverApplication, pendingApplicationControls: riverPending, privateLeak: riverPrivateLeak });
+  record(Boolean(riverContent?.includes('창립 멤버 10명')), 'flowing river missing founding member capacity');
+  record(Boolean(riverContent?.includes('월 10,000원')), 'flowing river missing monthly fee');
+  record(Boolean(riverContent?.includes('COACHING FLEX MOVE')), 'flowing river missing FLEX MOVE content');
+  record(riverInstagram >= 1, 'flowing river missing Instagram inquiry link');
+  record(!riverPrivateLeak, 'flowing river exposes a private meeting or Kakao value');
+  record(riverApplication >= 1 || riverPending >= 1, 'flowing river missing application state');
+
   await mobile.goto(`${baseUrl}/nal/gather/emotion-card-conversation/`, { waitUntil: 'networkidle' });
   const wishlistButton = mobile.locator('[data-wish-key]').first();
   await wishlistButton.click();
@@ -358,6 +372,8 @@ try {
     { route: '/nal/gather/', width: 390, height: 844 },
     { route: '/nal/class/', width: 390, height: 844 },
     { route: '/nal/shop/', width: 390, height: 844 },
+    { route: '/nal/gather/flowing-river-coaches/', width: 390, height: 844 },
+    { route: '/nal/gather/flowing-river-coaches/', width: 1440, height: 1000 },
     { route: '/nal/gather/emotion-card-conversation/', width: 1440, height: 1000 },
     { route: '/nal/class/art-current-mind/', width: 1440, height: 1000 },
     { route: '/nal/shop/emotion-cards/', width: 1440, height: 1000 },

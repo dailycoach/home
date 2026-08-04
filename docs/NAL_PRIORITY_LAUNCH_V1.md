@@ -13,12 +13,12 @@
 | 프로그램 | 상세 경로 | 현재 CTA | 정식 전환 방식 |
 |---|---|---|---|
 | 미술심리코칭 6주 과정 | `/programs/art-psychology-coaching/` | 이메일 참여 문의 | Google Form URL로 교체 |
-| 흐르는 강물처럼 | `/nal/gather/flowing-river-coaches/` | 이메일 커뮤니티 참여 문의 | 커뮤니티 신청 Form 또는 카카오톡 입장 경로로 교체 |
+| 흐르는 강물처럼 | `/nal/gather/flowing-river-coaches/` | Instagram DM 문의 | Google Form 신청 후 Instagram DM으로 승인·결제·입장 안내 |
 | 마음서재 독서모임 | 외부 마음서재 사이트 | 온라인 서재·독서모임 입장 | 마음서재 내부 신청 흐름 유지 또는 Form 연결 |
 
 ## 구현 범위
 
-- NAL 홈에 `FIRST LAUNCH` 전용 섹션 추가
+- NAL 홈에 `NAL / NOW OPEN` 전용 섹션 추가
 - 기존 홈 CTA를 `첫 런칭 3개 보기`와 `전체 모임·클래스 둘러보기`로 변경
 - 별도 런칭 데이터 `/nal/data/launches.json` 추가
 - 런칭 전용 CSS·JavaScript 분리

@@ -1,55 +1,25 @@
 {
   "schemaVersion": "1.0",
-  "title": "NAL FIRST LAUNCH",
-  "description": "NAL이 가장 먼저 여는 세 가지 경험입니다.",
+  "title": "NAL / NOW OPEN",
+  "description": "흐르는 강물처럼을 유일한 공식 모집 프로그램으로 우선 노출합니다.",
   "items": [
-    {
-      "id": "art-psychology-coaching-6week",
-      "kind": "class",
-      "label": "NAL CLASS",
-      "statusLabel": "우선 오픈",
-      "title": "미술심리코칭 6주 과정",
-      "subtitle": "다양한 빛깔, 나만의 존재감",
-      "summary": "색과 형태로 표현하고 자신의 언어로 읽으며 다음 행동으로 연결하는 6주 과정",
-      "meta": "6주 · 회기당 120분",
-      "image": "/programs/art-psychology-coaching/assets/hero-identity-collage.webp",
-      "imageAlt": "서로 다른 색과 질감의 종이를 겹쳐 한 사람의 모습을 표현한 콜라주",
-      "detailUrl": "/programs/art-psychology-coaching/",
-      "detailLabel": "과정 살펴보기",
-      "actionUrl": "mailto:hello@daily-coach-ing.com?subject=NAL%20미술심리코칭%206주%20과정%20참여%20문의",
-      "actionLabel": "참여 문의"
-    },
     {
       "id": "flowing-river-coach-community",
       "kind": "gather",
       "label": "NAL GATHER",
-      "statusLabel": "우선 오픈",
+      "statusLabel": "모집 중",
       "title": "흐르는 강물처럼",
-      "subtitle": "25–45 코치들의 느슨하지만 깊은 연결",
-      "summary": "온라인 대화와 Zoom, 서울 오프라인 모임을 오가며 코치로 살아가는 질문과 실천을 나누는 커뮤니티",
-      "meta": "25–45 코치 · 온라인·서울",
+      "subtitle": "코칭을 사랑하는 사람들이 오래 연결되는 곳",
+      "summary": "카카오톡 단톡방, 주 1회 코칭 미션, 매월 10일 Zoom으로 이어지는 월간 코칭 커뮤니티",
+      "meta": "창립 멤버 10명 · 월 10,000원 · 매월 10일 Zoom",
       "image": "/nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-cover.webp",
-      "imageAlt": "서울의 도시 조각과 대화 장면을 코발트색 흐르는 선으로 연결한 에디토리얼 콜라주",
+      "imageAlt": "코칭 대화와 질문이 코발트색 흐르는 선으로 이어지는 에디토리얼 콜라주",
       "detailUrl": "/nal/gather/flowing-river-coaches/",
-      "detailLabel": "모임 살펴보기",
-      "actionUrl": "mailto:hello@daily-coach-ing.com?subject=NAL%20흐르는%20강물처럼%20코치모임%20참여%20문의",
-      "actionLabel": "커뮤니티 참여 문의"
-    },
-    {
-      "id": "maeum-library-reading-club",
-      "kind": "reading",
-      "label": "NAL READING",
-      "statusLabel": "바로 입장",
-      "title": "마음서재 독서모임",
-      "subtitle": "읽은 문장보다 마음에 남은 장면을 나누는 시간",
-      "summary": "책·심리 콘텐츠와 한줄톡을 나누고 주 1회 Zoom 독서모임으로 이어지는 온라인 마음서재",
-      "meta": "온라인 서재 · 주 1회 Zoom",
-      "image": "/nal/assets/images/nal-og.png",
-      "imageAlt": "NAL 커뮤니티와 클래스, 감정도구를 표현한 브랜드 이미지",
-      "detailUrl": "https://maeum-library-talk.dailycoaching.chatgpt.site",
-      "detailLabel": "마음서재 보기",
-      "actionUrl": "https://maeum-library-talk.dailycoaching.chatgpt.site",
-      "actionLabel": "독서모임 입장"
+      "detailLabel": "운영 방식 보기",
+      "actionUrl": null,
+      "actionLabel": "창립 멤버 신청",
+      "inquiryUrl": "https://www.instagram.com/daily_coach_ing/",
+      "inquiryLabel": "Instagram으로 문의"
     }
   ]
 }

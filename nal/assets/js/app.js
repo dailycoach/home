@@ -2,6 +2,7 @@
   "use strict";
 
   const DATA_BASE = "/nal/data";
+  const FLOWING_RIVER_ID = "flowing-river-coach-community";
   const STORAGE = {
     wishlist: "nal:wishlist:v1",
     recent: "nal:recent:v1"
@@ -400,8 +401,44 @@
     </article>`;
   }
 
+  function applicationButton(item, className = "nal-button--primary") {
+    const applicationUrl = safeUrl(item?.applicationUrl);
+    return applicationUrl
+      ? `<a class="${className}" href="${escapeHtml(applicationUrl)}"${externalAttrs(applicationUrl)}>창립 멤버 신청</a>`
+      : `<span class="${className} is-disabled" role="link" aria-disabled="true">창립 멤버 신청 · 설문 연결 전</span>`;
+  }
+
+  function officialLaunchHero(item) {
+    const instagramUrl = safeUrl(item.instagramUrl);
+    const facts = [
+      "창립 멤버 10명",
+      "월 10,000원",
+      "매월 10일 Zoom",
+      "주 1회 카카오톡 미션",
+      "COACHING FLEX MOVE 활용"
+    ];
+    return `<section class="nal-hero nal-home-hero nal-river-launch-hero" data-official-launch>
+      <div class="nal-container nal-river-launch-hero__grid">
+        <div class="nal-river-launch-hero__copy">
+          <p class="nal-eyebrow">NAL / NOW OPEN</p>
+          <div class="nal-river-launch-hero__badges"><span>모집 중</span><span>FOUNDING 10</span></div>
+          <h1>코칭을 사랑하는 사람들이<br><span>오래 연결되는 곳.</span></h1>
+          <p>${escapeHtml(item.summary)}</p>
+          <ul class="nal-river-launch-facts" aria-label="흐르는 강물처럼 핵심 정보" tabindex="0">${facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join("")}</ul>
+          <div class="nal-hero__actions">${applicationButton(item)}${instagramUrl ? `<a class="nal-button--secondary" href="${escapeHtml(instagramUrl)}"${externalAttrs(instagramUrl)}>Instagram으로 문의</a>` : ""}</div>
+          <p class="nal-river-launch-hero__note">신청 후 Instagram @${escapeHtml(item.instagramHandle || "daily_coach_ing")}으로 신청완료 DM을 보내 주세요.</p>
+        </div>
+        <a class="nal-river-launch-hero__media" href="${itemRoute("programs", item)}" aria-label="흐르는 강물처럼 운영 방식 보기">
+          ${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { mobileSrc: item.coverImageMobile, eager: true, width: 1600, height: 1000 })}
+          <span>흐르는 강물처럼 <small>운영 방식 보기 →</small></span>
+        </a>
+      </div>
+    </section>`;
+  }
+
   function renderHome() {
     const programs = publicItems(state.programs);
+    const officialLaunch = programs.find((item) => item.id === FLOWING_RIVER_ID);
     const activePrograms = programs.filter((item) => !["closed", "completed"].includes(item.status));
     const featuredClass = sortFeatured(activePrograms.filter((item) => item.type === "class"))[0]
       || activePrograms.find((item) => item.type === "class");
@@ -425,12 +462,14 @@
       ? `<article class="nal-hero__feature nal-card--class">${imageMarkup(featuredClass.coverImage, featuredClass.coverImageAlt || `${featuredClass.title} 대표 이미지`, "", { mobileSrc: featuredClass.coverImageMobile, eager: true, width: 1600, height: 1000 })}<div class="nal-hero__feature-copy"><span class="nal-badge--class">${escapeHtml(statusLabel(featuredClass.status))}</span><h2>${escapeHtml(featuredClass.title)}</h2><p>${escapeHtml(featuredClass.summary)}</p><a class="nal-button--secondary" href="${itemRoute("programs", featuredClass)}">클래스 미리보기</a></div></article>`
       : emptyState("대표 프로그램 준비 중", "확인된 모집 정보가 등록되면 이곳에서 가장 먼저 안내합니다.");
 
-    root.innerHTML = `
-      <section class="nal-hero nal-home-hero"><div class="nal-container nal-hero__grid">
+    const defaultHero = `<section class="nal-hero nal-home-hero"><div class="nal-container nal-hero__grid">
         <div class="nal-hero__copy"><p class="nal-eyebrow">NAL / CURATED COMMUNITY</p><h1>오늘, 조금 다른 사람들과<br><span>조금 더 나다운 시간을.</span></h1><p>취향과 마음이 만나는 커뮤니티와 원데이클래스,<br>그리고 일상에서 사용하는 감정·코칭 도구.</p>
           <div class="nal-hero__actions"><a class="nal-button--primary" href="/nal/gather/">모집 중인 모임 보기</a><a class="nal-button--secondary" href="/nal/class/">원데이클래스 찾기</a></div>
         </div>${heroFeature}
-      </div></section>
+      </div></section>`;
+
+    root.innerHTML = `
+      ${officialLaunch ? officialLaunchHero(officialLaunch) : defaultHero}
       ${section({ label: "00 / CURATED THREE", title: "NAL에서 먼저 만날 세 가지", copy: "클래스·모임·도구를 하나씩 골라 서로 다른 경험을 함께 보여드립니다.", content: curated.length ? `<div class="nal-curation-grid">${featuredClass ? programCard(featuredClass) : ""}${featuredGather ? programCard(featuredGather) : ""}${featuredProduct ? productCard(featuredProduct) : ""}</div>` : emptyState("대표 큐레이션 준비 중", "공개된 클래스·모임·상품이 연결되면 이곳에 표시합니다.") })}
       ${section({ label: "01 / NOW OPEN", title: "지금 모집 중", copy: "현재 신청 가능한 프로그램만 먼저 보여드립니다.", content: recruiting.length ? `<div class="card-grid">${recruiting.map(programCard).join("")}</div>` : emptyState("현재 공개된 모집 일정이 없습니다.", "임의의 날짜나 잔여 좌석을 만들지 않습니다. 실제 일정이 확정되면 모집 상태와 함께 공개합니다."), action: '<a class="nal-text-link" href="/nal/gather/">NAL GATHER 보기 →</a>' })}
       ${section({ label: "02 / THIS WEEK", title: "이번 주 원데이클래스", copy: "가볍게 한 번 참여할 수 있는 프로그램.", content: classes.length ? `<div class="card-grid">${classes.map(programCard).join("")}</div>` : emptyState("이번 주 일정 등록 전입니다.", "날짜·시간·장소가 확인된 클래스만 이 영역에 노출합니다."), action: '<a class="nal-text-link" href="/nal/class/">전체 클래스 보기 →</a>' })}
@@ -550,6 +589,10 @@
   }
 
   function renderProgramDetail(item) {
+    if (item.id === FLOWING_RIVER_ID) {
+      renderFlowingRiverDetail(item);
+      return;
+    }
     remember("programs", item.id);
     const host = byId(publicItems(state.hosts), item.hostId);
     const relatedContent = publicItems(state.content).filter((entry) => item.relatedContentIds?.includes(entry.id));
@@ -570,6 +613,61 @@
         ${relatedContent.length ? `<section class="nal-detail-section"><p class="nal-eyebrow">RELATED NOTE</p><h2>관련 콘텐츠</h2><div class="card-grid">${relatedContent.map(noteCard).join("")}</div></section>` : ""}
       </article><aside class="nal-detail-aside"><div class="nal-detail-booking"><span>${escapeHtml(ctaState)}</span><strong>${formatPrice(item.price) || "참가비 확정 후 공개"}</strong>${ctaUrl ? `<a class="nal-button--primary" href="${ctaUrl}"${externalAttrs(ctaUrl)}>${ctaLabel}</a>` : `<button class="nal-button--primary" disabled>${ctaLabel}</button>`}</div></aside></div>`;
     renderStickyCta(ctaState, ctaLabel, ctaUrl);
+  }
+
+  function renderFlowingRiverDetail(item) {
+    remember("programs", item.id);
+    const host = byId(publicItems(state.hosts), item.hostId);
+    const applicationUrl = safeUrl(item.applicationUrl);
+    const instagramUrl = safeUrl(item.instagramUrl);
+    const flexMoveUrl = safeUrl(item.flexMoveUrl);
+    const quickFacts = [
+      ["창립 멤버", `${item.capacity || 10}명`],
+      ["참가비", `월 ${formatPrice(item.price)}`],
+      ["커뮤니티", "카카오톡 단톡방"],
+      ["Zoom", "매월 10일 오후 8:00~9:30"],
+      ["주간 활동", "주 1회 카카오톡 미션"],
+      ["핵심 도구", "COACHING FLEX MOVE"]
+    ];
+    const flexRules = [
+      "최근 실제 코칭 장면이 있으면 LIVE FLEX를 사용합니다.",
+      "실제 코칭 경험이 없거나 최근 장면이 없으면 SELF FLEX를 사용합니다.",
+      "고객 이름, 소속, 직업과 민감정보를 입력하거나 공유하지 않습니다.",
+      "도구 결과를 진단·평가하거나 외부에 공유하지 않습니다."
+    ];
+    const applicationMarkup = applicationButton(item);
+    const instagramMarkup = instagramUrl
+      ? `<a class="nal-button--secondary" href="${escapeHtml(instagramUrl)}"${externalAttrs(instagramUrl)}>@${escapeHtml(item.instagramHandle || "daily_coach_ing")} DM 문의</a>`
+      : "";
+
+    root.innerHTML = `
+      <section class="nal-detail-hero nal-detail-hero--gather nal-river-detail-hero">
+        <div class="nal-container nal-detail-hero__grid">
+          <div class="nal-detail-hero__copy">
+            <p class="nal-eyebrow">NAL GATHER / NOW OPEN</p>
+            <div class="nal-detail-hero__badges"><span class="nal-badge nal-badge--gather">모집 중</span><span class="nal-badge--neutral">창립 멤버 10명</span></div>
+            <h1>${escapeHtml(item.title)}</h1>
+            <p class="nal-detail-hero__lead">${escapeHtml(item.subtitle)}</p>
+            <p class="nal-detail-hero__summary">${escapeHtml(item.summary)}</p>
+            <dl class="nal-river-quick-facts">${quickFacts.map(([key, value]) => `<div><dt>${escapeHtml(key)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
+            <div class="nal-detail-actions">${applicationMarkup}${instagramMarkup}</div>
+            <p class="nal-river-dm-note">신청 후 Instagram @${escapeHtml(item.instagramHandle || "daily_coach_ing")}으로<br><strong>흐르는 강물처럼 신청완료 / 신청자 이름</strong>을 보내 주세요.</p>
+          </div>
+          <figure class="nal-detail-hero__media">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { mobileSrc: item.coverImageMobile, eager: true, width: 1600, height: 1000 })}${conceptCaption(item, "코칭의 질문과 실천이 이어지는 월간 커뮤니티를 표현한 NAL 에디토리얼 이미지입니다.")}</figure>
+        </div>
+      </section>
+      <div class="nal-container nal-detail-layout"><article class="nal-detail-content">
+        <section class="nal-detail-section"><p class="nal-eyebrow">01 / COMMUNITY</p><h2>이런 커뮤니티입니다</h2><p class="nal-detail-section__lead">${escapeHtml(item.description)}</p><p>자격과 경력보다 코칭을 좋아하는 마음으로 연결됩니다. 자신의 장면과 선택을 돌아보되, 누군가를 가르치거나 정답으로 평가하지 않습니다.</p></section>
+        <section class="nal-detail-section"><p class="nal-eyebrow">02 / MONTHLY FLOW</p><h2>한 달은 이렇게 흐릅니다</h2>${valueList(item.monthlyFlow, "nal-river-monthly-flow")}</section>
+        <section class="nal-detail-section"><p class="nal-eyebrow">03 / ZOOM × FLEX MOVE</p><h2>Zoom에서는 무엇을 하나요</h2><p class="nal-detail-section__lead">${escapeHtml(item.zoomSummary)}</p>${valueList(flexRules, "nal-check-list")}${flexMoveUrl ? `<p><a class="nal-button--secondary nal-flex-move-link" href="${escapeHtml(flexMoveUrl)}"${externalAttrs(flexMoveUrl)}>COACHING FLEX MOVE 살펴보기 →</a></p>` : ""}<p class="nal-honest-note">Zoom은 녹화하지 않으며 링크는 카카오톡 단톡방에서만 안내합니다.</p></section>
+        <section class="nal-detail-section"><p class="nal-eyebrow">04 / FOR YOU</p><h2>이런 분에게 맞습니다</h2>${valueList(item.recommendedFor, "nal-check-list")}</section>
+        <section class="nal-detail-section nal-safety-guide"><p class="nal-eyebrow">05 / COMMUNITY PROMISE</p><h2>함께 지킬 약속</h2>${valueList(item.safetyGuide, "nal-check-list")}</section>
+        <section class="nal-detail-section"><p class="nal-eyebrow">06 / HOW TO JOIN</p><h2>참여 과정</h2><ol class="nal-river-join-steps">${asArray(item.participationSteps).map((step, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span><p>${escapeHtml(step)}</p></li>`).join("")}</ol></section>
+        <section class="nal-detail-section nal-river-payment"><p class="nal-eyebrow">07 / MONTHLY FEE</p><h2>참가비 안내</h2><strong>월 ${formatPrice(item.price)}</strong><ul class="nal-check-list"><li>자동결제 없이 매월 수동 결제합니다.</li><li>Instagram DM으로 참가 승인과 결제 방법을 안내합니다.</li><li>결제 확인 후 카카오톡 링크·참여코드·안내문을 DM으로 보냅니다.</li></ul><p class="nal-honest-note">취소·환불 기준은 신청 설문 공개 전 운영자가 최종 확정합니다.</p></section>
+        <section class="nal-detail-section nal-river-final-cta"><p class="nal-eyebrow">08 / FOUNDING MEMBER</p><h2>첫 10명으로 함께 흐르기</h2><p>첫 공식 Zoom은 2026년 9월 10일 오후 8:00~9:30입니다.</p><div class="nal-detail-actions">${applicationMarkup}${instagramMarkup}</div></section>
+        ${host ? `<section class="nal-detail-section"><p class="nal-eyebrow">09 / NAL HOST</p><h2>운영자</h2><div class="nal-host-profile">${imageMarkup(host.profileImage, `${host.name} 프로필`)}<div><h3><a href="${itemRoute("hosts", host)}">${escapeHtml(host.name)}</a></h3><p>${escapeHtml(host.headline)}</p><p>${escapeHtml(host.bio)}</p></div></div></section>` : ""}
+      </article><aside class="nal-detail-aside"><div class="nal-detail-booking nal-river-booking"><span>창립 멤버 모집 중</span><strong>월 ${formatPrice(item.price)}</strong><small>매월 10일 Zoom<br>주 1회 카카오톡 미션</small>${applicationMarkup}${instagramMarkup}</div></aside></div>`;
+    renderStickyCta("창립 멤버 10명", applicationUrl ? "창립 멤버 신청" : "신청 설문 연결 전", applicationUrl);
   }
 
   function renderHostDetail(item) {

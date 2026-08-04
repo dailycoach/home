@@ -4,7 +4,7 @@
     {
       "route": "/nal/",
       "status": 200,
-      "title": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
+      "title": "흐르는 강물처럼 | NAL NOW OPEN · 날빛",
       "issues": []
     },
     {
@@ -114,61 +114,2347 @@
       "status": 200,
       "title": "배송·교환 안내 | NAL · 날빛",
       "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "status": 200,
+      "title": "감정카드 대화모임 | NAL GATHER · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "status": 200,
+      "title": "자기이해 글쓰기 모임 | NAL GATHER · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "status": 200,
+      "title": "코치들의 대화와 실습 모임 | NAL GATHER · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "status": 200,
+      "title": "흐르는 강물처럼 | NAL GATHER · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "status": 200,
+      "title": "감정카드로 만나는 나 | NAL CLASS · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "status": 200,
+      "title": "미술로 그리는 현재의 마음 | NAL CLASS · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "status": 200,
+      "title": "관계 속 나의 대화 방식 | NAL CLASS · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "status": 200,
+      "title": "올해의 방향 콜라주 | NAL CLASS · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "status": 200,
+      "title": "감정카드 | NAL SHOP · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "status": 200,
+      "title": "코칭 질문카드 | NAL SHOP · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "status": 200,
+      "title": "관계 질문카드 | NAL SHOP · 날빛",
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "status": 200,
+      "title": "강점카드 | NAL SHOP · 날빛",
+      "issues": []
     }
   ],
   "viewports": [
     {
+      "route": "/nal/",
       "width": 360,
       "height": 800,
+      "status": 200,
       "scrollWidth": 360,
       "clientWidth": 360,
-      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
-      "bodyFont": "16px",
+      "heading": "코칭을 사랑하는 사람들이오래 연결되는 곳.",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 23,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 180
+      },
       "issues": []
     },
     {
+      "route": "/nal/gather/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "계속 만나며 조금씩 달라지는 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 116
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "한 번의 참여로 새로운 장면을 여는 시간",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "감정과 대화를 위한 자기이해 도구",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "감정카드 대화모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "자기이해 글쓰기 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "코치들의 대화와 실습 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "흐르는 강물처럼",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "감정카드로 만나는 나",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "미술로 그리는 현재의 마음",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "관계 속 나의 대화 방식",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "올해의 방향 콜라주",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "감정카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "코칭 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "관계 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 5,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "강점카드",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "지금 필요한 경험을 한 번에",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 0,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 104
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "heading": "내가 남겨둔 NAL의 장면들",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 12,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/",
       "width": 390,
       "height": 844,
+      "status": 200,
       "scrollWidth": 390,
       "clientWidth": 390,
-      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
-      "bodyFont": "16px",
+      "heading": "코칭을 사랑하는 사람들이오래 연결되는 곳.",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 23,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 196
+      },
       "issues": []
     },
     {
+      "route": "/nal/gather/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "계속 만나며 조금씩 달라지는 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "한 번의 참여로 새로운 장면을 여는 시간",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 116
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "감정과 대화를 위한 자기이해 도구",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 112
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "감정카드 대화모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "자기이해 글쓰기 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "코치들의 대화와 실습 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "흐르는 강물처럼",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "감정카드로 만나는 나",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "미술로 그리는 현재의 마음",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "관계 속 나의 대화 방식",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "올해의 방향 콜라주",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "감정카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "코칭 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "관계 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 5,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "강점카드",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "지금 필요한 경험을 한 번에",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 0,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 104
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "heading": "내가 남겨둔 NAL의 장면들",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 12,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/",
       "width": 412,
       "height": 915,
+      "status": 200,
       "scrollWidth": 412,
       "clientWidth": 412,
-      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
-      "bodyFont": "16px",
+      "heading": "코칭을 사랑하는 사람들이오래 연결되는 곳.",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 23,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 152
+      },
       "issues": []
     },
     {
+      "route": "/nal/gather/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "계속 만나며 조금씩 달라지는 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 116
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "한 번의 참여로 새로운 장면을 여는 시간",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "감정과 대화를 위한 자기이해 도구",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "감정카드 대화모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "자기이해 글쓰기 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "코치들의 대화와 실습 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "흐르는 강물처럼",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 148
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "감정카드로 만나는 나",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "미술로 그리는 현재의 마음",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "관계 속 나의 대화 방식",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "올해의 방향 콜라주",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "감정카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "코칭 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "관계 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 5,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "강점카드",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 116
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "지금 필요한 경험을 한 번에",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 0,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 108
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "width": 412,
+      "height": 915,
+      "status": 200,
+      "scrollWidth": 412,
+      "clientWidth": 412,
+      "heading": "내가 남겨둔 NAL의 장면들",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 12,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/",
       "width": 768,
       "height": 1024,
+      "status": 200,
       "scrollWidth": 768,
       "clientWidth": 768,
-      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
-      "bodyFont": "16px",
+      "heading": "코칭을 사랑하는 사람들이오래 연결되는 곳.",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 23,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 200
+      },
       "issues": []
     },
     {
+      "route": "/nal/gather/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "계속 만나며 조금씩 달라지는 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "한 번의 참여로 새로운 장면을 여는 시간",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "감정과 대화를 위한 자기이해 도구",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "감정카드 대화모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "자기이해 글쓰기 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "코치들의 대화와 실습 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "흐르는 강물처럼",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 152
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "감정카드로 만나는 나",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "미술로 그리는 현재의 마음",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "관계 속 나의 대화 방식",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "올해의 방향 콜라주",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "감정카드",
+      "bodyFont": 16,
+      "maxTitleLines": 2,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "코칭 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 2,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "관계 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 2,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 5,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "강점카드",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "지금 필요한 경험을 한 번에",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 0,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 108
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "heading": "내가 남겨둔 NAL의 장면들",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 12,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 156
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/",
       "width": 1280,
       "height": 900,
+      "status": 200,
       "scrollWidth": 1280,
       "clientWidth": 1280,
-      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
-      "bodyFont": "16px",
+      "heading": "코칭을 사랑하는 사람들이오래 연결되는 곳.",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 23,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 164
+      },
       "issues": []
     },
     {
+      "route": "/nal/gather/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "계속 만나며 조금씩 달라지는 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "한 번의 참여로 새로운 장면을 여는 시간",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "감정과 대화를 위한 자기이해 도구",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "감정카드 대화모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "자기이해 글쓰기 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "코치들의 대화와 실습 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "흐르는 강물처럼",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "감정카드로 만나는 나",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 152
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "미술로 그리는 현재의 마음",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "관계 속 나의 대화 방식",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "올해의 방향 콜라주",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "감정카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "코칭 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 2,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "관계 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": true,
+      "catalogImageCount": 5,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "강점카드",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "지금 필요한 경험을 한 번에",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 0,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 124
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "heading": "내가 남겨둔 NAL의 장면들",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 12,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/",
       "width": 1440,
       "height": 1000,
+      "status": 200,
       "scrollWidth": 1440,
       "clientWidth": 1440,
-      "heading": "오늘, 조금 다른 사람들과조금 더 나다운 시간을.",
-      "bodyFont": "16px",
+      "heading": "코칭을 사랑하는 사람들이오래 연결되는 곳.",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 23,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 188
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "계속 만나며 조금씩 달라지는 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "한 번의 참여로 새로운 장면을 여는 시간",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 128
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "감정과 대화를 위한 자기이해 도구",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "감정카드 대화모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 148
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/self-understanding-writing/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "자기이해 글쓰기 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/coaches-dialogue-practice/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "코치들의 대화와 실습 모임",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "흐르는 강물처럼",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 148
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/meet-myself-with-emotion-cards/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "감정카드로 만나는 나",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "미술로 그리는 현재의 마음",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 144
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/relationship-dialogue-style/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "관계 속 나의 대화 방식",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 2,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 136
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/class/direction-collage/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "올해의 방향 콜라주",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 1,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "감정카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/coaching-question-cards/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "코칭 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 6,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 156
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/relationship-question-cards/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "관계 질문카드",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 5,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 140
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/shop/strength-cards/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "강점카드",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 4,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 132
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/search/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "지금 필요한 경험을 한 번에",
+      "bodyFont": 16,
+      "maxTitleLines": 0,
+      "minWishTarget": 0,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 0,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 120
+      },
+      "issues": []
+    },
+    {
+      "route": "/nal/my/",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "heading": "내가 남겨둔 NAL의 장면들",
+      "bodyFont": 16,
+      "maxTitleLines": 1,
+      "minWishTarget": 44,
+      "badgeWishOverlap": false,
+      "catalogImageCount": 12,
+      "failedCatalogImages": 0,
+      "catalogPlaceholders": 0,
+      "vitals": {
+        "cls": 0,
+        "lcp": 148
+      },
       "issues": []
     }
   ],
@@ -184,9 +2470,17 @@
       "url": "/nal/class/?status=comingSoon&sort=recommended"
     },
     {
-      "name": "local wishlist",
+      "name": "flowing river launch",
+      "instagramLinks": 3,
+      "applicationLinks": 0,
+      "pendingApplicationControls": 3,
+      "privateLeak": false
+    },
+    {
+      "name": "local wishlist and recent",
       "pressed": "true",
       "visibleInMy": true,
+      "visibleInRecent": true,
       "skipLinkState": {
         "active": false,
         "top": -54,
@@ -195,28 +2489,52 @@
       }
     },
     {
-      "name": "search",
-      "url": "/nal/search/?q=%EB%AF%B8%EC%88%A0",
-      "hasResult": true
+      "name": "catalog search coverage",
+      "checked": 12,
+      "passed": true
     }
   ],
   "noJavaScript": [
     {
       "route": "/nal/",
       "status": 200,
-      "expectedText": "오늘, 조금 다른 사람들과",
+      "expectedText": "코칭을 사랑하는 사람들이",
+      "passed": true
+    },
+    {
+      "route": "/nal/gather/",
+      "status": 200,
+      "expectedText": "감정카드 대화모임",
       "passed": true
     },
     {
       "route": "/nal/class/",
       "status": 200,
-      "expectedText": "미술심리코칭 6주 과정",
+      "expectedText": "미술로 그리는 현재의 마음",
       "passed": true
     },
     {
-      "route": "/nal/class/art-psychology-coaching-6week/",
+      "route": "/nal/shop/",
       "status": 200,
-      "expectedText": "미술심리코칭 6주 과정",
+      "expectedText": "코칭 질문카드",
+      "passed": true
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "status": 200,
+      "expectedText": "감정카드 대화모임",
+      "passed": true
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "status": 200,
+      "expectedText": "미술로 그리는 현재의 마음",
+      "passed": true
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
+      "status": 200,
+      "expectedText": "감정카드",
       "passed": true
     }
   ],
@@ -228,13 +2546,49 @@
       "violations": []
     },
     {
+      "route": "/nal/gather/",
+      "width": 390,
+      "height": 844,
+      "violations": []
+    },
+    {
       "route": "/nal/class/",
       "width": 390,
       "height": 844,
       "violations": []
     },
     {
-      "route": "/nal/class/art-psychology-coaching-6week/",
+      "route": "/nal/shop/",
+      "width": 390,
+      "height": 844,
+      "violations": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 390,
+      "height": 844,
+      "violations": []
+    },
+    {
+      "route": "/nal/gather/flowing-river-coaches/",
+      "width": 1440,
+      "height": 1000,
+      "violations": []
+    },
+    {
+      "route": "/nal/gather/emotion-card-conversation/",
+      "width": 1440,
+      "height": 1000,
+      "violations": []
+    },
+    {
+      "route": "/nal/class/art-current-mind/",
+      "width": 1440,
+      "height": 1000,
+      "violations": []
+    },
+    {
+      "route": "/nal/shop/emotion-cards/",
       "width": 1440,
       "height": 1000,
       "violations": []
