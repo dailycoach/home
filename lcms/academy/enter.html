@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="RS에듀컨설팅 LMC Academy 수강생 입장" />
+  <title>수강생 입장 | LMC Academy</title>
+  <link rel="stylesheet" href="../shared-platform-shell.css" />
+  <link rel="stylesheet" href="../cip-art-direction.css" />
+  <link rel="stylesheet" href="./academy.css" />
+  <link rel="stylesheet" href="./access.css" />
+  <script src="./access-config.js" defer></script>
+  <script src="./access.js" defer></script>
+</head>
+<body class="academy-page academy-entry-page" data-academy-page="enter">
+  <div class="cip-shell">
+    <header class="cip-header">
+      <div class="cip-header-inner">
+        <a class="cip-brand" href="../platform.html" aria-label="Career Intelligence Platform 홈"><span class="cip-brand-mark" aria-hidden="true"></span><span class="cip-brand-copy">CAREER INTELLIGENCE PLATFORM<small>RS EDU CONSULTING · 데이터 기반 평생 커리어 인프라</small></span></a>
+        <nav class="cip-nav" aria-label="Career Intelligence Platform 주 메뉴"><a href="../platform.html">Platform</a><a href="../business-achievements.html">사업실적</a><a href="./index.html" aria-current="page">Academy</a></nav>
+      </div>
+    </header>
+
+    <main class="entry-main cip-container">
+      <div class="entry-layout">
+        <section class="entry-intro" aria-labelledby="entry-title">
+          <span class="entry-kicker">LMC Student Access</span>
+          <h1 id="entry-title">배운 것을<br /><span>현장에 연결하는 곳</span></h1>
+          <p>결제 확인 후 발송된 입장코드와 신청서에 적은 이메일로 강의실에 들어갑니다. 영상은 별도 계정 없이 비공개 Cloudflare R2 재생 게이트를 통해 열립니다.</p>
+          <ol class="entry-steps">
+            <li><strong>01</strong><span>스마트스토어 구매 후 수강생 신청서를 작성합니다.</span></li>
+            <li><strong>02</strong><span>입금·주문 확인이 완료되면 입장코드가 이메일로 발송됩니다.</span></li>
+            <li><strong>03</strong><span>등록 이메일과 입장코드로 로그인한 뒤 강의를 시청합니다.</span></li>
+          </ol>
+        </section>
+
+        <section class="entry-card" aria-labelledby="login-title">
+          <span class="entry-card-kicker">Authorized Learner</span>
+          <h2 id="login-title">강의실 입장</h2>
+          <p>코드는 대소문자를 구분하지 않습니다. 이메일은 수강생 신청서에 입력한 주소와 같아야 합니다.</p>
+
+          <form class="entry-form" id="academyEntryForm" novalidate>
+            <div class="entry-field">
+              <label for="entryEmail">등록 이메일</label>
+              <input id="entryEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" required />
+            </div>
+            <div class="entry-field">
+              <label for="entryCode">8자리 입장코드</label>
+              <input id="entryCode" name="code" type="text" inputmode="text" autocomplete="one-time-code" maxlength="9" placeholder="ABCD 1234" required />
+            </div>
+            <button class="entry-submit" type="submit">LMC 강의실 입장 →</button>
+            <p class="enter-status" id="enterStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <a id="entryResume" href="./course.html?course=lmc-lifetime-management-counselor" hidden>기존 학습 이어가기 →</a>
+          <div class="entry-help">코드가 오지 않았거나 이메일이 바뀐 경우, 구매자명·주문번호와 함께 운영자에게 문의해 주세요. <a href="./index.html">과정 안내 보기</a></div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

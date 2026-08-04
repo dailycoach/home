@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lmc-r2-video-gateway",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-25",
+  "workers_dev": true,
+  "vars": {
+    "COURSE_ID": "lmc-lifetime-management-counselor",
+    "PLAYBACK_TTL_SECONDS": "14400"
+  },
+  "r2_buckets": [
+    {
+      "binding": "VIDEOS",
+      "bucket_name": "rsedu-lmc-videos"
+    }
+  ]
+}
