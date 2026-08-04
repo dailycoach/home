@@ -57,10 +57,11 @@ Course
 ## v2 변경 범위
 
 - 11개 week allowlist → 77개 week/part/media allowlist
-- `lmc/week-01.mp4` → `lmc/v2/week-01/part-01.mp4`
+- `lmc/week-01.mp4` → 수동 업로드 실제 키 `lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4`
 - 주차 진도 → 파트 진도와 주차·전체 집계
 - sessionStorage signed URL cache → 메모리 전용 cache
 - WEEK-12 전용 비영상 화면과 운영자 확인 안내
 - 77개 카탈로그·업로드 매핑·사전검사·Worker 테스트
+- 77개 실제 R2 키 인벤토리 `scripts/lmc-r2-object-key-map.json`
 
 실제 MP4 업로드, R2·Worker·Apps Script 운영 배포, 입장코드 발급, `main` 병합은 이 공사 범위에 포함하지 않습니다.

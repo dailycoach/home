@@ -34,14 +34,17 @@
 
 - partId: `week-01-part-01`
 - mediaId: `lmc-w01-p01`
-- objectKey: `lmc/v2/week-01/part-01.mp4`
+- objectKey: `lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4`
 - 로컬 파일: `LMC_WEEK01_P01_self-concept-and-sources.mp4`
+
+`objectKey`는 Cloudflare R2에 수동 업로드된 실제 객체명을 사용하며, `sourceFilename`은 로컬 프리플라이트 파일명을 유지합니다.
 
 전체 상세목록은 다음 파일을 단일 출처로 사용합니다.
 
 - `lcms/academy/data/media-catalog.json`
 - `lcms/academy/r2-worker/upload/video-upload-map.json`
 - `lcms/academy/r2-worker/upload/video-upload-map.csv`
+- `scripts/lmc-r2-object-key-map.json`
 
 ## 게시 상태 전환
 

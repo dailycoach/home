@@ -1,6 +1,6 @@
 # LMC Video Upload Runbook v2
 
-현재 상태는 실영상 사전검수 완료·R2 업로드 대기 단계입니다. 사전검수 77/77, R2 객체 0개, 공개 영상 0개, 업로드 대기 77개입니다.
+현재 상태는 실영상 사전검수·R2 업로드·Worker/Apps Script 운영 E2E 완료 단계입니다. 사전검수 77/77, R2 객체 77개, 카탈로그 `published` 77개입니다. 정적 강의실은 기능 브랜치가 `main`에 병합되기 전이라 아직 공개되지 않았습니다.
 
 ## 1. 로컬 사전검사
 
@@ -45,9 +45,15 @@ node scripts/apply-lmc-preflight-manifest.mjs /absolute/path/to/LMC_77_UPLOAD_MA
 - Chrome·Safari·모바일 재생
 - 음량·화면·고정 워터마크 최종 확인
 
+2026-08-04 운영 검증에서는 테스트 주문으로 로그인 세션을 만든 뒤 77개 모두 `authorize 200`, `HEAD 200`, `Range 206`, 정확한 `Content-Range`와 카탈로그 크기 일치를 확인했습니다. 재검사는 입장코드를 로그나 셸 이력에 남기지 않는 환경변수 전달 방식으로 실행합니다.
+
+```bash
+LMC_E2E_EMAIL='test@example.com' LMC_E2E_CODE='8자리코드' npm run verify:e2e
+```
+
 ## 5. 상태 전환
 
-객체를 올린 직후 `uploaded_unverified`, 기술·재생 검증 후 `verified`, 운영 승인 후에만 `published`로 전환합니다. `media-catalog.json`과 `src/media-catalog.js`의 상태를 동일하게 갱신하고 정적검사와 Worker 테스트를 재실행합니다.
+객체를 올린 직후 `uploaded_unverified`, 기술·재생 검증 후 `verified`, 운영 승인 후에만 `published`로 전환합니다. 현재 77개는 이 순서를 거쳐 `published`이며 `media-catalog.json`과 `src/media-catalog.js`가 일치합니다.
 
 ## 6. 운영 연결
 

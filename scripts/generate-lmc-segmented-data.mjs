@@ -6,6 +6,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const COURSE_ID = 'lmc-lifetime-management-counselor';
 const pad = (value) => String(value).padStart(2, '0');
 const seconds = (minutes, remain = 0) => (minutes * 60) + remain;
+const r2ObjectKeyMapPath = path.join(ROOT, 'scripts/lmc-r2-object-key-map.json');
+const r2ObjectKeyMap = JSON.parse(await fs.readFile(r2ObjectKeyMapPath, 'utf8')).objects || {};
 
 const weeks = [
   {
@@ -212,6 +214,7 @@ for (const week of weeks) {
 const totalVideoSeconds = weeks.reduce((sum, week) => sum + week.videoSeconds, 0);
 const totalParts = weeks.reduce((sum, week) => sum + week.parts.length, 0);
 if (totalParts !== 77) throw new Error(`Expected 77 parts, got ${totalParts}`);
+if (Object.keys(r2ObjectKeyMap).length !== 77) throw new Error(`Expected 77 R2 object keys, got ${Object.keys(r2ObjectKeyMap).length}`);
 
 const coursePath = path.join(ROOT, 'lcms/academy/data/courses.json');
 const existing = JSON.parse(await fs.readFile(coursePath, 'utf8'));
@@ -258,7 +261,7 @@ const media = weeks.flatMap((week) => week.parts.map((part) => ({
   title: part.title,
   durationSeconds: part.durationSeconds,
   provider: 'R2',
-  objectKey: `lmc/v2/week-${pad(week.week)}/part-${pad(part.part)}.mp4`,
+  objectKey: r2ObjectKeyMap[part.mediaId] || (() => { throw new Error(`Missing R2 object key: ${part.mediaId}`); })(),
   sourceFilename: part.sourceFilename,
   accessPolicy: 'PRIVATE_WORKER_SIGNED_URL',
   status: 'pending_upload',

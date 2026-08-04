@@ -13,7 +13,7 @@ const MAX_AUTHORIZE_BODY_CHARS = 8192;
 const MAX_SESSION_TOKEN_CHARS = 512;
 const MAX_USER_AGENT_CHARS = 500;
 const MAX_EMAIL_CHARS = 254;
-const ACCESS_API_TIMEOUT_MS = 10000;
+const ACCESS_API_TIMEOUT_MS = 30000;
 const SIGNATURE_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 const BROWSER_ACCESS_ACTIONS = new Set(['login', 'validate', 'logout']);
 

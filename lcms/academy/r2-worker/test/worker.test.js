@@ -7,9 +7,11 @@ import { MEDIA_CATALOG } from '../src/media-catalog.js';
 const COURSE_ID = 'lmc-lifetime-management-counselor';
 const ALLOWED_ORIGIN = 'https://daily-coach-ing.com';
 const originalFetch = globalThis.fetch;
+const originalAbortSignalTimeout = AbortSignal.timeout;
 
 afterEach(() => {
   globalThis.fetch = originalFetch;
+  AbortSignal.timeout = originalAbortSignalTimeout;
   for (const media of MEDIA_CATALOG.values()) media.status = 'pending_upload';
 });
 
@@ -19,7 +21,10 @@ test('worker media allowlist contains exactly 77 unique week/part entries and no
   assert.equal(new Set(media.map((item) => item.mediaId)).size, 77);
   assert.equal(new Set(media.map((item) => item.objectKey)).size, 77);
   assert.equal(media.some((item) => item.week === 12), false);
-  assert.equal(media.every((item) => /^lmc\/v2\/week-\d{2}\/part-\d{2}\.mp4$/.test(item.objectKey)), true);
+  assert.equal(media.every((item) => {
+    const match = item.objectKey.match(/^lmc\/v2\/week-(\d{2})\/LMC_WEEK(\d{2})_P(\d{2})_[A-Za-z0-9()_-]+\.mp4$/);
+    return match && Number(match[1]) === item.week && Number(match[2]) === item.week && Number(match[3]) === item.part;
+  }), true);
 });
 
 test('GET /health is public, but other methods are rejected', async () => {
@@ -278,6 +283,26 @@ test('/access validates upstream session shape and forwards only safe denial mes
   assert.equal(malformed.status, 502);
 });
 
+test('/access allows a 30-second Apps Script cold start window', async () => {
+  let configuredTimeout;
+  AbortSignal.timeout = (delay) => {
+    configuredTimeout = delay;
+    return new AbortController().signal;
+  };
+  globalThis.fetch = async () => Response.json({
+    ok: false,
+    message: '로그인 시간이 만료되었습니다. 다시 입장해 주세요.'
+  });
+
+  const response = await worker.fetch(
+    accessRequest({ action: 'validate', token: 't'.repeat(48) }),
+    baseEnv()
+  );
+
+  assert.equal(response.status, 401);
+  assert.equal(configuredTimeout, 30000);
+});
+
 test('signed /media Range request reads only the fixed R2 key and returns 206', async () => {
   const env = baseEnv();
   let getKey;
@@ -303,7 +328,7 @@ test('signed /media Range request reads only the fixed R2 key and returns 206', 
   );
 
   assert.equal(response.status, 206);
-  assert.equal(getKey, 'lmc/v2/week-01/part-01.mp4');
+  assert.equal(getKey, 'lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4');
   assert.equal(getOptions.range.get('Range'), 'bytes=100-199');
   assert.equal(response.headers.get('Content-Range'), 'bytes 100-199/1000');
   assert.equal(response.headers.get('Content-Length'), '100');
@@ -392,7 +417,7 @@ test('HEAD /media returns metadata without reading the object body', async () =>
   );
 
   assert.equal(response.status, 200);
-  assert.equal(headKey, 'lmc/v2/week-11/part-07.mp4');
+  assert.equal(headKey, 'lmc/v2/week-11/LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4');
   assert.equal(bodyReads, 0);
   assert.equal(response.headers.get('Content-Length'), '1000');
 });

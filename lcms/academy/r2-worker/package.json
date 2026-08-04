@@ -9,7 +9,9 @@
     "check": "wrangler deploy --dry-run",
     "test": "node --test test/*.test.js",
     "preflight:videos": "node scripts/preflight-segmented-videos.mjs",
-    "preflight:catalog": "node scripts/preflight-segmented-videos.mjs --catalog-only"
+    "preflight:catalog": "node scripts/preflight-segmented-videos.mjs --catalog-only",
+    "verify:published": "node scripts/verify-published-media.mjs",
+    "verify:e2e": "node scripts/verify-e2e-playback.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.27.0"

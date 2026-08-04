@@ -109,7 +109,8 @@ function validateCatalog(items) {
     if (!item.title || !Number.isInteger(item.durationSeconds) || item.durationSeconds <= 0) errors.push(`${item.mediaId}: 제목 또는 러닝타임 누락`);
     if (!/^lmc-w\d{2}-p\d{2}$/.test(item.mediaId || '')) errors.push(`${item.mediaId}: mediaId 형식 오류`);
     if (!/^week-\d{2}-part-\d{2}$/.test(item.partId || '')) errors.push(`${item.mediaId}: partId 형식 오류`);
-    if (item.objectKey !== `lmc/v2/week-${String(item.week).padStart(2, '0')}/part-${String(item.part).padStart(2, '0')}.mp4`) errors.push(`${item.mediaId}: objectKey 규칙 불일치`);
+    const keyMatch = item.objectKey?.match(/^lmc\/v2\/week-(\d{2})\/LMC_WEEK(\d{2})_P(\d{2})_[A-Za-z0-9()_-]+\.mp4$/);
+    if (!keyMatch || Number(keyMatch[1]) !== item.week || Number(keyMatch[2]) !== item.week || Number(keyMatch[3]) !== item.part) errors.push(`${item.mediaId}: objectKey 규칙 불일치`);
     if (!/^LMC_WEEK\d{2}_P\d{2}_[a-z0-9-]+\.mp4$/.test(item.sourceFilename || '')) errors.push(`${item.mediaId}: sourceFilename 형식 오류`);
     if (!['pending_upload', 'uploaded_unverified', 'verified', 'published', 'disabled'].includes(item.status)) errors.push(`${item.mediaId}: 허용되지 않은 상태 ${item.status}`);
     if (ids.has(item.mediaId)) errors.push(`mediaId 중복: ${item.mediaId}`); ids.add(item.mediaId);

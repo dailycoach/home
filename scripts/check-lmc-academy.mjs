@@ -47,6 +47,7 @@ assert(course.completion?.satisfactionSurveyUrl === '', 'WEEK-12 survey link mus
 assert(course.completion?.completionApplicationUrl === '', 'WEEK-12 completion link must remain empty');
 
 const mediaCatalog = json('lcms/academy/data/media-catalog.json');
+const r2ObjectKeyMap = json('scripts/lmc-r2-object-key-map.json').objects || {};
 const media = mediaCatalog.courses?.[courseId]?.media || [];
 const parts = course.weeks.slice(0, 11).flatMap((week) => week.parts);
 assert(parts.length === 77, `Course part total ${parts.length}/77`);
@@ -54,7 +55,11 @@ assert(media.length === 77, `Media total ${media.length}/77`);
 assert(mediaCatalog.courses?.[courseId]?.videoWeeks === 11, 'Media videoWeeks must be 11');
 assert(mediaCatalog.courses?.[courseId]?.completionWeek === 12, 'Completion week metadata missing');
 assert(!media.some((item) => item.week === 12), 'WEEK-12 must not contain media');
-assert(media.every((item) => item.status === 'pending_upload'), 'All 77 media items must remain pending_upload before upload');
+const allowedMediaStatuses = new Set(['pending_upload', 'uploaded_unverified', 'verified', 'published', 'disabled']);
+const mediaStatuses = new Set(media.map((item) => item.status));
+assert(mediaStatuses.size === 1, `All 77 media items must share one lifecycle status: ${[...mediaStatuses].join(', ')}`);
+const mediaStatus = [...mediaStatuses][0];
+assert(allowedMediaStatuses.has(mediaStatus), `Unsupported media lifecycle status: ${mediaStatus}`);
 assert(media.every((item) => item.provider === 'R2'), 'All media must use R2');
 assert(media.every((item) => item.accessPolicy === 'PRIVATE_WORKER_SIGNED_URL'), 'All media must use signed Worker access');
 assert(media.every((item) => Number.isInteger(item.sizeBytes) && item.sizeBytes > 0), 'All media must contain preflight sizeBytes');
@@ -62,6 +67,7 @@ assert(media.every((item) => /^[a-f0-9]{64}$/.test(item.sha256 || '')), 'All med
 assert(media.every((item) => item.technical?.videoCodec === 'h264' && item.technical?.audioCodec === 'aac'), 'All media must contain H.264/AAC preflight metadata');
 assert(media.every((item) => item.technical?.fastStart === true), 'All media must pass Fast Start preflight');
 assert(media.every((item) => Math.abs(item.technical?.actualDurationSeconds - item.durationSeconds) <= 2), 'All media must pass the two-second duration tolerance');
+assert(Object.keys(r2ObjectKeyMap).length === 77, 'R2 object key inventory must contain 77 entries');
 for (let week = 1; week <= 11; week += 1) assert(media.filter((item) => item.week === week).length === expectedCounts[week - 1], `WEEK-${week} media count mismatch`);
 for (const [index, item] of media.entries()) {
   const source = parts[index];
@@ -69,7 +75,9 @@ for (const [index, item] of media.entries()) {
   assert(item.partId === source.id, `${item.mediaId}: partId mismatch`);
   assert(item.title === source.title, `${item.mediaId}: title mismatch`);
   assert(item.durationSeconds === source.durationSeconds, `${item.mediaId}: duration mismatch`);
-  assert(item.objectKey === `lmc/v2/week-${String(item.week).padStart(2, '0')}/part-${String(item.part).padStart(2, '0')}.mp4`, `${item.mediaId}: objectKey mismatch`);
+  assert(item.objectKey === r2ObjectKeyMap[item.mediaId], `${item.mediaId}: objectKey does not match the R2 inventory`);
+  const keyMatch = item.objectKey.match(/^lmc\/v2\/week-(\d{2})\/LMC_WEEK(\d{2})_P(\d{2})_[A-Za-z0-9()_-]+\.mp4$/);
+  assert(keyMatch && Number(keyMatch[1]) === item.week && Number(keyMatch[2]) === item.week && Number(keyMatch[3]) === item.part, `${item.mediaId}: objectKey format mismatch`);
   assert(/^LMC_WEEK\d{2}_P\d{2}_[a-z0-9-]+\.mp4$/.test(item.sourceFilename), `${item.mediaId}: sourceFilename mismatch`);
 }
 for (const [name, values] of [['mediaId', media.map((item) => item.mediaId)], ['partId', media.map((item) => item.partId)], ['objectKey', media.map((item) => item.objectKey)], ['sourceFilename', media.map((item) => item.sourceFilename)]]) assert(new Set(values).size === 77, `${name} must be unique`);
@@ -141,11 +149,17 @@ assert(worker.includes('signaturePayload(courseId, week, part, media.mediaId, ob
 assert(!worker.includes('LESSON_OBJECTS'), 'Legacy week-only allowlist must be removed');
 assert(!worker.includes('lmc/week-01.mp4'), 'Legacy week-only object keys must be removed');
 assert((workerCatalog.match(/"mediaId":/g) || []).length === 77, 'Worker catalog must contain 77 media entries');
+assert((workerCatalog.match(new RegExp(`"status": "${mediaStatus}"`, 'g')) || []).length === 77, 'Worker catalog lifecycle status must match media-catalog.json');
 assert(wrangler.r2_buckets?.[0]?.binding === 'VIDEOS' && wrangler.r2_buckets?.[0]?.bucket_name === 'rsedu-lmc-videos', 'R2 binding mismatch');
 
 const accessConfig = read('lcms/academy/access-config.js');
 const accessJs = read('lcms/academy/access.js');
-assert(accessConfig.includes("playbackWorkerUrl: ''"), 'Worker URL placeholder must remain empty before deployment');
+const deployedWorkerUrl = 'https://lmc-r2-video-gateway.ros2468.workers.dev';
+if (mediaStatus === 'published') {
+  assert(accessConfig.includes(`playbackWorkerUrl: '${deployedWorkerUrl}'`), 'Published media requires the deployed Worker URL');
+} else {
+  assert(accessConfig.includes("playbackWorkerUrl: ''") || accessConfig.includes(`playbackWorkerUrl: '${deployedWorkerUrl}'`), 'Unexpected Worker URL configuration');
+}
 assert(!accessConfig.includes('apiUrl'), 'Apps Script URL must not be exposed');
 assert(accessJs.includes("new URL('/access'") && accessJs.includes("method: 'POST'"), 'Browser auth must use Worker POST /access');
 
@@ -160,4 +174,4 @@ const publicSource = [indexHtml, read('lcms/academy/course.html'), read('lcms/ac
 assert(!/vimeo|google\s*drive|drive-video|youtube-cache|youtube\.com|youtu\.be/i.test(publicSource), 'Legacy video provider dependency returned');
 assert(publicSource.includes('LMC 평생진로상담사') && publicSource.includes('mobile-learning-bar'), 'LMC identity or mobile learning bar missing');
 
-console.log(`LMC Academy v2 quality checks passed: 12 weeks, 77 pending parts, ${durationSeconds} video seconds.`);
+console.log(`LMC Academy v2 quality checks passed: 12 weeks, 77 ${mediaStatus} parts, ${durationSeconds} video seconds.`);
