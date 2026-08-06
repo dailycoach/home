@@ -9,7 +9,7 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260802-nal-menu-v1', {cache:'no-store'})
+    fetch('/index-source-disc.html?v=20260806-maeum-library-v2', {cache:'no-store'})
       .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
@@ -86,7 +86,7 @@
         html = html.replace("      liveBoard: '/activities/live-board/',", "      coachingFlexMove: '/activities/coaching-flex-move/',\n      liveBoard: '/activities/live-board/',");
         html = html.replace("      liveBoard: '/activities/live-board/',", "      valueScene: '/activities/value-scene/',\n      liveBoard: '/activities/live-board/',");
 
-        const maeumFooterLink = '<a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재</a>';
+        const maeumFooterLink = '<a href="/maeum-library/" data-route="maeumLibrary">마음서재</a>';
         const operatorFooterLink = `${maeumFooterLink}\n          <a href="/operator/" aria-label="마음서재 운영자 전용 관문">운영자</a>`;
         if (!html.includes('href="/operator/"')) html = html.replace(maeumFooterLink, operatorFooterLink);
 
