@@ -1,0 +1,32 @@
+{
+  "id": "ctc-kac-90",
+  "family": "one-to-one-coach-the-coach",
+  "title": "DAILYCOACHING KAC 코치더코치 90",
+  "targetCredential": "KAC",
+  "durationMinutes": 90,
+  "sessionCount": 1,
+  "observationMode": "prerecorded_actual_client_session",
+  "seniorCoachCount": 1,
+  "participantCoachCount": 1,
+  "framework": "DAILY",
+  "individualReportIncluded": true,
+  "recommendationReviewIncluded": true,
+  "recommendationAutomatic": false,
+  "secureUploadRequired": true,
+  "criteria": {
+    "authority": "한국코치협회",
+    "effectiveFrom": "2026년 3차 실기",
+    "checkedAt": "2026-08-07",
+    "sourceUrl": "https://www.kcoach.or.kr/cms/FrCon/index.do?CONTENTS_NO=1&MENU_ID=300"
+  },
+  "status": "review",
+  "price": null,
+  "taxDisplay": null,
+  "applyUrl": null,
+  "paymentUrl": null,
+  "secureUploadProvider": null,
+  "retentionPolicy": null,
+  "refundPolicyUrl": null,
+  "applicationOpen": false,
+  "indexable": false
+}
