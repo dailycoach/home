@@ -161,6 +161,75 @@ function initLibrary() {
   run();
 }
 
+
+function bookNewsCard(item) {
+  const article = node('article', 'editorial-card');
+  const meta = node('span', '', item.category || '도서뉴스');
+  const heading = node('h3');
+  const link = node('a', '', item.title || '기사 원문 보기');
+  link.href = item.link || '#';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  heading.append(link);
+  const source = node('p', '', item.source || '출처 확인 중');
+  const published = node('time', '', formatDate(item.publishedAt));
+  const publishedAt = new Date(item.publishedAt);
+  if (Number.isFinite(publishedAt.getTime())) published.dateTime = publishedAt.toISOString();
+  article.append(meta, heading, source, published);
+  if (item.attribution) {
+    if (item.attributionUrl) {
+      const attribution = node('a', '', item.attribution);
+      attribution.href = item.attributionUrl;
+      attribution.target = '_blank';
+      attribution.rel = 'noopener noreferrer';
+      article.append(attribution);
+    } else {
+      article.append(node('small', '', item.attribution));
+    }
+  }
+  return article;
+}
+
+function bookNewsState(title, description, retry) {
+  const wrap = node('div', retry ? 'error-state' : 'empty-state');
+  wrap.setAttribute('role', retry ? 'alert' : 'status');
+  wrap.append(node('b', '', title), node('p', '', description));
+  if (retry) {
+    const button = node('button', 'button ghost', '다시 불러오기');
+    button.type = 'button';
+    button.addEventListener('click', retry);
+    wrap.append(button);
+  }
+  return wrap;
+}
+
+function initBookNews() {
+  const target = $('[data-book-news]');
+  if (!target) return;
+  const run = async () => {
+    target.setAttribute('aria-busy', 'true');
+    const loading = bookNewsState('도서·출판 기사를 확인하고 있습니다.', '매체와 발행일을 확인한 뒤 원문 링크를 정리합니다.');
+    loading.classList.add('loading-state', 'skeleton');
+    target.replaceChildren(loading);
+    try {
+      const response = await publicApi('/api/book-news?limit=24');
+      const data = await json(response);
+      if (!response.ok || !data.ok || !Array.isArray(data.items)) throw new Error('book-news');
+      target.replaceChildren();
+      if (!data.items.length) {
+        target.append(bookNewsState('새로 확인된 기사가 없습니다.', '확인된 출처의 새 기사가 생기면 이곳에 표시합니다.'));
+      } else {
+        data.items.forEach((item) => target.append(bookNewsCard(item)));
+      }
+    } catch {
+      target.replaceChildren(bookNewsState('도서뉴스를 불러오지 못했습니다.', '잠시 후 다시 시도해 주세요.', run));
+    } finally {
+      target.setAttribute('aria-busy', 'false');
+    }
+  };
+  run();
+}
+
 function message(element, text, isError = false) {
   if (!element) return;
   element.textContent = text;
@@ -348,4 +417,4 @@ function initMenu() {
   });
 }
 
-initMenu(); initHomeEntries(); initLibrary(); initConnect(); initMe(); initWrite();
+initMenu(); initHomeEntries(); initLibrary(); initBookNews(); initConnect(); initMe(); initWrite();

@@ -154,6 +154,83 @@
     "source": "local import"
   },
   {
+    "title": "마음서재 소개와 편집 원칙",
+    "description": "마음서재가 책과 마음을 연결하는 방식과 콘텐츠 편집 원칙을 소개하는 페이지",
+    "category": "contents",
+    "url": "/maeum-library/about/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "토스 마음서재",
+    "description": "앱인토스 마음서재와 웹 마음서재 한줄톡의 연결 방식을 안내하는 페이지",
+    "category": "contents",
+    "url": "/maeum-library/app/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "마음서재 책읽기",
+    "description": "책을 읽고 남은 문장과 생각을 삶의 장면으로 이어가는 읽기 콘텐츠",
+    "category": "contents",
+    "url": "/maeum-library/books/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "코치의 서재",
+    "description": "코칭 현장에서 길어 올린 질문과 독서 경험을 나누는 칼럼",
+    "category": "contents",
+    "url": "/maeum-library/columns/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "마음서재 마음읽기",
+    "description": "읽기 전후의 감정과 내면의 움직임을 살피는 마음 콘텐츠",
+    "category": "contents",
+    "url": "/maeum-library/mind/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "도서·출판 기사 모아보기",
+    "description": "공개 책소식 API에서 도서와 출판 관련 최신 기사를 모아 보여주는 페이지",
+    "category": "contents",
+    "url": "/maeum-library/news/",
+    "source": "maeum-library public API"
+  },
+  {
+    "title": "읽고 싶은데 책을 펼치지 못하는 날",
+    "description": "책을 시작하기 어려운 마음을 다루는 마음서재 이야기",
+    "category": "contents",
+    "url": "/maeum-library/stories/before-opening-a-book/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "‘힘들다’ 다음에 붙일 수 있는 말",
+    "description": "감정에 이름을 붙이며 마음을 구체적으로 살피는 마음서재 이야기",
+    "category": "contents",
+    "url": "/maeum-library/stories/name-the-feeling/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "덮어둔 책에서 한 문장만 남았다면",
+    "description": "끝까지 읽지 못한 책에서도 남은 문장을 발견하는 마음서재 이야기",
+    "category": "contents",
+    "url": "/maeum-library/stories/reading-without-finishing/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "“제가 문제예요” 다음에 코치가 묻는 것",
+    "description": "자기비난을 다음 행동을 찾는 질문으로 전환하는 마음서재 이야기",
+    "category": "contents",
+    "url": "/maeum-library/stories/self-blame-and-next-action/",
+    "source": "maeum-library legacy migration"
+  },
+  {
+    "title": "그 말이 유독 오래 남은 이유",
+    "description": "관계 속 한마디가 마음에 남는 이유를 살피는 마음서재 이야기",
+    "category": "contents",
+    "url": "/maeum-library/stories/words-in-relationships/",
+    "source": "maeum-library legacy migration"
+  },
+  {
     "title": "말씀 묵상 셀프코칭 감사",
     "description": "말씀과 묵상, 셀프코칭과 감사를 위한 페이지",
     "category": "spiritual",
