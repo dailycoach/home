@@ -46,9 +46,9 @@
       "meta": "온라인 서재 · 주 1회 Zoom",
       "image": "/nal/assets/images/nal-og.png",
       "imageAlt": "NAL 커뮤니티와 클래스, 감정도구를 표현한 브랜드 이미지",
-      "detailUrl": "https://maeum-library-talk.dailycoaching.chatgpt.site",
+      "detailUrl": "/maeum-library/",
       "detailLabel": "마음서재 보기",
-      "actionUrl": "https://maeum-library-talk.dailycoaching.chatgpt.site",
+      "actionUrl": "/maeum-library/",
       "actionLabel": "독서모임 입장"
     }
   ]

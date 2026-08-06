@@ -148,10 +148,10 @@
   },
   {
     "title": "마음서재",
-    "description": "책·심리 콘텐츠, 도서뉴스, 참여자 한줄톡과 주 1회 Zoom 독서모임을 연결하는 온라인 서재",
+    "description": "책을 펴기 전 마음을 살펴보고, 읽은 뒤 남은 한 문장과 삶의 장면을 기록하는 온라인 서재",
     "category": "contents",
-    "url": "https://maeum-library-talk.dailycoaching.chatgpt.site",
-    "source": "OpenAI Sites"
+    "url": "/maeum-library/",
+    "source": "local import"
   },
   {
     "title": "말씀 묵상 셀프코칭 감사",

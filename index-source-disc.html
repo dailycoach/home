@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
@@ -570,6 +570,35 @@
     }
     .dot.is-active { width: 48px; background: linear-gradient(90deg, var(--gold-2), #fff); }
 
+    .maeum-feature-section {
+      padding: clamp(72px, 9vw, 118px) 20px;
+      color: var(--navy-950);
+      background: radial-gradient(circle at 82% 18%, rgba(196,154,87,.13), transparent 22rem), #f7f0e4;
+    }
+    .maeum-feature-card {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+      gap: clamp(42px, 7vw, 92px);
+      align-items: end;
+      padding: clamp(34px, 5vw, 68px);
+      border: 1px solid rgba(6,21,40,.22);
+      border-radius: 4px;
+      background: rgba(255,250,242,.78);
+      box-shadow: 18px 20px 0 rgba(196,154,87,.10);
+    }
+    .maeum-feature-kicker { margin: 0 0 24px; color: #8b2637; font-size: .72rem; font-weight: 900; letter-spacing: .18em; }
+    .maeum-feature-card h2 { margin: 0; font-family: Georgia, "Noto Serif KR", serif; font-size: clamp(2.55rem, 5vw, 5.3rem); line-height: 1.08; letter-spacing: -.065em; }
+    .maeum-feature-card h2 span { color: #8b2637; }
+    .maeum-feature-copy { margin: 24px 0 0; color: rgba(18,24,38,.68); font-size: 1rem; line-height: 1.85; }
+    .maeum-feature-note { padding: 26px 0 0; border-top: 1px solid rgba(6,21,40,.2); }
+    .maeum-feature-note blockquote { margin: 0; color: var(--navy-950); font-family: Georgia, "Noto Serif KR", serif; font-size: clamp(1.35rem, 2.3vw, 2rem); line-height: 1.55; letter-spacing: -.04em; }
+    .maeum-feature-note p { margin: 24px 0 0; color: rgba(18,24,38,.62); font-size: .86rem; line-height: 1.7; }
+    .maeum-feature-actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .maeum-feature-actions a { min-height: 48px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--navy-950); border-radius: 999px; font-size: .84rem; font-weight: 850; }
+    .maeum-feature-actions a:first-child { background: var(--navy-950); color: #fff; }
+
     .menu-panel {
       position: fixed;
       inset: 0;
@@ -730,6 +759,7 @@
     @media (max-width: 1080px) {
       .nav { display: none; }
       .hero-controls { grid-template-columns: 1fr; }
+      .maeum-feature-card { grid-template-columns: 1fr; }
       .slider-ui { justify-items: start; grid-template-columns: auto auto auto; align-items: center; }
       .intent-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .panel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -751,6 +781,9 @@
       .hero-subtitle { font-size: 1.02rem; line-height: 1.7; }
       .btn { width: 100%; min-height: 50px; }
       .hero-actions { gap: 10px; }
+      .maeum-feature-card { padding: 30px 22px; box-shadow: 8px 10px 0 rgba(196,154,87,.10); }
+      .maeum-feature-actions { display: grid; }
+      .maeum-feature-actions a { width: 100%; }
       .intent-rail { grid-template-columns: 1fr; border-radius: 22px; }
       .intent-rail a,
       .intent-rail button { min-height: 66px; padding: 14px 16px; }
@@ -961,7 +994,7 @@
         <div class="nav-group">
           <button class="nav-button" type="button" aria-haspopup="true">콘텐츠 <span aria-hidden="true">⌄</span></button>
           <div class="dropdown" role="menu">
-            <a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재 <small>NEW</small></a>
+            <a href="/maeum-library/" data-route="maeumLibrary">마음서재 <small>NEW</small></a>
             <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
           </div>
         </div>
@@ -995,7 +1028,7 @@
         </div>
 
         <div class="hero-controls">
-          <div class="intent-rail" aria-label="주요 바로가기">
+          <nav class="intent-rail" aria-label="주요 바로가기">
             <a href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">
               <strong>코칭 신청 <span aria-hidden="true">→</span></strong>
               <small>스마트스토어 날빛코칭으로 연결</small>
@@ -1016,9 +1049,9 @@
               <strong>콘텐츠 <span aria-hidden="true">→</span></strong>
               <small>Spiritual Hero 콘텐츠</small>
             </a>
-          </div>
+          </nav>
 
-          <div class="slider-ui" aria-label="슬라이드 제어">
+          <div class="slider-ui" role="group" aria-label="슬라이드 제어">
             <div class="slide-count"><span id="currentSlide">01</span> / 03</div>
             <div class="slider-arrows">
               <button class="circle-btn" type="button" data-slide-prev aria-label="이전 슬라이드">←</button>
@@ -1033,9 +1066,27 @@
         </div>
       </div>
     </section>
+
+    <section class="maeum-feature-section" aria-labelledby="maeumFeatureTitle">
+      <article class="maeum-feature-card">
+        <div>
+          <p class="maeum-feature-kicker">ONE SENTENCE LIBRARY · DAILYCOACHING</p>
+          <h2 id="maeumFeatureTitle">책을 다 읽지 않아도<br><span>괜찮습니다.</span></h2>
+          <p class="maeum-feature-copy">책을 펴기 전 지금의 마음을 살펴보고, 읽은 뒤 마음이 멈춘 한 문장과 삶의 장면을 기록하는 온라인 서재입니다.</p>
+          <div class="maeum-feature-actions">
+            <a href="/maeum-library/" data-route="maeumLibrary">마음서재 들어가기</a>
+            <a href="/maeum-library/library/">공개 한줄톡 읽기</a>
+          </div>
+        </div>
+        <div class="maeum-feature-note">
+          <blockquote>“문장 하나 앞에서<br>지금의 나를 만납니다.”</blockquote>
+          <p>기록의 기본값은 비공개입니다. 직접 공개를 선택한 기록만 이름 없이 한줄톡에 나타납니다.</p>
+        </div>
+      </article>
+    </section>
   </main>
 
-  <section class="menu-panel" id="menuPanel" aria-label="전체 카테고리" aria-hidden="true">
+  <section class="menu-panel" id="menuPanel" aria-label="전체 카테고리" inert>
     <div class="panel-card" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
       <div class="panel-head">
         <div>
@@ -1099,7 +1150,7 @@
         <article class="category" data-category="contents">
           <h3>콘텐츠</h3>
           <p>마음을 돌보고 일상의 성장을 돕는 콘텐츠입니다.</p>
-          <a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재 <small>NEW</small></a>
+          <a href="/maeum-library/" data-route="maeumLibrary">마음서재 <small>NEW</small></a>
           <a href="/spiritual/hero/" data-route="spiritualHero">Spiritual Hero <small>→</small></a>
           <a href="/pages.json" data-route="pagesJson">pages.json <small>→</small></a>
         </article>
@@ -1131,7 +1182,7 @@
           <a href="/lcms/" data-route="lcms">LCMS</a>
           <a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>
           <a href="/activities/live-board/" data-route="liveBoard">라이브보드</a>
-          <a href="https://maeum-library-talk.dailycoaching.chatgpt.site" data-route="maumLibrary" target="_blank" rel="noopener noreferrer">마음서재</a>
+          <a href="/maeum-library/" data-route="maeumLibrary">마음서재</a>
           <a href="/spiritual/hero/" data-route="spiritualHero">콘텐츠</a>
         </div>
       </div>
@@ -1182,7 +1233,7 @@
       kca8: '/tests/kca8/',
       wildernessSurvival: '/activities/wilderness-survival/',
       liveBoard: '/activities/live-board/',
-      maumLibrary: 'https://maeum-library-talk.dailycoaching.chatgpt.site',
+      maeumLibrary: '/maeum-library/',
       spiritualHero: '/spiritual/hero/',
       pagesJson: '/pages.json'
     });
@@ -1315,6 +1366,7 @@
     function openMenu(focusCategory) {
       if (!menuPanel) return;
       menuPanel.classList.add('is-open');
+      menuPanel.removeAttribute('inert');
       menuPanel.setAttribute('aria-hidden', 'false');
       document.body.classList.add('is-locked');
       document.querySelectorAll('[data-open-menu]').forEach((button) => button.setAttribute('aria-expanded', 'true'));
@@ -1330,6 +1382,7 @@
     function closeMenu() {
       if (!menuPanel) return;
       menuPanel.classList.remove('is-open');
+      menuPanel.setAttribute('inert', '');
       menuPanel.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('is-locked');
       document.querySelectorAll('[data-open-menu]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
