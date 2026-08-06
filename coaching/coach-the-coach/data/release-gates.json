@@ -1,0 +1,18 @@
+{
+  "project": "DAILYCOACHING KAC·KPC 1:1 코치더코치 90",
+  "status": "review",
+  "checkedAt": "2026-08-07",
+  "gates": [
+    {"id":"G1","name":"상품구조","status":"pass","detail":"KAC 90 / KPC 90 별도 SKU·별도 페이지"},
+    {"id":"G2","name":"운영표","status":"pass","detail":"KAC·KPC 각각 90분 운영표 구축"},
+    {"id":"G3","name":"공식기준","status":"pass","detail":"한국코치협회 2026년 3차 실기부터 적용 공개기준 확인"},
+    {"id":"G4","name":"추천서 정책","status":"partial","detail":"작성·보류·평가불가 구조 확정. 실제 추천서 양식·전달 방식은 운영 확정 필요"},
+    {"id":"G5","name":"보안 제출","status":"blocked","detail":"실제 고객 동의서·보안 업로드 제공자·접근권한·삭제일 정책 미확정"},
+    {"id":"G6","name":"가격","status":"blocked","detail":"KAC 90 / KPC 90 판매가 및 세금표시 미확정"},
+    {"id":"G7","name":"결제","status":"blocked","detail":"상품별 결제 URL·결제수단 미확정"},
+    {"id":"G8","name":"신청","status":"blocked","detail":"KAC·KPC 신청폼 URL 및 운영자 확인 프로세스 미확정"},
+    {"id":"G9","name":"취소·환불","status":"blocked","detail":"사전분석 시작 시점 포함 일정변경·취소·환불정책 미확정"},
+    {"id":"G10","name":"공개 QA","status":"pending","detail":"운영정보 확정 후 모바일·접근성·성능·SEO·실제 클릭 검수 필요"}
+  ],
+  "mergePolicy": "모든 출시 게이트가 통과되기 전 main 병합·메인메뉴·푸터·사이트맵·검색색인 연결 금지"
+}
