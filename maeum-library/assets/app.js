@@ -206,6 +206,10 @@ function bookNewsState(title, description, retry) {
 function initBookNews() {
   const target = $('[data-book-news]');
   if (!target) return;
+  if (target.querySelector('.editorial-card')) {
+    target.setAttribute('aria-busy', 'false');
+    return;
+  }
   const run = async () => {
     target.setAttribute('aria-busy', 'true');
     const loading = bookNewsState('도서·출판 기사를 확인하고 있습니다.', '매체와 발행일을 확인한 뒤 원문 링크를 정리합니다.');
