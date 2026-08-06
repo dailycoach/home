@@ -1,0 +1,37 @@
+{
+  "id": "ctc-kpc-90",
+  "family": "one-to-one-coach-the-coach",
+  "title": "DAILYCOACHING KPC 코치더코치 90",
+  "targetCredential": "KPC",
+  "durationMinutes": 90,
+  "sessionCount": 1,
+  "observationMode": "prerecorded_actual_client_session",
+  "seniorCoachCount": 1,
+  "participantCoachCount": 1,
+  "framework": "DAILY",
+  "individualReportIncluded": true,
+  "recommendationReviewIncluded": true,
+  "recommendationAutomatic": false,
+  "secureUploadRequired": true,
+  "credentialContext": {
+    "kpcOneToOneCtcHours": 5,
+    "note": "현재 한국코치협회 ACPK 공개 자격취득절차 기준. 이 90분 상품 1회가 전체 5시간 충족을 의미하지 않음."
+  },
+  "criteria": {
+    "authority": "한국코치협회",
+    "effectiveFrom": "2026년 3차 실기",
+    "checkedAt": "2026-08-07",
+    "sourceUrl": "https://www.kcoach.or.kr/cms/FrCon/index.do?CONTENTS_NO=3&MENU_ID=300",
+    "credentialProcedureUrl": "https://www.kcoach.or.kr/cms/FrCon/index.do?CONTENTS_NO=1&MENU_ID=290"
+  },
+  "status": "review",
+  "price": null,
+  "taxDisplay": null,
+  "applyUrl": null,
+  "paymentUrl": null,
+  "secureUploadProvider": null,
+  "retentionPolicy": null,
+  "refundPolicyUrl": null,
+  "applicationOpen": false,
+  "indexable": false
+}
