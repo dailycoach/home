@@ -285,6 +285,43 @@ function initConnect() {
   });
 }
 
+function initApplication() {
+  const form = $('[data-application-form]');
+  if (!form) return;
+  const status = $('[data-application-message]', form);
+  const submit = $('button[type=submit]', form);
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    submit.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    message(status, '신청서를 안전하게 접수하고 있습니다.');
+    try {
+      const values = Object.fromEntries(new FormData(form).entries());
+      const response = await fetch(`${API_BASE}/api/applications`, {
+        method: 'POST',
+        credentials: 'omit',
+        cache: 'no-store',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      const data = await json(response);
+      if (!response.ok || !data.ok) {
+        message(status, data.message || '신청서를 접수하지 못했습니다. 입력 내용을 확인해 주세요.', true);
+        return;
+      }
+      form.reset();
+      message(status, `신청이 접수되었습니다. 접수번호는 ${data.receipt}입니다. 운영 확인 후 참여 방법을 안내합니다.`);
+      status?.focus({ preventScroll: true });
+    } catch {
+      message(status, '인터넷 연결을 확인한 뒤 다시 시도해 주세요.', true);
+    } finally {
+      submit.disabled = false;
+      form.setAttribute('aria-busy', 'false');
+    }
+  });
+}
+
 function recordWrap(entry, reload, status) {
   const wrap = node('div', 'record-wrap');
   wrap.append(entryCard(entry));
@@ -421,4 +458,4 @@ function initMenu() {
   });
 }
 
-initMenu(); initHomeEntries(); initLibrary(); initBookNews(); initConnect(); initMe(); initWrite();
+initMenu(); initHomeEntries(); initLibrary(); initBookNews(); initConnect(); initApplication(); initMe(); initWrite();
