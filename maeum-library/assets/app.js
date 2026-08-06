@@ -1,4 +1,5 @@
 const API_BASE = 'https://maeum-api.daily-coach-ing.com';
+const LEGACY_PUBLIC_API_BASE = 'https://maeum-library-talk.dailycoaching.chatgpt.site';
 const TOSS_URL = 'https://minion.toss.im/NRHKhVoA';
 const entryRequests = new WeakMap();
 
@@ -6,6 +7,17 @@ const $ = (selector, scope = document) => scope.querySelector(selector);
 
 function api(path, options = {}) {
   return fetch(`${API_BASE}${path}`, { credentials: 'include', cache: 'no-store', ...options });
+}
+
+async function publicApi(path, options = {}) {
+  const requestOptions = { credentials: 'omit', cache: 'no-store', ...options };
+  try {
+    const response = await fetch(`${API_BASE}${path}`, requestOptions);
+    if (response.status < 500) return response;
+  } catch (error) {
+    if (error?.name === 'AbortError' || requestOptions.signal?.aborted) throw error;
+  }
+  return fetch(`${LEGACY_PUBLIC_API_BASE}${path}`, requestOptions);
 }
 
 async function json(response) {
@@ -96,7 +108,7 @@ async function loadEntries(target, params, retry, emptyFactory = emptyState) {
   target.setAttribute('aria-busy', 'true');
   target.replaceChildren(loadingState());
   try {
-    const response = await api(`/api/entries?${params.toString()}`, { signal: controller.signal });
+    const response = await publicApi(`/api/entries?${params.toString()}`, { signal: controller.signal });
     const data = await json(response);
     if (!response.ok || !data.ok) throw new Error('entries');
     target.replaceChildren();
