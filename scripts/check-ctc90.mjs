@@ -63,8 +63,28 @@ for (const [name, html] of Object.entries(htmlByPage)) {
   const kakaoLinks = [
     ...html.matchAll(/<a\b[^>]*\bhref=["'](https:\/\/open\.kakao\.com\/[^"']+)["'][^>]*>/gi),
   ].map((match) => match[1]);
-  assert(kakaoLinks.length >= 2, `${name}: 카카오 CTA가 2개 미만`);
+  assert(kakaoLinks.length === 1, `${name}: 카카오 CTA는 최종 구간에 정확히 1개여야 함`);
   assert(kakaoLinks.every((href) => href === kakaoUrl), `${name}: 카카오 URL 불일치`);
+
+  const heroHtml = html.match(/<section\b[^>]*class=["'][^"']*hero[^"']*["'][\s\S]*?<\/section>/i)?.[0] || "";
+  const heroPrimary = heroHtml.match(/<a\b[^>]*class=["'][^"']*button-primary[^"']*["'][^>]*href=["']([^"']+)["']/i)?.[1] || "";
+  assert(heroPrimary.startsWith("#"), `${name}: 첫 CTA는 페이지 내부 근거 구간으로 이동해야 함`);
+  assert(!heroHtml.includes(kakaoUrl), `${name}: 히어로에서 카카오로 직접 이동하면 안 됨`);
+
+  const storySources = [
+    ...html.matchAll(/<img\b[^>]*class=["'][^"']*story-image[^"']*["'][^>]*src=["']([^"']+)["']/gi),
+  ].map((match) => match[1]);
+  assert(storySources.length === 5, `${name}: 스토리 이미지는 정확히 5장이어야 함`);
+  assert(new Set(storySources).size === 5, `${name}: 스토리 이미지가 중복됨`);
+  for (const src of storySources) {
+    assert(src.startsWith("/coaching/coach-the-coach/assets/images/story/"), `${name}: 스토리 이미지 경로 불일치 ${src}`);
+    assert(fs.existsSync(path.join(root, src.replace(/^\//, ""))), `${name}: 스토리 이미지 파일 누락 ${src}`);
+  }
+
+  const finalCtaIndex = html.indexOf('class="cta-band"');
+  const kakaoIndex = html.indexOf(kakaoUrl);
+  assert(finalCtaIndex >= 0 && kakaoIndex > finalCtaIndex, `${name}: 카카오 CTA는 최종 CTA 구간에만 있어야 함`);
+  assert((html.match(/\bkakao-final\b/g) || []).length === 1, `${name}: 최종 카카오 CTA 식별자 누락`);
 }
 
 for (const [file, content] of [
@@ -90,7 +110,8 @@ for (const required of [
 }
 assert(htmlByPage.hub.includes('id="paid-coaching"'), "허브: 유료코칭 리스크 섹션 누락");
 for (const [name, html] of Object.entries(htmlByPage)) {
-  assert(html.includes("ctc90-editorial-hero.webp"), `${name}: 에디토리얼 히어로 이미지 누락`);
+  assert(html.includes(`/assets/images/story/${name}-01-hero.webp`), `${name}: 전용 히어로 이미지 누락`);
+  assert(!html.includes("ctc90-editorial-hero.webp"), `${name}: 구형 공용 히어로 이미지가 남아 있음`);
   assert(html.includes('class="hero-collage"'), `${name}: 히어로 콜라주 구조 누락`);
 }
 for (const required of ["멈춤", "반영", "한 질문", "확인", "내면 듣기", "고객다움", "복기"]) {
@@ -140,4 +161,5 @@ if (failures.length) {
 console.log("CTC90 QA 통과");
 console.log(`- 페이지: ${Object.keys(pages).length}`);
 console.log(`- 카카오 CTA: ${(combinedHtml.match(new RegExp(kakaoUrl, "g")) || []).length}`);
+console.log(`- 스토리 이미지: ${(combinedHtml.match(/\bstory-image\b/g) || []).length}`);
 console.log("- 구형 상품·자동판정·잘못된 운영명칭 회귀: 0건");

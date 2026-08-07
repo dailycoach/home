@@ -43,6 +43,15 @@ for (const viewport of viewports) {
       waitUntil: "domcontentloaded",
       timeout: 30_000,
     });
+    await page.evaluate(() => {
+      for (const image of document.images) image.loading = "eager";
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    await page.waitForFunction(
+      () => [...document.images].every((image) => image.complete),
+      { timeout: 15_000 },
+    );
+    await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(200);
 
     const metrics = await page.evaluate(() => {
@@ -78,6 +87,10 @@ for (const viewport of viewports) {
         clippedText,
         smallestCtaHeight: buttonRects.length ? Math.min(...buttonRects.map((rect) => rect.height)) : 0,
         smallestCtaWidth: buttonRects.length ? Math.min(...buttonRects.map((rect) => rect.width)) : 0,
+        storyImageCount: document.querySelectorAll("img.story-image").length,
+        brokenImages: [...document.images]
+          .filter((image) => !image.complete || image.naturalWidth === 0)
+          .map((image) => image.currentSrc || image.src),
         focusVisibleRuleLoaded: [...document.styleSheets].some((sheet) => {
           try {
             return [...sheet.cssRules].some((rule) => rule.cssText.includes(":focus-visible"));
@@ -98,13 +111,14 @@ for (const viewport of viewports) {
     result.passed = result.status === 200 && result.runtimeErrors.length === 0 &&
       result.h1Count === 1 && result.mainExists && !result.horizontalOverflow &&
       result.clippedText.length === 0 && result.smallestCtaHeight >= 44 &&
-      result.smallestCtaWidth >= 44 && result.focusVisibleRuleLoaded;
+      result.smallestCtaWidth >= 44 && result.storyImageCount === 5 &&
+      result.brokenImages.length === 0 && result.focusVisibleRuleLoaded;
     report.push(result);
 
     if (["mobile-390", "desktop-1440"].includes(viewport.name)) {
       await page.screenshot({
         path: path.join(outputDir, `${routeName}-${viewport.name}.png`),
-        fullPage: false,
+        fullPage: true,
       });
     }
     await page.close();
