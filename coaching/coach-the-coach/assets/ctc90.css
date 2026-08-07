@@ -98,7 +98,6 @@ img { max-width: 100%; }
 .brand::before {
   content: "";
   width: 28px;
-  height: 2px;
   height: 9px;
   background: var(--cobalt);
 }
@@ -375,6 +374,9 @@ h3 {
 .story-wide { width: 100%; }
 .story-inset-left { width: min(82%, 1080px); margin-right: auto; }
 .story-inset-right { width: min(82%, 1080px); margin-left: auto; }
+.story-panorama .story-image { aspect-ratio: 2 / 1; }
+.story-detail { width: min(70%, 900px); }
+.story-detail .story-image { aspect-ratio: 4 / 3; }
 .story-inset-left::before { right: auto; left: 8%; transform: rotate(-5deg); }
 .story-inset-right figcaption { margin-left: auto; }
 .story-trust .story-image { filter: saturate(0.92) contrast(1.04); }
@@ -642,6 +644,10 @@ h3 {
 
 .process-item h3 { margin: 0; }
 .process-item p { margin: 0; color: rgba(255, 255, 255, 0.68); }
+.process-list-on-light { color: var(--ink); border-color: var(--line); }
+.process-list-on-light .process-item { border-color: var(--line); }
+.process-list-on-light .process-item::before { color: var(--cobalt); }
+.process-list-on-light .process-item p { color: var(--muted); }
 
 .voice-gate {
   display: grid;
@@ -669,6 +675,7 @@ h3 {
 .voice-callout span { display: block; margin-top: 18px; color: rgba(255, 255, 255, 0.82); }
 
 .status-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.status-grid-spaced { margin-top: 64px; }
 .status { padding: 28px; background: var(--paper); }
 .status b { display: block; margin-bottom: 10px; font-size: 1.08rem; }
 .status p { margin: 0; color: var(--muted); font-size: 0.95rem; }
@@ -709,6 +716,26 @@ h3 {
 .faq summary::after { content: "+"; position: absolute; right: 4px; top: 19px; color: var(--cobalt); font-family: "Lilita One", sans-serif; font-size: 1.55rem; }
 .faq details[open] summary::after { content: "−"; }
 .faq .answer { max-width: 860px; padding: 0 0 28px; color: var(--muted); }
+
+.trust-bridge {
+  padding: 34px 0;
+  color: #fff;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.trust-bridge-inner {
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(250px, 0.3fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.trust-bridge .section-kicker { margin-bottom: 9px; color: var(--acid); }
+.trust-bridge h2 { margin: 0; font-size: clamp(1.8rem, 3.4vw, 3.35rem); }
+.trust-bridge p { margin: 10px 0 0; color: rgba(255, 255, 255, 0.7); }
+.trust-bridge .button { color: var(--ink); background: var(--acid); border-color: var(--acid); box-shadow: 5px 5px 0 var(--cobalt); }
 
 .cta-band {
   position: relative;
@@ -759,7 +786,8 @@ h3 {
   .hero-inner,
   .section-head,
   .voice-gate,
-  .cta-band-inner { grid-template-columns: 1fr; }
+  .cta-band-inner,
+  .trust-bridge-inner { grid-template-columns: 1fr; }
   .hero-inner { min-height: 0; padding: 78px 0 64px; gap: 46px; }
   .hero-copy { max-width: 690px; }
   .hero-collage { width: calc(100% + 10vw); height: min(74vw, 610px); margin: 0 -10vw 0 0; }
@@ -773,7 +801,8 @@ h3 {
   .footer-inner { align-items: flex-start; flex-direction: column; }
   .footer-links { justify-content: flex-start; }
   .story-inset-left,
-  .story-inset-right { width: 92%; }
+  .story-inset-right,
+  .story-detail { width: 92%; }
 }
 
 @media (max-width: 640px) {
@@ -793,31 +822,50 @@ h3 {
   .page-kpc .hero-collage img { object-position: 76% center; }
   .collage-label { left: 5%; bottom: 7%; font-size: 0.72rem; }
   .hero-facts { gap: 8px 14px; font-size: 0.76rem; }
-  .section { padding: 88px 0; }
-  .section-compact { padding: 60px 0; }
+  .section { padding: 68px 0; }
+  .section-compact { padding: 50px 0; }
+  .section-head { margin-bottom: 36px; }
+  .columns-3 { gap: 14px; }
   .columns-2, .columns-6 { grid-template-columns: 1fr; }
+  .lens { min-height: 0; padding: 18px 20px; flex-direction: row; align-items: center; gap: 18px; }
+  .lens b { font-size: 1.3rem; }
   .steps-line { grid-template-columns: 1fr 1fr; }
   .step-line-item,
   .step-line-item:nth-child(4) { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .step-line-item:nth-child(even) { border-right: 0; }
   .step-line-item:last-child { border-bottom: 0; }
-  .timeline-row { grid-template-columns: 86px 1fr; gap: 12px; }
-  .timeline-row p { grid-column: 1 / -1; }
-  .result-list { grid-template-columns: 1fr; }
+  .timeline-row { grid-template-columns: 64px 1fr; gap: 8px 12px; padding: 17px 0; }
+  .timeline-row p { grid-column: 2; font-size: 0.9rem; }
+  .result-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; }
+  .result-list div { padding: 16px 0; gap: 10px; font-size: 0.88rem; }
   .process-item { grid-template-columns: 48px 1fr; gap: 14px; }
-  .choice { min-height: 400px; }
-  .plain-card { min-height: 0; }
+  .process-item { padding: 20px 0; }
+  .choice { min-height: 0; gap: 30px; }
+  .plain-card { min-height: 0; padding: 24px 20px; }
+  .plain-card .number { margin-bottom: 14px; }
   .risk-turn { margin-top: 46px; padding: 32px 0; }
   .actions { flex-direction: column; }
   .button { width: 100%; }
-  .cta-band-inner { min-height: 0; padding: 82px 0; gap: 42px; }
+  .cta-band-inner { min-height: 0; padding: 70px 0; gap: 36px; }
   .cta-instruction { padding: 24px 0 0; border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.38); }
+  .status-grid-spaced { margin-top: 34px; }
+  .recommendation-states { margin-top: 26px; }
+  .privacy-list li { padding: 17px 0 17px 27px; }
+  .faq summary { padding: 20px 36px 20px 0; }
+  .faq summary::after { top: 14px; }
+  .faq .answer { padding-bottom: 22px; }
+  .trust-bridge { padding: 40px 0; }
+  .trust-bridge-inner { min-height: 0; gap: 24px; }
   .story-figure,
   .story-inset-left,
-  .story-inset-right { width: 100%; margin-bottom: 48px; }
+  .story-inset-right,
+  .story-detail { width: 100%; margin-bottom: 34px; }
+  .story-panorama .story-image,
+  .story-detail .story-image { aspect-ratio: 3 / 2; }
   .story-figure .story-image { box-shadow: 8px 8px 0 rgba(16, 16, 16, 0.14); }
   .story-figure figcaption {
     width: 100%;
+    margin-top: 12px;
     grid-template-columns: 1fr;
     gap: 4px;
     font-size: 0.84rem;

@@ -85,6 +85,12 @@ for (const [name, html] of Object.entries(htmlByPage)) {
   const kakaoIndex = html.indexOf(kakaoUrl);
   assert(finalCtaIndex >= 0 && kakaoIndex > finalCtaIndex, `${name}: 카카오 CTA는 최종 CTA 구간에만 있어야 함`);
   assert((html.match(/\bkakao-final\b/g) || []).length === 1, `${name}: 최종 카카오 CTA 식별자 누락`);
+  const trustBridgeHtml = html.match(/<aside\b[^>]*class=["'][^"']*trust-bridge[^"']*["'][\s\S]*?<\/aside>/i)?.[0] || "";
+  assert(trustBridgeHtml !== "", `${name}: 중간 신뢰 CTA 구조 누락`);
+  assert(/href=["']#file-check["']/i.test(trustBridgeHtml), `${name}: 중간 신뢰 CTA가 파일 준비 체크로 연결되지 않음`);
+  assert(/\bid=["']file-check["']/i.test(html), `${name}: 파일 준비 체크 앵커 누락`);
+  assert(!trustBridgeHtml.includes(kakaoUrl), `${name}: 중간 신뢰 CTA에서 카카오로 직접 이동하면 안 됨`);
+  assert(!/\sstyle=["']/i.test(html), `${name}: 인라인 스타일이 남아 있음`);
 }
 
 for (const [file, content] of [
