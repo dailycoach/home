@@ -48,12 +48,19 @@ for (const viewport of viewports) {
     const metrics = await page.evaluate(() => {
       const doc = document.documentElement;
       const body = document.body;
-      const buttons = [...document.querySelectorAll("a.button, a.nav-cta, a.mobile-header-cta")]
-        .filter((button) => getComputedStyle(button).display !== "none");
-      const buttonRects = buttons.map((button) => {
-        const rect = button.getBoundingClientRect();
-        return { text: button.textContent.trim(), width: rect.width, height: rect.height };
-      });
+      const buttonRects = [...document.querySelectorAll("a.button, a.nav-cta, a.mobile-header-cta")]
+        .map((button) => {
+          const style = getComputedStyle(button);
+          const rect = button.getBoundingClientRect();
+          return { button, style, rect };
+        })
+        .filter(({ style, rect }) => style.display !== "none" && style.visibility !== "hidden" &&
+          rect.width > 0 && rect.height > 0)
+        .map(({ button, rect }) => ({
+          text: button.textContent.trim(),
+          width: rect.width,
+          height: rect.height,
+        }));
       const clippedText = [...document.querySelectorAll("h1, h2, h3, p, a, span, summary")]
         .filter((element) => {
           const style = getComputedStyle(element);
