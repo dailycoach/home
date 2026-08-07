@@ -1,0 +1,51 @@
+name: Check CTC90 Experience
+
+on:
+  pull_request:
+    paths:
+      - "coaching/coach-the-coach/**"
+      - "google-apps-script/ctc90-onboarding/**"
+      - "scripts/check-ctc90.mjs"
+      - "scripts/audit-ctc90-visuals.mjs"
+      - ".github/workflows/check-ctc90.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Check structure and scripts
+        run: |
+          node scripts/check-ctc90.mjs
+          node --check coaching/coach-the-coach/assets/ctc90.js
+          node --check < google-apps-script/ctc90-onboarding/Code.gs
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 > /tmp/ctc90-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/coaching/coach-the-coach/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/ctc90-http.log
+          exit 1
+      - name: Audit responsive pages
+        run: node scripts/audit-ctc90-visuals.mjs
+      - name: Upload visual audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ctc90-visual-audit
+          path: /tmp/ctc90-visual-audit
+          retention-days: 7
