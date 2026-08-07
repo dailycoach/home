@@ -43,6 +43,16 @@ for (const viewport of viewports) {
       waitUntil: "domcontentloaded",
       timeout: 30_000,
     });
+    await page.locator(".hero-collage img").evaluate(async (image) => {
+      image.loading = "eager";
+      await image.decode();
+    });
+    if (["mobile-390", "desktop-1440"].includes(viewport.name)) {
+      await page.screenshot({
+        path: path.join(outputDir, `${route}-${viewport.name}-hero.png`),
+        fullPage: false,
+      });
+    }
     await page.locator("img").evaluateAll(async (images) => {
       for (const image of images) {
         image.loading = "eager";
