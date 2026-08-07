@@ -43,14 +43,14 @@ for (const viewport of viewports) {
       waitUntil: "domcontentloaded",
       timeout: 30_000,
     });
-    await page.evaluate(() => {
-      for (const image of document.images) image.loading = "eager";
-      window.scrollTo(0, document.body.scrollHeight);
+    await page.locator("img").evaluateAll(async (images) => {
+      for (const image of images) {
+        image.loading = "eager";
+        image.scrollIntoView({ block: "center" });
+        try { await image.decode(); } catch { /* broken images are reported below */ }
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      }
     });
-    await page.waitForFunction(
-      () => [...document.images].every((image) => image.complete),
-      { timeout: 15_000 },
-    );
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(200);
 
