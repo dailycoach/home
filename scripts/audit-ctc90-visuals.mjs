@@ -49,7 +49,7 @@ for (const viewport of viewports) {
     });
     if (["mobile-390", "desktop-1440"].includes(viewport.name)) {
       await page.screenshot({
-        path: path.join(outputDir, `${route}-${viewport.name}-hero.png`),
+        path: path.join(outputDir, `${routeName}-${viewport.name}-hero.png`),
         fullPage: false,
       });
     }
