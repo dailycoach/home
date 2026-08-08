@@ -148,7 +148,7 @@
   },
   {
     "title": "마음서재",
-    "description": "책을 펴기 전 마음을 살펴보고, 읽은 뒤 남은 한 문장과 삶의 장면을 기록하는 온라인 서재",
+    "description": "도서뉴스에서 책을 발견하고, 승인된 참여자가 토스에서 읽고, 한줄톡과 독서모임으로 이어가는 독서 서비스",
     "category": "contents",
     "url": "/maeum-library/",
     "source": "local import"
@@ -189,11 +189,32 @@
     "source": "maeum-library legacy migration"
   },
   {
-    "title": "도서·출판 기사 모아보기",
-    "description": "공개 책소식 API에서 도서와 출판 관련 최신 기사를 모아 보여주는 페이지",
+    "title": "마음서재 도서뉴스",
+    "description": "자동수집 후보 가운데 사람이 검토하고 승인한 새 책·작가·출판·독서문화 소식",
     "category": "contents",
     "url": "/maeum-library/news/",
-    "source": "maeum-library public API"
+    "source": "Google Sheets editorial review → approved public API"
+  },
+  {
+    "title": "마음서재 참여 신청",
+    "description": "운영자 검토와 승인을 거쳐 기존 1회 토스 연결코드를 안내받는 참여 신청",
+    "category": "contents",
+    "url": "/maeum-library/apply/",
+    "source": "maeum-library applications"
+  },
+  {
+    "title": "마음서재 한줄톡",
+    "description": "참여자가 직접 익명 공개를 선택한 문장을 읽고 검색하는 공개 서재",
+    "category": "contents",
+    "url": "/maeum-library/library/",
+    "source": "maeum-library entries"
+  },
+  {
+    "title": "마음서재 독서모임",
+    "description": "실제 운영 DB의 상태와 확정된 일정만 안내하는 독서모임 페이지",
+    "category": "contents",
+    "url": "/maeum-library/gathering/",
+    "source": "maeum-library cohorts"
   },
   {
     "title": "읽고 싶은데 책을 펼치지 못하는 날",
