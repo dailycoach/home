@@ -18,7 +18,7 @@
 5. 먼저 `previewMaeumApprovedBookNews()`를 실행해 전송 대상을 확인합니다.
 6. `installMaeumBookNewsSync()`를 한 번 실행하면 15분 트리거가 설치됩니다.
 
-Worker는 승인된 행만 D1 `book_news_publications`에 추가·갱신하며, 후보나 예약 행은 거부합니다.
+Worker는 편집실의 현재 승인 목록 전체를 하나의 발행 묶음으로 검증합니다. 한 행이라도 검수 조건이나 필수 필드를 충족하지 않으면 공개 목록을 바꾸지 않습니다. 전부 유효하면 기존 공개 행을 보존 상태로 전환한 뒤 승인 행만 D1 `book_news_publications`에 공개하므로, 승인 취소·숨김도 다음 동기화에 반영됩니다.
 
 ## 로컬 검증
 

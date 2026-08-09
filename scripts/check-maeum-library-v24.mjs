@@ -42,6 +42,26 @@ assert.doesNotMatch(home, /읽을거리|마음읽기 전체|책읽기|코치의 
 assert.match(home, /data-book-news/);
 assert.match(home, /data-home-entries/);
 
+for (const relative of [
+  'maeum-library/about/index.html',
+  'maeum-library/app/index.html',
+  'maeum-library/books/index.html',
+  'maeum-library/columns/index.html',
+  'maeum-library/mind/index.html',
+  'maeum-library/stories/before-opening-a-book/index.html',
+  'maeum-library/stories/name-the-feeling/index.html',
+  'maeum-library/stories/reading-without-finishing/index.html',
+  'maeum-library/stories/self-blame-and-next-action/index.html',
+  'maeum-library/stories/words-in-relationships/index.html',
+]) {
+  const html = await read(relative);
+  const navigation = html.match(/<nav class="mediaNav"[\s\S]*?<\/nav>/)?.[0] || '';
+  assert.doesNotMatch(navigation, /마음읽기|책읽기|코치의 서재/, `${relative}: archive navigation`);
+  for (const href of ['/maeum-library/', '/maeum-library/news/', '/maeum-library/library/', '/maeum-library/gathering/']) {
+    assert.match(navigation, new RegExp(href.replaceAll('/', '\\/')), `${relative}: final navigation ${href}`);
+  }
+}
+
 const apply = await read('maeum-library/apply/index.html');
 for (const field of ['name="name"', 'name="email"', 'name="phone"', 'name="ageRange"', 'name="readingRhythm"', 'name="zoomPreference"', 'name="expectation"', 'name="favoriteLine"', 'name="consent"']) {
   assert.match(apply, new RegExp(field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `application field ${field}`);
@@ -70,6 +90,7 @@ assert.doesNotMatch(app, /\/api\/participant\/connect/);
 assert.doesNotMatch(app, /\/api\/participant\/entries['"`]/);
 assert.doesNotMatch(app, /localStorage|sessionStorage/);
 assert.doesNotMatch(app, /console\./);
+assert.match(app, /article\.id = `news-\$\{anchor\}`/);
 
 const pages = JSON.parse(await read('pages.json'));
 for (const url of ['/maeum-library/', '/maeum-library/news/', '/maeum-library/library/', '/maeum-library/apply/', '/maeum-library/gathering/']) {
