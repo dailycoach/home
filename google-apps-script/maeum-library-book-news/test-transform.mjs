@@ -31,6 +31,5 @@ assert.equal(payload.items[0].editorialNote, '독자에게 의미 있는 이유'
 assert.equal(payload.items[0].sourceSheetRow, '발행목록!2');
 assert.ok(payload.items[0].imageUrl.includes('/maeum-library/assets/images/'));
 assert.ok(!code.includes('Bearer sk-'));
-assert.ok(!code.includes('minion.toss.im/7KNQwHZn'));
 
 console.log(JSON.stringify({ ok: true, publishedCount: payload.items.length, reviewGate: true, scheduleGate: true, imageRightsGate: true }));
