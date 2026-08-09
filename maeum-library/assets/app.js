@@ -197,6 +197,8 @@ const newsImages = {
 
 function newsCard(item, featured = false) {
   const article = node('article', `news-card${featured ? ' featured' : ''}`);
+  const anchor = String(item.id || '').trim().toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
+  if (anchor) article.id = `news-${anchor}`;
   const imageLink = node('a', 'news-image');
   imageLink.href = item.link;
   imageLink.target = '_blank';

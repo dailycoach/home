@@ -1,4 +1,4 @@
-const MAEUM_BOOK_NEWS_SYNC_VERSION = 'maeum-book-news-v2.4';
+const MAEUM_BOOK_NEWS_SYNC_VERSION = 'maeum-book-news-v2.4.1';
 const MAEUM_BOOK_NEWS_DEFAULT_ENDPOINT = 'https://maeum-api.daily-coach-ing.com/api/news/sync';
 
 function installMaeumBookNewsSync() {
@@ -28,10 +28,6 @@ function syncMaeumApprovedBookNews() {
   }
 
   const payload = previewMaeumApprovedBookNews();
-  if (!payload.items.length) {
-    return { ok: true, skipped: true, reason: '발행됨 + 승인 조건을 만족하는 항목이 없습니다.', publishedCount: 0 };
-  }
-
   const response = UrlFetchApp.fetch(endpoint, {
     method: 'post',
     contentType: 'application/json',
@@ -87,7 +83,7 @@ function maeumBuildBookNewsPayload_(editorialValues, publicationValues) {
     return [item];
   });
 
-  return { source: 'google-sheets-book-news-editorial', items };
+  return { source: 'google-sheets-book-news-editorial', mode: 'replace-published-set', items };
 }
 
 function maeumRowsByHeader_(values) {
