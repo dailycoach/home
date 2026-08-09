@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "courseId": "lmc-lifetime-management-counselor",
+  "strategy": "MASK_FULL_ZOOM_SIDE_PANEL_DURING_SCREEN_SHARE",
+  "maskColor": "#000000",
+  "height": 720,
+  "notes": [
+    "Mask the full right-side Zoom panel while screen sharing is visible.",
+    "Keep lecturer full-screen intervals unmasked.",
+    "Intervals include conservative overlap around detected layout transitions.",
+    "WEEK-05 source width is 1212; all other weeks are 1280."
+  ],
+  "weeks": {
+    "1":  {"width":1280,"intervals":[{"start":5,"end":"END","x":1131}]},
+    "2":  {"width":1280,"intervals":[{"start":0,"end":"END","x":1067}]},
+    "3":  {"width":1280,"intervals":[{"start":0,"end":"END","x":1067}]},
+    "4":  {"width":1280,"intervals":[{"start":0,"end":3702,"x":1088},{"start":4341,"end":"END","x":1088}]},
+    "5":  {"width":1212,"intervals":[{"start":86,"end":4418,"x":1035},{"start":7183,"end":"END","x":1016}]},
+    "6":  {"width":1280,"intervals":[{"start":0,"end":"END","x":1067}]},
+    "7":  {"width":1280,"intervals":[{"start":0,"end":"END","x":1093}]},
+    "8":  {"width":1280,"intervals":[{"start":88,"end":3808,"x":1140},{"start":3882,"end":"END","x":1091}]},
+    "9":  {"width":1280,"intervals":[{"start":42,"end":3790,"x":1197},{"start":3776,"end":"END","x":1160}]},
+    "10": {"width":1280,"intervals":[{"start":0,"end":"END","x":1088}]},
+    "11": {"width":1280,"intervals":[{"start":0,"end":"END","x":1088}]}
+  }
+}
