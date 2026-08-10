@@ -9,6 +9,7 @@ const pages = {
   kpc: path.join(siteRoot, "kpc", "index.html"),
 };
 const kakaoUrl = "https://open.kakao.com/o/s2ZmJFHi";
+const ctcHomePath = "/coaching/coach-the-coach/";
 const failures = [];
 
 const assert = (condition, message) => {
@@ -32,6 +33,10 @@ for (const [name, html] of Object.entries(htmlByPage)) {
   assert(/<main\b[^>]*\bid=["']main["']/i.test(html), `${name}: main 랜드마크 누락`);
   assert(/class=["'][^"']*skip-link[^"']*["'][^>]*href=["']#main["']/i.test(html), `${name}: 본문 바로가기 누락`);
   assert(/<nav\b[^>]*\baria-label=/i.test(html), `${name}: 내비게이션 이름 누락`);
+
+  const brandTag = html.match(/<a\b[^>]*class=["'][^"']*\bbrand\b[^"']*["'][^>]*>/i)?.[0] || "";
+  const brandHref = brandTag.match(/\bhref=["']([^"']+)["']/i)?.[1] || "";
+  assert(brandHref === ctcHomePath, `${name}: DAILYCOACHING 브랜드 링크가 CTC 90 홈을 가리키지 않음`);
 
   const ids = idsFor(html);
   assert(ids.length === new Set(ids).size, `${name}: 중복 ID 존재`);
