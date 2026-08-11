@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-08-11T23:58:39.1397695+09:00",
+  "week": 8,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 8,
+    "method": "Downloaded every approved WEEK-08 object from remote R2 after cutover and compared the complete byte count and SHA-256 to technical QA.",
+    "parts": [
+      { "mediaId": "lmc-w08-p01", "responseStatus": 200, "sizeBytes": 38109622, "sha256": "27054d042d5b40332e279a031d33f9d17bed55ccd733bb01261c3b80cc556f5c", "pass": true },
+      { "mediaId": "lmc-w08-p02", "responseStatus": 200, "sizeBytes": 26135729, "sha256": "e602b1f4fbbb33874ff01e7691ead190716f1994b32c13ad7e87bc33ed7fa74e", "pass": true },
+      { "mediaId": "lmc-w08-p03", "responseStatus": 200, "sizeBytes": 15069362, "sha256": "e6b7f0e546dec6fb594edd5265714a993e8ed8deb113bcb0d3cc9056e1160d06", "pass": true },
+      { "mediaId": "lmc-w08-p04", "responseStatus": 200, "sizeBytes": 22398700, "sha256": "8b09753afcab66cf9f8ea7c20ffe2ae607016073cd9f0673a67eec2b25e8a839", "pass": true },
+      { "mediaId": "lmc-w08-p05", "responseStatus": 200, "sizeBytes": 21952943, "sha256": "7392827692c9ad09c58dffc2c3a4b20b8d72037f553ed3137c12032d71284d66", "pass": true },
+      { "mediaId": "lmc-w08-p06", "responseStatus": 200, "sizeBytes": 23809999, "sha256": "fc157845505cd8558b6d4d225f199936cdd517b65d821a806fe156704c44ff6e", "pass": true },
+      { "mediaId": "lmc-w08-p07", "responseStatus": 200, "sizeBytes": 22664936, "sha256": "792bfdacd3e8060d551d54086b5cafb33c7af7b5847f58c67024c3d575079afa", "pass": true },
+      { "mediaId": "lmc-w08-p08", "responseStatus": 200, "sizeBytes": 11794743, "sha256": "179dfb013dff51334d77fc77fc2b2cb7f78db3bf7d30e34a3986e9a9938544e3", "pass": true }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 8,
+    "range206": 8,
+    "parts": [
+      { "mediaId": "lmc-w08-p01", "path": "/media/lmc-lifetime-management-counselor/8/1", "headStatus": 200, "contentType": "video/mp4", "contentLength": 38109622, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/38109622", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p02", "path": "/media/lmc-lifetime-management-counselor/8/2", "headStatus": 200, "contentType": "video/mp4", "contentLength": 26135729, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/26135729", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p03", "path": "/media/lmc-lifetime-management-counselor/8/3", "headStatus": 200, "contentType": "video/mp4", "contentLength": 15069362, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/15069362", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p04", "path": "/media/lmc-lifetime-management-counselor/8/4", "headStatus": 200, "contentType": "video/mp4", "contentLength": 22398700, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/22398700", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p05", "path": "/media/lmc-lifetime-management-counselor/8/5", "headStatus": 200, "contentType": "video/mp4", "contentLength": 21952943, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/21952943", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p06", "path": "/media/lmc-lifetime-management-counselor/8/6", "headStatus": 200, "contentType": "video/mp4", "contentLength": 23809999, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/23809999", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p07", "path": "/media/lmc-lifetime-management-counselor/8/7", "headStatus": 200, "contentType": "video/mp4", "contentLength": 22664936, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/22664936", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w08-p08", "path": "/media/lmc-lifetime-management-counselor/8/8", "headStatus": 200, "contentType": "video/mp4", "contentLength": 11794743, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/11794743", "rangeBodyBytes": 1, "pass": true }
+    ]
+  },
+  "academyPlayerMetadata": {
+    "status": "PASS",
+    "verifiedCount": 8,
+    "parts": [
+      { "mediaId": "lmc-w08-p01", "durationSeconds": 1106.08, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p02", "durationSeconds": 895.12, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p03", "durationSeconds": 569.84, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p04", "durationSeconds": 931.12, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p05", "durationSeconds": 591.36, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p06", "durationSeconds": 1008.12, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p07", "durationSeconds": 945.32, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w08-p08", "durationSeconds": 305.690703, "readyState": 4, "videoWidth": 1280, "videoHeight": 720, "error": null }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "requiredParts": ["lmc-w08-p01", "lmc-w08-p08"],
+    "parts": [
+      {
+        "mediaId": "lmc-w08-p01",
+        "durationSeconds": 1106.08,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 0,
+        "playbackSeconds": 2.493001,
+        "endSeekSeconds": 1106.08,
+        "endSeekPass": true,
+        "audioEnabled": true
+      },
+      {
+        "mediaId": "lmc-w08-p08",
+        "durationSeconds": 305.690703,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 0,
+        "playbackSeconds": 2.468599,
+        "endSeekSeconds": 305.690703,
+        "endSeekPass": true,
+        "audioEnabled": true
+      }
+    ]
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}
