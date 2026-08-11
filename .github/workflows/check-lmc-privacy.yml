@@ -3,8 +3,17 @@ name: Check LMC Privacy Rework
 on:
   pull_request:
     paths:
+      - "artifacts/lmc-privacy-rework/**"
       - "lcms/academy/privacy/**"
+      - "lcms/academy/data/media-catalog.json"
+      - "lcms/academy/r2-worker/src/media-catalog.js"
+      - "lcms/academy/r2-worker/upload/LMC_77_SHA256SUMS.txt"
+      - "lcms/academy/r2-worker/upload/video-upload-map.csv"
+      - "lcms/academy/r2-worker/upload/video-upload-map.json"
+      - "lcms/academy/r2-player.css"
       - "scripts/lmc-zoom-tile-privacy.mjs"
+      - "scripts/lmc-r2-overwrite-privacy.mjs"
+      - "scripts/lmc-sync-privacy-catalog.mjs"
       - ".github/workflows/check-lmc-privacy.yml"
   workflow_dispatch:
 
@@ -17,21 +26,54 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+
       - name: Check script syntax
-        run: node --check scripts/lmc-zoom-tile-privacy.mjs
-      - name: Generate 77-row review config
         run: |
-          node scripts/lmc-zoom-tile-privacy.mjs init --config /tmp/lmc-zoom-tile-masks.json
+          node --check scripts/lmc-zoom-tile-privacy.mjs
+          node --check scripts/lmc-r2-overwrite-privacy.mjs
+          node --check scripts/lmc-sync-privacy-catalog.mjs
+
+      - name: Check 77-part execution contract
+        run: |
+          node scripts/lmc-zoom-tile-privacy.mjs contract-test \
+            --week 1 \
+            --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json \
+            --catalog lcms/academy/data/media-catalog.json
+          node scripts/lmc-r2-overwrite-privacy.mjs --self-test
+
+      - name: Generate and inspect authoritative execution map
+        run: |
+          node scripts/lmc-zoom-tile-privacy.mjs map \
+            --week 1 \
+            --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json \
+            --catalog lcms/academy/data/media-catalog.json \
+            --report /tmp/lmc-execution-map.json
           node - <<'NODE'
           const fs = require('fs');
-          const config = JSON.parse(fs.readFileSync('/tmp/lmc-zoom-tile-masks.json', 'utf8'));
-          const rows = Object.values(config.media || {});
-          if (rows.length !== 77) throw new Error(`Expected 77 rows, got ${rows.length}`);
-          if (rows.some((row) => row.decision !== 'REVIEW_REQUIRED')) {
-            throw new Error('Initial privacy rows must all be REVIEW_REQUIRED');
-          }
-          console.log('LMC privacy config check passed: 77 REVIEW_REQUIRED rows.');
+          const map = JSON.parse(fs.readFileSync('/tmp/lmc-execution-map.json', 'utf8'));
+          if (map.length !== 77) throw new Error(`Expected 77 rows, got ${map.length}`);
+          if (map.filter((row) => row.decision === 'MASK').length !== 75) throw new Error('Expected 75 MASK rows');
+          if (map.filter((row) => row.decision === 'NO_MASK').length !== 2) throw new Error('Expected 2 NO_MASK rows');
+          if (map.some((row) => !row.currentObjectKey || 'objectKey' in row)) throw new Error('Execution map must expose only currentObjectKey');
+          if (new Set(map.map((row) => row.mediaId)).size !== 77) throw new Error('Duplicate mediaId in execution map');
           NODE
+
+      - name: Check catalog and Worker generated data
+        run: |
+          node scripts/lmc-sync-privacy-catalog.mjs \
+            --week 1 \
+            --technical-qa artifacts/lmc-privacy-rework/week-01/week-01-technical-qa.json \
+            --remote-qa artifacts/lmc-privacy-rework/week-01/week-01-remote-playback-qa.json \
+            --r2-report artifacts/lmc-privacy-rework/week-01/week-01-r2-overwrite-report.json \
+            --catalog lcms/academy/data/media-catalog.json \
+            --artifact-root artifacts/lmc-privacy-rework
+          node scripts/check-lmc-academy.mjs
+
+      - name: Keep player CSS outside privacy scope
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code "origin/${{ github.base_ref }}" -- lcms/academy/r2-player.css

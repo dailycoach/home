@@ -1,116 +1,66 @@
-# LMC Zoom 참여자 타일 비식별화 기준
+# LMC 77개 PART Zoom 참여자 타일 비식별화
 
-## 목적
+## 단일 실행 기준
 
-LMC WEEK-01~11, 77개 영상에서 강의 중 화면에 노출되는 Zoom 참여자 영역을 얼굴 단위가 아니라 **참여자 타일 전체 단위**로 가린다.
+`artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json`의 PART 로컬타임과 final-safe 좌표를 사용한다. 좌표를 다시 추론하거나 8px padding을 추가하지 않는다.
 
-이번 재작업의 기준은 `face blur`가 아니라 `tile redaction`이다.
+MASK JSON의 `objectKey`는 과거 manifest 값이므로 업로드에 사용하지 않는다. `mediaId`로 `lcms/academy/data/media-catalog.json`과 JOIN하고, 현재 카탈로그의 `objectKey`, `sourceFilename`, `week`, `part`, `status`만 실행 권위값으로 사용한다.
 
-## 고정 원칙
+## 고정 규칙
 
-1. Zoom 참여자의 얼굴만 추적하지 않는다.
-2. 참여자 타일의 얼굴·이름표·배경·프로필 이미지를 포함한 **타일 전체**를 가린다.
-3. 마스크는 흐림/모자이크가 아니라 **완전 불투명 솔리드 마스크**를 기본값으로 한다.
-4. 강사, PPT, 강의 자료, 자막, 강의 음성은 유지한다.
-5. Zoom 레이아웃이 바뀌거나 타일 위치가 움직이면 새 구간으로 분리한다.
-6. 타일 경계보다 약간 넓게 마스킹한다. 기본 안전 여백은 8px이다.
-7. 마스킹이 강사 또는 핵심 PPT 내용을 침범하면 해당 구간은 FAIL로 판정하고 좌표를 다시 잡는다.
-8. 77개 전부를 `NO_MASK` 또는 `MASK`로 명시적으로 판정해야 최종 처리할 수 있다.
-9. `REVIEW_REQUIRED`가 하나라도 남아 있으면 R2 교체 금지.
-10. 기존 R2 object key는 유지하되, 최종 교체 전 새 SHA256/size/러닝타임 QA를 기록한다.
+- 총 77개: `MASK` 75, `NO_MASK` 2
+- `RIGHT_PANEL`: `x=coordinate.xStart`, `y=0`, `w=frameWidth-x`, `h=frameHeight`
+- `FULL_FRAME`: 전체 프레임을 완전 불투명 검정으로 마스킹
+- `endIsFileEnd=true`: `gte(t,start)`를 사용해 마지막 프레임까지 마스킹
+- MASK: H.264/libx264, preset slow, CRF 18, yuv420p, 오디오 copy, Fast Start
+- NO_MASK: pristine 파일을 바이트 그대로 복사하고 입출력 SHA-256 일치 확인
+- 입력은 별도 보관된 pristine 77개 PART만 사용
+- 출력은 `<output-root>/<currentObjectKey>` mirror 구조
+- 사람 시각승인과 기술 QA가 모두 PASS하기 전 R2 업로드 금지
 
-## 권장 처리 방식
+## WEEK별 실행
 
-- 입력: R2에서 내려받은 원본/복구본 77개
-- 설정: `lcms/academy/privacy/zoom-tile-masks.json`
-- 실행: `node scripts/lmc-zoom-tile-privacy.mjs apply ...`
-- 검수: `node scripts/lmc-zoom-tile-privacy.mjs qa ...`
-- 출력: object key 구조를 그대로 유지한 새 MP4
-- 최종 산출물: `privacy-report.json`, QA 스크린샷, 새 SHA256 목록
+```powershell
+$env:LMC_FFMPEG = "C:\absolute\path\to\ffmpeg.exe"
 
-## 설정 예시
+node scripts/lmc-zoom-tile-privacy.mjs map `
+  --week 1 --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json `
+  --catalog lcms/academy/data/media-catalog.json
 
-```json
-{
-  "version": 1,
-  "maskColor": "#111111",
-  "defaultPadding": 8,
-  "media": {
-    "lmc-w01-p01": {
-      "decision": "MASK",
-      "intervals": [
-        {
-          "start": 12.4,
-          "end": 48.8,
-          "regions": [
-            { "x": 1030, "y": 22, "w": 235, "h": 145 }
-          ],
-          "note": "우측 상단 Zoom 참여자 타일 전체"
-        }
-      ]
-    },
-    "lmc-w01-p02": {
-      "decision": "NO_MASK",
-      "intervals": []
-    }
-  }
-}
+node scripts/lmc-zoom-tile-privacy.mjs preflight `
+  --week 1 --config <mask-json> --catalog <catalog-json> `
+  --input-root <pristine-week-directory>
+
+node scripts/lmc-zoom-tile-privacy.mjs apply `
+  --week 1 --config <mask-json> --catalog <catalog-json> `
+  --input-root <pristine-week-directory> --output-root <privacy-output> --dry-run
+
+node scripts/lmc-zoom-tile-privacy.mjs apply `
+  --week 1 --config <mask-json> --catalog <catalog-json> `
+  --input-root <pristine-week-directory> --output-root <privacy-output> --jobs 2
+
+node scripts/lmc-zoom-tile-privacy.mjs qa `
+  --week 1 --config <mask-json> --catalog <catalog-json> `
+  --input-root <pristine-week-directory> --output-root <privacy-output>
 ```
 
-## 좌표 원칙
+생성된 `week-NN-visual-approval.json`은 기본적으로 `approved:false`이다. 자동 스크립트가 이를 PASS로 바꾸면 안 된다. 사람이 모든 QA 프레임과 contact sheet를 확인한 후에만 `reviewer:"human"`, `approved:true`, 모든 PART의 `privacyVisualPass:true`를 기록한다.
 
-- 좌표 기준은 원본 영상 픽셀이다.
-- `x`, `y`는 타일 좌상단.
-- `w`, `h`는 타일 전체 너비/높이.
-- 이름표가 타일 하단에 걸치면 이름표 끝까지 포함한다.
-- 타일 그림자/테두리가 실제 얼굴이나 이름 일부를 남길 가능성이 있으면 8~12px 더 넓힌다.
-- 화면 가장자리를 넘어가는 경우 처리 스크립트가 프레임 범위 안으로 자동 보정한다.
+## R2 교체 게이트
 
-## 상태값
+```powershell
+node scripts/lmc-r2-overwrite-privacy.mjs `
+  --week 1 --dir <privacy-output> `
+  --technical-qa <week-01-technical-qa.json> `
+  --visual-approval <week-01-visual-approval.json> `
+  --catalog lcms/academy/data/media-catalog.json
+```
 
-- `REVIEW_REQUIRED`: 아직 사람이 확인하지 않음. 최종처리 금지.
-- `NO_MASK`: 해당 영상 전체를 확인했고 가릴 Zoom 참여자 타일이 없음.
-- `MASK`: 하나 이상의 타일 마스킹 구간이 확정됨.
+위 명령은 dry-run이다. 다음 조건이 모두 충족된 경우에만 `--execute`를 추가한다.
 
-## FFmpeg 출력 정책
+- 기술 QA 모든 PART PASS
+- 사람 시각승인 모든 PART PASS
+- 실제 출력 SHA/크기가 기술 QA와 일치
+- objectKey mirror 경로의 파일 수가 WEEK 기대 수량과 일치
 
-마스킹 영상은 픽셀 내용이 바뀌므로 영상 재인코딩이 필요하다.
-
-- video: H.264 (`libx264`)
-- preset: `slow`
-- CRF: `18`
-- pixel format: `yuv420p`
-- audio: 원본 스트림 복사 우선
-- Fast Start: `+faststart`
-- 자동재생용 불필요 메타데이터 추가 금지
-
-## QA 완료 기준
-
-각 77개 파일에 대해 다음을 모두 확인한다.
-
-- 파일 존재
-- 영상/음성 트랙 존재
-- H.264 영상
-- AAC 음성
-- 원본 대비 러닝타임 차이 0.75초 이하
-- 해상도 유지
-- Fast Start
-- SHA256 생성
-- `MASK` 영상은 각 마스크 구간의 시작/중간/끝 QA 프레임 생성
-- QA 프레임에서 참여자 얼굴·이름·프로필이 보이지 않음
-- 강사·PPT 핵심 영역 침범 없음
-- 전체 77개 중 `REVIEW_REQUIRED` 0
-
-## R2 교체 금지 조건
-
-다음 중 하나라도 해당하면 운영 R2에 덮어쓰지 않는다.
-
-- QA 실패
-- 미검수 영상 존재
-- Zoom 참여자 이름 일부 노출
-- 타일 이동 구간 누락
-- 강사/PPT 침범
-- 새 SHA256/size 미기록
-- 백업 원본 미확보
-
-최종 R2 교체는 **privacy QA가 완료된 파일만** 수행한다.
+업로드 후에는 각 PART의 HEAD 200, Content-Type, Content-Length, Accept-Ranges, Range 206을 확인하고 해당 WEEK의 첫·마지막 PART 및 고위험 PART를 signed playback으로 직접 재생한다. 원격검증이 끝난 후에만 카탈로그 SHA/size/technical metadata를 동기화한다.

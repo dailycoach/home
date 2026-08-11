@@ -8,16 +8,16 @@
     "objectKey": "lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4",
     "durationSeconds": 1220,
     "actualDurationSeconds": 1220.04,
-    "durationDeltaSeconds": 0.04,
-    "sizeBytes": 52392814,
-    "sha256": "16433b6f9319e77b6c3702ab38991980df3f31996c8c730f90f435b539b0de4e",
+    "durationDeltaSeconds": 0,
+    "sizeBytes": 42194259,
+    "sha256": "23a30f2498148398ef81ae1cffb1414c99e176dd0517c7f854d0cd7d68b3b167",
     "width": 1280,
     "height": 720,
-    "fps": "25/1",
+    "fps": 25,
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 1,
@@ -27,17 +27,17 @@
     "localFilename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
     "objectKey": "lmc/v2/week-01/LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
     "durationSeconds": 840,
-    "actualDurationSeconds": 840.08,
-    "durationDeltaSeconds": 0.08,
-    "sizeBytes": 37770869,
-    "sha256": "6b579830f99c49b86b27026b783bcd093a62b44410309f54e133c371e13767cf",
+    "actualDurationSeconds": 840.04,
+    "durationDeltaSeconds": 0.04000000000007731,
+    "sizeBytes": 29177152,
+    "sha256": "41fb32dd9ab1f1f6e05e03280ba355e04fe8af827a418171f40a58c39fff202d",
     "width": 1280,
     "height": 720,
-    "fps": "25/1",
+    "fps": 25,
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 1,
@@ -47,17 +47,17 @@
     "localFilename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
     "objectKey": "lmc/v2/week-01/LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
     "durationSeconds": 1290,
-    "actualDurationSeconds": 1290.16,
-    "durationDeltaSeconds": 0.16,
-    "sizeBytes": 60951914,
-    "sha256": "402e20159d97528c7fc2c6f5a54c005afef24a15ad999c0f777a1e3831bab2cc",
+    "actualDurationSeconds": 1290.04,
+    "durationDeltaSeconds": 0.12000000000011823,
+    "sizeBytes": 46449784,
+    "sha256": "4d663fdc10b2ffd3740a346141c673eee3ef36f3f7ff8cb6a398cfcf910a7406",
     "width": 1280,
     "height": 720,
-    "fps": "25/1",
+    "fps": 25,
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 1,
@@ -68,16 +68,16 @@
     "objectKey": "lmc/v2/week-01/LMC_WEEK01_P04_impression-formation.mp4",
     "durationSeconds": 1570,
     "actualDurationSeconds": 1570.04,
-    "durationDeltaSeconds": 0.04,
-    "sizeBytes": 66154544,
-    "sha256": "f942c42fc35fcd6499481e258fc9b3ecd7bcb7dfb9b342861db827a398554760",
+    "durationDeltaSeconds": 0,
+    "sizeBytes": 53780162,
+    "sha256": "6a83d2e12dfafead3b1249c16a7ba9ea677ad6e5db1c295aaee21646cc9af20d",
     "width": 1280,
     "height": 720,
-    "fps": "25/1",
+    "fps": 25,
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 1,
@@ -87,17 +87,17 @@
     "localFilename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
     "objectKey": "lmc/v2/week-01/LMC_WEEK01_P05_similarity-and-complementarity.mp4",
     "durationSeconds": 1434,
-    "actualDurationSeconds": 1433.652993,
-    "durationDeltaSeconds": 0.347007,
-    "sizeBytes": 65922937,
-    "sha256": "83123191f944ad3e9c62568f86984581e61503da78ab2cc90b73d5cf2906aa50",
+    "actualDurationSeconds": 1433.65,
+    "durationDeltaSeconds": 0.002992999999833046,
+    "sizeBytes": 50555509,
+    "sha256": "7538f0270d6763df21efa579bb808bcecee7c7d9f1fa720d4c4cf1b7276dfe24",
     "width": 1280,
     "height": 720,
-    "fps": "25/1",
+    "fps": 25,
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -117,7 +117,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -137,7 +137,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -157,7 +157,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -177,7 +177,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -197,7 +197,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -217,7 +217,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 2,
@@ -237,7 +237,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -257,7 +257,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -277,7 +277,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -297,7 +297,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -317,7 +317,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -337,7 +337,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -357,7 +357,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -377,7 +377,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 3,
@@ -397,7 +397,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 4,
@@ -417,7 +417,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 4,
@@ -437,7 +437,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 4,
@@ -457,7 +457,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 4,
@@ -477,7 +477,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 4,
@@ -497,7 +497,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 4,
@@ -517,7 +517,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -537,7 +537,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -557,7 +557,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -577,7 +577,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -597,7 +597,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -617,7 +617,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -637,7 +637,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -657,7 +657,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 5,
@@ -677,7 +677,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -697,7 +697,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -717,7 +717,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -737,7 +737,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -757,7 +757,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -777,7 +777,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -797,7 +797,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 6,
@@ -817,7 +817,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -837,7 +837,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -857,7 +857,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -877,7 +877,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -897,7 +897,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -917,7 +917,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -937,7 +937,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 7,
@@ -957,7 +957,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -977,7 +977,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -997,7 +997,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -1017,7 +1017,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -1037,7 +1037,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -1057,7 +1057,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -1077,7 +1077,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -1097,7 +1097,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 8,
@@ -1117,7 +1117,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1137,7 +1137,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1157,7 +1157,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1177,7 +1177,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1197,7 +1197,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1217,7 +1217,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1237,7 +1237,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 9,
@@ -1257,7 +1257,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1277,7 +1277,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1297,7 +1297,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1317,7 +1317,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1337,7 +1337,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1357,7 +1357,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1377,7 +1377,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 10,
@@ -1397,7 +1397,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1417,7 +1417,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1437,7 +1437,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1457,7 +1457,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1477,7 +1477,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1497,7 +1497,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1517,7 +1517,7 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   },
   {
     "week": 11,
@@ -1537,6 +1537,6 @@
     "videoCodec": "h264",
     "audioCodec": "aac",
     "fastStart": true,
-    "status": "pending_upload"
+    "status": "published"
   }
 ]

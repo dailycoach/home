@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-08-11T01:27:30.354Z",
+  "week": 1,
+  "dryRun": true,
+  "expectedParts": 5,
+  "results": [
+    {
+      "mediaId": "lmc-w01-p01",
+      "week": 1,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-01\\LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-01\\LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "filterGraph": "drawbox=x=1123:y=0:w=iw-1123:h=ih:color=black@1.0:t=fill:enable='gte(t,9.5)'"
+    },
+    {
+      "mediaId": "lmc-w01-p02",
+      "week": 1,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-01\\LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-01\\LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "filterGraph": "drawbox=x=1123:y=0:w=iw-1123:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w01-p03",
+      "week": 1,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-01\\LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-01\\LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "filterGraph": "drawbox=x=1123:y=0:w=iw-1123:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w01-p04",
+      "week": 1,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK01_P04_impression-formation.mp4",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P04_impression-formation.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-01\\LMC_WEEK01_P04_impression-formation.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-01\\LMC_WEEK01_P04_impression-formation.mp4",
+      "filterGraph": "drawbox=x=1123:y=0:w=iw-1123:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w01-p05",
+      "week": 1,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-01\\LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-01\\LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "filterGraph": "drawbox=x=1123:y=0:w=iw-1123:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    }
+  ]
+}

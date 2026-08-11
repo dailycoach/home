@@ -1,0 +1,2501 @@
+[
+  {
+    "mediaId": "lmc-w01-p01",
+    "week": 1,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK01_P01_self-concept-and-sources.mp4",
+    "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1220.04,
+    "intervals": [
+      {
+        "startSeconds": 9.5,
+        "endSeconds": 1220.04,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:09.50–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1123,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 157,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+        "sourceWeekStartSeconds": 9.5,
+        "sourceWeekEndSeconds": 6353.652971,
+        "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w01-p02",
+    "week": 1,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+    "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 840.08,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 840.08,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1123,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 157,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+        "sourceWeekStartSeconds": 9.5,
+        "sourceWeekEndSeconds": 6353.652971,
+        "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w01-p03",
+    "week": 1,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+    "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1290.16,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1290.16,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1123,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 157,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+        "sourceWeekStartSeconds": 9.5,
+        "sourceWeekEndSeconds": 6353.652971,
+        "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w01-p04",
+    "week": 1,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK01_P04_impression-formation.mp4",
+    "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P04_impression-formation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1570.04,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1570.04,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1123,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 157,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+        "sourceWeekStartSeconds": 9.5,
+        "sourceWeekEndSeconds": 6353.652971,
+        "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w01-p05",
+    "week": 1,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+    "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1433.652993,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1433.652993,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1123,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 157,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+        "sourceWeekStartSeconds": 9.5,
+        "sourceWeekEndSeconds": 6353.652971,
+        "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p01",
+    "week": 2,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1430.88,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1430.88,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p02",
+    "week": 2,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1184.76,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1184.76,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p03",
+    "week": 2,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1040.84,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1040.84,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p04",
+    "week": 2,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1395.68,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1395.68,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p05",
+    "week": 2,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1230.56,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1230.56,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p06",
+    "week": 2,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK02_P06_member-management-and-data-use.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P06_member-management-and-data-use.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 681.92,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 681.92,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w02-p07",
+    "week": 2,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+    "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 996.925011,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 996.925011,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7961.56517,
+        "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p01",
+    "week": 3,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK03_P01_course-introduction-and-personality-definition.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P01_course-overview-and-personality-definition.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1116.76,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1116.76,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p02",
+    "week": 3,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 905.048984,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 905.048984,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p03",
+    "week": 3,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK03_P03_trait-and-process-theories.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P03_personality-theory-framework-one.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 915.017031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 915.017031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p04",
+    "week": 3,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK03_P04_personality-perspectives-01.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P04_personality-theory-framework-two.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 904.882031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 904.882031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p05",
+    "week": 3,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK03_P05_personality-perspectives-02.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P05_personality-theory-comparison-and-application.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 909.292969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 909.292969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p06",
+    "week": 3,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK03_P06_cattell-trait-theory-and-16pf.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P06_integrated-theories-cattell-and-16pf.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1117.172031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1117.172031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p07",
+    "week": 3,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 750.522969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 750.522969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w03-p08",
+    "week": 3,
+    "part": 8,
+    "sourceFilename": "LMC_WEEK03_P08_ai-assisted-interpretation-and-platform.mp4",
+    "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P08_ai-assisted-interpretation-and-platform-use.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 616.513016,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 616.513016,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7234.57161,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w04-p01",
+    "week": 4,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+    "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 936.96,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 936.96,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 3694,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w04-p02",
+    "week": 4,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK04_P02_communication-functions-and-expression.mp4",
+    "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P02_characteristics-functions-and-expression.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1090.56,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1090.56,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 3694,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w04-p03",
+    "week": 4,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK04_P03_ten-types-and-assessment-criteria.mp4",
+    "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P03_ten-styles-framework-and-criteria.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 839.68,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 839.68,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 3694,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w04-p04",
+    "week": 4,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK04_P04_type-characteristics-interpretation.mp4",
+    "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P04_style-characteristics-and-interpretation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 808.96,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 808.96,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 3694,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w04-p05",
+    "week": 4,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK04_P05_case-application-and-summary.mp4",
+    "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P05_case-application-and-interpretation-review.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 675.84,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 17.84,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00–00:00:17.84",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 3694,
+        "note": "초반 화면공유 우측 패널"
+      },
+      {
+        "startSeconds": 666.34,
+        "endSeconds": 668.84,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:11:06.34–00:11:08.84",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 4342.5,
+        "sourceWeekEndSeconds": 4345,
+        "note": "화면공유 재개 직후 패널 폭 전환 구간"
+      },
+      {
+        "startSeconds": 668.84,
+        "endSeconds": 675.84,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:11:08.84–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1005,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 275,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1005–1279, y=0–719",
+        "sourceWeekStartSeconds": 4345,
+        "sourceWeekEndSeconds": 4378.5,
+        "note": "브라우저 화면 전환 중 확대된 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w04-p06",
+    "week": 4,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK04_P06_report-and-platform-use.mp4",
+    "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P06_report-and-platform-use.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 428.338005,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 26.5,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00–00:00:26.50",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1005,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 275,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1005–1279, y=0–719",
+        "sourceWeekStartSeconds": 4345,
+        "sourceWeekEndSeconds": 4378.5,
+        "note": "브라우저 화면 전환 중 확대된 우측 참여자 패널"
+      },
+      {
+        "startSeconds": 26.5,
+        "endSeconds": 428.338005,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:26.50–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 4378.5,
+        "sourceWeekEndSeconds": 4780.338503,
+        "note": "패널 폭 안정화 이후 종료까지"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w05-p01",
+    "week": 5,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK05_P01_stress-definition-and-core-characteristics.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P01_stress-definition-and-characteristics(1).mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1279.48,
+    "intervals": [
+      {
+        "startSeconds": 83.5,
+        "endSeconds": 1279.48,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:01:23.50–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1027,
+          "xEnd": 1211,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 185,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+        "sourceWeekStartSeconds": 83.5,
+        "sourceWeekEndSeconds": 4412.5,
+        "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w05-p02",
+    "week": 5,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK05_P02_positive-negative-stress-and-theories.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P02_stress-theories-and-cognitive-appraisal(1).mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 864.082031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 864.082031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1027,
+          "xEnd": 1211,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 185,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+        "sourceWeekStartSeconds": 83.5,
+        "sourceWeekEndSeconds": 4412.5,
+        "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w05-p03",
+    "week": 5,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK05_P03_rs-stress-assessment-causes.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P03_stress-causes-and-assessment(1).mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 734.972031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 734.972031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1027,
+          "xEnd": 1211,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 185,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+        "sourceWeekStartSeconds": 83.5,
+        "sourceWeekEndSeconds": 4412.5,
+        "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w05-p04",
+    "week": 5,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK05_P04_stress-symptoms-and-physiological-response.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P04_stress-symptoms-and-physiological-response(1).mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1018.002969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1018.002969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1027,
+          "xEnd": 1211,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 185,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+        "sourceWeekStartSeconds": 83.5,
+        "sourceWeekEndSeconds": 4412.5,
+        "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w05-p05",
+    "week": 5,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK05_P05_coping-types-and-management-strategies.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P05_coping-styles-and-management-strategies(1).mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 516.367031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 515.962969,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00–00:08:35.96",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1027,
+          "xEnd": 1211,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 185,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+        "sourceWeekStartSeconds": 83.5,
+        "sourceWeekEndSeconds": 4412.5,
+        "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w05-p06",
+    "week": 5,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK05_P06_stress-case-application-01.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P06_case-sharing-and-application-one(1).mp4",
+    "status": "published",
+    "decision": "NO_MASK",
+    "durationSeconds": 946.015,
+    "intervals": []
+  },
+  {
+    "mediaId": "lmc-w05-p07",
+    "week": 5,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK05_P07_stress-case-application-02.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P07_case-sharing-and-application-two(1).mp4",
+    "status": "published",
+    "decision": "NO_MASK",
+    "durationSeconds": 1099.92,
+    "intervals": []
+  },
+  {
+    "mediaId": "lmc-w05-p08",
+    "week": 5,
+    "part": 8,
+    "sourceFilename": "LMC_WEEK05_P08_case-integration-and-result-review.mp4",
+    "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P08_integration-and-result-review(1).mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 812.419773,
+    "intervals": [
+      {
+        "startSeconds": 730.160938,
+        "endSeconds": 812.419773,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:12:10.16–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1008,
+          "xEnd": 1211,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 204,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1008–1211, y=0–719",
+        "sourceWeekStartSeconds": 7189,
+        "sourceWeekEndSeconds": 7270.65542,
+        "note": "종료부 화면공유 재개 후 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p01",
+    "week": 6,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK06_P01_course-introduction-and-learning-style.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P01_course-overview-and-learning-style-basics.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1119.44,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1119.44,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p02",
+    "week": 6,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK06_P02_cognitive-affective-environmental-learning-style.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P02_multidimensional-learning-style-definition.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1168.257969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1168.257969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p03",
+    "week": 6,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK06_P03_five-affective-learning-factors.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P03_five-affective-factors-for-learning.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 721.446016,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 721.446016,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p04",
+    "week": 6,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK06_P04_jungian-learning-personality.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P04_jungian-psychology-and-learning-personality.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 667.775,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 667.775,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p05",
+    "week": 6,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK06_P05_learner-types-and-brain-functions.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P05_learner-types-and-brain-function.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 863.845,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 863.845,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p06",
+    "week": 6,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK06_P06_learning-style-report-practice.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P06_learning-style-report-interpretation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1077.406016,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1077.406016,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w06-p07",
+    "week": 6,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK06_P07_learning-emotion-and-platform-use.mp4",
+    "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P07_learning-emotion-results-and-platform.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1097.978776,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1097.978776,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6715.605624,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p01",
+    "week": 7,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1116.04,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1116.04,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p02",
+    "week": 7,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 986.967969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 986.967969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p03",
+    "week": 7,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1198.017031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1198.017031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p04",
+    "week": 7,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 908.82,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 908.82,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p05",
+    "week": 7,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1116.083984,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1116.083984,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p06",
+    "week": 7,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK07_P06_anger-causes-functions-and-effects.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P06_anger-causes-functions-and-impact.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 977.046016,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 977.046016,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w07-p07",
+    "week": 7,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+    "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1009.348209,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1009.348209,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1085,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 195,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 7311.777959,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p01",
+    "week": 8,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P01_depression-assessment-and-classification.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1106.08,
+    "intervals": [
+      {
+        "startSeconds": 93,
+        "endSeconds": 1106.08,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:01:33.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1132,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 148,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+        "sourceWeekStartSeconds": 93,
+        "sourceWeekEndSeconds": 3802.5,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p02",
+    "week": 8,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P02_mood-curve-and-depressive-manic-episodes.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 895.13,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 895.13,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1132,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 148,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+        "sourceWeekStartSeconds": 93,
+        "sourceWeekEndSeconds": 3802.5,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p03",
+    "week": 8,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P03_major-depression-diagnostic-criteria.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 569.852969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 569.852969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1132,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 148,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+        "sourceWeekStartSeconds": 93,
+        "sourceWeekEndSeconds": 3802.5,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p04",
+    "week": 8,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 931.122031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 931.122031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1132,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 148,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+        "sourceWeekStartSeconds": 93,
+        "sourceWeekEndSeconds": 3802.5,
+        "note": "초반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p05",
+    "week": 8,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P05_symptoms-treatment-and-result-structure.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 591.375,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 300.315,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00–00:05:00.32",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1132,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 148,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+        "sourceWeekStartSeconds": 93,
+        "sourceWeekEndSeconds": 3802.5,
+        "note": "초반 화면공유 우측 패널"
+      },
+      {
+        "startSeconds": 379.815,
+        "endSeconds": 385.315,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:06:19.82–00:06:25.32",
+        "maskType": "FULL_FRAME",
+        "coordinate": {
+          "xStart": 0,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 1280,
+          "height": 720
+        },
+        "coordinateText": "FULL_FRAME x=0–1279, y=0–719",
+        "sourceWeekStartSeconds": 3882,
+        "sourceWeekEndSeconds": 3887.5,
+        "note": "참여자 Y 프로필이 전체화면으로 노출되는 구간 — 기존 후보 좌표의 중대 누락 보정"
+      },
+      {
+        "startSeconds": 385.315,
+        "endSeconds": 591.375,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:06:25.32–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1083,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 197,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+        "sourceWeekStartSeconds": 3887.5,
+        "sourceWeekEndSeconds": 6352.004354,
+        "note": "후반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p06",
+    "week": 8,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P06_six-symptom-scales-overview.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1008.102031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1008.102031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1083,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 197,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+        "sourceWeekStartSeconds": 3887.5,
+        "sourceWeekEndSeconds": 6352.004354,
+        "note": "후반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p07",
+    "week": 8,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK08_P07_symptom-scale-case-application.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P07_scale-cases-and-integrated-interpretation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 945.301016,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 945.301016,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1083,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 197,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+        "sourceWeekStartSeconds": 3887.5,
+        "sourceWeekEndSeconds": 6352.004354,
+        "note": "후반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w08-p08",
+    "week": 8,
+    "part": 8,
+    "sourceFilename": "LMC_WEEK08_P08_report-and-assessment-platform.mp4",
+    "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P08_result-report-and-platform-use.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 305.690703,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 305.690703,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1083,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 197,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+        "sourceWeekStartSeconds": 3887.5,
+        "sourceWeekEndSeconds": 6352.004354,
+        "note": "후반 화면공유 우측 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p01",
+    "week": 9,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1080.12,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 47.5,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00–00:00:47.50",
+        "maskType": "FULL_FRAME",
+        "coordinate": {
+          "xStart": 0,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 1280,
+          "height": 720
+        },
+        "coordinateText": "FULL_FRAME x=0–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 47.5,
+        "note": "오프닝 Zoom 갤러리뷰 전체 참여자 노출 — 기존 후보 좌표의 중대 누락 보정"
+      },
+      {
+        "startSeconds": 47.5,
+        "endSeconds": 1080.12,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:47.50–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1189,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 91,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
+        "sourceWeekStartSeconds": 47.5,
+        "sourceWeekEndSeconds": 3722,
+        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p02",
+    "week": 9,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1080.09,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1080.09,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1189,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 91,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
+        "sourceWeekStartSeconds": 47.5,
+        "sourceWeekEndSeconds": 3722,
+        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p03",
+    "week": 9,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 833.042969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 833.042969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1189,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 91,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
+        "sourceWeekStartSeconds": 47.5,
+        "sourceWeekEndSeconds": 3722,
+        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p04",
+    "week": 9,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 818.577031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 728.747031,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00–00:12:08.75",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1189,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 91,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
+        "sourceWeekStartSeconds": 47.5,
+        "sourceWeekEndSeconds": 3722,
+        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+      },
+      {
+        "startSeconds": 728.747031,
+        "endSeconds": 788.747031,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:12:08.75–00:13:08.75",
+        "maskType": "FULL_FRAME",
+        "coordinate": {
+          "xStart": 0,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 1280,
+          "height": 720
+        },
+        "coordinateText": "FULL_FRAME x=0–1279, y=0–719",
+        "sourceWeekStartSeconds": 3722,
+        "sourceWeekEndSeconds": 3782,
+        "note": "중간 Zoom 갤러리뷰 전체 참여자 노출 — 기존 14초 overlap 후보를 실제 갤러리 구간으로 교정"
+      },
+      {
+        "startSeconds": 788.747031,
+        "endSeconds": 818.577031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:13:08.75–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1152,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 128,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "sourceWeekStartSeconds": 3782,
+        "sourceWeekEndSeconds": 7496.376599,
+        "note": "후반 화면공유 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p05",
+    "week": 9,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1204.257031,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1204.257031,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1152,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 128,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "sourceWeekStartSeconds": 3782,
+        "sourceWeekEndSeconds": 7496.376599,
+        "note": "후반 화면공유 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p06",
+    "week": 9,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1198.012969,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1198.012969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1152,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 128,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "sourceWeekStartSeconds": 3782,
+        "sourceWeekEndSeconds": 7496.376599,
+        "note": "후반 화면공유 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w09-p07",
+    "week": 9,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+    "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1282.832834,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1282.832834,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1152,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 128,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "sourceWeekStartSeconds": 3782,
+        "sourceWeekEndSeconds": 7496.376599,
+        "note": "후반 화면공유 우측 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p01",
+    "week": 10,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK10_P01_couple-assessment-profile.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P01_report-profile-overview.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1112.24,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1112.24,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p02",
+    "week": 10,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK10_P02_case-strengths-and-relationship-resources.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P02_case-interpretation-strength-factors.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1086.96,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1086.96,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p03",
+    "week": 10,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK10_P03_case-low-factors-and-adjustment.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P03_case-interpretation-adjustment-factors.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1120.2,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1120.2,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p04",
+    "week": 10,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1158.56,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1158.56,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p05",
+    "week": 10,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 706.72,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 706.72,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p06",
+    "week": 10,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK10_P06_thirteen-factors-and-criteria.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P06_thirteen-factors-and-interpretation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 784.6,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 784.6,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w10-p07",
+    "week": 10,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK10_P07_report-interpretation-and-platform.mp4",
+    "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P07_result-report-and-platform-use.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 936.729002,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 936.729002,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1059,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 221,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6906.009252,
+        "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p01",
+    "week": 11,
+    "part": 1,
+    "sourceFilename": "LMC_WEEK11_P01_development-profile-and-factors.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P01_result-profile-and-factor-overview.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1019.64,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1019.64,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p02",
+    "week": 11,
+    "part": 2,
+    "sourceFilename": "LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P02_child-adolescent-factors-self-and-regulation.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 1015.2,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 1015.2,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p03",
+    "week": 11,
+    "part": 3,
+    "sourceFilename": "LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P03_child-adolescent-factors-learning-identity-independence.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 849.4,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 849.4,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p04",
+    "week": 11,
+    "part": 4,
+    "sourceFilename": "LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P04_adult-factors-and-assessment-framework.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 813.8,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 813.8,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p05",
+    "week": 11,
+    "part": 5,
+    "sourceFilename": "LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P05_child-adolescent-case-application.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 861.2,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 861.2,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p06",
+    "week": 11,
+    "part": 6,
+    "sourceFilename": "LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P06_child-review-and-adult-factor-transition.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 825.52,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 825.52,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  },
+  {
+    "mediaId": "lmc-w11-p07",
+    "week": 11,
+    "part": 7,
+    "sourceFilename": "LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
+    "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4",
+    "status": "published",
+    "decision": "MASK",
+    "durationSeconds": 896.933991,
+    "intervals": [
+      {
+        "startSeconds": 0,
+        "endSeconds": 896.933991,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00–END",
+        "maskType": "RIGHT_PANEL",
+        "coordinate": {
+          "xStart": 1080,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 719,
+          "width": 200,
+          "height": 720
+        },
+        "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 6281.694331,
+        "note": "전 구간 우측 Zoom 참여자 패널"
+      }
+    ]
+  }
+]
