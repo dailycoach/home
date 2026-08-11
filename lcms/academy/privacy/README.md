@@ -2,7 +2,7 @@
 
 ## 단일 실행 기준
 
-`artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json`의 PART 로컬타임과 final-safe 좌표를 사용한다. 좌표를 다시 추론하거나 8px padding을 추가하지 않는다.
+`artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.2_WEEK09_INSTRUCTOR_PRESERVED.json`의 PART 로컬타임과 final-safe 좌표를 사용한다. 좌표를 다시 추론하거나 8px padding을 추가하지 않는다. 이 설정은 실제 WEEK-09 레이아웃을 구간별로 측정해 수강생 타일만 가리고 강사 타일은 보존한 승인본이다.
 
 MASK JSON의 `objectKey`는 과거 manifest 값이므로 업로드에 사용하지 않는다. `mediaId`로 `lcms/academy/data/media-catalog.json`과 JOIN하고, 현재 카탈로그의 `objectKey`, `sourceFilename`, `week`, `part`, `status`만 실행 권위값으로 사용한다.
 
@@ -64,3 +64,20 @@ node scripts/lmc-r2-overwrite-privacy.mjs `
 - objectKey mirror 경로의 파일 수가 WEEK 기대 수량과 일치
 
 업로드 후에는 각 PART의 HEAD 200, Content-Type, Content-Length, Accept-Ranges, Range 206을 확인하고 해당 WEEK의 첫·마지막 PART 및 고위험 PART를 signed playback으로 직접 재생한다. 원격검증이 끝난 후에만 카탈로그 SHA/size/technical metadata를 동기화한다.
+
+## 전체 77개 최종화
+
+WEEK-01~11이 모두 완료되면 주차별 source preflight, 기술 QA, 사람 시각승인, R2 교체, 원격 무결성·HEAD·Range·signed playback, 카탈로그 동기화 보고서를 다시 교차 검증한다.
+
+```powershell
+node scripts/lmc-finalize-privacy-rework.mjs
+node scripts/lmc-finalize-privacy-rework.mjs --check
+```
+
+첫 명령은 `artifacts/lmc-privacy-rework/`에 최종 산출물 5종을 생성하고, 두 번째 명령은 산출물이 현재 11개 WEEK 보고서 및 카탈로그와 정확히 일치하는지 검사한다.
+
+- `LMC_77_PRIVACY_SHA256SUMS.txt`
+- `LMC_77_PRIVACY_MANIFEST.json`
+- `LMC_77_PRIVACY_QA_REPORT.json`
+- `LMC_77_R2_OVERWRITE_REPORT.json`
+- `LMC_77_REMOTE_PLAYBACK_QA.json`
