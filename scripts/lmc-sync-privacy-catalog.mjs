@@ -90,7 +90,14 @@ const nextMedia = media.map((item) => {
       fps: qa.fps,
       videoCodec: qa.videoCodec,
       audioCodec: qa.audioCodec,
-      fastStart: qa.fastStart
+      fastStart: qa.fastStart,
+      ...(qa.fastStartWaiverApplied ? {
+        fastStartWaiver: {
+          type: 'NO_MASK_PRISTINE_BYTE_PRESERVATION',
+          authorized: true,
+          waivedChecks: qa.waivedChecks
+        }
+      } : {})
     }
   };
 });
@@ -193,7 +200,17 @@ function validateTechnicalQa(qa, number, expected, rows) {
     assert(Number.isInteger(item.sizeBytes) && item.sizeBytes > 0, `${item.mediaId}: invalid sizeBytes`);
     assertSha(item.sha256, `${item.mediaId}: invalid SHA-256`);
     assert(item.videoCodec === 'h264' && item.audioCodec === 'aac', `${item.mediaId}: codec mismatch`);
-    assert(item.fastStart === true, `${item.mediaId}: Fast Start failed`);
+    const approvedNoMaskFastStartWaiver = qa.noMaskNonFastStartWaiverAuthorized === true
+      && item.decision === 'NO_MASK'
+      && item.fastStart === false
+      && item.fastStartWaiverApplied === true
+      && Array.isArray(item.waivedChecks)
+      && item.waivedChecks.length === 1
+      && item.waivedChecks[0] === 'fastStart'
+      && item.checks?.fastStart === false
+      && item.checks?.noMaskSha === true
+      && item.inputSha256 === item.sha256;
+    assert(item.fastStart === true || approvedNoMaskFastStartWaiver, `${item.mediaId}: Fast Start failed without the approved NO_MASK byte-preservation waiver`);
     assert(Math.abs(item.actualDurationSeconds - item.durationBefore) <= 2, `${item.mediaId}: duration tolerance exceeded`);
   }
 }

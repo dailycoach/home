@@ -256,12 +256,22 @@ async function runContractTests(mapped, sourceConfigPath) {
     const hashes = await copyNoMask(input, output, 'test-no-mask');
     if (hashes.inputSha256 !== hashes.outputSha256) throw new Error('Contract test: NO_MASK byte preservation failed');
   } finally { await fs.rm(temp, { recursive: true, force: true }); }
+  if (technicalChecksPass({ fastStart: false, noMaskSha: true }, [])) {
+    throw new Error('Contract test: non-Fast-Start output passed without an explicit waiver');
+  }
+  if (!technicalChecksPass({ fastStart: false, noMaskSha: true }, ['fastStart'])) {
+    throw new Error('Contract test: explicit Fast Start waiver was not honored');
+  }
+  if (technicalChecksPass({ fastStart: true, noMaskSha: false }, ['fastStart'])) {
+    throw new Error('Contract test: Fast Start waiver incorrectly bypassed NO_MASK SHA identity');
+  }
   console.log('LMC privacy contract tests passed: 77 JOIN, current objectKey, counts, no-padding RIGHT_PANEL, FULL_FRAME, tail, path traversal.');
 }
 
 async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
   const inputRoot = requirePath(options['input-root'], '--input-root');
   const outputRoot = requirePath(options['output-root'], '--output-root');
+  const allowNoMaskNonFastStart = Boolean(options['allow-no-mask-non-faststart']);
   assertBinary();
   const weekRoot = path.join(root, `week-${pad(week)}`);
   const qaFramesRoot = path.join(weekRoot, 'qa-frames');
@@ -281,6 +291,7 @@ async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
       const sha256 = await sha256File(output);
       const fastStart = await isFastStart(output);
       const noMaskShaPass = row.decision !== 'NO_MASK' || inputSha256 === sha256;
+      const fastStartWaiverApplied = row.decision === 'NO_MASK' && !fastStart && allowNoMaskNonFastStart;
       const checks = {
         size: (await fs.stat(output)).size > 0,
         videoStream: after.videoCodec !== null,
@@ -301,8 +312,31 @@ async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
       const partContact = path.join(qaFramesRoot, row.mediaId, 'part-contact-sheet.jpg');
       await buildContactSheet(screenshots.map((relative) => ({ file: path.join(qaFramesRoot, ...relative.split('/')) })), partContact, 5);
       contactImages.push({ mediaId: row.mediaId, file: partContact });
-      const pass = Object.values(checks).every(Boolean);
-      result = { ...rowIdentity(row), pass, checks, durationBefore: before.durationSeconds, actualDurationSeconds: after.durationSeconds, durationDeltaSeconds, width: after.width, height: after.height, fps: after.fps, videoCodec: after.videoCodec, audioCodec: after.audioCodec, fastStart, sizeBytes: (await fs.stat(output)).size, inputSha256, sha256, screenshots };
+      const waivedChecks = fastStartWaiverApplied ? ['fastStart'] : [];
+      const pass = technicalChecksPass(checks, waivedChecks);
+      result = {
+        ...rowIdentity(row),
+        pass,
+        checks,
+        waivedChecks,
+        fastStartWaiverApplied,
+        waiverReason: fastStartWaiverApplied
+          ? 'Human approved pristine byte preservation for this NO_MASK source; remuxing would change the required input/output SHA identity.'
+          : null,
+        durationBefore: before.durationSeconds,
+        actualDurationSeconds: after.durationSeconds,
+        durationDeltaSeconds,
+        width: after.width,
+        height: after.height,
+        fps: after.fps,
+        videoCodec: after.videoCodec,
+        audioCodec: after.audioCodec,
+        fastStart,
+        sizeBytes: (await fs.stat(output)).size,
+        inputSha256,
+        sha256,
+        screenshots
+      };
     } catch (error) {
       result = { ...rowIdentity(row), pass: false, error: errorMessage(error) };
     }
@@ -311,7 +345,16 @@ async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
   }
   const pass = results.length === rows.length && results.every((row) => row.pass);
   const report = path.resolve(options.report || path.join(weekRoot, `week-${pad(week)}-technical-qa.json`));
-  await writeJson(report, { generatedAt: new Date().toISOString(), week, expectedParts: EXPECTED_BY_WEEK.get(week), pass, technicalPassCount: results.filter((row) => row.pass).length, results });
+  await writeJson(report, {
+    generatedAt: new Date().toISOString(),
+    week,
+    expectedParts: EXPECTED_BY_WEEK.get(week),
+    pass,
+    technicalPassCount: results.filter((row) => row.pass).length,
+    noMaskNonFastStartWaiverAuthorized: allowNoMaskNonFastStart,
+    waivedTechnicalCheckCount: results.reduce((total, row) => total + (row.waivedChecks?.length || 0), 0),
+    results
+  });
   if (contactImages.length === rows.length) await buildWeekContactSheet(contactImages, path.join(weekRoot, `week-${pad(week)}-contact-sheet.jpg`));
   await writeApprovalTemplate(week, rows, path.join(weekRoot, `week-${pad(week)}-visual-approval.json`));
   console.log(`Technical QA: ${report}`);
@@ -535,6 +578,11 @@ function rowIdentity(row) {
   return { mediaId: row.mediaId, week: row.week, part: row.part, sourceFilename: row.sourceFilename, currentObjectKey: row.currentObjectKey, decision: row.decision };
 }
 
+function technicalChecksPass(checks, waivedChecks) {
+  const waived = new Set(waivedChecks);
+  return Object.entries(checks).every(([check, value]) => value || waived.has(check));
+}
+
 function requireWeek(value) {
   const week = Number(value);
   if (!Number.isInteger(week) || !EXPECTED_BY_WEEK.has(week)) throw new Error('--week must be an integer from 1 through 11');
@@ -573,5 +621,5 @@ function pad(value) { return String(value).padStart(2, '0'); }
 function errorMessage(error) { return error instanceof Error ? error.message : String(error); }
 
 function printHelp() {
-  console.log(`LMC 77-part Zoom tile privacy pipeline\n\nCommands:\n  contract-test --week N --config <json> --catalog <json>\n  map       --week N --config <json> --catalog <json> --report <execution-map.json>\n  preflight --week N --config <json> --catalog <json> --input-root <pristine> --report <json>\n  apply     --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --report <json> [--dry-run] [--jobs 1..4] [--resume]\n  qa        --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --artifact-root <dir> --report <json>\n\nRules:\n  - MASK JSON objectKey is ignored; current catalog objectKey is authoritative.\n  - RIGHT_PANEL uses final coordinate.xStart with zero additional padding.\n  - FULL_FRAME covers the full frame and endIsFileEnd uses gte(t,start).\n  - R2 replacement remains blocked until a human visual approval is supplied.\n`);
+  console.log(`LMC 77-part Zoom tile privacy pipeline\n\nCommands:\n  contract-test --week N --config <json> --catalog <json>\n  map       --week N --config <json> --catalog <json> --report <execution-map.json>\n  preflight --week N --config <json> --catalog <json> --input-root <pristine> --report <json>\n  apply     --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --report <json> [--dry-run] [--jobs 1..4] [--resume]\n  qa        --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --artifact-root <dir> --report <json> [--allow-no-mask-non-faststart]\n\nRules:\n  - MASK JSON objectKey is ignored; current catalog objectKey is authoritative.\n  - RIGHT_PANEL uses final coordinate.xStart with zero additional padding.\n  - FULL_FRAME covers the full frame and endIsFileEnd uses gte(t,start).\n  - A non-Fast-Start NO_MASK source can pass only with the explicit waiver flag; the report keeps fastStart=false and records the waiver.\n  - R2 replacement remains blocked until a human visual approval is supplied.\n`);
 }
