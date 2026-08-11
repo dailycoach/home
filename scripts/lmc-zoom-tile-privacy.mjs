@@ -9,9 +9,10 @@ const EXPECTED_BY_WEEK = new Map([[1, 5], [2, 7], [3, 8], [4, 6], [5, 8], [6, 7]
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(SCRIPT_DIR, '..');
 const DEFAULT_CATALOG = path.join(REPO_ROOT, 'lcms/academy/data/media-catalog.json');
-const DEFAULT_CONFIG = path.join(REPO_ROOT, 'artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json');
+const DEFAULT_CONFIG = path.join(REPO_ROOT, 'artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.2_WEEK09_INSTRUCTOR_PRESERVED.json');
 const DEFAULT_ARTIFACT_ROOT = path.join(REPO_ROOT, 'artifacts/lmc-privacy-rework');
 const FFMPEG = process.env.LMC_FFMPEG || 'ffmpeg';
+const MAX_CHILD_OUTPUT_BYTES = 64 * 1024 * 1024;
 
 const [command = 'help', ...rest] = process.argv.slice(2);
 const args = parseArgs(rest);
@@ -106,7 +107,7 @@ function validateDecision(row) {
     if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start) {
       throw new Error(`${row.mediaId}: invalid local interval ${interval.startSeconds}-${interval.endSeconds}`);
     }
-    if (!['RIGHT_PANEL', 'FULL_FRAME'].includes(interval.maskType)) {
+    if (!['RIGHT_PANEL', 'PANEL_BOX', 'FULL_FRAME'].includes(interval.maskType)) {
       throw new Error(`${row.mediaId}: invalid maskType ${interval.maskType}`);
     }
     if (!interval.coordinate || !Number.isFinite(Number(interval.coordinate.xStart))) {
@@ -164,7 +165,15 @@ function coordinatesMatchFrame(row, metadata) {
       return Number(coordinate.xStart) === 0 && Number(coordinate.yStart) === 0 && Number(coordinate.xEnd) === metadata.width - 1 && Number(coordinate.yEnd) === metadata.height - 1 && Number(coordinate.width) === metadata.width && Number(coordinate.height) === metadata.height;
     }
     const x = Number(coordinate.xStart);
-    return Number.isInteger(x) && x >= 0 && x < metadata.width && Number(coordinate.xEnd) === metadata.width - 1 && Number(coordinate.yStart) === 0 && Number(coordinate.yEnd) === metadata.height - 1 && Number(coordinate.width) === metadata.width - x && Number(coordinate.height) === metadata.height;
+    if (interval.maskType === 'RIGHT_PANEL') {
+      return Number.isInteger(x) && x >= 0 && x < metadata.width && Number(coordinate.xEnd) === metadata.width - 1 && Number(coordinate.yStart) === 0 && Number(coordinate.yEnd) === metadata.height - 1 && Number(coordinate.width) === metadata.width - x && Number(coordinate.height) === metadata.height;
+    }
+    const y = Number(coordinate.yStart);
+    const xEnd = Number(coordinate.xEnd);
+    const yEnd = Number(coordinate.yEnd);
+    return Number.isInteger(x) && Number.isInteger(y) && Number.isInteger(xEnd) && Number.isInteger(yEnd)
+      && x >= 0 && y >= 0 && xEnd >= x && yEnd >= y && xEnd < metadata.width && yEnd < metadata.height
+      && Number(coordinate.width) === xEnd - x + 1 && Number(coordinate.height) === yEnd - y + 1;
   });
 }
 
@@ -223,6 +232,16 @@ function buildFilterGraph(row, metadata) {
     if (interval.maskType === 'FULL_FRAME') {
       return `drawbox=x=0:y=0:w=iw:h=ih:color=black@1.0:t=fill:enable='${enable}'`;
     }
+    if (interval.maskType === 'PANEL_BOX') {
+      const x = Number(interval.coordinate.xStart);
+      const y = Number(interval.coordinate.yStart);
+      const width = Number(interval.coordinate.width);
+      const height = Number(interval.coordinate.height);
+      if (![x, y, width, height].every(Number.isInteger) || x < 0 || y < 0 || width < 1 || height < 1 || x + width > metadata.width || y + height > metadata.height) {
+        throw new Error(`${row.mediaId}: PANEL_BOX is outside ${metadata.width}x${metadata.height} frame`);
+      }
+      return `drawbox=x=${x}:y=${y}:w=${width}:h=${height}:color=black@1.0:t=fill:enable='${enable}'`;
+    }
     const x = Number(interval.coordinate.xStart);
     if (!Number.isInteger(x) || x < 0 || x >= metadata.width) throw new Error(`${row.mediaId}: xStart ${x} is outside ${metadata.width}px frame`);
     return `drawbox=x=${x}:y=0:w=iw-${x}:h=ih:color=black@1.0:t=fill:enable='${enable}'`;
@@ -242,6 +261,9 @@ async function runContractTests(mapped, sourceConfigPath) {
   const right = { mediaId: 'test-right', intervals: [{ startSeconds: 1, endSeconds: 9, endIsFileEnd: false, maskType: 'RIGHT_PANEL', coordinate: { xStart: 1123 } }] };
   const rightGraph = buildFilterGraph(right, { width: 1280, height: 720 });
   if (rightGraph !== "drawbox=x=1123:y=0:w=iw-1123:h=ih:color=black@1.0:t=fill:enable='between(t,1,9)'") throw new Error(`Contract test: RIGHT_PANEL graph changed: ${rightGraph}`);
+  const panelBox = { mediaId: 'test-panel-box', intervals: [{ startSeconds: 2, endSeconds: 10, endIsFileEnd: true, maskType: 'PANEL_BOX', coordinate: { xStart: 856, yStart: 0, xEnd: 1011, yEnd: 719, width: 156, height: 720 } }] };
+  const panelBoxGraph = buildFilterGraph(panelBox, { width: 1280, height: 720 });
+  if (panelBoxGraph !== "drawbox=x=856:y=0:w=156:h=720:color=black@1.0:t=fill:enable='gte(t,2)'") throw new Error(`Contract test: PANEL_BOX graph changed: ${panelBoxGraph}`);
   const full = { mediaId: 'test-full', intervals: [{ startSeconds: 5.25, endSeconds: 10, endIsFileEnd: true, maskType: 'FULL_FRAME', coordinate: { xStart: 0 } }] };
   const fullGraph = buildFilterGraph(full, { width: 1280, height: 720 });
   if (!fullGraph.includes('x=0:y=0:w=iw:h=ih') || !fullGraph.includes("gte(t,5.25)")) throw new Error(`Contract test: FULL_FRAME/tail graph changed: ${fullGraph}`);
@@ -265,7 +287,7 @@ async function runContractTests(mapped, sourceConfigPath) {
   if (technicalChecksPass({ fastStart: true, noMaskSha: false }, ['fastStart'])) {
     throw new Error('Contract test: Fast Start waiver incorrectly bypassed NO_MASK SHA identity');
   }
-  console.log('LMC privacy contract tests passed: 77 JOIN, current objectKey, counts, no-padding RIGHT_PANEL, FULL_FRAME, tail, path traversal.');
+  console.log('LMC privacy contract tests passed: 77 JOIN, current objectKey, counts, no-padding RIGHT_PANEL, bounded PANEL_BOX, FULL_FRAME, tail, path traversal.');
 }
 
 async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
@@ -290,6 +312,7 @@ async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
       const inputSha256 = await sha256File(input);
       const sha256 = await sha256File(output);
       const fastStart = await isFastStart(output);
+      const decode = canDecodeFully(output);
       const noMaskShaPass = row.decision !== 'NO_MASK' || inputSha256 === sha256;
       const fastStartWaiverApplied = row.decision === 'NO_MASK' && !fastStart && allowNoMaskNonFastStart;
       const checks = {
@@ -304,6 +327,7 @@ async function qaWeek({ week, rows, args: options, artifactRoot: root }) {
         durationRecommended: durationDeltaSeconds <= 0.75,
         durationAbsolute: durationDeltaSeconds <= 2,
         fastStart,
+        decode,
         noMaskSha: noMaskShaPass
       };
       const screenshots = row.decision === 'MASK'
@@ -429,7 +453,7 @@ async function writeApprovalTemplate(week, rows, file) {
 }
 
 function probe(file) {
-  const result = spawnSync(FFMPEG, ['-hide_banner', '-i', file], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const result = spawnSync(FFMPEG, ['-hide_banner', '-i', file], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: MAX_CHILD_OUTPUT_BYTES });
   if (result.error) throw result.error;
   const text = `${result.stdout || ''}\n${result.stderr || ''}`;
   const durationMatch = text.match(/Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)/);
@@ -520,10 +544,15 @@ function safeJoin(root, ...segments) {
 }
 
 function runFfmpeg(argv) {
-  const result = spawnSync(FFMPEG, argv, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const result = spawnSync(FFMPEG, argv, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: MAX_CHILD_OUTPUT_BYTES });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(`FFmpeg failed (${result.status}): ${result.stderr || result.stdout}`.trim());
   return result;
+}
+
+function canDecodeFully(file) {
+  const result = spawnSync(FFMPEG, ['-hide_banner', '-loglevel', 'error', '-xerror', '-i', file, '-map', '0:v:0', '-f', 'null', '-'], { stdio: 'ignore' });
+  return !result.error && result.status === 0;
 }
 
 function runFfmpegAsync(argv) {
@@ -621,5 +650,5 @@ function pad(value) { return String(value).padStart(2, '0'); }
 function errorMessage(error) { return error instanceof Error ? error.message : String(error); }
 
 function printHelp() {
-  console.log(`LMC 77-part Zoom tile privacy pipeline\n\nCommands:\n  contract-test --week N --config <json> --catalog <json>\n  map       --week N --config <json> --catalog <json> --report <execution-map.json>\n  preflight --week N --config <json> --catalog <json> --input-root <pristine> --report <json>\n  apply     --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --report <json> [--dry-run] [--jobs 1..4] [--resume]\n  qa        --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --artifact-root <dir> --report <json> [--allow-no-mask-non-faststart]\n\nRules:\n  - MASK JSON objectKey is ignored; current catalog objectKey is authoritative.\n  - RIGHT_PANEL uses final coordinate.xStart with zero additional padding.\n  - FULL_FRAME covers the full frame and endIsFileEnd uses gte(t,start).\n  - A non-Fast-Start NO_MASK source can pass only with the explicit waiver flag; the report keeps fastStart=false and records the waiver.\n  - R2 replacement remains blocked until a human visual approval is supplied.\n`);
+  console.log(`LMC 77-part Zoom tile privacy pipeline\n\nCommands:\n  contract-test --week N --config <json> --catalog <json>\n  map       --week N --config <json> --catalog <json> --report <execution-map.json>\n  preflight --week N --config <json> --catalog <json> --input-root <pristine> --report <json>\n  apply     --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --report <json> [--dry-run] [--jobs 1..4] [--resume]\n  qa        --week N --config <json> --catalog <json> --input-root <pristine> --output-root <privacy> --artifact-root <dir> --report <json> [--allow-no-mask-non-faststart]\n\nRules:\n  - MASK JSON objectKey is ignored; current catalog objectKey is authoritative.\n  - RIGHT_PANEL uses final coordinate.xStart with zero additional padding.\n  - PANEL_BOX masks only the explicitly measured x/y/width/height region.\n  - FULL_FRAME covers the full frame and endIsFileEnd uses gte(t,start).\n  - A non-Fast-Start NO_MASK source can pass only with the explicit waiver flag; the report keeps fastStart=false and records the waiver.\n  - R2 replacement remains blocked until a human visual approval is supplied.\n`);
 }

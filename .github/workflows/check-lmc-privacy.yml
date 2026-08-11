@@ -42,7 +42,7 @@ jobs:
         run: |
           node scripts/lmc-zoom-tile-privacy.mjs contract-test \
             --week 1 \
-            --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json \
+            --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.2_WEEK09_INSTRUCTOR_PRESERVED.json \
             --catalog lcms/academy/data/media-catalog.json
           node scripts/lmc-r2-overwrite-privacy.mjs --self-test
 
@@ -50,7 +50,7 @@ jobs:
         run: |
           node scripts/lmc-zoom-tile-privacy.mjs map \
             --week 1 \
-            --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.0.json \
+            --config artifacts/lmc-privacy-rework/inputs/LMC_77_PART_MASK_INTERVALS_v1.2_WEEK09_INSTRUCTOR_PRESERVED.json \
             --catalog lcms/academy/data/media-catalog.json \
             --report /tmp/lmc-execution-map.json
           node - <<'NODE'

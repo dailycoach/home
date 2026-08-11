@@ -1802,41 +1802,212 @@
     "intervals": [
       {
         "startSeconds": 0,
-        "endSeconds": 47.5,
+        "endSeconds": 47.26,
         "endIsFileEnd": false,
-        "rangeTimecode": "00:00:00.00–00:00:47.50",
-        "maskType": "FULL_FRAME",
+        "rangeTimecode": "00:00:00.00-00:00:47.26",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 0,
+          "xEnd": 319,
+          "yStart": 0,
+          "yEnd": 179,
+          "width": 320,
+          "height": 180
+        },
+        "coordinateText": "PANEL_BOX x=0-319, y=0-179",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 47.26,
+        "note": "Opening gallery: mask first-row student tile left; preserve instructor tile x=320-639, y=0-179."
+      },
+      {
+        "startSeconds": 0,
+        "endSeconds": 47.26,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00-00:00:47.26",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 640,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 179,
+          "width": 640,
+          "height": 180
+        },
+        "coordinateText": "PANEL_BOX x=640-1279, y=0-179",
+        "sourceWeekStartSeconds": 0,
+        "sourceWeekEndSeconds": 47.26,
+        "note": "Opening gallery: mask first-row student tiles right; preserve instructor tile."
+      },
+      {
+        "startSeconds": 0,
+        "endSeconds": 47.26,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:00.00-00:00:47.26",
+        "maskType": "PANEL_BOX",
         "coordinate": {
           "xStart": 0,
           "xEnd": 1279,
-          "yStart": 0,
+          "yStart": 180,
           "yEnd": 719,
           "width": 1280,
-          "height": 720
+          "height": 540
         },
-        "coordinateText": "FULL_FRAME x=0–1279, y=0–719",
+        "coordinateText": "PANEL_BOX x=0-1279, y=180-719",
         "sourceWeekStartSeconds": 0,
-        "sourceWeekEndSeconds": 47.5,
-        "note": "오프닝 Zoom 갤러리뷰 전체 참여자 노출 — 기존 후보 좌표의 중대 누락 보정"
+        "sourceWeekEndSeconds": 47.26,
+        "note": "Opening gallery: mask all lower student rows; preserve instructor tile."
       },
       {
-        "startSeconds": 47.5,
-        "endSeconds": 1080.12,
-        "endIsFileEnd": true,
-        "rangeTimecode": "00:00:47.50–END",
-        "maskType": "RIGHT_PANEL",
+        "startSeconds": 47.26,
+        "endSeconds": 55.66,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:47.26-00:00:55.66",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1189,
+          "xStart": 1200,
           "xEnd": 1279,
           "yStart": 0,
-          "yEnd": 719,
-          "width": 91,
-          "height": 720
+          "yEnd": 247,
+          "width": 80,
+          "height": 248
         },
-        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
-        "sourceWeekStartSeconds": 47.5,
-        "sourceWeekEndSeconds": 3722,
-        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+        "coordinateText": "PANEL_BOX x=1200-1279, y=0-247",
+        "sourceWeekStartSeconds": 47.26,
+        "sourceWeekEndSeconds": 55.66,
+        "note": "Nine-person compact strip: mask above instructor; preserve x=1200-1279, y=248-292."
+      },
+      {
+        "startSeconds": 47.26,
+        "endSeconds": 55.66,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:47.26-00:00:55.66",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 293,
+          "yEnd": 719,
+          "width": 80,
+          "height": 427
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=293-719",
+        "sourceWeekStartSeconds": 47.26,
+        "sourceWeekEndSeconds": 55.66,
+        "note": "Nine-person compact strip: mask below instructor; preserve x=1200-1279, y=248-292."
+      },
+      {
+        "startSeconds": 55.66,
+        "endSeconds": 57.3,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:55.66-00:00:57.30",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 269,
+          "width": 80,
+          "height": 270
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+        "sourceWeekStartSeconds": 55.66,
+        "sourceWeekEndSeconds": 57.3,
+        "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+      },
+      {
+        "startSeconds": 55.66,
+        "endSeconds": 57.3,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:55.66-00:00:57.30",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 315,
+          "yEnd": 719,
+          "width": 80,
+          "height": 405
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+        "sourceWeekStartSeconds": 55.66,
+        "sourceWeekEndSeconds": 57.3,
+        "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+      },
+      {
+        "startSeconds": 57.3,
+        "endSeconds": 76.38,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:57.30-00:01:16.38",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1120,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 224,
+          "width": 160,
+          "height": 225
+        },
+        "coordinateText": "PANEL_BOX x=1120-1279, y=0-224",
+        "sourceWeekStartSeconds": 57.3,
+        "sourceWeekEndSeconds": 76.38,
+        "note": "Five-person wide strip: mask above instructor; preserve x=1120-1279, y=225-314."
+      },
+      {
+        "startSeconds": 57.3,
+        "endSeconds": 76.38,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:00:57.30-00:01:16.38",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1120,
+          "xEnd": 1279,
+          "yStart": 315,
+          "yEnd": 719,
+          "width": 160,
+          "height": 405
+        },
+        "coordinateText": "PANEL_BOX x=1120-1279, y=315-719",
+        "sourceWeekStartSeconds": 57.3,
+        "sourceWeekEndSeconds": 76.38,
+        "note": "Five-person wide strip: mask below instructor; preserve x=1120-1279, y=225-314."
+      },
+      {
+        "startSeconds": 76.38,
+        "endSeconds": 1080.12,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:01:16.38-END",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 269,
+          "width": 80,
+          "height": 270
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+        "sourceWeekStartSeconds": 76.38,
+        "sourceWeekEndSeconds": 1080.12,
+        "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+      },
+      {
+        "startSeconds": 76.38,
+        "endSeconds": 1080.12,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:01:16.38-END",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 315,
+          "yEnd": 719,
+          "width": 80,
+          "height": 405
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+        "sourceWeekStartSeconds": 76.38,
+        "sourceWeekEndSeconds": 1080.12,
+        "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
       }
     ]
   },
@@ -1854,20 +2025,39 @@
         "startSeconds": 0,
         "endSeconds": 1080.09,
         "endIsFileEnd": true,
-        "rangeTimecode": "00:00:00.00–END",
-        "maskType": "RIGHT_PANEL",
+        "rangeTimecode": "00:00:00.00-END",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1189,
+          "xStart": 1200,
           "xEnd": 1279,
           "yStart": 0,
-          "yEnd": 719,
-          "width": 91,
-          "height": 720
+          "yEnd": 269,
+          "width": 80,
+          "height": 270
         },
-        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
-        "sourceWeekStartSeconds": 47.5,
-        "sourceWeekEndSeconds": 3722,
-        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+        "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+        "sourceWeekStartSeconds": 1080.12,
+        "sourceWeekEndSeconds": 2160.21,
+        "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+      },
+      {
+        "startSeconds": 0,
+        "endSeconds": 1080.09,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00-END",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 315,
+          "yEnd": 719,
+          "width": 80,
+          "height": 405
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+        "sourceWeekStartSeconds": 1080.12,
+        "sourceWeekEndSeconds": 2160.21,
+        "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
       }
     ]
   },
@@ -1885,20 +2075,39 @@
         "startSeconds": 0,
         "endSeconds": 833.042969,
         "endIsFileEnd": true,
-        "rangeTimecode": "00:00:00.00–END",
-        "maskType": "RIGHT_PANEL",
+        "rangeTimecode": "00:00:00.00-END",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1189,
+          "xStart": 1200,
           "xEnd": 1279,
           "yStart": 0,
-          "yEnd": 719,
-          "width": 91,
-          "height": 720
+          "yEnd": 269,
+          "width": 80,
+          "height": 270
         },
-        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
-        "sourceWeekStartSeconds": 47.5,
-        "sourceWeekEndSeconds": 3722,
-        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+        "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+        "sourceWeekStartSeconds": 2160.21,
+        "sourceWeekEndSeconds": 2993.252969,
+        "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+      },
+      {
+        "startSeconds": 0,
+        "endSeconds": 833.042969,
+        "endIsFileEnd": true,
+        "rangeTimecode": "00:00:00.00-END",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 315,
+          "yEnd": 719,
+          "width": 80,
+          "height": 405
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+        "sourceWeekStartSeconds": 2160.21,
+        "sourceWeekEndSeconds": 2993.252969,
+        "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
       }
     ]
   },
@@ -1914,60 +2123,117 @@
     "intervals": [
       {
         "startSeconds": 0,
-        "endSeconds": 728.747031,
+        "endSeconds": 732.5,
         "endIsFileEnd": false,
-        "rangeTimecode": "00:00:00.00–00:12:08.75",
-        "maskType": "RIGHT_PANEL",
+        "rangeTimecode": "00:00:00.00-00:12:12.50",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1189,
+          "xStart": 1200,
           "xEnd": 1279,
           "yStart": 0,
-          "yEnd": 719,
-          "width": 91,
-          "height": 720
+          "yEnd": 269,
+          "width": 80,
+          "height": 270
         },
-        "coordinateText": "RIGHT_PANEL x=1189–1279, y=0–719",
-        "sourceWeekStartSeconds": 47.5,
-        "sourceWeekEndSeconds": 3722,
-        "note": "초반·중반 화면공유의 좁은 우측 참여자 패널"
+        "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+        "sourceWeekStartSeconds": 2993.252969,
+        "sourceWeekEndSeconds": 3725.752969,
+        "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
       },
       {
-        "startSeconds": 728.747031,
-        "endSeconds": 788.747031,
+        "startSeconds": 0,
+        "endSeconds": 732.5,
         "endIsFileEnd": false,
-        "rangeTimecode": "00:12:08.75–00:13:08.75",
-        "maskType": "FULL_FRAME",
+        "rangeTimecode": "00:00:00.00-00:12:12.50",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 1200,
+          "xEnd": 1279,
+          "yStart": 315,
+          "yEnd": 719,
+          "width": 80,
+          "height": 405
+        },
+        "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+        "sourceWeekStartSeconds": 2993.252969,
+        "sourceWeekEndSeconds": 3725.752969,
+        "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+      },
+      {
+        "startSeconds": 732.5,
+        "endSeconds": 788.74,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:12:12.50-00:13:08.74",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 0,
+          "xEnd": 255,
+          "yStart": 0,
+          "yEnd": 215,
+          "width": 256,
+          "height": 216
+        },
+        "coordinateText": "PANEL_BOX x=0-255, y=0-215",
+        "sourceWeekStartSeconds": 3725.752969,
+        "sourceWeekEndSeconds": 3781.992969,
+        "note": "Five-column gallery: mask first-row student tile left; preserve instructor tile x=256-511, y=72-215."
+      },
+      {
+        "startSeconds": 732.5,
+        "endSeconds": 788.74,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:12:12.50-00:13:08.74",
+        "maskType": "PANEL_BOX",
+        "coordinate": {
+          "xStart": 512,
+          "xEnd": 1279,
+          "yStart": 0,
+          "yEnd": 215,
+          "width": 768,
+          "height": 216
+        },
+        "coordinateText": "PANEL_BOX x=512-1279, y=0-215",
+        "sourceWeekStartSeconds": 3725.752969,
+        "sourceWeekEndSeconds": 3781.992969,
+        "note": "Five-column gallery: mask first-row student tiles right; preserve instructor tile."
+      },
+      {
+        "startSeconds": 732.5,
+        "endSeconds": 788.74,
+        "endIsFileEnd": false,
+        "rangeTimecode": "00:12:12.50-00:13:08.74",
+        "maskType": "PANEL_BOX",
         "coordinate": {
           "xStart": 0,
           "xEnd": 1279,
-          "yStart": 0,
+          "yStart": 216,
           "yEnd": 719,
           "width": 1280,
-          "height": 720
+          "height": 504
         },
-        "coordinateText": "FULL_FRAME x=0–1279, y=0–719",
-        "sourceWeekStartSeconds": 3722,
-        "sourceWeekEndSeconds": 3782,
-        "note": "중간 Zoom 갤러리뷰 전체 참여자 노출 — 기존 14초 overlap 후보를 실제 갤러리 구간으로 교정"
+        "coordinateText": "PANEL_BOX x=0-1279, y=216-719",
+        "sourceWeekStartSeconds": 3725.752969,
+        "sourceWeekEndSeconds": 3781.992969,
+        "note": "Five-column gallery: mask all lower student rows; preserve instructor tile."
       },
       {
-        "startSeconds": 788.747031,
+        "startSeconds": 788.74,
         "endSeconds": 818.577031,
         "endIsFileEnd": true,
-        "rangeTimecode": "00:13:08.75–END",
-        "maskType": "RIGHT_PANEL",
+        "rangeTimecode": "00:13:08.74-END",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1152,
-          "xEnd": 1279,
-          "yStart": 0,
-          "yEnd": 719,
-          "width": 128,
-          "height": 720
+          "xStart": 864,
+          "xEnd": 1003,
+          "yStart": 140,
+          "yEnd": 455,
+          "width": 140,
+          "height": 316
         },
-        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
-        "sourceWeekStartSeconds": 3782,
-        "sourceWeekEndSeconds": 7496.376599,
-        "note": "후반 화면공유 우측 참여자 패널"
+        "coordinateText": "PANEL_BOX x=864-1003, y=140-455",
+        "sourceWeekStartSeconds": 3781.992969,
+        "sourceWeekEndSeconds": 3811.83,
+        "note": "Embedded panel: mask student tiles below; preserve instructor tile x=864-1003, y=57-139."
       }
     ]
   },
@@ -1986,19 +2252,19 @@
         "endSeconds": 1204.257031,
         "endIsFileEnd": true,
         "rangeTimecode": "00:00:00.00–END",
-        "maskType": "RIGHT_PANEL",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1152,
-          "xEnd": 1279,
-          "yStart": 0,
-          "yEnd": 719,
-          "width": 128,
-          "height": 720
+          "xStart": 864,
+          "xEnd": 1003,
+          "yStart": 140,
+          "yEnd": 455,
+          "width": 140,
+          "height": 316
         },
-        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "coordinateText": "PANEL_BOX x=864–1003, y=140–455",
         "sourceWeekStartSeconds": 3782,
         "sourceWeekEndSeconds": 7496.376599,
-        "note": "후반 화면공유 우측 참여자 패널"
+        "note": "내장 패널의 수강생 칸만 마스킹 — 상단 강사 칸 x=864–1003, y=57–139 보존"
       }
     ]
   },
@@ -2017,19 +2283,19 @@
         "endSeconds": 1198.012969,
         "endIsFileEnd": true,
         "rangeTimecode": "00:00:00.00–END",
-        "maskType": "RIGHT_PANEL",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1152,
-          "xEnd": 1279,
-          "yStart": 0,
-          "yEnd": 719,
-          "width": 128,
-          "height": 720
+          "xStart": 864,
+          "xEnd": 1003,
+          "yStart": 140,
+          "yEnd": 455,
+          "width": 140,
+          "height": 316
         },
-        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "coordinateText": "PANEL_BOX x=864–1003, y=140–455",
         "sourceWeekStartSeconds": 3782,
         "sourceWeekEndSeconds": 7496.376599,
-        "note": "후반 화면공유 우측 참여자 패널"
+        "note": "내장 패널의 수강생 칸만 마스킹 — 상단 강사 칸 x=864–1003, y=57–139 보존"
       }
     ]
   },
@@ -2048,19 +2314,19 @@
         "endSeconds": 1282.832834,
         "endIsFileEnd": true,
         "rangeTimecode": "00:00:00.00–END",
-        "maskType": "RIGHT_PANEL",
+        "maskType": "PANEL_BOX",
         "coordinate": {
-          "xStart": 1152,
-          "xEnd": 1279,
-          "yStart": 0,
-          "yEnd": 719,
-          "width": 128,
-          "height": 720
+          "xStart": 864,
+          "xEnd": 1003,
+          "yStart": 140,
+          "yEnd": 455,
+          "width": 140,
+          "height": 316
         },
-        "coordinateText": "RIGHT_PANEL x=1152–1279, y=0–719",
+        "coordinateText": "PANEL_BOX x=864–1003, y=140–455",
         "sourceWeekStartSeconds": 3782,
         "sourceWeekEndSeconds": 7496.376599,
-        "note": "후반 화면공유 우측 참여자 패널"
+        "note": "내장 패널의 수강생 칸만 마스킹 — 상단 강사 칸 x=864–1003, y=57–139 보존"
       }
     ]
   },
