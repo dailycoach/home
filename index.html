@@ -30,12 +30,6 @@
           html = html.replace(nalPanelAnchor, `${nalPanelCategory}${nalPanelAnchor}`);
         }
 
-        const nalFooterAnchor = '<a href="/company/" data-route="companyIntro">기업소개</a>\n          <a href="/coach/" data-route="coachIntro">코치소개</a>\n          <a href="/tests/self/" data-route="selfTest">검사도구</a>';
-        const nalFooterLinks = '<a href="/company/" data-route="companyIntro">기업소개</a>\n          <a href="/coach/" data-route="coachIntro">코치소개</a>\n          <a href="/nal/" data-route="nal">NAL 플랫폼</a>\n          <a href="/tests/self/" data-route="selfTest">검사도구</a>';
-        if (!html.includes('<a href="/nal/" data-route="nal">NAL 플랫폼</a>')) {
-          html = html.replace(nalFooterAnchor, nalFooterLinks);
-        }
-
         if (!html.includes("      nal: '/nal/',")) {
           html = html.replace("      booking: 'https://smartstore.naver.com/nalbitcoaching',\n      lcms: '/lcms/',", "      booking: 'https://smartstore.naver.com/nalbitcoaching',\n      nal: '/nal/',\n      lcms: '/lcms/',");
         }
@@ -43,17 +37,12 @@
         const careerGameUrl = '/activities/career-deduction-game/';
         const desktopActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 <small>→</small></a>';
         const panelActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">광야 서바이벌 활동도구 <small>→</small></a>';
-        const footerActivityAnchor = '<a href="/activities/wilderness-survival/" data-route="wildernessSurvival">활동도구</a>';
-
         const desktopCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐! <small>V2</small></a>`;
         const panelCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐! · 보너스 러시 <small>V2</small></a>`;
-        const footerCareerLink = `<a href="${careerGameUrl}">내 직업을 맞춰봐</a>`;
         const flexMoveLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE <small>V4</small></a>';
         const flexMovePanelLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE · 셀프코칭 × 현장코칭 <small>V4</small></a>';
-        const flexMoveFooterLink = '<a href="/activities/coaching-flex-move/" data-route="coachingFlexMove">COACHING FLEX MOVE</a>';
         const valueSceneLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE <small>GEN Z</small></a>';
         const valueScenePanelLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE · 지금의 나를 움직이는 감각 편집 <small>GEN Z</small></a>';
-        const valueSceneFooterLink = '<a href="/activities/value-scene/" data-route="valueScene">VALUE SCENE</a>';
 
         if (!html.includes(`${desktopCareerLink}\n            ${desktopActivityAnchor}`)) {
           html = html.replace(desktopActivityAnchor, `${desktopCareerLink}\n            ${desktopActivityAnchor}`);
@@ -61,18 +50,11 @@
         if (!html.includes(`${panelCareerLink}\n          ${panelActivityAnchor}`)) {
           html = html.replace(panelActivityAnchor, `${panelCareerLink}\n          ${panelActivityAnchor}`);
         }
-        if (!html.includes(`${footerActivityAnchor}\n          ${footerCareerLink}`)) {
-          html = html.replace(footerActivityAnchor, `${footerActivityAnchor}\n          ${footerCareerLink}`);
-        }
-
         if (!html.includes(flexMoveLink)) {
           html = html.replace(desktopActivityAnchor, `${flexMoveLink}\n            ${desktopActivityAnchor}`);
         }
         if (!html.includes(flexMovePanelLink)) {
           html = html.replace(panelActivityAnchor, `${flexMovePanelLink}\n          ${panelActivityAnchor}`);
-        }
-        if (!html.includes(flexMoveFooterLink)) {
-          html = html.replace(footerActivityAnchor, `${footerActivityAnchor}\n          ${flexMoveFooterLink}`);
         }
         if (!html.includes(valueSceneLink)) {
           html = html.replace(desktopActivityAnchor, `${valueSceneLink}\n            ${desktopActivityAnchor}`);
@@ -80,15 +62,8 @@
         if (!html.includes(valueScenePanelLink)) {
           html = html.replace(panelActivityAnchor, `${valueScenePanelLink}\n          ${panelActivityAnchor}`);
         }
-        if (!html.includes(valueSceneFooterLink)) {
-          html = html.replace(footerActivityAnchor, `${footerActivityAnchor}\n          ${valueSceneFooterLink}`);
-        }
         html = html.replace("      liveBoard: '/activities/live-board/',", "      coachingFlexMove: '/activities/coaching-flex-move/',\n      liveBoard: '/activities/live-board/',");
         html = html.replace("      liveBoard: '/activities/live-board/',", "      valueScene: '/activities/value-scene/',\n      liveBoard: '/activities/live-board/',");
-
-        const maeumFooterLink = '<a href="/maeum-library/" data-route="maeumLibrary">마음서재</a>';
-        const operatorFooterLink = `${maeumFooterLink}\n          <a href="/operator/" aria-label="마음서재 운영자 전용 관문">운영자</a>`;
-        if (!html.includes('href="/operator/"')) html = html.replace(maeumFooterLink, operatorFooterLink);
 
         document.open(); document.write(html); document.close();
       })
