@@ -932,6 +932,443 @@
         width: 100%;
       }
     }
+
+    /* CTC editorial homepage — concrete, torn paper, cobalt blue */
+    :root {
+      --editorial-blue: #2447ff;
+      --editorial-blue-deep: #1733d8;
+      --editorial-acid: #efff38;
+      --editorial-paper: #eee9dd;
+      --editorial-ink: #10120f;
+    }
+
+    .site-header.is-solid,
+    .site-header:focus-within {
+      border-bottom: 2px solid var(--editorial-ink);
+      background: rgba(238, 233, 221, .96);
+      box-shadow: none;
+    }
+    .site-header.is-solid .brand-mark,
+    .site-header:focus-within .brand-mark {
+      background: var(--editorial-blue);
+      box-shadow: 0 0 0 7px rgba(36, 71, 255, .12);
+    }
+    .site-header.is-solid .header-menu-btn,
+    .site-header:focus-within .header-menu-btn {
+      color: #fff;
+      border-color: var(--editorial-ink);
+      background: var(--editorial-blue);
+    }
+
+    .ctc-feature {
+      min-height: max(100svh, 780px);
+      color: #fff;
+      background: var(--editorial-ink);
+    }
+    .ctc-feature::before {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      top: clamp(28px, 5vw, 72px);
+      right: clamp(22px, 5vw, 76px);
+      width: clamp(28px, 3.2vw, 48px);
+      aspect-ratio: 1;
+      background: var(--editorial-acid);
+      box-shadow: 8px 8px 0 var(--editorial-ink);
+      pointer-events: none;
+    }
+    .ctc-feature::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background:
+        linear-gradient(112deg, transparent 0 74%, rgba(36,71,255,.92) 74% 75%, transparent 75%),
+        linear-gradient(180deg, transparent 0 86%, rgba(0,0,0,.24) 100%);
+      pointer-events: none;
+    }
+    .ctc-feature .slide {
+      opacity: 1;
+      transform: none;
+      background: #d9d5cb;
+    }
+    .ctc-feature .slide::before {
+      background-position: center;
+      opacity: var(--image-opacity, 1);
+      transform: none;
+    }
+    .ctc-feature .slide::after {
+      background:
+        linear-gradient(90deg, rgba(7,9,13,.94) 0%, rgba(7,9,13,.84) 33%, rgba(7,9,13,.38) 57%, rgba(7,9,13,.08) 78%, rgba(7,9,13,.28) 100%),
+        linear-gradient(0deg, rgba(7,9,13,.72) 0%, transparent 45%, rgba(7,9,13,.20) 100%);
+    }
+    .ctc-feature-shell {
+      z-index: 4;
+      width: min(1320px, calc(100% - 48px));
+      padding: clamp(82px, 10vw, 138px) 0 38px;
+      gap: clamp(42px, 6vw, 76px);
+    }
+    .ctc-feature-copy {
+      align-self: center;
+      justify-self: start;
+      width: min(850px, 72%);
+      text-align: left;
+    }
+    .ctc-feature .eyebrow {
+      justify-content: flex-start;
+      width: fit-content;
+      margin: 0 0 24px;
+      padding: 8px 11px;
+      color: var(--editorial-ink);
+      background: var(--editorial-acid);
+      font-size: .75rem;
+      letter-spacing: .17em;
+    }
+    .ctc-feature .eyebrow::before,
+    .ctc-feature .eyebrow::after { display: none; }
+    .ctc-feature .hero-title {
+      max-width: 940px;
+      font-size: clamp(4rem, 7vw, 7.4rem);
+      line-height: .88;
+      letter-spacing: -.075em;
+      text-align: left;
+      text-shadow: 0 20px 80px rgba(0,0,0,.46);
+    }
+    .ctc-feature .hero-title span {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin-top: .24em;
+      color: #fff;
+      background: linear-gradient(transparent 70%, var(--editorial-blue) 70% 96%, transparent 96%);
+      font-size: .58em;
+      line-height: 1.14;
+      white-space: normal;
+    }
+    .ctc-feature .hero-subtitle {
+      display: block;
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(.98rem, 1.35vw, 1.14rem);
+      line-height: 1.78;
+      word-break: keep-all;
+    }
+    .ctc-feature .hero-actions {
+      justify-content: flex-start;
+      margin-top: 30px;
+    }
+    .ctc-feature .btn {
+      min-height: 52px;
+      border-radius: 0;
+      letter-spacing: -.025em;
+    }
+    .ctc-feature .btn-primary {
+      color: #fff;
+      border: 2px solid var(--editorial-blue);
+      background: var(--editorial-blue);
+      box-shadow: 8px 8px 0 rgba(0,0,0,.38);
+    }
+    .ctc-feature .btn-secondary {
+      color: var(--editorial-ink);
+      border: 2px solid var(--editorial-paper);
+      background: rgba(238,233,221,.94);
+      backdrop-filter: none;
+    }
+    .ctc-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 820px;
+      margin-top: 28px;
+    }
+    .ctc-option {
+      min-height: 116px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-top: 5px solid var(--editorial-blue);
+      color: #fff;
+      background: rgba(5,7,10,.56);
+      backdrop-filter: blur(9px);
+      transition: transform .18s ease, background .18s ease;
+    }
+    .ctc-option:hover,
+    .ctc-option:focus-visible {
+      outline: none;
+      transform: translateY(-3px);
+      background: rgba(36,71,255,.88);
+    }
+    .ctc-option span {
+      display: inline-block;
+      margin-bottom: 11px;
+      color: var(--editorial-acid);
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+    .ctc-option strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.45;
+      word-break: keep-all;
+    }
+    .ctc-option small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,.66);
+      font-size: .78rem;
+      line-height: 1.5;
+    }
+    .ctc-feature-controls {
+      grid-template-columns: minmax(0, 1fr) 156px;
+      align-items: stretch;
+    }
+    .ctc-feature .intent-rail {
+      border: 2px solid var(--editorial-ink);
+      border-radius: 0;
+      background: rgba(238,233,221,.95);
+      box-shadow: 9px 9px 0 var(--editorial-blue);
+      backdrop-filter: blur(12px);
+    }
+    .ctc-feature .intent-rail a,
+    .ctc-feature .intent-rail button {
+      color: var(--editorial-ink);
+      background: transparent;
+      border-right: 1px solid rgba(16,18,15,.28);
+    }
+    .ctc-feature .intent-rail a:last-child { border-right: 0; }
+    .ctc-feature .intent-rail a:hover,
+    .ctc-feature .intent-rail button:hover,
+    .ctc-feature .intent-rail a:focus-visible,
+    .ctc-feature .intent-rail button:focus-visible {
+      color: #fff;
+      background: var(--editorial-blue);
+    }
+    .ctc-feature .intent-rail strong { color: inherit; }
+    .ctc-feature .intent-rail small { color: rgba(16,18,15,.62); }
+    .ctc-feature .intent-rail a:hover small,
+    .ctc-feature .intent-rail button:hover small,
+    .ctc-feature .intent-rail a:focus-visible small,
+    .ctc-feature .intent-rail button:focus-visible small { color: rgba(255,255,255,.74); }
+    .ctc-edition-stamp {
+      display: grid;
+      align-content: center;
+      min-height: 92px;
+      padding: 16px;
+      border: 2px solid var(--editorial-ink);
+      color: var(--editorial-ink);
+      background: var(--editorial-acid);
+      text-transform: uppercase;
+    }
+    .ctc-edition-stamp span {
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+    .ctc-edition-stamp strong {
+      margin-top: 7px;
+      font-size: 1.48rem;
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .ctc-edition-stamp small {
+      margin-top: 8px;
+      font-size: .66rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+
+    .maeum-feature-section {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(84px, 10vw, 140px) 24px;
+      background:
+        linear-gradient(90deg, rgba(16,18,15,.05) 1px, transparent 1px),
+        linear-gradient(rgba(16,18,15,.05) 1px, transparent 1px),
+        var(--editorial-paper);
+      background-size: 48px 48px;
+    }
+    .maeum-feature-section::before {
+      content: "02";
+      position: absolute;
+      top: 24px;
+      left: max(24px, calc((100% - var(--max)) / 2));
+      color: var(--editorial-blue);
+      font-size: clamp(5rem, 11vw, 10rem);
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: -.1em;
+      opacity: .12;
+    }
+    .maeum-feature-card {
+      position: relative;
+      z-index: 1;
+      align-items: stretch;
+      border: 2px solid var(--editorial-ink);
+      border-radius: 0;
+      background: rgba(250,247,239,.96);
+      box-shadow: 16px 16px 0 var(--editorial-blue);
+    }
+    .maeum-feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 36%;
+      background: var(--editorial-blue);
+    }
+    .maeum-feature-kicker {
+      margin-bottom: 28px;
+      color: var(--editorial-blue);
+      font-size: .72rem;
+      letter-spacing: .19em;
+    }
+    .maeum-feature-card h2 {
+      color: var(--editorial-ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Pretendard", sans-serif;
+      font-size: clamp(2.7rem, 5.4vw, 5.8rem);
+      font-weight: 950;
+      line-height: .98;
+      letter-spacing: -.075em;
+    }
+    .maeum-feature-card h2 span { color: var(--editorial-blue); }
+    .maeum-feature-copy {
+      max-width: 650px;
+      color: rgba(16,18,15,.68);
+      line-height: 1.9;
+      word-break: keep-all;
+    }
+    .maeum-feature-actions a {
+      min-height: 50px;
+      border: 2px solid var(--editorial-ink);
+      border-radius: 0;
+      color: var(--editorial-ink);
+      background: transparent;
+    }
+    .maeum-feature-actions a:first-child {
+      color: #fff;
+      border-color: var(--editorial-blue);
+      background: var(--editorial-blue);
+    }
+    .maeum-feature-note {
+      position: relative;
+      display: grid;
+      align-content: end;
+      padding: 0 0 0 clamp(28px, 5vw, 72px);
+      border-top: 0;
+      border-left: 2px solid var(--editorial-ink);
+    }
+    .maeum-feature-note::before {
+      content: "";
+      width: 34px;
+      aspect-ratio: 1;
+      margin-bottom: auto;
+      background: var(--editorial-acid);
+      box-shadow: 7px 7px 0 var(--editorial-ink);
+    }
+    .maeum-feature-note blockquote {
+      color: var(--editorial-ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Pretendard", sans-serif;
+      font-size: clamp(1.55rem, 2.8vw, 2.7rem);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .panel-card {
+      border: 2px solid var(--editorial-ink);
+      border-radius: 0;
+      background: var(--editorial-paper);
+      box-shadow: 14px 14px 0 var(--editorial-blue);
+    }
+    .panel-head {
+      border-bottom: 2px solid var(--editorial-ink);
+      background: rgba(238,233,221,.96);
+    }
+    .panel-close {
+      color: #fff;
+      border-color: var(--editorial-ink);
+      border-radius: 0;
+      background: var(--editorial-blue);
+    }
+    .category { border-radius: 0; }
+    .category[data-category="ctc"] {
+      color: #fff;
+      border-color: var(--editorial-ink);
+      background: var(--editorial-blue);
+    }
+    .category[data-category="ctc"] h3,
+    .category[data-category="ctc"] p,
+    .category[data-category="ctc"] a { color: #fff; }
+    .category[data-category="ctc"] a { border-color: rgba(255,255,255,.5); }
+    .category[data-category="ctc"] a small { color: var(--editorial-acid); }
+
+    .site-footer { border-top: 10px solid var(--editorial-blue); }
+
+    @media (max-width: 1080px) {
+      .ctc-feature-copy { width: min(820px, 100%); }
+      .ctc-feature-controls { grid-template-columns: 1fr; }
+      .ctc-edition-stamp { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .ctc-feature { min-height: auto; }
+      .ctc-feature::before {
+        top: 22px;
+        right: 18px;
+        width: 28px;
+      }
+      .ctc-feature .slide::before { background-position: 58% center; }
+      .ctc-feature .slide::after {
+        background: linear-gradient(90deg, rgba(7,9,13,.92), rgba(7,9,13,.58));
+      }
+      .ctc-feature-shell {
+        width: min(100% - 28px, var(--max));
+        min-height: 100svh;
+        padding: 68px 0 28px;
+        gap: 36px;
+      }
+      .ctc-feature .hero-title {
+        font-size: clamp(3.05rem, 15vw, 4.8rem);
+        line-height: .9;
+      }
+      .ctc-feature .hero-title span {
+        font-size: .52em;
+        line-height: 1.22;
+      }
+      .ctc-feature .hero-subtitle {
+        margin-top: 22px;
+        font-size: .94rem;
+      }
+      .ctc-feature .hero-actions { display: grid; }
+      .ctc-options { grid-template-columns: 1fr; }
+      .ctc-option { min-height: 104px; }
+      .ctc-feature .intent-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        box-shadow: 6px 6px 0 var(--editorial-blue);
+      }
+      .ctc-feature .intent-rail a,
+      .ctc-feature .intent-rail button {
+        min-height: 62px;
+        padding: 13px;
+      }
+      .ctc-feature .intent-rail strong { font-size: .86rem; }
+      .ctc-feature .intent-rail small { display: none; }
+      .maeum-feature-section { padding: 82px 16px 94px; }
+      .maeum-feature-card {
+        padding: 34px 22px;
+        box-shadow: 8px 8px 0 var(--editorial-blue);
+      }
+      .maeum-feature-card h2 { font-size: clamp(2.55rem, 13vw, 4.4rem); }
+      .maeum-feature-note {
+        padding: 28px 0 0;
+        border-top: 2px solid var(--editorial-ink);
+        border-left: 0;
+      }
+      .maeum-feature-note::before { margin-bottom: 42px; }
+      .panel-card { box-shadow: none; }
+    }
+
   </style>
 </head>
 <body id="top">
@@ -1006,62 +1443,61 @@
   </header>
 
   <main id="main">
-    <section class="hero" aria-label="데일리코칭 메인 슬라이드">
+    <section class="hero ctc-feature" aria-labelledby="slideTitle">
       <div class="slides" aria-hidden="true">
-        <!-- IMAGE SLOT 01: mainSlide01 / 큰 대문 이미지 1 -->
-        <div class="slide is-active" data-slide-bg="mainSlide01"></div>
-        <!-- IMAGE SLOT 02: mainSlide02 / 큰 대문 이미지 2 -->
-        <div class="slide" data-slide-bg="mainSlide02"></div>
-        <!-- IMAGE SLOT 03: mainSlide03 / 큰 대문 이미지 3 -->
-        <div class="slide" data-slide-bg="mainSlide03"></div>
+        <div class="slide is-active" data-slide-bg="ctcEditorial"></div>
       </div>
 
-      <div class="hero-shell">
-        <div class="hero-copy" aria-live="polite">
-          <p class="eyebrow" id="slideEyebrow">Quiet Coaching Studio</p>
-          <h1 class="hero-title" id="slideTitle">문제보다<br><span>존재를 봅니다</span></h1>
-          <p class="hero-subtitle" id="slideSubtitle"></p>
+      <div class="hero-shell ctc-feature-shell">
+        <div class="hero-copy ctc-feature-copy" aria-live="polite">
+          <p class="eyebrow" id="slideEyebrow">COACH THE COACH · CTC 90</p>
+          <h1 class="hero-title" id="slideTitle">내 코칭을<br><span>제대로 들여다보는 90분</span></h1>
+          <p class="hero-subtitle" id="slideSubtitle">KAC는 시험 전 기본 코칭구조를, KPC는 시험 준비와 실제 코칭장면을 더 깊게 분석합니다.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="/coaching/coach-the-coach/" data-route="coachTheCoach">CTC · 코치더코치 90 <span aria-hidden="true">→</span></a>
-            <button class="btn btn-secondary" type="button" data-open-menu>메뉴에서 선택하기 <span aria-hidden="true">⌄</span></button>
+            <a class="btn btn-primary" href="/coaching/coach-the-coach/" data-route="coachTheCoach">CTC 90 전체보기 <span aria-hidden="true">→</span></a>
+            <button class="btn btn-secondary" type="button" data-open-menu>전체 메뉴 열기 <span aria-hidden="true">＋</span></button>
+          </div>
+          <div class="ctc-options" aria-label="CTC 상품 선택">
+            <a class="ctc-option" href="/coaching/coach-the-coach/kac/" data-route="ctcKac">
+              <span>KAC · 1:1</span>
+              <strong>시험 전 기본 코칭구조 점검</strong>
+              <small>관계 · 합의 · 경청 · 열린 질문 · 실행</small>
+            </a>
+            <a class="ctc-option" href="/coaching/coach-the-coach/kpc/" data-route="ctcKpc">
+              <span>KPC · 1:1</span>
+              <strong>시험 준비 + 실전 코칭 심층분석</strong>
+              <small>타임스탬프 · 재구성 · 재연습 · 실전 적용</small>
+            </a>
           </div>
         </div>
 
-        <div class="hero-controls">
+        <div class="hero-controls ctc-feature-controls">
           <nav class="intent-rail" aria-label="주요 바로가기">
             <a href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">
-              <strong>코칭 신청 <span aria-hidden="true">→</span></strong>
-              <small>스마트스토어 날빛코칭으로 연결</small>
+              <strong>1:1 코칭 <span aria-hidden="true">→</span></strong>
+              <small>스마트스토어 날빛코칭</small>
             </a>
             <button type="button" data-open-menu data-focus-category="tests">
-              <strong>검사도구 <span aria-hidden="true">⌄</span></strong>
-              <small>자기이해·학습·유형 검사</small>
+              <strong>검사도구 <span aria-hidden="true">＋</span></strong>
+              <small>자기이해 · 학습 · 관계</small>
             </button>
             <button type="button" data-open-menu data-focus-category="cards">
-              <strong>카드도구 <span aria-hidden="true">⌄</span></strong>
-              <small>킹덤·KOUM·KINGDOM35</small>
+              <strong>카드도구 <span aria-hidden="true">＋</span></strong>
+              <small>대화 · 성장 · 마인드셋</small>
             </button>
             <a href="/lcms/" data-route="lcms">
               <strong>LCMS <span aria-hidden="true">→</span></strong>
-              <small>데이터 기반 진로교육 인프라</small>
+              <small>데이터 기반 진로교육</small>
             </a>
-            <a href="/spiritual/hero/" data-route="spiritualHero">
-              <strong>콘텐츠 <span aria-hidden="true">→</span></strong>
-              <small>Spiritual Hero 콘텐츠</small>
+            <a href="/maeum-library/" data-route="maeumLibrary">
+              <strong>마음서재 <span aria-hidden="true">→</span></strong>
+              <small>읽고 · 기록하고 · 함께</small>
             </a>
           </nav>
-
-          <div class="slider-ui" role="group" aria-label="슬라이드 제어">
-            <div class="slide-count"><span id="currentSlide">01</span> / 03</div>
-            <div class="slider-arrows">
-              <button class="circle-btn" type="button" data-slide-prev aria-label="이전 슬라이드">←</button>
-              <button class="circle-btn" type="button" data-slide-next aria-label="다음 슬라이드">→</button>
-            </div>
-            <div class="dots" role="tablist" aria-label="슬라이드 선택">
-              <button class="dot is-active" type="button" data-slide-dot="0" aria-label="1번 슬라이드"></button>
-              <button class="dot" type="button" data-slide-dot="1" aria-label="2번 슬라이드"></button>
-              <button class="dot" type="button" data-slide-dot="2" aria-label="3번 슬라이드"></button>
-            </div>
+          <div class="ctc-edition-stamp" aria-label="CTC 운영 정보">
+            <span>DAILYCOACHING</span>
+            <strong>CTC 90</strong>
+            <small>1:1 · ZOOM</small>
           </div>
         </div>
       </div>
@@ -1070,9 +1506,9 @@
     <section class="maeum-feature-section" aria-labelledby="maeumFeatureTitle">
       <article class="maeum-feature-card">
         <div>
-          <p class="maeum-feature-kicker">DISCOVER · READ · RECORD · TOGETHER</p>
-          <h2 id="maeumFeatureTitle">도서뉴스에서 발견한 책이<br><span>한 문장으로 남습니다.</span></h2>
-          <p class="maeum-feature-copy">도서뉴스에서 책을 발견하고, 승인된 참여자가 토스에서 읽고, 원할 때 한줄톡에 문장을 남기고, 독서모임에서 함께 읽는 마음서재입니다.</p>
+          <p class="maeum-feature-kicker">MIND LIBRARY · DISCOVER · READ · RECORD</p>
+          <h2 id="maeumFeatureTitle">한 권의 책이<br><span>한 문장으로 남습니다.</span></h2>
+          <p class="maeum-feature-copy">도서뉴스로 발견하고, 토스에서 읽고, 한줄톡으로 남기고, 독서모임에서 함께 읽습니다.</p>
           <div class="maeum-feature-actions">
             <a href="/maeum-library/" data-route="maeumLibrary">마음서재 들어가기</a>
             <a href="/maeum-library/news/">오늘의 도서뉴스</a>
@@ -1080,8 +1516,8 @@
           </div>
         </div>
         <div class="maeum-feature-note">
-          <blockquote>“문장 하나 앞에서<br>지금의 나를 만납니다.”</blockquote>
-          <p>신청 → 운영자 승인 → 10분 1회 연결코드 → 토스 연결. 기록은 기본 비공개이며 직접 공개를 선택한 한줄톡만 이름 없이 나타납니다.</p>
+          <blockquote>읽은 것을<br>삶의 언어로 바꿉니다.</blockquote>
+          <p>신청 → 운영자 승인 → 연결코드 → 토스 연결. 기록은 기본 비공개이며, 직접 공개를 선택한 한줄톡만 이름 없이 나타납니다.</p>
         </div>
       </article>
     </section>
@@ -1180,7 +1616,7 @@
         <p><a href="https://www.instagram.com/daily_coach_ing" target="_blank" rel="noopener noreferrer">Instagram DM</a></p>
       </div>
     </div>
-    <div class="footer-bottom">© <span id="year">2026</span> DAILYCOACHING. All rights reserved. · Light slider homepage</div>
+    <div class="footer-bottom">© <span id="year">2026</span> DAILYCOACHING. All rights reserved.</div>
   </footer>
 
   <div class="route-toast" role="status" aria-live="polite"></div>
@@ -1190,6 +1626,7 @@
 
     const DAILYCOACHING_IMAGES = Object.freeze({
       firstViewCover: 'https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-17ec9dbc-ec98a4ed9b84-06_39_58.png',
+      ctcEditorial: '/assets/images/home/ctc-editorial-collage.webp',
       mainSlide01: `${WORDPRESS_IMAGE_BASE}dailycoaching-main-slide-01-existence.webp`,
       mainSlide02: `${WORDPRESS_IMAGE_BASE}dailycoaching-main-slide-02-direction.webp`,
       mainSlide03: `${WORDPRESS_IMAGE_BASE}dailycoaching-main-slide-03-tools.webp`,
@@ -1198,6 +1635,7 @@
 
     const DAILYCOACHING_IMAGE_SLOTS = Object.freeze([
       { key: 'firstViewCover', section: '첫 느낌 단일 대문 이미지', file: 'https://ddaycoach.wordpress.com/wp-content/uploads/2026/06/chatgpt-image-2026eb8584-6ec9b94-17ec9dbc-ec98a4ed9b84-06_39_58.png', size: '업로드 원본 사용', prompt: 'WordPress 직접 URL 적용 완료' },
+      { key: 'ctcEditorial', section: '항아리 아래 CTC 편집형 메인', file: 'assets/images/home/ctc-editorial-collage.webp', size: '1536x864', prompt: '사용자 제공 콘크리트·찢어진 종이·코발트 콜라주' },
       { key: 'mainSlide01', section: '메인 슬라이드 1', file: 'dailycoaching-main-slide-01-existence.webp', size: '2400x1500 권장', prompt: '프리미엄 자연광 코칭 장면, 넓은 여백, 깊이 듣는 분위기' },
       { key: 'mainSlide02', section: '메인 슬라이드 2', file: 'dailycoaching-main-slide-02-direction.webp', size: '2400x1500 권장', prompt: '노트, 펜, 창가의 빛, 삶의 방향을 정리하는 고급스러운 장면' },
       { key: 'mainSlide03', section: '메인 슬라이드 3', file: 'dailycoaching-main-slide-03-tools.webp', size: '2400x1500 권장', prompt: '카드도구, 진단지, 교육 로드맵이 정돈된 프리미엄 데스크' },
@@ -1236,19 +1674,9 @@
 
     const SLIDE_CONTENT = Object.freeze([
       {
-        eyebrow: 'Quiet Coaching Studio',
-        title: '문제보다<br><span>존재를 봅니다</span>',
-        subtitle: ''
-      },
-      {
-        eyebrow: 'Quiet Coaching Studio',
-        title: '답보다<br><span>질문을 남깁니다</span>',
-        subtitle: ''
-      },
-      {
-        eyebrow: 'Quiet Coaching Studio',
-        title: '변화보다<br><span>성장을 읽습니다</span>',
-        subtitle: ''
+        eyebrow: 'COACH THE COACH · CTC 90',
+        title: '내 코칭을<br><span>제대로 들여다보는 90분</span>',
+        subtitle: 'KAC는 시험 전 기본 코칭구조를, KPC는 시험 준비와 실제 코칭장면을 더 깊게 분석합니다.'
       }
     ]);
 
@@ -1351,12 +1779,13 @@
 
     function startSlider() {
       window.clearInterval(slideTimer);
+      if (slides.length <= 1) return;
       slideTimer = window.setInterval(() => setSlide(activeSlide + 1), 6400);
     }
 
     function initSlides() {
       loadSlideImage(0);
-      window.setTimeout(() => loadSlideImage(1), 1600);
+      if (slides.length > 1) window.setTimeout(() => loadSlideImage(1), 1600);
     }
 
     function openMenu(focusCategory) {
