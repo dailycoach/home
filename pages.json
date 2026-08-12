@@ -292,5 +292,26 @@
     "category": "activities",
     "url": "/activities/live-board/",
     "source": "https://github.com/dailycoach/live-board"
+  },
+  {
+    "title": "코치더코치 90",
+    "description": "실제 코칭 장면을 함께 관찰하며 KAC 시험 전 기본구조와 KPC 시험·실전 역량을 점검하는 1:1 코치더코치",
+    "category": "brand",
+    "url": "/coaching/coach-the-coach/",
+    "source": "local import"
+  },
+  {
+    "title": "KAC 1:1 코치더코치 90",
+    "description": "KAC 시험 전 실제 코칭의 관계·합의·경청·반영·질문·실행 구조를 점검하는 1:1 과정",
+    "category": "brand",
+    "url": "/coaching/coach-the-coach/kac/",
+    "source": "local import"
+  },
+  {
+    "title": "KPC 1:1 코치더코치 90",
+    "description": "KPC 시험 준비와 실제 유료 코칭 장면의 통합적 경청·개입·성장을 심층분석하는 1:1 과정",
+    "category": "brand",
+    "url": "/coaching/coach-the-coach/kpc/",
+    "source": "local import"
   }
 ]
