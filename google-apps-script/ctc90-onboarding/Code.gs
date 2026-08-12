@@ -3,6 +3,9 @@ const CTC90_FORM = Object.freeze({
   kakaoUrl: 'https://open.kakao.com/o/s2ZmJFHi',
   propertyKey: 'DAILYCOACHING_CTC90_FORM_ID',
   expectedSpreadsheetTitle: 'DAILYCOACHING CTC90 운영원장',
+  kacPrice: '110,000원',
+  kpcPrice: '448,000원',
+  paymentMethod: '계좌이체',
 });
 
 /**
@@ -32,13 +35,13 @@ function installCtc90Form() {
   buildSharedBefore_(form);
 
   const kacPage = form.addPageBreakItem()
-    .setTitle('KAC 90 | 기본 코칭구조를 고객 중심으로')
-    .setHelpText('관계·합의·고객 언어 경청·반영·열린 질문·고객 주도·실행을 중심으로 봅니다.');
+    .setTitle('KAC 90 | 시험 전 기본 코칭구조 점검')
+    .setHelpText('KAC 시험을 앞두고 관계·합의·경청·반영·열린 질문·고객 주도·실행을 실제 장면으로 확인합니다.');
   buildKacBranch_(form);
 
   const kpcPage = form.addPageBreakItem()
-    .setTitle('KPC 90 | 고객의 전체 흐름에 맞는 통합적 선택')
-    .setHelpText('통합적 경청·침묵·감정·에너지·경험·의미·가치·욕구·신념·정체성·은유·직관을 중심으로 봅니다.');
+    .setTitle('KPC 90 | 시험 준비 + 실전 코칭 심층분석')
+    .setHelpText('KPC 시험 준비와 실제 유료 코칭의 깊이를 함께 봅니다. 통합적 경청·침묵·감정·에너지·경험·의미·가치·욕구·신념·정체성·은유·직관을 중심으로 관찰합니다.');
   buildKpcBranch_(form);
 
   const commonPage = form.addPageBreakItem()
@@ -70,8 +73,11 @@ function configureForm_(form) {
       '내가 무엇을 했는지, 고객에게 무엇이 일어났는지,',
       '어떤 강점이 반복되고 어디에서 한 걸음 더 성장할 수 있는지 함께 발견합니다.',
       '',
+      '가격·결제방식·일정변경/환불·자료삭제 기준은 이 Form 안에서 확인합니다.',
+      '계좌번호는 Form 제출 후 전용 카카오 1:1톡에서 개별 안내합니다.',
+      '',
       '이 설문은 단순 신청서가 아닙니다. 지금부터 코치더코치가 시작됩니다.',
-      '예상 소요: 약 5~8분',
+      '예상 소요: 약 7~10분',
     ].join('\n'))
     .setConfirmationMessage([
       '준비가 끝났습니다.',
@@ -81,6 +87,7 @@ function configureForm_(form) {
       '',
       CTC90_FORM.kakaoUrl,
       '',
+      '확인 후 계좌정보와 다음 진행을 개별 안내드립니다.',
       '고객동의가 완료된 뒤 코치와 고객의 음성이 명확하게 구분되는 영상 또는 녹음파일을 전달해 주세요.',
     ].join('\n'))
     .setCollectEmail(false)
@@ -100,7 +107,7 @@ function buildSharedBefore_(form) {
 
   const productItem = form.addMultipleChoiceItem()
     .setTitle('신청할 코치더코치 90을 선택해 주세요.')
-    .setHelpText('KAC와 KPC는 동일한 평가상품이 아닙니다. 현재 준비수준과 성장목적에 맞춰 선택합니다.')
+    .setHelpText('KAC는 시험 전 기본 코칭구조 점검, KPC는 시험 준비와 실전 코칭 심층분석을 함께 다룹니다.')
     .setRequired(true);
   productItem.setTitle('[상품선택] 신청할 코치더코치 90을 선택해 주세요.');
 
@@ -156,6 +163,14 @@ function setProductRouting_(form, kacPage, kpcPage) {
 }
 
 function buildKacBranch_(form) {
+  section_(form, 'KAC 1:1 코치더코치 90 | ' + CTC90_FORM.kacPrice, [
+    '목적: KAC 시험 전 실제 코칭 기본구조 점검',
+    '진행: 실제 코칭장면 사전검토 + 1:1 CTC 90분 + 개별 피드백',
+    '결제: ' + CTC90_FORM.paymentMethod,
+    '계좌번호는 Form 제출 후 카카오 1:1톡에서 개별 안내합니다.',
+  ].join('\n'));
+  consentCheckbox_(form, 'KAC 1:1 코치더코치 90 참가비 ' + CTC90_FORM.kacPrice + '과 계좌이체 결제방식을 확인했습니다.');
+
   checkbox_(form, '특히 확인하고 싶은 KAC 영역을 선택해 주세요.', [
     '관계', '합의', '고객 언어 경청', '감정·의도·욕구 반영', '열린 질문',
     '고객에게 선택권 두기', '실행', '세션 흐름', '아직 잘 모르겠다.',
@@ -164,6 +179,14 @@ function buildKacBranch_(form) {
 }
 
 function buildKpcBranch_(form) {
+  section_(form, 'KPC 1:1 코치더코치 90 | ' + CTC90_FORM.kpcPrice, [
+    '목적: KPC 시험 준비 + 실제 유료 코칭 역량 심층분석',
+    '진행: 실제 코칭장면 사전 심층분석 + 핵심 타임스탬프 + 1:1 CTC 90분 + 재구성·재연습 + 개별 분석리포트',
+    '결제: ' + CTC90_FORM.paymentMethod,
+    '계좌번호는 Form 제출 후 카카오 1:1톡에서 개별 안내합니다.',
+  ].join('\n'));
+  consentCheckbox_(form, 'KPC 1:1 코치더코치 90 참가비 ' + CTC90_FORM.kpcPrice + '과 계좌이체 결제방식을 확인했습니다.');
+
   checkbox_(form, '특히 확인하고 싶은 KPC 영역을 선택해 주세요.', [
     '통합적 경청', '침묵', '고객의 감정·에너지', '고객 경험과 의미',
     '가치·욕구·신념', '정체성', '은유·직관', '개입하지 않아야 할 순간',
@@ -173,6 +196,26 @@ function buildKpcBranch_(form) {
 }
 
 function buildCommonAfter_(form) {
+  section_(form, '일정변경 · 취소 · 환불 운영기준', [
+    '• 일정변경: CTC 예정시간 48시간 전까지 1회 무료 변경',
+    '• 48시간 이내 변경: 1회 한정 재일정 협의',
+    '• 사전분석 착수 전 취소: 전액 환불',
+    '• 사전분석 착수 후 CTC 전 취소: KAC 44,000원 / KPC 179,200원 공제 후 환불',
+    '• CTC 진행 후 리포트 제작 미착수: 리포트분 KAC 11,000원 / KPC 44,800원 환불 가능',
+    '• 리포트 제작 착수 후: 이미 제공·착수한 범위는 환불에서 제외',
+    '• 노쇼: 1회 재일정 협의 가능. 이미 완료된 사전분석 비용은 환불하지 않음',
+    '',
+    '위 기준은 DAILYCOACHING의 운영기준이며, 관계 법령상 강행규정이 있는 경우 해당 기준을 우선합니다.',
+  ].join('\n'));
+  consentCheckbox_(form, '일정변경·취소·환불 운영기준을 확인했습니다.');
+
+  section_(form, '원본 코칭파일 보관 · 삭제', [
+    '• 영상·음성 원본: 최종 리포트 전달일로부터 30일 후 삭제',
+    '• 중도취소 확정: 7일 이내 원본 삭제',
+    '• 원본파일과 분석작업자료·거래기록은 구분하여 관리합니다.',
+  ].join('\n'));
+  consentCheckbox_(form, '원본 코칭파일의 보관·삭제 기준을 확인했습니다.');
+
   section_(form, 'VIDEO & AUDIO FILE 기준', '영상 또는 음성파일 모두 가능합니다. 가장 중요한 기준은 코치와 고객의 음성을 명확하게 식별할 수 있는가입니다.');
   consentCheckbox_(form, '실제 고객과 진행한 실제 코칭입니다.');
   consentCheckbox_(form, '코치와 고객의 목소리를 명확하게 구분할 수 있습니다.');
@@ -186,7 +229,7 @@ function buildCommonAfter_(form) {
   consentCheckbox_(form, 'DAILYCOACHING 상위코치가 해당 자료를 전달받아 사전분석한다는 사실을 안내했습니다.');
   consentCheckbox_(form, 'CTC 과정에서 코칭장면이 분석·피드백에 활용될 수 있음을 안내했습니다.');
   consentCheckbox_(form, '해당 자료가 홍보·콘텐츠·마케팅에 자동 활용되지 않는다는 사실을 안내했습니다.');
-  consentCheckbox_(form, '정해진 운영정책에 따라 자료가 삭제된다는 사실을 안내했습니다.');
+  consentCheckbox_(form, '원본 코칭파일이 최종 리포트 전달일로부터 30일 후 삭제되며, 중도취소 시 7일 이내 삭제된다는 사실을 안내했습니다.');
   multipleChoice_(form, '고객이 위 내용을 이해하고 동의했나요?', ['예', '아직 확인 전'], true, false, '‘아직 확인 전’인 경우 고객동의 확인 후 파일을 전달해 주세요.');
 
   section_(form, '추천서 검토', '추천서는 상품이 아니라 관찰의 결과입니다. 검토는 포함되지만 작성 자체가 자동 보장되지는 않습니다.');
@@ -286,7 +329,6 @@ function writeFormLinks_(spreadsheet, result) {
   if (gateSheet) {
     gateSheet.getRange('D6').setValue('검토중');
     gateSheet.getRange('E6').setValue(result.editUrl);
-    gateSheet.getRange('F6').setValue('실제 Form 생성 완료. KAC/KPC 분기·필수문항·완료화면 검수 후 통과로 변경합니다.');
+    gateSheet.getRange('F6').setValue('실제 Form 생성 완료. KAC/KPC 분기·가격·결제·환불·삭제·필수동의·완료화면을 검수한 뒤 통과로 변경합니다.');
   }
 }
-
