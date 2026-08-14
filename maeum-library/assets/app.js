@@ -287,14 +287,14 @@ function initNews() {
     requests.get(target)?.abort();
     const controller = new AbortController();
     requests.set(target, controller);
-    target.replaceChildren(loadingState('승인된 도서뉴스를 불러오고 있습니다.'));
+    target.replaceChildren(loadingState('도서뉴스를 불러오고 있습니다.'));
     target.setAttribute('aria-busy', 'true');
     try {
       items = await fetchNews(compact ? 5 : 60, controller.signal);
       buildFilters();
       render();
     } catch (error) {
-      if (error?.name !== 'AbortError') target.replaceChildren(errorState('도서뉴스를 불러오지 못했습니다.', '자동수집 후보가 아니라 운영자가 승인한 발행 목록을 확인하고 있습니다.', run));
+      if (error?.name !== 'AbortError') target.replaceChildren(errorState('도서뉴스를 불러오지 못했습니다.', '잠시 후 다시 시도해 주세요.', run));
     } finally {
       if (requests.get(target) === controller) {
         requests.delete(target);
@@ -328,13 +328,13 @@ function initApplication() {
       if (!response.ok || !data.ok) throw new Error(data.message || '신청을 접수하지 못했습니다.');
       form.reset();
       form.hidden = true;
-      setStatus(status, `마음서재 참여 신청이 접수되었습니다. 운영자가 내용을 확인한 뒤 참여 안내를 드립니다. 접수번호 ${data.receipt || ''}`);
+      setStatus(status, `마음서재 참여 신청이 접수되었습니다. 내용을 확인한 뒤 참여 안내를 드립니다. 접수번호 ${data.receipt || ''}`);
       status?.focus();
     } catch (error) {
       setStatus(status, error.message || '잠시 후 다시 시도해 주세요.', true);
     } finally {
       submit.disabled = false;
-      submit.textContent = '참여 신청 접수하기';
+      submit.textContent = '참여 신청하기';
     }
   });
 }
@@ -361,7 +361,7 @@ async function exchangeTossSession() {
 }
 
 function visibilityLabel(entry) {
-  if (entry.moderationStatus === 'hidden') return '운영 검수로 숨김';
+  if (entry.moderationStatus === 'hidden') return '공개 제한';
   return entry.shareConsent === true || entry.shareConsent === 1 || entry.status === 'published' ? '익명 공개' : '비공개';
 }
 
@@ -442,7 +442,7 @@ function initMyRecords() {
 }
 
 function gatheringLabel(value) {
-  return { recruiting: '모집 중', planning: '일정 조율 중', active: '운영 중', closed: '모집 종료', preparing: '다음 기수 준비' }[value] || '다음 기수 준비';
+  return { recruiting: '모집 중', planning: '일정 조율 중', active: '운영 중', closed: '모집 종료', preparing: '다음 모임 준비 중' }[value] || '다음 모임 준비 중';
 }
 
 async function initGathering() {
@@ -456,9 +456,10 @@ async function initGathering() {
     if (!response.ok || !data.ok) throw new Error('gathering');
     status.textContent = gatheringLabel(data.gathering?.status);
     if (name) name.textContent = data.gathering?.name || '다음 마음서재 독서모임';
-    if (schedule) schedule.textContent = data.gathering?.zoomSchedule || '일정 확정 후 안내';
+    if (schedule) schedule.textContent = data.gathering?.zoomSchedule || '준비 중';
   } catch {
-    status.textContent = '운영 상태 확인 중';
+    status.textContent = '다음 모임 준비 중';
+    if (schedule) schedule.textContent = '준비 중';
   }
 }
 
