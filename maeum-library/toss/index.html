@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>토스 마음서재 열기 | 마음서재</title>
+  <meta name="description" content="토스 마음서재를 여는 공식 진입 페이지">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://daily-coach-ing.com/maeum-library/toss/">
+  <link rel="stylesheet" href="/maeum-library/assets/styles.css?v=20260809-v24-final">
+</head>
+<body class="connect-page">
+  <a class="skip" href="#main">본문 바로가기</a>
+  <main id="main" class="page-shell">
+    <section class="page-hero">
+      <p class="eyebrow">OPEN IN TOSS</p>
+      <h1>토스 마음서재를<br>열고 있습니다.</h1>
+      <p>자동으로 열리지 않으면 아래 버튼을 눌러주세요.</p>
+      <div class="hero-actions">
+        <a id="open-toss" class="button accent" href="intoss://maum-library-entry">토스 마음서재 열기</a>
+        <a class="button ghost" href="https://minion.toss.im/FZZaAaJp">공유 링크로 다시 시도</a>
+      </div>
+      <p class="form-message" id="toss-status" role="status" aria-live="polite">토스 앱으로 연결을 시도합니다.</p>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const DEEP_LINK = 'intoss://maum-library-entry';
+      const FALLBACK_LINK = 'https://minion.toss.im/FZZaAaJp';
+      const status = document.getElementById('toss-status');
+      let leftPage = false;
+      let fallbackTimer;
+
+      const cancelFallback = () => {
+        leftPage = true;
+        if (fallbackTimer) clearTimeout(fallbackTimer);
+      };
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelFallback();
+      });
+      window.addEventListener('pagehide', cancelFallback, { once: true });
+      window.addEventListener('blur', () => {
+        if (document.hidden) cancelFallback();
+      });
+
+      try {
+        window.location.href = DEEP_LINK;
+      } catch (_) {
+        status.textContent = '자동 연결이 되지 않았습니다. 아래 버튼을 눌러주세요.';
+      }
+
+      fallbackTimer = window.setTimeout(() => {
+        if (leftPage || document.hidden) return;
+        status.textContent = '토스 앱이 열리지 않으면 공유 링크로 연결합니다.';
+        window.location.replace(FALLBACK_LINK);
+      }, 2200);
+    })();
+  </script>
+</body>
+</html>
