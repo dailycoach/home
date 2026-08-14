@@ -1,5 +1,5 @@
 const API_BASE = 'https://maeum-api.daily-coach-ing.com';
-const TOSS_URL = 'https://minion.toss.im/FZZaAaJp';
+const TOSS_URL = '/maeum-library/toss/';
 const requests = new WeakMap();
 
 const $ = (selector, scope = document) => scope.querySelector(selector);
