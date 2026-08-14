@@ -4,7 +4,9 @@
   const VERSION = "2.3";
   const PROGRESS_KEY = "dailycoaching.myvoice.v2.3.progress";
   const NOTES_KEY = "dailycoaching.myvoice.v2.3.notes";
-  const REFLECTIONS_KEY = "dailycoaching.myvoice.v2.3.reflections";
+  const SCALE_VALUES = [1, 2, 3, 4, 5, 6, 7];
+  const SCALE_WORDS = ["전혀 아니다", "아니다", "약간 아니다", "보통", "약간 그렇다", "그렇다", "매우 그렇다"];
+  const FLOW_VERSION = "5-plus-1";
 
   const CONTEXTS = [
     "발표",
@@ -362,6 +364,7 @@
 
   function defaultState() {
     return {
+      flowVersion: FLOW_VERSION,
       stage: "intro",
       context: "",
       factorPage: 0,
@@ -377,7 +380,6 @@
       answeredQuestionIds: [],
       assistOpen: false,
       previousSnapshot: latestNote(),
-      retestReflection: "",
       startedAt: null,
       completedAt: null
     };
@@ -400,11 +402,31 @@
   function loadState() {
     const saved = loadJSON(PROGRESS_KEY, null);
     if (!saved || typeof saved !== "object") return defaultState();
-    return Object.assign(defaultState(), saved, {
+    const restored = Object.assign(defaultState(), saved, {
       factorAnswers: saved.factorAnswers || {},
       sceneRanks: saved.sceneRanks || {},
       answeredQuestionIds: saved.answeredQuestionIds || []
     });
+    if (saved.flowVersion !== FLOW_VERSION && ["questions", "scenes"].includes(restored.stage)) {
+      const legacyScaleMap = { 1: 1, 2: 3, 3: 4, 4: 6, 5: 7 };
+      Object.keys(restored.factorAnswers).forEach(function (id) {
+        const legacyValue = Number(restored.factorAnswers[id]);
+        if (legacyScaleMap[legacyValue]) restored.factorAnswers[id] = legacyScaleMap[legacyValue];
+      });
+      for (let index = 0; index < FACTORS.length; index += 1) {
+        const factor = FACTORS[index];
+        const factorComplete = factor.questions.every(function (_, questionIndex) {
+          return SCALE_VALUES.includes(Number(restored.factorAnswers[`${factor.id}-${questionIndex}`]));
+        });
+        const sceneComplete = (restored.sceneRanks[SCENES[index].id] || []).length === 4;
+        restored.factorPage = index;
+        restored.scenePage = index;
+        restored.stage = factorComplete ? "scenes" : "questions";
+        if (!factorComplete || !sceneComplete) break;
+      }
+    }
+    restored.flowVersion = FLOW_VERSION;
+    return restored;
   }
 
   let state = loadState();
@@ -459,10 +481,13 @@
   }
 
   function progressValue() {
+    if (state.stage === "questions" || state.stage === "scenes") {
+      const round = state.stage === "questions" ? state.factorPage : state.scenePage;
+      const step = round * 2 + (state.stage === "scenes" ? 1 : 0);
+      return 8 + (step / (FACTORS.length * 2)) * 67;
+    }
     const stages = {
       intro: 0,
-      questions: 8 + (state.factorPage / FACTORS.length) * 52,
-      scenes: 60 + (state.scenePage / SCENES.length) * 15,
       results: 78,
       questionSelect: 84,
       coachingAnswer: 89,
@@ -505,7 +530,6 @@
   }
 
   function introHTML() {
-    const last = state.previousSnapshot || latestNote();
     return `
       <div class="site-shell">
         ${headerHTML()}
@@ -516,7 +540,7 @@
                 <p class="eyebrow on-dark">SPEECH AWARENESS · COACHING QUESTION ENGINE</p>
                 <h1 class="display-title">MY<br />VOICE</h1>
                 <p class="hero-emphasis">말을 잘하는지 평가하기보다<br />내가 어떻게 말하고 있는지 바라봅니다.</p>
-                <p class="lead">30개의 스피치 문항과 6개의 실제 장면을 지나, 지금 나에게 가장 생각해볼 만한 질문 하나를 직접 선택합니다.</p>
+                <p class="lead">스피치 문항 5개 뒤에 실제 장면 질문 1개가 이어집니다. 이 흐름을 여섯 번 지나 지금 나에게 가장 생각해볼 만한 질문 하나를 직접 선택합니다.</p>
                 <div class="hero-actions">
                   <button class="button button-light button-arrow" type="button" data-action="jump-context">검사 시작하기</button>
                 </div>
@@ -540,21 +564,13 @@
                 <p class="eyebrow">HOW IT WORKS</p>
                 <h2 class="section-title">점수보다<br />질문이 남는 검사</h2>
                 <ul class="experience-list">
-                  <li><strong>01</strong><span>여섯 가지 말하기 힘을 살핍니다.</span></li>
+                  <li><strong>01</strong><span>5개 문항과 1개 장면을 한 묶음으로 살핍니다.</span></li>
                   <li><strong>02</strong><span>나의 스피치 스타일을 보조 렌즈로 확인합니다.</span></li>
                   <li><strong>03</strong><span>세 질문 중 지금 마음에 걸리는 하나를 고릅니다.</span></li>
                   <li><strong>04</strong><span>실제 장면과 다음 행동을 MY VOICE NOTE에 남깁니다.</span></li>
                 </ul>
               </aside>
               <div>
-                ${last ? `
-                  <section class="panel resume-card">
-                    <p class="panel-label">BEFORE → NOW</p>
-                    <h3 class="panel-title">지난번에 선택한 목소리가 있습니다.</h3>
-                    <p class="body-copy">“${escapeHTML(last.nextVoice || "기록된 다음 행동") }”</p>
-                    <p class="micro-copy">이번 검사를 마치면 이전 결과와 현재 결과를 함께 보며 실제로 무엇이 달라졌는지 기록할 수 있습니다.</p>
-                  </section>
-                ` : ""}
                 <section class="panel">
                   <p class="panel-label">OPTIONAL CONTEXT</p>
                   <h3 class="panel-title">요즘 가장 신경 쓰이는<br />말하기 상황은 무엇인가요?</h3>
@@ -565,7 +581,7 @@
                     }).join("")}
                   </div>
                   <div class="intro-start">
-                    <button class="button button-primary button-arrow" type="button" data-action="start">${last ? "현재의 MY VOICE 시작" : "MY VOICE 시작"}</button>
+                    <button class="button button-primary button-arrow" type="button" data-action="start">MY VOICE 시작</button>
                     <span class="time-note">약 8–12분 · 정답 없음 · 자동 저장</span>
                   </div>
                 </section>
@@ -585,7 +601,8 @@
       return Number.isFinite(Number(state.factorAnswers[`${factor.id}-${index}`]));
     }).length;
     const complete = answered === factor.questions.length;
-    const scaleWords = ["전혀", "드물게", "보통", "자주", "매우"];
+    const startNumber = state.factorPage * 5 + 1;
+    const endNumber = startNumber + 4;
     return `
       <div class="site-shell">
         ${headerHTML()}
@@ -593,8 +610,8 @@
           <div class="screen-inner reading-width">
             <div class="stage-head">
               <div>
-                <p class="step-count">SPEECH QUESTIONS · ${String(state.factorPage + 1).padStart(2, "0")} / 06</p>
-                <h1 class="screen-title">지금의 말하기를<br />있는 그대로 표시해주세요.</h1>
+                <p class="step-count">ROUND ${String(state.factorPage + 1).padStart(2, "0")} / 06 · QUESTIONS ${String(startNumber).padStart(2, "0")}–${String(endNumber).padStart(2, "0")}</p>
+                <h1 class="screen-title">5개의 스피치 문항에<br />있는 그대로 답해주세요.</h1>
               </div>
               <p class="stage-help">잘해야 하는 나보다, 최근 실제 장면의 나와 가까운 답을 선택합니다.</p>
             </div>
@@ -615,8 +632,8 @@
                     <p class="question-number">${String(globalNo).padStart(2, "0")}</p>
                     <p class="question-text">${escapeHTML(question)}</p>
                     <div class="scale-options" role="radiogroup" aria-label="${escapeHTML(question)}">
-                      ${[1,2,3,4,5].map(function (value) {
-                        return `<button type="button" class="scale-button ${current === value ? "is-selected" : ""}" role="radio" aria-checked="${current === value}" aria-label="${value}점 ${scaleWords[value - 1]}" data-action="factor-answer" data-id="${id}" data-value="${value}"><span class="scale-number">${value}</span><span class="scale-word">${scaleWords[value - 1]}</span></button>`;
+                      ${SCALE_VALUES.map(function (value) {
+                        return `<button type="button" class="scale-button ${current === value ? "is-selected" : ""}" role="radio" aria-checked="${current === value}" aria-label="${value}점 ${SCALE_WORDS[value - 1]}" data-action="factor-answer" data-id="${id}" data-value="${value}"><span class="scale-number">${value}</span><span class="scale-word">${SCALE_WORDS[value - 1]}</span></button>`;
                       }).join("")}
                     </div>
                     <div class="scale-legend"><span>나와 거리가 멀다</span><span>나와 매우 가깝다</span></div>
@@ -628,7 +645,7 @@
               <span class="action-meta">이 영역 ${answered} / 5 응답</span>
               <div class="action-buttons">
                 <button class="button button-ghost" type="button" data-action="factor-back">이전</button>
-                <button class="button button-primary button-arrow" type="button" data-action="factor-next" ${complete ? "" : "disabled"}>${state.factorPage === FACTORS.length - 1 ? "장면 질문으로" : "다음 영역"}</button>
+                <button class="button button-primary button-arrow" type="button" data-action="factor-next" ${complete ? "" : "disabled"}>장면 질문으로</button>
               </div>
             </div>
           </div>
@@ -649,8 +666,8 @@
           <div class="screen-inner reading-width">
             <div class="stage-head">
               <div>
-                <p class="step-count">SPEECH SCENES · ${String(state.scenePage + 1).padStart(2, "0")} / 06</p>
-                <h1 class="screen-title">말하는 장면 속<br />나의 반응을 골라보세요.</h1>
+                <p class="step-count">ROUND ${String(state.scenePage + 1).padStart(2, "0")} / 06 · SCENE QUESTION</p>
+                <h1 class="screen-title">방금 살펴본 말하기 힘을<br />실제 장면에 연결해보세요.</h1>
               </div>
               <p class="stage-help">네 가지 모두 순서대로 선택합니다. 스타일은 말하기 결과를 돕는 보조 렌즈입니다.</p>
             </div>
@@ -675,7 +692,7 @@
               <span class="action-meta">${complete ? "4·3·2·1 선택 완료" : `${ranking.length} / 4 선택`}</span>
               <div class="action-buttons">
                 <button class="button button-ghost" type="button" data-action="scene-back">이전</button>
-                <button class="button button-primary button-arrow" type="button" data-action="scene-next" ${complete ? "" : "disabled"}>${state.scenePage === SCENES.length - 1 ? "결과 보기" : "다음 장면"}</button>
+                <button class="button button-primary button-arrow" type="button" data-action="scene-next" ${complete ? "" : "disabled"}>${state.scenePage === SCENES.length - 1 ? "결과 보기" : "다음 5개 문항"}</button>
               </div>
             </div>
           </div>
@@ -690,7 +707,7 @@
       const total = factor.questions.reduce(function (sum, _, index) {
         return sum + Number(state.factorAnswers[`${factor.id}-${index}`] || 0);
       }, 0);
-      scores[factor.id] = Math.round(((total - 5) / 20) * 100);
+      scores[factor.id] = Math.round(((total - 5) / 30) * 100);
     });
     const orderedFactors = FACTORS.slice().sort(function (a, b) {
       const delta = scores[b.id] - scores[a.id];
@@ -822,29 +839,33 @@
   function comparisonHTML(result) {
     const previous = state.previousSnapshot;
     if (!previous || !previous.result || !previous.result.scores) return "";
+    const changes = FACTORS.map(function (factor) {
+      const before = Number(previous.result.scores[factor.id] || 0);
+      const now = Number(result.scores[factor.id] || 0);
+      return { factor: factor, before: before, now: now, delta: now - before };
+    });
+    const rising = changes.slice().sort(function (a, b) { return b.delta - a.delta; })[0];
+    const falling = changes.slice().sort(function (a, b) { return a.delta - b.delta; })[0];
+    let summary = "여섯 영역의 점수 흐름이 이전과 같은 범위에 머물렀습니다.";
+    if (rising.delta > 0 && falling.delta < 0) {
+      summary = `가장 크게 높아진 영역은 ${rising.factor.name} +${rising.delta}점이며, 가장 낮아진 영역은 ${falling.factor.name} ${falling.delta}점입니다.`;
+    } else if (rising.delta > 0) {
+      summary = `가장 크게 높아진 영역은 ${rising.factor.name} +${rising.delta}점입니다.`;
+    } else if (falling.delta < 0) {
+      summary = `가장 크게 낮아진 영역은 ${falling.factor.name} ${falling.delta}점입니다.`;
+    }
     return `
       <section class="comparison-panel" aria-labelledby="comparison-title">
         <p class="eyebrow">BEFORE → NOW → CHANGE</p>
-        <h2 id="comparison-title" class="section-title">점수보다 먼저,<br />지난 선택을 다시 봅니다.</h2>
+        <h2 id="comparison-title" class="section-title">말하기 힘의<br />변화 흐름을 비교합니다.</h2>
         <div class="comparison-list">
-          ${FACTORS.map(function (factor) {
-            const before = Number(previous.result.scores[factor.id] || 0);
-            const now = Number(result.scores[factor.id] || 0);
-            const delta = now - before;
-            const cls = delta > 0 ? "up" : delta < 0 ? "down" : "same";
-            const sign = delta > 0 ? "+" : "";
-            return `<div class="comparison-row"><strong>${factor.name}</strong><span class="previous-value">이전 ${before} → 현재 ${now}</span><span class="delta ${cls}">${sign}${delta}</span></div>`;
+          ${changes.map(function (change) {
+            const cls = change.delta > 0 ? "up" : change.delta < 0 ? "down" : "same";
+            const sign = change.delta > 0 ? "+" : "";
+            return `<div class="comparison-row"><strong>${change.factor.name}</strong><span class="previous-value">이전 ${change.before} → 현재 ${change.now}</span><span class="delta ${cls}">${sign}${change.delta}</span></div>`;
           }).join("")}
         </div>
-        <div class="previous-action">
-          <p>지난번 당신이 선택했던 것은</p>
-          <strong>“${escapeHTML(previous.nextVoice || "기록된 다음 행동") }”</strong>
-        </div>
-        <div class="reflection-area">
-          <label class="input-label" for="retest-reflection">이번에는 실제로 무엇이 달라졌나요?</label>
-          <textarea id="retest-reflection" class="coach-input" data-field="retestReflection" placeholder="점수 변화가 아니라 실제 말하기 장면에서 달라진 점을 적어보세요.">${escapeHTML(state.retestReflection || "")}</textarea>
-          <button class="button button-outline" type="button" data-action="save-reflection">변화 기록하기</button>
-        </div>
+        <p class="change-summary">${escapeHTML(summary)}</p>
       </section>
     `;
   }
@@ -1045,7 +1066,7 @@
     const list = Array.isArray(notes) ? notes : [];
     if (!list.some(function (item) { return item.id === note.id; })) {
       list.push(note);
-      try { localStorage.setItem(NOTES_KEY, JSON.stringify(list.slice(-12))); } catch (_) {}
+      try { localStorage.setItem(NOTES_KEY, JSON.stringify(list.slice(-50))); } catch (_) {}
     }
     return note;
   }
@@ -1202,19 +1223,6 @@
     showToast("MY VOICE NOTE를 저장했습니다.");
   }
 
-  function saveReflection() {
-    const value = String(state.retestReflection || "").trim();
-    if (!value) {
-      showToast("달라진 점을 한 문장 이상 적어주세요.");
-      return;
-    }
-    const list = loadJSON(REFLECTIONS_KEY, []);
-    const reflections = Array.isArray(list) ? list : [];
-    reflections.push({ date: new Date().toISOString(), text: value, result: state.result });
-    try { localStorage.setItem(REFLECTIONS_KEY, JSON.stringify(reflections.slice(-12))); } catch (_) {}
-    showToast("이번 변화가 기기에 저장되었습니다.");
-  }
-
   document.addEventListener("click", function (event) {
     const target = event.target.closest("[data-action]");
     if (!target) return;
@@ -1255,20 +1263,12 @@
       return;
     }
     if (action === "factor-next") {
-      if (state.factorPage < FACTORS.length - 1) {
-        state.factorPage += 1;
-        saveState();
-        render(true);
-      } else {
-        go("scenes", { scenePage: 0 });
-      }
+      go("scenes", { scenePage: state.factorPage });
       return;
     }
     if (action === "factor-back") {
       if (state.factorPage > 0) {
-        state.factorPage -= 1;
-        saveState();
-        render(true);
+        go("scenes", { scenePage: state.factorPage - 1 });
       } else {
         go("intro");
       }
@@ -1295,22 +1295,14 @@
     }
     if (action === "scene-next") {
       if (state.scenePage < SCENES.length - 1) {
-        state.scenePage += 1;
-        saveState();
-        render(true);
+        go("questions", { factorPage: state.scenePage + 1 });
       } else {
         finishAssessment();
       }
       return;
     }
     if (action === "scene-back") {
-      if (state.scenePage > 0) {
-        state.scenePage -= 1;
-        saveState();
-        render(true);
-      } else {
-        go("questions", { factorPage: FACTORS.length - 1 });
-      }
+      go("questions", { factorPage: state.scenePage });
       return;
     }
     if (action === "open-questions") {
@@ -1404,11 +1396,8 @@
       });
       saveState();
       render(true);
-      showToast("지난 NEXT VOICE를 보존하고 새 검사를 준비했습니다.");
+      showToast("새 검사를 준비했습니다.");
       return;
-    }
-    if (action === "save-reflection") {
-      saveReflection();
     }
   });
 
@@ -1435,6 +1424,8 @@
     factorCount: FACTORS.length,
     speechQuestionCount: FACTORS.reduce(function (sum, factor) { return sum + factor.questions.length; }, 0),
     sceneCount: SCENES.length,
+    scalePoints: SCALE_VALUES.length,
+    flowPattern: FLOW_VERSION,
     reset: function () {
       state = defaultState();
       saveState();
