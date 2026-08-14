@@ -84,7 +84,7 @@ assert.doesNotMatch(write, /<form|data-entry-form/);
 
 const app = await read('maeum-library/assets/app.js');
 assert.match(app, /https:\/\/maeum-api\.daily-coach-ing\.com/);
-assert.match(app, /https:\/\/minion\.toss\.im\/NRHKhVoA/);
+assert.match(app, /https:\/\/minion\.toss\.im\/FZZaAaJp/);
 assert.match(app, /\/api\/participant\/toss-exchange/);
 assert.doesNotMatch(app, /\/api\/participant\/connect/);
 assert.doesNotMatch(app, /\/api\/participant\/entries['"`]/);
