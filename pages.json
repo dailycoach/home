@@ -148,108 +148,38 @@
   },
   {
     "title": "마음서재",
-    "description": "도서뉴스에서 책을 발견하고, 승인된 참여자가 토스에서 읽고, 한줄톡과 독서모임으로 이어가는 독서 서비스",
+    "description": "도서뉴스에서 책을 발견하고, 토스에서 읽고, 한줄톡과 독서모임으로 이어가는 독서 서비스",
     "category": "contents",
     "url": "/maeum-library/",
     "source": "local import"
   },
   {
-    "title": "마음서재 소개와 편집 원칙",
-    "description": "마음서재가 책과 마음을 연결하는 방식과 콘텐츠 편집 원칙을 소개하는 페이지",
-    "category": "contents",
-    "url": "/maeum-library/about/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "토스 마음서재",
-    "description": "앱인토스 마음서재와 웹 마음서재 한줄톡의 연결 방식을 안내하는 페이지",
-    "category": "contents",
-    "url": "/maeum-library/app/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "마음서재 책읽기",
-    "description": "책을 읽고 남은 문장과 생각을 삶의 장면으로 이어가는 읽기 콘텐츠",
-    "category": "contents",
-    "url": "/maeum-library/books/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "코치의 서재",
-    "description": "코칭 현장에서 길어 올린 질문과 독서 경험을 나누는 칼럼",
-    "category": "contents",
-    "url": "/maeum-library/columns/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "마음서재 마음읽기",
-    "description": "읽기 전후의 감정과 내면의 움직임을 살피는 마음 콘텐츠",
-    "category": "contents",
-    "url": "/maeum-library/mind/",
-    "source": "maeum-library legacy migration"
-  },
-  {
     "title": "마음서재 도서뉴스",
-    "description": "자동수집 후보 가운데 사람이 검토하고 승인한 새 책·작가·출판·독서문화 소식",
+    "description": "새 책·작가·출판·서점과 독서문화의 흐름을 골라 전하는 도서뉴스",
     "category": "contents",
     "url": "/maeum-library/news/",
-    "source": "Google Sheets editorial review → approved public API"
+    "source": "local import"
   },
   {
     "title": "마음서재 참여 신청",
-    "description": "운영자 검토와 승인을 거쳐 기존 1회 토스 연결코드를 안내받는 참여 신청",
+    "description": "마음서재에서 함께 읽고 기록하기 위한 참여 신청",
     "category": "contents",
     "url": "/maeum-library/apply/",
-    "source": "maeum-library applications"
+    "source": "local import"
   },
   {
     "title": "마음서재 한줄톡",
-    "description": "참여자가 직접 익명 공개를 선택한 문장을 읽고 검색하는 공개 서재",
+    "description": "이름 없이 나누기로 선택한 문장을 읽고 검색하는 공개 서재",
     "category": "contents",
     "url": "/maeum-library/library/",
-    "source": "maeum-library entries"
+    "source": "local import"
   },
   {
     "title": "마음서재 독서모임",
-    "description": "실제 운영 DB의 상태와 확정된 일정만 안내하는 독서모임 페이지",
+    "description": "한 문장을 사이에 두고 서로의 읽기를 나누는 독서모임",
     "category": "contents",
     "url": "/maeum-library/gathering/",
-    "source": "maeum-library cohorts"
-  },
-  {
-    "title": "읽고 싶은데 책을 펼치지 못하는 날",
-    "description": "책을 시작하기 어려운 마음을 다루는 마음서재 이야기",
-    "category": "contents",
-    "url": "/maeum-library/stories/before-opening-a-book/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "‘힘들다’ 다음에 붙일 수 있는 말",
-    "description": "감정에 이름을 붙이며 마음을 구체적으로 살피는 마음서재 이야기",
-    "category": "contents",
-    "url": "/maeum-library/stories/name-the-feeling/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "덮어둔 책에서 한 문장만 남았다면",
-    "description": "끝까지 읽지 못한 책에서도 남은 문장을 발견하는 마음서재 이야기",
-    "category": "contents",
-    "url": "/maeum-library/stories/reading-without-finishing/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "“제가 문제예요” 다음에 코치가 묻는 것",
-    "description": "자기비난을 다음 행동을 찾는 질문으로 전환하는 마음서재 이야기",
-    "category": "contents",
-    "url": "/maeum-library/stories/self-blame-and-next-action/",
-    "source": "maeum-library legacy migration"
-  },
-  {
-    "title": "그 말이 유독 오래 남은 이유",
-    "description": "관계 속 한마디가 마음에 남는 이유를 살피는 마음서재 이야기",
-    "category": "contents",
-    "url": "/maeum-library/stories/words-in-relationships/",
-    "source": "maeum-library legacy migration"
+    "source": "local import"
   },
   {
     "title": "말씀 묵상 셀프코칭 감사",
