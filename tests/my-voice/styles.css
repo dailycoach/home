@@ -428,8 +428,9 @@ textarea:focus-visible {
 }
 .question-number { margin: 0 0 8px; color: var(--terra-dark); font-family: var(--serif); font-size: .83rem; font-weight: 700; }
 .question-text { margin: 0; font-size: 1.02rem; font-weight: 720; line-height: 1.67; }
-.scale-options { margin-top: 20px; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 7px; }
+.scale-options { margin-top: 20px; display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 5px; }
 .scale-button {
+  min-width: 0;
   min-height: 54px;
   padding: 8px 4px;
   display: grid;
@@ -444,7 +445,7 @@ textarea:focus-visible {
 .scale-button:hover { transform: translateY(-1px); border-color: var(--violet); }
 .scale-button.is-selected { color: #fff; border-color: var(--violet); background: var(--violet); }
 .scale-number { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; line-height: 1; }
-.scale-word { font-size: .59rem; font-weight: 750; line-height: 1.2; }
+.scale-word { font-size: .52rem; font-weight: 750; line-height: 1.2; word-break: keep-all; }
 .scale-legend { margin-top: 10px; display: flex; justify-content: space-between; color: var(--muted); font-size: .67rem; }
 .action-bar {
   position: sticky;
@@ -633,11 +634,7 @@ textarea:focus-visible {
 .delta.up { color: #4d7651; }
 .delta.down { color: var(--terra-dark); }
 .delta.same { color: var(--muted); }
-.previous-action { margin-top: 22px; padding: 18px 20px; border-left: 3px solid var(--sage); background: rgba(255,255,255,.72); }
-.previous-action p { margin: 0; }
-.previous-action strong { display: block; margin-top: 7px; font-family: var(--serif); font-size: 1.08rem; }
-.reflection-area { margin-top: 20px; }
-
+.change-summary { margin: 22px 0 0; padding: 18px 20px; border-left: 3px solid var(--sage); background: rgba(255,255,255,.72); color: #334139; font-size: .88rem; font-weight: 720; line-height: 1.65; }
 .question-select-head { max-width: 740px; }
 .question-instruction { margin: 22px 0 0; color: var(--muted); font-size: .96rem; }
 .question-grid { margin-top: 34px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
