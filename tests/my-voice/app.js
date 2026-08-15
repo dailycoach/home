@@ -594,7 +594,7 @@
               </div>
               <div class="hero-art">
                 <figure class="visual-frame hero-visual">
-                  <img src="./assets/visuals/my-voice-hero.webp" width="1672" height="941" fetchpriority="high" decoding="async" alt="빛의 흐름이 투명한 말하기 공간을 지나 새싹으로 이어지는 모습" />
+                  <img src="./assets/visuals/my-voice-hero-editorial.webp" width="1672" height="941" fetchpriority="high" decoding="async" alt="아이보리 종이 위의 붉은 실이 흔들림을 지나 공명의 원으로 이어지는 모습" />
                 </figure>
               </div>
             </div>
@@ -720,7 +720,7 @@
             </div>
             <section class="scene-card">
               <div class="scene-top">
-                <img class="scene-visual-image" src="./assets/visuals/my-voice-scene.webp" width="1672" height="941" loading="lazy" decoding="async" alt="말의 파동을 받아들이는 투명한 경청 공간" />
+                <img class="scene-visual-image" src="./assets/visuals/my-voice-scene-editorial.webp" width="1672" height="941" loading="lazy" decoding="async" alt="남색 종이 사이에 드러난 여백과 붉은 실이 질문 뒤의 잠깐의 멈춤을 표현한 모습" />
                 <span class="scene-visual-veil" aria-hidden="true"></span>
                 <span class="scene-listening-pulse" aria-hidden="true"></span>
                 <div class="scene-top-copy">
@@ -946,7 +946,7 @@
                 </div>
               </div>
               <figure class="visual-frame results-visual">
-                <img src="./assets/visuals/my-voice-results.webp" width="1672" height="941" loading="lazy" decoding="async" alt="서로 다른 여섯 개의 투명한 공명 그릇과 중앙에서 자라는 새싹" />
+                <img src="./assets/visuals/my-voice-results-editorial.webp" width="1672" height="941" loading="lazy" decoding="async" alt="서로 다른 여섯 가지 종이와 잉크 제스처가 하나의 붉은 실로 연결된 모습" />
               </figure>
             </div>
           </section>
@@ -1018,7 +1018,7 @@
               <p class="question-instruction">${isFollowup ? "아직 선택하지 않은 질문입니다. 지금 다시 마음에 걸리는 질문 하나를 고르세요." : "당신의 결과를 바탕으로 세 가지 질문을 골랐습니다. 정답을 찾을 필요는 없습니다. 지금 가장 마음에 걸리는 질문 하나를 선택해주세요."}</p>
             </div>
             <figure class="visual-frame questions-visual">
-              <img src="./assets/visuals/my-voice-questions.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="빛의 길 위에 놓인 서로 다른 세 개의 투명한 질문의 문" />
+              <img src="./assets/visuals/my-voice-questions-editorial.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="알아차림과 탐색, 선택을 상징하는 세 가지 종이 제스처가 붉은 실로 이어진 모습" />
             </figure>
             <div class="question-grid">
               ${options.map(function (question, index) {
@@ -1151,7 +1151,7 @@
                 <p class="note-date">${formatDate(state.completedAt)}<br />CONTEXT · ${escapeHTML(contextLabel(state.context || "아직 잘 모르겠다"))}</p>
               </header>
               <figure class="note-visual">
-                <img src="./assets/visuals/my-voice-note.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="투명한 공간 안에서 다음 목소리처럼 자라는 새싹" />
+                <img src="./assets/visuals/my-voice-note-editorial.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="매듭지은 붉은 실과 잉크 자국이 다음 말하기에서 기억할 한 가지 선택을 표현한 모습" />
               </figure>
               <section class="note-section">
                 <p class="note-label">MY SPEECH</p>
