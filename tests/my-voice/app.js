@@ -582,7 +582,7 @@
         <main id="main-content" class="screen">
           <section class="hero">
             <div class="hero-grid">
-              <div>
+              <div class="hero-copy">
                 <p class="eyebrow on-dark">SPEECH AWARENESS · COACHING QUESTION ENGINE</p>
                 <h1 class="display-title">MY<br />VOICE</h1>
                 <p class="hero-emphasis">말을 잘하는지 평가하기보다<br />내가 어떻게 말하고 있는지 바라봅니다.</p>
@@ -595,11 +595,7 @@
               <div class="hero-art">
                 <figure class="visual-frame hero-visual">
                   <img src="./assets/visuals/my-voice-hero.webp" width="1672" height="941" fetchpriority="high" decoding="async" alt="빛의 흐름이 투명한 말하기 공간을 지나 새싹으로 이어지는 모습" />
-                  <span class="visual-light-path" aria-hidden="true"></span>
-                  <figcaption><span>FROM AWARENESS</span><strong>TO NEXT VOICE</strong></figcaption>
                 </figure>
-                <span class="breath-orbit breath-orbit-one" aria-hidden="true"></span>
-                <span class="breath-orbit breath-orbit-two" aria-hidden="true"></span>
               </div>
             </div>
           </section>
@@ -617,7 +613,6 @@
                 </ul>
                 <figure class="visual-frame flow-visual">
                   <img src="./assets/visuals/my-voice-flow.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="여섯 개의 투명한 공간이 빛으로 이어지고 새싹이 차례로 자라는 모습" />
-                  <figcaption><strong>06 ROUNDS</strong><span>5 QUESTIONS + 1 SCENE</span></figcaption>
                 </figure>
               </aside>
               <div>
@@ -952,8 +947,6 @@
               </div>
               <figure class="visual-frame results-visual">
                 <img src="./assets/visuals/my-voice-results.webp" width="1672" height="941" loading="lazy" decoding="async" alt="서로 다른 여섯 개의 투명한 공명 그릇과 중앙에서 자라는 새싹" />
-                <span class="visual-light-path" aria-hidden="true"></span>
-                <figcaption><span>SIX SPEECH FACTORS</span><strong>당신 안의 여섯 가지 말하기 힘</strong></figcaption>
               </figure>
             </div>
           </section>
@@ -1026,8 +1019,6 @@
             </div>
             <figure class="visual-frame questions-visual">
               <img src="./assets/visuals/my-voice-questions.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="빛의 길 위에 놓인 서로 다른 세 개의 투명한 질문의 문" />
-              <span class="visual-light-path" aria-hidden="true"></span>
-              <figcaption><span>NOTICE · EXPLORE · CHOOSE</span><strong>가장 마음에 걸리는 문 앞에 머물러보세요.</strong></figcaption>
             </figure>
             <div class="question-grid">
               ${options.map(function (question, index) {
@@ -1085,9 +1076,6 @@
           <div class="coach-layout">
             <div class="coach-heading">
               <div><p class="coach-step">${config.step}</p><h1 class="screen-title">${config.title}</h1></div>
-              <figure class="coach-seed-visual" aria-label="다음 목소리로 자라는 새싹">
-                <img src="./assets/visuals/my-voice-note.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="빛의 고리 안에서 자라는 작은 새싹" />
-              </figure>
             </div>
             <section class="coach-card">
               <p class="question-quote">${escapeHTML(config.prompt)}</p>
@@ -1164,7 +1152,6 @@
               </header>
               <figure class="note-visual">
                 <img src="./assets/visuals/my-voice-note.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="투명한 공간 안에서 다음 목소리처럼 자라는 새싹" />
-                <figcaption><span>ONE SMALL CHOICE</span><strong>다음 목소리는 작은 선택에서 자랍니다.</strong></figcaption>
               </figure>
               <section class="note-section">
                 <p class="note-label">MY SPEECH</p>
