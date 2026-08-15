@@ -1018,7 +1018,7 @@
               <p class="question-instruction">${isFollowup ? "아직 선택하지 않은 질문입니다. 지금 다시 마음에 걸리는 질문 하나를 고르세요." : "당신의 결과를 바탕으로 세 가지 질문을 골랐습니다. 정답을 찾을 필요는 없습니다. 지금 가장 마음에 걸리는 질문 하나를 선택해주세요."}</p>
             </div>
             <figure class="visual-frame questions-visual">
-              <img src="./assets/visuals/my-voice-questions-editorial.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="알아차림과 탐색, 선택을 상징하는 세 가지 종이 제스처가 붉은 실로 이어진 모습" />
+              <img src="./assets/visuals/my-voice-questions-editorial.webp" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" alt="알아차림과 탐색, 선택을 상징하는 세 가지 종이 제스처가 붉은 실로 이어진 모습" />
             </figure>
             <div class="question-context" aria-label="질문을 떠올릴 말하기 장면">
               <span class="question-context-label">지금 떠올릴 장면</span>

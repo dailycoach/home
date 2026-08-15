@@ -1147,7 +1147,15 @@ textarea:focus-visible {
   .question-pick::before { left: 20px; width: 46px; }
   .question-pick .question-quote { margin: 24px 0 26px; font-size: 1.17rem; line-height: 1.56; }
   .question-pick .select-label { min-height: 49px; }
-  .questions-visual { display: none; }
+  .questions-visual {
+    width: 100%;
+    height: 148px;
+    margin-top: 22px;
+    display: block;
+    border-radius: 18px;
+    box-shadow: 0 10px 26px rgba(4,17,31,.065);
+  }
+  .questions-visual img { object-position: center 61%; }
   .question-grid { margin-top: 14px; gap: 12px; }
   .results-visual { width: 100%; height: 138px; margin-top: 26px; border-radius: 18px 18px 0 0; }
   .scene-top, .scene-top-copy { min-height: 260px; }
@@ -1185,6 +1193,7 @@ textarea:focus-visible {
   .comparison-row { gap: 6px; }
   .hero-art { height: 220px; }
   .flow-visual { height: 116px; }
+  .questions-visual { height: 128px; border-radius: 16px; }
   .question-context { padding-right: 11px; align-items: flex-start; flex-direction: column; gap: 7px; }
   .question-context-label { margin-left: -1px; }
   .question-card-head { gap: 10px; }
