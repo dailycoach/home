@@ -529,6 +529,31 @@
     `;
   }
 
+  function roundIndicatorHTML(round, phase) {
+    const factor = FACTORS[round];
+    const isScene = phase === "scene";
+    const currentStep = round * 2 + (isScene ? 2 : 1);
+    return `
+      <section class="round-indicator" aria-label="검사 진행 ${currentStep} / 12">
+        <div class="round-indicator-copy">
+          <span>ASSESSMENT FLOW</span>
+          <strong>ROUND ${String(round + 1).padStart(2, "0")} <small>/ 06</small></strong>
+          <em>${escapeHTML(factor.name)} · ${isScene ? "장면 질문" : "5개 문항"}</em>
+        </div>
+        <div class="round-progress-group">
+          <div class="round-markers" role="progressbar" aria-valuemin="1" aria-valuemax="12" aria-valuenow="${currentStep}">
+            ${FACTORS.map(function (_, index) {
+              const questionState = index < round || (index === round && isScene) ? "is-complete" : index === round ? "is-active" : "";
+              const sceneState = index < round ? "is-complete" : index === round && isScene ? "is-active" : "";
+              return `<span class="round-marker ${index === round ? "is-current" : ""}"><span class="marker-bars"><i class="${questionState}"></i><i class="${sceneState}"></i></span><b>${String(index + 1).padStart(2, "0")}</b></span>`;
+            }).join("")}
+          </div>
+          <div class="round-key" aria-hidden="true"><span><i></i>5 SPEECH QUESTIONS</span><span><i></i>1 SCENE</span></div>
+        </div>
+      </section>
+    `;
+  }
+
   function introHTML() {
     return `
       <div class="site-shell">
@@ -608,6 +633,7 @@
         ${headerHTML()}
         <main id="main-content" class="screen">
           <div class="screen-inner reading-width">
+            ${roundIndicatorHTML(state.factorPage, "questions")}
             <div class="stage-head">
               <div>
                 <p class="step-count">ROUND ${String(state.factorPage + 1).padStart(2, "0")} / 06 · QUESTIONS ${String(startNumber).padStart(2, "0")}–${String(endNumber).padStart(2, "0")}</p>
@@ -636,7 +662,7 @@
                         return `<button type="button" class="scale-button ${current === value ? "is-selected" : ""}" role="radio" aria-checked="${current === value}" aria-label="${value}점 ${SCALE_WORDS[value - 1]}" data-action="factor-answer" data-id="${id}" data-value="${value}"><span class="scale-number">${value}</span><span class="scale-word">${SCALE_WORDS[value - 1]}</span></button>`;
                       }).join("")}
                     </div>
-                    <div class="scale-legend"><span>나와 거리가 멀다</span><span>나와 매우 가깝다</span></div>
+                    <div class="scale-legend"><span>1 · 나와 거리가 멀다</span><span>4 · 보통</span><span>7 · 나와 매우 가깝다</span></div>
                   </article>
                 `;
               }).join("")}
@@ -664,6 +690,7 @@
         ${headerHTML()}
         <main id="main-content" class="screen">
           <div class="screen-inner reading-width">
+            ${roundIndicatorHTML(state.scenePage, "scene")}
             <div class="stage-head">
               <div>
                 <p class="step-count">ROUND ${String(state.scenePage + 1).padStart(2, "0")} / 06 · SCENE QUESTION</p>
