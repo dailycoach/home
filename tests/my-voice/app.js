@@ -19,6 +19,13 @@
     "아직 잘 모르겠다"
   ];
 
+  const CONTEXT_LABELS = {
+    "회의·의견발표": "회의·의견 발표",
+    "일상대화": "일상 대화",
+    "즉흥질문": "즉흥 질문",
+    "설득·반대의견": "설득·반대 의견"
+  };
+
   const CONTEXT_HINTS = {
     "발표": "최근 발표 장면을 떠올리며",
     "면접": "면접관의 질문을 마주한 순간을 떠올리며",
@@ -36,8 +43,8 @@
     "자기소개": "다음 자기소개에서",
     "회의·의견발표": "다음 회의에서",
     "일상대화": "다음 대화에서",
-    "즉흥질문": "다음 즉흥질문을 받았을 때",
-    "설득·반대의견": "다음 반대의견을 마주했을 때",
+    "즉흥질문": "다음에 즉흥 질문을 받았을 때",
+    "설득·반대의견": "다음에 반대 의견을 마주했을 때",
     "아직 잘 모르겠다": "다음번 비슷한 상황에서"
   };
 
@@ -117,7 +124,7 @@
       questions: [
         "상대의 표정과 반응을 보며 설명의 양과 방식을 조절한다.",
         "상대의 말을 끝까지 듣고 핵심을 확인한 뒤 답한다.",
-        "반대의견을 들어도 방어하기 전에 상대의 의도를 살핀다.",
+        "반대 의견을 들어도 방어하기 전에 상대의 의도를 살핀다.",
         "대화 중 질문을 사용해 서로의 이해를 확인한다.",
         "관계를 배려하면서도 내 의견을 분명하게 말한다."
       ]
@@ -207,17 +214,17 @@
     D: {
       name: "DIRECT",
       ko: "핵심주도형",
-      description: "핵심과 방향을 빠르게 잡고 분명하게 말하는 경향입니다. 상대가 따라올 시간과 이해를 확인할 때 이 힘이 더 선명해집니다."
+      description: "핵심과 방향을 빠르게 잡고 분명하게 말하는 경향입니다. 상대가 따라올 시간을 주고 이해를 확인할 때 이 힘이 더 선명해집니다."
     },
     I: {
       name: "ENGAGING",
       ko: "관여확장형",
-      description: "이야기와 에너지로 사람을 말 안으로 끌어들이는 경향입니다. 기억해야 할 한 문장을 남길 때 풍성함이 메시지가 됩니다."
+      description: "이야기와 에너지로 사람을 대화 안으로 끌어들이는 경향입니다. 기억해야 할 한 문장을 남길 때 풍성함이 메시지가 됩니다."
     },
     S: {
       name: "STEADY",
       ko: "안정공감형",
-      description: "상대가 편안하도록 듣고 관계의 온도를 살피는 경향입니다. 배려와 함께 내 의견의 첫 문장을 분명히 둘 때 존재감이 살아납니다."
+      description: "상대가 편안하도록 듣고 관계의 온도를 살피는 경향입니다. 배려하면서도 내 의견의 첫 문장을 분명히 할 때 존재감이 살아납니다."
     },
     C: {
       name: "STRUCTURED",
@@ -300,7 +307,7 @@
     recovery: {
       notice: [
         "말이 막히는 순간 나는 실제로 무엇을 두려워하고 있을까?",
-        "한번 실수한 뒤 내 머릿속에서는 어떤 일이 일어날까?"
+        "한 번 실수한 뒤 내 머릿속에서는 어떤 일이 일어날까?"
       ],
       explore: [
         "완벽한 답을 찾으려 하지 않는다면 지금 알고 있는 것만으로 무엇을 말할 수 있을까?",
@@ -480,6 +487,20 @@
     return FACTORS.find(function (factor) { return factor.id === id; });
   }
 
+  function contextLabel(context) {
+    return CONTEXT_LABELS[context] || context;
+  }
+
+  function withParticle(value, type) {
+    const text = String(value || "");
+    const lastCode = text.charCodeAt(text.length - 1);
+    const hasFinalConsonant = lastCode >= 0xAC00 && lastCode <= 0xD7A3 && (lastCode - 0xAC00) % 28 !== 0;
+    const particle = type === "subject"
+      ? (hasFinalConsonant ? "이" : "가")
+      : (hasFinalConsonant ? "과" : "와");
+    return `${text}${particle}`;
+  }
+
   function progressValue() {
     if (state.stage === "questions" || state.stage === "scenes") {
       const round = state.stage === "questions" ? state.factorPage : state.scenePage;
@@ -565,7 +586,7 @@
                 <p class="eyebrow on-dark">SPEECH AWARENESS · COACHING QUESTION ENGINE</p>
                 <h1 class="display-title">MY<br />VOICE</h1>
                 <p class="hero-emphasis">말을 잘하는지 평가하기보다<br />내가 어떻게 말하고 있는지 바라봅니다.</p>
-                <p class="lead">스피치 문항 5개 뒤에 실제 장면 질문 1개가 이어집니다. 이 흐름을 여섯 번 지나 지금 나에게 가장 생각해볼 만한 질문 하나를 직접 선택합니다.</p>
+                <p class="lead">스피치 문항 5개 뒤에 실제 장면 질문 1개가 이어집니다. 이 흐름을 여섯 차례 거친 뒤, 지금 나에게 가장 생각해볼 만한 질문 하나를 직접 선택합니다.</p>
                 <div class="hero-actions">
                   <button class="button button-light button-arrow" type="button" data-action="jump-context">검사 시작하기</button>
                 </div>
@@ -602,7 +623,7 @@
                   <p class="body-copy">점수에는 영향을 주지 않습니다. 결과 질문을 더 현실적인 장면의 언어로 바꾸는 데만 사용합니다.</p>
                   <div class="context-grid" role="group" aria-label="현재 신경 쓰이는 말하기 상황">
                     ${CONTEXTS.map(function (context) {
-                      return `<button type="button" class="choice-tile ${state.context === context ? "is-selected" : ""}" data-action="context" data-context="${escapeHTML(context)}" aria-pressed="${state.context === context}"><span class="choice-dot" aria-hidden="true"></span>${escapeHTML(context)}</button>`;
+                      return `<button type="button" class="choice-tile ${state.context === context ? "is-selected" : ""}" data-action="context" data-context="${escapeHTML(context)}" aria-pressed="${state.context === context}"><span class="choice-dot" aria-hidden="true"></span>${escapeHTML(contextLabel(context))}</button>`;
                     }).join("")}
                   </div>
                   <div class="intro-start">
@@ -639,7 +660,7 @@
                 <p class="step-count">ROUND ${String(state.factorPage + 1).padStart(2, "0")} / 06 · QUESTIONS ${String(startNumber).padStart(2, "0")}–${String(endNumber).padStart(2, "0")}</p>
                 <h1 class="screen-title">5개의 스피치 문항에<br />있는 그대로 답해주세요.</h1>
               </div>
-              <p class="stage-help">잘해야 하는 나보다, 최근 실제 장면의 나와 가까운 답을 선택합니다.</p>
+              <p class="stage-help">이상적인 모습보다 최근 실제 장면의 나와 가까운 답을 선택합니다.</p>
             </div>
             <section class="factor-banner" aria-labelledby="factor-title">
               <span class="factor-monogram">${factor.code}</span>
@@ -777,13 +798,13 @@
     const priority = factorById(result.priority);
     if (result.gap >= 20) {
       return {
-        title: `${strongest.short}에서 가진 힘이 ${priority.short}이 필요한 순간에는 충분히 사용되지 않을 수 있습니다.`,
+        title: `${strongest.short}에서 이미 쓰고 있는 힘이 ${withParticle(priority.short, "subject")} 필요한 순간에는 충분히 이어지지 않을 수 있습니다.`,
         copy: "이미 있는 능력을 다른 장면으로 가져오는 조건을 살펴볼 만합니다. 약점을 규정하기보다 능력이 멈추는 순간을 봅니다."
       };
     }
     if (result.gap >= 10) {
       return {
-        title: `${strongest.short}과 ${priority.short} 사이에 상황에 따라 달라지는 패턴이 보입니다.`,
+        title: `${withParticle(strongest.short, "companion")} ${priority.short} 사이에 상황에 따라 달라지는 패턴이 보입니다.`,
         copy: "고정된 약점이라기보다 익숙한 상황과 낯선 상황에서 쓰는 힘이 달라지는지 살펴볼 수 있습니다."
       };
     }
@@ -819,7 +840,7 @@
       if (low === "interaction" && primary === "D") return "내 의견을 더 강하게 말하는 것보다 상대가 무엇을 듣고 있는지 확인한다면 무엇이 달라질까?";
       const highFactor = factorById(high);
       const lowFactor = factorById(low);
-      return `${highFactor.short}에서 이미 쓰고 있는 힘을 ${lowFactor.short}이 필요한 순간에도 가져온다면 무엇이 달라질까?`;
+      return `${highFactor.short}에서 이미 쓰고 있는 힘을 ${withParticle(lowFactor.short, "subject")} 필요한 순간에도 가져온다면 무엇이 달라질까?`;
     }
     const explore = QUESTION_BANK[low].explore;
     return explore[questionIndex(result.scores[low])];
@@ -939,7 +960,7 @@
                   <h2 class="section-title">이미 잘 되는 것과<br />지금 연습해볼 것</h2>
                   <div class="insight-grid">
                     <article class="insight-card strength"><div><p class="insight-label">CURRENT STRENGTH</p><h3 class="insight-name">${strongest.name}</h3></div><p class="insight-desc">${strongest.strength}</p></article>
-                    <article class="insight-card priority"><div><p class="insight-label">TRAINING PRIORITY</p><h3 class="insight-name">${priority.name}</h3></div><p class="insight-desc">능력이 없는 영역이 아니라, 상황에 따라 아직 충분히 사용하지 못할 수 있는 힘입니다.</p></article>
+                    <article class="insight-card priority"><div><p class="insight-label">TRAINING PRIORITY</p><h3 class="insight-name">${priority.name}</h3></div><p class="insight-desc">능력이 없는 영역이 아니라, 상황에 따라 아직 충분히 활용하지 못하고 있는 힘입니다.</p></article>
                   </div>
                   <article class="gap-card">
                     <div><p class="gap-label">SPEECH GAP</p><h3 class="gap-title">${gap.title}</h3><p class="gap-copy">${gap.copy}</p></div>
@@ -1116,7 +1137,7 @@
             <article class="note-paper" id="my-voice-note">
               <header class="note-header">
                 <div><p class="note-label">DAILYCOACHING · MY VOICE V${VERSION}</p><h2 class="note-logo">MY VOICE NOTE</h2></div>
-                <p class="note-date">${formatDate(state.completedAt)}<br />CONTEXT · ${escapeHTML(state.context || "아직 잘 모르겠다")}</p>
+                <p class="note-date">${formatDate(state.completedAt)}<br />CONTEXT · ${escapeHTML(contextLabel(state.context || "아직 잘 모르겠다"))}</p>
               </header>
               <section class="note-section">
                 <p class="note-label">MY SPEECH</p>
@@ -1237,7 +1258,7 @@
     const primary = STYLE_META[result.primaryStyle];
     const secondary = STYLE_META[result.secondaryStyle];
     const factors = FACTORS.map(function (factor) { return `${factor.name}: ${result.scores[factor.id]}`; }).join("\n");
-    const text = `MY VOICE NOTE\nDAILYCOACHING · V${VERSION}\n검사일: ${formatDate(state.completedAt)}\n상황: ${state.context || "아직 잘 모르겠다"}\n\nMY SPEECH\n현재 가장 강한 힘: ${strongest.name}\n현재 연습 우선영역: ${priority.name}\nMY SPEECH STYLE: ${primary.name} / ${secondary.name}\nMY SPEECH INDEX: ${result.overall}\n\n${factors}\n\nMY QUESTION\n«${state.selectedQuestion.text}»\n\nMY ANSWER\n${state.myAnswer}\n\nTHE MOMENT\n${state.moment}\n\nNEXT VOICE\n«${state.nextVoice}»\n\n«다음에 말할 때, 오늘 선택한 한 가지를 기억해보세요.»`;
+    const text = `MY VOICE NOTE\nDAILYCOACHING · V${VERSION}\n검사일: ${formatDate(state.completedAt)}\n상황: ${contextLabel(state.context || "아직 잘 모르겠다")}\n\nMY SPEECH\n현재 가장 강한 힘: ${strongest.name}\n현재 연습 우선영역: ${priority.name}\nMY SPEECH STYLE: ${primary.name} / ${secondary.name}\nMY SPEECH INDEX: ${result.overall}\n\n${factors}\n\nMY QUESTION\n«${state.selectedQuestion.text}»\n\nMY ANSWER\n${state.myAnswer}\n\nTHE MOMENT\n${state.moment}\n\nNEXT VOICE\n«${state.nextVoice}»\n\n«다음에 말할 때, 오늘 선택한 한 가지를 기억해보세요.»`;
     const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
