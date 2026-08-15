@@ -1028,7 +1028,7 @@
               ${options.map(function (question, index) {
                 const roleLabels = { NOTICE: "지금의 나를 알아차리기", EXPLORE: "말하기 패턴을 탐색하기", CHOOSE: "다음 말하기를 선택하기" };
                 const roleKo = question.roleKo || roleLabels[question.role] || "질문 살펴보기";
-                return `<button class="question-pick" type="button" data-action="select-question" data-id="${escapeHTML(question.id)}" aria-label="${String(index + 1).padStart(2, "0")}번 질문 선택: ${escapeHTML(question.text)}"><span class="question-card-head"><span class="question-index">${String(index + 1).padStart(2, "0")}</span><span class="question-role-group"><span class="question-role">${question.role}</span><span class="question-role-ko">${escapeHTML(roleKo)}</span></span></span><span class="question-quote">«${escapeHTML(question.text)}»</span><span class="select-label"><span>이 질문 선택하기</span><span class="select-arrow" aria-hidden="true">→</span></span></button>`;
+                return `<button class="question-pick" type="button" data-action="select-question" data-id="${escapeHTML(question.id)}" aria-label="${String(index + 1).padStart(2, "0")}번 질문 선택: ${escapeHTML(question.text)}"><span class="question-card-head"><span class="question-index">${String(index + 1).padStart(2, "0")}</span><span class="question-role-group"><span class="question-role">${question.role}</span><span class="question-role-ko">${escapeHTML(roleKo)}</span></span></span><span class="question-quote">${escapeHTML(question.text)}</span><span class="select-label"><span>이 질문 선택하기</span><span class="select-arrow" aria-hidden="true">→</span></span></button>`;
               }).join("")}
             </div>
             <div class="action-bar"><span class="action-meta">질문은 사용자를 분석하지 않고 현재의 말하기를 보게 합니다.</span><div class="action-buttons"><button class="button button-ghost" type="button" data-action="questions-back">결과로 돌아가기</button></div></div>
@@ -1045,7 +1045,7 @@
       coachingAnswer: {
         step: "STEP 01 · MY ANSWER",
         title: "지금 떠오르는 생각을 적어보세요.",
-        prompt: `«${question.text}»`,
+        prompt: question.text,
         label: "정답을 찾지 말고, 지금 떠오르는 생각을 자유롭게 적어보세요.",
         placeholder: "한 문장도 충분합니다.",
         field: "myAnswer",
@@ -1055,7 +1055,7 @@
       coachingMoment: {
         step: "STEP 02 · THE MOMENT",
         title: "생각을 실제 장면으로 가져옵니다.",
-        prompt: "«최근 실제로 비슷했던 순간 하나를 떠올린다면 언제였나요?»",
+        prompt: "최근 실제로 비슷했던 순간 하나를 떠올린다면 언제였나요?",
         label: "누구와, 어디에서, 어떤 말을 하려던 순간이었는지 적어보세요.",
         placeholder: "예: 지난 회의에서 갑자기 의견을 물었을 때…",
         field: "moment",
@@ -1065,7 +1065,7 @@
       coachingChoose: {
         step: "STEP 03 · NEXT VOICE",
         title: "다음 말하기의 한 가지를 선택합니다.",
-        prompt: "«그 장면이 다시 온다면 이번에는 무엇을 한 가지 다르게 해보고 싶나요?»",
+        prompt: "그 장면이 다시 온다면 이번에는 무엇을 한 가지 다르게 해보고 싶나요?",
         label: "작고 구체적으로 적을수록 다음 장면에서 떠올리기 쉽습니다.",
         placeholder: "예: 질문을 받은 뒤 바로 답하지 않고 3초 생각한다.",
         field: "nextVoice",
@@ -1171,11 +1171,11 @@
                   ${FACTORS.map(function (factor) { return `<div class="note-factor"><span>${factor.short}</span><strong>${result.scores[factor.id]}</strong></div>`; }).join("")}
                 </div>
               </section>
-              <section class="note-section"><p class="note-label">MY QUESTION</p><p class="note-text">«${escapeHTML(state.selectedQuestion.text)}»</p></section>
+              <section class="note-section"><p class="note-label">MY QUESTION</p><p class="note-text">${escapeHTML(state.selectedQuestion.text)}</p></section>
               <section class="note-section"><p class="note-label">MY ANSWER</p><p class="note-text">${nl2br(state.myAnswer)}</p></section>
               <section class="note-section"><p class="note-label">THE MOMENT</p><p class="note-text">${nl2br(state.moment)}</p></section>
-              <section class="note-section"><div class="next-voice"><p class="note-label">NEXT VOICE</p><p class="note-text">«${nl2br(state.nextVoice)}»</p></div></section>
-              <p class="note-closing">«다음에 말할 때, 오늘 선택한 한 가지를 기억해보세요.»</p>
+              <section class="note-section"><div class="next-voice"><p class="note-label">NEXT VOICE</p><p class="note-text">${nl2br(state.nextVoice)}</p></div></section>
+              <p class="note-closing">다음에 말할 때, 오늘 선택한 한 가지를 기억해보세요.</p>
             </article>
             <nav class="note-nav" aria-label="MY VOICE 다음 행동">
               <button class="button button-outline" type="button" data-action="result-again">결과 다시 보기</button>
@@ -1278,7 +1278,7 @@
     const primary = STYLE_META[result.primaryStyle];
     const secondary = STYLE_META[result.secondaryStyle];
     const factors = FACTORS.map(function (factor) { return `${factor.name}: ${result.scores[factor.id]}`; }).join("\n");
-    const text = `MY VOICE NOTE\nDAILYCOACHING · V${VERSION}\n검사일: ${formatDate(state.completedAt)}\n상황: ${contextLabel(state.context || "아직 잘 모르겠다")}\n\nMY SPEECH\n현재 가장 강한 힘: ${strongest.name}\n현재 연습 우선영역: ${priority.name}\nMY SPEECH STYLE: ${primary.name} / ${secondary.name}\nMY SPEECH INDEX: ${result.overall}\n\n${factors}\n\nMY QUESTION\n«${state.selectedQuestion.text}»\n\nMY ANSWER\n${state.myAnswer}\n\nTHE MOMENT\n${state.moment}\n\nNEXT VOICE\n«${state.nextVoice}»\n\n«다음에 말할 때, 오늘 선택한 한 가지를 기억해보세요.»`;
+    const text = `MY VOICE NOTE\nDAILYCOACHING · V${VERSION}\n검사일: ${formatDate(state.completedAt)}\n상황: ${contextLabel(state.context || "아직 잘 모르겠다")}\n\nMY SPEECH\n현재 가장 강한 힘: ${strongest.name}\n현재 연습 우선영역: ${priority.name}\nMY SPEECH STYLE: ${primary.name} / ${secondary.name}\nMY SPEECH INDEX: ${result.overall}\n\n${factors}\n\nMY QUESTION\n${state.selectedQuestion.text}\n\nMY ANSWER\n${state.myAnswer}\n\nTHE MOMENT\n${state.moment}\n\nNEXT VOICE\n${state.nextVoice}\n\n다음에 말할 때, 오늘 선택한 한 가지를 기억해보세요.`;
     const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
