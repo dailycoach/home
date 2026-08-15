@@ -612,7 +612,7 @@
                   <li><strong>04</strong><span>실제 장면과 다음 행동을 MY VOICE NOTE에 남깁니다.</span></li>
                 </ul>
                 <figure class="visual-frame flow-visual">
-                  <img src="./assets/visuals/my-voice-flow.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="여섯 개의 투명한 공간이 빛으로 이어지고 새싹이 차례로 자라는 모습" />
+                  <img src="./assets/visuals/my-voice-flow-editorial.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="종이와 잉크로 표현한 여섯 번의 말하기 호흡이 하나의 붉은 실로 이어지는 모습" />
                 </figure>
               </aside>
               <div>
