@@ -333,7 +333,7 @@ textarea:focus-visible {
   mask-image: linear-gradient(90deg, transparent 0, #000 15%, #000 88%, transparent 100%);
 }
 .hero-visual::before { background: linear-gradient(90deg, rgba(5,19,33,.88), transparent 33% 80%, rgba(5,19,33,.28)); }
-.hero-visual img { object-position: 54% center; }
+.hero-visual img { object-position: 54% center; filter: saturate(.88) contrast(.98) brightness(.98); }
 
 .button {
   min-height: 52px;
@@ -573,7 +573,7 @@ textarea:focus-visible {
   display: block;
   object-fit: cover;
   object-position: center;
-  filter: saturate(.68) contrast(.98) brightness(.86);
+  filter: saturate(.9) contrast(1) brightness(.94);
   animation: imageBreath 12s ease-in-out infinite;
 }
 .scene-visual-veil {
@@ -671,11 +671,12 @@ textarea:focus-visible {
   border-radius: 24px 24px 0 0;
   background: transparent;
   box-shadow: none;
-  opacity: .72;
+  opacity: 1;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 18%, #000 100%);
 }
-.results-visual img { object-position: center 57%; }
+.results-visual::before { display: none; }
+.results-visual img { object-position: center 57%; filter: saturate(.9) contrast(.98) brightness(1); }
 .index-seal {
   width: clamp(158px, 20vw, 220px);
   aspect-ratio: 1;
@@ -786,9 +787,10 @@ textarea:focus-visible {
   border-color: rgba(7,24,43,.12);
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(4,17,31,.07);
-  opacity: .72;
+  opacity: 1;
 }
-.questions-visual img { object-position: center 58%; }
+.questions-visual::before { display: none; }
+.questions-visual img { object-position: center 58%; filter: saturate(.9) contrast(.98) brightness(1); }
 .question-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
 .question-pick {
   position: relative;
@@ -895,7 +897,7 @@ textarea:focus-visible {
   background: linear-gradient(90deg, rgba(4,17,31,.24), transparent 52%, rgba(4,17,31,.16));
   pointer-events: none;
 }
-.note-visual img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 55%; filter: saturate(.65) brightness(.9); }
+.note-visual img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 55%; filter: saturate(.9) contrast(.98) brightness(1); }
 .note-section { padding: 31px 0; border-bottom: 1px solid var(--line); }
 .note-section:last-of-type { border-bottom: 0; }
 .note-label { margin: 0 0 12px; color: var(--terra-dark); font-size: .68rem; font-weight: 860; letter-spacing: .16em; }
