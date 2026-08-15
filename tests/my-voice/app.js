@@ -1010,7 +1010,7 @@
     return `
       <div class="site-shell">
         ${headerHTML()}
-        <main id="main-content" class="screen">
+        <main id="main-content" class="screen question-select-screen">
           <div class="screen-inner">
             <div class="question-select-head">
               <p class="eyebrow">THREE QUESTIONS · NOTICE / EXPLORE / CHOOSE</p>
@@ -1020,9 +1020,15 @@
             <figure class="visual-frame questions-visual">
               <img src="./assets/visuals/my-voice-questions-editorial.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="알아차림과 탐색, 선택을 상징하는 세 가지 종이 제스처가 붉은 실로 이어진 모습" />
             </figure>
+            <div class="question-context" aria-label="질문을 떠올릴 말하기 장면">
+              <span class="question-context-label">지금 떠올릴 장면</span>
+              <strong>${escapeHTML(CONTEXT_HINTS[state.context || "아직 잘 모르겠다"])}</strong>
+            </div>
             <div class="question-grid">
               ${options.map(function (question, index) {
-                return `<button class="question-pick" type="button" data-action="select-question" data-id="${escapeHTML(question.id)}"><span class="question-role">QUESTION ${String(index + 1).padStart(2, "0")} · ${question.role}</span><span class="context-hint">${escapeHTML(CONTEXT_HINTS[state.context || "아직 잘 모르겠다"])}</span><span class="question-quote">«${escapeHTML(question.text)}»</span><span class="select-label">이 질문 선택하기</span></button>`;
+                const roleLabels = { NOTICE: "지금의 나를 알아차리기", EXPLORE: "말하기 패턴을 탐색하기", CHOOSE: "다음 말하기를 선택하기" };
+                const roleKo = question.roleKo || roleLabels[question.role] || "질문 살펴보기";
+                return `<button class="question-pick" type="button" data-action="select-question" data-id="${escapeHTML(question.id)}" aria-label="${String(index + 1).padStart(2, "0")}번 질문 선택: ${escapeHTML(question.text)}"><span class="question-card-head"><span class="question-index">${String(index + 1).padStart(2, "0")}</span><span class="question-role-group"><span class="question-role">${question.role}</span><span class="question-role-ko">${escapeHTML(roleKo)}</span></span></span><span class="question-quote">«${escapeHTML(question.text)}»</span><span class="select-label"><span>이 질문 선택하기</span><span class="select-arrow" aria-hidden="true">→</span></span></button>`;
               }).join("")}
             </div>
             <div class="action-bar"><span class="action-meta">질문은 사용자를 분석하지 않고 현재의 말하기를 보게 합니다.</span><div class="action-buttons"><button class="button button-ghost" type="button" data-action="questions-back">결과로 돌아가기</button></div></div>
