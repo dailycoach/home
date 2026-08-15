@@ -9,14 +9,16 @@
 <body>
   <div class="loading"><p>DAILYCOACHING을 불러오는 중입니다.</p></div>
   <script>
-    fetch('/index-source-disc.html?v=20260814-my-voice-v23', {cache:'no-store'})
+    fetch('/index-source-disc.html?v=20260815-home-hotfix', {cache:'no-store'})
       .then(r => textOrThrow(r))
       .then(html => {
         const anchor = '<a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>';
         const links = `${anchor}\n            <a href="/tests/my-voice/" data-route="myVoice">MY VOICE 스피치 알아차림 <small>NEW</small></a>\n            <a href="/tests/flourish-awareness/" data-route="flourishAwareness">플로리싱 × 알아차림 <small>NEW</small></a>\n            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>\n            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>`;
         html = html.replaceAll(anchor, links);
-        html = html.replace("      kgm210: '/tests/kgm210/',\n      flourishAwareness: '/tests/flourish-awareness/',", "      kgm210: '/tests/kgm210/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',");
-        html = html.replace("      kgm210: '/tests/kgm210/',", "      kgm210: '/tests/kgm210/',\\n      myVoice: '/tests/my-voice/',");
+        html = html.replace(
+          "      kgm210: '/tests/kgm210/',",
+          "      kgm210: '/tests/kgm210/',\n      myVoice: '/tests/my-voice/',\n      flourishAwareness: '/tests/flourish-awareness/',\n      disc16: '/tests/disc16/',\n      disc16Youth: '/tests/disc16-youth/',"
+        );
 
         const nalUrl = '/nal/';
         const nalTopAnchor = '<a class="nav-link" href="https://smartstore.naver.com/nalbitcoaching" data-route="booking">1:1 코칭</a>';
@@ -66,7 +68,9 @@
         html = html.replace("      liveBoard: '/activities/live-board/',", "      coachingFlexMove: '/activities/coaching-flex-move/',\n      liveBoard: '/activities/live-board/',");
         html = html.replace("      liveBoard: '/activities/live-board/',", "      valueScene: '/activities/value-scene/',\n      liveBoard: '/activities/live-board/',");
 
-        document.open(); document.write(html); document.close();
+        document.open();
+        document.write(html);
+        document.close();
       })
       .catch(() => {
         document.body.innerHTML = '<div class="loading"><p>페이지를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.</p></div>';
