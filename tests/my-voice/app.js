@@ -592,14 +592,14 @@
                 </div>
                 <p class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span>로그인 없이 이용하며, 답변은 이 기기에만 저장됩니다.</p>
               </div>
-              <div class="hero-art" aria-hidden="true">
-                <div class="voice-orbit"></div>
-                <article class="voice-card">
-                  <p class="card-kicker">A QUESTION FOR MY VOICE</p>
-                  <div class="voice-lines"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                  <blockquote>“다음에는 무엇을<br />한 가지 다르게 말해볼까?”</blockquote>
-                  <p class="hand-note">진단 → 알아차림 → 질문 → 선택</p>
-                </article>
+              <div class="hero-art">
+                <figure class="visual-frame hero-visual">
+                  <img src="./assets/visuals/my-voice-hero.webp" width="1672" height="941" fetchpriority="high" decoding="async" alt="빛의 흐름이 투명한 말하기 공간을 지나 새싹으로 이어지는 모습" />
+                  <span class="visual-light-path" aria-hidden="true"></span>
+                  <figcaption><span>FROM AWARENESS</span><strong>TO NEXT VOICE</strong></figcaption>
+                </figure>
+                <span class="breath-orbit breath-orbit-one" aria-hidden="true"></span>
+                <span class="breath-orbit breath-orbit-two" aria-hidden="true"></span>
               </div>
             </div>
           </section>
@@ -615,6 +615,10 @@
                   <li><strong>03</strong><span>세 질문 중 지금 마음에 걸리는 하나를 고릅니다.</span></li>
                   <li><strong>04</strong><span>실제 장면과 다음 행동을 MY VOICE NOTE에 남깁니다.</span></li>
                 </ul>
+                <figure class="visual-frame flow-visual">
+                  <img src="./assets/visuals/my-voice-flow.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="여섯 개의 투명한 공간이 빛으로 이어지고 새싹이 차례로 자라는 모습" />
+                  <figcaption><strong>06 ROUNDS</strong><span>5 QUESTIONS + 1 SCENE</span></figcaption>
+                </figure>
               </aside>
               <div>
                 <section class="panel">
@@ -721,8 +725,13 @@
             </div>
             <section class="scene-card">
               <div class="scene-top">
-                <p class="scene-number">SCENE ${String(state.scenePage + 1).padStart(2, "0")}</p>
-                <h2 class="scene-title">${escapeHTML(scene.title)}</h2>
+                <img class="scene-visual-image" src="./assets/visuals/my-voice-scene.webp" width="1672" height="941" loading="lazy" decoding="async" alt="말의 파동을 받아들이는 투명한 경청 공간" />
+                <span class="scene-visual-veil" aria-hidden="true"></span>
+                <span class="scene-listening-pulse" aria-hidden="true"></span>
+                <div class="scene-top-copy">
+                  <p class="scene-number">SCENE ${String(state.scenePage + 1).padStart(2, "0")}</p>
+                  <h2 class="scene-title">${escapeHTML(scene.title)}</h2>
+                </div>
               </div>
               <div class="scene-body">
                 <p class="ranking-guide">가장 나다운 반응부터 눌러주세요. ${complete ? "<strong>순위 선택을 완료했습니다.</strong>" : `<strong>지금 선택하면 ${nextScore}점</strong>이 됩니다.`}</p>
@@ -941,6 +950,11 @@
                   <div class="index-seal-inner"><span class="index-label">MY SPEECH INDEX</span><strong class="index-number">${result.overall}</strong></div>
                 </div>
               </div>
+              <figure class="visual-frame results-visual">
+                <img src="./assets/visuals/my-voice-results.webp" width="1672" height="941" loading="lazy" decoding="async" alt="서로 다른 여섯 개의 투명한 공명 그릇과 중앙에서 자라는 새싹" />
+                <span class="visual-light-path" aria-hidden="true"></span>
+                <figcaption><span>SIX SPEECH FACTORS</span><strong>당신 안의 여섯 가지 말하기 힘</strong></figcaption>
+              </figure>
             </div>
           </section>
           <section class="results-body">
@@ -1010,6 +1024,11 @@
               <h1 class="screen-title">${isFollowup ? "질문 하나를 더 살펴보세요." : "이제 질문 하나를 선택해보세요."}</h1>
               <p class="question-instruction">${isFollowup ? "아직 선택하지 않은 질문입니다. 지금 다시 마음에 걸리는 질문 하나를 고르세요." : "당신의 결과를 바탕으로 세 가지 질문을 골랐습니다. 정답을 찾을 필요는 없습니다. 지금 가장 마음에 걸리는 질문 하나를 선택해주세요."}</p>
             </div>
+            <figure class="visual-frame questions-visual">
+              <img src="./assets/visuals/my-voice-questions.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="빛의 길 위에 놓인 서로 다른 세 개의 투명한 질문의 문" />
+              <span class="visual-light-path" aria-hidden="true"></span>
+              <figcaption><span>NOTICE · EXPLORE · CHOOSE</span><strong>가장 마음에 걸리는 문 앞에 머물러보세요.</strong></figcaption>
+            </figure>
             <div class="question-grid">
               ${options.map(function (question, index) {
                 return `<button class="question-pick" type="button" data-action="select-question" data-id="${escapeHTML(question.id)}"><span class="question-role">QUESTION ${String(index + 1).padStart(2, "0")} · ${question.role}</span><span class="context-hint">${escapeHTML(CONTEXT_HINTS[state.context || "아직 잘 모르겠다"])}</span><span class="question-quote">«${escapeHTML(question.text)}»</span><span class="select-label">이 질문 선택하기</span></button>`;
@@ -1064,8 +1083,12 @@
         ${headerHTML()}
         <main id="main-content" class="screen">
           <div class="coach-layout">
-            <p class="coach-step">${config.step}</p>
-            <h1 class="screen-title">${config.title}</h1>
+            <div class="coach-heading">
+              <div><p class="coach-step">${config.step}</p><h1 class="screen-title">${config.title}</h1></div>
+              <figure class="coach-seed-visual" aria-label="다음 목소리로 자라는 새싹">
+                <img src="./assets/visuals/my-voice-note.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="빛의 고리 안에서 자라는 작은 새싹" />
+              </figure>
+            </div>
             <section class="coach-card">
               <p class="question-quote">${escapeHTML(config.prompt)}</p>
               <label class="input-label" for="coach-input">${config.label}</label>
@@ -1139,6 +1162,10 @@
                 <div><p class="note-label">DAILYCOACHING · MY VOICE V${VERSION}</p><h2 class="note-logo">MY VOICE NOTE</h2></div>
                 <p class="note-date">${formatDate(state.completedAt)}<br />CONTEXT · ${escapeHTML(contextLabel(state.context || "아직 잘 모르겠다"))}</p>
               </header>
+              <figure class="note-visual">
+                <img src="./assets/visuals/my-voice-note.webp" width="1254" height="1254" loading="lazy" decoding="async" alt="투명한 공간 안에서 다음 목소리처럼 자라는 새싹" />
+                <figcaption><span>ONE SMALL CHOICE</span><strong>다음 목소리는 작은 선택에서 자랍니다.</strong></figcaption>
+              </figure>
               <section class="note-section">
                 <p class="note-label">MY SPEECH</p>
                 <div class="note-speech-grid">
