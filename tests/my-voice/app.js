@@ -361,13 +361,139 @@
     })
   );
 
-  const ACTION_ASSISTS = [
-    { label: "생각할 시간 갖기", text: "바로 말하지 않고 3초 생각한다." },
-    { label: "핵심부터 말하기", text: "결론을 한 문장으로 먼저 말한다." },
-    { label: "천천히 말하기", text: "첫 문장의 속도를 의식적으로 낮춘다." },
-    { label: "다시 시작하기", text: "말이 꼬여도 처음부터 다시 하지 않고 이어간다." },
-    { label: "질문하기", text: "상대에게 질문의 의도를 한번 확인한다." }
-  ];
+  const BUILDER_CONTEXT = {
+    "발표": {
+      when: ["발표를 시작하기 직전", "중요한 문장을 말하려는 순간", "청중의 반응이 달라질 때"],
+      scenes: ["업무 발표에서", "수업·교육 발표에서", "여러 사람 앞에서"]
+    },
+    "면접": {
+      when: ["면접관의 질문을 받은 순간", "답을 시작하기 직전", "추가 질문이 이어질 때"],
+      scenes: ["실제 면접에서", "모의 면접에서", "면접 답변을 연습할 때"]
+    },
+    "자기소개": {
+      when: ["처음 나를 소개할 때", "내 강점을 말하려는 순간", "상대의 반응을 살필 때"],
+      scenes: ["첫 만남의 자기소개에서", "업무상 인사 자리에서", "자기소개를 연습할 때"]
+    },
+    "회의·의견발표": {
+      when: ["회의에서 의견을 꺼내기 직전", "갑자기 발언 요청을 받았을 때", "다른 의견이 나온 순간"],
+      scenes: ["팀 회의에서", "여러 사람이 모인 회의에서", "상사·동료와 논의할 때"]
+    },
+    "일상대화": {
+      when: ["내 의견을 말하려는 순간", "상대의 반응이 달라질 때", "대화가 예상과 다르게 흐를 때"],
+      scenes: ["가까운 사람과 대화할 때", "처음 만난 사람과 이야기할 때", "의견이 다른 사람과 대화할 때"]
+    },
+    "즉흥질문": {
+      when: ["예상하지 못한 질문을 받은 순간", "바로 답해야 한다고 느낄 때", "질문의 뜻이 모호할 때"],
+      scenes: ["갑작스러운 질문을 받았을 때", "질의응답을 하던 중", "준비하지 않은 주제로 말할 때"]
+    },
+    "설득·반대의견": {
+      when: ["상대가 반대 의견을 말할 때", "내 입장을 설명하려는 순간", "대화의 긴장이 높아질 때"],
+      scenes: ["반대 의견을 나누는 자리에서", "상대를 설득해야 하는 대화에서", "의견 차이를 조율할 때"]
+    },
+    "아직 잘 모르겠다": {
+      when: ["말을 시작하기 직전", "예상과 다른 반응을 만났을 때", "중요한 말을 하려는 순간"],
+      scenes: ["최근 여러 사람 앞에서", "누군가와 중요한 대화를 할 때", "갑자기 말을 요청받았을 때"]
+    }
+  };
+
+  const BUILDER_FACTOR = {
+    confidence: {
+      patterns: ["내가 어떻게 보일지 먼저 의식한다", "첫 문장을 짧게 줄이거나 미룬다", "확신이 생길 때까지 말을 아낀다"],
+      triggers: ["내 차례가 갑자기 왔을 때", "사람들의 시선이 모였을 때", "다른 의견을 말해야 했을 때"],
+      signals: ["말을 시작하기 전에 몸이 긴장될 때", "첫 문장을 미루고 싶어질 때", "내가 어떻게 보일지 신경 쓰일 때"],
+      actions: ["첫 문장을 짧게 꺼내본다", "완벽함보다 핵심 하나를 말한다", "호흡한 뒤 내 의견부터 말한다"]
+    },
+    message: {
+      patterns: ["핵심보다 설명을 먼저 늘린다", "빠뜨리지 않으려 내용을 많이 붙인다", "결론을 뒤로 미룬 채 말을 시작한다"],
+      triggers: ["설명을 시작했을 때", "추가 질문을 받았을 때", "말이 길어졌다는 느낌이 들었을 때"],
+      signals: ["설명이 길어지기 시작할 때", "핵심이 무엇인지 흐려질 때", "여러 내용을 모두 말하고 싶어질 때"],
+      actions: ["결론을 한 문장으로 먼저 말한다", "설명 하나를 의식적으로 덜어낸다", "상대가 기억할 문장부터 고른다"]
+    },
+    delivery: {
+      patterns: ["말의 속도가 빨라진다", "문장 사이의 쉼이 줄어든다", "중요한 문장도 같은 톤으로 말한다"],
+      triggers: ["중요한 문장을 말했을 때", "시간이 부족하다고 느꼈을 때", "긴장이 올라온 순간"],
+      signals: ["말이 빨라지는 것을 느낄 때", "숨이 짧아지기 시작할 때", "중요한 문장을 곧 말해야 할 때"],
+      actions: ["첫 문장의 속도를 낮춘다", "중요한 문장 앞에서 잠시 쉰다", "핵심 단어 하나를 분명히 강조한다"]
+    },
+    presence: {
+      patterns: ["메시지보다 내 모습을 더 의식한다", "시선과 자세를 작게 만든다", "표정과 몸이 굳어지는 편이다"],
+      triggers: ["여러 시선이 나에게 모였을 때", "사람들의 표정을 확인했을 때", "내 모습이 신경 쓰이기 시작했을 때"],
+      signals: ["시선을 피하고 싶어질 때", "자세가 움츠러드는 것을 느낄 때", "표정이 굳는 느낌이 들 때"],
+      actions: ["한 사람의 시선을 편하게 마주본다", "두 발을 바닥에 두고 첫 문장을 말한다", "내 모습보다 전달할 문장에 집중한다"]
+    },
+    interaction: {
+      patterns: ["듣는 동안 다음 답을 준비한다", "상대의 반응에 맞춰 내 의견을 줄인다", "반대가 나오면 설명부터 더한다"],
+      triggers: ["상대의 반응이 달라졌을 때", "반대 의견을 들었을 때", "서로의 이해가 어긋났을 때"],
+      signals: ["내 답을 서둘러 준비하고 있을 때", "상대의 말을 끊고 싶어질 때", "설득부터 하고 싶어질 때"],
+      actions: ["답하기 전에 질문을 하나 더 한다", "상대의 말을 한 문장으로 확인한다", "상대를 존중하며 내 의견을 분명히 말한다"]
+    },
+    recovery: {
+      patterns: ["완벽한 답을 찾느라 잠시 멈춘다", "실수한 문장에 오래 머문다", "바로 답하려다 생각의 흐름을 놓친다"],
+      triggers: ["예상하지 못한 질문을 받았을 때", "말이 한 번 꼬였을 때", "준비한 흐름이 달라졌을 때"],
+      signals: ["정답을 빨리 찾아야 한다고 느낄 때", "말이 막히기 시작할 때", "실수한 문장이 계속 떠오를 때"],
+      actions: ["바로 답하지 않고 3초 생각한다", "아는 범위부터 한 문장으로 답한다", "말이 꼬여도 멈추지 않고 이어간다"]
+    }
+  };
+
+  const BUILDER_PATTERN_PAST = {
+    "내가 어떻게 보일지 먼저 의식한다": "내가 어떻게 보일지 먼저 의식했다",
+    "첫 문장을 짧게 줄이거나 미룬다": "첫 문장을 짧게 줄이거나 미뤘다",
+    "확신이 생길 때까지 말을 아낀다": "확신이 생길 때까지 말을 아꼈다",
+    "핵심보다 설명을 먼저 늘린다": "핵심보다 설명을 먼저 늘렸다",
+    "빠뜨리지 않으려 내용을 많이 붙인다": "빠뜨리지 않으려 내용을 많이 붙였다",
+    "결론을 뒤로 미룬 채 말을 시작한다": "결론을 뒤로 미룬 채 말을 시작했다",
+    "말의 속도가 빨라진다": "말의 속도가 빨라졌다",
+    "문장 사이의 쉼이 줄어든다": "문장 사이의 쉼이 줄어들었다",
+    "중요한 문장도 같은 톤으로 말한다": "중요한 문장도 같은 톤으로 말했다",
+    "메시지보다 내 모습을 더 의식한다": "메시지보다 내 모습을 더 의식했다",
+    "시선과 자세를 작게 만든다": "시선과 자세를 작게 만들었다",
+    "표정과 몸이 굳어지는 편이다": "표정과 몸이 굳어졌다",
+    "듣는 동안 다음 답을 준비한다": "듣는 동안 다음 답을 준비했다",
+    "상대의 반응에 맞춰 내 의견을 줄인다": "상대의 반응에 맞춰 내 의견을 줄였다",
+    "반대가 나오면 설명부터 더한다": "반대가 나오자 설명부터 더했다",
+    "완벽한 답을 찾느라 잠시 멈춘다": "완벽한 답을 찾느라 잠시 멈췄다",
+    "실수한 문장에 오래 머문다": "실수한 문장에 오래 머물렀다",
+    "바로 답하려다 생각의 흐름을 놓친다": "바로 답하려다 생각의 흐름을 놓쳤다"
+  };
+
+  const BUILDER_STYLE_ACTION = {
+    confidence: {
+      D: "망설이기 전에 내 의견의 결론부터 짧게 말한다",
+      I: "분위기를 살피기 전에 말하고 싶은 핵심부터 꺼낸다",
+      S: "상대를 배려하면서도 내 의견 한 문장을 먼저 말한다",
+      C: "완벽한 표현을 기다리지 않고 준비된 핵심부터 말한다"
+    },
+    message: {
+      D: "결론 뒤에 상대가 이해할 이유 하나만 덧붙인다",
+      I: "이야기를 시작하기 전에 핵심 한 문장을 먼저 말한다",
+      S: "배경 설명보다 내 의견의 핵심부터 분명히 말한다",
+      C: "모든 내용을 담기보다 핵심과 근거 하나만 고른다"
+    },
+    delivery: {
+      D: "결론을 말한 뒤 한 박자 쉬어 상대가 따라올 시간을 준다",
+      I: "분위기보다 중요한 문장의 속도와 강조를 먼저 지킨다",
+      S: "편안한 톤을 유지하며 문장 끝까지 또렷하게 말한다",
+      C: "정확히 말하려는 속도를 낮추고 핵심 앞에서 한 번 쉰다"
+    },
+    presence: {
+      D: "결론을 말할 때 한 사람의 시선을 편하게 마주본다",
+      I: "반응을 좇기보다 내 메시지에 맞는 표정과 자세를 유지한다",
+      S: "몸을 작게 만들지 않고 내 의견을 말하는 자리에 머문다",
+      C: "내 모습을 점검하기보다 전달할 첫 문장에 시선을 둔다"
+    },
+    interaction: {
+      D: "내 결론을 더 설명하기 전에 상대의 뜻을 한 번 확인한다",
+      I: "내 이야기를 이어가기 전에 상대의 말을 한 문장으로 확인한다",
+      S: "상대를 배려하면서도 내 의견을 한 문장으로 분명히 말한다",
+      C: "정확한 답을 만들기 전에 질문의 의도를 먼저 확인한다"
+    },
+    recovery: {
+      D: "바로 결론을 내기 전에 3초 동안 답의 핵심을 고른다",
+      I: "분위기를 메우려 서두르지 않고 아는 범위부터 말한다",
+      S: "실수 뒤에도 관계를 걱정하기보다 이어갈 한 문장을 꺼낸다",
+      C: "완벽한 답보다 지금 충분한 답부터 말한다"
+    }
+  };
 
   function defaultState() {
     return {
@@ -384,8 +510,9 @@
       myAnswer: "",
       moment: "",
       nextVoice: "",
+      builderChoices: {},
+      customInputStage: "",
       answeredQuestionIds: [],
-      assistOpen: false,
       previousSnapshot: latestNote(),
       startedAt: null,
       completedAt: null
@@ -412,6 +539,7 @@
     const restored = Object.assign(defaultState(), saved, {
       factorAnswers: saved.factorAnswers || {},
       sceneRanks: saved.sceneRanks || {},
+      builderChoices: saved.builderChoices || {},
       answeredQuestionIds: saved.answeredQuestionIds || []
     });
     if (saved.flowVersion !== FLOW_VERSION && ["questions", "scenes"].includes(restored.stage)) {
@@ -1039,24 +1167,163 @@
     `;
   }
 
+  function cleanBuilderFragment(value) {
+    return String(value || "").trim().replace(/[.!?]+$/g, "");
+  }
+
+  function pastBuilderPattern(value) {
+    const pattern = cleanBuilderFragment(value);
+    return BUILDER_PATTERN_PAST[pattern] || pattern;
+  }
+
+  function currentBuilderContext() {
+    return BUILDER_CONTEXT[state.context || "아직 잘 모르겠다"] || BUILDER_CONTEXT["아직 잘 모르겠다"];
+  }
+
+  function currentBuilderFactor() {
+    const priority = state.result && state.result.priority ? state.result.priority : "recovery";
+    return BUILDER_FACTOR[priority] || BUILDER_FACTOR.recovery;
+  }
+
+  function coachingBuilder(stage) {
+    const context = currentBuilderContext();
+    const factor = currentBuilderFactor();
+    const priority = state.result && state.result.priority ? state.result.priority : "recovery";
+    const primaryStyle = state.result && state.result.primaryStyle ? state.result.primaryStyle : "C";
+    if (stage === "coachingAnswer") {
+      return {
+        field: "myAnswer",
+        instruction: "각 줄에서 지금의 나와 가장 가까운 키워드 하나를 선택하세요.",
+        groups: [
+          { key: "when", label: "이 패턴은 언제 나타나나요?", options: context.when },
+          { key: "pattern", label: "그때 나는 어떻게 반응하나요?", options: factor.patterns }
+        ]
+      };
+    }
+    if (stage === "coachingMoment") {
+      return {
+        field: "moment",
+        instruction: "앞에서 찾은 패턴을 최근의 실제 장면에 연결합니다.",
+        groups: [
+          { key: "scene", label: "가장 가까운 실제 장면은?", options: context.scenes },
+          { key: "trigger", label: "무엇이 시작점이었나요?", options: factor.triggers }
+        ]
+      };
+    }
+    const styleActions = BUILDER_STYLE_ACTION[priority] || BUILDER_STYLE_ACTION.recovery;
+    const recommendedAction = styleActions[primaryStyle] || factor.actions[0];
+    const actionOptions = Array.from(new Set([recommendedAction].concat(factor.actions))).slice(0, 3);
+    return {
+      field: "nextVoice",
+      instruction: "알아차릴 신호와 다음에 해볼 행동을 하나씩 선택하세요.",
+      groups: [
+        { key: "signal", label: "어떤 신호를 알아차릴까요?", options: factor.signals },
+        { key: "action", label: "이번에는 무엇을 해볼까요?", options: actionOptions, recommendFirst: true }
+      ]
+    };
+  }
+
+  function composeBuilderSentence(stage, choices) {
+    const selected = choices || {};
+    if (stage === "coachingAnswer") {
+      if (!selected.when || !selected.pattern) return "";
+      return `나는 ${cleanBuilderFragment(selected.when)} ${cleanBuilderFragment(selected.pattern)}.`;
+    }
+    if (stage === "coachingMoment") {
+      if (!selected.scene || !selected.trigger) return "";
+      const answerChoices = state.builderChoices && state.builderChoices.coachingAnswer ? state.builderChoices.coachingAnswer : {};
+      const pattern = answerChoices.pattern
+        ? pastBuilderPattern(answerChoices.pattern)
+        : "앞에서 알아차린 말하기 패턴이 다시 나타났다";
+      return `최근 ${cleanBuilderFragment(selected.scene)} ${cleanBuilderFragment(selected.trigger)}, ${pattern}.`;
+    }
+    if (!selected.signal || !selected.action) return "";
+    return `다음에는 ${cleanBuilderFragment(selected.signal)} ${cleanBuilderFragment(selected.action)}.`;
+  }
+
+  function sentenceSlotHTML(value, placeholder) {
+    const hasValue = Boolean(String(value || "").trim());
+    return `<span class="sentence-slot ${hasValue ? "is-filled" : "is-empty"}">${escapeHTML(hasValue ? cleanBuilderFragment(value) : placeholder)}</span>`;
+  }
+
+  function partialSentenceHTML(stage, choices) {
+    const selected = choices || {};
+    if (stage === "coachingAnswer") {
+      return `나는 ${sentenceSlotHTML(selected.when, "어떤 순간")}&nbsp;${sentenceSlotHTML(selected.pattern, "나의 반응")}.`;
+    }
+    if (stage === "coachingMoment") {
+      const answerChoices = state.builderChoices && state.builderChoices.coachingAnswer ? state.builderChoices.coachingAnswer : {};
+      const pattern = answerChoices.pattern ? pastBuilderPattern(answerChoices.pattern) : "앞에서 찾은 반응";
+      return `최근 ${sentenceSlotHTML(selected.scene, "실제 장면")}&nbsp;${sentenceSlotHTML(selected.trigger, "시작점")}, ${escapeHTML(pattern)}.`;
+    }
+    return `다음에는 ${sentenceSlotHTML(selected.signal, "알아차릴 신호")}&nbsp;${sentenceSlotHTML(selected.action, "한 가지 행동")}.`;
+  }
+
+  function sentenceBuilderHTML(config) {
+    const builder = coachingBuilder(state.stage);
+    const choices = state.builderChoices && state.builderChoices[state.stage] ? state.builderChoices[state.stage] : {};
+    const selectedCount = builder.groups.filter(function (group) { return Boolean(choices[group.key]); }).length;
+    const editorOpen = state.customInputStage === state.stage;
+    const preview = config.value ? escapeHTML(config.value) : partialSentenceHTML(state.stage, choices);
+    return `
+      <div class="sentence-builder">
+        <div class="builder-intro"><p>${escapeHTML(builder.instruction)}</p><span>${selectedCount} / ${builder.groups.length} 선택</span></div>
+        ${builder.groups.map(function (group, groupIndex) {
+          const groupId = `builder-${state.stage}-${group.key}`;
+          return `<section class="builder-group" aria-labelledby="${groupId}"><div class="builder-group-head"><span>${String(groupIndex + 1).padStart(2, "0")}</span><strong id="${groupId}">${escapeHTML(group.label)}</strong></div><div class="builder-chips">${group.options.map(function (option, optionIndex) {
+            const selected = choices[group.key] === option;
+            const recommended = Boolean(group.recommendFirst && optionIndex === 0);
+            return `<button class="builder-chip ${selected ? "is-selected" : ""} ${recommended ? "is-recommended" : ""}" type="button" data-action="builder-choice" data-slot="${escapeHTML(group.key)}" data-value="${escapeHTML(option)}" aria-pressed="${selected}">${recommended ? `<span class="builder-chip-badge">결과 기반 추천</span>` : ""}<span>${escapeHTML(option)}</span></button>`;
+          }).join("")}</div></section>`;
+        }).join("")}
+        <div class="sentence-preview ${config.value ? "is-complete" : ""}" aria-live="polite">
+          <span class="sentence-preview-label">${config.value ? "나의 문장" : "완성되는 문장"}</span>
+          <p data-builder-preview>${preview}</p>
+        </div>
+        <button class="builder-edit-toggle" type="button" data-action="custom-toggle" aria-expanded="${editorOpen}">${editorOpen ? "직접 다듬기 닫기" : "완성된 문장을 내 말로 다듬기"}</button>
+        ${editorOpen ? `<div class="builder-editor"><label class="input-label" for="coach-input">선택한 문장을 자유롭게 고쳐도 좋습니다.</label><textarea id="coach-input" class="coach-input" data-field="${config.field}" placeholder="${escapeHTML(config.placeholder)}">${escapeHTML(config.value || "")}</textarea><div class="input-foot"><span>선택 문장을 그대로 사용해도 충분합니다.</span><span>이 기기에만 자동 저장됩니다.</span></div></div>` : ""}
+      </div>
+    `;
+  }
+
+  function refreshSentenceBuilderUI(builder, choices) {
+    document.querySelectorAll('[data-action="builder-choice"]').forEach(function (button) {
+      const selected = choices[button.dataset.slot] === button.dataset.value;
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+    const selectedCount = builder.groups.filter(function (group) { return Boolean(choices[group.key]); }).length;
+    const progress = document.querySelector(".builder-intro > span");
+    if (progress) progress.textContent = `${selectedCount} / ${builder.groups.length} 선택`;
+    const value = state[builder.field] || "";
+    const preview = document.querySelector("[data-builder-preview]");
+    if (preview) preview.innerHTML = value ? escapeHTML(value) : partialSentenceHTML(state.stage, choices);
+    const previewBox = preview ? preview.closest(".sentence-preview") : null;
+    if (previewBox) previewBox.classList.toggle("is-complete", Boolean(value));
+    const previewLabel = document.querySelector(".sentence-preview-label");
+    if (previewLabel) previewLabel.textContent = value ? "나의 문장" : "완성되는 문장";
+    const editor = document.getElementById("coach-input");
+    if (editor && editor.value !== value) editor.value = value;
+    const requiredButton = document.querySelector('[data-requires-input="true"]');
+    if (requiredButton) requiredButton.disabled = !String(value).trim();
+  }
+
   function coachingHTML() {
     const question = state.selectedQuestion;
     const configs = {
       coachingAnswer: {
         step: "STEP 01 · MY ANSWER",
-        title: "지금 떠오르는 생각을 적어보세요.",
+        title: "키워드로 지금의 패턴을 완성해보세요.",
         prompt: question.text,
-        label: "정답을 찾지 말고, 지금 떠오르는 생각을 자유롭게 적어보세요.",
-        placeholder: "한 문장도 충분합니다.",
+        placeholder: "지금 떠오르는 생각을 한 문장으로 적어보세요.",
         field: "myAnswer",
         value: state.myAnswer,
         next: "answer-next"
       },
       coachingMoment: {
         step: "STEP 02 · THE MOMENT",
-        title: "생각을 실제 장면으로 가져옵니다.",
+        title: "그 패턴이 나타난 장면을 찾아보세요.",
         prompt: "최근 실제로 비슷했던 순간 하나를 떠올린다면 언제였나요?",
-        label: "누구와, 어디에서, 어떤 말을 하려던 순간이었는지 적어보세요.",
         placeholder: "예: 지난 회의에서 갑자기 의견을 물었을 때…",
         field: "moment",
         value: state.moment,
@@ -1064,9 +1331,8 @@
       },
       coachingChoose: {
         step: "STEP 03 · NEXT VOICE",
-        title: "다음 말하기의 한 가지를 선택합니다.",
+        title: "다음 말하기의 한 가지를 선택해보세요.",
         prompt: "그 장면이 다시 온다면 이번에는 무엇을 한 가지 다르게 해보고 싶나요?",
-        label: "작고 구체적으로 적을수록 다음 장면에서 떠올리기 쉽습니다.",
         placeholder: "예: 질문을 받은 뒤 바로 답하지 않고 3초 생각한다.",
         field: "nextVoice",
         value: state.nextVoice,
@@ -1085,16 +1351,10 @@
             </div>
             <section class="coach-card">
               <p class="question-quote">${escapeHTML(config.prompt)}</p>
-              <label class="input-label" for="coach-input">${config.label}</label>
-              <textarea id="coach-input" class="coach-input" data-field="${config.field}" placeholder="${escapeHTML(config.placeholder)}">${escapeHTML(config.value || "")}</textarea>
-              <div class="input-foot"><span>글자 수 제한 없음</span><span>답변은 이 기기에만 자동 저장됩니다.</span></div>
-              ${state.stage === "coachingChoose" ? `
-                <button class="assist-toggle" type="button" data-action="assist-toggle" aria-expanded="${state.assistOpen}">${state.assistOpen ? "행동 선택 보조 닫기" : "바로 떠오르지 않나요? 작은 선택지 보기"}</button>
-                ${state.assistOpen ? `<div class="assist-panel"><p>처방이 아니라 생각을 돕는 보조 선택지입니다.</p><div class="assist-chips">${ACTION_ASSISTS.map(function (item) { return `<button class="assist-chip" type="button" data-action="assist" data-value="${escapeHTML(item.text)}">${escapeHTML(item.label)}</button>`; }).join("")}<button class="assist-chip" type="button" data-action="focus-input">내 방식 직접 적기</button></div></div>` : ""}
-              ` : ""}
+              ${sentenceBuilderHTML(config)}
             </section>
             <div class="action-bar">
-              <span class="action-meta">${state.stage === "coachingChoose" ? "이 답변이 MY VOICE NOTE의 NEXT VOICE가 됩니다." : "한 문장만 적어도 다음으로 갈 수 있습니다."}</span>
+              <span class="action-meta">${state.stage === "coachingChoose" ? "완성된 문장이 MY VOICE NOTE의 NEXT VOICE가 됩니다." : "각 줄에서 하나씩 고르면 다음으로 갈 수 있습니다."}</span>
               <div class="action-buttons"><button class="button button-ghost" type="button" data-action="coach-back">이전</button><button class="button button-primary button-arrow" type="button" data-action="${config.next}" data-requires-input="true" ${canContinue ? "" : "disabled"}>${state.stage === "coachingChoose" ? "MY VOICE NOTE 만들기" : "다음 질문"}</button></div>
             </div>
           </div>
@@ -1390,8 +1650,33 @@
         myAnswer: "",
         moment: "",
         nextVoice: "",
-        assistOpen: false
+        builderChoices: {},
+        customInputStage: ""
       });
+      return;
+    }
+    if (action === "builder-choice") {
+      if (!["coachingAnswer", "coachingMoment", "coachingChoose"].includes(state.stage)) return;
+      const builder = coachingBuilder(state.stage);
+      const slot = target.dataset.slot || "";
+      const validGroup = builder.groups.find(function (group) { return group.key === slot; });
+      if (!validGroup || !validGroup.options.includes(target.dataset.value || "")) return;
+      const stageChoices = Object.assign({}, state.builderChoices && state.builderChoices[state.stage] ? state.builderChoices[state.stage] : {});
+      stageChoices[slot] = target.dataset.value;
+      state.builderChoices = Object.assign({}, state.builderChoices || {}, { [state.stage]: stageChoices });
+      state[builder.field] = composeBuilderSentence(state.stage, stageChoices);
+      saveState();
+      refreshSentenceBuilderUI(builder, stageChoices);
+      return;
+    }
+    if (action === "custom-toggle") {
+      state.customInputStage = state.customInputStage === state.stage ? "" : state.stage;
+      saveState();
+      render(false);
+      if (state.customInputStage === state.stage) {
+        const input = document.getElementById("coach-input");
+        if (input) input.focus();
+      }
       return;
     }
     if (action === "answer-next") {
@@ -1406,25 +1691,6 @@
       if (state.stage === "coachingAnswer") go("questionSelect");
       else if (state.stage === "coachingMoment") go("coachingAnswer");
       else go("coachingMoment");
-      return;
-    }
-    if (action === "assist-toggle") {
-      state.assistOpen = !state.assistOpen;
-      saveState();
-      render(false);
-      return;
-    }
-    if (action === "assist") {
-      state.nextVoice = target.dataset.value || "";
-      saveState();
-      render(false);
-      const input = document.getElementById("coach-input");
-      if (input) input.focus();
-      return;
-    }
-    if (action === "focus-input") {
-      const input = document.getElementById("coach-input");
-      if (input) input.focus();
       return;
     }
     if (action === "finish-note") {
@@ -1451,7 +1717,7 @@
       const base = generateQuestions(state.result);
       let remaining = base.filter(function (question) { return !state.answeredQuestionIds.includes(question.id); });
       if (!remaining.length) remaining = base;
-      go("questionSelect", { questionOptions: remaining, selectedQuestion: null, myAnswer: "", moment: "", nextVoice: "" });
+      go("questionSelect", { questionOptions: remaining, selectedQuestion: null, myAnswer: "", moment: "", nextVoice: "", builderChoices: {}, customInputStage: "" });
       return;
     }
     if (action === "retest") {
@@ -1474,6 +1740,15 @@
     if (!field) return;
     state[field] = event.target.value;
     saveState();
+    const preview = document.querySelector("[data-builder-preview]");
+    if (preview) {
+      const nextText = String(event.target.value || "").trim();
+      preview.textContent = nextText || "위 키워드를 다시 선택하거나 내 문장을 적어보세요.";
+      const previewBox = preview.closest(".sentence-preview");
+      if (previewBox) previewBox.classList.toggle("is-complete", Boolean(nextText));
+      const previewLabel = document.querySelector(".sentence-preview-label");
+      if (previewLabel) previewLabel.textContent = nextText ? "나의 문장" : "완성되는 문장";
+    }
     const requiredButton = document.querySelector('[data-requires-input="true"]');
     if (requiredButton) requiredButton.disabled = !String(event.target.value || "").trim();
   });
