@@ -88,7 +88,7 @@ const producedByTheme = Object.fromEntries(["memory", "recharge", "future", "kin
 assert(producedByTheme.memory.length === 15, "memory Batch 1 deck is incomplete");
 assert(producedByTheme.recharge.length === 15, "recharge Batch 2 deck is incomplete");
 assert(producedByTheme.future.length === 15, "future Batch 3 deck is incomplete");
-assert(producedByTheme.kind.length === 3, "kind Batch 4 assets were added early");
+assert(new Set([3, 15]).has(producedByTheme.kind.length), "kind assets are in a partial or invalid state");
 
 const report = {
   status: errors.length === 0 ? "PASS" : "FAIL",

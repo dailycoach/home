@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "run": "A04 IMAGE PRODUCTION · BATCH 4 KIND",
+  "a04Status": "COMPLETE",
+  "kindCards": 15,
+  "inheritedPilots": 3,
+  "newAssets": 12,
+  "dimensions": "1122x1402",
+  "format": "webp",
+  "uniqueHashes": 15,
+  "newAssetBytes": 1015152,
+  "fullDeckBytes": 1278990,
+  "deckBoard": "1040x912 WEBP",
+  "allImageDecksBoard": "1240x1092 WEBP",
+  "manualBoardReview": "PASS",
+  "regeneratedCards": 1,
+  "correctedCardIds": [
+    "kind_15"
+  ],
+  "normalizedCanvasCards": 0,
+  "regressionValidators": {
+    "passed": 6,
+    "total": 6
+  },
+  "producedAssetCounts": {
+    "memory": 15,
+    "recharge": 15,
+    "future": 15,
+    "kind": 15
+  },
+  "allImageCards": 60,
+  "allImageBytes": 6870730,
+  "allImageUniqueHashes": 60,
+  "nextRunGate": "A05 BLOCKED UNTIL USER CONTINUES",
+  "errors": []
+}
