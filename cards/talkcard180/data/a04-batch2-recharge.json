@@ -1,0 +1,214 @@
+{
+  "project": "DAILYCOACHING TALK CARD 180 Renewal",
+  "version": "v2.0",
+  "run": "A04 IMAGE PRODUCTION · BATCH 2",
+  "status": "BATCH_2_COMPLETE_BATCH_3_BLOCKED",
+  "generatedAt": "2026-08-16",
+  "theme": "recharge",
+  "themeName": "충전·회복",
+  "styleAnchors": [
+    "recharge_01",
+    "recharge_05",
+    "recharge_15",
+    "memory_01"
+  ],
+  "inheritedPilotIds": [
+    "recharge_01",
+    "recharge_05",
+    "recharge_15"
+  ],
+  "generatedIds": [
+    "recharge_02",
+    "recharge_03",
+    "recharge_04",
+    "recharge_06",
+    "recharge_07",
+    "recharge_08",
+    "recharge_09",
+    "recharge_10",
+    "recharge_11",
+    "recharge_12",
+    "recharge_13",
+    "recharge_14"
+  ],
+  "allIds": [
+    "recharge_01",
+    "recharge_02",
+    "recharge_03",
+    "recharge_04",
+    "recharge_05",
+    "recharge_06",
+    "recharge_07",
+    "recharge_08",
+    "recharge_09",
+    "recharge_10",
+    "recharge_11",
+    "recharge_12",
+    "recharge_13",
+    "recharge_14",
+    "recharge_15"
+  ],
+  "promptPack": "docs/a04/A04_BATCH2_RECHARGE_PROMPT_PACK.md",
+  "reviewBoard": "docs/a04/A04_BATCH2_RECHARGE_DECK_BOARD.webp",
+  "canvas": {
+    "width": 1122,
+    "height": 1402,
+    "ratio": "4:5"
+  },
+  "qa": {
+    "expectedCards": 15,
+    "actualCards": 15,
+    "inheritedPilotCount": 3,
+    "newAssetCount": 12,
+    "uniqueHashes": 15,
+    "dimensionsUniform": true,
+    "webpValidated": true,
+    "manualBoardReview": "PASS",
+    "regeneratedCards": 0,
+    "normalizedCanvasIds": [
+      "recharge_07",
+      "recharge_10",
+      "recharge_11"
+    ],
+    "newAssetBytes": 1157842,
+    "fullDeckBytes": 1310590,
+    "nextBatchGate": "BLOCKED UNTIL USER CONTINUES"
+  },
+  "cards": [
+    {
+      "id": "recharge_01",
+      "source": "A03 PILOT",
+      "asset": "assets/images/recharge/recharge_01.webp",
+      "bytes": 69934,
+      "sha256": "8b650179acae0ae2bd338bd55f5f3a617ced23e07da1a46b7c9a380f29431136",
+      "manualQa": "PASS",
+      "qaNote": "단일 남색 실만 존재. 고정점·바늘·매듭·문자 없음."
+    },
+    {
+      "id": "recharge_02",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_02.webp",
+      "bytes": 128966,
+      "sha256": "32606cdf658631f086d0cd73409ec1dcc30af9d8d582436fd4bc4c67b06b13bc",
+      "manualQa": "PASS",
+      "qaNote": "수평선·육지·사물 없이 잔잔한 수면과 작은 빛 반사만 존재. 파문 중심 없음."
+    },
+    {
+      "id": "recharge_03",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_03.webp",
+      "bytes": 144924,
+      "sha256": "88bc037e3b10887179067d64ef1862c3c84b575de45cbbf23089882e2196a4af",
+      "manualQa": "PASS",
+      "qaNote": "파랑·테라코타 번짐이 중앙 여백을 두고 분리. 구체 형상·문자 없음."
+    },
+    {
+      "id": "recharge_04",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_04.webp",
+      "bytes": 135856,
+      "sha256": "3592bae89f1abb55623639a758ed003091694fe21ddb5d4584b4d1c4d68378b5",
+      "manualQa": "PASS",
+      "qaNote": "김 서린 유리와 비정형 맑은 자국 1개. 손자국·인물·거리·물방울 없음."
+    },
+    {
+      "id": "recharge_05",
+      "source": "A03 PILOT",
+      "asset": "assets/images/recharge/recharge_05.webp",
+      "bytes": 55900,
+      "sha256": "5e5169ccfcd6e4069c7e9c6434b8d3047fbdea55d8fde4e6ae6e34a17fa007c7",
+      "manualQa": "PASS",
+      "qaNote": "두 남색 면과 단일 빛 틈만 존재. 포털·문자·추가 사물 없음."
+    },
+    {
+      "id": "recharge_06",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_06.webp",
+      "bytes": 147554,
+      "sha256": "5fafbf8a153fc150ad57ba6065b3634ae57e96c50670ac1496f234f47e62c636",
+      "manualQa": "PASS",
+      "qaNote": "돌 1개가 오프화이트 천을 실제로 누르며 접점·주름·그림자 구조 정상."
+    },
+    {
+      "id": "recharge_07",
+      "source": "A04 BATCH 2 · CANVAS NORMALIZED",
+      "asset": "assets/images/recharge/recharge_07.webp",
+      "bytes": 46254,
+      "sha256": "e96fe125a4a89059e4cd99f6608803efbbd3b4f9c3bbe08e8c46fb9036614e06",
+      "manualQa": "PASS",
+      "qaNote": "가구 없는 빈 방에 세이지 매트 1개. 벽·바닥·모서리 원근 정상."
+    },
+    {
+      "id": "recharge_08",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_08.webp",
+      "bytes": 31266,
+      "sha256": "8e6cb0a2e9279a1cdcc3cd353981fca3870f1ad67d9fab3f6855119a062b9b77",
+      "manualQa": "PASS",
+      "qaNote": "벽의 단일 가는 균열과 작은 자연 분기만 존재. 파손·빛·글자 없음."
+    },
+    {
+      "id": "recharge_09",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_09.webp",
+      "bytes": 61636,
+      "sha256": "9243a4c1eade824f3ec9471fe588baa50f318b6270b85ff550ab7c9e5e063f35",
+      "manualQa": "PASS",
+      "qaNote": "서로 다른 두께·투명도의 무문자 종이 층과 모서리 구조 정상. 잉크·사진 없음."
+    },
+    {
+      "id": "recharge_10",
+      "source": "A04 BATCH 2 · CANVAS NORMALIZED",
+      "asset": "assets/images/recharge/recharge_10.webp",
+      "bytes": 58170,
+      "sha256": "af70b03b550733f09aae915baad71e4e1c739a41d6f2e99eabfb0041429ea64d",
+      "manualQa": "PASS",
+      "qaNote": "프레임 밖에서 떨어지는 모래 1줄과 모래언덕 1개. 용기·손·두 번째 흐름 없음."
+    },
+    {
+      "id": "recharge_11",
+      "source": "A04 BATCH 2 · CANVAS NORMALIZED",
+      "asset": "assets/images/recharge/recharge_11.webp",
+      "bytes": 107894,
+      "sha256": "3ce070bb7e07ac717a699a798cd236e52f19a2ac0695004a791797bc82ea8c51",
+      "manualQa": "PASS",
+      "qaNote": "단일 충격점에서 동심원이 자연스럽게 확산. 추가 물방울·잎·사물 없음."
+    },
+    {
+      "id": "recharge_12",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_12.webp",
+      "bytes": 120694,
+      "sha256": "03f85fade1a7dc5ac8ec11da4fad31dc84b8238fdb2c39c46aca817d7db27062",
+      "manualQa": "PASS",
+      "qaNote": "테라코타 천 1조각의 연속된 주름·접지·그림자 정상. 돌·인물 없음."
+    },
+    {
+      "id": "recharge_13",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_13.webp",
+      "bytes": 87814,
+      "sha256": "d9822d36a0541cfdaab7e9ba744f3ba17fc3a96ce49bda9d5196a1857261b9db",
+      "manualQa": "PASS",
+      "qaNote": "창틀에 매달린 커튼 1장이 안쪽으로 부풀며 천·부착·그림자 구조 정상."
+    },
+    {
+      "id": "recharge_14",
+      "source": "A04 BATCH 2",
+      "asset": "assets/images/recharge/recharge_14.webp",
+      "bytes": 86814,
+      "sha256": "ae8e2a0ab7b3bbf51cab17a75261088f345a32ae67296db4d2250796f03424d2",
+      "manualQa": "PASS",
+      "qaNote": "컵 1개의 원형 테두리와 가장자리까지 찬 단일 수면 정상. 넘침·추가 식기 없음."
+    },
+    {
+      "id": "recharge_15",
+      "source": "A03 PILOT",
+      "asset": "assets/images/recharge/recharge_15.webp",
+      "bytes": 26914,
+      "sha256": "a4c83672b784654b55a67c49ea147366a49a90938650d32689f788c4bec3986a",
+      "manualQa": "PASS",
+      "qaNote": "단일 황동 등불과 작은 빛의 원. 추가 가구·장식 없음."
+    }
+  ]
+}

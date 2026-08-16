@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "run": "A04 IMAGE PRODUCTION · BATCH 2 RECHARGE",
+  "rechargeCards": 15,
+  "inheritedPilots": 3,
+  "newAssets": 12,
+  "dimensions": "1122x1402",
+  "format": "webp",
+  "uniqueHashes": 15,
+  "newAssetBytes": 1157842,
+  "fullDeckBytes": 1310590,
+  "board": "1040x912 WEBP",
+  "manualBoardReview": "PASS",
+  "regeneratedCards": 0,
+  "normalizedCanvasCards": 3,
+  "regressionValidators": {
+    "passed": 4,
+    "total": 4
+  },
+  "producedAssetCounts": {
+    "memory": 15,
+    "recharge": 15,
+    "future": 3,
+    "kind": 3
+  },
+  "nextBatchGate": "BLOCKED UNTIL USER CONTINUES",
+  "errors": []
+}
