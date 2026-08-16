@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "pilotCount": 12,
+  "perDeck": {
+    "memory": 3,
+    "recharge": 3,
+    "future": 3,
+    "kind": 3
+  },
+  "dimensions": "1122x1402",
+  "format": "webp",
+  "uniqueHashes": 12,
+  "totalBytes": 1405634,
+  "board": "780x1464",
+  "a04Gate": "PENDING USER APPROVAL",
+  "errors": []
+}
