@@ -11,34 +11,36 @@ const assert = (condition, message) => {
   if (!condition) errors.push(message);
 };
 
-const expectedIds = Array.from({ length: 15 }, (_, index) => `recharge_${String(index + 1).padStart(2, "0")}`);
-const pilotIds = ["recharge_01", "recharge_05", "recharge_15"];
+const expectedIds = Array.from({ length: 15 }, (_, index) => `future_${String(index + 1).padStart(2, "0")}`);
+const pilotIds = ["future_02", "future_03", "future_06"];
 const generatedIds = expectedIds.filter((id) => !pilotIds.includes(id));
-const normalizedCanvasIds = ["recharge_07", "recharge_10", "recharge_11"];
+const normalizedCanvasIds = [];
 
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "data/image-card-manifest.json"), "utf8"));
 const memoryRegistry = JSON.parse(fs.readFileSync(path.join(root, "data/a04-batch1-memory.json"), "utf8"));
-const registry = JSON.parse(fs.readFileSync(path.join(root, "data/a04-batch2-recharge.json"), "utf8"));
-const rechargeManifest = manifest.cards.filter((card) => card.theme === "recharge");
+const rechargeRegistry = JSON.parse(fs.readFileSync(path.join(root, "data/a04-batch2-recharge.json"), "utf8"));
+const registry = JSON.parse(fs.readFileSync(path.join(root, "data/a04-batch3-future.json"), "utf8"));
+const futureManifest = manifest.cards.filter((card) => card.theme === "future");
 
 assert(memoryRegistry.status === "BATCH_1_COMPLETE_BATCH_2_BLOCKED", "A04 Batch 1 registry changed unexpectedly");
-assert(registry.status === "BATCH_2_COMPLETE_BATCH_3_BLOCKED", "A04 Batch 3 gate is not locked");
+assert(rechargeRegistry.status === "BATCH_2_COMPLETE_BATCH_3_BLOCKED", "A04 Batch 2 registry changed unexpectedly");
+assert(registry.status === "BATCH_3_COMPLETE_BATCH_4_BLOCKED", "A04 Batch 4 gate is not locked");
 assert(JSON.stringify(registry.inheritedPilotIds) === JSON.stringify(pilotIds), "pilot ID set differs");
 assert(JSON.stringify(registry.generatedIds) === JSON.stringify(generatedIds), "generated ID set differs");
-assert(JSON.stringify(registry.allIds) === JSON.stringify(expectedIds), "full recharge ID set differs");
+assert(JSON.stringify(registry.allIds) === JSON.stringify(expectedIds), "full future ID set differs");
 assert(JSON.stringify(registry.qa.normalizedCanvasIds) === JSON.stringify(normalizedCanvasIds), "normalized canvas ID set differs");
-assert(rechargeManifest.length === 15, `recharge manifest has ${rechargeManifest.length} cards`);
-assert(JSON.stringify(rechargeManifest.map((card) => card.id)) === JSON.stringify(expectedIds), "recharge manifest order or IDs differ");
-assert(registry.cards.length === 15, `A04 Batch 2 registry has ${registry.cards.length} cards`);
+assert(futureManifest.length === 15, `future manifest has ${futureManifest.length} cards`);
+assert(JSON.stringify(futureManifest.map((card) => card.id)) === JSON.stringify(expectedIds), "future manifest order or IDs differ");
+assert(registry.cards.length === 15, `A04 Batch 3 registry has ${registry.cards.length} cards`);
 
 const hashes = [];
 let fullDeckBytes = 0;
 let newAssetBytes = 0;
 
 for (const id of expectedIds) {
-  const relativePath = `assets/images/recharge/${id}.webp`;
+  const relativePath = `assets/images/future/${id}.webp`;
   const assetPath = path.join(root, relativePath);
-  const manifestCard = rechargeManifest.find((card) => card.id === id);
+  const manifestCard = futureManifest.find((card) => card.id === id);
   const registered = registry.cards.find((card) => card.id === id);
 
   assert(manifestCard?.image === relativePath, `${id}: A02 manifest asset path mismatch`);
@@ -56,7 +58,7 @@ for (const id of expectedIds) {
 
   assert(stat.size > 20_000, `${id}: suspiciously small asset (${stat.size} bytes)`);
   assert(dimensions === "1122 1402 WEBP", `${id}: dimensions or format are ${dimensions}`);
-  assert(registered, `${id}: missing A04 Batch 2 registry entry`);
+  assert(registered, `${id}: missing A04 Batch 3 registry entry`);
   if (registered) {
     assert(registered.asset === relativePath, `${id}: registry asset path mismatch`);
     assert(registered.bytes === stat.size, `${id}: registry byte size mismatch`);
@@ -65,12 +67,12 @@ for (const id of expectedIds) {
   }
 }
 
-assert(new Set(hashes).size === 15, "recharge image hashes are not unique");
+assert(new Set(hashes).size === 15, "future image hashes are not unique");
 assert(registry.qa.newAssetBytes === newAssetBytes, "new asset byte total differs");
 assert(registry.qa.fullDeckBytes === fullDeckBytes, "full deck byte total differs");
 
-const boardPath = path.join(root, "docs/a04/A04_BATCH2_RECHARGE_DECK_BOARD.webp");
-assert(fs.existsSync(boardPath), "recharge review board missing");
+const boardPath = path.join(root, "docs/a04/A04_BATCH3_FUTURE_DECK_BOARD.webp");
+assert(fs.existsSync(boardPath), "future review board missing");
 if (fs.existsSync(boardPath)) {
   const boardDimensions = execFileSync("identify", ["-format", "%w %h %m", boardPath], { encoding: "utf8" }).trim();
   assert(boardDimensions === "1040 912 WEBP", `review board dimensions or format are ${boardDimensions}`);
@@ -85,16 +87,13 @@ const producedByTheme = Object.fromEntries(["memory", "recharge", "future", "kin
 
 assert(producedByTheme.memory.length === 15, "memory Batch 1 deck is incomplete");
 assert(producedByTheme.recharge.length === 15, "recharge Batch 2 deck is incomplete");
-
-const validDownstreamCounts = new Set([3, 15]);
-assert(validDownstreamCounts.has(producedByTheme.future.length), "future assets are in a partial or invalid state");
-assert(validDownstreamCounts.has(producedByTheme.kind.length), "kind assets are in a partial or invalid state");
-assert(producedByTheme.kind.length !== 15 || producedByTheme.future.length === 15, "kind deck completed before future deck");
+assert(producedByTheme.future.length === 15, "future Batch 3 deck is incomplete");
+assert(producedByTheme.kind.length === 3, "kind Batch 4 assets were added early");
 
 const report = {
   status: errors.length === 0 ? "PASS" : "FAIL",
-  run: "A04 IMAGE PRODUCTION · BATCH 2 RECHARGE",
-  rechargeCards: expectedIds.length,
+  run: "A04 IMAGE PRODUCTION · BATCH 3 FUTURE",
+  futureCards: expectedIds.length,
   inheritedPilots: pilotIds.length,
   newAssets: generatedIds.length,
   dimensions: "1122x1402",

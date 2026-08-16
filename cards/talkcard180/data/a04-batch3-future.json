@@ -1,0 +1,209 @@
+{
+  "project": "DAILYCOACHING TALK CARD 180 Renewal",
+  "version": "v2.0",
+  "run": "A04 IMAGE PRODUCTION · BATCH 3",
+  "status": "BATCH_3_COMPLETE_BATCH_4_BLOCKED",
+  "generatedAt": "2026-08-16",
+  "theme": "future",
+  "themeName": "미래 상상",
+  "styleAnchors": [
+    "future_02",
+    "future_03",
+    "future_06"
+  ],
+  "inheritedPilotIds": [
+    "future_02",
+    "future_03",
+    "future_06"
+  ],
+  "generatedIds": [
+    "future_01",
+    "future_04",
+    "future_05",
+    "future_07",
+    "future_08",
+    "future_09",
+    "future_10",
+    "future_11",
+    "future_12",
+    "future_13",
+    "future_14",
+    "future_15"
+  ],
+  "allIds": [
+    "future_01",
+    "future_02",
+    "future_03",
+    "future_04",
+    "future_05",
+    "future_06",
+    "future_07",
+    "future_08",
+    "future_09",
+    "future_10",
+    "future_11",
+    "future_12",
+    "future_13",
+    "future_14",
+    "future_15"
+  ],
+  "promptPack": "docs/a04/A04_BATCH3_FUTURE_PROMPT_PACK.md",
+  "reviewBoard": "docs/a04/A04_BATCH3_FUTURE_DECK_BOARD.webp",
+  "canvas": {
+    "width": 1122,
+    "height": 1402,
+    "ratio": "4:5"
+  },
+  "qa": {
+    "expectedCards": 15,
+    "actualCards": 15,
+    "inheritedPilotCount": 3,
+    "newAssetCount": 12,
+    "uniqueHashes": 15,
+    "dimensionsUniform": true,
+    "webpValidated": true,
+    "manualBoardReview": "PASS",
+    "regeneratedCards": 0,
+    "normalizedCanvasIds": [],
+    "newAssetBytes": 1536630,
+    "fullDeckBytes": 1968548,
+    "nextBatchGate": "BLOCKED UNTIL USER CONTINUES"
+  },
+  "cards": [
+    {
+      "id": "future_01",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_01.webp",
+      "bytes": 131038,
+      "sha256": "757c0fb7a93a8ce7033cc152c5d142c677006fc0f6f3d2d4101cf62740703b9a",
+      "manualQa": "PASS",
+      "qaNote": "금속 열쇠 1개의 몸체·비트 구조 정상. 자물쇠·문·글자·발광 효과 없음."
+    },
+    {
+      "id": "future_02",
+      "source": "A03 PILOT",
+      "asset": "assets/images/future/future_02.webp",
+      "bytes": 128250,
+      "sha256": "03345d20dc4f7154e07b621259bc3f45d07d76281e2fd5ca93bb899fed90f482",
+      "manualQa": "PASS",
+      "qaNote": "계곡 사이 보행 다리의 난간·상판·지지 구조와 원근 정상. 인물·표지판 없음."
+    },
+    {
+      "id": "future_03",
+      "source": "A03 PILOT",
+      "asset": "assets/images/future/future_03.webp",
+      "bytes": 199940,
+      "sha256": "877ec9270fcef38bd488c8a127805a622690ba762edbc0536a21793adaa1912d",
+      "manualQa": "PASS",
+      "qaNote": "흙 틈의 씨앗 1개와 가는 뿌리 끝만 존재. 설명적 성장 장면·문자 없음."
+    },
+    {
+      "id": "future_04",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_04.webp",
+      "bytes": 92236,
+      "sha256": "0d4df109352cd1c7e4260cfa6173ab058b4403e01cca7450157620572790ca82",
+      "manualQa": "PASS",
+      "qaNote": "절벽 위 작은 등대와 한 방향의 절제된 빛. 배·인물·표지·과장된 광원 없음."
+    },
+    {
+      "id": "future_05",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_05.webp",
+      "bytes": 123168,
+      "sha256": "1a04898491f3506a3892adf8e4dbd5c94f34f3fdfb7aaf34387f417fae70ec0b",
+      "manualQa": "PASS",
+      "qaNote": "넓은 계단의 단높이·디딤판·벽 접점·원근 정상. 난간·인물·불가능 구조 없음."
+    },
+    {
+      "id": "future_06",
+      "source": "A03 PILOT",
+      "asset": "assets/images/future/future_06.webp",
+      "bytes": 103728,
+      "sha256": "be0736c7e557e9b4947d0af745a431e7ad4719ccbbc35fc144d3515c47be0cf1",
+      "manualQa": "PASS",
+      "qaNote": "무문자 지도, 나무 표식 3개, 남색 연필 1개의 형태와 배치 정상. 경로·지명 없음."
+    },
+    {
+      "id": "future_07",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_07.webp",
+      "bytes": 94712,
+      "sha256": "abc3781f6b6e45e790b5c19590bfdcc6de01b4ff2ca72b705d177e71ac25a728",
+      "manualQa": "PASS",
+      "qaNote": "높은 벽의 양개 창문과 바깥 하늘만 존재. 프레임·힌지·원근 정상, 포털 효과 없음."
+    },
+    {
+      "id": "future_08",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_08.webp",
+      "bytes": 155000,
+      "sha256": "ed3d1771a206a2f283408053c8fe5f216c5d0538f0de8fed72bec7a23773fb6e",
+      "manualQa": "PASS",
+      "qaNote": "무인 목선 1척의 선체·돛대·접힌 돛·반사 구조 정상. 글자·다른 배·인물 없음."
+    },
+    {
+      "id": "future_09",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_09.webp",
+      "bytes": 138780,
+      "sha256": "e61560890f0e43728f17869a3cdcb23dd441af4657dba5b6e2e90a15bf2f50bf",
+      "manualQa": "PASS",
+      "qaNote": "들판의 어린 나무 1그루와 두 방향 가지 구조 정상. 한쪽을 정답처럼 강조하지 않음."
+    },
+    {
+      "id": "future_10",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_10.webp",
+      "bytes": 158784,
+      "sha256": "09c987f9cd536c39c65389ac1451c029841e8e7f87ce27f577dc04e77f16edc6",
+      "manualQa": "PASS",
+      "qaNote": "숲과 들판으로 갈라지는 두 흙길의 폭·밝기·비중 균형. 표지판·인물·화살표 없음."
+    },
+    {
+      "id": "future_11",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_11.webp",
+      "bytes": 157924,
+      "sha256": "1a0c8a5eb8899319baca457d328b2f1298ccd33bbfd2fcdb1742e2aa49e2153c",
+      "manualQa": "PASS",
+      "qaNote": "풀밭에 독립된 닫힌 문 1개의 문틀·경첩·손잡이·접지 정상. 빛샘·포털·글자 없음."
+    },
+    {
+      "id": "future_12",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_12.webp",
+      "bytes": 120834,
+      "sha256": "a367a997e98d33e17b5251ee823e0ccd6b844db3f5ac2dc500df927a15c29309",
+      "manualQa": "PASS",
+      "qaNote": "열린 천 가방과 접힌 천·무문자 노트·빈 유리병 각 1개. 추가 소품·라벨 없음."
+    },
+    {
+      "id": "future_13",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_13.webp",
+      "bytes": 115222,
+      "sha256": "4f5e4b4d2c26f0615a44ab25e5bec24d2f328e68a1c65775df6f0a4a46ed923f",
+      "manualQa": "PASS",
+      "qaNote": "짧은 밀랍 촛불 1개의 심지·불꽃·촛농 구조 정상. 추가 사물·과장된 광륜 없음."
+    },
+    {
+      "id": "future_14",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_14.webp",
+      "bytes": 112508,
+      "sha256": "3546bd1233d6a5d8d1c82e46ec8c8b16f8de5df5a4a3a7c30b33e27907db1ae3",
+      "manualQa": "PASS",
+      "qaNote": "나무 실패 1개에서 먼지 낀 파랑 실이 느슨하게 이어짐. 매듭·바늘·고정점·문자 없음."
+    },
+    {
+      "id": "future_15",
+      "source": "A04 BATCH 3",
+      "asset": "assets/images/future/future_15.webp",
+      "bytes": 136424,
+      "sha256": "6f2e8c7eb3a412c0e38dc0ea926816469da560d2e90346320d7a482939e16856",
+      "manualQa": "PASS",
+      "qaNote": "빈 도자기 그릇 1개의 테두리·내부 타원·받침·그림자 정상. 내용물·글자·발광 없음."
+    }
+  ]
+}
