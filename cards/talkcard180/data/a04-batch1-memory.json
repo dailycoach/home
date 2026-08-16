@@ -1,0 +1,204 @@
+{
+  "project": "DAILYCOACHING TALK CARD 180 Renewal",
+  "version": "v2.0",
+  "run": "A04 IMAGE PRODUCTION · BATCH 1",
+  "status": "BATCH_1_COMPLETE_BATCH_2_BLOCKED",
+  "generatedAt": "2026-08-16",
+  "theme": "memory",
+  "themeName": "기억 한 조각",
+  "styleAnchor": "memory_01",
+  "inheritedPilotIds": [
+    "memory_01",
+    "memory_06",
+    "memory_13"
+  ],
+  "generatedIds": [
+    "memory_02",
+    "memory_03",
+    "memory_04",
+    "memory_05",
+    "memory_07",
+    "memory_08",
+    "memory_09",
+    "memory_10",
+    "memory_11",
+    "memory_12",
+    "memory_14",
+    "memory_15"
+  ],
+  "allIds": [
+    "memory_01",
+    "memory_02",
+    "memory_03",
+    "memory_04",
+    "memory_05",
+    "memory_06",
+    "memory_07",
+    "memory_08",
+    "memory_09",
+    "memory_10",
+    "memory_11",
+    "memory_12",
+    "memory_13",
+    "memory_14",
+    "memory_15"
+  ],
+  "promptPack": "docs/a04/A04_BATCH1_MEMORY_PROMPT_PACK.md",
+  "reviewBoard": "docs/a04/A04_BATCH1_MEMORY_DECK_BOARD.webp",
+  "canvas": {
+    "width": 1122,
+    "height": 1402,
+    "ratio": "4:5"
+  },
+  "qa": {
+    "expectedCards": 15,
+    "actualCards": 15,
+    "inheritedPilotCount": 3,
+    "newAssetCount": 12,
+    "uniqueHashes": 15,
+    "dimensionsUniform": true,
+    "webpValidated": true,
+    "manualBoardReview": "PASS",
+    "regeneratedCards": 0,
+    "newAssetBytes": 1755472,
+    "fullDeckBytes": 2312602,
+    "nextBatchGate": "BLOCKED UNTIL USER CONTINUES"
+  },
+  "cards": [
+    {
+      "id": "memory_01",
+      "source": "A03 PILOT",
+      "asset": "assets/images/memory/memory_01.webp",
+      "bytes": 122772,
+      "sha256": "5d1f1f6cabe75926fc834da12686193163bac7a4f33bfe098fc2fdc9f702a5c7",
+      "manualQa": "PASS",
+      "qaNote": "원목 식탁·서랍·식탁보 구조 정상. 우측 여백과 오후빛 유지."
+    },
+    {
+      "id": "memory_02",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_02.webp",
+      "bytes": 127742,
+      "sha256": "45855ed3183baaccb614eb58b635de9d0bdd728a5bdf4ee5891cc74cadd8bf69",
+      "manualQa": "PASS",
+      "qaNote": "단일 의자와 원형 테이블의 다리·좌판 구조 정상. 두 번째 의자·인물 없음."
+    },
+    {
+      "id": "memory_03",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_03.webp",
+      "bytes": 183590,
+      "sha256": "8ef4133fdef68ab1956bdce1b9d4e7ed2fd2949a1ee1abf7d0aeb47e2b892fe9",
+      "manualQa": "PASS",
+      "qaNote": "유리병 1개·마른 잎 1개·커튼 끝 확인. 라벨·비·추가 사물 없음."
+    },
+    {
+      "id": "memory_04",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_04.webp",
+      "bytes": 199848,
+      "sha256": "18bee1871094893e88e887162c93017c6c1b11b5cbe3296f6aa0c400e07e73c2",
+      "manualQa": "PASS",
+      "qaNote": "골목 원근·담·대문·자전거 프레임과 바퀴 구조 정상. 간판·글자 없음."
+    },
+    {
+      "id": "memory_05",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_05.webp",
+      "bytes": 158860,
+      "sha256": "eeab883a1b45540e53fa4304f0ae22ed99b900f04beeca63f488bc96a5dcf28b",
+      "manualQa": "PASS",
+      "qaNote": "복도 단일 소실점·문·사물함·천장 구조 정상. 방 번호·표지 없음."
+    },
+    {
+      "id": "memory_06",
+      "source": "A03 PILOT",
+      "asset": "assets/images/memory/memory_06.webp",
+      "bytes": 194242,
+      "sha256": "1ddd6f91397c1be8db809738da67caf27146bf271be6134f63fe11fa9ad390b2",
+      "manualQa": "PASS",
+      "qaNote": "빗방울 전경과 이동 중 버스 창 분리. 노선 문자·인물 없음."
+    },
+    {
+      "id": "memory_07",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_07.webp",
+      "bytes": 118288,
+      "sha256": "f0a655609e00143c4d481645f7c0beef99532b0a9036f22d1208d893607092bd",
+      "manualQa": "PASS",
+      "qaNote": "카세트 플레이어와 테이프의 두 릴·버튼·스피커 구조 정상. 브랜드·라벨 없음."
+    },
+    {
+      "id": "memory_08",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_08.webp",
+      "bytes": 118158,
+      "sha256": "3604f599cf7cea527b3552f208d741261e995e40f51cece604065acf2690ec95",
+      "manualQa": "PASS",
+      "qaNote": "찻잔 정확히 2개, 각 손잡이·원형 테두리 정상. 한 잔만 차가 있고 추가 식기 없음."
+    },
+    {
+      "id": "memory_09",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_09.webp",
+      "bytes": 187598,
+      "sha256": "1f9b39f8311e5516458b6ea8aa43999d798c60d090f45242cc8c6f5db452c071",
+      "manualQa": "PASS",
+      "qaNote": "단일 문·문틀·경첩·바닥·복도 구조와 명암 정상. 공포 연출·표지 없음."
+    },
+    {
+      "id": "memory_10",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_10.webp",
+      "bytes": 149558,
+      "sha256": "82ef346fb5c6a03baff54c87e3691ebb4ca2e806da66907e8a8c1b6620ea0afa",
+      "manualQa": "PASS",
+      "qaNote": "갈림 없는 흙길 1개가 먼 언덕까지 연속. 사람·차량·표지판 없음."
+    },
+    {
+      "id": "memory_11",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_11.webp",
+      "bytes": 79068,
+      "sha256": "339f7e10c3d744053030108b843d76730c013c2a82fb1e1275c92d94428acb64",
+      "manualQa": "PASS",
+      "qaNote": "옥상 난간과 빨랫줄 기둥 2개 구조 정상. 빨래·인물·해 원반 없음."
+    },
+    {
+      "id": "memory_12",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_12.webp",
+      "bytes": 202504,
+      "sha256": "56e13b51eeaeb2a5079cc5831305f24bc16cd8ef080b1a9a9b4ae262f386c40b",
+      "manualQa": "PASS",
+      "qaNote": "사진 정확히 3장·닫힌 만년필 1개·상자 1개. 사진 속 인물·글자 식별 불가."
+    },
+    {
+      "id": "memory_13",
+      "source": "A03 PILOT",
+      "asset": "assets/images/memory/memory_13.webp",
+      "bytes": 240116,
+      "sha256": "fb1d97baec64a2c0155afdaf9b59f5388af34a7568f6b709f380034168667300",
+      "manualQa": "PASS",
+      "qaNote": "벤치·나무·산책로 구조 정상. 환경 와이드와 좌측 배치 유지."
+    },
+    {
+      "id": "memory_14",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_14.webp",
+      "bytes": 124670,
+      "sha256": "89c0216362168534205deb575124f14aa6fd901722d4b90a64f17237da8d2211",
+      "manualQa": "PASS",
+      "qaNote": "단일 계단의 디딤판·챌판·난간·기둥·상부 창 구조 정상. 마법적 빛 없음."
+    },
+    {
+      "id": "memory_15",
+      "source": "A04 BATCH 1",
+      "asset": "assets/images/memory/memory_15.webp",
+      "bytes": 105588,
+      "sha256": "4de8ecddaecf592c0010a66f611b638455522296a348087fe6292a8190be0577",
+      "manualQa": "PASS",
+      "qaNote": "램프 1개·접힌 담요·닫힌 무문자 책·러그와 방 구조 정상. 인물 없음."
+    }
+  ]
+}
