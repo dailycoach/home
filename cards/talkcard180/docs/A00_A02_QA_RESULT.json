@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "counts": {
+    "legacyCards": 180,
+    "themes": 12,
+    "textCards": 120,
+    "imageSlots": 60,
+    "totalSlots": 180,
+    "manifestCards": 60
+  },
+  "perTheme": {
+    "ice": 15,
+    "taste": 15,
+    "lately": 15,
+    "talk": 15,
+    "work": 15,
+    "value": 15,
+    "courage": 15,
+    "tmi": 15,
+    "memory": 15,
+    "recharge": 15,
+    "future": 15,
+    "kind": 15
+  },
+  "pilotCandidates": {
+    "memory": [
+      "memory_01",
+      "memory_06",
+      "memory_13"
+    ],
+    "recharge": [
+      "recharge_01",
+      "recharge_05",
+      "recharge_15"
+    ],
+    "future": [
+      "future_02",
+      "future_03",
+      "future_06"
+    ],
+    "kind": [
+      "kind_01",
+      "kind_08",
+      "kind_14"
+    ]
+  },
+  "errors": []
+}
