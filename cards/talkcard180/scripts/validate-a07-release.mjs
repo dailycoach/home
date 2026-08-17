@@ -210,6 +210,16 @@ assert(html.includes('loading="eager"'), "ACTIVE_IMAGE_EAGER", "the current imag
 assert(html.includes('decoding="async"'), "ACTIVE_IMAGE_ASYNC_DECODE", "the current image card must decode asynchronously");
 assert(html.includes('fetchpriority="high"'), "ACTIVE_IMAGE_PRIORITY", "the current image card must receive high fetch priority");
 assert(
+  html.includes('href="css/talkcard.css?v=2.0.0-a07"'),
+  "CSS_CACHE_VERSION",
+  "the v2 stylesheet must use an explicit release cache key",
+);
+assert(
+  html.includes('src="js/talkcard-view.js?v=2.0.0-a07"'),
+  "ENTRY_SCRIPT_CACHE_VERSION",
+  "the v2 module entry must use an explicit release cache key",
+);
+assert(
   /\.image-frame img\s*\{[^}]*height:\s*auto;/s.test(css),
   "ACTIVE_IMAGE_ASPECT_RATIO",
   "the active image must override HTML height hints and preserve the 1122:1402 source ratio",

@@ -5,8 +5,8 @@
   "browserQa": "PENDING_STAGING_DEPLOYMENT",
   "coreWebVitals": "BLOCKED_CHROME_DEVTOOLS_MCP_UNAVAILABLE",
   "summary": {
-    "checks": 89,
-    "passed": 89,
+    "checks": 91,
+    "passed": 91,
     "failed": 0,
     "themes": 12,
     "runtimeTextCards": 120,
@@ -363,6 +363,16 @@
       "name": "ACTIVE_IMAGE_PRIORITY",
       "status": "PASS",
       "detail": "the current image card must receive high fetch priority"
+    },
+    {
+      "name": "CSS_CACHE_VERSION",
+      "status": "PASS",
+      "detail": "the v2 stylesheet must use an explicit release cache key"
+    },
+    {
+      "name": "ENTRY_SCRIPT_CACHE_VERSION",
+      "status": "PASS",
+      "detail": "the v2 module entry must use an explicit release cache key"
     },
     {
       "name": "ACTIVE_IMAGE_ASPECT_RATIO",
