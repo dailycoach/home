@@ -154,6 +154,7 @@ assert.match(candidate, /id="optional-prompt"[^>]* hidden/);
 assert.match(candidate, /id="followup-panel" hidden/);
 assert.match(candidate, /id="open-prompt"[^>]*data-action="open-prompt" hidden/);
 assert.match(candidate, /id="picked-image"[\s\S]*loading="eager"[\s\S]*decoding="async"[\s\S]*fetchpriority="high"/);
+assert.doesNotMatch(candidate, /<img[^>]+src=""/, "Hidden image elements must not trigger an empty-src document request");
 assert.equal((candidate.match(/<img\b/g) ?? []).length, 1, "Only the selected-card image element may exist in Pilot HTML");
 
 assert.match(pickEngine, /tableSlots/);
