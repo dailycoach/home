@@ -7,17 +7,9 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
-      content="서로를 조금 더 알고 싶은 순간을 위한 180개의 대화 카드. 질문 120장과 이미지 카드 60장으로 새로운 대화를 시작해보세요."
+      content="카드를 직접 고르고, 보고, 서로 이야기하는 DAILYCOACHING TALK CARD 180 v2.1 파일럿"
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ko_KR" />
-    <meta property="og:title" content="톡카드180 | TALK CARD 180 | DAILYCOACHING" />
-    <meta property="og:description" content="120개의 질문으로 말하고 60개의 이미지로 발견하는 대화 카드" />
-    <meta
-      property="og:image"
-      content="https://daily-coach-ing.com/cards/talkcard180/docs/a04/A04_IMAGE_DECKS_60_BOARD.webp"
-    />
-    <title>톡카드180 | TALK CARD 180 | DAILYCOACHING</title>
+    <title>TALK CARD 180 v2.1 Pilot | PICK · SEE · TALK</title>
     <link rel="stylesheet" href="css/talkcard.css?v=2.0.0-a07" />
     <link rel="stylesheet" href="css/talkcard-v21.css?v=2.1.0-r04" />
     <script type="module" src="js/talkcard-v21-view.js?v=2.1.0-r04"></script>
@@ -36,17 +28,17 @@
           <small>DAILYCOACHING</small>
         </span>
       </button>
-      <p class="header-count" aria-label="카드 180장, 테마 12개">
-        <span>180 CARDS</span>
+      <p class="header-count" aria-label="v2.1 파일럿, 고르고 보고 이야기하기">
+        <span>V2.1 PILOT</span>
         <i aria-hidden="true"></i>
-        <span>12 THEMES</span>
+        <span>PICK · SEE · TALK</span>
       </p>
     </header>
 
     <main id="app" tabindex="-1">
       <section class="screen opening" data-screen="opening" aria-labelledby="opening-title">
         <div class="opening-copy">
-          <p class="eyebrow">PICK · SEE · TALK</p>
+          <p class="eyebrow">A DIGITAL CONVERSATION DECK</p>
           <h1 id="opening-title">TALK CARD <em>180</em></h1>
           <p class="opening-lead">
             서로를 조금 더 알고 싶은 순간을 위한<br />
@@ -60,7 +52,7 @@
           <div class="product-stats" aria-label="제품 구성">
             <span>180 CARDS</span>
             <span>12 THEMES</span>
-            <span>4 IMAGE DECKS</span>
+            <span>PICK · SEE · TALK</span>
           </div>
 
           <button class="button button--primary opening-cta" type="button" data-action="show-themes">
@@ -69,18 +61,18 @@
           </button>
         </div>
 
-        <div class="opening-deck opening-deck--backs" aria-label="TALK CARD 180 카드 뒷면 미리보기">
-          <article class="opening-card opening-card--back" aria-hidden="true">
-            <span>QUESTION DECK</span>
-            <p>TALK CARD<br />180</p>
-          </article>
-          <article class="opening-card opening-card--middle opening-card--pattern" aria-hidden="true">
+        <div class="opening-deck opening-deck--closed" aria-label="내용이 가려진 TALK CARD 180 카드덱">
+          <article class="opening-card opening-card--back v21-opening-back v21-opening-back--image" aria-hidden="true">
             <span>IMAGE DECK</span>
-            <div class="back-orbit"></div>
+            <p>PICK<br />A CARD</p>
+          </article>
+          <article class="opening-card opening-card--middle v21-opening-back" aria-hidden="true">
+            <span>QUESTION DECK</span>
+            <b>SEE</b>
           </article>
           <article class="opening-card opening-card--front">
-            <div class="card-index">PICK · SEE · TALK</div>
-            <p>카드 하나<br />골라보세요.</p>
+            <div class="card-index">TALK CARD · 180</div>
+            <p>카드 하나<br />골라봐.</p>
             <span class="card-seal" aria-hidden="true">180</span>
           </article>
         </div>
@@ -104,20 +96,20 @@
         </aside>
       </section>
 
-      <section class="screen theme-select theme-select--pilot" data-screen="themes" aria-labelledby="themes-title" hidden>
-        <div class="section-heading">
-          <p class="eyebrow">R03 PILOT · T01 + I01</p>
-          <h2 id="themes-title">오늘, 어떤 카드를 펼쳐볼까요?</h2>
-          <p>먼저 두 개의 Pilot 덱에서 직접 고르는 경험을 확인합니다.</p>
+      <section class="screen theme-select" data-screen="themes" aria-labelledby="themes-title" hidden>
+        <div class="section-heading section-heading--pilot">
+          <p class="eyebrow">PILOT · T01 + I01</p>
+          <h2 id="themes-title">오늘, 어떤 이야기부터 시작할까요?</h2>
+          <p>테마를 고른 뒤 15장의 카드 중 마음이 가는 한 장을 직접 골라보세요.</p>
         </div>
 
         <section class="deck-group" aria-labelledby="text-decks-title">
           <div class="deck-group-heading">
             <div>
-              <p class="eyebrow">15 TEXT CARDS</p>
-              <h3 id="text-decks-title">질문 카드</h3>
+              <p class="eyebrow">TEXT PILOT</p>
+              <h3 id="text-decks-title">질문으로 말하기</h3>
             </div>
-            <p>내용이 보이지 않는 카드 중 한 장을 직접 고릅니다.</p>
+            <p>질문은 카드를 고른 뒤에만 보입니다.</p>
           </div>
           <div class="theme-grid theme-grid--pilot" id="text-theme-list"></div>
         </section>
@@ -125,10 +117,10 @@
         <section class="deck-group deck-group--image" aria-labelledby="image-decks-title">
           <div class="deck-group-heading">
             <div>
-              <p class="eyebrow">15 IMAGE CARDS</p>
-              <h3 id="image-decks-title">이미지 카드</h3>
+              <p class="eyebrow">IMAGE PILOT</p>
+              <h3 id="image-decks-title">이미지로 발견하기</h3>
             </div>
-            <p>카드를 고른 뒤에야 이미지가 처음 공개됩니다.</p>
+            <p>이미지도 미리 보이지 않습니다. 고른 뒤 이미지부터 천천히 봅니다.</p>
           </div>
           <div class="theme-grid theme-grid--pilot" id="image-theme-list"></div>
         </section>
@@ -137,11 +129,11 @@
       <section class="screen deck-intro" data-screen="intro" aria-labelledby="intro-title" hidden>
         <button class="text-button back-button" type="button" data-action="show-themes">
           <span aria-hidden="true">←</span>
-          Pilot 덱
+          파일럿 테마
         </button>
 
-        <div class="intro-layout intro-layout--v21">
-          <div class="intro-visual intro-visual--backs" id="intro-visual" aria-hidden="true"></div>
+        <div class="intro-layout intro-layout--closed">
+          <div class="intro-visual intro-visual--closed" id="intro-visual" aria-hidden="true"></div>
           <div class="intro-copy">
             <p class="eyebrow" id="intro-code">T01 · QUESTION DECK</p>
             <h2 id="intro-title">가볍게 인사</h2>
@@ -151,7 +143,7 @@
               <span id="intro-method">QUESTION</span>
             </div>
             <div class="intro-note" id="intro-note"></div>
-            <button class="button button--primary" type="button" data-action="spread-cards">
+            <button class="button button--primary" type="button" data-action="unfold-deck">
               카드 펼치기
               <span aria-hidden="true">→</span>
             </button>
@@ -160,108 +152,92 @@
       </section>
 
       <section class="screen card-table-screen" data-screen="table" aria-labelledby="table-title" hidden>
-        <div class="table-toolbar">
+        <div class="table-header">
           <button class="text-button" type="button" data-action="show-themes">
             <span aria-hidden="true">←</span>
-            테마 고르기
+            테마로
           </button>
           <div class="table-identity">
-            <span id="table-code">T01 · QUESTION DECK</span>
-            <strong id="table-theme">가볍게 인사</strong>
+            <span id="table-code">T01</span>
+            <p id="table-theme">가볍게 인사</p>
           </div>
-          <p class="table-progress" id="table-progress" aria-live="polite" aria-label="15장 중 0장 사용">00 / 15</p>
+          <p class="table-progress" id="table-progress" aria-live="polite">00 / 15</p>
         </div>
 
-        <div class="table-heading">
+        <div class="table-copy">
           <p class="eyebrow">PICK A CARD</p>
-          <h2 id="table-title">카드 한 장을 골라보세요.</h2>
-          <p>내용은 고른 뒤에 열립니다. 마음이 가는 자리를 탭하세요.</p>
+          <h2 id="table-title">마음이 가는 카드 한 장을 골라보세요.</h2>
+          <p>내용은 고른 뒤에 보입니다.</p>
         </div>
 
-        <div class="card-table" id="card-table" role="list" aria-label="가볍게 인사 카드 15장"></div>
+        <div class="card-table-cloth">
+          <div class="card-table" id="card-table" role="group" aria-label="선택할 카드 15장"></div>
+        </div>
 
         <div class="table-actions">
-          <button class="button button--quiet" type="button" data-action="finish-conversation">오늘 대화 마치기</button>
+          <button class="text-button end-conversation" type="button" data-action="finish-conversation">
+            오늘 대화 마치기
+          </button>
         </div>
-        <p class="sr-only" id="table-announcement" aria-live="polite"></p>
       </section>
 
-      <section class="screen card-reveal-screen" data-screen="reveal" aria-labelledby="reveal-title" hidden>
-        <div class="reveal-toolbar">
+      <section class="screen card-reveal-screen" data-screen="reveal" aria-labelledby="reveal-screen-title" hidden>
+        <h2 class="sr-only" id="reveal-screen-title">선택한 카드</h2>
+        <div class="reveal-header">
           <button class="text-button" type="button" data-action="return-table">
             <span aria-hidden="true">←</span>
             카드 테이블
           </button>
           <div class="reveal-identity">
-            <span id="reveal-code">T01 · QUESTION</span>
-            <strong id="reveal-theme">가볍게 인사</strong>
+            <span id="reveal-code">T01</span>
+            <p id="reveal-theme">가볍게 인사</p>
           </div>
-          <p class="table-progress" id="reveal-progress" aria-live="polite">01 / 15</p>
+          <p class="reveal-progress" id="reveal-progress">01 / 15</p>
         </div>
 
-        <h2 class="sr-only" id="reveal-title">선택한 카드</h2>
-
-        <div class="reveal-stage">
-          <article class="conversation-card" id="conversation-card" aria-label="선택한 대화 카드">
-            <div class="reveal-content text-reveal-content" id="text-reveal-content" hidden>
-              <p class="reveal-kicker" id="text-reveal-kicker">T01 · QUESTION</p>
+        <div class="reveal-stage" id="reveal-stage">
+          <article class="revealed-card" id="revealed-card">
+            <div class="revealed-text" id="revealed-text" hidden>
+              <p class="revealed-kicker" id="text-card-code">T01 · QUESTION</p>
               <h3 id="text-question"></h3>
-              <p class="pass-line"><strong>PASS</strong> 대답하고 싶지 않다면 이 카드를 넘겨도 됩니다.</p>
+              <p class="revealed-pass">PASS · 대답하고 싶지 않다면 다른 카드를 골라도 됩니다.</p>
             </div>
 
-            <div class="reveal-content image-reveal-content" id="image-reveal-content" hidden>
-              <figure class="picked-image-frame" id="picked-image-frame">
+            <div class="revealed-image" id="revealed-image" hidden>
+              <figure class="reveal-image-frame" id="image-frame">
                 <img
-                  id="picked-image"
+                  id="image-card-art"
+                  src=""
                   alt=""
                   width="1122"
                   height="1402"
                   loading="eager"
                   decoding="async"
-                  fetchpriority="high"
                 />
-                <figcaption>잠시 이미지를 바라보세요. 무엇이 먼저 눈에 들어오나요?</figcaption>
-                <div class="image-fallback" id="picked-image-fallback" role="status" hidden>
+                <div class="image-fallback" id="image-fallback" role="status" hidden>
                   <strong>이미지를 불러오지 못했습니다.</strong>
-                  <p>질문 열기로 대화를 계속할 수 있습니다.</p>
                 </div>
               </figure>
-
-              <section class="optional-prompt" id="optional-prompt" aria-labelledby="image-prompt" hidden>
-                <p class="reveal-kicker">LOOK, THEN TALK</p>
-                <h3 id="image-prompt"></h3>
-                <div class="followup-panel" id="followup-panel" hidden>
-                  <span>한 걸음 더</span>
-                  <p id="image-followup"></p>
-                </div>
-              </section>
             </div>
           </article>
         </div>
 
         <div class="reveal-actions" aria-label="선택한 카드 행동">
-          <button class="button button--reveal" id="open-prompt" type="button" data-action="open-prompt" hidden>
-            질문 열기
-          </button>
+          <button class="button button--quiet" id="pass-card" type="button" data-action="pass-card">PASS</button>
           <button class="button button--primary" type="button" data-action="return-table">
             다음 카드 고르기
             <span aria-hidden="true">→</span>
           </button>
-          <button class="button button--quiet pass-action" id="pass-card" type="button" data-action="return-table">
-            PASS
-          </button>
-          <button class="text-button finish-link" type="button" data-action="finish-conversation">
-            오늘 대화 마치기
-          </button>
         </div>
-        <p class="sr-only" id="reveal-announcement" aria-live="polite"></p>
+        <button class="text-button reveal-finish" type="button" data-action="finish-conversation">
+          오늘 대화 마치기
+        </button>
       </section>
 
       <section class="screen closing" data-screen="closing" aria-labelledby="closing-title" hidden>
-        <div class="closing-card closing-card--v21">
+        <div class="closing-card">
           <p class="eyebrow">THE CONVERSATION CONTINUES</p>
-          <span class="closing-mark" id="closing-mark" aria-hidden="true">01</span>
-          <p class="closing-used" id="closing-used">1 CARD PICKED</p>
+          <span class="closing-mark" id="closing-used" aria-label="사용한 카드 수">0</span>
           <h2 id="closing-title">오늘 조금 더 알게 된 것이 있나요?</h2>
           <p class="closing-question">오늘 대화에서 새롭게 알게 된 것은 무엇인가요?</p>
           <p class="closing-copy">
@@ -275,10 +251,12 @@
           </div>
         </div>
       </section>
+
+      <p class="sr-only" id="card-announcement" aria-live="polite" aria-atomic="true"></p>
     </main>
 
     <footer class="site-footer">
-      <p>TALK CARD 180 v2.1 · PICK · SEE · TALK</p>
+      <p>V2.1 PILOT · T01 + I01</p>
       <p>© DAILYCOACHING</p>
     </footer>
 

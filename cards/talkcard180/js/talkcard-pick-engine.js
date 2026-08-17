@@ -1,14 +1,19 @@
 /**
  * TALK CARD 180 v2.1 — PICK ENGINE
  *
- * Product loop: TABLE → PICK → REVEAL → TALK → RETURN → TABLE.
- * This engine never advances to or reveals another card automatically.
+ * Product contract:
+ *   TABLE → PICK → REVEAL → TALK → RETURN → TABLE
+ *
+ * This engine never advances to another card by itself. It persists only
+ * non-sensitive card state; no participant response is accepted or stored.
  */
 
-export const TALKCARD_PICK_DECK_SIZE = 15;
-export const TALKCARD_PICK_SESSION_VERSION = 1;
+export const TALKCARD_PICK_SESSION_VERSION = 2;
 export const TALKCARD_PICK_SESSION_KEY = "talkcard180:v21:pick-session";
+export const TALKCARD_THEME_DECK_SIZE = 15;
 
+const SESSION_MODES = new Set(["theme"]);
+const CARD_TYPES = new Set(["text", "image"]);
 const SESSION_FIELDS = new Set([
   "version",
   "mode",
@@ -19,7 +24,6 @@ const SESSION_FIELDS = new Set([
   "used",
   "selectedCard",
   "revealed",
-  "promptLevel",
   "cycle",
   "startedAt",
   "updatedAt",
@@ -49,14 +53,22 @@ function assertRandomValue(value) {
   }
 }
 
-function validateThemeCards(cards, themeId, cardType) {
-  if (!Array.isArray(cards) || cards.length !== TALKCARD_PICK_DECK_SIZE) {
-    throw new RangeError(`A theme hand must contain exactly ${TALKCARD_PICK_DECK_SIZE} cards.`);
+function unique(values) {
+  return new Set(values).size === values.length;
+}
+
+function sameOrder(first, second) {
+  return first.length === second.length && first.every((value, index) => value === second[index]);
+}
+
+function validateCards(cards, themeId, cardType) {
+  if (!Array.isArray(cards) || cards.length !== TALKCARD_THEME_DECK_SIZE) {
+    throw new RangeError(`A theme hand must contain exactly ${TALKCARD_THEME_DECK_SIZE} cards.`);
   }
   if (typeof themeId !== "string" || !themeId.trim()) {
     throw new TypeError("A themeId is required.");
   }
-  if (!new Set(["text", "image"]).has(cardType)) {
+  if (!CARD_TYPES.has(cardType)) {
     throw new TypeError("cardType must be text or image.");
   }
 
@@ -64,7 +76,7 @@ function validateThemeCards(cards, themeId, cardType) {
   if (ids.some((id) => typeof id !== "string" || !id.trim())) {
     throw new TypeError("Every card needs a stable string ID.");
   }
-  if (new Set(ids).size !== TALKCARD_PICK_DECK_SIZE) {
+  if (!unique(ids)) {
     throw new Error("Card IDs inside a theme hand must be unique.");
   }
   if (cards.some((card) => card.theme !== themeId)) {
@@ -75,12 +87,8 @@ function validateThemeCards(cards, themeId, cardType) {
   }
 }
 
-function sameOrder(left, right) {
-  return Array.isArray(left) && Array.isArray(right) && left.length === right.length && left.every((id, index) => id === right[index]);
-}
-
-export function shuffleForTable(cards, { random = cryptoRandom, avoidOrder = null } = {}) {
-  if (!Array.isArray(cards)) throw new TypeError("shuffleForTable expects an array.");
+export function shuffleCards(cards, { random = cryptoRandom } = {}) {
+  if (!Array.isArray(cards)) throw new TypeError("shuffleCards expects an array.");
 
   const shuffled = cards.slice();
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -89,12 +97,6 @@ export function shuffleForTable(cards, { random = cryptoRandom, avoidOrder = nul
     const swapIndex = Math.floor(value * (index + 1));
     [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
   }
-
-  const shuffledIds = shuffled.map((card) => card?.id);
-  if (shuffled.length > 1 && sameOrder(shuffledIds, avoidOrder)) {
-    shuffled.push(shuffled.shift());
-  }
-
   return shuffled;
 }
 
@@ -103,17 +105,21 @@ export class TalkCardPickEngine {
     cards,
     themeId,
     cardType,
+    mode = "theme",
     storage,
     sessionKey = TALKCARD_PICK_SESSION_KEY,
     random = cryptoRandom,
     now = () => Date.now(),
   }) {
-    validateThemeCards(cards, themeId, cardType);
+    validateCards(cards, themeId, cardType);
+    if (!SESSION_MODES.has(mode)) throw new TypeError("Pilot Pick Engine mode must be theme.");
 
     this.cards = cards.slice();
     this.cardById = new Map(this.cards.map((card) => [card.id, card]));
+    this.sourceIds = this.cards.map((card) => card.id);
     this.themeId = themeId;
     this.cardType = cardType;
+    this.mode = mode;
     this.storage = storage === undefined ? defaultStorage() : storage;
     this.sessionKey = sessionKey;
     this.random = random;
@@ -121,7 +127,7 @@ export class TalkCardPickEngine {
     this.session = null;
   }
 
-  startTheme({ resume = true } = {}) {
+  start({ resume = true } = {}) {
     const restored = resume ? this.#restore() : null;
     if (restored) {
       this.session = restored;
@@ -138,88 +144,68 @@ export class TalkCardPickEngine {
     return this.cardById.get(this.session.selectedCard) ?? null;
   }
 
+  get tableCards() {
+    if (!this.session) return [];
+    return this.session.hand.map((id) => this.cardById.get(id)).filter(Boolean);
+  }
+
   get progress() {
+    const total = this.session?.pool.length ?? TALKCARD_THEME_DECK_SIZE;
     const used = this.session?.used.length ?? 0;
+    const remaining = this.session?.hand.length ?? total;
     return {
       used,
-      total: TALKCARD_PICK_DECK_SIZE,
-      remaining: TALKCARD_PICK_DECK_SIZE - used,
-      complete: used === TALKCARD_PICK_DECK_SIZE,
+      total,
+      remaining,
+      complete: remaining === 0,
     };
   }
 
-  get availableCardIds() {
-    if (!this.session) return [];
-    const used = new Set(this.session.used);
-    return this.session.hand.filter((id) => !used.has(id));
-  }
-
-  get tableSlots() {
-    if (!this.session) return [];
-    const used = new Set(this.session.used);
-    return this.session.hand.map((cardId, index) => ({
-      position: index + 1,
-      cardId,
-      used: used.has(cardId),
-      selected: this.session.selectedCard === cardId,
-      selectable: !used.has(cardId) && this.session.selectedCard === null,
-    }));
-  }
-
-  selectCard(cardId) {
-    this.#requireSession();
-    if (this.session.selectedCard !== null) {
-      throw new Error("Return the selected card to the table before choosing another card.");
+  pick(cardId) {
+    this.#assertStarted();
+    if (this.session.selectedCard) {
+      throw new Error("Return the selected card before picking another card.");
     }
-    if (!this.cardById.has(cardId) || !this.session.hand.includes(cardId)) {
-      throw new RangeError("The selected card does not belong to this hand.");
-    }
-    if (this.session.used.includes(cardId)) {
-      throw new Error("A used card cannot be selected again.");
+    if (!this.session.hand.includes(cardId) || this.session.used.includes(cardId)) {
+      throw new RangeError("Only an unused card in the current hand can be picked.");
     }
 
-    this.session.used.push(cardId);
     this.session.selectedCard = cardId;
     this.session.revealed = false;
-    this.session.promptLevel = 0;
-    this.#touchAndPersist();
+    this.session.updatedAt = this.now();
+    this.#persist();
     return this.snapshot();
   }
 
   revealSelected() {
-    this.#requireSelected();
+    this.#assertSelected();
     this.session.revealed = true;
-    this.#touchAndPersist();
+    this.session.updatedAt = this.now();
+    this.#persist();
     return this.snapshot();
   }
 
-  openPrompt() {
-    this.#requireSelected();
-    if (this.cardType !== "image") {
-      throw new Error("Only image cards have optional prompt levels.");
-    }
-    if (!this.session.revealed) {
-      throw new Error("Reveal the selected image before opening a prompt.");
+  returnToTable({ markUsed = true } = {}) {
+    this.#assertStarted();
+    const selectedId = this.session.selectedCard;
+    if (!selectedId) return this.snapshot();
+
+    if (markUsed) {
+      this.session.hand = this.session.hand.filter((id) => id !== selectedId);
+      if (!this.session.used.includes(selectedId)) this.session.used.push(selectedId);
     }
 
-    this.session.promptLevel = Math.min(this.session.promptLevel + 1, 2);
-    this.#touchAndPersist();
-    return this.snapshot();
-  }
-
-  returnToTable() {
-    this.#requireSession();
     this.session.selectedCard = null;
     this.session.revealed = false;
-    this.session.promptLevel = 0;
-    this.#touchAndPersist();
+    this.session.updatedAt = this.now();
+    this.#persist();
     return this.snapshot();
   }
 
   restart() {
-    const previousOrder = this.session?.hand ?? null;
-    const nextCycle = (this.session?.cycle ?? 0) + 1;
-    this.session = this.#createSession({ cycle: nextCycle, avoidOrder: previousOrder });
+    const previousPool = this.session?.pool.slice() ?? [];
+    const cycle = (this.session?.cycle ?? 0) + 1;
+    this.session = this.#createSession({ cycle, previousPool });
     this.#persist();
     return this.snapshot();
   }
@@ -229,25 +215,23 @@ export class TalkCardPickEngine {
     try {
       this.storage?.removeItem(this.sessionKey);
     } catch {
-      // Session persistence is optional; in-memory play must remain available.
+      // Storage is optional. In-memory play remains available.
     }
   }
 
   snapshot() {
     if (!this.session) {
       return {
-        mode: "theme",
+        mode: this.mode,
         themeId: this.themeId,
         cardType: this.cardType,
         pool: [],
         hand: [],
         used: [],
         selectedCard: null,
-        card: null,
+        selectedCardId: null,
         revealed: false,
-        promptLevel: 0,
-        table: [],
-        availableCardIds: [],
+        tableCards: [],
         progress: this.progress,
         cycle: 0,
       };
@@ -260,51 +244,50 @@ export class TalkCardPickEngine {
       pool: this.session.pool.slice(),
       hand: this.session.hand.slice(),
       used: this.session.used.slice(),
-      selectedCard: this.session.selectedCard,
-      card: this.selectedCard,
+      selectedCard: this.selectedCard,
+      selectedCardId: this.session.selectedCard,
       revealed: this.session.revealed,
-      promptLevel: this.session.promptLevel,
-      table: this.tableSlots,
-      availableCardIds: this.availableCardIds,
+      tableCards: this.tableCards,
       progress: this.progress,
       cycle: this.session.cycle,
     };
   }
 
-  #createSession({ cycle, avoidOrder = null }) {
+  #assertStarted() {
+    if (!this.session) throw new Error("Start the Pick Engine before using it.");
+  }
+
+  #assertSelected() {
+    this.#assertStarted();
+    if (!this.session.selectedCard || !this.selectedCard) {
+      throw new Error("Pick a card before revealing it.");
+    }
+  }
+
+  #createSession({ cycle, previousPool = [] }) {
     const timestamp = this.now();
+    let pool = shuffleCards(this.cards, { random: this.random }).map((card) => card.id);
+
+    // A deterministic test source—or an unlikely shuffle—must not make a
+    // restart look unchanged. Rotate once while retaining every card.
+    if (pool.length > 1 && sameOrder(pool, previousPool)) {
+      pool = [...pool.slice(1), pool[0]];
+    }
+
     return {
       version: TALKCARD_PICK_SESSION_VERSION,
-      mode: "theme",
+      mode: this.mode,
       themeId: this.themeId,
       cardType: this.cardType,
-      pool: [],
-      hand: shuffleForTable(this.cards, {
-        random: this.random,
-        avoidOrder,
-      }).map((card) => card.id),
+      pool,
+      hand: pool.slice(),
       used: [],
       selectedCard: null,
       revealed: false,
-      promptLevel: 0,
       cycle,
       startedAt: timestamp,
       updatedAt: timestamp,
     };
-  }
-
-  #requireSession() {
-    if (!this.session) throw new Error("Start the theme hand before interacting with cards.");
-  }
-
-  #requireSelected() {
-    this.#requireSession();
-    if (!this.session.selectedCard) throw new Error("Select a card before revealing content.");
-  }
-
-  #touchAndPersist() {
-    this.session.updatedAt = this.now();
-    this.#persist();
   }
 
   #persist() {
@@ -332,20 +315,21 @@ export class TalkCardPickEngine {
   #isValidSession(candidate) {
     if (!candidate || typeof candidate !== "object" || Array.isArray(candidate)) return false;
     if (Object.keys(candidate).some((key) => !SESSION_FIELDS.has(key))) return false;
-    if (candidate.version !== TALKCARD_PICK_SESSION_VERSION || candidate.mode !== "theme") return false;
+    if (candidate.version !== TALKCARD_PICK_SESSION_VERSION) return false;
+    if (candidate.mode !== this.mode || !SESSION_MODES.has(candidate.mode)) return false;
     if (candidate.themeId !== this.themeId || candidate.cardType !== this.cardType) return false;
-    if (!Array.isArray(candidate.pool) || candidate.pool.length !== 0) return false;
-    if (!Array.isArray(candidate.hand) || candidate.hand.length !== TALKCARD_PICK_DECK_SIZE) return false;
-    if (new Set(candidate.hand).size !== TALKCARD_PICK_DECK_SIZE) return false;
-    if (candidate.hand.some((id) => !this.cardById.has(id))) return false;
-    if (!Array.isArray(candidate.used) || new Set(candidate.used).size !== candidate.used.length) return false;
-    if (candidate.used.some((id) => !candidate.hand.includes(id))) return false;
-    if (candidate.selectedCard !== null && !candidate.used.includes(candidate.selectedCard)) return false;
+    if (!Array.isArray(candidate.pool) || candidate.pool.length !== TALKCARD_THEME_DECK_SIZE) return false;
+    if (!unique(candidate.pool) || candidate.pool.some((id) => !this.cardById.has(id))) return false;
+    if (!sameOrder([...candidate.pool].sort(), [...this.sourceIds].sort())) return false;
+    if (!Array.isArray(candidate.hand) || !unique(candidate.hand)) return false;
+    if (!Array.isArray(candidate.used) || !unique(candidate.used)) return false;
+    if (candidate.hand.some((id) => !candidate.pool.includes(id))) return false;
+    if (candidate.used.some((id) => !candidate.pool.includes(id))) return false;
+    if (candidate.hand.some((id) => candidate.used.includes(id))) return false;
+    if (!sameOrder([...candidate.hand, ...candidate.used].sort(), [...candidate.pool].sort())) return false;
+    if (candidate.selectedCard !== null && !candidate.hand.includes(candidate.selectedCard)) return false;
     if (typeof candidate.revealed !== "boolean") return false;
-    if (!Number.isInteger(candidate.promptLevel) || candidate.promptLevel < 0 || candidate.promptLevel > 2) return false;
-    if (candidate.selectedCard === null && (candidate.revealed || candidate.promptLevel !== 0)) return false;
-    if (!candidate.revealed && candidate.promptLevel !== 0) return false;
-    if (this.cardType === "text" && candidate.promptLevel !== 0) return false;
+    if (candidate.selectedCard === null && candidate.revealed) return false;
     if (!Number.isInteger(candidate.cycle) || candidate.cycle < 1) return false;
     if (!Number.isFinite(candidate.startedAt) || !Number.isFinite(candidate.updatedAt)) return false;
     return true;
