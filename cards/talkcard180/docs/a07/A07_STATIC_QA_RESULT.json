@@ -5,8 +5,8 @@
   "browserQa": "PENDING_STAGING_DEPLOYMENT",
   "coreWebVitals": "BLOCKED_CHROME_DEVTOOLS_MCP_UNAVAILABLE",
   "summary": {
-    "checks": 86,
-    "passed": 86,
+    "checks": 89,
+    "passed": 89,
     "failed": 0,
     "themes": 12,
     "runtimeTextCards": 120,
@@ -413,6 +413,21 @@
       "name": "FOCUS_VISIBLE",
       "status": "PASS",
       "detail": "keyboard focus must be visibly styled"
+    },
+    {
+      "name": "TERRACOTTA_TOKEN",
+      "status": "PASS",
+      "detail": "the product accent color token must be a six-digit hex value"
+    },
+    {
+      "name": "ACCENT_TEXT_CONTRAST",
+      "status": "PASS",
+      "detail": "terracotta on card must reach 4.5:1; received 4.55:1"
+    },
+    {
+      "name": "FOCUS_INDICATOR_CONTRAST",
+      "status": "PASS",
+      "detail": "focus ring on paper must reach 3:1; received 4.21:1"
     },
     {
       "name": "REDUCED_MOTION",

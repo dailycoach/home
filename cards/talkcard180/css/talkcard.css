@@ -5,7 +5,7 @@
   --ink: #18243a;
   --ink-soft: #4e5867;
   --navy: #1c2d4b;
-  --terracotta: #b86d52;
+  --terracotta: #a85e43;
   --sage: #8b9b7a;
   --olive: #77784f;
   --mustard: #c49b4d;
@@ -80,7 +80,7 @@ img {
 }
 
 :focus-visible {
-  outline: 3px solid #d08b55;
+  outline: 3px solid var(--terracotta);
   outline-offset: 4px;
 }
 

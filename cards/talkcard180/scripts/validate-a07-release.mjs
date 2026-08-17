@@ -41,6 +41,20 @@ function seededRandom(seed) {
   };
 }
 
+function relativeLuminance(hex) {
+  const channels = [1, 3, 5].map((index) => Number.parseInt(hex.slice(index, index + 2), 16) / 255);
+  const linear = channels.map((channel) =>
+    channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4,
+  );
+  return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+}
+
+function contrastRatio(foreground, background) {
+  const first = relativeLuminance(foreground);
+  const second = relativeLuminance(background);
+  return (Math.max(first, second) + 0.05) / (Math.min(first, second) + 0.05);
+}
+
 const html = read("index-v2.html");
 const css = read("css/talkcard.css");
 const view = read("js/talkcard-view.js");
@@ -215,6 +229,18 @@ assert(view.includes("imageCardArt.alt = card.alt"), "OBJECTIVE_ALT_BINDING", "a
 assert(view.includes('imageCardArt.addEventListener("error"'), "IMAGE_FAILURE_FALLBACK", "image failures must expose fallback content");
 assert(view.includes("playCard.dataset.cardId = card.id"), "QA_CARD_ID_HOOK", "active card IDs must be observable for no-repeat E2E QA");
 assert(css.includes(":focus-visible"), "FOCUS_VISIBLE", "keyboard focus must be visibly styled");
+const terracotta = css.match(/--terracotta:\s*(#[0-9a-f]{6})/i)?.[1];
+assert(Boolean(terracotta), "TERRACOTTA_TOKEN", "the product accent color token must be a six-digit hex value");
+assert(
+  Boolean(terracotta) && contrastRatio(terracotta, "#fbf8ef") >= 4.5,
+  "ACCENT_TEXT_CONTRAST",
+  `terracotta on card must reach 4.5:1; received ${terracotta ? contrastRatio(terracotta, "#fbf8ef").toFixed(2) : "n/a"}:1`,
+);
+assert(
+  css.includes("outline: 3px solid var(--terracotta)") && Boolean(terracotta) && contrastRatio(terracotta, "#f3efe5") >= 3,
+  "FOCUS_INDICATOR_CONTRAST",
+  `focus ring on paper must reach 3:1; received ${terracotta ? contrastRatio(terracotta, "#f3efe5").toFixed(2) : "n/a"}:1`,
+);
 assert(css.includes("prefers-reduced-motion: reduce"), "REDUCED_MOTION", "reduced motion must be supported");
 assert(css.includes("env(safe-area-inset-bottom)"), "SAFE_AREA", "mobile safe-area padding must be present");
 for (const width of [390, 560, 768, 1040]) {
