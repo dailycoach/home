@@ -4,7 +4,7 @@
  */
 import { THEME_BY_ID, THEMES } from "../data/themes.js";
 import { IMAGE_CARDS, TEXT_CARDS } from "../data/runtime-cards.js";
-import { TalkCardPickEngine } from "./talkcard-pick-engine.js";
+import { TalkCardPickEngine } from "./talkcard-pick-engine.js?v=2.1.2-image-only";
 
 const PILOT_THEME_IDS = new Set(["ice", "memory"]);
 const TABLE_LAYOUT = [
