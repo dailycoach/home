@@ -3,18 +3,17 @@
  * A05 screen experience connected to the A06 theme-local deck engine.
  */
 import { THEMES, THEME_BY_ID } from "../data/themes.js";
-import { TEXT_CARDS } from "../data/cards.js";
+import { IMAGE_CARDS, TEXT_CARDS } from "../data/runtime-cards.js";
 import { TalkCardDeckEngine } from "./talkcard-engine.js";
-
-const IMAGE_MANIFEST_URL = "data/image-card-manifest.json";
 
 const state = {
   screen: "opening",
   theme: null,
   engine: null,
-  imageCards: [],
   revealLevels: new Map(),
 };
+
+const preloadedImages = new Map();
 
 const screens = [...document.querySelectorAll("[data-screen]")];
 const textThemeList = document.querySelector("#text-theme-list");
@@ -52,7 +51,21 @@ function padCardNumber(value) {
 function getCardsForTheme(themeId) {
   const theme = THEME_BY_ID[themeId];
   if (!theme) return [];
-  return (theme.type === "text" ? TEXT_CARDS : state.imageCards).filter((card) => card.theme === themeId);
+  return (theme.type === "text" ? TEXT_CARDS : IMAGE_CARDS).filter((card) => card.theme === themeId);
+}
+
+function getThumbnailPath(card) {
+  return `assets/images/${card.theme}/thumbs/${card.id}.webp`;
+}
+
+function preloadUpcomingImages(cards) {
+  cards.filter((card) => card?.type === "image").forEach((card) => {
+    if (preloadedImages.has(card.image)) return;
+    const image = new Image();
+    image.decoding = "async";
+    image.src = card.image;
+    preloadedImages.set(card.image, image);
+  });
 }
 
 function createTextDeckPreview(className = "deck-preview deck-preview--text") {
@@ -71,11 +84,12 @@ function createImageDeckPreview(cards, className = "deck-preview deck-preview--i
   cards.slice(0, 3).forEach((card) => {
     const image = document.createElement("img");
     image.className = "image-thumb";
-    image.src = card.image;
+    image.src = getThumbnailPath(card);
     image.alt = "";
-    image.width = 1122;
-    image.height = 1402;
+    image.width = 360;
+    image.height = 450;
     image.loading = "lazy";
+    image.decoding = "async";
     preview.append(image);
   });
 
@@ -138,11 +152,12 @@ function renderIntroVisual(theme, cards) {
   if (theme.type === "image") {
     [cards[0], cards[5], cards[10]].filter(Boolean).forEach((card) => {
       const image = document.createElement("img");
-      image.src = card.image;
+      image.src = getThumbnailPath(card);
       image.alt = "";
-      image.width = 1122;
-      image.height = 1402;
+      image.width = 360;
+      image.height = 450;
       image.loading = "lazy";
+      image.decoding = "async";
       introVisual.append(image);
     });
     return;
@@ -235,6 +250,8 @@ function renderPlayCard() {
   const isExtra = progress.mode === "extra";
   const revealLevel = state.revealLevels.get(card.id) ?? 0;
 
+  playCard.dataset.cardId = card.id;
+  playCard.dataset.cardType = card.type;
   playCode.textContent = state.theme.code;
   playTitle.textContent = state.theme.label;
   playProgress.textContent = isExtra
@@ -261,6 +278,7 @@ function renderPlayCard() {
     imageCardArt.alt = card.alt;
     imagePrompt.textContent = card.prompt;
     imageFollowup.textContent = card.followup;
+    preloadUpcomingImages(state.engine.peekNext(2));
     renderImageReveal(revealLevel);
   }
 
@@ -401,40 +419,8 @@ imageCardArt.addEventListener("error", () => {
   imageCardArt.style.visibility = "hidden";
 });
 
-async function loadImageCards() {
-  const response = await fetch(IMAGE_MANIFEST_URL);
-  if (!response.ok) throw new Error(`Image manifest request failed: ${response.status}`);
-  const manifest = await response.json();
-
-  if (!Array.isArray(manifest.cards) || manifest.cards.length !== 60) {
-    throw new Error("Image manifest must contain exactly 60 cards.");
-  }
-
-  return manifest.cards.map((card) => ({
-    id: card.id,
-    theme: card.theme,
-    type: "image",
-    image: card.image,
-    alt: card.alt,
-    prompt: card.prompt,
-    followup: card.followup,
-  }));
-}
-
-async function init() {
-  try {
-    state.imageCards = await loadImageCards();
-    renderThemeSelection();
-  } catch (error) {
-    console.error(error);
-    renderThemeSelection();
-    imageThemeList.replaceChildren();
-    const message = document.createElement("p");
-    message.className = "intro-note";
-    message.textContent = "이미지 카드 정보를 불러오지 못했습니다. 페이지를 새로고침해주세요.";
-    message.setAttribute("role", "alert");
-    imageThemeList.append(message);
-  }
+function init() {
+  renderThemeSelection();
 }
 
 init();

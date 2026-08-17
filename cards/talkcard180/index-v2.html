@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f3efe5" />
+    <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
       content="서로를 조금 더 알고 싶은 순간을 위한 180개의 대화 카드. 질문 120장과 이미지 카드 60장으로 새로운 대화를 시작해보세요."
@@ -15,8 +16,18 @@
       property="og:description"
       content="120개의 질문으로 말하고 60개의 이미지로 발견하는 대화 카드"
     />
-    <meta property="og:image" content="docs/a04/A04_IMAGE_DECKS_60_BOARD.webp" />
+    <meta
+      property="og:image"
+      content="https://daily-coach-ing.com/cards/talkcard180/docs/a04/A04_IMAGE_DECKS_60_BOARD.webp"
+    />
     <title>톡카드180 | TALK CARD 180 | DAILYCOACHING</title>
+    <link
+      rel="preload"
+      as="image"
+      href="assets/images/memory/thumbs/memory_11.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
     <link rel="stylesheet" href="css/talkcard.css" />
     <script type="module" src="js/talkcard-view.js"></script>
   </head>
@@ -75,11 +86,12 @@
           <article class="opening-card opening-card--middle" aria-hidden="true">
             <span>IMAGE DECK</span>
             <img
-              src="assets/images/memory/memory_11.webp"
+              src="assets/images/memory/thumbs/memory_11.webp"
               alt=""
-              width="1122"
-              height="1402"
+              width="360"
+              height="450"
               fetchpriority="high"
+              decoding="async"
             />
           </article>
           <article class="opening-card opening-card--front">
@@ -185,7 +197,16 @@
 
           <div class="image-card-view" id="image-card-view" hidden>
             <figure class="image-frame" id="image-frame">
-              <img id="image-card-art" src="" alt="" width="1122" height="1402" />
+              <img
+                id="image-card-art"
+                src=""
+                alt=""
+                width="1122"
+                height="1402"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
               <figcaption>이미지를 잠시 바라보세요. 무엇이 먼저 눈에 들어오나요?</figcaption>
               <div class="image-fallback" id="image-fallback" role="status" hidden>
                 <strong>이미지를 불러오지 못했습니다.</strong>

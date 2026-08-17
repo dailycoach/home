@@ -30,6 +30,7 @@ const html = read("index-v2.html");
 const css = read("css/talkcard.css");
 const view = read("js/talkcard-view.js");
 const a06EnginePresent = exists("js/talkcard-engine.js");
+const a07RuntimePresent = exists("data/runtime-cards.js");
 const themes = readExportedJson("data/themes.js", "THEMES", "THEME_BY_ID");
 const textCards = readExportedJson("data/cards.js", "TEXT_CARDS", "IMAGE_CARD_SLOTS");
 const manifest = JSON.parse(read("data/image-card-manifest.json"));
@@ -124,8 +125,18 @@ assert(
 );
 
 assert(view.includes('import { THEMES, THEME_BY_ID } from "../data/themes.js"'), "DATA_THEME_IMPORT", "view must import theme data");
-assert(view.includes('import { TEXT_CARDS } from "../data/cards.js"'), "DATA_CARD_IMPORT", "view must import text card data");
-assert(view.includes("fetch(IMAGE_MANIFEST_URL)"), "IMAGE_MANIFEST_LOAD", "view must load the locked image manifest");
+assert(
+  a07RuntimePresent
+    ? view.includes('import { IMAGE_CARDS, TEXT_CARDS } from "../data/runtime-cards.js"')
+    : view.includes('import { TEXT_CARDS } from "../data/cards.js"'),
+  "DATA_CARD_IMPORT",
+  "view must import the source or validated runtime card data",
+);
+assert(
+  a07RuntimePresent ? !view.includes("fetch(IMAGE_MANIFEST_URL)") : view.includes("fetch(IMAGE_MANIFEST_URL)"),
+  "IMAGE_DATA_LOAD",
+  "A05 manifest loading or the later A07 runtime projection must be active",
+);
 assert(
   a06EnginePresent
     ? view.includes('import { TalkCardDeckEngine } from "./talkcard-engine.js"')

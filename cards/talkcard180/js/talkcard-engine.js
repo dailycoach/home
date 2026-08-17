@@ -168,6 +168,15 @@ export class TalkCardDeckEngine {
     };
   }
 
+  peekNext(limit = 2) {
+    if (!this.session || this.session.mode === "extra") return [];
+    const count = Math.max(0, Math.min(Number.isFinite(limit) ? Math.floor(limit) : 0, 2));
+    return this.session.order
+      .slice(this.session.position + 1, this.session.position + 1 + count)
+      .map((id) => this.cardById.get(id))
+      .filter(Boolean);
+  }
+
   previous() {
     if (!this.session || this.session.mode === "extra" || this.session.position === 0) {
       return this.snapshot();
