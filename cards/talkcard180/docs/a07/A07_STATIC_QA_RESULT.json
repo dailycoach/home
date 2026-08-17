@@ -5,8 +5,8 @@
   "browserQa": "PENDING_STAGING_DEPLOYMENT",
   "coreWebVitals": "BLOCKED_CHROME_DEVTOOLS_MCP_UNAVAILABLE",
   "summary": {
-    "checks": 85,
-    "passed": 85,
+    "checks": 86,
+    "passed": 86,
     "failed": 0,
     "themes": 12,
     "runtimeTextCards": 120,
@@ -363,6 +363,11 @@
       "name": "ACTIVE_IMAGE_PRIORITY",
       "status": "PASS",
       "detail": "the current image card must receive high fetch priority"
+    },
+    {
+      "name": "ACTIVE_IMAGE_ASPECT_RATIO",
+      "status": "PASS",
+      "detail": "the active image must override HTML height hints and preserve the 1122:1402 source ratio"
     },
     {
       "name": "STAGING_NOINDEX",
