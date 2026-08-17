@@ -1,0 +1,36 @@
+{
+  "release": "TALK CARD 180 v2.1 — THEMELESS 180",
+  "date": "2026-08-17",
+  "status": "PASS",
+  "counts": {
+    "participantModes": 2,
+    "participantThemes": 0,
+    "questions": 120,
+    "images": 60,
+    "imageHand": 15,
+    "engineTestsPassed": 14,
+    "engineTestsFailed": 0,
+    "viewportsPassed": 4,
+    "viewportsFailed": 0
+  },
+  "viewports": [
+    "390x844",
+    "430x932",
+    "768x1024",
+    "1440x1000"
+  ],
+  "locks": {
+    "themesRemovedFromUI": true,
+    "question120Sequential": true,
+    "image60PickAndFlip": true,
+    "imageOnly": true,
+    "imageQuestionControls": false,
+    "imagePromptVisible": false,
+    "sameSlotRefill": true,
+    "usedCardDuplicates": false,
+    "sessionRestore": true,
+    "keyboard": true,
+    "altAndAria": true,
+    "horizontalOverflow": false
+  }
+}
