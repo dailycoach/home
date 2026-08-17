@@ -195,6 +195,11 @@ assert(html.includes('id="image-card-art"'), "ACTIVE_IMAGE_ELEMENT", "image play
 assert(html.includes('loading="eager"'), "ACTIVE_IMAGE_EAGER", "the current image card must load eagerly");
 assert(html.includes('decoding="async"'), "ACTIVE_IMAGE_ASYNC_DECODE", "the current image card must decode asynchronously");
 assert(html.includes('fetchpriority="high"'), "ACTIVE_IMAGE_PRIORITY", "the current image card must receive high fetch priority");
+assert(
+  /\.image-frame img\s*\{[^}]*height:\s*auto;/s.test(css),
+  "ACTIVE_IMAGE_ASPECT_RATIO",
+  "the active image must override HTML height hints and preserve the 1122:1402 source ratio",
+);
 
 assert(html.includes('<meta name="robots" content="noindex, nofollow"'), "STAGING_NOINDEX", "the hidden v2 candidate must remain noindex before release");
 assert(
