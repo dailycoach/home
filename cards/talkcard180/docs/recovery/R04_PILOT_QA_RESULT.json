@@ -1,0 +1,36 @@
+{
+  "suite": "R03/R04 PILOT BROWSER QA",
+  "status": "PASS",
+  "date": "2026-08-17",
+  "pilotDecks": ["T01", "I01"],
+  "passedViewports": 4,
+  "failedViewports": 0,
+  "checksPerViewport": 11,
+  "passedChecks": 44,
+  "failedChecks": 0,
+  "imagePolicy": "IMAGE_ONLY_FREE_ASSOCIATION",
+  "visibleImagePromptCount": 0,
+  "imageQuestionControlCount": 0,
+  "viewports": [
+    { "width": 390, "height": 844, "tableColumns": 3, "status": "PASS" },
+    { "width": 430, "height": 932, "tableColumns": 3, "status": "PASS" },
+    { "width": 768, "height": 1024, "tableColumns": 5, "status": "PASS" },
+    { "width": 1440, "height": 1000, "tableColumns": 5, "status": "PASS" }
+  ],
+  "checks": [
+    "directPick",
+    "noPreExposure",
+    "returnToTable",
+    "usedState",
+    "imageOnlyFreeAssociation",
+    "noImageQuestionControls",
+    "noImagePromptText",
+    "sessionRestore",
+    "keyboardTabEnterSpaceEscape",
+    "tapTarget44",
+    "noHorizontalOverflow"
+  ],
+  "productionIndexModified": false,
+  "v2CandidateModified": false,
+  "scaleBeyondPilot": false
+}
