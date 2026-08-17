@@ -1,24 +1,19 @@
 /**
- * TALK CARD 180 v2.0 — A05 VIEW CONTROLLER
- *
- * This run intentionally presents cards in their source order so the five-screen
- * experience can be reviewed safely. Theme shuffle, no-repeat guarantees and
- * session persistence belong to A06 DECK ENGINE.
+ * TALK CARD 180 v2.0 — VIEW CONTROLLER
+ * A05 screen experience connected to the A06 theme-local deck engine.
  */
 import { THEMES, THEME_BY_ID } from "../data/themes.js";
 import { TEXT_CARDS } from "../data/cards.js";
+import { TalkCardDeckEngine } from "./talkcard-engine.js";
 
 const IMAGE_MANIFEST_URL = "data/image-card-manifest.json";
 
 const state = {
   screen: "opening",
   theme: null,
-  deck: [],
-  index: 0,
+  engine: null,
   imageCards: [],
   revealLevels: new Map(),
-  extraCursor: 0,
-  isExtra: false,
 };
 
 const screens = [...document.querySelectorAll("[data-screen]")];
@@ -176,9 +171,7 @@ function selectTheme(themeId) {
   }
 
   state.theme = theme;
-  state.deck = [];
-  state.index = 0;
-  state.isExtra = false;
+  state.engine = null;
 
   introCode.textContent = `${theme.code} · ${theme.type === "text" ? "QUESTION DECK" : "IMAGE DECK"}`;
   introTitle.textContent = theme.label;
@@ -216,10 +209,12 @@ function showScreen(name) {
 function startDeck() {
   if (!state.theme) return;
 
-  // A05 review order only. A06 will inject the shuffled, no-repeat deck here.
-  state.deck = getCardsForTheme(state.theme.id).slice();
-  state.index = 0;
-  state.isExtra = false;
+  state.engine = new TalkCardDeckEngine({
+    cards: getCardsForTheme(state.theme.id),
+    themeId: state.theme.id,
+    cardType: state.theme.type,
+  });
+  state.engine.start({ resume: true });
   state.revealLevels.clear();
   renderPlayCard();
   showScreen("play");
@@ -232,17 +227,21 @@ function animateCardChange() {
 }
 
 function renderPlayCard() {
-  const card = state.deck[state.index];
-  if (!card || !state.theme) return;
+  const snapshot = state.engine?.snapshot();
+  const card = snapshot?.card;
+  const progress = snapshot?.progress;
+  if (!card || !progress || !state.theme) return;
 
-  const position = state.index + 1;
+  const isExtra = progress.mode === "extra";
   const revealLevel = state.revealLevels.get(card.id) ?? 0;
 
   playCode.textContent = state.theme.code;
   playTitle.textContent = state.theme.label;
-  playProgress.textContent = state.isExtra ? "한 장 더" : `${padCardNumber(position)} / ${padCardNumber(state.deck.length)}`;
-  previousCardButton.disabled = state.index === 0 || state.isExtra;
-  nextCardLabel.textContent = !state.isExtra && position === state.deck.length ? "대화 마치기" : "다음";
+  playProgress.textContent = isExtra
+    ? "한 장 더"
+    : `${padCardNumber(progress.position)} / ${padCardNumber(progress.total)}`;
+  previousCardButton.disabled = progress.isFirst || isExtra;
+  nextCardLabel.textContent = !isExtra && progress.isLast ? "대화 마치기" : "다음";
   animateCardChange();
 
   if (card.type === "text") {
@@ -266,7 +265,8 @@ function renderPlayCard() {
   }
 
   const typeName = card.type === "text" ? "질문" : "이미지";
-  announce(`${state.theme.label} ${typeName} 카드 ${position}번째`);
+  const positionLabel = isExtra ? "추가" : `${progress.position}번째`;
+  announce(`${state.theme.label} ${typeName} ${positionLabel} 카드`);
 }
 
 function renderImageReveal(level) {
@@ -287,7 +287,7 @@ function renderImageReveal(level) {
 }
 
 function revealImageQuestion() {
-  const card = state.deck[state.index];
+  const card = state.engine?.currentCard;
   if (!card || card.type !== "image") return;
 
   const nextLevel = Math.min((state.revealLevels.get(card.id) ?? 0) + 1, 2);
@@ -302,26 +302,20 @@ function revealImageQuestion() {
 }
 
 function previousCard() {
-  if (state.index <= 0 || state.isExtra) return;
-  state.index -= 1;
+  if (!state.engine || state.engine.progress.isFirst || state.engine.progress.mode === "extra") return;
+  state.engine.previous();
   renderPlayCard();
   focusPlayCard();
 }
 
 function nextCard() {
-  if (!state.deck.length) return;
-
-  if (!state.isExtra && state.index >= state.deck.length - 1) {
+  if (!state.engine) return;
+  const result = state.engine.next();
+  if (result.reachedClosing) {
     showScreen("closing");
     return;
   }
 
-  if (state.isExtra) {
-    showScreen("closing");
-    return;
-  }
-
-  state.index += 1;
   renderPlayCard();
   focusPlayCard();
 }
@@ -333,24 +327,20 @@ function focusPlayCard() {
 }
 
 function showOneMoreCard() {
-  if (!state.deck.length) {
+  if (!state.engine) {
     showScreen("themes");
     return;
   }
 
-  // A05 deterministic preview. A06 will choose this post-completion card.
-  state.index = state.extraCursor % state.deck.length;
-  state.extraCursor += 1;
-  state.isExtra = true;
+  const snapshot = state.engine.drawExtra();
+  if (snapshot.card) state.revealLevels.delete(snapshot.card.id);
   renderPlayCard();
   showScreen("play");
 }
 
 function goHome() {
   state.theme = null;
-  state.deck = [];
-  state.index = 0;
-  state.isExtra = false;
+  state.engine = null;
   state.revealLevels.clear();
   showScreen("opening");
 }

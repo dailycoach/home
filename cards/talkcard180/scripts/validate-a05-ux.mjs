@@ -29,6 +29,7 @@ function readExportedJson(relativePath, exportName, nextExportName) {
 const html = read("index-v2.html");
 const css = read("css/talkcard.css");
 const view = read("js/talkcard-view.js");
+const a06EnginePresent = exists("js/talkcard-engine.js");
 const themes = readExportedJson("data/themes.js", "THEMES", "THEME_BY_ID");
 const textCards = readExportedJson("data/cards.js", "TEXT_CARDS", "IMAGE_CARD_SLOTS");
 const manifest = JSON.parse(read("data/image-card-manifest.json"));
@@ -44,7 +45,11 @@ const requiredFiles = [
 ];
 assert(requiredFiles.every(exists), "A05_FILE_SET", "staging, view, data and legacy files must all exist");
 assert(!exists("index.html"), "LIVE_FILE_LOCK", "A05 workspace must not introduce or overwrite production index.html");
-assert(!exists("js/talkcard-engine.js"), "A06_ENGINE_LOCK", "A06 deck engine must not start during A05");
+assert(
+  !a06EnginePresent || exists("scripts/validate-a06-engine.mjs"),
+  "A06_ENGINE_TRANSITION",
+  "a later A06 engine must include its dedicated validator",
+);
 
 assert(themes.length === 12, "THEME_COUNT", `expected 12, received ${themes.length}`);
 assert(themes.filter((theme) => theme.type === "text").length === 8, "TEXT_THEME_COUNT", "expected 8 text themes");
@@ -121,8 +126,14 @@ assert(
 assert(view.includes('import { THEMES, THEME_BY_ID } from "../data/themes.js"'), "DATA_THEME_IMPORT", "view must import theme data");
 assert(view.includes('import { TEXT_CARDS } from "../data/cards.js"'), "DATA_CARD_IMPORT", "view must import text card data");
 assert(view.includes("fetch(IMAGE_MANIFEST_URL)"), "IMAGE_MANIFEST_LOAD", "view must load the locked image manifest");
-assert(view.includes("state.deck = getCardsForTheme(state.theme.id).slice()"), "A05_SOURCE_ORDER", "A05 must use deterministic source order");
-assert(!view.includes("Math.random"), "A06_SHUFFLE_LOCK", "shuffle must remain deferred to A06");
+assert(
+  a06EnginePresent
+    ? view.includes('import { TalkCardDeckEngine } from "./talkcard-engine.js"')
+    : view.includes("state.deck = getCardsForTheme(state.theme.id).slice()"),
+  "VIEW_DECK_SOURCE",
+  "A05 source order or the later A06 engine must provide the deck sequence",
+);
+assert(!view.includes("Math.random"), "VIEW_ENGINE_SEPARATION", "the View must not implement random ordering directly");
 
 assert(view.includes("imageQuestionPanel.hidden = level < 1"), "IMAGE_FIRST_FLOW", "image question must remain hidden before reveal");
 assert(view.includes("followupPanel.hidden = level < 2"), "FOLLOWUP_FLOW", "follow-up must require a second reveal");
