@@ -1,0 +1,89 @@
+{
+  "run": "A06 DECK ENGINE",
+  "status": "PASS",
+  "date": "2026-08-17",
+  "scope": "theme-local shuffle, no-repeat traversal, progress and minimal session state",
+  "counts": {
+    "checks": 99,
+    "passed": 99,
+    "failed": 0,
+    "themesTested": 12,
+    "textDecksTested": 8,
+    "imageDecksTested": 4,
+    "cardsTraversed": 180,
+    "sessionFields": 10,
+    "regressionValidators": 8,
+    "regressionPassed": 8
+  },
+  "perDeck": {
+    "ice": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "taste": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "lately": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "talk": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "work": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "value": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "courage": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "tmi": { "type": "text", "visited": 15, "unique": 15, "completed": true },
+    "memory": { "type": "image", "visited": 15, "unique": 15, "completed": true },
+    "recharge": { "type": "image", "visited": 15, "unique": 15, "completed": true },
+    "future": { "type": "image", "visited": 15, "unique": 15, "completed": true },
+    "kind": { "type": "image", "visited": 15, "unique": 15, "completed": true }
+  },
+  "engineContracts": {
+    "deckScope": "selected theme only",
+    "deckSize": 15,
+    "sourceMutation": false,
+    "repeatBeforeCompletion": false,
+    "progress": "01 / 15 through 15 / 15",
+    "previousNextOrderStable": true,
+    "completedDeckStartsNewCycle": true,
+    "cycleBoundaryImmediateRepeat": false,
+    "oneMoreImmediateRepeat": false
+  },
+  "session": {
+    "storage": "sessionStorage",
+    "key": "talkcard180:v2:deck-session",
+    "restoresSameThemePosition": true,
+    "isolatesDifferentTheme": true,
+    "recoversCorruptState": true,
+    "storedContent": [
+      "schema version",
+      "theme ID",
+      "card type",
+      "shuffled card ID order",
+      "current position",
+      "completion state",
+      "play mode",
+      "cycle",
+      "timestamps"
+    ],
+    "excludedContent": [
+      "question text",
+      "image prompt",
+      "follow-up",
+      "user answer",
+      "name",
+      "email",
+      "sensitive information"
+    ]
+  },
+  "httpSmoke": {
+    "index-v2.html": 200,
+    "js/talkcard-view.js": 200,
+    "js/talkcard-engine.js": 200,
+    "data/themes.js": 200,
+    "data/cards.js": 200,
+    "data/image-card-manifest.json": 200
+  },
+  "liveFileLock": {
+    "expectedSha": "4078aa8a9ba1c37ce6e5d20049c8d3f438860bac",
+    "unchanged": true
+  },
+  "deferred": [
+    "optional all-card random mode",
+    "A07 real-browser functional QA",
+    "A07 mobile and performance QA",
+    "A07 production release"
+  ],
+  "errors": []
+}

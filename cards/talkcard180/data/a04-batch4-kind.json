@@ -1,0 +1,216 @@
+{
+  "project": "DAILYCOACHING TALK CARD 180 Renewal",
+  "version": "v2.0",
+  "run": "A04 IMAGE PRODUCTION · BATCH 4",
+  "status": "BATCH_4_COMPLETE_A04_COMPLETE_A05_BLOCKED",
+  "generatedAt": "2026-08-16",
+  "theme": "kind",
+  "themeName": "서로에게 따뜻",
+  "styleAnchors": [
+    "kind_01",
+    "kind_08",
+    "kind_14"
+  ],
+  "inheritedPilotIds": [
+    "kind_01",
+    "kind_08",
+    "kind_14"
+  ],
+  "generatedIds": [
+    "kind_02",
+    "kind_03",
+    "kind_04",
+    "kind_05",
+    "kind_06",
+    "kind_07",
+    "kind_09",
+    "kind_10",
+    "kind_11",
+    "kind_12",
+    "kind_13",
+    "kind_15"
+  ],
+  "allIds": [
+    "kind_01",
+    "kind_02",
+    "kind_03",
+    "kind_04",
+    "kind_05",
+    "kind_06",
+    "kind_07",
+    "kind_08",
+    "kind_09",
+    "kind_10",
+    "kind_11",
+    "kind_12",
+    "kind_13",
+    "kind_14",
+    "kind_15"
+  ],
+  "promptPack": "docs/a04/A04_BATCH4_KIND_PROMPT_PACK.md",
+  "reviewBoard": "docs/a04/A04_BATCH4_KIND_DECK_BOARD.webp",
+  "allImageDecksBoard": "docs/a04/A04_IMAGE_DECKS_60_BOARD.webp",
+  "canvas": {
+    "width": 1122,
+    "height": 1402,
+    "ratio": "4:5"
+  },
+  "qa": {
+    "expectedCards": 15,
+    "actualCards": 15,
+    "inheritedPilotCount": 3,
+    "newAssetCount": 12,
+    "uniqueHashes": 15,
+    "dimensionsUniform": true,
+    "webpValidated": true,
+    "manualBoardReview": "PASS",
+    "regeneratedCards": 1,
+    "correctedCardIds": [
+      "kind_15"
+    ],
+    "normalizedCanvasIds": [],
+    "newAssetBytes": 1015152,
+    "fullDeckBytes": 1278990,
+    "allImageCards": 60,
+    "allImageBytes": 6870730,
+    "allImageUniqueHashes": 60,
+    "nextRunGate": "A05 BLOCKED UNTIL USER CONTINUES"
+  },
+  "cards": [
+    {
+      "id": "kind_01",
+      "source": "A03 PILOT",
+      "asset": "assets/images/kind/kind_01.webp",
+      "bytes": 109768,
+      "sha256": "0d81a31b0b8976a5c83c9881d5eeee7c1a8a6fc91f39b8522bd43ad46cc8514f",
+      "manualQa": "PASS",
+      "qaNote": "모양이 다른 나무 의자 2개의 다리·좌판·등받이 구조 정상. 테이블·인물·문자 없음."
+    },
+    {
+      "id": "kind_02",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_02.webp",
+      "bytes": 110952,
+      "sha256": "0e2a347ca173ca0bbc9f63af8d12dd6d5649a3ff3688bace0b0b110321f48b98",
+      "manualQa": "PASS",
+      "qaNote": "펼친 우산 1개의 중심·패널·살 구조 정상. 아래에 서로 다른 신발 두 켤레만 존재."
+    },
+    {
+      "id": "kind_03",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_03.webp",
+      "bytes": 33046,
+      "sha256": "b1f250784057b0a0c4fabfad79c82873e65a151616cb385f54940a3048d13cf9",
+      "manualQa": "PASS",
+      "qaNote": "크기와 색이 다른 작은 원 2개가 멀리 분리. 연결선·화살표·추가 표시 없음."
+    },
+    {
+      "id": "kind_04",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_04.webp",
+      "bytes": 113286,
+      "sha256": "9c6c94ea78abde5c38c115198fcf0d0b8739d9a0441e06d04a059d5e60e1e853",
+      "manualQa": "PASS",
+      "qaNote": "긴 테이블의 양 끝에 빈 접시·물잔 각 1개. 중앙 비움과 테이블 원근·다리 구조 정상."
+    },
+    {
+      "id": "kind_05",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_05.webp",
+      "bytes": 69522,
+      "sha256": "10568a275af7998690f864fc970c184b2589dc8009b494bdc12b10c1472d9d69",
+      "manualQa": "PASS",
+      "qaNote": "프레임 밖 두 사람의 그림자 2개만 벽에 분리되어 존재. 실제 인물·얼굴·추가 그림자 없음."
+    },
+    {
+      "id": "kind_06",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_06.webp",
+      "bytes": 104106,
+      "sha256": "057439f34eed8d7ff9cf5dff129af0ce855b31e9f8ea9332ce7289e382eba857",
+      "manualQa": "PASS",
+      "qaNote": "크기가 다른 두 발자국 열이 같은 방향으로 나란히 진행. 좌우 교대·간격·원근 정상."
+    },
+    {
+      "id": "kind_07",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_07.webp",
+      "bytes": 159388,
+      "sha256": "1ae1900210ea8aaddc6e5cd128d3db3a13669f5efcf810b47bbd4a633e3ee07c",
+      "manualQa": "PASS",
+      "qaNote": "완만한 두 언덕을 돌아가는 두 경로의 폭·밝기·비중 균형. 표지·인물·정답 대비 없음."
+    },
+    {
+      "id": "kind_08",
+      "source": "A03 PILOT",
+      "asset": "assets/images/kind/kind_08.webp",
+      "bytes": 49610,
+      "sha256": "bbda92408c0e04c356da0059014dda014235c42eca8a344926a1717716e4d5ba",
+      "manualQa": "PASS",
+      "qaNote": "반투명 원 2개가 일부 겹쳐 제3의 색면 형성. 선·글자·추가 도형 없음."
+    },
+    {
+      "id": "kind_09",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_09.webp",
+      "bytes": 106096,
+      "sha256": "9d1eac3a7ca8572b7ea78ec67d6e7efd8bfe9716fd712274077009e862fdb73a",
+      "manualQa": "PASS",
+      "qaNote": "좁은 중정의 같은 높이 창문 2개가 마주 봄. 한쪽 열림·한쪽 닫힘과 건축 원근 정상."
+    },
+    {
+      "id": "kind_10",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_10.webp",
+      "bytes": 52638,
+      "sha256": "00b6f2b298fafe061f2c037be754512cb66079f895eb627f3c1b6019a4037f0f",
+      "manualQa": "PASS",
+      "qaNote": "높이가 다른 무광 병 2개가 같은 방향으로 미세하게 기울며 평평한 바닥에 안정적으로 접지."
+    },
+    {
+      "id": "kind_11",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_11.webp",
+      "bytes": 46674,
+      "sha256": "c68b91450586fa65ae6c996eb78661620a116d8215498c3cf6c888154026bc38",
+      "manualQa": "PASS",
+      "qaNote": "두 손의 손가락 각 5개·관절·엄지 방향·손목·소매 연결 정상. 손끝 사이 작은 간격 유지."
+    },
+    {
+      "id": "kind_12",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_12.webp",
+      "bytes": 100002,
+      "sha256": "bccded6ee60c3b441b872a56790937ed5e57a0dfeaf6d53fe4ccf120bee1bf59",
+      "manualQa": "PASS",
+      "qaNote": "완만한 계단과 가파른 계단이 동일 높이 플랫폼에 도달. 단높이·디딤판·벽 접점 정상."
+    },
+    {
+      "id": "kind_13",
+      "source": "A04 BATCH 4",
+      "asset": "assets/images/kind/kind_13.webp",
+      "bytes": 90470,
+      "sha256": "5a072081509d7e59dc8a2d12703538044683a8cde68bf60e819bdee8fa990fef",
+      "manualQa": "PASS",
+      "qaNote": "빈 방의 서로 다른 방석 2개가 같은 창을 향함. 방·창·바닥 원근 정상, 추가 가구 없음."
+    },
+    {
+      "id": "kind_14",
+      "source": "A03 PILOT",
+      "asset": "assets/images/kind/kind_14.webp",
+      "bytes": 104460,
+      "sha256": "6267538faba5f93f9f49d174b0659bfc9ece19b0dda0f7aeb2c2aaa0e17c5392",
+      "manualQa": "PASS",
+      "qaNote": "호숫가의 작은 뒷모습 2명만 존재. 얼굴·구체 연령·성별·과장된 표정 없음."
+    },
+    {
+      "id": "kind_15",
+      "source": "A04 BATCH 4 · TARGETED CORRECTION",
+      "asset": "assets/images/kind/kind_15.webp",
+      "bytes": 28972,
+      "sha256": "0a2823db0df0d81e21201991985df65828e18e579b8e59fc9f432d51af1a6d3f",
+      "manualQa": "PASS",
+      "qaNote": "남색·세이지 선 2개가 테라코타 점 1개에 함께 닿고 이후 분리된 평행선으로 이어짐."
+    }
+  ]
+}

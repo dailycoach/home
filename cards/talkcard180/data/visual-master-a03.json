@@ -1,0 +1,192 @@
+{
+  "project": "DAILYCOACHING TALK CARD 180 Renewal",
+  "version": "v2.0",
+  "run": "A03 VISUAL MASTER PILOT",
+  "status": "REVIEW_READY_A04_BLOCKED",
+  "generatedAt": "2026-08-16",
+  "generationMode": "built-in image_gen",
+  "styleAnchor": "memory_01",
+  "promptPack": "docs/a03/A03_PROMPT_PACK.md",
+  "reviewBoard": "docs/a03/A03_VISUAL_MASTER_PILOT_BOARD.webp",
+  "canvas": {
+    "width": 1122,
+    "height": 1402,
+    "ratio": "4:5"
+  },
+  "visualLock": {
+    "medium": "adult editorial illustration",
+    "line": "thin rough charcoal line with tactile imperfect edges",
+    "surface": "off-white fibrous paper with subtle uniform grain",
+    "color": "low-saturation off-white, charcoal, muted terracotta, deep navy, sage, olive, mustard, dusty blue",
+    "rendering": "matte flat color washes and restrained vintage print texture",
+    "meaning": "open-ended, observational, non-diagnostic; image does not explain a fixed meaning",
+    "people": "faces minimized or hidden; no frontal close-up; natural anatomy",
+    "prohibited": [
+      "text or pseudo-text",
+      "logo or watermark",
+      "photorealism",
+      "stock-photo look",
+      "3D or glossy rendering",
+      "children's-book tone",
+      "therapy-workbook tone",
+      "explanatory symbols",
+      "excessive detail",
+      "impossible object or body geometry"
+    ]
+  },
+  "qa": {
+    "expectedPilots": 12,
+    "actualPilots": 12,
+    "uniqueHashes": 12,
+    "dimensionsUniform": true,
+    "webpValidated": true,
+    "manualBoardReview": "PASS",
+    "a04Gate": "PENDING USER APPROVAL"
+  },
+  "cards": [
+    {
+      "id": "memory_01",
+      "theme": "memory",
+      "asset": "assets/images/memory/memory_01.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 122772,
+      "sha256": "5d1f1f6cabe75926fc834da12686193163bac7a4f33bfe098fc2fdc9f702a5c7",
+      "manualQa": "PASS",
+      "qaNote": "원목 식탁·서랍·식탁보 구조 정상. 우측 여백과 오후빛 유지."
+    },
+    {
+      "id": "memory_06",
+      "theme": "memory",
+      "asset": "assets/images/memory/memory_06.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 194242,
+      "sha256": "1ddd6f91397c1be8db809738da67caf27146bf271be6134f63fe11fa9ad390b2",
+      "manualQa": "PASS",
+      "qaNote": "빗방울 전경과 이동 중 버스 창 분리. 노선 문자·인물 없음."
+    },
+    {
+      "id": "memory_13",
+      "theme": "memory",
+      "asset": "assets/images/memory/memory_13.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 240116,
+      "sha256": "fb1d97baec64a2c0155afdaf9b59f5388af34a7568f6b709f380034168667300",
+      "manualQa": "PASS",
+      "qaNote": "벤치·나무·산책로 구조 정상. 환경 와이드와 좌측 배치 유지."
+    },
+    {
+      "id": "recharge_01",
+      "theme": "recharge",
+      "asset": "assets/images/recharge/recharge_01.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 69934,
+      "sha256": "8b650179acae0ae2bd338bd55f5f3a617ced23e07da1a46b7c9a380f29431136",
+      "manualQa": "PASS",
+      "qaNote": "단일 남색 실만 존재. 고정점·바늘·매듭·문자 없음."
+    },
+    {
+      "id": "recharge_05",
+      "theme": "recharge",
+      "asset": "assets/images/recharge/recharge_05.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 55900,
+      "sha256": "5e5169ccfcd6e4069c7e9c6434b8d3047fbdea55d8fde4e6ae6e34a17fa007c7",
+      "manualQa": "PASS",
+      "qaNote": "두 남색 면과 단일 빛 틈만 존재. 포털·문자·추가 사물 없음."
+    },
+    {
+      "id": "recharge_15",
+      "theme": "recharge",
+      "asset": "assets/images/recharge/recharge_15.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 26914,
+      "sha256": "a4c83672b784654b55a67c49ea147366a49a90938650d32689f788c4bec3986a",
+      "manualQa": "PASS",
+      "qaNote": "단일 황동 등불과 작은 빛의 원. 추가 가구·장식 없음."
+    },
+    {
+      "id": "future_02",
+      "theme": "future",
+      "asset": "assets/images/future/future_02.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 128250,
+      "sha256": "03345d20dc4f7154e07b621259bc3f45d07d76281e2fd5ca93bb899fed90f482",
+      "manualQa": "PASS",
+      "qaNote": "보행교 원근·난간·지지 구조 정상. 인물·표지 없음."
+    },
+    {
+      "id": "future_03",
+      "theme": "future",
+      "asset": "assets/images/future/future_03.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 199940,
+      "sha256": "877ec9270fcef38bd488c8a127805a622690ba762edbc0536a21793adaa1912d",
+      "manualQa": "PASS",
+      "qaNote": "씨앗 하나와 가는 뿌리 끝만 존재. 발아 상징 과장 없음."
+    },
+    {
+      "id": "future_06",
+      "theme": "future",
+      "asset": "assets/images/future/future_06.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 103728,
+      "sha256": "be0736c7e557e9b4947d0af745a431e7ad4719ccbbc35fc144d3515c47be0cf1",
+      "manualQa": "PASS",
+      "qaNote": "접힌 무문자 지도·표식 3개·연필 1개. 도로·기호·글자 없음."
+    },
+    {
+      "id": "kind_01",
+      "theme": "kind",
+      "asset": "assets/images/kind/kind_01.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 109768,
+      "sha256": "0d81a31b0b8976a5c83c9881d5eeee7c1a8a6fc91f39b8522bd43ad46cc8514f",
+      "manualQa": "PASS",
+      "qaNote": "형태가 다른 의자 정확히 2개. 테이블·인물·추가 가구 없음."
+    },
+    {
+      "id": "kind_08",
+      "theme": "kind",
+      "asset": "assets/images/kind/kind_08.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 49610,
+      "sha256": "bbda92408c0e04c356da0059014dda014235c42eca8a344926a1717716e4d5ba",
+      "manualQa": "PASS",
+      "qaNote": "두 반투명 원과 하나의 겹침 면. 추가 원·도식 문자 없음."
+    },
+    {
+      "id": "kind_14",
+      "theme": "kind",
+      "asset": "assets/images/kind/kind_14.webp",
+      "width": 1122,
+      "height": 1402,
+      "ratio": "4:5",
+      "bytes": 104460,
+      "sha256": "6267538faba5f93f9f49d174b0659bfc9ece19b0dda0f7aeb2c2aaa0e17c5392",
+      "manualQa": "PASS",
+      "qaNote": "작은 뒷모습 인물 정확히 2명. 얼굴 비노출·인체 관통 없음."
+    }
+  ]
+}

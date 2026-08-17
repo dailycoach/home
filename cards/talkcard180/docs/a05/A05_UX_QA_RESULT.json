@@ -1,0 +1,64 @@
+{
+  "run": "A05 UX BUILD",
+  "status": "PASS",
+  "date": "2026-08-17",
+  "scope": "branch-only v2 staging; production index and deployment locked",
+  "counts": {
+    "screens": 5,
+    "themes": 12,
+    "textThemes": 8,
+    "imageThemes": 4,
+    "textCards": 120,
+    "imageCards": 60,
+    "totalCards": 180,
+    "a05Checks": 55,
+    "a05Passed": 55,
+    "a05Failed": 0,
+    "regressionValidators": 6,
+    "regressionPassed": 6
+  },
+  "screens": [
+    "OPENING",
+    "12 THEMES",
+    "DECK INTRO",
+    "CARD PLAY",
+    "CLOSING"
+  ],
+  "responsiveContracts": [
+    "390px",
+    "430px via <=560px rule",
+    "768px",
+    "1440px base desktop",
+    "landscape <=620px height"
+  ],
+  "accessibilityContracts": [
+    "native buttons and keyboard focus",
+    "focus-visible",
+    "skip link",
+    "heading landmarks",
+    "polite aria-live card announcements",
+    "objective manifest alt binding",
+    "image failure fallback",
+    "reduced motion",
+    "safe-area insets"
+  ],
+  "httpSmoke": {
+    "index-v2.html": 200,
+    "css/talkcard.css": 200,
+    "js/talkcard-view.js": 200,
+    "data/image-card-manifest.json": 200,
+    "assets/images/memory/memory_01.webp": 200
+  },
+  "liveFileLock": {
+    "mainSha": "4078aa8a9ba1c37ce6e5d20049c8d3f438860bac",
+    "branchShaBeforeA05": "4078aa8a9ba1c37ce6e5d20049c8d3f438860bac",
+    "unchanged": true
+  },
+  "deferred": [
+    "A06 theme-local shuffle and no-repeat engine",
+    "A06 session state",
+    "A07 real-browser click E2E and viewport screenshot QA",
+    "A07 production release"
+  ],
+  "errors": []
+}

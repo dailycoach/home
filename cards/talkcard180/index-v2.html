@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3efe5" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="서로를 조금 더 알고 싶은 순간을 위한 180개의 대화 카드. 질문 120장과 이미지 카드 60장으로 새로운 대화를 시작해보세요."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:title" content="톡카드180 | TALK CARD 180 | DAILYCOACHING" />
+    <meta
+      property="og:description"
+      content="120개의 질문으로 말하고 60개의 이미지로 발견하는 대화 카드"
+    />
+    <meta
+      property="og:image"
+      content="https://daily-coach-ing.com/cards/talkcard180/docs/a04/A04_IMAGE_DECKS_60_BOARD.webp"
+    />
+    <title>톡카드180 | TALK CARD 180 | DAILYCOACHING</title>
+    <link
+      rel="preload"
+      as="image"
+      href="assets/images/memory/thumbs/memory_11.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="css/talkcard.css" />
+    <script type="module" src="js/talkcard-view.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#app">본문으로 건너뛰기</a>
+
+    <div class="paper-glow paper-glow--one" aria-hidden="true"></div>
+    <div class="paper-glow paper-glow--two" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <button class="brand-button" type="button" data-action="home" aria-label="TALK CARD 180 처음 화면으로">
+        <span class="brand-mark" aria-hidden="true">DC</span>
+        <span>
+          <strong>TALK CARD 180</strong>
+          <small>DAILYCOACHING</small>
+        </span>
+      </button>
+      <p class="header-count" aria-label="카드 180장, 테마 12개">
+        <span>180 CARDS</span>
+        <i aria-hidden="true"></i>
+        <span>12 THEMES</span>
+      </p>
+    </header>
+
+    <main id="app" tabindex="-1">
+      <section class="screen opening" data-screen="opening" aria-labelledby="opening-title">
+        <div class="opening-copy">
+          <p class="eyebrow">A DIGITAL CONVERSATION DECK</p>
+          <h1 id="opening-title">TALK CARD <em>180</em></h1>
+          <p class="opening-lead">
+            서로를 조금 더 알고 싶은 순간을 위한<br />
+            180개의 대화 카드
+          </p>
+          <p class="opening-product-copy">
+            120개의 질문으로 말하고<br />
+            60개의 이미지로 발견한다.
+          </p>
+
+          <div class="product-stats" aria-label="제품 구성">
+            <span>180 CARDS</span>
+            <span>12 THEMES</span>
+            <span>4 IMAGE DECKS</span>
+          </div>
+
+          <button class="button button--primary opening-cta" type="button" data-action="show-themes">
+            카드 시작하기
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div class="opening-deck" aria-label="TALK CARD 180 카드 미리보기">
+          <article class="opening-card opening-card--back" aria-hidden="true">
+            <span>QUESTION DECK</span>
+            <p>오늘의 대화에<br />작은 틈을 만듭니다.</p>
+          </article>
+          <article class="opening-card opening-card--middle" aria-hidden="true">
+            <span>IMAGE DECK</span>
+            <img
+              src="assets/images/memory/thumbs/memory_11.webp"
+              alt=""
+              width="360"
+              height="450"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </article>
+          <article class="opening-card opening-card--front">
+            <div class="card-index">TALK CARD · 180</div>
+            <p>좋은 대화에<br />정답은 없습니다.</p>
+            <span class="card-seal" aria-hidden="true">180</span>
+          </article>
+        </div>
+
+        <aside class="talk-rules" aria-labelledby="talk-rules-title">
+          <h2 id="talk-rules-title">대화를 위한 세 가지 약속</h2>
+          <div class="talk-rule-list">
+            <article>
+              <strong>PASS</strong>
+              <p>대답하고 싶지 않다면 넘겨도 됩니다.</p>
+            </article>
+            <article>
+              <strong>LISTEN</strong>
+              <p>답을 고치려 하지 말고 들어주세요.</p>
+            </article>
+            <article>
+              <strong>NO RIGHT ANSWER</strong>
+              <p>좋은 대화에 정답은 없습니다.</p>
+            </article>
+          </div>
+        </aside>
+      </section>
+
+      <section class="screen theme-select" data-screen="themes" aria-labelledby="themes-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">CHOOSE A DECK</p>
+          <h2 id="themes-title">오늘, 어떤 이야기부터 시작할까요?</h2>
+          <p>각 테마에는 15장의 카드가 있습니다. 마음이 가는 덱을 골라보세요.</p>
+        </div>
+
+        <section class="deck-group" aria-labelledby="text-decks-title">
+          <div class="deck-group-heading">
+            <div>
+              <p class="eyebrow">120 TEXT CARDS</p>
+              <h3 id="text-decks-title">질문으로 말하는 8개 테마</h3>
+            </div>
+            <p>질문을 중심에 두고 서로의 생각과 경험을 나눕니다.</p>
+          </div>
+          <div class="theme-grid" id="text-theme-list"></div>
+        </section>
+
+        <section class="deck-group deck-group--image" aria-labelledby="image-decks-title">
+          <div class="deck-group-heading">
+            <div>
+              <p class="eyebrow">60 IMAGE CARDS</p>
+              <h3 id="image-decks-title">이미지로 발견하는 4개 테마</h3>
+            </div>
+            <p>이미지를 먼저 바라본 뒤 떠오르는 이야기를 천천히 꺼냅니다.</p>
+          </div>
+          <div class="theme-grid theme-grid--image" id="image-theme-list"></div>
+        </section>
+      </section>
+
+      <section class="screen deck-intro" data-screen="intro" aria-labelledby="intro-title" hidden>
+        <button class="text-button back-button" type="button" data-action="show-themes">
+          <span aria-hidden="true">←</span>
+          12개 테마
+        </button>
+
+        <div class="intro-layout">
+          <div class="intro-visual" id="intro-visual" aria-hidden="true"></div>
+          <div class="intro-copy">
+            <p class="eyebrow" id="intro-code">T01 · QUESTION DECK</p>
+            <h2 id="intro-title">가볍게 인사</h2>
+            <p class="intro-description" id="intro-description"></p>
+            <div class="intro-meta" aria-label="선택한 덱 정보">
+              <span id="intro-count">15 CARDS</span>
+              <span id="intro-method">QUESTION</span>
+            </div>
+            <div class="intro-note" id="intro-note"></div>
+            <button class="button button--primary" type="button" data-action="start-deck">
+              이 덱 시작하기
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen card-play" data-screen="play" aria-labelledby="play-title" hidden>
+        <div class="play-header">
+          <button class="text-button" type="button" data-action="show-themes">
+            <span aria-hidden="true">←</span>
+            테마로
+          </button>
+          <div class="play-identity">
+            <span id="play-code">T01</span>
+            <h2 id="play-title">가볍게 인사</h2>
+          </div>
+          <p class="play-progress" id="play-progress" aria-live="polite">01 / 15</p>
+        </div>
+
+        <article class="play-card" id="play-card">
+          <div class="text-card-view" id="text-card-view" hidden>
+            <p class="card-kicker">QUESTION</p>
+            <h2 id="text-question"></h2>
+            <p class="card-pass-note">대답하고 싶지 않다면 다음 카드로 넘겨도 됩니다.</p>
+          </div>
+
+          <div class="image-card-view" id="image-card-view" hidden>
+            <figure class="image-frame" id="image-frame">
+              <img
+                id="image-card-art"
+                src=""
+                alt=""
+                width="1122"
+                height="1402"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <figcaption>이미지를 잠시 바라보세요. 무엇이 먼저 눈에 들어오나요?</figcaption>
+              <div class="image-fallback" id="image-fallback" role="status" hidden>
+                <strong>이미지를 불러오지 못했습니다.</strong>
+                <p>질문 보기를 눌러 대화를 계속할 수 있습니다.</p>
+              </div>
+            </figure>
+
+            <div class="image-question-panel" id="image-question-panel" hidden>
+              <p class="card-kicker">LOOK, THEN TALK</p>
+              <h2 id="image-prompt"></h2>
+              <div class="followup" id="followup-panel" hidden>
+                <span>FOLLOW-UP</span>
+                <p id="image-followup"></p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="play-actions" aria-label="카드 이동">
+          <button class="button button--quiet" id="previous-card" type="button" data-action="previous-card">
+            <span aria-hidden="true">←</span>
+            이전
+          </button>
+          <button class="button button--reveal" id="reveal-card" type="button" data-action="reveal-card" hidden>
+            질문 보기
+          </button>
+          <button class="button button--primary" id="next-card" type="button" data-action="next-card">
+            <span id="next-card-label">다음</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <p class="sr-only" id="card-announcement" aria-live="polite"></p>
+      </section>
+
+      <section class="screen closing" data-screen="closing" aria-labelledby="closing-title" hidden>
+        <div class="closing-card">
+          <p class="eyebrow">THE CONVERSATION CONTINUES</p>
+          <span class="closing-mark" aria-hidden="true">15</span>
+          <h2 id="closing-title">오늘 조금 더 알게 된 것이 있나요?</h2>
+          <p class="closing-question">오늘 대화에서 새롭게 알게 된 것은 무엇인가요?</p>
+          <p class="closing-copy">
+            모든 답을 정리하지 않아도 괜찮습니다.<br />
+            기억에 남는 한 장이면 충분합니다.
+          </p>
+          <div class="closing-actions">
+            <button class="button button--primary" type="button" data-action="show-themes">다른 테마 고르기</button>
+            <button class="button button--quiet" type="button" data-action="one-more">한 장 더</button>
+            <button class="text-button" type="button" data-action="home">처음으로</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>120 TEXT CARDS · 60 IMAGE CARDS</p>
+      <p>© DAILYCOACHING</p>
+    </footer>
+
+    <noscript>
+      <div class="noscript-message">TALK CARD 180을 사용하려면 브라우저에서 JavaScript를 켜주세요.</div>
+    </noscript>
+  </body>
+</html>

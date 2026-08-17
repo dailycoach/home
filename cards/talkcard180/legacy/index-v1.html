@@ -1,0 +1,694 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>대화 질문 카드 180</title>
+  <style>
+    :root{
+      --ink:#14131a;
+      --panel: rgba(255,255,255,0.82);
+      --stroke: rgba(20,19,26,0.10);
+      --shadow: 0 18px 55px rgba(20,19,26,0.10);
+
+      --r24:24px;
+      --r28:28px;
+      --tap: 52px;
+
+      /* theme vars */
+      --bgA:#f3fbff;
+      --bgB:#eef6ff;
+      --bgC:#f4fffd;
+      --accent:#2563eb;
+      --themeBadgeBg: rgba(255,255,255,0.70);
+      --themeBadgeBd: rgba(20,19,26,0.12);
+      --themeBadgeTx: rgba(20,19,26,0.86);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 520px at 18% 10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%),
+        radial-gradient(900px 520px at 86% 6%, rgba(236,72,153,0.10), transparent 60%),
+        radial-gradient(900px 520px at 60% 88%, rgba(6,182,212,0.12), transparent 60%),
+        linear-gradient(180deg, var(--bgA), var(--bgB) 45%, var(--bgC));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 16px calc(28px + env(safe-area-inset-bottom));
+      min-height: 100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .shell{
+      width:100%;
+      border-radius: var(--r28);
+      border: 1px solid var(--stroke);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    header{
+      padding: 18px 18px 14px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(20,19,26,0.06);
+      background:
+        radial-gradient(520px 160px at 15% 0%, rgba(255,255,255,0.55), transparent 70%),
+        radial-gradient(520px 160px at 85% 0%, rgba(255,255,255,0.40), transparent 70%),
+        transparent;
+    }
+
+    .brand{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+    .title{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 860;
+      letter-spacing:-0.02em;
+      font-size: 16px;
+      line-height:1.2;
+      white-space:nowrap;
+    }
+    .dot{
+      width: 10px; height: 10px; border-radius: 99px;
+      background: conic-gradient(from 180deg, var(--accent), rgba(236,72,153,0.92), rgba(6,182,212,0.92), var(--accent));
+      box-shadow: 0 10px 18px rgba(20,19,26,0.10);
+      flex:0 0 auto;
+    }
+    .sub{
+      margin:0;
+      color: rgba(74,70,86,0.90);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(20,19,26,0.10);
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 10px 18px rgba(20,19,26,0.06);
+      user-select:none;
+      white-space:nowrap;
+      height: 40px;
+      color: rgba(74,70,86,0.95);
+      font-size:12.5px;
+    }
+    .status strong{ color: var(--ink); font-weight:850; }
+
+    .content{ padding: 18px; }
+
+    .stage{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+
+    .card{
+      border-radius: var(--r28);
+      border: 1px solid rgba(20,19,26,0.10);
+      overflow:hidden;
+      min-height: 360px;
+      box-shadow: 0 16px 40px rgba(20,19,26,0.10);
+      background:
+        radial-gradient(720px 320px at 20% 10%, rgba(255,255,255,0.50), transparent 65%),
+        radial-gradient(720px 320px at 85% 0%, rgba(255,255,255,0.35), transparent 70%),
+        radial-gradient(720px 320px at 60% 95%, rgba(255,255,255,0.32), transparent 70%),
+        linear-gradient(180deg, var(--bgA), var(--bgB) 45%, var(--bgC));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      position:relative;
+    }
+
+    .themeBadge{
+      position:absolute;
+      top: 14px;
+      right: 14px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--themeBadgeBd);
+      background: var(--themeBadgeBg);
+      color: var(--themeBadgeTx);
+      font-size: 12.5px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      user-select:none;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 10px 22px rgba(20,19,26,0.08);
+    }
+    .themeDot{
+      width: 9px; height: 9px; border-radius: 99px;
+      background: var(--accent);
+      box-shadow: 0 10px 18px color-mix(in srgb, var(--accent) 20%, transparent);
+      flex:0 0 auto;
+    }
+
+    .question{
+      margin:0;
+      width: min(820px, 100%);
+      text-align:center;
+      color: rgba(20,19,26,0.92);
+      font-size: clamp(20px, 3.4vw, 32px);
+      line-height: 1.55;
+      letter-spacing: -0.02em;
+      font-weight: 900;
+      word-break: keep-all;
+      padding: 12px 10px;
+    }
+
+    .glow{
+      position:absolute;
+      inset:-2px;
+      pointer-events:none;
+      border-radius: var(--r28);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+      opacity: 0.85;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .btn{
+      min-height: var(--tap);
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(20,19,26,0.10);
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 12px 26px rgba(20,19,26,0.06);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      white-space:nowrap;
+      color: rgba(20,19,26,0.92);
+      font-weight: 800;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 28px rgba(20,19,26,0.10); }
+    .btn:active{ transform: translateY(0); }
+    .btn:disabled{ opacity:0.55; cursor:not-allowed; transform:none; }
+
+    .btn.primary{
+      color:#fff;
+      border-color: rgba(20,19,26,0.08);
+      background: linear-gradient(135deg, rgba(20,19,26,0.92), rgba(20,19,26,0.78));
+      box-shadow: 0 16px 34px rgba(20,19,26,0.16);
+    }
+
+    .btnRowRight{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+
+    .idle{
+      border-radius: var(--r28);
+      border: 1px solid rgba(20,19,26,0.08);
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 12px 28px rgba(20,19,26,0.06);
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      align-items:center;
+      text-align:center;
+    }
+    .idle h2{
+      margin: 0;
+      font-size: 18px;
+      letter-spacing:-0.02em;
+      font-weight: 950;
+    }
+    .idle p{
+      margin: 0;
+      color: rgba(74,70,86,0.92);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    :focus-visible{
+      outline: 3px solid rgba(20,19,26,0.22);
+      outline-offset: 2px;
+      border-radius: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="shell" role="application" aria-label="대화 질문 카드 180">
+
+      <header>
+        <div class="brand">
+          <div class="title"><span class="dot" aria-hidden="true"></span>12가지 대화 질문 카드 180</div>
+          <p class="sub">관심과 호기심은 사랑입니다
+</p>
+        </div>
+        <div class="status" title="진행 상태">
+          <span>진행</span> <strong id="progress">0</strong>/<strong id="total">180</strong>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="stage">
+
+          <div class="card" aria-label="질문 카드">
+            <div class="glow" aria-hidden="true"></div>
+
+            <div class="themeBadge" id="themeBadge" style="display:none;">
+              <span class="themeDot" aria-hidden="true"></span>
+              <span id="themeName">테마</span>
+            </div>
+
+            <p class="question" id="questionText" style="display:none;"></p>
+
+            <div class="idle" id="idleBox">
+              <h2>대화를 시작해볼까요?</h2>
+              <p>
+                “다음”을 누를 때마다 <strong>질문 한 장</strong>이 나옵니다.<br/>
+              </p>
+<h2 class="ruleTitle">오늘의 대화 룰: 가볍게, 예쁘게</h2>
+
+  <ul class="ruleList">
+    <li><strong>패스는 매너입니다.</strong> 부담은 내려놓으셔도 됩니다.</li>
+    <li><strong>조언은 선물인데요,</strong> 오늘은 일단 포장만 해둘게요.</li>
+    <li><strong>한 번에 짧게:</strong> 길면 다음 사람이 숨이 찹니다.</li>
+    <li><strong>비밀은 그대로:</strong> 여기서 들은 이야기는 여기서만.</li>
+    <li><strong>정답 없음:</strong> “그냥 그렇습니다”도 훌륭한 답입니다.</li>
+  </ul>
+              <div style="margin-top:10px;">
+                <button class="btn primary" id="btnStart" type="button">시작</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions" aria-label="컨트롤">
+            <button class="btn" id="btnNext" type="button" disabled>다음</button>
+            <div class="btnRowRight">
+              <button class="btn" id="btnDone" type="button" disabled>완료</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* =========================================================
+  - 12 테마 × 15 질문 = 180장
+  - 질문 톤: 존칭(부드러운 대화용) + 가벼운 위트는 유지(과하지 않게)
+  - 카드 상단 우측: 테마 표기
+  - 반복 완화: 덱(셔플) + 덱 재생성 시 최근 N장 회피
+========================================================= */
+
+/* ===== 12 THEME PALETTES ===== */
+const THEME_STYLE = {
+  ice:     { label:"가볍게 인사",  bgA:"#fff7fb", bgB:"#f7f2ff", bgC:"#f3fbff", accent:"#ec4899" },
+  taste:   { label:"취향·감각",    bgA:"#fff7ed", bgB:"#fff4e6", bgC:"#fff7fb", accent:"#fb7185" },
+  lately:  { label:"요즘 뭐하나요", bgA:"#f3fff9", bgB:"#effaf8", bgC:"#f2fbff", accent:"#06b6d4" },
+  memory:  { label:"기억 한 조각",  bgA:"#fdf4ff", bgB:"#f5f3ff", bgC:"#fff7ed", accent:"#8b5cf6" },
+  talk:    { label:"대화 습관",     bgA:"#f3fbff", bgB:"#eef6ff", bgC:"#f4fffd", accent:"#2563eb" },
+  work:    { label:"일·성장",       bgA:"#f4fff6", bgB:"#effdf5", bgC:"#f5fbff", accent:"#10b981" },
+  recharge:{ label:"충전·회복",     bgA:"#f0f9ff", bgB:"#e0f2fe", bgC:"#f5fbff", accent:"#0ea5e9" },
+  value:   { label:"가치·기준",     bgA:"#fff7ed", bgB:"#fff1f2", bgC:"#fff7fb", accent:"#f97316" },
+  courage: { label:"용기·도전",     bgA:"#fefce8", bgB:"#fff7ed", bgC:"#fff1f2", accent:"#eab308" },
+  tmi:     { label:"인간미(TMI)",   bgA:"#f3fbff", bgB:"#fff7fb", bgC:"#f3fff9", accent:"#22c55e" },
+  future:  { label:"미래 상상",     bgA:"#f5f3ff", bgB:"#fdf4ff", bgC:"#f3fbff", accent:"#a855f7" },
+  kind:    { label:"서로에게 따뜻", bgA:"#fff7ed", bgB:"#fff7fb", bgC:"#fdf2f8", accent:"#fb7185" },
+};
+
+/* ===== 180 CARDS (12×15) - 존칭 톤 ===== */
+const CARDS = [
+  // 1) ice 15
+  ...[
+    "오늘 기분을 이모지 하나로만 표현하신다면, 어떤 이모지일까요?",
+    "요즘 하루를 살짝 살려주는 ‘소확행’이 있으실까요?",
+    "최근에 ‘오늘 좀 괜찮았는데요?’ 싶었던 순간이 있으셨나요?",
+    "오늘 스스로에게 칭찬 한 줄만 해주신다면, 어떤 말이 떠오르실까요?",
+    "요즘 시간 순삭하게 만드는 것이 있으신가요? (영상/책/게임/사람, 다 가능합니다)",
+    "요즘 자주 듣는 노래나 장르가 있으실까요?",
+    "최근에 가장 자주 하신 말(또는 생각) 1위는 무엇이었나요?",
+    "오늘 컨디션을 날씨로 비유하신다면 어떤 날씨에 가까우실까요?",
+    "요즘 가장 자주 가시는 장소 TOP1은 어디인가요?",
+    "지금 당장 ‘커피 한 잔’ 같이 하고 싶은 분이 떠오르신다면 누구실까요?",
+    "요즘 ‘이건 좀 웃기다’ 하고 혼자 빵 터진 순간이 있으셨나요?",
+    "최근에 새로 알게 된 소소한 팁(생활꿀팁)이 있다면 무엇인가요?",
+    "오늘 하루에 제목을 붙인다면 어떤 제목이 어울릴까요?",
+    "지금 기분에 가장 어울리는 색 하나만 고르신다면 무엇일까요?",
+    "요즘 ‘이건 꼭 챙긴다’ 싶은 작은 루틴이 있으실까요?"
+  ].map((t,i)=>({ id:`ice_${i+1}`, theme:"ice", text:t })),
+
+  // 2) taste 15
+  ...[
+    "평생 간식 하나만 고르셔야 한다면 무엇을 고르시겠어요?",
+    "힘드실 때 자동으로 찾게 되는 맛은 어떤 쪽이신가요? (매운/달달/짭짤/고소)",
+    "향(향수/샴푸/캔들) 중에서 ‘이건 반칙입니다’ 싶은 최애가 있으실까요?",
+    "색 조합 하나만 고르신다면 어떤 조합을 좋아하시나요? (예: 크림+베이지)",
+    "요즘 알고리즘을 지배한 콘텐츠 취향은 어떤 쪽인가요?",
+    "좋아하시는 ‘소리’가 있으실까요? (비/키보드/지하철/카페 소음 등)",
+    "여행 가시면 꼭 드시는 ‘그 지역의 그것’이 있으신가요?",
+    "옷을 고르실 때 기준 1순위는 무엇인가요? (핏/소재/색/가격/브랜드)",
+    "요즘 기분 버튼 같은 장소가 있다면 어디인가요?",
+    "편안해지는 온도는 어떤 쪽이신가요? (따뜻/서늘/바람/햇빛)",
+    "카페에서 주문이 늘 똑같으신 편인가요, 매번 바꾸시는 편인가요?",
+    "요즘 자꾸 손이 가는 ‘디저트/음료’가 있으실까요?",
+    "좋아하시는 영화/드라마의 공통 분위기가 있다면 어떤 느낌인가요?",
+    "내 방(또는 책상)을 꾸민다면 꼭 넣고 싶은 아이템이 있으신가요?",
+    "‘이 맛은 나를 배신하지 않습니다’ 같은 메뉴가 있다면 무엇인가요?"
+  ].map((t,i)=>({ id:`taste_${i+1}`, theme:"taste", text:t })),
+
+  // 3) lately 15
+  ...[
+    "요즘 가장 자주 드는 생각을 한 문장으로 줄인다면 무엇일까요?",
+    "요즘 바쁘신가요, 아니면 바쁜 척이 더 바쁘신가요? (둘 다 가능하십니다)",
+    "요즘 ‘이건 진짜 배우고 싶습니다’ 싶은 것이 있으실까요?",
+    "최근 생활을 조금이라도 편하게 만든 것이 있다면 무엇인가요?",
+    "요즘 스스로에게 가장 많이 하시는 말이 있다면 무엇인가요?",
+    "요즘 ‘아, 이게 제 스타일이네요’ 하고 느끼는 순간이 있으신가요?",
+    "최근 마음이 반응한 이슈/주제가 있다면 하나만 꼽아주실까요?",
+    "잠들기 전에 제일 먼저 하시는 행동이 있으신가요?",
+    "요즘 에너지를 훔쳐 가는 1순위는 무엇인가요?",
+    "요즘 에너지를 충전해 주는 1순위는 무엇인가요?",
+    "요즘 ‘시간이 빨리 가네요’가 느껴지는 순간은 언제인가요?",
+    "최근에 처음 시도해본 작은 변화가 있으신가요?",
+    "요즘 자주 보는 사람(또는 자주 피하는 것)이 있으실까요?",
+    "요즘 ‘일단 보류’ 중인 일이 있다면 무엇인가요?",
+    "요즘 나에게 가장 필요한 한 가지를 고르신다면 무엇일까요?"
+  ].map((t,i)=>({ id:`lately_${i+1}`, theme:"lately", text:t })),
+
+  // 4) memory 15
+  ...[
+    "인생에 좋은 방향으로 남아 있는 한마디가 있으실까요?",
+    "예전의 나에게 조언 한 줄을 선물하신다면 어떤 말이 좋을까요?",
+    "아직도 또렷한 사소한 장면 하나가 떠오르신다면 어떤 장면인가요?",
+    "스스로를 조금 단단하게 만든 경험이 있다면 무엇이었나요?",
+    "어릴 때 좋아했던 것 중 지금도 좋아하는 것이 있으신가요?",
+    "최근 ‘아, 제가 성장했네요’ 싶었던 순간이 있으셨나요?",
+    "좋아하시는 기억의 계절은 언제인가요? (봄/여름/가을/겨울)",
+    "성격을 설명하는 에피소드 하나만 고르신다면 무엇인가요?",
+    "최근 다시 꺼내 본 추억(사진/노래/장소)이 있으실까요?",
+    "인생의 한 장면으로 남길 사진이 있다면 어떤 사진인가요?",
+    "‘이때로 딱 하루만’ 돌아갈 수 있다면 언제로 가고 싶으신가요?",
+    "어떤 냄새/노래가 들리면 자동으로 떠오르는 기억이 있으신가요?",
+    "어른이 된 뒤에 새롭게 좋아지게 된 것이 있으실까요?",
+    "내가 나를 처음으로 ‘믿게 된’ 순간이 있다면 언제인가요?",
+    "최근에 감탄했던 사람(또는 장면)이 있다면 무엇이었나요?"
+  ].map((t,i)=>({ id:`memory_${i+1}`, theme:"memory", text:t })),
+
+  // 5) talk 15
+  ...[
+    "대화할 때 말로 풀어가는 편이신가요, 정리하고 말하는 편이신가요?",
+    "연락 템포는 빠른 편이신가요, 느린 편이신가요?",
+    "갈등이 생기면 먼저 이야기하시는 편인가요, 잠깐 시간을 가지시는 편인가요?",
+    "상대가 해주면 고마운 대화 습관 하나만 꼽아주실까요?",
+    "고민을 말할 때 공감이 더 좋으신가요, 해결이 더 좋으신가요?",
+    "대화에서 가장 싫으신 방식이 있다면 무엇인가요? (예: 떠보기/단정/비꼼)",
+    "듣고 싶어 하시는 칭찬 스타일은 어떤 쪽인가요? (과정/결과/존재/센스)",
+    "사람이 편해지는 순간은 언제라고 느끼시나요?",
+    "나의 ‘기본 친절’은 어떤 모습이라고 생각하시나요?",
+    "대화하다가 지치면 어떤 신호가 나타나시나요? (말수/표정/거리)",
+    "좋아하는 대화 주제(대화가 잘 되는 주제)는 어떤 것들인가요?",
+    "상대의 어떤 말투가 가장 안심되시나요?",
+    "‘그 말은 좀…’ 싶을 때, 보통 어떻게 반응하시나요?",
+    "대화에서 내가 무심코 자주 하는 버릇이 있다면 무엇인가요?",
+    "요즘 더 잘하고 싶다고 느끼는 대화 장면이 있으신가요?"
+  ].map((t,i)=>({ id:`talk_${i+1}`, theme:"talk", text:t })),
+
+  // 6) work 15
+  ...[
+    "요즘 일(또는 공부)에서 가장 많이 배우는 것은 무엇인가요?",
+    "의외로 잘하시는데 사람들이 잘 모르는 능력이 있으실까요?",
+    "요즘 ‘이 역할은 저랑 잘 맞습니다’ 싶은 것이 있으신가요?",
+    "반대로 ‘이건 저랑 안 맞네요’가 확실한 것은 무엇인가요?",
+    "요즘 키우고 싶은 역량 1순위는 무엇인가요?",
+    "최근 스스로에게 “수고하셨습니다” 말해주고 싶은 일이 있다면 무엇인가요?",
+    "집중 스위치는 어디에 있으신가요? (음악/정리/마감/카페 등)",
+    "요즘의 ‘일하는 태도’를 한 문장으로 정의하신다면?",
+    "존경하는 ‘일 잘하는 사람’의 특징 1가지는 무엇인가요?",
+    "지금 다음 단계로 가기 위해 필요한 한 가지는 무엇인가요?",
+    "요즘 가장 스트레스 받는 업무 순간은 어떤 순간인가요?",
+    "업무에서 ‘이건 제가 맡으면 잘합니다’ 싶은 것이 있으실까요?",
+    "일을 할 때 나를 살려주는 말(또는 습관)은 무엇인가요?",
+    "요즘 ‘그만두고 싶다’가 아니라 ‘조정하고 싶다’는 것은 무엇인가요?",
+    "올해(또는 이번 달) 목표를 한 문장으로 말하면 무엇인가요?"
+  ].map((t,i)=>({ id:`work_${i+1}`, theme:"work", text:t })),
+
+  // 7) recharge 15
+  ...[
+    "쉬어야 회복되시는 편이신가요, 놀아야 회복되시는 편이신가요?",
+    "요즘 ‘진짜 쉬었다’고 느낀 건 언제였나요?",
+    "기분이 내려갈 때 나를 살리는 루틴 하나만 공유해주실까요?",
+    "하루가 꼬였을 때, 어디부터 다시 정리하시는 편이신가요?",
+    "요즘 잠은 어떠신가요? (안 좋으시면 저희는 잠 편을 들겠습니다)",
+    "회복을 방해하는 습관 하나만 고르신다면 무엇인가요?",
+    "‘휴식’이라는 단어를 다시 정의하신다면 어떤 뜻일까요?",
+    "지금 가장 필요한 것은 수면/정리/산책/대화 중 무엇인가요?",
+    "편안하게 느껴지는 사람의 특징이 있다면 무엇인가요?",
+    "오늘 딱 30분이 생긴다면 무엇을 하고 싶으신가요?",
+    "요즘 내 몸이 좋아하는 활동(가벼운 운동 포함)이 있으실까요?",
+    "기분이 좋아지는 정리 방식(책상/방/가방)이 있으신가요?",
+    "휴식 중에도 죄책감이 올라오면, 보통 어떤 생각이 드시나요?",
+    "요즘 제일 ‘방전’되는 시간대는 언제인가요?",
+    "내일을 위해 오늘 미리 해두면 좋은 회복 하나가 있다면 무엇인가요?"
+  ].map((t,i)=>({ id:`recharge_${i+1}`, theme:"recharge", text:t })),
+
+  // 8) value 15
+  ...[
+    "요즘 가장 지키고 싶은 기준(룰) 하나가 있으실까요?",
+    "최근에 ‘아니다’라고 말씀하신 적이 있다면 어떤 상황이었나요?",
+    "돈/시간을 아끼지 않는 영역이 있으시다면 무엇인가요?",
+    "‘좋은 사람’보다 ‘어떤 사람’이 되고 싶으신가요?",
+    "요즘 내 선택을 흔드는 것은 남의 시선인가요, 내 기준인가요?",
+    "절대 양보 못 하는 것이 있으시다면 무엇인가요? (사소한 것도 환영입니다)",
+    "줄이고 싶은 것 하나, 늘리고 싶은 것 하나를 고르신다면?",
+    "‘성공’이라는 말을 그림으로 그리면 어떤 장면일까요?",
+    "관계에서 중요하게 생각하시는 원칙 1가지는 무엇인가요?",
+    "인생에서 꼭 해보고 싶은 가치가 있다면 무엇인가요?",
+    "요즘 제일 자주 하는 ‘타협’이 있다면 무엇인가요?",
+    "나에게 ‘충분함’의 기준은 어떤가요?",
+    "나의 우선순위를 바꾸게 만든 사건이 있었나요?",
+    "요즘 ‘이건 지켜야 합니다’라는 선이 있다면 무엇인가요?",
+    "내가 진짜 소중히 여기는 것을 세 단어로 말하면 무엇일까요?"
+  ].map((t,i)=>({ id:`value_${i+1}`, theme:"value", text:t })),
+
+  // 9) courage 15
+  ...[
+    "요즘 해보고 싶은데 살짝 겁나는 것이 있으신가요?",
+    "실패해도 ‘그래도 해볼 만합니다’ 싶은 일은 무엇일까요?",
+    "최근 하신 가장 작은 용기는 무엇이었나요?",
+    "주저하게 만드는 말버릇(내적 멘트)이 있으시다면 무엇인가요?",
+    "‘완벽’ 대신 ‘일단’으로 가면 가능해지는 것이 무엇일까요?",
+    "지금 필요한 응원 한마디가 있다면 무엇인가요?",
+    "한 달 뒤의 내가 고마워할 선택 하나를 꼽는다면?",
+    "처음이라 떨리는 일을 할 때의 안정장치는 무엇인가요?",
+    "용기 내서 도움을 요청해본 경험이 있으신가요? 어떠셨나요?",
+    "요즘 도전해보고 싶은 새로운 세계(취미/사람/일)가 있으신가요?",
+    "요즘 ‘미뤄두는 용기’가 아니라 ‘내는 용기’가 필요한 건 무엇인가요?",
+    "두려움이 있어도 해보고 싶은 이유가 있으신가요?",
+    "도전할 때, 나를 가장 잘 움직이게 하는 동기는 무엇인가요?",
+    "작게 시작해도 된다면, 오늘 한 걸음은 무엇일까요?",
+    "용기의 반대가 두려움이 아니라 ‘익숙함’이라면, 익숙함은 무엇인가요?"
+  ].map((t,i)=>({ id:`courage_${i+1}`, theme:"courage", text:t })),
+
+  // 10) tmi 15
+  ...[
+    "사소한 강박 하나만 살짝 고백해주실 수 있으신가요? (귀여운 걸로요)",
+    "이상하게 포기 못 하는 습관이 있으신가요?",
+    "혼자만 아는 작은 재능이 있으시다면 무엇인가요?",
+    "요즘 제일 자주 검색한 단어는 무엇인가요?",
+    "기분이 좋아지는 ‘이상한 버튼’이 하나 있다면 무엇인가요?",
+    "어떤 순간에 갑자기 텐션이 올라가시나요?",
+    "MBTI 말고 ‘실제 나’를 보여주는 특징 하나만 말씀해주실까요?",
+    "최근 웃긴 실수 하신 적 있으신가요? (저희끼리만 알고 있겠습니다)",
+    "좋아하시는 짤/밈 스타일은 어떤 느낌인가요?",
+    "생활 속 ‘소소하지만 확실한 행복’ 순간은 언제인가요?",
+    "의외로 까다로운 취향 하나가 있으시다면 무엇인가요?",
+    "‘이건 이상한데 좋은데요?’ 싶은 나만의 루틴이 있으신가요?",
+    "나도 모르게 습관적으로 하는 말버릇이 있으신가요?",
+    "요즘 ‘자꾸만 클릭’하게 되는 카테고리가 있으신가요?",
+    "주변에서 자주 듣는 “그거 진짜 당신답다”는 포인트가 있나요?"
+  ].map((t,i)=>({ id:`tmi_${i+1}`, theme:"tmi", text:t })),
+
+  // 11) future 15
+  ...[
+    "1년 뒤 이상적인 하루는 어떻게 시작될까요?",
+    "지금 당장 떠난다면 어디로 가고 싶으신가요? 이유도 살짝 부탁드립니다.",
+    "미래의 나에게 선물하고 싶은 생활 습관 하나가 있다면 무엇인가요?",
+    "원하는 삶의 분위기를 한 단어로 말하면 무엇일까요? (예: 고요/선명/따뜻)",
+    "꿈꾸는 공간(집/방/책상)은 어떤 느낌이신가요?",
+    "미래의 내가 고마워할 소비(또는 투자) 하나를 꼽는다면 무엇인가요?",
+    "버킷리스트 중 ‘가장 현실적인 것’ 하나만 말씀해주실까요?",
+    "앞으로 더 하고 싶은 사람 관계는 어떤 관계인가요?",
+    "인생에 추가하고 싶은 장면은 어떤 장면인가요?",
+    "미래의 나에게 한 문장 약속을 한다면 무엇이라고 하시겠어요?",
+    "다음 달의 나에게 가장 필요한 변화는 무엇일까요?",
+    "지금부터 3개월 후, 가장 듣고 싶은 소식은 무엇인가요?",
+    "미래의 내가 지금의 나에게 해줄 칭찬은 무엇일까요?",
+    "‘언젠가’가 아니라 ‘올해’ 해보고 싶은 한 가지가 있다면 무엇인가요?",
+    "지금의 나를 한 단계 끌어올리는 데 필요한 환경은 무엇일까요?"
+  ].map((t,i)=>({ id:`future_${i+1}`, theme:"future", text:t })),
+
+  // 12) kind 15
+  ...[
+    "요즘 가장 듣고 싶은 말이 있으신가요? 제가 대신 한 번 말씀드려도 될까요?",
+    "오늘 스스로를 칭찬해주고 싶은 지점이 있다면 무엇인가요?",
+    "요즘 가장 애쓰고 계신 부분은 어떤 부분인가요?",
+    "힘들 때 도움이 되는 위로 방식은 어떤 쪽이신가요?",
+    "제가 해드릴 수 있는 작은 도움이 있다면 무엇이 좋으실까요?",
+    "요즘 소중하게 지키고 계신 것은 무엇인가요?",
+    "요즘 ‘안심’을 주는 것은 무엇인가요?",
+    "지금 자신에게 가장 친절한 선택 하나만 한다면 무엇일까요?",
+    "오늘 하루, 마음이 고마워할 행동 하나는 무엇인가요?",
+    "지금 여기서 서로에게 좋은 말 한 줄씩 해볼까요? 어떤 말을 해주고 싶으신가요?",
+    "요즘 마음이 무거울 때, 가장 먼저 필요한 것은 무엇인가요?",
+    "요즘 스스로에게 ‘괜찮습니다’라고 말해주고 싶은 순간이 있으신가요?",
+    "누군가에게 고마웠던 순간이 있다면, 그 고마움은 어떤 것이었나요?",
+    "요즘 나를 편들어주는 사람(또는 문장)이 있다면 무엇인가요?",
+    "오늘의 나에게 ‘수고하셨습니다’라고 말해주고 싶은 이유가 있으신가요?"
+  ].map((t,i)=>({ id:`kind_${i+1}`, theme:"kind", text:t })),
+];
+
+const $ = (id)=>document.getElementById(id);
+const questionText = $("questionText");
+const themeBadge = $("themeBadge");
+const themeName = $("themeName");
+const progress = $("progress");
+const total = $("total");
+const idleBox = $("idleBox");
+const btnStart = $("btnStart");
+const btnNext = $("btnNext");
+const btnDone = $("btnDone");
+
+total.textContent = String(CARDS.length);
+
+/* ===== Deck (반복 완화) ===== */
+let deck = [];
+let index = 0;
+let recent = [];
+const recentWindow = 12; // 최근 12장 회피(덱 재생성 시)
+
+function shuffleInPlace(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function buildDeckAvoidingRecent(){
+  const base = CARDS.slice();
+  shuffleInPlace(base);
+
+  for(let tries=0; tries<7; tries++){
+    const head = base.slice(0, Math.min(recentWindow, base.length)).map(c=>c.id);
+    const overlap = head.filter(id=>recent.includes(id)).length;
+    if(overlap <= 1) break; // 0이 이상적이지만 덱 크기/최근상황 고려해 1까지 허용
+    shuffleInPlace(base);
+  }
+  return base;
+}
+
+function applyTheme(themeKey){
+  const t = THEME_STYLE[themeKey] || THEME_STYLE.ice;
+  document.documentElement.style.setProperty("--bgA", t.bgA);
+  document.documentElement.style.setProperty("--bgB", t.bgB);
+  document.documentElement.style.setProperty("--bgC", t.bgC);
+  document.documentElement.style.setProperty("--accent", t.accent);
+  themeName.textContent = t.label;
+}
+
+function showCard(card){
+  applyTheme(card.theme);
+  themeBadge.style.display = "";
+  questionText.textContent = card.text;
+  progress.textContent = String(Math.min(index, deck.length));
+}
+
+function startSession(){
+  recent = [];
+  deck = buildDeckAvoidingRecent();
+  index = 0;
+
+  idleBox.style.display = "none";
+  questionText.style.display = "";
+  btnNext.disabled = false;
+  btnDone.disabled = false;
+
+  nextCard();
+}
+
+function nextCard(){
+  if(index >= deck.length){
+    deck = buildDeckAvoidingRecent();
+    index = 0;
+  }
+
+  const card = deck[index];
+  index += 1;
+
+  recent.push(card.id);
+  if(recent.length > recentWindow) recent = recent.slice(-recentWindow);
+
+  showCard(card);
+}
+
+function endSession(){
+  deck = [];
+  index = 0;
+  recent = [];
+
+  themeBadge.style.display = "none";
+  questionText.textContent = "";
+  questionText.style.display = "none";
+  idleBox.style.display = "";
+  btnNext.disabled = true;
+  btnDone.disabled = true;
+  progress.textContent = "0";
+
+  applyTheme("ice");
+}
+
+btnStart.addEventListener("click", startSession);
+btnNext.addEventListener("click", nextCard);
+btnDone.addEventListener("click", endSession);
+
+// Keyboard: Space/Enter = Next, Esc = Done
+document.addEventListener("keydown",(e)=>{
+  if(btnNext.disabled) return;
+  if(e.key === "Escape"){
+    endSession();
+  }else if(e.key === " " || e.key === "Enter"){
+    e.preventDefault();
+    nextCard();
+  }
+});
+</script>
+</body>
+</html>
+

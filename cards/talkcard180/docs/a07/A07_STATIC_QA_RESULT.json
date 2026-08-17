@@ -1,0 +1,449 @@
+{
+  "run": "A07 PERFORMANCE / QA / RELEASE — STATIC",
+  "status": "PASS",
+  "releaseStatus": "NOT_RELEASED",
+  "browserQa": "PENDING_STAGING_DEPLOYMENT",
+  "coreWebVitals": "BLOCKED_CHROME_DEVTOOLS_MCP_UNAVAILABLE",
+  "summary": {
+    "checks": 85,
+    "passed": 85,
+    "failed": 0,
+    "themes": 12,
+    "runtimeTextCards": 120,
+    "runtimeImageCards": 60,
+    "runtimeTotalCards": 180,
+    "runtimeDataBytes": 43465,
+    "sourceDataBytes": 93560,
+    "thumbnailCount": 12,
+    "thumbnailBytes": 114944,
+    "correspondingOriginalBytes": 1374702
+  },
+  "checks": [
+    {
+      "name": "RUNTIME_TEXT_SOURCE_EQUALITY",
+      "status": "PASS",
+      "detail": "the 120 runtime text cards must be an exact field projection of the locked A01 source"
+    },
+    {
+      "name": "RUNTIME_IMAGE_SOURCE_EQUALITY",
+      "status": "PASS",
+      "detail": "the 60 runtime image cards must be an exact field projection of the approved manifest"
+    },
+    {
+      "name": "RUNTIME_TEXT_COUNT",
+      "status": "PASS",
+      "detail": "expected 120, received 120"
+    },
+    {
+      "name": "RUNTIME_IMAGE_COUNT",
+      "status": "PASS",
+      "detail": "expected 60, received 60"
+    },
+    {
+      "name": "RUNTIME_TOTAL_COUNT",
+      "status": "PASS",
+      "detail": "expected 180, received 180"
+    },
+    {
+      "name": "RUNTIME_ID_UNIQUENESS",
+      "status": "PASS",
+      "detail": "all runtime IDs must be unique"
+    },
+    {
+      "name": "THEME_COUNT",
+      "status": "PASS",
+      "detail": "expected 12, received 12"
+    },
+    {
+      "name": "RUNTIME_DECK_ICE",
+      "status": "PASS",
+      "detail": "가볍게 인사 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_TASTE",
+      "status": "PASS",
+      "detail": "취향·감각 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_LATELY",
+      "status": "PASS",
+      "detail": "요즘 뭐하나요 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_TALK",
+      "status": "PASS",
+      "detail": "대화 습관 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_WORK",
+      "status": "PASS",
+      "detail": "일·성장 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_VALUE",
+      "status": "PASS",
+      "detail": "가치·기준 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_COURAGE",
+      "status": "PASS",
+      "detail": "용기·도전 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_TMI",
+      "status": "PASS",
+      "detail": "인간미(TMI) must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_MEMORY",
+      "status": "PASS",
+      "detail": "기억 한 조각 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_RECHARGE",
+      "status": "PASS",
+      "detail": "충전·회복 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_FUTURE",
+      "status": "PASS",
+      "detail": "미래 상상 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "RUNTIME_DECK_KIND",
+      "status": "PASS",
+      "detail": "서로에게 따뜻 must contain exactly 15 runtime cards"
+    },
+    {
+      "name": "IMAGE_ASSET_COMPLETENESS",
+      "status": "PASS",
+      "detail": "all 60 runtime image paths must resolve to local WebP assets"
+    },
+    {
+      "name": "RUNTIME_DATA_REDUCTION",
+      "status": "PASS",
+      "detail": "runtime 43465 bytes; source payload 93560 bytes"
+    },
+    {
+      "name": "RUNTIME_DATA_IMPORT",
+      "status": "PASS",
+      "detail": "the browser view must import the lean runtime projection"
+    },
+    {
+      "name": "NO_A01_BROWSER_IMPORT",
+      "status": "PASS",
+      "detail": "the full A01 registry must not ship to the browser"
+    },
+    {
+      "name": "NO_MANIFEST_BROWSER_LOAD",
+      "status": "PASS",
+      "detail": "the full authoring manifest must not load at runtime"
+    },
+    {
+      "name": "NO_RUNTIME_DATA_FETCH",
+      "status": "PASS",
+      "detail": "runtime data must not require an additional manifest fetch"
+    },
+    {
+      "name": "THUMBNAIL_FILE_SET",
+      "status": "PASS",
+      "detail": "only the locked 01/06/11 preview thumbnails must exist for each image deck"
+    },
+    {
+      "name": "THUMB_MEMORY_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/memory/thumbs/memory_01.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_MEMORY_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/memory/thumbs/memory_01.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_MEMORY_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/memory/thumbs/memory_06.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_MEMORY_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/memory/thumbs/memory_06.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_MEMORY_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/memory/thumbs/memory_11.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_MEMORY_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/memory/thumbs/memory_11.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_RECHARGE_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/recharge/thumbs/recharge_01.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_RECHARGE_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/recharge/thumbs/recharge_01.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_RECHARGE_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/recharge/thumbs/recharge_06.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_RECHARGE_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/recharge/thumbs/recharge_06.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_RECHARGE_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/recharge/thumbs/recharge_11.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_RECHARGE_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/recharge/thumbs/recharge_11.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_FUTURE_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/future/thumbs/future_01.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_FUTURE_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/future/thumbs/future_01.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_FUTURE_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/future/thumbs/future_06.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_FUTURE_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/future/thumbs/future_06.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_FUTURE_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/future/thumbs/future_11.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_FUTURE_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/future/thumbs/future_11.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_KIND_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/kind/thumbs/kind_01.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_KIND_01.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/kind/thumbs/kind_01.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_KIND_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/kind/thumbs/kind_06.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_KIND_06.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/kind/thumbs/kind_06.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMB_KIND_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/kind/thumbs/kind_11.webp must exist"
+    },
+    {
+      "name": "THUMB_FORMAT_KIND_11.WEBP",
+      "status": "PASS",
+      "detail": "assets/images/kind/thumbs/kind_11.webp: 360 450 WEBP"
+    },
+    {
+      "name": "THUMBNAIL_HASH_UNIQUENESS",
+      "status": "PASS",
+      "detail": "the 12 preview thumbnails must be visually distinct files"
+    },
+    {
+      "name": "THUMBNAIL_TRANSFER_REDUCTION",
+      "status": "PASS",
+      "detail": "thumbnails 114944 bytes; matching originals 1374702 bytes"
+    },
+    {
+      "name": "THUMBNAIL_LAZY_LOAD",
+      "status": "PASS",
+      "detail": "theme and intro thumbnails must lazy load"
+    },
+    {
+      "name": "THUMBNAIL_ASYNC_DECODE",
+      "status": "PASS",
+      "detail": "theme and intro thumbnails must decode asynchronously"
+    },
+    {
+      "name": "THUMBNAIL_VIEW_BINDING",
+      "status": "PASS",
+      "detail": "preview cards must use thumbnails instead of full assets"
+    },
+    {
+      "name": "NEXT_TWO_PRELOAD",
+      "status": "PASS",
+      "detail": "image play must preload at most the next two cards"
+    },
+    {
+      "name": "PRELOAD_DEDUPLICATION",
+      "status": "PASS",
+      "detail": "preloads must be deduplicated by image path"
+    },
+    {
+      "name": "ENGINE_PEEK_API",
+      "status": "PASS",
+      "detail": "the engine must expose a bounded look-ahead API"
+    },
+    {
+      "name": "ENGINE_PEEK_TWO",
+      "status": "PASS",
+      "detail": "expected 2, received 2"
+    },
+    {
+      "name": "ENGINE_PEEK_ORDER",
+      "status": "PASS",
+      "detail": "look-ahead cards must match the next two shuffled positions"
+    },
+    {
+      "name": "ENGINE_PEEK_CAP",
+      "status": "PASS",
+      "detail": "look-ahead must remain capped at two cards"
+    },
+    {
+      "name": "ENGINE_PEEK_NEGATIVE",
+      "status": "PASS",
+      "detail": "negative look-ahead must return no cards"
+    },
+    {
+      "name": "ENGINE_PEEK_EXTRA_MODE",
+      "status": "PASS",
+      "detail": "extra-card mode must not preload a new cycle"
+    },
+    {
+      "name": "OPENING_PRELOAD_COUNT",
+      "status": "PASS",
+      "detail": "expected 1 opening preload, received 1"
+    },
+    {
+      "name": "OPENING_PRELOAD_THUMBNAIL",
+      "status": "PASS",
+      "detail": "opening must preload the visible thumbnail, not a full card image"
+    },
+    {
+      "name": "ACTIVE_IMAGE_ELEMENT",
+      "status": "PASS",
+      "detail": "image play needs one active image element"
+    },
+    {
+      "name": "ACTIVE_IMAGE_EAGER",
+      "status": "PASS",
+      "detail": "the current image card must load eagerly"
+    },
+    {
+      "name": "ACTIVE_IMAGE_ASYNC_DECODE",
+      "status": "PASS",
+      "detail": "the current image card must decode asynchronously"
+    },
+    {
+      "name": "ACTIVE_IMAGE_PRIORITY",
+      "status": "PASS",
+      "detail": "the current image card must receive high fetch priority"
+    },
+    {
+      "name": "STAGING_NOINDEX",
+      "status": "PASS",
+      "detail": "the hidden v2 candidate must remain noindex before release"
+    },
+    {
+      "name": "ABSOLUTE_OG_IMAGE",
+      "status": "PASS",
+      "detail": "OG image must use an absolute public URL"
+    },
+    {
+      "name": "PRODUCTION_INDEX_LOCK",
+      "status": "PASS",
+      "detail": "A07 static work must not create or overwrite the production index"
+    },
+    {
+      "name": "SKIP_LINK",
+      "status": "PASS",
+      "detail": "a skip link must be present"
+    },
+    {
+      "name": "ARIA_LIVE",
+      "status": "PASS",
+      "detail": "progress and card changes need polite announcements"
+    },
+    {
+      "name": "OBJECTIVE_ALT_BINDING",
+      "status": "PASS",
+      "detail": "approved objective alt text must bind to the active image"
+    },
+    {
+      "name": "IMAGE_FAILURE_FALLBACK",
+      "status": "PASS",
+      "detail": "image failures must expose fallback content"
+    },
+    {
+      "name": "QA_CARD_ID_HOOK",
+      "status": "PASS",
+      "detail": "active card IDs must be observable for no-repeat E2E QA"
+    },
+    {
+      "name": "FOCUS_VISIBLE",
+      "status": "PASS",
+      "detail": "keyboard focus must be visibly styled"
+    },
+    {
+      "name": "REDUCED_MOTION",
+      "status": "PASS",
+      "detail": "reduced motion must be supported"
+    },
+    {
+      "name": "SAFE_AREA",
+      "status": "PASS",
+      "detail": "mobile safe-area padding must be present"
+    },
+    {
+      "name": "RESPONSIVE_390",
+      "status": "PASS",
+      "detail": "responsive rule for 390px must exist"
+    },
+    {
+      "name": "RESPONSIVE_560",
+      "status": "PASS",
+      "detail": "responsive rule for 560px must exist"
+    },
+    {
+      "name": "RESPONSIVE_768",
+      "status": "PASS",
+      "detail": "responsive rule for 768px must exist"
+    },
+    {
+      "name": "RESPONSIVE_1040",
+      "status": "PASS",
+      "detail": "responsive rule for 1040px must exist"
+    },
+    {
+      "name": "LANDSCAPE_RULE",
+      "status": "PASS",
+      "detail": "landscape-specific card bounds must be present"
+    }
+  ],
+  "errors": []
+}
