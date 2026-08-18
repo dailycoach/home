@@ -1,0 +1,35 @@
+{
+  "sourceUrl": "https://blog.naver.com/apilos",
+  "rssUrl": "https://rss.blog.naver.com/apilos.xml",
+  "updatedAt": "2026-08-19T00:00:00Z",
+  "posts": [
+    {
+      "title": "스트레스 코칭 특강",
+      "summary": "세종여성새로일하기센터 · 세종시 가족센터 임직원",
+      "url": "https://blog.naver.com/apilos/224378644947",
+      "publishedAt": 1786460400000,
+      "category": "FIELD NOTE"
+    },
+    {
+      "title": "AI시대 여름방학 진로성장캠프",
+      "summary": "한국ESG경영협회 공익사업 · 청소년·부모·코치",
+      "url": "https://blog.naver.com/apilos/224366336614",
+      "publishedAt": 1785682800000,
+      "category": "FIELD NOTE"
+    },
+    {
+      "title": "청청바톤터치 리빙랩 수업",
+      "summary": "공주시 교육발전특구 · 이인중학교 전교생",
+      "url": "https://blog.naver.com/apilos/224352947484",
+      "publishedAt": 1784559600000,
+      "category": "FIELD NOTE"
+    },
+    {
+      "title": "리빙랩 참여형 혁신 수업",
+      "summary": "우성중학교 · 중학교 2학년 학생",
+      "url": "https://blog.naver.com/apilos/224348123401",
+      "publishedAt": 1784127600000,
+      "category": "FIELD NOTE"
+    }
+  ]
+}
