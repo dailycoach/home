@@ -26,6 +26,22 @@ const pages = [
   'apilos/404/index.html'
 ];
 
+const publicUrls = [
+  '/apilos/',
+  '/apilos/center/',
+  '/apilos/programs/',
+  '/apilos/programs/professional-academy/',
+  '/apilos/programs/youth-family-school/',
+  '/apilos/programs/pastoral-coaching/',
+  '/apilos/programs/professional-network/',
+  '/apilos/programs/social-impact/',
+  '/apilos/programs/research-publication/',
+  '/apilos/archive/',
+  '/apilos/books/',
+  '/apilos/books/sachungi-coaching-psychology/',
+  '/apilos/news/'
+];
+
 const mustContain = (html, needle, file, label = needle) => {
   if (!html.includes(needle)) fail(`${file}: missing ${label}`);
 };
@@ -80,6 +96,7 @@ for (const file of pages) {
 if (!exists('404.html')) fail('root 404.html missing (GitHub Pages custom 404 gate)');
 if (exists('apilos/archive/index-v2.html')) fail('staging file apilos/archive/index-v2.html still present');
 if (!exists('apilos/qa.css')) fail('apilos/qa.css missing');
+if (!exists('apilos/assets/ycc-logo.webp')) fail('canonical YCC WebP logo missing');
 
 const responsiveCss = [
   'apilos/style.css','apilos/qa.css','apilos/ecosystem.css','apilos/business.css','apilos/evidence.css',
@@ -91,12 +108,19 @@ for (const file of responsiveCss) {
 }
 if (!read('apilos/qa.css').includes('orientation:landscape')) fail('apilos/qa.css: landscape hardening missing');
 if (!read('apilos/qa.css').includes('prefers-reduced-motion')) fail('apilos/qa.css: reduced-motion hardening missing');
+if (!read('apilos/qa.css').includes("--ycc-logo:url('/apilos/assets/ycc-logo.webp')")) fail('apilos/qa.css: canonical logo CSS variable missing');
 
 const webps = [
-  'apilos/assets/career-camp.webp','apilos/assets/iin-classroom.webp','apilos/assets/iin-living-lab.webp',
+  'apilos/assets/ycc-logo.webp','apilos/assets/career-camp.webp','apilos/assets/iin-classroom.webp','apilos/assets/iin-living-lab.webp',
   'apilos/assets/stress-lecture.webp','apilos/assets/woosung-living-lab.webp','apilos/assets/sachungi-coaching-psychology-cover.webp'
 ];
 for (const file of webps) if (!exists(file)) fail(`${file}: expected visual asset missing`);
+
+const legacyAssets = [
+  'apilos/assets/career-camp.jpg','apilos/assets/iin-classroom.jpg','apilos/assets/iin-living-lab.jpg',
+  'apilos/assets/stress-lecture.jpg','apilos/assets/woosung-living-lab.jpg','apilos/assets/ycc-logo.bin.b64'
+];
+for (const file of legacyAssets) if (exists(file)) fail(`${file}: superseded asset still present`);
 
 if (exists('apilos/news/blog.json')) {
   try {
@@ -112,7 +136,22 @@ if (exists('apilos/news/blog.json')) {
 if (exists('apilos/assets/ycc-logo.webp')) {
   const b = fs.readFileSync(path.join(ROOT,'apilos/assets/ycc-logo.webp'));
   if (b.subarray(0,4).toString('ascii') !== 'RIFF' || b.subarray(8,12).toString('ascii') !== 'WEBP') fail('ycc-logo.webp: invalid WebP header');
-} else warn('ycc-logo.webp not materialized yet; one-shot workflow should create it');
+}
+
+if (!exists('robots.txt')) fail('root robots.txt missing');
+else if (!read('robots.txt').includes('Sitemap: https://daily-coach-ing.com/sitemap.xml')) fail('robots.txt: sitemap declaration missing');
+if (!exists('sitemap.xml')) fail('root sitemap.xml missing');
+else {
+  const sitemap = read('sitemap.xml');
+  for (const url of publicUrls) {
+    const full = `https://daily-coach-ing.com${url}`;
+    if (!sitemap.includes(`<loc>${full}</loc>`)) fail(`sitemap.xml: missing ${full}`);
+  }
+}
+
+const archive = exists('apilos/archive/index.html') ? read('apilos/archive/index.html') : '';
+if (archive.includes('224371249575')) fail('archive: unverified Naver mapping 224371249575 reintroduced');
+if (archive.includes('href="https://m.blog.naver.com/apilos/224339731348"') && archive.includes('PASTORAL')) fail('archive: 224339731348 incorrectly mapped to pastoral');
 
 console.log(`APILOS QA: ${pages.length} pages, ${failures.length} failures, ${warnings.length} warnings`);
 for (const w of warnings) console.log(`WARN: ${w}`);
