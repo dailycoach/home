@@ -1,4 +1,31 @@
 (() => {
+  const fixStaticSources = () => {
+    const links = [...document.querySelectorAll('.archive-source-card a')];
+    const byHref = fragment => links.find(a => a.href.includes(fragment));
+
+    const academy = byHref('224351456999');
+    if (academy) {
+      const card = academy.closest('.archive-source-card');
+      card.querySelector('small').textContent = 'ACADEMY / OFFICIAL BLOG';
+      card.querySelector('strong').textContent = '제4기 통합상담코칭전문가 양성과정';
+      card.querySelector('p').textContent = '대면 + 비대면 2 Track으로 운영된 통합상담코칭전문가 양성과정 공식 기록입니다.';
+      academy.textContent = '공식 기록 ↗';
+    }
+
+    const happy = byHref('224339731348');
+    if (happy) {
+      const card = happy.closest('.archive-source-card');
+      card.querySelector('small').textContent = 'SOCIAL IMPACT / OFFICIAL BLOG';
+      card.querySelector('strong').textContent = '해피피플 대전지부 × KB캐피탈 자립준비청년 지원';
+      card.querySelector('p').textContent = '행복드림센터를 통한 자립준비청년 자격증 취득 지원 활동이 공식 RSS에서 확인됩니다.';
+      happy.textContent = '공식 기록 ↗';
+    }
+
+    const unknown = byHref('224371249575');
+    if (unknown) unknown.closest('.archive-source-card').hidden = true;
+  };
+  fixStaticSources();
+
   const grid = document.querySelector('[data-archive-live-grid]');
   const toolbar = document.querySelector('[data-archive-filters]');
   const updated = document.querySelector('[data-archive-updated]');
@@ -13,8 +40,8 @@
   const keywords = {
     academy: ['전문가', '양성과정', '커리어컨설턴트', '자기주도학습코치', '심리검사전문가', 'nlp', '코치 양성', '교육과정'],
     youth: ['청소년', '진로', '학습', '중학교', '학교', '리빙랩', '캠프', '조이스쿨', '부모', '학생'],
-    pastoral: ['목회', '교회', '기독교', '사역', '다음세대', '신앙'],
-    social: ['해피피플', '행복드림', '사회공헌', '공익', 'esg', '안전', '봉사', 'ngo', '다문화'],
+    pastoral: ['목회', '교회', '기독교', '사역', '다음세대', '신앙', '크리스챤'],
+    social: ['해피피플', '행복드림', '사회공헌', '공익', 'esg', '안전', '봉사', 'ngo', '다문화', '자립준비청년'],
     network: ['학회', '상담인상', '전문상담', '임상감독', '상담학회', '자격'],
     knowledge: ['심리상담뉴스', '창간', '연구', '학술', '저서', '책', '출판', '교재', '미디어']
   };
