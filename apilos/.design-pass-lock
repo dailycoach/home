@@ -1,0 +1,1 @@
+This file intentionally prevents no-op tool validation from writing into production. Remove in same design-pass commit.
