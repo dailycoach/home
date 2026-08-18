@@ -6,7 +6,7 @@ on:
     paths:
       - ".github/workflows/update-apilos-blog-rss.yml"
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
