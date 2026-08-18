@@ -1,4 +1,6 @@
 (()=>{
+  const addCss=()=>{if(document.querySelector('link[href="/apilos/qa.css"]'))return;const l=document.createElement('link');l.rel='stylesheet';l.href='/apilos/qa.css';document.head.appendChild(l);};
+  addCss();
   const loadCore=()=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='/apilos/app-core.js';s.async=false;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
   const setCard=(card,{href,mark,kind,title,note})=>{if(!card)return;card.href=href;const m=card.querySelector('.evidence-source-mark');const copy=card.querySelector('.evidence-source-copy');if(m)m.textContent=mark;if(copy){const els=copy.children;if(els[0])els[0].textContent=kind;if(els[1])els[1].textContent=title;if(els[2])els[2].textContent=note;}};
   const correct=()=>{
