@@ -19,6 +19,13 @@ const IMAGE_DECK = IMAGE_CARDS.map(({ id, type, theme, image, alt }) => ({
   alt,
 }));
 
+const IMAGE_CARD_BY_ID = new Map(IMAGE_DECK.map((card) => [card.id, card]));
+
+const INTRO_BACK_ART = {
+  questions: ["symbol", "step", "ground"],
+  images: ["memory", "future", "kind"],
+};
+
 const TABLE_LAYOUT = [
   [-2.8, -2, 7, 3],
   [1.6, 1, -2, 2],
@@ -121,6 +128,7 @@ function createIntroBack(mode, index) {
     "article",
     `intro-back-card intro-back-card--${isQuestions ? "questions" : "image"}`,
   );
+  card.dataset.art = INTRO_BACK_ART[mode][index];
   card.append(
     makeElement(
       "span",
@@ -209,6 +217,7 @@ function renderQuestion(snapshot = state.engine?.snapshot(), { animate = true } 
   questionNumber.textContent = `QUESTION · ${pad(shown, 3)}`;
   questionText.textContent = card.text;
   questionCard.dataset.currentCardId = card.id;
+  questionCard.dataset.theme = card.theme;
   nextQuestionButton.firstChild.textContent = snapshot.progress.isLast ? "대화 마치기 " : "다음 질문 ";
 
   questionCard.classList.remove("is-entering");
@@ -238,12 +247,13 @@ function advanceQuestion({ passed = false } = {}) {
   );
 }
 
-function createImageCardBack(cardId, slotIndex) {
+function createImageCardBack(card, slotIndex) {
   const button = makeElement("button", "table-card table-card--image");
   const [rotation, x, y, z] = TABLE_LAYOUT[slotIndex];
   button.type = "button";
   button.dataset.action = "pick-image";
-  button.dataset.cardId = cardId;
+  button.dataset.cardId = card.id;
+  button.dataset.theme = card.theme;
   button.style.setProperty("--card-rotate", `${rotation}deg`);
   button.style.setProperty("--card-x", `${x}px`);
   button.style.setProperty("--card-y", `${y}px`);
@@ -281,7 +291,8 @@ function renderImageTable(snapshot = state.engine?.snapshot()) {
     const slot = makeElement("div", "table-slot");
     slot.dataset.slot = String(slotIndex + 1);
     if (cardId) {
-      slot.append(createImageCardBack(cardId, slotIndex));
+      const card = IMAGE_CARD_BY_ID.get(cardId);
+      if (card) slot.append(createImageCardBack(card, slotIndex));
     } else {
       slot.classList.add("table-slot--empty");
       slot.setAttribute("aria-hidden", "true");
@@ -336,6 +347,7 @@ function renderImage(snapshot = state.engine?.snapshot(), { animate = true } = {
     `그림 카드 60장 중 ${snapshot.progress.used}장 사용함. 현재 이미지는 아직 사용 수에 포함되지 않음`,
   );
   imageRevealedCard.dataset.cardId = card.id;
+  imageRevealedCard.dataset.theme = card.theme;
   imageFrame.classList.remove("is-failed");
   imageFallback.hidden = true;
   imageCardArt.style.visibility = "visible";

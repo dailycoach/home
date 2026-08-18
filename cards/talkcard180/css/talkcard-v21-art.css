@@ -1,0 +1,725 @@
+/**
+ * TALK CARD 180 v2.1.6 — ART PAPER SYSTEM
+ * Visual language derived from the supplied DAILYCOACHING Art Coaching works.
+ * Theme metadata is used only for color and material; theme navigation stays removed.
+ */
+
+:root {
+  --paper: #f3ede3;
+  --paper-deep: #e5dacb;
+  --card: #fbf7ee;
+  --ink: #1a2a43;
+  --ink-soft: #626774;
+  --navy: #1b304c;
+  --terracotta: #a85434;
+  --dusty-blue: #8299b0;
+  --art-blue: #7e96b0;
+  --art-mauve: #8b6f82;
+  --art-ochre: #bf8e45;
+  --art-charcoal: #3f454d;
+  --art-taupe: #b7a188;
+  --art-rust: #a95630;
+  --art-gold: #aa844d;
+  --line: rgba(52, 48, 44, 0.13);
+  --line-strong: rgba(81, 64, 45, 0.25);
+  --shadow-card: 0 22px 54px rgba(48, 42, 35, 0.11), 0 2px 7px rgba(48, 42, 35, 0.06);
+  --shadow-small: 0 10px 25px rgba(48, 42, 35, 0.08), 0 1px 4px rgba(48, 42, 35, 0.05);
+  --radius-card: 14px;
+}
+
+body {
+  background: var(--paper);
+}
+
+body::before {
+  opacity: 0.13;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.82) 0 0.5px, transparent 0.7px),
+    radial-gradient(circle at 70% 60%, rgba(44, 39, 33, 0.2) 0 0.4px, transparent 0.65px);
+  background-size: 11px 13px, 13px 11px;
+  mix-blend-mode: soft-light;
+}
+
+.paper-glow {
+  width: min(42vw, 560px);
+  height: min(62vw, 760px);
+  border-radius: 0;
+  filter: none;
+  opacity: 0.055;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  mix-blend-mode: multiply;
+}
+
+.paper-glow--one {
+  top: -220px;
+  right: -120px;
+  background-image: url("../assets/images/card-backs/back-possibility.webp");
+}
+
+.paper-glow--two {
+  bottom: -310px;
+  left: -120px;
+  background-image: url("../assets/images/card-backs/back-ground.webp");
+}
+
+.site-header {
+  min-height: 80px;
+  border-bottom-color: rgba(170, 132, 77, 0.32);
+}
+
+.brand-mark {
+  width: 38px;
+  color: #f8f1e6;
+  background: var(--navy);
+  border: 1px solid rgba(170, 132, 77, 0.62);
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.brand-button strong {
+  letter-spacing: 0.13em;
+}
+
+.brand-button small {
+  color: rgba(64, 69, 78, 0.7);
+  letter-spacing: 0.24em;
+}
+
+:focus-visible {
+  outline-color: var(--art-rust);
+}
+
+.button {
+  border-color: rgba(91, 72, 49, 0.28);
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.button:hover {
+  box-shadow: 0 8px 18px rgba(48, 42, 35, 0.09);
+}
+
+.button--primary,
+.button--primary:hover {
+  color: #fffaf1;
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: none;
+}
+
+.button--primary:hover {
+  background: #243c5c;
+}
+
+.button--quiet {
+  background: rgba(251, 247, 238, 0.76);
+}
+
+/* Opening: the product becomes a small stack of art objects. */
+.opening-card {
+  border-color: rgba(116, 87, 53, 0.26);
+  border-radius: 11px;
+  box-shadow: 0 20px 46px rgba(47, 40, 33, 0.13), 0 2px 6px rgba(47, 40, 33, 0.07);
+}
+
+.opening-card::after {
+  inset: 7px;
+  border-color: rgba(170, 132, 77, 0.48);
+  border-radius: 6px;
+}
+
+.opening-card--back.v21-opening-back {
+  background: #ddd0bf url("../assets/images/card-backs/back-ground.webp") center / cover no-repeat;
+}
+
+.opening-card--middle.v21-opening-back {
+  background: #e7ddd0 url("../assets/images/card-backs/back-dialogue.webp") center / cover no-repeat;
+}
+
+.v21-opening-back > span,
+.v21-opening-back > p,
+.v21-opening-back > b,
+.opening-card--front .card-index {
+  display: none;
+}
+
+.opening-card--front {
+  display: block;
+  background: #eee4d7 url("../assets/images/card-backs/back-self.webp") center / cover no-repeat;
+}
+
+.opening-card--front::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 31%;
+  background: rgba(248, 242, 231, 0.94);
+  border-top: 1px solid rgba(170, 132, 77, 0.45);
+}
+
+.opening-card--front p {
+  position: absolute;
+  z-index: 2;
+  right: 82px;
+  bottom: 29px;
+  left: 28px;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(20px, 2.35vw, 30px);
+  line-height: 1.38;
+}
+
+.card-seal {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 25px;
+  width: 46px;
+  color: #fffaf0;
+  background: var(--art-rust);
+  border: 1px solid rgba(170, 132, 77, 0.74);
+  box-shadow: none;
+}
+
+.talk-rules {
+  border-top-color: rgba(170, 132, 77, 0.32);
+}
+
+.talk-rule-list article {
+  border-left-color: rgba(170, 132, 77, 0.28);
+}
+
+/* Mode cards use the six works as a quiet material preview. */
+.mode-card {
+  background: rgba(251, 247, 238, 0.82);
+  border-color: rgba(126, 96, 61, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 13px 34px rgba(48, 42, 35, 0.075);
+}
+
+.mode-card--images {
+  background: rgba(248, 244, 237, 0.86);
+}
+
+.mode-card::after {
+  inset: 7px;
+  border-color: rgba(170, 132, 77, 0.28);
+  border-radius: 8px;
+}
+
+.mode-card:hover,
+.mode-card:focus-visible {
+  border-color: rgba(126, 96, 61, 0.38);
+  box-shadow: 0 20px 48px rgba(48, 42, 35, 0.11);
+  transform: translateY(-5px);
+}
+
+.mode-deck-preview i {
+  border-color: rgba(126, 96, 61, 0.31);
+  border-radius: 9px;
+  box-shadow: 0 13px 28px rgba(48, 42, 35, 0.13);
+  background-color: #e9dfd1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mode-deck-preview--questions i:nth-child(1) {
+  background-image: url("../assets/images/card-backs/back-symbol.webp");
+}
+
+.mode-deck-preview--questions i:nth-child(2) {
+  background-image: url("../assets/images/card-backs/back-step.webp");
+}
+
+.mode-deck-preview--questions i:nth-child(3) {
+  background-image: url("../assets/images/card-backs/back-ground.webp");
+}
+
+.mode-deck-preview--images i:nth-child(1) {
+  background-image: url("../assets/images/card-backs/back-self.webp");
+}
+
+.mode-deck-preview--images i:nth-child(2) {
+  background-image: url("../assets/images/card-backs/back-possibility.webp");
+}
+
+.mode-deck-preview--images i:nth-child(3) {
+  background-image: url("../assets/images/card-backs/back-dialogue.webp");
+}
+
+.mode-card-copy > strong {
+  color: var(--navy);
+}
+
+.mode-card-copy > span {
+  color: rgba(66, 69, 77, 0.7);
+}
+
+/* Closed deck intro */
+.intro-layout {
+  background: rgba(250, 246, 237, 0.68);
+  border-color: rgba(126, 96, 61, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(48, 42, 35, 0.075);
+}
+
+.intro-visual--closed .intro-back-card {
+  border-color: rgba(126, 96, 61, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 18px 38px rgba(48, 42, 35, 0.15);
+  background-color: #e4d8c8;
+  background-image: var(--intro-back-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.intro-back-card[data-art="symbol"] {
+  --intro-back-image: url("../assets/images/card-backs/back-symbol.webp");
+}
+
+.intro-back-card[data-art="step"] {
+  --intro-back-image: url("../assets/images/card-backs/back-step.webp");
+}
+
+.intro-back-card[data-art="ground"] {
+  --intro-back-image: url("../assets/images/card-backs/back-ground.webp");
+}
+
+.intro-back-card[data-art="memory"] {
+  --intro-back-image: url("../assets/images/card-backs/back-self.webp");
+}
+
+.intro-back-card[data-art="future"] {
+  --intro-back-image: url("../assets/images/card-backs/back-possibility.webp");
+}
+
+.intro-back-card[data-art="kind"] {
+  --intro-back-image: url("../assets/images/card-backs/back-dialogue.webp");
+}
+
+.intro-back-card::after {
+  inset: 7px;
+  border-color: rgba(170, 132, 77, 0.54);
+  border-radius: 5px;
+}
+
+.intro-back-mark {
+  position: absolute;
+  z-index: 2;
+  right: 18px;
+  bottom: 18px;
+  width: 45px;
+  aspect-ratio: 1;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: transparent;
+  background: rgba(248, 242, 231, 0.9);
+  border: 1px solid rgba(170, 132, 77, 0.64);
+  border-radius: 50%;
+  font-size: 0;
+}
+
+.intro-back-mark::after {
+  content: "180";
+  color: var(--navy);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.intro-copy h2 {
+  color: var(--navy);
+}
+
+/* Question cards retain hidden source groups only as material colors. */
+.question-paper {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--card);
+  border-color: rgba(126, 96, 61, 0.23);
+  border-radius: 14px;
+  box-shadow:
+    inset 5px 0 0 var(--question-accent, var(--art-blue)),
+    0 20px 50px rgba(48, 42, 35, 0.09);
+}
+
+.question-paper::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 35%;
+  opacity: 0.115;
+  background-color: transparent;
+  background-image: var(--question-art);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: saturate(0.84) contrast(0.94);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 45%);
+  mask-image: linear-gradient(to right, transparent, #000 45%);
+}
+
+.question-paper::after {
+  border-color: rgba(170, 132, 77, 0.34);
+  border-radius: 8px;
+}
+
+.question-paper h3 {
+  position: relative;
+  z-index: 1;
+  color: var(--navy);
+}
+
+.question-paper[data-theme="ice"] {
+  --question-accent: #8ba0b5;
+  --question-art: url("../assets/images/card-backs/back-dialogue.webp");
+}
+
+.question-paper[data-theme="taste"] {
+  --question-accent: #8b6f82;
+  --question-art: url("../assets/images/card-backs/back-self.webp");
+}
+
+.question-paper[data-theme="lately"] {
+  --question-accent: #bf8e45;
+  --question-art: url("../assets/images/card-backs/back-possibility.webp");
+}
+
+.question-paper[data-theme="talk"] {
+  --question-accent: #718ca6;
+  --question-art: url("../assets/images/card-backs/back-dialogue.webp");
+}
+
+.question-paper[data-theme="work"] {
+  --question-accent: #454a51;
+  --question-art: url("../assets/images/card-backs/back-step.webp");
+}
+
+.question-paper[data-theme="value"] {
+  --question-accent: #aa844d;
+  --question-art: url("../assets/images/card-backs/back-ground.webp");
+}
+
+.question-paper[data-theme="courage"] {
+  --question-accent: #a95630;
+  --question-art: url("../assets/images/card-backs/back-symbol.webp");
+}
+
+.question-paper[data-theme="tmi"] {
+  --question-accent: #a28d7d;
+  --question-art: url("../assets/images/card-backs/back-self.webp");
+}
+
+.question-actions {
+  border-top-color: rgba(170, 132, 77, 0.25);
+}
+
+/* Image card table */
+.card-table-cloth {
+  background: #ddd1bf;
+  border-color: rgba(126, 96, 61, 0.25);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0 7px rgba(255, 250, 240, 0.12),
+    0 16px 38px rgba(48, 42, 35, 0.09);
+}
+
+.table-card {
+  border-radius: clamp(8px, 1vw, 12px);
+  box-shadow: 0 11px 24px rgba(44, 38, 32, 0.16), 0 1px 4px rgba(44, 38, 32, 0.09);
+}
+
+.table-card:hover,
+.table-card:focus-visible {
+  box-shadow: 0 20px 38px rgba(44, 38, 32, 0.22), 0 2px 7px rgba(44, 38, 32, 0.11);
+}
+
+.table-card[data-theme="memory"] {
+  --card-back-image: url("../assets/images/card-backs/back-self.webp");
+  --card-back-fallback: #8a9baa;
+}
+
+.table-card[data-theme="recharge"] {
+  --card-back-image: url("../assets/images/card-backs/back-ground.webp");
+  --card-back-fallback: #827b72;
+}
+
+.table-card[data-theme="future"] {
+  --card-back-image: url("../assets/images/card-backs/back-possibility.webp");
+  --card-back-fallback: #b39272;
+}
+
+.table-card[data-theme="kind"] {
+  --card-back-image: url("../assets/images/card-backs/back-dialogue.webp");
+  --card-back-fallback: #8d8190;
+}
+
+.table-card-inner {
+  padding: clamp(10px, 1.2vw, 16px);
+  background-color: var(--card-back-fallback, #8796a2);
+  background-image: var(--card-back-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: rgba(108, 80, 49, 0.32);
+}
+
+.table-card-inner::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: rgba(249, 243, 232, 0.035);
+  pointer-events: none;
+}
+
+.table-card-inner::after {
+  inset: 6px;
+  border-color: rgba(170, 132, 77, 0.68);
+  border-radius: 6px;
+}
+
+.table-card-motif {
+  position: absolute;
+  z-index: 2;
+  top: 11px;
+  right: 11px;
+  width: 38px;
+  aspect-ratio: 1;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+  background: rgba(248, 242, 231, 0.88);
+  border: 1px solid rgba(170, 132, 77, 0.68);
+  border-radius: 50%;
+  box-shadow: 0 3px 9px rgba(44, 38, 32, 0.08);
+}
+
+.table-card-motif::before {
+  content: "180";
+  position: static;
+  width: auto;
+  height: auto;
+  color: var(--navy);
+  background: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 9px;
+  font-style: italic;
+  line-height: 1;
+  transform: none;
+}
+
+.table-card-motif::after {
+  display: none;
+}
+
+.table-card-number {
+  z-index: 2;
+  right: 11px;
+  bottom: 11px;
+  min-width: 28px;
+  padding: 4px 5px 3px;
+  color: var(--navy);
+  background: rgba(248, 242, 231, 0.88);
+  border: 1px solid rgba(170, 132, 77, 0.56);
+  border-radius: 2px;
+  font-size: clamp(9px, 0.85vw, 12px);
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Image reveal remains visually quiet so the chosen image owns the screen. */
+.image-paper {
+  background: rgba(251, 247, 238, 0.9);
+  border-color: rgba(126, 96, 61, 0.23);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(48, 42, 35, 0.09);
+}
+
+.image-paper::after {
+  border-color: rgba(170, 132, 77, 0.34);
+  border-radius: 8px;
+}
+
+.reveal-image-frame img {
+  border-color: rgba(126, 96, 61, 0.24);
+  border-radius: 7px;
+  box-shadow: 0 10px 25px rgba(48, 42, 35, 0.08);
+}
+
+/* Closing */
+.closing-card {
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--card);
+  border-color: rgba(126, 96, 61, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(48, 42, 35, 0.09);
+}
+
+.closing-card::before {
+  border-color: rgba(170, 132, 77, 0.34);
+  border-radius: 8px;
+}
+
+.closing-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 38%;
+  opacity: 0.1;
+  background: url("../assets/images/card-backs/back-ground.webp") center / cover no-repeat;
+  filter: saturate(0.75);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 42%);
+  mask-image: linear-gradient(to right, transparent, #000 42%);
+}
+
+.closing-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .paper-glow {
+    width: 58vw;
+    height: 82vw;
+  }
+
+  .mode-card {
+    border-radius: 12px;
+  }
+
+  .intro-layout,
+  .question-paper,
+  .image-paper,
+  .closing-card {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .paper-glow {
+    opacity: 0.035;
+  }
+
+  .opening-card {
+    border-radius: 9px;
+  }
+
+  .opening-card--front p {
+    right: 68px;
+    bottom: 23px;
+    left: 22px;
+    font-size: 21px;
+  }
+
+  .card-seal {
+    right: 19px;
+    bottom: 20px;
+    width: 39px;
+    font-size: 14px;
+  }
+
+  .mode-card {
+    min-height: 376px;
+    border-radius: 11px;
+  }
+
+  .mode-card::after {
+    border-radius: 6px;
+  }
+
+  .mode-deck-preview i {
+    border-radius: 7px;
+  }
+
+  .intro-layout,
+  .question-paper,
+  .image-paper,
+  .closing-card {
+    border-radius: 10px;
+  }
+
+  .question-paper {
+    box-shadow:
+      inset 4px 0 0 var(--question-accent, var(--art-blue)),
+      0 14px 34px rgba(48, 42, 35, 0.08);
+  }
+
+  .question-paper::before {
+    width: 48%;
+    opacity: 0.085;
+  }
+
+  .question-actions {
+    background: transparent;
+    border-color: rgba(170, 132, 77, 0.27);
+    border-radius: 7px;
+    backdrop-filter: none;
+  }
+
+  .card-table-cloth {
+    border-radius: 12px;
+  }
+
+  .table-card {
+    border-radius: 7px;
+  }
+
+  .table-card-motif {
+    top: 7px;
+    right: 7px;
+    width: 27px;
+  }
+
+  .table-card-motif::before {
+    font-size: 7px;
+  }
+
+  .table-card-number {
+    right: 7px;
+    bottom: 7px;
+    min-width: 23px;
+    padding: 3px 4px 2px;
+    font-size: 8px;
+  }
+
+  .image-actions > :last-child {
+    border-radius: 5px;
+  }
+
+  .reveal-image-frame img {
+    border-radius: 5px;
+  }
+
+  .closing-card::after {
+    width: 58%;
+    opacity: 0.07;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-card,
+  .table-card,
+  .button {
+    transition-duration: 0.01ms;
+  }
+}
