@@ -581,6 +581,10 @@ body[data-screen="opening"] .talk-rule-list p {
 }
 
 @media (max-width: 768px) {
+  body[data-screen="opening"] .paper-glow {
+    display: none;
+  }
+
   body[data-screen="opening"] .site-header {
     min-height: 72px;
   }
@@ -638,47 +642,47 @@ body[data-screen="opening"] .talk-rule-list p {
   }
 
   .opening-card--fan-1 {
-    --x: -62%;
+    --x: -54%;
     --y: 12%;
-    --r: -14deg;
+    --r: -12deg;
   }
 
   .opening-card--fan-2 {
-    --x: -44%;
+    --x: -38%;
     --y: 1%;
-    --r: -10deg;
+    --r: -8deg;
   }
 
   .opening-card--fan-3 {
-    --x: -23%;
+    --x: -20%;
     --y: -7%;
-    --r: -5deg;
+    --r: -4deg;
   }
 
   .opening-card--fan-5 {
-    --x: 23%;
+    --x: 20%;
     --y: -7%;
-    --r: 5deg;
+    --r: 4deg;
   }
 
   .opening-card--fan-6 {
-    --x: 44%;
+    --x: 38%;
     --y: 1%;
-    --r: 10deg;
+    --r: 8deg;
   }
 
   .opening-card--fan-7 {
-    --x: 62%;
+    --x: 54%;
     --y: 12%;
-    --r: 14deg;
+    --r: 12deg;
   }
 
   .opening-orbit--outer {
-    width: min(100%, 440px);
+    width: min(84%, 360px);
   }
 
   .opening-orbit--inner {
-    width: min(72%, 315px);
+    width: min(60%, 270px);
   }
 
   .opening-deck-whisper {
