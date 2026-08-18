@@ -887,3 +887,698 @@
     animation-duration: 0.01ms;
   }
 }
+
+/* =========================================================
+   v2.1.4 — EDITORIAL QUIET
+   Keep only the copy that helps the participant act.
+   ========================================================= */
+
+:root {
+  --paper: #f1ece2;
+  --paper-deep: #e6ddcf;
+  --card: #fcfaf4;
+  --ink: #17233a;
+  --ink-soft: #626873;
+  --navy: #182b49;
+  --terracotta: #a66249;
+  --dusty-blue: #6f8793;
+  --line: rgba(23, 35, 58, 0.12);
+  --line-strong: rgba(23, 35, 58, 0.24);
+  --shadow-card: 0 34px 90px rgba(38, 34, 28, 0.11), 0 3px 12px rgba(38, 34, 28, 0.06);
+  --shadow-small: 0 14px 38px rgba(38, 34, 28, 0.09), 0 2px 7px rgba(38, 34, 28, 0.05);
+  --radius-card: 27px;
+}
+
+body {
+  background:
+    radial-gradient(circle at 86% 4%, rgba(166, 98, 73, 0.09), transparent 31%),
+    radial-gradient(circle at 6% 92%, rgba(111, 135, 147, 0.08), transparent 29%),
+    repeating-linear-gradient(93deg, rgba(28, 34, 41, 0.012) 0 1px, transparent 1px 7px),
+    var(--paper);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.7) 0 0.5px, transparent 0.7px),
+    radial-gradient(circle at 70% 60%, rgba(26, 30, 37, 0.22) 0 0.45px, transparent 0.65px);
+  background-position: 0 0, 5px 7px;
+  background-size: 11px 13px, 13px 11px;
+  mix-blend-mode: soft-light;
+}
+
+.paper-glow {
+  opacity: 0.2;
+  filter: blur(18px);
+}
+
+.site-header {
+  min-height: 84px;
+  padding-block: calc(17px + env(safe-area-inset-top)) 16px;
+  border-bottom-color: rgba(23, 35, 58, 0.1);
+}
+
+.brand-mark {
+  width: 39px;
+  background: #172945;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.19),
+    0 5px 16px rgba(23, 41, 69, 0.12);
+}
+
+.brand-button strong {
+  letter-spacing: 0.11em;
+}
+
+.brand-button small {
+  opacity: 0.72;
+}
+
+main {
+  min-height: calc(100vh - 84px);
+}
+
+.screen {
+  padding-block: clamp(58px, 7.5vw, 104px);
+}
+
+.button {
+  min-height: 54px;
+  padding: 14px 25px;
+  border-color: rgba(23, 35, 58, 0.22);
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.46);
+}
+
+.button--primary {
+  background: linear-gradient(145deg, #1b3153, #152743);
+  border-color: #172b49;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.13),
+    0 12px 28px rgba(23, 43, 73, 0.16);
+}
+
+.button--primary:hover {
+  background: linear-gradient(145deg, #213a61, #182c4b);
+}
+
+.button--quiet {
+  background: rgba(252, 250, 244, 0.58);
+}
+
+.text-button {
+  color: rgba(49, 58, 73, 0.72);
+  font-size: 13px;
+}
+
+/* Quiet copy: preserved in source where useful, absent from the participant view. */
+.header-count,
+.product-stats,
+.deck-select-heading > p:last-child,
+.mode-card-top,
+.mode-card-action,
+.intro-code,
+.intro-meta,
+.intro-note,
+.intro-back-top,
+.intro-back-bottom,
+.play-identity,
+.question-kicker,
+.question-pass,
+.table-copy .eyebrow,
+.table-copy > p:last-child,
+.table-card-topline,
+.table-card-bottomline,
+.image-actions [data-action="pass-image"],
+.closing-card > .eyebrow,
+.closing-unit,
+.closing-question,
+.site-footer {
+  display: none;
+}
+
+/* Opening */
+.opening {
+  column-gap: clamp(68px, 9vw, 132px);
+}
+
+.opening-copy h1 {
+  letter-spacing: -0.055em;
+}
+
+.opening-lead {
+  margin-top: 34px;
+  line-height: 1.58;
+}
+
+.opening-product-copy {
+  margin-top: 18px;
+  color: rgba(54, 63, 77, 0.72);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.opening-cta {
+  margin-top: 38px;
+}
+
+.opening-card {
+  border-color: rgba(23, 35, 58, 0.14);
+  border-radius: 25px;
+  box-shadow: 0 30px 76px rgba(38, 34, 28, 0.13), 0 3px 10px rgba(38, 34, 28, 0.06);
+}
+
+.opening-card::after {
+  inset: 7px;
+  border-color: rgba(23, 35, 58, 0.09);
+  border-radius: 18px;
+}
+
+.opening-card--front {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(166, 98, 73, 0.09), transparent 25%),
+    linear-gradient(150deg, #fdfbf6, #f7f1e7);
+}
+
+.card-seal {
+  width: 58px;
+  background: #a66249;
+  box-shadow: 0 10px 24px rgba(123, 66, 46, 0.15);
+}
+
+.talk-rules {
+  padding-top: 30px;
+  border-top-color: rgba(23, 35, 58, 0.1);
+}
+
+.talk-rule-list article {
+  border-left-color: rgba(23, 35, 58, 0.1);
+}
+
+.talk-rule-list p {
+  color: rgba(65, 72, 84, 0.72);
+}
+
+/* Two choices, treated as physical deck objects. */
+.deck-select-v21 {
+  max-width: 1020px;
+}
+
+.deck-select-heading {
+  max-width: 680px;
+  margin-bottom: clamp(38px, 5vw, 58px);
+}
+
+.deck-select-heading h2 {
+  font-size: clamp(39px, 5vw, 62px);
+  line-height: 1.18;
+}
+
+.mode-grid {
+  gap: clamp(22px, 3vw, 34px);
+}
+
+.mode-card {
+  min-height: 510px;
+  padding: clamp(30px, 3.6vw, 40px);
+  background:
+    radial-gradient(circle at 76% 12%, rgba(166, 98, 73, 0.055), transparent 29%),
+    linear-gradient(150deg, rgba(255, 254, 250, 0.98), rgba(247, 242, 232, 0.96));
+  border-color: rgba(23, 35, 58, 0.13);
+  border-radius: 27px;
+  box-shadow: 0 22px 56px rgba(38, 34, 28, 0.085), 0 2px 8px rgba(38, 34, 28, 0.045);
+}
+
+.mode-card--images {
+  background:
+    radial-gradient(circle at 76% 12%, rgba(111, 135, 147, 0.11), transparent 30%),
+    linear-gradient(150deg, rgba(255, 254, 250, 0.98), rgba(244, 241, 233, 0.96));
+}
+
+.mode-card::after {
+  inset: 7px;
+  border-color: rgba(23, 35, 58, 0.08);
+  border-radius: 20px;
+}
+
+.mode-card:hover,
+.mode-card:focus-visible {
+  border-color: rgba(23, 35, 58, 0.25);
+  box-shadow: 0 34px 76px rgba(38, 34, 28, 0.13), 0 4px 12px rgba(38, 34, 28, 0.055);
+  transform: translateY(-6px) rotate(-0.18deg);
+}
+
+.mode-deck-preview {
+  width: min(72%, 250px);
+  aspect-ratio: 4 / 3.9;
+  margin: 12px auto 42px;
+}
+
+.mode-deck-preview i {
+  inset: 0 14%;
+  border-radius: 17px;
+  box-shadow: 0 20px 40px rgba(28, 32, 38, 0.15), 0 2px 7px rgba(28, 32, 38, 0.08);
+}
+
+.mode-card-copy {
+  margin-top: auto;
+  gap: 9px;
+}
+
+.mode-card-copy > strong {
+  font-size: clamp(34px, 3.6vw, 44px);
+  letter-spacing: -0.04em;
+}
+
+.mode-card-copy > span {
+  color: rgba(64, 72, 84, 0.7);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* Deck intro */
+.back-button {
+  margin-bottom: 28px;
+}
+
+.intro-layout {
+  min-height: 610px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(166, 98, 73, 0.055), transparent 27%),
+    rgba(252, 250, 244, 0.64);
+  border-color: rgba(23, 35, 58, 0.11);
+  border-radius: 27px;
+  box-shadow: 0 28px 72px rgba(38, 34, 28, 0.095), 0 2px 8px rgba(38, 34, 28, 0.045);
+}
+
+.intro-visual--closed .intro-back-card {
+  border-color: rgba(19, 31, 52, 0.24);
+  border-radius: 20px;
+  box-shadow: 0 25px 55px rgba(26, 31, 39, 0.16), 0 2px 8px rgba(26, 31, 39, 0.08);
+}
+
+.intro-back-card::after {
+  inset: 7px;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.intro-back-mark {
+  margin-block: auto;
+  font-size: 54px;
+  opacity: 0.92;
+}
+
+.intro-copy h2 {
+  font-size: clamp(43px, 5vw, 65px);
+}
+
+.intro-description {
+  margin-top: 22px;
+  color: rgba(65, 72, 84, 0.74);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.intro-copy .button {
+  margin-top: 35px;
+}
+
+/* Play chrome */
+.play-header {
+  margin-bottom: 28px;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.play-progress {
+  color: rgba(65, 72, 84, 0.7);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.question-paper {
+  min-height: 570px;
+  background:
+    radial-gradient(circle at 78% 15%, rgba(166, 98, 73, 0.065), transparent 24%),
+    linear-gradient(155deg, #fefcf7, #f8f3e9);
+  border-color: rgba(23, 35, 58, 0.12);
+  border-radius: 27px;
+  box-shadow: 0 32px 82px rgba(38, 34, 28, 0.105), 0 3px 10px rgba(38, 34, 28, 0.05);
+}
+
+.question-paper::after,
+.image-paper::after {
+  inset: 7px;
+  border-color: rgba(23, 35, 58, 0.075);
+  border-radius: 20px;
+}
+
+.question-paper h3 {
+  max-width: 820px;
+  margin: 0 auto;
+  font-size: clamp(35px, 5vw, 58px);
+  letter-spacing: -0.042em;
+  line-height: 1.48;
+}
+
+.question-actions,
+.image-actions {
+  margin-top: 22px;
+}
+
+.play-finish,
+.end-conversation {
+  color: rgba(49, 58, 73, 0.68);
+  text-decoration: none;
+}
+
+.play-finish:hover,
+.end-conversation:hover {
+  color: var(--ink);
+}
+
+/* Image table */
+.table-copy {
+  margin-bottom: 30px;
+}
+
+.table-copy h2 {
+  font-size: clamp(34px, 4.5vw, 51px);
+}
+
+.card-table-cloth {
+  padding: clamp(32px, 5vw, 58px);
+  background:
+    radial-gradient(circle at 48% 34%, rgba(255, 255, 255, 0.45), transparent 46%),
+    repeating-linear-gradient(88deg, rgba(44, 47, 43, 0.015) 0 1px, transparent 1px 8px),
+    linear-gradient(145deg, #ded5c6, #d8cfbf);
+  border-color: rgba(36, 42, 49, 0.13);
+  border-radius: 28px;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.62),
+    inset 0 0 0 7px rgba(255, 255, 255, 0.09),
+    0 28px 66px rgba(38, 34, 28, 0.11);
+}
+
+.card-table {
+  gap: clamp(12px, 1.7vw, 21px);
+}
+
+.table-card {
+  border-radius: clamp(13px, 1.45vw, 18px);
+  box-shadow: 0 16px 32px rgba(30, 35, 42, 0.17), 0 2px 7px rgba(30, 35, 42, 0.1);
+}
+
+.table-card:hover,
+.table-card:focus-visible {
+  box-shadow: 0 27px 50px rgba(30, 35, 42, 0.23), 0 4px 10px rgba(30, 35, 42, 0.11);
+}
+
+.table-card-inner {
+  padding: clamp(11px, 1.35vw, 18px);
+  background:
+    radial-gradient(circle at 50% 44%, transparent 0 21%, rgba(255, 255, 255, 0.24) 21.5% 22%, transparent 22.5%),
+    repeating-linear-gradient(45deg, transparent 0 14px, rgba(255, 255, 255, 0.035) 14px 15px),
+    linear-gradient(150deg, #7c929d, #637c89 56%, #5c7481);
+  border-color: rgba(23, 35, 58, 0.2);
+}
+
+.table-card-inner::after {
+  inset: 6px;
+  border-color: rgba(255, 255, 255, 0.17);
+}
+
+.table-card-motif {
+  width: 36%;
+  border-color: rgba(255, 255, 255, 0.48);
+  box-shadow:
+    0 0 0 7px rgba(255, 255, 255, 0.045),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+}
+
+.table-card-number {
+  right: clamp(11px, 1.35vw, 18px);
+  bottom: clamp(10px, 1.35vw, 17px);
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(11px, 1.15vw, 15px);
+}
+
+/* Image is the entire interpretation surface. */
+.image-paper {
+  padding: clamp(17px, 3vw, 30px);
+  background: rgba(252, 250, 244, 0.76);
+  border-color: rgba(23, 35, 58, 0.11);
+  border-radius: 27px;
+  box-shadow: 0 32px 82px rgba(38, 34, 28, 0.105), 0 3px 10px rgba(38, 34, 28, 0.05);
+}
+
+.reveal-image-frame {
+  width: min(100%, 640px);
+}
+
+.reveal-image-frame img {
+  border-color: rgba(23, 35, 58, 0.12);
+  border-radius: 17px;
+  box-shadow: 0 18px 42px rgba(38, 34, 28, 0.1);
+}
+
+.image-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.image-actions > :last-child {
+  min-width: 218px;
+  justify-self: auto;
+}
+
+/* Closing */
+.closing-card {
+  min-height: 550px;
+  background:
+    radial-gradient(circle at 50% 17%, rgba(166, 98, 73, 0.08), transparent 27%),
+    linear-gradient(155deg, #fefcf7, #f7f2e8);
+  border-color: rgba(23, 35, 58, 0.11);
+  border-radius: 27px;
+  box-shadow: 0 32px 82px rgba(38, 34, 28, 0.105), 0 3px 10px rgba(38, 34, 28, 0.05);
+}
+
+.closing-card::before {
+  inset: 7px;
+  border-color: rgba(23, 35, 58, 0.075);
+  border-radius: 20px;
+}
+
+.closing-mark {
+  width: 48px;
+  margin-bottom: 28px;
+  background: #a66249;
+}
+
+.closing-card h2 {
+  max-width: 660px;
+  font-size: clamp(38px, 5.6vw, 63px);
+  line-height: 1.3;
+}
+
+.closing-copy {
+  margin-top: 22px;
+  color: rgba(65, 72, 84, 0.7);
+}
+
+@media (max-width: 768px) {
+  .screen {
+    padding-block: 52px 70px;
+  }
+
+  .mode-card {
+    min-height: 420px;
+  }
+
+  .mode-deck-preview {
+    width: min(66%, 238px);
+    margin-block: 4px 34px;
+  }
+
+  .intro-layout {
+    min-height: 0;
+    gap: 34px;
+  }
+
+  .intro-copy .button {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header,
+  main {
+    width: min(calc(100% - 24px), var(--content));
+  }
+
+  .site-header {
+    min-height: 74px;
+  }
+
+  .screen {
+    padding-block: 42px 58px;
+  }
+
+  .opening {
+    row-gap: 58px;
+  }
+
+  .opening-lead {
+    margin-top: 26px;
+  }
+
+  .opening-cta {
+    margin-top: 30px;
+  }
+
+  .talk-rules {
+    padding-top: 26px;
+  }
+
+  .deck-select-heading {
+    margin-bottom: 30px;
+  }
+
+  .mode-card {
+    min-height: 388px;
+    padding: 26px;
+    border-radius: 24px;
+  }
+
+  .mode-deck-preview {
+    width: min(64%, 218px);
+    margin-bottom: 28px;
+  }
+
+  .mode-card-copy > strong {
+    font-size: 33px;
+  }
+
+  .intro-layout {
+    padding: 22px 18px 34px;
+    border-radius: 24px;
+  }
+
+  .intro-visual {
+    min-height: 330px;
+  }
+
+  .intro-copy h2 {
+    font-size: 40px;
+  }
+
+  .intro-description {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .play-header {
+    margin-bottom: 20px;
+    grid-template-columns: 1fr auto;
+  }
+
+  .play-progress {
+    font-size: 13px;
+  }
+
+  .question-paper {
+    min-height: 500px;
+    padding: 42px 23px;
+    border-radius: 23px;
+  }
+
+  .question-paper h3 {
+    font-size: clamp(29px, 8.2vw, 39px);
+    line-height: 1.5;
+  }
+
+  .question-actions {
+    border-color: rgba(23, 35, 58, 0.11);
+    background: rgba(241, 236, 226, 0.9);
+  }
+
+  .table-copy {
+    margin-bottom: 24px;
+  }
+
+  .table-copy h2 {
+    font-size: clamp(29px, 8vw, 38px);
+  }
+
+  .card-table-cloth {
+    margin-inline: -3px;
+    padding: 19px 11px 24px;
+    border-radius: 22px;
+  }
+
+  .card-table {
+    gap: 8px 6px;
+  }
+
+  .table-card {
+    border-radius: 13px;
+  }
+
+  .table-card-number {
+    right: 9px;
+    bottom: 8px;
+    font-size: 11px;
+  }
+
+  .image-paper {
+    padding: 13px;
+    border-radius: 22px;
+  }
+
+  .reveal-image-frame img {
+    border-radius: 13px;
+  }
+
+  .image-actions {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    backdrop-filter: none;
+  }
+
+  .image-actions > :last-child {
+    width: 100%;
+  }
+
+  .closing-card {
+    min-height: 520px;
+    padding: 48px 24px;
+    border-radius: 23px;
+  }
+
+  .closing-card h2 {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 390px) {
+  .mode-card {
+    min-height: 372px;
+    padding: 24px;
+  }
+
+  .mode-deck-preview {
+    width: min(62%, 205px);
+  }
+
+  .question-actions .button {
+    padding-inline: 12px;
+  }
+}

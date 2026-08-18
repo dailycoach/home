@@ -148,7 +148,7 @@ function selectMode(mode) {
   if (mode === "questions") {
     introCode.textContent = "QUESTION DECK · 120";
     introTitle.textContent = "대화 질문 120";
-    introDescription.textContent = "여덟 갈래에서 만든 120개의 질문을 하나로 섞어 한 장씩 이어갑니다.";
+    introDescription.textContent = "질문을 한 장씩 보며 대화를 이어갑니다.";
     introCount.textContent = "120 CARDS";
     introMethod.textContent = "ONE BY ONE";
     introNote.textContent = "질문은 한 번에 한 장만 보입니다. PASS하거나 다음 질문으로 바로 넘어갈 수 있습니다.";
@@ -156,7 +156,7 @@ function selectMode(mode) {
   } else {
     introCode.textContent = "IMAGE DECK · 60";
     introTitle.textContent = "그림 카드 60";
-    introDescription.textContent = "60개의 그림을 섞고, 15장의 뒷면 중 한 장을 직접 골라 뒤집습니다.";
+    introDescription.textContent = "15장의 뒷면 중 한 장을 골라 그림을 봅니다.";
     introCount.textContent = "60 CARDS";
     introMethod.textContent = "PICK & FLIP";
     introNote.textContent = "그림에는 질문이 없습니다. 이미지에서 자유롭게 떠오르는 이야기를 나눠보세요.";
@@ -534,4 +534,3 @@ if (TEXT_CARDS.length !== 120 || IMAGE_DECK.length !== 60 || TALKCARD_IMAGE_HAND
 } else {
   showScreen("opening", { focus: false });
 }
-
