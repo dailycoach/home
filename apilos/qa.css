@@ -1,0 +1,30 @@
+/* APILOS FINAL QA HARDENING */
+html,body{max-width:100%;overflow-x:clip}
+.portal-shell,main,section,article,nav,header,footer,div{min-width:0}
+img{height:auto}
+a,button{-webkit-tap-highlight-color:transparent}
+.portal-menu-button,.portal-contact,.fusion-actions a,.knowledge-actions a,.apilos-404-actions a{touch-action:manipulation}
+@media(max-width:840px){
+  .portal-header{padding-left:max(4vw,env(safe-area-inset-left));padding-right:max(4vw,env(safe-area-inset-right))}
+  .portal-mobile-nav{max-height:calc(100svh - 76px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(18px,env(safe-area-inset-bottom))}
+  .portal-footer{padding-bottom:max(32px,calc(20px + env(safe-area-inset-bottom)))}
+}
+@media(max-width:560px){
+  .fusion-actions,.knowledge-actions,.apilos-404-actions{align-items:stretch}
+  .fusion-actions a,.knowledge-actions a,.apilos-404-actions a{min-height:44px}
+  .journal-status,.archive-live-status{overflow-wrap:anywhere}
+}
+@media(max-width:950px) and (orientation:landscape) and (max-height:560px){
+  .portal-header{min-height:64px!important}
+  .portal-header .portal-mark{width:38px!important;height:38px!important;flex-basis:38px!important}
+  .fusion-hero,.center-hero,.archive-hero,.knowledge-hero,.book-detail-hero,.journal-hero{grid-template-columns:1fr 1fr!important;min-height:calc(100svh - 64px)!important}
+  .fusion-copy,.center-hero-copy,.archive-hero-copy,.knowledge-hero-copy,.book-detail-copy,.journal-copy{padding:44px 5vw!important}
+  .fusion-copy h1,.center-hero h1,.archive-hero h1,.knowledge-hero h1,.book-detail-copy h1,.journal-copy h1{font-size:clamp(38px,7.2vw,58px)!important;line-height:1.03!important}
+  .fusion-copy>p,.center-hero p,.archive-hero p,.knowledge-hero p,.book-detail-copy p,.journal-copy p{margin-top:18px!important;font-size:12px!important;line-height:1.65!important}
+  .fusion-actions,.center-hero-actions,.knowledge-actions,.journal-live-row,.archive-hero-meta,.knowledge-cycle,.book-detail-meta{margin-top:22px!important}
+  .fusion-visual,.center-hero-visual,.archive-hero-visual,.knowledge-hero-cover,.book-detail-cover,.journal-visual{min-height:calc(100svh - 64px)!important}
+  .fusion-manifesto,.ecosystem-home,.fusion-spectrum,.fusion-field,.center-belief,.center-history,.center-founder,.center-proof,.ecosystem-layer,.archive-index,.archive-highlights,.archive-sources,.archive-live,.knowledge-feature,.knowledge-next,.knowledge-map,.book-detail-body,.journal-feed{padding-top:72px!important;padding-bottom:76px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
