@@ -34,7 +34,6 @@ jobs:
         run: node scripts/check-apilos-site.mjs
 
   live-qa:
-    if: github.event_name == 'workflow_dispatch'
     needs: static-qa
     runs-on: ubuntu-latest
     timeout-minutes: 10
