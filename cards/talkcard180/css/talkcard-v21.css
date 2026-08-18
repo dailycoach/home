@@ -1000,6 +1000,8 @@ main {
 /* Quiet copy: preserved in source where useful, absent from the participant view. */
 .header-count,
 .product-stats,
+.opening-copy > .eyebrow,
+.deck-select-heading > .eyebrow,
 .deck-select-heading > p:last-child,
 .mode-card-top,
 .mode-card-action,
@@ -1017,6 +1019,7 @@ main {
 .table-card-bottomline,
 .image-actions [data-action="pass-image"],
 .closing-card > .eyebrow,
+.closing-mark,
 .closing-unit,
 .closing-question,
 .site-footer {
