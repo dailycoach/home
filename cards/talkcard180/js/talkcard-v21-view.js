@@ -104,6 +104,10 @@ function announce(message) {
 
 function showScreen(name, { focus = true } = {}) {
   state.screen = name;
+  document.body.dataset.screen = name;
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content", name === "opening" ? "#101523" : "#f3ede3");
   screens.forEach((screen) => {
     screen.hidden = screen.dataset.screen !== name;
   });

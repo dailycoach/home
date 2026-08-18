@@ -1,0 +1,807 @@
+/**
+ * TALK CARD 180 v2.1.7 — STORY DECK
+ * A cinematic first impression: old storybook, collector's deck, quiet ritual.
+ */
+
+@font-face {
+  font-family: "Gowun Story";
+  src: url("/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --story-night: #101523;
+  --story-night-soft: #171b2c;
+  --story-indigo: #27243d;
+  --story-wine: #3a2233;
+  --story-gold: #c7a66a;
+  --story-gold-light: #ead8a8;
+  --story-ivory: #f6efe2;
+  --font-story: "Gowun Story", "Noto Serif KR", "Apple SD Gothic Neo", serif;
+  --font-fantasy: "Cinzel Decorative", "Times New Roman", serif;
+}
+
+body {
+  transition: background-color 360ms ease, color 360ms ease;
+}
+
+body[data-screen="opening"] {
+  color: var(--story-ivory);
+  background:
+    radial-gradient(circle at 76% 38%, rgba(91, 69, 105, 0.34), transparent 29%),
+    radial-gradient(circle at 16% 72%, rgba(91, 45, 63, 0.24), transparent 31%),
+    linear-gradient(145deg, #0d1220 0%, #151929 50%, #111523 100%);
+}
+
+body[data-screen="opening"]::before {
+  opacity: 0.28;
+  background-image:
+    radial-gradient(circle, rgba(238, 219, 171, 0.42) 0 0.5px, transparent 0.8px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.2) 0 0.45px, transparent 0.8px),
+    linear-gradient(118deg, transparent 34%, rgba(255, 255, 255, 0.018) 49%, transparent 64%);
+  background-position: 0 0, 7px 9px, 0 0;
+  background-size: 17px 19px, 23px 29px, 100% 100%;
+  mix-blend-mode: screen;
+}
+
+body[data-screen="opening"] .paper-glow {
+  opacity: 0.12;
+  filter: blur(46px) saturate(0.72);
+  mix-blend-mode: screen;
+}
+
+body[data-screen="opening"] .paper-glow--one {
+  top: 4%;
+  right: -8%;
+}
+
+body[data-screen="opening"] .paper-glow--two {
+  bottom: -18%;
+  left: -8%;
+}
+
+body[data-screen="opening"] .site-header {
+  position: relative;
+  z-index: 20;
+  color: var(--story-ivory);
+  border-bottom-color: rgba(199, 166, 106, 0.25);
+}
+
+body[data-screen="opening"] .brand-mark {
+  color: var(--story-gold-light);
+  background: rgba(12, 16, 27, 0.52);
+  border-color: rgba(199, 166, 106, 0.72);
+  box-shadow: inset 0 0 18px rgba(199, 166, 106, 0.08);
+}
+
+body[data-screen="opening"] .brand-button strong {
+  color: var(--story-ivory);
+  font-family: var(--font-fantasy);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+body[data-screen="opening"] .brand-button small {
+  color: rgba(233, 216, 177, 0.62);
+}
+
+/* Give every major card screen a warmer, authored voice without slowing body copy. */
+.section-heading h2,
+.mode-card-copy > strong,
+.intro-copy h2,
+.question-paper h3,
+.table-copy h2,
+.closing-card h2 {
+  font-family: var(--font-story);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.button {
+  font-family: var(--font-story);
+}
+
+/* Opening hero */
+.opening {
+  min-height: calc(100svh - 80px);
+  padding: 0;
+  grid-template-columns: minmax(310px, 0.76fr) minmax(520px, 1.24fr);
+  grid-template-rows: minmax(690px, calc(100svh - 80px)) auto;
+  column-gap: clamp(24px, 3.4vw, 58px);
+  row-gap: 0;
+  align-items: center;
+}
+
+.opening-copy {
+  position: relative;
+  z-index: 8;
+  padding: 30px 0 36px clamp(2px, 1.5vw, 22px);
+}
+
+.opening-invitation {
+  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(233, 216, 177, 0.66);
+  font-family: var(--font-fantasy);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.opening-invitation span {
+  width: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--story-gold));
+}
+
+.opening-invitation span:last-child {
+  background: linear-gradient(90deg, var(--story-gold), transparent);
+}
+
+.opening-copy h1 {
+  position: relative;
+  margin: 0;
+  color: var(--story-ivory);
+  font-family: var(--font-fantasy);
+  font-size: clamp(57px, 6.25vw, 90px);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 0.93;
+  text-shadow: 0 3px 30px rgba(0, 0, 0, 0.24);
+}
+
+.opening-copy h1 > span {
+  display: block;
+}
+
+.opening-copy h1 em {
+  display: inline-block;
+  margin: 16px 0 0 4px;
+  color: var(--story-gold-light);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 0.42em;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  line-height: 1;
+}
+
+.opening-copy h1 em::before,
+.opening-copy h1 em::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  margin: 0 11px 0 3px;
+  display: inline-block;
+  vertical-align: middle;
+  background: rgba(199, 166, 106, 0.58);
+}
+
+.opening-copy h1 em::after {
+  margin: 0 0 0 5px;
+}
+
+.opening-lead {
+  margin: 30px 0 0;
+  color: rgba(246, 239, 226, 0.82);
+  font-family: var(--font-story);
+  font-size: clamp(19px, 1.75vw, 25px);
+  letter-spacing: -0.035em;
+  line-height: 1.62;
+  word-break: keep-all;
+}
+
+.opening-lead strong {
+  color: var(--story-ivory);
+  font-weight: 700;
+}
+
+.opening-product-copy {
+  margin: 19px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(233, 216, 177, 0.65);
+  font-family: var(--font-fantasy);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+}
+
+.opening-product-copy i {
+  width: 3px;
+  height: 3px;
+  background: var(--story-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 9px rgba(199, 166, 106, 0.65);
+}
+
+.opening-cta {
+  position: relative;
+  min-width: 216px;
+  margin-top: 32px;
+  overflow: hidden;
+  color: #181726;
+  background: linear-gradient(135deg, #ead9ad, #bd985d 74%, #a78049);
+  border: 1px solid rgba(244, 226, 180, 0.7);
+  border-radius: 2px;
+  box-shadow: 0 15px 34px rgba(0, 0, 0, 0.24), inset 0 1px rgba(255, 255, 255, 0.38);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.opening-cta::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(71, 48, 28, 0.28);
+  pointer-events: none;
+}
+
+.opening-cta:hover {
+  color: #13131e;
+  background: linear-gradient(135deg, #f3e6c2, #cba76a 72%, #af8950);
+  border-color: rgba(255, 239, 198, 0.88);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28), 0 0 24px rgba(199, 166, 106, 0.14);
+  transform: translateY(-2px);
+}
+
+.opening-cta > span {
+  color: #5e452b;
+  font-size: 11px;
+}
+
+/* The product itself: seven art-backed cards on a ceremonial table. */
+.opening-deck--story {
+  position: relative;
+  z-index: 4;
+  width: min(100%, 690px);
+  height: min(720px, calc(100svh - 104px));
+  min-height: 610px;
+  aspect-ratio: auto;
+  margin-inline: auto;
+  perspective: 1200px;
+  isolation: isolate;
+}
+
+.opening-deck--story::before {
+  content: "";
+  position: absolute;
+  z-index: -3;
+  inset: 5% 1% 7%;
+  background:
+    radial-gradient(ellipse at center, rgba(192, 160, 101, 0.14), transparent 36%),
+    radial-gradient(ellipse at center, rgba(71, 57, 92, 0.3), transparent 68%);
+  filter: blur(2px);
+}
+
+.opening-deck--story::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 7%;
+  bottom: 7%;
+  left: 7%;
+  height: 15%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.58), transparent 68%);
+  filter: blur(15px);
+  transform: rotate(-2deg);
+}
+
+.opening-orbit {
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(199, 166, 106, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.opening-orbit::before,
+.opening-orbit::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--story-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(231, 206, 145, 0.78);
+}
+
+.opening-orbit::before {
+  top: 12%;
+  right: 16%;
+}
+
+.opening-orbit::after {
+  bottom: 12%;
+  left: 17%;
+}
+
+.opening-orbit--outer {
+  width: 90%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -49%) rotate(-13deg);
+}
+
+.opening-orbit--inner {
+  width: 67%;
+  aspect-ratio: 1;
+  border-color: rgba(199, 166, 106, 0.11);
+  transform: translate(-50%, -49%) rotate(26deg);
+}
+
+.opening-deck--story .opening-card {
+  --x: 0%;
+  --y: 0%;
+  --r: 0deg;
+  position: absolute;
+  inset: auto;
+  top: 49%;
+  left: 50%;
+  width: clamp(190px, 18.6vw, 250px);
+  aspect-ratio: 5 / 7;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ded0bb;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid rgba(226, 199, 137, 0.82);
+  border-radius: 9px;
+  box-shadow:
+    0 34px 58px rgba(0, 0, 0, 0.32),
+    0 3px 10px rgba(0, 0, 0, 0.26),
+    inset 0 0 0 1px rgba(255, 247, 220, 0.2);
+  transform: translate(-50%, -50%) translate(var(--x), var(--y)) rotate(var(--r));
+  transform-origin: 50% 116%;
+  animation: story-card-arrive 820ms cubic-bezier(0.2, 0.78, 0.24, 1) both;
+}
+
+.opening-deck--story .opening-card::after {
+  inset: 7px;
+  border: 1px solid rgba(226, 199, 137, 0.54);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(22, 22, 31, 0.16);
+}
+
+.opening-deck--story .opening-card::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(118deg, transparent 22%, rgba(255, 246, 218, 0.13) 47%, transparent 60%),
+    linear-gradient(to bottom, rgba(15, 17, 27, 0.02), rgba(15, 17, 27, 0.2));
+  pointer-events: none;
+}
+
+.opening-card--fan-1 {
+  --x: -127%;
+  --y: 13%;
+  --r: -21deg;
+  z-index: 1;
+  background-image: url("../assets/images/card-backs/back-ground.webp");
+  animation-delay: 40ms !important;
+}
+
+.opening-card--fan-2 {
+  --x: -87%;
+  --y: 1%;
+  --r: -14deg;
+  z-index: 2;
+  background-image: url("../assets/images/card-backs/back-step.webp");
+  animation-delay: 100ms !important;
+}
+
+.opening-card--fan-3 {
+  --x: -45%;
+  --y: -8%;
+  --r: -7deg;
+  z-index: 3;
+  background-image: url("../assets/images/card-backs/back-dialogue.webp");
+  animation-delay: 160ms !important;
+}
+
+.opening-card--fan-5 {
+  --x: 45%;
+  --y: -8%;
+  --r: 7deg;
+  z-index: 3;
+  background-image: url("../assets/images/card-backs/back-possibility.webp");
+  animation-delay: 220ms !important;
+}
+
+.opening-card--fan-6 {
+  --x: 87%;
+  --y: 1%;
+  --r: 14deg;
+  z-index: 2;
+  background-image: url("../assets/images/card-backs/back-symbol.webp");
+  animation-delay: 280ms !important;
+}
+
+.opening-card--fan-7 {
+  --x: 127%;
+  --y: 13%;
+  --r: 21deg;
+  z-index: 1;
+  background-image: url("../assets/images/card-backs/back-ground.webp");
+  animation-delay: 340ms !important;
+}
+
+.opening-deck--story .opening-card--hero {
+  --x: 0%;
+  --y: -15%;
+  --r: 0.5deg;
+  z-index: 6;
+  width: clamp(208px, 20.5vw, 276px);
+  background-image: url("../assets/images/card-backs/back-self.webp");
+  box-shadow:
+    0 42px 76px rgba(0, 0, 0, 0.42),
+    0 0 34px rgba(196, 162, 99, 0.11),
+    inset 0 0 0 1px rgba(255, 247, 220, 0.26);
+  animation-delay: 430ms !important;
+}
+
+.opening-card-title,
+.opening-card-note,
+.opening-card-symbol,
+.opening-card--hero .card-seal {
+  position: absolute;
+  z-index: 3;
+}
+
+.opening-card-title {
+  top: 25px;
+  left: 50%;
+  color: #f7ead0;
+  font-family: var(--font-fantasy);
+  font-size: clamp(9px, 0.85vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-shadow: 0 2px 13px rgba(18, 18, 27, 0.68);
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.opening-card-symbol {
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: var(--story-gold-light);
+  background: rgba(21, 24, 37, 0.5);
+  border: 1px solid rgba(235, 211, 158, 0.72);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(30, 29, 42, 0.17), 0 8px 22px rgba(0, 0, 0, 0.24);
+  font-size: 15px;
+  transform: translate(-50%, -50%);
+}
+
+.opening-card--hero .card-seal {
+  right: 20px;
+  bottom: 22px;
+  width: 51px;
+  display: grid;
+  color: #f7e8c6;
+  background: rgba(57, 34, 50, 0.91);
+  border: 1px solid rgba(227, 197, 134, 0.76);
+  border-radius: 50%;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), inset 0 0 0 3px rgba(227, 197, 134, 0.13);
+  font-family: var(--font-fantasy);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.opening-card-note {
+  bottom: 35px;
+  left: 22px;
+  color: rgba(247, 234, 208, 0.76);
+  font-family: var(--font-fantasy);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-shadow: 0 2px 10px rgba(18, 18, 27, 0.62);
+}
+
+.opening-deck-whisper {
+  position: absolute;
+  z-index: 8;
+  right: 0;
+  bottom: 2.5%;
+  left: 0;
+  margin: 0;
+  color: rgba(229, 207, 160, 0.62);
+  font-family: var(--font-fantasy);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-align: center;
+}
+
+@keyframes story-card-arrive {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -42%) translate(0, 12%) rotate(0deg) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) rotate(var(--r)) scale(1);
+  }
+}
+
+/* Rules stay below the first viewport: present, quiet, never competing with the deck. */
+body[data-screen="opening"] .talk-rules {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 46px clamp(8px, 2vw, 24px) 58px;
+  color: var(--story-ivory);
+  border-top-color: rgba(199, 166, 106, 0.22);
+}
+
+body[data-screen="opening"] .talk-rules h2 {
+  color: rgba(246, 239, 226, 0.78);
+  font-family: var(--font-story);
+  font-size: 15px;
+}
+
+body[data-screen="opening"] .talk-rule-list article {
+  border-left-color: rgba(199, 166, 106, 0.18);
+}
+
+body[data-screen="opening"] .talk-rule-list strong {
+  color: var(--story-gold-light);
+  font-family: var(--font-fantasy);
+  font-size: 9px;
+}
+
+body[data-screen="opening"] .talk-rule-list p {
+  color: rgba(246, 239, 226, 0.58);
+}
+
+@media (max-width: 1040px) {
+  .opening {
+    grid-template-columns: minmax(280px, 0.72fr) minmax(450px, 1.28fr);
+    column-gap: 10px;
+  }
+
+  .opening-deck--story .opening-card {
+    width: clamp(176px, 19vw, 218px);
+  }
+
+  .opening-deck--story .opening-card--hero {
+    width: clamp(196px, 21vw, 244px);
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-screen="opening"] .site-header {
+    min-height: 72px;
+  }
+
+  .opening {
+    min-height: auto;
+    padding-top: 26px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: 0;
+  }
+
+  .opening-copy {
+    padding: 12px 0 0;
+    text-align: center;
+  }
+
+  .opening-invitation,
+  .opening-product-copy {
+    justify-content: center;
+  }
+
+  .opening-copy h1 {
+    font-size: clamp(54px, 13vw, 76px);
+  }
+
+  .opening-copy h1 em {
+    margin-top: 13px;
+  }
+
+  .opening-lead {
+    margin-top: 22px;
+    font-size: clamp(18px, 4.4vw, 22px);
+  }
+
+  .opening-cta {
+    min-width: 210px;
+    margin-top: 26px;
+  }
+
+  .opening-deck--story {
+    width: min(100%, 520px);
+    height: 455px;
+    min-height: 0;
+    margin-top: 8px;
+  }
+
+  .opening-deck--story .opening-card {
+    top: 49%;
+    width: clamp(142px, 37vw, 174px);
+  }
+
+  .opening-deck--story .opening-card--hero {
+    width: clamp(170px, 43vw, 202px);
+  }
+
+  .opening-card--fan-1 {
+    --x: -78%;
+    --y: 12%;
+    --r: -17deg;
+  }
+
+  .opening-card--fan-2 {
+    --x: -53%;
+    --y: 1%;
+    --r: -12deg;
+  }
+
+  .opening-card--fan-3 {
+    --x: -27%;
+    --y: -7%;
+    --r: -6deg;
+  }
+
+  .opening-card--fan-5 {
+    --x: 27%;
+    --y: -7%;
+    --r: 6deg;
+  }
+
+  .opening-card--fan-6 {
+    --x: 53%;
+    --y: 1%;
+    --r: 12deg;
+  }
+
+  .opening-card--fan-7 {
+    --x: 78%;
+    --y: 12%;
+    --r: 17deg;
+  }
+
+  .opening-orbit--outer {
+    width: min(100%, 440px);
+  }
+
+  .opening-orbit--inner {
+    width: min(72%, 315px);
+  }
+
+  .opening-deck-whisper {
+    bottom: 1%;
+  }
+
+  body[data-screen="opening"] .talk-rules {
+    margin-top: 18px;
+    padding-block: 36px 48px;
+  }
+}
+
+@media (max-width: 430px) {
+  body[data-screen="opening"] .site-header,
+  body[data-screen="opening"] main {
+    width: min(calc(100% - 24px), var(--content));
+  }
+
+  .opening {
+    padding-top: 18px;
+  }
+
+  .opening-invitation {
+    margin-bottom: 18px;
+    font-size: 8px;
+  }
+
+  .opening-copy h1 {
+    font-size: clamp(48px, 13.2vw, 57px);
+    line-height: 0.95;
+  }
+
+  .opening-copy h1 em::before,
+  .opening-copy h1 em::after {
+    width: 20px;
+    margin-right: 8px;
+  }
+
+  .opening-copy h1 em::after {
+    margin-right: 0;
+    margin-left: 3px;
+  }
+
+  .opening-lead {
+    margin-top: 18px;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .opening-product-copy {
+    margin-top: 15px;
+    font-size: 7px;
+  }
+
+  .opening-cta {
+    min-width: 198px;
+    min-height: 52px;
+    margin-top: 22px;
+  }
+
+  .opening-deck--story {
+    height: 360px;
+    margin-top: 8px;
+  }
+
+  .opening-deck--story .opening-card {
+    width: 138px;
+  }
+
+  .opening-deck--story .opening-card--hero {
+    --y: -13%;
+    width: 166px;
+  }
+
+  .opening-card-title {
+    top: 18px;
+    font-size: 8px;
+  }
+
+  .opening-card-symbol {
+    width: 36px;
+    font-size: 12px;
+  }
+
+  .opening-card--hero .card-seal {
+    right: 15px;
+    bottom: 17px;
+    width: 40px;
+    font-size: 9px;
+  }
+
+  .opening-card-note {
+    bottom: 27px;
+    left: 16px;
+    font-size: 5px;
+  }
+
+  .opening-deck-whisper {
+    bottom: -1%;
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 390px) {
+  .opening-deck--story {
+    height: 344px;
+  }
+
+  .opening-deck--story .opening-card {
+    width: 130px;
+  }
+
+  .opening-deck--story .opening-card--hero {
+    width: 158px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-deck--story .opening-card {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms !important;
+  }
+}
