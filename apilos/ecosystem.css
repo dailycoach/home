@@ -1,0 +1,74 @@
+/* APILOS PROFESSIONAL ECOSYSTEM */
+.ecosystem-home{padding:140px 6vw 150px;background:#f7f4ee;color:#15151a}
+.ecosystem-home-head,.ecosystem-page-head{display:grid;grid-template-columns:.72fr 1.28fr;gap:8vw;align-items:end;margin-bottom:58px}
+.ecosystem-home-head>span,.ecosystem-page-head>span,.ecosystem-layer-kicker{font-size:10px;font-weight:800;letter-spacing:.18em;color:#776f68}
+.ecosystem-home-head h2,.ecosystem-page-head h1{margin:0;font-size:clamp(48px,5.4vw,82px);letter-spacing:-.085em;line-height:1.04}
+.ecosystem-home-head h2 em,.ecosystem-page-head h1 em{font-style:normal;color:#704bff}
+.ecosystem-islands{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:118px;gap:14px}
+.ecosystem-island{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:28px;border-radius:30px;overflow:hidden;color:#15151a;transition:transform .25s ease,box-shadow .25s ease}
+.ecosystem-island::after{position:absolute;right:-13%;bottom:-42%;width:56%;aspect-ratio:1;content:"";border:1px solid rgba(20,20,25,.16);border-radius:50%}
+.ecosystem-island:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(30,22,50,.10)}
+.ecosystem-island small{font-size:9px;font-weight:800;letter-spacing:.15em;opacity:.62}
+.ecosystem-island strong{position:relative;z-index:1;font-size:clamp(25px,2.7vw,42px);letter-spacing:-.07em;line-height:1.08}
+.ecosystem-island:nth-child(1){grid-column:span 5;grid-row:span 2;background:#5570ff;color:#fff}
+.ecosystem-island:nth-child(2){grid-column:span 3;grid-row:span 2;background:#9ce3d5}
+.ecosystem-island:nth-child(3){grid-column:span 4;grid-row:span 2;background:#d9ef72}
+.ecosystem-island:nth-child(4){grid-column:span 4;grid-row:span 2;background:#cdb9ff}
+.ecosystem-island:nth-child(5){grid-column:span 3;grid-row:span 2;background:#ff927b}
+.ecosystem-island:nth-child(6){grid-column:span 5;grid-row:span 2;background:#b65bac;color:#fff}
+.ecosystem-home-cta{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding-bottom:7px;border-bottom:1px solid currentColor;color:#15151a;font-size:12px;font-weight:800}
+
+/* ecosystem page */
+.ecosystem-page{background:#f7f4ee}
+.ecosystem-page-hero{padding:120px 6vw 110px;background:linear-gradient(135deg,#fbfaf7,#eee8f7 62%,#f7eee7)}
+.ecosystem-page-head{margin:0}
+.ecosystem-page-head p{max-width:640px;margin:28px 0 0;color:#68615d;font-size:15px;line-height:1.8}
+.ecosystem-layer{padding:120px 6vw 130px}
+.ecosystem-layer.is-dark{background:#17171c;color:#fff}
+.ecosystem-layer.is-white{background:#fff;color:#15151a}
+.ecosystem-layer.is-paper{background:#f7f4ee;color:#15151a}
+.ecosystem-layer-heading{display:grid;grid-template-columns:.45fr 1.55fr;gap:7vw;align-items:start;margin-bottom:50px}
+.ecosystem-layer-heading h2{margin:0;font-size:clamp(40px,4.5vw,66px);letter-spacing:-.078em;line-height:1.06}
+.ecosystem-layer-heading p{max-width:620px;margin:20px 0 0;color:#77716c;font-size:13px;line-height:1.8}
+.is-dark .ecosystem-layer-heading p{color:#aaa5ae}
+.ecosystem-card-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.ecosystem-card{position:relative;min-height:270px;padding:28px;border-radius:28px;border:1px solid rgba(20,20,25,.12);background:#fff;overflow:hidden}
+.is-dark .ecosystem-card{border-color:rgba(255,255,255,.12);background:#24242b}
+.ecosystem-card:nth-child(1){grid-column:span 5}.ecosystem-card:nth-child(2){grid-column:span 7}.ecosystem-card:nth-child(3){grid-column:span 7}.ecosystem-card:nth-child(4){grid-column:span 5}
+.ecosystem-card .tag{display:inline-flex;padding:7px 10px;border-radius:999px;background:#eee9ff;color:#6745dc;font-size:9px;font-weight:800;letter-spacing:.12em}
+.is-dark .ecosystem-card .tag{background:rgba(217,239,114,.12);color:#d9ef72}
+.ecosystem-card h3{margin:34px 0 0;font-size:clamp(28px,3vw,44px);letter-spacing:-.072em;line-height:1.08}
+.ecosystem-card p{max-width:520px;margin:18px 0 0;color:#706a65;font-size:13px;line-height:1.75}
+.is-dark .ecosystem-card p{color:#b9b5bd}
+.ecosystem-card .meta{position:absolute;right:24px;bottom:22px;color:#aaa39c;font-size:9px;font-weight:800;letter-spacing:.12em}
+.ecosystem-network{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.network-node{min-height:210px;padding:24px;border-radius:24px;background:#fff;border:1px solid rgba(20,20,25,.10)}
+.network-node:nth-child(1){background:#edf0ff}.network-node:nth-child(2){background:#e9f8f4}.network-node:nth-child(3){background:#f3f7d8}.network-node:nth-child(4){background:#f2e9f6}.network-node:nth-child(5){background:#faebe6}
+.network-node span{font-size:9px;font-weight:800;letter-spacing:.14em;color:#827b74}
+.network-node h3{margin:48px 0 0;font-size:25px;letter-spacing:-.06em;line-height:1.12}
+.network-node p{margin:12px 0 0;color:#756e68;font-size:12px;line-height:1.6}
+.ecosystem-method{padding:100px 6vw 115px;background:linear-gradient(90deg,#6846f3,#9c4aa8 45%,#ef786e 100%);color:#fff}
+.ecosystem-method h2{margin:0;font-size:clamp(38px,4.2vw,64px);letter-spacing:-.075em;line-height:1.08}
+.method-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.method-pills span{padding:11px 15px;border:1px solid rgba(255,255,255,.45);border-radius:999px;font-size:11px;font-weight:800}
+.ecosystem-note{padding:42px 6vw;background:#111116;color:#bcb8c0;font-size:11px;line-height:1.7}
+
+@media(max-width:900px){
+  .ecosystem-home-head,.ecosystem-page-head,.ecosystem-layer-heading{grid-template-columns:1fr;gap:20px}
+  .ecosystem-islands{grid-template-columns:1fr 1fr;grid-auto-rows:220px}
+  .ecosystem-island:nth-child(n){grid-column:span 1;grid-row:span 1}
+  .ecosystem-card-grid{grid-template-columns:1fr 1fr}
+  .ecosystem-card:nth-child(n){grid-column:span 1}
+  .ecosystem-network{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .ecosystem-home{padding:95px 5vw 100px}
+  .ecosystem-home-head h2,.ecosystem-page-head h1{font-size:42px}
+  .ecosystem-islands{grid-template-columns:1fr;grid-auto-rows:180px;gap:10px}
+  .ecosystem-page-hero{padding:90px 5vw 80px}
+  .ecosystem-layer{padding:86px 5vw 94px}
+  .ecosystem-card-grid,.ecosystem-network{grid-template-columns:1fr}
+  .ecosystem-card{min-height:235px}
+  .ecosystem-layer-heading h2{font-size:38px}
+  .ecosystem-method{padding:78px 5vw 86px}
+}
