@@ -1,3 +1,4 @@
+:root{--ycc-logo:url('/apilos/assets/ycc-logo.webp')}
 /* APILOS FINAL QA HARDENING */
 html,body{max-width:100%;overflow-x:clip}
 .portal-shell,main,section,article,nav,header,footer,div{min-width:0}
