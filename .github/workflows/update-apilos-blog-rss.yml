@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/update-apilos-blog-rss.yml"
+      - "scripts/update-apilos-blog-rss.py"
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
