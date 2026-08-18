@@ -1,0 +1,45 @@
+name: Update APILOS Naver Blog RSS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-apilos-blog-rss.yml"
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apilos-blog-rss
+  cancel-in-progress: false
+
+jobs:
+  update-blog-rss:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch and parse Naver Blog RSS
+        run: python3 scripts/update-apilos-blog-rss.py
+
+      - name: Commit updated feed when changed
+        shell: bash
+        run: |
+          if git diff --quiet -- apilos/news/blog.json; then
+            echo "No RSS changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apilos/news/blog.json
+          git commit -m "Update APILOS blog RSS"
+          git pull --rebase origin main
+          git push origin HEAD:main
