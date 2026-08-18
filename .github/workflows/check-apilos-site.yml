@@ -10,6 +10,7 @@ on:
       - "robots.txt"
       - "sitemap.xml"
       - "scripts/check-apilos-site.mjs"
+      - "scripts/check-apilos-runtime.mjs"
       - "scripts/check-apilos-live.mjs"
       - ".github/workflows/check-apilos-site.yml"
   workflow_dispatch:
@@ -31,7 +32,9 @@ jobs:
         with:
           node-version: "20"
       - name: Run APILOS static QA
-        run: node scripts/check-apilos-site.mjs
+        run: |
+          node scripts/check-apilos-site.mjs
+          node scripts/check-apilos-runtime.mjs
 
   live-qa:
     needs: static-qa
