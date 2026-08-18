@@ -3,38 +3,153 @@
   "project": "GLOBAL FUTURE EDUCATION COUNSELLING & COACHING CENTER",
   "principle": "상담·코칭·교육을 방법론으로 사용하여 사람·가족·학교·전문가·학회·교회·사회공헌·연구를 연결한다.",
   "method_layer": ["상담", "코칭", "교육", "심리", "진로", "관계"],
+  "display_rule": "기관·사업의 직접운영, 협력, 위촉·전문활동, 과거 이력을 동일한 법적 관계로 표현하지 않는다. 상세페이지에서 관계 성격과 시점을 별도 표기한다.",
   "layers": [
     {
       "id": "core-professional-work",
       "label": "핵심 전문사업",
       "items": [
-        {"id": "academy", "name": "전문가 양성과정", "status": "core", "evidence": "user-confirmed + public-record", "current_relation_check": false},
-        {"id": "youth-family-school", "name": "청소년·가족·학교", "status": "core", "evidence": "user-confirmed + public-record", "current_relation_check": false},
-        {"id": "pastoral-christian", "name": "목회·기독교 코칭전문과정", "status": "core", "evidence": "user-confirmed + public-record", "current_relation_check": false},
-        {"id": "counselling-coaching-education", "name": "상담·코칭 교육 및 현장실천", "status": "core", "evidence": "user-confirmed + field-archive", "current_relation_check": false}
+        {
+          "id": "academy",
+          "name": "전문가 양성과정",
+          "status": "core",
+          "detail_path": "/apilos/programs/professional-academy/",
+          "current_relation_check": false,
+          "evidence": [
+            {"type": "university-official", "label": "서울벤처대학원대학교 2023 메타인지 자기주도학습코치 양성과정", "url": "https://edu.svu.ac.kr/educate/special.php?category=&code=special&idx=413&ptype=view"},
+            {"type": "university-official", "label": "서울벤처대학원대학교 2024 메타인지 자기주도학습코치 양성과정", "url": "https://edu.svu.ac.kr/educate/special.php?category=&code=special&idx=440&ptype=view"}
+          ]
+        },
+        {
+          "id": "youth-family-school",
+          "name": "청소년·가족·학교",
+          "status": "core",
+          "detail_path": "/apilos/programs/youth-family-school/",
+          "current_relation_check": false,
+          "evidence": [
+            {"type": "public-profile", "label": "YES24 곽동현 작가 프로필", "url": "https://www.yes24.com/product/author/444667"},
+            {"type": "academic", "label": "KCI 학교폭력예방을 위한 융합적 상담프로그램 연구", "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002375018"},
+            {"type": "internal-public", "label": "APILOS 현장 아카이브", "url": "/apilos/archive/"}
+          ]
+        },
+        {
+          "id": "pastoral-christian",
+          "name": "목회·기독교 코칭전문과정",
+          "status": "core",
+          "detail_path": "/apilos/programs/pastoral-coaching/",
+          "current_relation_check": false,
+          "evidence": [
+            {"type": "user-supplied-official", "label": "사용자 제공 목회코칭 관련 공식 페이지", "url": "http://hdts.or.kr/sub6_1.html#intro"},
+            {"type": "public-qualification", "label": "PQI 한국전문상담학회 기독교상담사", "url": "https://www.pqi.or.kr/inf/qul/infQulBasDetail.do?qulId=14508"},
+            {"type": "field-reference", "label": "서울신학대학교 평생교육원 목회코칭전문과정 모집기록", "url": "https://pnuaa.net/ht_ml/w_06ed/6000.php?bbsid=notice&cafeid=&category=&keyfield=&keyword=&pageno=16&pagetype=&qstr=&ref_code="}
+          ]
+        },
+        {
+          "id": "counselling-coaching-education",
+          "name": "상담·코칭 교육 및 현장실천",
+          "status": "core",
+          "detail_path": "/apilos/archive/",
+          "current_relation_check": false,
+          "evidence": [{"type": "internal-public", "label": "APILOS 현장 아카이브", "url": "/apilos/archive/"}]
+        }
       ]
     },
     {
       "id": "institutions-network",
       "label": "전문기관·사회적 네트워크",
       "items": [
-        {"id": "pgak", "name": "한국전문상담학회", "status": "professional-network", "evidence": "user-confirmed + public-record", "current_relation_check": true},
-        {"id": "happypeople", "name": "해피피플 / 행복드림센터", "status": "social-impact-professional-activity", "evidence": "user-confirmed + public-profile", "current_relation_check": true},
-        {"id": "safety", "name": "안전·생명안전·학교폭력 예방", "status": "professional-activity", "evidence": "public-record", "current_relation_check": true},
-        {"id": "language-psychomotor", "name": "언어·심리운동·발달재활", "status": "professional-network", "evidence": "public-profile + institutional-record", "current_relation_check": true},
-        {"id": "education-partners", "name": "대학·교육기관·전문조직 협력", "status": "professional-collaboration", "evidence": "public-record", "current_relation_check": true}
+        {
+          "id": "pgak",
+          "name": "한국전문상담학회",
+          "status": "professional-network",
+          "detail_path": "/apilos/programs/professional-network/",
+          "current_relation_check": true,
+          "evidence": [
+            {"type": "public-qualification", "label": "PQI 기독교상담사 / 한국전문상담학회", "url": "https://www.pqi.or.kr/inf/qul/infQulBasDetail.do?qulId=14508"},
+            {"type": "public-profile", "label": "YES24 곽동현 작가 프로필 / 임상감독(19호) 기재", "url": "https://www.yes24.com/product/author/444667"}
+          ]
+        },
+        {
+          "id": "happypeople",
+          "name": "해피피플 / 행복드림센터",
+          "status": "social-impact-professional-activity",
+          "detail_path": "/apilos/programs/social-impact/",
+          "current_relation_check": true,
+          "evidence": [
+            {"type": "public-profile", "label": "YES24 곽동현 작가 프로필 / 행복드림센터장 기재", "url": "https://www.yes24.com/product/author/444667"},
+            {"type": "organization-current", "label": "2026 서울시공익활동지원센터 해피피플 기관소개", "url": "https://seoulpa.kr/home/kor/M824079520/npo/recruit/view.do?idx=cb00d1a0008a85e71a41b8741facbffeacc33a26924151987c8e1f37c1034773"},
+            {"type": "organization-current", "label": "카카오같이가치 해피피플 단체정보", "url": "https://together.kakao.com/fundraisings/teams/3085"}
+          ]
+        },
+        {
+          "id": "safety",
+          "name": "안전·생명안전·학교폭력 예방",
+          "status": "professional-activity",
+          "detail_path": "/apilos/programs/professional-network/",
+          "current_relation_check": true,
+          "evidence": [
+            {"type": "academic", "label": "KCI 학교폭력예방 융합상담 연구", "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002375018"},
+            {"type": "public-profile", "label": "YES24 공개 프로필 / 안전문화포럼·생명안전센터 기재", "url": "https://www.yes24.com/product/author/444667"}
+          ]
+        },
+        {
+          "id": "language-psychomotor",
+          "name": "언어·심리운동·발달재활",
+          "status": "professional-network",
+          "detail_path": "/apilos/programs/professional-network/",
+          "current_relation_check": true,
+          "evidence": [{"type": "public-profile", "label": "YES24 공개 프로필 / 국제언어심리운동학회 국제협력개발위원장 기재", "url": "https://www.yes24.com/product/author/444667"}]
+        },
+        {
+          "id": "education-partners",
+          "name": "대학·교육기관·전문조직 협력",
+          "status": "professional-collaboration",
+          "detail_path": "/apilos/programs/professional-academy/",
+          "current_relation_check": true,
+          "evidence": [{"type": "university-official", "label": "서울벤처대학원대학교 공개 교육과정", "url": "https://edu.svu.ac.kr/educate/special.php?category=&code=special&idx=413&ptype=view"}]
+        }
       ]
     },
     {
       "id": "knowledge-public-impact",
       "label": "지식·공공확산",
       "items": [
-        {"id": "research", "name": "연구·학술", "status": "knowledge", "evidence": "public-record", "current_relation_check": false},
-        {"id": "publication", "name": "저서·교재·교육콘텐츠", "status": "knowledge-ip", "evidence": "public-record", "current_relation_check": false},
-        {"id": "psychology-news", "name": "한국심리상담뉴스", "status": "media-public-impact", "evidence": "official-blog-rss", "current_relation_check": true},
-        {"id": "field-archive", "name": "강의·상담·코칭·교육 현장 기록", "status": "evidence", "evidence": "field-archive", "current_relation_check": false}
+        {
+          "id": "research",
+          "name": "연구·학술",
+          "status": "knowledge",
+          "detail_path": "/apilos/programs/research-publication/",
+          "current_relation_check": false,
+          "evidence": [{"type": "academic", "label": "KCI 융합상담 연구", "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002375018"}]
+        },
+        {
+          "id": "publication",
+          "name": "저서·교재·교육콘텐츠",
+          "status": "knowledge-ip",
+          "detail_path": "/apilos/programs/research-publication/",
+          "current_relation_check": false,
+          "evidence": [
+            {"type": "internal-public", "label": "사춘기 자녀 코칭 심리학 상세", "url": "/apilos/books/sachungi-coaching-psychology/"},
+            {"type": "university-official", "label": "아동·청소년 학습코칭 통합교재 기재", "url": "https://edu.svu.ac.kr/educate/special.php?category=&code=special&idx=413&ptype=view"}
+          ]
+        },
+        {
+          "id": "psychology-news",
+          "name": "한국심리상담뉴스",
+          "status": "media-public-impact",
+          "detail_path": "/apilos/programs/research-publication/",
+          "current_relation_check": true,
+          "evidence": [{"type": "official-blog-rss", "label": "APILOS 네이버 공식 블로그 RSS 최신기록", "url": "/apilos/news/"}]
+        },
+        {
+          "id": "field-archive",
+          "name": "강의·상담·코칭·교육 현장 기록",
+          "status": "evidence",
+          "detail_path": "/apilos/archive/",
+          "current_relation_check": false,
+          "evidence": [{"type": "internal-public", "label": "APILOS 현장 아카이브", "url": "/apilos/archive/"}]
+        }
       ]
     }
-  ],
-  "display_rule": "기관·사업의 직접운영, 협력, 위촉·전문활동, 과거 이력을 동일한 법적 관계로 표현하지 않는다. 상세페이지에서 관계 성격과 시점을 별도 표기한다."
+  ]
 }
