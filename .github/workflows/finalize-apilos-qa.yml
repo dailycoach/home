@@ -1,0 +1,106 @@
+name: Finalize APILOS QA Fixes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/finalize-apilos-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apilos-finalize-qa
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply final APILOS fixes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, re
+
+          # 1) Materialize the real YCC WebP once.
+          src = Path('apilos/assets/ycc-logo-base64.txt')
+          dst = Path('apilos/assets/ycc-logo.webp')
+          if src.exists():
+              data = base64.b64decode(src.read_text(encoding='utf-8').strip(), validate=True)
+              if not (data[:4] == b'RIFF' and data[8:12] == b'WEBP'):
+                  raise SystemExit('YCC logo decode failed WebP validation')
+              dst.write_bytes(data)
+
+          # 2) Make the real file the CSS default so the logo has no JS-loading flash.
+          q = Path('apilos/qa.css')
+          qs = q.read_text(encoding='utf-8')
+          root_rule = ":root{--ycc-logo:url('/apilos/assets/ycc-logo.webp')}\n"
+          if root_rule not in qs:
+              q.write_text(root_rule + qs, encoding='utf-8')
+
+          # 3) Stop app-core from fetching base64 text on every page view.
+          core = Path('apilos/app-core.js')
+          cs = core.read_text(encoding='utf-8')
+          start = cs.find("fetch('/apilos/assets/ycc-logo-base64.txt'")
+          if start >= 0:
+              end_marker = '.catch(()=>{});'
+              end = cs.find(end_marker, start)
+              if end < 0:
+                  raise SystemExit('Could not locate end of legacy YCC loader')
+              end += len(end_marker)
+              replacement = "document.documentElement.style.setProperty('--ycc-logo',\"url('/apilos/assets/ycc-logo.webp')\");"
+              cs = cs[:start] + replacement + cs[end:]
+              core.write_text(cs, encoding='utf-8')
+
+          # 4) Restore social/OG metadata lost when Archive v2 replaced the old page.
+          archive = Path('apilos/archive/index.html')
+          hs = archive.read_text(encoding='utf-8')
+          if 'property="og:title"' not in hs:
+              match = re.search(r'<meta name="description" content="([^"]+)">', hs)
+              if not match:
+                  raise SystemExit('Archive description meta not found')
+              desc = match.group(1)
+              block = (
+                  f'<meta property="og:site_name" content="글로벌미래교육원 상담코칭센터">'
+                  f'<meta property="og:type" content="website">'
+                  f'<meta property="og:title" content="현장 기록 | 글로벌미래교육원 상담코칭센터">'
+                  f'<meta property="og:description" content="{desc}">'
+                  f'<meta property="og:url" content="https://daily-coach-ing.com/apilos/archive/">'
+                  f'<meta property="og:locale" content="ko_KR">'
+                  f'<meta property="og:image" content="https://daily-coach-ing.com/apilos/assets/career-camp.webp">'
+                  f'<meta property="og:image:alt" content="글로벌미래교육원 청소년·교육 현장">'
+                  f'<meta name="twitter:card" content="summary_large_image">'
+              )
+              hs = hs[:match.end()] + block + hs[match.end():]
+              archive.write_text(hs, encoding='utf-8')
+
+          # 5) Remove superseded APILOS-only files; active pages use WebP.
+          for name in [
+              'career-camp.jpg','iin-classroom.jpg','iin-living-lab.jpg',
+              'stress-lecture.jpg','woosung-living-lab.jpg','ycc-logo.bin.b64'
+          ]:
+              p = Path('apilos/assets') / name
+              if p.exists(): p.unlink()
+          PY
+      - name: Run static APILOS QA before commit
+        run: node scripts/check-apilos-site.mjs
+      - name: Commit fixes when changed
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No final fixes needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Finalize APILOS site QA fixes"
+          git pull --rebase origin main
+          git push origin HEAD:main
