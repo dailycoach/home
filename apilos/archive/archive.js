@@ -1,31 +1,4 @@
 (() => {
-  const fixStaticSources = () => {
-    const links = [...document.querySelectorAll('.archive-source-card a')];
-    const byHref = fragment => links.find(a => a.href.includes(fragment));
-
-    const academy = byHref('224351456999');
-    if (academy) {
-      const card = academy.closest('.archive-source-card');
-      card.querySelector('small').textContent = 'ACADEMY / OFFICIAL BLOG';
-      card.querySelector('strong').textContent = '제4기 통합상담코칭전문가 양성과정';
-      card.querySelector('p').textContent = '대면 + 비대면 2 Track으로 운영된 통합상담코칭전문가 양성과정 공식 기록입니다.';
-      academy.textContent = '공식 기록 ↗';
-    }
-
-    const happy = byHref('224339731348');
-    if (happy) {
-      const card = happy.closest('.archive-source-card');
-      card.querySelector('small').textContent = 'SOCIAL IMPACT / OFFICIAL BLOG';
-      card.querySelector('strong').textContent = '해피피플 대전지부 × KB캐피탈 자립준비청년 지원';
-      card.querySelector('p').textContent = '행복드림센터를 통한 자립준비청년 자격증 취득 지원 활동이 공식 RSS에서 확인됩니다.';
-      happy.textContent = '공식 기록 ↗';
-    }
-
-    const unknown = byHref('224371249575');
-    if (unknown) unknown.closest('.archive-source-card').hidden = true;
-  };
-  fixStaticSources();
-
   const grid = document.querySelector('[data-archive-live-grid]');
   const toolbar = document.querySelector('[data-archive-filters]');
   const updated = document.querySelector('[data-archive-updated]');
