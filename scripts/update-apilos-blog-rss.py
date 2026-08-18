@@ -16,7 +16,7 @@ RSS_URL = "https://rss.blog.naver.com/apilos.xml"
 SOURCE_URL = "https://blog.naver.com/apilos"
 OUTPUT_PATH = Path("apilos/news/blog.json")
 MAX_SUMMARY_LENGTH = 170
-LIMIT = 4
+LIMIT = 16
 
 
 def clean_summary(value: str) -> str:
@@ -72,7 +72,7 @@ def parse_rss(xml_text: str, limit: int = LIMIT) -> list[dict]:
             "category": category,
         })
     posts.sort(key=lambda post: post["publishedAt"], reverse=True)
-    return posts[: max(1, min(limit, 6))]
+    return posts[: max(1, min(limit, 20))]
 
 
 def fetch_rss() -> str:
