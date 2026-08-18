@@ -1,0 +1,40 @@
+{
+  "version": "2026-08-19",
+  "project": "GLOBAL FUTURE EDUCATION COUNSELLING & COACHING CENTER",
+  "principle": "상담·코칭·교육을 방법론으로 사용하여 사람·가족·학교·전문가·학회·교회·사회공헌·연구를 연결한다.",
+  "method_layer": ["상담", "코칭", "교육", "심리", "진로", "관계"],
+  "layers": [
+    {
+      "id": "core-professional-work",
+      "label": "핵심 전문사업",
+      "items": [
+        {"id": "academy", "name": "전문가 양성과정", "status": "core", "evidence": "user-confirmed + public-record", "current_relation_check": false},
+        {"id": "youth-family-school", "name": "청소년·가족·학교", "status": "core", "evidence": "user-confirmed + public-record", "current_relation_check": false},
+        {"id": "pastoral-christian", "name": "목회·기독교 코칭전문과정", "status": "core", "evidence": "user-confirmed + public-record", "current_relation_check": false},
+        {"id": "counselling-coaching-education", "name": "상담·코칭 교육 및 현장실천", "status": "core", "evidence": "user-confirmed + field-archive", "current_relation_check": false}
+      ]
+    },
+    {
+      "id": "institutions-network",
+      "label": "전문기관·사회적 네트워크",
+      "items": [
+        {"id": "pgak", "name": "한국전문상담학회", "status": "professional-network", "evidence": "user-confirmed + public-record", "current_relation_check": true},
+        {"id": "happypeople", "name": "해피피플 / 행복드림센터", "status": "social-impact-professional-activity", "evidence": "user-confirmed + public-profile", "current_relation_check": true},
+        {"id": "safety", "name": "안전·생명안전·학교폭력 예방", "status": "professional-activity", "evidence": "public-record", "current_relation_check": true},
+        {"id": "language-psychomotor", "name": "언어·심리운동·발달재활", "status": "professional-network", "evidence": "public-profile + institutional-record", "current_relation_check": true},
+        {"id": "education-partners", "name": "대학·교육기관·전문조직 협력", "status": "professional-collaboration", "evidence": "public-record", "current_relation_check": true}
+      ]
+    },
+    {
+      "id": "knowledge-public-impact",
+      "label": "지식·공공확산",
+      "items": [
+        {"id": "research", "name": "연구·학술", "status": "knowledge", "evidence": "public-record", "current_relation_check": false},
+        {"id": "publication", "name": "저서·교재·교육콘텐츠", "status": "knowledge-ip", "evidence": "public-record", "current_relation_check": false},
+        {"id": "psychology-news", "name": "한국심리상담뉴스", "status": "media-public-impact", "evidence": "official-blog-rss", "current_relation_check": true},
+        {"id": "field-archive", "name": "강의·상담·코칭·교육 현장 기록", "status": "evidence", "evidence": "field-archive", "current_relation_check": false}
+      ]
+    }
+  ],
+  "display_rule": "기관·사업의 직접운영, 협력, 위촉·전문활동, 과거 이력을 동일한 법적 관계로 표현하지 않는다. 상세페이지에서 관계 성격과 시점을 별도 표기한다."
+}
