@@ -1,0 +1,47 @@
+name: Check APILOS Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apilos/**"
+      - "!apilos/news/blog.json"
+      - "404.html"
+      - "robots.txt"
+      - "sitemap.xml"
+      - "scripts/check-apilos-site.mjs"
+      - "scripts/check-apilos-live.mjs"
+      - ".github/workflows/check-apilos-site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-apilos-site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run APILOS static QA
+        run: node scripts/check-apilos-site.mjs
+
+  live-qa:
+    if: github.event_name == 'workflow_dispatch'
+    needs: static-qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verify deployed APILOS routes
+        run: node scripts/check-apilos-live.mjs
