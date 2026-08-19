@@ -5,15 +5,29 @@ html,body{max-width:100%;overflow-x:clip}
 img{height:auto}
 a,button{-webkit-tap-highlight-color:transparent}
 .portal-menu-button,.portal-contact,.fusion-actions a,.knowledge-actions a,.apilos-404-actions a{touch-action:manipulation}
+
+/* unified footer — use the real YCC mark, not the old bar icon */
+.portal-footer{grid-template-columns:1fr auto;gap:22px;align-items:end;padding:46px 6vw 30px;color:#17171c;background:#f3efe8;border-top:1px solid rgba(21,21,26,.10)}
+.portal-footer>div{display:inline-flex;align-items:center;gap:14px}
+.portal-footer .portal-mark{display:block;width:54px;height:54px;flex:0 0 54px;border-radius:50%;background-image:var(--ycc-logo);background-size:cover;background-position:center;box-shadow:0 0 0 1px rgba(21,21,26,.08)}
+.portal-footer .portal-mark>*{display:none!important}
+.portal-footer strong{color:#17171c;font-size:14px;letter-spacing:-.04em}
+.portal-footer p,.portal-footer small{margin:0;color:#817a74;font-size:10px;letter-spacing:.10em}
+.portal-footer p{text-align:right}
+.portal-footer small{grid-column:1/-1;padding-top:20px;border-top:1px solid rgba(21,21,26,.12)}
+
 @media(max-width:840px){
   .portal-header{padding-left:max(4vw,env(safe-area-inset-left));padding-right:max(4vw,env(safe-area-inset-right))}
   .portal-mobile-nav{max-height:calc(100svh - 76px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(18px,env(safe-area-inset-bottom))}
-  .portal-footer{padding-bottom:max(32px,calc(20px + env(safe-area-inset-bottom)))}
+  .portal-footer{grid-template-columns:1fr;padding:38px 6vw max(32px,calc(20px + env(safe-area-inset-bottom)))}
+  .portal-footer p{text-align:left}
 }
 @media(max-width:560px){
   .fusion-actions,.knowledge-actions,.apilos-404-actions{align-items:stretch}
   .fusion-actions a,.knowledge-actions a,.apilos-404-actions a{min-height:44px}
   .journal-status,.archive-live-status{overflow-wrap:anywhere}
+  .portal-footer .portal-mark{width:50px;height:50px;flex-basis:50px}
+  .portal-footer strong{font-size:13px}
 }
 @media(max-width:950px) and (orientation:landscape) and (max-height:560px){
   .portal-header{min-height:64px!important}
