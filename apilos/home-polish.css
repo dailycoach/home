@@ -1,0 +1,46 @@
+/* APILOS HOME — COHESIVE ENDING */
+.home-closing{padding:0 6vw 120px;background:linear-gradient(180deg,#f7f4ee 0 110px,#fff 110px 100%);color:#15151a}
+.home-closing-shell{padding:76px 5vw 44px;border:1px solid rgba(21,21,26,.10);border-radius:40px;background:#fbfaf7;box-shadow:0 24px 70px rgba(46,34,57,.06)}
+.home-closing-head{display:grid;grid-template-columns:.42fr 1.58fr;gap:7vw;align-items:start}
+.home-closing-kicker{font-size:10px;font-weight:800;letter-spacing:.18em;color:#7652e8}
+.home-closing-head h2{max-width:980px;margin:0;font-size:clamp(42px,4.8vw,70px);line-height:1.06;letter-spacing:-.082em}
+.home-closing-head h2 em{font-style:normal;color:#7652e8}
+.home-closing-head p{max-width:650px;margin:22px 0 0;color:#746d67;font-size:13px;line-height:1.8}
+.home-closing-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:14px;margin-top:54px}
+.home-closing-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:330px;padding:30px;border-radius:32px;overflow:hidden;color:#15151a}
+.home-closing-card::after{position:absolute;right:-10%;bottom:-38%;width:45%;aspect-ratio:1;border:1px solid rgba(21,21,26,.14);border-radius:50%;content:""}
+.home-closing-card small{font-size:9px;font-weight:800;letter-spacing:.15em;opacity:.64}
+.home-closing-card strong{position:relative;z-index:1;max-width:620px;font-size:clamp(34px,4vw,56px);line-height:1.06;letter-spacing:-.075em}
+.home-closing-card span{position:relative;z-index:1;font-size:11px;font-weight:800}
+.home-closing-card.is-ecosystem{background:#dcd2ff}
+.home-closing-card.is-field{background:#dff3ee}
+.home-closing-links{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:26px;border-top:1px solid rgba(21,21,26,.12)}
+.home-closing-links a{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:24px 20px 4px 0;border-right:1px solid rgba(21,21,26,.10);margin-right:20px}
+.home-closing-links a:last-child{border-right:0;margin-right:0}
+.home-closing-links small{display:block;color:#8a837d;font-size:8px;font-weight:800;letter-spacing:.14em}
+.home-closing-links strong{display:block;margin-top:6px;font-size:17px;letter-spacing:-.045em}
+.home-closing-links i{font-style:normal;font-size:18px}
+.home-closing-card,.home-closing-links a{transition:transform .22s ease,box-shadow .22s ease}
+.home-closing-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(40,29,50,.08)}
+.home-closing-links a:hover{transform:translateY(-2px)}
+
+@media(max-width:840px){
+  .home-closing{padding:0 6vw 96px;background:linear-gradient(180deg,#f7f4ee 0 72px,#fff 72px 100%)}
+  .home-closing-shell{padding:58px 6vw 36px;border-radius:32px}
+  .home-closing-head{grid-template-columns:1fr;gap:18px}
+  .home-closing-grid{grid-template-columns:1fr 1fr;margin-top:40px}
+  .home-closing-card{min-height:280px;padding:25px;border-radius:26px}
+  .home-closing-links{grid-template-columns:1fr}
+  .home-closing-links a{border-right:0;border-bottom:1px solid rgba(21,21,26,.10);margin-right:0;padding:20px 0}
+  .home-closing-links a:last-child{border-bottom:0}
+}
+
+@media(max-width:560px){
+  .home-closing{padding:0 5vw 78px}
+  .home-closing-shell{padding:44px 5vw 24px;border-radius:26px}
+  .home-closing-head h2{font-size:38px;line-height:1.1}
+  .home-closing-grid{grid-template-columns:1fr;gap:10px;margin-top:34px}
+  .home-closing-card{min-height:210px;padding:22px}
+  .home-closing-card strong{font-size:34px}
+  .home-closing-links{margin-top:18px}
+}
