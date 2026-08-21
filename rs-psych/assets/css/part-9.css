@@ -1,0 +1,477 @@
+@media (max-width: 640px) {
+  :root {
+    --header-h: 64px;
+    --shell: calc(100% - 36px);
+  }
+
+  .brand-text span,
+  .header-start {
+    display: none;
+  }
+
+  .site-header {
+    height: var(--header-h);
+  }
+
+  .hero-grid {
+    padding: 3.4rem 0 4rem;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 1.15rem;
+    font-size: clamp(2.65rem, 11.5vw, 3.05rem);
+    letter-spacing: -0.058em;
+  }
+
+  .hero-copy .lead {
+    font-size: 0.98rem;
+    line-height: 1.68;
+  }
+
+  .button-row .btn {
+    flex: 1 1 100%;
+  }
+
+  .system-line {
+    gap: 0.5rem 0.75rem;
+    font-size: 0.58rem;
+  }
+
+  .hero-stage {
+    min-height: 360px;
+    transform: none;
+  }
+
+  .hero-credential {
+    top: 48%;
+    left: 50%;
+    width: 150px;
+  }
+
+  .assessment-card {
+    top: 7%;
+    left: 0;
+    width: 176px;
+    padding: 0.72rem;
+  }
+
+  .coaching-card {
+    right: 0;
+    bottom: 10%;
+    width: 178px;
+    padding: 0.72rem;
+  }
+
+  .passport-card {
+    bottom: 0;
+    left: 2%;
+    width: 205px;
+    padding: 0.72rem;
+  }
+
+  .hero-card .card-micro {
+    margin-bottom: 0.35rem;
+    font-size: 0.48rem;
+  }
+
+  .hero-card strong {
+    font-size: 0.69rem;
+  }
+
+  .hero-card p,
+  .mini-bars,
+  .passport-mini-grid {
+    display: none;
+  }
+
+  .source-strip {
+    padding: 1.8rem 0;
+  }
+
+  .source-grid {
+    gap: 1.2rem;
+  }
+
+  .source-copy p {
+    font-size: 1rem;
+  }
+
+  .scene-section,
+  .journey-section,
+  .coaching-section,
+  .practice-section,
+  .credentials-section,
+  .passport-section,
+  .page-section {
+    padding: 5rem 0;
+  }
+
+  .section-head {
+    margin-bottom: 2.2rem;
+  }
+
+  .section-head h2 {
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+
+  .scene-layout {
+    gap: 1.4rem;
+  }
+
+  .scene-rail {
+    display: flex;
+    gap: 0.65rem;
+    padding-bottom: 0.55rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    border-top: 0;
+    scrollbar-width: thin;
+  }
+
+  .scene-option {
+    flex: 0 0 82%;
+    grid-template-columns: 36px 1fr;
+    min-height: 112px;
+    padding: 0.9rem;
+    border: 1px solid var(--line-dark);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.42);
+    scroll-snap-align: start;
+  }
+
+  .scene-option:hover,
+  .scene-option:focus-visible,
+  .scene-option[aria-pressed="true"] {
+    padding-left: 0.9rem;
+  }
+
+  .scene-arrow {
+    display: none;
+  }
+
+  .scene-result {
+    min-height: 450px;
+    padding: 1.35rem;
+    border-radius: 24px;
+  }
+
+  .scene-result blockquote {
+    font-size: 1.55rem;
+  }
+
+  .domain-explore {
+    margin-top: 4.4rem;
+  }
+
+  .domain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .domain-tile,
+  .domain-tile:nth-child(1),
+  .domain-tile:nth-child(4) {
+    min-height: 210px;
+  }
+
+  .domain-motif {
+    width: 38%;
+  }
+
+  .journey-track {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 1rem;
+  }
+
+  .journey-track::before {
+    display: block;
+    top: 18px;
+    bottom: 30px;
+    left: 22px;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(var(--violet-300), var(--gold-300), var(--mint-300), var(--cyan-300));
+  }
+
+  .journey-step {
+    min-height: 154px;
+    padding: 0 0 2rem 4.3rem;
+  }
+
+  .journey-node {
+    top: 0;
+    left: 0;
+  }
+
+  .coaching-panel.large {
+    min-height: 390px;
+  }
+
+  .coaching-output {
+    right: 1.4rem;
+    bottom: 1.4rem;
+    left: 1.4rem;
+  }
+
+  .coaching-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .expert-standard {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-shell {
+    min-height: 0;
+    padding: 1.1rem;
+    border-radius: 24px;
+  }
+
+  .practice-head {
+    display: block;
+  }
+
+  .practice-head .status-chip {
+    margin-top: 0.8rem;
+  }
+
+  .practice-days {
+    grid-template-columns: repeat(8, 58px);
+  }
+
+  .practice-action {
+    min-height: 210px;
+    padding: 1.35rem;
+  }
+
+  .featured-credential {
+    min-height: 340px;
+  }
+
+  .featured-credential .seal-button {
+    --seal-size: 210px;
+  }
+
+  .credential-collection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .credential-collection .seal-button,
+  .credential-collection .seal-button:nth-child(1),
+  .credential-collection .seal-button:nth-child(3),
+  .credential-collection .seal-button:nth-child(5) {
+    --seal-size: min(100%, 135px);
+  }
+
+  .passport-frame {
+    border-radius: 24px;
+  }
+
+  .passport-rail,
+  .passport-main {
+    padding: 1.3rem;
+  }
+
+  .passport-nav {
+    display: none;
+  }
+
+  .passport-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .passport-module.current,
+  .passport-module.scene,
+  .passport-module.assessments,
+  .passport-module.practice,
+  .passport-module.evidence,
+  .passport-module.credentials,
+  .passport-module.next {
+    grid-column: auto;
+  }
+
+  .mini-journey {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trust-grid,
+  .footer-grid {
+    gap: 2.2rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    display: block;
+  }
+
+  .footer-bottom span {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .subhero {
+    min-height: auto;
+  }
+
+  .subhero-inner {
+    min-height: auto;
+    padding: 3.7rem 0 2.5rem;
+  }
+
+  .subhero-copy h1 {
+    font-size: clamp(2.7rem, 12vw, 3.4rem);
+  }
+
+  .subhero-visual {
+    min-height: 230px;
+  }
+
+  .page-intro {
+    gap: 1rem;
+  }
+
+  .catalog-featured,
+  .catalog-grid,
+  .badges-feature,
+  .badge-gallery,
+  .evidence-grid,
+  .two-list,
+  .credential-dialog-grid,
+  .dialog-scene-list {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-featured {
+    padding: 1.2rem;
+  }
+
+  .catalog-symbol {
+    min-height: 220px;
+  }
+
+  .pathway-stage {
+    padding: 4rem 0;
+  }
+
+  .badge-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .badge-card {
+    min-height: 280px;
+    padding: 0.8rem;
+  }
+
+  .badge-card .seal-button {
+    --seal-size: min(100%, 135px);
+  }
+
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .document-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .trust-toc {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .trust-toc a {
+    flex: 0 0 auto;
+  }
+
+  .dialog-backdrop {
+    align-items: end;
+    padding: 0.6rem;
+  }
+
+  .dialog-panel {
+    width: 100%;
+    max-height: 90svh;
+    border-radius: 24px 24px 16px 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  :root {
+    --shell: calc(100% - 32px);
+  }
+
+  .hero-copy h1 {
+    font-size: 2.62rem;
+  }
+
+  .hero-stage {
+    min-height: 350px;
+  }
+
+  .assessment-card { width: 168px; }
+  .coaching-card { width: 170px; }
+  .passport-card { width: 192px; }
+
+  .badge-gallery {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Intrinsic-size guard: keep data-driven modules inside the viewport. */
+.scene-layout,
+.scene-layout > *,
+.scene-rail,
+.scene-result,
+.practice-layout,
+.practice-layout > *,
+.practice-intro,
+.practice-shell,
+.practice-head,
+.practice-head > *,
+.pathway-stack,
+.pathway-stage,
+.pathway-stage > *,
+.stage-content,
+.passport-frame,
+.passport-main,
+.passport-grid,
+.credential-stage,
+.credential-stage > * {
+  min-width: 0;
+}
+
+.scene-rail,
+.practice-days {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 860px) {
+  .scene-layout,
+  .practice-layout,
+  .pathway-stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Final visual QA refinements */
