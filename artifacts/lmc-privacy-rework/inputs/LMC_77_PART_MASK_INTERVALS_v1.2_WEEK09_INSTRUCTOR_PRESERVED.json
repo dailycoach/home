@@ -1,0 +1,3085 @@
+{
+  "version": "1.2.3-week09-instructor-preserved-layout-segmented",
+  "generatedAt": "2026-08-12",
+  "courseId": "lmc-lifetime-management-counselor",
+  "totalFiles": 77,
+  "boundaryBasis": "77-part manifest actualDurationSeconds cumulative per WEEK",
+  "privacyRule": "WEEK-09 uses frame-measured, layout-segmented PANEL_BOX regions that cover student tiles only and explicitly preserve the instructor tile; WEEK-END masks extend to PART END to cover the container tail.",
+  "sourceWeekMaskMap": "LMC_WEEK_ZOOM_MASK_MAP_v1.0.json",
+  "sourcePartManifest": "LMC_77_UPLOAD_MANIFEST_FINAL.json",
+  "media": [
+    {
+      "week": 1,
+      "part": 1,
+      "mediaId": "lmc-w01-p01",
+      "title": "자기의 개념·종류·원천",
+      "filename": "LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "objectKey": "lmc/v2/week-01/part-01.mp4",
+      "durationSeconds": 1220.04,
+      "durationTimecode": "00:20:20.04",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1220.04,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 9.5,
+          "endSeconds": 1220.04,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:09.50–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1123,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 157,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+          "sourceWeekStartSeconds": 9.5,
+          "sourceWeekEndSeconds": 6353.652971,
+          "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 1,
+      "part": 2,
+      "mediaId": "lmc-w01-p02",
+      "title": "자기동기와 자아존중감",
+      "filename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "objectKey": "lmc/v2/week-01/part-02.mp4",
+      "durationSeconds": 840.08,
+      "durationTimecode": "00:14:00.08",
+      "weekAbsoluteStartSeconds": 1220.04,
+      "weekAbsoluteEndSeconds": 2060.12,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 840.08,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1123,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 157,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+          "sourceWeekStartSeconds": 9.5,
+          "sourceWeekEndSeconds": 6353.652971,
+          "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 1,
+      "part": 3,
+      "mediaId": "lmc-w01-p03",
+      "title": "자기방어·자기수용·자기개방",
+      "filename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "objectKey": "lmc/v2/week-01/part-03.mp4",
+      "durationSeconds": 1290.16,
+      "durationTimecode": "00:21:30.16",
+      "weekAbsoluteStartSeconds": 2060.12,
+      "weekAbsoluteEndSeconds": 3350.28,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1290.16,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1123,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 157,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+          "sourceWeekStartSeconds": 9.5,
+          "sourceWeekEndSeconds": 6353.652971,
+          "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 1,
+      "part": 4,
+      "mediaId": "lmc-w01-p04",
+      "title": "타인에 대한 인상형성",
+      "filename": "LMC_WEEK01_P04_impression-formation.mp4",
+      "objectKey": "lmc/v2/week-01/part-04.mp4",
+      "durationSeconds": 1570.04,
+      "durationTimecode": "00:26:10.04",
+      "weekAbsoluteStartSeconds": 3350.28,
+      "weekAbsoluteEndSeconds": 4920.32,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1570.04,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1123,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 157,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+          "sourceWeekStartSeconds": 9.5,
+          "sourceWeekEndSeconds": 6353.652971,
+          "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 1,
+      "part": 5,
+      "mediaId": "lmc-w01-p05",
+      "title": "매력의 요인: 유사성과 보상성",
+      "filename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "objectKey": "lmc/v2/week-01/part-05.mp4",
+      "durationSeconds": 1433.652993,
+      "durationTimecode": "00:23:53.65",
+      "weekAbsoluteStartSeconds": 4920.32,
+      "weekAbsoluteEndSeconds": 6353.972993,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1433.652993,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1123,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 157,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1123–1279, y=0–719",
+          "sourceWeekStartSeconds": 9.5,
+          "sourceWeekEndSeconds": 6353.652971,
+          "note": "화면공유 시작 후 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 1,
+      "mediaId": "lmc-w02-p01",
+      "title": "적성의 구성과 다요인 분석 개요",
+      "filename": "LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+      "objectKey": "lmc/v2/week-02/part-01.mp4",
+      "durationSeconds": 1430.88,
+      "durationTimecode": "00:23:50.88",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1430.88,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1430.88,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 2,
+      "mediaId": "lmc-w02-p02",
+      "title": "적성판단의 어려움과 개별검사 종합분석",
+      "filename": "LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+      "objectKey": "lmc/v2/week-02/part-02.mp4",
+      "durationSeconds": 1184.76,
+      "durationTimecode": "00:19:44.76",
+      "weekAbsoluteStartSeconds": 1430.88,
+      "weekAbsoluteEndSeconds": 2615.64,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1184.76,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 3,
+      "mediaId": "lmc-w02-p03",
+      "title": "종합적성분석법과 성격 유형 이론",
+      "filename": "LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+      "objectKey": "lmc/v2/week-02/part-03.mp4",
+      "durationSeconds": 1040.84,
+      "durationTimecode": "00:17:20.84",
+      "weekAbsoluteStartSeconds": 2615.64,
+      "weekAbsoluteEndSeconds": 3656.48,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1040.84,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 4,
+      "mediaId": "lmc-w02-p04",
+      "title": "RS 다중지능·직업가치관검사와 CIPP 플랫폼",
+      "filename": "LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+      "objectKey": "lmc/v2/week-02/part-04.mp4",
+      "durationSeconds": 1395.68,
+      "durationTimecode": "00:23:15.68",
+      "weekAbsoluteStartSeconds": 3656.48,
+      "weekAbsoluteEndSeconds": 5052.16,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1395.68,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 5,
+      "mediaId": "lmc-w02-p05",
+      "title": "종합검사 결과보고서 해석 실습",
+      "filename": "LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+      "objectKey": "lmc/v2/week-02/part-05.mp4",
+      "durationSeconds": 1230.56,
+      "durationTimecode": "00:20:30.56",
+      "weekAbsoluteStartSeconds": 5052.16,
+      "weekAbsoluteEndSeconds": 6282.72,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1230.56,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 6,
+      "mediaId": "lmc-w02-p06",
+      "title": "회원관리·결과조회·데이터 활용",
+      "filename": "LMC_WEEK02_P06_member-management-and-data-use.mp4",
+      "objectKey": "lmc/v2/week-02/part-06.mp4",
+      "durationSeconds": 681.92,
+      "durationTimecode": "00:11:21.92",
+      "weekAbsoluteStartSeconds": 6282.72,
+      "weekAbsoluteEndSeconds": 6964.64,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 681.92,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 2,
+      "part": 7,
+      "mediaId": "lmc-w02-p07",
+      "title": "AI를 활용한 진로·적성 해석과 정리",
+      "filename": "LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+      "objectKey": "lmc/v2/week-02/part-07.mp4",
+      "durationSeconds": 996.925011,
+      "durationTimecode": "00:16:36.93",
+      "weekAbsoluteStartSeconds": 6964.64,
+      "weekAbsoluteEndSeconds": 7961.565011,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 996.925011,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7961.56517,
+          "note": "시작 검은 프레임을 포함해 전 구간 우측 패널 고정"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 1,
+      "mediaId": "lmc-w03-p01",
+      "title": "과정 안내와 성격의 정의",
+      "filename": "LMC_WEEK03_P01_course-introduction-and-personality-definition.mp4",
+      "objectKey": "lmc/v2/week-03/part-01.mp4",
+      "durationSeconds": 1116.76,
+      "durationTimecode": "00:18:36.76",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1116.76,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1116.76,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 2,
+      "mediaId": "lmc-w03-p02",
+      "title": "성격의 특성과 이해의 필요성",
+      "filename": "LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "objectKey": "lmc/v2/week-03/part-02.mp4",
+      "durationSeconds": 905.048984,
+      "durationTimecode": "00:15:05.05",
+      "weekAbsoluteStartSeconds": 1116.76,
+      "weekAbsoluteEndSeconds": 2021.808984,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 905.048984,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 3,
+      "mediaId": "lmc-w03-p03",
+      "title": "성격이론의 두 흐름: 특성이론과 과정이론",
+      "filename": "LMC_WEEK03_P03_trait-and-process-theories.mp4",
+      "objectKey": "lmc/v2/week-03/part-03.mp4",
+      "durationSeconds": 915.017031,
+      "durationTimecode": "00:15:15.02",
+      "weekAbsoluteStartSeconds": 2021.808984,
+      "weekAbsoluteEndSeconds": 2936.826015,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 915.017031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 4,
+      "mediaId": "lmc-w03-p04",
+      "title": "성격을 조망하는 다양한 관점 ①",
+      "filename": "LMC_WEEK03_P04_personality-perspectives-01.mp4",
+      "objectKey": "lmc/v2/week-03/part-04.mp4",
+      "durationSeconds": 904.882031,
+      "durationTimecode": "00:15:04.88",
+      "weekAbsoluteStartSeconds": 2936.826015,
+      "weekAbsoluteEndSeconds": 3841.708046,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 904.882031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 5,
+      "mediaId": "lmc-w03-p05",
+      "title": "성격을 조망하는 다양한 관점 ②",
+      "filename": "LMC_WEEK03_P05_personality-perspectives-02.mp4",
+      "objectKey": "lmc/v2/week-03/part-05.mp4",
+      "durationSeconds": 909.292969,
+      "durationTimecode": "00:15:09.29",
+      "weekAbsoluteStartSeconds": 3841.708046,
+      "weekAbsoluteEndSeconds": 4751.001015,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 909.292969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 6,
+      "mediaId": "lmc-w03-p06",
+      "title": "성격이론 통합과 Cattell 특질론·16PF",
+      "filename": "LMC_WEEK03_P06_cattell-trait-theory-and-16pf.mp4",
+      "objectKey": "lmc/v2/week-03/part-06.mp4",
+      "durationSeconds": 1117.172031,
+      "durationTimecode": "00:18:37.17",
+      "weekAbsoluteStartSeconds": 4751.001015,
+      "weekAbsoluteEndSeconds": 5868.173046,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1117.172031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 7,
+      "mediaId": "lmc-w03-p07",
+      "title": "16PF 결과보고서 해석 실습",
+      "filename": "LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "objectKey": "lmc/v2/week-03/part-07.mp4",
+      "durationSeconds": 750.522969,
+      "durationTimecode": "00:12:30.52",
+      "weekAbsoluteStartSeconds": 5868.173046,
+      "weekAbsoluteEndSeconds": 6618.696015,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 750.522969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 3,
+      "part": 8,
+      "mediaId": "lmc-w03-p08",
+      "title": "AI 보조 해석과 검사 플랫폼 활용",
+      "filename": "LMC_WEEK03_P08_ai-assisted-interpretation-and-platform.mp4",
+      "objectKey": "lmc/v2/week-03/part-08.mp4",
+      "durationSeconds": 616.513016,
+      "durationTimecode": "00:10:16.51",
+      "weekAbsoluteStartSeconds": 6618.696015,
+      "weekAbsoluteEndSeconds": 7235.209031,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 616.513016,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7234.57161,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 4,
+      "part": 1,
+      "mediaId": "lmc-w04-p01",
+      "title": "의사소통의 개념과 기본 구조",
+      "filename": "LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+      "objectKey": "lmc/v2/week-04/part-01.mp4",
+      "durationSeconds": 936.96,
+      "durationTimecode": "00:15:36.96",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 936.96,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 936.96,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 3694,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 4,
+      "part": 2,
+      "mediaId": "lmc-w04-p02",
+      "title": "의사소통의 특성·기능과 표현 요소",
+      "filename": "LMC_WEEK04_P02_communication-functions-and-expression.mp4",
+      "objectKey": "lmc/v2/week-04/part-02.mp4",
+      "durationSeconds": 1090.56,
+      "durationTimecode": "00:18:10.56",
+      "weekAbsoluteStartSeconds": 936.96,
+      "weekAbsoluteEndSeconds": 2027.52,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1090.56,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 3694,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 4,
+      "part": 3,
+      "mediaId": "lmc-w04-p03",
+      "title": "의사소통 10유형의 구조와 진단 기준",
+      "filename": "LMC_WEEK04_P03_ten-types-and-assessment-criteria.mp4",
+      "objectKey": "lmc/v2/week-04/part-03.mp4",
+      "durationSeconds": 839.68,
+      "durationTimecode": "00:13:59.68",
+      "weekAbsoluteStartSeconds": 2027.52,
+      "weekAbsoluteEndSeconds": 2867.2,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 839.68,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 3694,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 4,
+      "part": 4,
+      "mediaId": "lmc-w04-p04",
+      "title": "의사소통 유형별 특성 해석",
+      "filename": "LMC_WEEK04_P04_type-characteristics-interpretation.mp4",
+      "objectKey": "lmc/v2/week-04/part-04.mp4",
+      "durationSeconds": 808.96,
+      "durationTimecode": "00:13:28.96",
+      "weekAbsoluteStartSeconds": 2867.2,
+      "weekAbsoluteEndSeconds": 3676.16,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 808.96,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 3694,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 4,
+      "part": 5,
+      "mediaId": "lmc-w04-p05",
+      "title": "유형 적용 사례와 해석 정리",
+      "filename": "LMC_WEEK04_P05_case-application-and-summary.mp4",
+      "objectKey": "lmc/v2/week-04/part-05.mp4",
+      "durationSeconds": 675.84,
+      "durationTimecode": "00:11:15.84",
+      "weekAbsoluteStartSeconds": 3676.16,
+      "weekAbsoluteEndSeconds": 4352,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 17.84,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00–00:00:17.84",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 3694,
+          "note": "초반 화면공유 우측 패널"
+        },
+        {
+          "startSeconds": 666.34,
+          "endSeconds": 668.84,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:11:06.34–00:11:08.84",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 4342.5,
+          "sourceWeekEndSeconds": 4345,
+          "note": "화면공유 재개 직후 패널 폭 전환 구간"
+        },
+        {
+          "startSeconds": 668.84,
+          "endSeconds": 675.84,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:11:08.84–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1005,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 275,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1005–1279, y=0–719",
+          "sourceWeekStartSeconds": 4345,
+          "sourceWeekEndSeconds": 4378.5,
+          "note": "브라우저 화면 전환 중 확대된 우측 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 4,
+      "part": 6,
+      "mediaId": "lmc-w04-p06",
+      "title": "검사 결과보고서와 플랫폼 활용",
+      "filename": "LMC_WEEK04_P06_report-and-platform-use.mp4",
+      "objectKey": "lmc/v2/week-04/part-06.mp4",
+      "durationSeconds": 428.338005,
+      "durationTimecode": "00:07:08.34",
+      "weekAbsoluteStartSeconds": 4352,
+      "weekAbsoluteEndSeconds": 4780.338005,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 26.5,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00–00:00:26.50",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1005,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 275,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1005–1279, y=0–719",
+          "sourceWeekStartSeconds": 4345,
+          "sourceWeekEndSeconds": 4378.5,
+          "note": "브라우저 화면 전환 중 확대된 우측 참여자 패널"
+        },
+        {
+          "startSeconds": 26.5,
+          "endSeconds": 428.338005,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:26.50–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 4378.5,
+          "sourceWeekEndSeconds": 4780.338503,
+          "note": "패널 폭 안정화 이후 종료까지"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 1,
+      "mediaId": "lmc-w05-p01",
+      "title": "스트레스의 정의와 핵심 특성",
+      "filename": "LMC_WEEK05_P01_stress-definition-and-core-characteristics.mp4",
+      "objectKey": "lmc/v2/week-05/part-01.mp4",
+      "durationSeconds": 1279.48,
+      "durationTimecode": "00:21:19.48",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1279.48,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 83.5,
+          "endSeconds": 1279.48,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:01:23.50–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1027,
+            "xEnd": 1211,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 185,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+          "sourceWeekStartSeconds": 83.5,
+          "sourceWeekEndSeconds": 4412.5,
+          "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 2,
+      "mediaId": "lmc-w05-p02",
+      "title": "긍정·부정 스트레스와 주요 스트레스 이론",
+      "filename": "LMC_WEEK05_P02_positive-negative-stress-and-theories.mp4",
+      "objectKey": "lmc/v2/week-05/part-02.mp4",
+      "durationSeconds": 864.082031,
+      "durationTimecode": "00:14:24.08",
+      "weekAbsoluteStartSeconds": 1279.48,
+      "weekAbsoluteEndSeconds": 2143.562031,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 864.082031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1027,
+            "xEnd": 1211,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 185,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+          "sourceWeekStartSeconds": 83.5,
+          "sourceWeekEndSeconds": 4412.5,
+          "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 3,
+      "mediaId": "lmc-w05-p03",
+      "title": "RS-스트레스 검사: 스트레스 원인",
+      "filename": "LMC_WEEK05_P03_rs-stress-assessment-causes.mp4",
+      "objectKey": "lmc/v2/week-05/part-03.mp4",
+      "durationSeconds": 734.972031,
+      "durationTimecode": "00:12:14.97",
+      "weekAbsoluteStartSeconds": 2143.562031,
+      "weekAbsoluteEndSeconds": 2878.534062,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 734.972031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1027,
+            "xEnd": 1211,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 185,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+          "sourceWeekStartSeconds": 83.5,
+          "sourceWeekEndSeconds": 4412.5,
+          "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 4,
+      "mediaId": "lmc-w05-p04",
+      "title": "스트레스 증상과 생리적 반응",
+      "filename": "LMC_WEEK05_P04_stress-symptoms-and-physiological-response.mp4",
+      "objectKey": "lmc/v2/week-05/part-04.mp4",
+      "durationSeconds": 1018.002969,
+      "durationTimecode": "00:16:58.00",
+      "weekAbsoluteStartSeconds": 2878.534062,
+      "weekAbsoluteEndSeconds": 3896.537031,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1018.002969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1027,
+            "xEnd": 1211,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 185,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+          "sourceWeekStartSeconds": 83.5,
+          "sourceWeekEndSeconds": 4412.5,
+          "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 5,
+      "mediaId": "lmc-w05-p05",
+      "title": "스트레스 대처 유형과 관리 전략",
+      "filename": "LMC_WEEK05_P05_coping-types-and-management-strategies.mp4",
+      "objectKey": "lmc/v2/week-05/part-05.mp4",
+      "durationSeconds": 516.367031,
+      "durationTimecode": "00:08:36.37",
+      "weekAbsoluteStartSeconds": 3896.537031,
+      "weekAbsoluteEndSeconds": 4412.904062,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 515.962969,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00–00:08:35.96",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1027,
+            "xEnd": 1211,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 185,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1027–1211, y=0–719",
+          "sourceWeekStartSeconds": 83.5,
+          "sourceWeekEndSeconds": 4412.5,
+          "note": "초기 패널이 잠시 더 좁지만 개인정보 누출 방지를 위해 가장 넓은 패널 경계 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 6,
+      "mediaId": "lmc-w05-p06",
+      "title": "스트레스 경험 사례 나눔과 적용 ①",
+      "filename": "LMC_WEEK05_P06_stress-case-application-01.mp4",
+      "objectKey": "lmc/v2/week-05/part-06.mp4",
+      "durationSeconds": 946.015,
+      "durationTimecode": "00:15:46.01",
+      "weekAbsoluteStartSeconds": 4412.904062,
+      "weekAbsoluteEndSeconds": 5358.919062,
+      "decision": "NO_MASK",
+      "intervals": [],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 7,
+      "mediaId": "lmc-w05-p07",
+      "title": "스트레스 경험 사례 나눔과 적용 ②",
+      "filename": "LMC_WEEK05_P07_stress-case-application-02.mp4",
+      "objectKey": "lmc/v2/week-05/part-07.mp4",
+      "durationSeconds": 1099.92,
+      "durationTimecode": "00:18:19.92",
+      "weekAbsoluteStartSeconds": 5358.919062,
+      "weekAbsoluteEndSeconds": 6458.839062,
+      "decision": "NO_MASK",
+      "intervals": [],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 5,
+      "part": 8,
+      "mediaId": "lmc-w05-p08",
+      "title": "사례 통합 정리와 검사 결과 확인",
+      "filename": "LMC_WEEK05_P08_case-integration-and-result-review.mp4",
+      "objectKey": "lmc/v2/week-05/part-08.mp4",
+      "durationSeconds": 812.419773,
+      "durationTimecode": "00:13:32.42",
+      "weekAbsoluteStartSeconds": 6458.839062,
+      "weekAbsoluteEndSeconds": 7271.258835,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 730.160938,
+          "endSeconds": 812.419773,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:12:10.16–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1008,
+            "xEnd": 1211,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 204,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1008–1211, y=0–719",
+          "sourceWeekStartSeconds": 7189,
+          "sourceWeekEndSeconds": 7270.65542,
+          "note": "종료부 화면공유 재개 후 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 1,
+      "mediaId": "lmc-w06-p01",
+      "title": "과정 안내와 학습양식의 기본 개념",
+      "filename": "LMC_WEEK06_P01_course-introduction-and-learning-style.mp4",
+      "objectKey": "lmc/v2/week-06/part-01.mp4",
+      "durationSeconds": 1119.44,
+      "durationTimecode": "00:18:39.44",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1119.44,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1119.44,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 2,
+      "mediaId": "lmc-w06-p02",
+      "title": "학습양식의 다각적 정의: 인지·정의·환경",
+      "filename": "LMC_WEEK06_P02_cognitive-affective-environmental-learning-style.mp4",
+      "objectKey": "lmc/v2/week-06/part-02.mp4",
+      "durationSeconds": 1168.257969,
+      "durationTimecode": "00:19:28.26",
+      "weekAbsoluteStartSeconds": 1119.44,
+      "weekAbsoluteEndSeconds": 2287.697969,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1168.257969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 3,
+      "mediaId": "lmc-w06-p03",
+      "title": "학습 성과를 높이는 5대 정의적 요소",
+      "filename": "LMC_WEEK06_P03_five-affective-learning-factors.mp4",
+      "objectKey": "lmc/v2/week-06/part-03.mp4",
+      "durationSeconds": 721.446016,
+      "durationTimecode": "00:12:01.45",
+      "weekAbsoluteStartSeconds": 2287.697969,
+      "weekAbsoluteEndSeconds": 3009.143985,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 721.446016,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 4,
+      "mediaId": "lmc-w06-p04",
+      "title": "융 분석심리학 기반 학습 성격 접근",
+      "filename": "LMC_WEEK06_P04_jungian-learning-personality.mp4",
+      "objectKey": "lmc/v2/week-06/part-04.mp4",
+      "durationSeconds": 667.775,
+      "durationTimecode": "00:11:07.77",
+      "weekAbsoluteStartSeconds": 3009.143985,
+      "weekAbsoluteEndSeconds": 3676.918985,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 667.775,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 5,
+      "mediaId": "lmc-w06-p05",
+      "title": "학습자 유형별 학습법과 두뇌 기능 분석",
+      "filename": "LMC_WEEK06_P05_learner-types-and-brain-functions.mp4",
+      "objectKey": "lmc/v2/week-06/part-05.mp4",
+      "durationSeconds": 863.845,
+      "durationTimecode": "00:14:23.85",
+      "weekAbsoluteStartSeconds": 3676.918985,
+      "weekAbsoluteEndSeconds": 4540.763985,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 863.845,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 6,
+      "mediaId": "lmc-w06-p06",
+      "title": "학습양식 검사 결과보고서 해석 실습",
+      "filename": "LMC_WEEK06_P06_learning-style-report-practice.mp4",
+      "objectKey": "lmc/v2/week-06/part-06.mp4",
+      "durationSeconds": 1077.406016,
+      "durationTimecode": "00:17:57.41",
+      "weekAbsoluteStartSeconds": 4540.763985,
+      "weekAbsoluteEndSeconds": 5618.170001,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1077.406016,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 6,
+      "part": 7,
+      "mediaId": "lmc-w06-p07",
+      "title": "학습정서 결과 해석과 검사 플랫폼 활용",
+      "filename": "LMC_WEEK06_P07_learning-emotion-and-platform-use.mp4",
+      "objectKey": "lmc/v2/week-06/part-07.mp4",
+      "durationSeconds": 1097.978776,
+      "durationTimecode": "00:18:17.98",
+      "weekAbsoluteStartSeconds": 5618.170001,
+      "weekAbsoluteEndSeconds": 6716.148777,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1097.978776,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6715.605624,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 1,
+      "mediaId": "lmc-w07-p01",
+      "title": "정서검사의 구성과 결과그래프 읽기",
+      "filename": "LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+      "objectKey": "lmc/v2/week-07/part-01.mp4",
+      "durationSeconds": 1116.04,
+      "durationTimecode": "00:18:36.04",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1116.04,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1116.04,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 2,
+      "mediaId": "lmc-w07-p02",
+      "title": "정서검사 사례 해석 ① 점수와 반응 이해",
+      "filename": "LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+      "objectKey": "lmc/v2/week-07/part-02.mp4",
+      "durationSeconds": 986.967969,
+      "durationTimecode": "00:16:26.97",
+      "weekAbsoluteStartSeconds": 1116.04,
+      "weekAbsoluteEndSeconds": 2103.007969,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 986.967969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 3,
+      "mediaId": "lmc-w07-p03",
+      "title": "정서검사 사례 해석 ② 맥락과 정서 패턴",
+      "filename": "LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+      "objectKey": "lmc/v2/week-07/part-03.mp4",
+      "durationSeconds": 1198.017031,
+      "durationTimecode": "00:19:58.02",
+      "weekAbsoluteStartSeconds": 2103.007969,
+      "weekAbsoluteEndSeconds": 3301.025,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1198.017031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 4,
+      "mediaId": "lmc-w07-p04",
+      "title": "사례 통합과 상담·코칭 적용",
+      "filename": "LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+      "objectKey": "lmc/v2/week-07/part-04.mp4",
+      "durationSeconds": 908.82,
+      "durationTimecode": "00:15:08.82",
+      "weekAbsoluteStartSeconds": 3301.025,
+      "weekAbsoluteEndSeconds": 4209.845,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 908.82,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 5,
+      "mediaId": "lmc-w07-p05",
+      "title": "정서척도 ① 사회적 불안과 외로움",
+      "filename": "LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+      "objectKey": "lmc/v2/week-07/part-05.mp4",
+      "durationSeconds": 1116.083984,
+      "durationTimecode": "00:18:36.08",
+      "weekAbsoluteStartSeconds": 4209.845,
+      "weekAbsoluteEndSeconds": 5325.928984,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1116.083984,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 6,
+      "mediaId": "lmc-w07-p06",
+      "title": "정서척도 ② 분노의 원인·기능·영향",
+      "filename": "LMC_WEEK07_P06_anger-causes-functions-and-effects.mp4",
+      "objectKey": "lmc/v2/week-07/part-06.mp4",
+      "durationSeconds": 977.046016,
+      "durationTimecode": "00:16:17.05",
+      "weekAbsoluteStartSeconds": 5325.928984,
+      "weekAbsoluteEndSeconds": 6302.975,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 977.046016,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 7,
+      "part": 7,
+      "mediaId": "lmc-w07-p07",
+      "title": "정서척도 ③ 공격성·무기력·열등감과 결과보고서",
+      "filename": "LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+      "objectKey": "lmc/v2/week-07/part-07.mp4",
+      "durationSeconds": 1009.348209,
+      "durationTimecode": "00:16:49.35",
+      "weekAbsoluteStartSeconds": 6302.975,
+      "weekAbsoluteEndSeconds": 7312.323209,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1009.348209,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1085,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 195,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1085–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 7311.777959,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 1,
+      "mediaId": "lmc-w08-p01",
+      "title": "행복지수(우울)검사의 이해와 우울 분류",
+      "filename": "LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
+      "objectKey": "lmc/v2/week-08/part-01.mp4",
+      "durationSeconds": 1106.08,
+      "durationTimecode": "00:18:26.08",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1106.08,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 93,
+          "endSeconds": 1106.08,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:01:33.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1132,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 148,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+          "sourceWeekStartSeconds": 93,
+          "sourceWeekEndSeconds": 3802.5,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 2,
+      "mediaId": "lmc-w08-p02",
+      "title": "기분곡선과 우울·조증·경조증 삽화",
+      "filename": "LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
+      "objectKey": "lmc/v2/week-08/part-02.mp4",
+      "durationSeconds": 895.13,
+      "durationTimecode": "00:14:55.13",
+      "weekAbsoluteStartSeconds": 1106.08,
+      "weekAbsoluteEndSeconds": 2001.21,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 895.13,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1132,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 148,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+          "sourceWeekStartSeconds": 93,
+          "sourceWeekEndSeconds": 3802.5,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 3,
+      "mediaId": "lmc-w08-p03",
+      "title": "주요우울장애 진단기준과 특성",
+      "filename": "LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
+      "objectKey": "lmc/v2/week-08/part-03.mp4",
+      "durationSeconds": 569.852969,
+      "durationTimecode": "00:09:29.85",
+      "weekAbsoluteStartSeconds": 2001.21,
+      "weekAbsoluteEndSeconds": 2571.062969,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 569.852969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1132,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 148,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+          "sourceWeekStartSeconds": 93,
+          "sourceWeekEndSeconds": 3802.5,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 4,
+      "mediaId": "lmc-w08-p04",
+      "title": "우울의 생물학적·심리사회적 원인",
+      "filename": "LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "objectKey": "lmc/v2/week-08/part-04.mp4",
+      "durationSeconds": 931.122031,
+      "durationTimecode": "00:15:31.12",
+      "weekAbsoluteStartSeconds": 2571.062969,
+      "weekAbsoluteEndSeconds": 3502.185,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 931.122031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1132,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 148,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+          "sourceWeekStartSeconds": 93,
+          "sourceWeekEndSeconds": 3802.5,
+          "note": "초반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 5,
+      "mediaId": "lmc-w08-p05",
+      "title": "우울 증상·검사·치료와 결과구조",
+      "filename": "LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
+      "objectKey": "lmc/v2/week-08/part-05.mp4",
+      "durationSeconds": 591.375,
+      "durationTimecode": "00:09:51.38",
+      "weekAbsoluteStartSeconds": 3502.185,
+      "weekAbsoluteEndSeconds": 4093.56,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 300.315,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00–00:05:00.32",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1132,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 148,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1132–1279, y=0–719",
+          "sourceWeekStartSeconds": 93,
+          "sourceWeekEndSeconds": 3802.5,
+          "note": "초반 화면공유 우측 패널"
+        },
+        {
+          "startSeconds": 379.815,
+          "endSeconds": 385.315,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:06:19.82–00:06:25.32",
+          "maskType": "FULL_FRAME",
+          "coordinate": {
+            "xStart": 0,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 1280,
+            "height": 720
+          },
+          "coordinateText": "FULL_FRAME x=0–1279, y=0–719",
+          "sourceWeekStartSeconds": 3882,
+          "sourceWeekEndSeconds": 3887.5,
+          "note": "참여자 Y 프로필이 전체화면으로 노출되는 구간 — 기존 후보 좌표의 중대 누락 보정"
+        },
+        {
+          "startSeconds": 385.315,
+          "endSeconds": 591.375,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:06:25.32–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1083,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 197,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+          "sourceWeekStartSeconds": 3887.5,
+          "sourceWeekEndSeconds": 6352.004354,
+          "note": "후반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 6,
+      "mediaId": "lmc-w08-p06",
+      "title": "행복지수 6개 증상척도의 구성과 해석",
+      "filename": "LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
+      "objectKey": "lmc/v2/week-08/part-06.mp4",
+      "durationSeconds": 1008.102031,
+      "durationTimecode": "00:16:48.10",
+      "weekAbsoluteStartSeconds": 4093.56,
+      "weekAbsoluteEndSeconds": 5101.662031,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1008.102031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1083,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 197,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+          "sourceWeekStartSeconds": 3887.5,
+          "sourceWeekEndSeconds": 6352.004354,
+          "note": "후반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 7,
+      "mediaId": "lmc-w08-p07",
+      "title": "증상척도 사례 적용과 종합 해석",
+      "filename": "LMC_WEEK08_P07_symptom-scale-case-application.mp4",
+      "objectKey": "lmc/v2/week-08/part-07.mp4",
+      "durationSeconds": 945.301016,
+      "durationTimecode": "00:15:45.30",
+      "weekAbsoluteStartSeconds": 5101.662031,
+      "weekAbsoluteEndSeconds": 6046.963047,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 945.301016,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1083,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 197,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+          "sourceWeekStartSeconds": 3887.5,
+          "sourceWeekEndSeconds": 6352.004354,
+          "note": "후반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 8,
+      "part": 8,
+      "mediaId": "lmc-w08-p08",
+      "title": "결과보고서와 검사 플랫폼 활용",
+      "filename": "LMC_WEEK08_P08_report-and-assessment-platform.mp4",
+      "objectKey": "lmc/v2/week-08/part-08.mp4",
+      "durationSeconds": 305.690703,
+      "durationTimecode": "00:05:05.69",
+      "weekAbsoluteStartSeconds": 6046.963047,
+      "weekAbsoluteEndSeconds": 6352.65375,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 305.690703,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1083,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 197,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1083–1279, y=0–719",
+          "sourceWeekStartSeconds": 3887.5,
+          "sourceWeekEndSeconds": 6352.004354,
+          "note": "후반 화면공유 우측 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 1,
+      "mediaId": "lmc-w09-p01",
+      "title": "이상심리학의 이해와 정상·이상의 경계",
+      "filename": "LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "objectKey": "lmc/v2/week-09/part-01.mp4",
+      "durationSeconds": 1080.12,
+      "durationTimecode": "00:18:00.12",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1080.12,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 47.26,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00-00:00:47.26",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 0,
+            "xEnd": 319,
+            "yStart": 0,
+            "yEnd": 179,
+            "width": 320,
+            "height": 180
+          },
+          "coordinateText": "PANEL_BOX x=0-319, y=0-179",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 47.26,
+          "note": "Opening gallery: mask first-row student tile left; preserve instructor tile x=320-639, y=0-179."
+        },
+        {
+          "startSeconds": 0,
+          "endSeconds": 47.26,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00-00:00:47.26",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 640,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 179,
+            "width": 640,
+            "height": 180
+          },
+          "coordinateText": "PANEL_BOX x=640-1279, y=0-179",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 47.26,
+          "note": "Opening gallery: mask first-row student tiles right; preserve instructor tile."
+        },
+        {
+          "startSeconds": 0,
+          "endSeconds": 47.26,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00-00:00:47.26",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 0,
+            "xEnd": 1279,
+            "yStart": 180,
+            "yEnd": 719,
+            "width": 1280,
+            "height": 540
+          },
+          "coordinateText": "PANEL_BOX x=0-1279, y=180-719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 47.26,
+          "note": "Opening gallery: mask all lower student rows; preserve instructor tile."
+        },
+        {
+          "startSeconds": 47.26,
+          "endSeconds": 55.66,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:47.26-00:00:55.66",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 247,
+            "width": 80,
+            "height": 248
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=0-247",
+          "sourceWeekStartSeconds": 47.26,
+          "sourceWeekEndSeconds": 55.66,
+          "note": "Nine-person compact strip: mask above instructor; preserve x=1200-1279, y=248-292."
+        },
+        {
+          "startSeconds": 47.26,
+          "endSeconds": 55.66,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:47.26-00:00:55.66",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 293,
+            "yEnd": 719,
+            "width": 80,
+            "height": 427
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=293-719",
+          "sourceWeekStartSeconds": 47.26,
+          "sourceWeekEndSeconds": 55.66,
+          "note": "Nine-person compact strip: mask below instructor; preserve x=1200-1279, y=248-292."
+        },
+        {
+          "startSeconds": 55.66,
+          "endSeconds": 57.3,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:55.66-00:00:57.30",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 269,
+            "width": 80,
+            "height": 270
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+          "sourceWeekStartSeconds": 55.66,
+          "sourceWeekEndSeconds": 57.3,
+          "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 55.66,
+          "endSeconds": 57.3,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:55.66-00:00:57.30",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 315,
+            "yEnd": 719,
+            "width": 80,
+            "height": 405
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+          "sourceWeekStartSeconds": 55.66,
+          "sourceWeekEndSeconds": 57.3,
+          "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 57.3,
+          "endSeconds": 76.38,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:57.30-00:01:16.38",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1120,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 224,
+            "width": 160,
+            "height": 225
+          },
+          "coordinateText": "PANEL_BOX x=1120-1279, y=0-224",
+          "sourceWeekStartSeconds": 57.3,
+          "sourceWeekEndSeconds": 76.38,
+          "note": "Five-person wide strip: mask above instructor; preserve x=1120-1279, y=225-314."
+        },
+        {
+          "startSeconds": 57.3,
+          "endSeconds": 76.38,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:57.30-00:01:16.38",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1120,
+            "xEnd": 1279,
+            "yStart": 315,
+            "yEnd": 719,
+            "width": 160,
+            "height": 405
+          },
+          "coordinateText": "PANEL_BOX x=1120-1279, y=315-719",
+          "sourceWeekStartSeconds": 57.3,
+          "sourceWeekEndSeconds": 76.38,
+          "note": "Five-person wide strip: mask below instructor; preserve x=1120-1279, y=225-314."
+        },
+        {
+          "startSeconds": 76.38,
+          "endSeconds": 1080.12,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:01:16.38-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 269,
+            "width": 80,
+            "height": 270
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+          "sourceWeekStartSeconds": 76.38,
+          "sourceWeekEndSeconds": 1080.12,
+          "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 76.38,
+          "endSeconds": 1080.12,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:01:16.38-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 315,
+            "yEnd": 719,
+            "width": 80,
+            "height": 405
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+          "sourceWeekStartSeconds": 76.38,
+          "sourceWeekEndSeconds": 1080.12,
+          "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 2,
+      "mediaId": "lmc-w09-p02",
+      "title": "이상심리 판단기준: 현실판단·적응·통계",
+      "filename": "LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "objectKey": "lmc/v2/week-09/part-02.mp4",
+      "durationSeconds": 1080.09,
+      "durationTimecode": "00:18:00.09",
+      "weekAbsoluteStartSeconds": 1080.12,
+      "weekAbsoluteEndSeconds": 2160.21,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1080.09,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 269,
+            "width": 80,
+            "height": 270
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+          "sourceWeekStartSeconds": 1080.12,
+          "sourceWeekEndSeconds": 2160.21,
+          "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 0,
+          "endSeconds": 1080.09,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 315,
+            "yEnd": 719,
+            "width": 80,
+            "height": 405
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+          "sourceWeekStartSeconds": 1080.12,
+          "sourceWeekEndSeconds": 2160.21,
+          "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 3,
+      "mediaId": "lmc-w09-p03",
+      "title": "사회문화적 기준과 ICD·DSM 진단체계",
+      "filename": "LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "objectKey": "lmc/v2/week-09/part-03.mp4",
+      "durationSeconds": 833.042969,
+      "durationTimecode": "00:13:53.04",
+      "weekAbsoluteStartSeconds": 2160.21,
+      "weekAbsoluteEndSeconds": 2993.252969,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 833.042969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 269,
+            "width": 80,
+            "height": 270
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+          "sourceWeekStartSeconds": 2160.21,
+          "sourceWeekEndSeconds": 2993.252969,
+          "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 0,
+          "endSeconds": 833.042969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 315,
+            "yEnd": 719,
+            "width": 80,
+            "height": 405
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+          "sourceWeekStartSeconds": 2160.21,
+          "sourceWeekEndSeconds": 2993.252969,
+          "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 4,
+      "mediaId": "lmc-w09-p04",
+      "title": "이상심리의 이론적 입장과 치료 접근",
+      "filename": "LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "objectKey": "lmc/v2/week-09/part-04.mp4",
+      "durationSeconds": 818.577031,
+      "durationTimecode": "00:13:38.58",
+      "weekAbsoluteStartSeconds": 2993.252969,
+      "weekAbsoluteEndSeconds": 3811.83,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 732.5,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00-00:12:12.50",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 269,
+            "width": 80,
+            "height": 270
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=0-269",
+          "sourceWeekStartSeconds": 2993.252969,
+          "sourceWeekEndSeconds": 3725.752969,
+          "note": "Six-person compact strip: mask above instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 0,
+          "endSeconds": 732.5,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:00:00.00-00:12:12.50",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 1200,
+            "xEnd": 1279,
+            "yStart": 315,
+            "yEnd": 719,
+            "width": 80,
+            "height": 405
+          },
+          "coordinateText": "PANEL_BOX x=1200-1279, y=315-719",
+          "sourceWeekStartSeconds": 2993.252969,
+          "sourceWeekEndSeconds": 3725.752969,
+          "note": "Six-person compact strip: mask below instructor; preserve x=1200-1279, y=270-314."
+        },
+        {
+          "startSeconds": 732.5,
+          "endSeconds": 788.74,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:12:12.50-00:13:08.74",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 0,
+            "xEnd": 255,
+            "yStart": 0,
+            "yEnd": 215,
+            "width": 256,
+            "height": 216
+          },
+          "coordinateText": "PANEL_BOX x=0-255, y=0-215",
+          "sourceWeekStartSeconds": 3725.752969,
+          "sourceWeekEndSeconds": 3781.992969,
+          "note": "Five-column gallery: mask first-row student tile left; preserve instructor tile x=256-511, y=72-215."
+        },
+        {
+          "startSeconds": 732.5,
+          "endSeconds": 788.74,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:12:12.50-00:13:08.74",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 512,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 215,
+            "width": 768,
+            "height": 216
+          },
+          "coordinateText": "PANEL_BOX x=512-1279, y=0-215",
+          "sourceWeekStartSeconds": 3725.752969,
+          "sourceWeekEndSeconds": 3781.992969,
+          "note": "Five-column gallery: mask first-row student tiles right; preserve instructor tile."
+        },
+        {
+          "startSeconds": 732.5,
+          "endSeconds": 788.74,
+          "endIsFileEnd": false,
+          "rangeTimecode": "00:12:12.50-00:13:08.74",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 0,
+            "xEnd": 1279,
+            "yStart": 216,
+            "yEnd": 719,
+            "width": 1280,
+            "height": 504
+          },
+          "coordinateText": "PANEL_BOX x=0-1279, y=216-719",
+          "sourceWeekStartSeconds": 3725.752969,
+          "sourceWeekEndSeconds": 3781.992969,
+          "note": "Five-column gallery: mask all lower student rows; preserve instructor tile."
+        },
+        {
+          "startSeconds": 788.74,
+          "endSeconds": 818.577031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:13:08.74-END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 864,
+            "xEnd": 1003,
+            "yStart": 140,
+            "yEnd": 455,
+            "width": 140,
+            "height": 316
+          },
+          "coordinateText": "PANEL_BOX x=864-1003, y=140-455",
+          "sourceWeekStartSeconds": 3781.992969,
+          "sourceWeekEndSeconds": 3811.83,
+          "note": "Embedded panel: mask student tiles below; preserve instructor tile x=864-1003, y=57-139."
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 5,
+      "mediaId": "lmc-w09-p05",
+      "title": "RS 심리건강 7개 척도 해석 ① 핵심 개념",
+      "filename": "LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "objectKey": "lmc/v2/week-09/part-05.mp4",
+      "durationSeconds": 1204.257031,
+      "durationTimecode": "00:20:04.26",
+      "weekAbsoluteStartSeconds": 3811.83,
+      "weekAbsoluteEndSeconds": 5016.087031,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1204.257031,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 864,
+            "xEnd": 1003,
+            "yStart": 140,
+            "yEnd": 455,
+            "width": 140,
+            "height": 316
+          },
+          "coordinateText": "PANEL_BOX x=864–1003, y=140–455",
+          "sourceWeekStartSeconds": 3782,
+          "sourceWeekEndSeconds": 7496.376599,
+          "note": "내장 패널의 수강생 칸만 마스킹 — 상단 강사 칸 x=864–1003, y=57–139 보존"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 6,
+      "mediaId": "lmc-w09-p06",
+      "title": "RS 심리건강 7개 척도 해석 ② 원인과 영향",
+      "filename": "LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "objectKey": "lmc/v2/week-09/part-06.mp4",
+      "durationSeconds": 1198.012969,
+      "durationTimecode": "00:19:58.01",
+      "weekAbsoluteStartSeconds": 5016.087031,
+      "weekAbsoluteEndSeconds": 6214.1,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1198.012969,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 864,
+            "xEnd": 1003,
+            "yStart": 140,
+            "yEnd": 455,
+            "width": 140,
+            "height": 316
+          },
+          "coordinateText": "PANEL_BOX x=864–1003, y=140–455",
+          "sourceWeekStartSeconds": 3782,
+          "sourceWeekEndSeconds": 7496.376599,
+          "note": "내장 패널의 수강생 칸만 마스킹 — 상단 강사 칸 x=864–1003, y=57–139 보존"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 9,
+      "part": 7,
+      "mediaId": "lmc-w09-p07",
+      "title": "RS 심리건강 7개 척도 해석 ③ 사례 통합과 활용",
+      "filename": "LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "objectKey": "lmc/v2/week-09/part-07.mp4",
+      "durationSeconds": 1282.832834,
+      "durationTimecode": "00:21:22.83",
+      "weekAbsoluteStartSeconds": 6214.1,
+      "weekAbsoluteEndSeconds": 7496.932834,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1282.832834,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "PANEL_BOX",
+          "coordinate": {
+            "xStart": 864,
+            "xEnd": 1003,
+            "yStart": 140,
+            "yEnd": 455,
+            "width": 140,
+            "height": 316
+          },
+          "coordinateText": "PANEL_BOX x=864–1003, y=140–455",
+          "sourceWeekStartSeconds": 3782,
+          "sourceWeekEndSeconds": 7496.376599,
+          "note": "내장 패널의 수강생 칸만 마스킹 — 상단 강사 칸 x=864–1003, y=57–139 보존"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 1,
+      "mediaId": "lmc-w10-p01",
+      "title": "RS 부부커플검사 결과프로파일 읽기",
+      "filename": "LMC_WEEK10_P01_couple-assessment-profile.mp4",
+      "objectKey": "lmc/v2/week-10/part-01.mp4",
+      "durationSeconds": 1112.24,
+      "durationTimecode": "00:18:32.24",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1112.24,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1112.24,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 2,
+      "mediaId": "lmc-w10-p02",
+      "title": "사례 해석 ① 높은 요인과 관계 자원",
+      "filename": "LMC_WEEK10_P02_case-strengths-and-relationship-resources.mp4",
+      "objectKey": "lmc/v2/week-10/part-02.mp4",
+      "durationSeconds": 1086.96,
+      "durationTimecode": "00:18:06.96",
+      "weekAbsoluteStartSeconds": 1112.24,
+      "weekAbsoluteEndSeconds": 2199.2,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1086.96,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 3,
+      "mediaId": "lmc-w10-p03",
+      "title": "사례 해석 ② 낮은 요인과 조정 과제",
+      "filename": "LMC_WEEK10_P03_case-low-factors-and-adjustment.mp4",
+      "objectKey": "lmc/v2/week-10/part-03.mp4",
+      "durationSeconds": 1120.2,
+      "durationTimecode": "00:18:40.20",
+      "weekAbsoluteStartSeconds": 2199.2,
+      "weekAbsoluteEndSeconds": 3319.4,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1120.2,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 4,
+      "mediaId": "lmc-w10-p04",
+      "title": "사례 통합과 부부상담·코칭 적용",
+      "filename": "LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
+      "objectKey": "lmc/v2/week-10/part-04.mp4",
+      "durationSeconds": 1158.56,
+      "durationTimecode": "00:19:18.56",
+      "weekAbsoluteStartSeconds": 3319.4,
+      "weekAbsoluteEndSeconds": 4477.96,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1158.56,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 5,
+      "mediaId": "lmc-w10-p05",
+      "title": "부부커플검사 개요와 결혼만족도 이론",
+      "filename": "LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
+      "objectKey": "lmc/v2/week-10/part-05.mp4",
+      "durationSeconds": 706.72,
+      "durationTimecode": "00:11:46.72",
+      "weekAbsoluteStartSeconds": 4477.96,
+      "weekAbsoluteEndSeconds": 5184.68,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 706.72,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 6,
+      "mediaId": "lmc-w10-p06",
+      "title": "13개 측정요인의 의미와 해석기준",
+      "filename": "LMC_WEEK10_P06_thirteen-factors-and-criteria.mp4",
+      "objectKey": "lmc/v2/week-10/part-06.mp4",
+      "durationSeconds": 784.6,
+      "durationTimecode": "00:13:04.60",
+      "weekAbsoluteStartSeconds": 5184.68,
+      "weekAbsoluteEndSeconds": 5969.28,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 784.6,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 10,
+      "part": 7,
+      "mediaId": "lmc-w10-p07",
+      "title": "결과보고서 해석과 검사 플랫폼 활용",
+      "filename": "LMC_WEEK10_P07_report-interpretation-and-platform.mp4",
+      "objectKey": "lmc/v2/week-10/part-07.mp4",
+      "durationSeconds": 936.729002,
+      "durationTimecode": "00:15:36.73",
+      "weekAbsoluteStartSeconds": 5969.28,
+      "weekAbsoluteEndSeconds": 6906.009002,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 936.729002,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1059,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 221,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1059–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6906.009252,
+          "note": "초기 패널 경계 x=1067, 이후 x=1088로 좁아지므로 개인정보 안전을 위해 x=1067을 전 구간 적용"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 1,
+      "mediaId": "lmc-w11-p01",
+      "title": "발달검사 결과프로파일과 측정요인 개요",
+      "filename": "LMC_WEEK11_P01_development-profile-and-factors.mp4",
+      "objectKey": "lmc/v2/week-11/part-01.mp4",
+      "durationSeconds": 1019.64,
+      "durationTimecode": "00:16:59.64",
+      "weekAbsoluteStartSeconds": 0,
+      "weekAbsoluteEndSeconds": 1019.64,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1019.64,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 2,
+      "mediaId": "lmc-w11-p02",
+      "title": "아동·청소년 발달요인 ① 신체·자아상·자기조절",
+      "filename": "LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
+      "objectKey": "lmc/v2/week-11/part-02.mp4",
+      "durationSeconds": 1015.2,
+      "durationTimecode": "00:16:55.20",
+      "weekAbsoluteStartSeconds": 1019.64,
+      "weekAbsoluteEndSeconds": 2034.84,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 1015.2,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 3,
+      "mediaId": "lmc-w11-p03",
+      "title": "아동·청소년 발달요인 ② 학업·효능감·정체성·독립성",
+      "filename": "LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
+      "objectKey": "lmc/v2/week-11/part-03.mp4",
+      "durationSeconds": 849.4,
+      "durationTimecode": "00:14:09.40",
+      "weekAbsoluteStartSeconds": 2034.84,
+      "weekAbsoluteEndSeconds": 2884.24,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 849.4,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 4,
+      "mediaId": "lmc-w11-p04",
+      "title": "성인 발달요인과 발달진단검사 전체 구조",
+      "filename": "LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
+      "objectKey": "lmc/v2/week-11/part-04.mp4",
+      "durationSeconds": 813.8,
+      "durationTimecode": "00:13:33.80",
+      "weekAbsoluteStartSeconds": 2884.24,
+      "weekAbsoluteEndSeconds": 3698.04,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 813.8,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 5,
+      "mediaId": "lmc-w11-p05",
+      "title": "발달진단검사 구성과 아동·청소년 사례 적용",
+      "filename": "LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
+      "objectKey": "lmc/v2/week-11/part-05.mp4",
+      "durationSeconds": 861.2,
+      "durationTimecode": "00:14:21.20",
+      "weekAbsoluteStartSeconds": 3698.04,
+      "weekAbsoluteEndSeconds": 4559.24,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 861.2,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 6,
+      "mediaId": "lmc-w11-p06",
+      "title": "생애단계별 발달요인 비교와 통합 해석",
+      "filename": "LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
+      "objectKey": "lmc/v2/week-11/part-06.mp4",
+      "durationSeconds": 825.52,
+      "durationTimecode": "00:13:45.52",
+      "weekAbsoluteStartSeconds": 4559.24,
+      "weekAbsoluteEndSeconds": 5384.76,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 825.52,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    },
+    {
+      "week": 11,
+      "part": 7,
+      "mediaId": "lmc-w11-p07",
+      "title": "성인 발달요인·결과보고서와 과정 정리",
+      "filename": "LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
+      "objectKey": "lmc/v2/week-11/part-07.mp4",
+      "durationSeconds": 896.933991,
+      "durationTimecode": "00:14:56.93",
+      "weekAbsoluteStartSeconds": 5384.76,
+      "weekAbsoluteEndSeconds": 6281.693991,
+      "decision": "MASK",
+      "intervals": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 896.933991,
+          "endIsFileEnd": true,
+          "rangeTimecode": "00:00:00.00–END",
+          "maskType": "RIGHT_PANEL",
+          "coordinate": {
+            "xStart": 1080,
+            "xEnd": 1279,
+            "yStart": 0,
+            "yEnd": 719,
+            "width": 200,
+            "height": 720
+          },
+          "coordinateText": "RIGHT_PANEL x=1080–1279, y=0–719",
+          "sourceWeekStartSeconds": 0,
+          "sourceWeekEndSeconds": 6281.694331,
+          "note": "전 구간 우측 Zoom 참여자 패널"
+        }
+      ],
+      "boundaryBasis": "cumulative actualDurationSeconds from LMC_77_UPLOAD_MANIFEST_FINAL.json"
+    }
+  ]
+}

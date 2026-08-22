@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-11T13:38:00.564Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 11,
+  "expectedUploads": 7,
+  "mode": "EXECUTE",
+  "rows": [
+    {
+      "mediaId": "lmc-w11-p01",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P01_result-profile-and-factor-overview.mp4",
+      "sourceFilename": "LMC_WEEK11_P01_development-profile-and-factors.mp4",
+      "newSizeBytes": 25478752,
+      "newSha256": "8c11db20f04fc36bc494c7a3a0156308ecefb83ecc341ed220b4d7c2dfa6eeb7",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w11-p02",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P02_child-adolescent-factors-self-and-regulation.mp4",
+      "sourceFilename": "LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
+      "newSizeBytes": 25198285,
+      "newSha256": "c06a46e110ac08d10b21b0a78d3a7be6b1dab7ae826604b5b5c07c03511efb74",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w11-p03",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P03_child-adolescent-factors-learning-identity-independence.mp4",
+      "sourceFilename": "LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
+      "newSizeBytes": 21240961,
+      "newSha256": "73cef06df0139c37dc8b7b33a72e3159e6719bf93c10e52bc89aa112d59b5ca5",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w11-p04",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P04_adult-factors-and-assessment-framework.mp4",
+      "sourceFilename": "LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
+      "newSizeBytes": 18706846,
+      "newSha256": "6545dceb4fb525a0adac3d90638ec2a2e0a95a98110cf9ebc1ce0daeaca27afd",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w11-p05",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P05_child-adolescent-case-application.mp4",
+      "sourceFilename": "LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
+      "newSizeBytes": 21714623,
+      "newSha256": "c9819c142b1c0aead941e76ce68a0aff588a6f944bc14d788a96752627edf0c7",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w11-p06",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P06_child-review-and-adult-factor-transition.mp4",
+      "sourceFilename": "LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
+      "newSizeBytes": 20369854,
+      "newSha256": "a7a2b0c6e3665c8ecc7b029b8dcccfe9859974230656214a3522da64e823d840",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w11-p07",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4",
+      "sourceFilename": "LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
+      "newSizeBytes": 21332422,
+      "newSha256": "6ef1f2871d080b87aee22006099725f6478f0563e142f5ea40dcd6f6175a5e4d",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    }
+  ]
+}

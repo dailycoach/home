@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-08-11T14:16:38.730Z",
+  "week": 5,
+  "status": "PASS",
+  "syncedCount": 8,
+  "sourceFiles": {
+    "technicalQa": "artifacts/lmc-privacy-rework/week-05/week-05-technical-qa.json",
+    "remoteQa": "artifacts/lmc-privacy-rework/week-05/week-05-remote-playback-qa.json",
+    "r2Report": "artifacts/lmc-privacy-rework/week-05/week-05-r2-overwrite-report.json"
+  },
+  "outputs": [
+    "lcms/academy/data/media-catalog.json",
+    "lcms/academy/r2-worker/src/media-catalog.js",
+    "lcms/academy/r2-worker/upload/video-upload-map.json",
+    "lcms/academy/r2-worker/upload/video-upload-map.csv",
+    "lcms/academy/r2-worker/upload/LMC_77_SHA256SUMS.txt"
+  ],
+  "changes": [
+    {
+      "mediaId": "lmc-w05-p01",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P01_stress-definition-and-characteristics(1).mp4",
+      "previousSizeBytes": 44441468,
+      "nextSizeBytes": 44441468,
+      "previousSha256": "de086267e080b1c7e6459fe1aa84c38e27ecb52ce247ce7a64c6e3e77c934f2b",
+      "nextSha256": "de086267e080b1c7e6459fe1aa84c38e27ecb52ce247ce7a64c6e3e77c934f2b"
+    },
+    {
+      "mediaId": "lmc-w05-p02",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P02_stress-theories-and-cognitive-appraisal(1).mp4",
+      "previousSizeBytes": 28670204,
+      "nextSizeBytes": 28670204,
+      "previousSha256": "7b1c982151df3b13121ef9919d12a947a650e3e0e1d3c972949cea503b505040",
+      "nextSha256": "7b1c982151df3b13121ef9919d12a947a650e3e0e1d3c972949cea503b505040"
+    },
+    {
+      "mediaId": "lmc-w05-p03",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P03_stress-causes-and-assessment(1).mp4",
+      "previousSizeBytes": 26372684,
+      "nextSizeBytes": 26372684,
+      "previousSha256": "3bcccfe3c06b2290d2dc810715e40051e2ef489c1b7d0d6f929fb71ac1c008f5",
+      "nextSha256": "3bcccfe3c06b2290d2dc810715e40051e2ef489c1b7d0d6f929fb71ac1c008f5"
+    },
+    {
+      "mediaId": "lmc-w05-p04",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P04_stress-symptoms-and-physiological-response(1).mp4",
+      "previousSizeBytes": 36118471,
+      "nextSizeBytes": 36118471,
+      "previousSha256": "fff1f715177bfeede3ab7a566bfa604a76a9cfdb641af2859e578df50fb0c123",
+      "nextSha256": "fff1f715177bfeede3ab7a566bfa604a76a9cfdb641af2859e578df50fb0c123"
+    },
+    {
+      "mediaId": "lmc-w05-p05",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P05_coping-styles-and-management-strategies(1).mp4",
+      "previousSizeBytes": 19280772,
+      "nextSizeBytes": 19280772,
+      "previousSha256": "463d10d8e20a98de03ecbf4efe320e4abf92b2339a72f5761859b679367a1401",
+      "nextSha256": "463d10d8e20a98de03ecbf4efe320e4abf92b2339a72f5761859b679367a1401"
+    },
+    {
+      "mediaId": "lmc-w05-p06",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P06_case-sharing-and-application-one(1).mp4",
+      "previousSizeBytes": 68516077,
+      "nextSizeBytes": 68516077,
+      "previousSha256": "6e03487074d8b0e27752da8b67bd73a5a886dfe7300d3753ec19a3f52d554353",
+      "nextSha256": "6e03487074d8b0e27752da8b67bd73a5a886dfe7300d3753ec19a3f52d554353"
+    },
+    {
+      "mediaId": "lmc-w05-p07",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P07_case-sharing-and-application-two(1).mp4",
+      "previousSizeBytes": 74697167,
+      "nextSizeBytes": 74697167,
+      "previousSha256": "183760cec3439e62cd7c8e975333fbb4b922eb64621fe4bbe82dbe8e1b467df8",
+      "nextSha256": "183760cec3439e62cd7c8e975333fbb4b922eb64621fe4bbe82dbe8e1b467df8"
+    },
+    {
+      "mediaId": "lmc-w05-p08",
+      "objectKey": "lmc/v2/week-05/LMC_WEEK05_P08_integration-and-result-review(1).mp4",
+      "previousSizeBytes": 114292100,
+      "nextSizeBytes": 114292100,
+      "previousSha256": "879f18cc8c7476198e355e43cd2a94cf8cb9426c80f6f5423255f0ddaaf820bd",
+      "nextSha256": "879f18cc8c7476198e355e43cd2a94cf8cb9426c80f6f5423255f0ddaaf820bd"
+    }
+  ]
+}

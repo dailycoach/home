@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-08-11T06:13:47.677Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 3,
+  "uploadedCount": 8,
+  "uploaded": [
+    {
+      "mediaId": "lmc-w03-p01",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P01_course-overview-and-personality-definition.mp4",
+      "sizeBytes": 28084733,
+      "sha256": "889f39cafa3b6f375db3d7b4fc8feedf6cf78a6354646582b28e823d931f00ca",
+      "uploadedAt": "2026-08-11T06:13:12.160Z"
+    },
+    {
+      "mediaId": "lmc-w03-p02",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "sizeBytes": 20080452,
+      "sha256": "3ed461c91b52bee6fe3fa538f09475e0520ddfbf928d0c8ecc337972eead934a",
+      "uploadedAt": "2026-08-11T06:13:17.128Z"
+    },
+    {
+      "mediaId": "lmc-w03-p03",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P03_personality-theory-framework-one.mp4",
+      "sizeBytes": 21857666,
+      "sha256": "cefcf9616f12bdaea0ed410e8edfc4037b3cd8bd30288a91a97cded13a6d8f8b",
+      "uploadedAt": "2026-08-11T06:13:22.592Z"
+    },
+    {
+      "mediaId": "lmc-w03-p04",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P04_personality-theory-framework-two.mp4",
+      "sizeBytes": 22400887,
+      "sha256": "2428cd8eb2e240673eb0d185e0e1c49d8909d1322587c60920167843d8459a00",
+      "uploadedAt": "2026-08-11T06:13:27.416Z"
+    },
+    {
+      "mediaId": "lmc-w03-p05",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P05_personality-theory-comparison-and-application.mp4",
+      "sizeBytes": 22446624,
+      "sha256": "7f2b71e5fa8913a1efdc2d57323c9662f8a707b1cfdbef9cee1bddf69b4a2985",
+      "uploadedAt": "2026-08-11T06:13:31.711Z"
+    },
+    {
+      "mediaId": "lmc-w03-p06",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P06_integrated-theories-cattell-and-16pf.mp4",
+      "sizeBytes": 31061749,
+      "sha256": "7497f9d69f584175c65b657dfcf2abc4d171d318bb80f6afb0b33084c298ad72",
+      "uploadedAt": "2026-08-11T06:13:37.631Z"
+    },
+    {
+      "mediaId": "lmc-w03-p07",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "sizeBytes": 23764006,
+      "sha256": "7411f1b49303d5f8acf8f3522da47e6c7ce74a705a8947abf5c00ef8da0caa59",
+      "uploadedAt": "2026-08-11T06:13:42.129Z"
+    },
+    {
+      "mediaId": "lmc-w03-p08",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P08_ai-assisted-interpretation-and-platform-use.mp4",
+      "sizeBytes": 19614976,
+      "sha256": "a66e2aa7b6b223ea379434cf348bc850b3eca63bf9dbcfa0be4a5397d57a002e",
+      "uploadedAt": "2026-08-11T06:13:47.677Z"
+    }
+  ]
+}

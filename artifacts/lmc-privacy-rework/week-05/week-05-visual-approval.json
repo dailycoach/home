@@ -1,0 +1,50 @@
+{
+  "week": 5,
+  "approved": true,
+  "approvedAt": "2026-08-11T23:02:33.7725054+09:00",
+  "reviewer": "human",
+  "approvalStatement": "WEEK-05 원본유지 승인",
+  "approvalScope": "P06 and P07 preserve pristine bytes even though their source containers are not Fast Start; all eight parts passed visual privacy review.",
+  "parts": [
+    {
+      "mediaId": "lmc-w05-p01",
+      "privacyVisualPass": true,
+      "reviewNote": "Human approved WEEK-05 visual privacy output."
+    },
+    {
+      "mediaId": "lmc-w05-p02",
+      "privacyVisualPass": true,
+      "reviewNote": "Human approved WEEK-05 visual privacy output."
+    },
+    {
+      "mediaId": "lmc-w05-p03",
+      "privacyVisualPass": true,
+      "reviewNote": "Human approved WEEK-05 visual privacy output."
+    },
+    {
+      "mediaId": "lmc-w05-p04",
+      "privacyVisualPass": true,
+      "reviewNote": "Human approved WEEK-05 visual privacy output."
+    },
+    {
+      "mediaId": "lmc-w05-p05",
+      "privacyVisualPass": true,
+      "reviewNote": "Human approved WEEK-05 visual privacy output."
+    },
+    {
+      "mediaId": "lmc-w05-p06",
+      "privacyVisualPass": true,
+      "reviewNote": "NO_MASK pristine-byte preservation approved; the source container is not Fast Start."
+    },
+    {
+      "mediaId": "lmc-w05-p07",
+      "privacyVisualPass": true,
+      "reviewNote": "NO_MASK pristine-byte preservation approved; the source container is not Fast Start."
+    },
+    {
+      "mediaId": "lmc-w05-p08",
+      "privacyVisualPass": true,
+      "reviewNote": "Human approved WEEK-05 visual privacy output."
+    }
+  ]
+}

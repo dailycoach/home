@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-08-11T22:44:02.7167241+09:00",
+  "week": 11,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 7,
+    "method": "Downloaded each approved object through the production signed Worker route with the academy Origin header and compared the complete response size and SHA-256 to the approved cutover manifest.",
+    "parts": [
+      { "mediaId": "lmc-w11-p01", "sizeBytes": 25478752, "sha256": "8c11db20f04fc36bc494c7a3a0156308ecefb83ecc341ed220b4d7c2dfa6eeb7", "pass": true },
+      { "mediaId": "lmc-w11-p02", "sizeBytes": 25198285, "sha256": "c06a46e110ac08d10b21b0a78d3a7be6b1dab7ae826604b5b5c07c03511efb74", "pass": true },
+      { "mediaId": "lmc-w11-p03", "sizeBytes": 21240961, "sha256": "73cef06df0139c37dc8b7b33a72e3159e6719bf93c10e52bc89aa112d59b5ca5", "pass": true },
+      { "mediaId": "lmc-w11-p04", "sizeBytes": 18706846, "sha256": "6545dceb4fb525a0adac3d90638ec2a2e0a95a98110cf9ebc1ce0daeaca27afd", "pass": true },
+      { "mediaId": "lmc-w11-p05", "sizeBytes": 21714623, "sha256": "c9819c142b1c0aead941e76ce68a0aff588a6f944bc14d788a96752627edf0c7", "pass": true },
+      { "mediaId": "lmc-w11-p06", "sizeBytes": 20369854, "sha256": "a7a2b0c6e3665c8ecc7b029b8dcccfe9859974230656214a3522da64e823d840", "pass": true },
+      { "mediaId": "lmc-w11-p07", "sizeBytes": 21332422, "sha256": "6ef1f2871d080b87aee22006099725f6478f0563e142f5ea40dcd6f6175a5e4d", "pass": true }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 7,
+    "range206": 7,
+    "parts": [
+      { "mediaId": "lmc-w11-p01", "path": "/media/lmc-lifetime-management-counselor/11/1", "headStatus": 200, "contentType": "video/mp4", "contentLength": 25478752, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/25478752", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w11-p02", "path": "/media/lmc-lifetime-management-counselor/11/2", "headStatus": 200, "contentType": "video/mp4", "contentLength": 25198285, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/25198285", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w11-p03", "path": "/media/lmc-lifetime-management-counselor/11/3", "headStatus": 200, "contentType": "video/mp4", "contentLength": 21240961, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/21240961", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w11-p04", "path": "/media/lmc-lifetime-management-counselor/11/4", "headStatus": 200, "contentType": "video/mp4", "contentLength": 18706846, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/18706846", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w11-p05", "path": "/media/lmc-lifetime-management-counselor/11/5", "headStatus": 200, "contentType": "video/mp4", "contentLength": 21714623, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/21714623", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w11-p06", "path": "/media/lmc-lifetime-management-counselor/11/6", "headStatus": 200, "contentType": "video/mp4", "contentLength": 20369854, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/20369854", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w11-p07", "path": "/media/lmc-lifetime-management-counselor/11/7", "headStatus": 200, "contentType": "video/mp4", "contentLength": 21332422, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/21332422", "rangeBodyBytes": 1, "pass": true }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "requiredParts": ["lmc-w11-p01", "lmc-w11-p07"],
+    "parts": [
+      {
+        "mediaId": "lmc-w11-p01",
+        "durationSeconds": 1019.64,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 1.697465,
+        "seekTargetSeconds": 509.82,
+        "seekPlaybackSeconds": 500.635305,
+        "seekPass": true,
+        "audioEnabled": true
+      },
+      {
+        "mediaId": "lmc-w11-p07",
+        "durationSeconds": 896.933991,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 1.698961,
+        "endBoundarySeconds": 866.933991,
+        "endPlaybackSeconds": 871.170459,
+        "endPlaybackPass": true,
+        "audioEnabled": true,
+        "nextMediaPartNotApplicable": true
+      }
+    ]
+  },
+  "outOfScopeUiObservation": {
+    "status": "OBSERVED",
+    "scopeImpact": "NONE_ON_WEEK_11_MEDIA_PRIVACY",
+    "message": "The pre-existing final-part next link points to /lesson.html?course=lmc-lifetime-management-counselor&week=12, which renders an empty lesson shell with no video. The project explicitly forbids WEEK-12 and unrelated UI changes, so this was recorded but not modified."
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}
