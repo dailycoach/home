@@ -1,0 +1,37 @@
+h1,
+h2,
+h3,
+.section-head h2,
+.subhero-copy h1 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 861px) {
+  .hero-copy h1 {
+    font-size: clamp(3.45rem, 4vw, 4rem);
+    word-break: keep-all;
+  }
+}
+
+.seal-button {
+  height: var(--seal-size, 250px);
+  min-height: 0;
+}
+
+.seal-button .credential-seal {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.credential-collection .seal-core strong,
+.badge-gallery .seal-core strong {
+  font-size: clamp(0.9rem, 1.35vw, 1.18rem);
+}
+
+.passport-module.next p,
+.passport-module.next .text-link {
+  color: rgba(255, 255, 255, 0.72);
+}
+
