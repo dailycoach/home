@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>김철웅 코치 | DAILYCOACHING</title>
   <meta name="description" content="DAILYCOACHING 김철웅 코치의 코칭 철학, 전문영역, 공공·교육 현장, 주요 경력과 자격을 소개합니다." />
-  <meta name="theme-color" content="#f7f0e6" />
-  <meta property="og:type" content="profile" />
-  <meta property="og:title" content="김철웅 코치 | DAILYCOACHING" />
-  <meta property="og:description" content="사람을 읽고, 대화를 세우고, 변화를 훈련합니다." />
-  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#f2eee5" />
+  <link rel="canonical" href="https://daily-coach-ing.com/coach/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Lilita+One&family=Noto+Sans+KR:wght@400;600;700;900&family=Noto+Serif+KR:wght@600;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/coaching/coach-the-coach/assets/images/story/hub-01-hero.webp" type="image/webp" fetchpriority="high" />
+  <link rel="stylesheet" href="/coaching/coach-the-coach/assets/ctc90.css?v=20260807-4" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="김철웅 코치 | DAILYCOACHING" />
+  <meta property="og:description" content="사람을 보고, 대화를 세우고, 움직임을 만듭니다." />
+  <meta property="og:url" content="https://daily-coach-ing.com/coach/" />
+  <meta property="og:image" content="https://daily-coach-ing.com/coaching/coach-the-coach/assets/images/story/hub-01-hero.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <script type="application/ld+json">
   {
@@ -27,522 +33,276 @@
   </script>
 
   <style>
-    :root {
-      --ink:#0b1f33;
-      --orange:#e5482f;
-      --cream:#f7f0e6;
-      --paper:#fffdf9;
-      --char:#252d35;
-      --muted:#657382;
-      --line:#d8d8d2;
-      --soft:#ebe6dc;
-      --header-h:72px;
-      --max:1200px;
+    .page-profile .hero-inner{min-height:720px}
+    .page-profile .hero-collage{height:clamp(500px,46vw,630px)}
+    .page-profile .hero-title-long{font-size:clamp(3.15rem,5.25vw,5.55rem)}
+    .profile-roleline{margin:0 0 18px;color:var(--muted);font-weight:900;letter-spacing:.02em}
+    .metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:2px solid var(--ink);background:var(--paper)}
+    .metric{min-height:170px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line)}
+    .metric:last-child{border-right:0}
+    .metric strong{font-family:"Lilita One",sans-serif;font-size:clamp(2.7rem,5vw,4.5rem);line-height:.9;color:var(--cobalt)}
+    .metric span{font-weight:900;font-size:.86rem}
+    .profile-timeline .timeline-row p strong{color:var(--ink)}
+    .public-project{font-weight:900;color:var(--ink)!important;font-size:1.04rem}
+    .career-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+    .career-panel{padding:34px;border:2px solid var(--ink);background:var(--paper);box-shadow:8px 8px 0 rgba(16,16,16,.12)}
+    .career-panel h3{margin:0 0 22px;font-family:"Black Han Sans",sans-serif;font-weight:400;font-size:2rem}
+    .career-panel ul{margin:0;padding:0;list-style:none;border-top:2px solid var(--ink)}
+    .career-panel li{padding:15px 0;border-bottom:1px solid var(--line);line-height:1.55}
+    .career-panel li strong{color:var(--cobalt)}
+    .book-process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink);background:var(--paper)}
+    .book-step{min-height:160px;padding:25px 20px;border-right:1px solid var(--line)}
+    .book-step:nth-child(4),.book-step:nth-child(8){border-right:0}
+    .book-step:nth-child(n+5){border-top:1px solid var(--line)}
+    .book-step b{display:block;margin-bottom:16px;color:var(--cobalt);font-family:"Lilita One",sans-serif;font-size:1.25rem}
+    .book-step span{font-weight:900}
+    .credential-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-bottom:30px}
+    .credential-chip{padding:22px;border:2px solid var(--ink);background:var(--paper);font-weight:900}
+    .credential-chip b{display:block;margin-bottom:6px;color:var(--cobalt);font-family:"Lilita One",sans-serif;font-size:1.05rem;letter-spacing:.06em}
+    .credential-details{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+    .credential-details summary{cursor:pointer;padding:22px 0;font-weight:900;list-style:none}
+    .credential-details summary::-webkit-details-marker{display:none}
+    .credential-details summary::after{content:"+";float:right;color:var(--cobalt);font-family:"Lilita One",sans-serif;font-size:1.5rem}
+    .credential-details[open] summary::after{content:"−"}
+    .credential-list{columns:3;column-gap:34px;margin:0;padding:0 0 28px;list-style:none}
+    .credential-list li{break-inside:avoid;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+    .contact-band{padding:clamp(38px,7vw,78px);color:#fff;background:var(--cobalt);border:3px solid var(--ink);box-shadow:12px 12px 0 var(--ink)}
+    .contact-band h2{max-width:900px;margin-bottom:24px}
+    .contact-band p{max-width:720px;color:rgba(255,255,255,.82)}
+    .contact-band .button-primary{background:var(--acid)}
+    .footer{padding:40px 0;color:#fff;background:var(--ink)}
+    .footer-inner{width:min(var(--max),calc(100% - 40px));margin:0 auto;display:flex;justify-content:space-between;gap:30px;align-items:flex-end}
+    .footer strong{font-family:"Lilita One",sans-serif;letter-spacing:.08em}
+    .footer p{margin:8px 0 0;color:rgba(255,255,255,.56);font-size:.82rem}
+    .footer-links{display:flex;flex-wrap:wrap;gap:18px;color:rgba(255,255,255,.7);font-size:.84rem;font-weight:700}
+    @media(max-width:900px){
+      .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .career-split{grid-template-columns:1fr}.book-process{grid-template-columns:repeat(2,minmax(0,1fr))}.book-step:nth-child(2n){border-right:0}.book-step:nth-child(3),.book-step:nth-child(4){border-top:1px solid var(--line)}
+      .credential-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.credential-list{columns:2}
     }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--char);
-      background:var(--cream);
-      font-family:"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;
-      letter-spacing:-.03em;
+    @media(max-width:640px){
+      .page-profile .hero-inner{min-height:auto}.page-profile .hero-title-long{font-size:clamp(2.7rem,13vw,4rem)}
+      .metric-grid,.credential-summary{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid var(--line)}.metric:last-child{border-bottom:0}
+      .book-process{grid-template-columns:1fr}.book-step{border-right:0!important;border-top:1px solid var(--line)}.book-step:first-child{border-top:0}
+      .credential-list{columns:1}.footer-inner{align-items:flex-start;flex-direction:column}
     }
-    a{color:inherit;text-decoration:none}
-    button,a{-webkit-tap-highlight-color:transparent}
-    img{max-width:100%;display:block}
-    ::selection{background:var(--orange);color:#fff}
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      height:var(--header-h);
-      color:var(--ink);
-      background:rgba(247,240,230,.93);
-      border-bottom:1px solid rgba(11,31,51,.12);
-      backdrop-filter:blur(16px);
-    }
-    .header-inner{
-      width:min(var(--max),calc(100% - 44px));
-      height:100%;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:28px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-family:"Cormorant Garamond",Georgia,serif;
-      font-size:1.28rem;
-      font-weight:600;
-      letter-spacing:.11em;
-      white-space:nowrap;
-    }
-    .brand::before{content:"";width:26px;height:2px;background:var(--orange)}
-    .nav{display:flex;align-items:center;gap:4px;font-size:.86rem;font-weight:600}
-    .nav a{padding:11px 10px;color:rgba(11,31,51,.72);white-space:nowrap}
-    .nav a:hover,.nav a[aria-current="page"]{color:var(--ink)}
-    .nav .cta{margin-left:8px;padding:11px 16px;color:#fff;background:var(--ink)}
-    .menu-button{display:none;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
-
-    .page{overflow:hidden}
-    .shell{width:min(var(--max),calc(100% - 44px));margin:0 auto}
-    .section{padding:112px 0;border-top:1px solid rgba(11,31,51,.13)}
-    .section:first-child{border-top:0}
-    .eyebrow{
-      margin:0 0 20px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:var(--orange);
-      font-size:.72rem;
-      font-weight:700;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-    .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
-    .section-head{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(280px,.55fr);
-      gap:64px;
-      align-items:end;
-      margin-bottom:54px;
-    }
-    .section-title{
-      margin:0;
-      max-width:850px;
-      color:var(--ink);
-      font-family:"Cormorant Garamond","Noto Sans KR",serif;
-      font-size:clamp(2.5rem,5.2vw,5rem);
-      font-weight:600;
-      line-height:1.01;
-      letter-spacing:-.055em;
-      word-break:keep-all;
-    }
-    .section-desc{margin:0;color:var(--muted);font-size:1rem;line-height:1.9;word-break:keep-all}
-
-    /* HERO */
-    .hero{padding:clamp(76px,9vw,132px) 0 76px;background:var(--cream)}
-    .hero-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.18fr) minmax(320px,.72fr);
-      gap:clamp(54px,8vw,108px);
-      align-items:stretch;
-    }
-    .hero-copy{display:flex;flex-direction:column;justify-content:space-between;min-height:620px}
-    .hero-kicker{margin:0;color:var(--orange);font-size:.76rem;font-weight:700;letter-spacing:.16em}
-    .hero h1{
-      margin:56px 0 34px;
-      color:var(--ink);
-      font-family:"Cormorant Garamond","Noto Sans KR",serif;
-      font-size:clamp(3.6rem,7.6vw,7.7rem);
-      font-weight:600;
-      line-height:.92;
-      letter-spacing:-.065em;
-      word-break:keep-all;
-    }
-    .hero h1 .ko{display:block;font-family:"Noto Sans KR",sans-serif;font-size:.46em;font-weight:600;line-height:1.2;letter-spacing:-.065em}
-    .hero h1 em{color:var(--orange);font-style:normal}
-    .hero-lead{max-width:760px;margin:0;color:#3f4a55;font-size:clamp(1.05rem,1.45vw,1.28rem);line-height:1.9;word-break:keep-all}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:42px}
-    .button{min-height:46px;padding:0 19px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--ink);font-size:.88rem;font-weight:700}
-    .button.primary{background:var(--ink);color:#fff}
-    .button.ghost{background:transparent;color:var(--ink)}
-    .button:hover{transform:translateY(-1px)}
-
-    .identity-panel{
-      position:relative;
-      min-height:620px;
-      padding:34px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      color:#fff;
-      background:var(--ink);
-      overflow:hidden;
-    }
-    .identity-panel::after{
-      content:"KIM";
-      position:absolute;
-      right:-18px;
-      bottom:52px;
-      color:rgba(255,255,255,.035);
-      font-family:"Cormorant Garamond",Georgia,serif;
-      font-size:13rem;
-      font-weight:600;
-      line-height:.7;
-      pointer-events:none;
-    }
-    .identity-top{position:relative;z-index:1;display:flex;justify-content:space-between;gap:18px;font-size:.72rem;font-weight:700;letter-spacing:.13em;color:rgba(255,255,255,.62)}
-    .identity-name{position:relative;z-index:1;margin:auto 0 36px;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(3.5rem,5.5vw,5.7rem);font-weight:500;line-height:.82;letter-spacing:-.055em}
-    .identity-name span{display:block;color:#fff}.identity-name strong{display:block;margin-top:22px;color:var(--orange);font-family:"Noto Sans KR",sans-serif;font-size:.24em;font-weight:600;letter-spacing:-.04em}
-    .identity-bottom{position:relative;z-index:1;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);display:grid;gap:8px;color:rgba(255,255,255,.68);font-size:.87rem;line-height:1.6}
-    .identity-bottom strong{color:#fff;font-size:1rem}
-
-    .proof-bar{margin-top:74px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(11,31,51,.25);border-bottom:1px solid rgba(11,31,51,.25)}
-    .proof-item{padding:26px 22px;border-left:1px solid rgba(11,31,51,.16)}
-    .proof-item:first-child{border-left:0}
-    .proof-item strong{display:block;color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:2.65rem;font-weight:600;line-height:1;letter-spacing:-.04em}
-    .proof-item span{display:block;margin-top:9px;color:var(--muted);font-size:.78rem;font-weight:600}
-
-    /* PILLARS */
-    .pillar-list{border-top:1px solid var(--line)}
-    .pillar{
-      display:grid;
-      grid-template-columns:90px minmax(220px,.65fr) minmax(0,1fr);
-      gap:30px;
-      align-items:start;
-      padding:34px 0;
-      border-bottom:1px solid var(--line);
-    }
-    .pillar-index{color:var(--orange);font-family:"Cormorant Garamond",Georgia,serif;font-size:1.7rem}
-    .pillar h3{margin:0;color:var(--ink);font-size:1.35rem;line-height:1.45;word-break:keep-all}
-    .pillar p{margin:0;color:var(--muted);font-size:.98rem;line-height:1.8;word-break:keep-all}
-
-    /* PHILOSOPHY */
-    .philosophy-band{color:#fff;background:var(--ink)}
-    .philosophy-band .section{border-color:rgba(255,255,255,.14)}
-    .philosophy-band .section-title{color:#fff}
-    .philosophy-band .section-desc{color:rgba(255,255,255,.62)}
-    .philosophy-band .eyebrow{color:#ff6a51}
-    .principle-list{border-top:1px solid rgba(255,255,255,.2)}
-    .principle-row{display:grid;grid-template-columns:90px minmax(240px,.75fr) minmax(0,1fr);gap:30px;padding:34px 0;border-bottom:1px solid rgba(255,255,255,.16)}
-    .principle-row span{color:#ff6a51;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.6rem}
-    .principle-row h3{margin:0;color:#fff;font-size:1.35rem}
-    .principle-row p{margin:0;color:rgba(255,255,255,.62);line-height:1.8;word-break:keep-all}
-    .process-line{display:grid;grid-template-columns:repeat(3,1fr);margin-top:58px;border:1px solid rgba(255,255,255,.18)}
-    .process-step{min-height:180px;padding:28px;border-left:1px solid rgba(255,255,255,.18)}
-    .process-step:first-child{border-left:0}
-    .process-step b{display:block;color:#ff6a51;font-family:"Cormorant Garamond",Georgia,serif;font-size:2.45rem;font-weight:500}
-    .process-step strong{display:block;margin:10px 0 10px;color:#fff;font-size:1.12rem}
-    .process-step p{margin:0;color:rgba(255,255,255,.58);font-size:.9rem;line-height:1.7}
-
-    /* FIELD */
-    .field-list{border-top:2px solid var(--ink)}
-    .field-row{display:grid;grid-template-columns:100px 210px minmax(0,1fr);gap:26px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
-    .field-year{color:var(--orange);font-family:"Cormorant Garamond",Georgia,serif;font-size:1.65rem;font-weight:600}
-    .field-label{color:var(--ink);font-weight:700;line-height:1.55}
-    .field-copy{margin:0;color:#4f5c68;line-height:1.8;word-break:keep-all}
-    .field-copy strong{color:var(--ink)}
-
-    .school-proof{margin-top:52px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--paper)}
-    .school-proof div{padding:25px 22px;border-left:1px solid var(--line)}
-    .school-proof div:first-child{border-left:0}
-    .school-proof strong{display:block;color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif;font-size:2.35rem}
-    .school-proof span{display:block;margin-top:5px;color:var(--muted);font-size:.8rem}
-    .school-note{margin:13px 0 0;color:#79838b;font-size:.75rem;line-height:1.6}
-
-    /* CAREER */
-    .career-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
-    .career-block h3{margin:0 0 18px;color:var(--orange);font-size:.75rem;letter-spacing:.14em}
-    .career-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--ink)}
-    .career-list li{padding:15px 0;border-bottom:1px solid var(--line);color:#3e4a55;line-height:1.55}
-    .career-list strong{color:var(--ink);font-weight:700}
-
-    /* PUBLISHING */
-    .publishing{background:var(--paper)}
-    .publishing-layout{display:grid;grid-template-columns:minmax(260px,.55fr) minmax(0,1fr);gap:70px;align-items:start}
-    .book-title{margin:0;color:var(--ink);font-family:"Cormorant Garamond","Noto Sans KR",serif;font-size:clamp(2.5rem,4.5vw,4.6rem);line-height:1.06;letter-spacing:-.055em}
-    .book-role{margin:18px 0 0;color:var(--orange);font-size:.8rem;font-weight:700;letter-spacing:.08em}
-    .book-process{margin:0;padding:0;list-style:none;border-top:2px solid var(--ink)}
-    .book-process li{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:21px 0;border-bottom:1px solid var(--line);line-height:1.7}
-    .book-process span{color:var(--orange);font-family:"Cormorant Garamond",Georgia,serif;font-size:1.25rem}
-    .book-process strong{color:var(--ink)}
-
-    /* CREDENTIALS */
-    .credential-core{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
-    .credential-core div{padding:24px 20px;border-left:1px solid var(--line)}
-    .credential-core div:first-child{border-left:0}
-    .credential-core strong{display:block;color:var(--ink);font-size:1rem;line-height:1.5}
-    .credential-core span{display:block;margin-top:8px;color:var(--muted);font-size:.78rem;line-height:1.55}
-    details.credentials{margin-top:36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    details.credentials summary{padding:20px 0;cursor:pointer;color:var(--ink);font-weight:700;list-style:none}
-    details.credentials summary::-webkit-details-marker{display:none}
-    details.credentials summary::after{content:"+";float:right;color:var(--orange);font-size:1.4rem;font-weight:400}
-    details.credentials[open] summary::after{content:"–"}
-    .credential-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0 34px;margin:0;padding:0 0 24px;list-style:none}
-    .credential-list li{padding:9px 0;border-top:1px solid rgba(11,31,51,.08);color:#596672;font-size:.84rem;line-height:1.5}
-
-    /* CONTACT */
-    .contact-section{padding:100px 0;color:#fff;background:var(--orange)}
-    .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.5fr);gap:70px;align-items:end}
-    .contact-title{margin:0;font-family:"Cormorant Garamond","Noto Sans KR",serif;font-size:clamp(2.8rem,5.6vw,5.7rem);font-weight:600;line-height:1;letter-spacing:-.055em;word-break:keep-all}
-    .contact-copy{margin:26px 0 0;max-width:700px;color:rgba(255,255,255,.78);line-height:1.8;word-break:keep-all}
-    .contact-links{display:grid;border-top:1px solid rgba(255,255,255,.55)}
-    .contact-links a{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.35);display:flex;justify-content:space-between;gap:20px;font-weight:700}
-    .contact-links span{font-size:.73rem;letter-spacing:.12em;color:rgba(255,255,255,.7)}
-
-    .footer{padding:32px 0;background:var(--ink);color:rgba(255,255,255,.62)}
-    .footer-inner{width:min(var(--max),calc(100% - 44px));margin:0 auto;display:flex;justify-content:space-between;gap:30px;align-items:center;font-size:.78rem}
-    .footer strong{color:#fff;letter-spacing:.12em}
-    .footer-links{display:flex;flex-wrap:wrap;gap:18px}
-
-    @media (max-width:980px){
-      .menu-button{display:block}
-      .nav{position:absolute;top:var(--header-h);left:0;right:0;display:none;flex-direction:column;align-items:stretch;padding:16px 22px 22px;background:var(--cream);border-bottom:1px solid var(--line)}
-      .nav.open{display:flex}.nav a{padding:12px 4px}.nav .cta{margin:4px 0 0;text-align:center;justify-content:center}
-      .hero-grid,.section-head,.publishing-layout,.contact-grid{grid-template-columns:1fr}
-      .hero-copy{min-height:0}.identity-panel{min-height:430px}.proof-bar{grid-template-columns:repeat(2,1fr)}.proof-item:nth-child(3){border-left:0;border-top:1px solid rgba(11,31,51,.16)}.proof-item:nth-child(4){border-top:1px solid rgba(11,31,51,.16)}
-      .section-head{gap:24px}.pillar,.principle-row{grid-template-columns:64px 1fr}.pillar p,.principle-row p{grid-column:2}.field-row{grid-template-columns:80px 170px 1fr}.career-grid{gap:30px}.credential-core{grid-template-columns:repeat(2,1fr)}.credential-core div:nth-child(3){border-left:0;border-top:1px solid var(--line)}.credential-core div:nth-child(4){border-top:1px solid var(--line)}
-    }
-
-    @media (max-width:720px){
-      :root{--header-h:64px}
-      .shell,.header-inner,.footer-inner{width:min(100% - 30px,var(--max))}
-      .hero{padding:64px 0 54px}.hero-grid{gap:36px}.hero h1{margin:38px 0 26px;font-size:clamp(3.25rem,15vw,5rem)}.hero-lead{font-size:1rem}.identity-panel{min-height:360px;padding:26px}.identity-panel::after{font-size:9rem}.identity-name{font-size:3.8rem}
-      .proof-bar{margin-top:48px}.proof-item{padding:22px 16px}.proof-item strong{font-size:2.15rem}
-      .section{padding:76px 0}.section-title{font-size:clamp(2.5rem,12vw,3.8rem)}.section-desc{font-size:.93rem}.section-head{margin-bottom:38px}
-      .pillar,.principle-row{grid-template-columns:48px 1fr;gap:16px;padding:26px 0}.pillar-index,.principle-row span{font-size:1.35rem}.pillar h3,.principle-row h3{font-size:1.12rem}.pillar p,.principle-row p{font-size:.9rem}
-      .process-line{grid-template-columns:1fr}.process-step{min-height:auto;border-left:0;border-top:1px solid rgba(255,255,255,.18)}.process-step:first-child{border-top:0}
-      .field-row{grid-template-columns:64px 1fr;gap:12px 16px}.field-copy{grid-column:2;font-size:.9rem}.field-label{font-size:.92rem}.school-proof{grid-template-columns:repeat(2,1fr)}.school-proof div:nth-child(3){border-left:0;border-top:1px solid var(--line)}.school-proof div:nth-child(4){border-top:1px solid var(--line)}
-      .career-grid{grid-template-columns:1fr}.book-process li{grid-template-columns:50px 1fr}.credential-core{grid-template-columns:1fr}.credential-core div{border-left:0;border-top:1px solid var(--line)}.credential-core div:first-child{border-top:0}.credential-list{grid-template-columns:1fr}
-      .contact-section{padding:72px 0}.contact-grid{gap:42px}.footer-inner{align-items:flex-start;flex-direction:column}
-    }
-
-    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button:hover{transform:none}}
   </style>
 </head>
-<body>
+<body class="page-hub page-profile">
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="DAILYCOACHING 홈">DAILYCOACHING</a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">MENU</button>
-      <nav class="nav" id="site-nav" aria-label="주요 메뉴">
-        <a href="/company/">기업소개</a>
-        <a href="/coach/" aria-current="page">코치소개</a>
-        <a href="/coaching/coach-the-coach/">코치더코치</a>
-        <a href="/tests/self/">검사도구</a>
-        <a href="/cards/kingdom/">카드도구</a>
-        <a href="/lcms/">LCMS</a>
-        <a class="cta" href="#contact">강의·코칭 문의</a>
+      <nav class="nav" aria-label="코치소개 메뉴">
+        <a href="#about" aria-current="page">소개</a>
+        <a href="#field">현장</a>
+        <a href="#career">경력</a>
+        <a href="#credentials">자격</a>
+        <a class="nav-cta" href="#contact">문의</a>
       </nav>
+      <a class="mobile-header-cta" href="#contact">문의</a>
     </div>
   </header>
 
-  <main class="page">
-    <section class="hero">
-      <div class="shell">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <div>
-              <p class="hero-kicker">COACH · EDUCATOR · FACILITATOR</p>
-              <h1>
-                <span class="ko">사람을 읽고,</span>
-                Dialogue<br />
-                <em>into Practice.</em>
-              </h1>
-              <p class="hero-lead">김철웅 코치는 개인·리더·청소년·전문코치가 자신의 상황을 더 정확히 읽고, 대화를 통해 방향을 정리하고, 실제 행동으로 옮기도록 돕는 코치이자 교육 설계자입니다.</p>
-              <div class="hero-actions">
-                <a class="button primary" href="#field">주요 현장 보기</a>
-                <a class="button ghost" href="#contact">강의·코칭 문의</a>
-              </div>
-            </div>
+  <main id="main">
+    <section id="about" class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">COACH · EDUCATOR · FIELD DESIGNER</p>
+          <p class="profile-roleline">김철웅 · DAILYCOACHING 대표 · 한국코치협회 KPC</p>
+          <h1 id="hero-title" class="hero-title-long">사람을 보고,<br />대화를 세우고,<br /><span class="hook-word">움직임</span>을 만듭니다.</h1>
+          <p class="hero-lead">코칭 11년. 개인의 삶과 비즈니스, 청소년·청년, 공공·교육 현장을 오가며 질문이 실제 선택과 행동으로 이어지는 구조를 만들어 왔습니다.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#field">현장 이력 보기 →</a>
+            <a class="button button-secondary" href="#career">경력·자격 보기</a>
           </div>
-
-          <aside class="identity-panel" aria-label="김철웅 코치 핵심 프로필">
-            <div class="identity-top"><span>PROFILE / 2026</span><span>KPC-03483</span></div>
-            <div class="identity-name">
-              <span>KIM</span>
-              <span>CHEOL-UNG</span>
-              <strong>김철웅 · DAILYCOACHING 대표</strong>
-            </div>
-            <div class="identity-bottom">
-              <strong>문제보다 존재 · 답보다 질문 · 변화보다 성장</strong>
-              <span>코칭 · 리더십 · 진로·학습 · 코치양성 · 공공·교육 프로그램</span>
-            </div>
-          </aside>
+          <ul class="hero-facts" aria-label="전문 분야">
+            <li>1:1 코칭</li><li>리더십·커뮤니케이션</li><li>진로·학습</li><li>코치 양성</li>
+          </ul>
         </div>
 
-        <div class="proof-bar" aria-label="주요 활동 지표">
-          <div class="proof-item"><strong>11년</strong><span>COACHING FIELD · 2015–</span></div>
-          <div class="proof-item"><strong>5,000h+</strong><span>1:1 COACHING</span></div>
-          <div class="proof-item"><strong>1,200+</strong><span>LECTURE · SESSION</span></div>
-          <div class="proof-item"><strong>KPC</strong><span>한국코치협회 인증코치</span></div>
+        <figure class="hero-collage">
+          <img class="story-image" src="/coaching/coach-the-coach/assets/images/story/hub-01-hero.webp" width="1600" height="900" alt="관찰과 기록, 대화의 흐름을 상징하는 DAILYCOACHING 에디토리얼 콜라주" fetchpriority="high" decoding="async" />
+          <figcaption class="sr-only">관찰에서 대화로, 대화에서 실행으로 이어지는 코칭 현장을 표현합니다.</figcaption>
+          <span class="collage-label" aria-hidden="true">COACHING<br />IN THE FIELD</span>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-paper" aria-labelledby="numbers-title">
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker">FIELD NUMBERS</p><h2 id="numbers-title">말보다 먼저,<br />쌓여 있는 현장.</h2></div>
+          <p class="section-intro">프로필을 꾸미기 위한 숫자가 아니라 실제 코칭·교육 현장에서 축적해 온 경험의 크기입니다.</p>
+        </div>
+        <div class="metric-grid" aria-label="주요 경력 수치">
+          <div class="metric"><strong>11Y</strong><span>코칭 현장 경력</span></div>
+          <div class="metric"><strong>5,000H+</strong><span>1:1 코칭</span></div>
+          <div class="metric"><strong>1,200+</strong><span>강의·세션</span></div>
+          <div class="metric"><strong>KPC</strong><span>한국코치협회 인증코치</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="work">
-      <div class="shell">
+    <section class="section section-lavender" aria-labelledby="work-title">
+      <div class="container">
         <div class="section-head">
-          <div>
-            <p class="eyebrow">01 · WHAT I WORK ON</p>
-            <h2 class="section-title">사람의 변화가 필요한<br />현장을 다룹니다.</h2>
-          </div>
-          <p class="section-desc">하나의 코칭 기법을 모든 현장에 적용하지 않습니다. 대상과 목적, 조직의 맥락을 먼저 읽고 필요한 대화와 실습을 설계합니다.</p>
+          <div><p class="section-kicker">WHAT I WORK ON</p><h2 id="work-title">한 가지 직함보다<br />한 사람이 움직이는 전 과정을 봅니다.</h2></div>
+          <p class="section-intro">코칭, 강의, 진로, 조직, 프로그램 설계를 따로 떼지 않습니다. 상황을 읽고 대화를 설계하고 실제 실행까지 이어지게 하는 것이 공통된 일입니다.</p>
         </div>
-
-        <div class="pillar-list">
-          <article class="pillar"><span class="pillar-index">01</span><h3>리더십 · 조직 대화</h3><p>리더의 자기인식, 질문·경청·피드백, 갈등 대화, 팀 커뮤니케이션과 실행 정렬을 다룹니다.</p></article>
-          <article class="pillar"><span class="pillar-index">02</span><h3>청소년 · 청년 진로와 학습</h3><p>성향·흥미·가치·학습패턴을 연결해 진로를 정답이 아닌 탐색과 선택의 과정으로 다룹니다.</p></article>
-          <article class="pillar"><span class="pillar-index">03</span><h3>코치 양성 · 전문성 훈련</h3><p>코칭 철학과 윤리, 실제 대화 실습, 시연·녹취·피드백, 멘토코칭을 통해 현장에서 작동하는 역량을 훈련합니다.</p></article>
-          <article class="pillar"><span class="pillar-index">04</span><h3>공공 · 교육 프로그램 설계</h3><p>강의, 검사해석, 코칭, 참여활동을 목적에 맞게 연결해 학교·공공기관·커뮤니티의 성장 경험을 구조화합니다.</p></article>
+        <div class="columns-3">
+          <article class="plain-card"><span class="number">COACH</span><h3>개인·비즈니스 코칭</h3><p>삶의 방향, 관계, 커리어, 리더십과 의사결정을 다루며 스스로 선택하고 실행할 수 있는 힘을 키웁니다.</p></article>
+          <article class="plain-card"><span class="number">EDUCATE</span><h3>교육·강의·워크숍</h3><p>리더십, 커뮤니케이션, 진로·학습, 청소년·청년 성장 주제를 참여형 교육과 코칭 방식으로 설계합니다.</p></article>
+          <article class="plain-card"><span class="number">DESIGN</span><h3>프로그램·도구 설계</h3><p>진단, 질문, 실습, 코칭도구와 디지털 경험을 하나의 학습 흐름으로 연결해 현장에서 작동하게 만듭니다.</p></article>
         </div>
       </div>
     </section>
 
-    <div class="philosophy-band">
-      <section class="section" id="philosophy">
-        <div class="shell">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">02 · COACHING PHILOSOPHY</p>
-              <h2 class="section-title">코칭은 사람을 고치는 기술이 아니라,<br />자기 삶을 다시 읽는 대화입니다.</h2>
-            </div>
-            <p class="section-desc">질문 자체보다 중요한 것은 질문을 통해 자신을 다시 바라보는 순간입니다. 그 알아차림이 선택과 행동으로 이어지도록 돕습니다.</p>
-          </div>
-
-          <div class="principle-list">
-            <article class="principle-row"><span>01</span><h3>문제보다 존재</h3><p>해결해야 할 문제를 먼저 정의하기보다, 지금 그 문제를 경험하고 있는 사람과 맥락을 먼저 봅니다.</p></article>
-            <article class="principle-row"><span>02</span><h3>답보다 질문</h3><p>정답을 대신 주지 않고, 자신의 언어로 상황을 이해하고 판단의 기준을 발견하도록 돕습니다.</p></article>
-            <article class="principle-row"><span>03</span><h3>변화보다 성장</h3><p>한 번의 결심보다 반복 가능한 작은 실천, 성찰, 피드백이 삶에 남는 구조를 만듭니다.</p></article>
-          </div>
-
-          <div class="process-line" aria-label="코칭 진행 원리">
-            <div class="process-step"><b>A</b><strong>Awareness</strong><p>말·감정·선택의 패턴과 현재의 신호를 알아차립니다.</p></div>
-            <div class="process-step"><b>D</b><strong>Dialogue</strong><p>질문과 경청으로 의미와 가능성을 자기 언어로 정리합니다.</p></div>
-            <div class="process-step"><b>P</b><strong>Practice</strong><p>작은 행동으로 검증하고 경험을 다음 성장으로 연결합니다.</p></div>
-          </div>
+    <section class="section section-dark" aria-labelledby="philosophy-title">
+      <div class="container">
+        <p class="section-kicker">COACHING PHILOSOPHY</p>
+        <h2 id="philosophy-title">문제보다 존재.<br />답보다 질문.<br />변화보다 성장.</h2>
+        <p class="statement">사람을 바꾸는 기술보다 <strong>자신을 더 정확히 보고, 자기 언어로 선택하고, 자기 힘으로 움직이게 하는 대화</strong>를 중요하게 봅니다.</p>
+        <div class="process-list" style="margin-top:64px">
+          <article class="process-item"><h3>알아차림</h3><p>지금 무엇이 일어나고 있는지 사실·감정·욕구·맥락을 구별해 봅니다.</p></article>
+          <article class="process-item"><h3>대화</h3><p>익숙한 답을 반복하기보다 질문과 반영을 통해 새로운 관점과 선택지를 만듭니다.</p></article>
+          <article class="process-item"><h3>실행</h3><p>좋은 통찰에서 멈추지 않고 현실에서 검증할 수 있는 작은 행동으로 연결합니다.</p></article>
         </div>
-      </section>
-    </div>
-
-    <section class="section" id="field">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">03 · SELECTED FIELD EXPERIENCE</p>
-            <h2 class="section-title">최근의 공공 현장부터<br />교육·조직·청년 현장까지.</h2>
-          </div>
-          <p class="section-desc">기관명을 장식처럼 나열하기보다, 어떤 대상과 맥락에서 어떤 역할을 맡았는지 중심으로 정리했습니다.</p>
-        </div>
-
-        <div class="field-list">
-          <article class="field-row"><div class="field-year">2026</div><div class="field-label">서울시 매력일자리</div><p class="field-copy"><strong>서울시 민간단체 협력형 매력일자리 사업</strong> 참여기관 협력 · (사)한국ESG경영협회 연계 인턴십 및 직무역량 강화 사업 참여</p></article>
-          <article class="field-row"><div class="field-year">2026</div><div class="field-label">고립청년 · 청소년</div><p class="field-copy"><strong>행정안전부 사업 및 (사)한국ESG경영협회 관련 사업</strong> 참여 · KINGDOM 청소년 성장·진로·학습 프로그램 기획·운영</p></article>
-          <article class="field-row"><div class="field-year">2025</div><div class="field-label">재외동포 청년 진로</div><p class="field-copy">재외동포협력센터·현대경제연구원 연계 <strong>「2025 차세대동포 모국 초청연수 청년 4차」 ‘재외동포 청년 진로 특강’</strong> 강사</p></article>
-          <article class="field-row"><div class="field-year">2023–25</div><div class="field-label">한국코치협회</div><p class="field-copy">사업위원회 활동 · 2023 CoCP 운영위원, 2024 기획운영국 위원, 2025 전략운영국 위원</p></article>
-          <article class="field-row"><div class="field-year">2023</div><div class="field-label">전문 코칭 프로젝트</div><p class="field-copy">삼정 자립코칭 참여코치 · 전북창업체험지원센터 임직원 코칭 · 20·30대 청년 대상 KAC S-TOP 과정 진행</p></article>
-          <article class="field-row"><div class="field-year">SELECTED</div><div class="field-label">기업 · 공공</div><p class="field-copy">삼성, LG전자, SK네트웍스, POSCO, 국방부, 한국자원봉사협의회 등 기업·기관 대상 <strong>코칭 프로젝트 개발·기획 및 교육 참여</strong></p></article>
-          <article class="field-row"><div class="field-year">EDU</div><div class="field-label">교육지원청 · 학교</div><p class="field-copy">옥천·충주·단양교육지원청 등과 연계한 초·중·고 진로·학습·자기주도성장 교육 및 코칭 · 고룡정보산업학교·청주교도소 등 교정·인성 교육 경험</p></article>
-        </div>
-
-        <div class="school-proof" aria-label="학교 현장 기록">
-          <div><strong>11개교</strong><span>자기주도학습</span></div>
-          <div><strong>22개교</strong><span>진로·커리어</span></div>
-          <div><strong>6개교</strong><span>인성·라이프</span></div>
-          <div><strong>8개교</strong><span>창업·창직</span></div>
-        </div>
-        <p class="school-note">※ 분야별 학교 현장 기록은 2025년 공식 이력자료에 기재된 범위를 기준으로 하며 단순 합산 기관 수가 아닙니다.</p>
       </div>
     </section>
 
-    <section class="section" id="career">
-      <div class="shell">
+    <section id="field" class="section" aria-labelledby="field-title">
+      <div class="container">
         <div class="section-head">
-          <div>
-            <p class="eyebrow">04 · CAREER</p>
-            <h2 class="section-title">역할은 달라도,<br />대화와 성장이라는 축은 같습니다.</h2>
-          </div>
-          <p class="section-desc">코칭, 교육, 진로, 평가, 출판 현장을 오가며 사람이 가능성을 발견하고 실제 선택으로 옮기는 구조를 다뤄왔습니다.</p>
+          <div><p class="section-kicker">SELECTED FIELD</p><h2 id="field-title">최근 공공 현장부터<br />교육·코칭 현장까지.</h2></div>
+          <p class="section-intro">서울시·행정안전부 관련 이력은 요청대로 사업명만 남기고 별도 기관·협회 설명은 붙이지 않았습니다.</p>
         </div>
 
-        <div class="career-grid">
-          <div class="career-block">
-            <h3>CURRENT ROLES</h3>
-            <ul class="career-list">
-              <li><strong>DAILYCOACHING</strong> 대표</li>
-              <li><strong>라온에듀(주)</strong> 수석코치</li>
-              <li><strong>RS에듀컨설팅</strong> 전문위원</li>
-              <li><strong>글로벌미래교육원 상담코칭센터</strong> 교육국장</li>
-              <li><strong>알아차림코칭센터</strong> 인증 FT · 전문 코치/강사</li>
+        <div class="timeline profile-timeline">
+          <div class="timeline-row"><time>2026</time><b>서울시</b><p class="public-project">2026년 서울시 민간단체 협력형 매력일자리 사업</p></div>
+          <div class="timeline-row"><time>2026</time><b>행정안전부</b><p class="public-project">행정안전부 고립청년·청소년 지원사업</p></div>
+          <div class="timeline-row"><time>2025</time><b>재외동포 청년</b><p>「2025 차세대동포 모국 초청연수 청년 4차」 <strong>재외동포 청년 진로 특강</strong> 강사</p></div>
+          <div class="timeline-row"><time>2023–25</time><b>한국코치협회</b><p>사업위원회 활동 · 2023 CoCP 운영위원 · 2024 기획운영국 위원 · 2025 전략운영국 위원</p></div>
+          <div class="timeline-row"><time>2023</time><b>전문 코칭</b><p>삼정 자립코칭 참여코치 · 전북창업체험지원센터 임직원 코칭 · 20·30대 청년 대상 KAC S-TOP 과정 진행</p></div>
+          <div class="timeline-row"><time>FIELD</time><b>기업·공공</b><p>삼성 · LG전자 · SK네트웍스 · POSCO · 국방부 · 한국자원봉사협의회 등 기업·기관 대상 코칭 프로젝트 개발·기획 및 교육 참여</p></div>
+          <div class="timeline-row"><time>FIELD</time><b>교육·청소년</b><p>교육지원청 및 전국 초·중·고 대상 자기주도학습 · 진로진학 · 인성 · 창업·창직 교육과 코칭</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="career" class="section section-paper" aria-labelledby="career-title">
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker">CAREER</p><h2 id="career-title">현재의 역할과<br />이전의 현장.</h2></div>
+          <p class="section-intro">지금 하는 일과 지나온 경력을 한 화면에서 읽히도록 단순하게 정리했습니다.</p>
+        </div>
+
+        <div class="career-split">
+          <article class="career-panel">
+            <h3>NOW</h3>
+            <ul>
+              <li><strong>현</strong> DAILYCOACHING 대표</li>
+              <li><strong>현</strong> 라온에듀(주) 수석코치</li>
+              <li><strong>현</strong> RS에듀컨설팅 전문위원</li>
+              <li><strong>현</strong> 글로벌미래교육원 상담코칭센터 교육국장</li>
             </ul>
-          </div>
-          <div class="career-block">
-            <h3>PREVIOUS · EXTERNAL</h3>
-            <ul class="career-list">
-              <li><strong>한국코치협회 사업위원회</strong> 2023–2025 위원</li>
-              <li><strong>떠오름출판사</strong> 전략본부장</li>
-              <li><strong>한국학습코치협회</strong> 전문코치</li>
-              <li><strong>용인미래교육센터</strong> 진로코칭강사</li>
-              <li><strong>한국인간과학연구소</strong> 표준화 인·적성 평가 연구원</li>
-              <li><strong>WellCounselling Centre · Canada</strong> LIFE COACH</li>
-              <li><strong>의정부시청소년상담복지센터</strong> Happywork 매니저</li>
+          </article>
+          <article class="career-panel">
+            <h3>BEFORE</h3>
+            <ul>
+              <li><strong>전</strong> 한국코치협회 사업위원회 위원</li>
+              <li><strong>전</strong> 한국학습코치협회 전문코치</li>
+              <li><strong>전</strong> 떠오름출판사 전략본부장</li>
+              <li><strong>전</strong> 용인미래교육센터 진로코칭강사</li>
+              <li><strong>전</strong> 한국인간과학연구소 표준화 인·적성 평가 연구원</li>
+              <li><strong>전</strong> 캐나다 WellCounselling Centre LIFE COACH</li>
+              <li><strong>전</strong> 의정부시청소년상담복지센터 Happywork 매니저</li>
             </ul>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section publishing" id="publishing">
-      <div class="shell">
-        <div class="publishing-layout">
-          <div>
-            <p class="eyebrow">05 · PUBLISHING & CONTENT</p>
-            <h2 class="book-title">『나는 장사의 신이다』</h2>
-            <p class="book-role">떠오름출판사 전략본부장 · 출판 전 과정 참여</p>
-          </div>
-          <ol class="book-process">
-            <li><span>01</span><div><strong>저자 발굴의 초기 단계</strong><br />저자 접촉 · 선정 · 인터뷰</div></li>
-            <li><span>02</span><div><strong>콘셉트와 기획</strong><br />책의 방향과 콘텐츠 콘셉트 기획</div></li>
-            <li><span>03</span><div><strong>원고 완성</strong><br />원고 1교 · 2교 · 3교 교정 과정 참여</div></li>
-            <li><span>04</span><div><strong>비주얼과 출간</strong><br />표지 시안 제작 · 출판 진행</div></li>
-            <li><span>05</span><div><strong>시장 연결</strong><br />출판 마케팅까지 전 과정에 관여</div></li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="credentials">
-      <div class="shell">
+    <section class="section section-blue" aria-labelledby="book-title">
+      <div class="container">
         <div class="section-head">
-          <div>
-            <p class="eyebrow">06 · CREDENTIALS</p>
-            <h2 class="section-title">자격은 이름보다<br />현장에서 지키는 기준입니다.</h2>
-          </div>
-          <p class="section-desc">학력, 코칭 자격, 전문과정을 구분해 표기합니다. 다양한 상담·교육 자격은 필요할 때만 펼쳐볼 수 있도록 정리했습니다.</p>
+          <div><p class="section-kicker">PUBLISHING & CONTENT</p><h2 id="book-title">『나는 장사의 신이다』<br />책이 나오기 전부터, 나온 뒤까지.</h2></div>
+          <p class="section-intro">떠오름출판사 전략본부장으로 저자 발굴과 초기 기획부터 교정, 표지, 출판, 마케팅까지 전 과정에 관여했습니다.</p>
+        </div>
+        <div class="book-process" aria-label="출판 기여 과정">
+          <div class="book-step"><b>01</b><span>저자 접촉</span></div>
+          <div class="book-step"><b>02</b><span>저자 선정</span></div>
+          <div class="book-step"><b>03</b><span>인터뷰</span></div>
+          <div class="book-step"><b>04</b><span>콘셉트 기획</span></div>
+          <div class="book-step"><b>05</b><span>1·2·3교 교정</span></div>
+          <div class="book-step"><b>06</b><span>표지 시안 제작</span></div>
+          <div class="book-step"><b>07</b><span>출판 진행</span></div>
+          <div class="book-step"><b>08</b><span>출판 마케팅</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="credentials" class="section" aria-labelledby="credential-title">
+      <div class="container">
+        <div class="section-head">
+          <div><p class="section-kicker">EDUCATION & CREDENTIALS</p><h2 id="credential-title">전문성은 앞세우기보다<br />필요할 때 확인할 수 있게.</h2></div>
+          <p class="section-intro">핵심 학력·코칭 자격을 먼저 보여주고, 보유 자격 전체는 펼쳐볼 수 있도록 정리했습니다.</p>
         </div>
 
-        <div class="credential-core">
-          <div><strong>코칭학 석사</strong><span>학력 · 전공</span></div>
-          <div><strong>한국코치협회 KPC</strong><span>KPC-03483 · 유효 2028.06.11</span></div>
-          <div><strong>AMCC</strong><span>Awareness Master Certified Coaching</span></div>
-          <div><strong>ICF Level 3</strong><span>과정 수료</span></div>
+        <div class="credential-summary">
+          <div class="credential-chip"><b>MASTER</b>코칭학 석사</div>
+          <div class="credential-chip"><b>KPC</b>한국코치협회 KPC</div>
+          <div class="credential-chip"><b>AMCC</b>Awareness Master Certified Coaching 과정 수료</div>
+          <div class="credential-chip"><b>ICF L3</b>ICF Level 3 과정 수료</div>
         </div>
 
-        <details class="credentials">
-          <summary>보유 자격 전체보기</summary>
+        <details class="credential-details">
+          <summary>보유 자격 전체 보기</summary>
           <ul class="credential-list">
-            <li>한국코치협회 KAC</li><li>다문화가정상담사 1급</li><li>청소년학습코칭지도사 1급</li>
-            <li>심리상담사 1급</li><li>인성교육지도사 2급</li><li>진로코치지도사 2급</li>
-            <li>진로코칭상담사 1급</li><li>학교폭력상담사 1급</li><li>심리검사전문가 1급</li>
-            <li>통합예술심리상담사 1급</li><li>경제진로교육지도사 1급</li><li>인성지도사 1급</li>
-            <li>레크리에이션 1급</li><li>웃음코칭 1급</li><li>스피치 지도자 2급</li>
-            <li>펀 리더십 2급</li><li>중독재활상담사 1급</li><li>중독심리상담사 1급</li>
-            <li>중독예방지도사 1급</li><li>중독예방전문가 1급</li><li>도형심리상담사 1급</li>
-            <li>독서논술지도사 1급</li><li>NLP코칭상담사 1급</li><li>감정코칭지도사 1급</li>
-            <li>안전교육사</li><li>뇌교육사</li><li>국제코칭전문가</li><li>인권교육지도사</li>
+            <li>한국코치협회 KAC</li>
+            <li>다문화가정상담사 1급</li>
+            <li>청소년학습코칭지도사 1급</li>
+            <li>심리상담사 1급</li>
+            <li>인성교육지도사 2급</li>
+            <li>진로코치지도사 2급</li>
+            <li>진로코칭상담사 1급</li>
+            <li>학교폭력상담사 1급</li>
+            <li>심리검사전문가 1급</li>
+            <li>통합예술심리상담사 1급</li>
+            <li>경제진로교육지도사 1급</li>
+            <li>인성지도사 1급</li>
+            <li>레크리에이션 1급</li>
+            <li>웃음코칭 1급</li>
+            <li>스피치 지도자 2급</li>
+            <li>펀 리더십 2급</li>
+            <li>중독재활상담사 1급</li>
+            <li>중독심리상담사 1급</li>
+            <li>중독예방지도사 1급</li>
+            <li>중독예방전문가 1급</li>
+            <li>도형심리상담사 1급</li>
+            <li>독서논술지도사 1급</li>
+            <li>NLP코칭상담사 1급</li>
+            <li>감정코칭지도사 1급</li>
+            <li>안전교육사</li>
+            <li>뇌교육사</li>
+            <li>국제코칭전문가</li>
+            <li>인권교육지도사</li>
           </ul>
         </details>
       </div>
     </section>
 
-    <section class="contact-section" id="contact">
-      <div class="shell contact-grid">
-        <div>
-          <p class="eyebrow" style="color:#fff">07 · CONTACT</p>
-          <h2 class="contact-title">사람과 현장에 필요한<br />대화를 함께 설계합니다.</h2>
-          <p class="contact-copy">공공기관·학교·기업 강의, 코칭 프로그램, 리더십·진로·코치양성 협업은 목적과 대상부터 확인한 뒤 가장 적합한 방식으로 설계합니다.</p>
-        </div>
-        <div class="contact-links">
-          <a href="tel:01028823625"><span>PHONE</span>010-2882-3625</a>
-          <a href="mailto:ros2468@naver.com"><span>EMAIL</span>ros2468@naver.com</a>
-          <a href="/company/"><span>COMPANY</span>DAILYCOACHING 소개</a>
+    <section id="contact" class="section section-compact section-paper" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-band">
+          <p class="section-kicker">CONTACT</p>
+          <h2 id="contact-title">강의든 코칭이든,<br />먼저 현장의 목적부터 봅니다.</h2>
+          <p>기관 교육, 특강, 워크숍, 코칭 프로젝트 협업 문의는 아래 연락처로 전달해 주세요.</p>
+          <div class="actions">
+            <a class="button button-primary" href="tel:01028823625">010-2882-3625</a>
+            <a class="button button-secondary" style="color:#fff;border-color:#fff" href="mailto:ros2468@naver.com">ros2468@naver.com</a>
+          </div>
         </div>
       </div>
     </section>
@@ -550,21 +310,12 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div><strong>DAILYCOACHING</strong> · © <span id="year">2026</span></div>
-      <div class="footer-links"><a href="/">홈</a><a href="/company/">기업소개</a><a href="/coaching/coach-the-coach/">코치더코치</a><a href="/nal/">NAL</a></div>
+      <div><strong>DAILYCOACHING</strong><p>© <span id="year">2026</span> DAILYCOACHING. All rights reserved.</p></div>
+      <div class="footer-links"><a href="/">홈</a><a href="/company/">기업소개</a><a href="/coaching/coach-the-coach/">CTC 90</a><a href="/nal/">NAL</a></div>
     </div>
   </footer>
 
   <script>
-    const menuButton=document.querySelector('.menu-button');
-    const nav=document.querySelector('#site-nav');
-    if(menuButton&&nav){
-      menuButton.addEventListener('click',()=>{
-        const open=nav.classList.toggle('open');
-        menuButton.setAttribute('aria-expanded',String(open));
-      });
-      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}));
-    }
     const year=document.querySelector('#year');
     if(year) year.textContent=new Date().getFullYear();
   </script>
