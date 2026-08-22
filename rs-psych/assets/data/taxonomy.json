@@ -1,0 +1,56 @@
+{
+  "organizationTypes": [
+    "school",
+    "university",
+    "corporate",
+    "association",
+    "center"
+  ],
+  "assessmentDomains": [
+    "personality",
+    "ability",
+    "strength",
+    "interest",
+    "values",
+    "career",
+    "program-specific"
+  ],
+  "certificationModels": [
+    "participation",
+    "insight",
+    "practice"
+  ],
+  "issuerModels": [
+    "rs-candidate",
+    "institution-candidate",
+    "co-issuer-candidate",
+    "tbd"
+  ],
+  "participantSteps": [
+    "invited",
+    "assessment-ready",
+    "assessment-complete",
+    "program-active",
+    "badge-pending",
+    "badge-issued",
+    "verify"
+  ],
+  "statuses": [
+    "confirmed-public-info",
+    "public-source-verified",
+    "confirmed-live",
+    "operation-pending",
+    "integration-pending",
+    "portfolio-demo",
+    "preview-credential",
+    "concept-option",
+    "tbd",
+    "demo-only",
+    "not-connected",
+    "contact-pending",
+    "verified-current-public-page",
+    "verified-historical-public-reference",
+    "verify-before-live",
+    "do-not-show-as-live-without-verification"
+  ]
+}

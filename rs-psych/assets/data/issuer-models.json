@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rs-candidate",
+    "label": "RS 발급 후보",
+    "status": "concept-option",
+    "description": "RS가 발급 책임주체가 되는 개념안. 계약·정책 확인 전 확정 아님."
+  },
+  {
+    "id": "institution-candidate",
+    "label": "기관 발급 후보",
+    "status": "concept-option",
+    "description": "참여기관이 발급 책임주체가 되는 개념안."
+  },
+  {
+    "id": "co-issuer-candidate",
+    "label": "공동 발급 후보",
+    "status": "concept-option",
+    "description": "역할분담에 따른 공동표기 개념안. 실제 지원여부·법적표기 확인 필요."
+  },
+  {
+    "id": "tbd",
+    "label": "발급모델 협의 필요",
+    "status": "tbd",
+    "description": "현재 기본값."
+  }
+]

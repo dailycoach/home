@@ -1,0 +1,109 @@
+[
+  {
+    "id": "rs-personality-aptitude",
+    "publicName": "RS성격적성검사",
+    "domain": "self",
+    "startingPoint": "self",
+    "publicDescription": "RS CDS 공개 페이지에 명시된 성격·적성 관련 검사 자산.",
+    "publicSourceStatus": "verified-current-public-page",
+    "operationalStatus": "verify-before-live",
+    "deliveryMode": null,
+    "durationMinutes": null,
+    "audience": null,
+    "officialUrl": null,
+    "sourceIds": [
+      "RS-SRC-001"
+    ],
+    "uiTags": [
+      "성격",
+      "자기이해",
+      "적성"
+    ]
+  },
+  {
+    "id": "rs-multiple-intelligence",
+    "publicName": "RS다중지능검사",
+    "domain": "strength",
+    "startingPoint": "strength",
+    "publicDescription": "RS CDS 공개 페이지에 명시된 다중지능 검사 자산.",
+    "publicSourceStatus": "verified-current-public-page",
+    "operationalStatus": "verify-before-live",
+    "deliveryMode": null,
+    "durationMinutes": null,
+    "audience": null,
+    "officialUrl": null,
+    "sourceIds": [
+      "RS-SRC-001",
+      "RS-SRC-005"
+    ],
+    "uiTags": [
+      "능력",
+      "다중지능",
+      "강점"
+    ]
+  },
+  {
+    "id": "rs-job-interest",
+    "publicName": "RS직업흥미검사",
+    "domain": "interest",
+    "startingPoint": "interest",
+    "publicDescription": "RS CDS 공개 페이지에 명시된 직업흥미 검사 자산.",
+    "publicSourceStatus": "verified-current-public-page",
+    "operationalStatus": "verify-before-live",
+    "deliveryMode": null,
+    "durationMinutes": null,
+    "audience": null,
+    "officialUrl": null,
+    "sourceIds": [
+      "RS-SRC-001"
+    ],
+    "uiTags": [
+      "흥미",
+      "직업",
+      "진로"
+    ]
+  },
+  {
+    "id": "rs-career-aptitude-group",
+    "publicName": "RS진로적성검사",
+    "domain": "career",
+    "startingPoint": "career-design",
+    "publicDescription": "학교·기관·학원 등에서 실시하는 단체 진로적성검사로 RS 공개 페이지에 안내됨.",
+    "publicSourceStatus": "verified-current-public-page",
+    "operationalStatus": "verify-before-live",
+    "deliveryMode": "public-page-describes-onsite-OMR-group",
+    "durationMinutes": 60,
+    "audience": "public-page-describes-ES-and-MHS-types",
+    "officialUrl": "https://www.rsedu.co.kr/page/page57",
+    "sourceIds": [
+      "RS-SRC-002"
+    ],
+    "uiTags": [
+      "종합적성",
+      "ES",
+      "MHS",
+      "진로설계"
+    ]
+  },
+  {
+    "id": "rsat-historical-reference",
+    "publicName": "RSAT (RS종합진로적성검사)",
+    "domain": "career",
+    "startingPoint": "career-design",
+    "publicDescription": "RS 주요사업실적/연혁 공개자료에 학지사 심리검사 연구소 공급계약 명칭으로 확인되는 역사적 자산.",
+    "publicSourceStatus": "verified-historical-public-reference",
+    "operationalStatus": "do-not-show-as-live-without-verification",
+    "deliveryMode": null,
+    "durationMinutes": null,
+    "audience": null,
+    "officialUrl": null,
+    "sourceIds": [
+      "RS-SRC-005",
+      "RS-SRC-006"
+    ],
+    "uiTags": [
+      "종합진로적성",
+      "역사적 공개근거"
+    ]
+  }
+]

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /rs-psych/
+Sitemap: https://daily-coach-ing.com/rs-psych/sitemap.xml

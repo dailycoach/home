@@ -1,0 +1,32 @@
+[
+  {
+    "id": "achievement-not-type",
+    "title": "Achievement, not type",
+    "body": "배지는 심리유형·원점수·진단이 아니라 지정된 참여·활동·성취조건을 설명합니다."
+  },
+  {
+    "id": "private-by-default",
+    "title": "Private by default",
+    "body": "원점수, 세부 심리프로파일, 상담·코칭 대화와 자유서술은 공개 Credential 기본필드에 포함하지 않습니다."
+  },
+  {
+    "id": "official-vs-operation",
+    "title": "Official information and operation are separate",
+    "body": "공식 제품 안내페이지와 기관별 실제 이용경로를 분리해 표시합니다."
+  },
+  {
+    "id": "demo-live",
+    "title": "Demo and live are separate",
+    "body": "실제 발급·검증·기관별 플랫폼 연결이 확정되지 않은 기능은 Demo 또는 Pending으로 표시합니다."
+  },
+  {
+    "id": "minor-policy",
+    "title": "Minor / guardian policy pending",
+    "body": "미성년자 실사업은 기관별 참여·보호자·개인정보 정책 검토 후 운영합니다."
+  },
+  {
+    "id": "non-medical",
+    "title": "Non-medical boundary",
+    "body": "허브와 배지는 의료·진단·응급서비스를 대체하지 않습니다."
+  }
+]

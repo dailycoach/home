@@ -1,0 +1,136 @@
+[
+  {
+    "id": "self-understanding-participation",
+    "title": "자기이해 탐색 참여 인증",
+    "modelId": "participation",
+    "audiences": [
+      "student",
+      "adult"
+    ],
+    "assessmentDomains": [
+      "personality",
+      "values"
+    ],
+    "assessmentIds": [
+      "rs-personality-aptitude"
+    ],
+    "activities": [
+      "orientation"
+    ],
+    "criteria": [
+      "지정 검사 완료",
+      "필수 안내 확인"
+    ],
+    "evidenceExamples": [
+      "검사 완료 이벤트 또는 기관 확인",
+      "안내과정 완료 확인"
+    ],
+    "credentialTemplateId": "self-discovery",
+    "issuerModelId": "tbd",
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "strength-insight-program",
+    "title": "강점 인사이트 인증 프로그램",
+    "modelId": "insight",
+    "audiences": [
+      "student",
+      "adult",
+      "employee"
+    ],
+    "assessmentDomains": [
+      "ability",
+      "strength"
+    ],
+    "assessmentIds": [
+      "rs-multiple-intelligence"
+    ],
+    "activities": [
+      "result-review",
+      "strength-scene-map"
+    ],
+    "criteria": [
+      "지정 검사 완료",
+      "결과 해석활동 완료",
+      "강점장면 결과물 또는 운영확인"
+    ],
+    "evidenceExamples": [
+      "검사 완료 확인",
+      "활동 완료 체크",
+      "승인된 결과물 또는 운영자 확인"
+    ],
+    "credentialTemplateId": "strength-insight",
+    "issuerModelId": "tbd",
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "career-interest-insight",
+    "title": "직업흥미 탐색 인증 프로그램",
+    "modelId": "insight",
+    "audiences": [
+      "student",
+      "job-seeker"
+    ],
+    "assessmentDomains": [
+      "interest",
+      "career"
+    ],
+    "assessmentIds": [
+      "rs-job-interest"
+    ],
+    "activities": [
+      "result-review",
+      "occupation-exploration"
+    ],
+    "criteria": [
+      "직업흥미검사 완료",
+      "흥미키워드 정리",
+      "관심분야 탐색활동 완료"
+    ],
+    "evidenceExamples": [
+      "검사 완료 확인",
+      "탐색활동 완료 체크"
+    ],
+    "credentialTemplateId": "interest-explorer",
+    "issuerModelId": "tbd",
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "career-design-practice-program",
+    "title": "진로설계 실천 인증 프로그램",
+    "modelId": "practice",
+    "audiences": [
+      "student",
+      "job-seeker",
+      "adult"
+    ],
+    "assessmentDomains": [
+      "personality",
+      "ability",
+      "interest",
+      "values",
+      "career"
+    ],
+    "assessmentIds": [
+      "rs-career-aptitude-group"
+    ],
+    "activities": [
+      "integrated-review",
+      "career-design-canvas",
+      "practice-example"
+    ],
+    "criteria": [
+      "지정 진로적성검사 완료",
+      "진로설계 활동 완료",
+      "다음 행동 실행·회고 확인"
+    ],
+    "evidenceExamples": [
+      "검사 완료 확인",
+      "Canvas 완료 확인",
+      "행동·회고 완료 체크"
+    ],
+    "credentialTemplateId": "career-design-practice",
+    "issuerModelId": "tbd",
+    "status": "portfolio-demo"
+  }
+]

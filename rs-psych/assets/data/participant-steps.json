@@ -1,0 +1,86 @@
+[
+  {
+    "id": "invited",
+    "label": "기관에서 안내를 받았어요",
+    "nowAction": "프로그램명, 검사명, 참여기간과 문의담당자를 확인하세요.",
+    "preparation": [
+      "기관 안내문",
+      "참여코드 또는 지정 링크"
+    ],
+    "destinationType": "guide",
+    "destination": "/rs-psych/guide/#invitation",
+    "nextStep": "assessment-ready"
+  },
+  {
+    "id": "assessment-ready",
+    "label": "심리검사를 시작하려고 해요",
+    "nowAction": "기관이 지정한 검사명과 이용경로를 확인하세요.",
+    "preparation": [
+      "지정 검사명",
+      "기관별 참여정보"
+    ],
+    "destinationType": "platform",
+    "platformId": "rs-assessment-platform",
+    "fallback": "/rs-psych/tests/",
+    "nextStep": "assessment-complete"
+  },
+  {
+    "id": "assessment-complete",
+    "label": "검사를 완료했어요",
+    "nowAction": "기관 안내로 돌아와 다음 교육·해석·활동을 확인하세요.",
+    "preparation": [
+      "검사 완료 여부",
+      "기관 후속 안내"
+    ],
+    "destinationType": "guide",
+    "destination": "/rs-psych/guide/#after-assessment",
+    "nextStep": "program-active"
+  },
+  {
+    "id": "program-active",
+    "label": "프로그램 활동을 진행 중이에요",
+    "nowAction": "기관이 정한 필수활동과 완료증거를 확인하세요.",
+    "preparation": [
+      "프로그램 일정",
+      "활동·과제 기준"
+    ],
+    "destinationType": "catalog",
+    "destination": "/rs-psych/badges/#programs",
+    "nextStep": "badge-pending"
+  },
+  {
+    "id": "badge-pending",
+    "label": "배지 발급 안내를 받았어요",
+    "nowAction": "발급주체, 배지명, 공개정보와 수령경로를 확인하세요.",
+    "preparation": [
+      "발급 안내",
+      "기관별 배지 이용경로"
+    ],
+    "destinationType": "guide",
+    "destination": "/rs-psych/badges/#receive-and-manage",
+    "nextStep": "badge-issued"
+  },
+  {
+    "id": "badge-issued",
+    "label": "내 배지를 확인하고 싶어요",
+    "nowAction": "기관이 안내한 배지 이용경로에서 발급상태를 확인하세요.",
+    "preparation": [
+      "기관별 배지 수령안내"
+    ],
+    "destinationType": "platform",
+    "platformId": "omnione-badge-platform",
+    "fallback": "/rs-psych/badges/#receive-and-manage",
+    "nextStep": "verify"
+  },
+  {
+    "id": "verify",
+    "label": "배지가 유효한지 확인하고 싶어요",
+    "nowAction": "Credential의 발급정보·취득조건·현재 상태를 확인하세요.",
+    "preparation": [
+      "기관이 제공한 Credential ID 또는 검증링크"
+    ],
+    "destinationType": "verify",
+    "destination": "/rs-psych/verify/",
+    "nextStep": null
+  }
+]

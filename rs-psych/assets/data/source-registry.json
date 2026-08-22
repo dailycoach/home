@@ -1,0 +1,119 @@
+[
+  {
+    "id": "RS-SRC-001",
+    "organization": "RS EDU CONSULTING",
+    "title": "CDS솔루션 소개",
+    "url": "https://www.rsedu.co.kr/page/page48",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "성격·능력·흥미·가치관을 활용한 적성진단 구조",
+      "RS다중지능검사",
+      "RS직업흥미검사",
+      "RS성격적성검사",
+      "적성진단·진로설계·상담관리"
+    ],
+    "usage": "current public-source architecture"
+  },
+  {
+    "id": "RS-SRC-002",
+    "organization": "RS EDU CONSULTING",
+    "title": "RS진로적성검사",
+    "url": "https://www.rsedu.co.kr/page/page57",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "학교·기관·학원 단체검사",
+      "ES/MHS",
+      "약 60분",
+      "OMR",
+      "현장 전문가 진행",
+      "CDS 결과 조회"
+    ],
+    "usage": "public test description; operation must be re-confirmed"
+  },
+  {
+    "id": "RS-SRC-003",
+    "organization": "RS EDU CONSULTING",
+    "title": "심리검사 공급",
+    "url": "https://www.rsedu.co.kr/page/page56",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "학교·학원·기관 심리검사 공급",
+      "검사결과 해석/진로적성교육 강연"
+    ],
+    "usage": "service context"
+  },
+  {
+    "id": "RS-SRC-004",
+    "organization": "RS EDU CONSULTING",
+    "title": "진로적성 카운슬링",
+    "url": "https://www.rsedu.co.kr/page/page16",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "성격·능력·흥미·가치관의 다요인 종합",
+      "진로선택 과정 컨설팅"
+    ],
+    "usage": "service philosophy context"
+  },
+  {
+    "id": "RS-SRC-005",
+    "organization": "RS EDU CONSULTING",
+    "title": "주요사업실적",
+    "url": "https://www.rsedu.co.kr/page/page63",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "RSAT/RSMI 학지사 심리검사 연구소 공급계약 공개",
+      "대학 상담센터 심리검사 공급 실적"
+    ],
+    "usage": "historical/public evidence only"
+  },
+  {
+    "id": "RS-SRC-006",
+    "organization": "RS EDU CONSULTING",
+    "title": "연혁",
+    "url": "https://www.rsedu.co.kr/page/page54",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "2017 RSAT/RSMI 공급계약 공개",
+      "서울진로진학정보센터 검사 활용 실적 등 역사"
+    ],
+    "usage": "historical/public evidence only"
+  },
+  {
+    "id": "OMNI-SRC-001",
+    "organization": "RaonSecure",
+    "title": "OmniOne Badge 2026 brochure",
+    "url": "https://www.raonsecure.com/common/ko/downfile/OmniOne%20Badge_Brochure_Ko.pdf",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "국제 표준 디지털 배지 플랫폼 소개",
+      "학습·기술·역량 등 경험의 배지화",
+      "취득조건/지식·스킬/발행처/유효기간 예시",
+      "Issuer/Displayer/Host 흐름 표시",
+      "타 배지 지갑 연동 가능 문구"
+    ],
+    "usage": "product capability reference, NOT API contract"
+  },
+  {
+    "id": "OMNI-SRC-002",
+    "organization": "RaonSecure",
+    "title": "건국대학교 디지털 배지 발급 서비스 구현",
+    "url": "https://www.raonsecure.com/ko/about/news_list/view/420",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "대학 전용 디지털배지 웹사이트",
+      "OmniOne Badge 기반 발급/관리"
+    ],
+    "usage": "front-site + credential infrastructure reference"
+  },
+  {
+    "id": "OMNI-SRC-003",
+    "organization": "RaonSecure",
+    "title": "OmniOne Badge product page",
+    "url": "https://www.raon.com/ko/service/badge",
+    "verifiedDate": "2026-08-20",
+    "facts": [
+      "국제 표준 디지털 배지 플랫폼으로 현재 소개"
+    ],
+    "usage": "current product positioning"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "id": "rs-assessment-platform",
+    "platformType": "assessment",
+    "displayName": "RS 심리검사·CDS",
+    "provider": "RS EDU CONSULTING",
+    "officialInfoUrl": "https://www.rsedu.co.kr/page/page48",
+    "officialInfoStatus": "confirmed-public-info",
+    "operationalEntryUrl": null,
+    "operationalStatus": "operation-pending",
+    "description": "RS의 적성진단·진로설계·상담관리와 공개 검사자산을 안내하는 공식 정보 출처.",
+    "operationalNote": "기관별 검사명·대상·참여코드·실제 검사경로는 운영정보 확인 후 연결.",
+    "officialInfoLabel": "RS 공식 검사·CDS 안내 보기",
+    "operationalActionLabel": "기관별 검사 이용경로 열기",
+    "fallbackPath": "/rs-psych/tests/",
+    "sourceIds": [
+      "RS-OFFICIAL-001",
+      "RS-OFFICIAL-002"
+    ]
+  },
+  {
+    "id": "omnione-badge-platform",
+    "platformType": "credential",
+    "displayName": "OmniOne Badge",
+    "provider": "RaonSecure",
+    "officialInfoUrl": "https://www.raon.com/ko/service/badge",
+    "officialInfoStatus": "confirmed-public-info",
+    "operationalEntryUrl": null,
+    "operationalStatus": "integration-pending",
+    "description": "학습·기술·역량 등 다양한 경험을 디지털배지로 발급하고 증명하는 국제 표준 디지털배지 플랫폼으로 공식 소개됨.",
+    "operationalNote": "기관별 발급·수령·관리·공유·검증 경로는 계약·tenant·issuer 정책 확인 후 연결.",
+    "officialInfoLabel": "OmniOne Badge 공식 안내 보기",
+    "operationalActionLabel": "기관별 배지 이용경로 열기",
+    "fallbackPath": "/rs-psych/badges/#receive-and-manage",
+    "sourceIds": [
+      "RAON-OFFICIAL-001",
+      "RAON-OFFICIAL-002"
+    ]
+  }
+]

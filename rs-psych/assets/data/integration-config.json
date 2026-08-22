@@ -1,0 +1,33 @@
+{
+  "environment": "portfolio-demo",
+  "siteBaseUrl": "https://daily-coach-ing.com/rs-psych/",
+  "externalPlatforms": {
+    "rsAssessment": {
+      "officialInfoStatus": "confirmed-public-info",
+      "officialInfoUrl": "https://www.rsedu.co.kr/page/page48",
+      "operationalEntryUrl": null,
+      "operationalStatus": "operation-pending"
+    },
+    "omnioneBadge": {
+      "officialInfoStatus": "confirmed-public-info",
+      "officialInfoUrl": "https://www.raon.com/ko/service/badge",
+      "operationalEntryUrl": null,
+      "operationalStatus": "integration-pending",
+      "brandPermissionConfirmed": false
+    }
+  },
+  "credential": {
+    "issuerModelId": "tbd",
+    "realIssuance": false,
+    "realVerification": false
+  },
+  "participant": {
+    "accounts": false,
+    "dataStorage": false,
+    "freeText": false
+  },
+  "institutionInquiry": {
+    "url": null,
+    "status": "contact-pending"
+  }
+}

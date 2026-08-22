@@ -1,0 +1,17 @@
+{
+  "id": "hub-institution-inquiry",
+  "status": "contact-pending",
+  "url": null,
+  "headline": "도입 문의 채널은 운영주체 확정 후 연결됩니다.",
+  "fallbackPath": "/rs-psych/institutions/#preparation",
+  "preparationFields": [
+    "기관명/기관유형",
+    "대상과 예상인원",
+    "활용할 검사영역",
+    "프로그램 목적",
+    "희망 인증수준",
+    "예상 운영시기",
+    "담당자 역할"
+  ],
+  "doNotCollectInDemo": true
+}

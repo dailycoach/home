@@ -1,0 +1,71 @@
+[
+  {
+    "role": "RS EDU CONSULTING",
+    "responsibilities": [
+      "검사자산·공식 운영정보 제공",
+      "검사 플랫폼 안내 또는 기관별 연결 협의",
+      "검사 완료정보 제공방식 협의"
+    ],
+    "notAssumed": [
+      "모든 Credential의 자동 발급자",
+      "모든 프로그램 운영자"
+    ]
+  },
+  {
+    "role": "PARTICIPATING INSTITUTION",
+    "responsibilities": [
+      "사업목표·대상·일정",
+      "참여자 안내·동의",
+      "프로그램 운영 또는 위탁",
+      "완료증거 확인",
+      "문의·예외처리"
+    ],
+    "notAssumed": [
+      "심리점수 공개",
+      "동의 없는 데이터 이전"
+    ]
+  },
+  {
+    "role": "DAILYCOACHING",
+    "responsibilities": [
+      "허브 UX·사업모델 설계 후보",
+      "해석·코칭·실천 프로그램 운영 후보",
+      "기관 운영지원 후보"
+    ],
+    "notAssumed": [
+      "모든 사업의 필수운영자",
+      "확정되지 않은 Issuer"
+    ]
+  },
+  {
+    "role": "CREDENTIAL ISSUER",
+    "responsibilities": [
+      "발급기준 승인",
+      "발급·취소·갱신 정책",
+      "발급정보 책임"
+    ],
+    "status": "tbd"
+  },
+  {
+    "role": "OMNIONE BADGE",
+    "responsibilities": [
+      "디지털배지 발급·관리·공유·검증 인프라 연결 대상"
+    ],
+    "status": "integration-pending"
+  },
+  {
+    "role": "PARTICIPANT",
+    "responsibilities": [
+      "검사·프로그램 참여",
+      "필수활동 완료",
+      "공개·공유 범위 확인"
+    ]
+  },
+  {
+    "role": "VERIFIER",
+    "responsibilities": [
+      "발급정보·취득조건·현재 상태 확인",
+      "Credential 비증명범위 존중"
+    ]
+  }
+]

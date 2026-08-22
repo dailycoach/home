@@ -1,0 +1,80 @@
+[
+  {
+    "order": 1,
+    "id": "design",
+    "label": "기관 사업설계",
+    "ownerRoles": [
+      "PARTICIPATING INSTITUTION"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "order": 2,
+    "id": "invite",
+    "label": "참여자 안내·동의",
+    "ownerRoles": [
+      "PARTICIPATING INSTITUTION"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "order": 3,
+    "id": "assessment",
+    "label": "RS 심리검사",
+    "ownerRoles": [
+      "RS EDU CONSULTING",
+      "PARTICIPANT"
+    ],
+    "status": "operation-pending"
+  },
+  {
+    "order": 4,
+    "id": "program",
+    "label": "교육·해석·활동",
+    "ownerRoles": [
+      "PARTICIPATING INSTITUTION",
+      "DAILYCOACHING"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "order": 5,
+    "id": "eligibility",
+    "label": "성취기준 확인",
+    "ownerRoles": [
+      "PARTICIPATING INSTITUTION",
+      "CREDENTIAL ISSUER"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "order": 6,
+    "id": "issue",
+    "label": "디지털배지 발급",
+    "ownerRoles": [
+      "CREDENTIAL ISSUER",
+      "OMNIONE BADGE"
+    ],
+    "status": "integration-pending"
+  },
+  {
+    "order": 7,
+    "id": "manage",
+    "label": "수령·관리·공유",
+    "ownerRoles": [
+      "PARTICIPANT",
+      "OMNIONE BADGE"
+    ],
+    "status": "integration-pending"
+  },
+  {
+    "order": 8,
+    "id": "verify",
+    "label": "제3자 검증",
+    "ownerRoles": [
+      "VERIFIER",
+      "OMNIONE BADGE"
+    ],
+    "status": "integration-pending"
+  }
+]

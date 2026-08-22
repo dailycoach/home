@@ -1,0 +1,179 @@
+[
+  {
+    "id": "school-career",
+    "organizationType": "school",
+    "title": "학교·청소년 진로탐색 인증",
+    "target": "중·고등학생",
+    "assessmentDomains": [
+      "career",
+      "interest",
+      "strength"
+    ],
+    "recommendedModelIds": [
+      "participation",
+      "insight"
+    ],
+    "programExamples": [
+      "진로적성검사",
+      "결과해석교육",
+      "직업세계 탐색",
+      "진로설계 활동"
+    ],
+    "credentialTemplateIds": [
+      "career-insight",
+      "career-design-practice"
+    ],
+    "issuerModelIds": [
+      "tbd"
+    ],
+    "institutionPreparation": [
+      "대상/일정",
+      "보호자·참여자 동의정책",
+      "검사운영방식",
+      "완료기준",
+      "담당자"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "university-career",
+    "organizationType": "university",
+    "title": "대학·취업지원 Career Credential",
+    "target": "대학생·취업준비생",
+    "assessmentDomains": [
+      "interest",
+      "strength",
+      "career"
+    ],
+    "recommendedModelIds": [
+      "insight",
+      "practice"
+    ],
+    "programExamples": [
+      "직업흥미검사",
+      "강점해석",
+      "취업준비 워크숍",
+      "Action Plan"
+    ],
+    "credentialTemplateIds": [
+      "interest-explorer",
+      "career-design-practice"
+    ],
+    "issuerModelIds": [
+      "tbd"
+    ],
+    "institutionPreparation": [
+      "사업목표",
+      "학과/대상",
+      "과정이수기준",
+      "과제검토주체",
+      "발급정책"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "corporate-development",
+    "organizationType": "corporate",
+    "title": "기업·조직 자기이해·역량개발 인증",
+    "target": "임직원·리더",
+    "assessmentDomains": [
+      "personality",
+      "strength",
+      "values"
+    ],
+    "recommendedModelIds": [
+      "insight",
+      "practice"
+    ],
+    "programExamples": [
+      "자기이해검사",
+      "소통·리더십 교육",
+      "행동실험",
+      "회고"
+    ],
+    "credentialTemplateIds": [
+      "self-discovery",
+      "growth-journey"
+    ],
+    "issuerModelIds": [
+      "tbd"
+    ],
+    "institutionPreparation": [
+      "직무목표",
+      "개인정보 최소수집",
+      "인사평가와 분리정책",
+      "운영자",
+      "발급활용범위"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "association-course",
+    "organizationType": "association",
+    "title": "협회·교육기관 과정이수·실습 인증",
+    "target": "교육과정 참여자",
+    "assessmentDomains": [
+      "program-specific"
+    ],
+    "recommendedModelIds": [
+      "participation",
+      "practice"
+    ],
+    "programExamples": [
+      "검사 기반 오리엔테이션",
+      "과정수강",
+      "실습",
+      "과제"
+    ],
+    "credentialTemplateIds": [
+      "self-discovery",
+      "growth-journey"
+    ],
+    "issuerModelIds": [
+      "tbd"
+    ],
+    "institutionPreparation": [
+      "교육과정",
+      "출석/과제기준",
+      "검토자",
+      "취소·갱신정책",
+      "발급주체"
+    ],
+    "status": "portfolio-demo"
+  },
+  {
+    "id": "counseling-coaching-center",
+    "organizationType": "center",
+    "title": "상담·코칭기관 성장프로그램 인증",
+    "target": "프로그램 참여자",
+    "assessmentDomains": [
+      "personality",
+      "career"
+    ],
+    "recommendedModelIds": [
+      "insight",
+      "practice"
+    ],
+    "programExamples": [
+      "심리검사",
+      "결과리뷰",
+      "코칭·교육",
+      "작은 실천"
+    ],
+    "credentialTemplateIds": [
+      "career-insight",
+      "growth-journey"
+    ],
+    "issuerModelIds": [
+      "tbd"
+    ],
+    "institutionPreparation": [
+      "의료·진단 경계",
+      "자격검증",
+      "동의·비밀보장",
+      "완료기준",
+      "공개정보"
+    ],
+    "status": "portfolio-demo"
+  }
+]

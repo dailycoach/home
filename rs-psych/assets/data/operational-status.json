@@ -1,0 +1,40 @@
+{
+  "mode": "portfolio-demo",
+  "features": [
+    {
+      "id": "rs-official-info",
+      "status": "confirmed-public-info",
+      "publicLabel": "RS 공식 안내 연결 가능"
+    },
+    {
+      "id": "rs-operational-entry",
+      "status": "operation-pending",
+      "publicLabel": "기관별 검사 이용경로 확인 필요"
+    },
+    {
+      "id": "omnione-official-info",
+      "status": "confirmed-public-info",
+      "publicLabel": "OmniOne Badge 공식 안내 연결 가능"
+    },
+    {
+      "id": "omnione-operational-entry",
+      "status": "integration-pending",
+      "publicLabel": "기관별 배지 이용경로 확인 필요"
+    },
+    {
+      "id": "credential-issuance",
+      "status": "integration-pending",
+      "publicLabel": "실제 발급 연동 전"
+    },
+    {
+      "id": "credential-verification",
+      "status": "demo-only",
+      "publicLabel": "검증 화면 Demo"
+    },
+    {
+      "id": "institution-inquiry",
+      "status": "contact-pending",
+      "publicLabel": "도입 문의 채널 확정 전"
+    }
+  ]
+}
