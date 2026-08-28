@@ -18,13 +18,16 @@ google-site-verification=xjjPqraQDRBHUBOH0pnVMmOlFRTvys-GEHlISsQzE6I
 ```
 
 - 발급 출처: Google Search Console의 `daily-coach-ing.com` Domain property 소유권 확인 화면
-- 상태: `EXTERNAL ACTION REQUIRED`
-- 현재 조치: DNS를 수정하지 않았고 Search Console의 `확인` 버튼을 누르지 않았다.
+- DNS 제공업체: 가비아
+- TTL: 600초
+- 상태: `VERIFIED`
+- 완료 조치: 루트 도메인 TXT 추가, 공개 DNS 전파 확인, Search Console 소유권 확인 완료
 
 ## Sitemap
 
 - 제출 URL: `https://daily-coach-ing.com/sitemap.xml`
-- 상태: property 소유확인 완료 후 제출 필요
+- 제출 상태: `성공`
+- Search Console 발견 페이지 수: 77
 
 ## Priority indexing URLs
 
@@ -49,11 +52,11 @@ google-site-verification=xjjPqraQDRBHUBOH0pnVMmOlFRTvys-GEHlISsQzE6I
 - `https://daily-coach-ing.com/apilos/programs/social-impact/`
 - `https://daily-coach-ing.com/apilos/programs/research-publication/`
 
-## Remaining action
+## Indexing requests completed
 
-1. `daily-coach-ing.com` DNS 관리 화면에서 위 TXT 값을 루트 도메인에 추가한다.
-2. DNS 전파 후 현재 Search Console 소유권 확인 화면에서 `확인`을 누른다.
-3. 소유확인이 성공하면 sitemap을 제출한다.
-4. P0 → P1 → P2 순서로 URL 검사를 실행하고 가능한 URL에 색인 생성 요청을 한다.
+- `https://daily-coach-ing.com/apilos/`
+- `https://daily-coach-ing.com/apilos/programs/`
 
-Search Console이 발급한 실제 TXT만 기록했다. HTML에 Google verification meta를 추가하지 않았고 placeholder도 만들지 않았다.
+두 URL 모두 URL 검사 후 색인 생성 요청 접수를 확인했다. 나머지 URL은 sitemap을 통해 발견될 수 있으며, 필요하면 P0 → P1 → P2 순서로 추가 요청한다.
+
+Search Console이 발급한 실제 TXT만 사용했다. HTML에 Google verification meta나 placeholder는 추가하지 않았다. 실제 색인 반영은 Google 처리 일정에 따라 시간이 걸릴 수 있다.

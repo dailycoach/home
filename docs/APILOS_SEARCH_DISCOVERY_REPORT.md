@@ -1,25 +1,26 @@
 # APILOS 검색 발견성 구축 결과
 
 - 실행 일시: 2026-08-28 (Asia/Seoul)
-- 배포 커밋: `b5446efb403ccf15ad1134793aff8f02ab837435`
+- Naver verification 배포 커밋: `652b74e`
 - GitHub Pages: `built`
 - APILOS workflow: `success` (static QA + live QA)
 
 ## GOOGLE
 
 - Property: Domain property `daily-coach-ing.com` 선택
-- Verification: Google이 실제 DNS TXT를 발급했으며 `docs/APILOS_GOOGLE_SEARCH_CONSOLE_SETUP.md`에 기록. DNS 변경 및 Search Console `확인` 클릭은 수행하지 않음.
-- Sitemap: `https://daily-coach-ing.com/sitemap.xml` 운영 200 및 APILOS URL 13개 확인. Search Console 제출은 소유확인 후 필요.
-- Indexing: URL Inspection 및 Request Indexing은 소유확인 전이므로 미실행.
-- Remaining Action: DNS TXT 추가 → DNS 전파 → Search Console `확인` → sitemap 제출 → P0/P1/P2 URL 검사 및 색인 생성 요청.
+- Verification: 가비아 루트 DNS에 Google 발급 TXT를 추가하고 공개 DNS 전파 확인 후 Domain property 소유확인 완료.
+- Sitemap: `https://daily-coach-ing.com/sitemap.xml` 제출 상태 `성공`, 발견 페이지 77개.
+- Indexing: `/apilos/`, `/apilos/programs/` URL 검사 및 색인 생성 요청 접수 완료.
+- Remaining Action: 실제 색인 반영 대기. 필요 시 나머지 P0/P1/P2 URL을 추가 요청.
 
 ## NAVER
 
-- Site Registration: 미실행. Google DNS 확인 단계의 사용자 조치 지점에서 외부 서비스 작업을 중지함.
-- Verification: 실제 Naver token 미발급. production HTML에 verification meta 및 placeholder 없음.
-- Sitemap: `https://daily-coach-ing.com/sitemap.xml` 제출 준비 완료, Search Advisor 소유확인 후 제출 필요.
-- Collection Request: 미실행.
-- Remaining Action: `https://daily-coach-ing.com/` 등록 → 실제 provider token으로 소유확인 → sitemap 제출 → APILOS 우선순위 URL 검사 및 수집 요청.
+- Site Registration: `https://daily-coach-ing.com` 등록 완료.
+- Verification: Naver 발급 실제 HTML meta를 root HTML에 배포하고 소유확인 완료.
+- Sitemap: `https://daily-coach-ing.com/sitemap.xml` 제출 완료(2026-08-28 14:06:35).
+- URL Inspection: `/apilos/`의 200 응답, robots.txt, 로봇 메타, 제목·설명·OG 모두 정상.
+- Collection Request: `/apilos/`, `/apilos/programs/`, `/apilos/center/`, `/apilos/archive/`, `/apilos/news/` 5개 등록 완료.
+- Remaining Action: 실제 수집·색인 반영 대기.
 
 ## TECHNICAL SEO
 
@@ -37,10 +38,10 @@
 
 ## RESULT
 
-`PARTIAL`
+`SUBMITTED / PASS`
 
 - 기술 구현 및 production 검증: `READY / PASS`
-- Google 등록: `BLOCKED_BY_EXTERNAL_VERIFICATION`
-- Naver 등록: `BLOCKED_BY_EXTERNAL_VERIFICATION`
+- Google 등록·sitemap·우선 URL 요청: `COMPLETE`
+- Naver 등록·sitemap·우선 URL 요청: `COMPLETE`
 
-검색엔진의 실제 색인 완료는 코드 배포와 별개의 외부 상태다. 현재 사이트는 크롤링·색인 요청을 받을 기술 조건을 충족했으며, 남은 단계는 소유확인과 각 검색엔진 내 sitemap/URL 제출이다.
+검색엔진의 실제 색인 완료는 코드 배포 및 제출과 별개의 외부 상태다. 현재 사이트는 기술 조건과 양쪽 검색엔진 등록·제출을 모두 완료했으며, 남은 단계는 Google/Naver의 수집·색인 처리다.
