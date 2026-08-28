@@ -252,6 +252,18 @@ if (!exists('404.html')) {
   if (!/\bnoindex\b/i.test(robots) || !/\bfollow\b/i.test(robots)) fail('404.html: expected noindex,follow');
 }
 
+if (!exists('index.html')) {
+  fail('index.html: root verification target missing');
+} else {
+  const rootHtml = read('index.html');
+  const rootHead = rootHtml.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] || '';
+  const naverVerification = metaContent(rootHead, 'name', 'naver-site-verification');
+  if (!naverVerification) fail('index.html: Naver site verification meta missing or empty');
+  else if (naverVerification.length < 12 || /(?:placeholder|actual[_ -]?token|xxxx|your[_ -]?token|todo|change\s*me)/i.test(naverVerification)) {
+    fail('index.html: Naver site verification contains a placeholder token');
+  }
+}
+
 console.log(`APILOS search QA: ${pages.length} public pages, ${failures.length} failures`);
 for (const message of failures) console.error(`FAIL: ${message}`);
 if (failures.length) process.exit(1);
