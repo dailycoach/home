@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-08-11T06:47:55.385Z",
+  "week": 4,
+  "dryRun": false,
+  "expectedParts": 6,
+  "results": [
+    {
+      "mediaId": "lmc-w04-p01",
+      "week": 4,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-04\\LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+      "sizeBytes": 22369124,
+      "sha256": "80250c007a5a474263e61be82dbfa3231ca0eaea0c729966df5f190e9adc2ff7",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w04-p02",
+      "week": 4,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK04_P02_communication-functions-and-expression.mp4",
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P02_characteristics-functions-and-expression.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-04\\LMC_WEEK04_P02_characteristics-functions-and-expression.mp4",
+      "sizeBytes": 26921368,
+      "sha256": "da84675f9b02d815ba7011f36ad39e6c55622410a3075c270a5adbca6ba75626",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w04-p03",
+      "week": 4,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK04_P03_ten-types-and-assessment-criteria.mp4",
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P03_ten-styles-framework-and-criteria.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-04\\LMC_WEEK04_P03_ten-styles-framework-and-criteria.mp4",
+      "sizeBytes": 22475107,
+      "sha256": "fd8ae7bc2de18c3d903cda0205cbb0c00941c1e29e7885e4ba2d9f20f5b7063e",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w04-p04",
+      "week": 4,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK04_P04_type-characteristics-interpretation.mp4",
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P04_style-characteristics-and-interpretation.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-04\\LMC_WEEK04_P04_style-characteristics-and-interpretation.mp4",
+      "sizeBytes": 22086876,
+      "sha256": "bcbfedf4a5c30d942096e5ba1c33280cb42652b978b80590ebf42f96107df565",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w04-p05",
+      "week": 4,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK04_P05_case-application-and-summary.mp4",
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P05_case-application-and-interpretation-review.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-04\\LMC_WEEK04_P05_case-application-and-interpretation-review.mp4",
+      "sizeBytes": 98222057,
+      "sha256": "6ed6ec966f9f168459a3a1c29d3643b10e772c9e6ce7eca8d2899e6c86409c0e",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='between(t,0,17.84)',drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='between(t,666.34,668.84)',drawbox=x=1005:y=0:w=iw-1005:h=ih:color=black@1.0:t=fill:enable='gte(t,668.84)'"
+    },
+    {
+      "mediaId": "lmc-w04-p06",
+      "week": 4,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK04_P06_report-and-platform-use.mp4",
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P06_report-and-platform-use.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-04\\LMC_WEEK04_P06_report-and-platform-use.mp4",
+      "sizeBytes": 18542768,
+      "sha256": "0514206ef779df7039bc2008812aee7718a9833106eb4ed9a09771d9594dd3be",
+      "filterGraph": "drawbox=x=1005:y=0:w=iw-1005:h=ih:color=black@1.0:t=fill:enable='between(t,0,26.5)',drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,26.5)'"
+    }
+  ]
+}

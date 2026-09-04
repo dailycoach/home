@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-08-11T18:59:50.7251471+09:00",
+  "week": 7,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 7,
+    "method": "Downloaded each object from the remote R2 bucket and compared size and SHA-256 to the approved cutover manifest.",
+    "parts": [
+      { "mediaId": "lmc-w07-p01", "sizeBytes": 24522689, "sha256": "78c8ec7664534844295d03d00421210f9b022107befefe4d29c5d2dbf7a36e74", "pass": true },
+      { "mediaId": "lmc-w07-p02", "sizeBytes": 21586625, "sha256": "fc5c89e059eb994b2fd627ac59d613a5ab0ab64a216d8fd610f3924daa3637d0", "pass": true },
+      { "mediaId": "lmc-w07-p03", "sizeBytes": 26156332, "sha256": "629a54a774ef3bd8b9f20e54e00852a685f72da981701545cad076a15471be85", "pass": true },
+      { "mediaId": "lmc-w07-p04", "sizeBytes": 19802585, "sha256": "91b9654c1641913a1fe96d663ee06b4a9ea48873844729062c9a0e76a5e28a99", "pass": true },
+      { "mediaId": "lmc-w07-p05", "sizeBytes": 34810603, "sha256": "268bb47994278f6633da6a6e157c6333587e1fea1e98fc3719a5e45da21cd440", "pass": true },
+      { "mediaId": "lmc-w07-p06", "sizeBytes": 30296225, "sha256": "74812d4df789c0b545b4acd51b2bd5ac09ff6b2a71d9b3a21212ddaf7656abc3", "pass": true },
+      { "mediaId": "lmc-w07-p07", "sizeBytes": 31438705, "sha256": "f5a9f4d9c9ba18907241c6c64a3603685eae806a81d5eead21a54e7752fdff5c", "pass": true }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 7,
+    "range206": 7,
+    "parts": [
+      { "mediaId": "lmc-w07-p01", "path": "/media/lmc-lifetime-management-counselor/7/1", "headStatus": 200, "contentType": "video/mp4", "contentLength": 24522689, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/24522689", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w07-p02", "path": "/media/lmc-lifetime-management-counselor/7/2", "headStatus": 200, "contentType": "video/mp4", "contentLength": 21586625, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/21586625", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w07-p03", "path": "/media/lmc-lifetime-management-counselor/7/3", "headStatus": 200, "contentType": "video/mp4", "contentLength": 26156332, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/26156332", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w07-p04", "path": "/media/lmc-lifetime-management-counselor/7/4", "headStatus": 200, "contentType": "video/mp4", "contentLength": 19802585, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/19802585", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w07-p05", "path": "/media/lmc-lifetime-management-counselor/7/5", "headStatus": 200, "contentType": "video/mp4", "contentLength": 34810603, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/34810603", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w07-p06", "path": "/media/lmc-lifetime-management-counselor/7/6", "headStatus": 200, "contentType": "video/mp4", "contentLength": 30296225, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/30296225", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w07-p07", "path": "/media/lmc-lifetime-management-counselor/7/7", "headStatus": 200, "contentType": "video/mp4", "contentLength": 31438705, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/31438705", "rangeBodyBytes": 1, "pass": true }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "requiredParts": ["lmc-w07-p01", "lmc-w07-p07"],
+    "parts": [
+      {
+        "mediaId": "lmc-w07-p01",
+        "durationSeconds": 1116.04,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 1.69133,
+        "seekTargetSeconds": 558.02,
+        "seekActualSeconds": 558.0044,
+        "seekPlaybackSeconds": 559.188986,
+        "seekPass": true,
+        "audioEnabled": true
+      },
+      {
+        "mediaId": "lmc-w07-p07",
+        "durationSeconds": 1009.348209,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 2.12492,
+        "endBoundarySeconds": 989.161517,
+        "endPlaybackSeconds": 990.926117,
+        "endPlaybackPass": true,
+        "audioEnabled": true,
+        "nextPartNavigationPass": true,
+        "nextPartUrl": "/lcms/academy/lesson.html?course=lmc-lifetime-management-counselor&week=8&part=1"
+      }
+    ]
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}

@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-08-11T14:59:32.813Z",
+  "week": 8,
+  "status": "PASS",
+  "syncedCount": 8,
+  "sourceFiles": {
+    "technicalQa": "artifacts/lmc-privacy-rework/week-08/week-08-technical-qa.json",
+    "remoteQa": "artifacts/lmc-privacy-rework/week-08/week-08-remote-playback-qa.json",
+    "r2Report": "artifacts/lmc-privacy-rework/week-08/week-08-r2-overwrite-report.json"
+  },
+  "outputs": [
+    "lcms/academy/data/media-catalog.json",
+    "lcms/academy/r2-worker/src/media-catalog.js",
+    "lcms/academy/r2-worker/upload/video-upload-map.json",
+    "lcms/academy/r2-worker/upload/video-upload-map.csv",
+    "lcms/academy/r2-worker/upload/LMC_77_SHA256SUMS.txt"
+  ],
+  "changes": [
+    {
+      "mediaId": "lmc-w08-p01",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P01_depression-assessment-and-classification.mp4",
+      "previousSizeBytes": 44633024,
+      "nextSizeBytes": 38109622,
+      "previousSha256": "741aba65d4daa1cf43a657fab410a454aa5ad6db3d8e7cde68ad874ccf41b578",
+      "nextSha256": "27054d042d5b40332e279a031d33f9d17bed55ccd733bb01261c3b80cc556f5c"
+    },
+    {
+      "mediaId": "lmc-w08-p02",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P02_mood-curve-and-depressive-manic-episodes.mp4",
+      "previousSizeBytes": 35910054,
+      "nextSizeBytes": 26135729,
+      "previousSha256": "3db4602c7c569a63163c9ab3804d4517be9355624d2226c9967f03c6ae127f26",
+      "nextSha256": "e602b1f4fbbb33874ff01e7691ead190716f1994b32c13ad7e87bc33ed7fa74e"
+    },
+    {
+      "mediaId": "lmc-w08-p03",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P03_major-depression-diagnostic-criteria.mp4",
+      "previousSizeBytes": 20254210,
+      "nextSizeBytes": 15069362,
+      "previousSha256": "aa6ee0227e78109ed04ae6855814cfe4850ec708ebca78ea237db78f32fb4a8e",
+      "nextSha256": "e6b7f0e546dec6fb594edd5265714a993e8ed8deb113bcb0d3cc9056e1160d06"
+    },
+    {
+      "mediaId": "lmc-w08-p04",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "previousSizeBytes": 30136334,
+      "nextSizeBytes": 22398700,
+      "previousSha256": "bfe18c2e6edb80d184fe65fd4a25270a0e878baa1f3963a06cbc3ce75ed41c6b",
+      "nextSha256": "8b09753afcab66cf9f8ea7c20ffe2ae607016073cd9f0673a67eec2b25e8a839"
+    },
+    {
+      "mediaId": "lmc-w08-p05",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P05_symptoms-treatment-and-result-structure.mp4",
+      "previousSizeBytes": 23543523,
+      "nextSizeBytes": 21952943,
+      "previousSha256": "2f1a7e77157aacc3b31db1ae5e9f6240c2a52aa821ec2d26d80b3d9a372c1731",
+      "nextSha256": "7392827692c9ad09c58dffc2c3a4b20b8d72037f553ed3137c12032d71284d66"
+    },
+    {
+      "mediaId": "lmc-w08-p06",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P06_six-symptom-scales-overview.mp4",
+      "previousSizeBytes": 33794731,
+      "nextSizeBytes": 23809999,
+      "previousSha256": "73b9139de00eb832daad3d5ad8874635430b5a551b7dad924737f9e21a374dad",
+      "nextSha256": "fc157845505cd8558b6d4d225f199936cdd517b65d821a806fe156704c44ff6e"
+    },
+    {
+      "mediaId": "lmc-w08-p07",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P07_scale-cases-and-integrated-interpretation.mp4",
+      "previousSizeBytes": 32317780,
+      "nextSizeBytes": 22664936,
+      "previousSha256": "fe5c285e0898d977244618d44a717ee95393753ab04bc4484d08c5addfa5876e",
+      "nextSha256": "792bfdacd3e8060d551d54086b5cafb33c7af7b5847f58c67024c3d575079afa"
+    },
+    {
+      "mediaId": "lmc-w08-p08",
+      "objectKey": "lmc/v2/week-08/LMC_WEEK08_P08_result-report-and-platform-use.mp4",
+      "previousSizeBytes": 13090185,
+      "nextSizeBytes": 11794743,
+      "previousSha256": "36e4def16c5ed80c31085a81e67e9d4c5cef847f7563d4df4c6399b31ee5aa47",
+      "nextSha256": "179dfb013dff51334d77fc77fc2b2cb7f78db3bf7d30e34a3986e9a9938544e3"
+    }
+  ]
+}

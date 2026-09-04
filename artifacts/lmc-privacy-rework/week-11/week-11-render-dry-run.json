@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-08-11T13:09:59.826Z",
+  "week": 11,
+  "dryRun": true,
+  "expectedParts": 7,
+  "results": [
+    {
+      "mediaId": "lmc-w11-p01",
+      "week": 11,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK11_P01_development-profile-and-factors.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P01_result-profile-and-factor-overview.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P01_development-profile-and-factors.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P01_result-profile-and-factor-overview.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w11-p02",
+      "week": 11,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P02_child-adolescent-factors-self-and-regulation.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P02_youth-physical-self-image-self-regulation.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P02_child-adolescent-factors-self-and-regulation.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w11-p03",
+      "week": 11,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P03_child-adolescent-factors-learning-identity-independence.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P03_youth-academic-efficacy-identity-independence.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P03_child-adolescent-factors-learning-identity-independence.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w11-p04",
+      "week": 11,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P04_adult-factors-and-assessment-framework.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P04_adult-development-and-assessment-structure.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P04_adult-factors-and-assessment-framework.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w11-p05",
+      "week": 11,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P05_child-adolescent-case-application.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P05_assessment-structure-and-youth-case.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P05_child-adolescent-case-application.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w11-p06",
+      "week": 11,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P06_child-review-and-adult-factor-transition.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P06_lifespan-comparison-and-integration.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P06_child-review-and-adult-factor-transition.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w11-p07",
+      "week": 11,
+      "part": 7,
+      "sourceFilename": "LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-11\\LMC_WEEK11_P07_adult-factors-report-and-summary.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-11\\LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4",
+      "filterGraph": "drawbox=x=1080:y=0:w=iw-1080:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    }
+  ]
+}

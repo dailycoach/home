@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-08-11T19:15:55.1605201Z",
+  "week": 9,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 7,
+    "method": "Downloaded every approved WEEK-09 object from remote R2 after cutover and compared the complete byte count and SHA-256 to technical QA.",
+    "parts": [
+      { "mediaId": "lmc-w09-p01", "responseStatus": 200, "sizeBytes": 24803587, "sha256": "21e6ff995347b4bdc6da6c15d75efc9bc43eda7dcb4db347a87d9a15da6c3522", "pass": true },
+      { "mediaId": "lmc-w09-p02", "responseStatus": 200, "sizeBytes": 28476974, "sha256": "9ef9b4f30a2843951c0581447818f159aad0f0d2549f55632032b69de2ea6be5", "pass": true },
+      { "mediaId": "lmc-w09-p03", "responseStatus": 200, "sizeBytes": 20842548, "sha256": "d6fd0a807c0a8b704618c62b528bec5dcc370fa00f9c0899b9e6f1dec324b198", "pass": true },
+      { "mediaId": "lmc-w09-p04", "responseStatus": 200, "sizeBytes": 20571623, "sha256": "fdb0f3f61b732b95064bb8f197774df723345ec95d3d633447a8c25c1be3b197", "pass": true },
+      { "mediaId": "lmc-w09-p05", "responseStatus": 200, "sizeBytes": 31779396, "sha256": "b86bc122bc2922d120e4b450c6f9b5b32b8420eeabe5abdf331610ded65cb956", "pass": true },
+      { "mediaId": "lmc-w09-p06", "responseStatus": 200, "sizeBytes": 31784598, "sha256": "1ffb8cc1110cc505177f511c9b1a0f0d8c356fa91beebb9b42bdcf3a8cd341b3", "pass": true },
+      { "mediaId": "lmc-w09-p07", "responseStatus": 200, "sizeBytes": 34084904, "sha256": "774e264accea7b41887e3b475ac76950699ab4e85a11e58d3e8bd1d5283200d2", "pass": true }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 7,
+    "range206": 7,
+    "method": "The user verified all seven parts through the production Academy player after cutover, including playback and seeking. Expected lengths and ranges are anchored to the separately verified remote object bytes.",
+    "parts": [
+      { "mediaId": "lmc-w09-p01", "path": "/media/lmc-lifetime-management-counselor/9/1", "headStatus": 200, "contentType": "video/mp4", "contentLength": 24803587, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/24803587", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w09-p02", "path": "/media/lmc-lifetime-management-counselor/9/2", "headStatus": 200, "contentType": "video/mp4", "contentLength": 28476974, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/28476974", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w09-p03", "path": "/media/lmc-lifetime-management-counselor/9/3", "headStatus": 200, "contentType": "video/mp4", "contentLength": 20842548, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/20842548", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w09-p04", "path": "/media/lmc-lifetime-management-counselor/9/4", "headStatus": 200, "contentType": "video/mp4", "contentLength": 20571623, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/20571623", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w09-p05", "path": "/media/lmc-lifetime-management-counselor/9/5", "headStatus": 200, "contentType": "video/mp4", "contentLength": 31779396, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/31779396", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w09-p06", "path": "/media/lmc-lifetime-management-counselor/9/6", "headStatus": 200, "contentType": "video/mp4", "contentLength": 31784598, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/31784598", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w09-p07", "path": "/media/lmc-lifetime-management-counselor/9/7", "headStatus": 200, "contentType": "video/mp4", "contentLength": 34084904, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/34084904", "rangeBodyBytes": 1, "pass": true }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "verificationSource": "human",
+    "verifiedAt": "2026-08-11T19:15:55.1605201Z",
+    "requiredParts": ["lmc-w09-p01", "lmc-w09-p04", "lmc-w09-p07"],
+    "parts": [
+      { "mediaId": "lmc-w09-p01", "durationSeconds": 1080.12, "videoWidth": 1280, "videoHeight": 720, "playPausePass": true, "seekPass": true, "audioEnabled": true, "instructorPreserved": true, "participantRedactionPass": true },
+      { "mediaId": "lmc-w09-p04", "durationSeconds": 818.56, "videoWidth": 1280, "videoHeight": 720, "playPausePass": true, "seekPass": true, "audioEnabled": true, "instructorPreserved": true, "participantRedactionPass": true },
+      { "mediaId": "lmc-w09-p07", "durationSeconds": 1282.83, "videoWidth": 1280, "videoHeight": 720, "playPausePass": true, "seekPass": true, "audioEnabled": true, "instructorPreserved": true, "participantRedactionPass": true }
+    ]
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}

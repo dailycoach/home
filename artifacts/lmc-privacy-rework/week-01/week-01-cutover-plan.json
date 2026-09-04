@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-08-11T02:25:16.224Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 1,
+  "expectedUploads": 5,
+  "mode": "EXECUTE",
+  "rows": [
+    {
+      "mediaId": "lmc-w01-p01",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "sourceFilename": "LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "newSizeBytes": 42194259,
+      "newSha256": "23a30f2498148398ef81ae1cffb1414c99e176dd0517c7f854d0cd7d68b3b167",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w01-p02",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "sourceFilename": "LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "newSizeBytes": 29177152,
+      "newSha256": "41fb32dd9ab1f1f6e05e03280ba355e04fe8af827a418171f40a58c39fff202d",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w01-p03",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "sourceFilename": "LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "newSizeBytes": 46449784,
+      "newSha256": "4d663fdc10b2ffd3740a346141c673eee3ef36f3f7ff8cb6a398cfcf910a7406",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w01-p04",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P04_impression-formation.mp4",
+      "sourceFilename": "LMC_WEEK01_P04_impression-formation.mp4",
+      "newSizeBytes": 53780162,
+      "newSha256": "6a83d2e12dfafead3b1249c16a7ba9ea677ad6e5db1c295aaee21646cc9af20d",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w01-p05",
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "sourceFilename": "LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "newSizeBytes": 50555509,
+      "newSha256": "7538f0270d6763df21efa579bb808bcecee7c7d9f1fa720d4c4cf1b7276dfe24",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    }
+  ]
+}

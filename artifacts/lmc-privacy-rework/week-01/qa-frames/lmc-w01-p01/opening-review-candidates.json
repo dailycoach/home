@@ -1,0 +1,10 @@
+{
+  "candidates": [
+    { "seconds": 0.5 },
+    { "seconds": 2.0 },
+    { "seconds": 4.0 },
+    { "seconds": 6.0 },
+    { "seconds": 8.0 },
+    { "seconds": 9.0 }
+  ]
+}

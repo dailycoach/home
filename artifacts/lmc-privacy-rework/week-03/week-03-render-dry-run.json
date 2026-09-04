@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-08-11T05:47:36.953Z",
+  "week": 3,
+  "dryRun": true,
+  "expectedParts": 8,
+  "results": [
+    {
+      "mediaId": "lmc-w03-p01",
+      "week": 3,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK03_P01_course-introduction-and-personality-definition.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P01_course-overview-and-personality-definition.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P01_course-introduction-and-personality-definition.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P01_course-overview-and-personality-definition.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p02",
+      "week": 3,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p03",
+      "week": 3,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK03_P03_trait-and-process-theories.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P03_personality-theory-framework-one.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P03_trait-and-process-theories.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P03_personality-theory-framework-one.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p04",
+      "week": 3,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK03_P04_personality-perspectives-01.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P04_personality-theory-framework-two.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P04_personality-perspectives-01.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P04_personality-theory-framework-two.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p05",
+      "week": 3,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK03_P05_personality-perspectives-02.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P05_personality-theory-comparison-and-application.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P05_personality-perspectives-02.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P05_personality-theory-comparison-and-application.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p06",
+      "week": 3,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK03_P06_cattell-trait-theory-and-16pf.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P06_integrated-theories-cattell-and-16pf.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P06_cattell-trait-theory-and-16pf.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P06_integrated-theories-cattell-and-16pf.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p07",
+      "week": 3,
+      "part": 7,
+      "sourceFilename": "LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w03-p08",
+      "week": 3,
+      "part": 8,
+      "sourceFilename": "LMC_WEEK03_P08_ai-assisted-interpretation-and-platform.mp4",
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P08_ai-assisted-interpretation-and-platform-use.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-03\\LMC_WEEK03_P08_ai-assisted-interpretation-and-platform.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-03\\LMC_WEEK03_P08_ai-assisted-interpretation-and-platform-use.mp4",
+      "filterGraph": "drawbox=x=1059:y=0:w=iw-1059:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    }
+  ]
+}

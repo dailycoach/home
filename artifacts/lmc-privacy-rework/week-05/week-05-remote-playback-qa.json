@@ -1,0 +1,95 @@
+{
+  "generatedAt": "2026-08-11T23:14:32.9950506+09:00",
+  "week": 5,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 8,
+    "method": "Read every approved object through its production signed Worker URL, compared the complete response byte count and SHA-256 to technical QA, and accepted the Worker's full-range 206 response only when it contained the complete object.",
+    "parts": [
+      { "mediaId": "lmc-w05-p01", "responseStatus": 206, "sizeBytes": 44441468, "sha256": "de086267e080b1c7e6459fe1aa84c38e27ecb52ce247ce7a64c6e3e77c934f2b", "pass": true },
+      { "mediaId": "lmc-w05-p02", "responseStatus": 206, "sizeBytes": 28670204, "sha256": "7b1c982151df3b13121ef9919d12a947a650e3e0e1d3c972949cea503b505040", "pass": true },
+      { "mediaId": "lmc-w05-p03", "responseStatus": 206, "sizeBytes": 26372684, "sha256": "3bcccfe3c06b2290d2dc810715e40051e2ef489c1b7d0d6f929fb71ac1c008f5", "pass": true },
+      { "mediaId": "lmc-w05-p04", "responseStatus": 206, "sizeBytes": 36118471, "sha256": "fff1f715177bfeede3ab7a566bfa604a76a9cfdb641af2859e578df50fb0c123", "pass": true },
+      { "mediaId": "lmc-w05-p05", "responseStatus": 206, "sizeBytes": 19280772, "sha256": "463d10d8e20a98de03ecbf4efe320e4abf92b2339a72f5761859b679367a1401", "pass": true },
+      { "mediaId": "lmc-w05-p06", "responseStatus": 206, "sizeBytes": 68516077, "sha256": "6e03487074d8b0e27752da8b67bd73a5a886dfe7300d3753ec19a3f52d554353", "pass": true },
+      { "mediaId": "lmc-w05-p07", "responseStatus": 206, "sizeBytes": 74697167, "sha256": "183760cec3439e62cd7c8e975333fbb4b922eb64621fe4bbe82dbe8e1b467df8", "pass": true },
+      { "mediaId": "lmc-w05-p08", "responseStatus": 206, "sizeBytes": 114292100, "sha256": "879f18cc8c7476198e355e43cd2a94cf8cb9426c80f6f5423255f0ddaaf820bd", "pass": true }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 8,
+    "range206": 8,
+    "parts": [
+      { "mediaId": "lmc-w05-p01", "path": "/media/lmc-lifetime-management-counselor/5/1", "headStatus": 200, "contentType": "video/mp4", "contentLength": 44441468, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/44441468", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p02", "path": "/media/lmc-lifetime-management-counselor/5/2", "headStatus": 200, "contentType": "video/mp4", "contentLength": 28670204, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/28670204", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p03", "path": "/media/lmc-lifetime-management-counselor/5/3", "headStatus": 200, "contentType": "video/mp4", "contentLength": 26372684, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/26372684", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p04", "path": "/media/lmc-lifetime-management-counselor/5/4", "headStatus": 200, "contentType": "video/mp4", "contentLength": 36118471, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/36118471", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p05", "path": "/media/lmc-lifetime-management-counselor/5/5", "headStatus": 200, "contentType": "video/mp4", "contentLength": 19280772, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/19280772", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p06", "path": "/media/lmc-lifetime-management-counselor/5/6", "headStatus": 200, "contentType": "video/mp4", "contentLength": 68516077, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/68516077", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p07", "path": "/media/lmc-lifetime-management-counselor/5/7", "headStatus": 200, "contentType": "video/mp4", "contentLength": 74697167, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/74697167", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w05-p08", "path": "/media/lmc-lifetime-management-counselor/5/8", "headStatus": 200, "contentType": "video/mp4", "contentLength": 114292100, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/114292100", "rangeBodyBytes": 1, "pass": true }
+    ]
+  },
+  "academyPlayerMetadata": {
+    "status": "PASS",
+    "verifiedCount": 8,
+    "parts": [
+      { "mediaId": "lmc-w05-p01", "durationSeconds": 1279.48, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p02", "durationSeconds": 864.08, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p03", "durationSeconds": 734.96, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p04", "durationSeconds": 1018, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p05", "durationSeconds": 516.36, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p06", "durationSeconds": 946.015, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p07", "durationSeconds": 1099.92, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null },
+      { "mediaId": "lmc-w05-p08", "durationSeconds": 812.419773, "readyState": 4, "videoWidth": 1212, "videoHeight": 720, "error": null }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "requiredParts": ["lmc-w05-p01", "lmc-w05-p08"],
+    "parts": [
+      {
+        "mediaId": "lmc-w05-p01",
+        "durationSeconds": 1279.48,
+        "readyState": 4,
+        "videoWidth": 1212,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 0,
+        "playbackSeconds": 2.248985,
+        "endSeekSeconds": 1279.48,
+        "endSeekPass": true,
+        "audioEnabled": true
+      },
+      {
+        "mediaId": "lmc-w05-p08",
+        "durationSeconds": 812.419773,
+        "readyState": 4,
+        "videoWidth": 1212,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "startPlaybackSeconds": 0,
+        "playbackSeconds": 2.560687,
+        "endSeekSeconds": 812.419773,
+        "endSeekPass": true,
+        "audioEnabled": true
+      }
+    ]
+  },
+  "approvedException": {
+    "status": "APPLIED",
+    "approvalStatement": "WEEK-05 원본유지 승인",
+    "mediaIds": ["lmc-w05-p06", "lmc-w05-p07"],
+    "rule": "Preserve pristine input/output SHA identity even though the source containers are not Fast Start."
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}

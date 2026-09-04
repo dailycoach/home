@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-08-11T14:40:55.194Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 8,
+  "expectedUploads": 8,
+  "mode": "EXECUTE",
+  "rows": [
+    {
+      "mediaId": "lmc-w08-p01",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P01_depression-assessment-and-classification.mp4",
+      "sourceFilename": "LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
+      "newSizeBytes": 38109622,
+      "newSha256": "27054d042d5b40332e279a031d33f9d17bed55ccd733bb01261c3b80cc556f5c",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p02",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P02_mood-curve-and-depressive-manic-episodes.mp4",
+      "sourceFilename": "LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
+      "newSizeBytes": 26135729,
+      "newSha256": "e602b1f4fbbb33874ff01e7691ead190716f1994b32c13ad7e87bc33ed7fa74e",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p03",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P03_major-depression-diagnostic-criteria.mp4",
+      "sourceFilename": "LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
+      "newSizeBytes": 15069362,
+      "newSha256": "e6b7f0e546dec6fb594edd5265714a993e8ed8deb113bcb0d3cc9056e1160d06",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p04",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "sourceFilename": "LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "newSizeBytes": 22398700,
+      "newSha256": "8b09753afcab66cf9f8ea7c20ffe2ae607016073cd9f0673a67eec2b25e8a839",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p05",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P05_symptoms-treatment-and-result-structure.mp4",
+      "sourceFilename": "LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
+      "newSizeBytes": 21952943,
+      "newSha256": "7392827692c9ad09c58dffc2c3a4b20b8d72037f553ed3137c12032d71284d66",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p06",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P06_six-symptom-scales-overview.mp4",
+      "sourceFilename": "LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
+      "newSizeBytes": 23809999,
+      "newSha256": "fc157845505cd8558b6d4d225f199936cdd517b65d821a806fe156704c44ff6e",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p07",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P07_scale-cases-and-integrated-interpretation.mp4",
+      "sourceFilename": "LMC_WEEK08_P07_symptom-scale-case-application.mp4",
+      "newSizeBytes": 22664936,
+      "newSha256": "792bfdacd3e8060d551d54086b5cafb33c7af7b5847f58c67024c3d575079afa",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w08-p08",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P08_result-report-and-platform-use.mp4",
+      "sourceFilename": "LMC_WEEK08_P08_report-and-assessment-platform.mp4",
+      "newSizeBytes": 11794743,
+      "newSha256": "179dfb013dff51334d77fc77fc2b2cb7f78db3bf7d30e34a3986e9a9938544e3",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    }
+  ]
+}

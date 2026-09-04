@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-08-11T23:40:12.7165739+09:00",
+  "week": 8,
+  "humanApprovalRequired": true,
+  "r2ChangedFiles": 8,
+  "overallStatus": "PASS",
+  "findings": [
+    {
+      "mediaId": "lmc-w08-p01",
+      "severity": "PASS",
+      "observation": "The configured right participant panel begins masking at 00:01:33.00 and remains covered through the end while lecture content stays visible.",
+      "humanDecision": "WEEK-08 PART-01 transition contact sheet approved by the human reviewer on 2026-08-11."
+    },
+    {
+      "mediaId": "lmc-w08-p02..lmc-w08-p04,lmc-w08-p06..lmc-w08-p08",
+      "severity": "PASS",
+      "observation": "Sampled start, midpoint, and end frames show the configured right participant panel covered in solid black while lecture content remains visible.",
+      "humanDecision": "WEEK-08 PART contact sheets approved by the human reviewer on 2026-08-11."
+    },
+    {
+      "mediaId": "lmc-w08-p05",
+      "severity": "PASS",
+      "observation": "The configured initial right-panel mask, intentional unmasked gap, full-frame mask, and final right-panel mask all transition at the specified boundaries.",
+      "humanDecision": "WEEK-08 PART-05 multi-interval contact sheet approved by the human reviewer on 2026-08-11."
+    }
+  ],
+  "approvalGateTest": {
+    "result": "PASS",
+    "message": "Missing human approval is blocked; complete human approval is accepted; technical QA SHA mismatch is blocked.",
+    "r2UploadAttemptedDuringTest": false
+  }
+}

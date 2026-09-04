@@ -1,0 +1,30 @@
+{
+  "week": 5,
+  "reviewedAt": "2026-08-11T23:14:32.9950506+09:00",
+  "reviewer": "human",
+  "result": "PASS_WITH_APPROVED_NO_MASK_CONTAINER_EXCEPTION",
+  "privacy": {
+    "participantFacesExposed": 0,
+    "participantNamesExposed": 0,
+    "participantProfilesExposed": 0,
+    "transitionLeaks": 0,
+    "incorrectMasks": 0
+  },
+  "technicalQa": {
+    "result": "PASS",
+    "partsPassed": 8,
+    "partsExpected": 8,
+    "durationPreserved": true,
+    "resolutionPreserved": true,
+    "audioPreserved": true,
+    "maskedPartsFastStart": true,
+    "noMaskOriginalBytesPreserved": true,
+    "approvedNonFastStartNoMaskParts": ["lmc-w05-p06", "lmc-w05-p07"]
+  },
+  "approvalGate": {
+    "approved": true,
+    "approvalStatement": "WEEK-05 원본유지 승인",
+    "r2UploadAllowed": true,
+    "r2UploadAttempted": true
+  }
+}
