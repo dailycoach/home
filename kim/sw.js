@@ -1,8 +1,8 @@
 /* Same-origin card assets only. The scope prefix prevents deleting other apps' caches. */
 const SCOPE = new URL(self.registration.scope);
 const PREFIX = 'dailycoaching-card-' + encodeURIComponent(SCOPE.pathname) + '-';
-const CACHE = PREFIX + 'v1.1.1-phone-20260914';
-const FILES = ['./assets/brand-hero.webp', './', './index.html', './assets/styles.css', './assets/app.js', './assets/qr.js', './assets/icon-192.png', './assets/icon-512.png', './assets/apple-touch-icon.png', './manifest.webmanifest', './KIM_CHEOL_UNG.vcf'];
+const CACHE = PREFIX + 'v1.2-signature-20260914';
+const FILES = ['./', './index.html', './assets/styles.css', './assets/app.js', './assets/qr.js', './assets/signature-hero-v12.webp', './assets/signature-qr-v12.webp', './assets/kim-signature-v12.webp', './assets/kim-korean-signature-v12.webp', './assets/signature-og-v12.jpg', './assets/icon-192-v12.png', './assets/icon-512-v12.png', './assets/apple-touch-icon-v12.png', './manifest.webmanifest', './KIM_CHEOL_UNG.vcf'];
 const ASSETS = FILES.map(path => new URL(path, SCOPE).href);
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));

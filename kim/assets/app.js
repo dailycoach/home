@@ -1,4 +1,4 @@
-/* DAILYCOACHING mobile card v1.1.1 — framework-free, no tracking or remote QR APIs. */
+/* DAILYCOACHING mobile card v1.2.0 — framework-free, no tracking or remote QR APIs. */
 (() => {
   'use strict';
   const $ = (selector) => document.querySelector(selector);
@@ -79,214 +79,163 @@
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${side} ${side}" aria-hidden="true" shape-rendering="crispEdges"><rect width="${side}" height="${side}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
   }
   function renderQR() {
-    const payload = mode === 'page' ? cardUrl : vcard;
-    if (!payload) return;
     try {
-      qr = DailyQR(payload);
-      const svg = qrSvg(qr);
-      $('#qr-code').innerHTML = svg;
-      $('#large-qr').innerHTML = svg;
-      $('#qr-type-label').textContent = mode === 'page' ? 'OPEN DIGITAL CARD' : 'SAVE CONTACT';
-      $('#qr-state-label').textContent = mode === 'page' ? '명함 페이지' : '오프라인 가능';
-      $('#qr-instruction').textContent = mode === 'page' ? '카메라로 스캔하면 명함이 열립니다.' : '카메라로 스캔해 연락처 저장을 진행하세요.';
-      $('#large-qr-caption').textContent = mode === 'page' ? '카메라로 스캔하면 모바일 명함이 열립니다.' : '카메라로 스캔해 연락처 저장을 진행하세요.';
-      $('#qr-code').setAttribute('aria-label', mode === 'page' ? '김철웅 코치 모바일 명함 페이지 QR 코드' : '김철웅 코치 연락처 QR 코드');
-      $('#large-qr').setAttribute('aria-label', mode === 'page' ? '확대된 모바일 명함 페이지 QR 코드' : '확대된 연락처 QR 코드');
-    } catch (error) {
+      qr = DailyQR(mode === 'page' ? cardUrl : vcard);
+      $('#large-qr').innerHTML = qrSvg(qr);
+      $('#large-qr').setAttribute('aria-label', mode === 'page' ? '김철웅 모바일 명함 QR 코드' : '김철웅 연락처 저장 QR 코드');
+      $$('[data-download-qr]').forEach(node => { node.disabled = false; });
+    } catch {
       qr = null;
-      $('#qr-code').textContent = 'QR을 만들지 못했습니다. 연락처 파일 저장을 이용해 주세요.';
-      $('#expand-qr').disabled = true; $('#download-qr').disabled = true;
-      console.error('QR creation failed:', error);
+      $('#large-qr').textContent = 'QR을 불러오지 못했습니다. 명함에서 연락처를 저장해 주세요.';
+      $$('[data-download-qr]').forEach(node => { node.disabled = true; });
     }
   }
   function setMode(next) {
-    if (next === 'page' && !cardUrl) { toast('실제 웹주소에 명함을 게시한 뒤 사용할 수 있습니다.'); return; }
-    mode = next;
-    for (const tab of ['contact', 'page']) {
-      const node = $(`#mode-${tab}`);
-      node.setAttribute('aria-selected', String(mode === tab));
-      node.tabIndex = mode === tab ? 0 : -1;
-    }
-    $('#qr-panel').setAttribute('aria-labelledby', `mode-${mode}`);
+    mode = next === 'contact' ? 'contact' : 'page';
+    ['page', 'contact'].forEach(value => {
+      const node = $('#mode-' + value);
+      node.setAttribute('aria-selected', String(mode === value));
+      node.tabIndex = mode === value ? 0 : -1;
+    });
+    $('#qr-panel').setAttribute('aria-labelledby', 'mode-' + mode);
     renderQR();
   }
-  function showView(view, moveFocus = false) {
-    const safe = ['card', 'qr', 'guide'].includes(view) ? view : 'card';
-    $$('.view').forEach(node => { node.hidden = node.id !== `view-${safe}`; });
-    $$('[data-nav]').forEach(button => {
-      if (button.dataset.view === safe) button.setAttribute('aria-current', 'page');
-      else button.removeAttribute('aria-current');
-    });
-    if (moveFocus) {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      $('#main').focus({ preventScroll: true });
+  function openDialog(dialog) {
+    if (dialog.open) return;
+    if (typeof dialog.showModal !== 'function') {
+      toast('최신 브라우저에서 열어 주세요. 연락처 파일은 바로 저장할 수 있습니다.');
+      return;
+    }
+    dialog.showModal();
+    document.body.classList.add('dialog-open');
+  }
+  function openQR() {
+    setMode('page');
+    openDialog($('#qr-dialog'));
+    if ($('#qr-dialog').open) {
+      wakeRequested = true;
+      acquireWakeLock();
+      try { history.replaceState(null, '', '#qr'); } catch {}
     }
   }
-  function openDialog(node) {
-    if (node.open) return;
-    if (typeof node.showModal === 'function') node.showModal();
-    else { toast('이 브라우저에서는 팝업을 지원하지 않습니다. 최신 브라우저로 열어주세요.'); return; }
-  }
   async function acquireWakeLock() {
-    if (!wakeRequested || !$('#qr-dialog').open || document.visibilityState !== 'visible' || !('wakeLock' in navigator)) return;
+    if (!wakeRequested || wakeLock || !$('#qr-dialog').open || document.visibilityState !== 'visible' || !('wakeLock' in navigator)) return;
     try {
-      if (wakeLock) return;
       const acquired = await navigator.wakeLock.request('screen');
       if (!$('#qr-dialog').open) { await acquired.release(); return; }
       wakeLock = acquired;
-      $('#wake-status').textContent = 'QR을 보여주는 동안 화면 켜짐을 유지합니다. 밝기는 직접 조절해 주세요.';
-      acquired.addEventListener('release', () => {
-        if (wakeLock === acquired) wakeLock = null;
-        $('#wake-status').textContent = '화면 밝기를 높이면 인식하기 편합니다.';
-      });
-    } catch { $('#wake-status').textContent = '화면 밝기를 높이고, 꺼지지 않게 확인해 주세요.'; }
+      $('#wake-status').textContent = 'QR 화면 켜짐 유지';
+      acquired.addEventListener('release', () => { if (wakeLock === acquired) wakeLock = null; });
+    } catch {}
   }
   function releaseWakeLock() {
     wakeRequested = false;
     if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+    $('#wake-status').textContent = '';
   }
   function drawQR(context, matrix, left, top, cell) {
     const count = matrix.getModuleCount();
-    const side = (count + 8) * cell;
-    context.fillStyle = '#ffffff'; context.fillRect(left, top, side, side);
-    context.fillStyle = '#111111';
+    context.fillStyle = '#fff'; context.fillRect(left, top, (count + 8) * cell, (count + 8) * cell);
+    context.fillStyle = '#111';
     for (let r = 0; r < count; r++) for (let c = 0; c < count; c++) if (matrix.isDark(r, c)) context.fillRect(left + (c + 4) * cell, top + (r + 4) * cell, cell, cell);
   }
-  function downloadQR() {
-    if (!qr) { toast('QR을 만들지 못했습니다. 연락처 파일을 저장해 주세요.'); return; }
+  async function downloadQR() {
+    if (!$('#qr-dialog').open) setMode('page');
+    if (!qr) return;
+    const savedQR = qr, savedMode = mode;
     const canvas = document.createElement('canvas');
-    canvas.width = 1080; canvas.height = 1440;
+    canvas.width = 1080; canvas.height = 1920;
     const context = canvas.getContext('2d');
-    if (!context) { toast('이 브라우저는 이미지 저장을 지원하지 않습니다. 화면 캡처를 이용해 주세요.'); return; }
-    context.fillStyle = '#f7f5f0'; context.fillRect(0, 0, 1080, 1440);
-    context.fillStyle = '#302a38';
-    context.font = '600 34px -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Noto Sans CJK KR", sans-serif';
-    context.fillText('DAILYCOACHING', 88, 112);
-    context.strokeStyle = '#d5ccde'; context.lineWidth = 2;
-    context.beginPath(); context.moveTo(88, 150); context.lineTo(992, 150); context.stroke();
-    context.font = '500 82px -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Noto Sans CJK KR", sans-serif';
-    context.fillText(profile.name, 85, 266);
-    context.font = '400 27px -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Noto Sans CJK KR", sans-serif';
-    context.fillStyle = '#686070';
-    context.fillText(`${profile.englishName}  /  ${profile.title}`, 90, 321);
-    context.fillStyle = '#ffffff';
-    context.beginPath();
-    if (context.roundRect) context.roundRect(70, 370, 940, 940, 40);
-    else context.rect(70, 370, 940, 940);
-    context.fill();
-    const cell = Math.floor(886 / (qr.getModuleCount() + 8));
-    const side = cell * (qr.getModuleCount() + 8);
-    drawQR(context, qr, Math.floor((1080 - side) / 2), 370 + Math.floor((940 - side) / 2), cell);
-    context.fillStyle = '#62566d';
-    context.font = '400 28px -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Noto Sans CJK KR", sans-serif';
-    context.textAlign = 'center';
-    context.fillText(mode === 'page' ? 'SCAN TO OPEN THE CARD' : 'SCAN TO SAVE CONTACT', 540, 1372);
-    triggerDownload(canvas.toDataURL('image/png'), mode === 'page' ? 'DAILYCOACHING_QR_PAGE.png' : 'DAILYCOACHING_QR_CONTACT.png');
-    toast('이미지를 받은 뒤 갤러리에서 꺼내 보여주세요.');
-  }
-  function showShareFallback() {
-    $('#share-url').value = cardUrl || website || '';
-    $('#share-url-label').textContent = cardUrl ? '공개 모바일 명함 주소' : '기존 홈페이지 주소 (모바일 명함 주소 아님)';
-    $('#share-explanation').textContent = cardUrl ? '주소를 복사해 보내거나 연락처 파일을 전달하세요.' : '모바일 명함 페이지는 아직 공개되지 않았습니다. 지금은 연락처 파일을 전달하거나 기존 홈페이지 주소를 공유할 수 있습니다.';
-    openDialog($('#share-dialog'));
+    if (!context) { toast('화면 캡처로 QR을 저장해 주세요.'); return; }
+    context.fillStyle = '#f5f1e8'; context.fillRect(0, 0, 1080, 1920);
+    try {
+      const art = new Image(); art.src = './assets/signature-qr-v12.webp'; await art.decode();
+      context.drawImage(art, 0, 0, 1080, 1920);
+    } catch {}
+    context.fillStyle = '#37332c'; context.textAlign = 'center';
+    const font = '-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+    context.font = '500 76px ' + font; context.fillText(profile.name, 540, 285);
+    context.font = '400 28px ' + font; context.fillText(profile.englishName, 540, 349);
+    context.fillStyle = '#fff'; context.fillRect(82, 455, 916, 916);
+    const cell = Math.floor(880 / (savedQR.getModuleCount() + 8));
+    const side = cell * (savedQR.getModuleCount() + 8);
+    drawQR(context, savedQR, Math.floor((1080 - side) / 2), 455 + Math.floor((916 - side) / 2), cell);
+    context.fillStyle = '#6d665c'; context.font = '400 28px ' + font;
+    context.fillText('SCAN TO CONNECT', 540, 1460);
+    context.font = '400 34px ' + font;
+    context.fillText(savedMode === 'page' ? '명함 페이지' : '연락처 저장', 540, 1540);
+    context.font = '500 27px ' + font; context.fillText('DAILYCOACHING', 540, 1770);
+    triggerDownload(canvas.toDataURL('image/png'), savedMode === 'page' ? 'DAILYCOACHING_QR_PAGE.png' : 'DAILYCOACHING_QR_CONTACT.png');
+    toast('QR 이미지를 저장했습니다.');
   }
   async function shareCard() {
     try {
-      if (cardUrl && typeof navigator.share === 'function') {
-        await navigator.share({ title: `${profile.name} | ${profile.brand}`, text: profile.tagline, url: cardUrl });
+      if (typeof navigator.share === 'function') {
+        await navigator.share({ title: profile.name + ' | ' + profile.brand, text: profile.tagline, url: cardUrl });
         return;
       }
-      if (!cardUrl && navigator.share && navigator.canShare && typeof File === 'function') {
-        const file = new File([vcard], 'KIM_CHEOL_UNG.vcf', { type: 'text/vcard' });
-        if (navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: `${profile.name} 코치 연락처` }); return; }
-      }
     } catch (error) { if (error.name === 'AbortError') return; }
-    showShareFallback();
+    $('#share-url').value = cardUrl;
+    openDialog($('#share-dialog'));
   }
   async function copyURL() {
-    const url = $('#share-url').value;
-    if (!url) return;
     try {
-      if (!navigator.clipboard || !window.isSecureContext) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(url);
-      toast('주소를 복사했습니다.');
+      await navigator.clipboard.writeText(cardUrl);
+      toast('명함 주소를 복사했습니다.');
     } catch {
       $('#share-url').focus(); $('#share-url').select();
-      toast('선택된 주소를 길게 눌러 복사하거나 Ctrl/Cmd+C를 눌러주세요.');
+      toast('선택된 주소를 복사해 주세요.');
     }
   }
   function installGuide() {
     const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-    $('#install-state').textContent = standalone ? '현재 홈 화면에 추가된 웹앱으로 열려 있습니다.' : cardUrl ? '공개 명함 주소를 기기의 기본 브라우저에서 열고 추가하세요.' : '현재 파일 미리보기에서는 설치할 수 없습니다. 웹에 게시한 뒤 HTTPS 명함 주소를 브라우저에서 열어주세요.';
+    $('#install-state').textContent = standalone ? '홈 화면에 추가된 명함으로 열려 있습니다.' : '휴대폰 브라우저에서 아래 메뉴를 선택하세요.';
     $('#native-install').hidden = !installEvent || standalone;
     openDialog($('#install-dialog'));
   }
   async function nativeInstall() {
     if (!installEvent) return;
     try {
-      await installEvent.prompt();
-      const result = await installEvent.userChoice;
-      installEvent = null;
-      $('#native-install').hidden = true;
-      if (result.outcome === 'accepted') $('#install-state').textContent = '브라우저의 설치 절차를 완료해 주세요.';
-    } catch { toast('브라우저 메뉴의 홈 화면 추가를 이용해 주세요.'); }
+      await installEvent.prompt(); await installEvent.userChoice;
+      installEvent = null; $('#native-install').hidden = true;
+    } catch { toast('브라우저 메뉴에서 홈 화면에 추가해 주세요.'); }
   }
-  // Apply only known profile fields. Optional contact channels stay hidden until configured.
-  $$('[data-profile]').forEach(node => { node.textContent = String(profile[node.dataset.profile] ?? ''); });
-  $('.philosophy').textContent = profile.tagline;
-  document.title = `${profile.name} | ${profile.brand} 모바일 명함`;
-  $('#large-qr-title').textContent = `${profile.name} 코치`;
-  if (website) $('#website-link').href = website; else $('#website-link').hidden = true;
-  $('#email-link').href = `mailto:${encodeURIComponent(plain(profile.email)).replace(/%40/g, '@')}`;
-  if (plain(profile.phone)) {
-    $('#phone-link').hidden = false; $('#phone-label').textContent = plain(profile.phone);
-    $('#phone-link').href = `tel:${plain(profile.phone).replace(/[^\d+]/g, '')}`;
-  }
-  const kakao = publicHttps(profile.kakaoUrl);
-  if (kakao) { $('#kakao-link').hidden = false; $('#kakao-link').href = kakao; }
-  $('#mode-page').disabled = !cardUrl;
-  $('#mode-page').title = cardUrl ? '공개 명함 페이지로 연결' : '실제 웹주소에 게시한 뒤 활성화';
-  $('#local-notice').hidden = Boolean(cardUrl);
-  // Navigation and keyboard access.
-  $$('[data-view]').forEach(button => button.addEventListener('click', () => {
-    const view = button.dataset.view;
-    try { history.replaceState(null, '', `#${view}`); } catch { /* sandbox/file contexts may disallow history. */ }
-    showView(view, true);
-  }));
-  window.addEventListener('hashchange', () => showView(location.hash.slice(1), true));
-  $$('[data-save-contact]').forEach(button => button.addEventListener('click', saveContact));
-  $('#mode-contact').addEventListener('click', () => setMode('contact'));
+  $('#show-qr').addEventListener('click', openQR);
+  $$('[data-save-contact]').forEach(node => node.addEventListener('click', event => { event.preventDefault(); saveContact(); }));
+  $$('[data-download-qr]').forEach(node => node.addEventListener('click', downloadQR));
   $('#mode-page').addEventListener('click', () => setMode('page'));
+  $('#mode-contact').addEventListener('click', () => setMode('contact'));
   $('.mode-switch').addEventListener('keydown', event => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key) || !cardUrl) return;
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    const next = event.key === 'Home' ? 'page' : event.key === 'End' ? 'contact' : mode === 'contact' ? 'page' : 'contact';
-    setMode(next); $(`#mode-${next}`).focus();
+    const next = event.key === 'Home' ? 'page' : event.key === 'End' ? 'contact' : mode === 'page' ? 'contact' : 'page';
+    setMode(next); $('#mode-' + next).focus();
   });
-  $('#expand-qr').addEventListener('click', () => { if (!qr) return; openDialog($('#qr-dialog')); wakeRequested = true; acquireWakeLock(); });
-  $('#qr-dialog').addEventListener('close', releaseWakeLock);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') acquireWakeLock(); });
-  $('#download-qr').addEventListener('click', downloadQR);
-  $('#large-qr-download').addEventListener('click', downloadQR);
+  $('#qr-dialog').addEventListener('close', () => {
+    releaseWakeLock();
+    if (location.hash === '#qr') { try { history.replaceState(null, '', location.pathname + location.search); } catch {} }
+  });
   $('#share-top').addEventListener('click', shareCard);
   $('#copy-url').addEventListener('click', copyURL);
-  $$('[data-install]').forEach(button => button.addEventListener('click', installGuide));
+  $$('[data-install]').forEach(node => node.addEventListener('click', installGuide));
   $('#native-install').addEventListener('click', nativeInstall);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installEvent = event; });
   window.addEventListener('appinstalled', () => { installEvent = null; $('#native-install').hidden = true; });
-  $$('[data-close]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
-  $$('dialog').forEach(dialog => dialog.addEventListener('click', event => {
-    if (event.target !== dialog) return;
-    const rect = dialog.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
-  }));
-  window.addEventListener('pagehide', releaseWakeLock);
-  renderQR();
-  showView(location.hash.slice(1));
-  // The standalone file deliberately does not register a service worker.
-  if (document.documentElement.dataset.pwa === 'true' && 'serviceWorker' in navigator && window.isSecureContext && location.pathname.startsWith('/kim/') && /^https?:$/.test(location.protocol)) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/kim/sw.js', { scope: '/kim/', updateViaCache: 'none' }).catch(() => { /* Online card remains usable when offline caching is not available. */ });
+  $$('[data-close]').forEach(node => node.addEventListener('click', () => node.closest('dialog').close()));
+  $$('dialog').forEach(dialog => {
+    dialog.addEventListener('close', () => { if (!$$('dialog').some(node => node.open)) document.body.classList.remove('dialog-open'); });
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
     });
+  });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') acquireWakeLock(); });
+  window.addEventListener('pagehide', releaseWakeLock);
+  window.addEventListener('hashchange', () => { if (location.hash === '#qr') openQR(); else if ($('#qr-dialog').open) $('#qr-dialog').close(); });
+  renderQR();
+  if (location.hash === '#qr') openQR();
+  if ('serviceWorker' in navigator && window.isSecureContext && location.pathname.startsWith('/kim/')) {
+    window.addEventListener('load', () => { navigator.serviceWorker.register('/kim/sw.js', { scope: '/kim/', updateViaCache: 'none' }).catch(() => {}); });
   }
 })();
