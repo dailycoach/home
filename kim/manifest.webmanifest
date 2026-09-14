@@ -1,0 +1,33 @@
+{
+  "id": "/kim/",
+  "name": "데일리코칭 · 김철웅 명함",
+  "short_name": "데일리코칭",
+  "description": "김철웅 코치의 모바일 QR 명함",
+  "lang": "ko",
+  "start_url": "/kim/",
+  "scope": "/kim/",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#f7f5f0",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "QR 교환",
+      "url": "./#qr",
+      "description": "현장에서 보여줄 명함 QR"
+    }
+  ]
+}

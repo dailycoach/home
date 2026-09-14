@@ -1,0 +1,10 @@
+/kim/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), screen-wake-lock=(self), web-share=(self)
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'
+  Cache-Control: public, max-age=0, must-revalidate
+/kim/*.vcf
+  Content-Type: text/vcard; charset=utf-8
+  Content-Disposition: attachment; filename="KIM_CHEOL_UNG.vcf"

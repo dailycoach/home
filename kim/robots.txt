@@ -1,0 +1,4 @@
+# Informational only: crawlers read the root robots.txt.
+# /kim/index.html carries noindex, nofollow.
+User-agent: *
+Disallow: /kim/
