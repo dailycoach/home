@@ -1,4 +1,4 @@
-/* DAILYCOACHING mobile card v1.1.0 — framework-free, no tracking or remote QR APIs. */
+/* DAILYCOACHING mobile card v1.1.1 — framework-free, no tracking or remote QR APIs. */
 (() => {
   'use strict';
   const $ = (selector) => document.querySelector(selector);
@@ -48,7 +48,7 @@
       `TITLE:${escVCard(profile.title)}`,
       `EMAIL;TYPE=INTERNET,WORK:${plain(profile.email)}`
     ];
-    if (plain(profile.phone)) fields.push(`TEL;TYPE=WORK,VOICE:${plain(profile.phone)}`);
+    if (plain(profile.phone)) fields.push(`TEL;TYPE=CELL,VOICE:${plain(profile.phone)}`);
     if (website) fields.push(`URL:${website}`);
     fields.push('END:VCARD');
     return fields.map(foldVCard).join('\r\n') + '\r\n';

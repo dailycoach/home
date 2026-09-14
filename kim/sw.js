@@ -1,7 +1,7 @@
 /* Same-origin card assets only. The scope prefix prevents deleting other apps' caches. */
 const SCOPE = new URL(self.registration.scope);
 const PREFIX = 'dailycoaching-card-' + encodeURIComponent(SCOPE.pathname) + '-';
-const CACHE = PREFIX + 'v1.1-brand-20260914';
+const CACHE = PREFIX + 'v1.1.1-phone-20260914';
 const FILES = ['./assets/brand-hero.webp', './', './index.html', './assets/styles.css', './assets/app.js', './assets/qr.js', './assets/icon-192.png', './assets/icon-512.png', './assets/apple-touch-icon.png', './manifest.webmanifest', './KIM_CHEOL_UNG.vcf'];
 const ASSETS = FILES.map(path => new URL(path, SCOPE).href);
 self.addEventListener('install', event => {
