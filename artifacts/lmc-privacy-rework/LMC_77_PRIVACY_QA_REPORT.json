@@ -1,0 +1,325 @@
+{
+  "version": 1,
+  "generatedAt": "2026-08-12T04:36:13.3601312+09:00",
+  "courseId": "lmc-lifetime-management-counselor",
+  "status": "PASS",
+  "summary": {
+    "totalParts": 77,
+    "maskedParts": 75,
+    "noMaskParts": 2,
+    "sourceVerified": 77,
+    "technicalPass": 77,
+    "humanVisualApproved": 77,
+    "r2Overwrite": 77,
+    "remoteIntegrityPass": 77,
+    "head200": 77,
+    "range206": 77,
+    "contentLengthMatch": 77,
+    "signedPlaybackWeeks": 11,
+    "signedPlaybackParts": 24,
+    "catalogSynced": 77,
+    "approvedIdentifiableParticipantExposureFindings": 0,
+    "transitionLeakFindings": 0,
+    "instructorMaskingFindings": 0
+  },
+  "weekResults": [
+    {
+      "week": 1,
+      "expectedParts": 5,
+      "sourceVerified": 5,
+      "technicalPass": 5,
+      "visualApproved": 5,
+      "r2Overwrite": 5,
+      "remoteIntegrity": 5,
+      "head200": 5,
+      "range206": 5,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w01-p01",
+        "lmc-w01-p05"
+      ],
+      "catalogSync": 5,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-01/week-01-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-01/week-01-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-01/week-01-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-01/week-01-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-01/week-01-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-01/week-01-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 2,
+      "expectedParts": 7,
+      "sourceVerified": 7,
+      "technicalPass": 7,
+      "visualApproved": 7,
+      "r2Overwrite": 7,
+      "remoteIntegrity": 7,
+      "head200": 7,
+      "range206": 7,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w02-p01",
+        "lmc-w02-p07"
+      ],
+      "catalogSync": 7,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-02/week-02-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-02/week-02-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-02/week-02-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-02/week-02-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-02/week-02-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-02/week-02-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 3,
+      "expectedParts": 8,
+      "sourceVerified": 8,
+      "technicalPass": 8,
+      "visualApproved": 8,
+      "r2Overwrite": 8,
+      "remoteIntegrity": 8,
+      "head200": 8,
+      "range206": 8,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w03-p01",
+        "lmc-w03-p08"
+      ],
+      "catalogSync": 8,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-03/week-03-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-03/week-03-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-03/week-03-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-03/week-03-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-03/week-03-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-03/week-03-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 4,
+      "expectedParts": 6,
+      "sourceVerified": 6,
+      "technicalPass": 6,
+      "visualApproved": 6,
+      "r2Overwrite": 6,
+      "remoteIntegrity": 6,
+      "head200": 6,
+      "range206": 6,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w04-p01",
+        "lmc-w04-p06"
+      ],
+      "catalogSync": 6,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-04/week-04-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-04/week-04-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-04/week-04-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-04/week-04-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-04/week-04-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-04/week-04-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 5,
+      "expectedParts": 8,
+      "sourceVerified": 8,
+      "technicalPass": 8,
+      "visualApproved": 8,
+      "r2Overwrite": 8,
+      "remoteIntegrity": 8,
+      "head200": 8,
+      "range206": 8,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w05-p01",
+        "lmc-w05-p08"
+      ],
+      "catalogSync": 8,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-05/week-05-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-05/week-05-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-05/week-05-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-05/week-05-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-05/week-05-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-05/week-05-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 6,
+      "expectedParts": 7,
+      "sourceVerified": 7,
+      "technicalPass": 7,
+      "visualApproved": 7,
+      "r2Overwrite": 7,
+      "remoteIntegrity": 7,
+      "head200": 7,
+      "range206": 7,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w06-p01",
+        "lmc-w06-p07"
+      ],
+      "catalogSync": 7,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-06/week-06-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-06/week-06-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-06/week-06-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-06/week-06-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-06/week-06-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-06/week-06-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 7,
+      "expectedParts": 7,
+      "sourceVerified": 7,
+      "technicalPass": 7,
+      "visualApproved": 7,
+      "r2Overwrite": 7,
+      "remoteIntegrity": 7,
+      "head200": 7,
+      "range206": 7,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w07-p01",
+        "lmc-w07-p07"
+      ],
+      "catalogSync": 7,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-07/week-07-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-07/week-07-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-07/week-07-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-07/week-07-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-07/week-07-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-07/week-07-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 8,
+      "expectedParts": 8,
+      "sourceVerified": 8,
+      "technicalPass": 8,
+      "visualApproved": 8,
+      "r2Overwrite": 8,
+      "remoteIntegrity": 8,
+      "head200": 8,
+      "range206": 8,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w08-p01",
+        "lmc-w08-p05",
+        "lmc-w08-p08"
+      ],
+      "catalogSync": 8,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-08/week-08-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-08/week-08-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-08/week-08-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-08/week-08-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-08/week-08-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-08/week-08-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 9,
+      "expectedParts": 7,
+      "sourceVerified": 7,
+      "technicalPass": 7,
+      "visualApproved": 7,
+      "r2Overwrite": 7,
+      "remoteIntegrity": 7,
+      "head200": 7,
+      "range206": 7,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w09-p01",
+        "lmc-w09-p04",
+        "lmc-w09-p07"
+      ],
+      "catalogSync": 7,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-09/week-09-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-09/week-09-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-09/week-09-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-09/week-09-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-09/week-09-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-09/week-09-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 10,
+      "expectedParts": 7,
+      "sourceVerified": 7,
+      "technicalPass": 7,
+      "visualApproved": 7,
+      "r2Overwrite": 7,
+      "remoteIntegrity": 7,
+      "head200": 7,
+      "range206": 7,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w10-p01",
+        "lmc-w10-p07"
+      ],
+      "catalogSync": 7,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-10/week-10-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-10/week-10-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-10/week-10-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-10/week-10-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-10/week-10-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-10/week-10-catalog-sync-report.json"
+      }
+    },
+    {
+      "week": 11,
+      "expectedParts": 7,
+      "sourceVerified": 7,
+      "technicalPass": 7,
+      "visualApproved": 7,
+      "r2Overwrite": 7,
+      "remoteIntegrity": 7,
+      "head200": 7,
+      "range206": 7,
+      "signedPlayback": "PASS",
+      "signedPlaybackParts": [
+        "lmc-w11-p01",
+        "lmc-w11-p07"
+      ],
+      "catalogSync": 7,
+      "status": "PASS",
+      "reports": {
+        "source": "artifacts/lmc-privacy-rework/week-11/week-11-source-preflight.json",
+        "technical": "artifacts/lmc-privacy-rework/week-11/week-11-technical-qa.json",
+        "visual": "artifacts/lmc-privacy-rework/week-11/week-11-visual-approval.json",
+        "overwrite": "artifacts/lmc-privacy-rework/week-11/week-11-r2-overwrite-report.json",
+        "remote": "artifacts/lmc-privacy-rework/week-11/week-11-remote-playback-qa.json",
+        "catalog": "artifacts/lmc-privacy-rework/week-11/week-11-catalog-sync-report.json"
+      }
+    }
+  ],
+  "authorizedExceptions": [
+    {
+      "mediaIds": [
+        "lmc-w05-p06",
+        "lmc-w05-p07"
+      ],
+      "type": "NO_MASK_PRISTINE_BYTE_PRESERVATION",
+      "description": "Human-approved original-byte preservation; input/output SHA-256 identity retained. Non-Fast-Start state is explicitly waived because remuxing would change the required bytes."
+    }
+  ]
+}

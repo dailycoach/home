@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-11T05:30:10.399Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 2,
+  "expectedUploads": 7,
+  "mode": "EXECUTE",
+  "rows": [
+    {
+      "mediaId": "lmc-w02-p01",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+      "sourceFilename": "LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+      "newSizeBytes": 47256118,
+      "newSha256": "a514294378c400b5adb20f87477725ee0a35ca0ed6b6c7de576198dfa835d29b",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w02-p02",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+      "sourceFilename": "LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+      "newSizeBytes": 35515567,
+      "newSha256": "51ce5632c56fa30e3a4a9d7e6237f2f3f43e46b505fd21db2fbe2f6f20742a8b",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w02-p03",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+      "sourceFilename": "LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+      "newSizeBytes": 33346101,
+      "newSha256": "17b37b82043f34d73f87efb88b1aff6b640c755f510e7c122978e7f1e8b95a28",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w02-p04",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+      "sourceFilename": "LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+      "newSizeBytes": 49916783,
+      "newSha256": "41740803983bfae018f15c7622f9d91e1b82f90f5931c1ac0dc607486034e121",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w02-p05",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+      "sourceFilename": "LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+      "newSizeBytes": 56880800,
+      "newSha256": "88d5bb69e5583c9750aa048c8934ec78bf70e8dac06e8414f15420ee366358b9",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w02-p06",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P06_member-management-and-data-use.mp4",
+      "sourceFilename": "LMC_WEEK02_P06_member-management-and-data-use.mp4",
+      "newSizeBytes": 29361762,
+      "newSha256": "82ac970aa9b785317da0d2a99a2e03407b442e57efa2920d8132c13339563629",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w02-p07",
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+      "sourceFilename": "LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+      "newSizeBytes": 34449350,
+      "newSha256": "2e6bb8c7e944f716b555815dfabdbcd536422329e8d65c661276b97da28d38ad",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    }
+  ]
+}

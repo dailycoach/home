@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-08-11T15:52:05.5271745+09:00",
+  "week": 4,
+  "humanApprovalRequired": true,
+  "r2ChangedFiles": 6,
+  "overallStatus": "PASS",
+  "findings": [
+    {
+      "mediaId": "lmc-w04-p01..lmc-w04-p06",
+      "severity": "PASS",
+      "observation": "Sampled start, midpoint, end, and interval frames show the configured right participant panel covered in solid black while lecture content remains visible.",
+      "humanDecision": "All WEEK-04 PART contact sheets approved by the human reviewer on 2026-08-11."
+    }
+  ],
+  "approvalGateTest": {
+    "result": "PASS",
+    "message": "Missing human approval is blocked; complete human approval is accepted; technical QA SHA mismatch is blocked.",
+    "r2UploadAttemptedDuringTest": false
+  }
+}

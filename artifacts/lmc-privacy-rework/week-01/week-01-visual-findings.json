@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-08-11T11:06:18.7041536+09:00",
+  "week": 1,
+  "humanApprovalRequired": true,
+  "r2ChangedFiles": 5,
+  "overallStatus": "PASS",
+  "findings": [
+    {
+      "mediaId": "lmc-w01-p01",
+      "severity": "RESOLVED",
+      "timeRangeSeconds": [0.0, 9.5],
+      "observation": "The v1.0 MASK JSON intentionally leaves the opening full-screen person unmasked until screen share begins at 9.5 seconds. The visible Zoom label is 'user'.",
+      "humanDecision": "Confirmed as the instructor by the human reviewer on 2026-08-11.",
+      "evidence": "qa-frames/lmc-w01-p01/opening-0-to-9s-review.jpg"
+    },
+    {
+      "mediaId": "lmc-w01-p02..lmc-w01-p05",
+      "severity": "PASS",
+      "observation": "Sampled transition and interval frames show the configured right panel covered in solid black while slide content remains visible.",
+      "humanDecision": "All WEEK-01 PART contact sheets approved by the human reviewer on 2026-08-11."
+    }
+  ],
+  "approvalGateTest": {
+    "result": "PASS",
+    "expectedExitCode": 1,
+    "actualExitCode": 1,
+    "message": "WEEK-01 human visual approval is missing",
+    "r2UploadAttempted": false
+  }
+}

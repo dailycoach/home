@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-08-11T15:57:36.3774559+09:00",
+  "week": 4,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 6,
+    "method": "Downloaded each object from the remote R2 bucket and compared size and SHA-256 to the approved cutover manifest.",
+    "parts": [
+      { "mediaId": "lmc-w04-p01", "sizeBytes": 22369124, "sha256": "80250c007a5a474263e61be82dbfa3231ca0eaea0c729966df5f190e9adc2ff7", "pass": true },
+      { "mediaId": "lmc-w04-p02", "sizeBytes": 26921368, "sha256": "da84675f9b02d815ba7011f36ad39e6c55622410a3075c270a5adbca6ba75626", "pass": true },
+      { "mediaId": "lmc-w04-p03", "sizeBytes": 22475107, "sha256": "fd8ae7bc2de18c3d903cda0205cbb0c00941c1e29e7885e4ba2d9f20f5b7063e", "pass": true },
+      { "mediaId": "lmc-w04-p04", "sizeBytes": 22086876, "sha256": "bcbfedf4a5c30d942096e5ba1c33280cb42652b978b80590ebf42f96107df565", "pass": true },
+      { "mediaId": "lmc-w04-p05", "sizeBytes": 98222057, "sha256": "6ed6ec966f9f168459a3a1c29d3643b10e772c9e6ce7eca8d2899e6c86409c0e", "pass": true },
+      { "mediaId": "lmc-w04-p06", "sizeBytes": 18542768, "sha256": "0514206ef779df7039bc2008812aee7718a9833106eb4ed9a09771d9594dd3be", "pass": true }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 6,
+    "range206": 6,
+    "parts": [
+      { "mediaId": "lmc-w04-p01", "path": "/media/lmc-lifetime-management-counselor/4/1", "headStatus": 200, "contentType": "video/mp4", "contentLength": 22369124, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/22369124", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w04-p02", "path": "/media/lmc-lifetime-management-counselor/4/2", "headStatus": 200, "contentType": "video/mp4", "contentLength": 26921368, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/26921368", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w04-p03", "path": "/media/lmc-lifetime-management-counselor/4/3", "headStatus": 200, "contentType": "video/mp4", "contentLength": 22475107, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/22475107", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w04-p04", "path": "/media/lmc-lifetime-management-counselor/4/4", "headStatus": 200, "contentType": "video/mp4", "contentLength": 22086876, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/22086876", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w04-p05", "path": "/media/lmc-lifetime-management-counselor/4/5", "headStatus": 200, "contentType": "video/mp4", "contentLength": 98222057, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/98222057", "rangeBodyBytes": 1, "pass": true },
+      { "mediaId": "lmc-w04-p06", "path": "/media/lmc-lifetime-management-counselor/4/6", "headStatus": 200, "contentType": "video/mp4", "contentLength": 18542768, "acceptRanges": "bytes", "rangeStatus": 206, "contentRange": "bytes 0-0/18542768", "rangeBodyBytes": 1, "pass": true }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "requiredParts": ["lmc-w04-p01", "lmc-w04-p06"],
+    "parts": [
+      {
+        "mediaId": "lmc-w04-p01",
+        "durationSeconds": 936.96,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "seekTargetSeconds": 468.48,
+        "seekActualSeconds": 468.4956,
+        "seekPass": true,
+        "audioEnabled": true
+      },
+      {
+        "mediaId": "lmc-w04-p06",
+        "durationSeconds": 428.338005,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "endBoundarySeconds": 419.771619,
+        "endPlaybackSeconds": 421.26794,
+        "endPlaybackPass": true,
+        "audioEnabled": true,
+        "nextPartNavigationPass": true,
+        "nextPartUrl": "/lcms/academy/lesson.html?course=lmc-lifetime-management-counselor&week=5&part=1"
+      }
+    ]
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}

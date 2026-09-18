@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-08-11T07:36:00.324Z",
+  "week": 5,
+  "dryRun": false,
+  "expectedParts": 8,
+  "results": [
+    {
+      "mediaId": "lmc-w05-p01",
+      "week": 5,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK05_P01_stress-definition-and-core-characteristics.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P01_stress-definition-and-characteristics(1).mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P01_stress-definition-and-characteristics(1).mp4",
+      "sizeBytes": 44441468,
+      "sha256": "de086267e080b1c7e6459fe1aa84c38e27ecb52ce247ce7a64c6e3e77c934f2b",
+      "filterGraph": "drawbox=x=1027:y=0:w=iw-1027:h=ih:color=black@1.0:t=fill:enable='gte(t,83.5)'"
+    },
+    {
+      "mediaId": "lmc-w05-p02",
+      "week": 5,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK05_P02_positive-negative-stress-and-theories.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P02_stress-theories-and-cognitive-appraisal(1).mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P02_stress-theories-and-cognitive-appraisal(1).mp4",
+      "sizeBytes": 28670204,
+      "sha256": "7b1c982151df3b13121ef9919d12a947a650e3e0e1d3c972949cea503b505040",
+      "filterGraph": "drawbox=x=1027:y=0:w=iw-1027:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w05-p03",
+      "week": 5,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK05_P03_rs-stress-assessment-causes.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P03_stress-causes-and-assessment(1).mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P03_stress-causes-and-assessment(1).mp4",
+      "sizeBytes": 26372684,
+      "sha256": "3bcccfe3c06b2290d2dc810715e40051e2ef489c1b7d0d6f929fb71ac1c008f5",
+      "filterGraph": "drawbox=x=1027:y=0:w=iw-1027:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w05-p04",
+      "week": 5,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK05_P04_stress-symptoms-and-physiological-response.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P04_stress-symptoms-and-physiological-response(1).mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P04_stress-symptoms-and-physiological-response(1).mp4",
+      "sizeBytes": 36118471,
+      "sha256": "fff1f715177bfeede3ab7a566bfa604a76a9cfdb641af2859e578df50fb0c123",
+      "filterGraph": "drawbox=x=1027:y=0:w=iw-1027:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w05-p05",
+      "week": 5,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK05_P05_coping-types-and-management-strategies.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P05_coping-styles-and-management-strategies(1).mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P05_coping-styles-and-management-strategies(1).mp4",
+      "sizeBytes": 19280772,
+      "sha256": "463d10d8e20a98de03ecbf4efe320e4abf92b2339a72f5761859b679367a1401",
+      "filterGraph": "drawbox=x=1027:y=0:w=iw-1027:h=ih:color=black@1.0:t=fill:enable='between(t,0,515.963)'"
+    },
+    {
+      "mediaId": "lmc-w05-p06",
+      "week": 5,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK05_P06_stress-case-application-01.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P06_case-sharing-and-application-one(1).mp4",
+      "decision": "NO_MASK",
+      "action": "COPIED_NO_MASK",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P06_case-sharing-and-application-one(1).mp4",
+      "sizeBytes": 68516077,
+      "sha256": "6e03487074d8b0e27752da8b67bd73a5a886dfe7300d3753ec19a3f52d554353"
+    },
+    {
+      "mediaId": "lmc-w05-p07",
+      "week": 5,
+      "part": 7,
+      "sourceFilename": "LMC_WEEK05_P07_stress-case-application-02.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P07_case-sharing-and-application-two(1).mp4",
+      "decision": "NO_MASK",
+      "action": "COPIED_NO_MASK",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P07_case-sharing-and-application-two(1).mp4",
+      "sizeBytes": 74697167,
+      "sha256": "183760cec3439e62cd7c8e975333fbb4b922eb64621fe4bbe82dbe8e1b467df8"
+    },
+    {
+      "mediaId": "lmc-w05-p08",
+      "week": 5,
+      "part": 8,
+      "sourceFilename": "LMC_WEEK05_P08_case-integration-and-result-review.mp4",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P08_integration-and-result-review(1).mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-05\\LMC_WEEK05_P08_integration-and-result-review(1).mp4",
+      "sizeBytes": 114292100,
+      "sha256": "879f18cc8c7476198e355e43cd2a94cf8cb9426c80f6f5423255f0ddaaf820bd",
+      "filterGraph": "drawbox=x=1008:y=0:w=iw-1008:h=ih:color=black@1.0:t=fill:enable='gte(t,730.161)'"
+    }
+  ]
+}

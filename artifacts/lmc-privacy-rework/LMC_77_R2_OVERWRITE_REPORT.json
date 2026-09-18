@@ -1,0 +1,704 @@
+{
+  "version": 1,
+  "generatedAt": "2026-08-12T04:36:13.3601312+09:00",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "status": "PASS",
+  "uploadedCount": 77,
+  "currentObjectKeysPreserved": true,
+  "parts": [
+    {
+      "mediaId": "lmc-w01-p01",
+      "week": 1,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P01_self-concept-and-sources.mp4",
+      "sizeBytes": 42194259,
+      "sha256": "23a30f2498148398ef81ae1cffb1414c99e176dd0517c7f854d0cd7d68b3b167",
+      "uploadedAt": "2026-08-11T02:25:30.492Z"
+    },
+    {
+      "mediaId": "lmc-w01-p02",
+      "week": 1,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P02_motivation-and-self-esteem.mp4",
+      "sizeBytes": 29177152,
+      "sha256": "41fb32dd9ab1f1f6e05e03280ba355e04fe8af827a418171f40a58c39fff202d",
+      "uploadedAt": "2026-08-11T02:25:35.928Z"
+    },
+    {
+      "mediaId": "lmc-w01-p03",
+      "week": 1,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P03_self-defense-acceptance-disclosure.mp4",
+      "sizeBytes": 46449784,
+      "sha256": "4d663fdc10b2ffd3740a346141c673eee3ef36f3f7ff8cb6a398cfcf910a7406",
+      "uploadedAt": "2026-08-11T02:25:44.968Z"
+    },
+    {
+      "mediaId": "lmc-w01-p04",
+      "week": 1,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P04_impression-formation.mp4",
+      "sizeBytes": 53780162,
+      "sha256": "6a83d2e12dfafead3b1249c16a7ba9ea677ad6e5db1c295aaee21646cc9af20d",
+      "uploadedAt": "2026-08-11T02:25:54.088Z"
+    },
+    {
+      "mediaId": "lmc-w01-p05",
+      "week": 1,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-01/LMC_WEEK01_P05_similarity-and-complementarity.mp4",
+      "sizeBytes": 50555509,
+      "sha256": "7538f0270d6763df21efa579bb808bcecee7c7d9f1fa720d4c4cf1b7276dfe24",
+      "uploadedAt": "2026-08-11T02:26:02.901Z"
+    },
+    {
+      "mediaId": "lmc-w02-p01",
+      "week": 2,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P01_aptitude-structure-and-multifactor-analysis.mp4",
+      "sizeBytes": 47256118,
+      "sha256": "a514294378c400b5adb20f87477725ee0a35ca0ed6b6c7de576198dfa835d29b",
+      "uploadedAt": "2026-08-11T05:30:25.224Z"
+    },
+    {
+      "mediaId": "lmc-w02-p02",
+      "week": 2,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P02_difficulties-and-integrated-test-analysis.mp4",
+      "sizeBytes": 35515567,
+      "sha256": "51ce5632c56fa30e3a4a9d7e6237f2f3f43e46b505fd21db2fbe2f6f20742a8b",
+      "uploadedAt": "2026-08-11T05:30:33.197Z"
+    },
+    {
+      "mediaId": "lmc-w02-p03",
+      "week": 2,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P03_comprehensive-aptitude-and-personality-theories.mp4",
+      "sizeBytes": 33346101,
+      "sha256": "17b37b82043f34d73f87efb88b1aff6b640c755f510e7c122978e7f1e8b95a28",
+      "uploadedAt": "2026-08-11T05:30:39.310Z"
+    },
+    {
+      "mediaId": "lmc-w02-p04",
+      "week": 2,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P04_rs-tests-and-cipp-platform.mp4",
+      "sizeBytes": 49916783,
+      "sha256": "41740803983bfae018f15c7622f9d91e1b82f90f5931c1ac0dc607486034e121",
+      "uploadedAt": "2026-08-11T05:30:47.445Z"
+    },
+    {
+      "mediaId": "lmc-w02-p05",
+      "week": 2,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P05_result-report-interpretation-practice.mp4",
+      "sizeBytes": 56880800,
+      "sha256": "88d5bb69e5583c9750aa048c8934ec78bf70e8dac06e8414f15420ee366358b9",
+      "uploadedAt": "2026-08-11T05:30:55.910Z"
+    },
+    {
+      "mediaId": "lmc-w02-p06",
+      "week": 2,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P06_member-management-and-data-use.mp4",
+      "sizeBytes": 29361762,
+      "sha256": "82ac970aa9b785317da0d2a99a2e03407b442e57efa2920d8132c13339563629",
+      "uploadedAt": "2026-08-11T05:31:05.052Z"
+    },
+    {
+      "mediaId": "lmc-w02-p07",
+      "week": 2,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-02/LMC_WEEK02_P07_ai-assisted-career-interpretation.mp4",
+      "sizeBytes": 34449350,
+      "sha256": "2e6bb8c7e944f716b555815dfabdbcd536422329e8d65c661276b97da28d38ad",
+      "uploadedAt": "2026-08-11T05:31:13.808Z"
+    },
+    {
+      "mediaId": "lmc-w03-p01",
+      "week": 3,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P01_course-overview-and-personality-definition.mp4",
+      "sizeBytes": 28084733,
+      "sha256": "889f39cafa3b6f375db3d7b4fc8feedf6cf78a6354646582b28e823d931f00ca",
+      "uploadedAt": "2026-08-11T06:13:12.160Z"
+    },
+    {
+      "mediaId": "lmc-w03-p02",
+      "week": 3,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P02_personality-characteristics-and-importance.mp4",
+      "sizeBytes": 20080452,
+      "sha256": "3ed461c91b52bee6fe3fa538f09475e0520ddfbf928d0c8ecc337972eead934a",
+      "uploadedAt": "2026-08-11T06:13:17.128Z"
+    },
+    {
+      "mediaId": "lmc-w03-p03",
+      "week": 3,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P03_personality-theory-framework-one.mp4",
+      "sizeBytes": 21857666,
+      "sha256": "cefcf9616f12bdaea0ed410e8edfc4037b3cd8bd30288a91a97cded13a6d8f8b",
+      "uploadedAt": "2026-08-11T06:13:22.592Z"
+    },
+    {
+      "mediaId": "lmc-w03-p04",
+      "week": 3,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P04_personality-theory-framework-two.mp4",
+      "sizeBytes": 22400887,
+      "sha256": "2428cd8eb2e240673eb0d185e0e1c49d8909d1322587c60920167843d8459a00",
+      "uploadedAt": "2026-08-11T06:13:27.416Z"
+    },
+    {
+      "mediaId": "lmc-w03-p05",
+      "week": 3,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P05_personality-theory-comparison-and-application.mp4",
+      "sizeBytes": 22446624,
+      "sha256": "7f2b71e5fa8913a1efdc2d57323c9662f8a707b1cfdbef9cee1bddf69b4a2985",
+      "uploadedAt": "2026-08-11T06:13:31.711Z"
+    },
+    {
+      "mediaId": "lmc-w03-p06",
+      "week": 3,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P06_integrated-theories-cattell-and-16pf.mp4",
+      "sizeBytes": 31061749,
+      "sha256": "7497f9d69f584175c65b657dfcf2abc4d171d318bb80f6afb0b33084c298ad72",
+      "uploadedAt": "2026-08-11T06:13:37.631Z"
+    },
+    {
+      "mediaId": "lmc-w03-p07",
+      "week": 3,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P07_16pf-report-interpretation-practice.mp4",
+      "sizeBytes": 23764006,
+      "sha256": "7411f1b49303d5f8acf8f3522da47e6c7ce74a705a8947abf5c00ef8da0caa59",
+      "uploadedAt": "2026-08-11T06:13:42.129Z"
+    },
+    {
+      "mediaId": "lmc-w03-p08",
+      "week": 3,
+      "part": 8,
+      "currentObjectKey": "lmc/v2/week-03/LMC_WEEK03_P08_ai-assisted-interpretation-and-platform-use.mp4",
+      "sizeBytes": 19614976,
+      "sha256": "a66e2aa7b6b223ea379434cf348bc850b3eca63bf9dbcfa0be4a5397d57a002e",
+      "uploadedAt": "2026-08-11T06:13:47.677Z"
+    },
+    {
+      "mediaId": "lmc-w04-p01",
+      "week": 4,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P01_communication-concept-and-structure.mp4",
+      "sizeBytes": 22369124,
+      "sha256": "80250c007a5a474263e61be82dbfa3231ca0eaea0c729966df5f190e9adc2ff7",
+      "uploadedAt": "2026-08-11T06:53:22.459Z"
+    },
+    {
+      "mediaId": "lmc-w04-p02",
+      "week": 4,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P02_characteristics-functions-and-expression.mp4",
+      "sizeBytes": 26921368,
+      "sha256": "da84675f9b02d815ba7011f36ad39e6c55622410a3075c270a5adbca6ba75626",
+      "uploadedAt": "2026-08-11T06:53:30.494Z"
+    },
+    {
+      "mediaId": "lmc-w04-p03",
+      "week": 4,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P03_ten-styles-framework-and-criteria.mp4",
+      "sizeBytes": 22475107,
+      "sha256": "fd8ae7bc2de18c3d903cda0205cbb0c00941c1e29e7885e4ba2d9f20f5b7063e",
+      "uploadedAt": "2026-08-11T06:53:38.445Z"
+    },
+    {
+      "mediaId": "lmc-w04-p04",
+      "week": 4,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P04_style-characteristics-and-interpretation.mp4",
+      "sizeBytes": 22086876,
+      "sha256": "bcbfedf4a5c30d942096e5ba1c33280cb42652b978b80590ebf42f96107df565",
+      "uploadedAt": "2026-08-11T06:53:45.260Z"
+    },
+    {
+      "mediaId": "lmc-w04-p05",
+      "week": 4,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P05_case-application-and-interpretation-review.mp4",
+      "sizeBytes": 98222057,
+      "sha256": "6ed6ec966f9f168459a3a1c29d3643b10e772c9e6ce7eca8d2899e6c86409c0e",
+      "uploadedAt": "2026-08-11T06:53:57.184Z"
+    },
+    {
+      "mediaId": "lmc-w04-p06",
+      "week": 4,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-04/LMC_WEEK04_P06_report-and-platform-use.mp4",
+      "sizeBytes": 18542768,
+      "sha256": "0514206ef779df7039bc2008812aee7718a9833106eb4ed9a09771d9594dd3be",
+      "uploadedAt": "2026-08-11T06:54:04.058Z"
+    },
+    {
+      "mediaId": "lmc-w05-p01",
+      "week": 5,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P01_stress-definition-and-characteristics(1).mp4",
+      "sizeBytes": 44441468,
+      "sha256": "de086267e080b1c7e6459fe1aa84c38e27ecb52ce247ce7a64c6e3e77c934f2b",
+      "uploadedAt": "2026-08-11T14:05:11.252Z"
+    },
+    {
+      "mediaId": "lmc-w05-p02",
+      "week": 5,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P02_stress-theories-and-cognitive-appraisal(1).mp4",
+      "sizeBytes": 28670204,
+      "sha256": "7b1c982151df3b13121ef9919d12a947a650e3e0e1d3c972949cea503b505040",
+      "uploadedAt": "2026-08-11T14:05:18.077Z"
+    },
+    {
+      "mediaId": "lmc-w05-p03",
+      "week": 5,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P03_stress-causes-and-assessment(1).mp4",
+      "sizeBytes": 26372684,
+      "sha256": "3bcccfe3c06b2290d2dc810715e40051e2ef489c1b7d0d6f929fb71ac1c008f5",
+      "uploadedAt": "2026-08-11T14:05:32.468Z"
+    },
+    {
+      "mediaId": "lmc-w05-p04",
+      "week": 5,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P04_stress-symptoms-and-physiological-response(1).mp4",
+      "sizeBytes": 36118471,
+      "sha256": "fff1f715177bfeede3ab7a566bfa604a76a9cfdb641af2859e578df50fb0c123",
+      "uploadedAt": "2026-08-11T14:05:39.111Z"
+    },
+    {
+      "mediaId": "lmc-w05-p05",
+      "week": 5,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P05_coping-styles-and-management-strategies(1).mp4",
+      "sizeBytes": 19280772,
+      "sha256": "463d10d8e20a98de03ecbf4efe320e4abf92b2339a72f5761859b679367a1401",
+      "uploadedAt": "2026-08-11T14:05:46.618Z"
+    },
+    {
+      "mediaId": "lmc-w05-p06",
+      "week": 5,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P06_case-sharing-and-application-one(1).mp4",
+      "sizeBytes": 68516077,
+      "sha256": "6e03487074d8b0e27752da8b67bd73a5a886dfe7300d3753ec19a3f52d554353",
+      "uploadedAt": "2026-08-11T14:05:57.734Z"
+    },
+    {
+      "mediaId": "lmc-w05-p07",
+      "week": 5,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P07_case-sharing-and-application-two(1).mp4",
+      "sizeBytes": 74697167,
+      "sha256": "183760cec3439e62cd7c8e975333fbb4b922eb64621fe4bbe82dbe8e1b467df8",
+      "uploadedAt": "2026-08-11T14:06:07.702Z"
+    },
+    {
+      "mediaId": "lmc-w05-p08",
+      "week": 5,
+      "part": 8,
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P08_integration-and-result-review(1).mp4",
+      "sizeBytes": 114292100,
+      "sha256": "879f18cc8c7476198e355e43cd2a94cf8cb9426c80f6f5423255f0ddaaf820bd",
+      "uploadedAt": "2026-08-11T14:06:19.950Z"
+    },
+    {
+      "mediaId": "lmc-w06-p01",
+      "week": 6,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P01_course-overview-and-learning-style-basics.mp4",
+      "sizeBytes": 25463596,
+      "sha256": "b95aaff7e9aa105ab2d106dc08902ed50738c5daa2f157a9161e2e9d08882e3b",
+      "uploadedAt": "2026-08-11T08:08:02.163Z"
+    },
+    {
+      "mediaId": "lmc-w06-p02",
+      "week": 6,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P02_multidimensional-learning-style-definition.mp4",
+      "sizeBytes": 28439361,
+      "sha256": "4182bf24988551ccfec7471bd9fe58b0bd5845c776e7b0a0c14f257310750e6f",
+      "uploadedAt": "2026-08-11T08:08:09.099Z"
+    },
+    {
+      "mediaId": "lmc-w06-p03",
+      "week": 6,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P03_five-affective-factors-for-learning.mp4",
+      "sizeBytes": 19464007,
+      "sha256": "0fb3961fc013ffc8eb6d7f3697e21bb4e41bac0f59c95d58f1b490fabee03108",
+      "uploadedAt": "2026-08-11T08:08:15.438Z"
+    },
+    {
+      "mediaId": "lmc-w06-p04",
+      "week": 6,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P04_jungian-psychology-and-learning-personality.mp4",
+      "sizeBytes": 18348375,
+      "sha256": "c72e66640998f05b23b29504f1d1ef05a27f0b9805b0e4c74687cd62730cae57",
+      "uploadedAt": "2026-08-11T08:08:22.088Z"
+    },
+    {
+      "mediaId": "lmc-w06-p05",
+      "week": 6,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P05_learner-types-and-brain-function.mp4",
+      "sizeBytes": 26204781,
+      "sha256": "eb8d75e712d77fb1f6630aebc5923067e0f2a819777a5d5b66ff1e00ba04c89c",
+      "uploadedAt": "2026-08-11T08:08:28.974Z"
+    },
+    {
+      "mediaId": "lmc-w06-p06",
+      "week": 6,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P06_learning-style-report-interpretation.mp4",
+      "sizeBytes": 37635022,
+      "sha256": "899f784ccf8f2f2f24c472ed2974bc199547aac22a45eb24d38f003e8d1edfc1",
+      "uploadedAt": "2026-08-11T08:08:36.192Z"
+    },
+    {
+      "mediaId": "lmc-w06-p07",
+      "week": 6,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P07_learning-emotion-results-and-platform.mp4",
+      "sizeBytes": 32932025,
+      "sha256": "3532259acb21c1190631bc1d47a2dbfd6190ccf000d78d5d6069ec92ddfa6dea",
+      "uploadedAt": "2026-08-11T08:08:44.131Z"
+    },
+    {
+      "mediaId": "lmc-w07-p01",
+      "week": 7,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+      "sizeBytes": 24522689,
+      "sha256": "78c8ec7664534844295d03d00421210f9b022107befefe4d29c5d2dbf7a36e74",
+      "uploadedAt": "2026-08-11T09:48:27.018Z"
+    },
+    {
+      "mediaId": "lmc-w07-p02",
+      "week": 7,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+      "sizeBytes": 21586625,
+      "sha256": "fc5c89e059eb994b2fd627ac59d613a5ab0ab64a216d8fd610f3924daa3637d0",
+      "uploadedAt": "2026-08-11T09:48:33.093Z"
+    },
+    {
+      "mediaId": "lmc-w07-p03",
+      "week": 7,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+      "sizeBytes": 26156332,
+      "sha256": "629a54a774ef3bd8b9f20e54e00852a685f72da981701545cad076a15471be85",
+      "uploadedAt": "2026-08-11T09:48:39.691Z"
+    },
+    {
+      "mediaId": "lmc-w07-p04",
+      "week": 7,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+      "sizeBytes": 19802585,
+      "sha256": "91b9654c1641913a1fe96d663ee06b4a9ea48873844729062c9a0e76a5e28a99",
+      "uploadedAt": "2026-08-11T09:48:45.842Z"
+    },
+    {
+      "mediaId": "lmc-w07-p05",
+      "week": 7,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+      "sizeBytes": 34810603,
+      "sha256": "268bb47994278f6633da6a6e157c6333587e1fea1e98fc3719a5e45da21cd440",
+      "uploadedAt": "2026-08-11T09:48:52.862Z"
+    },
+    {
+      "mediaId": "lmc-w07-p06",
+      "week": 7,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P06_anger-causes-functions-and-impact.mp4",
+      "sizeBytes": 30296225,
+      "sha256": "74812d4df789c0b545b4acd51b2bd5ac09ff6b2a71d9b3a21212ddaf7656abc3",
+      "uploadedAt": "2026-08-11T09:49:00.617Z"
+    },
+    {
+      "mediaId": "lmc-w07-p07",
+      "week": 7,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+      "sizeBytes": 31438705,
+      "sha256": "f5a9f4d9c9ba18907241c6c64a3603685eae806a81d5eead21a54e7752fdff5c",
+      "uploadedAt": "2026-08-11T09:49:09.093Z"
+    },
+    {
+      "mediaId": "lmc-w08-p01",
+      "week": 8,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P01_depression-assessment-and-classification.mp4",
+      "sizeBytes": 38109622,
+      "sha256": "27054d042d5b40332e279a031d33f9d17bed55ccd733bb01261c3b80cc556f5c",
+      "uploadedAt": "2026-08-11T14:41:11.837Z"
+    },
+    {
+      "mediaId": "lmc-w08-p02",
+      "week": 8,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P02_mood-curve-and-depressive-manic-episodes.mp4",
+      "sizeBytes": 26135729,
+      "sha256": "e602b1f4fbbb33874ff01e7691ead190716f1994b32c13ad7e87bc33ed7fa74e",
+      "uploadedAt": "2026-08-11T14:41:21.869Z"
+    },
+    {
+      "mediaId": "lmc-w08-p03",
+      "week": 8,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P03_major-depression-diagnostic-criteria.mp4",
+      "sizeBytes": 15069362,
+      "sha256": "e6b7f0e546dec6fb594edd5265714a993e8ed8deb113bcb0d3cc9056e1160d06",
+      "uploadedAt": "2026-08-11T14:41:30.898Z"
+    },
+    {
+      "mediaId": "lmc-w08-p04",
+      "week": 8,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "sizeBytes": 22398700,
+      "sha256": "8b09753afcab66cf9f8ea7c20ffe2ae607016073cd9f0673a67eec2b25e8a839",
+      "uploadedAt": "2026-08-11T14:41:39.879Z"
+    },
+    {
+      "mediaId": "lmc-w08-p05",
+      "week": 8,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P05_symptoms-treatment-and-result-structure.mp4",
+      "sizeBytes": 21952943,
+      "sha256": "7392827692c9ad09c58dffc2c3a4b20b8d72037f553ed3137c12032d71284d66",
+      "uploadedAt": "2026-08-11T14:41:48.939Z"
+    },
+    {
+      "mediaId": "lmc-w08-p06",
+      "week": 8,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P06_six-symptom-scales-overview.mp4",
+      "sizeBytes": 23809999,
+      "sha256": "fc157845505cd8558b6d4d225f199936cdd517b65d821a806fe156704c44ff6e",
+      "uploadedAt": "2026-08-11T14:41:59.158Z"
+    },
+    {
+      "mediaId": "lmc-w08-p07",
+      "week": 8,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P07_scale-cases-and-integrated-interpretation.mp4",
+      "sizeBytes": 22664936,
+      "sha256": "792bfdacd3e8060d551d54086b5cafb33c7af7b5847f58c67024c3d575079afa",
+      "uploadedAt": "2026-08-11T14:42:08.874Z"
+    },
+    {
+      "mediaId": "lmc-w08-p08",
+      "week": 8,
+      "part": 8,
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P08_result-report-and-platform-use.mp4",
+      "sizeBytes": 11794743,
+      "sha256": "179dfb013dff51334d77fc77fc2b2cb7f78db3bf7d30e34a3986e9a9938544e3",
+      "uploadedAt": "2026-08-11T14:42:15.607Z"
+    },
+    {
+      "mediaId": "lmc-w09-p01",
+      "week": 9,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "sizeBytes": 24803587,
+      "sha256": "21e6ff995347b4bdc6da6c15d75efc9bc43eda7dcb4db347a87d9a15da6c3522",
+      "uploadedAt": "2026-08-11T18:54:08.594Z"
+    },
+    {
+      "mediaId": "lmc-w09-p02",
+      "week": 9,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "sizeBytes": 28476974,
+      "sha256": "9ef9b4f30a2843951c0581447818f159aad0f0d2549f55632032b69de2ea6be5",
+      "uploadedAt": "2026-08-11T18:54:18.382Z"
+    },
+    {
+      "mediaId": "lmc-w09-p03",
+      "week": 9,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "sizeBytes": 20842548,
+      "sha256": "d6fd0a807c0a8b704618c62b528bec5dcc370fa00f9c0899b9e6f1dec324b198",
+      "uploadedAt": "2026-08-11T18:54:26.375Z"
+    },
+    {
+      "mediaId": "lmc-w09-p04",
+      "week": 9,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "sizeBytes": 20571623,
+      "sha256": "fdb0f3f61b732b95064bb8f197774df723345ec95d3d633447a8c25c1be3b197",
+      "uploadedAt": "2026-08-11T18:54:35.846Z"
+    },
+    {
+      "mediaId": "lmc-w09-p05",
+      "week": 9,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "sizeBytes": 31779396,
+      "sha256": "b86bc122bc2922d120e4b450c6f9b5b32b8420eeabe5abdf331610ded65cb956",
+      "uploadedAt": "2026-08-11T18:54:46.799Z"
+    },
+    {
+      "mediaId": "lmc-w09-p06",
+      "week": 9,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "sizeBytes": 31784598,
+      "sha256": "1ffb8cc1110cc505177f511c9b1a0f0d8c356fa91beebb9b42bdcf3a8cd341b3",
+      "uploadedAt": "2026-08-11T18:54:58.031Z"
+    },
+    {
+      "mediaId": "lmc-w09-p07",
+      "week": 9,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "sizeBytes": 34084904,
+      "sha256": "774e264accea7b41887e3b475ac76950699ab4e85a11e58d3e8bd1d5283200d2",
+      "uploadedAt": "2026-08-11T18:55:09.886Z"
+    },
+    {
+      "mediaId": "lmc-w10-p01",
+      "week": 10,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P01_report-profile-overview.mp4",
+      "sizeBytes": 25351077,
+      "sha256": "819fe7eb39e60a3d2f99f9b2e0c4d7bcbf32c3beb9efcfe6edc47e8744153db8",
+      "uploadedAt": "2026-08-11T12:42:35.041Z"
+    },
+    {
+      "mediaId": "lmc-w10-p02",
+      "week": 10,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P02_case-interpretation-strength-factors.mp4",
+      "sizeBytes": 24616556,
+      "sha256": "ffa8e33292c872a40c7b528cf1f8b697db646321e2f8f2f52db3baff87da00ce",
+      "uploadedAt": "2026-08-11T12:42:41.447Z"
+    },
+    {
+      "mediaId": "lmc-w10-p03",
+      "week": 10,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P03_case-interpretation-adjustment-factors.mp4",
+      "sizeBytes": 25534641,
+      "sha256": "c03b9fcef3614d0a4b7f162e4daeacfbdebb3c92b22529bfe6a37575ec20cccf",
+      "uploadedAt": "2026-08-11T12:42:48.202Z"
+    },
+    {
+      "mediaId": "lmc-w10-p04",
+      "week": 10,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
+      "sizeBytes": 26217965,
+      "sha256": "9d49a61a0a6d33e7ab734bbec82e9d2b520c251fa0fd5bb8c773bae0dc22dde8",
+      "uploadedAt": "2026-08-11T12:42:54.612Z"
+    },
+    {
+      "mediaId": "lmc-w10-p05",
+      "week": 10,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
+      "sizeBytes": 20646492,
+      "sha256": "938b740effaeea8dc72ef6cbbef0f4502e48e7c54814c42fb3efaab66aebcf40",
+      "uploadedAt": "2026-08-11T12:43:02.237Z"
+    },
+    {
+      "mediaId": "lmc-w10-p06",
+      "week": 10,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P06_thirteen-factors-and-interpretation.mp4",
+      "sizeBytes": 23820792,
+      "sha256": "942af01a04afbafdeb9728a2be19c086fc110efdb8b4ef3f3398ff81c24d4131",
+      "uploadedAt": "2026-08-11T12:43:09.144Z"
+    },
+    {
+      "mediaId": "lmc-w10-p07",
+      "week": 10,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P07_result-report-and-platform-use.mp4",
+      "sizeBytes": 28176760,
+      "sha256": "1763f47e2576b5fe6a33df68c7b6a6e947fb53a0d49899919d71bd184c4a6131",
+      "uploadedAt": "2026-08-11T12:43:15.922Z"
+    },
+    {
+      "mediaId": "lmc-w11-p01",
+      "week": 11,
+      "part": 1,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P01_result-profile-and-factor-overview.mp4",
+      "sizeBytes": 25478752,
+      "sha256": "8c11db20f04fc36bc494c7a3a0156308ecefb83ecc341ed220b4d7c2dfa6eeb7",
+      "uploadedAt": "2026-08-11T13:38:16.961Z"
+    },
+    {
+      "mediaId": "lmc-w11-p02",
+      "week": 11,
+      "part": 2,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P02_child-adolescent-factors-self-and-regulation.mp4",
+      "sizeBytes": 25198285,
+      "sha256": "c06a46e110ac08d10b21b0a78d3a7be6b1dab7ae826604b5b5c07c03511efb74",
+      "uploadedAt": "2026-08-11T13:38:26.619Z"
+    },
+    {
+      "mediaId": "lmc-w11-p03",
+      "week": 11,
+      "part": 3,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P03_child-adolescent-factors-learning-identity-independence.mp4",
+      "sizeBytes": 21240961,
+      "sha256": "73cef06df0139c37dc8b7b33a72e3159e6719bf93c10e52bc89aa112d59b5ca5",
+      "uploadedAt": "2026-08-11T13:38:33.987Z"
+    },
+    {
+      "mediaId": "lmc-w11-p04",
+      "week": 11,
+      "part": 4,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P04_adult-factors-and-assessment-framework.mp4",
+      "sizeBytes": 18706846,
+      "sha256": "6545dceb4fb525a0adac3d90638ec2a2e0a95a98110cf9ebc1ce0daeaca27afd",
+      "uploadedAt": "2026-08-11T13:38:40.444Z"
+    },
+    {
+      "mediaId": "lmc-w11-p05",
+      "week": 11,
+      "part": 5,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P05_child-adolescent-case-application.mp4",
+      "sizeBytes": 21714623,
+      "sha256": "c9819c142b1c0aead941e76ce68a0aff588a6f944bc14d788a96752627edf0c7",
+      "uploadedAt": "2026-08-11T13:38:47.390Z"
+    },
+    {
+      "mediaId": "lmc-w11-p06",
+      "week": 11,
+      "part": 6,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P06_child-review-and-adult-factor-transition.mp4",
+      "sizeBytes": 20369854,
+      "sha256": "a7a2b0c6e3665c8ecc7b029b8dcccfe9859974230656214a3522da64e823d840",
+      "uploadedAt": "2026-08-11T13:39:05.053Z"
+    },
+    {
+      "mediaId": "lmc-w11-p07",
+      "week": 11,
+      "part": 7,
+      "currentObjectKey": "lmc/v2/week-11/LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4",
+      "sizeBytes": 21332422,
+      "sha256": "6ef1f2871d080b87aee22006099725f6478f0563e142f5ea40dcd6f6175a5e4d",
+      "uploadedAt": "2026-08-11T13:39:11.949Z"
+    }
+  ]
+}

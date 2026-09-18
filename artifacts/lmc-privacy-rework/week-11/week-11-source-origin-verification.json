@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-11T22:32:05.1128959+09:00",
+  "week": 11,
+  "status": "PASS_WITH_CATALOG_METADATA_CAVEAT",
+  "remoteSourceCount": 7,
+  "backupVerifiedCount": 7,
+  "catalogMatchCount": 0,
+  "sourceVisualPristine": true,
+  "decision": "The current R2 objects were accepted as pristine processing inputs because all seven matched their separately uploaded and re-downloaded rollback backups, passed format/duration/resolution preflight, and source contact sheets visibly contained the unmasked participant panel. Historical catalog size/SHA metadata did not match and was not used as source authority.",
+  "parts": [
+    { "mediaId": "lmc-w11-p01", "actualSizeBytes": 40949335, "actualSha256": "ae378833adeca1a542b45fee5ddceaf83ab2b9b1c175090b24c188a1e8b00385", "catalogMatch": false, "backupVerified": true },
+    { "mediaId": "lmc-w11-p02", "actualSizeBytes": 42605407, "actualSha256": "6f584f393bd043a6ac3bdbe53bb8d5ca194f94ab98b1e208318e6219202817ff", "catalogMatch": false, "backupVerified": true },
+    { "mediaId": "lmc-w11-p03", "actualSizeBytes": 36385225, "actualSha256": "f3044b5dc093f5f072bad48273ba9ecf052f8a6e8e69f4b7bf988c10d150e140", "catalogMatch": false, "backupVerified": true },
+    { "mediaId": "lmc-w11-p04", "actualSizeBytes": 30469160, "actualSha256": "ad86d103b275bdcc05258c4783513e87cb9ee1bf4631da6f318968e74ff899a6", "catalogMatch": false, "backupVerified": true },
+    { "mediaId": "lmc-w11-p05", "actualSizeBytes": 33386506, "actualSha256": "e9b2a55d1574d15b82c25f941e04096fec2a4b90ac36a43722f7a57308fa67d1", "catalogMatch": false, "backupVerified": true },
+    { "mediaId": "lmc-w11-p06", "actualSizeBytes": 33665737, "actualSha256": "c42e370cf8da31cb56d9259cfee677e7f4ba0e7cd387b95d95f834b70c1aa0ff", "catalogMatch": false, "backupVerified": true },
+    { "mediaId": "lmc-w11-p07", "actualSizeBytes": 33918831, "actualSha256": "81f7e4c3d6e636d4d5e9a72ff959a0ec9e87fb507965df35938368c80b3f400a", "catalogMatch": false, "backupVerified": true }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "week": 8,
+  "approved": true,
+  "approvedAt": "2026-08-11T23:40:12.7165739+09:00",
+  "reviewer": "human",
+  "parts": [
+    {
+      "mediaId": "lmc-w08-p01",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking and configured transition timing approved."
+    },
+    {
+      "mediaId": "lmc-w08-p02",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w08-p03",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w08-p04",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w08-p05",
+      "privacyVisualPass": true,
+      "reviewNote": "Right-panel, intentional unmasked gap, full-frame, and final right-panel transitions approved."
+    },
+    {
+      "mediaId": "lmc-w08-p06",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w08-p07",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w08-p08",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    }
+  ]
+}
