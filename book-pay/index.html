@@ -42,7 +42,7 @@ text-decoration:none;text-align:center;cursor:pointer;display:flex;align-items:c
 .section-sub{font-size:14px;color:var(--muted);margin:0 0 14px;line-height:1.5}
 .search{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px 14px;font-size:16px;outline:none;margin:4px 0 12px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.bank-btn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;text-align:left;cursor:pointer;min-height:76px}
+.bank-btn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;text-align:left;cursor:pointer;min-height:76px;display:block;text-decoration:none;color:inherit}
 .bank-btn strong{display:block;font-size:15px;margin-bottom:5px}
 .bank-btn span{display:block;font-size:12px;color:var(--muted);line-height:1.3}
 .bank-btn:active{transform:scale(.99);background:#fafafa}
@@ -101,7 +101,7 @@ transition:.2s;z-index:999;white-space:nowrap;max-width:90vw;overflow:hidden;tex
 
   <section class="card">
     <h2 class="section-title">내 은행 선택</h2>
-    <p class="section-sub">국내 주요 은행·상호금융·저축은행까지 한 화면에서 접근할 수 있게 구성했습니다.</p>
+    <p class="section-sub">은행 버튼을 누르면 계좌번호를 복사한 뒤 설치된 은행 앱을 직접 실행합니다. 앱이 없으면 스토어로 연결됩니다.</p>
     <input id="search" class="search" placeholder="은행 이름 검색" oninput="renderBanks()">
     <div id="banks" class="grid"></div>
   </section>
@@ -127,7 +127,32 @@ const ACCOUNT = "3333116254166";
 const ACCOUNT_DISPLAY = "3333-11-6254166";
 const HOLDER = "송영선";
 const RECEIVE_BANK = "카카오뱅크";
-const BANKS = [{"name": "KB국민은행", "app": "KB스타뱅킹", "pkg": "com.kbstar.kbbank"}, {"name": "신한은행", "app": "신한 슈퍼SOL", "pkg": "com.shinhan.sbanking"}, {"name": "우리은행", "app": "우리WON뱅킹", "pkg": "com.wooribank.smart.npib"}, {"name": "하나은행", "app": "하나원큐", "pkg": "com.hanabank.oqf"}, {"name": "NH농협은행", "app": "NH올원뱅크", "pkg": "com.nonghyup.nhallonebank"}, {"name": "NH농협/지역농축협", "app": "NH스마트뱅킹", "pkg": "nh.smart.banking"}, {"name": "IBK기업은행", "app": "i-ONE Bank", "pkg": "com.ibk.android.ionebank"}, {"name": "카카오뱅크", "app": "카카오뱅크", "pkg": "com.kakaobank.channel"}, {"name": "케이뱅크", "app": "케이뱅크", "pkg": "com.kbankwith.smartbank"}, {"name": "토스/토스뱅크", "app": "토스", "pkg": "viva.republica.toss"}, {"name": "SC제일은행", "app": "SC제일은행 모바일뱅킹", "pkg": "com.scbank.ma30"}, {"name": "iM뱅크", "app": "iM뱅크", "pkg": "kr.co.dgb.dgbm"}, {"name": "BNK부산은행", "app": "BNK부산은행 모바일뱅킹", "pkg": "kr.co.busanbank.mbp"}, {"name": "BNK경남은행", "app": "BNK경남은행 모바일뱅킹", "pkg": "com.knb.psb"}, {"name": "광주은행", "app": "광주 와뱅크", "pkg": "com.kjbank.asb.pbanking"}, {"name": "전북은행", "app": "전북은행 쏙뱅크", "pkg": "kr.co.jbbank.privatebank"}, {"name": "제주은행", "app": "제주은행 JBANK", "pkg": "com.jejubank.smartnew"}, {"name": "Sh수협은행", "app": "수협 파트너뱅크", "pkg": "com.suhyup.psmb"}, {"name": "우체국", "app": "우체국뱅킹", "pkg": "com.epost.psf.sdsi"}, {"name": "MG새마을금고", "app": "MG더뱅킹", "pkg": "com.smg.spbs"}, {"name": "신협", "app": "신협 온뱅크", "pkg": "kr.co.cu.onbank"}, {"name": "저축은행", "app": "SB톡톡플러스", "pkg": "kr.or.sbbank.plus"}, {"name": "산림조합", "app": "산림조합 스마트뱅킹", "pkg": "kr.or.nfcf.NFCFSmart"}, {"name": "KDB산업은행", "app": "스마트KDB", "pkg": "co.kr.kdb.android.smartkdb"}];
+const BANKS = [
+  {name:"KB국민은행", app:"KB스타뱅킹", pkg:"com.kbstar.kbbank", scheme:"kbbank", host:"call", ios:"https://apps.apple.com/kr/app/id373742138"},
+  {name:"신한은행", app:"신한 SOL뱅크", pkg:"com.shinhan.sbanking", scheme:"shinhansol", host:"sbankandnor", ios:"https://apps.apple.com/kr/app/id357484932"},
+  {name:"우리은행", app:"우리WON뱅킹", pkg:"com.wooribank.smart.npib", scheme:"newsmartpib", host:"com.wooribank.smart.npib", ios:"https://apps.apple.com/kr/app/id1470181651"},
+  {name:"하나은행", app:"하나원큐", pkg:"com.hanabank.oqf", scheme:"hanapush", host:"hanapush", ios:"https://apps.apple.com/kr/app/id6743190232"},
+  {name:"NH농협은행", app:"NH올원뱅크", pkg:"com.nonghyup.nhallonebank", scheme:"nhallone", host:"nhcok", ios:"https://apps.apple.com/kr/app/id1641628055"},
+  {name:"NH농협/지역농축협", app:"NH스마트뱅킹", pkg:"nh.smart.banking", scheme:"newnhsmartbanking", host:"view?data=", ios:"https://apps.apple.com/kr/app/id1444712671"},
+  {name:"IBK기업은행", app:"i-ONE Bank", pkg:"com.ibk.android.ionebank", scheme:"ionebank", host:"ionebank", ios:"https://apps.apple.com/kr/app/id1460543865"},
+  {name:"카카오뱅크", app:"카카오뱅크", pkg:"com.kakaobank.channel", scheme:"kakaobank", host:"kakaobank", ios:"https://apps.apple.com/kr/app/id1258016944"},
+  {name:"케이뱅크", app:"케이뱅크", pkg:"com.kbankwith.smartbank", scheme:"ukbanksmartbanknonloginpay", host:"ukbanksmartbankweb", ios:"https://apps.apple.com/kr/app/id1178872627"},
+  {name:"토스/토스뱅크", app:"토스", pkg:"viva.republica.toss", scheme:"supertoss", host:"toss", ios:"https://apps.apple.com/kr/app/id839333328"},
+  {name:"SC제일은행", app:"SC제일은행 모바일뱅킹", pkg:"com.scbank.ma30", scheme:"scbmobile", host:"ma30sso", ios:"https://apps.apple.com/kr/app/id1457418899"},
+  {name:"iM뱅크", app:"iM뱅크", pkg:"kr.co.dgb.dgbm", scheme:"mbanking", host:"openservice", ios:"https://apps.apple.com/kr/app/id1067748687"},
+  {name:"BNK부산은행", app:"BNK부산은행 모바일뱅킹", pkg:"kr.co.busanbank.mbp", scheme:"bslink", host:"call", ios:"https://apps.apple.com/kr/app/id1445137607"},
+  {name:"BNK경남은행", app:"BNK경남은행 모바일뱅킹", pkg:"com.knb.psb", scheme:"com.knb.psb", host:"knbank.onelink.me", ios:"https://apps.apple.com/kr/app/id678852685"},
+  {name:"광주은행", app:"광주 와뱅크", pkg:"com.kjbank.asb.pbanking", scheme:"kjbankisb", host:"asb", ios:"https://apps.apple.com/kr/app/id1576149106"},
+  {name:"전북은행", app:"전북은행 쏙뱅크", pkg:"kr.co.jbbank.privatebank", scheme:"jbpribanksign", host:"lina-close", ios:"https://apps.apple.com/kr/app/id1547903285"},
+  {name:"제주은행", app:"제주은행 JBANK", pkg:"com.jejubank.smartnew", scheme:"jbanksmart", host:"action", ios:"https://apps.apple.com/kr/app/id6443788309"},
+  {name:"Sh수협은행", app:"수협 파트너뱅크", pkg:"com.suhyup.psmb", rawIntent:"intent://com.suhyup.psmb#Intent;scheme=http;package=com.suhyup.psmb;end"},
+  {name:"우체국", app:"우체국뱅킹", pkg:"com.epost.psf.sdsi", scheme:"com.epost.psf.sd", host:"com.epost.psf.sd", ios:"https://apps.apple.com/kr/app/id554920991"},
+  {name:"MG새마을금고", app:"MG더뱅킹", pkg:"com.smg.spbs", scheme:"kfccsb", host:"call", ios:"https://apps.apple.com/kr/app/id425089902"},
+  {name:"신협", app:"신협 온뱅크", pkg:"kr.co.cu.onbank", scheme:"cuonbank", host:"clientservice", ios:"https://apps.apple.com/kr/app/id1484456647"},
+  {name:"저축은행", app:"SB톡톡플러스", pkg:"kr.or.sbbank.plus", rawIntent:"intent://kr.or.sbbank.plus#Intent;scheme=http;package=kr.or.sbbank.plus;end", ios:"https://apps.apple.com/kr/app/id1469002262"},
+  {name:"산림조합", app:"산림조합 스마트뱅킹", pkg:"kr.or.nfcf.NFCFSmart", rawIntent:"intent://kr.or.nfcf.NFCFSmart#Intent;scheme=http;package=kr.or.nfcf.NFCFSmart;end", ios:"https://apps.apple.com/kr/app/id1251840731"},
+  {name:"KDB산업은행", app:"스마트KDB", pkg:"co.kr.kdb.android.smartkdb", scheme:"smartkdb", host:"", ios:"https://apps.apple.com/kr/app/id392572957"}
+];
 
 function amountValue() {
   return document.getElementById('amount').value.replace(/[^0-9]/g,'');
@@ -171,51 +196,96 @@ async function shareAccount() {
 }
 
 function openToss() {
+  copyAccountSync();
   const amount = amountValue();
   const q = new URLSearchParams({
     bank: RECEIVE_BANK,
     accountNo: ACCOUNT,
-    message: '현장책구매',
-    origin: 'qr'
+    message: "현장책구매",
+    origin: "qr"
   });
-  if (amount) q.set('amount', amount);
-  location.href = 'supertoss://send?' + q.toString();
-  setTimeout(()=>{
-    if (document.visibilityState === 'visible') {
-      location.href = 'https://play.google.com/store/apps/details?id=viva.republica.toss';
-    }
-  }, 1200);
+  if (amount) q.set("amount", amount);
+  const scheme = "supertoss://send?" + q.toString();
+  if (isAndroid()) {
+    const fallback = encodeURIComponent("https://play.google.com/store/apps/details?id=viva.republica.toss");
+    location.href = "intent://send?" + q.toString() + "#Intent;scheme=supertoss;package=viva.republica.toss;S.browser_fallback_url=" + fallback + ";end";
+    return;
+  }
+  if (isIOS()) {
+    location.href = "https://ul.toss.im?scheme=" + encodeURIComponent(scheme);
+    return;
+  }
+  location.href = "https://toss.im";
 }
 
 function isAndroid() { return /Android/i.test(navigator.userAgent); }
-function isIOS() { return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
+function isIOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
 
-async function openBank(bank) {
-  await copyText(ACCOUNT);
-  toast('계좌번호 복사됨 · 은행 앱을 엽니다');
-  const play = 'https://play.google.com/store/apps/details?id=' + encodeURIComponent(bank.pkg);
-  if (isAndroid()) {
-    const fallback = encodeURIComponent(play);
-    const intent = `intent://open#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=${bank.pkg};S.browser_fallback_url=${fallback};end`;
-    setTimeout(()=>{ location.href = intent; }, 120);
-  } else if (isIOS()) {
-    const term = encodeURIComponent(bank.app || bank.name);
-    setTimeout(()=>{ location.href = 'https://www.google.com/search?q=' + term + '+App+Store'; }, 120);
-  } else {
-    window.open(play, '_blank', 'noopener');
+function playStore(bank) {
+  return "https://play.google.com/store/apps/details?id=" + encodeURIComponent(bank.pkg);
+}
+
+function copyAccountSync() {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(ACCOUNT).catch(()=>{});
+    }
+  } catch(e) {}
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = ACCOUNT;
+    ta.setAttribute("readonly","");
+    ta.style.cssText = "position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  } catch(e) {}
+  toast("계좌번호 복사됨 · 은행 앱을 엽니다");
+}
+
+function androidIntent(bank) {
+  const fallback = encodeURIComponent(playStore(bank));
+  if (bank.rawIntent) {
+    return bank.rawIntent.replace(/;end$/, ";S.browser_fallback_url=" + fallback + ";end");
   }
+  if (bank.scheme) {
+    const host = bank.host || "";
+    return `intent://${host}#Intent;scheme=${bank.scheme};package=${bank.pkg};S.browser_fallback_url=${fallback};end`;
+  }
+  return `intent://${bank.pkg}#Intent;scheme=http;package=${bank.pkg};S.browser_fallback_url=${fallback};end`;
+}
+
+function appHref(bank) {
+  if (isAndroid()) return androidIntent(bank);
+  if (isIOS()) {
+    if (bank.scheme) return bank.scheme + "://";
+    if (bank.ios) return bank.ios;
+    return "https://www.google.com/search?q=" + encodeURIComponent(bank.app + " App Store");
+  }
+  return playStore(bank);
+}
+
+function beforeBankOpen() {
+  copyAccountSync();
+  return true;
 }
 
 function renderBanks() {
-  const q = (document.getElementById('search').value || '').trim().toLowerCase();
-  const root = document.getElementById('banks');
-  root.innerHTML = '';
-  BANKS.filter(b => (b.name + ' ' + b.app).toLowerCase().includes(q)).forEach(bank => {
-    const btn = document.createElement('button');
-    btn.className = 'bank-btn';
-    btn.innerHTML = `<strong>${bank.name}</strong><span>${bank.app}</span>`;
-    btn.onclick = () => openBank(bank);
-    root.appendChild(btn);
+  const q = (document.getElementById("search").value || "").trim().toLowerCase();
+  const root = document.getElementById("banks");
+  root.innerHTML = "";
+  BANKS.filter(b => (b.name + " " + b.app).toLowerCase().includes(q)).forEach(bank => {
+    const a = document.createElement("a");
+    a.className = "bank-btn";
+    a.href = appHref(bank);
+    a.innerHTML = `<strong>${bank.name}</strong><span>${bank.app} · 앱 열기</span>`;
+    a.addEventListener("click", beforeBankOpen);
+    root.appendChild(a);
   });
 }
 
