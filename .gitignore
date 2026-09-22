@@ -1,3 +1,7 @@
 node_modules/
 .wrangler/
-artifacts/
+artifacts/*
+!artifacts/lmc-privacy-rework/
+!artifacts/lmc-privacy-rework/**
+artifacts/lmc-privacy-rework/**/*.jpg
+artifacts/lmc-privacy-rework/**/*.mp4

@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-08-11T22:32:05.1128959+09:00",
+  "week": 11,
+  "humanApprovalRequired": true,
+  "r2ChangedFiles": 7,
+  "overallStatus": "PASS",
+  "findings": [
+    {
+      "mediaId": "lmc-w11-p01..lmc-w11-p07",
+      "severity": "PASS",
+      "observation": "Start, start+0.1s, midpoint, end-1.0s, and end-0.1s samples show the right participant panel covered in solid black for all seven parts. No participant faces, names, profile images, or personal backgrounds are exposed. Lecture slides remain visible and the mask does not cover the intended slide content.",
+      "humanDecision": "All WEEK-11 PART contact sheets approved by the human reviewer on 2026-08-11."
+    }
+  ],
+  "technicalQa": {
+    "result": "PASS",
+    "partsPassed": 7,
+    "partsExpected": 7,
+    "durationPreserved": true,
+    "resolutionPreserved": true,
+    "audioPreserved": true,
+    "fastStart": true
+  },
+  "approvalGate": {
+    "approved": true,
+    "r2UploadAllowed": true,
+    "r2UploadAttempted": true
+  }
+}

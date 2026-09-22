@@ -1,0 +1,33 @@
+{
+  "week": 1,
+  "approved": true,
+  "approvedAt": "2026-08-11T11:24:43.8652996+09:00",
+  "reviewer": "human",
+  "parts": [
+    {
+      "mediaId": "lmc-w01-p01",
+      "privacyVisualPass": true,
+      "reviewNote": "P01 opening person confirmed as the instructor; participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w01-p02",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w01-p03",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w01-p04",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    },
+    {
+      "mediaId": "lmc-w01-p05",
+      "privacyVisualPass": true,
+      "reviewNote": "Participant panel masking approved."
+    }
+  ]
+}

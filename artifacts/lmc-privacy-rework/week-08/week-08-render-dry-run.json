@@ -1,0 +1,104 @@
+{
+  "generatedAt": "2026-08-11T10:08:46.026Z",
+  "week": 8,
+  "dryRun": true,
+  "expectedParts": 8,
+  "results": [
+    {
+      "mediaId": "lmc-w08-p01",
+      "week": 8,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P01_depression-assessment-and-classification.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P01_happiness-depression-assessment-and-classification.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P01_depression-assessment-and-classification.mp4",
+      "filterGraph": "drawbox=x=1132:y=0:w=iw-1132:h=ih:color=black@1.0:t=fill:enable='gte(t,93)'"
+    },
+    {
+      "mediaId": "lmc-w08-p02",
+      "week": 8,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P02_mood-curve-and-depressive-manic-episodes.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P02_mood-curve-and-mood-episodes.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P02_mood-curve-and-depressive-manic-episodes.mp4",
+      "filterGraph": "drawbox=x=1132:y=0:w=iw-1132:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w08-p03",
+      "week": 8,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P03_major-depression-diagnostic-criteria.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P03_major-depression-criteria-and-characteristics.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P03_major-depression-diagnostic-criteria.mp4",
+      "filterGraph": "drawbox=x=1132:y=0:w=iw-1132:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w08-p04",
+      "week": 8,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P04_biological-and-psychosocial-causes.mp4",
+      "filterGraph": "drawbox=x=1132:y=0:w=iw-1132:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w08-p05",
+      "week": 8,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P05_symptoms-treatment-and-result-structure.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P05_symptoms-assessment-treatment-and-results.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P05_symptoms-treatment-and-result-structure.mp4",
+      "filterGraph": "drawbox=x=1132:y=0:w=iw-1132:h=ih:color=black@1.0:t=fill:enable='between(t,0,300.315)',drawbox=x=0:y=0:w=iw:h=ih:color=black@1.0:t=fill:enable='between(t,379.815,385.315)',drawbox=x=1083:y=0:w=iw-1083:h=ih:color=black@1.0:t=fill:enable='gte(t,385.315)'"
+    },
+    {
+      "mediaId": "lmc-w08-p06",
+      "week": 8,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P06_six-symptom-scales-overview.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P06_six-symptom-scales-and-interpretation.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P06_six-symptom-scales-overview.mp4",
+      "filterGraph": "drawbox=x=1083:y=0:w=iw-1083:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w08-p07",
+      "week": 8,
+      "part": 7,
+      "sourceFilename": "LMC_WEEK08_P07_symptom-scale-case-application.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P07_scale-cases-and-integrated-interpretation.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P07_symptom-scale-case-application.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P07_scale-cases-and-integrated-interpretation.mp4",
+      "filterGraph": "drawbox=x=1083:y=0:w=iw-1083:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w08-p08",
+      "week": 8,
+      "part": 8,
+      "sourceFilename": "LMC_WEEK08_P08_report-and-assessment-platform.mp4",
+      "currentObjectKey": "lmc/v2/week-08/LMC_WEEK08_P08_result-report-and-platform-use.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-08\\LMC_WEEK08_P08_report-and-assessment-platform.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-08\\LMC_WEEK08_P08_result-report-and-platform-use.mp4",
+      "filterGraph": "drawbox=x=1083:y=0:w=iw-1083:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    }
+  ]
+}

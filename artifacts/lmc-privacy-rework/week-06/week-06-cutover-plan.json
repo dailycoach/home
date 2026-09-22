@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-11T08:07:50.008Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 6,
+  "expectedUploads": 7,
+  "mode": "EXECUTE",
+  "rows": [
+    {
+      "mediaId": "lmc-w06-p01",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P01_course-overview-and-learning-style-basics.mp4",
+      "sourceFilename": "LMC_WEEK06_P01_course-introduction-and-learning-style.mp4",
+      "newSizeBytes": 25463596,
+      "newSha256": "b95aaff7e9aa105ab2d106dc08902ed50738c5daa2f157a9161e2e9d08882e3b",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w06-p02",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P02_multidimensional-learning-style-definition.mp4",
+      "sourceFilename": "LMC_WEEK06_P02_cognitive-affective-environmental-learning-style.mp4",
+      "newSizeBytes": 28439361,
+      "newSha256": "4182bf24988551ccfec7471bd9fe58b0bd5845c776e7b0a0c14f257310750e6f",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w06-p03",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P03_five-affective-factors-for-learning.mp4",
+      "sourceFilename": "LMC_WEEK06_P03_five-affective-learning-factors.mp4",
+      "newSizeBytes": 19464007,
+      "newSha256": "0fb3961fc013ffc8eb6d7f3697e21bb4e41bac0f59c95d58f1b490fabee03108",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w06-p04",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P04_jungian-psychology-and-learning-personality.mp4",
+      "sourceFilename": "LMC_WEEK06_P04_jungian-learning-personality.mp4",
+      "newSizeBytes": 18348375,
+      "newSha256": "c72e66640998f05b23b29504f1d1ef05a27f0b9805b0e4c74687cd62730cae57",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w06-p05",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P05_learner-types-and-brain-function.mp4",
+      "sourceFilename": "LMC_WEEK06_P05_learner-types-and-brain-functions.mp4",
+      "newSizeBytes": 26204781,
+      "newSha256": "eb8d75e712d77fb1f6630aebc5923067e0f2a819777a5d5b66ff1e00ba04c89c",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w06-p06",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P06_learning-style-report-interpretation.mp4",
+      "sourceFilename": "LMC_WEEK06_P06_learning-style-report-practice.mp4",
+      "newSizeBytes": 37635022,
+      "newSha256": "899f784ccf8f2f2f24c472ed2974bc199547aac22a45eb24d38f003e8d1edfc1",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    },
+    {
+      "mediaId": "lmc-w06-p07",
+      "currentObjectKey": "lmc/v2/week-06/LMC_WEEK06_P07_learning-emotion-results-and-platform.mp4",
+      "sourceFilename": "LMC_WEEK06_P07_learning-emotion-and-platform-use.mp4",
+      "newSizeBytes": 32932025,
+      "newSha256": "3532259acb21c1190631bc1d47a2dbfd6190ccf000d78d5d6069ec92ddfa6dea",
+      "technicalPass": true,
+      "privacyVisualPass": true
+    }
+  ]
+}
