@@ -1,0 +1,19 @@
+{
+  "name": "lmc-naver-integration",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "wrangler deploy --dry-run",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "bcryptjs": "3.0.2",
+    "jose": "6.1.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.136.1"
+  }
+}
