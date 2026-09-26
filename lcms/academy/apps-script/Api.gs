@@ -27,6 +27,10 @@ function doPost(event) {
     const payload = JSON.parse(event && event.postData && event.postData.contents ? event.postData.contents : '{}');
     action = String(payload.action || '').trim().toLowerCase();
 
+    if (action.indexOf('naver') === 0) {
+      return jsonOutput_(naverIntegrationResponse_(payload));
+    }
+
     if (action === 'login' || action === 'validate' || action === 'logout') {
       requireWorkerSharedSecret_(payload);
       const result = action === 'login'

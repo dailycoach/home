@@ -1,8 +1,9 @@
 /** Cloudflare R2 강의실 입장코드 발급, 이용정지, 만료, 메일 전송 */
 
 function provisionStudentRow_(ss, rowNumber, options) {
-  const lock = LockService.getScriptLock();
-  lock.waitLock(30000);
+  // Only server-side integration code can pass its already-held ScriptLock.
+  const lock = options && options.lockHeld ? null : LockService.getScriptLock();
+  if (lock) lock.waitLock(30000);
   try {
     const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
     const values = sheet.getRange(rowNumber, 1, 1, 23).getValues()[0];
@@ -11,6 +12,7 @@ function provisionStudentRow_(ss, rowNumber, options) {
 
     if (student.paymentStatus !== '확인완료') throw new Error('결제상태가 확인완료가 아닙니다.');
     if (!student.id || !student.studentName || !isValidEmail_(student.email)) throw new Error('수강생 이름 또는 이메일이 올바르지 않습니다.');
+    if (typeof naverEnsureOrderNotRevoked_ === 'function') naverEnsureOrderNotRevoked_(ss, student.orderNo);
     if (!forceNewCode && student.accessStatus === '활성' && student.codeHash && student.mailStatus === '발송완료') {
       return { ok: true, alreadyProvisioned: true, studentId: student.id, studentName: student.studentName };
     }
@@ -60,7 +62,7 @@ function provisionStudentRow_(ss, rowNumber, options) {
       source: options && options.source ? options.source : 'UNKNOWN'
     };
   } finally {
-    lock.releaseLock();
+    if (lock) lock.releaseLock();
   }
 }
 
@@ -91,9 +93,9 @@ function resolveProvisioningExpiry_(student, nowMs, accessDays, forceNewCode) {
   return new Date(now + Number(accessDays) * 24 * 60 * 60 * 1000);
 }
 
-function suspendStudentRow_(ss, rowNumber, reason) {
-  const lock = LockService.getScriptLock();
-  lock.waitLock(30000);
+function suspendStudentRow_(ss, rowNumber, reason, lockHeld) {
+  const lock = lockHeld ? null : LockService.getScriptLock();
+  if (lock) lock.waitLock(30000);
   try {
     const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.STUDENTS);
     const values = sheet.getRange(rowNumber, 1, 1, 23).getValues()[0];
@@ -105,7 +107,7 @@ function suspendStudentRow_(ss, rowNumber, reason) {
     writeLog_(ss, student.id, student.orderNo, student.email, 'ACCESS_SUSPEND', 'SUCCESS', '', 0);
     return { ok: true, studentId: student.id, studentName: student.studentName };
   } finally {
-    lock.releaseLock();
+    if (lock) lock.releaseLock();
   }
 }
 

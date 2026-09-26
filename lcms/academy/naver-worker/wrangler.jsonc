@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lmc-naver-integration-staging",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-22",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "durable_objects": { "bindings": [{ "name": "INTEGRATION", "class_name": "NaverIntegration" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["NaverIntegration"] }],
+  "triggers": { "crons": ["*/2 * * * *"] },
+  "vars": {
+    "ENVIRONMENT": "staging",
+    "NAVER_TOKEN_TYPE": "SELF",
+    "NAVER_SYNC_ENABLED": "false",
+    "NAVER_AUTO_PROVISION_ENABLED": "false",
+    "NAVER_AUTO_SUSPEND_ENABLED": "false",
+    "DRY_RUN": "true",
+    "NAVER_EGRESS_VERIFIED": "false",
+    "PRODUCT_MAPPING_VERIFIED": "false",
+    "PRIVACY_POLICY_VERIFIED": "false",
+    "REGISTRATION_MODE": "canary",
+    "CANARY_ORDER_HASHES": "[]",
+    "PRODUCT_MAPPINGS": "[]",
+    "SYNC_START_AT": "",
+    "REGISTRATION_ORIGIN": "https://daily-coach-ing.com",
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": ""
+  }
+}
