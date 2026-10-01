@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-08-11T13:45:08.429Z",
+  "week": 11,
+  "status": "PASS",
+  "syncedCount": 7,
+  "sourceFiles": {
+    "technicalQa": "artifacts/lmc-privacy-rework/week-11/week-11-technical-qa.json",
+    "remoteQa": "artifacts/lmc-privacy-rework/week-11/week-11-remote-playback-qa.json",
+    "r2Report": "artifacts/lmc-privacy-rework/week-11/week-11-r2-overwrite-report.json"
+  },
+  "outputs": [
+    "lcms/academy/data/media-catalog.json",
+    "lcms/academy/r2-worker/src/media-catalog.js",
+    "lcms/academy/r2-worker/upload/video-upload-map.json",
+    "lcms/academy/r2-worker/upload/video-upload-map.csv",
+    "lcms/academy/r2-worker/upload/LMC_77_SHA256SUMS.txt"
+  ],
+  "changes": [
+    {
+      "mediaId": "lmc-w11-p01",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P01_result-profile-and-factor-overview.mp4",
+      "previousSizeBytes": 40949312,
+      "nextSizeBytes": 25478752,
+      "previousSha256": "999a79678b198c6d9772052036ea2e6485231cdc07bda818696a81ffb85a429b",
+      "nextSha256": "8c11db20f04fc36bc494c7a3a0156308ecefb83ecc341ed220b4d7c2dfa6eeb7"
+    },
+    {
+      "mediaId": "lmc-w11-p02",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P02_child-adolescent-factors-self-and-regulation.mp4",
+      "previousSizeBytes": 42605408,
+      "nextSizeBytes": 25198285,
+      "previousSha256": "5bc6a6c7d92e7849a7c0df0a35bfa123b029b1d8962170e366187c12338cdf71",
+      "nextSha256": "c06a46e110ac08d10b21b0a78d3a7be6b1dab7ae826604b5b5c07c03511efb74"
+    },
+    {
+      "mediaId": "lmc-w11-p03",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P03_child-adolescent-factors-learning-identity-independence.mp4",
+      "previousSizeBytes": 36385226,
+      "nextSizeBytes": 21240961,
+      "previousSha256": "e11f2270c40cbce91d87d75fbb8060fbbbd3915c00bd14e6a4f20be798b65c60",
+      "nextSha256": "73cef06df0139c37dc8b7b33a72e3159e6719bf93c10e52bc89aa112d59b5ca5"
+    },
+    {
+      "mediaId": "lmc-w11-p04",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P04_adult-factors-and-assessment-framework.mp4",
+      "previousSizeBytes": 30469161,
+      "nextSizeBytes": 18706846,
+      "previousSha256": "4ed407f511fde6b0e37f7286a5a8ebe08258ac8f153d9ba119b83d6fb625722e",
+      "nextSha256": "6545dceb4fb525a0adac3d90638ec2a2e0a95a98110cf9ebc1ce0daeaca27afd"
+    },
+    {
+      "mediaId": "lmc-w11-p05",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P05_child-adolescent-case-application.mp4",
+      "previousSizeBytes": 33386507,
+      "nextSizeBytes": 21714623,
+      "previousSha256": "b97c5cf18cf40f742ba908772e739a5ad7f9c805dda4d2de2227274b0c887408",
+      "nextSha256": "c9819c142b1c0aead941e76ce68a0aff588a6f944bc14d788a96752627edf0c7"
+    },
+    {
+      "mediaId": "lmc-w11-p06",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P06_child-review-and-adult-factor-transition.mp4",
+      "previousSizeBytes": 33665738,
+      "nextSizeBytes": 20369854,
+      "previousSha256": "06ceeb22e8671b03c626b4c29243cc3af8711a989abe6a1534c3044221f005a9",
+      "nextSha256": "a7a2b0c6e3665c8ecc7b029b8dcccfe9859974230656214a3522da64e823d840"
+    },
+    {
+      "mediaId": "lmc-w11-p07",
+      "objectKey": "lmc/v2/week-11/LMC_WEEK11_P07_adult-factors-report-and-course-summary.mp4",
+      "previousSizeBytes": 33918832,
+      "nextSizeBytes": 21332422,
+      "previousSha256": "8cf2cab18ce6b2b55e0d780aa4ac836fc54728a7eaa6df949f121f47bb4ce0db",
+      "nextSha256": "6ef1f2871d080b87aee22006099725f6478f0563e142f5ea40dcd6f6175a5e4d"
+    }
+  ]
+}

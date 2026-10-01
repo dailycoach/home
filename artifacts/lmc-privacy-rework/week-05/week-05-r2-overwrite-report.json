@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-08-11T14:06:19.950Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 5,
+  "uploadedCount": 8,
+  "uploaded": [
+    {
+      "mediaId": "lmc-w05-p01",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P01_stress-definition-and-characteristics(1).mp4",
+      "sizeBytes": 44441468,
+      "sha256": "de086267e080b1c7e6459fe1aa84c38e27ecb52ce247ce7a64c6e3e77c934f2b",
+      "uploadedAt": "2026-08-11T14:05:11.252Z"
+    },
+    {
+      "mediaId": "lmc-w05-p02",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P02_stress-theories-and-cognitive-appraisal(1).mp4",
+      "sizeBytes": 28670204,
+      "sha256": "7b1c982151df3b13121ef9919d12a947a650e3e0e1d3c972949cea503b505040",
+      "uploadedAt": "2026-08-11T14:05:18.077Z"
+    },
+    {
+      "mediaId": "lmc-w05-p03",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P03_stress-causes-and-assessment(1).mp4",
+      "sizeBytes": 26372684,
+      "sha256": "3bcccfe3c06b2290d2dc810715e40051e2ef489c1b7d0d6f929fb71ac1c008f5",
+      "uploadedAt": "2026-08-11T14:05:32.468Z"
+    },
+    {
+      "mediaId": "lmc-w05-p04",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P04_stress-symptoms-and-physiological-response(1).mp4",
+      "sizeBytes": 36118471,
+      "sha256": "fff1f715177bfeede3ab7a566bfa604a76a9cfdb641af2859e578df50fb0c123",
+      "uploadedAt": "2026-08-11T14:05:39.111Z"
+    },
+    {
+      "mediaId": "lmc-w05-p05",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P05_coping-styles-and-management-strategies(1).mp4",
+      "sizeBytes": 19280772,
+      "sha256": "463d10d8e20a98de03ecbf4efe320e4abf92b2339a72f5761859b679367a1401",
+      "uploadedAt": "2026-08-11T14:05:46.618Z"
+    },
+    {
+      "mediaId": "lmc-w05-p06",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P06_case-sharing-and-application-one(1).mp4",
+      "sizeBytes": 68516077,
+      "sha256": "6e03487074d8b0e27752da8b67bd73a5a886dfe7300d3753ec19a3f52d554353",
+      "uploadedAt": "2026-08-11T14:05:57.734Z"
+    },
+    {
+      "mediaId": "lmc-w05-p07",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P07_case-sharing-and-application-two(1).mp4",
+      "sizeBytes": 74697167,
+      "sha256": "183760cec3439e62cd7c8e975333fbb4b922eb64621fe4bbe82dbe8e1b467df8",
+      "uploadedAt": "2026-08-11T14:06:07.702Z"
+    },
+    {
+      "mediaId": "lmc-w05-p08",
+      "currentObjectKey": "lmc/v2/week-05/LMC_WEEK05_P08_integration-and-result-review(1).mp4",
+      "sizeBytes": 114292100,
+      "sha256": "879f18cc8c7476198e355e43cd2a94cf8cb9426c80f6f5423255f0ddaaf820bd",
+      "uploadedAt": "2026-08-11T14:06:19.950Z"
+    }
+  ]
+}

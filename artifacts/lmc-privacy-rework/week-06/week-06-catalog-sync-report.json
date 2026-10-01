@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-08-11T08:12:49.341Z",
+  "week": 6,
+  "status": "PASS",
+  "syncedCount": 7,
+  "sourceFiles": {
+    "technicalQa": "artifacts/lmc-privacy-rework/week-06/week-06-technical-qa.json",
+    "remoteQa": "artifacts/lmc-privacy-rework/week-06/week-06-remote-playback-qa.json",
+    "r2Report": "artifacts/lmc-privacy-rework/week-06/week-06-r2-overwrite-report.json"
+  },
+  "outputs": [
+    "lcms/academy/data/media-catalog.json",
+    "lcms/academy/r2-worker/src/media-catalog.js",
+    "lcms/academy/r2-worker/upload/video-upload-map.json",
+    "lcms/academy/r2-worker/upload/video-upload-map.csv",
+    "lcms/academy/r2-worker/upload/LMC_77_SHA256SUMS.txt"
+  ],
+  "changes": [
+    {
+      "mediaId": "lmc-w06-p01",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P01_course-overview-and-learning-style-basics.mp4",
+      "previousSizeBytes": 39668091,
+      "nextSizeBytes": 25463596,
+      "previousSha256": "0ac9d2e981357a96d97f163329f0cda8b43b7dddb5ce236d3b82a6f2769cc6ae",
+      "nextSha256": "b95aaff7e9aa105ab2d106dc08902ed50738c5daa2f157a9161e2e9d08882e3b"
+    },
+    {
+      "mediaId": "lmc-w06-p02",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P02_multidimensional-learning-style-definition.mp4",
+      "previousSizeBytes": 46740085,
+      "nextSizeBytes": 28439361,
+      "previousSha256": "2d2f0fe85e9bfa7e0579322c24ef4a6e6ec37cce338b9159fafb85ab6947c502",
+      "nextSha256": "4182bf24988551ccfec7471bd9fe58b0bd5845c776e7b0a0c14f257310750e6f"
+    },
+    {
+      "mediaId": "lmc-w06-p03",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P03_five-affective-factors-for-learning.mp4",
+      "previousSizeBytes": 31415723,
+      "nextSizeBytes": 19464007,
+      "previousSha256": "054a3c63cab1646fcc28b3885a8033588e14f0b4fb7c5e5435f3c593f8055eca",
+      "nextSha256": "0fb3961fc013ffc8eb6d7f3697e21bb4e41bac0f59c95d58f1b490fabee03108"
+    },
+    {
+      "mediaId": "lmc-w06-p04",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P04_jungian-psychology-and-learning-personality.mp4",
+      "previousSizeBytes": 26803976,
+      "nextSizeBytes": 18348375,
+      "previousSha256": "be2fe2a44972c94f4615b896128bd54d9694f46b357748a57a3d557dffcf260f",
+      "nextSha256": "c72e66640998f05b23b29504f1d1ef05a27f0b9805b0e4c74687cd62730cae57"
+    },
+    {
+      "mediaId": "lmc-w06-p05",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P05_learner-types-and-brain-function.mp4",
+      "previousSizeBytes": 40139674,
+      "nextSizeBytes": 26204781,
+      "previousSha256": "0a31d6feefa830ccd6969289ec1ef79baef90fa885960e6cf2b02f6730ff4751",
+      "nextSha256": "eb8d75e712d77fb1f6630aebc5923067e0f2a819777a5d5b66ff1e00ba04c89c"
+    },
+    {
+      "mediaId": "lmc-w06-p06",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P06_learning-style-report-interpretation.mp4",
+      "previousSizeBytes": 57266824,
+      "nextSizeBytes": 37635022,
+      "previousSha256": "fe40677ee9296b71cb66989af76ed269aa5080c9182d046dc61eec3d85be45ee",
+      "nextSha256": "899f784ccf8f2f2f24c472ed2974bc199547aac22a45eb24d38f003e8d1edfc1"
+    },
+    {
+      "mediaId": "lmc-w06-p07",
+      "objectKey": "lmc/v2/week-06/LMC_WEEK06_P07_learning-emotion-results-and-platform.mp4",
+      "previousSizeBytes": 46525407,
+      "nextSizeBytes": 32932025,
+      "previousSha256": "65929443eadc4d190686deeee96f28989cf8eefa0d4cdc49399820404956f84c",
+      "nextSha256": "3532259acb21c1190631bc1d47a2dbfd6190ccf000d78d5d6069ec92ddfa6dea"
+    }
+  ]
+}

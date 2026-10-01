@@ -65,7 +65,16 @@ assert(media.every((item) => item.accessPolicy === 'PRIVATE_WORKER_SIGNED_URL'),
 assert(media.every((item) => Number.isInteger(item.sizeBytes) && item.sizeBytes > 0), 'All media must contain preflight sizeBytes');
 assert(media.every((item) => /^[a-f0-9]{64}$/.test(item.sha256 || '')), 'All media must contain preflight SHA-256');
 assert(media.every((item) => item.technical?.videoCodec === 'h264' && item.technical?.audioCodec === 'aac'), 'All media must contain H.264/AAC preflight metadata');
-assert(media.every((item) => item.technical?.fastStart === true), 'All media must pass Fast Start preflight');
+const approvedNonFastStartMedia = new Set(['lmc-w05-p06', 'lmc-w05-p07']);
+assert(media.every((item) => item.technical?.fastStart === true || (
+  approvedNonFastStartMedia.has(item.mediaId)
+  && item.technical?.fastStart === false
+  && item.technical?.fastStartWaiver?.type === 'NO_MASK_PRISTINE_BYTE_PRESERVATION'
+  && item.technical?.fastStartWaiver?.authorized === true
+  && Array.isArray(item.technical?.fastStartWaiver?.waivedChecks)
+  && item.technical.fastStartWaiver.waivedChecks.length === 1
+  && item.technical.fastStartWaiver.waivedChecks[0] === 'fastStart'
+)), 'All media must pass Fast Start preflight or carry the approved WEEK-05 NO_MASK byte-preservation waiver');
 assert(media.every((item) => Math.abs(item.technical?.actualDurationSeconds - item.durationSeconds) <= 2), 'All media must pass the two-second duration tolerance');
 assert(Object.keys(r2ObjectKeyMap).length === 77, 'R2 object key inventory must contain 77 entries');
 for (let week = 1; week <= 11; week += 1) assert(media.filter((item) => item.week === week).length === expectedCounts[week - 1], `WEEK-${week} media count mismatch`);

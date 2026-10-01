@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-08-11T18:48:38.204Z",
+  "week": 9,
+  "dryRun": true,
+  "expectedParts": 7,
+  "results": [
+    {
+      "mediaId": "lmc-w09-p01",
+      "week": 9,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "filterGraph": "drawbox=x=0:y=0:w=320:h=180:color=black@1.0:t=fill:enable='between(t,0,47.26)',drawbox=x=640:y=0:w=640:h=180:color=black@1.0:t=fill:enable='between(t,0,47.26)',drawbox=x=0:y=180:w=1280:h=540:color=black@1.0:t=fill:enable='between(t,0,47.26)',drawbox=x=1200:y=0:w=80:h=248:color=black@1.0:t=fill:enable='between(t,47.26,55.66)',drawbox=x=1200:y=293:w=80:h=427:color=black@1.0:t=fill:enable='between(t,47.26,55.66)',drawbox=x=1200:y=0:w=80:h=270:color=black@1.0:t=fill:enable='between(t,55.66,57.3)',drawbox=x=1200:y=315:w=80:h=405:color=black@1.0:t=fill:enable='between(t,55.66,57.3)',drawbox=x=1120:y=0:w=160:h=225:color=black@1.0:t=fill:enable='between(t,57.3,76.38)',drawbox=x=1120:y=315:w=160:h=405:color=black@1.0:t=fill:enable='between(t,57.3,76.38)',drawbox=x=1200:y=0:w=80:h=270:color=black@1.0:t=fill:enable='gte(t,76.38)',drawbox=x=1200:y=315:w=80:h=405:color=black@1.0:t=fill:enable='gte(t,76.38)'"
+    },
+    {
+      "mediaId": "lmc-w09-p02",
+      "week": 9,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "filterGraph": "drawbox=x=1200:y=0:w=80:h=270:color=black@1.0:t=fill:enable='gte(t,0)',drawbox=x=1200:y=315:w=80:h=405:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w09-p03",
+      "week": 9,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "filterGraph": "drawbox=x=1200:y=0:w=80:h=270:color=black@1.0:t=fill:enable='gte(t,0)',drawbox=x=1200:y=315:w=80:h=405:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w09-p04",
+      "week": 9,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "filterGraph": "drawbox=x=1200:y=0:w=80:h=270:color=black@1.0:t=fill:enable='between(t,0,732.5)',drawbox=x=1200:y=315:w=80:h=405:color=black@1.0:t=fill:enable='between(t,0,732.5)',drawbox=x=0:y=0:w=256:h=216:color=black@1.0:t=fill:enable='between(t,732.5,788.74)',drawbox=x=512:y=0:w=768:h=216:color=black@1.0:t=fill:enable='between(t,732.5,788.74)',drawbox=x=0:y=216:w=1280:h=504:color=black@1.0:t=fill:enable='between(t,732.5,788.74)',drawbox=x=864:y=140:w=140:h=316:color=black@1.0:t=fill:enable='gte(t,788.74)'"
+    },
+    {
+      "mediaId": "lmc-w09-p05",
+      "week": 9,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "filterGraph": "drawbox=x=864:y=140:w=140:h=316:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w09-p06",
+      "week": 9,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "filterGraph": "drawbox=x=864:y=140:w=140:h=316:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w09-p07",
+      "week": 9,
+      "part": 7,
+      "sourceFilename": "LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "decision": "MASK",
+      "action": "MASK",
+      "input": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-video-work\\original\\week-09\\LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-09\\LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "filterGraph": "drawbox=x=864:y=140:w=140:h=316:color=black@1.0:t=fill:enable='gte(t,0)'"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-08-11T09:49:09.094Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 7,
+  "uploadedCount": 7,
+  "uploaded": [
+    {
+      "mediaId": "lmc-w07-p01",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+      "sizeBytes": 24522689,
+      "sha256": "78c8ec7664534844295d03d00421210f9b022107befefe4d29c5d2dbf7a36e74",
+      "uploadedAt": "2026-08-11T09:48:27.018Z"
+    },
+    {
+      "mediaId": "lmc-w07-p02",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+      "sizeBytes": 21586625,
+      "sha256": "fc5c89e059eb994b2fd627ac59d613a5ab0ab64a216d8fd610f3924daa3637d0",
+      "uploadedAt": "2026-08-11T09:48:33.093Z"
+    },
+    {
+      "mediaId": "lmc-w07-p03",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+      "sizeBytes": 26156332,
+      "sha256": "629a54a774ef3bd8b9f20e54e00852a685f72da981701545cad076a15471be85",
+      "uploadedAt": "2026-08-11T09:48:39.691Z"
+    },
+    {
+      "mediaId": "lmc-w07-p04",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+      "sizeBytes": 19802585,
+      "sha256": "91b9654c1641913a1fe96d663ee06b4a9ea48873844729062c9a0e76a5e28a99",
+      "uploadedAt": "2026-08-11T09:48:45.842Z"
+    },
+    {
+      "mediaId": "lmc-w07-p05",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+      "sizeBytes": 34810603,
+      "sha256": "268bb47994278f6633da6a6e157c6333587e1fea1e98fc3719a5e45da21cd440",
+      "uploadedAt": "2026-08-11T09:48:52.862Z"
+    },
+    {
+      "mediaId": "lmc-w07-p06",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P06_anger-causes-functions-and-impact.mp4",
+      "sizeBytes": 30296225,
+      "sha256": "74812d4df789c0b545b4acd51b2bd5ac09ff6b2a71d9b3a21212ddaf7656abc3",
+      "uploadedAt": "2026-08-11T09:49:00.617Z"
+    },
+    {
+      "mediaId": "lmc-w07-p07",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+      "sizeBytes": 31438705,
+      "sha256": "f5a9f4d9c9ba18907241c6c64a3603685eae806a81d5eead21a54e7752fdff5c",
+      "uploadedAt": "2026-08-11T09:49:09.093Z"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-08-11T18:55:09.886Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 9,
+  "uploadedCount": 7,
+  "uploaded": [
+    {
+      "mediaId": "lmc-w09-p01",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P01_abnormal-psychology-and-boundaries.mp4",
+      "sizeBytes": 24803587,
+      "sha256": "21e6ff995347b4bdc6da6c15d75efc9bc43eda7dcb4db347a87d9a15da6c3522",
+      "uploadedAt": "2026-08-11T18:54:08.594Z"
+    },
+    {
+      "mediaId": "lmc-w09-p02",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P02_judgment-criteria-reality-adaptation-statistics.mp4",
+      "sizeBytes": 28476974,
+      "sha256": "9ef9b4f30a2843951c0581447818f159aad0f0d2549f55632032b69de2ea6be5",
+      "uploadedAt": "2026-08-11T18:54:18.382Z"
+    },
+    {
+      "mediaId": "lmc-w09-p03",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P03_sociocultural-criteria-and-icd-dsm.mp4",
+      "sizeBytes": 20842548,
+      "sha256": "d6fd0a807c0a8b704618c62b528bec5dcc370fa00f9c0899b9e6f1dec324b198",
+      "uploadedAt": "2026-08-11T18:54:26.375Z"
+    },
+    {
+      "mediaId": "lmc-w09-p04",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P04_theoretical-and-treatment-approaches.mp4",
+      "sizeBytes": 20571623,
+      "sha256": "fdb0f3f61b732b95064bb8f197774df723345ec95d3d633447a8c25c1be3b197",
+      "uploadedAt": "2026-08-11T18:54:35.846Z"
+    },
+    {
+      "mediaId": "lmc-w09-p05",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P05_seven-scales-core-concepts.mp4",
+      "sizeBytes": 31779396,
+      "sha256": "b86bc122bc2922d120e4b450c6f9b5b32b8420eeabe5abdf331610ded65cb956",
+      "uploadedAt": "2026-08-11T18:54:46.799Z"
+    },
+    {
+      "mediaId": "lmc-w09-p06",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P06_seven-scales-causes-and-effects.mp4",
+      "sizeBytes": 31784598,
+      "sha256": "1ffb8cc1110cc505177f511c9b1a0f0d8c356fa91beebb9b42bdcf3a8cd341b3",
+      "uploadedAt": "2026-08-11T18:54:58.031Z"
+    },
+    {
+      "mediaId": "lmc-w09-p07",
+      "currentObjectKey": "lmc/v2/week-09/LMC_WEEK09_P07_seven-scales-case-integration.mp4",
+      "sizeBytes": 34084904,
+      "sha256": "774e264accea7b41887e3b475ac76950699ab4e85a11e58d3e8bd1d5283200d2",
+      "uploadedAt": "2026-08-11T18:55:09.886Z"
+    }
+  ]
+}

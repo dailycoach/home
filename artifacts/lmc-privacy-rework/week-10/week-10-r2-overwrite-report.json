@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-08-11T12:43:15.922Z",
+  "courseId": "lmc-lifetime-management-counselor",
+  "bucket": "rsedu-lmc-videos",
+  "week": 10,
+  "uploadedCount": 7,
+  "uploaded": [
+    {
+      "mediaId": "lmc-w10-p01",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P01_report-profile-overview.mp4",
+      "sizeBytes": 25351077,
+      "sha256": "819fe7eb39e60a3d2f99f9b2e0c4d7bcbf32c3beb9efcfe6edc47e8744153db8",
+      "uploadedAt": "2026-08-11T12:42:35.041Z"
+    },
+    {
+      "mediaId": "lmc-w10-p02",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P02_case-interpretation-strength-factors.mp4",
+      "sizeBytes": 24616556,
+      "sha256": "ffa8e33292c872a40c7b528cf1f8b697db646321e2f8f2f52db3baff87da00ce",
+      "uploadedAt": "2026-08-11T12:42:41.447Z"
+    },
+    {
+      "mediaId": "lmc-w10-p03",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P03_case-interpretation-adjustment-factors.mp4",
+      "sizeBytes": 25534641,
+      "sha256": "c03b9fcef3614d0a4b7f162e4daeacfbdebb3c92b22529bfe6a37575ec20cccf",
+      "uploadedAt": "2026-08-11T12:42:48.202Z"
+    },
+    {
+      "mediaId": "lmc-w10-p04",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P04_case-integration-and-couple-coaching.mp4",
+      "sizeBytes": 26217965,
+      "sha256": "9d49a61a0a6d33e7ab734bbec82e9d2b520c251fa0fd5bb8c773bae0dc22dde8",
+      "uploadedAt": "2026-08-11T12:42:54.612Z"
+    },
+    {
+      "mediaId": "lmc-w10-p05",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P05_assessment-overview-and-marital-satisfaction.mp4",
+      "sizeBytes": 20646492,
+      "sha256": "938b740effaeea8dc72ef6cbbef0f4502e48e7c54814c42fb3efaab66aebcf40",
+      "uploadedAt": "2026-08-11T12:43:02.237Z"
+    },
+    {
+      "mediaId": "lmc-w10-p06",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P06_thirteen-factors-and-interpretation.mp4",
+      "sizeBytes": 23820792,
+      "sha256": "942af01a04afbafdeb9728a2be19c086fc110efdb8b4ef3f3398ff81c24d4131",
+      "uploadedAt": "2026-08-11T12:43:09.144Z"
+    },
+    {
+      "mediaId": "lmc-w10-p07",
+      "currentObjectKey": "lmc/v2/week-10/LMC_WEEK10_P07_result-report-and-platform-use.mp4",
+      "sizeBytes": 28176760,
+      "sha256": "1763f47e2576b5fe6a33df68c7b6a6e947fb53a0d49899919d71bd184c4a6131",
+      "uploadedAt": "2026-08-11T12:43:15.922Z"
+    }
+  ]
+}

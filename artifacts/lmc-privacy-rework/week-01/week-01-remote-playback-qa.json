@@ -1,0 +1,153 @@
+{
+  "generatedAt": "2026-08-11T11:40:21.6075521+09:00",
+  "week": 1,
+  "overallStatus": "PASS",
+  "workerHealth": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyOk": true
+  },
+  "remoteObjectIntegrity": {
+    "status": "PASS",
+    "verifiedCount": 5,
+    "method": "Downloaded each object from the remote R2 bucket and compared size and SHA-256 to the approved cutover manifest.",
+    "parts": [
+      {
+        "mediaId": "lmc-w01-p01",
+        "sizeBytes": 42194259,
+        "sha256": "23a30f2498148398ef81ae1cffb1414c99e176dd0517c7f854d0cd7d68b3b167",
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p02",
+        "sizeBytes": 29177152,
+        "sha256": "41fb32dd9ab1f1f6e05e03280ba355e04fe8af827a418171f40a58c39fff202d",
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p03",
+        "sizeBytes": 46449784,
+        "sha256": "4d663fdc10b2ffd3740a346141c673eee3ef36f3f7ff8cb6a398cfcf910a7406",
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p04",
+        "sizeBytes": 53780162,
+        "sha256": "6a83d2e12dfafead3b1249c16a7ba9ea677ad6e5db1c295aaee21646cc9af20d",
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p05",
+        "sizeBytes": 50555509,
+        "sha256": "7538f0270d6763df21efa579bb808bcecee7c7d9f1fa720d4c4cf1b7276dfe24",
+        "pass": true
+      }
+    ]
+  },
+  "httpVerification": {
+    "status": "PASS",
+    "head200": 5,
+    "range206": 5,
+    "parts": [
+      {
+        "mediaId": "lmc-w01-p01",
+        "path": "/media/lmc-lifetime-management-counselor/1/1",
+        "headStatus": 200,
+        "contentType": "video/mp4",
+        "contentLength": 42194259,
+        "acceptRanges": "bytes",
+        "rangeStatus": 206,
+        "contentRange": "bytes 0-0/42194259",
+        "rangeBodyBytes": 1,
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p02",
+        "path": "/media/lmc-lifetime-management-counselor/1/2",
+        "headStatus": 200,
+        "contentType": "video/mp4",
+        "contentLength": 29177152,
+        "acceptRanges": "bytes",
+        "rangeStatus": 206,
+        "contentRange": "bytes 0-0/29177152",
+        "rangeBodyBytes": 1,
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p03",
+        "path": "/media/lmc-lifetime-management-counselor/1/3",
+        "headStatus": 200,
+        "contentType": "video/mp4",
+        "contentLength": 46449784,
+        "acceptRanges": "bytes",
+        "rangeStatus": 206,
+        "contentRange": "bytes 0-0/46449784",
+        "rangeBodyBytes": 1,
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p04",
+        "path": "/media/lmc-lifetime-management-counselor/1/4",
+        "headStatus": 200,
+        "contentType": "video/mp4",
+        "contentLength": 53780162,
+        "acceptRanges": "bytes",
+        "rangeStatus": 206,
+        "contentRange": "bytes 0-0/53780162",
+        "rangeBodyBytes": 1,
+        "pass": true
+      },
+      {
+        "mediaId": "lmc-w01-p05",
+        "path": "/media/lmc-lifetime-management-counselor/1/5",
+        "headStatus": 200,
+        "contentType": "video/mp4",
+        "contentLength": 50555509,
+        "acceptRanges": "bytes",
+        "rangeStatus": 206,
+        "contentRange": "bytes 0-0/50555509",
+        "rangeBodyBytes": 1,
+        "pass": true
+      }
+    ]
+  },
+  "signedPlayback": {
+    "status": "PASS",
+    "requiredParts": [
+      "lmc-w01-p01",
+      "lmc-w01-p05"
+    ],
+    "parts": [
+      {
+        "mediaId": "lmc-w01-p01",
+        "durationSeconds": 1220.04,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "seekPass": true,
+        "audioEnabled": true,
+        "maskTransition": {
+          "targetSeconds": 9.5,
+          "playbackStartSeconds": 7.9811,
+          "playbackEndSeconds": 11.860644,
+          "pass": true
+        }
+      },
+      {
+        "mediaId": "lmc-w01-p05",
+        "durationSeconds": 1433.652993,
+        "readyState": 4,
+        "videoWidth": 1280,
+        "videoHeight": 720,
+        "playPausePass": true,
+        "seekPass": true,
+        "audioEnabled": true,
+        "nextPartNavigationPass": true
+      }
+    ]
+  },
+  "catalogSyncAllowed": true,
+  "catalogSyncCompleted": true,
+  "weekComplete": true
+}

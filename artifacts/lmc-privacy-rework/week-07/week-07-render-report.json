@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-08-11T08:39:36.795Z",
+  "week": 7,
+  "dryRun": false,
+  "expectedParts": 7,
+  "results": [
+    {
+      "mediaId": "lmc-w07-p01",
+      "week": 7,
+      "part": 1,
+      "sourceFilename": "LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P01_emotion-assessment-overview-and-result-graph.mp4",
+      "sizeBytes": 24522689,
+      "sha256": "78c8ec7664534844295d03d00421210f9b022107befefe4d29c5d2dbf7a36e74",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w07-p02",
+      "week": 7,
+      "part": 2,
+      "sourceFilename": "LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P02_case-interpretation-scores-and-responses.mp4",
+      "sizeBytes": 21586625,
+      "sha256": "fc5c89e059eb994b2fd627ac59d613a5ab0ab64a216d8fd610f3924daa3637d0",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w07-p03",
+      "week": 7,
+      "part": 3,
+      "sourceFilename": "LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P03_case-interpretation-context-and-patterns.mp4",
+      "sizeBytes": 26156332,
+      "sha256": "629a54a774ef3bd8b9f20e54e00852a685f72da981701545cad076a15471be85",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w07-p04",
+      "week": 7,
+      "part": 4,
+      "sourceFilename": "LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P04_case-integration-and-coaching-application.mp4",
+      "sizeBytes": 19802585,
+      "sha256": "91b9654c1641913a1fe96d663ee06b4a9ea48873844729062c9a0e76a5e28a99",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w07-p05",
+      "week": 7,
+      "part": 5,
+      "sourceFilename": "LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P05_social-anxiety-and-loneliness.mp4",
+      "sizeBytes": 34810603,
+      "sha256": "268bb47994278f6633da6a6e157c6333587e1fea1e98fc3719a5e45da21cd440",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w07-p06",
+      "week": 7,
+      "part": 6,
+      "sourceFilename": "LMC_WEEK07_P06_anger-causes-functions-and-effects.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P06_anger-causes-functions-and-impact.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P06_anger-causes-functions-and-impact.mp4",
+      "sizeBytes": 30296225,
+      "sha256": "74812d4df789c0b545b4acd51b2bd5ac09ff6b2a71d9b3a21212ddaf7656abc3",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    },
+    {
+      "mediaId": "lmc-w07-p07",
+      "week": 7,
+      "part": 7,
+      "sourceFilename": "LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+      "currentObjectKey": "lmc/v2/week-07/LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+      "decision": "MASK",
+      "action": "MASKED",
+      "output": "C:\\Users\\user\\Documents\\Codex\\2026-08-07\\files-mentioned-by-the-user-work\\work\\lmc-v2-privacy-output\\lmc\\v2\\week-07\\LMC_WEEK07_P07_aggression-lethargy-inferiority-and-report.mp4",
+      "sizeBytes": 31438705,
+      "sha256": "f5a9f4d9c9ba18907241c6c64a3603685eae806a81d5eead21a54e7752fdff5c",
+      "filterGraph": "drawbox=x=1085:y=0:w=iw-1085:h=ih:color=black@1.0:t=fill:enable='gte(t,0)'"
+    }
+  ]
+}

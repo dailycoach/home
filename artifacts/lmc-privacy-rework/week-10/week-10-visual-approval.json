@@ -1,0 +1,43 @@
+{
+  "week": 10,
+  "approved": true,
+  "approvedAt": "2026-08-11T21:41:43.7929440+09:00",
+  "reviewer": "human",
+  "parts": [
+    {
+      "mediaId": "lmc-w10-p01",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    },
+    {
+      "mediaId": "lmc-w10-p02",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    },
+    {
+      "mediaId": "lmc-w10-p03",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    },
+    {
+      "mediaId": "lmc-w10-p04",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    },
+    {
+      "mediaId": "lmc-w10-p05",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    },
+    {
+      "mediaId": "lmc-w10-p06",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    },
+    {
+      "mediaId": "lmc-w10-p07",
+      "privacyVisualPass": true,
+      "reviewNote": "participant panel fully covered; approved by human"
+    }
+  ]
+}
