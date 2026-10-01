@@ -1,0 +1,36 @@
+name: Check LMC Naver integration
+on:
+  pull_request:
+    paths: ['lcms/academy/**', 'lcms/register/**', '.github/workflows/check-lmc-naver.yml']
+  push:
+    branches: ['feature/lmc-smartstore-automation']
+    paths: ['lcms/academy/**', 'lcms/register/**', '.github/workflows/check-lmc-naver.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: lcms/academy/naver-worker/package-lock.json
+      - run: npm ci
+        working-directory: lcms/academy/naver-worker
+      - run: npm test && npm run check && npm audit --omit=dev
+        working-directory: lcms/academy/naver-worker
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+      - name: Check Apps Script syntax and legacy behavior
+        run: |
+          for file in lcms/academy/apps-script/*.gs; do node --check < "$file"; done
+          node --check lcms/register/register.js
+          node --check lcms/register/config.js
+          node scripts/check-lmc-academy.mjs
+          node lcms/academy/apps-script/test-access-validation.mjs
+          node scripts/test-lmc-progress-scope.mjs
+          node --test lcms/academy/r2-worker/test/worker.test.js

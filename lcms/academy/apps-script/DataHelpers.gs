@@ -310,6 +310,11 @@ function runAcademySelfTest() {
 }
 
 function writeLog_(ss, studentId, orderNo, email, template, result, error, retryCount) {
+  if (typeof LMC_NAVER_MUTATION_CONTEXT !== 'undefined' && LMC_NAVER_MUTATION_CONTEXT) {
+    orderNo = orderNo ? '****' + String(orderNo).slice(-4) : '';
+    email = '';
+    error = error ? 'NAVER_LIFECYCLE_ERROR' : '';
+  }
   const sheet = ss.getSheetByName(RSEDU_ACADEMY.SHEETS.LOGS);
   sheet.appendRow([
     sheetSafeText_(createId_('LOG')),
