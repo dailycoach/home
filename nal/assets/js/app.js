@@ -448,7 +448,7 @@
     const recruiting = programs.filter((item) => ["open", "closing", "waiting"].includes(item.status));
     const classes = programs.filter((item) => item.type === "class" && ["open", "closing", "waiting"].includes(item.status) && isThisWeek(item.startDate));
     const gathers = sortFeatured(activePrograms.filter((item) => item.type === "gather"));
-    const products = sortFeatured(publicItems(state.products));
+    const products = sortFeatured(publicItems(state.products)).sort((a, b) => Number(isDigitalProduct(b)) - Number(isDigitalProduct(a)) || featuredOrder(a) - featuredOrder(b));
     const featuredProduct = products[0];
     const hosts = publicItems(state.hosts).filter((item) => item.featured || item.programIds?.length);
     const notes = publicItems(state.content).filter((item) => item.featured);
@@ -501,7 +501,7 @@
     if (sort === "closing") items.sort((a, b) => (a.status === "closing" ? -1 : 1) - (b.status === "closing" ? -1 : 1));
     if (sort === "newest") items.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
     if (sort === "lowPrice") items.sort((a, b) => (a.price ?? Number.MAX_SAFE_INTEGER) - (b.price ?? Number.MAX_SAFE_INTEGER));
-    if (sort === "recommended") items.sort((a, b) => Number(b.featured) - Number(a.featured) || featuredOrder(a) - featuredOrder(b));
+    if (sort === "recommended") items.sort((a, b) => (collection === "products" ? Number(isDigitalProduct(b)) - Number(isDigitalProduct(a)) : 0) || Number(b.featured) - Number(a.featured) || featuredOrder(a) - featuredOrder(b));
     return items;
   }
 
