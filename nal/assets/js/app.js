@@ -353,12 +353,44 @@
     </article>`;
   }
 
+  function isDigitalProduct(item) {
+    return item?.deliveryType === "digital" || ["pdfEbook", "pdf", "digital"].includes(item?.productType);
+  }
+
+  function productFormatLabel(item) {
+    if (isDigitalProduct(item)) return item.fileFormat || "PDF";
+    if (item.productType === "card") return "실물 카드";
+    if (item.productType === "workbook") return "워크북";
+    if (item.productType === "kit") return "키트";
+    return item.category || "마음도구";
+  }
+
+  function digitalDeliveryLabel(item) {
+    if (!isDigitalProduct(item)) return "";
+    if (item.deliveryMethod === "digital-download") return "디지털 다운로드";
+    if (item.deliveryMethod === "email") return "이메일 제공";
+    return "디지털 제공";
+  }
+
+  function licenseLabel(item) {
+    if (item.licenseType === "personal-use") return "개인 이용";
+    if (item.licenseType === "facilitator-use") return "진행자 이용";
+    if (item.licenseType === "organization-use") return "기관 이용";
+    return "";
+  }
+
   function productCard(item) {
     const route = itemRoute("products", item);
-    return `<article class="nal-card nal-card--product" data-catalog-id="${escapeHtml(item.id)}">
-      <div class="nal-card__media">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: 1600, height: 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">마음도구</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
+    const digital = isDigitalProduct(item);
+    const meta = [
+      productFormatLabel(item),
+      Number.isFinite(item.pageCount) ? `${item.pageCount}쪽` : "",
+      digitalDeliveryLabel(item)
+    ].filter(Boolean).join(" · ");
+    return `<article class="nal-card nal-card--product${digital ? " nal-card--digital" : ""}" data-catalog-id="${escapeHtml(item.id)}">
+      <div class="nal-card__media">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || "PDF") : "마음도구"}</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
       <div class="nal-card__body"><p class="nal-card__eyebrow">${escapeHtml(item.category)}</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
-      <p class="nal-card__summary">${escapeHtml(item.summary)}</p><div class="nal-card__footer"><span class="nal-card__delivery">${formatPrice(item.price) || "가격 확정 후 공개"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
+      <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${formatPrice(item.price) || "가격 확정 후 공개"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
     </article>`;
   }
 
@@ -398,7 +430,7 @@
         <span aria-hidden="true">+</span>
         <div>${imageMarkup(product.coverImage, "", "", { width: 1600, height: 1600 })}</div>
       </div>
-      <div class="nal-relation-card__copy"><p class="nal-eyebrow">${program.type === "gather" ? "NAL GATHER" : "NAL CLASS"} × NAL SHOP</p>
+      <div class="nal-relation-card__copy"><p class="nal-eyebrow">${program.type === "gather" ? "NAL GATHER" : "NAL CLASS"} × NAL MIND TOOLS</p>
         <h3><a href="${itemRoute("programs", program)}">${escapeHtml(program.title)}</a></h3>
         <p>${escapeHtml(product.title)}와 함께 사용하는 경험</p>
         <a class="nal-text-link" href="${itemRoute("products", product)}">도구 보기 →</a>
@@ -484,8 +516,11 @@
     const params = new URLSearchParams(location.search);
     const items = getListingItems();
     const q = params.get("q") || "";
+    const listingIntro = collection === "products"
+      ? "PDF 전자책과 워크북은 파일형식·페이지수·미리보기·제공방식을 우선 표시합니다. 실물 도구는 배송 정보를 구분해 안내합니다."
+      : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     root.innerHTML = `
-      <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.</p></div></section>
+      <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
       <section class="nal-section nal-listing"><div class="nal-container">
         <form class="nal-filter-bar" data-filter-form role="search">
           <label class="nal-form-field nal-filter-search"><span>검색</span><input type="search" name="q" value="${escapeHtml(q)}" placeholder="주제나 이름으로 검색"></label>
@@ -604,36 +639,64 @@
 
   function renderProductDetail(item) {
     remember("products", item.id);
+    const digital = isDigitalProduct(item);
     const [url, label, status] = detailCta(item, "products");
-    const policies = [item.shippingPolicy, item.exchangePolicy, item.refundPolicy].filter(Boolean);
+    const smartStore = safeUrl(state.site?.externalLinks?.smartStore);
+    const previewUrl = safeUrl(item.sampleUrl || item.previewUrl);
     const programs = publicItems(state.programs).filter((entry) => item.relatedProgramIds?.includes(entry.id));
     const gallery = asArray(item.gallery).map((src, index) => ({ src, alt: asArray(item.galleryAlts)[index] || item.coverImageAlt || `${item.title} 상품 이미지` }));
-    const smartStore = safeUrl(state.site?.externalLinks?.smartStore);
     const price = formatPrice(item.price);
     const originalPrice = formatPrice(item.originalPrice);
     const hasPrice = Boolean(price);
-    const shippingText = item.shippingPolicy || (item.deliveryType === "physical" ? "배송 조건은 스마트스토어 상품 페이지에서 확인합니다." : "상품 제공 방식을 확인해 주세요.");
     const stockText = stockLabel(item.stockStatus) || status || "판매 상태 확인";
     const optionItems = asArray(item.options).filter(Boolean);
+    const license = licenseLabel(item);
+    const format = productFormatLabel(item);
+    const delivery = digital ? digitalDeliveryLabel(item) : (item.shippingPolicy || "스마트스토어 상품 페이지에서 배송 조건을 확인합니다.");
     const commerceButton = url
       ? `<a class="nal-commerce-buy" href="${escapeHtml(url)}"${externalAttrs(url)}>${escapeHtml(label)}</a>`
       : `<button class="nal-commerce-buy" type="button" disabled>${escapeHtml(label)}</button>`;
+    const previewButton = previewUrl
+      ? `<a class="nal-commerce-preview" href="${escapeHtml(previewUrl)}"${externalAttrs(previewUrl)}>미리보기</a>`
+      : "";
+    const fileFacts = digital ? [
+      ["파일", item.fileFormat || "PDF"],
+      ["분량", Number.isFinite(item.pageCount) ? `${item.pageCount}쪽` : ""],
+      ["용량", Number.isFinite(item.fileSizeMB) ? `${item.fileSizeMB} MB` : ""],
+      ["제공", digitalDeliveryLabel(item)],
+      ["이용", license],
+      ["인쇄", item.printingAllowed === true ? "가능" : item.printingAllowed === false ? "불가" : ""]
+    ].filter(([, value]) => value) : [
+      ["배송", delivery],
+      ["구매처", smartStore ? "NAL 스마트스토어" : "판매 채널 준비 중"],
+      ["상태", stockText]
+    ];
+    const digitalPolicy = [
+      item.fulfillmentNote,
+      item.accessPeriod ? `이용 가능 기간: ${item.accessPeriod}` : "",
+      Number.isFinite(item.downloadLimit) ? `다운로드 가능 횟수: ${item.downloadLimit}회` : "",
+      item.licenseType ? `이용 범위: ${license || item.licenseType}` : "",
+      item.printingAllowed === true ? "개인 사용 범위에서 인쇄 가능" : item.printingAllowed === false ? "인쇄 불가" : "",
+      item.refundPolicy
+    ].filter(Boolean);
+    const physicalPolicies = [item.shippingPolicy, item.exchangePolicy, item.refundPolicy].filter(Boolean);
 
     root.innerHTML = `
-      <section class="nal-commerce-product">
+      <section class="nal-commerce-product${digital ? " nal-commerce-product--digital" : ""}">
         <div class="nal-container nal-commerce-breadcrumb"><a href="/nal/">NAL</a><span>›</span><a href="/nal/shop/">마음도구</a><span>›</span><strong>${escapeHtml(item.category)}</strong></div>
         <div class="nal-container nal-commerce-product__grid">
           <div class="nal-commerce-gallery">
             <figure class="nal-commerce-gallery__main">
-              ${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { eager: true, width: 1600, height: 1600 })}
-              ${conceptCaption(item, "현재 이미지는 상품 사용 경험을 보여주는 비주얼 콘셉트입니다.")}
+              ${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { eager: true, width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}
+              ${conceptCaption(item, digital ? "전자책 표지 또는 미리보기 이미지입니다." : "현재 이미지는 상품 사용 경험을 보여주는 비주얼 콘셉트입니다.")}
             </figure>
-            ${gallery.length > 1 ? `<div class="nal-commerce-gallery__rail" aria-label="상품 이미지">${gallery.map((image, index) => `<figure>${imageMarkup(image.src, image.alt, "", { width: 480, height: 480 })}<figcaption class="nal-sr-only">상품 이미지 ${index + 1}</figcaption></figure>`).join("")}</div>` : ""}
+            ${gallery.length > 1 ? `<div class="nal-commerce-gallery__rail" aria-label="상품 이미지">${gallery.map((image, index) => `<figure>${imageMarkup(image.src, image.alt, "", { width: 480, height: digital ? 640 : 480 })}<figcaption class="nal-sr-only">상품 이미지 ${index + 1}</figcaption></figure>`).join("")}</div>` : ""}
           </div>
           <aside class="nal-commerce-panel" aria-label="상품 구매 정보">
             <p class="nal-commerce-brand">NAL · MIND TOOLS</p>
-            <div class="nal-commerce-state"><span>${escapeHtml(item.category)}</span><b>${escapeHtml(stockText)}</b></div>
+            <div class="nal-commerce-state"><span>${escapeHtml(item.category)}</span><b>${escapeHtml(digital ? format : stockText)}</b></div>
             <h1>${escapeHtml(item.title)}</h1>
+            ${item.author ? `<p class="nal-commerce-author">저자 · ${escapeHtml(item.author)}</p>` : ""}
             ${item.subtitle ? `<p class="nal-commerce-subtitle">${escapeHtml(item.subtitle)}</p>` : ""}
             <p class="nal-commerce-summary">${escapeHtml(item.summary)}</p>
             <div class="nal-commerce-price">
@@ -641,16 +704,18 @@
               <strong>${hasPrice ? escapeHtml(price) : "판매가 준비 중"}</strong>
             </div>
             <dl class="nal-commerce-facts">
-              <div><dt>배송</dt><dd>${escapeHtml(shippingText)}</dd></div>
-              <div><dt>구매처</dt><dd>${smartStore ? "NAL 스마트스토어" : "판매 채널 준비 중"}</dd></div>
-              <div><dt>상태</dt><dd>${escapeHtml(stockText)}</dd></div>
+              ${fileFacts.map(([key, value]) => `<div><dt>${escapeHtml(key)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}
+              ${digital ? `<div><dt>상태</dt><dd>${escapeHtml(stockText)}</dd></div>` : ""}
             </dl>
             ${optionItems.length ? `<label class="nal-commerce-option"><span>옵션</span><select><option value="">옵션을 선택하세요</option>${optionItems.map((option) => `<option>${escapeHtml(typeof option === "string" ? option : option.label || option.name || "")}</option>`).join("")}</select></label>` : ""}
-            <div class="nal-commerce-actions">
+            <div class="nal-commerce-actions${previewButton ? " has-preview" : ""}">
               ${commerceButton}
+              ${previewButton}
               ${wishButton("products", item, true)}
             </div>
-            <p class="nal-commerce-note">${url && label === "구매하기" ? "외부 스마트스토어의 실제 상품 주문 화면으로 이동합니다." : "개별 상품 판매가 열리기 전에는 스마트스토어의 현재 판매 상품을 확인할 수 있습니다."}</p>
+            <p class="nal-commerce-note">${digital
+              ? (label === "구매하기" ? "구매 후 제공 방식과 다운로드 조건은 실제 판매 페이지의 안내를 따릅니다." : "판매가 열리면 PDF 제공 방식·이용 범위·환불 조건을 함께 안내합니다.")
+              : (url && label === "구매하기" ? "외부 스마트스토어의 실제 상품 주문 화면으로 이동합니다." : "개별 상품 판매가 열리기 전에는 스마트스토어의 현재 판매 상품을 확인할 수 있습니다.")}</p>
           </aside>
         </div>
       </section>
@@ -658,8 +723,8 @@
       <nav class="nal-commerce-tabs" aria-label="상품 상세 메뉴">
         <div class="nal-container">
           <a href="#product-info">상품정보</a>
-          <a href="#product-use">사용방법</a>
-          <a href="#product-delivery">배송·교환</a>
+          <a href="#product-use">${digital ? "목차·활용" : "사용방법"}</a>
+          <a href="#product-delivery">${digital ? "다운로드·이용" : "배송·교환"}</a>
           ${programs.length ? '<a href="#product-programs">연결 프로그램</a>' : ""}
         </div>
       </nav>
@@ -667,16 +732,18 @@
       <div class="nal-container nal-commerce-detail">
         <main>
           <section id="product-info" class="nal-commerce-section">
-            <p class="nal-eyebrow">PRODUCT INFORMATION</p>
-            <h2>상품 정보</h2>
+            <p class="nal-eyebrow">${digital ? "PDF EBOOK INFORMATION" : "PRODUCT INFORMATION"}</p>
+            <h2>${digital ? "전자책 정보" : "상품 정보"}</h2>
             <p class="nal-commerce-lead">${escapeHtml(item.description)}</p>
-            ${gallery.length ? `<div class="nal-commerce-detail-images">${gallery.map((image) => `<figure>${imageMarkup(image.src, image.alt, "", { width: 1400, height: 1400 })}</figure>`).join("")}</div>` : ""}
+            ${asArray(item.tableOfContents).length ? `<div class="nal-commerce-toc"><h3>목차</h3><ol>${asArray(item.tableOfContents).map((entry) => `<li>${escapeHtml(entry)}</li>`).join("")}</ol></div>` : ""}
+            ${gallery.length ? `<div class="nal-commerce-detail-images${digital ? " is-digital" : ""}">${gallery.map((image) => `<figure>${imageMarkup(image.src, image.alt, "", { width: digital ? 1200 : 1400, height: digital ? 1600 : 1400 })}</figure>`).join("")}</div>` : ""}
+            ${previewUrl ? `<p><a class="nal-button--secondary" href="${escapeHtml(previewUrl)}"${externalAttrs(previewUrl)}>PDF 미리보기 열기</a></p>` : ""}
             ${item.visualNote ? `<p class="nal-visual-note">${escapeHtml(item.visualNote)}</p>` : ""}
           </section>
 
           <section id="product-use" class="nal-commerce-section">
             <p class="nal-eyebrow">HOW TO USE</p>
-            <h2>이렇게 사용합니다</h2>
+            <h2>${digital ? "읽고, 쓰고, 적용하는 방법" : "이렇게 사용합니다"}</h2>
             ${item.components?.length ? `<h3>구성</h3>${valueList(item.components, "nal-tool-list")}` : ""}
             ${item.recommendedFor?.length ? `<h3>이런 분께 권합니다</h3>${valueList(item.recommendedFor, "nal-check-list")}` : ""}
             <div class="nal-commerce-use-grid">
@@ -688,22 +755,25 @@
           </section>
 
           <section id="product-delivery" class="nal-commerce-section">
-            <p class="nal-eyebrow">DELIVERY & POLICY</p>
-            <h2>배송·교환 안내</h2>
-            ${policies.length ? valueList(policies, "nal-check-list") : `<p>배송비·출고일·교환·반품 기준은 실제 판매가 시작된 스마트스토어 상품 페이지의 조건을 기준으로 합니다.</p>`}
+            <p class="nal-eyebrow">${digital ? "DOWNLOAD & LICENSE" : "DELIVERY & POLICY"}</p>
+            <h2>${digital ? "다운로드·이용 안내" : "배송·교환 안내"}</h2>
+            ${digital
+              ? (digitalPolicy.length ? valueList(digitalPolicy, "nal-check-list") : "<p>판매 시작 전입니다. 다운로드 방식, 이용 가능 범위, 인쇄 가능 여부와 디지털 상품 환불 기준은 판매 페이지에서 함께 공개합니다.</p>")
+              : (physicalPolicies.length ? valueList(physicalPolicies, "nal-check-list") : "<p>배송비·출고일·교환·반품 기준은 실제 판매가 시작된 스마트스토어 상품 페이지의 조건을 기준으로 합니다.</p>")}
             ${smartStore ? `<a class="nal-text-link" href="${escapeHtml(smartStore)}"${externalAttrs(smartStore)}>NAL 스마트스토어에서 판매 정보 확인 →</a>` : ""}
           </section>
 
           ${programs.length ? `<section id="product-programs" class="nal-commerce-section"><p class="nal-eyebrow">CONNECTED PROGRAM</p><h2>이 도구와 함께하는 프로그램</h2><div class="card-grid nal-related-grid">${programs.map(programCard).join("")}</div></section>` : ""}
         </main>
         <aside class="nal-commerce-sidecart">
-          <span>${escapeHtml(stockText)}</span>
+          <span>${escapeHtml(digital ? format : stockText)}</span>
           <strong>${escapeHtml(item.title)}</strong>
           <b>${hasPrice ? escapeHtml(price) : "판매가 준비 중"}</b>
+          ${previewButton}
           ${commerceButton}
         </aside>
       </div>`;
-    renderStickyCta(stockText, label, url);
+    renderStickyCta(digital ? format : stockText, label, url);
   }
 
   function renderDetail() {
