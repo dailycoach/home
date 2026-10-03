@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { productValidator } from './nal-product-model.mjs';
+const validate = await productValidator();
+const { products } = JSON.parse(await readFile('nal/data/products.json','utf8'));
+const { product } = JSON.parse(await readFile('nal/data/pdf-ebook-product-template.json','utf8'));
+for (const p of [...products,product]) assert.deepEqual(validate(p),[], p.id || 'PDF template');
+assert.equal(products.filter(p=>p.published && p.productType==='physicalCard').length,4);
+const store = globalThis.NALStore;
+// Synthetic metadata only; never exported to the production catalog.
+const pdf = {...product,id:'qa-pdf',slug:'qa-pdf',title:'QA 전자책',summary:'합성 자료',description:'합성 자료',coverImage:'/qa.webp',coverImageAlt:'QA 표지',published:true,author:'QA 저자',price:9900,stockStatus:'available',pageCount:86,fileSizeMB:14.2,tableOfContents:['감정 언어 찾기'],deliveryMethod:'digital-download',licenseType:'personal-use',printingAllowed:true,refundPolicy:'QA 조건',policyStatus:'reviewed',purchaseUrl:'https://example.com/qa',audiences:['코치'],topics:['감정']};
+assert.deepEqual(validate(pdf),[]);
+assert(validate({...pdf,originalPdfUrl:'https://example.com/original.pdf'}).length);
+assert(validate({...pdf,licenseOptions:[{id:'a',licenseType:'personal-use',price:null,printingAllowed:null,downloadLimit:null,accessPeriod:null,purchaseUrl:null,token:'private'}]}).length);
+assert(validate({...pdf,price:null}).length);
+for (const url of ['javascript:alert(1)','http://example.com/a','//example.com/a','https://example.com/nal-products-private/original.pdf','https://x.test/%6eal-products-private/a.pdf','https://x.test/a.pdf?%74oken=x']) assert.equal(store.safePublicUrl(url),'',url);
+assert.equal(store.preview({...pdf,sampleUrl:'javascript:x',previewUrl:'/sample.pdf'}),'/sample.pdf');
+const card={...products.find(p=>p.published),featured:true,featuredOrder:0};
+assert.equal(store.filter([card,pdf])[0].id,pdf.id);
+assert.equal(store.filter([pdf,{...pdf,id:'draft',published:false}]).length,1);
+for (const params of ['q=감정','q=QA 저자','format=pdfEbook','topic=감정','audience=코치']) assert.equal(store.filter([card,pdf],new URLSearchParams(params))[0].id,pdf.id,params);
+assert.equal(store.filter([card,pdf],new URLSearchParams('format=physical'))[0].id,card.id);
+assert.equal(store.filter([card,pdf],new URLSearchParams('sort=highPrice')).at(-1).price,null);
+assert.equal(store.purchase(pdf,'').label,'구매하기');
+assert.equal(store.purchase({...pdf,price:null},'https://smartstore.naver.com/nalbitcoaching').label,'스마트스토어 보기');
+assert.equal(store.purchase({...pdf,stockStatus:'soldOut'},'https://example.com').url,'');
+assert.equal(store.purchase({...pdf,purchaseUrl:null},'').label,'판매 준비 중');
+console.log('NAL store: schema, 4 physical cards, URL privacy, digital-first filters, metadata search and direct CTA passed.');

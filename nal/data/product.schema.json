@@ -1,0 +1,673 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NAL public product v2",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "slug": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subtitle": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "category": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "coverImage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coverImageAlt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "galleryAlts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "price": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "originalPrice": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "productType": {
+      "enum": [
+        "pdfEbook",
+        "pdfWorkbook",
+        "pdfWorksheet",
+        "digitalGuide",
+        "physicalCard",
+        "physicalBook",
+        "kit"
+      ]
+    },
+    "deliveryType": {
+      "enum": [
+        "digital",
+        "physical"
+      ]
+    },
+    "stock": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "stockStatus": {
+      "enum": [
+        "comingSoon",
+        "available",
+        "soldOut",
+        "discontinued"
+      ]
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "cardCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "pageCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "recommendedFor": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "usageIndividual": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "usageCouple": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "usageGroup": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "precautions": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "visualNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "shippingPolicy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "exchangePolicy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "refundPolicy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "purchaseUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sourceUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relatedProgramIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "relatedContentIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "featured": {
+      "type": "boolean"
+    },
+    "featuredOrder": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "createdAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updatedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fileFormat": {
+      "enum": [
+        "PDF",
+        "ZIP",
+        "PPTX",
+        "DOCX",
+        "XLSX",
+        null
+      ]
+    },
+    "fileSizeMB": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0
+    },
+    "sampleUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deliveryMethod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "licenseType": {
+      "enum": [
+        "personal-use",
+        "facilitator-use",
+        "organization-use",
+        null
+      ]
+    },
+    "printingAllowed": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "downloadLimit": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "accessPeriod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fulfillmentNote": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "author": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "audiences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "tableOfContents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 150
+    },
+    "previewUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "licenseOptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "licenseType",
+          "price",
+          "printingAllowed",
+          "downloadLimit",
+          "accessPeriod",
+          "purchaseUrl"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "licenseType": {
+            "enum": [
+              "personal-use",
+              "facilitator-use",
+              "organization-use"
+            ]
+          },
+          "price": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "printingAllowed": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "downloadLimit": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "accessPeriod": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "purchaseUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "policyStatus": {
+      "enum": [
+        "draft",
+        "reviewed"
+      ]
+    },
+    "policyVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "subtitle",
+    "summary",
+    "description",
+    "category",
+    "tags",
+    "coverImage",
+    "coverImageAlt",
+    "gallery",
+    "galleryAlts",
+    "price",
+    "originalPrice",
+    "productType",
+    "deliveryType",
+    "stock",
+    "stockStatus",
+    "options",
+    "components",
+    "cardCount",
+    "pageCount",
+    "recommendedFor",
+    "usageIndividual",
+    "usageCouple",
+    "usageGroup",
+    "precautions",
+    "visualNote",
+    "shippingPolicy",
+    "exchangePolicy",
+    "refundPolicy",
+    "purchaseUrl",
+    "sourceUrl",
+    "relatedProgramIds",
+    "relatedContentIds",
+    "featured",
+    "featuredOrder",
+    "published",
+    "createdAt",
+    "updatedAt",
+    "fileFormat",
+    "fileSizeMB",
+    "sampleUrl",
+    "deliveryMethod",
+    "licenseType",
+    "printingAllowed",
+    "downloadLimit",
+    "accessPeriod",
+    "fulfillmentNote",
+    "author",
+    "audiences",
+    "topics",
+    "tableOfContents",
+    "previewUrl",
+    "licenseOptions",
+    "version",
+    "policyStatus"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "published": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "coverImage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "coverImageAlt": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "productType": {
+            "enum": [
+              "pdfEbook",
+              "pdfWorkbook",
+              "pdfWorksheet",
+              "digitalGuide"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "deliveryType": {
+            "const": "digital"
+          },
+          "fileFormat": {
+            "enum": [
+              "PDF",
+              "ZIP",
+              "PPTX",
+              "DOCX",
+              "XLSX"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "deliveryType": {
+            "const": "physical"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "stockStatus": {
+            "const": "available"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "price": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "purchaseUrl": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "deliveryType": {
+            "const": "digital"
+          },
+          "stockStatus": {
+            "const": "available"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "author": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pageCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fileSizeMB": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "tableOfContents": {
+            "type": "array",
+            "minItems": 1
+          },
+          "deliveryMethod": {
+            "type": "string",
+            "minLength": 1
+          },
+          "licenseType": {
+            "enum": [
+              "personal-use",
+              "facilitator-use",
+              "organization-use"
+            ]
+          },
+          "printingAllowed": {
+            "type": "boolean"
+          },
+          "refundPolicy": {
+            "type": "string",
+            "minLength": 1
+          },
+          "policyStatus": {
+            "const": "reviewed"
+          }
+        }
+      }
+    }
+  ]
+}

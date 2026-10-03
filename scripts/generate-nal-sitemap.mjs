@@ -4,10 +4,20 @@ import path from 'node:path';
 const root = path.resolve(process.cwd());
 const base = 'https://daily-coach-ing.com';
 const urls = new Set(['/']);
+const existing = new Map();
+let previous = '';
+try { previous = await readFile(path.join(root, 'sitemap.xml'), 'utf8'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+for (const match of previous.matchAll(/<url><loc>([^<]+)<\/loc>(?:<lastmod>([^<]+)<\/lastmod>)?<\/url>/g)) {
+  if (!match[1].startsWith(base)) continue;
+  const route = match[1].slice(base.length) || '/';
+  if (route === '/nal/' || route.startsWith('/nal/')) continue;
+  urls.add(route);
+  existing.set(route, match[2]);
+}
 
 const registry = JSON.parse(await readFile(path.join(root, 'pages.json'), 'utf8'));
 for (const item of registry) {
-  if (typeof item.url === 'string' && item.url.startsWith('/')) urls.add(item.url);
+  if (!previous && typeof item.url === 'string' && item.url.startsWith('/')) urls.add(item.url);
 }
 
 async function walk(directory) {
@@ -32,7 +42,7 @@ const date = new Date().toISOString().slice(0, 10);
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...[...urls].sort().map((route) => `  <url><loc>${base}${route}</loc><lastmod>${date}</lastmod></url>`),
+  ...[...urls].sort().map((route) => `  <url><loc>${base}${route}</loc><lastmod>${existing.get(route) || date}</lastmod></url>`),
   '</urlset>',
   ''
 ].join('\n');

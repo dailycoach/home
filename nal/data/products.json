@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "2.0",
   "storefrontUrl": "https://smartstore.naver.com/nalbitcoaching",
   "products": [
     {
@@ -30,7 +30,7 @@
       ],
       "price": null,
       "originalPrice": null,
-      "productType": "card",
+      "productType": "physicalCard",
       "deliveryType": "physical",
       "stock": null,
       "stockStatus": "comingSoon",
@@ -74,7 +74,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": null
+      "fulfillmentNote": null,
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "coaching-question-card",
@@ -104,7 +112,7 @@
       ],
       "price": null,
       "originalPrice": null,
-      "productType": "card",
+      "productType": "physicalCard",
       "deliveryType": "physical",
       "stock": null,
       "stockStatus": "comingSoon",
@@ -149,7 +157,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": null
+      "fulfillmentNote": null,
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "relationship-question-card",
@@ -179,7 +195,7 @@
       ],
       "price": null,
       "originalPrice": null,
-      "productType": "card",
+      "productType": "physicalCard",
       "deliveryType": "physical",
       "stock": null,
       "stockStatus": "comingSoon",
@@ -222,7 +238,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": null
+      "fulfillmentNote": null,
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "strength-card",
@@ -252,7 +276,7 @@
       ],
       "price": null,
       "originalPrice": null,
-      "productType": "card",
+      "productType": "physicalCard",
       "deliveryType": "physical",
       "stock": null,
       "stockStatus": "comingSoon",
@@ -293,7 +317,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": null
+      "fulfillmentNote": null,
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "value-card",
@@ -310,8 +342,8 @@
       "galleryAlts": [],
       "price": null,
       "originalPrice": null,
-      "productType": "card",
-      "deliveryType": null,
+      "productType": "physicalCard",
+      "deliveryType": "physical",
       "stock": null,
       "stockStatus": "comingSoon",
       "options": [],
@@ -344,7 +376,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": null
+      "fulfillmentNote": null,
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "emotion-record-workbook",
@@ -361,7 +401,7 @@
       "galleryAlts": [],
       "price": null,
       "originalPrice": null,
-      "productType": "pdfEbook",
+      "productType": "pdfWorkbook",
       "deliveryType": "digital",
       "stock": null,
       "stockStatus": "comingSoon",
@@ -395,7 +435,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": "결제 후 제공 방식과 이용 범위가 확정되면 공개합니다."
+      "fulfillmentNote": "결제 후 제공 방식과 이용 범위가 확정되면 공개합니다.",
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "art-psychology-workbook",
@@ -412,7 +460,7 @@
       "galleryAlts": [],
       "price": null,
       "originalPrice": null,
-      "productType": "pdfEbook",
+      "productType": "pdfWorkbook",
       "deliveryType": "digital",
       "stock": null,
       "stockStatus": "comingSoon",
@@ -451,7 +499,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": "결제 후 제공 방식과 이용 범위가 확정되면 공개합니다."
+      "fulfillmentNote": "결제 후 제공 방식과 이용 범위가 확정되면 공개합니다.",
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     },
     {
       "id": "one-day-class-kit",
@@ -469,7 +525,7 @@
       "price": null,
       "originalPrice": null,
       "productType": "kit",
-      "deliveryType": null,
+      "deliveryType": "physical",
       "stock": null,
       "stockStatus": "comingSoon",
       "options": [],
@@ -504,7 +560,15 @@
       "printingAllowed": null,
       "downloadLimit": null,
       "accessPeriod": null,
-      "fulfillmentNote": null
+      "fulfillmentNote": null,
+      "author": null,
+      "audiences": [],
+      "topics": [],
+      "tableOfContents": [],
+      "previewUrl": null,
+      "licenseOptions": [],
+      "version": null,
+      "policyStatus": "draft"
     }
   ],
   "digitalProductFields": {

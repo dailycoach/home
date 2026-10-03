@@ -25,6 +25,12 @@ for (const kind of ['programs', 'products', 'hosts', 'content']) {
   }
   counts[kind] = payload[kind].length;
 }
-assert.deepEqual(payload.site, JSON.parse(await readFile('nal/data/site.json', 'utf8')));
+const localSite = JSON.parse(await readFile('nal/data/site.json', 'utf8'));
+// A PR may stage public navigation and store metadata before production changes.
+// Verify operational invariants against the live API without requiring a deploy.
+for (const field of ['brand','legal','externalLinks','designTokens']) assert.deepEqual(payload.site[field],localSite[field], `site/${field}`);
+for (const field of ['account','cart','checkout','storePurchase']) assert.equal(payload.site.features[field],false, `live feature ${field} remains unavailable`);
+const publicText=JSON.stringify(payload.products);
+assert(!/originalPdfUrl|privateStoragePath|downloadToken|nal-products-private/i.test(publicText),'Private delivery data leaked into public products');
 assert.deepEqual(payload.launches, JSON.parse(await readFile('nal/data/launches.json', 'utf8')));
 console.log('NAL live public API verified:', counts);

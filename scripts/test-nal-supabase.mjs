@@ -18,7 +18,7 @@ const hiddenSession = '10000000-0000-4000-8000-000000000003';
 const request = (n) => `20000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
 
 async function role(name, uid = '') {
-  if (!['anon', 'authenticated', 'postgres'].includes(name)) throw new Error('Invalid test role');
+  if (!['anon', 'authenticated', 'postgres', 'service_role'].includes(name)) throw new Error('Invalid test role');
   await db.exec(`reset role; set role ${name};`);
   await db.query("select set_config('request.jwt.claim.sub', $1, false)", [uid]);
 }
@@ -40,6 +40,14 @@ try {
     create role service_role nologin bypassrls;
     create schema auth;
     create table auth.users (id uuid primary key, email_confirmed_at timestamptz);
+    create schema storage;
+    create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);
+    create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text references storage.buckets(id),name text);
+    alter table storage.objects enable row level security;
+    grant usage on schema storage to anon, authenticated, service_role;
+    grant select on auth.users to service_role;
+    grant all on storage.objects,storage.buckets to service_role;
+    grant select,insert,update,delete on storage.objects to anon,authenticated;
     create function auth.uid() returns uuid language sql stable as $$
       select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid;
     $$;
@@ -57,7 +65,7 @@ try {
   await equal("select (body->>'seedReplayTest')::boolean from public.nal_catalog where kind='hosts' and id='kim-cheol-woong'", true);
   await equal('select count(*)::integer from public.nal_catalog', 21);
   await equal(`select count(*)::integer from pg_class c join pg_namespace n on n.oid = c.relnamespace
-    where c.relkind = 'r' and (n.nspname = 'nal_private' or (n.nspname = 'public' and c.relname like 'nal_%')) and c.relrowsecurity`, 13);
+    where c.relkind = 'r' and (n.nspname = 'nal_private' or (n.nspname = 'public' and c.relname like 'nal_%')) and c.relrowsecurity`, 16);
   await db.query('insert into auth.users values ($1, now()), ($2, now()), ($3, now()), ($4, null)', [alice, bob, carol, unverified]);
   await db.exec(`insert into public.nal_catalog(kind, id, slug, body, published) values
     ('programs', 'test-free', 'test-free', '{"title":"Synthetic free session"}', true),
@@ -149,7 +157,98 @@ try {
   await equal('select nal_private.is_admin()', false);
   await equal('select count(*)::integer from nal_private.audit_log', 0);
 
-  console.log(`NAL Supabase foundation: ${checks} checks passed (SQL/RLS and sequential reservation behavior).`);
+  // Digital delivery fixtures are synthetic and remain in this disposable database.
+  const order='30000000-0000-4000-8000-000000000001';
+  const item='40000000-0000-4000-8000-000000000001';
+  const file='50000000-0000-4000-8000-000000000001';
+  const entitlement='60000000-0000-4000-8000-000000000001';
+  await role('postgres');
+  await denied("insert into public.nal_catalog(kind,id,slug,body,published) values ('products','private-leak','private-leak','{\"originalPdfUrl\":\"secret\"}',true)",[], '23514');
+  await denied("insert into public.nal_catalog(kind,id,slug,body,published) values ('products','nested-leak','nested-leak','{\"licenseOptions\":[{\"token\":\"secret\"}]}',true)",[], '23514');
+  await denied("insert into public.nal_catalog(kind,id,slug,body,published) values ('products','nested-tags','nested-tags','{\"tags\":[{\"private\":\"secret\"}]}',true)",[], '23514');
+  await denied("insert into public.nal_catalog(kind,id,slug,body,published) values ('products','url-leak','url-leak','{\"previewUrl\":\"https://x.test/nal-products-private/file.pdf\"}',true)",[], '23514');
+  await equal("select public from storage.buckets where id='nal-products-private'", false);
+  await db.exec(`insert into public.nal_orders(id,user_id,amount_won,status) values('${order}','${alice}',100,'pending');
+    insert into public.nal_order_items(id,order_id,catalog_kind,catalog_id,title_snapshot,quantity,unit_price_won) values('${item}','${order}','products','emotion-card','Synthetic PDF',1,100);
+    insert into nal_private.product_files(id,product_id,object_path,download_name,version,active) values('${file}','emotion-card','emotion-card/v1/original.pdf','qa.pdf','qa-v1',true);`);
+  const createEnt = 'insert into public.nal_digital_entitlements(id,user_id,product_id,order_id,order_item_id,file_id,license_type,printing_allowed,download_limit) values($1,$2,\'emotion-card\',$3,$4,$5,\'personal-use\',true,2)';
+  const entArgs=[entitlement,alice,order,item,file];
+  await denied(createEnt,entArgs);
+  await db.query("update public.nal_orders set status='paid' where id=$1",[order]);
+  await denied(createEnt,entArgs); // A paid label without a verified payment is insufficient.
+  await db.query("insert into public.nal_payments(order_id,provider,provider_event_id,amount_won,status) values($1,'qa','qa-digital-event',100,'paid')",[order]);
+  await denied(createEnt,[entitlement,bob,order,item,file]);
+  await role('service_role');
+  await db.query(createEnt,entArgs);
+  const begin=(user,key)=>db.query('select public.nal_begin_download($1,$2,$3) as grant',[user,entitlement,request(key)]);
+  const finish=(key,issued)=>db.query('select public.nal_finish_download($1,$2,$3,$4)',[alice,entitlement,request(key),issued]);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(100)]); // No original object yet.
+  await db.query("insert into storage.objects(bucket_id,name) values('nal-products-private','emotion-card/v1/original.pdf')");
+  await denied('select public.nal_begin_download($1,$2,$3)',[bob,entitlement,request(100)]);
+  const firstGrant=(await begin(alice,100)).rows[0].grant;
+  assert.equal(firstGrant.bucket_id,'nal-products-private'); checks++;
+  assert(Date.parse(firstGrant.expires_at)-Date.now()<=600000); checks++;
+  await equal('select download_count from public.nal_digital_entitlements where id=$1',1,[entitlement]);
+  await begin(alice,100);
+  await equal('select download_count from public.nal_digital_entitlements where id=$1',1,[entitlement]);
+  await finish(100,true);
+  await finish(100,true);
+  await begin(alice,101);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(102)]);
+  await finish(101,false); // Storage signing failure returns the reserved quota.
+  await finish(101,false);
+  await equal('select download_count from public.nal_digital_entitlements where id=$1',1,[entitlement]);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(101)]);
+  await begin(alice,102);
+  await db.query("update public.nal_download_events set created_at=now()-interval '3 minutes' where request_id=$1",[request(102)]);
+  await begin(alice,103);
+  await equal("select status from public.nal_download_events where request_id=$1",'failed',[request(102)]);
+  await equal('select download_count from public.nal_digital_entitlements where id=$1',2,[entitlement]);
+  await db.query('update public.nal_digital_entitlements set revoked_at=now() where id=$1',[entitlement]);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(100)]);
+  await denied('select public.nal_finish_download($1,$2,$3,true)',[alice,entitlement,request(103)]);
+  await denied('select public.nal_finish_download($1,$2,$3,true)',[alice,entitlement,request(100)]); // Replayed issued request also rechecks rights.
+  await finish(103,false);
+  await db.query('update public.nal_digital_entitlements set revoked_at=null,expires_at=now()-interval \'1 second\' where id=$1',[entitlement]);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(104)]);
+  await db.query('update public.nal_digital_entitlements set expires_at=now()+interval \'1 minute\' where id=$1',[entitlement]);
+  const shortGrant=(await begin(alice,104)).rows[0].grant;
+  assert(Date.parse(shortGrant.expires_at)-Date.now()<=60000); checks++;
+  await db.query("update public.nal_orders set status='refunded' where id=$1",[order]);
+  await denied('select public.nal_finish_download($1,$2,$3,true)',[alice,entitlement,request(104)]);
+  await finish(104,false);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(105)]);
+  await db.query("update public.nal_orders set status='paid' where id=$1",[order]);
+  await db.query('update nal_private.product_files set active=false where id=$1',[file]);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(105)]);
+  await db.query('update nal_private.product_files set active=true where id=$1',[file]);
+  await db.query("update public.nal_payments set status='refunded' where order_id=$1",[order]);
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(105)]);
+  await db.query("update public.nal_payments set status='paid' where order_id=$1",[order]);
+  await db.query("update storage.buckets set public=true where id='nal-products-private'");
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(105)]);
+  await db.query("update storage.buckets set public=false where id='nal-products-private'");
+  await denied('select public.nal_finish_download($1,$2,$3,null)',[alice,entitlement,request(100)], '22023');
+  await role('anon');
+  await denied('select * from public.nal_digital_entitlements');
+  await denied('select * from public.nal_download_events');
+  await denied('select * from nal_private.product_files');
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(106)]);
+  await equal('select count(*)::integer from public.nal_products',4);
+  await role('authenticated',bob);
+  await equal('select count(*)::integer from public.nal_digital_entitlements',0);
+  await equal('select count(*)::integer from public.nal_download_events',0);
+  await denied('select * from nal_private.product_files');
+  await denied('select public.nal_begin_download($1,$2,$3)',[alice,entitlement,request(106)]);
+  await denied('select public.nal_finish_download($1,$2,$3,true)',[alice,entitlement,request(106)]);
+  await role('authenticated',alice);
+  await equal('select count(*)::integer from public.nal_digital_entitlements',1);
+  await equal('select count(*)::integer>0 from public.nal_download_events',true);
+  await denied('update public.nal_digital_entitlements set download_count=0');
+  await equal('select count(*)::integer from storage.objects',0);
+  await denied('insert into storage.objects(bucket_id,name) values(\'nal-products-private\',\'illegal.pdf\')');
+
+  console.log(`NAL Supabase foundation: ${checks} checks passed (SQL/RLS, sequential reservations and digital download permissions).`);
 } finally {
   await db.close();
 }

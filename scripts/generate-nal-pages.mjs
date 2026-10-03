@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = path.resolve(process.cwd());
@@ -37,9 +37,9 @@ const pages = [
   },
   {
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
-    title: '감정카드·질문카드 | NAL 마음도구 · 날빛', description: '감정카드, 질문카드, 관계카드, 강점·가치카드와 워크북을 살펴보세요.',
-    label: 'NAL 마음도구', heading: '말로 꺼내기 어려운 마음을\n한 장의 카드에서',
-    copy: '감정을 발견하고 대화를 시작하며 생각을 기록하는 자기이해 도구를 소개합니다.', schemaType: 'CollectionPage'
+    title: 'PDF 전자책·워크북 | NAL 마음도구 · 날빛', description: 'PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.',
+    label: 'NAL MIND TOOLS', heading: 'PDF 전자책부터 워크북·코칭도구까지',
+    copy: '읽고 끝나는 자료보다, 실제 삶과 코칭 장면에서 꺼내 쓰는 도구를 만듭니다.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/note/', attrs: 'data-page="listing" data-collection="content"',
@@ -118,12 +118,15 @@ for (const item of publicItems(products)) {
       ? '파일형식·페이지수·미리보기·다운로드·이용 범위는 확정된 내용만 공개합니다.'
       : '가격·재고·배송 정보는 확정된 내용만 공개합니다. 현재 등록 상태를 확인해 주세요.',
     schemaType: 'Product',
+    product: item,
     ogImage: item.coverImage,
     ogImageAlt: item.coverImageAlt || `${item.title} 상품 비주얼 콘셉트`,
     ogImageWidth: item.deliveryType === 'digital' ? 1200 : 1600,
     ogImageHeight: item.deliveryType === 'digital' ? 1600 : 1600
   });
 }
+
+pages.push({ route: '/nal/shop/item/', attrs: 'data-page="detail" data-collection="products"', title: '마음도구 상품 | NAL · 날빛', description: '등록된 마음도구의 상품정보와 미리보기, 구매 안내를 확인합니다.', label: 'NAL MIND TOOLS', heading: '마음도구 상품', copy: '상품 정보를 불러오는 중입니다.', schemaType: 'WebPage', noindex: true });
 
 for (const item of publicItems(hosts)) {
   const heading = item.name.endsWith('코치') ? item.name : `${item.name} 코치`;
@@ -162,6 +165,12 @@ function jsonLd(page) {
     }
   };
   if (page.ogImage) base.image = absoluteUrl(page.ogImage);
+  if (page.product) {
+    base.sku = page.product.id;
+    base.brand = { '@type': 'Brand', name: 'NAL · 날빛' };
+    base.additionalProperty = [['파일형식',page.product.fileFormat],['페이지',page.product.pageCount],['저자',page.product.author]].filter(([,value])=>value != null).map(([name,value])=>({ '@type':'PropertyValue', name, value }));
+    if (Number.isFinite(page.product.price) && page.product.purchaseUrl && page.product.stockStatus === 'available') base.offers = { '@type': 'Offer', price: page.product.price, priceCurrency: 'KRW', url: page.product.purchaseUrl, availability: 'https://schema.org/InStock' };
+  }
   return JSON.stringify(base).replaceAll('<', '\\u003c');
 }
 
@@ -277,10 +286,12 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=pdf-ebook-store-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=mind-store-02">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
+  <script src="/nal/assets/js/product-routes.js?v=mind-store-02" defer></script>
+  <script src="/nal/assets/js/store.js?v=mind-store-02" defer></script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  <script src="/nal/assets/js/app.js?v=pdf-ebook-store-1" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
+  <script src="/nal/assets/js/app.js?v=mind-store-02" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
@@ -313,11 +324,20 @@ for (const page of pages) {
   await writeFile(file, html(page), 'utf8');
 }
 
+// Remove only previously generated product pages that are no longer public.
+// Other NAL pages and assets remain under their existing generators.
+try {
+  const previous = JSON.parse(await readFile(path.join(root, 'nal/data/routes.json'), 'utf8'));
+  for (const entry of previous.routes || []) if (/^\/nal\/shop\/[a-z0-9-]+\/$/.test(entry.path) && !uniqueRoutes.has(entry.path)) {
+    await rm(path.join(root, entry.path.slice(1), 'index.html'), { force: true });
+  }
+} catch (error) { if (error.code !== 'ENOENT') throw error; }
+
 await mkdir(path.join(root, 'nal/data'), { recursive: true });
 await writeFile(
   path.join(root, 'nal/data/routes.json'),
   `${JSON.stringify({
-    schemaVersion: '1.0',
+    schemaVersion: '1.2',
     routes: pages.map((page) => ({
       path: page.route, title: page.title, description: page.description, indexable: !page.noindex
     }))
@@ -326,3 +346,4 @@ await writeFile(
 );
 
 console.log(`Generated ${pages.length} NAL pages from published data.`);
+await writeFile(path.join(root, 'nal/assets/js/product-routes.js'), `globalThis.NALProductRoutes = Object.freeze(${JSON.stringify(publicItems(products).map(p => p.slug))});\n`);

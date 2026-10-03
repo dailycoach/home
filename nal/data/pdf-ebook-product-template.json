@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "note": "NAL PDF 전자책 상품 등록 템플릿. published=true 전환 전 필수 정보를 검수한다.",
   "product": {
     "id": null,
@@ -29,8 +29,8 @@
     "sampleUrl": null,
     "previewUrl": null,
     "tableOfContents": [],
-    "deliveryMethod": "digital-download",
-    "licenseType": "personal-use",
+    "deliveryMethod": null,
+    "licenseType": null,
     "printingAllowed": null,
     "downloadLimit": null,
     "accessPeriod": null,
@@ -50,6 +50,15 @@
     "featuredOrder": null,
     "published": false,
     "createdAt": null,
-    "updatedAt": null
+    "updatedAt": null,
+    "audiences": [],
+    "topics": [],
+    "licenseOptions": [],
+    "version": null,
+    "policyStatus": "draft",
+    "cardCount": null,
+    "shippingPolicy": null,
+    "exchangePolicy": null,
+    "policyVersion": null
   }
 }

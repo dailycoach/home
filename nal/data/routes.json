@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "routes": [
     {
       "path": "/nal/",
@@ -21,8 +21,8 @@
     },
     {
       "path": "/nal/shop/",
-      "title": "PDF 전자책·마음도구 | NAL · 날빛",
-      "description": "PDF 전자책, 워크북, 코칭자료와 감정·질문카드를 파일형식·페이지수·미리보기·구매정보와 함께 살펴보세요.",
+      "title": "PDF 전자책·워크북 | NAL 마음도구 · 날빛",
+      "description": "PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.",
       "indexable": true
     },
     {
@@ -88,7 +88,7 @@
     {
       "path": "/nal/policy/shipping/",
       "title": "배송·다운로드 안내 | NAL · 날빛",
-      "description": "실물 상품의 배송·교환과 PDF 전자책 등 디지털 상품의 제공 방식이 확정된 뒤 안내합니다.",
+      "description": "실물 상품의 배송과 PDF 전자책 등 디지털 상품의 제공 방식이 확정된 뒤 공개합니다.",
       "indexable": false
     },
     {
@@ -168,6 +168,12 @@
       "title": "강점카드 | NAL 마음도구 · 날빛",
       "description": "일상의 행동과 경험에서 자주 사용하는 강점을 발견하고 다음 장면에 적용하도록 돕는 카드",
       "indexable": true
+    },
+    {
+      "path": "/nal/shop/item/",
+      "title": "마음도구 상품 | NAL · 날빛",
+      "description": "등록된 마음도구의 상품정보와 미리보기, 구매 안내를 확인합니다.",
+      "indexable": false
     },
     {
       "path": "/nal/host/park-jia/",

@@ -20,7 +20,7 @@
         "href": "/nal/gather/"
       },
       {
-        "label": "원데이",
+        "label": "클래스",
         "nalLabel": "NAL CLASS",
         "href": "/nal/class/"
       },
@@ -30,19 +30,9 @@
         "href": "/nal/shop/"
       },
       {
-        "label": "콘텐츠",
+        "label": "이야기",
         "nalLabel": "NAL NOTE",
         "href": "/nal/note/"
-      },
-      {
-        "label": "진행자",
-        "nalLabel": "NAL HOST",
-        "href": "/nal/host/"
-      },
-      {
-        "label": "MY NAL",
-        "nalLabel": "MY NAL",
-        "href": "/nal/my/"
       }
     ],
     "utility": [
