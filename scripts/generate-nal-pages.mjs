@@ -37,8 +37,8 @@ const pages = [
   },
   {
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
-    title: '감정카드·질문카드 | NAL SHOP · 날빛', description: '감정카드, 질문카드, 관계카드, 강점·가치카드와 워크북을 살펴보세요.',
-    label: 'NAL SHOP', heading: '말로 꺼내기 어려운 마음을\n한 장의 카드에서',
+    title: '감정카드·질문카드 | NAL 마음도구 · 날빛', description: '감정카드, 질문카드, 관계카드, 강점·가치카드와 워크북을 살펴보세요.',
+    label: 'NAL 마음도구', heading: '말로 꺼내기 어려운 마음을\n한 장의 카드에서',
     copy: '감정을 발견하고 대화를 시작하며 생각을 기록하는 자기이해 도구를 소개합니다.', schemaType: 'CollectionPage'
   },
   {
@@ -111,9 +111,9 @@ for (const item of publicItems(products)) {
   pages.push({
     route: `/nal/shop/${item.slug}/`,
     attrs: `data-page="detail" data-collection="products" data-slug="${item.slug}"`,
-    title: `${item.title} | NAL SHOP · 날빛`,
+    title: `${item.title} | NAL 마음도구 · 날빛`,
     description: text(item, 'summary', 'description'),
-    label: 'NAL SHOP', heading: item.title,
+    label: 'NAL 마음도구', heading: item.title,
     copy: '가격·재고·배송 정보는 확정된 내용만 공개합니다. 현재 등록 상태를 확인해 주세요.',
     schemaType: 'Product',
     ogImage: item.coverImage,
@@ -274,10 +274,10 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=user-theme-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=mind-tools-commerce-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  <script src="/nal/assets/js/app.js?v=user-theme-1" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
+  <script src="/nal/assets/js/app.js?v=mind-tools-commerce-1" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
