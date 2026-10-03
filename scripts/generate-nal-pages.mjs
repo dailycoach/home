@@ -74,7 +74,7 @@ const infoPages = [
   ['/nal/policy/terms/', 'terms', '이용약관', 'NAL POLICY', '법적 검토와 운영자 정보 확정 후 정식 약관을 공개합니다.', true],
   ['/nal/policy/privacy/', 'privacy', '개인정보처리방침', 'NAL POLICY', '수집 항목과 처리 주체가 확정되기 전 개인정보 입력을 받지 않습니다.', true],
   ['/nal/policy/cancellation/', 'cancellation', '취소·환불 규정', 'NAL POLICY', '프로그램별 실제 조건과 판매 채널의 정책이 확정된 뒤 공개합니다.', true],
-  ['/nal/policy/shipping/', 'shipping', '배송·교환 안내', 'NAL POLICY', '판매 상품과 배송 운영 방식이 확정된 뒤 공개합니다.', true]
+  ['/nal/policy/shipping/', 'shipping', '배송·다운로드 안내', 'NAL POLICY', '실물 상품의 배송과 PDF 전자책 등 디지털 상품의 제공 방식이 확정된 뒤 공개합니다.', true]
 ];
 
 for (const [route, section, heading, label, copy, noindex] of infoPages) {
