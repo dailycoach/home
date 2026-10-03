@@ -9,7 +9,7 @@
   const DEFAULT_NAV = [
     ["모임", "NAL GATHER", "/nal/gather/"],
     ["원데이", "NAL CLASS", "/nal/class/"],
-    ["스토어", "NAL SHOP", "/nal/shop/"],
+    ["마음도구", "NAL MIND TOOLS", "/nal/shop/"],
     ["콘텐츠", "NAL NOTE", "/nal/note/"],
     ["진행자", "NAL HOST", "/nal/host/"],
     ["MY NAL", "MY NAL", "/nal/my/"]
@@ -356,7 +356,7 @@
   function productCard(item) {
     const route = itemRoute("products", item);
     return `<article class="nal-card nal-card--product" data-catalog-id="${escapeHtml(item.id)}">
-      <div class="nal-card__media">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: 1600, height: 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">NAL SHOP</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
+      <div class="nal-card__media">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: 1600, height: 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">마음도구</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
       <div class="nal-card__body"><p class="nal-card__eyebrow">${escapeHtml(item.category)}</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
       <p class="nal-card__summary">${escapeHtml(item.summary)}</p><div class="nal-card__footer"><span class="nal-card__delivery">${formatPrice(item.price) || "가격 확정 후 공개"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
     </article>`;
@@ -474,7 +474,7 @@
     if (collection === "programs") return pageType === "gather"
       ? ["NAL GATHER", "계속 만나며 조금씩 달라지는 모임", state.site?.categories?.gather || [], programCard]
       : ["NAL CLASS", "한 번의 참여로 새로운 장면을 여는 시간", state.site?.categories?.class || [], programCard];
-    if (collection === "products") return ["NAL SHOP", "감정과 대화를 위한 자기이해 도구", state.site?.categories?.shop || [], productCard];
+    if (collection === "products") return ["NAL MIND TOOLS", "마음을 살피고 대화를 여는 도구를 고르는 스토어", state.site?.categories?.shop || [], productCard];
     if (collection === "hosts") return ["NAL HOST", "어떻게 진행하는지 먼저 보여주는 사람들", [], hostCard];
     return ["NAL NOTE", "읽고 끝나지 않는 다음 경험의 기록", state.site?.categories?.note || [], noteCard];
   }
@@ -525,10 +525,11 @@
       return ["", item.status === "waiting" ? "대기 신청 준비 중" : "다음 일정 준비 중", statusLabel(item.status || "comingSoon")];
     }
     if (kind === "products") {
-      const purchaseUrl = safeUrl(item.purchaseUrl || item.externalPurchaseUrl);
+      const purchaseUrl = safeUrl(item.purchaseUrl || item.externalPurchaseUrl || state.site?.externalLinks?.smartStore);
       const unavailable = ["comingSoon", "soldOut", "outOfStock"].includes(item.stockStatus) || (typeof item.stock === "number" && item.stock <= 0);
       if (!unavailable && ["inStock", "available"].includes(item.stockStatus) && purchaseUrl) return [purchaseUrl, "구매하기", stockLabel(item.stockStatus)];
       if (sourceUrl) return [sourceUrl, "상품 자세히 보기", stockLabel(item.stockStatus) || "판매 상태 확인"];
+      if (purchaseUrl) return [purchaseUrl, "스마트스토어 보기", stockLabel(item.stockStatus) || "판매 준비 중"];
       return ["", ["soldOut", "outOfStock"].includes(item.stockStatus) ? "품절" : "구매 준비 중", stockLabel(item.stockStatus) || "준비 중"];
     }
     if (sourceUrl) return [sourceUrl, "원문 보기", "공개 콘텐츠"];
@@ -606,20 +607,103 @@
     const [url, label, status] = detailCta(item, "products");
     const policies = [item.shippingPolicy, item.exchangePolicy, item.refundPolicy].filter(Boolean);
     const programs = publicItems(state.programs).filter((entry) => item.relatedProgramIds?.includes(entry.id));
-    const gallery = asArray(item.gallery).map((src, index) => ({ src, alt: asArray(item.galleryAlts)[index] || item.coverImageAlt || `${item.title} 비주얼 콘셉트` }));
+    const gallery = asArray(item.gallery).map((src, index) => ({ src, alt: asArray(item.galleryAlts)[index] || item.coverImageAlt || `${item.title} 상품 이미지` }));
     const smartStore = safeUrl(state.site?.externalLinks?.smartStore);
-    root.innerHTML = `<section class="nal-detail-hero nal-detail-hero--shop"><div class="nal-container nal-detail-hero__grid"><div class="nal-detail-hero__copy"><p class="nal-eyebrow">NAL SHOP</p><div class="nal-detail-hero__badges"><span class="nal-badge--shop">${escapeHtml(status)}</span><span class="nal-badge--neutral">${escapeHtml(item.category)}</span></div><h1>${escapeHtml(item.title)}</h1>${item.subtitle ? `<p class="nal-detail-hero__lead">${escapeHtml(item.subtitle)}</p>` : ""}<p class="nal-detail-hero__summary">${escapeHtml(item.summary)}</p><p class="nal-honest-note">${formatPrice(item.price) || "가격 확정 후 공개"}</p><div class="nal-detail-actions">${wishButton("products", item, true)}${url ? `<a class="nal-button--primary" href="${escapeHtml(url)}"${externalAttrs(url)}>${escapeHtml(label)}</a>` : `<button class="nal-button--primary" disabled>${escapeHtml(label)}</button>`}</div></div><figure class="nal-detail-hero__media nal-detail-hero__media--square">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 비주얼 콘셉트`, "", { eager: true, width: 1600, height: 1600 })}${conceptCaption(item, "실제 판매 제품 확정본이 아닌 NAL 비주얼 콘셉트 이미지입니다.")}</figure></div></section>
-      <div class="nal-container nal-detail-layout"><article class="nal-detail-content">
-        <section class="nal-detail-section"><p class="nal-eyebrow">01 / OPENING</p><h2>이 도구가 여는 대화</h2><p class="nal-detail-section__lead">${escapeHtml(item.description)}</p></section>
-        ${gallery.length ? `<section class="nal-detail-section nal-product-visuals"><p class="nal-eyebrow">VISUAL CONCEPT</p><h2>사용 장면과 카드 디테일</h2><div class="nal-product-gallery">${gallery.map((image, index) => `<figure class="nal-product-gallery__item nal-product-gallery__item--${index + 1}">${imageMarkup(image.src, image.alt, "", { width: index === 0 ? 1600 : index === 1 ? 1600 : 1200, height: index === 0 ? 1600 : index === 1 ? 1100 : 1500 })}</figure>`).join("")}</div><p class="nal-visual-note">${escapeHtml(item.visualNote || "제품 이미지 준비 중입니다.")}</p></section>` : ""}
-        <section class="nal-detail-section"><p class="nal-eyebrow">02 / HOW TO USE</p><h2>카드 또는 도구의 사용 방식</h2>${item.components?.length ? valueList(item.components, "nal-tool-list") : ""}${item.recommendedFor?.length ? `<h3>이런 때 꺼내 보세요</h3>${valueList(item.recommendedFor, "nal-check-list")}` : ""}</section>
-        ${item.usageIndividual ? `<section class="nal-detail-section"><p class="nal-eyebrow">03 / INDIVIDUAL</p><h2>혼자 사용할 때</h2><p>${escapeHtml(item.usageIndividual)}</p></section>` : ""}
-        ${item.usageCouple ? `<section class="nal-detail-section"><p class="nal-eyebrow">04 / TOGETHER</p><h2>함께 사용할 때</h2><p>${escapeHtml(item.usageCouple)}</p></section>` : ""}
-        ${item.usageGroup ? `<section class="nal-detail-section"><p class="nal-eyebrow">05 / GROUP</p><h2>모임·클래스에서 사용할 때</h2><p>${escapeHtml(item.usageGroup)}</p></section>` : ""}
-        ${programs.length ? `<section class="nal-detail-section"><p class="nal-eyebrow">06 / CONNECTED PROGRAM</p><h2>연결 프로그램</h2><div class="card-grid nal-related-grid">${programs.map(programCard).join("")}</div></section>` : ""}
-        <section class="nal-detail-section nal-detail-section--status"><p class="nal-eyebrow">07 / PRODUCT STATUS</p><h2>제품 준비 상태</h2><p>현재 <strong>${escapeHtml(status)}</strong>이며, 가격·재고·배송·개별 구매 링크는 확정 후 공개합니다.</p>${item.precautions ? `<p><strong>사용 전 안내</strong><br>${escapeHtml(item.precautions)}</p>` : ""}${policies.length ? valueList(policies, "nal-check-list") : '<p>실제 판매 채널과 상품 유형이 확정된 뒤 배송·교환·환불 정책을 공개합니다.</p>'}${smartStore ? `<p class="nal-detail-secondary-link"><a class="nal-text-link" href="${escapeHtml(smartStore)}"${externalAttrs(smartStore)}>운영 중인 스마트스토어 홈 보기 →</a><small>개별 상품 판매 링크가 아닌 보조 안내입니다.</small></p>` : ""}</section>
-      </article><aside class="nal-detail-aside"><div class="nal-detail-booking"><span>${escapeHtml(status)}</span><strong>${formatPrice(item.price) || "가격 확정 후 공개"}</strong>${url ? `<a class="nal-button--primary" href="${escapeHtml(url)}"${externalAttrs(url)}>${escapeHtml(label)}</a>` : `<button class="nal-button--primary" disabled>${escapeHtml(label)}</button>`}</div></aside></div>`;
-    renderStickyCta(status, label, url);
+    const price = formatPrice(item.price);
+    const originalPrice = formatPrice(item.originalPrice);
+    const hasPrice = Boolean(price);
+    const shippingText = item.shippingPolicy || (item.deliveryType === "physical" ? "배송 조건은 스마트스토어 상품 페이지에서 확인합니다." : "상품 제공 방식을 확인해 주세요.");
+    const stockText = stockLabel(item.stockStatus) || status || "판매 상태 확인";
+    const optionItems = asArray(item.options).filter(Boolean);
+    const commerceButton = url
+      ? `<a class="nal-commerce-buy" href="${escapeHtml(url)}"${externalAttrs(url)}>${escapeHtml(label)}</a>`
+      : `<button class="nal-commerce-buy" type="button" disabled>${escapeHtml(label)}</button>`;
+
+    root.innerHTML = `
+      <section class="nal-commerce-product">
+        <div class="nal-container nal-commerce-breadcrumb"><a href="/nal/">NAL</a><span>›</span><a href="/nal/shop/">마음도구</a><span>›</span><strong>${escapeHtml(item.category)}</strong></div>
+        <div class="nal-container nal-commerce-product__grid">
+          <div class="nal-commerce-gallery">
+            <figure class="nal-commerce-gallery__main">
+              ${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 상품 이미지`, "", { eager: true, width: 1600, height: 1600 })}
+              ${conceptCaption(item, "현재 이미지는 상품 사용 경험을 보여주는 비주얼 콘셉트입니다.")}
+            </figure>
+            ${gallery.length > 1 ? `<div class="nal-commerce-gallery__rail" aria-label="상품 이미지">${gallery.map((image, index) => `<figure>${imageMarkup(image.src, image.alt, "", { width: 480, height: 480 })}<figcaption class="nal-sr-only">상품 이미지 ${index + 1}</figcaption></figure>`).join("")}</div>` : ""}
+          </div>
+          <aside class="nal-commerce-panel" aria-label="상품 구매 정보">
+            <p class="nal-commerce-brand">NAL · MIND TOOLS</p>
+            <div class="nal-commerce-state"><span>${escapeHtml(item.category)}</span><b>${escapeHtml(stockText)}</b></div>
+            <h1>${escapeHtml(item.title)}</h1>
+            ${item.subtitle ? `<p class="nal-commerce-subtitle">${escapeHtml(item.subtitle)}</p>` : ""}
+            <p class="nal-commerce-summary">${escapeHtml(item.summary)}</p>
+            <div class="nal-commerce-price">
+              ${originalPrice && originalPrice !== price ? `<del>${escapeHtml(originalPrice)}</del>` : ""}
+              <strong>${hasPrice ? escapeHtml(price) : "판매가 준비 중"}</strong>
+            </div>
+            <dl class="nal-commerce-facts">
+              <div><dt>배송</dt><dd>${escapeHtml(shippingText)}</dd></div>
+              <div><dt>구매처</dt><dd>${smartStore ? "NAL 스마트스토어" : "판매 채널 준비 중"}</dd></div>
+              <div><dt>상태</dt><dd>${escapeHtml(stockText)}</dd></div>
+            </dl>
+            ${optionItems.length ? `<label class="nal-commerce-option"><span>옵션</span><select><option value="">옵션을 선택하세요</option>${optionItems.map((option) => `<option>${escapeHtml(typeof option === "string" ? option : option.label || option.name || "")}</option>`).join("")}</select></label>` : ""}
+            <div class="nal-commerce-actions">
+              ${commerceButton}
+              ${wishButton("products", item, true)}
+            </div>
+            <p class="nal-commerce-note">${url && label === "구매하기" ? "외부 스마트스토어의 실제 상품 주문 화면으로 이동합니다." : "개별 상품 판매가 열리기 전에는 스마트스토어의 현재 판매 상품을 확인할 수 있습니다."}</p>
+          </aside>
+        </div>
+      </section>
+
+      <nav class="nal-commerce-tabs" aria-label="상품 상세 메뉴">
+        <div class="nal-container">
+          <a href="#product-info">상품정보</a>
+          <a href="#product-use">사용방법</a>
+          <a href="#product-delivery">배송·교환</a>
+          ${programs.length ? '<a href="#product-programs">연결 프로그램</a>' : ""}
+        </div>
+      </nav>
+
+      <div class="nal-container nal-commerce-detail">
+        <main>
+          <section id="product-info" class="nal-commerce-section">
+            <p class="nal-eyebrow">PRODUCT INFORMATION</p>
+            <h2>상품 정보</h2>
+            <p class="nal-commerce-lead">${escapeHtml(item.description)}</p>
+            ${gallery.length ? `<div class="nal-commerce-detail-images">${gallery.map((image) => `<figure>${imageMarkup(image.src, image.alt, "", { width: 1400, height: 1400 })}</figure>`).join("")}</div>` : ""}
+            ${item.visualNote ? `<p class="nal-visual-note">${escapeHtml(item.visualNote)}</p>` : ""}
+          </section>
+
+          <section id="product-use" class="nal-commerce-section">
+            <p class="nal-eyebrow">HOW TO USE</p>
+            <h2>이렇게 사용합니다</h2>
+            ${item.components?.length ? `<h3>구성</h3>${valueList(item.components, "nal-tool-list")}` : ""}
+            ${item.recommendedFor?.length ? `<h3>이런 분께 권합니다</h3>${valueList(item.recommendedFor, "nal-check-list")}` : ""}
+            <div class="nal-commerce-use-grid">
+              ${item.usageIndividual ? `<article><span>01</span><h3>혼자</h3><p>${escapeHtml(item.usageIndividual)}</p></article>` : ""}
+              ${item.usageCouple ? `<article><span>02</span><h3>둘이</h3><p>${escapeHtml(item.usageCouple)}</p></article>` : ""}
+              ${item.usageGroup ? `<article><span>03</span><h3>모임·코칭</h3><p>${escapeHtml(item.usageGroup)}</p></article>` : ""}
+            </div>
+            ${item.precautions ? `<div class="nal-commerce-caution"><strong>사용 전 확인</strong><p>${escapeHtml(item.precautions)}</p></div>` : ""}
+          </section>
+
+          <section id="product-delivery" class="nal-commerce-section">
+            <p class="nal-eyebrow">DELIVERY & POLICY</p>
+            <h2>배송·교환 안내</h2>
+            ${policies.length ? valueList(policies, "nal-check-list") : `<p>배송비·출고일·교환·반품 기준은 실제 판매가 시작된 스마트스토어 상품 페이지의 조건을 기준으로 합니다.</p>`}
+            ${smartStore ? `<a class="nal-text-link" href="${escapeHtml(smartStore)}"${externalAttrs(smartStore)}>NAL 스마트스토어에서 판매 정보 확인 →</a>` : ""}
+          </section>
+
+          ${programs.length ? `<section id="product-programs" class="nal-commerce-section"><p class="nal-eyebrow">CONNECTED PROGRAM</p><h2>이 도구와 함께하는 프로그램</h2><div class="card-grid nal-related-grid">${programs.map(programCard).join("")}</div></section>` : ""}
+        </main>
+        <aside class="nal-commerce-sidecart">
+          <span>${escapeHtml(stockText)}</span>
+          <strong>${escapeHtml(item.title)}</strong>
+          <b>${hasPrice ? escapeHtml(price) : "판매가 준비 중"}</b>
+          ${commerceButton}
+        </aside>
+      </div>`;
+    renderStickyCta(stockText, label, url);
   }
 
   function renderDetail() {
