@@ -389,7 +389,7 @@
     return `<article class="nal-card nal-card--product${digital ? " nal-card--digital" : ""}" data-catalog-id="${escapeHtml(item.id)}">
       <div class="nal-card__media">${imageMarkup(globalThis.NALStore.safePublicUrl(item.coverImage), item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일")) : "실물"}</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
       <div class="nal-card__body"><p class="nal-card__eyebrow">${escapeHtml(productFormatLabel(item))}</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
-      <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${formatPrice(item.price) || "판매 준비 중"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
+      <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${item.price === 0 ? "무료" : formatPrice(item.price) || "판매 준비 중"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
     </article>`;
   }
 
@@ -677,7 +677,7 @@
     const previewUrl = globalThis.NALStore.preview(item);
     const programs = publicItems(state.programs).filter((entry) => item.relatedProgramIds?.includes(entry.id));
     const gallery = asArray(item.gallery).map((src, index) => ({ src: globalThis.NALStore.safePublicUrl(src), alt: asArray(item.galleryAlts)[index] || item.coverImageAlt || `${item.title} 상품 이미지` })).filter(image => image.src);
-    const price = formatPrice(item.price);
+    const price = item.price === 0 ? "무료" : formatPrice(item.price);
     const originalPrice = formatPrice(item.originalPrice);
     const hasPrice = Boolean(price);
     const stockText = stockLabel(item.stockStatus) || status || "판매 상태 확인";
@@ -685,8 +685,9 @@
     const license = licenseLabel(item);
     const format = productFormatLabel(item);
     const delivery = digital ? digitalDeliveryLabel(item) : (item.shippingPolicy || "스마트스토어 상품 페이지에서 배송 조건을 확인합니다.");
+    const directFreeDownload = item.price === 0 && label === "무료 다운로드" && url.startsWith("/");
     const commerceButton = url
-      ? `<a class="nal-commerce-buy" href="${escapeHtml(url)}"${externalAttrs(url)}>${escapeHtml(label)}</a>`
+      ? `<a class="nal-commerce-buy" href="${escapeHtml(url)}"${directFreeDownload ? " download" : externalAttrs(url)}>${escapeHtml(label)}</a>`
       : `<button class="nal-commerce-buy" type="button" aria-describedby="product-purchase-status" disabled>${escapeHtml(label)}</button>`;
     const previewButton = previewUrl
       ? `<a class="nal-commerce-preview" href="${escapeHtml(previewUrl)}"${externalAttrs(previewUrl)}>${escapeHtml(item.fileFormat || "자료")} 미리보기</a>`
