@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "routes": [
     {
       "path": "/nal/",
@@ -21,8 +21,8 @@
     },
     {
       "path": "/nal/shop/",
-      "title": "마음도구 | NAL · 날빛",
-      "description": "감정카드, 질문카드, 관계카드, 강점카드 등 마음과 대화를 위한 도구를 상품처럼 비교하고 구매 정보를 확인하세요.",
+      "title": "PDF 전자책·마음도구 | NAL · 날빛",
+      "description": "PDF 전자책, 워크북, 코칭자료와 감정·질문카드를 파일형식·페이지수·미리보기·구매정보와 함께 살펴보세요.",
       "indexable": true
     },
     {
@@ -87,8 +87,8 @@
     },
     {
       "path": "/nal/policy/shipping/",
-      "title": "배송·교환 안내 | NAL · 날빛",
-      "description": "판매 상품과 배송 운영 방식이 확정된 뒤 공개합니다.",
+      "title": "배송·다운로드 안내 | NAL · 날빛",
+      "description": "실물 상품의 배송·교환과 PDF 전자책 등 디지털 상품의 제공 방식이 확정된 뒤 안내합니다.",
       "indexable": false
     },
     {
