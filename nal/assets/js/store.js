@@ -55,6 +55,7 @@
     const individual = safePublicUrl(item.purchaseUrl);
     const unavailable = item.stockStatus === 'soldOut' || item.stockStatus === 'discontinued';
     if (unavailable) return { url: '', label: item.stockStatus === 'soldOut' ? '품절' : '판매 종료', reason: '현재 이 상품은 구매할 수 없습니다.' };
+    if (individual && item.price === 0 && item.stockStatus === 'available') return { url: individual, label: '무료 다운로드', reason: '별도 결제나 로그인 없이 PDF를 바로 받을 수 있습니다.' };
     if (individual && Number.isFinite(item.price) && item.stockStatus === 'available') return { url: individual, label: '구매하기', reason: '실제 판매 채널에서 결제와 제공 조건을 확인합니다.' };
     return { url: safePublicUrl(storeUrl), label: safePublicUrl(storeUrl) ? '스마트스토어 보기' : '판매 준비 중', reason: '개별 상품의 가격과 판매 연결을 준비하고 있습니다.' };
   }
