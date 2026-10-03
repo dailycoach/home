@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "storefrontUrl": "https://smartstore.naver.com/nalbitcoaching",
   "products": [
     {
@@ -65,7 +65,16 @@
       "featuredOrder": 1,
       "published": true,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": null,
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": null,
+      "licenseType": null,
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": null
     },
     {
       "id": "coaching-question-card",
@@ -131,7 +140,16 @@
       "featuredOrder": 2,
       "published": true,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": null,
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": null,
+      "licenseType": null,
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": null
     },
     {
       "id": "relationship-question-card",
@@ -195,7 +213,16 @@
       "featuredOrder": 3,
       "published": true,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": null,
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": null,
+      "licenseType": null,
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": null
     },
     {
       "id": "strength-card",
@@ -257,7 +284,16 @@
       "featuredOrder": 4,
       "published": true,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": null,
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": null,
+      "licenseType": null,
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": null
     },
     {
       "id": "value-card",
@@ -299,7 +335,16 @@
       "featuredOrder": null,
       "published": false,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": null,
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": null,
+      "licenseType": null,
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": null
     },
     {
       "id": "emotion-record-workbook",
@@ -308,7 +353,7 @@
       "subtitle": null,
       "summary": null,
       "description": null,
-      "category": "워크북",
+      "category": "워크북·활동지",
       "tags": [],
       "coverImage": null,
       "coverImageAlt": null,
@@ -316,8 +361,8 @@
       "galleryAlts": [],
       "price": null,
       "originalPrice": null,
-      "productType": "workbook",
-      "deliveryType": null,
+      "productType": "pdfEbook",
+      "deliveryType": "digital",
       "stock": null,
       "stockStatus": "comingSoon",
       "options": [],
@@ -341,7 +386,16 @@
       "featuredOrder": null,
       "published": false,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": "PDF",
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": "digital-download",
+      "licenseType": "personal-use",
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": "결제 후 제공 방식과 이용 범위가 확정되면 공개합니다."
     },
     {
       "id": "art-psychology-workbook",
@@ -350,7 +404,7 @@
       "subtitle": null,
       "summary": null,
       "description": null,
-      "category": "워크북",
+      "category": "워크북·활동지",
       "tags": [],
       "coverImage": null,
       "coverImageAlt": null,
@@ -358,8 +412,8 @@
       "galleryAlts": [],
       "price": null,
       "originalPrice": null,
-      "productType": "workbook",
-      "deliveryType": null,
+      "productType": "pdfEbook",
+      "deliveryType": "digital",
       "stock": null,
       "stockStatus": "comingSoon",
       "options": [],
@@ -388,7 +442,16 @@
       "featuredOrder": null,
       "published": false,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": "PDF",
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": "digital-download",
+      "licenseType": "personal-use",
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": "결제 후 제공 방식과 이용 범위가 확정되면 공개합니다."
     },
     {
       "id": "one-day-class-kit",
@@ -432,7 +495,27 @@
       "featuredOrder": null,
       "published": false,
       "createdAt": null,
-      "updatedAt": null
+      "updatedAt": null,
+      "fileFormat": null,
+      "fileSizeMB": null,
+      "sampleUrl": null,
+      "deliveryMethod": null,
+      "licenseType": null,
+      "printingAllowed": null,
+      "downloadLimit": null,
+      "accessPeriod": null,
+      "fulfillmentNote": null
     }
-  ]
+  ],
+  "digitalProductFields": {
+    "fileFormat": "PDF",
+    "pageCount": null,
+    "fileSizeMB": null,
+    "sampleUrl": null,
+    "deliveryMethod": null,
+    "licenseType": null,
+    "printingAllowed": null,
+    "downloadLimit": null,
+    "accessPeriod": null
+  }
 }
