@@ -488,9 +488,12 @@
     const q = (params.get("q") || "").trim().toLocaleLowerCase("ko");
     const category = params.get("category") || "";
     const status = params.get("status") || "";
+    const format = params.get("format") || "";
     if (q) items = items.filter((item) => [item.title, item.name, item.summary, item.description, item.headline, item.bio, ...asArray(item.tags), ...asArray(item.fields)].filter(Boolean).join(" ").toLocaleLowerCase("ko").includes(q));
     if (category) items = items.filter((item) => item.category === category || item.fields?.includes(category));
     if (status) items = items.filter((item) => item.status === status || item.stockStatus === status);
+    if (collection === "products" && format === "digital") items = items.filter(isDigitalProduct);
+    if (collection === "products" && format === "physical") items = items.filter((item) => !isDigitalProduct(item));
     const allowedSorts = ["recommended", "closing", "nearest", "newest", "lowPrice"];
     const sort = allowedSorts.includes(params.get("sort")) ? params.get("sort") : "recommended";
     const dateValue = (item) => item.startDate ? Date.parse(item.startDate) : Number.MAX_SAFE_INTEGER;
@@ -506,7 +509,7 @@
     if (collection === "programs") return pageType === "gather"
       ? ["NAL GATHER", "계속 만나며 조금씩 달라지는 모임", state.site?.categories?.gather || [], programCard]
       : ["NAL CLASS", "한 번의 참여로 새로운 장면을 여는 시간", state.site?.categories?.class || [], programCard];
-    if (collection === "products") return ["NAL MIND TOOLS", "마음을 살피고 대화를 여는 도구를 고르는 스토어", state.site?.categories?.shop || [], productCard];
+    if (collection === "products") return ["NAL MIND TOOLS", "PDF 전자책부터 워크북·코칭도구까지", state.site?.categories?.shop || [], productCard];
     if (collection === "hosts") return ["NAL HOST", "어떻게 진행하는지 먼저 보여주는 사람들", [], hostCard];
     return ["NAL NOTE", "읽고 끝나지 않는 다음 경험의 기록", state.site?.categories?.note || [], noteCard];
   }
@@ -526,6 +529,7 @@
           <label class="nal-form-field nal-filter-search"><span>검색</span><input type="search" name="q" value="${escapeHtml(q)}" placeholder="주제나 이름으로 검색"></label>
           ${categories.length ? `<label class="nal-form-field"><span>카테고리</span><select name="category" data-filter><option value="">전체</option>${categories.filter((value) => !value.startsWith("전체") && value !== "지난 모임").map((value) => `<option value="${escapeHtml(value)}"${params.get("category") === value ? " selected" : ""}>${escapeHtml(value)}</option>`).join("")}</select></label>` : ""}
           ${collection === "programs" ? `<label class="nal-form-field"><span>모집 상태</span><select name="status" data-filter><option value="">전체</option>${["open","closing","waiting","closed","completed","comingSoon"].map((value) => `<option value="${value}"${params.get("status") === value ? " selected" : ""}>${statusLabel(value)}</option>`).join("")}</select></label>` : ""}
+          ${collection === "products" ? `<label class="nal-form-field"><span>형태</span><select name="format" data-filter><option value="">전체</option><option value="digital"${params.get("format") === "digital" ? " selected" : ""}>PDF·디지털</option><option value="physical"${params.get("format") === "physical" ? " selected" : ""}>실물 도구</option></select></label>` : ""}
           <label class="nal-form-field"><span>정렬</span><select name="sort" data-filter><option value="recommended"${!params.get("sort") || params.get("sort") === "recommended" ? " selected" : ""}>추천순</option><option value="closing"${params.get("sort") === "closing" ? " selected" : ""}>모집 상태순</option><option value="nearest"${params.get("sort") === "nearest" ? " selected" : ""}>가까운 일정순</option><option value="newest"${params.get("sort") === "newest" ? " selected" : ""}>신규 등록순</option><option value="lowPrice"${params.get("sort") === "lowPrice" ? " selected" : ""}>낮은 가격순</option></select></label>
           <button class="nal-button--primary" type="submit">적용</button>
         </form>
