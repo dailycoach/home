@@ -49,7 +49,7 @@ try {
   w=await page('/nal/shop/item/','?slug=qa-pdf',{price:null,pageCount:null,fileSizeMB:null,author:null,sampleUrl:null,previewUrl:null,stockStatus:'comingSoon'});d=w.document;
   assert(!d.querySelector('#product-preview'));checks++;
   assert(!d.querySelector('.nal-commerce-author'));checks++;
-  assert(d.querySelector('.nal-commerce-price').textContent.includes('판매 준비 중'));checks++;
+  assert(d.querySelector('.nal-commerce-price').textContent.includes('판매가 준비 중'));checks++;
   assert(!d.querySelector('.nal-commerce-facts').textContent.includes('86쪽'));checks++;
   assert(!JSON.parse(d.querySelector('script[type="application/ld+json"]').textContent).offers);checks++;
   w=await page('/nal/shop/item/','?slug=qa-pdf',{stockStatus:'soldOut'});d=w.document;

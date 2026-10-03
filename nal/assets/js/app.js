@@ -387,7 +387,7 @@
       licenseLabel(item)
     ].filter(Boolean).join(" · ");
     return `<article class="nal-card nal-card--product${digital ? " nal-card--digital" : ""}" data-catalog-id="${escapeHtml(item.id)}">
-      <div class="nal-card__media">${imageMarkup(globalThis.NALStore.safePublicUrl(item.coverImage), item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일")) : "마음도구"}</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
+      <div class="nal-card__media">${imageMarkup(globalThis.NALStore.safePublicUrl(item.coverImage), item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일")) : "실물"}</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
       <div class="nal-card__body"><p class="nal-card__eyebrow">${escapeHtml(productFormatLabel(item))}</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
       <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${formatPrice(item.price) || "판매 준비 중"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
     </article>`;
@@ -651,14 +651,15 @@
     setMeta('meta[property="og:title"]', title);
     setMeta('meta[property="og:description"]', item.summary || item.description || item.title);
     const route = itemRoute("products", item);
-    const canonical = new URL(route, location.origin).href;
+    const canonicalOrigin = "https://daily-coach-ing.com";
+    const canonical = new URL(route, canonicalOrigin).href;
     const link = document.querySelector('link[rel="canonical"]');
     if (link) link.href = canonical;
     setMeta('meta[property="og:url"]', canonical);
     const cover = globalThis.NALStore.safePublicUrl(item.coverImage);
-    if (cover) setMeta('meta[property="og:image"]', new URL(cover, location.origin).href);
+    if (cover) setMeta('meta[property="og:image"]', new URL(cover, canonicalOrigin).href);
     const data = { "@context": "https://schema.org", "@type": "Product", name: item.title, description: item.summary || item.description, sku: item.id, url: canonical, brand: { "@type": "Brand", name: "NAL · 날빛" } };
-    if (cover) data.image = new URL(cover, location.origin).href;
+    if (cover) data.image = new URL(cover, canonicalOrigin).href;
     data.additionalProperty = [["파일형식",item.fileFormat],["페이지",item.pageCount],["저자",item.author]].filter(([,value])=>value != null).map(([name,value])=>({"@type":"PropertyValue",name,value}));
     const purchase = globalThis.NALStore.purchase(item, "");
     if (purchase.label === "구매하기") data.offers = { "@type": "Offer", price: item.price, priceCurrency: "KRW", availability: "https://schema.org/InStock", url: purchase.url };
@@ -732,7 +733,7 @@
             <p class="nal-commerce-summary">${escapeHtml(item.summary)}</p>
             <div class="nal-commerce-price">
               ${originalPrice && originalPrice !== price ? `<del>${escapeHtml(originalPrice)}</del>` : ""}
-              <strong>${hasPrice ? escapeHtml(price) : "판매 준비 중"}</strong>
+              <strong>${hasPrice ? escapeHtml(price) : "판매가 준비 중"}</strong>
             </div>
             <dl class="nal-commerce-facts">
               ${fileFacts.map(([key, value]) => `<div><dt>${escapeHtml(key)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}
@@ -806,7 +807,7 @@
         <aside class="nal-commerce-sidecart">
           <span>${escapeHtml(digital ? format : stockText)}</span>
           <strong>${escapeHtml(item.title)}</strong>
-          <b>${hasPrice ? escapeHtml(price) : "판매 준비 중"}</b>
+          <b>${hasPrice ? escapeHtml(price) : "판매가 준비 중"}</b>
           ${previewButton}
           ${commerceButton}
         </aside>
@@ -904,6 +905,7 @@
     else renderInfo();
     renderLoadNotice();
     updateWishCount();
+    document.dispatchEvent(new CustomEvent("nal:page-rendered", { detail: { launches: state.launches } }));
   }
 
   function renderLoadNotice() {
@@ -938,14 +940,15 @@
       ["programs", "programs.json", "programs"],
       ["products", "products.json", "products"],
       ["hosts", "hosts.json", "hosts"],
-      ["content", "content.json", "content"]
+      ["content", "content.json", "content"],
+      ...(page === "home" ? [["launches", "launches.json", "launches"]] : [])
     ];
     state.errors = [];
     const loaded = await Promise.allSettled(entries.map(async ([name, file, key]) => {
       const response = await fetch(`${DATA_BASE}/${file}`, { cache: "no-store" });
       if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
       const data = await response.json();
-      return [name, key === "site" ? data : asArray(data[key])];
+      return [name, key === "site" || key === "launches" ? data : asArray(data[key])];
     }));
     loaded.forEach((result, index) => {
       const name = entries[index][0];

@@ -132,15 +132,15 @@ jobs:
         run: |
           gh issue comment 1 --body "## 실서비스 배포 검수 통과 · KGM210 v3.15.4
 
-- 검수 커밋: \`${GITHUB_SHA}\`
-- GitHub Pages 재빌드 요청 상태: \`${PAGE_STATUS}\`
-- 실서비스 제목: \`${LIVE_TITLE}\`
-- 프로필 엔진: 로드 확인
-- 7주 성장여정 UI: v3.15.2 로드 확인
-- 저장·재방문 QA: v3.15.4 로드 확인
-- 확인 URL: https://daily-coach-ing.com/tests/kgm210/
+          - 검수 커밋: \`${GITHUB_SHA}\`
+          - GitHub Pages 재빌드 요청 상태: \`${PAGE_STATUS}\`
+          - 실서비스 제목: \`${LIVE_TITLE}\`
+          - 프로필 엔진: 로드 확인
+          - 7주 성장여정 UI: v3.15.2 로드 확인
+          - 저장·재방문 QA: v3.15.4 로드 확인
+          - 확인 URL: https://daily-coach-ing.com/tests/kgm210/
 
-캐시 우회 요청으로 HTML과 핵심 외부 자산을 직접 확인했습니다."
+          캐시 우회 요청으로 HTML과 핵심 외부 자산을 직접 확인했습니다."
 
       - name: Report live verification failure
         if: steps.live.outputs.pass != '1'
@@ -152,13 +152,13 @@ jobs:
         run: |
           gh issue comment 1 --body "## 실서비스 배포 검수 미통과 · KGM210 v3.15.4
 
-- 검수 커밋: \`${GITHUB_SHA}\`
-- GitHub Pages 재빌드 요청 상태: \`${PAGE_STATUS}\`
-- 재빌드 응답: \`${PAGE_RESPONSE}\`
-- 마지막 확인 제목: \`${LIVE_TITLE}\`
-- 확인 URL: https://daily-coach-ing.com/tests/kgm210/
+          - 검수 커밋: \`${GITHUB_SHA}\`
+          - GitHub Pages 재빌드 요청 상태: \`${PAGE_STATUS}\`
+          - 재빌드 응답: \`${PAGE_RESPONSE}\`
+          - 마지막 확인 제목: \`${LIVE_TITLE}\`
+          - 확인 URL: https://daily-coach-ing.com/tests/kgm210/
 
-main에는 새 코드가 있으나 실서비스가 검수 시간 안에 갱신되지 않았습니다. Pages 배포 소스와 캐시를 추가 점검해야 합니다."
+          main에는 새 코드가 있으나 실서비스가 검수 시간 안에 갱신되지 않았습니다. Pages 배포 소스와 캐시를 추가 점검해야 합니다."
 
       - name: Fail when live verification did not pass
         if: steps.live.outputs.pass != '1'

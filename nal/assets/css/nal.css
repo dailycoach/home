@@ -5255,12 +5255,17 @@
   body[data-collection="products"] .nal-card {border-radius:6px;box-shadow:none;min-width:0}
   body[data-collection="products"] .nal-card__summary {font-size:.875rem}
   body[data-collection="products"] .nal-card__product-meta {font-size:.875rem}
+  body[data-collection="products"] .nal-card--digital .nal-card__media {aspect-ratio:3/4}
+  .nal-card--product .nal-card__badges {top:auto;bottom:.75rem}
   .nal-card--digital .nal-card__media img,
   .nal-commerce-product--digital .nal-commerce-gallery__main img,
   .nal-commerce-product--digital .nal-commerce-gallery__rail img,
   .nal-commerce-detail-images.is-digital img {object-fit:contain;background:var(--nal-surface-subtle)}
   .nal-commerce-gallery,.nal-commerce-panel,.nal-commerce-content {min-width:0}
   .nal-commerce-panel :is(h1,p,dd),.nal-commerce-content {overflow-wrap:anywhere}
+  .nal-commerce-actions {display:flex;flex-wrap:wrap}
+  .nal-commerce-actions > :is(a,button) {flex:1 1 9rem;min-width:0;overflow-wrap:anywhere}
+  .nal-commerce-actions .nal-commerce-preview {white-space:normal;text-align:center}
   .nal-commerce-buy:focus-visible,.nal-commerce-preview:focus-visible {outline:3px solid var(--nal-focus);outline-offset:3px}
   .nal-commerce-tabs .nal-container {display:flex;overflow-x:auto}
   .nal-commerce-tabs a {flex:1 0 auto;padding-inline:1rem;min-width:7rem}
@@ -5282,6 +5287,7 @@
     .nal-commerce-product--digital .nal-commerce-gallery__rail figure {flex:0 0 4rem}
     .nal-commerce-facts>div {grid-template-columns:4rem minmax(0,1fr);gap:.75rem}
     .nal-commerce-actions.has-preview .nal-commerce-buy {grid-column:1/-1}
+    .nal-commerce-actions .nal-commerce-buy {flex-basis:100%}
   }
   @media(max-width:21rem) {body[data-collection="products"] .card-grid {grid-template-columns:minmax(0,1fr)}}
 }

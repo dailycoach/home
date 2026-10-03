@@ -55,27 +55,27 @@ jobs:
               disc_replacements = [
                   (
                       '''            <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
-            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>''',
+                      <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>''',
                       '''            <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
-            <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 <small>NEW</small></a>
-            <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계 <small>NEW</small></a>
-            <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+                      <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 <small>NEW</small></a>
+                      <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계 <small>NEW</small></a>
+                      <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
                   ),
                   (
                       '''          <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
-          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>''',
+                    <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>''',
                       '''          <a href="/tests/kgm210/" data-route="kgm210">KGM210 성장코칭 <small>→</small></a>
-          <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>
-          <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>
-          <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
+                    <a href="/tests/disc16/" data-route="disc16">DISC16 행동스타일 검사 <small>NEW</small></a>
+                    <a href="/tests/disc16-youth/" data-route="disc16Youth">DISC16 청소년 관계행동 <small>NEW</small></a>
+                    <a href="/tests/learning/" data-route="learning">학습 진단 <small>→</small></a>'''
                   ),
                   (
                       '''      kgm210: '/tests/kgm210/',
-      learning: '/tests/learning/',''',
+                learning: '/tests/learning/',''',
                       '''      kgm210: '/tests/kgm210/',
-      disc16: '/tests/disc16/',
-      disc16Youth: '/tests/disc16-youth/',
-      learning: '/tests/learning/','''
+                disc16: '/tests/disc16/',
+                disc16Youth: '/tests/disc16-youth/',
+                learning: '/tests/learning/','''
                   )
               ]
               for before, after in disc_replacements:
@@ -86,41 +86,41 @@ jobs:
           ensure_replacement(
               '''        <a class="nav-link" href="/lcms/" data-route="lcms">LCMS</a>''',
               '''        <div class="nav-group">
-          <button class="nav-button" type="button" aria-haspopup="true">RS에듀 <span aria-hidden="true">⌄</span></button>
-          <div class="dropdown" role="menu">
-            <a href="/lcms/business-achievements.html" data-route="rsAchievements">사업실적 <small>2010–현재</small></a>
-            <a href="/lcms/platform.html" data-route="rsPlatform">Career Platform <small>→</small></a>
-          </div>
-        </div>''',
+                    <button class="nav-button" type="button" aria-haspopup="true">RS에듀 <span aria-hidden="true">⌄</span></button>
+                    <div class="dropdown" role="menu">
+                      <a href="/lcms/business-achievements.html" data-route="rsAchievements">사업실적 <small>2010–현재</small></a>
+                      <a href="/lcms/platform.html" data-route="rsPlatform">Career Platform <small>→</small></a>
+                    </div>
+                  </div>''',
               'data-route="rsAchievements">사업실적',
               '데스크톱 RS에듀 메뉴'
           )
 
           ensure_replacement(
               '''            <a href="/lcms/" data-route="lcms">
-              <strong>LCMS <span aria-hidden="true">→</span></strong>
-              <small>데이터 기반 진로교육 인프라</small>
-            </a>''',
+                        <strong>LCMS <span aria-hidden="true">→</span></strong>
+                        <small>데이터 기반 진로교육 인프라</small>
+                      </a>''',
               '''            <a href="/lcms/business-achievements.html" data-route="rsAchievements">
-              <strong>RS에듀 사업실적 <span aria-hidden="true">→</span></strong>
-              <small>2010년부터 이어진 진로교육 수행 기록</small>
-            </a>''',
+                        <strong>RS에듀 사업실적 <span aria-hidden="true">→</span></strong>
+                        <small>2010년부터 이어진 진로교육 수행 기록</small>
+                      </a>''',
               '<strong>RS에듀 사업실적',
               '메인 바로가기'
           )
 
           ensure_replacement(
               '''        <article class="category" data-category="program">
-          <h3>교육·프로그램</h3>
-          <p>LCMS와 데이터 기반 교육 인프라로 이동합니다.</p>
-          <a href="/lcms/" data-route="lcms">LCMS 진로교육 인프라 <small>→</small></a>
-        </article>''',
+                    <h3>교육·프로그램</h3>
+                    <p>LCMS와 데이터 기반 교육 인프라로 이동합니다.</p>
+                    <a href="/lcms/" data-route="lcms">LCMS 진로교육 인프라 <small>→</small></a>
+                  </article>''',
               '''        <article class="category" data-category="program">
-          <h3>RS에듀컨설팅</h3>
-          <p>진로교육 수행실적과 Career Intelligence Platform을 확인합니다.</p>
-          <a href="/lcms/business-achievements.html" data-route="rsAchievements">주요 사업실적 <small>2010–현재</small></a>
-          <a href="/lcms/platform.html" data-route="rsPlatform">Career Intelligence Platform <small>→</small></a>
-        </article>''',
+                    <h3>RS에듀컨설팅</h3>
+                    <p>진로교육 수행실적과 Career Intelligence Platform을 확인합니다.</p>
+                    <a href="/lcms/business-achievements.html" data-route="rsAchievements">주요 사업실적 <small>2010–현재</small></a>
+                    <a href="/lcms/platform.html" data-route="rsPlatform">Career Intelligence Platform <small>→</small></a>
+                  </article>''',
               '<h3>RS에듀컨설팅</h3>',
               '전체 메뉴 RS에듀 카테고리'
           )
@@ -128,7 +128,7 @@ jobs:
           ensure_replacement(
               '''<a href="/lcms/" data-route="lcms">LCMS</a>''',
               '''<a href="/lcms/business-achievements.html" data-route="rsAchievements">RS에듀 사업실적</a>
-          <a href="/lcms/platform.html" data-route="rsPlatform">Career Platform</a>''',
+                    <a href="/lcms/platform.html" data-route="rsPlatform">Career Platform</a>''',
               '>RS에듀 사업실적</a>',
               '푸터 RS에듀 메뉴'
           )
@@ -136,8 +136,8 @@ jobs:
           ensure_replacement(
               '''      lcms: '/lcms/',''',
               '''      lcms: '/lcms/',
-      rsAchievements: '/lcms/business-achievements.html',
-      rsPlatform: '/lcms/platform.html',''',
+                rsAchievements: '/lcms/business-achievements.html',
+                rsPlatform: '/lcms/platform.html',''',
               "rsAchievements: '/lcms/business-achievements.html'",
               'RS에듀 라우트 맵'
           )
