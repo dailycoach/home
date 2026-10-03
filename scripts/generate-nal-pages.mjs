@@ -114,12 +114,14 @@ for (const item of publicItems(products)) {
     title: `${item.title} | NAL 마음도구 · 날빛`,
     description: text(item, 'summary', 'description'),
     label: 'NAL 마음도구', heading: item.title,
-    copy: '가격·재고·배송 정보는 확정된 내용만 공개합니다. 현재 등록 상태를 확인해 주세요.',
+    copy: item.deliveryType === 'digital'
+      ? '파일형식·페이지수·미리보기·다운로드·이용 범위는 확정된 내용만 공개합니다.'
+      : '가격·재고·배송 정보는 확정된 내용만 공개합니다. 현재 등록 상태를 확인해 주세요.',
     schemaType: 'Product',
     ogImage: item.coverImage,
     ogImageAlt: item.coverImageAlt || `${item.title} 상품 비주얼 콘셉트`,
-    ogImageWidth: 1600,
-    ogImageHeight: 1600
+    ogImageWidth: item.deliveryType === 'digital' ? 1200 : 1600,
+    ogImageHeight: item.deliveryType === 'digital' ? 1600 : 1600
   });
 }
 
@@ -192,7 +194,8 @@ function fallbackImage(item, collectionName, eager = false) {
   if (!item?.coverImage) return '';
   const alt = item.coverImageAlt || `${item.title ?? item.name} 대표 이미지`;
   const isProgram = collectionName === 'programs';
-  const width = isProgram ? 1600 : 1600;
+  const isDigitalProduct = collectionName === 'products' && item.deliveryType === 'digital';
+  const width = isProgram ? 1600 : isDigitalProduct ? 1200 : 1600;
   const height = isProgram ? 1000 : 1600;
   const image = `<img src="${escapeHtml(item.coverImage)}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="${eager ? 'eager' : 'lazy'}" decoding="async">`;
   if (!isProgram || !item.coverImageMobile) return image;
@@ -274,10 +277,10 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=mind-tools-commerce-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=pdf-ebook-store-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  <script src="/nal/assets/js/app.js?v=mind-tools-commerce-1" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
+  <script src="/nal/assets/js/app.js?v=pdf-ebook-store-1" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
