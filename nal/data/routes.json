@@ -146,6 +146,24 @@
       "indexable": true
     },
     {
+      "path": "/nal/shop/nal-starter-01-mind-reset/",
+      "title": "지금 마음을 정리하는 7개의 질문 | NAL 마음도구 · 날빛",
+      "description": "감정·생각·장면을 분리해 보고 지금 필요한 것과 오늘의 한 걸음을 찾는 무료 PDF 워크북",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-starter-02-relationship-dialogue/",
+      "title": "관계 대화를 다시 시작하는 9개의 질문 | NAL 마음도구 · 날빛",
+      "description": "갈등 장면에서 사실·감정·해석·바람·요청·경계를 차례로 살펴보는 무료 PDF 워크북",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-starter-03-next-step/",
+      "title": "막막함을 다음 한 걸음으로 바꾸는 7개의 질문 | NAL 마음도구 · 날빛",
+      "description": "막힌 장면과 현실적 마찰을 살펴보고 10분 행동과 24시간 안의 시작을 정하는 무료 PDF 워크북",
+      "indexable": true
+    },
+    {
       "path": "/nal/shop/emotion-cards/",
       "title": "감정카드 | NAL 마음도구 · 날빛",
       "description": "말로 설명하기 어려운 감정을 카드 한 장에서 발견하고 대화를 시작하도록 돕는 자기이해 카드",
