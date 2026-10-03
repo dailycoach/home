@@ -15,9 +15,13 @@ const pages = [
   {
     route: '/nal/', attrs: 'data-page="home"',
     title: '날빛 | NAL 커뮤니티·원데이클래스·감정카드',
-    description: '취향과 마음을 주제로 만나는 커뮤니티와 원데이클래스, 감정카드·질문카드·워크북을 소개하는 NAL 플랫폼입니다.',
-    label: 'NAL / CURATED COMMUNITY', heading: '오늘, 조금 다른 사람들과\n조금 더 나다운 시간을.',
-    copy: '취향과 마음이 만나는 커뮤니티와 원데이클래스, 그리고 일상에서 사용하는 감정·코칭 도구.', schemaType: 'WebSite'
+    description: '미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 우선 런칭하는 NAL 커뮤니티 플랫폼입니다.',
+    label: 'NAL / FIRST LAUNCH', heading: '가장 먼저 여는\n세 가지 NAL 경험.',
+    copy: '미술심리코칭, 코치 커뮤니티, 마음서재 독서모임부터 실제 연결을 시작합니다.', schemaType: 'WebSite',
+    launch: true, ogTitle: 'NAL FIRST LAUNCH | 날빛',
+    ogDescription: '미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 가장 먼저 엽니다.',
+    schemaName: 'NAL FIRST LAUNCH',
+    schemaDescription: '미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 우선 런칭하는 NAL 플랫폼입니다.'
   },
   {
     route: '/nal/gather/', attrs: 'data-page="listing" data-collection="programs" data-type="gather"',
@@ -148,9 +152,9 @@ function jsonLd(page) {
   const base = {
     '@context': 'https://schema.org',
     '@type': page.schemaType,
-    name: page.heading.replaceAll('\n', ' '),
+    name: page.schemaName || page.heading.replaceAll('\n', ' '),
     url: `${canonicalBase}${page.route}`,
-    description: page.description,
+    description: page.schemaDescription || page.description,
     isPartOf: {
       '@type': 'WebSite', name: '날빛', alternateName: 'NAL', url: `${canonicalBase}/nal/`
     }
@@ -197,12 +201,12 @@ function fallbackImage(item, collectionName, eager = false) {
 
 function fallbackExtras(page) {
   if (page.route === '/nal/') {
-    return `<section class="nal-section nal-static-fallback" aria-label="NAL 핵심 영역">
+    return `<section class="nal-section nal-static-fallback" aria-label="NAL 우선 런칭">
       <div class="nal-container">
         <div class="nal-grid nal-grid--three">
-          <a class="nal-card nal-card--gather" href="/nal/gather/"><span>NAL GATHER</span><strong>커뮤니티와 소모임</strong></a>
-          <a class="nal-card nal-card--class" href="/nal/class/"><span>NAL CLASS</span><strong>원데이클래스와 워크숍</strong></a>
-          <a class="nal-card nal-card--product" href="/nal/shop/"><span>NAL SHOP</span><strong>감정카드와 자기이해 도구</strong></a>
+          <a class="nal-card nal-card--class" href="/programs/art-psychology-coaching/"><span>NAL CLASS</span><strong>미술심리코칭 6주 과정</strong></a>
+          <a class="nal-card nal-card--gather" href="/nal/gather/flowing-river-coaches/"><span>NAL GATHER</span><strong>흐르는 강물처럼</strong></a>
+          <a class="nal-card nal-card--product" href="/maeum-library/"><span>NAL READING</span><strong>마음서재 독서모임</strong></a>
         </div>
       </div>
     </section>`;
@@ -258,8 +262,8 @@ function html(page) {
   <meta property="og:locale" content="ko_KR">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="날빛">
-  <meta property="og:title" content="${escapeHtml(page.title)}">
-  <meta property="og:description" content="${escapeHtml(page.description)}">
+  <meta property="og:title" content="${escapeHtml(page.ogTitle || page.title)}">
+  <meta property="og:description" content="${escapeHtml(page.ogDescription || page.description)}">
   <meta property="og:url" content="${canonicalBase}${page.route}">
   <meta property="og:image" content="${escapeHtml(socialImage)}">
   <meta property="og:image:width" content="${socialImageWidth}">
@@ -269,9 +273,10 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css">${preload}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
-  <script src="/nal/assets/js/app.js" defer></script>
+  <script src="/nal/assets/js/backend.js" defer></script>
+  <script src="/nal/assets/js/app.js" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>

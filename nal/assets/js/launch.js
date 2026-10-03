@@ -5,6 +5,7 @@
   const ROOT_SELECTOR = "[data-page-root]";
   const HERO_SELECTOR = ".nal-home-hero";
   const SECTION_ID = "nal-opening-lineup";
+  let liveLaunches = null;
 
   const escapeHtml = (value) => String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -100,9 +101,13 @@
     if (!hero) return false;
 
     try {
-      const response = await fetch(DATA_URL, { cache: "no-store" });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
+      let data = liveLaunches;
+      if (document.body.dataset.backend !== "supabase") {
+        const response = await fetch(DATA_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        data = await response.json();
+      }
+      if (!data) throw new Error("Launch catalog unavailable");
       const section = buildSection(data);
       if (!section || document.getElementById(SECTION_ID)) return true;
       hero.insertAdjacentElement("afterend", section);
@@ -114,6 +119,10 @@
   }
 
   let attempts = 0;
+  document.addEventListener("nal:page-rendered", (event) => {
+    liveLaunches = event.detail?.launches || null;
+    void mount();
+  });
   const timer = window.setInterval(async () => {
     attempts += 1;
     const done = await mount();
