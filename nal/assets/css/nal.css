@@ -62,10 +62,17 @@
     --nal-text-muted: var(--nal-color-charcoal-muted);
     --nal-border: var(--nal-color-line);
     --nal-border-soft: var(--nal-color-line-soft);
+    --nal-border-strong: var(--nal-color-charcoal);
     --nal-brand: var(--nal-color-cobalt);
     --nal-brand-hover: var(--nal-color-cobalt-dark);
     --nal-focus: #1b63d9;
     --nal-overlay: rgb(22 23 28 / 62%);
+    --nal-link: var(--nal-color-cobalt-dark);
+    --nal-accent: var(--nal-color-cobalt);
+    --nal-header-bg: rgb(245 241 232 / 92%);
+    --nal-panel-bg: rgb(255 255 255 / 95%);
+    --nal-hover-bg: rgb(255 255 255 / 70%);
+    --nal-highlight: var(--nal-color-lime);
 
     /* Type: local/system stacks only */
     --nal-font-sans: "Pretendard Variable", Pretendard, "SUIT Variable", SUIT,
@@ -146,6 +153,45 @@
     --nal-z-drawer: 120;
     --nal-z-modal: 180;
     --nal-z-toast: 220;
+  }
+
+  @media screen {
+    :root[data-theme="dark"] {
+      --nal-bg: #17191e;
+      --nal-surface: #22252c;
+      --nal-surface-subtle: #1c1f25;
+      --nal-surface-muted: #2a2e36;
+      --nal-text: #f2eee6;
+      --nal-text-secondary: #d0cdd2;
+      --nal-text-muted: #b0afb8;
+      --nal-border: #656975;
+      --nal-border-soft: #414550;
+      --nal-border-strong: #858b9a;
+      --nal-link: #bac4ff;
+      --nal-accent: #a9b7ff;
+      --nal-focus: #b7c4ff;
+      --nal-overlay: rgb(0 0 0 / 72%);
+      --nal-header-bg: rgb(23 25 30 / 94%);
+      --nal-panel-bg: rgb(34 37 44 / 96%);
+      --nal-hover-bg: rgb(255 255 255 / 7%);
+      --nal-highlight: #3c4724;
+      --nal-color-cobalt-soft: #2b3150;
+      --nal-color-lilac-soft: #302a3e;
+      --nal-color-lilac-ink: #ddcef8;
+      --nal-color-coral-soft: #3d282f;
+      --nal-color-coral-ink: #ffc1cd;
+      --nal-color-lime-soft: #2e3523;
+      --nal-color-lime-ink: #e1eca7;
+      --nal-color-success: #9bdfb9;
+      --nal-color-success-soft: #233a2e;
+      --nal-color-warning: #f5d394;
+      --nal-color-warning-soft: #3b3222;
+      --nal-color-danger: #ffb2bb;
+      --nal-color-danger-soft: #42272e;
+      --nal-color-info: #bbcfff;
+      --nal-color-info-soft: #29344c;
+      --nal-shadow-focus: 0 0 0 3px rgb(183 196 255 / 26%);
+    }
   }
 }
 
@@ -319,7 +365,7 @@
   }
 
   .nal-section--mist {
-    background: var(--nal-color-mist-soft);
+    background: var(--nal-surface-muted);
   }
 
   .nal-section--cobalt {
@@ -438,8 +484,8 @@
     z-index: var(--nal-z-header);
     top: 0;
     width: 100%;
-    border-bottom: 1px solid rgb(32 33 38 / 9%);
-    background: rgb(245 241 232 / 92%);
+    border-bottom: 1px solid var(--nal-border-soft);
+    background: var(--nal-header-bg);
     backdrop-filter: blur(16px) saturate(120%);
   }
 
@@ -456,7 +502,7 @@
     align-items: center;
     justify-content: center;
     min-height: var(--nal-touch-target);
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
     font-family: var(--nal-font-latin);
     font-size: clamp(1.6rem, 3vw, 2rem);
     font-weight: 850;
@@ -515,7 +561,7 @@
   }
 
   .nal-nav__link:hover {
-    background: rgb(255 255 255 / 70%);
+    background: var(--nal-hover-bg);
     color: var(--nal-text);
   }
 
@@ -545,7 +591,7 @@
     padding: 0.625rem;
     border: 1px solid transparent;
     border-radius: 50%;
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
     cursor: pointer;
     transition:
       border-color var(--nal-duration-fast),
@@ -557,7 +603,7 @@
   .nal-menu-button:hover,
   .nal-close-button:hover {
     border-color: var(--nal-border);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
   }
 
   .nal-icon-button svg,
@@ -603,6 +649,48 @@
     display: none;
   }
 
+  .nal-theme-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--nal-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .nal-theme-control select {
+    min-height: var(--nal-touch-target);
+    max-width: 9rem;
+    padding: 0.5rem;
+    border: 1px solid var(--nal-border);
+    border-radius: var(--nal-radius-sm);
+    background: var(--nal-surface);
+    color: var(--nal-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .nal-drawer-theme {
+    grid-column: 1 / -1;
+    padding-block-end: 1rem;
+  }
+
+  .nal-drawer-theme .nal-theme-control {
+    justify-content: space-between;
+  }
+
+  .nal-drawer-theme select {
+    width: 9rem;
+    font-size: 1rem;
+  }
+
+  .nal-drawer-theme p {
+    margin: 0.75rem 0 0;
+    color: var(--nal-text-muted);
+    font-size: 0.875rem;
+  }
+
   /* Drawer */
   .nal-drawer {
     position: fixed;
@@ -641,7 +729,7 @@
     overscroll-behavior: contain;
     padding: max(1rem, env(safe-area-inset-top)) 1.25rem
       max(1.5rem, env(safe-area-inset-bottom));
-    background: var(--nal-color-ivory);
+    background: var(--nal-bg);
     box-shadow: var(--nal-shadow-lg);
     translate: 102% 0;
     transition: translate var(--nal-duration-base) var(--nal-ease-out);
@@ -758,9 +846,9 @@
   }
 
   .nal-button--secondary {
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
     background: transparent;
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
   }
 
   .nal-button--secondary:hover {
@@ -770,17 +858,17 @@
 
   .nal-button--ghost {
     border-color: var(--nal-border);
-    background: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-surface);
+    color: var(--nal-text);
   }
 
   .nal-button--ghost:hover {
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
   }
 
   .nal-button--lime {
     background: var(--nal-color-lime);
-    color: var(--nal-color-lime-ink);
+    color: #354006;
   }
 
   .nal-button--lime:hover {
@@ -788,7 +876,7 @@
   }
 
   .nal-button--danger {
-    background: var(--nal-color-danger);
+    background: #b32636;
     color: var(--nal-color-white);
   }
 
@@ -805,8 +893,8 @@
   :where(.nal-button, [class^="nal-button--"], [class*=" nal-button--"]):disabled,
   :where(.nal-button, [class^="nal-button--"], [class*=" nal-button--"])[aria-disabled="true"] {
     border-color: var(--nal-color-line);
-    background: var(--nal-color-mist);
-    color: #6e6e6a;
+    background: var(--nal-surface-muted);
+    color: var(--nal-text-muted);
     box-shadow: none;
     cursor: not-allowed;
     opacity: 1;
@@ -820,7 +908,7 @@
     align-items: center;
     gap: var(--nal-space-2);
     margin-block-end: var(--nal-space-3);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-family: var(--nal-font-latin);
     font-size: 0.75rem;
     font-weight: 800;
@@ -865,7 +953,7 @@
     display: inline-flex;
     align-items: center;
     min-height: var(--nal-touch-target);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-weight: 800;
     white-space: nowrap;
   }
@@ -895,7 +983,7 @@
     padding: 0.28rem 0.65rem;
     border: 1px solid transparent;
     border-radius: var(--nal-radius-pill);
-    background: var(--nal-color-mist-soft);
+    background: var(--nal-surface-muted);
     color: var(--nal-text-secondary);
     font-size: 0.75rem;
     font-weight: 800;
@@ -920,9 +1008,9 @@
   }
 
   .nal-badge--note {
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
     background: transparent;
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
   }
 
   .nal-badge--open,
@@ -946,8 +1034,8 @@
   .nal-badge--closed,
   .nal-badge--muted,
   .nal-badge--completed {
-    background: var(--nal-color-mist);
-    color: #55565b;
+    background: var(--nal-surface-muted);
+    color: var(--nal-text-secondary);
   }
 
   .nal-status-dot {
@@ -1022,7 +1110,7 @@
 
   .nal-hero__title em {
     position: relative;
-    color: var(--nal-color-cobalt);
+    color: var(--nal-accent);
     font-style: normal;
     white-space: nowrap;
   }
@@ -1034,9 +1122,10 @@
     bottom: 0.02em;
     left: -0.04em;
     height: 0.22em;
-    background: var(--nal-color-lime);
+    background: var(--nal-highlight);
     content: "";
     rotate: -1deg;
+    color: var(--nal-color-charcoal);
   }
 
   .nal-hero__description {
@@ -1065,7 +1154,7 @@
     inset: 0;
     overflow: hidden;
     border-radius: 3.25rem 0.75rem 3.25rem 0.75rem;
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-hero__media img,
@@ -1081,7 +1170,7 @@
     padding: var(--nal-space-8);
     background:
       linear-gradient(135deg, transparent 48%, rgb(32 33 38 / 7%) 48% 52%, transparent 52%),
-      var(--nal-color-mist);
+      var(--nal-surface-muted);
     background-size: 2rem 2rem;
     color: var(--nal-text-secondary);
     text-align: center;
@@ -1091,7 +1180,7 @@
     max-width: 18rem;
     padding: var(--nal-space-4);
     border: 1px solid rgb(32 33 38 / 20%);
-    background: rgb(255 255 255 / 70%);
+    background: var(--nal-hover-bg);
     font-size: var(--nal-font-size-sm);
     font-weight: 700;
   }
@@ -1105,7 +1194,7 @@
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid rgb(32 33 38 / 10%);
     border-radius: var(--nal-radius-md);
-    background: rgb(255 255 255 / 95%);
+    background: var(--nal-panel-bg);
     box-shadow: var(--nal-shadow-lg);
     backdrop-filter: blur(12px);
   }
@@ -1147,8 +1236,8 @@
   /* Editorial category ribbon */
   .nal-category-ribbon {
     overflow: hidden;
-    border-block: 1px solid var(--nal-color-charcoal);
-    background: var(--nal-color-white);
+    border-block: 1px solid var(--nal-border-strong);
+    background: var(--nal-surface);
   }
 
   .nal-category-ribbon__track {
@@ -1163,7 +1252,7 @@
     align-items: center;
     min-height: 3.5rem;
     padding-inline: clamp(1rem, 3vw, 2.5rem);
-    border-right: 1px solid var(--nal-color-charcoal);
+    border-right: 1px solid var(--nal-border-strong);
     font-family: var(--nal-font-latin);
     font-size: clamp(0.78rem, 1.3vw, 1rem);
     font-weight: 800;
@@ -1175,6 +1264,7 @@
 
   .nal-category-ribbon__item:hover {
     background: var(--nal-color-lime);
+    color: var(--nal-color-charcoal);
   }
 
   /* Filters and sorting */
@@ -1207,7 +1297,7 @@
     padding: 0.65rem 1rem;
     border: 1px solid var(--nal-border);
     border-radius: var(--nal-radius-pill);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     color: var(--nal-text-secondary);
     font-size: var(--nal-font-size-sm);
     font-weight: 750;
@@ -1217,13 +1307,13 @@
   }
 
   .nal-filter-chip:hover {
-    border-color: var(--nal-color-charcoal);
-    color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
+    color: var(--nal-text);
   }
 
   .nal-filter-chip[aria-pressed="true"],
   .nal-filter-chip.is-active {
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
     background: var(--nal-color-charcoal);
     color: var(--nal-color-white);
   }
@@ -1242,9 +1332,9 @@
     gap: var(--nal-space-2);
     min-height: var(--nal-touch-target);
     padding: 0.65rem 1rem;
-    border: 1px solid var(--nal-color-charcoal);
+    border: 1px solid var(--nal-border-strong);
     border-radius: var(--nal-radius-pill);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     font-size: var(--nal-font-size-sm);
     font-weight: 800;
     cursor: pointer;
@@ -1280,8 +1370,8 @@
     padding: 0.55rem 2.5rem 0.55rem 0.85rem;
     border: 1px solid var(--nal-border);
     border-radius: var(--nal-radius-sm);
-    background-color: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background-color: var(--nal-surface);
+    color: var(--nal-text);
     font-size: var(--nal-font-size-sm);
     font-weight: 700;
   }
@@ -1307,7 +1397,7 @@
     padding-inline: 0.75rem;
     border-radius: var(--nal-radius-pill);
     background: var(--nal-color-cobalt-soft);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-size: 0.8125rem;
     font-weight: 750;
   }
@@ -1328,7 +1418,7 @@
     padding: var(--nal-space-6);
     border: 1px solid var(--nal-border-soft);
     border-radius: var(--nal-radius-lg);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     box-shadow: var(--nal-shadow-md);
   }
 
@@ -1380,7 +1470,7 @@
     grid-template-rows: auto minmax(0, 1fr) auto;
     max-height: min(88dvh, 52rem);
     border-radius: 1.5rem 1.5rem 0 0;
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     box-shadow: var(--nal-shadow-lg);
     translate: 0 102%;
     transition: translate var(--nal-duration-base) var(--nal-ease-out);
@@ -1421,7 +1511,7 @@
     padding-bottom: max(var(--nal-space-4), env(safe-area-inset-bottom));
     border-top: 1px solid var(--nal-border-soft);
     border-bottom: 0;
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
   }
 
   /* Cards: shared shell */
@@ -1433,8 +1523,8 @@
     height: 100%;
     overflow: hidden;
     border: 1px solid var(--nal-border-soft);
-    background: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-surface);
+    color: var(--nal-text);
     transition:
       border-color var(--nal-duration-base),
       box-shadow var(--nal-duration-base),
@@ -1450,7 +1540,7 @@
   .nal-card__media {
     position: relative;
     overflow: hidden;
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-card__media img {
@@ -1483,7 +1573,7 @@
 
   .nal-wish-button {
     border-color: rgb(32 33 38 / 14%);
-    background: rgb(255 255 255 / 90%);
+    background: var(--nal-panel-bg);
     box-shadow: var(--nal-shadow-xs);
   }
 
@@ -1677,6 +1767,7 @@
     width: 0.3rem;
     border-radius: var(--nal-radius-pill);
     background: var(--nal-color-coral);
+    color: var(--nal-color-charcoal);
   }
 
   .nal-level__bar:nth-child(1) {
@@ -1692,7 +1783,7 @@
   }
 
   .nal-level__bar.is-muted {
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   /* Product card: close-up, composition and fulfilment */
@@ -1740,13 +1831,13 @@
     min-height: 18rem;
     overflow: visible;
     border-width: 2px 0 0;
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
     border-radius: var(--nal-radius-note);
     background: transparent;
   }
 
   .nal-card--note:hover {
-    border-color: var(--nal-color-cobalt);
+    border-color: var(--nal-accent);
     box-shadow: none;
     transform: none;
   }
@@ -1825,9 +1916,9 @@
     display: grid;
     grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
     overflow: hidden;
-    border: 1px solid var(--nal-color-charcoal);
+    border: 1px solid var(--nal-border-strong);
     border-radius: var(--nal-radius-lg);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
   }
 
   .nal-crosslink__story {
@@ -1867,7 +1958,7 @@
   }
 
   .nal-crosslink__step::before {
-    color: var(--nal-color-cobalt);
+    color: var(--nal-accent);
     font-family: var(--nal-font-latin);
     font-size: var(--nal-font-size-sm);
     font-weight: 800;
@@ -1884,7 +1975,7 @@
   }
 
   .nal-crosslink__step:hover strong {
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
   }
 
   /* Reviews */
@@ -1895,12 +1986,12 @@
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid var(--nal-border-soft);
     border-radius: var(--nal-radius-md);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
   }
 
   .nal-review__context {
     margin-block-end: var(--nal-space-5);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-size: var(--nal-font-size-sm);
     font-weight: 800;
   }
@@ -1991,7 +2082,7 @@
     gap: var(--nal-space-2);
     padding: var(--nal-space-2);
     border-radius: var(--nal-radius-pill);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
   }
 
   .nal-letter__form input {
@@ -2000,7 +2091,7 @@
     padding-inline: var(--nal-space-4);
     border: 0;
     background: transparent;
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
   }
 
   .nal-letter__form input:focus-visible {
@@ -2012,7 +2103,7 @@
   .nal-letter__consent {
     grid-column: 1 / -1;
     padding: 0 var(--nal-space-3) var(--nal-space-2);
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
     font-size: 0.75rem;
   }
 
@@ -2048,7 +2139,7 @@
 
   .nal-page-hero__label {
     margin-block-end: var(--nal-space-4);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-family: var(--nal-font-latin);
     font-size: 0.78rem;
     font-weight: 850;
@@ -2106,7 +2197,7 @@
     aspect-ratio: 4 / 3;
     border-radius: var(--nal-radius-xl) var(--nal-radius-sm) var(--nal-radius-xl)
       var(--nal-radius-sm);
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-detail-hero__media img {
@@ -2134,7 +2225,7 @@
   .nal-detail-facts {
     display: grid;
     margin: 0 0 var(--nal-space-6);
-    border-top: 1px solid var(--nal-color-charcoal);
+    border-top: 1px solid var(--nal-border-strong);
   }
 
   .nal-detail-facts__row {
@@ -2212,7 +2303,7 @@
 
   .nal-detail-section__body :where(h3, h4) {
     margin-block: 1.75em 0.65em;
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
   }
 
   .nal-detail-section__body :where(ul, ol) {
@@ -2225,7 +2316,7 @@
     padding: var(--nal-space-5);
     border: 1px solid var(--nal-border);
     border-radius: var(--nal-radius-md);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     box-shadow: var(--nal-shadow-sm);
   }
 
@@ -2259,7 +2350,7 @@
 
   .nal-detail-toc a:hover,
   .nal-detail-toc a[aria-current="true"] {
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-weight: 800;
   }
 
@@ -2290,7 +2381,7 @@
     display: grid;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--nal-color-charcoal);
+    border-top: 1px solid var(--nal-border-strong);
     list-style: none;
   }
 
@@ -2303,7 +2394,7 @@
   }
 
   .nal-schedule__time {
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-family: var(--nal-font-latin), var(--nal-font-sans);
     font-weight: 800;
   }
@@ -2330,7 +2421,7 @@
     overflow: hidden;
     aspect-ratio: 1;
     border-radius: 50% 50% 15% 50%;
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-host-profile__image img {
@@ -2346,7 +2437,7 @@
 
   .nal-host-profile__headline {
     margin-block-end: var(--nal-space-3);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-weight: 750;
   }
 
@@ -2374,12 +2465,12 @@
     padding: 0;
     border: 2px solid transparent;
     border-radius: var(--nal-radius-xs);
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
     cursor: pointer;
   }
 
   .nal-product-gallery__thumb[aria-current="true"] {
-    border-color: var(--nal-color-cobalt);
+    border-color: var(--nal-accent);
   }
 
   .nal-product-gallery__thumb img,
@@ -2435,8 +2526,8 @@
     padding: 0.75rem 0.9rem;
     border: 1px solid var(--nal-border);
     border-radius: var(--nal-radius-sm);
-    background: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-surface);
+    color: var(--nal-text);
     font-size: 1rem;
     transition:
       border-color var(--nal-duration-fast),
@@ -2450,7 +2541,7 @@
 
   .nal-input::placeholder,
   .nal-textarea::placeholder {
-    color: #7a7b80;
+    color: var(--nal-text-muted);
     opacity: 1;
   }
 
@@ -2494,7 +2585,7 @@
     width: 1.25rem;
     height: 1.25rem;
     margin-block-start: 0.15rem;
-    accent-color: var(--nal-color-cobalt);
+    accent-color: var(--nal-accent);
   }
 
   .nal-choice__label {
@@ -2537,7 +2628,7 @@
     padding: clamp(2rem, 6vw, 4rem);
     border: 1px dashed var(--nal-border);
     border-radius: var(--nal-radius-lg);
-    background: rgb(255 255 255 / 58%);
+    background: var(--nal-hover-bg);
     text-align: center;
   }
 
@@ -2579,7 +2670,7 @@
     padding: var(--nal-space-4);
     border: 1px solid var(--nal-border);
     border-radius: var(--nal-radius-sm);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     color: var(--nal-text-secondary);
   }
 
@@ -2605,7 +2696,7 @@
     position: relative;
     overflow: hidden;
     border-radius: var(--nal-radius-xs);
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-skeleton::after {
@@ -2701,8 +2792,8 @@
     padding: 0;
     border: 0;
     border-radius: var(--nal-radius-lg);
-    background: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-surface);
+    color: var(--nal-text);
     box-shadow: var(--nal-shadow-lg);
   }
 
@@ -2767,8 +2858,8 @@
     min-height: var(--nal-touch-target);
     border: 1px solid var(--nal-border);
     border-radius: 50%;
-    background: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-surface);
+    color: var(--nal-text);
     font-family: var(--nal-font-latin);
     font-size: var(--nal-font-size-sm);
     font-weight: 750;
@@ -2777,7 +2868,7 @@
 
   .nal-pagination__link:hover,
   .nal-pagination__link[aria-current="page"] {
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
     background: var(--nal-color-charcoal);
     color: var(--nal-color-white);
   }
@@ -2795,7 +2886,7 @@
     top: calc(var(--nal-header-height) + var(--nal-space-6));
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--nal-color-charcoal);
+    border-top: 1px solid var(--nal-border-strong);
     list-style: none;
   }
 
@@ -2813,7 +2904,7 @@
 
   .nal-account-nav__link:hover,
   .nal-account-nav__link[aria-current="page"] {
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-weight: 850;
   }
 
@@ -2830,7 +2921,7 @@
     padding: var(--nal-space-3) var(--nal-gutter)
       max(var(--nal-space-3), env(safe-area-inset-bottom));
     border-top: 1px solid var(--nal-border-soft);
-    background: rgb(255 255 255 / 96%);
+    background: var(--nal-panel-bg);
     box-shadow: 0 -10px 30px rgb(32 33 38 / 10%);
     backdrop-filter: blur(14px);
   }
@@ -3012,8 +3103,8 @@
   .nal-badge--neutral,
   .nal-badge--status {
     border-color: rgb(32 33 38 / 14%);
-    background: rgb(255 255 255 / 92%);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-panel-bg);
+    color: var(--nal-text);
   }
 
   .nal-section__header {
@@ -3045,7 +3136,7 @@
     flex: 0 0 auto;
     align-items: center;
     min-height: var(--nal-touch-target);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-weight: 800;
     text-decoration-thickness: 0.08em;
     white-space: nowrap;
@@ -3070,7 +3161,7 @@
   .nal-hero__copy h1 span {
     position: relative;
     z-index: 0;
-    color: var(--nal-color-cobalt);
+    color: var(--nal-accent);
   }
 
   .nal-hero__copy h1 span::after {
@@ -3080,7 +3171,7 @@
     bottom: 0.02em;
     left: -0.04em;
     height: 0.22em;
-    background: var(--nal-color-lime);
+    background: var(--nal-highlight);
     content: "";
     rotate: -1deg;
   }
@@ -3097,7 +3188,7 @@
     overflow: visible;
     border: 0;
     border-radius: 3.25rem 0.75rem 3.25rem 0.75rem;
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-hero__feature > img,
@@ -3120,7 +3211,7 @@
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1px solid rgb(32 33 38 / 10%);
     border-radius: var(--nal-radius-md);
-    background: rgb(255 255 255 / 95%);
+    background: var(--nal-panel-bg);
     box-shadow: var(--nal-shadow-lg);
     backdrop-filter: blur(12px);
   }
@@ -3180,8 +3271,8 @@
     padding: 0.72rem 0.85rem;
     border: 1px solid var(--nal-border);
     border-radius: var(--nal-radius-sm);
-    background: var(--nal-color-white);
-    color: var(--nal-color-charcoal);
+    background: var(--nal-surface);
+    color: var(--nal-text);
     font-size: 1rem;
   }
 
@@ -3199,7 +3290,7 @@
   }
 
   .nal-result-summary strong {
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
     font-family: var(--nal-font-latin), var(--nal-font-sans);
     font-size: 1.15rem;
   }
@@ -3279,7 +3370,7 @@
   }
 
   .nal-detail-booking > span {
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-size: var(--nal-font-size-sm);
     font-weight: 800;
   }
@@ -3295,7 +3386,7 @@
     border-left: 0.3rem solid var(--nal-color-cobalt);
     border-radius: 0 var(--nal-radius-sm) var(--nal-radius-sm) 0;
     background: var(--nal-color-cobalt-soft);
-    color: var(--nal-color-cobalt-dark);
+    color: var(--nal-link);
     font-size: var(--nal-font-size-sm);
     font-weight: 700;
   }
@@ -3362,7 +3453,7 @@
 
   .nal-prose :where(h2, h3, h4) {
     margin-block: 1.8em 0.7em;
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
   }
 
   .nal-prose :where(ul, ol) {
@@ -3371,7 +3462,7 @@
 
   .nal-faq {
     margin-block-start: var(--nal-space-10);
-    border-top: 1px solid var(--nal-color-charcoal);
+    border-top: 1px solid var(--nal-border-strong);
   }
 
   .nal-faq details {
@@ -3385,7 +3476,7 @@
     justify-content: space-between;
     gap: var(--nal-space-4);
     padding-block: var(--nal-space-3);
-    color: var(--nal-color-charcoal);
+    color: var(--nal-text);
     font-weight: 800;
     list-style: none;
     cursor: pointer;
@@ -3397,7 +3488,7 @@
 
   .nal-faq summary::after {
     flex: 0 0 auto;
-    color: var(--nal-color-cobalt);
+    color: var(--nal-accent);
     font-family: var(--nal-font-latin);
     font-size: 1.25rem;
     content: "+";
@@ -3433,12 +3524,12 @@
     padding: var(--nal-space-5);
     border: 1px solid var(--nal-border-soft);
     border-radius: var(--nal-radius-md);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     text-decoration: none;
   }
 
   .nal-static-list a:hover {
-    border-color: var(--nal-color-charcoal);
+    border-color: var(--nal-text);
     box-shadow: var(--nal-shadow-sm);
   }
 
@@ -3453,7 +3544,7 @@
     overflow: hidden;
     aspect-ratio: 8 / 5;
     margin: calc(var(--nal-space-5) * -1) calc(var(--nal-space-5) * -1) var(--nal-space-3);
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-static-list__image > :where(img, picture),
@@ -3470,7 +3561,7 @@
     aspect-ratio: 8 / 5;
     margin: 0 0 var(--nal-space-6);
     border-radius: var(--nal-radius-lg) var(--nal-radius-xs) var(--nal-radius-lg) var(--nal-radius-xs);
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-static-detail-image > :where(img, picture),
@@ -3609,7 +3700,7 @@
     overflow: hidden;
     border: 1px solid var(--nal-border-soft);
     border-radius: var(--nal-radius-md);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
   }
 
   .nal-relation-card__visuals {
@@ -3619,7 +3710,7 @@
     align-items: center;
     min-height: 16rem;
     padding: var(--nal-space-5);
-    background: var(--nal-color-mist-soft);
+    background: var(--nal-surface-muted);
   }
 
   .nal-relation-card__visuals > div {
@@ -3650,6 +3741,7 @@
     font-family: var(--nal-font-latin);
     font-weight: 850;
     translate: -50% -50%;
+    color: var(--nal-color-charcoal);
   }
 
   .nal-relation-card__copy {
@@ -3706,7 +3798,7 @@
     min-height: 0;
     aspect-ratio: 8 / 5;
     border-radius: var(--nal-radius-xl) var(--nal-radius-sm) var(--nal-radius-xl) var(--nal-radius-sm);
-    background: var(--nal-color-mist);
+    background: var(--nal-surface-muted);
   }
 
   .nal-detail-hero__media--square > .nal-media-picture,
@@ -3752,7 +3844,7 @@
     padding: 1rem 1rem 1rem 3.25rem;
     border: 1px solid var(--nal-border-soft);
     border-radius: var(--nal-radius-sm);
-    background: var(--nal-color-white);
+    background: var(--nal-surface);
     line-height: 1.65;
   }
 
@@ -3839,7 +3931,7 @@
     overflow: hidden;
     margin: 0;
     border: 1px solid var(--nal-border-soft);
-    background: var(--nal-color-mist-soft);
+    background: var(--nal-surface-muted);
   }
 
   .nal-product-gallery__item--1 {
@@ -3906,7 +3998,7 @@
   }
 
   .nal-text-cobalt {
-    color: var(--nal-color-cobalt-dark) !important;
+    color: var(--nal-link) !important;
   }
 
   .nal-text-danger {
@@ -3914,11 +4006,11 @@
   }
 
   .nal-bg-white {
-    background: var(--nal-color-white) !important;
+    background: var(--nal-surface) !important;
   }
 
   .nal-bg-ivory {
-    background: var(--nal-color-ivory) !important;
+    background: var(--nal-bg) !important;
   }
 
   .nal-nowrap {
@@ -3970,6 +4062,17 @@
 }
 
 @layer nal-responsive {
+  /* Reserve enough room for readable navigation and the theme selector. */
+  @media (max-width: 74.999rem) {
+    .nal-nav,
+    .nal-header-theme {
+      display: none;
+    }
+
+    .nal-menu-button {
+      display: inline-flex;
+    }
+  }
   /* Large laptop and below */
   @media (max-width: 79.999rem) {
     :root {
@@ -4375,7 +4478,7 @@
       padding-inline: var(--nal-space-4);
       border: 1px solid var(--nal-border);
       border-radius: var(--nal-radius-pill);
-      background: var(--nal-color-white);
+      background: var(--nal-surface);
       scroll-snap-align: start;
     }
 

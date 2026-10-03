@@ -184,12 +184,15 @@
       .map(([label, nalLabel, href]) => `<li><a class="nal-drawer__link" href="${href}"><span>${escapeHtml(label)}</span><small>${escapeHtml(nalLabel)}</small></a></li>`)
       .join("");
 
+    const themeControl = `<label class="nal-theme-control"><span>테마</span><select data-nal-theme aria-label="화면 테마"><option value="system">기기 설정</option><option value="light">밝게</option><option value="dark">어둡게</option></select></label>`;
+
     headerSlot.innerHTML = `
       <header class="nal-site-header">
         <div class="nal-container nal-header__inner">
           <a class="nal-logo" href="/nal/" aria-label="NAL 홈"><span class="nal-logo__mark">N</span>NAL</a>
           <nav class="nal-nav" aria-label="주요 메뉴"><ul class="nal-nav__list">${navLinks}</ul></nav>
           <ul class="nal-header-actions" aria-label="사용자 메뉴">
+            <li class="nal-header-theme">${themeControl}</li>
             <li><a class="nal-icon-button" href="/nal/search/">${ICONS.search}<span class="nal-icon-button__label">검색</span></a></li>
             <li><a class="nal-icon-button" href="/nal/my/#wishlist">${ICONS.heart}<span class="nal-icon-button__label">찜</span><span class="nal-icon-button__count" data-wish-count hidden>0</span></a></li>
             <li><button class="nal-menu-button" type="button" data-drawer-open aria-controls="nalDrawer" aria-expanded="false">${ICONS.menu}<span class="nal-sr-only">메뉴 열기</span></button></li>
@@ -205,6 +208,7 @@
           </div>
           <nav aria-label="모바일 메뉴"><ul class="nal-drawer__nav">${drawerLinks}</ul></nav>
           <div class="nal-drawer__utility">
+            <div class="nal-drawer-theme">${themeControl}<p>선택한 테마는 이 브라우저에 저장됩니다.</p></div>
             <a class="nal-button--ghost" href="/nal/search/">검색</a>
             <a class="nal-button--ghost" href="/nal/my/">MY NAL</a>
           </div>

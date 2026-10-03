@@ -255,6 +255,7 @@ function html(page) {
   <meta name="theme-color" content="#F5F1E8">
   <meta name="robots" content="${robots}">
   <script>document.documentElement.classList.add('nal-js')</script>
+  <script src="/nal/assets/js/theme.js"></script>
   <title>${escapeHtml(page.title)}</title>
   <meta name="description" content="${escapeHtml(page.description)}">
   <link rel="canonical" href="${canonicalBase}${page.route}">
@@ -273,10 +274,10 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=user-theme-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  <script src="/nal/assets/js/app.js" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
+  <script src="/nal/assets/js/app.js?v=user-theme-1" defer></script>${page.launch ? '\n  <script src="/nal/assets/js/launch.js" defer></script>' : ''}
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>

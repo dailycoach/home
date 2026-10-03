@@ -235,6 +235,8 @@ for (const file of htmlFiles) {
   check(/<meta property="og:image" content="https:\/\/daily-coach-ing\.com\/[^\"]+\.(?:png|webp)">/.test(source), `${relative} missing same-origin OG image`);
   check(/<a class="nal-skip-link" href="#main-content">/.test(source), `${relative} missing skip link`);
   check(/<main id="main-content" data-page-root/.test(source), `${relative} missing main root`);
+  check(source.includes('<script src="/nal/assets/js/theme.js"></script>'), `${relative} missing early theme script`);
+  check(source.indexOf('/nal/assets/js/theme.js') < source.indexOf('<link rel="stylesheet"'), `${relative} theme must run before styles`);
   const canonical = source.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
   check(Boolean(canonical), `${relative} missing canonical`);
   if (canonical) {
