@@ -169,7 +169,7 @@ function jsonLd(page) {
     base.sku = page.product.id;
     base.brand = { '@type': 'Brand', name: 'NAL · 날빛' };
     base.additionalProperty = [['파일형식',page.product.fileFormat],['페이지',page.product.pageCount],['저자',page.product.author]].filter(([,value])=>value != null).map(([name,value])=>({ '@type':'PropertyValue', name, value }));
-    if (Number.isFinite(page.product.price) && page.product.purchaseUrl && page.product.stockStatus === 'available') base.offers = { '@type': 'Offer', price: page.product.price, priceCurrency: 'KRW', url: page.product.purchaseUrl, availability: 'https://schema.org/InStock' };
+    if (Number.isFinite(page.product.price) && page.product.purchaseUrl && page.product.stockStatus === 'available') base.offers = { '@type': 'Offer', price: page.product.price, priceCurrency: 'KRW', url: absoluteUrl(page.product.purchaseUrl), availability: 'https://schema.org/InStock' };
   }
   return JSON.stringify(base).replaceAll('<', '\\u003c');
 }
