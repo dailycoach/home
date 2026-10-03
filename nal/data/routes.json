@@ -21,8 +21,8 @@
     },
     {
       "path": "/nal/shop/",
-      "title": "감정카드·질문카드 | NAL SHOP · 날빛",
-      "description": "감정카드, 질문카드, 관계카드, 강점·가치카드와 워크북을 살펴보세요.",
+      "title": "마음도구 | NAL · 날빛",
+      "description": "감정카드, 질문카드, 관계카드, 강점카드 등 마음과 대화를 위한 도구를 상품처럼 비교하고 구매 정보를 확인하세요.",
       "indexable": true
     },
     {
@@ -147,25 +147,25 @@
     },
     {
       "path": "/nal/shop/emotion-cards/",
-      "title": "감정카드 | NAL SHOP · 날빛",
+      "title": "감정카드 | NAL 마음도구 · 날빛",
       "description": "말로 설명하기 어려운 감정을 카드 한 장에서 발견하고 대화를 시작하도록 돕는 자기이해 카드",
       "indexable": true
     },
     {
       "path": "/nal/shop/coaching-question-cards/",
-      "title": "코칭 질문카드 | NAL SHOP · 날빛",
+      "title": "코칭 질문카드 | NAL 마음도구 · 날빛",
       "description": "현재 장면을 살펴보고 관점을 넓히며 다음 행동을 선택하도록 돕는 코칭 질문카드",
       "indexable": true
     },
     {
       "path": "/nal/shop/relationship-question-cards/",
-      "title": "관계 질문카드 | NAL SHOP · 날빛",
+      "title": "관계 질문카드 | NAL 마음도구 · 날빛",
       "description": "커플·가족·동료 사이에서 반복되는 대화 장면을 안전하게 살펴보도록 돕는 관계 질문카드",
       "indexable": true
     },
     {
       "path": "/nal/shop/strength-cards/",
-      "title": "강점카드 | NAL SHOP · 날빛",
+      "title": "강점카드 | NAL 마음도구 · 날빛",
       "description": "일상의 행동과 경험에서 자주 사용하는 강점을 발견하고 다음 장면에 적용하도록 돕는 카드",
       "indexable": true
     },
