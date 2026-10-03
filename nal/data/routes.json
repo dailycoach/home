@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.2",
   "routes": [
     {
       "path": "/nal/",
@@ -21,8 +21,8 @@
     },
     {
       "path": "/nal/shop/",
-      "title": "감정카드·질문카드 | NAL SHOP · 날빛",
-      "description": "감정카드, 질문카드, 관계카드, 강점·가치카드와 워크북을 살펴보세요.",
+      "title": "PDF 전자책·워크북 | NAL 마음도구 · 날빛",
+      "description": "PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.",
       "indexable": true
     },
     {
@@ -87,8 +87,8 @@
     },
     {
       "path": "/nal/policy/shipping/",
-      "title": "배송·교환 안내 | NAL · 날빛",
-      "description": "판매 상품과 배송 운영 방식이 확정된 뒤 공개합니다.",
+      "title": "배송·다운로드 안내 | NAL · 날빛",
+      "description": "실물 상품의 배송과 PDF 전자책 등 디지털 상품의 제공 방식이 확정된 뒤 공개합니다.",
       "indexable": false
     },
     {
@@ -146,28 +146,52 @@
       "indexable": true
     },
     {
+      "path": "/nal/shop/nal-starter-01-mind-reset/",
+      "title": "지금 마음을 정리하는 7개의 질문 | NAL 마음도구 · 날빛",
+      "description": "감정·생각·장면을 분리해 보고 지금 필요한 것과 오늘의 한 걸음을 찾는 무료 PDF 워크북",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-starter-02-relationship-dialogue/",
+      "title": "관계 대화를 다시 시작하는 9개의 질문 | NAL 마음도구 · 날빛",
+      "description": "갈등 장면에서 사실·감정·해석·바람·요청·경계를 차례로 살펴보는 무료 PDF 워크북",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-starter-03-next-step/",
+      "title": "막막함을 다음 한 걸음으로 바꾸는 7개의 질문 | NAL 마음도구 · 날빛",
+      "description": "막힌 장면과 현실적 마찰을 살펴보고 10분 행동과 24시간 안의 시작을 정하는 무료 PDF 워크북",
+      "indexable": true
+    },
+    {
       "path": "/nal/shop/emotion-cards/",
-      "title": "감정카드 | NAL SHOP · 날빛",
+      "title": "감정카드 | NAL 마음도구 · 날빛",
       "description": "말로 설명하기 어려운 감정을 카드 한 장에서 발견하고 대화를 시작하도록 돕는 자기이해 카드",
       "indexable": true
     },
     {
       "path": "/nal/shop/coaching-question-cards/",
-      "title": "코칭 질문카드 | NAL SHOP · 날빛",
+      "title": "코칭 질문카드 | NAL 마음도구 · 날빛",
       "description": "현재 장면을 살펴보고 관점을 넓히며 다음 행동을 선택하도록 돕는 코칭 질문카드",
       "indexable": true
     },
     {
       "path": "/nal/shop/relationship-question-cards/",
-      "title": "관계 질문카드 | NAL SHOP · 날빛",
+      "title": "관계 질문카드 | NAL 마음도구 · 날빛",
       "description": "커플·가족·동료 사이에서 반복되는 대화 장면을 안전하게 살펴보도록 돕는 관계 질문카드",
       "indexable": true
     },
     {
       "path": "/nal/shop/strength-cards/",
-      "title": "강점카드 | NAL SHOP · 날빛",
+      "title": "강점카드 | NAL 마음도구 · 날빛",
       "description": "일상의 행동과 경험에서 자주 사용하는 강점을 발견하고 다음 장면에 적용하도록 돕는 카드",
       "indexable": true
+    },
+    {
+      "path": "/nal/shop/item/",
+      "title": "마음도구 상품 | NAL · 날빛",
+      "description": "등록된 마음도구의 상품정보와 미리보기, 구매 안내를 확인합니다.",
+      "indexable": false
     },
     {
       "path": "/nal/host/park-jia/",

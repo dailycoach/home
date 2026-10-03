@@ -1,0 +1,23 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { productValidator } from './nal-product-model.mjs';
+import '../nal/assets/js/backend.js';
+const config=JSON.parse(await readFile('nal/data/backend.json','utf8'));
+if (!globalThis.NALBackend.validateConfig(config)) throw new Error('Public backend must be enabled.');
+const catalog=await globalThis.NALBackend.load(config);
+const local=JSON.parse(await readFile('nal/data/products.json','utf8'));
+const {product:defaults}=JSON.parse(await readFile('nal/data/pdf-ebook-product-template.json','utf8'));
+const validate=await productValidator();
+const incoming=catalog.products.map(item=>{
+  const product={...defaults,...item,productType:globalThis.NALStore.type(item),deliveryType:globalThis.NALStore.digital(item)?'digital':'physical'};
+  if (product.deliveryType==='physical' && item.fileFormat == null) product.fileFormat=null;
+  const errors=validate(product);
+  if (errors.length) throw new Error(`${product.id}: ${errors.join('; ')}`);
+  return product;
+});
+const ids=new Set(incoming.map(p=>p.id));
+const slugs=new Set(incoming.map(p=>p.slug));
+if (ids.size!==incoming.length || slugs.size!==incoming.length) throw new Error('Duplicate public product ids or slugs.');
+local.products=[...local.products.filter(p=>!ids.has(p.id)).map(p=>({...p,published:false})),...incoming];
+local.schemaVersion='2.0';
+await writeFile('nal/data/products.json',JSON.stringify(local,null,2)+'\n');
+console.log(`Synced ${incoming.length} public products; local drafts retained. Generate pages and sitemap to publish stable SEO routes.`);

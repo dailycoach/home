@@ -1,0 +1,1 @@
+globalThis.NALProductRoutes = Object.freeze(["nal-starter-01-mind-reset","nal-starter-02-relationship-dialogue","nal-starter-03-next-step","emotion-cards","coaching-question-cards","relationship-question-cards","strength-cards"]);

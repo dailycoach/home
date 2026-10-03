@@ -75,3 +75,12 @@ NAL_PGLITE_MODULE=/tmp/nal-db-test/node_modules/@electric-sql/pglite/dist/index.
 node scripts/check-nal-platform.mjs
 node scripts/check-nal-backend.mjs
 ```
+
+## NAL PDF delivery preparation (PR #155)
+
+The unapplied `20261003124325_nal_digital_store_foundation.sql` prepares a private
+PDF bucket, safe public product view, service-only file registry, owner-readable
+entitlements and link-issuance events. Existing orders/items/payments remain the
+source for verified fulfillment. The Edge Function is disabled by default and
+is not deployed. See [NAL-MIND-STORE-02](../docs/NAL_MIND_STORE_02.md) for the
+registration workflow, feature gates, tests and signed-link limitations.

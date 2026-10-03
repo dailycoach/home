@@ -5036,3 +5036,258 @@
     }
   }
 }
+
+
+/* NAL MIND TOOLS COMMERCE V1 */
+@layer nal-components {
+  .nal-commerce-product{padding:1.25rem 0 4.5rem;background:var(--nal-bg)}
+  .nal-commerce-breadcrumb{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;color:var(--nal-text-muted);font-size:.875rem}
+  .nal-commerce-breadcrumb strong{color:var(--nal-text)}
+  .nal-commerce-product__grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(22rem,.78fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+  .nal-commerce-gallery__main{margin:0;border:1px solid var(--nal-border-soft);background:var(--nal-surface)}
+  .nal-commerce-gallery__main img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+  .nal-commerce-gallery__main figcaption{padding:.75rem 1rem;color:var(--nal-text-muted);font-size:.75rem;line-height:1.5}
+  .nal-commerce-gallery__rail{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:.75rem}
+  .nal-commerce-gallery__rail figure{margin:0;border:1px solid var(--nal-border-soft);background:var(--nal-surface)}
+  .nal-commerce-gallery__rail img{width:100%;aspect-ratio:1/1;display:block;object-fit:cover}
+  .nal-commerce-panel{position:sticky;top:calc(var(--nal-header-height) + 1.5rem);padding:2rem;border-top:2px solid var(--nal-border-strong);border-bottom:1px solid var(--nal-border);background:var(--nal-surface)}
+  .nal-commerce-brand{margin:0 0 1rem;color:var(--nal-link);font-family:var(--nal-font-latin);font-size:.75rem;font-weight:850;letter-spacing:.12em}
+  .nal-commerce-state{display:flex;justify-content:space-between;gap:1rem;margin-bottom:1rem;color:var(--nal-text-muted);font-size:.875rem}
+  .nal-commerce-state b{color:var(--nal-text)}
+  .nal-commerce-panel h1{margin:0;font-size:clamp(2rem,4vw,3.4rem);line-height:1.12;letter-spacing:-.055em}
+  .nal-commerce-subtitle{margin:.9rem 0 0;color:var(--nal-text-secondary);font-size:1.06rem;font-weight:750}
+  .nal-commerce-summary{margin:1rem 0 0;color:var(--nal-text-secondary);font-size:1rem;line-height:1.7}
+  .nal-commerce-price{display:grid;gap:.35rem;margin:1.75rem 0;padding:1.4rem 0;border-top:1px solid var(--nal-border);border-bottom:1px solid var(--nal-border)}
+  .nal-commerce-price del{color:var(--nal-text-muted);font-size:.9rem}
+  .nal-commerce-price strong{font-size:clamp(1.6rem,3vw,2.25rem);letter-spacing:-.04em}
+  .nal-commerce-facts{margin:0;display:grid}
+  .nal-commerce-facts>div{display:grid;grid-template-columns:5rem 1fr;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--nal-border-soft)}
+  .nal-commerce-facts dt{color:var(--nal-text-muted);font-size:.875rem}
+  .nal-commerce-facts dd{margin:0;color:var(--nal-text);font-size:.875rem;line-height:1.55}
+  .nal-commerce-option{display:grid;gap:.5rem;margin-top:1rem}
+  .nal-commerce-option span{font-size:.875rem;font-weight:800}
+  .nal-commerce-option select{min-height:3rem;padding:.7rem .85rem;border:1px solid var(--nal-border);background:var(--nal-bg);color:var(--nal-text)}
+  .nal-commerce-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.75rem;margin-top:1.5rem}
+  .nal-commerce-buy{min-height:3.4rem;display:flex;align-items:center;justify-content:center;padding:.8rem 1.2rem;border:0;background:var(--nal-color-cobalt);color:#fff;font-weight:850;text-align:center}
+  .nal-commerce-buy:hover{background:var(--nal-color-cobalt-dark)}
+  .nal-commerce-buy:disabled{background:var(--nal-surface-muted);color:var(--nal-text-muted);cursor:not-allowed}
+  .nal-commerce-actions .nal-wish-button{position:static;width:3.4rem;height:3.4rem;border:1px solid var(--nal-border);border-radius:0;box-shadow:none}
+  .nal-commerce-note{margin:1rem 0 0;color:var(--nal-text-muted);font-size:.78rem;line-height:1.6}
+
+  .nal-commerce-tabs{position:sticky;top:var(--nal-header-height);z-index:40;border-top:1px solid var(--nal-border);border-bottom:1px solid var(--nal-border);background:var(--nal-header-bg);backdrop-filter:blur(14px)}
+  .nal-commerce-tabs .nal-container{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .nal-commerce-tabs a{min-height:3.5rem;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--nal-border-soft);font-size:.9rem;font-weight:800}
+  .nal-commerce-tabs a:first-child{border-left:1px solid var(--nal-border-soft)}
+  .nal-commerce-tabs a:hover{background:var(--nal-hover-bg)}
+
+  .nal-commerce-detail{display:grid;grid-template-columns:minmax(0,1fr) 18rem;gap:clamp(2rem,5vw,4rem);padding-top:4.5rem;padding-bottom:6rem}
+  .nal-commerce-section{scroll-margin-top:calc(var(--nal-header-height) + 4rem);padding:0 0 5rem;margin:0 0 5rem;border-bottom:1px solid var(--nal-border)}
+  .nal-commerce-section h2{margin:.35rem 0 1.75rem;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.045em}
+  .nal-commerce-section h3{margin:2rem 0 1rem;font-size:1.15rem}
+  .nal-commerce-lead{max-width:48rem;color:var(--nal-text-secondary);font-size:1.08rem;line-height:1.85}
+  .nal-commerce-detail-images{display:grid;gap:1rem;margin-top:2.25rem}
+  .nal-commerce-detail-images figure{margin:0;background:var(--nal-surface)}
+  .nal-commerce-detail-images img{width:100%;display:block}
+  .nal-commerce-use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+  .nal-commerce-use-grid article{min-height:13rem;padding:1.5rem;border-top:3px solid var(--nal-border-strong);background:var(--nal-surface)}
+  .nal-commerce-use-grid span{color:var(--nal-link);font:850 .75rem var(--nal-font-latin)}
+  .nal-commerce-use-grid h3{margin:2rem 0 .75rem}
+  .nal-commerce-use-grid p{margin:0;color:var(--nal-text-secondary);line-height:1.75}
+  .nal-commerce-caution{margin-top:2rem;padding:1.25rem 1.4rem;border-left:4px solid var(--nal-color-coral);background:var(--nal-color-coral-soft)}
+  .nal-commerce-caution p{margin:.5rem 0 0;line-height:1.7}
+  .nal-commerce-sidecart{position:sticky;top:calc(var(--nal-header-height) + 5rem);align-self:start;display:grid;gap:.75rem;padding:1.25rem;border:1px solid var(--nal-border);background:var(--nal-surface)}
+  .nal-commerce-sidecart span{color:var(--nal-text-muted);font-size:.78rem}
+  .nal-commerce-sidecart strong{font-size:1rem}
+  .nal-commerce-sidecart b{font-size:1.35rem}
+  .nal-commerce-sidecart .nal-commerce-buy{margin-top:.5rem}
+
+  body[data-collection="products"] .nal-page-hero{padding-bottom:2rem}
+  body[data-collection="products"] .nal-page-hero h1{max-width:44rem}
+  body[data-collection="products"] .card-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+  body[data-collection="products"] .nal-card--product{border-radius:0;box-shadow:none}
+  body[data-collection="products"] .nal-card--product .nal-card__media{border-radius:0;aspect-ratio:1/1}
+  body[data-collection="products"] .nal-card--product .nal-card__body{padding:1rem .25rem 1.5rem}
+  body[data-collection="products"] .nal-card--product .nal-card__title{font-size:1.15rem}
+  body[data-collection="products"] .nal-card--product .nal-card__summary{min-height:4.8em}
+  body[data-collection="products"] .nal-card--product .nal-card__footer{padding-top:.9rem;border-top:1px solid var(--nal-border-soft)}
+}
+
+@media(max-width:64rem){
+  @layer nal-components {
+    .nal-commerce-product__grid{grid-template-columns:1fr 1fr;gap:2rem}
+    .nal-commerce-panel{position:static;padding:1.5rem}
+    .nal-commerce-detail{grid-template-columns:1fr}
+    .nal-commerce-sidecart{display:none}
+    body[data-collection="products"] .card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+}
+@media(max-width:47.999rem){
+  @layer nal-components {
+    .nal-commerce-product{padding-top:.5rem}
+    .nal-commerce-breadcrumb{overflow:auto;white-space:nowrap}
+    .nal-commerce-product__grid{grid-template-columns:1fr;gap:1.25rem}
+    .nal-commerce-panel{padding:1.25rem 0;background:transparent}
+    .nal-commerce-gallery__rail{gap:.5rem}
+    .nal-commerce-actions{grid-template-columns:1fr auto}
+    .nal-commerce-tabs{top:0}
+    .nal-commerce-tabs .nal-container{padding-inline:0;overflow:auto;display:flex}
+    .nal-commerce-tabs a{flex:0 0 7rem;padding-inline:.65rem}
+    .nal-commerce-detail{padding-top:3rem;padding-bottom:4rem}
+    .nal-commerce-section{margin-bottom:3.5rem;padding-bottom:3.5rem}
+    .nal-commerce-use-grid{grid-template-columns:1fr}
+    .nal-commerce-use-grid article{min-height:0}
+    body[data-collection="products"] .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+    body[data-collection="products"] .nal-card--product .nal-card__body{padding:.8rem 0 1.2rem}
+    body[data-collection="products"] .nal-card--product .nal-card__summary{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:0}
+  }
+}
+@media(max-width:22rem){
+  @layer nal-components {
+    body[data-collection="products"] .card-grid{grid-template-columns:1fr}
+  }
+}
+
+
+/* NAL PDF EBOOK STOREFRONT V1 */
+@layer nal-components {
+  .nal-card__product-meta{
+    margin:.85rem 0 0;
+    color:var(--nal-text-muted);
+    font-size:.78rem;
+    font-weight:700;
+    line-height:1.55;
+  }
+  .nal-card--digital .nal-card__media{
+    aspect-ratio:3/4;
+    background:var(--nal-surface-muted);
+  }
+  .nal-card--digital .nal-card__media img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+  .nal-commerce-product--digital .nal-commerce-gallery__main{
+    max-width:42rem;
+    margin-inline:auto;
+  }
+  .nal-commerce-product--digital .nal-commerce-gallery__main img{
+    aspect-ratio:3/4;
+    object-fit:cover;
+  }
+  .nal-commerce-product--digital .nal-commerce-gallery__rail figure img{
+    aspect-ratio:3/4;
+    object-fit:cover;
+  }
+  .nal-commerce-author{
+    margin:.75rem 0 0;
+    color:var(--nal-text-muted);
+    font-size:.9rem;
+    font-weight:750;
+  }
+  .nal-commerce-actions.has-preview{
+    grid-template-columns:minmax(0,1fr) auto auto;
+  }
+  .nal-commerce-preview{
+    min-height:3.4rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:.8rem 1.1rem;
+    border:1px solid var(--nal-border-strong);
+    background:var(--nal-surface);
+    color:var(--nal-text);
+    font-weight:850;
+    white-space:nowrap;
+  }
+  .nal-commerce-preview:hover{
+    background:var(--nal-hover-bg);
+  }
+  .nal-commerce-toc{
+    max-width:48rem;
+    margin:2.5rem 0 0;
+    padding:1.5rem 0;
+    border-top:1px solid var(--nal-border);
+    border-bottom:1px solid var(--nal-border);
+  }
+  .nal-commerce-toc h3{margin:0 0 1rem}
+  .nal-commerce-toc ol{
+    margin:0;
+    padding-left:1.4rem;
+    display:grid;
+    gap:.7rem;
+    color:var(--nal-text-secondary);
+    line-height:1.65;
+  }
+  .nal-commerce-detail-images.is-digital{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:start;
+  }
+  .nal-commerce-detail-images.is-digital img{
+    aspect-ratio:3/4;
+    object-fit:cover;
+  }
+  .nal-commerce-sidecart .nal-commerce-preview{
+    width:100%;
+  }
+}
+@media(max-width:47.999rem){
+  @layer nal-components {
+    .nal-commerce-actions.has-preview{
+      grid-template-columns:1fr auto;
+    }
+    .nal-commerce-actions.has-preview .nal-commerce-buy{
+      grid-column:1/-1;
+    }
+    .nal-commerce-detail-images.is-digital{
+      grid-template-columns:1fr;
+    }
+    .nal-card--digital .nal-card__media{
+      aspect-ratio:3/4;
+    }
+  }
+}
+
+/* NAL-MIND-STORE-02: compact discovery, intact ebook covers and readable controls. */
+@layer nal-components {
+  body[data-collection="products"] .nal-page-hero {padding-block:2rem 1.5rem}
+  body[data-collection="products"] .nal-page-hero h1 {max-width:none;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.3}
+  body[data-collection="products"] .nal-listing {padding-block:1.25rem 4rem}
+  body[data-collection="products"] .nal-card {border-radius:6px;box-shadow:none;min-width:0}
+  body[data-collection="products"] .nal-card__summary {font-size:.875rem}
+  body[data-collection="products"] .nal-card__product-meta {font-size:.875rem}
+  body[data-collection="products"] .nal-card--digital .nal-card__media {aspect-ratio:3/4}
+  .nal-card--product .nal-card__badges {top:auto;bottom:.75rem}
+  .nal-card--digital .nal-card__media img,
+  .nal-commerce-product--digital .nal-commerce-gallery__main img,
+  .nal-commerce-product--digital .nal-commerce-gallery__rail img,
+  .nal-commerce-detail-images.is-digital img {object-fit:contain;background:var(--nal-surface-subtle)}
+  .nal-commerce-gallery,.nal-commerce-panel,.nal-commerce-content {min-width:0}
+  .nal-commerce-panel :is(h1,p,dd),.nal-commerce-content {overflow-wrap:anywhere}
+  .nal-commerce-actions {display:flex;flex-wrap:wrap}
+  .nal-commerce-actions > :is(a,button) {flex:1 1 9rem;min-width:0;overflow-wrap:anywhere}
+  .nal-commerce-actions .nal-commerce-preview {white-space:normal;text-align:center}
+  .nal-commerce-buy:focus-visible,.nal-commerce-preview:focus-visible {outline:3px solid var(--nal-focus);outline-offset:3px}
+  .nal-commerce-tabs .nal-container {display:flex;overflow-x:auto}
+  .nal-commerce-tabs a {flex:1 0 auto;padding-inline:1rem;min-width:7rem}
+  .nal-commerce-note {font-size:.875rem}
+  .nal-commerce-license-options {padding-left:1.25rem}
+  .nal-commerce-license-options li {display:flex;flex-wrap:wrap;gap:.75rem;margin-block:.75rem}
+  .nal-commerce-product--digital .nal-commerce-gallery:has(.nal-commerce-gallery__rail) {display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:.75rem}
+  .nal-commerce-product--digital .nal-commerce-gallery:has(.nal-commerce-gallery__rail) .nal-commerce-gallery__main {grid-column:2;grid-row:1}
+  .nal-commerce-product--digital .nal-commerce-gallery__rail {grid-column:1;grid-row:1;display:flex;flex-direction:column;margin:0}
+}
+@layer nal-responsive {
+  @media(max-width:47.999rem) {
+    body[data-collection="products"] .card-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+    body[data-collection="products"] .nal-card--product .nal-card__body {padding:.75rem}
+    body[data-collection="products"] .nal-card__title {font-size:1rem;overflow-wrap:anywhere}
+    body[data-collection="products"] .nal-card__footer {flex-wrap:wrap;gap:.4rem}
+    .nal-commerce-product--digital .nal-commerce-gallery:has(.nal-commerce-gallery__rail) {display:block}
+    .nal-commerce-product--digital .nal-commerce-gallery__rail {flex-direction:row;overflow-x:auto;margin-top:.75rem}
+    .nal-commerce-product--digital .nal-commerce-gallery__rail figure {flex:0 0 4rem}
+    .nal-commerce-facts>div {grid-template-columns:4rem minmax(0,1fr);gap:.75rem}
+    .nal-commerce-actions.has-preview .nal-commerce-buy {grid-column:1/-1}
+    .nal-commerce-actions .nal-commerce-buy {flex-basis:100%}
+  }
+  @media(max-width:21rem) {body[data-collection="products"] .card-grid {grid-template-columns:minmax(0,1fr)}}
+}

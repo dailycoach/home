@@ -102,7 +102,7 @@
 
     try {
       let data = liveLaunches;
-      if (document.body.dataset.backend !== "supabase") {
+      if (!data && document.body.dataset.backend !== "supabase") {
         const response = await fetch(DATA_URL, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         data = await response.json();

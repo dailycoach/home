@@ -210,7 +210,7 @@ try {
 
   const noJsContext = await browser.newContext({ viewport: { width: 1280, height: 900 }, javaScriptEnabled: false });
   for (const [route, expectedText] of [
-    ['/nal/', '오늘, 조금 다른 사람들과'],
+    ['/nal/', '가장 먼저 여는'],
     ['/nal/gather/', '감정카드 대화모임'],
     ['/nal/class/', '미술로 그리는 현재의 마음'],
     ['/nal/shop/', '코칭 질문카드'],
