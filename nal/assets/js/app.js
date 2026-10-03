@@ -845,10 +845,10 @@
       terms: ["NAL POLICY", "이용약관", "정식 약관 공개 전입니다.", "운영 주체와 서비스 범위에 대한 법적 검토가 끝나기 전에는 약관이 확정된 것처럼 표시하지 않습니다."],
       privacy: ["NAL POLICY", "개인정보처리방침", "개인정보 수집 기능 연결 전입니다.", "현재 NAL은 서버로 개인정보를 받지 않으며, 찜과 최근 본 항목은 이 기기의 로컬 저장소에만 남습니다."],
       cancellation: ["NAL POLICY", "취소·환불 규정", "프로그램별 실제 규정 확정 전입니다.", "일정·참가비·신청 채널이 확정되면 프로그램 상세에 적용되는 취소·노쇼·환불 기준을 함께 공개합니다."],
-      shipping: ["NAL POLICY", "배송·교환 안내", "판매 상품과 배송 방식 확정 전입니다.", "상품 유형, 출고 주체, 배송비와 교환 조건이 확인되기 전에는 정책을 만들어 표시하지 않습니다."]
+      shipping: ["NAL POLICY", "배송·다운로드 안내", "상품 제공 방식 확정 전입니다.", "실물 상품은 배송·교환 정보를, PDF 전자책 등 디지털 상품은 다운로드·이용 범위를 상품별로 확인된 내용만 표시합니다."]
     }[sectionName] || ["NAL INFO", "운영 안내", "안내 준비 중입니다.", "확인된 내용만 공개합니다."];
     const extra = sectionName === "faq"
-      ? `<div class="nal-faq"><details><summary>일정과 가격은 어디에서 확인하나요?</summary><p>실제 모집이 시작된 프로그램의 상세 페이지와 연결된 신청 채널에서 확인합니다.</p></details><details><summary>혼자 참여해도 되나요?</summary><p>프로그램마다 다릅니다. 확인된 경우에만 ‘혼자 참여 가능’ 정보를 표시합니다.</p></details><details><summary>감정카드는 진단 도구인가요?</summary><p>아닙니다. 감정을 발견하고 대화를 시작하며 생각을 기록하도록 돕는 자기이해 도구입니다.</p></details><details><summary>말하고 싶지 않은 이야기도 해야 하나요?</summary><p>참여자는 답변을 거절하거나 활동을 쉬고 중단할 수 있습니다. 프로그램별 안전 안내를 확인해 주세요.</p></details></div>`
+      ? `<div class="nal-faq"><details><summary>일정과 가격은 어디에서 확인하나요?</summary><p>실제 모집이 시작된 프로그램의 상세 페이지와 연결된 신청 채널에서 확인합니다.</p></details><details><summary>혼자 참여해도 되나요?</summary><p>프로그램마다 다릅니다. 확인된 경우에만 ‘혼자 참여 가능’ 정보를 표시합니다.</p></details><details><summary>PDF 전자책은 어떻게 받나요?</summary><p>상품별 상세 페이지에 파일형식과 제공 방식을 표시합니다. 판매가 열리기 전에는 다운로드가 가능한 것처럼 표시하지 않습니다.</p></details><details><summary>감정카드는 진단 도구인가요?</summary><p>아닙니다. 감정을 발견하고 대화를 시작하며 생각을 기록하도록 돕는 자기이해 도구입니다.</p></details><details><summary>말하고 싶지 않은 이야기도 해야 하나요?</summary><p>참여자는 답변을 거절하거나 활동을 쉬고 중단할 수 있습니다. 프로그램별 안전 안내를 확인해 주세요.</p></details></div>`
       : sectionName === "partnership"
         ? inquiry ? `<p><a class="nal-button--primary" href="${escapeHtml(inquiry)}">이메일로 문의하기</a></p>` : "<p>운영 문의 경로를 준비 중입니다.</p>"
         : "";
