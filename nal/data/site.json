@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "brand": {
     "externalSiteName": "날빛",
     "internalBrand": "NAL",
@@ -7,8 +7,8 @@
     "basePath": "/nal/"
   },
   "metadata": {
-    "defaultTitle": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
-    "defaultDescription": "취향과 마음을 주제로 만나는 커뮤니티와 원데이클래스, 감정카드·질문카드·워크북을 소개하는 NAL 플랫폼입니다.",
+    "defaultTitle": "날빛 | NAL PDF 전자책·마음도구 스토어",
+    "defaultDescription": "PDF 전자책, 워크북, 코칭자료와 감정·질문카드를 소개하는 NAL 마음도구 스토어입니다.",
     "canonicalBase": "https://daily-coach-ing.com/nal/",
     "openGraphImage": "https://daily-coach-ing.com/nal/assets/images/nal-og.png"
   },
@@ -98,13 +98,14 @@
       "코치·진행자"
     ],
     "shop": [
+      "PDF 전자책",
+      "워크북·활동지",
+      "코칭자료",
       "감정카드",
       "질문카드",
       "관계카드",
       "강점·가치카드",
-      "워크북",
-      "클래스 키트",
-      "디지털 도구"
+      "클래스 키트"
     ],
     "note": [
       "마음",
@@ -143,7 +144,11 @@
     "account": false,
     "cart": false,
     "checkout": false,
-    "reviews": false
+    "reviews": false,
+    "digitalProducts": true,
+    "digitalPreview": true,
+    "secureDownload": false,
+    "orderLibrary": false
   },
   "designTokens": {
     "colors": {
