@@ -69,6 +69,7 @@ try {
     ('${hiddenSession}', 'test-draft', now() + interval '1 day', now() + interval '2 days', 1, 0, 'open', true);`);
 
   await role('anon');
+  await equal("select jsonb_array_length(public.nal_public_catalog()->'programs')", 10);
   await equal("select count(*)::integer from public.nal_catalog where id='test-draft'", 0);
   await equal('select count(*)::integer from public.nal_sessions where id=$1', 0, [hiddenSession]);
   await denied('select * from public.nal_profiles');

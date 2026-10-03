@@ -39,6 +39,7 @@
     products: [],
     hosts: [],
     content: [],
+    launches: null,
     errors: []
   };
 
@@ -210,6 +211,7 @@
         </div>
       </div>`;
     updateWishCount();
+    document.dispatchEvent(new CustomEvent("nal:page-rendered", { detail: { launches: state.launches } }));
   }
 
   function renderFooter(site = null) {
@@ -723,6 +725,18 @@
   }
 
   async function loadData() {
+    const backendConfigResponse = await fetch(`${DATA_BASE}/backend.json`, { cache: "no-store" });
+    if (backendConfigResponse.ok) {
+      const config = await backendConfigResponse.json();
+      if (config.enabled === true) {
+        const data = await globalThis.NALBackend.load(config);
+        state = { ...state, ...data, errors: [] };
+        body.dataset.backend = "supabase";
+        return;
+      }
+    } else if (backendConfigResponse.status !== 404) {
+      throw new Error(`Backend configuration HTTP ${backendConfigResponse.status}`);
+    }
     const entries = [
       ["site", "site.json", "site"],
       ["programs", "programs.json", "programs"],
@@ -781,7 +795,7 @@
         renderFooter(state.site);
         renderCurrentPage();
         showToast(state.errors.length ? "일부 정보를 여전히 불러오지 못했습니다." : "정보를 다시 불러왔습니다.");
-      });
+      }).catch(() => showToast("정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."));
     }
   });
   document.addEventListener("keydown", trapDrawerFocus);
@@ -805,7 +819,7 @@
       renderFooter(state.site);
       renderCurrentPage();
     } catch (error) {
-      if (root) root.innerHTML = `<section class="nal-section"><div class="nal-container"><div class="nal-error" role="alert"><p class="nal-eyebrow">NAL / ERROR</p><h1>정보를 불러오지 못했습니다.</h1><p>잠시 후 새로고침해 주세요. 오류가 계속되면 NAL 홈에서 다시 시작할 수 있습니다.</p><a class="nal-button--secondary" href="/nal/">NAL 홈으로</a></div></div></section>`;
+      if (root) root.innerHTML = `<section class="nal-section"><div class="nal-container"><div class="nal-error" role="alert"><p class="nal-eyebrow">NAL / ERROR</p><h1>정보를 불러오지 못했습니다.</h1><p>잠시 후 다시 시도해 주세요. 오류가 계속되면 NAL 홈에서 다시 시작할 수 있습니다.</p><button class="nal-button--secondary" type="button" data-retry-data>다시 시도</button><a class="nal-button--secondary" href="/nal/">NAL 홈으로</a></div></div></section>`;
     }
   }
 

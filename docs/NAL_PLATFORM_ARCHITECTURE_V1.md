@@ -1,5 +1,9 @@
 # NAL Platform Architecture v1
 
+> 데이터 계층 업데이트: NAL 전용 Supabase 프로젝트를 연결했다.
+> 현재 연결과 미완료 범위는 [NAL_SUPABASE_STATUS_V1.md](NAL_SUPABASE_STATUS_V1.md)를 기준으로 한다.
+> 아래 v1 정적 구조 설명은 이전 버전 기록이다.
+
 기준 브랜치: `agent/nal-community-platform-v1`
 
 기준 경로: `/nal/`
