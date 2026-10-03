@@ -25,8 +25,8 @@
         "href": "/nal/class/"
       },
       {
-        "label": "스토어",
-        "nalLabel": "NAL SHOP",
+        "label": "마음도구",
+        "nalLabel": "NAL MIND TOOLS",
         "href": "/nal/shop/"
       },
       {
@@ -71,7 +71,7 @@
   "pageLabels": {
     "gather": "NAL GATHER",
     "class": "NAL CLASS",
-    "shop": "NAL SHOP",
+    "shop": "NAL MIND TOOLS",
     "note": "NAL NOTE",
     "host": "NAL HOST",
     "my": "MY NAL",
