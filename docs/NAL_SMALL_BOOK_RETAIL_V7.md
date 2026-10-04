@@ -1,35 +1,52 @@
-# NAL SMALL BOOK RETAIL v7 · STOREFRONT PRELAUNCH
+# NAL STARTER FREE v7 · DIRECT DOWNLOAD
 
-- 무료 NAL STARTER 3종은 유지한다.
-- Retail v7은 별도 유료 상품군 **NAL · 날빛 작은 책**으로 등록한다.
-- 개별권 4,900원.
-- 3권 세트 정가 14,900원 / 런칭가 9,900원.
-- 현재 stockStatus=comingSoon, purchaseUrl=null. 결제 CTA는 비활성.
-- 공개 미리보기만 GitHub에 포함하며 유료 원본 PDF는 public repo에 넣지 않는다.
+## Product decision
 
-## 실제 판매 오픈 전 게이트
-1. Retail v7 원본 PDF 3권을 nal-products-private bucket에 업로드.
-2. private product file row를 각 상품 ID에 active로 등록.
-3. 3권 세트 전달 방식 확정: ZIP 1건 또는 entitlement 3건.
-4. Toss merchant client/secret key 설정.
-5. PAYMENT_STATUS_CHANGED webhook 등록.
-6. checkout/success/fail 프런트 연결 및 테스트 결제.
-7. catalog stockStatus=available, checkout purchaseUrl 적용.
-8. NAL_TOSS_PAYMENTS_ENABLED=true는 마지막에 활성화.
-9. 결제 → entitlement → signed download E2E PASS 후 판매 오픈.
+The three upgraded NAL starter books are **free editions**.
 
+- No payment.
+- No checkout.
+- No login.
+- Direct PDF download from the public NAL site.
+- Personal reading and personal printing are allowed.
+- Resale, re-upload, paid redistribution, and bulk copying for classes/organizations are not included.
 
-## Checkout frontend · prelaunch
-- /nal/checkout/?product=<id>
-- /nal/checkout/success/
-- /nal/checkout/fail/
-- Supabase email magic-link authentication
-- Toss Payments V2 widget frontend
-- server-authoritative create-order
-- success redirect 뒤 server confirm
-- entitlementId 기반 nal-digital-download signed link 발급
-- 상품 purchaseUrl은 checkout URL로 미리 연결하지만 stockStatus=comingSoon이므로 공개 구매 CTA는 계속 비활성
-- payment/delivery feature flags는 그대로 OFF
+## Canonical free products
 
-### Bundle delivery
-3권 세트는 현재 private delivery가 PDF-only이므로 ZIP이 아니라 3권 합본 PDF 113쪽을 1개 상품 파일로 연결한다.
+| Product | Pages | Price | Delivery |
+| --- | ---: | ---: | --- |
+| `nal-small-book-01-mind-reset` | 37 | 0 KRW | direct PDF |
+| `nal-small-book-02-relationship` | 39 | 0 KRW | direct PDF |
+| `nal-small-book-03-next-step` | 37 | 0 KRW | direct PDF |
+
+The previous short `nal-starter-*` pages redirect to the upgraded books so existing links continue to work.
+
+The previously planned paid 3-book set is unpublished.
+
+## Runtime contract
+
+Each product uses:
+
+- `price=0`
+- `stockStatus=available`
+- root-relative public `purchaseUrl`
+- `deliveryMethod=digital-download`
+- `licenseType=personal-use`
+
+`NALStore.purchase()` therefore resolves to **무료 다운로드** and the detail runtime adds the browser `download` attribute. Toss Payments is not part of this three-book flow.
+
+## Payment foundation
+
+The existing Toss/private-delivery foundation remains available for future paid NAL products. It is not used by these three free editions and does not need to be enabled for their release.
+
+## Generated PDFs
+
+The free PDFs are generated from source page text by:
+
+`scripts/generate-nal-free-starter-v7.py`
+
+The workflow commits the generated PDFs to:
+
+- `/nal/assets/downloads/free/nal-small-book-01-mind-reset-v7.pdf`
+- `/nal/assets/downloads/free/nal-small-book-02-relationship-v7.pdf`
+- `/nal/assets/downloads/free/nal-small-book-03-next-step-v7.pdf`
