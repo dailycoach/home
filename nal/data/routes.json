@@ -146,24 +146,6 @@
       "indexable": true
     },
     {
-      "path": "/nal/shop/nal-starter-01-mind-reset/",
-      "title": "지금 마음을 정리하는 7개의 질문 | NAL 마음도구 · 날빛",
-      "description": "감정·생각·장면을 분리해 보고 지금 필요한 것과 오늘의 한 걸음을 찾는 무료 PDF 워크북",
-      "indexable": true
-    },
-    {
-      "path": "/nal/shop/nal-starter-02-relationship-dialogue/",
-      "title": "관계 대화를 다시 시작하는 9개의 질문 | NAL 마음도구 · 날빛",
-      "description": "갈등 장면에서 사실·감정·해석·바람·요청·경계를 차례로 살펴보는 무료 PDF 워크북",
-      "indexable": true
-    },
-    {
-      "path": "/nal/shop/nal-starter-03-next-step/",
-      "title": "막막함을 다음 한 걸음으로 바꾸는 7개의 질문 | NAL 마음도구 · 날빛",
-      "description": "막힌 장면과 현실적 마찰을 살펴보고 10분 행동과 24시간 안의 시작을 정하는 무료 PDF 워크북",
-      "indexable": true
-    },
-    {
       "path": "/nal/shop/dailycoaching-awareness-100/",
       "title": "반응하기 전, 3분 알아차림 | NAL 마음도구 · 날빛",
       "description": "짧은 에세이와 질문으로 지금의 마음·몸·생각을 관찰하고, 반응 전에 가장 작은 선택 하나를 남기는 입문 PDF",
@@ -230,27 +212,21 @@
       "indexable": true
     },
     {
-      "path": "/nal/shop/nal-small-book-set-01-03/",
-      "title": "NAL · 날빛 작은 책 3종 세트 | NAL · 날빛 작은 책",
-      "description": "짧은 에세이와 날빛 이야기, 코칭 질문, 기록, 작은 실험이 한 흐름으로 이어지는 날빛 작은 책 3종 세트",
-      "indexable": true
-    },
-    {
       "path": "/nal/shop/nal-small-book-01-mind-reset/",
-      "title": "지금, 마음을 정리하는 7개의 질문 | NAL · 날빛 작은 책",
-      "description": "짧은 에세이를 읽고 감정·몸·생각·사실·필요를 천천히 구분하며 오늘의 한 걸음까지 이어가는 날빛 작은 책",
+      "title": "지금, 마음을 정리하는 7개의 질문 | NAL · 날빛 무료 작은 책",
+      "description": "무료 PDF · 37쪽 · 짧은 에세이를 읽고 감정·몸·생각·사실·필요를 천천히 구분하며 오늘의 한 걸음까지 이어가는 날빛 작은 책",
       "indexable": true
     },
     {
       "path": "/nal/shop/nal-small-book-02-relationship/",
-      "title": "관계를 다시 시작하는 9개의 질문 | NAL · 날빛 작은 책",
-      "description": "답이 오지 않은 메시지와 달라진 말투처럼 오래 남는 관계 장면을 천천히 풀어 다시 건넬 말을 찾는 날빛 작은 책",
+      "title": "관계를 다시 시작하는 9개의 질문 | NAL · 날빛 무료 작은 책",
+      "description": "무료 PDF · 39쪽 · 답이 오지 않은 메시지와 달라진 말투처럼 오래 남는 관계 장면을 천천히 풀어 다시 건넬 말을 찾는 날빛 작은 책",
       "indexable": true
     },
     {
       "path": "/nal/shop/nal-small-book-03-next-step/",
-      "title": "막막함을 다음 한 걸음으로 바꾸는 7개의 질문 | NAL · 날빛 작은 책",
-      "description": "해야 할 일은 알지만 시작이 막힐 때, 통제할 수 있는 것과 현실적 마찰을 살피고 오늘의 10분 행동을 정하는 날빛 작은 책",
+      "title": "막막함을 다음 한 걸음으로 바꾸는 7개의 질문 | NAL · 날빛 무료 작은 책",
+      "description": "무료 PDF · 37쪽 · 해야 할 일은 알지만 시작이 막힐 때, 통제할 수 있는 것과 현실적 마찰을 살피고 오늘의 10분 행동을 정하는 날빛 작은 책",
       "indexable": true
     }
   ]
