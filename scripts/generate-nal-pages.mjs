@@ -286,12 +286,12 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=mind-store-03">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=awareness-ladder-1">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
-  <script src="/nal/assets/js/product-routes.js?v=mind-store-03" defer></script>
-  <script src="/nal/assets/js/store.js?v=mind-store-03" defer></script>
+  <script src="/nal/assets/js/product-routes.js?v=awareness-ladder-1" defer></script>
+  <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=mind-store-03" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=mind-store-03" defer></script>
+  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=awareness-ladder-1" defer></script>
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
