@@ -164,6 +164,24 @@
       "indexable": true
     },
     {
+      "path": "/nal/shop/dailycoaching-awareness-100/",
+      "title": "반응하기 전, 3분 알아차림 | NAL 마음도구 · 날빛",
+      "description": "짧은 에세이와 질문으로 지금의 마음·몸·생각을 관찰하고, 반응 전에 가장 작은 선택 하나를 남기는 입문 PDF",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/dailycoaching-awareness-1000/",
+      "title": "반응에서 선택으로 | NAL 마음도구 · 날빛",
+      "description": "Step Back·Think by Questions·Options·Proceed의 흐름을 에세이와 실습으로 풀어내는 셀프코칭 PDF 워크북",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/dailycoaching-awareness-10000/",
+      "title": "DAILY 알아차림코칭 플레이북 | NAL 마음도구 · 날빛",
+      "description": "Detect·Acknowledge·Inquire·Link·Your Action과 7 Lenses로 경험을 읽고 선택을 행동으로 연결하는 심화 플레이북",
+      "indexable": true
+    },
+    {
       "path": "/nal/shop/emotion-cards/",
       "title": "감정카드 | NAL 마음도구 · 날빛",
       "description": "말로 설명하기 어려운 감정을 카드 한 장에서 발견하고 대화를 시작하도록 돕는 자기이해 카드",
