@@ -29,7 +29,7 @@ jobs:
         run: python scripts/generate-nal-free-starter-v7.py
       - name: Commit generated PDFs
         run: |
-          if git diff --quiet -- nal/assets/downloads/free/; then
+          if [ -z "$(git status --porcelain -- nal/assets/downloads/free/nal-small-book-01-mind-reset-v7.pdf nal/assets/downloads/free/nal-small-book-02-relationship-v7.pdf nal/assets/downloads/free/nal-small-book-03-next-step-v7.pdf)" ]; then
             echo "No generated PDF changes."
             exit 0
           fi
