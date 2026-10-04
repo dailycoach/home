@@ -17,3 +17,19 @@
 7. catalog stockStatus=available, checkout purchaseUrl 적용.
 8. NAL_TOSS_PAYMENTS_ENABLED=true는 마지막에 활성화.
 9. 결제 → entitlement → signed download E2E PASS 후 판매 오픈.
+
+
+## Checkout frontend · prelaunch
+- /nal/checkout/?product=<id>
+- /nal/checkout/success/
+- /nal/checkout/fail/
+- Supabase email magic-link authentication
+- Toss Payments V2 widget frontend
+- server-authoritative create-order
+- success redirect 뒤 server confirm
+- entitlementId 기반 nal-digital-download signed link 발급
+- 상품 purchaseUrl은 checkout URL로 미리 연결하지만 stockStatus=comingSoon이므로 공개 구매 CTA는 계속 비활성
+- payment/delivery feature flags는 그대로 OFF
+
+### Bundle delivery
+3권 세트는 현재 private delivery가 PDF-only이므로 ZIP이 아니라 3권 합본 PDF 113쪽을 1개 상품 파일로 연결한다.
