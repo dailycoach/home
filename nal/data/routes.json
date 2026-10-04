@@ -228,6 +228,30 @@
       "title": "미술심리코칭 6주 과정 참여 안내 | NAL NOTE · 날빛",
       "description": "미술심리코칭 6주 과정의 참여 방식, 준비물, 진행자, FAQ와 과정 범위를 안내합니다.",
       "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-small-book-set-01-03/",
+      "title": "NAL · 날빛 작은 책 3종 세트 | NAL · 날빛 작은 책",
+      "description": "짧은 에세이와 날빛 이야기, 코칭 질문, 기록, 작은 실험이 한 흐름으로 이어지는 날빛 작은 책 3종 세트",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-small-book-01-mind-reset/",
+      "title": "지금, 마음을 정리하는 7개의 질문 | NAL · 날빛 작은 책",
+      "description": "짧은 에세이를 읽고 감정·몸·생각·사실·필요를 천천히 구분하며 오늘의 한 걸음까지 이어가는 날빛 작은 책",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-small-book-02-relationship/",
+      "title": "관계를 다시 시작하는 9개의 질문 | NAL · 날빛 작은 책",
+      "description": "답이 오지 않은 메시지와 달라진 말투처럼 오래 남는 관계 장면을 천천히 풀어 다시 건넬 말을 찾는 날빛 작은 책",
+      "indexable": true
+    },
+    {
+      "path": "/nal/shop/nal-small-book-03-next-step/",
+      "title": "막막함을 다음 한 걸음으로 바꾸는 7개의 질문 | NAL · 날빛 작은 책",
+      "description": "해야 할 일은 알지만 시작이 막힐 때, 통제할 수 있는 것과 현실적 마찰을 살피고 오늘의 10분 행동을 정하는 날빛 작은 책",
+      "indexable": true
     }
   ]
 }
