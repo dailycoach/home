@@ -1,0 +1,17 @@
+{
+  "name": "rsedu-lmc-order-bridge",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "test": "node --test test/*.test.js",
+    "check": "npm test && wrangler deploy --dry-run"
+  },
+  "dependencies": {
+    "bcryptjs": "3.0.3"
+  },
+  "devDependencies": {
+    "wrangler": "^4.114.0"
+  }
+}

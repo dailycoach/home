@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "rsedu-lmc-order-bridge",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "TARGET_PRODUCT_ID": "13702661269",
+    "COURSE_NAME": "LMC 평생진로상담사 2급 과정",
+    "FORM_URL": "https://docs.google.com/forms/d/e/1FAIpQLSfvXSLjEm8HqLcwloUJW7IK48aAuEZSVTKlANqFRq3h5oEoPw/viewform",
+    "FORM_PREFILL_URL_TEMPLATE": "",
+    "NAVER_TOKEN_TYPE": "SELF",
+    "POLL_LOOKBACK_MINUTES": "15",
+    "INVITE_PROVISION_WINDOW_DAYS": "14"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "ORDER_STATE",
+      "id": "00000000000000000000000000000000"
+    }
+  ],
+  "triggers": {
+    "crons": ["*/2 * * * *"]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
