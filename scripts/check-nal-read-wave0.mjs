@@ -11,7 +11,7 @@ const required=[
 "docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql",
 "supabase/migrations/20261006095820_nal_read_wave0_foundation.sql",
 "supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql",
-"scripts/test-nal-read-db-fixture.sql","scripts/test-nal-read-db-cases.sql"
+"scripts/test-nal-read-db-fixture.sql","scripts/test-nal-read-db-cases.sql","scripts/nal-read-browser-qa.mjs"
 ];
 for(const file of required)await access(path.join(root,file));
 const seasons=JSON.parse(await readFile(path.join(root,"nal/data/read-seasons.json"),"utf8"));
