@@ -40,7 +40,7 @@ const routes = [
   ["/nal/read/","책을 읽고"],
   ["/nal/read/trend-2027/","TREND"],
   ["/nal/read/trend-2027/welcome/","앞으로 28일"],
-  ["/nal/read/trend-2027/before/","지금의 나를"],
+  ["/nal/read/trend-2027/before/","책을 읽기 전에"],
   ["/nal/read/auth/callback/","로그인을"]
 ];
 const viewports = [
