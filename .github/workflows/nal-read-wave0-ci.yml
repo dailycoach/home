@@ -1,0 +1,49 @@
+name: NAL READ W0 CI
+
+on:
+  push:
+    branches:
+      - feat/nal-read-v1
+    paths:
+      - "nal/read/**"
+      - "nal/assets/js/read.js"
+      - "nal/assets/css/nal-read.css"
+      - "nal/data/read-*.json"
+      - "supabase/functions/nal-read-enroll/**"
+      - "docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql"
+      - "scripts/check-nal-read-wave0.mjs"
+      - ".github/workflows/nal-read-wave0-ci.yml"
+  pull_request:
+    paths:
+      - "nal/read/**"
+      - "nal/assets/js/read.js"
+      - "nal/assets/css/nal-read.css"
+      - "nal/data/read-*.json"
+      - "supabase/functions/nal-read-enroll/**"
+      - "docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql"
+      - "scripts/check-nal-read-wave0.mjs"
+      - ".github/workflows/nal-read-wave0-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript syntax
+        run: |
+          node --check nal/assets/js/read.js
+          node --check supabase/functions/nal-read-enroll/handler.mjs
+          node --check supabase/functions/nal-read-enroll/handler.test.mjs
+      - name: Test READ enrollment handler
+        run: node supabase/functions/nal-read-enroll/handler.test.mjs
+      - name: Check READ W0 static contract
+        run: node scripts/check-nal-read-wave0.mjs
+      - name: Run NAL shared regression QA
+        run: node scripts/check-nal-platform.mjs
