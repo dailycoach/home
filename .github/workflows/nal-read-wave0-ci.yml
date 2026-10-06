@@ -14,6 +14,7 @@ on:
       - "supabase/migrations/*nal_read*"
       - "scripts/check-nal-read-wave0.mjs"
       - "scripts/test-nal-read-db-*.sql"
+      - "scripts/nal-read-browser-qa.mjs"
       - ".github/workflows/nal-read-wave0-ci.yml"
   pull_request:
     paths:
@@ -26,6 +27,7 @@ on:
       - "supabase/migrations/*nal_read*"
       - "scripts/check-nal-read-wave0.mjs"
       - "scripts/test-nal-read-db-*.sql"
+      - "scripts/nal-read-browser-qa.mjs"
       - ".github/workflows/nal-read-wave0-ci.yml"
 
 permissions:
@@ -78,10 +80,16 @@ jobs:
           psql -h localhost -U postgres -d nal_read_test -f scripts/test-nal-read-db-fixture.sql
           psql -h localhost -U postgres -d nal_read_test -f docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql
           psql -h localhost -U postgres -d nal_read_test -f scripts/test-nal-read-db-cases.sql
+      - name: Install browser QA dependency
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run zero-cost READ browser QA
+        run: node scripts/nal-read-browser-qa.mjs
       - name: Confirm W0 change isolation
         shell: bash
         run: |
-          unexpected="$(git diff --name-only origin/main...HEAD | grep -Ev '^(.github/workflows/nal-read-wave0-ci.yml|docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql|nal/read/|nal/assets/js/read.js$|nal/assets/css/nal-read.css$|nal/data/read-[^/]+[.]json$|scripts/check-nal-read-wave0.mjs$|scripts/test-nal-read-db-[^/]+[.]sql$|supabase/functions/nal-read-enroll/)' || true)"
+          unexpected="$(git diff --name-only origin/main...HEAD | grep -Ev '^(.github/workflows/nal-read-wave0-ci.yml|docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql|nal/read/|nal/assets/js/read.js$|nal/assets/css/nal-read.css$|nal/data/read-[^/]+[.]json$|scripts/check-nal-read-wave0.mjs$|scripts/test-nal-read-db-[^/]+[.]sql$|scripts/nal-read-browser-qa.mjs$|supabase/migrations/[^/]*nal_read[^/]*[.]sql$|supabase/functions/nal-read-enroll/)' || true)"
           if [ -n "$unexpected" ]; then
             echo "Unexpected W0 changes:"
             echo "$unexpected"
