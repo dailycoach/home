@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   foundation:
-    name: READ foundation only
+    name: Historical READ foundation regression only
     runs-on: ubuntu-latest
     timeout-minutes: 10
     services:
@@ -32,7 +32,7 @@ jobs:
           node --check supabase/functions/nal-read-enroll/handler.mjs
           node supabase/functions/nal-read-enroll/handler.test.mjs
           node scripts/check-nal-read-wave0.mjs
-      - name: Test actual migration chain plus corrective patch
+      - name: Historical migration chain and isolated FIX-01 core regression
         env:
           PGHOST: localhost
           PGUSER: postgres
@@ -42,11 +42,12 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y postgresql-client >/dev/null
           psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-db-fixture.sql
-          for file in $(find supabase/migrations -name '*nal_read*.sql' | sort); do
-            psql -X -v ON_ERROR_STOP=1 -f "$file"
-          done
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095820_nal_read_wave0_foundation.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql
           psql -X -v ON_ERROR_STOP=1 -f docs/NAL_READ_FIX01_PATCH.sql
           psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-db-cases.sql
+          echo 'This job does NOT validate the current controlled rollout. See Controlled Release CI.'
       - name: Browser layout QA (not real authentication)
         run: |
           npm install --no-save --ignore-scripts playwright@1.55.0

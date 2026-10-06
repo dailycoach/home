@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   release-guard:
-    name: Exact release SQL - OFF and scoped test access
+    name: Hosted-equivalent permissions - no Auth table grant
     runs-on: ubuntu-latest
     timeout-minutes: 8
     services:
@@ -31,13 +31,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - name: Render atomic FIX-01 and controlled scope migration
+      - name: Verify recorded migration matches the tested source
         run: |
-          mkdir -p /tmp/nal-fix02-evidence/source
+          mkdir -p /tmp/nal-fix02-evidence
           node scripts/render-nal-read-controlled-release.mjs /tmp/nal-fix02-evidence/nal-read-controlled-release.sql | tee /tmp/nal-fix02-evidence/source-hashes.json
-          cp docs/NAL_READ_FIX02_GUARD.sql scripts/test-nal-read-fix02-db.sql /tmp/nal-fix02-evidence/source/
-          cp -r supabase/functions/nal-read-daily supabase/functions/nal-read-enroll /tmp/nal-fix02-evidence/source/
-      - name: Disposable baseline database only
+          cmp /tmp/nal-fix02-evidence/nal-read-controlled-release.sql supabase/migrations/20261006200849_nal_read_fix02_controlled_rollout.sql
+      - name: Disposable baseline with actual Auth permission boundary
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y postgresql-client >/dev/null
@@ -46,23 +45,39 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095820_nal_read_wave0_foundation.sql
           psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
           psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql
-          psql -X -v ON_ERROR_STOP=1 -c 'alter role service_role bypassrls; grant usage on schema public,auth,nal_private to service_role; grant select,update on auth.users,public.nal_catalog,public.nal_orders,public.nal_order_items to service_role;'
-      - name: Apply exact generated forward migration
-        run: psql -X -v ON_ERROR_STOP=1 -f /tmp/nal-fix02-evidence/nal-read-controlled-release.sql
-      - name: OFF, allowlist and protected participant journey
+          psql -X -v ON_ERROR_STOP=1 -c 'alter role service_role bypassrls; grant usage on schema public,auth,nal_private to service_role; grant select,update on public.nal_catalog,public.nal_orders,public.nal_order_items to service_role; revoke all on auth.users from service_role;'
+      - name: Apply recorded forward migration
+        run: psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006200849_nal_read_fix02_controlled_rollout.sql
+      - name: Participant path - preserve permission failures
         shell: bash
         run: |
           set -o pipefail
-          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix02-db.sql | tee /tmp/nal-fix02-evidence/db-tests.log
-          psql -X -v ON_ERROR_STOP=1 -c 'select mode from nal_private.read_release_control; select count(*) as remaining_test_permits from nal_private.read_test_allowlist; select count(*) as remaining_users from auth.users;' | tee /tmp/nal-fix02-evidence/after-rollback.log
-      - name: Unchanged validated Edge handler tests
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix02-db.sql 2>&1 | tee /tmp/nal-fix02-evidence/db-tests.log
+      - name: Record fail-closed state after rollback
+        if: always()
         run: |
-          node supabase/functions/nal-read-enroll/handler.test.mjs
-          node supabase/functions/nal-read-daily/handler.test.mjs
-          node scripts/test-nal-read-fix01-handler.mjs
+          psql -X -v ON_ERROR_STOP=1 -c 'select mode from nal_private.read_release_control; select count(*) as remaining_test_permits from nal_private.read_test_allowlist; select count(*) as remaining_users from auth.users;' | tee /tmp/nal-fix02-evidence/after-rollback.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: nal-fix02-controlled-release-evidence
           path: /tmp/nal-fix02-evidence
+          retention-days: 3
+  hosted-perimeter:
+    name: Deployed API perimeter only - not real login E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Missing or invalid token and anonymous table checks
+        env:
+          NAL_QA_OUTPUT: /tmp/nal-read-hosted-perimeter.json
+        run: node scripts/check-nal-read-hosted-perimeter.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nal-read-hosted-perimeter
+          path: /tmp/nal-read-hosted-perimeter.json
           retention-days: 3
