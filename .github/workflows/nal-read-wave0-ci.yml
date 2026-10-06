@@ -12,6 +12,7 @@ on:
       - "supabase/functions/nal-read-enroll/**"
       - "docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql"
       - "scripts/check-nal-read-wave0.mjs"
+      - "scripts/test-nal-read-db-*.sql"
       - ".github/workflows/nal-read-wave0-ci.yml"
   pull_request:
     paths:
@@ -22,6 +23,7 @@ on:
       - "supabase/functions/nal-read-enroll/**"
       - "docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql"
       - "scripts/check-nal-read-wave0.mjs"
+      - "scripts/test-nal-read-db-*.sql"
       - ".github/workflows/nal-read-wave0-ci.yml"
 
 permissions:
@@ -30,7 +32,20 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nal_read_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nal_read_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,10 +62,24 @@ jobs:
         run: node supabase/functions/nal-read-enroll/handler.test.mjs
       - name: Check READ W0 static contract
         run: node scripts/check-nal-read-wave0.mjs
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client >/dev/null
+      - name: Test W0 schema on PostgreSQL 17
+        env:
+          PGPASSWORD: postgres
+        run: |
+          version="$(psql -h localhost -U postgres -d nal_read_test -Atc 'show server_version_num')"
+          echo "PostgreSQL server_version_num=$version"
+          test "$version" -ge 170000 -a "$version" -lt 180000
+          psql -h localhost -U postgres -d nal_read_test -f scripts/test-nal-read-db-fixture.sql
+          psql -h localhost -U postgres -d nal_read_test -f docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql
+          psql -h localhost -U postgres -d nal_read_test -f scripts/test-nal-read-db-cases.sql
       - name: Confirm W0 change isolation
         shell: bash
         run: |
-          unexpected="$(git diff --name-only origin/main...HEAD | grep -Ev '^(.github/workflows/nal-read-wave0-ci.yml|docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql|nal/read/|nal/assets/js/read.js$|nal/assets/css/nal-read.css$|nal/data/read-[^/]+[.]json$|scripts/check-nal-read-wave0.mjs$|supabase/functions/nal-read-enroll/)' || true)"
+          unexpected="$(git diff --name-only origin/main...HEAD | grep -Ev '^(.github/workflows/nal-read-wave0-ci.yml|docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql|nal/read/|nal/assets/js/read.js$|nal/assets/css/nal-read.css$|nal/data/read-[^/]+[.]json$|scripts/check-nal-read-wave0.mjs$|scripts/test-nal-read-db-[^/]+[.]sql$|supabase/functions/nal-read-enroll/)' || true)"
           if [ -n "$unexpected" ]; then
             echo "Unexpected W0 changes:"
             echo "$unexpected"
