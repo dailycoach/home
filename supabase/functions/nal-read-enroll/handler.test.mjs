@@ -11,6 +11,11 @@ function req(body,{token="ok",requestOrigin=origin,method="POST"}={}){
 function handler(overrides={}){
   return createReadEnrollmentHandler({enabled:true,origins:[origin],authenticate:async(token)=>{if(token!=="ok")throw new Error("bad");return user;},access:async(_u,seasonSlug)=>({allowed:true,seasonSlug,enrollmentStatus:"active"}),claim:async(_u,seasonSlug)=>({allowed:true,seasonSlug,enrollmentStatus:"active"}),...overrides});
 }
+const preflight=await handler()(req(null,{method:"OPTIONS"}));
+assert.equal(preflight.status,204);
+assert.equal(await preflight.text(),"");
+assert.equal(preflight.headers.get("access-control-allow-origin"),origin);
+assert.equal((await handler()(req(null,{method:"OPTIONS",requestOrigin:"https://evil.test"}))).status,403);
 assert.equal((await handler({enabled:false})(req({action:"access",seasonSlug:"trend-2027"}))).status,503);
 assert.equal((await handler()(req({action:"access",seasonSlug:"trend-2027"},{token:""}))).status,401);
 assert.equal((await handler()(req({action:"access",seasonSlug:"trend-2027"},{requestOrigin:"https://evil.test"}))).status,403);
