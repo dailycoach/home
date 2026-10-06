@@ -109,6 +109,7 @@ try{
     await page.locator("textarea").fill("오래 대화했을 때");
     await page.getByRole("button",{name:"기록하고 계속"}).click();
     await page.getByRole("button",{name:"오늘 기록 마치기"}).click();
+    await page.waitForFunction(() => document.querySelector(".read-question")?.textContent?.includes("오늘의 기록이 남았습니다"));
     check((await page.locator(".read-question").textContent())?.includes("오늘의 기록이 남았습니다"),"DAY complete");
     await ctx.close();
   }
