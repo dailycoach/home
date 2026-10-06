@@ -7,13 +7,15 @@ create table public.nal_read_seasons (
   slug text not null unique check (slug ~ '^[a-z0-9-]{1,120}$'),
   title text not null check (length(title) between 1 and 120),
   subtitle text,
+  product_kind text not null default 'products' check (product_kind='products'),
   product_id text,
   status text not null default 'draft' check (status in ('draft','preview','open','closed','archived')),
   starts_at timestamptz,
   ends_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  check (ends_at is null or starts_at is null or ends_at > starts_at)
+  check (ends_at is null or starts_at is null or ends_at > starts_at),
+  foreign key(product_kind,product_id) references public.nal_catalog(kind,id)
 );
 
 create table public.nal_product_entitlements (
@@ -27,6 +29,7 @@ create table public.nal_product_entitlements (
   status text not null default 'active' check (status in ('active','revoked','expired','refunded')),
   metadata jsonb not null default '{}'::jsonb check (jsonb_typeof(metadata)='object'),
   granted_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
   expires_at timestamptz,
   revoked_at timestamptz,
   unique(order_item_id,resource_type,resource_id),
@@ -96,6 +99,13 @@ language sql stable security invoker set search_path='' as $$
         and pe.revoked_at is null
         and (pe.expires_at is null or pe.expires_at>now())
         and (pe.source_type<>'order' or o.status='paid'),
+      'reason',case
+        when e.status not in ('active','completed') then 'enrollment_inactive'
+        when pe.status<>'active' or pe.revoked_at is not null then 'entitlement_inactive'
+        when pe.expires_at is not null and pe.expires_at<=now() then 'entitlement_expired'
+        when pe.source_type='order' and o.status is distinct from 'paid' then 'order_inactive'
+        else null
+      end,
       'seasonSlug',s.slug,
       'enrollmentId',e.id::text,
       'enrollmentStatus',e.status,
@@ -152,7 +162,7 @@ begin
   end if;
 
   select * into i from public.nal_order_items
-    where order_id=o.id and catalog_kind='products' and catalog_id=s.product_id
+    where order_id=o.id and catalog_kind=s.product_kind and catalog_id=s.product_id
     order by id limit 1;
   if not found then raise exception 'Order product mismatch' using errcode='42501'; end if;
 
@@ -179,5 +189,20 @@ revoke all on function public.nal_issue_read_enrollment(uuid,text,uuid,uuid) fro
 revoke all on function public.nal_get_read_access(uuid,text) from public,anon,authenticated;
 grant execute on function public.nal_issue_read_enrollment(uuid,text,uuid,uuid) to service_role;
 grant execute on function public.nal_get_read_access(uuid,text) to service_role;
+
+create trigger nal_touch before update on public.nal_read_seasons
+  for each row execute function nal_private.touch_updated_at();
+create trigger nal_audit after insert or update or delete on public.nal_read_seasons
+  for each row execute function nal_private.audit_change();
+
+create trigger nal_touch before update on public.nal_product_entitlements
+  for each row execute function nal_private.touch_updated_at();
+create trigger nal_audit after insert or update or delete on public.nal_product_entitlements
+  for each row execute function nal_private.audit_change();
+
+create trigger nal_touch before update on public.nal_read_enrollments
+  for each row execute function nal_private.touch_updated_at();
+create trigger nal_audit after insert or update or delete on public.nal_read_enrollments
+  for each row execute function nal_private.audit_change();
 
 commit;
