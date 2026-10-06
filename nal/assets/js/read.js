@@ -51,9 +51,15 @@
     }
   }
 
+  function backendConfigPath() {
+    const host = location.hostname.toLowerCase();
+    const isProduction = host === "daily-coach-ing.com" || host === "www.daily-coach-ing.com";
+    return isProduction ? "/nal/data/backend.json" : "/nal/data/read-backend.staging.json";
+  }
+
   async function setup() {
     const [cfg, seasonData] = await Promise.all([
-      json("/nal/data/backend.json"),
+      json(backendConfigPath()),
       json("/nal/data/read-seasons.json")
     ]);
     if (cfg?.enabled !== true || !/^https:\/\/[a-z0-9]{20}\.supabase\.co$/.test(cfg.url || "") || !/^sb_publishable_[A-Za-z0-9_-]+$/.test(cfg.publishableKey || "")) {
