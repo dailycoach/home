@@ -8,7 +8,8 @@ const required=[
 "nal/read/index.html","nal/read/trend-2027/index.html","nal/read/trend-2027/welcome/index.html",
 "nal/read/trend-2027/before/index.html","nal/read/auth/callback/index.html",
 "supabase/functions/nal-read-enroll/index.ts","supabase/functions/nal-read-enroll/handler.mjs",
-"docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql"
+"docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql",
+"scripts/test-nal-read-db-fixture.sql","scripts/test-nal-read-db-cases.sql"
 ];
 for(const file of required)await access(path.join(root,file));
 const seasons=JSON.parse(await readFile(path.join(root,"nal/data/read-seasons.json"),"utf8"));
