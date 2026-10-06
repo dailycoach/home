@@ -7,6 +7,15 @@ on:
     paths:
       - "docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql"
       - "scripts/test-nal-read-wave1-db-cases.sql"
+      - "scripts/nal-read-wave1-browser-qa.mjs"
+      - "nal/assets/js/read-daily.js"
+      - "nal/assets/css/nal-read.css"
+      - "nal/read/trend-2027/before/**"
+      - "nal/read/trend-2027/today/**"
+      - "nal/read/trend-2027/journey/**"
+      - "nal/read/trend-2027/day/**"
+      - "supabase/functions/nal-read-daily/**"
+      - "supabase/migrations/*nal_read_wave1*"
       - ".github/workflows/nal-read-wave1-ci.yml"
   pull_request:
     paths:
@@ -36,6 +45,16 @@ jobs:
           --health-retries 10
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check W1 JavaScript syntax
+        run: |
+          node --check nal/assets/js/read-daily.js
+          node --check supabase/functions/nal-read-daily/handler.mjs
+          node --check supabase/functions/nal-read-daily/handler.test.mjs
+      - name: Test W1 Edge handler
+        run: node supabase/functions/nal-read-daily/handler.test.mjs
       - name: Install PostgreSQL client
         run: |
           sudo apt-get update -qq
@@ -56,3 +75,9 @@ jobs:
           psql -h localhost -U postgres -d nal_read_w1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
           psql -h localhost -U postgres -d nal_read_w1 -f docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql
           psql -h localhost -U postgres -d nal_read_w1 -f scripts/test-nal-read-wave1-db-cases.sql
+      - name: Install browser QA dependency
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Test W1 browser flows
+        run: node scripts/nal-read-wave1-browser-qa.mjs
