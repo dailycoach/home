@@ -21,6 +21,15 @@ on:
     paths:
       - "docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql"
       - "scripts/test-nal-read-wave1-db-cases.sql"
+      - "scripts/nal-read-wave1-browser-qa.mjs"
+      - "nal/assets/js/read-daily.js"
+      - "nal/assets/css/nal-read.css"
+      - "nal/read/trend-2027/before/**"
+      - "nal/read/trend-2027/today/**"
+      - "nal/read/trend-2027/journey/**"
+      - "nal/read/trend-2027/day/**"
+      - "supabase/functions/nal-read-daily/**"
+      - "supabase/migrations/*nal_read_wave1*"
       - ".github/workflows/nal-read-wave1-ci.yml"
 
 permissions:
