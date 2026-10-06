@@ -1,0 +1,68 @@
+name: NAL READ Controlled Release CI
+on:
+  pull_request:
+    paths: ['docs/NAL_READ_FIX*.sql','scripts/*nal-read*','supabase/**','.github/workflows/nal-read-controlled-release.yml']
+permissions:
+  contents: read
+concurrency:
+  group: nal-read-release-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  release-guard:
+    name: Exact release SQL - OFF and scoped test access
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nal_read_fix02
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nal_read_fix02"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGDATABASE: nal_read_fix02
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Render atomic FIX-01 and controlled scope migration
+        run: |
+          mkdir -p /tmp/nal-fix02-evidence/source
+          node scripts/render-nal-read-controlled-release.mjs /tmp/nal-fix02-evidence/nal-read-controlled-release.sql | tee /tmp/nal-fix02-evidence/source-hashes.json
+          cp docs/NAL_READ_FIX02_GUARD.sql scripts/test-nal-read-fix02-db.sql /tmp/nal-fix02-evidence/source/
+          cp -r supabase/functions/nal-read-daily supabase/functions/nal-read-enroll /tmp/nal-fix02-evidence/source/
+      - name: Disposable baseline database only
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client >/dev/null
+          psql -X -v ON_ERROR_STOP=1 -c 'select version()'
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-db-fixture.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095820_nal_read_wave0_foundation.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql
+          psql -X -v ON_ERROR_STOP=1 -c 'alter role service_role bypassrls; grant usage on schema public,auth,nal_private to service_role; grant select,update on auth.users,public.nal_catalog,public.nal_orders,public.nal_order_items to service_role;'
+      - name: Apply exact generated forward migration
+        run: psql -X -v ON_ERROR_STOP=1 -f /tmp/nal-fix02-evidence/nal-read-controlled-release.sql
+      - name: OFF, allowlist and protected participant journey
+        shell: bash
+        run: |
+          set -o pipefail
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix02-db.sql | tee /tmp/nal-fix02-evidence/db-tests.log
+          psql -X -v ON_ERROR_STOP=1 -c 'select mode from nal_private.read_release_control; select count(*) as remaining_test_permits from nal_private.read_test_allowlist; select count(*) as remaining_users from auth.users;' | tee /tmp/nal-fix02-evidence/after-rollback.log
+      - name: Unchanged validated Edge handler tests
+        run: |
+          node supabase/functions/nal-read-enroll/handler.test.mjs
+          node supabase/functions/nal-read-daily/handler.test.mjs
+          node scripts/test-nal-read-fix01-handler.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nal-fix02-controlled-release-evidence
+          path: /tmp/nal-fix02-evidence
+          retention-days: 3
