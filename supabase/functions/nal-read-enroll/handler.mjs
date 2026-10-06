@@ -2,9 +2,9 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 const SLUG = /^[a-z0-9-]{1,120}$/;
 
 function cors(origin, allowed) {
-  const accepted = allowed.includes(origin) ? origin : allowed[0] || "";
+  const accepted = allowed.includes(origin) ? origin : "";
   return {
-    "Access-Control-Allow-Origin": accepted,
+    ...(accepted ? { "Access-Control-Allow-Origin": accepted } : {}),
     "Access-Control-Allow-Headers": "authorization, apikey, content-type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin"
@@ -12,9 +12,13 @@ function cors(origin, allowed) {
 }
 
 function response(status, body, origin, allowed) {
-  return new Response(JSON.stringify(body), {
+  const isEmpty = status === 204;
+  return new Response(isEmpty ? null : JSON.stringify(body), {
     status,
-    headers: { "Content-Type": "application/json; charset=utf-8", ...cors(origin, allowed) }
+    headers: {
+      ...(!isEmpty ? { "Content-Type": "application/json; charset=utf-8" } : {}),
+      ...cors(origin, allowed)
+    }
   });
 }
 
@@ -22,7 +26,10 @@ export function createReadEnrollmentHandler(deps) {
   const { enabled, origins, authenticate, access, claim } = deps;
   return async function handler(request) {
     const origin = request.headers.get("origin") || "";
-    if (request.method === "OPTIONS") return response(204, {}, origin, origins);
+    if (request.method === "OPTIONS") {
+      if (origin && !origins.includes(origin)) return response(403, { error: "Origin not allowed" }, origin, origins);
+      return response(204, null, origin, origins);
+    }
     if (request.method !== "POST") return response(405, { error: "Method not allowed" }, origin, origins);
     if (origin && !origins.includes(origin)) return response(403, { error: "Origin not allowed" }, origin, origins);
     if (!enabled) return response(503, { error: "NAL READ foundation is not enabled" }, origin, origins);
