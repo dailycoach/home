@@ -1,0 +1,58 @@
+name: NAL READ W1 CI
+
+on:
+  push:
+    branches:
+      - feat/nal-read-v1
+    paths:
+      - "docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql"
+      - "scripts/test-nal-read-wave1-db-cases.sql"
+      - ".github/workflows/nal-read-wave1-ci.yml"
+  pull_request:
+    paths:
+      - "docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql"
+      - "scripts/test-nal-read-wave1-db-cases.sql"
+      - ".github/workflows/nal-read-wave1-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test-db:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nal_read_w1
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nal_read_w1"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client >/dev/null
+      - name: Verify PostgreSQL 17
+        env:
+          PGPASSWORD: postgres
+        run: |
+          version="$(psql -h localhost -U postgres -d nal_read_w1 -Atc 'show server_version_num')"
+          echo "PostgreSQL server_version_num=$version"
+          test "$version" -ge 170000 -a "$version" -lt 180000
+      - name: Test W1 daily engine
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql -h localhost -U postgres -d nal_read_w1 -f scripts/test-nal-read-db-fixture.sql
+          psql -h localhost -U postgres -d nal_read_w1 -f supabase/migrations/20261006095820_nal_read_wave0_foundation.sql
+          psql -h localhost -U postgres -d nal_read_w1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
+          psql -h localhost -U postgres -d nal_read_w1 -f docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql
+          psql -h localhost -U postgres -d nal_read_w1 -f scripts/test-nal-read-wave1-db-cases.sql
