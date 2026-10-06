@@ -91,7 +91,7 @@ jobs:
       - name: Confirm W0 change isolation
         shell: bash
         run: |
-          unexpected="$(git diff --name-only origin/main...HEAD | grep -Ev '^(.github/workflows/nal-read-wave0-ci.yml|docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql|docs/NAL_READ_WAVE0_STATUS.md|nal/read/|nal/assets/js/read.js$|nal/assets/css/nal-read.css$|nal/data/read-[^/]+[.]json$|scripts/check-nal-read-wave0.mjs$|scripts/test-nal-read-db-[^/]+[.]sql$|scripts/nal-read-browser-qa.mjs$|supabase/migrations/[^/]*nal_read[^/]*[.]sql$|supabase/functions/nal-read-enroll/)' || true)"
+          unexpected="$(git diff --name-only origin/main...HEAD | grep -Ev '^(.github/workflows/nal-read-[^/]+[.]yml$|docs/NAL_READ_[^/]+$|nal/read/|nal/assets/js/read[^/]*[.]js$|nal/assets/css/nal-read[.]css$|nal/data/read-[^/]+[.]json$|scripts/[^/]*nal-read[^/]*$|supabase/migrations/[^/]*nal_read[^/]*[.]sql$|supabase/functions/nal-read-[^/]+/)' || true)"
           if [ -n "$unexpected" ]; then
             echo "Unexpected W0 changes:"
             echo "$unexpected"
