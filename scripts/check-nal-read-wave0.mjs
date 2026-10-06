@@ -9,6 +9,8 @@ const required=[
 "nal/read/trend-2027/before/index.html","nal/read/auth/callback/index.html",
 "supabase/functions/nal-read-enroll/index.ts","supabase/functions/nal-read-enroll/handler.mjs",
 "docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql",
+"supabase/migrations/20261006095820_nal_read_wave0_foundation.sql",
+"supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql",
 "scripts/test-nal-read-db-fixture.sql","scripts/test-nal-read-db-cases.sql"
 ];
 for(const file of required)await access(path.join(root,file));
