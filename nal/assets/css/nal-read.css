@@ -1,4 +1,9 @@
 @layer nal-read {
+  html,
+  body {
+    min-width: 0;
+  }
+
   .read-shell {
     width: min(100% - 2rem, 70rem);
     margin-inline: auto;
