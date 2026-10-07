@@ -388,3 +388,130 @@ body[data-slug^="dailycoaching-awareness-"] .nal-commerce-section>h2{
   .nal-awareness-series-card__when{min-height:0}
   .nal-awareness-series-philosophy{padding:80px 0 92px}
 }
+
+.nal-shop-awareness{
+  margin:0 0 74px;
+  padding:clamp(42px,6vw,72px);
+  background:#f4f0e7;
+  border:1px solid rgba(23,33,42,.12);
+}
+.nal-shop-awareness__head{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(280px,1.1fr);
+  gap:clamp(42px,8vw,100px);
+  align-items:end;
+  padding-bottom:42px;
+  border-bottom:1px solid rgba(23,33,42,.14);
+}
+.nal-shop-awareness__head h2{
+  margin:14px 0 0;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:clamp(50px,7vw,96px);
+  line-height:.98;
+  letter-spacing:-.055em;
+  color:#17212a;
+}
+.nal-shop-awareness__intro p{
+  margin:0 0 14px;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:clamp(18px,1.8vw,24px);
+  line-height:1.72;
+  color:#50575c;
+  word-break:keep-all;
+}
+.nal-shop-awareness__intro .nal-text-link{
+  display:inline-block;
+  margin-top:8px;
+  color:#315e72;
+  font-weight:800;
+}
+.nal-shop-awareness__grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:26px;
+  padding-top:42px;
+}
+.nal-shop-awareness-card{
+  min-width:0;
+  background:#fff;
+  border:1px solid rgba(23,33,42,.1);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.nal-shop-awareness-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 42px rgba(20,26,32,.09);
+}
+.nal-shop-awareness-card__cover{
+  display:block;
+  background:#e8e6df;
+  overflow:hidden;
+}
+.nal-shop-awareness-card__cover img{
+  display:block;
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+}
+.nal-shop-awareness-card__copy{
+  padding:24px 24px 26px;
+}
+.nal-shop-awareness-card__copy>span{
+  display:block;
+  color:#69747c;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.nal-shop-awareness-card__copy>strong{
+  display:block;
+  margin-top:24px;
+  color:#315e72;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+.nal-shop-awareness-card--100 .nal-shop-awareness-card__copy>strong{color:#2e5ed8}
+.nal-shop-awareness-card--10000 .nal-shop-awareness-card__copy>strong{color:#8a6c32}
+.nal-shop-awareness-card__copy h3{
+  margin:8px 0 10px;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:24px;
+  line-height:1.3;
+  letter-spacing:-.025em;
+}
+.nal-shop-awareness-card__copy h3 a{
+  color:#17212a;
+  text-decoration:none;
+}
+.nal-shop-awareness-card__copy p{
+  min-height:50px;
+  margin:0 0 26px;
+  color:#5f666b;
+  line-height:1.65;
+  word-break:keep-all;
+}
+.nal-shop-awareness-card__copy>div{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:end;
+  padding-top:18px;
+  border-top:1px solid rgba(23,33,42,.12);
+}
+.nal-shop-awareness-card__copy>div b{font-size:20px;color:#17212a}
+.nal-shop-awareness-card__copy>div small{color:#85898c;font-size:12px}
+body[data-page="listing"][data-collection="products"] .nal-filter-bar{
+  margin-top:0;
+}
+@media(max-width:960px){
+  .nal-shop-awareness__head{grid-template-columns:1fr}
+  .nal-shop-awareness__grid{grid-template-columns:1fr}
+  .nal-shop-awareness-card{display:grid;grid-template-columns:minmax(180px,.65fr) 1fr}
+  .nal-shop-awareness-card__copy p{min-height:0}
+}
+@media(max-width:680px){
+  .nal-shop-awareness{padding:34px 20px;margin-bottom:52px}
+  .nal-shop-awareness__head{gap:28px;padding-bottom:32px}
+  .nal-shop-awareness__grid{padding-top:32px}
+  .nal-shop-awareness-card{display:block}
+}
