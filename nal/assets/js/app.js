@@ -172,24 +172,24 @@
   function applyAwarenessPublicationOverlay(products) {
     const display = {
       "dailycoaching-awareness-100": {
-        updatedAt:"2026-10-07", version:"7.1", pageCount:16, fileSizeMB:0.26,
+        updatedAt:"2026-10-08", version:"7.2", pageCount:17, fileSizeMB:0.27,
         coverImage:"/nal/assets/images/catalog/shop/awareness/dailycoaching-awareness-100-catalog-v7.svg",
         coverImageAlt:"DAILYCOACHING AWARENESS 100 반응하기 전, 3분 알아차림 포켓 코칭북 표지",
         subtitle:"짧은 에세이와 3분 도구로 반응보다 먼저 지금의 나를 보는 포켓 코칭북",
         summary:"장면형 에세이와 3분 질문으로 마음·몸·생각·사실을 바라보고, 자동반응 전에 작은 선택 하나를 남기는 포켓 코칭 PDF",
         description:"답장을 보내기 직전처럼 손이 먼저 움직이는 생활 장면에서 시작합니다. 김철웅 코치톤의 짧은 에세이 5편과 3분 알아차림 5문장, 60초 작전타임, ONE PAGE 카드로 구성해 정답을 내기보다 반응과 선택 사이에 작은 틈을 만드는 입문 도구입니다.",
-        components:["120×180mm PDF 16쪽","김철웅 코치톤 장면형 에세이 5편","3분 알아차림 5문장","60초 작전타임","ONE PAGE 반복 카드"],
-        visualNote:"AWARENESS v7.1 포켓 코칭 툴 디자인. NAL STARTER와 분리된 DAILYCOACHING AWARENESS 고유 편집 시스템입니다."
+        components:["120×180mm PDF 17쪽","김철웅 코치톤 장면형 에세이 5편","3분 알아차림 5문장","60초 작전타임","ONE PAGE 반복 카드","OPTIONAL NEXT · S-TOP 워크북 안내 1쪽"],
+        visualNote:"AWARENESS v7.2 Pocket Coaching Tool. 마지막 1쪽은 강제 업셀이 아니라, 필요할 때만 S-TOP으로 이어지는 선택형 NEXT 페이지입니다."
       },
       "dailycoaching-awareness-1000": {
-        updatedAt:"2026-10-07", version:"7.3", pageCount:32, fileSizeMB:0.39,
+        updatedAt:"2026-10-08", version:"7.4", pageCount:33, fileSizeMB:0.38,
         coverImage:"/nal/assets/images/catalog/shop/awareness/dailycoaching-awareness-1000-catalog-v7.svg",
         coverImageAlt:"DAILYCOACHING AWARENESS 1000 반응에서 선택으로 S-TOP 시그니처 워크북 표지",
         subtitle:"S-TOP Signature Map으로 한 장면을 거리·질문·선택·착수까지 연결하는 셀프코칭 워크북",
         summary:"김철웅 코치톤 에세이와 S-TOP 실습으로 한 장면을 다시 보고, 자기평가 대신 다음 선택과 실제 착수까지 이어가는 시그니처 워크북",
         description:"문제 전체가 아니라 지금 멈춰 있는 한 장면에서 시작합니다. Step Back → Think by Questions → Options → Proceed의 네 단계를 시그니처 맵으로 시각화하고, 장면형 에세이 8편과 넓은 기록면, 사실·해석·패턴·선택지·마찰·지원·10분 행동을 직접 써보는 워크시트, CASE와 ONE PAGE를 결합했습니다.",
-        components:["130×195mm PDF 32쪽","김철웅 코치톤 장면형 에세이 8편","S-TOP Signature Map","단계별 기록 워크시트","선택지·마찰·10분 행동 설계","CASE + ONE PAGE"],
-        visualNote:"AWARENESS v7.3 Signature Workbook. S/T/O/P 자체가 내비게이션과 기록 체계로 작동하는 프리미엄 편집판입니다."
+        components:["130×195mm PDF 33쪽","김철웅 코치톤 장면형 에세이 8편","S-TOP Signature Map","단계별 기록 워크시트","선택지·마찰·10분 행동 설계","CASE + ONE PAGE","OPTIONAL NEXT · DAILY 플레이북 안내 1쪽"],
+        visualNote:"AWARENESS v7.4 Signature Workbook. 마지막 1쪽은 현재 워크북으로 충분하면 멈추고, 필요할 때만 DAILY 방법론으로 이어지는 선택형 NEXT 페이지입니다."
       },
       "dailycoaching-awareness-10000": {
         updatedAt:"2026-10-07", version:"7.4", pageCount:72, fileSizeMB:0.67,
