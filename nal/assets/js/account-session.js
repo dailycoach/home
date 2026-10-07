@@ -28,6 +28,8 @@
  const pay=(action,payload={})=>request('nal-read-payments',{action,payload},60000);
  const cohort=(action,payload={})=>request('nal-read-cohorts',{action,payload});
  const companion=(action,seasonSlug,payload={})=>request('nal-read-companion',{action,seasonSlug,payload});
+ // BUILD13: reuse the authenticated request path; no new Auth client or credential access.
+ const support=(action,payload={})=>request('nal-support',{action,payload});
  async function publicGet(endpoint,params={}){
   await ready;if(!config)throw new Error('계정 연결 설정을 준비하고 있습니다.');
   const u=new URL(config.url+'/functions/v1/'+endpoint);for(const [k,v]of Object.entries(params))if(v!=null)u.searchParams.set(k,v);
@@ -70,7 +72,7 @@
   if(!res.ok)throw new Error(data.error||'파일 전달을 준비하고 있습니다.');
   const u=new URL(data.downloadUrl);if(u.origin!==new URL(config.url).origin||!u.pathname.startsWith('/storage/v1/object/sign/'))throw new Error('파일 주소를 확인하지 못했습니다.');return u.href;
  }
- window.NalAccount={ready,call,offers,download,pay,payConfig,cohort,cohortCatalog,companion,programDetail,node,status,safeNext,
+ window.NalAccount={ready,call,offers,download,pay,payConfig,cohort,cohortCatalog,companion,programDetail,support,node,status,safeNext,
   get user(){return session?.user||null;},get epoch(){return epoch;},
   onChange(fn){callbacks.add(fn);return ()=>callbacks.delete(fn);},
   link(href,text,cls='nal-account-link'){const a=node('a',text,cls);a.href=href;return a;},

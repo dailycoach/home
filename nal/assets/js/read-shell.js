@@ -2,7 +2,7 @@
  'use strict';const main=document.querySelector('[data-read-shell]');if(!main)return;
  const title=main.querySelector('h1')?.textContent||'NAL READ',description=main.querySelector('p')?.textContent||'';
  const slug=document.body.dataset.season||'trend-2027';if(!/^[a-z0-9-]{1,120}$/.test(slug))return;
- main.innerHTML=`<header class="read-topbar"><a class="read-brand" href="/nal/read/">NAL READ</a><nav class="read-actions" aria-label="내 기록 안내"><a class="read-inline-link" href="/nal/my/">전체 MY NAL</a><a class="read-inline-link" data-arrival-link>시작 안내</a><a class="read-inline-link" data-report-link>MY REPORT →</a></nav></header>
+ main.innerHTML=`<header class="read-topbar"><a class="read-brand" href="/nal/read/">NAL READ</a><nav class="read-actions" aria-label="내 기록 안내"><a class="read-inline-link" href="/nal/my/">전체 MY NAL</a><a class="read-inline-link" data-arrival-link>시작 안내</a><a class="read-inline-link" data-report-link>MY REPORT →</a><a class="read-inline-link" data-help-link>문의하기</a></nav></header>
  <section class="read-public-intro"><p class="read-eyebrow">NAL · 날빛</p><h1></h1><p data-description></p></section>
  <div data-private-root hidden></div>
  <section class="read-panel read-account-panel" aria-label="내 계정">
@@ -12,6 +12,8 @@
  </section>`;
  main.querySelector('.read-public-intro h1').textContent=title;main.querySelector('[data-description]').textContent=description;
  main.querySelector('[data-arrival-link]').href='/nal/read/start/?season='+encodeURIComponent(slug);
+ // Only an explicit season hint is passed. Never attach the page URL or private answer content.
+ main.querySelector('[data-help-link]').href='/nal/my/help/?tab=new&season='+encodeURIComponent(slug);
  const report=main.querySelector('[data-report-link]');report.href='/nal/read/'+slug+'/report/';
  if(document.body.dataset.readWorkspacePage==='report')report.setAttribute('aria-current','page');
  const nav=document.createElement('nav');nav.className='read-bottom-nav';nav.dataset.readNav='';nav.setAttribute('aria-label','NAL READ 메뉴');document.body.append(nav);

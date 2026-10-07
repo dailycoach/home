@@ -1,19 +1,25 @@
-# nal-support — BUILD12 source, not deployed
+# nal-support — BUILD13 account wiring, not deployed
 
-## Current blocker
-The common browser account adapter/menu write was blocked by the connector safety gate and was left unapplied. `NalAccount.support` does not exist in the current account-session source. The new inquiry UI detects this absence, displays a preparation message and does not submit. Do not report a usable connected feature until that separate write is resolved through authorized tooling.
+## Current source status
+BUILD12 introduced the support schema/API/UI but left the common browser account adapter and menus unwritten after a blocked connector operation. BUILD13 completes those same common-file changes through a successful normal GitHub tree write. The current account-session source now exposes `NalAccount.support(action,payload)` using the existing authenticated request closure. Customer and operator support entrypoints load that account bundle, and shared account/READ menus link to the support screens.
 
-## Runtime scope after later integration
-Existing SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY and exact NAL_ALLOWED_ORIGINS. Additional `NAL_SUPPORT_ENABLED=false` by default. No settings are changed by this build. Support does not require an active READ entitlement: verified former participants can access their own support history.
-The endpoint accepts authenticated POST only, plus CORS OPTIONS. Public help is a static page. Retain server-side Auth /user and bound current-account verification via the existing shared helper. Configure the gateway deliberately for the project's real token/signing configuration at integration; no gateway changes are made now.
+No separate browser Auth client, alternative credential flow or relaxed permission check was added. The server endpoint, SQL and Auth verification helper are unchanged in this follow-up. Historical BUILD12 notes describe the prior missing adapter; current source scope is documented in docs/NAL_READ_BUILD13_SUPPORT_CONNECTION.md.
 
-POST `{action,payload}`. User ID comes only from server verification.
-Member actions: contexts, list, get, create, reply, resolve, reopen, read.
-Admin prefix selects a fixed staff RPC: admin-list, admin-get, admin-staff, admin-reply, admin-resolve, admin-reopen, admin-assign.
-The SQL wrapper, not the requested action name alone, verifies owner/operator role and per-thread assignment. Owners see the full queue, operators only explicitly assigned threads. No support endpoint grants admin membership or performs a payment/refund/entitlement operation.
+## Runtime boundary
+This is source integration only: no migration, Edge deployment, feature activation, live login, inquiry, reply or runtime test has been performed by BUILD13. `NAL_SUPPORT_ENABLED` is still false/unset unless separately configured outside this build. A successful Git write is not a successful live message send.
 
-Data contract: title <=120 characters; body <=4,000; strict allowed fields; 24KiB request cap; same payload/request ID is idempotent; modified conversation revisions reject a stale mutation; messages use sequential pagination. Read receipts apply only to the owner's loaded message sequence. No HTML messages, file upload, auto-attachment, diagnostics, token, card field, personal coaching-answer lookup or auto-reply.
+## Runtime contract after later integration
+Use the existing SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY and exact NAL_ALLOWED_ORIGINS. No configuration was changed. Support does not require an active READ entitlement; verified former participants may access their own support history when the support feature is enabled. Existing account eligibility rules remain.
+Authenticated POST only, plus CORS OPTIONS. Public help is static. Retain server-side Auth /user and bound current-account verification through the existing helper. Review gateway compatibility with actual project signing configuration during the later deployment stage; no gateway settings are changed now.
 
-Source dependency: recorded FIX03 verified identity + BUILD06 account preference/order/enrollment data + BUILD07 checkout context + BUILD09 cohort/waitlist tables, then docs/NAL_READ_BUILD12_SUPPORT.sql. It is an unapplied source, not a migration record. The overall app still needs prior BUILD04-11 sources integrated; do not deploy the support code alone and claim the platform complete.
+POST `{action,payload}`. Acting user identity comes only from server verification.
+Member: contexts, list, get, create, reply, resolve, reopen, read.
+Staff: admin-list, admin-get, admin-staff, admin-reply, admin-resolve, admin-reopen, admin-assign.
+The SQL wrappers enforce owner/operator role and per-thread assignment. Owners see the full queue; operators only assigned threads. Navigation links or client action names never grant staff permission. No support operation creates an admin role or alters payments, refunds, entitlements or DAY completion.
 
-No tests, actual messages, hosted SQL, Edge deployment, paid helpdesk, AI use, scheduler or new cloud resource was executed in this build. Tests remain deferred to the owner's pre-sale phase. See docs/NAL_READ_BUILD12_SUPPORT.md for the exact implemented and missing parts.
+Title <=120 characters, message <=4,000, strict field allowlist, 24KiB request cap, request identity/fingerprint replay handling, optimistic thread revisions and sequential message pagination. Read receipts cover the owner's loaded messages. No HTML message rendering, upload, diagnostics, complete URL, card-field or coaching-answer collection.
+
+## Later integration dependencies
+Recorded FIX03 verified identity + BUILD06 account/order/enrollment source + BUILD07 checkout context + BUILD09 cohort/waitlist source, then docs/NAL_READ_BUILD12_SUPPORT.sql. That file remains unapplied source, not a recorded hosted migration. Package with the matching full application source chain; the account wrapper alone does not deploy the platform.
+
+BUILD13 has no tests, actual messages, hosted SQL, paid helpdesk, AI service, scheduler or new cloud resource. Existing refund-console flow, free PDFs, content, prices and schedules are untouched. Pre-sale integration/validation and retention/account-deletion decisions remain separate work.
