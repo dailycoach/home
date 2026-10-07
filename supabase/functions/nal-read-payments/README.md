@@ -1,25 +1,26 @@
-# READ payments — source only, NOT deployed
+# READ payments — BUILD08 simplified scope, source only
 
-## Event ownership
-- Browser identity: verified by the existing request-scoped Auth boundary.
-- Amount/product/season/notice: server catalog and immutable READ checkout snapshot.
-- Payment/refund state: server lookup using matching Toss secret/MID/mode.
-- Financial mutation: new checkout requires explicit participant agreement; refund execution requires an existing owner-approved, amount-confirmed request.
+This version supersedes BUILD07's in-NAL refund approval/execution UI. It has NOT been deployed or tested for sale.
+
+## Customer flow
+One NAL price/participation-notice agreement -> create/reuse held order -> standard card/easy-pay selector -> verified paid + ready enrollment -> direct shared TODAY entry. Existing NAL email authentication remains separate from any payment-provider account. No Toss registration/install prerequisite is added.
+Launch uses method CARD, card.flowMode DEFAULT and card.useAppCardOnly false. It does not restrict cardCompany or select an easyPay provider. Enabled merchant methods appear in the provider UI; do not market a named wallet as already contracted.
+The launch POST requires accepted=true, expectedAmount, policyVersion and notice. A reused order must match the agreed snapshot. Interrupted or mismatched older orders require explicit review; no automatic charge is started during a page view or a new login.
 
 ## Public GET
-Returns only enabled, checkoutEnabled, mode and methods. No order, token, secret or participant data.
+Returns enabled, checkoutEnabled, mode, methods, selection=DEFAULT and refundManagement=merchant-console. No private order data or credentials.
 
 ## Authenticated POST
-JSON `{ action, payload }`.
-User: create, get, list, launch, confirm, confirm-recover, refresh, refund-request, refund-withdraw.
-Owner: admin-list, admin-refresh, refund-approve, refund-reject, refund-execute.
-Unknown actions are rejected. User ids, prices, MID/mode or approval identities from the browser are not trusted.
+User actions: create, get, list, launch, confirm, confirm-recover, refresh, refund-request (inquiry only), refund-withdraw.
+Owner actions: admin-list and admin-refresh only.
+refund-approve / refund-reject / refund-execute are rejected by the public action whitelist. Runtime hard-disables API cancellation, including reconciliation from webhook callbacks, regardless of a stale NAL_READ_REFUNDS_ENABLED value.
+Actual cancellations and settlement are handled in https://app.tosspayments.com/ by the merchant. NAL keeps inquiries, verified provider-state reconciliation and related entitlement updates. A customer inquiry is not an approved or completed refund.
 
-## Deployment preparation later
-This mixed public GET / custom-auth POST endpoint needs gateway `verify_jwt=false` only after reviewing its existing custom POST authentication path. The webhook endpoint also has no user JWT; it uses a fixed upstream provider lookup and local order binding. Do not change original READ/private function authentication settings.
+## Security and deployment boundary
+Existing request-scoped Auth verification and DB ownership, product, amount, order, expiration, release and non-reactivation rules remain.
+The privileged processor is still not a user-facing RPC action. Both read payment code paths pass refundsEnabled:false to the retained BUILD07 processor. Unused advanced SQL is retained for history, not activated or exposed.
+Use the documented custom-auth setup for the mixed public GET/authenticated POST endpoint at eventual deployment. Do not change other functions' JWT settings. No gateway setting, key, merchant contract, callback, webhook registration, price or live feature flag is changed in this source task.
+The new frontend and launch handler must be deployed together later; old launch requests without the agreed snapshot fields fail closed.
 
-Load BUILD07 SQL sources after BUILD04/05/06 in documented order and package all relative shared dependencies. Everything remains default-off. Do not use `supabase db push` or enable payment flags as part of this feature-writing task.
-
-Provider retries and explicit user/owner requests process durable pending order work. There is no scheduler, task or paid queue service created by this implementation. Failed or unknown states remain visible rather than marked successful.
-
-All functional, financial, auth and UI validation is deferred to the owner-requested pre-sale phase. No tests were run and no PASS claim is made.
+Detailed source scope and pre-sale limitations: docs/NAL_READ_BUILD08_SIMPLE_CHECKOUT.md
+All tests, actual Auth/payment/refund exercises and UI verification remain deferred to pre-sale. No PASS claim, paid resource, actual transaction or hosted SQL change in BUILD08.

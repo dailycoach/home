@@ -1,47 +1,42 @@
 (() => {
- 'use strict';const A=window.NalAccount;if(!A)return;const el=A.node,root=document.querySelector('[data-account-private]');let run=0;
- function button(text,fn){const b=el('button',text,'nal-account-button');b.type='button';b.addEventListener('click',async()=>{b.disabled=true;try{await fn();}catch(e){if(e.name!=='AbortError')A.status(e.message,'error');}finally{b.disabled=false;}});return b;}
+ 'use strict';const A=window.NalAccount;if(!A)return;
+ const el=A.node,root=document.querySelector('[data-account-private]');let run=0;
+ const state={pending:'결제 확인 전',paid:'결제 완료',failed:'미완료',partially_refunded:'일부 환불',refunded:'환불 완료',manual_review:'확인 필요'};
+ const delivery={not_paid:'결제 전',pending:'참가권 연결 대기',ready:'참여 가능',blocked:'이용권 확인 필요',manual_review:'참가권 확인 필요',refunded:'이용 종료'};
+ function button(text,fn){const b=el('button',text,'nal-account-link');b.type='button';b.addEventListener('click',async()=>{const owner=A.epoch;b.disabled=true;try{await fn();}catch(e){if(owner===A.epoch&&e.name!=='AbortError')A.status(e.message,'error');}finally{if(b.isConnected)b.disabled=false;}});return b;}
+ function merchant(){const a=A.link('https://app.tosspayments.com/','토스 상점관리자 열기 ↗','nal-account-button');a.target='_blank';a.rel='noopener noreferrer';return a;}
  async function render(){const ticket=++run;if(!A.user){root.replaceChildren();root.hidden=true;return;}
-  try{const data=await A.pay('admin-list',{filter:'attention',offset:0});if(ticket!==run)return;root.replaceChildren();root.hidden=false;
-   root.append(el('h2','확인이 필요한 결제·참가권·환불'),el('p','승인은 검토 기록입니다. 실제 환불은 별도 실행 버튼에서 금액을 다시 확인합니다.','nal-account-note'));
-   let offset=0;
-   async function append(data){
-    const orders=(data.orders||[]).slice(0,50);offset+=orders.length;
-    for(const q of orders){const section=el('section','','nal-account-record');
-     section.append(el('h3',q.title),el('p',A.money(q.amount)+' · '+q.state+' / '+q.fulfillment),el('p','반영 환불액 '+A.money(q.refundedAmount)),el('code',q.orderId));
-     if(q.fulfillmentReason)section.append(el('p',q.fulfillmentReason,'nal-account-note'));
-     if(q.workError)section.append(el('p','재처리 사유: '+q.workError,'nal-account-note'));
-     section.append(button('결제 조회·참가권 연결 재처리',async()=>{await A.pay('admin-refresh',{orderId:q.orderId});await render();}));
-     for(const r of q.refunds||[]){
-      const box=el('div','','nal-refund-review');box.append(el('h4','환불 요청 · '+r.state),el('p',r.reason));
-      if(r.amount!=null)box.append(el('p','승인 금액 '+A.money(r.amount)));if(r.decisionNote)box.append(el('p',r.decisionNote,'nal-account-note'));
-      if(r.state==='requested'){
-       const form=el('form','','nal-account-form'),amount=el('input');amount.type='number';amount.min='1';amount.max=String(q.amount-q.refundedAmount);amount.step='1';amount.value=String(q.amount-q.refundedAmount);amount.required=true;
-       const amountLabel=el('label','검토한 환불 금액');amountLabel.append(amount);
-       const note=el('textarea');note.required=true;note.maxLength=180;note.rows=3;const noteLabel=el('label','고객에게 표시할 검토 사유');noteLabel.append(note);
-       const check=el('input');check.type='checkbox';check.required=true;const agreed=el('label','','nal-account-check');agreed.append(check,document.createTextNode('주문·이용 안내·금액을 확인했습니다.'));
-       form.append(amountLabel,noteLabel,agreed);
-       const approve=el('button','환불 승인 기록','nal-account-button');approve.type='submit';form.append(approve);
-       form.addEventListener('submit',async e=>{e.preventDefault();approve.disabled=true;try{await A.pay('refund-approve',{orderId:q.orderId,refundId:r.id,revision:r.revision,confirmed:check.checked,amount:Number(amount.value),note:note.value});await render();}catch(e){A.status(e.message,'error');}finally{approve.disabled=false;}});
-       form.append(button('사유를 남기고 승인하지 않기',async()=>{if(!check.checked||!note.value.trim())throw new Error('확인 표시와 사유를 먼저 남겨주세요.');
-        if(!confirm('환불을 승인하지 않는 것으로 검토 결과를 남길까요? 실제 결제에는 변화가 없습니다.'))return;
-        await A.pay('refund-reject',{orderId:q.orderId,refundId:r.id,revision:r.revision,confirmed:true,note:note.value});await render();
-       }));box.append(form);
-      }else if(['approved','processing'].includes(r.state)){
-       box.append(button(r.state==='approved'?'승인된 '+A.money(r.amount)+' 환불 실행':'동일 환불 요청 결과 확인·재시도',async()=>{
-        if(!confirm(`${q.title}\n${A.money(r.amount)} 환불을 실제 결제사에 요청합니다. 동일한 승인 요청을 사용하며 새 요청으로 중복 취소하지 않습니다. 계속할까요?`))return;
-        await A.pay('refund-execute',{orderId:q.orderId,refundId:r.id,revision:r.revision,amount:r.amount,confirmed:true});await render();
-       }));
-      }else if(r.state==='manual_review')box.append(el('p','외부 취소 또는 응답 누락으로 거래 대조가 필요합니다. 자동으로 추가 환불하거나 참가권을 복구하지 않습니다.','nal-account-note'));
-      section.append(box);
-     }root.append(section);
+  try{
+   const data=await A.pay('admin-list',{filter:'all',offset:0});if(ticket!==run)return;
+   root.replaceChildren();root.hidden=false;
+   root.append(el('h2','돈 관리는 결제사에서, 참여 관리는 날에서.'),
+    el('p','실제 취소·환불과 정산은 토스 상점관리자에서 처리하세요. 처리 후에는 날의 주문 상태와 참가권 연결만 다시 확인합니다.','nal-account-note'),merchant());
+   const contents=el('div');root.append(contents);let offset=0;
+   async function append(batchData){if(ticket!==run)return;const batch=(batchData.orders||[]).slice(0,50);offset+=batch.length;
+    for(const q of batch){const s=el('article','','nal-account-record');
+     s.append(el('h3',q.title),el('p',A.money(q.amount)+' · '+(state[q.state]||'확인 필요')),
+      el('p',delivery[q.fulfillment]||'참가권 확인 필요','nal-account-note'));
+     if(q.refundedAmount)s.append(el('p','반영된 환불액 '+A.money(q.refundedAmount),'nal-account-meta'));
+     s.append(el('p','결제사에서 찾을 주문 번호','nal-account-meta'),el('code',q.providerOrderId));
+     s.append(button('결제사 주문 번호 복사',async()=>{
+      if(!navigator.clipboard?.writeText)throw new Error('표시된 주문 번호를 직접 복사해 주세요.');
+      await navigator.clipboard.writeText(q.providerOrderId);A.status('주문 번호를 복사했습니다. 토스 상점관리자에서 검색해 주세요.','ok');
+     }),button('결제사 상태 반영·참가권 연결',async()=>{await A.pay('admin-refresh',{orderId:q.orderId});if(ticket===run)await render();}));
+     const requests=(q.refunds||[]).filter(r=>r.state!=='withdrawn');
+     if(requests.length){const d=el('details','','nal-order-details');d.append(el('summary','참가자가 남긴 문의 '+requests.length+'건'));
+      for(const r of requests)d.append(el('p',r.reason),el('p',A.date(r.createdAt),'nal-account-meta'));
+      d.append(el('p',q.state==='refunded'?'이 주문은 환불 결과가 반영된 상태입니다. 문의 원문은 기록으로 남습니다.':'문의 접수만으로 취소·환불이 실행되지는 않습니다.','nal-account-note'));s.append(d);
+     }
+     if(q.state==='partially_refunded')s.append(el('p','일부 환불로 참가권이 일시정지된 경우 운영자가 이용 범위를 확인해야 합니다. 이 화면은 권한을 자동 복구하지 않습니다.','nal-account-note'));
+     const detail=el('details','','nal-order-details');detail.append(el('summary','내부 주문 정보'),el('code',q.orderId),el('p',q.notice||'','nal-account-notice'));
+     if(q.fulfillmentReason)detail.append(el('p',q.fulfillmentReason,'nal-account-meta'));if(q.workError)detail.append(el('p',q.workError,'nal-account-meta'));s.append(detail);contents.append(s);
     }
-    root.querySelector('[data-more]')?.remove();
-    if((data.orders||[]).length>50){const next=button('다음 결제 보기',async()=>{const more=await A.pay('admin-list',{filter:'attention',offset});if(ticket===run)await append(more);});next.dataset.more='';root.append(next);}
+    contents.querySelector('[data-more]')?.remove();
+    if((batchData.orders||[]).length>50){const b=button('다음 주문 보기',async()=>{const next=await A.pay('admin-list',{filter:'all',offset});await append(next);});b.dataset.more='';contents.append(b);}
    }
-   await append(data);if(!offset)root.append(el('p','현재 확인이 필요한 결제 기록이 없습니다.','nal-account-empty'));
+   await append(data);if(!offset)contents.append(el('p','아직 READ 결제 기록이 없습니다.','nal-account-empty'));
    root.append(A.link('/nal/read/admin/offers/','참가상품 설정'),A.link('/nal/read/admin/','콘텐츠 편집'));
-  }catch(e){if(e.name!=='AbortError')A.status(e.message,'error');}
+  }catch(e){if(ticket===run&&e.name!=='AbortError')A.status(e.message,'error');}
  }
  A.ready.then(ok=>{if(ok)render();});A.onChange(render);
 })();
