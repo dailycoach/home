@@ -1,4 +1,4 @@
-const ACTIONS={account:new Set(['profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
+const ACTIONS={account:new Set(['home','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
 const SLUG=/^[a-z0-9-]{1,120}$/;
 async function readBody(req){
  const r=req.body?.getReader();if(!r)throw new Error('body');let n=0;const parts=[];
@@ -26,6 +26,8 @@ export function createAccountHandler({enabled,origins,authenticate,catalog,opera
   let b;try{b=await readBody(req);}catch(e){return reply(e.message==='large'?413:400,{error:'입력 내용을 확인해 주세요.'});}
   if(!b||typeof b!=='object'||Array.isArray(b)||!Object.hasOwn(ACTIONS,b.area)||!ACTIONS[b.area].has(b.action)
    ||!b.payload||typeof b.payload!=='object'||Array.isArray(b.payload)||(b.area==='join'&&!SLUG.test(b.seasonSlug||'')))return reply(400,{error:'입력 내용을 확인해 주세요.'});
+  // Home owns no client-provided identity, feature flags or diagnostic payload.
+  if(b.area==='account'&&b.action==='home'&&Object.keys(b.payload).length)return reply(400,{error:'홈은 추가 정보 없이 현재 계정으로 불러옵니다.'});
   if(Object.hasOwn(b.payload,'offset')&&(!Number.isInteger(b.payload.offset)||b.payload.offset<0||b.payload.offset>10000))return reply(400,{error:'페이지 범위를 확인해 주세요.'});
   try{return reply(200,await operate(user.id,b.area,b.action,b.seasonSlug,b.payload));}
   catch(e){
