@@ -1,0 +1,227 @@
+/* DAILYCOACHING AWARENESS v7 sales/editorial layer */
+.nal-awareness-story{
+  --aw-ink:#17212a;
+  --aw-paper:#f4f0e7;
+  --aw-line:rgba(23,33,42,.16);
+  --aw-accent:#315e72;
+  position:relative;
+  overflow:hidden;
+  padding:clamp(72px,9vw,128px) 0;
+  background:var(--aw-paper);
+  color:var(--aw-ink);
+  border-top:1px solid var(--aw-line);
+  border-bottom:1px solid var(--aw-line);
+}
+.nal-awareness-story--100{--aw-accent:#2e5ed8}
+.nal-awareness-story--1000{--aw-paper:#e9eeee;--aw-accent:#315e72}
+.nal-awareness-story--10000{
+  --aw-paper:#111c2b;
+  --aw-ink:#f5f2ea;
+  --aw-line:rgba(255,255,255,.14);
+  --aw-accent:#c2a15d;
+}
+.nal-awareness-story::after{
+  content:"";
+  position:absolute;
+  width:42vw;
+  height:42vw;
+  max-width:650px;
+  max-height:650px;
+  right:-14vw;
+  top:-16vw;
+  border:1px solid color-mix(in srgb,var(--aw-accent) 28%,transparent);
+  border-radius:50%;
+  pointer-events:none;
+}
+.nal-awareness-story .nal-container{position:relative;z-index:1}
+.nal-awareness-story .nal-eyebrow{color:var(--aw-accent);letter-spacing:.08em}
+.nal-awareness-story__head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:48px;
+  align-items:start;
+  padding-bottom:40px;
+  border-bottom:1px solid var(--aw-line);
+}
+.nal-awareness-story__head h2{
+  max-width:920px;
+  margin:12px 0 0;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:clamp(38px,5.2vw,74px);
+  line-height:1.14;
+  letter-spacing:-.045em;
+  word-break:keep-all;
+  color:var(--aw-ink);
+}
+.nal-awareness-story__mark{
+  display:block;
+  color:var(--aw-accent);
+  font-size:clamp(48px,8vw,116px);
+  line-height:.9;
+  letter-spacing:-.06em;
+  white-space:nowrap;
+  opacity:.96;
+}
+.nal-awareness-story__essay{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(32px,6vw,84px);
+  max-width:1080px;
+  padding:52px 0 62px;
+}
+.nal-awareness-story__essay p{
+  margin:0;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:clamp(19px,2vw,27px);
+  line-height:1.82;
+  word-break:keep-all;
+}
+.nal-awareness-story__essay p:last-child{
+  color:color-mix(in srgb,var(--aw-ink) 72%,transparent);
+}
+.nal-awareness-story__points{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid var(--aw-line);
+  border-bottom:1px solid var(--aw-line);
+}
+.nal-awareness-story__points article{
+  min-height:240px;
+  padding:34px 34px 38px;
+  border-right:1px solid var(--aw-line);
+}
+.nal-awareness-story__points article:last-child{border-right:0}
+.nal-awareness-story__points span{
+  display:block;
+  margin-bottom:44px;
+  color:var(--aw-accent);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+.nal-awareness-story__points h3{
+  margin:0 0 14px;
+  font-size:20px;
+  letter-spacing:.02em;
+  color:var(--aw-ink);
+}
+.nal-awareness-story__points p{
+  margin:0;
+  line-height:1.7;
+  color:color-mix(in srgb,var(--aw-ink) 76%,transparent);
+  word-break:keep-all;
+}
+.nal-awareness-ladder{
+  display:grid;
+  grid-template-columns:minmax(260px,.82fr) 1.7fr;
+  gap:clamp(42px,7vw,90px);
+  align-items:end;
+  padding-top:72px;
+}
+.nal-awareness-ladder__intro>span{
+  display:block;
+  margin-bottom:12px;
+  color:var(--aw-accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.1em;
+}
+.nal-awareness-ladder__intro>strong{
+  display:block;
+  margin-bottom:14px;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:30px;
+  line-height:1.3;
+  color:var(--aw-ink);
+}
+.nal-awareness-ladder__intro p{
+  margin:0;
+  line-height:1.75;
+  color:color-mix(in srgb,var(--aw-ink) 70%,transparent);
+}
+.nal-awareness-ladder__steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  min-height:205px;
+  border-left:1px solid var(--aw-line);
+  border-top:1px solid var(--aw-line);
+}
+.nal-awareness-ladder__steps a{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap:5px;
+  padding:26px;
+  color:var(--aw-ink);
+  text-decoration:none;
+  border-right:1px solid var(--aw-line);
+  border-bottom:1px solid var(--aw-line);
+  transition:transform .18s ease,background .18s ease;
+}
+.nal-awareness-ladder__steps a:hover,
+.nal-awareness-ladder__steps a:focus-visible{
+  background:color-mix(in srgb,var(--aw-accent) 9%,transparent);
+  transform:translateY(-4px);
+}
+.nal-awareness-ladder__steps a.is-current{
+  background:var(--aw-accent);
+  color:#fff;
+}
+.nal-awareness-story--10000 .nal-awareness-ladder__steps a.is-current{color:#111c2b}
+.nal-awareness-ladder__steps span{
+  position:absolute;
+  top:24px;
+  left:26px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.08em;
+  opacity:.7;
+}
+.nal-awareness-ladder__steps strong{font-size:24px}
+.nal-awareness-ladder__steps small{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  opacity:.72;
+}
+body[data-slug^="dailycoaching-awareness-"] .nal-commerce-brand{
+  color:#315e72;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+body[data-slug="dailycoaching-awareness-100"] .nal-commerce-brand{color:#2e5ed8}
+body[data-slug="dailycoaching-awareness-10000"] .nal-commerce-brand{color:#9b7d42}
+body[data-slug^="dailycoaching-awareness-"] .nal-commerce-gallery__main{
+  border-radius:0;
+  box-shadow:0 24px 70px rgba(20,26,32,.12);
+}
+body[data-slug^="dailycoaching-awareness-"] .nal-commerce-gallery__main img{
+  border-radius:0;
+}
+body[data-slug^="dailycoaching-awareness-"] .nal-commerce-panel h1{
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  letter-spacing:-.035em;
+}
+body[data-slug^="dailycoaching-awareness-"] .nal-commerce-section>h2{
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  letter-spacing:-.025em;
+}
+@media (max-width:900px){
+  .nal-awareness-story__head{grid-template-columns:1fr;gap:26px}
+  .nal-awareness-story__mark{font-size:56px}
+  .nal-awareness-story__essay{grid-template-columns:1fr;gap:22px}
+  .nal-awareness-story__points{grid-template-columns:1fr}
+  .nal-awareness-story__points article{min-height:0;border-right:0;border-bottom:1px solid var(--aw-line)}
+  .nal-awareness-story__points article:last-child{border-bottom:0}
+  .nal-awareness-story__points span{margin-bottom:24px}
+  .nal-awareness-ladder{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  .nal-awareness-story{padding:56px 0}
+  .nal-awareness-story__head{padding-bottom:30px}
+  .nal-awareness-story__essay{padding:38px 0 44px}
+  .nal-awareness-ladder{padding-top:54px}
+  .nal-awareness-ladder__steps{grid-template-columns:1fr;min-height:0}
+  .nal-awareness-ladder__steps a{min-height:132px;border-left:0}
+}
