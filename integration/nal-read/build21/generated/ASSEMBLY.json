@@ -1,0 +1,14 @@
+{
+  "bundle": "build20-3ccdbe665435",
+  "edgeSourceFiles": 31,
+  "networkRequests": 0,
+  "publicOverlayFiles": 81,
+  "salesEnabled": false,
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "sqlExecuted": false,
+  "sqlLayers": 19,
+  "status": "ASSEMBLED_NOT_DEPLOYED_NOT_TESTED",
+  "targetAuthorization": "not granted by this build",
+  "testsRun": false,
+  "transformedFiles": 37
+}

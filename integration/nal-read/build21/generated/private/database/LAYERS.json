@@ -1,0 +1,344 @@
+[
+  {
+    "beginSpan": [
+      197,
+      203
+    ],
+    "commitSpan": [
+      17642,
+      17649
+    ],
+    "gitBlob": "169e53b5ba919eace65c6949e691a959b1eed352",
+    "id": "build04-workspace",
+    "path": "docs/NAL_READ_BUILD04_WORKSPACE.sql",
+    "purpose": "Drafts, experiments, LIVE and personal archive",
+    "requires": [
+      "baseline-fix03"
+    ],
+    "sourceSha256": "fc8765130a5a5f5f1369b0f1aa278b237bdb417c93a81fd0bd7239693ed90203"
+  },
+  {
+    "beginSpan": [
+      190,
+      196
+    ],
+    "commitSpan": [
+      20175,
+      20182
+    ],
+    "gitBlob": "a3236865b2b6d08b24d115ab309b1e274bbbdaab",
+    "id": "build05-editorial",
+    "path": "docs/NAL_READ_BUILD05_EDITORIAL.sql",
+    "purpose": "Manuscript versions and editorial actions",
+    "requires": [
+      "build04-workspace"
+    ],
+    "sourceSha256": "88632505da60a0575781ea78a8b1835512ea978c5393176736413e4dcdd13ad4"
+  },
+  {
+    "beginSpan": [
+      95,
+      101
+    ],
+    "commitSpan": [
+      7311,
+      7318
+    ],
+    "gitBlob": "ce3f69f0680736cbd452744410f55297217004ce",
+    "id": "build05-report",
+    "path": "docs/NAL_READ_BUILD05_REPORT.sql",
+    "purpose": "Personal report source and immutable editions",
+    "requires": [
+      "build05-editorial"
+    ],
+    "sourceSha256": "a8992b0df6a7f8d91e99da6f2ea5ab836757f52fa5e6dea85da9e9bfee04851a"
+  },
+  {
+    "beginSpan": [
+      186,
+      192
+    ],
+    "commitSpan": [
+      15222,
+      15229
+    ],
+    "gitBlob": "7d8f1b979bcb317d613fe3fbf3bf149f1c8d12c6",
+    "id": "build06-join",
+    "path": "docs/NAL_READ_BUILD06_JOIN.sql",
+    "purpose": "Offer, terms and enrollment claim",
+    "requires": [
+      "build05-report"
+    ],
+    "sourceSha256": "d227dda9aa95ed89cac3578da0cb77a221b7479cf9d04180b6bbe566be2c4995"
+  },
+  {
+    "beginSpan": [
+      166,
+      172
+    ],
+    "commitSpan": [
+      7638,
+      7645
+    ],
+    "gitBlob": "395459ae8f58be9ac1d69be10bd440e0fb930c52",
+    "id": "build06-account",
+    "path": "docs/NAL_READ_BUILD06_ACCOUNT.sql",
+    "purpose": "Common account projection and display name",
+    "requires": [
+      "build06-join"
+    ],
+    "sourceSha256": "3ad78f06f8228a2d02bee7e1f7a7511f01b7b1754e9b8b4625c431cd7bfc9ff9"
+  },
+  {
+    "beginSpan": [
+      161,
+      167
+    ],
+    "commitSpan": [
+      16117,
+      16124
+    ],
+    "gitBlob": "33d72324d1d8491890a27b08b81e2722478602d8",
+    "id": "build07-payments",
+    "path": "docs/NAL_READ_BUILD07_PAYMENTS.sql",
+    "purpose": "READ checkout orders and participant payment actions",
+    "requires": [
+      "build06-account"
+    ],
+    "sourceSha256": "7ea4be7582f65d5062d227f9a5c44ce115da09a84389d19e73e103f636408107"
+  },
+  {
+    "beginSpan": [
+      153,
+      159
+    ],
+    "commitSpan": [
+      20109,
+      20116
+    ],
+    "gitBlob": "6dc7be905a1f52827cbd346b15073e235df54e12",
+    "id": "build07-reconciliation",
+    "path": "docs/NAL_READ_BUILD07_RECONCILIATION.sql",
+    "purpose": "Verified provider-state processing",
+    "requires": [
+      "build07-payments"
+    ],
+    "sourceSha256": "d238733822eee4f77708788bf4c59244243bfb0bb9266ccc493450851fe40bd4"
+  },
+  {
+    "beginSpan": [
+      191,
+      197
+    ],
+    "commitSpan": [
+      5670,
+      5677
+    ],
+    "gitBlob": "b5bdce5ae3721b9e81093a1f466aee575b228be9",
+    "id": "build07-integration",
+    "path": "docs/NAL_READ_BUILD07_INTEGRATION.sql",
+    "purpose": "Payment to entitlement integration",
+    "requires": [
+      "build07-reconciliation"
+    ],
+    "sourceSha256": "63bbf891e1b1e370dd24d95e305df08b870cbe6b58df53683b074b214276aeea"
+  },
+  {
+    "beginSpan": [
+      247,
+      253
+    ],
+    "commitSpan": [
+      18618,
+      18625
+    ],
+    "gitBlob": "8af241374c89546609703f825730c42df0d57809",
+    "id": "build09-cohorts",
+    "path": "docs/NAL_READ_BUILD09_COHORTS.sql",
+    "purpose": "Cohort, capacity and waitlist",
+    "requires": [
+      "build07-integration"
+    ],
+    "sourceSha256": "887ae8be3334aa328b738ae162849dec725a535d8be09f3f120b073e46f35454"
+  },
+  {
+    "beginSpan": [
+      174,
+      180
+    ],
+    "commitSpan": [
+      13600,
+      13607
+    ],
+    "gitBlob": "ee488780e8ce5961594d9ab461e1f7730ae20e3e",
+    "id": "build09-cohort-admin",
+    "path": "docs/NAL_READ_BUILD09_COHORT_ADMIN.sql",
+    "purpose": "Owner roster and manual attendance",
+    "requires": [
+      "build09-cohorts"
+    ],
+    "sourceSha256": "4eee4563f317206d158ff8147b14521c0b531a4745326a96302c34560431ac76"
+  },
+  {
+    "beginSpan": [
+      246,
+      252
+    ],
+    "commitSpan": [
+      10291,
+      10298
+    ],
+    "gitBlob": "7422710e198eb6e9fb25c53065faa0937e0f91ad",
+    "id": "build09-admission-bridges",
+    "path": "docs/NAL_READ_BUILD09_ADMISSION_BRIDGES.sql",
+    "purpose": "Admission wrappers around original entrypoints",
+    "requires": [
+      "build09-cohort-admin"
+    ],
+    "sourceSha256": "0cb99ee0155f54f9b5864e1d32766c26efb08bd11818f36b921933d4fa67c48d"
+  },
+  {
+    "beginSpan": [
+      152,
+      158
+    ],
+    "commitSpan": [
+      13071,
+      13078
+    ],
+    "gitBlob": "8c94d8de165b1a43be535a390461aca09f71633f",
+    "id": "build10-guide",
+    "path": "docs/NAL_READ_BUILD10_GUIDE.sql",
+    "purpose": "Published guide and optional personal preparation",
+    "requires": [
+      "build09-admission-bridges"
+    ],
+    "sourceSha256": "e7ba63528977abb5cfc9b39baaba7fa974dc247635cdceda7b8532ebd8ad1b73"
+  },
+  {
+    "beginSpan": [
+      175,
+      181
+    ],
+    "commitSpan": [
+      12492,
+      12499
+    ],
+    "gitBlob": "fbefb4b6c6bac4f7733df2e29412aa98910a9c45",
+    "id": "build10-studio",
+    "path": "docs/NAL_READ_BUILD10_STUDIO.sql",
+    "purpose": "Weekly facilitator plans and guide editing",
+    "requires": [
+      "build10-guide"
+    ],
+    "sourceSha256": "96ee1405c09b22323d37fe285f7b1d66007ce140c73ba0f1d1deed65421654e8"
+  },
+  {
+    "beginSpan": [
+      144,
+      150
+    ],
+    "commitSpan": [
+      1047,
+      1054
+    ],
+    "gitBlob": "2be2bc49c25a9a69978a6ab7229712b6e3118aeb",
+    "id": "build10-arrival-bridge",
+    "path": "docs/NAL_READ_BUILD10_ARRIVAL_BRIDGE.sql",
+    "purpose": "Add arrival metadata to existing bootstrap",
+    "requires": [
+      "build10-studio"
+    ],
+    "sourceSha256": "b5a3508842ebd4d62bdfaff275464c9245939c1d9417d3ef702a7b34940f324f"
+  },
+  {
+    "beginSpan": [
+      238,
+      244
+    ],
+    "commitSpan": [
+      19378,
+      19385
+    ],
+    "gitBlob": "8eacd6348ef055a342487f1c71098b5e5cd5464e",
+    "id": "build12-support",
+    "path": "docs/NAL_READ_BUILD12_SUPPORT.sql",
+    "purpose": "Member inquiries and assigned staff replies",
+    "requires": [
+      "build10-arrival-bridge"
+    ],
+    "sourceSha256": "7720c4ebc168aed571c28d39d56c7b248e38439a10780f337de1f0fd85c9a956"
+  },
+  {
+    "beginSpan": [
+      174,
+      180
+    ],
+    "commitSpan": [
+      12599,
+      12606
+    ],
+    "gitBlob": "2ffebe6170ed827f0d4aa4dd869e035d22e06d29",
+    "id": "build14-home",
+    "path": "docs/NAL_READ_BUILD14_HOME.sql",
+    "purpose": "Read-only participant home account wrapper",
+    "requires": [
+      "build12-support"
+    ],
+    "sourceSha256": "71ea12d8cd35200c6b8381bf4757c8b60c3637edaa70832f4d11f80841a6dbbe"
+  },
+  {
+    "beginSpan": [
+      154,
+      160
+    ],
+    "commitSpan": [
+      8031,
+      8038
+    ],
+    "gitBlob": "5e2ad12bf18c0bb2b2a13cdb14aa815595153109",
+    "id": "build15-pathway",
+    "path": "docs/NAL_READ_BUILD15_PATHWAY.sql",
+    "purpose": "Source-linked experiment and LIVE revision handoff",
+    "requires": [
+      "build14-home"
+    ],
+    "sourceSha256": "705a4bf0372083a92bbc70b7763502927e53e02ab525a165c2662cea93bd871f"
+  },
+  {
+    "beginSpan": [
+      279,
+      285
+    ],
+    "commitSpan": [
+      12800,
+      12807
+    ],
+    "gitBlob": "0abba16e0597eacd7d165e540ebaacb607f72cd2",
+    "id": "build17-operations",
+    "path": "docs/NAL_READ_BUILD17_OPERATIONS.sql",
+    "purpose": "Read-only operator home account wrapper",
+    "requires": [
+      "build15-pathway"
+    ],
+    "sourceSha256": "3cb11da80d51d1a9ccd2dc271e6b2a8951b3810bcd7b30bf0592fe5f5e4fa6e3"
+  },
+  {
+    "beginSpan": [
+      180,
+      186
+    ],
+    "commitSpan": [
+      5785,
+      5792
+    ],
+    "gitBlob": "37bf804bd4cbe2a9a62cd9a9ecc5f6699b553778",
+    "id": "build18-context",
+    "path": "docs/NAL_READ_BUILD18_CONTEXT.sql",
+    "purpose": "Selected-season order and support projections",
+    "requires": [
+      "build17-operations"
+    ],
+    "sourceSha256": "c4cfd41672fb4d1841fb98ac2c1ce9ddd0a8466b3f1c746cd182517febad9afa"
+  }
+]

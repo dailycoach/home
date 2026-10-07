@@ -1,0 +1,1004 @@
+[
+  {
+    "changes": [
+      {
+        "count": 1,
+        "kind": "literal-loader-label"
+      }
+    ],
+    "path": "nal/assets/js/read-editorial-loader.js"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "./read-editorial-contract.mjs?v=build20-3ccdbe665435",
+        "source": "./read-editorial-contract.mjs"
+      }
+    ],
+    "path": "nal/assets/js/read-editorial.js"
+  },
+  {
+    "changes": [
+      {
+        "count": 1,
+        "kind": "literal-loader-label"
+      }
+    ],
+    "path": "nal/assets/js/read-open-loader.js"
+  },
+  {
+    "changes": [
+      {
+        "count": 1,
+        "kind": "literal-loader-label"
+      }
+    ],
+    "path": "nal/assets/js/read-shell.js"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css?v=build06"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build06"
+      }
+    ],
+    "path": "nal/auth/callback/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-support.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-support.css?v=build12"
+      }
+    ],
+    "path": "nal/help/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-support.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-support.css?v=build12"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-support.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-support.js?v=build12"
+      }
+    ],
+    "path": "nal/my/help/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account-home.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account-home.css?v=build14"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-overview.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-overview.js?v=build14"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-home.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-home.js?v=build14"
+      }
+    ],
+    "path": "nal/my/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-payments.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-payments.css?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-checkout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-checkout.js?v=build08"
+      }
+    ],
+    "path": "nal/my/payments/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-cohorts.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-cohorts.js?v=build09"
+      }
+    ],
+    "path": "nal/my/waitlist/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-cohorts-admin.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-cohorts-admin.js?v=build18"
+      }
+    ],
+    "path": "nal/read/admin/cohorts/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-operations.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-operations.css?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-operations.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-operations.js?v=build18"
+      }
+    ],
+    "path": "nal/read/admin/home/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-workspace.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-workspace.css?v=build15"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-editorial.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-editorial.css?v=build05"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-session.js?v=build16"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-editorial-loader.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-editorial-loader.js?v=build18"
+      }
+    ],
+    "path": "nal/read/admin/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css?v=build06"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-offers-admin.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-offers-admin.js?v=build18"
+      }
+    ],
+    "path": "nal/read/admin/offers/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-payments.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-payments.css?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-payments-admin.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-payments-admin.js?v=build18"
+      }
+    ],
+    "path": "nal/read/admin/payments/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-companion.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-companion.css?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-studio-library.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-studio-library.css?v=build11"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-studio-library.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-studio-library.js?v=build11"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-studio.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-studio.js?v=build11"
+      }
+    ],
+    "path": "nal/read/admin/studio/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-support.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-support.css?v=build12"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-admin-context.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-admin-context.css?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build17"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build13"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-admin-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-admin-context.js?v=build18"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-support.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-support.js?v=build18"
+      }
+    ],
+    "path": "nal/read/admin/support/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=read-w0"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read.js?v=read-w0"
+      }
+    ],
+    "path": "nal/read/auth/callback/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-payment-return.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-payment-return.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-payments.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-payments.css?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-checkout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-checkout.js?v=build08"
+      }
+    ],
+    "path": "nal/read/checkout/fail/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-payments.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-payments.css?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-checkout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-checkout.js?v=build08"
+      }
+    ],
+    "path": "nal/read/checkout/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-payment-return.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-payment-return.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-payments.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-payments.css?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build08"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-checkout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-checkout.js?v=build08"
+      }
+    ],
+    "path": "nal/read/checkout/success/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build09"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-cohorts.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-cohorts.js?v=build09"
+      }
+    ],
+    "path": "nal/read/cohorts/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=read-w0"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read.js?v=read-w0"
+      }
+    ],
+    "path": "nal/read/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-companion.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-companion.css?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-program-sections.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-program-sections.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-join.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-join.js?v=build10"
+      }
+    ],
+    "path": "nal/read/join/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-workspace.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-workspace.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-report.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-report.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-feedback.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-feedback.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-open-context.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-open-context.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-shell.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-shell.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-session.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-open-loader.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-open-loader.js?v=build20"
+      }
+    ],
+    "path": "nal/read/open/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-companion.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-companion.css?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-program-sections.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-program-sections.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-start.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-start.js?v=build10"
+      }
+    ],
+    "path": "nal/read/start/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/before/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/day/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=read-w0"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read.js?v=read-w0"
+      }
+    ],
+    "path": "nal/read/trend-2027/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/journey/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/live/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/my/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/report/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/today/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-routes.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-routes.js?v=build20"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-legacy-route.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-legacy-route.js?v=build20"
+      }
+    ],
+    "path": "nal/read/trend-2027/try/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read.css?v=read-w0"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read.js?v=read-w0"
+      }
+    ],
+    "path": "nal/read/trend-2027/welcome/index.html"
+  },
+  {
+    "changes": [
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-account.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-account.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-cohorts.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-cohorts.css"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/css/nal-read-companion.css?v=build20-3ccdbe665435",
+        "source": "/nal/assets/css/nal-read-companion.css?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-layout.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-layout.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/account-session.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/account-session.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-program-sections.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-program-sections.js?v=build10"
+      },
+      {
+        "kind": "asset-reference",
+        "output": "/nal/assets/js/read-join.js?v=build20-3ccdbe665435",
+        "source": "/nal/assets/js/read-join.js?v=build10"
+      }
+    ],
+    "path": "nal/shop/read/index.html"
+  }
+]

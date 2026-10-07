@@ -1,0 +1,8 @@
+{
+  "bundle": "build20-3ccdbe665435",
+  "databaseCandidate": "private/database/after-fix03.forward.sql",
+  "edgeSourceCount": 31,
+  "referenceMapSourceCommit": "0e2e8652212748278067c2981502174a6c109c18",
+  "runtimeState": "not_observed_by_assembler",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e"
+}

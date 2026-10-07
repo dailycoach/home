@@ -1,0 +1,1262 @@
+[
+  {
+    "bytes": 9051,
+    "destination": "START-HERE.md",
+    "gitBlob": "a87e8751e1ad869ca289dcbc93a6a03d725e416d",
+    "group": "handoff",
+    "outputSha256": "c7469bf5b5b8bc2ee6bcd2be368b7b3b7b123d3e1d5784477367473b017d0d81",
+    "path": "integration/nal-read/build20/README.md",
+    "sourceSha256": "c7469bf5b5b8bc2ee6bcd2be368b7b3b7b123d3e1d5784477367473b017d0d81"
+  },
+  {
+    "bytes": 1480,
+    "destination": "private/assembly.json",
+    "gitBlob": "1d4c1552da2dceacb39ad19cdccdd8f588bf59df",
+    "group": "assembly-plan",
+    "outputSha256": "31904dc5e6200f53d122258661188c0fd10f4b956903bbdd51f3997f158e1812",
+    "path": "integration/nal-read/build20/assembly.json",
+    "sourceSha256": "31904dc5e6200f53d122258661188c0fd10f4b956903bbdd51f3997f158e1812"
+  },
+  {
+    "bytes": 2899,
+    "destination": "private/database/baseline-observation.json",
+    "gitBlob": "d97a9f1943efb5c42243b8cfb5cd8d29a9e1e9a3",
+    "group": "observed-metadata",
+    "outputSha256": "66b53e48184ccf07cb777c64cf3e03e4923a36b233b69ff10b8d6aa011a39890",
+    "path": "integration/nal-read/build20/baseline-observation.json",
+    "sourceSha256": "66b53e48184ccf07cb777c64cf3e03e4923a36b233b69ff10b8d6aa011a39890"
+  },
+  {
+    "bytes": 17650,
+    "destination": "private/database/original-layers/01-build04-workspace.sql",
+    "gitBlob": "169e53b5ba919eace65c6949e691a959b1eed352",
+    "group": "sql-original",
+    "outputSha256": "fc8765130a5a5f5f1369b0f1aa278b237bdb417c93a81fd0bd7239693ed90203",
+    "path": "docs/NAL_READ_BUILD04_WORKSPACE.sql",
+    "sourceSha256": "fc8765130a5a5f5f1369b0f1aa278b237bdb417c93a81fd0bd7239693ed90203"
+  },
+  {
+    "bytes": 20205,
+    "destination": "private/database/original-layers/02-build05-editorial.sql",
+    "gitBlob": "a3236865b2b6d08b24d115ab309b1e274bbbdaab",
+    "group": "sql-original",
+    "outputSha256": "88632505da60a0575781ea78a8b1835512ea978c5393176736413e4dcdd13ad4",
+    "path": "docs/NAL_READ_BUILD05_EDITORIAL.sql",
+    "sourceSha256": "88632505da60a0575781ea78a8b1835512ea978c5393176736413e4dcdd13ad4"
+  },
+  {
+    "bytes": 7391,
+    "destination": "private/database/original-layers/03-build05-report.sql",
+    "gitBlob": "ce3f69f0680736cbd452744410f55297217004ce",
+    "group": "sql-original",
+    "outputSha256": "a8992b0df6a7f8d91e99da6f2ea5ab836757f52fa5e6dea85da9e9bfee04851a",
+    "path": "docs/NAL_READ_BUILD05_REPORT.sql",
+    "sourceSha256": "a8992b0df6a7f8d91e99da6f2ea5ab836757f52fa5e6dea85da9e9bfee04851a"
+  },
+  {
+    "bytes": 15230,
+    "destination": "private/database/original-layers/04-build06-join.sql",
+    "gitBlob": "7d8f1b979bcb317d613fe3fbf3bf149f1c8d12c6",
+    "group": "sql-original",
+    "outputSha256": "d227dda9aa95ed89cac3578da0cb77a221b7479cf9d04180b6bbe566be2c4995",
+    "path": "docs/NAL_READ_BUILD06_JOIN.sql",
+    "sourceSha256": "d227dda9aa95ed89cac3578da0cb77a221b7479cf9d04180b6bbe566be2c4995"
+  },
+  {
+    "bytes": 7654,
+    "destination": "private/database/original-layers/05-build06-account.sql",
+    "gitBlob": "395459ae8f58be9ac1d69be10bd440e0fb930c52",
+    "group": "sql-original",
+    "outputSha256": "3ad78f06f8228a2d02bee7e1f7a7511f01b7b1754e9b8b4625c431cd7bfc9ff9",
+    "path": "docs/NAL_READ_BUILD06_ACCOUNT.sql",
+    "sourceSha256": "3ad78f06f8228a2d02bee7e1f7a7511f01b7b1754e9b8b4625c431cd7bfc9ff9"
+  },
+  {
+    "bytes": 16125,
+    "destination": "private/database/original-layers/06-build07-payments.sql",
+    "gitBlob": "33d72324d1d8491890a27b08b81e2722478602d8",
+    "group": "sql-original",
+    "outputSha256": "7ea4be7582f65d5062d227f9a5c44ce115da09a84389d19e73e103f636408107",
+    "path": "docs/NAL_READ_BUILD07_PAYMENTS.sql",
+    "sourceSha256": "7ea4be7582f65d5062d227f9a5c44ce115da09a84389d19e73e103f636408107"
+  },
+  {
+    "bytes": 20117,
+    "destination": "private/database/original-layers/07-build07-reconciliation.sql",
+    "gitBlob": "6dc7be905a1f52827cbd346b15073e235df54e12",
+    "group": "sql-original",
+    "outputSha256": "d238733822eee4f77708788bf4c59244243bfb0bb9266ccc493450851fe40bd4",
+    "path": "docs/NAL_READ_BUILD07_RECONCILIATION.sql",
+    "sourceSha256": "d238733822eee4f77708788bf4c59244243bfb0bb9266ccc493450851fe40bd4"
+  },
+  {
+    "bytes": 5748,
+    "destination": "private/database/original-layers/08-build07-integration.sql",
+    "gitBlob": "b5bdce5ae3721b9e81093a1f466aee575b228be9",
+    "group": "sql-original",
+    "outputSha256": "63bbf891e1b1e370dd24d95e305df08b870cbe6b58df53683b074b214276aeea",
+    "path": "docs/NAL_READ_BUILD07_INTEGRATION.sql",
+    "sourceSha256": "63bbf891e1b1e370dd24d95e305df08b870cbe6b58df53683b074b214276aeea"
+  },
+  {
+    "bytes": 18626,
+    "destination": "private/database/original-layers/09-build09-cohorts.sql",
+    "gitBlob": "8af241374c89546609703f825730c42df0d57809",
+    "group": "sql-original",
+    "outputSha256": "887ae8be3334aa328b738ae162849dec725a535d8be09f3f120b073e46f35454",
+    "path": "docs/NAL_READ_BUILD09_COHORTS.sql",
+    "sourceSha256": "887ae8be3334aa328b738ae162849dec725a535d8be09f3f120b073e46f35454"
+  },
+  {
+    "bytes": 13620,
+    "destination": "private/database/original-layers/10-build09-cohort-admin.sql",
+    "gitBlob": "ee488780e8ce5961594d9ab461e1f7730ae20e3e",
+    "group": "sql-original",
+    "outputSha256": "4eee4563f317206d158ff8147b14521c0b531a4745326a96302c34560431ac76",
+    "path": "docs/NAL_READ_BUILD09_COHORT_ADMIN.sql",
+    "sourceSha256": "4eee4563f317206d158ff8147b14521c0b531a4745326a96302c34560431ac76"
+  },
+  {
+    "bytes": 10299,
+    "destination": "private/database/original-layers/11-build09-admission-bridges.sql",
+    "gitBlob": "7422710e198eb6e9fb25c53065faa0937e0f91ad",
+    "group": "sql-original",
+    "outputSha256": "0cb99ee0155f54f9b5864e1d32766c26efb08bd11818f36b921933d4fa67c48d",
+    "path": "docs/NAL_READ_BUILD09_ADMISSION_BRIDGES.sql",
+    "sourceSha256": "0cb99ee0155f54f9b5864e1d32766c26efb08bd11818f36b921933d4fa67c48d"
+  },
+  {
+    "bytes": 13079,
+    "destination": "private/database/original-layers/12-build10-guide.sql",
+    "gitBlob": "8c94d8de165b1a43be535a390461aca09f71633f",
+    "group": "sql-original",
+    "outputSha256": "e7ba63528977abb5cfc9b39baaba7fa974dc247635cdceda7b8532ebd8ad1b73",
+    "path": "docs/NAL_READ_BUILD10_GUIDE.sql",
+    "sourceSha256": "e7ba63528977abb5cfc9b39baaba7fa974dc247635cdceda7b8532ebd8ad1b73"
+  },
+  {
+    "bytes": 12500,
+    "destination": "private/database/original-layers/13-build10-studio.sql",
+    "gitBlob": "fbefb4b6c6bac4f7733df2e29412aa98910a9c45",
+    "group": "sql-original",
+    "outputSha256": "96ee1405c09b22323d37fe285f7b1d66007ce140c73ba0f1d1deed65421654e8",
+    "path": "docs/NAL_READ_BUILD10_STUDIO.sql",
+    "sourceSha256": "96ee1405c09b22323d37fe285f7b1d66007ce140c73ba0f1d1deed65421654e8"
+  },
+  {
+    "bytes": 1055,
+    "destination": "private/database/original-layers/14-build10-arrival-bridge.sql",
+    "gitBlob": "2be2bc49c25a9a69978a6ab7229712b6e3118aeb",
+    "group": "sql-original",
+    "outputSha256": "b5a3508842ebd4d62bdfaff275464c9245939c1d9417d3ef702a7b34940f324f",
+    "path": "docs/NAL_READ_BUILD10_ARRIVAL_BRIDGE.sql",
+    "sourceSha256": "b5a3508842ebd4d62bdfaff275464c9245939c1d9417d3ef702a7b34940f324f"
+  },
+  {
+    "bytes": 19410,
+    "destination": "private/database/original-layers/15-build12-support.sql",
+    "gitBlob": "8eacd6348ef055a342487f1c71098b5e5cd5464e",
+    "group": "sql-original",
+    "outputSha256": "7720c4ebc168aed571c28d39d56c7b248e38439a10780f337de1f0fd85c9a956",
+    "path": "docs/NAL_READ_BUILD12_SUPPORT.sql",
+    "sourceSha256": "7720c4ebc168aed571c28d39d56c7b248e38439a10780f337de1f0fd85c9a956"
+  },
+  {
+    "bytes": 12607,
+    "destination": "private/database/original-layers/16-build14-home.sql",
+    "gitBlob": "2ffebe6170ed827f0d4aa4dd869e035d22e06d29",
+    "group": "sql-original",
+    "outputSha256": "71ea12d8cd35200c6b8381bf4757c8b60c3637edaa70832f4d11f80841a6dbbe",
+    "path": "docs/NAL_READ_BUILD14_HOME.sql",
+    "sourceSha256": "71ea12d8cd35200c6b8381bf4757c8b60c3637edaa70832f4d11f80841a6dbbe"
+  },
+  {
+    "bytes": 8039,
+    "destination": "private/database/original-layers/17-build15-pathway.sql",
+    "gitBlob": "5e2ad12bf18c0bb2b2a13cdb14aa815595153109",
+    "group": "sql-original",
+    "outputSha256": "705a4bf0372083a92bbc70b7763502927e53e02ab525a165c2662cea93bd871f",
+    "path": "docs/NAL_READ_BUILD15_PATHWAY.sql",
+    "sourceSha256": "705a4bf0372083a92bbc70b7763502927e53e02ab525a165c2662cea93bd871f"
+  },
+  {
+    "bytes": 12808,
+    "destination": "private/database/original-layers/18-build17-operations.sql",
+    "gitBlob": "0abba16e0597eacd7d165e540ebaacb607f72cd2",
+    "group": "sql-original",
+    "outputSha256": "3cb11da80d51d1a9ccd2dc271e6b2a8951b3810bcd7b30bf0592fe5f5e4fa6e3",
+    "path": "docs/NAL_READ_BUILD17_OPERATIONS.sql",
+    "sourceSha256": "3cb11da80d51d1a9ccd2dc271e6b2a8951b3810bcd7b30bf0592fe5f5e4fa6e3"
+  },
+  {
+    "bytes": 5793,
+    "destination": "private/database/original-layers/19-build18-context.sql",
+    "gitBlob": "37bf804bd4cbe2a9a62cd9a9ecc5f6699b553778",
+    "group": "sql-original",
+    "outputSha256": "c4cfd41672fb4d1841fb98ac2c1ce9ddd0a8466b3f1c746cd182517febad9afa",
+    "path": "docs/NAL_READ_BUILD18_CONTEXT.sql",
+    "sourceSha256": "c4cfd41672fb4d1841fb98ac2c1ce9ddd0a8466b3f1c746cd182517febad9afa"
+  },
+  {
+    "bytes": 3515,
+    "destination": "private/database/preconditions.sql.in",
+    "gitBlob": "27e60d9eec2c7f9167c16634b8a92b23712ce92c",
+    "group": "assembly-template",
+    "outputSha256": "b438a85b8c45a098224875f2fa08bf6fcf97a9a8f86e8f0ddc37d5cb6d998ea3",
+    "path": "integration/nal-read/build20/preconditions.sql.in",
+    "sourceSha256": "b438a85b8c45a098224875f2fa08bf6fcf97a9a8f86e8f0ddc37d5cb6d998ea3"
+  },
+  {
+    "bytes": 3333,
+    "destination": "private/edge/supabase/functions/_shared/nal-read-auth.mjs",
+    "gitBlob": "7c34d210820cb6efc6ea13c1d7dfe339a12b796d",
+    "group": "edge",
+    "outputSha256": "684c2d5eef1a93031c8be235182ff5d54b940622d91fcfee4aad043000b95942",
+    "path": "supabase/functions/_shared/nal-read-auth.mjs",
+    "sourceSha256": "684c2d5eef1a93031c8be235182ff5d54b940622d91fcfee4aad043000b95942"
+  },
+  {
+    "bytes": 3531,
+    "destination": "private/edge/supabase/functions/_shared/nal-read-document-http.mjs",
+    "gitBlob": "20540518433ebc830cbc5e2cbf3940ca500b5352",
+    "group": "edge",
+    "outputSha256": "4285e83718faa2c5d047edfd4fd6b4de8113563a784929cb8958e23366c28707",
+    "path": "supabase/functions/_shared/nal-read-document-http.mjs",
+    "sourceSha256": "4285e83718faa2c5d047edfd4fd6b4de8113563a784929cb8958e23366c28707"
+  },
+  {
+    "bytes": 1951,
+    "destination": "private/edge/supabase/functions/_shared/nal-read-payments-runtime.mjs",
+    "gitBlob": "487286cfcbe5a1bc2119e59518016ccb1221e640",
+    "group": "edge",
+    "outputSha256": "d80acc0c20e1f94a8ee7933b8e2f2243b556fc4aa24f7910a2d2d8cbb6fb1c26",
+    "path": "supabase/functions/_shared/nal-read-payments-runtime.mjs",
+    "sourceSha256": "d80acc0c20e1f94a8ee7933b8e2f2243b556fc4aa24f7910a2d2d8cbb6fb1c26"
+  },
+  {
+    "bytes": 5974,
+    "destination": "private/edge/supabase/functions/_shared/nal-read-toss.mjs",
+    "gitBlob": "8e8bdd7335dada0be1fd260853c141671e23ebbc",
+    "group": "edge",
+    "outputSha256": "72d134b8201cecc0657e33dd5baf30debb0a7aa187e46063ce5c8cead1a1fe67",
+    "path": "supabase/functions/_shared/nal-read-toss.mjs",
+    "sourceSha256": "72d134b8201cecc0657e33dd5baf30debb0a7aa187e46063ce5c8cead1a1fe67"
+  },
+  {
+    "bytes": 1639,
+    "destination": "private/edge/supabase/functions/nal-account/README.md",
+    "gitBlob": "935df5b66ede305ce10f0ad8fc7004c609507644",
+    "group": "edge",
+    "outputSha256": "0581425c37983fa443601cfd14fd7d428ec7533d6efb5c45b4779dbcc4cc1e8a",
+    "path": "supabase/functions/nal-account/README.md",
+    "sourceSha256": "0581425c37983fa443601cfd14fd7d428ec7533d6efb5c45b4779dbcc4cc1e8a"
+  },
+  {
+    "bytes": 6656,
+    "destination": "private/edge/supabase/functions/nal-account/handler.mjs",
+    "gitBlob": "c4c0b53fe71e82caf9cdbde5386716ce9add71bc",
+    "group": "edge",
+    "outputSha256": "417d72c8b02d1e772e5a84d1ff54b0df5e4d1731c96e54c5c8326d78801f35ef",
+    "path": "supabase/functions/nal-account/handler.mjs",
+    "sourceSha256": "417d72c8b02d1e772e5a84d1ff54b0df5e4d1731c96e54c5c8326d78801f35ef"
+  },
+  {
+    "bytes": 2129,
+    "destination": "private/edge/supabase/functions/nal-account/index.ts",
+    "gitBlob": "dd84bd57211788eb37a552792759c4a4bc81c596",
+    "group": "edge",
+    "outputSha256": "8aacd394276fdb6525eadc45eedd8e3f4a7d07989899a900b6d5b62eec362b6f",
+    "path": "supabase/functions/nal-account/index.ts",
+    "sourceSha256": "8aacd394276fdb6525eadc45eedd8e3f4a7d07989899a900b6d5b62eec362b6f"
+  },
+  {
+    "bytes": 1674,
+    "destination": "private/edge/supabase/functions/nal-read-cohorts/README.md",
+    "gitBlob": "f65b66a60dfc0231225c3988ef7a7b9d4521f4e3",
+    "group": "edge",
+    "outputSha256": "da4675680595d6f76f1ec13a391895f7df1c64e06908551960d0fb473a2af001",
+    "path": "supabase/functions/nal-read-cohorts/README.md",
+    "sourceSha256": "da4675680595d6f76f1ec13a391895f7df1c64e06908551960d0fb473a2af001"
+  },
+  {
+    "bytes": 5625,
+    "destination": "private/edge/supabase/functions/nal-read-cohorts/handler.mjs",
+    "gitBlob": "c0c4c5f9665f01fecd4ae79c044e60adfd1fdcb2",
+    "group": "edge",
+    "outputSha256": "e77cfa29ec57297858252bb8e58d9bce751908943e570502ac9c2d5136670fb2",
+    "path": "supabase/functions/nal-read-cohorts/handler.mjs",
+    "sourceSha256": "e77cfa29ec57297858252bb8e58d9bce751908943e570502ac9c2d5136670fb2"
+  },
+  {
+    "bytes": 1364,
+    "destination": "private/edge/supabase/functions/nal-read-cohorts/index.ts",
+    "gitBlob": "823e44209d1eaae5b926ced87736eaf299eee271",
+    "group": "edge",
+    "outputSha256": "d3d44d69189fe212a2807c82fd2d97452ae587ba3ce729d55c4411588123da51",
+    "path": "supabase/functions/nal-read-cohorts/index.ts",
+    "sourceSha256": "d3d44d69189fe212a2807c82fd2d97452ae587ba3ce729d55c4411588123da51"
+  },
+  {
+    "bytes": 2899,
+    "destination": "private/edge/supabase/functions/nal-read-companion/README.md",
+    "gitBlob": "5a488e8cc05e003f7fedda42e4032d4706cd5601",
+    "group": "edge",
+    "outputSha256": "9474acf4bba33912d3eb835da7adb38d84be1933abfca47e6d4ace65f8e47fea",
+    "path": "supabase/functions/nal-read-companion/README.md",
+    "sourceSha256": "9474acf4bba33912d3eb835da7adb38d84be1933abfca47e6d4ace65f8e47fea"
+  },
+  {
+    "bytes": 4799,
+    "destination": "private/edge/supabase/functions/nal-read-companion/handler.mjs",
+    "gitBlob": "b889f61a009ac1e1bec4484ea724fa7478b69c8c",
+    "group": "edge",
+    "outputSha256": "76cfb8da0fa700deae6d696bbbafdd9b026bdf72112b851079e3b4caa2c2ba89",
+    "path": "supabase/functions/nal-read-companion/handler.mjs",
+    "sourceSha256": "76cfb8da0fa700deae6d696bbbafdd9b026bdf72112b851079e3b4caa2c2ba89"
+  },
+  {
+    "bytes": 2208,
+    "destination": "private/edge/supabase/functions/nal-read-companion/index.ts",
+    "gitBlob": "7abac7c9a516eb572bb951a0199d26ceee1f2a04",
+    "group": "edge",
+    "outputSha256": "dc3ddde4875dd02cf59c23de2dcbc2df900ed1171c502e68f428f00af7b8fe72",
+    "path": "supabase/functions/nal-read-companion/index.ts",
+    "sourceSha256": "dc3ddde4875dd02cf59c23de2dcbc2df900ed1171c502e68f428f00af7b8fe72"
+  },
+  {
+    "bytes": 973,
+    "destination": "private/edge/supabase/functions/nal-read-companion/presets/index.mjs",
+    "gitBlob": "0b11408117f88e8c9b0d30733fa881daca885993",
+    "group": "edge",
+    "outputSha256": "2192a205d6bf091d01d37f1b16630cc4ecef29f7f39c9f8920199ffe4fd5eea2",
+    "path": "supabase/functions/nal-read-companion/presets/index.mjs",
+    "sourceSha256": "2192a205d6bf091d01d37f1b16630cc4ecef29f7f39c9f8920199ffe4fd5eea2"
+  },
+  {
+    "bytes": 11901,
+    "destination": "private/edge/supabase/functions/nal-read-companion/presets/trend-2027-guide.mjs",
+    "gitBlob": "0cfffc33d849a8c9f22bcdfdb9cc8cccaa27d625",
+    "group": "edge",
+    "outputSha256": "3782ef3c15213951f70793fedc34ba02822c820894aa432d63bccdfc51eef82a",
+    "path": "supabase/functions/nal-read-companion/presets/trend-2027-guide.mjs",
+    "sourceSha256": "3782ef3c15213951f70793fedc34ba02822c820894aa432d63bccdfc51eef82a"
+  },
+  {
+    "bytes": 22720,
+    "destination": "private/edge/supabase/functions/nal-read-companion/presets/trend-2027-weeks.mjs",
+    "gitBlob": "46c670e16ad4b03245f4b00c6f9f1528cd02e04f",
+    "group": "edge",
+    "outputSha256": "1b3a77057b10d875dd54a92a68a3a48ebaec4490bb9a7b749221fbe9c7cd8bb5",
+    "path": "supabase/functions/nal-read-companion/presets/trend-2027-weeks.mjs",
+    "sourceSha256": "1b3a77057b10d875dd54a92a68a3a48ebaec4490bb9a7b749221fbe9c7cd8bb5"
+  },
+  {
+    "bytes": 4353,
+    "destination": "private/edge/supabase/functions/nal-read-daily/handler.mjs",
+    "gitBlob": "2372096925ff675dfa77d4f046c8537a1c8c9539",
+    "group": "edge",
+    "outputSha256": "faec613391a5a13393168df84adb020239dab92b9508cac0cd09e01d7c0977d1",
+    "path": "supabase/functions/nal-read-daily/handler.mjs",
+    "sourceSha256": "faec613391a5a13393168df84adb020239dab92b9508cac0cd09e01d7c0977d1"
+  },
+  {
+    "bytes": 1567,
+    "destination": "private/edge/supabase/functions/nal-read-daily/index.ts",
+    "gitBlob": "1365a02235276a660bb184f32093b29b8bef0114",
+    "group": "edge",
+    "outputSha256": "8866aded58fa17df8881a100fee3c22e65d59550887a4741e0531cb5976365b6",
+    "path": "supabase/functions/nal-read-daily/index.ts",
+    "sourceSha256": "8866aded58fa17df8881a100fee3c22e65d59550887a4741e0531cb5976365b6"
+  },
+  {
+    "bytes": 1068,
+    "destination": "private/edge/supabase/functions/nal-read-editorial/index.ts",
+    "gitBlob": "8b78228750eb5b9337def154bc9fb0a9da037ebe",
+    "group": "edge",
+    "outputSha256": "d937008fcd91716f869e378fc40fa26aa31c21969555bd8e5c47bcf9dba30c0d",
+    "path": "supabase/functions/nal-read-editorial/index.ts",
+    "sourceSha256": "d937008fcd91716f869e378fc40fa26aa31c21969555bd8e5c47bcf9dba30c0d"
+  },
+  {
+    "bytes": 3531,
+    "destination": "private/edge/supabase/functions/nal-read-enroll/handler.mjs",
+    "gitBlob": "cb3f80c8b56666b9eb305e9e576d00949e8d1755",
+    "group": "edge",
+    "outputSha256": "d03926faaed650002aabbd5272a291212b7f1d26964ed7dcab78e6773b9e3140",
+    "path": "supabase/functions/nal-read-enroll/handler.mjs",
+    "sourceSha256": "d03926faaed650002aabbd5272a291212b7f1d26964ed7dcab78e6773b9e3140"
+  },
+  {
+    "bytes": 1153,
+    "destination": "private/edge/supabase/functions/nal-read-enroll/index.ts",
+    "gitBlob": "6796832b737e07e05c1131180d18e122b8e4f3b7",
+    "group": "edge",
+    "outputSha256": "38645d438f5860c207c14c5af2e621c1c9a88fe01eb68fdaa24280990f2dcbaf",
+    "path": "supabase/functions/nal-read-enroll/index.ts",
+    "sourceSha256": "38645d438f5860c207c14c5af2e621c1c9a88fe01eb68fdaa24280990f2dcbaf"
+  },
+  {
+    "bytes": 1427,
+    "destination": "private/edge/supabase/functions/nal-read-payments-webhook/index.ts",
+    "gitBlob": "9e997a81938e06d9ea9eb9fa9fefa201771b2974",
+    "group": "edge",
+    "outputSha256": "3402ad89d1c06ee70d4ebb17d6a82bdace884403471fb713a0a7530e96b2f697",
+    "path": "supabase/functions/nal-read-payments-webhook/index.ts",
+    "sourceSha256": "3402ad89d1c06ee70d4ebb17d6a82bdace884403471fb713a0a7530e96b2f697"
+  },
+  {
+    "bytes": 2952,
+    "destination": "private/edge/supabase/functions/nal-read-payments/README.md",
+    "gitBlob": "8db8ae2d9e516d85bf12cc8af239a0ecb31082bc",
+    "group": "edge",
+    "outputSha256": "9667fe01a67cc3661565b08c969885aebd3fca1c57399f99fa442ae5564ec99c",
+    "path": "supabase/functions/nal-read-payments/README.md",
+    "sourceSha256": "9667fe01a67cc3661565b08c969885aebd3fca1c57399f99fa442ae5564ec99c"
+  },
+  {
+    "bytes": 7535,
+    "destination": "private/edge/supabase/functions/nal-read-payments/handler.mjs",
+    "gitBlob": "f7072170a57b30eaecf49ee714bd2a3d4ce04d46",
+    "group": "edge",
+    "outputSha256": "0891878ca26bb88e6757a7636cc775566a1b6fec9a2a8524ee6bfae147175dc0",
+    "path": "supabase/functions/nal-read-payments/handler.mjs",
+    "sourceSha256": "0891878ca26bb88e6757a7636cc775566a1b6fec9a2a8524ee6bfae147175dc0"
+  },
+  {
+    "bytes": 752,
+    "destination": "private/edge/supabase/functions/nal-read-payments/index.ts",
+    "gitBlob": "92dc3f5510aee1fdd6affbc1a399f906278f2852",
+    "group": "edge",
+    "outputSha256": "82768dcbe6c12139319f84e2a539cafe8b81e225161ecab8eae5e6fee18fe940",
+    "path": "supabase/functions/nal-read-payments/index.ts",
+    "sourceSha256": "82768dcbe6c12139319f84e2a539cafe8b81e225161ecab8eae5e6fee18fe940"
+  },
+  {
+    "bytes": 932,
+    "destination": "private/edge/supabase/functions/nal-read-report/index.ts",
+    "gitBlob": "ff3c0d719e8afb48211aec1ff6faf3b07a7129f1",
+    "group": "edge",
+    "outputSha256": "1871d297cea28d75b4474a8479bd0c506e5929f09e6dd8dbc784a8101e7fe814",
+    "path": "supabase/functions/nal-read-report/index.ts",
+    "sourceSha256": "1871d297cea28d75b4474a8479bd0c506e5929f09e6dd8dbc784a8101e7fe814"
+  },
+  {
+    "bytes": 4506,
+    "destination": "private/edge/supabase/functions/nal-read-workspace/handler.mjs",
+    "gitBlob": "05ff83072e27a8c719a85beb89525bc0dfb02a42",
+    "group": "edge",
+    "outputSha256": "0b4e9be50f33ffb30e3e624b04f4c4b3cc8101a7f054b4382e2276d96455037d",
+    "path": "supabase/functions/nal-read-workspace/handler.mjs",
+    "sourceSha256": "0b4e9be50f33ffb30e3e624b04f4c4b3cc8101a7f054b4382e2276d96455037d"
+  },
+  {
+    "bytes": 905,
+    "destination": "private/edge/supabase/functions/nal-read-workspace/index.ts",
+    "gitBlob": "02686648bba3ab6ea5590c23ce05911fb4724b77",
+    "group": "edge",
+    "outputSha256": "be82f9bdb7c7d0939c8fc8cd76e298e8c0ab5e10571c091d6970eb6a15f47b8e",
+    "path": "supabase/functions/nal-read-workspace/index.ts",
+    "sourceSha256": "be82f9bdb7c7d0939c8fc8cd76e298e8c0ab5e10571c091d6970eb6a15f47b8e"
+  },
+  {
+    "bytes": 3527,
+    "destination": "private/edge/supabase/functions/nal-support/README.md",
+    "gitBlob": "5415bd901e8ddc260ac5f514391cb63cd820c520",
+    "group": "edge",
+    "outputSha256": "b72d87bde263e19a37a75b9b9c6ae8e821b3824928e115052941e351410b3be5",
+    "path": "supabase/functions/nal-support/README.md",
+    "sourceSha256": "b72d87bde263e19a37a75b9b9c6ae8e821b3824928e115052941e351410b3be5"
+  },
+  {
+    "bytes": 6645,
+    "destination": "private/edge/supabase/functions/nal-support/handler.mjs",
+    "gitBlob": "411e3f018c59fb8354e7f67845103e7e9f585dc7",
+    "group": "edge",
+    "outputSha256": "ba2aba32cef9e6192338c1059e18dc9fe60508ed0da4a53583fae0cf69fd9bb5",
+    "path": "supabase/functions/nal-support/handler.mjs",
+    "sourceSha256": "ba2aba32cef9e6192338c1059e18dc9fe60508ed0da4a53583fae0cf69fd9bb5"
+  },
+  {
+    "bytes": 933,
+    "destination": "private/edge/supabase/functions/nal-support/index.ts",
+    "gitBlob": "2c3aaa8028e2e3861ecb53df3804782cc81572ea",
+    "group": "edge",
+    "outputSha256": "b99312ac29ba08a5a26da5c303c3bc5c731edb685be415ba99c81c45b3c22c06",
+    "path": "supabase/functions/nal-support/index.ts",
+    "sourceSha256": "b99312ac29ba08a5a26da5c303c3bc5c731edb685be415ba99c81c45b3c22c06"
+  },
+  {
+    "bytes": 25227,
+    "destination": "private/editorial-input/content/nal-read/trend-2027.editorial.json",
+    "gitBlob": "749fd994e7c53017ea6f19aaaae2bf8503ad96c6",
+    "group": "content",
+    "outputSha256": "7b3ba6b574000febf08ed99c780745762f56f3856cb931a82692f0486e0a39f7",
+    "path": "content/nal-read/trend-2027.editorial.json",
+    "sourceSha256": "7b3ba6b574000febf08ed99c780745762f56f3856cb931a82692f0486e0a39f7"
+  },
+  {
+    "bytes": 128748,
+    "destination": "private/reference/nal/assets/css/nal.css",
+    "gitBlob": "66c50069bb8352df7bf16c0334684efc94eacc66",
+    "group": "shared-frontend-reference",
+    "outputSha256": "8429278b7467bd78fdf9c62da1018dc4332401c36a3e5ef51ea0a48fc684eb7a",
+    "path": "nal/assets/css/nal.css",
+    "sourceSha256": "8429278b7467bd78fdf9c62da1018dc4332401c36a3e5ef51ea0a48fc684eb7a"
+  },
+  {
+    "bytes": 2367,
+    "destination": "private/reference/nal/assets/js/theme.js",
+    "gitBlob": "a31e795309eeec962c78aa86b1bade1ea25c82e5",
+    "group": "shared-frontend-reference",
+    "outputSha256": "4d53b9fd98b9fe886f88e7273f97696167413b781b49c94fe04227458c352b71",
+    "path": "nal/assets/js/theme.js",
+    "sourceSha256": "4d53b9fd98b9fe886f88e7273f97696167413b781b49c94fe04227458c352b71"
+  },
+  {
+    "bytes": 2211,
+    "destination": "private/reference/supabase/functions/nal-toss-webhook/handler.mjs",
+    "gitBlob": "c5dece1e005fec37b6ae8a679292932f6bca3b1d",
+    "group": "pdf-webhook-boundary-reference",
+    "outputSha256": "8953c6ec8dde7f05f69bed8a71df566aaef58750f6aba6840c8c3fadd3b2d82f",
+    "path": "supabase/functions/nal-toss-webhook/handler.mjs",
+    "sourceSha256": "8953c6ec8dde7f05f69bed8a71df566aaef58750f6aba6840c8c3fadd3b2d82f"
+  },
+  {
+    "bytes": 6305,
+    "destination": "private/runtime-reference.json",
+    "gitBlob": "b4bbafee9719d49a9f52ecf8d27ad5173bc76a27",
+    "group": "runtime-reference",
+    "outputSha256": "40dc3513ccdbc3082f6843eea197034015fe9b32af56ee43d85be1506c3c6595",
+    "path": "integration/nal-read/build19/runtime-plan.json",
+    "sourceSha256": "40dc3513ccdbc3082f6843eea197034015fe9b32af56ee43d85be1506c3c6595"
+  },
+  {
+    "bytes": 19145,
+    "destination": "private/tools/assemble-nal-read-build20.py",
+    "gitBlob": "02d087e903dbb70a84b883221cf3bb64b50ad4a0",
+    "group": "assembler",
+    "outputSha256": "495012d3dc7499cb1ebe35047dc6ef78ba2dcb10bda305e0f6302c89cd28d438",
+    "path": "scripts/assemble-nal-read-build20.py",
+    "sourceSha256": "495012d3dc7499cb1ebe35047dc6ef78ba2dcb10bda305e0f6302c89cd28d438"
+  },
+  {
+    "bytes": 3631,
+    "destination": "public-overlay/nal/assets/css/nal-account-home.css",
+    "gitBlob": "1778e5ccbf77fc9bede1dd2e8b3c1c57f35e3837",
+    "group": "frontend",
+    "outputSha256": "fe5b26b86528f28c88fa81022574c70ee914dd443cd1615a1b70be3c5587620e",
+    "path": "nal/assets/css/nal-account-home.css",
+    "sourceSha256": "fe5b26b86528f28c88fa81022574c70ee914dd443cd1615a1b70be3c5587620e"
+  },
+  {
+    "bytes": 4441,
+    "destination": "public-overlay/nal/assets/css/nal-account.css",
+    "gitBlob": "52c9ea680ead8ccdcd7efc1870e3fbc31fa561f0",
+    "group": "frontend",
+    "outputSha256": "9738d647be96ae0f66fd28f9203ad7b9e3d773bcb4d0458c53521988240e084a",
+    "path": "nal/assets/css/nal-account.css",
+    "sourceSha256": "9738d647be96ae0f66fd28f9203ad7b9e3d773bcb4d0458c53521988240e084a"
+  },
+  {
+    "bytes": 993,
+    "destination": "public-overlay/nal/assets/css/nal-admin-context.css",
+    "gitBlob": "c77ca8cfe47a0f5dd6ea741da3815553c6ed4a5f",
+    "group": "frontend",
+    "outputSha256": "e86c5949e127061d1ac4b2ce699c3a7e80404844384d935ad19686859be66c65",
+    "path": "nal/assets/css/nal-admin-context.css",
+    "sourceSha256": "e86c5949e127061d1ac4b2ce699c3a7e80404844384d935ad19686859be66c65"
+  },
+  {
+    "bytes": 3344,
+    "destination": "public-overlay/nal/assets/css/nal-operations.css",
+    "gitBlob": "cde34b2723acbba284d08ff00988701d791db372",
+    "group": "frontend",
+    "outputSha256": "f317b97d647529a522c06fa6a3ad610b94cc3516f7a092a995c4facd0061acad",
+    "path": "nal/assets/css/nal-operations.css",
+    "sourceSha256": "f317b97d647529a522c06fa6a3ad610b94cc3516f7a092a995c4facd0061acad"
+  },
+  {
+    "bytes": 1828,
+    "destination": "public-overlay/nal/assets/css/nal-read-cohorts.css",
+    "gitBlob": "afa8040113ed7e78aa8dc709d95257726c571734",
+    "group": "frontend",
+    "outputSha256": "6ee8fee2113eeb5975463b5c74157b650d5e52f53077c50bc1c5814ed3196f51",
+    "path": "nal/assets/css/nal-read-cohorts.css",
+    "sourceSha256": "6ee8fee2113eeb5975463b5c74157b650d5e52f53077c50bc1c5814ed3196f51"
+  },
+  {
+    "bytes": 4127,
+    "destination": "public-overlay/nal/assets/css/nal-read-companion.css",
+    "gitBlob": "c874cdd76d8d22ac948bca70925084ef9ca98e1a",
+    "group": "frontend",
+    "outputSha256": "007468d3d10cdbbd7a20b5692c76863ee5f896b410125387a8442530312733a7",
+    "path": "nal/assets/css/nal-read-companion.css",
+    "sourceSha256": "007468d3d10cdbbd7a20b5692c76863ee5f896b410125387a8442530312733a7"
+  },
+  {
+    "bytes": 2192,
+    "destination": "public-overlay/nal/assets/css/nal-read-editorial.css",
+    "gitBlob": "9e7c2e6ec92034aba83f01f009560f7de45178c5",
+    "group": "frontend",
+    "outputSha256": "c5987ea76dd727d96c63933a8121c20d9ce56bf16191c120018036b3209d6be7",
+    "path": "nal/assets/css/nal-read-editorial.css",
+    "sourceSha256": "c5987ea76dd727d96c63933a8121c20d9ce56bf16191c120018036b3209d6be7"
+  },
+  {
+    "bytes": 3183,
+    "destination": "public-overlay/nal/assets/css/nal-read-feedback.css",
+    "gitBlob": "bd784abb9fb602ef51a61761813b4fcd8549c0d8",
+    "group": "frontend",
+    "outputSha256": "1801db7f6180f313cd206d85432e36e713d6c3f2e4029c4bdd3333f05a36e82e",
+    "path": "nal/assets/css/nal-read-feedback.css",
+    "sourceSha256": "1801db7f6180f313cd206d85432e36e713d6c3f2e4029c4bdd3333f05a36e82e"
+  },
+  {
+    "bytes": 2352,
+    "destination": "public-overlay/nal/assets/css/nal-read-payments.css",
+    "gitBlob": "2164b5de8ed505284069782ee95b2df6310571f3",
+    "group": "frontend",
+    "outputSha256": "e418e9852c0bc649e12a066bf701d32ca60be716e0daf6d302dbf5b829fe002d",
+    "path": "nal/assets/css/nal-read-payments.css",
+    "sourceSha256": "e418e9852c0bc649e12a066bf701d32ca60be716e0daf6d302dbf5b829fe002d"
+  },
+  {
+    "bytes": 2865,
+    "destination": "public-overlay/nal/assets/css/nal-read-report.css",
+    "gitBlob": "b92adcfa881f4749a17e721972343817e21f994d",
+    "group": "frontend",
+    "outputSha256": "a025027b39dfaeafed154c4e54ac84af1dd7019279b94b2070df9fcdeb58c3c5",
+    "path": "nal/assets/css/nal-read-report.css",
+    "sourceSha256": "a025027b39dfaeafed154c4e54ac84af1dd7019279b94b2070df9fcdeb58c3c5"
+  },
+  {
+    "bytes": 1556,
+    "destination": "public-overlay/nal/assets/css/nal-read-studio-library.css",
+    "gitBlob": "487c8e033dbd1f6341a1136bdf2e8f5291e3e10a",
+    "group": "frontend",
+    "outputSha256": "3b135107ddd13aeceea23e87cbf0715bc539c899de8dc4c24abaeca0540cbd41",
+    "path": "nal/assets/css/nal-read-studio-library.css",
+    "sourceSha256": "3b135107ddd13aeceea23e87cbf0715bc539c899de8dc4c24abaeca0540cbd41"
+  },
+  {
+    "bytes": 5468,
+    "destination": "public-overlay/nal/assets/css/nal-read-workspace.css",
+    "gitBlob": "540dad0b8e1c07becc005300abb98cb0509c0825",
+    "group": "frontend",
+    "outputSha256": "aa0575ca68f71136a65dfd8e383b8357580c2b3c0bcbd70a71cce8c4d3d24ef2",
+    "path": "nal/assets/css/nal-read-workspace.css",
+    "sourceSha256": "aa0575ca68f71136a65dfd8e383b8357580c2b3c0bcbd70a71cce8c4d3d24ef2"
+  },
+  {
+    "bytes": 4943,
+    "destination": "public-overlay/nal/assets/css/nal-read.css",
+    "gitBlob": "7415ff4d954bd5dc3918532f3d2f0eb40b102ea5",
+    "group": "frontend",
+    "outputSha256": "f5011f45762783efd537d2714a9a3b972d2c8b1de75bd20f9fbca25c840c3dbd",
+    "path": "nal/assets/css/nal-read.css",
+    "sourceSha256": "f5011f45762783efd537d2714a9a3b972d2c8b1de75bd20f9fbca25c840c3dbd"
+  },
+  {
+    "bytes": 3254,
+    "destination": "public-overlay/nal/assets/css/nal-support.css",
+    "gitBlob": "3b4dec518cac6335e69f04842a33cf36e9ff7a57",
+    "group": "frontend",
+    "outputSha256": "8db53a76a5671774f3c8440d01f35b0b71ee5335728c2b57dce93efe1f7455be",
+    "path": "nal/assets/css/nal-support.css",
+    "sourceSha256": "8db53a76a5671774f3c8440d01f35b0b71ee5335728c2b57dce93efe1f7455be"
+  },
+  {
+    "bytes": 10571,
+    "destination": "public-overlay/nal/assets/js/account-home.js",
+    "gitBlob": "540e7222138bd7112462674175f942f24f434422",
+    "group": "frontend",
+    "outputSha256": "099e6fcf72c36c2cc5ad9c78a645e06af9823ae4c860bb4f213fa840a1ea536b",
+    "path": "nal/assets/js/account-home.js",
+    "sourceSha256": "099e6fcf72c36c2cc5ad9c78a645e06af9823ae4c860bb4f213fa840a1ea536b"
+  },
+  {
+    "bytes": 3062,
+    "destination": "public-overlay/nal/assets/js/account-layout.js",
+    "gitBlob": "1561f60a1698de10ffa3466baf16924dc06c03cb",
+    "group": "frontend",
+    "outputSha256": "1e5b5c0527f9515bf4048207b555f2e8240f3bf82e8317e882fe8502371e6bf6",
+    "path": "nal/assets/js/account-layout.js",
+    "sourceSha256": "1e5b5c0527f9515bf4048207b555f2e8240f3bf82e8317e882fe8502371e6bf6"
+  },
+  {
+    "bytes": 14795,
+    "destination": "public-overlay/nal/assets/js/account-overview.js",
+    "gitBlob": "23d4ee9f8ce0e07aaf0f2ca2cbcd368845555440",
+    "group": "frontend",
+    "outputSha256": "4862d38b882c386ac502c815ad9a02d41cf3f754c1bc377d5af1ef0984e511a3",
+    "path": "nal/assets/js/account-overview.js",
+    "sourceSha256": "4862d38b882c386ac502c815ad9a02d41cf3f754c1bc377d5af1ef0984e511a3"
+  },
+  {
+    "bytes": 7775,
+    "destination": "public-overlay/nal/assets/js/account-session.js",
+    "gitBlob": "40ea70b4f2d86a0f7c4bf40d6ce4e92e2e562d61",
+    "group": "frontend",
+    "outputSha256": "1766e135b50e5cb5dd0ac2f3b4e09a363c2839ca7e60ac3eda005f5fc3c737dd",
+    "path": "nal/assets/js/account-session.js",
+    "sourceSha256": "1766e135b50e5cb5dd0ac2f3b4e09a363c2839ca7e60ac3eda005f5fc3c737dd"
+  },
+  {
+    "bytes": 7627,
+    "destination": "public-overlay/nal/assets/js/read-admin-context.js",
+    "gitBlob": "4046e4e7998052f12e16c3074f5a2193723b610f",
+    "group": "frontend",
+    "outputSha256": "4e41eff63438234eb137a224cdd207c26ac5de9f17ffba5a4d0f219ae82bd8e4",
+    "path": "nal/assets/js/read-admin-context.js",
+    "sourceSha256": "4e41eff63438234eb137a224cdd207c26ac5de9f17ffba5a4d0f219ae82bd8e4"
+  },
+  {
+    "bytes": 16198,
+    "destination": "public-overlay/nal/assets/js/read-checkout.js",
+    "gitBlob": "bb4a456ac12025528ac49af96c1d59b1f37017e5",
+    "group": "frontend",
+    "outputSha256": "b74e25530e5729d87902f04c5903077e651cf75626dc9ba8a0940f71c7d5ccb2",
+    "path": "nal/assets/js/read-checkout.js",
+    "sourceSha256": "b74e25530e5729d87902f04c5903077e651cf75626dc9ba8a0940f71c7d5ccb2"
+  },
+  {
+    "bytes": 13719,
+    "destination": "public-overlay/nal/assets/js/read-cohorts-admin.js",
+    "gitBlob": "78aec89a939c2257999e61047bf7edf34ff81735",
+    "group": "frontend",
+    "outputSha256": "7e53acdbb6da2a1044d456df353cffc6e8c322a8ea108d691dc7af5fc8bc839b",
+    "path": "nal/assets/js/read-cohorts-admin.js",
+    "sourceSha256": "7e53acdbb6da2a1044d456df353cffc6e8c322a8ea108d691dc7af5fc8bc839b"
+  },
+  {
+    "bytes": 8553,
+    "destination": "public-overlay/nal/assets/js/read-cohorts.js",
+    "gitBlob": "1237cfff62d5cd369f7c551b2cbd9194327e9426",
+    "group": "frontend",
+    "outputSha256": "7ef5d625b80a78248089b29602ee0a53c1ca6bb6fcb2faab0d59f63656018759",
+    "path": "nal/assets/js/read-cohorts.js",
+    "sourceSha256": "7ef5d625b80a78248089b29602ee0a53c1ca6bb6fcb2faab0d59f63656018759"
+  },
+  {
+    "bytes": 17268,
+    "destination": "public-overlay/nal/assets/js/read-daily.js",
+    "gitBlob": "6dcbe7b4de48ee9f30c4e326428ead5b7e0b3f33",
+    "group": "frontend",
+    "outputSha256": "83558116b6887a8b73f06a1a22b562f595bed9c0c781a5b76338ee165dc38c0a",
+    "path": "nal/assets/js/read-daily.js",
+    "sourceSha256": "83558116b6887a8b73f06a1a22b562f595bed9c0c781a5b76338ee165dc38c0a"
+  },
+  {
+    "bytes": 4778,
+    "destination": "public-overlay/nal/assets/js/read-editorial-contract.mjs",
+    "gitBlob": "3ccf60009c9851d049f4336aacb6fd2d720a9177",
+    "group": "frontend",
+    "outputSha256": "2ddad7d39b44b6230345e3e957c5c265ec5dc17dfcd9a7d00574395e7c34b71f",
+    "path": "nal/assets/js/read-editorial-contract.mjs",
+    "sourceSha256": "2ddad7d39b44b6230345e3e957c5c265ec5dc17dfcd9a7d00574395e7c34b71f"
+  },
+  {
+    "bytes": 585,
+    "destination": "public-overlay/nal/assets/js/read-editorial-loader.js",
+    "gitBlob": "eaca59a6ebbb288db3a5317f89ca32a795481b70",
+    "group": "frontend",
+    "outputSha256": "ca934e9a543bc7ed56c4b73c669c40ae65316f5712f586861a761af6a37940e5",
+    "path": "nal/assets/js/read-editorial-loader.js",
+    "sourceSha256": "f711640dbb21d0d3978f1a9bc9f31c46531ba1e97049882ba6eed275cda731ae"
+  },
+  {
+    "bytes": 20722,
+    "destination": "public-overlay/nal/assets/js/read-editorial.js",
+    "gitBlob": "a28e8a586f7d66cb1b211bb5f3d71115a926b857",
+    "group": "frontend",
+    "outputSha256": "95fc2da7a848f630643ee878eed781f2ece54a4cbf4a07dd79a34ebcc10ab942",
+    "path": "nal/assets/js/read-editorial.js",
+    "sourceSha256": "9e6a95a0424b96370be184e36a12702c7dab9d75cd3870681b4a74b8e71c167d"
+  },
+  {
+    "bytes": 8927,
+    "destination": "public-overlay/nal/assets/js/read-join.js",
+    "gitBlob": "79e35885d50770c388f250b1c051ee890ba45c41",
+    "group": "frontend",
+    "outputSha256": "f79399cad6ac10c7fca91b87341be49fea52e2b384a61ae45f9d6b938ae73fb2",
+    "path": "nal/assets/js/read-join.js",
+    "sourceSha256": "f79399cad6ac10c7fca91b87341be49fea52e2b384a61ae45f9d6b938ae73fb2"
+  },
+  {
+    "bytes": 1270,
+    "destination": "public-overlay/nal/assets/js/read-legacy-route.js",
+    "gitBlob": "1b0274a317ad66b700f16730741b52ad7659648f",
+    "group": "frontend",
+    "outputSha256": "4a2da0ba3ac0679d01b040fb4b90ed190093e660a568af6002332005b6ea22d6",
+    "path": "nal/assets/js/read-legacy-route.js",
+    "sourceSha256": "4a2da0ba3ac0679d01b040fb4b90ed190093e660a568af6002332005b6ea22d6"
+  },
+  {
+    "bytes": 5377,
+    "destination": "public-overlay/nal/assets/js/read-offers-admin.js",
+    "gitBlob": "4df1ab70ce32aa6afdd93b316dc6d99244553cf5",
+    "group": "frontend",
+    "outputSha256": "5cec0c4ae467529243c205064c6093486771aec8eb721dbe6fba6d28136c063a",
+    "path": "nal/assets/js/read-offers-admin.js",
+    "sourceSha256": "5cec0c4ae467529243c205064c6093486771aec8eb721dbe6fba6d28136c063a"
+  },
+  {
+    "bytes": 752,
+    "destination": "public-overlay/nal/assets/js/read-open-context.js",
+    "gitBlob": "7798ef07f5da2a89659fb2e85a323ab36b8df34d",
+    "group": "frontend",
+    "outputSha256": "fc227aff6ac6bd3e2df6713b2ab45bb9ea829eba0a8bcce5f6eb2f8e3a8951ee",
+    "path": "nal/assets/js/read-open-context.js",
+    "sourceSha256": "fc227aff6ac6bd3e2df6713b2ab45bb9ea829eba0a8bcce5f6eb2f8e3a8951ee"
+  },
+  {
+    "bytes": 1742,
+    "destination": "public-overlay/nal/assets/js/read-open-loader.js",
+    "gitBlob": "dc98c8e3eae53af9c25f396eecb73a19cb0f1269",
+    "group": "frontend",
+    "outputSha256": "9e6b3810d1d1406c1af23b6ea04b8dc28d775c2e22f03c0b3eb3347727d4263f",
+    "path": "nal/assets/js/read-open-loader.js",
+    "sourceSha256": "b34f4fd3a84474185505e6aeb8dce82712038f66eeb293145709ea2d1c2edc4c"
+  },
+  {
+    "bytes": 19411,
+    "destination": "public-overlay/nal/assets/js/read-operations.js",
+    "gitBlob": "59d19cbe0bb048b843e6d138281db8198b1bedae",
+    "group": "frontend",
+    "outputSha256": "efe15fced2e96366987e0a1547e67f3cd1220460dca19e27f939b6fc8718f570",
+    "path": "nal/assets/js/read-operations.js",
+    "sourceSha256": "efe15fced2e96366987e0a1547e67f3cd1220460dca19e27f939b6fc8718f570"
+  },
+  {
+    "bytes": 719,
+    "destination": "public-overlay/nal/assets/js/read-payment-return.js",
+    "gitBlob": "39846eaeaa49226535f9661bf180511e95483a22",
+    "group": "frontend",
+    "outputSha256": "6b2bab94f174faeb9bd543b957b0e0444a1e4f5c5783ccc7124beb6312a0ae9c",
+    "path": "nal/assets/js/read-payment-return.js",
+    "sourceSha256": "6b2bab94f174faeb9bd543b957b0e0444a1e4f5c5783ccc7124beb6312a0ae9c"
+  },
+  {
+    "bytes": 5484,
+    "destination": "public-overlay/nal/assets/js/read-payments-admin.js",
+    "gitBlob": "2aef827c3c92e90ac0d333a9649c7c6ba6a3f2ce",
+    "group": "frontend",
+    "outputSha256": "195c78ee9d0d1c1b39d41a595201ce589d1bd105480e1a642fc049eaa2b9dfbd",
+    "path": "nal/assets/js/read-payments-admin.js",
+    "sourceSha256": "195c78ee9d0d1c1b39d41a595201ce589d1bd105480e1a642fc049eaa2b9dfbd"
+  },
+  {
+    "bytes": 2339,
+    "destination": "public-overlay/nal/assets/js/read-program-sections.js",
+    "gitBlob": "88759d48cfbdc5be1c3f4e9273afe851653f7b00",
+    "group": "frontend",
+    "outputSha256": "a3bdf32c8f76461554d71d264fe35e8278e910883b65838f4de14f1d2b5948bf",
+    "path": "nal/assets/js/read-program-sections.js",
+    "sourceSha256": "a3bdf32c8f76461554d71d264fe35e8278e910883b65838f4de14f1d2b5948bf"
+  },
+  {
+    "bytes": 12888,
+    "destination": "public-overlay/nal/assets/js/read-report.js",
+    "gitBlob": "23ce110c407e461b817354eae2650a05c067c43a",
+    "group": "frontend",
+    "outputSha256": "b37beddf275347e5517a0d575aa7668093a0b0a17c395e9e0dac7c4b4d2393c3",
+    "path": "nal/assets/js/read-report.js",
+    "sourceSha256": "b37beddf275347e5517a0d575aa7668093a0b0a17c395e9e0dac7c4b4d2393c3"
+  },
+  {
+    "bytes": 2713,
+    "destination": "public-overlay/nal/assets/js/read-routes.js",
+    "gitBlob": "655cf6a1d52ebae8d209f46e4d6af8ff95ff87be",
+    "group": "frontend",
+    "outputSha256": "c0b76b3b20e4bb2700d7c33caec3851dd841fb6bfc2bbfce19059c9cae70bda7",
+    "path": "nal/assets/js/read-routes.js",
+    "sourceSha256": "c0b76b3b20e4bb2700d7c33caec3851dd841fb6bfc2bbfce19059c9cae70bda7"
+  },
+  {
+    "bytes": 17337,
+    "destination": "public-overlay/nal/assets/js/read-session.js",
+    "gitBlob": "8936c62f7a7d4f4620700901d17653824cafe29a",
+    "group": "frontend",
+    "outputSha256": "5f678be0148bb28742cc0d2eb33814f5fd0eabec7ec5b0b7e5ffc464cf1d83a8",
+    "path": "nal/assets/js/read-session.js",
+    "sourceSha256": "5f678be0148bb28742cc0d2eb33814f5fd0eabec7ec5b0b7e5ffc464cf1d83a8"
+  },
+  {
+    "bytes": 4974,
+    "destination": "public-overlay/nal/assets/js/read-shell.js",
+    "gitBlob": "26c001d284162bc6f37f42e9bf7b918ee5e867c4",
+    "group": "frontend",
+    "outputSha256": "c49f56d0f196985985b4d438038b6a63e9b4e43ce76b0510c5dc62aa7994ea97",
+    "path": "nal/assets/js/read-shell.js",
+    "sourceSha256": "652804298ff8f3195e62b3e790da393690d692124f51f1118031d643c12c5e0b"
+  },
+  {
+    "bytes": 6731,
+    "destination": "public-overlay/nal/assets/js/read-start.js",
+    "gitBlob": "cca901399c6d11a76016d9ae53bb41943f90198e",
+    "group": "frontend",
+    "outputSha256": "af3fff319fcb424c165506db5fa71e7e70f115ec0c214398891e2ed4598e676a",
+    "path": "nal/assets/js/read-start.js",
+    "sourceSha256": "af3fff319fcb424c165506db5fa71e7e70f115ec0c214398891e2ed4598e676a"
+  },
+  {
+    "bytes": 8422,
+    "destination": "public-overlay/nal/assets/js/read-studio-library.js",
+    "gitBlob": "06b896ff1800392799ddfdf27078b59455152ea6",
+    "group": "frontend",
+    "outputSha256": "0410d65e5db20dc48662661dbde5da17e1ef79ca51fcd5cef9fb26b014463c68",
+    "path": "nal/assets/js/read-studio-library.js",
+    "sourceSha256": "0410d65e5db20dc48662661dbde5da17e1ef79ca51fcd5cef9fb26b014463c68"
+  },
+  {
+    "bytes": 23718,
+    "destination": "public-overlay/nal/assets/js/read-studio.js",
+    "gitBlob": "de79513064091b99dc9c20b25151dd346a163887",
+    "group": "frontend",
+    "outputSha256": "7fd7d2ac3eb07c06612d701fff9702409536edc3f6dae033f982dcd90e80ade5",
+    "path": "nal/assets/js/read-studio.js",
+    "sourceSha256": "7fd7d2ac3eb07c06612d701fff9702409536edc3f6dae033f982dcd90e80ade5"
+  },
+  {
+    "bytes": 19542,
+    "destination": "public-overlay/nal/assets/js/read-support.js",
+    "gitBlob": "d31d80e51267e5b8c40c044b0fbc75b31d72a644",
+    "group": "frontend",
+    "outputSha256": "a40952d326342dcd57558aeffa1a98d6ecedaa65e9a9e67e19f71b91ef56eb9b",
+    "path": "nal/assets/js/read-support.js",
+    "sourceSha256": "a40952d326342dcd57558aeffa1a98d6ecedaa65e9a9e67e19f71b91ef56eb9b"
+  },
+  {
+    "bytes": 21135,
+    "destination": "public-overlay/nal/assets/js/read-workspace.js",
+    "gitBlob": "c7dff6798f79d163a767a8e9473f0cbdf6270c75",
+    "group": "frontend",
+    "outputSha256": "f23ada658aeb3952d966bb2c7a0085aec902bc36ef680857ba623e093b3529df",
+    "path": "nal/assets/js/read-workspace.js",
+    "sourceSha256": "f23ada658aeb3952d966bb2c7a0085aec902bc36ef680857ba623e093b3529df"
+  },
+  {
+    "bytes": 9120,
+    "destination": "public-overlay/nal/assets/js/read.js",
+    "gitBlob": "78e52a2678f02f3c5728cb3848655140b46b83d3",
+    "group": "frontend",
+    "outputSha256": "6ce5a363eca7cfd9440128e42c53589fa5e34e404dc15fc37b7ffc9ce81dc01a",
+    "path": "nal/assets/js/read.js",
+    "sourceSha256": "6ce5a363eca7cfd9440128e42c53589fa5e34e404dc15fc37b7ffc9ce81dc01a"
+  },
+  {
+    "bytes": 1155,
+    "destination": "public-overlay/nal/auth/callback/index.html",
+    "gitBlob": "92b6f76a2b3ac0fe41222d8c2a38e435b7a2d1df",
+    "group": "frontend",
+    "outputSha256": "701b7547610daa2499399c751e5bdf6db3549f49569be22f6d89f5922707e948",
+    "path": "nal/auth/callback/index.html",
+    "sourceSha256": "182ece8d28aa294a686bd204b16cc013ed7788b954d940af430b1f7e4a6a276b"
+  },
+  {
+    "bytes": 490,
+    "destination": "public-overlay/nal/data/read-seasons.json",
+    "gitBlob": "e0fba2abc4b515ec602fdac0d83567d8e8b428f1",
+    "group": "frontend",
+    "outputSha256": "f8ce3de86edc033fe03fc01a2574c8217abe85da534c54451386dae1d56744c9",
+    "path": "nal/data/read-seasons.json",
+    "sourceSha256": "f8ce3de86edc033fe03fc01a2574c8217abe85da534c54451386dae1d56744c9"
+  },
+  {
+    "bytes": 5413,
+    "destination": "public-overlay/nal/help/index.html",
+    "gitBlob": "3c287a13c05da0d50f397ba14be03e25d0072977",
+    "group": "frontend",
+    "outputSha256": "e7b8cd77f3b2c36c81d584e23d6214f27b2d5a8d869c2b82cbb00bd360bb7cf0",
+    "path": "nal/help/index.html",
+    "sourceSha256": "5e14ee63c4100ab633a00a230fe553419e02caf796d9515df56560c41da2659f"
+  },
+  {
+    "bytes": 2075,
+    "destination": "public-overlay/nal/my/help/index.html",
+    "gitBlob": "5b16b2d2213cf8da8224668f9f44b1e58ff07f8a",
+    "group": "frontend",
+    "outputSha256": "f237345afcc71c33363be099dfdaf473f34f8fe989e1d0cdcd1fd0cca4de6199",
+    "path": "nal/my/help/index.html",
+    "sourceSha256": "f3979939589e0eaa4c23782da9dc3ee062f9a7534a8ba2c3c4c0bd196961ffcf"
+  },
+  {
+    "bytes": 2407,
+    "destination": "public-overlay/nal/my/index.html",
+    "gitBlob": "361e1ada450504492d09440d2fa2750f08fa18b4",
+    "group": "frontend",
+    "outputSha256": "87664215a1e4f496a5a2394eb75a318430194900e0714ba1ceb5d23fd194d563",
+    "path": "nal/my/index.html",
+    "sourceSha256": "a81d8d09f4b35b52169f4e7359843eb210e445f05dd97ee2645d6f402dff44fe"
+  },
+  {
+    "bytes": 3398,
+    "destination": "public-overlay/nal/my/local/index.html",
+    "gitBlob": "587056369612e5eab079019a3b75becf7bbf3bc6",
+    "group": "frontend",
+    "outputSha256": "aaadb316e268138faba451796373e95ffffc761bf6a212c895b57eec3a41b4d2",
+    "path": "nal/my/local/index.html",
+    "sourceSha256": "aaadb316e268138faba451796373e95ffffc761bf6a212c895b57eec3a41b4d2"
+  },
+  {
+    "bytes": 1708,
+    "destination": "public-overlay/nal/my/payments/index.html",
+    "gitBlob": "dfabb5e0275e49979b53559b151706f006730368",
+    "group": "frontend",
+    "outputSha256": "3fa27dbfd70c27f5c4098e84bdf40910da214bd232ecea15593da0f0566ad1e4",
+    "path": "nal/my/payments/index.html",
+    "sourceSha256": "ff6247e2d475c1d5c0aa72cd4239b3658d3b4a6e0d2945a68f05e82eaf4a4ba3"
+  },
+  {
+    "bytes": 1643,
+    "destination": "public-overlay/nal/my/waitlist/index.html",
+    "gitBlob": "7a2c9c6767362e1ca53024878ed332e7f3c195eb",
+    "group": "frontend",
+    "outputSha256": "d4eaa61d3c378d1643e1fd6b7bdb52791a88b230d4f21b0e372f4d412463a627",
+    "path": "nal/my/waitlist/index.html",
+    "sourceSha256": "a687ff2b50414afe0bf8956ce3ebaa90753e7a9043cdb8bf157fa5a75b1b8982"
+  },
+  {
+    "bytes": 1841,
+    "destination": "public-overlay/nal/read/admin/cohorts/index.html",
+    "gitBlob": "5d9ea7baea3996a4efe563542b56f92f3e6b12e0",
+    "group": "frontend",
+    "outputSha256": "6e71016b55bf182ba7e9d2a2ef1fb74ba89b97a0a050ccb8b414d8503048ba03",
+    "path": "nal/read/admin/cohorts/index.html",
+    "sourceSha256": "a73a953019ef9422ee7179b53b528fb17b2d5725ac7074f72dbe48a3418ff5dd"
+  },
+  {
+    "bytes": 1980,
+    "destination": "public-overlay/nal/read/admin/home/index.html",
+    "gitBlob": "50936dafd07bde07cb244966a87ddd27972feb9f",
+    "group": "frontend",
+    "outputSha256": "1fd9cd05513f70610fa4c0b6169f7fa17ae03081288e595b6dae0c8efac3c761",
+    "path": "nal/read/admin/home/index.html",
+    "sourceSha256": "f8d6febed2bfa99e5588941ca352c2a3155d12110a2c81c993784c0cb2b76ed6"
+  },
+  {
+    "bytes": 3000,
+    "destination": "public-overlay/nal/read/admin/index.html",
+    "gitBlob": "4a243d26a61fe2a90b10ae5ec1bb0644bd758115",
+    "group": "frontend",
+    "outputSha256": "f383552b884cd06f45b587f7597d0f218b0717e3cb7a52e0c5b2518d6ba5e88b",
+    "path": "nal/read/admin/index.html",
+    "sourceSha256": "61a25c6358ea4a359eb5edbf2543f163ce20898bea25b35a5879e19eae59d7bb"
+  },
+  {
+    "bytes": 1758,
+    "destination": "public-overlay/nal/read/admin/offers/index.html",
+    "gitBlob": "76ed8a9f0f48e2369107aa4cfe8ea9678006f880",
+    "group": "frontend",
+    "outputSha256": "061b057f243cb7ef5947f23b010cabb963b9ee3a63f9afdae5db37fa7a1420e9",
+    "path": "nal/read/admin/offers/index.html",
+    "sourceSha256": "a162e4b3f66b2438a62b1efa408c0350fe4af943bca4941f4d3ea38eec00b7d6"
+  },
+  {
+    "bytes": 1998,
+    "destination": "public-overlay/nal/read/admin/payments/index.html",
+    "gitBlob": "84e802a4a0cda6544e6d67ffd4201c9b792005ae",
+    "group": "frontend",
+    "outputSha256": "9c099f93498b164b43eadec857dc56fa896e1dd713a9dceb871b2472083631ce",
+    "path": "nal/read/admin/payments/index.html",
+    "sourceSha256": "49d890b6866da1d69d2bf42b97e7da2afe82362385362c7e13150b6bb6478143"
+  },
+  {
+    "bytes": 2061,
+    "destination": "public-overlay/nal/read/admin/studio/index.html",
+    "gitBlob": "3bb4fffc3c77838245b017db0fb5bcc1f9f5f518",
+    "group": "frontend",
+    "outputSha256": "b3dfa046c0cc2c731f274e9f3c50b8686e5ab362084bdfc454aa235ef4cb6c95",
+    "path": "nal/read/admin/studio/index.html",
+    "sourceSha256": "7e0821e21afe00a7e98ff6fbc84af8617130b025b68febc098795d17aa56dc6e"
+  },
+  {
+    "bytes": 2212,
+    "destination": "public-overlay/nal/read/admin/support/index.html",
+    "gitBlob": "3001d0c5c34507bdfc8d252013082cc3b64637dc",
+    "group": "frontend",
+    "outputSha256": "0170b9b240027393cacb1c6345120394b7477f2567500beced6a5694cca8b000",
+    "path": "nal/read/admin/support/index.html",
+    "sourceSha256": "798b0b4cd070cf3295b971730cf55305ae24b0b069e293a3f26e056a98feaad6"
+  },
+  {
+    "bytes": 1860,
+    "destination": "public-overlay/nal/read/auth/callback/index.html",
+    "gitBlob": "2dbffa8143a08f36a986818cc426bfd03596116b",
+    "group": "frontend",
+    "outputSha256": "424b7ad2553810f69f098e6ecc7fefe82b2df4eb4cb71ee1949f65bd60c4188d",
+    "path": "nal/read/auth/callback/index.html",
+    "sourceSha256": "af1028e33f2bbf9763fc08aa0b30c2d298cfb11f54eaee432a6bf020b43ebf38"
+  },
+  {
+    "bytes": 1865,
+    "destination": "public-overlay/nal/read/checkout/fail/index.html",
+    "gitBlob": "ce008460a00c0f0358e106a94829458470eff5e0",
+    "group": "frontend",
+    "outputSha256": "3c635c65a0eb95bbf3c5449aa6a7195bab41ded8ba3eadb384df19f0aec642bb",
+    "path": "nal/read/checkout/fail/index.html",
+    "sourceSha256": "1df26e4ed6a25aa51c402c9f29135bf603ff6a5f6456b80de847c231565df885"
+  },
+  {
+    "bytes": 1977,
+    "destination": "public-overlay/nal/read/checkout/index.html",
+    "gitBlob": "52fbb9d8cec080fd5e81618a8b496cf7b2a04f92",
+    "group": "frontend",
+    "outputSha256": "cd3e4cb12943faaffe5a3f41833a88ecf73d36566e020c58cfb0e353b08a5b72",
+    "path": "nal/read/checkout/index.html",
+    "sourceSha256": "751b9711aa69ba5551a4f3dd1a2dc73eaceaae4f2b859095c3d3601c083ace3e"
+  },
+  {
+    "bytes": 1930,
+    "destination": "public-overlay/nal/read/checkout/success/index.html",
+    "gitBlob": "14440359efbe5a7ee2a97b154329221607792f47",
+    "group": "frontend",
+    "outputSha256": "da129e83fbaa2924315b286edaad34247f7b33f7e951879bf6bf7978473d1b98",
+    "path": "nal/read/checkout/success/index.html",
+    "sourceSha256": "dcf6fe3d718631b9d8f1387df881830abc2d21a84dabef06af3df03da614d910"
+  },
+  {
+    "bytes": 1610,
+    "destination": "public-overlay/nal/read/cohorts/index.html",
+    "gitBlob": "cc7791cc4dc837191caf20c85048c6bf09e48872",
+    "group": "frontend",
+    "outputSha256": "29ece210e041c1c888ae2e4042084f445a7889c67dbe59f09561ccec0a03b579",
+    "path": "nal/read/cohorts/index.html",
+    "sourceSha256": "62c49c208c25b31ea3ace41804ec3f0a5f86a8d233fb19315035c831acff4974"
+  },
+  {
+    "bytes": 3132,
+    "destination": "public-overlay/nal/read/index.html",
+    "gitBlob": "1eb763aec0a747d0196a9e0b9fbf02d0abd89993",
+    "group": "frontend",
+    "outputSha256": "deb296c65d60893dac70143b1f28144a26a4e66b933ea243ff1795840a8615ec",
+    "path": "nal/read/index.html",
+    "sourceSha256": "3d8de285f1ec18b1d98d7da99f464a46ad28bb1c9886cf0c60d24f593323f8f6"
+  },
+  {
+    "bytes": 1903,
+    "destination": "public-overlay/nal/read/join/index.html",
+    "gitBlob": "5fbb23f3fa26d1a55d6102a58726f2bcbd1d1a9e",
+    "group": "frontend",
+    "outputSha256": "9e34388fe390c7dc7a15a9f5b5e1602dbd6ac4b29c14730772d88a146dfd62c0",
+    "path": "nal/read/join/index.html",
+    "sourceSha256": "edcd0893ee6a43fed325397f6651a1d37db089e2d9b13d63cadc5e400d98c382"
+  },
+  {
+    "bytes": 2039,
+    "destination": "public-overlay/nal/read/open/index.html",
+    "gitBlob": "b39127c8785a4f4916a262ca62d953795937d9c7",
+    "group": "frontend",
+    "outputSha256": "e21daee6a86764d4688b20a2712b3e2d0daa31cb1c6a04524e99b604213f062e",
+    "path": "nal/read/open/index.html",
+    "sourceSha256": "4f1ab23b81e6839e49fc3c8dfd38e8a0fc5b7a56294fa794caf72df2f0554994"
+  },
+  {
+    "bytes": 1877,
+    "destination": "public-overlay/nal/read/start/index.html",
+    "gitBlob": "48b381703ebc437f5db0028cae4694dadc3833d8",
+    "group": "frontend",
+    "outputSha256": "efb0c97c2664dbe829fef8c0793441b6061d6a77e94e727d5b56e048efa1ce8b",
+    "path": "nal/read/start/index.html",
+    "sourceSha256": "f7e54fe54be37f484a6f7a629cd5d2178c2f3401f404156cba16c09a0d89631f"
+  },
+  {
+    "bytes": 1103,
+    "destination": "public-overlay/nal/read/trend-2027/before/index.html",
+    "gitBlob": "903c72f3c950a704da976c374cd91ee04f5417ef",
+    "group": "frontend",
+    "outputSha256": "d8b0ea87d4fd8d6222a1c9f8b8a73b101aa72f2e7212c36d40b4ca74fc106ae2",
+    "path": "nal/read/trend-2027/before/index.html",
+    "sourceSha256": "80304dc91143ddcfa225d606d8c336b7ee7cb6e4bf62d16b7a9981563509133c"
+  },
+  {
+    "bytes": 1083,
+    "destination": "public-overlay/nal/read/trend-2027/day/index.html",
+    "gitBlob": "dcf823b5eb75ef48f351db1bf54b231725b1307f",
+    "group": "frontend",
+    "outputSha256": "ac10e69cafe533e01699dc7411c4d8929726cf298050b825e6dcf32e12d51526",
+    "path": "nal/read/trend-2027/day/index.html",
+    "sourceSha256": "dfde777028e004630f8955681b2e46b32a0cc1fd8336b52e8abdc8ad31d75e0e"
+  },
+  {
+    "bytes": 3465,
+    "destination": "public-overlay/nal/read/trend-2027/index.html",
+    "gitBlob": "c062c6f8485e419de5526effb9bb2c6d6ab12813",
+    "group": "frontend",
+    "outputSha256": "35fbc0f05e55e79d7ace8f8cb7c90668ff9e613ec62904515f5921a117321639",
+    "path": "nal/read/trend-2027/index.html",
+    "sourceSha256": "8f7eb622dd53020651bd019030672f2a895ca8614bcad7d14afd1362150480ce"
+  },
+  {
+    "bytes": 1098,
+    "destination": "public-overlay/nal/read/trend-2027/journey/index.html",
+    "gitBlob": "99954670af0b771c56235d3007a7eaa15c56839b",
+    "group": "frontend",
+    "outputSha256": "14b46c7627120710df56d34662b8f43ddc32c03c7ee91275597a629f01498c21",
+    "path": "nal/read/trend-2027/journey/index.html",
+    "sourceSha256": "b4d8585ffd2328078338265da78019f963b2bf4c7b5108910d6c87415a4b6ef5"
+  },
+  {
+    "bytes": 1082,
+    "destination": "public-overlay/nal/read/trend-2027/live/index.html",
+    "gitBlob": "bba612b801c2df2f829097b31f90240352a608f9",
+    "group": "frontend",
+    "outputSha256": "3d0f4599846305af309e99f6ef868c94344cae1b7b344687435564d9d5e7f33a",
+    "path": "nal/read/trend-2027/live/index.html",
+    "sourceSha256": "7a5c73bbf6b4333d19001c026506e03acbb72fc05d1a9ba85895bbc0883d94fe"
+  },
+  {
+    "bytes": 1094,
+    "destination": "public-overlay/nal/read/trend-2027/my/index.html",
+    "gitBlob": "6418f4413952c7c1bc44d274577943c7e8d70080",
+    "group": "frontend",
+    "outputSha256": "c99cb4df74384713d8f199f6007fb0c185cfbcae1b1bddfc51d5ca09d9ab0c46",
+    "path": "nal/read/trend-2027/my/index.html",
+    "sourceSha256": "95f4397ec2fcffbcae38f5b4b0efa30817ac7ecfeedc9b4ff376e49f7f3fef19"
+  },
+  {
+    "bytes": 1100,
+    "destination": "public-overlay/nal/read/trend-2027/report/index.html",
+    "gitBlob": "9dd3189be6acb63539ed9a3fb697bbbdace5c6f8",
+    "group": "frontend",
+    "outputSha256": "5acb0b6ae82c6d7871c6041febc90208f82383738df1a8f5154b804d55e73ade",
+    "path": "nal/read/trend-2027/report/index.html",
+    "sourceSha256": "b0175e4a472c7ca0e57618499571939c66872b7d396def4bcfba9cde84ff2f93"
+  },
+  {
+    "bytes": 1071,
+    "destination": "public-overlay/nal/read/trend-2027/today/index.html",
+    "gitBlob": "e436849050692c0b13e930faa2658252b6ca4c08",
+    "group": "frontend",
+    "outputSha256": "0623c05a4263aac3928a0399f7b39a2a481a14600b3be1fe8706f37346d1b3b9",
+    "path": "nal/read/trend-2027/today/index.html",
+    "sourceSha256": "9e5928955a94a005f17bdc21916dc3b3121a0e5a09014f0ff5db4074d0398c31"
+  },
+  {
+    "bytes": 1086,
+    "destination": "public-overlay/nal/read/trend-2027/try/index.html",
+    "gitBlob": "b6892f9390106a3a84153563143a33942bc472e7",
+    "group": "frontend",
+    "outputSha256": "5db68f0cbaa5406e4e876e0bdd1617faac0ebcd53c5214745e1c38404ed5a693",
+    "path": "nal/read/trend-2027/try/index.html",
+    "sourceSha256": "4bd4bdd2b62bbfbe0ba4a8ab36fdf799f7b3c571f7f79d958fda94770e5ff298"
+  },
+  {
+    "bytes": 2916,
+    "destination": "public-overlay/nal/read/trend-2027/welcome/index.html",
+    "gitBlob": "2fc057cbce16e0203e2b6b44068aaaca99e7c3a6",
+    "group": "frontend",
+    "outputSha256": "8efb949df8fadd4233b3d0e1b8e8306d95e8c7816d21370650b3a62568232881",
+    "path": "nal/read/trend-2027/welcome/index.html",
+    "sourceSha256": "76803e3f18c8063e676f3a6fdf8148a0da28ac6dd1e48c86459ff01a2b00be39"
+  },
+  {
+    "bytes": 1939,
+    "destination": "public-overlay/nal/shop/read/index.html",
+    "gitBlob": "b1d8eec5fdc87edaf3834c7ad369705cf73592a3",
+    "group": "frontend",
+    "outputSha256": "6121170913170b12c9557508fed496d3e9b480d9c775c6949871298aad026875",
+    "path": "nal/shop/read/index.html",
+    "sourceSha256": "e98342093800830c3cc33632265a651216b185858d486f94d95db7e63f476c58"
+  }
+]
