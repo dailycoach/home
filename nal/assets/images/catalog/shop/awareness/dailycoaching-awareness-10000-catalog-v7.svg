@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600"><style>
+.sans{font-family:"NanumBarunGothic","Noto Sans CJK KR",Arial,sans-serif}.serif{font-family:"NanumMyeongjo","Noto Serif CJK KR",serif}.meta{letter-spacing:.04em}
+</style>
+<rect width="1200" height="1600" fill="#111C2B"/>
+<text x="86" y="92" class="sans meta" font-size="26" font-weight="700" fill="#F5F2EA">DAILYCOACHING</text>
+<text x="1110" y="92" class="sans meta" font-size="24" text-anchor="end" fill="#C2A15D">AWARENESS / 10000</text>
+<line x1="86" y1="126" x2="1110" y2="126" stroke="#526476" stroke-width="2"/>
+<text x="86" y="194" class="sans meta" font-size="23" font-weight="700" fill="#C2A15D">PROFESSIONAL PLAYBOOK</text>
+<text x="1110" y="194" class="sans meta" font-size="23" text-anchor="end" fill="#F5F2EA">DAILY</text>
+<g transform="translate(86,270)">
+<rect x="0" y="0" width="180" height="26" rx="13" fill="#3F79B6"/><rect x="205" y="0" width="180" height="26" rx="13" fill="#82A8A2"/><rect x="410" y="0" width="180" height="26" rx="13" fill="#617A9E"/><rect x="615" y="0" width="180" height="26" rx="13" fill="#77818D"/><rect x="820" y="0" width="180" height="26" rx="13" fill="#C2A15D"/>
+<g class="sans" font-size="15" fill="#92A0AE"><text x="0" y="62">DETECT</text><text x="205" y="62">ACKNOWLEDGE</text><text x="410" y="62">INQUIRE</text><text x="615" y="62">LINK</text><text x="820" y="62">YOUR ACTION</text></g>
+</g>
+<text x="86" y="655" class="sans" font-size="138" fill="#FFFFFF">DAILY</text>
+<text x="90" y="720" class="sans meta" font-size="19" fill="#C2A15D">DETECT · ACKNOWLEDGE · INQUIRE · LINK · YOUR ACTION</text>
+<text x="86" y="885" class="serif" font-size="76" font-weight="700" fill="#F6F2E8">알아차림코칭</text>
+<text x="86" y="975" class="serif" font-size="76" font-weight="700" fill="#F6F2E8">플레이북</text>
+<text x="88" y="1180" class="serif" font-size="26" fill="#B7C0C9">한 장면에서 시작해 신호를 보고, 있는 것을 인정하고, 질문으로 탐색한 뒤,</text>
+<text x="88" y="1228" class="serif" font-size="26" fill="#B7C0C9">내가 지키고 싶은 방향과 다음 행동으로 이어가는 DAILYCOACHING의 실천 플레이북.</text>
+<line x1="86" y1="1350" x2="1110" y2="1350" stroke="#526476" stroke-width="1"/>
+<text x="86" y="1405" class="sans meta" font-size="20" fill="#C2A15D">PUBLICATION MASTER</text>
+<text x="86" y="1445" class="sans" font-size="21" fill="#7F8C99">A5 · PDF · 72P · 16 ESSAYS · 7 LENSES · 3 CASES</text>
+<text x="1110" y="1445" class="sans" font-size="28" font-weight="700" text-anchor="end" fill="#C2A15D">10,000원</text>
+</svg>
