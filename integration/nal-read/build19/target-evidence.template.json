@@ -1,0 +1,15 @@
+{
+  "formatVersion": 1,
+  "build": 19,
+  "templateOnly": true,
+  "status": "not-observed",
+  "sourceCommit": "0e2e8652212748278067c2981502174a6c109c18",
+  "targetIdentity": {"projectRef":null,"environment":null,"origin":null,"confirmedByOwner":false},
+  "baseline": {"status":"unknown","recordedMigrationIds":null,"schemaEvidenceReference":null,"fix03BoundaryObserved":null},
+  "buildLayers": {"status":"unknown","observedAppliedLayerIds":null,"manuallyAppliedEquivalentSources":null,"evidenceReference":null},
+  "apiAndAssets": {"status":"unknown","deployedSourceCommit":null,"gatewayReviewReference":null,"callbackReviewReference":null,"assetRevisionReviewReference":null},
+  "merchant": {"status":"unknown","configurationEvidenceReference":null,"testTransactionEvidenceReference":null},
+  "permissions": {"reviewed":false,"ownerApprovalReference":null},
+  "preSaleValidation": {"status":"deferred-not-run","evidenceReference":null},
+  "instruction": "Do not insert passwords, keys, tokens or customer data. Null means not observed, never zero/absent/healthy. Filling this template does not authorize a migration, deployment, payment or sale. The packager does not consume it as executable configuration."
+}
