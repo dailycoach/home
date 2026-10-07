@@ -1,0 +1,39 @@
+{
+  "formatVersion":1,
+  "build":22,
+  "kind":"integration-continuation-map-not-an-apply-runner",
+  "sourceCommit":"3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "sourceManifest":"integration/nal-read/build19/manifest.json",
+  "targetProfile":"after-build22-first-five-layers",
+  "requiredRecordedMigrations":["20261007131539","20261007131833","20261007132041"],
+  "releaseMustRemain":"off",
+  "alreadyAppliedLayerIds":["build04-workspace","build05-editorial","build05-report","build06-join","build06-account"],
+  "remainingLayers":[
+    {"id":"build07-payments","path":"docs/NAL_READ_BUILD07_PAYMENTS.sql"},
+    {"id":"build07-reconciliation","path":"docs/NAL_READ_BUILD07_RECONCILIATION.sql"},
+    {"id":"build07-integration","path":"docs/NAL_READ_BUILD07_INTEGRATION.sql"},
+    {"id":"build09-cohorts","path":"docs/NAL_READ_BUILD09_COHORTS.sql"},
+    {"id":"build09-cohort-admin","path":"docs/NAL_READ_BUILD09_COHORT_ADMIN.sql"},
+    {"id":"build09-admission-bridges","path":"docs/NAL_READ_BUILD09_ADMISSION_BRIDGES.sql"},
+    {"id":"build10-guide","path":"docs/NAL_READ_BUILD10_GUIDE.sql"},
+    {"id":"build10-studio","path":"docs/NAL_READ_BUILD10_STUDIO.sql"},
+    {"id":"build10-arrival-bridge","path":"docs/NAL_READ_BUILD10_ARRIVAL_BRIDGE.sql"},
+    {"id":"build12-support","path":"docs/NAL_READ_BUILD12_SUPPORT.sql"},
+    {"id":"build14-home","path":"docs/NAL_READ_BUILD14_HOME.sql"},
+    {"id":"build15-pathway","path":"docs/NAL_READ_BUILD15_PATHWAY.sql"},
+    {"id":"build17-operations","path":"docs/NAL_READ_BUILD17_OPERATIONS.sql"},
+    {"id":"build18-context","path":"docs/NAL_READ_BUILD18_CONTEXT.sql"}
+  ],
+  "continuationRules":[
+    "Re-read actual migration and schema metadata before each subsequent integration tranche; this document is not a substitute for current state.",
+    "Preserve READ OFF and existing storefront/payment data. Schema installation is not permission to exercise a payment or grant a participant/admin role.",
+    "Do not submit BUILD20/21 after-fix03.forward.sql unchanged: its clean-baseline guard must now reject this target. Do not remove that guard to force replay.",
+    "Prepare only the remaining forward delta. Do not skip required layers or record unapplied layers as completed.",
+    "Do not mark read_build20_integration as installed: BUILD22 applied only five of nineteen layers in three transactions, not the complete atomic package.",
+    "Canonical BUILD22 filenames use versions returned by the actual migration history, not invented timestamps. Preserve their SQL and subsequent deployment receipts.",
+    "The earlier STORE foundation identifier mismatch remains unresolved. Do not run blanket db push/repair, reset, or baseline replay to hide it.",
+    "Keep the latest Edge/frontend bundle inactive until its complete matching DB chain exists. No Edge or public page was deployed by BUILD22.",
+    "Continue to defer participant/auth/payment/browser/regression tests to the stated pre-sale stage. Installation metadata and security notices are not a PASS result."
+  ],
+  "automaticActions":false
+}

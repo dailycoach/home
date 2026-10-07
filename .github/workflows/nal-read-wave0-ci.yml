@@ -1,0 +1,96 @@
+name: NAL READ W0 CI
+on:
+  pull_request:
+    paths: ['nal/**', 'scripts/**nal-read**', 'docs/NAL_READ_*', 'supabase/**', '.github/workflows/nal-read-*.yml']
+permissions:
+  contents: read
+concurrency:
+  group: nal-read-w0-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  foundation:
+    name: Historical READ foundation regression only
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nal_read_w0
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nal_read_w0"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Syntax and handler checks
+        run: |
+          node --check nal/assets/js/read.js
+          node --check supabase/functions/nal-read-enroll/handler.mjs
+          node supabase/functions/nal-read-enroll/handler.test.mjs
+          node scripts/check-nal-read-wave0.mjs
+      - name: Historical migration chain and isolated FIX-01 core regression
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGDATABASE: nal_read_w0
+          PGPASSWORD: postgres
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client >/dev/null
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-db-fixture.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095820_nal_read_wave0_foundation.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql
+          psql -X -v ON_ERROR_STOP=1 -f docs/NAL_READ_FIX01_PATCH.sql
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-db-cases.sql
+          echo 'This job does NOT validate the current controlled rollout. See Controlled Release CI.'
+      - name: Browser layout QA (not real authentication)
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node scripts/nal-read-browser-qa.mjs
+  platform-full:
+    name: Entire NAL platform - strict, no waiver
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Full platform QA - preserve failing exit code
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/check-nal-platform.mjs 2>&1 | tee /tmp/nal-platform-full.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nal-platform-full-result
+          path: /tmp/nal-platform-full.log
+          retention-days: 3
+  baseline-diff:
+    name: Same-checker baseline vs HEAD regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Test failure classification
+        run: node scripts/test-nal-read-platform-regression.mjs
+      - name: Compare exact failure lists, including non-READ routes
+        env:
+          NAL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          NAL_QA_OUTPUT: ${{ runner.temp }}/nal-qa-comparison
+        run: node scripts/nal-read-platform-regression.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nal-platform-baseline-comparison
+          path: ${{ runner.temp }}/nal-qa-comparison
+          retention-days: 3

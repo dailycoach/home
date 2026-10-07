@@ -1,0 +1,66 @@
+{
+  "formatVersion": 1,
+  "build": 19,
+  "status": "integration-planning-only",
+  "sourceCommit": "0e2e8652212748278067c2981502174a6c109c18",
+  "targetProject": null,
+  "targetOrigin": null,
+  "supabaseGatewayConfiguration": "unresolved: decide per endpoint during authorized integration; do not set verify_jwt=false globally",
+  "configurationPolicy": "Names and non-secret planning values only. No existing runtime config, environment file, password, token or project key is read into this package.",
+  "serverSuppliedNames": ["SUPABASE_URL","SUPABASE_ANON_KEY","SUPABASE_SERVICE_ROLE_KEY"],
+  "operatorSuppliedNames": ["NAL_ALLOWED_ORIGINS","NAL_READ_TOSS_CLIENT_KEY","NAL_READ_TOSS_SECRET_KEY","NAL_READ_TOSS_MID"],
+  "initialSwitchPlanNotApplied": {
+    "NAL_ACCOUNT_ENABLED": false,
+    "NAL_READ_ENABLED": false,
+    "NAL_READ_EDITORIAL_ENABLED": false,
+    "NAL_READ_COMPANION_ENABLED": false,
+    "NAL_COHORTS_ENABLED": false,
+    "NAL_SUPPORT_ENABLED": false,
+    "NAL_READ_PAYMENTS_ENABLED": false,
+    "NAL_READ_CHECKOUT_ENABLED": false,
+    "NAL_READ_WEBHOOK_ENABLED": false,
+    "NAL_READ_REFUNDS_ENABLED": false,
+    "NAL_READ_TOSS_MODE": "test"
+  },
+  "switchPolicy": "Do not copy this plan over an existing live project's environment. It is an initial integration checklist, not evidence of current values. Enable only a deliberately approved non-production scope later.",
+  "databaseReleaseControl": {
+    "source": "recorded FIX03 release guard",
+    "knownDesign": "off / time-bounded test_only allowlist; customer production activation is a separate design and permission step",
+    "requestedMutation": "none",
+    "observedValue": null,
+    "allowlistCreation": "none"
+  },
+  "functionGroups": [
+    {"id":"account","names":["nal-account"],"client":["account-session.js","account-home.js","account-overview.js","read-operations.js","read-admin-context.js"],"sql":["build06-join","build06-account","build14-home","build17-operations","build18-context"],"boundary":"public-safe offers GET and verified user POST; role checks inside operator projections"},
+    {"id":"participant","names":["nal-read-enroll","nal-read-daily","nal-read-workspace","nal-read-report"],"client":["read-session.js","read-shell.js","read-open-loader.js","read-daily.js","read-workspace.js","read-report.js"],"sql":["build04-workspace","build05-report","build09-admission-bridges","build10-arrival-bridge","build15-pathway"],"boundary":"verified member plus current release/access/ownership gates"},
+    {"id":"editorial","names":["nal-read-editorial"],"client":["read-editorial-loader.js","read-editorial.js","read-editorial-contract.mjs"],"sql":["build05-editorial"],"boundary":"existing owner/operator; explicit approve/publish controls"},
+    {"id":"cohorts","names":["nal-read-cohorts"],"client":["read-cohorts.js","read-cohorts-admin.js","read-join.js"],"sql":["build09-cohorts","build09-cohort-admin","build09-admission-bridges"],"boundary":"public cohort projection vs verified member actions and owner-only administration"},
+    {"id":"companion","names":["nal-read-companion"],"client":["read-program-sections.js","read-start.js","read-studio.js","read-studio-library.js"],"sql":["build10-guide","build10-studio","build10-arrival-bridge"],"boundary":"public published guide vs own preparation and existing editorial roles"},
+    {"id":"support","names":["nal-support"],"client":["read-support.js"],"sql":["build12-support","build18-context"],"boundary":"verified member; owner or currently assigned operator; no external notifications"},
+    {"id":"read-payments","names":["nal-read-payments","nal-read-payments-webhook"],"client":["read-checkout.js","read-payment-return.js","read-payments-admin.js"],"sql":["build07-payments","build07-reconciliation","build07-integration","build09-admission-bridges"],"boundary":"general-card client flow, verified provider results, merchant-console refund execution; existing PDF webhook must coexist"}
+  ],
+  "existingPlatformDependencies": [
+    {"name":"STORE / public catalog / core orders and digital entitlements","action":"retain and reconcile existing schema; do not rebuild from scratch over a live project"},
+    {"name":"PDF download and PDF payment endpoints","action":"retain existing deployment and routes; do not deploy the reference-only PDF webhook handler alone"},
+    {"name":"base NAL CSS/theme, images, fonts and public starter PDFs","action":"keep existing host assets; capsule is not a complete storefront snapshot"},
+    {"name":"Auth callbacks","paths":["/nal/auth/callback/","/nal/read/auth/callback/"],"action":"resolve exact approved origin/redirect list later; no Auth setting changes now"},
+    {"name":"frontend runtime connection files","paths":["/nal/data/backend.json","/nal/data/read-backend.staging.json"],"action":"excluded from source export; deliberately bind only a chosen non-production target later"},
+    {"name":"asset cache consistency","action":"coordinate generic participant, legacy direct entry, account, support and operator scripts together; the capsule preserves original query labels and does not purge any cache"}
+  ],
+  "contentHandoff": [
+    {"source":"content/nal-read/trend-2027.editorial.json","destination":"manuscript editor","automaticSave":false,"automaticApproval":false},
+    {"source":"supabase/functions/nal-read-companion/presets/trend-2027-guide.mjs","destination":"guide editor draft","automaticSave":false,"automaticApproval":false},
+    {"source":"supabase/functions/nal-read-companion/presets/trend-2027-weeks.mjs","destination":"four runbook drafts","automaticSave":false,"automaticApproval":false}
+  ],
+  "notResolvedByThisPlan": [
+    "Target database identity and actual migration history",
+    "Whether BUILD04-18 layers or any manual equivalent are already applied",
+    "Verified schema parity and cumulative SQL/runtime behavior",
+    "Existing provider merchant/webhook settings and real test credentials",
+    "First cohort dates, capacity, catalog linkage and final participation terms",
+    "Coordinated legacy asset version alignment",
+    "Customer production release mode beyond the existing test-only guard",
+    "Personal-record retention/erasure and source-snapshot treatment",
+    "Owner-deferred pre-sale Auth/payment/mobile/accessibility/regression validation"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "url": "",
+  "publishableKey": "",
+  "note": "Populate only from the non-production Supabase branch before staging QA."
+}

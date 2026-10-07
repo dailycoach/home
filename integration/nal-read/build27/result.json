@@ -1,0 +1,62 @@
+{
+  "formatVersion": 1,
+  "build": 27,
+  "status": "DECLARED_DATABASE_CHAIN_INSTALLED_RUNTIME_NOT_RELEASED",
+  "projectName": "nal-platform",
+  "observedAtUtc": "2026-10-07T21:59:53.170289+00:00",
+  "reportTimezone": "Asia/Seoul",
+  "developmentParent": "5d5e9e0d24e6bfac843750e84c03b2150cfd87d2",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "migration": {
+    "version": "20261007215922",
+    "name": "nal_read_build27_pathway_operations_context",
+    "path": "supabase/migrations/20261007215922_nal_read_build27_pathway_operations_context.sql",
+    "toolResult": "success",
+    "historyObserved": true,
+    "transactionCount": 1,
+    "storedSqlBytes": 28822,
+    "storedSqlMd5": "6129aa71d71028acefbd79695abe3e94",
+    "storedSqlGitBlobSha": "bf8044a0c9e6fceec5406fec9605000cf8a6091c",
+    "createdRepositoryBlobSha": "bf8044a0c9e6fceec5406fec9605000cf8a6091c"
+  },
+  "layersAppliedThisBuild": ["build15-pathway", "build17-operations", "build18-context"],
+  "cumulativeAppliedLayerCount": 19,
+  "declaredSourceLayerCount": 19,
+  "remainingDeclaredSqlLayers": 0,
+  "countMeaning": "Installation of the nineteen declared BUILD SQL layers across eight recorded integration migrations, not application completeness, runtime correctness or a sales-readiness percentage.",
+  "newTables": 0,
+  "addedColumns": {"nal_private.read_experiments": ["source_answer_id", "source_snapshot"]},
+  "sourceIndex": {"name": "read_experiment_one_source", "unique": true, "valid": true, "columns": ["enrollment_id", "source_answer_id"], "predicate": "source_answer_id IS NOT NULL"},
+  "sourceForeignKey": "source_answer_id -> public.nal_read_answers(id) ON DELETE SET NULL",
+  "observedFunctionObjects": ["nal_private.read_workspace_before_pathway", "public.nal_read_workspace", "nal_private.read_operations_home", "nal_private.account_before_operations", "nal_private.read_operator_context", "nal_private.account_before_context", "public.nal_account"],
+  "functionCountMeaning": "Seven resulting objects include three preserved previous implementations. They are database functions, not seven deployed Edge services.",
+  "installationMetadata": {
+    "releaseModes": ["off"],
+    "experimentTableRlsEnabled": true,
+    "experimentTableAnonOrAuthenticatedPrivilege": false,
+    "allSevenObservedFunctionsSecurityInvoker": true,
+    "anyObservedFunctionAnonOrAuthenticatedExecute": false,
+    "allSevenObservedFunctionsServiceExecute": true,
+    "historicalAtomicBuild20MarkerPresent": false
+  },
+  "postInstallationCounts": {"catalog": 31, "settings": 2, "pdfFiles": 3, "orders": 0, "payments": 0, "enrollments": 0, "answers": 0, "experiments": 0, "admins": 0, "cohorts": 0, "supportThreads": 0},
+  "securityAdvisor": {
+    "run": true,
+    "returnedLevels": ["INFO"],
+    "finding": "rls_enabled_no_policy",
+    "findingCountAcrossProject": 36,
+    "observedAtUtc": "2026-10-07T21:59:59.449Z",
+    "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+    "interpretation": "Existing private server-only tables retain no direct browser privileges. No opening policy was added to suppress INFO notices. This is not comprehensive security or application validation."
+  },
+  "runtimeInventoryObservation": {
+    "source": "Supabase list_edge_functions in this execution",
+    "requiredReadFunctionNames": 11,
+    "presentRequiredNames": [{"name": "nal-read-enroll", "version": 2, "verifyJwt": true}, {"name": "nal-read-daily", "version": 3, "verifyJwt": true}],
+    "missingRequiredNames": ["nal-account", "nal-read-workspace", "nal-read-report", "nal-read-editorial", "nal-read-cohorts", "nal-read-companion", "nal-support", "nal-read-payments", "nal-read-payments-webhook"],
+    "existingFunctionSourceParity": "not inspected; a listed ACTIVE version is not proof of matching source or working behavior",
+    "existingOtherFunctionsUntouched": ["nal-digital-download", "nal-toss-checkout", "nal-toss-webhook", "nal-one-time-original-upload"]
+  },
+  "boundaries": {"applicationTestsRun": false, "applicationFunctionsExercised": 0, "externalMessagesSent": 0, "providerCalls": 0, "contentOrCustomerRowsCreated": false, "edgeDeployment": false, "frontendDeployment": false, "featureFlagChange": false, "roleAssignment": false, "newPaidResources": false, "mainMerge": false, "salesActivation": false},
+  "important": "The declared DB-source installation chain is complete. Runtime/API/frontend integration, first-cohort data, source-snapshot retention decisions and pre-sale validation are not complete. No historical atomic-package marker was forged: installation used eight actual migrations, not that one original transaction."
+}

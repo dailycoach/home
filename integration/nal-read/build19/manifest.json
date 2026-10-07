@@ -1,0 +1,85 @@
+{
+  "formatVersion": 1,
+  "build": 19,
+  "repository": "dailycoach/home",
+  "branch": "feat/nal-read-v1",
+  "pullRequest": 160,
+  "sourceCommit": "0e2e8652212748278067c2981502174a6c109c18",
+  "sourceTree": "a8c07c6d0b63f5b3cdeafdd85370edd388b1da79",
+  "purpose": "offline integration source capsule; not an executable migration or a static-site deployment",
+  "database": {
+    "profile": "after-reviewed-fix03-before-build04",
+    "targetState": "unknown",
+    "baselinePolicy": "Reference files only. Their presence in Git does not prove application to any database. FIX02 embeds FIX01; do not apply the old FIX01 draft again. Fresh-database bootstrap and partially applied BUILD chains require separate reconciliation.",
+    "baselineReferences": [
+      "supabase/migrations/20261003042518_nal_platform_foundation.sql",
+      "supabase/migrations/20261003064307_nal_policy_hardening.sql",
+      "supabase/migrations/20261003064633_nal_launch_catalog_payload.sql",
+      "supabase/migrations/20261003124325_nal_digital_store_foundation.sql",
+      "supabase/migrations/20261004002706_nal_digital_store_index_hardening.sql",
+      "supabase/migrations/20261004003752_nal_toss_payment_foundation.sql",
+      "supabase/migrations/20261004003859_nal_toss_payment_index_hardening.sql",
+      "supabase/migrations/20261006095820_nal_read_wave0_foundation.sql",
+      "supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql",
+      "supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql",
+      "supabase/migrations/20261006200849_nal_read_fix02_controlled_rollout.sql",
+      "supabase/migrations/20261007024130_nal_read_fix03_auth_boundary.sql"
+    ],
+    "doNotSchedule": [
+      {"path":"docs/NAL_READ_WAVE0_SCHEMA_DRAFT.sql","reason":"Use recorded foundation migration as the baseline reference, not both copies."},
+      {"path":"docs/NAL_READ_WAVE1_SCHEMA_DRAFT.sql","reason":"Use recorded daily-engine migration as the baseline reference, not both copies."},
+      {"path":"docs/NAL_READ_FIX01_PATCH.sql","reason":"FIX02 recorded migration already contains corrected FIX01 logic."},
+      {"path":"docs/NAL_READ_FIX02_GUARD.sql","reason":"Component already included in recorded FIX02 migration."},
+      {"path":"docs/NAL_READ_FIX03_PATCH.sql","reason":"Recorded FIX03 migration is the same source; never schedule both."}
+    ],
+    "layers": [
+      {"id":"build04-workspace","path":"docs/NAL_READ_BUILD04_WORKSPACE.sql","requires":["baseline-fix03"],"purpose":"Drafts, experiments, LIVE and personal archive"},
+      {"id":"build05-editorial","path":"docs/NAL_READ_BUILD05_EDITORIAL.sql","requires":["build04-workspace"],"purpose":"Manuscript versions and editorial actions"},
+      {"id":"build05-report","path":"docs/NAL_READ_BUILD05_REPORT.sql","requires":["build05-editorial"],"purpose":"Personal report source and immutable editions"},
+      {"id":"build06-join","path":"docs/NAL_READ_BUILD06_JOIN.sql","requires":["build05-report"],"purpose":"Offer, terms and enrollment claim"},
+      {"id":"build06-account","path":"docs/NAL_READ_BUILD06_ACCOUNT.sql","requires":["build06-join"],"purpose":"Common account projection and display name"},
+      {"id":"build07-payments","path":"docs/NAL_READ_BUILD07_PAYMENTS.sql","requires":["build06-account"],"purpose":"READ checkout orders and participant payment actions"},
+      {"id":"build07-reconciliation","path":"docs/NAL_READ_BUILD07_RECONCILIATION.sql","requires":["build07-payments"],"purpose":"Verified provider-state processing"},
+      {"id":"build07-integration","path":"docs/NAL_READ_BUILD07_INTEGRATION.sql","requires":["build07-reconciliation"],"purpose":"Payment to entitlement integration"},
+      {"id":"build09-cohorts","path":"docs/NAL_READ_BUILD09_COHORTS.sql","requires":["build07-integration"],"purpose":"Cohort, capacity and waitlist"},
+      {"id":"build09-cohort-admin","path":"docs/NAL_READ_BUILD09_COHORT_ADMIN.sql","requires":["build09-cohorts"],"purpose":"Owner roster and manual attendance"},
+      {"id":"build09-admission-bridges","path":"docs/NAL_READ_BUILD09_ADMISSION_BRIDGES.sql","requires":["build09-cohort-admin"],"purpose":"Admission wrappers around original entrypoints"},
+      {"id":"build10-guide","path":"docs/NAL_READ_BUILD10_GUIDE.sql","requires":["build09-admission-bridges"],"purpose":"Published guide and optional personal preparation"},
+      {"id":"build10-studio","path":"docs/NAL_READ_BUILD10_STUDIO.sql","requires":["build10-guide"],"purpose":"Weekly facilitator plans and guide editing"},
+      {"id":"build10-arrival-bridge","path":"docs/NAL_READ_BUILD10_ARRIVAL_BRIDGE.sql","requires":["build10-studio"],"purpose":"Add arrival metadata to existing bootstrap"},
+      {"id":"build12-support","path":"docs/NAL_READ_BUILD12_SUPPORT.sql","requires":["build10-arrival-bridge"],"purpose":"Member inquiries and assigned staff replies"},
+      {"id":"build14-home","path":"docs/NAL_READ_BUILD14_HOME.sql","requires":["build12-support"],"purpose":"Read-only participant home account wrapper"},
+      {"id":"build15-pathway","path":"docs/NAL_READ_BUILD15_PATHWAY.sql","requires":["build14-home"],"purpose":"Source-linked experiment and LIVE revision handoff"},
+      {"id":"build17-operations","path":"docs/NAL_READ_BUILD17_OPERATIONS.sql","requires":["build15-pathway"],"purpose":"Read-only operator home account wrapper"},
+      {"id":"build18-context","path":"docs/NAL_READ_BUILD18_CONTEXT.sql","requires":["build17-operations"],"purpose":"Selected-season order and support projections"}
+    ],
+    "copyMode": "Preserve original SQL bytes and individual transactions. Never concatenate or rewrite BEGIN/COMMIT. No apply script, migration history repair or down migration is emitted."
+  },
+  "groups": [
+    {"id":"frontend","patterns":["nal/read/**/*.html","nal/my/**/*.html","nal/auth/**/*.html","nal/shop/read/**/*.html","nal/help/**/*.html","nal/assets/js/read*.js","nal/assets/js/read*.mjs","nal/assets/js/account-*.js","nal/assets/css/nal-read*.css","nal/assets/css/nal-account*.css","nal/assets/css/nal-admin-context.css","nal/assets/css/nal-operations.css","nal/assets/css/nal-support.css","nal/data/read-seasons.json"],"required":["nal/read/open/index.html","nal/my/index.html","nal/read/admin/home/index.html","nal/assets/js/read-session.js","nal/assets/js/account-session.js","nal/assets/js/read-admin-context.js"],"note":"Unmodified frontend sources, not a complete deployable storefront. Existing CSS/theme, image/font/PDF and catalog dependencies remain in the host repository. No cache labels are silently rewritten by packaging."},
+    {"id":"shared-frontend-reference","patterns":["nal/assets/js/theme.js","nal/assets/css/nal.css"],"required":["nal/assets/js/theme.js","nal/assets/css/nal.css"],"note":"Read-only dependencies for coordination. Do not overwrite a newer site's shared assets with this older snapshot."},
+    {"id":"edge","patterns":["supabase/functions/_shared/nal-read-*.mjs","supabase/functions/nal-account/**","supabase/functions/nal-read-cohorts/**","supabase/functions/nal-read-companion/**","supabase/functions/nal-read-daily/**","supabase/functions/nal-read-editorial/**","supabase/functions/nal-read-enroll/**","supabase/functions/nal-read-payments/**","supabase/functions/nal-read-payments-webhook/**","supabase/functions/nal-read-report/**","supabase/functions/nal-read-workspace/**","supabase/functions/nal-support/**"],"required":["supabase/functions/_shared/nal-read-auth.mjs","supabase/functions/nal-account/index.ts","supabase/functions/nal-read-cohorts/index.ts","supabase/functions/nal-read-companion/index.ts","supabase/functions/nal-read-daily/index.ts","supabase/functions/nal-read-editorial/index.ts","supabase/functions/nal-read-enroll/index.ts","supabase/functions/nal-read-payments/index.ts","supabase/functions/nal-read-payments-webhook/index.ts","supabase/functions/nal-read-report/index.ts","supabase/functions/nal-read-workspace/index.ts","supabase/functions/nal-support/index.ts"],"note":"Eleven function source directories plus shared helper modules. Keep custom user Auth, public projection and provider webhook entrypoints distinct; no gateway settings are applied."},
+    {"id":"content","patterns":["content/nal-read/*.json"],"required":["content/nal-read/trend-2027.editorial.json"],"note":"Import into the editor as a draft only. Guide/runbook preset modules are included with nal-read-companion; no automatic approval or publishing."},
+    {"id":"pdf-webhook-boundary-reference","patterns":["supabase/functions/nal-toss-webhook/handler.mjs"],"required":["supabase/functions/nal-toss-webhook/handler.mjs"],"note":"READ nr_ order namespace exclusion within existing PDF webhook. Reference only: this single handler is not a complete webhook deployment and must not replace its existing receiver."}
+  ],
+  "allowedSourceExtensions": [".html",".css",".js",".mjs",".ts",".json",".md",".sql"],
+  "excludedPatterns": ["**/.env*","**/.git/**","**/node_modules/**","**/*.test.*","**/*.spec.*","**/test/**","**/tests/**","**/fixtures/**","**/test-*.sql","**/test-*.mjs",".github/**","nal/data/backend*.json","nal/data/read-backend*.json","supabase/config.toml","supabase/.temp/**","**/CNAME","**/credentials*","**/secrets*","**/*.pem","**/*.key"],
+  "packagingFiles": [
+    "integration/nal-read/build19/manifest.json",
+    "integration/nal-read/build19/runtime-plan.json",
+    "integration/nal-read/build19/target-evidence.template.json",
+    "integration/nal-read/build19/README.md",
+    "scripts/package-nal-read-build19.py",
+    "docs/NAL_READ_BUILD19_INTEGRATION.md"
+  ],
+  "boundary": {
+    "network": "none",
+    "databaseExecution": "none",
+    "deployment": "none",
+    "tests": "not run by packager",
+    "cost": "no resource provisioning or paid API calls",
+    "output": "new local directory outside repository; no overwrite",
+    "knownRuntimeState": "unknown",
+    "salesActivation": "not included"
+  }
+}

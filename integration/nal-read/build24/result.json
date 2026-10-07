@@ -1,0 +1,48 @@
+{
+  "formatVersion": 1,
+  "build": 24,
+  "status": "COHORT_DATABASE_CHAIN_APPLIED_RELEASE_OFF",
+  "projectName": "nal-platform",
+  "developmentParent": "c15d684cbdbd4a1313eed880b66f14f1f778ab4a",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "migration": {
+    "version": "20261007150710",
+    "name": "nal_read_build24_cohort_admission_integration",
+    "path": "supabase/migrations/20261007150710_nal_read_build24_cohort_admission_integration.sql",
+    "toolResult": "success",
+    "historyObserved": true,
+    "transactionCount": 1,
+    "storedSqlBytes": 43909,
+    "storedSqlMd5": "3ef72053260319717ad948af53abfc16",
+    "storedSqlGitBlobSha": "6b7a1adb313685f561a9b35781fd08ed834cfef5"
+  },
+  "layersAppliedThisBuild": ["build09-cohorts", "build09-cohort-admin", "build09-admission-bridges"],
+  "cumulativeAppliedLayerCount": 11,
+  "totalSourceLayerCount": 19,
+  "remainingLayerCount": 8,
+  "newPrivateTables": ["read_cohorts", "read_waitlist", "read_cohort_attendance", "read_cohort_events"],
+  "installedTriggers": ["nal_read_cohort_enrollment", "nal_read_cohort_waitlist_joined", "nal_read_cohort_checkout"],
+  "installationMetadata": {
+    "releaseModes": ["off"],
+    "allFourTablesRlsEnabled": true,
+    "anyNewTableAnonOrAuthenticatedPrivilege": false,
+    "affectedFunctionObjectsObserved": 24,
+    "allAffectedFunctionsSecurityInvoker": true,
+    "anyAffectedFunctionAnonOrAuthenticatedExecute": false,
+    "serviceExecutableFunctionObjectsObserved": 21,
+    "triggerFunctionsWithoutDirectServiceExecute": 3
+  },
+  "postInstallationCounts": {"catalog": 31, "settings": 2, "pdfFiles": 3, "orders": 0, "payments": 0, "enrollments": 0, "answers": 0, "admins": 0, "checkoutOrders": 0, "cohorts": 0, "waitlist": 0, "attendance": 0, "cohortEvents": 0},
+  "securityAdvisor": {
+    "run": true,
+    "returnedLevels": ["INFO"],
+    "finding": "rls_enabled_no_policy",
+    "findingCountAcrossProject": 29,
+    "observedAtUtc": "2026-10-07T15:07:53.579Z",
+    "interpretation": "Private server-only tables retain no browser-role policy or direct privilege. No policy was added to open them. This is installation metadata, not an application security certification.",
+    "reference": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+  },
+  "boundaries": {"applicationTestsRun": false, "applicationFunctionsExercised": 0, "providerCalls": 0, "customerOrFixtureRowsCreated": false, "edgeDeployment": false, "frontendDeployment": false, "featureFlagChange": false, "roleAssignment": false, "newPaidResources": false, "mainMerge": false, "salesActivation": false},
+  "nextLayer": "build10-guide",
+  "important": "The target has eleven installed layers, not the initial FIX03-only baseline. Existing admission/payment entrypoints now wrap their previous implementations with cohort checks. Do not replay the original full candidate or interpret its initial function hashes as the current schema. Complete only the remaining eight layers before matching runtime integration."
+}

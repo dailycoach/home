@@ -1,0 +1,52 @@
+{
+  "formatVersion": 1,
+  "build": 26,
+  "status": "SUPPORT_AND_MEMBER_HOME_DATABASE_APPLIED_RELEASE_OFF",
+  "projectName": "nal-platform",
+  "observedAtUtc": "2026-10-07T21:14:52.869312+00:00",
+  "reportTimezone": "Asia/Seoul",
+  "developmentParent": "5491bc9d2c30daf7ffa3416238f2577df19d4b40",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "migration": {
+    "version": "20261007211433",
+    "name": "nal_read_build26_support_home_integration",
+    "path": "supabase/migrations/20261007211433_nal_read_build26_support_home_integration.sql",
+    "toolResult": "success",
+    "historyObserved": true,
+    "transactionCount": 1,
+    "storedSqlBytes": 34214,
+    "storedSqlMd5": "4bb56674536caf051bcfaf6376de48f0",
+    "storedSqlGitBlobSha": "baf5a1aacd2592cb5c7af74cbb89c9bc87532409",
+    "createdRepositoryBlobSha": "baf5a1aacd2592cb5c7af74cbb89c9bc87532409"
+  },
+  "layersAppliedThisBuild": ["build12-support", "build14-home"],
+  "cumulativeAppliedLayerCount": 16,
+  "totalSourceLayerCount": 19,
+  "remainingLayerCount": 3,
+  "newPrivateTables": ["support_threads", "support_messages", "support_commands"],
+  "observedFunctionObjects": ["nal_private.support_summary", "nal_private.support_owned_context", "nal_private.support_core", "public.nal_support_user", "public.nal_support_admin", "nal_private.read_account_home", "nal_private.account_before_home", "public.nal_account"],
+  "functionCountMeaning": "Eight resulting objects include the retained previous account function and its new wrapper; no Edge function was deployed.",
+  "installationMetadata": {
+    "releaseModes": ["off"],
+    "allThreeTablesRlsEnabled": true,
+    "anyNewTableAnonOrAuthenticatedPrivilege": false,
+    "allEightObservedFunctionsSecurityInvoker": true,
+    "anyObservedFunctionAnonOrAuthenticatedExecute": false,
+    "allEightObservedFunctionsServiceExecute": true,
+    "messagesAndCommandsServiceUpdate": false,
+    "threadsServiceUpdate": true
+  },
+  "postInstallationCounts": {"catalog": 31, "settings": 2, "pdfFiles": 3, "orders": 0, "payments": 0, "enrollments": 0, "answers": 0, "admins": 0, "supportThreads": 0, "supportMessages": 0, "supportCommands": 0},
+  "securityAdvisor": {
+    "run": true,
+    "returnedLevels": ["INFO"],
+    "finding": "rls_enabled_no_policy",
+    "findingCountAcrossProject": 36,
+    "observedAtUtc": "2026-10-07T21:15:01.667Z",
+    "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+    "interpretation": "Private server-only tables have no direct anon/authenticated privileges. No policy was added to open them merely to suppress INFO notices. This is installation metadata, not application or comprehensive security validation."
+  },
+  "boundaries": {"applicationTestsRun": false, "applicationFunctionsExercised": 0, "externalMessagesSent": 0, "providerCalls": 0, "contentOrCustomerRowsCreated": false, "edgeDeployment": false, "frontendDeployment": false, "featureFlagChange": false, "roleAssignment": false, "newPaidResources": false, "mainMerge": false, "salesActivation": false},
+  "nextLayer": "build15-pathway",
+  "important": "Sixteen SQL source layers are installed, not all nineteen and not a released platform. Do not replay the original clean-baseline package. Support remains a verified-user workflow independent of active READ access; server feature flags and role/assignment checks must remain in the subsequent Edge integration."
+}

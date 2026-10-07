@@ -1,0 +1,61 @@
+-- BUILD20 forward-candidate preconditions. Expanded by the offline assembler.
+-- Not a standalone migration. Operator acknowledgements are accident guards,
+-- not proof of environment identity or substitutes for deployment authorization.
+DO $nal_build20_preconditions$
+DECLARE
+  signature_check jsonb;
+  target_function regprocedure;
+  object_name text;
+  version_id text;
+BEGIN
+  IF current_setting('nal.integration.profile',true) IS DISTINCT FROM 'reviewed-fix03-before-build04'
+     OR current_setting('nal.integration.source',true) IS DISTINCT FROM '__SOURCE_COMMIT__' THEN
+    RAISE EXCEPTION 'BUILD20 requires a deliberately reviewed baseline and this exact source commit';
+  END IF;
+  IF current_setting('server_version_num')::integer / 10000 <> 17 THEN
+    RAISE EXCEPTION 'BUILD20 baseline was observed on PostgreSQL 17; reconcile this target separately';
+  END IF;
+  PERFORM pg_advisory_xact_lock(hashtextextended('nal-read:integration:build20',20));
+  IF to_regclass('nal_private.read_release_control') IS NULL
+     OR to_regclass('supabase_migrations.schema_migrations') IS NULL THEN
+    RAISE EXCEPTION 'Recorded FIX03 baseline is missing';
+  END IF;
+  LOCK TABLE nal_private.read_release_control IN SHARE ROW EXCLUSIVE MODE;
+  IF (SELECT count(*) FROM nal_private.read_release_control) <> 1
+     OR EXISTS(SELECT 1 FROM nal_private.read_release_control WHERE mode IS DISTINCT FROM 'off') THEN
+    RAISE EXCEPTION 'READ must remain OFF throughout this initial integration';
+  END IF;
+  FOREACH version_id IN ARRAY ARRAY[__READ_MIGRATIONS__] LOOP
+    IF NOT EXISTS(SELECT 1 FROM supabase_migrations.schema_migrations m WHERE m.version=version_id) THEN
+      RAISE EXCEPTION 'Required recorded READ migration is missing: %',version_id;
+    END IF;
+  END LOOP;
+  FOR signature_check IN SELECT value FROM jsonb_array_elements('__BASELINE_FUNCTIONS__'::jsonb) LOOP
+    target_function:=to_regprocedure(signature_check->>'signature');
+    IF target_function IS NULL THEN
+      RAISE EXCEPTION 'Required baseline function is missing: %',signature_check->>'signature';
+    END IF;
+    IF md5(pg_get_functiondef(target_function)) IS DISTINCT FROM signature_check->>'definitionMd5'
+       OR (SELECT p.prosecdef FROM pg_proc p WHERE p.oid=target_function) THEN
+      RAISE EXCEPTION 'Baseline function drift; do not force this forward candidate: %',signature_check->>'signature';
+    END IF;
+  END LOOP;
+  -- Any one of these additions means this is not the supported initial profile.
+  FOREACH object_name IN ARRAY ARRAY[
+    'nal_private.read_drafts','nal_private.read_experiments','nal_private.read_live_sessions',
+    'nal_private.read_editorial_documents','nal_private.read_report_editions',
+    'nal_private.read_offers','nal_private.account_preferences','nal_private.read_checkout_orders',
+    'nal_private.read_cohorts','nal_private.read_waitlist','nal_private.read_arrival_guides',
+    'nal_private.read_facilitator_plans','nal_private.support_threads'
+  ] LOOP
+    IF to_regclass(object_name) IS NOT NULL THEN
+      RAISE EXCEPTION 'BUILD layers already present; reconcile a forward delta instead of replaying: %',object_name;
+    END IF;
+  END LOOP;
+  IF to_regprocedure('nal_private.read_build20_integration()') IS NOT NULL
+     OR to_regprocedure('public.nal_account(uuid,text,jsonb)') IS NOT NULL
+     OR EXISTS(SELECT 1 FROM public.nal_read_enrollments) THEN
+    RAISE EXCEPTION 'This candidate is for the unintegrated, not-yet-enrolled baseline only';
+  END IF;
+END
+$nal_build20_preconditions$;

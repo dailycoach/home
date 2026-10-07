@@ -1,0 +1,31 @@
+/* BUILD06 — platform account and program onboarding; uses existing NAL design tokens. */
+.nal-account-shell{width:min(100% - 3rem,72rem);margin:auto;padding:0 0 5rem;color:var(--nal-text,#202126);}
+.nal-account-header{display:flex;justify-content:space-between;gap:1.2rem;align-items:center;min-height:5rem;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-account-header nav{display:flex;gap:1.2rem;flex-wrap:wrap;}.nal-account-header a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none;font-weight:700;}
+.nal-account-brand{font-size:1.2rem;letter-spacing:-.04em;}.nal-account-hero{padding:clamp(3rem,8vw,7rem) 0;max-width:54rem;}
+.nal-account-hero h1{font-size:clamp(2.3rem,7vw,5.5rem);line-height:1.18;letter-spacing:-.065em;word-break:keep-all;overflow-wrap:anywhere;margin:1.2rem 0;}
+.nal-account-kicker{font-size:.82rem;letter-spacing:.13em;font-weight:750;color:var(--nal-text-muted,#696a70);}
+.nal-account-lead{font-size:clamp(1.05rem,2.5vw,1.25rem);line-height:1.9;white-space:pre-wrap;}
+.nal-account-meta,.nal-account-note{font-size:.93rem;line-height:1.85;color:var(--nal-text-muted,#696a70);overflow-wrap:anywhere;}
+.nal-account-tabs{display:flex;gap:.5rem 1.5rem;flex-wrap:wrap;border-bottom:1px solid var(--nal-border,#ccc);padding:1rem 0;margin-top:2rem;}
+.nal-account-tabs a{font-weight:700;text-decoration:none;padding:.7rem 0;min-height:44px;}.nal-account-tabs [aria-current=page]{border-bottom:2px solid currentColor;}
+.nal-account-record{padding:2rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}.nal-account-record h2{font-size:clamp(1.3rem,3vw,2rem);line-height:1.4;}
+.nal-account-record p{line-height:1.9;}.nal-account-list{min-height:14rem;}
+.nal-account-empty{padding:2.5rem 0;line-height:2;max-width:45rem;}
+.nal-account-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1rem 0;}
+.nal-account-link,.nal-account-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.65rem .9rem;font:inherit;text-decoration:none;cursor:pointer;white-space:normal;line-height:1.6;}
+.nal-account-link{background:transparent;border:0;color:inherit;text-decoration:underline;text-underline-offset:.25rem;}
+.nal-account-button{background:var(--nal-text,#202126);color:var(--nal-bg,#f5f1e8);border:1px solid var(--nal-text,#202126);font-weight:700;}
+.nal-account-button:disabled{opacity:.5;cursor:not-allowed;}.nal-account-form{max-width:44rem;display:grid;gap:1.25rem;padding:1rem 0;}
+.nal-account-form label{display:grid;gap:.6rem;font-weight:600;line-height:1.6;}
+.nal-account-form input,.nal-account-form select,.nal-account-form textarea{max-width:100%;min-height:3rem;font:inherit;border:0;border-bottom:1px solid var(--nal-border,#bbb);color:inherit;background:var(--nal-surface-subtle,transparent);padding:.8rem;}
+.nal-account-form textarea{min-height:8rem;resize:vertical;line-height:1.9;}.nal-account-form .nal-account-check{display:flex;align-items:flex-start;gap:.8rem;font-size:.95rem;font-weight:400;}
+.nal-account-check input{width:1.2rem;height:1.2rem;min-height:0;flex-shrink:0;margin-top:.2rem;}
+.nal-account-login-panel{border-top:1px solid var(--nal-border-soft,#ddd);padding:1.6rem 0;}.nal-account-login-panel [data-account-user]{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+[data-account-user][hidden],[data-account-auth][hidden],[data-account-private][hidden]{display:none!important;}
+[data-account-email]{overflow-wrap:anywhere;}[data-account-status]{line-height:1.8;padding:1rem 0;}[data-account-status][data-state=error]{color:var(--nal-color-danger,#b32636);}
+.nal-account-notice{line-height:1.9;white-space:pre-wrap;padding:1.5rem 0;max-width:48rem;}.nal-account-notice summary{font-weight:700;cursor:pointer;}
+.nal-account-footer{display:flex;flex-wrap:wrap;gap:1rem 2rem;padding-top:4rem;font-size:.9rem;border-top:1px solid var(--nal-border-soft,#ddd);margin-top:4rem;}
+.nal-welcome-steps{padding-left:1.3rem;line-height:2.2;margin:2rem 0;}.nal-order-reference code{overflow-wrap:anywhere;font-size:.85rem;}
+.nal-account-shell :focus-visible{outline:3px solid var(--nal-focus,#4055d8);outline-offset:4px;}
+@media(max-width:42rem){.nal-account-shell{width:calc(100% - 2rem);}.nal-account-header{align-items:flex-start;flex-direction:column;padding:1rem 0;gap:0;}.nal-account-header nav{gap:1rem;}.nal-account-tabs{gap:.3rem 1.1rem;}.nal-account-form{max-width:100%;}.nal-account-form input{width:100%;}}

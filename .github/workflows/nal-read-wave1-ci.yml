@@ -1,0 +1,83 @@
+name: NAL READ W1 CI
+on:
+  pull_request:
+    paths: ['nal/**', 'scripts/**nal-read**', 'docs/NAL_READ_*', 'supabase/**', '.github/workflows/nal-read-*.yml']
+permissions:
+  contents: read
+concurrency:
+  group: nal-read-w1-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  hardening:
+    name: NAL-FIX-01 PostgreSQL 17 and API regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nal_read_fix01
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d nal_read_fix01"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGDATABASE: nal_read_fix01
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Syntax and API contracts
+        run: |
+          node --check nal/assets/js/read-daily.js
+          node supabase/functions/nal-read-daily/handler.test.mjs
+          node scripts/test-nal-read-fix01-handler.mjs
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client >/dev/null
+      - name: Load immutable pre-fix DB baseline
+        run: |
+          psql -X -v ON_ERROR_STOP=1 -c "select version()"
+          version="$(psql -X -Atc 'show server_version_num')"
+          test "$version" -ge 170000 -a "$version" -lt 180000
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-db-fixture.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095820_nal_read_wave0_foundation.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql
+      - name: Regression test must expose the original defect
+        shell: bash
+        run: |
+          set +e
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix01-db.sql >/tmp/nal-fix01-before.log 2>&1
+          status=$?
+          set -e
+          cat /tmp/nal-fix01-before.log
+          test "$status" -ne 0
+          grep -F 'NAL-FIX-01: revoked claim denied' /tmp/nal-fix01-before.log
+      - name: Apply and test corrective patch
+        shell: bash
+        run: |
+          set -o pipefail
+          psql -X -v ON_ERROR_STOP=1 -f docs/NAL_READ_FIX01_PATCH.sql
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix01-db.sql | tee /tmp/nal-fix01-after.log
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-wave1-db-cases.sql
+      - name: Parallel identical and revoked retries
+        env:
+          NAL_QA_ISOLATED_DATABASE: '1'
+        run: python3 scripts/test-nal-read-fix01-concurrency.py
+      - name: Existing W1 browser flows - synthetic Auth and API
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node scripts/nal-read-wave1-browser-qa.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nal-fix01-db-evidence
+          path: /tmp/nal-fix01-*.log
+          retention-days: 3
