@@ -1,4 +1,4 @@
-/* BUILD04 participant workspace. Editorial layout, shared NAL tokens, no external assets. */
+/* Shared editorial participant workspace. BUILD15 adds pathway context, not another navigation layer. */
 .read-shell{max-width:70rem;padding-bottom:8rem;}
 .read-public-intro{padding:clamp(3rem,8vw,6rem) 0;max-width:50rem;}
 .read-public-intro h1{font-size:clamp(2.1rem,6vw,4.5rem);line-height:1.2;letter-spacing:-.05em;}
@@ -38,7 +38,16 @@
 .read-archive-search{margin:2rem 0;max-width:38rem;}
 .read-button{max-width:100%;white-space:normal;line-height:1.55;text-align:center;}
 .read-button:focus-visible,.read-nav-link:focus-visible{outline:3px solid var(--nal-focus);outline-offset:4px;}
-@media(max-width:42rem){.read-journey li{grid-template-columns:3.5rem minmax(0,1fr);gap:.6rem;}.read-journey li>:last-child{grid-column:2;}.read-actions{align-items:stretch;}.read-hero>.read-button{justify-self:start;}}
+.read-flow-weeks{display:flex;flex-wrap:wrap;gap:.6rem 1.3rem;margin:1.5rem 0;padding:1rem 0;border-block:1px solid var(--nal-border-soft);}
+.read-flow-weeks a{padding:.35rem 0;}
+.read-flow-weeks [aria-current=page]{text-decoration:underline;text-underline-offset:.4rem;text-decoration-thickness:2px;}
+.read-origin,.read-live-prep{padding:1rem 0;margin:1.5rem 0;max-width:48rem;border-block:1px solid var(--nal-border-soft);}
+.read-origin summary,.read-live-prep summary{min-height:44px;line-height:1.8;padding:.6rem 0;cursor:pointer;font-weight:650;}
+.read-live-prep-item{padding:1.3rem 0;border-bottom:1px solid var(--nal-border-soft);}
+.read-live-prep-item h3{font-size:1.2rem;line-height:1.7;overflow-wrap:anywhere;}
+.read-pathway-next{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--nal-border-soft);}
+.read-pathway-next h2{font-size:1.3rem;line-height:1.7;}
+@media(max-width:42rem){.read-journey li{grid-template-columns:3.5rem minmax(0,1fr);gap:.6rem;}.read-journey li>:last-child{grid-column:2;}.read-actions{align-items:stretch;}.read-hero>.read-button{justify-self:start;}.read-flow-weeks{gap:.4rem 1rem;}}
 @media(max-height:450px){.read-bottom-nav{position:static;}.read-shell{padding-bottom:2rem;}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;}}
-@media print{.read-bottom-nav,.read-account-panel,.read-actions,.read-archive-search{display:none!important;}.read-shell{width:100%;padding:0;}.read-record{break-inside:avoid;}}
+@media print{.read-bottom-nav,.read-account-panel,.read-actions,.read-archive-search,.read-flow-weeks{display:none!important;}.read-shell{width:100%;padding:0;}.read-record{break-inside:avoid;}}

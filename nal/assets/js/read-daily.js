@@ -1,40 +1,43 @@
+/* BUILD15: a saved TRY answer opens one source-linked experiment; completion offers a next action. */
 (() => {
  'use strict';
  const N=window.NalRead;if(!N)return;
- const page=document.body.dataset.readDailyPage;
- const root=document.querySelector('[data-private-root]');
- const el=N.node;let day=null,index=0,drafts=new Map(),run=0;
+ const page=document.body.dataset.readDailyPage,root=document.querySelector('[data-private-root]'),el=N.node;
+ let day=null,index=0,drafts=new Map(),run=0,working=false,links=new Map();
  const inputTypes=new Set(['QUESTION','SCALE','MULTI_SELECT','TRY']);
- function acceptedInput(s){return inputTypes.has(s.type)||(s.type==='RECORD'&&s.required);}
- function actions(){return el('div','','read-actions');}
- function button(text,fn,secondary=false){const b=el('button',text,'read-button'+(secondary?' secondary':''));b.type='button';b.addEventListener('click',async()=>{b.disabled=true;try{await fn();}catch(e){N.error(e);}finally{b.disabled=false;}});return b;}
+ const accepts=s=>inputTypes.has(s.type)||(s.type==='RECORD'&&s.required);
+ const route=(view,params={})=>{const q=new URLSearchParams({season:N.slug,view});for(const[k,v]of Object.entries(params))if(v!=null)q.set(k,String(v));return '/nal/read/open/?'+q;};
+ const actions=()=>el('div','','read-actions');
+ const context=()=>({run,epoch:N.epoch});
+ const current=c=>c.run===run&&c.epoch===N.epoch&&!!N.user;
+ function button(text,fn,secondary=false){const b=el('button',text,'read-button'+(secondary?' secondary':''));b.type='button';
+  b.addEventListener('click',async()=>{
+   if(working)return;working=true;const c=context(),states=[...root.querySelectorAll('input,textarea,button')].map(n=>[n,n.disabled]);states.forEach(([n])=>n.disabled=true);
+   try{await fn(c);}catch(e){if(current(c))N.error(e);}finally{working=false;states.forEach(([n,v])=>{if(n.isConnected)n.disabled=v;});}
+  });return b;
+ }
  function reveal(){root.hidden=false;}
+ function weekParams(){return Number.isInteger(day?.weekNumber)?{week:day.weekNumber}:{};}
  function renderStep(){
   if(!day||!N.user)return;root.replaceChildren();reveal();
   const s=day.steps[index];if(!s){renderEnd();return;}
-  const section=el('section','','read-step');
-  section.append(el('p',`DAY ${String(day.dayNumber).padStart(2,'0')} · ${index+1} / ${day.steps.length}`,'read-eyebrow'));
-  const heading=el('h1',s.type==='HOOK'?(s.content||day.title):(s.prompt||s.content||day.title),s.type==='HOOK'?'read-question':'read-step-prompt');
-  heading.tabIndex=-1;section.append(heading);
+  const section=el('section','','read-step');section.append(el('p',`DAY ${String(day.dayNumber).padStart(2,'0')} · ${index+1} / ${day.steps.length}`,'read-eyebrow'));
+  const heading=el('h1',s.type==='HOOK'?(s.content||day.title):(s.prompt||s.content||day.title),s.type==='HOOK'?'read-question':'read-step-prompt');heading.tabIndex=-1;section.append(heading);
   if(s.content&&s.type!=='HOOK'&&s.prompt)section.append(el('p',s.content,'read-step-copy'));
-  let control=null,draft=drafts.get(s.order);
-  if(acceptedInput(s)){
-   const value=draft?.value||{answerText:s.answerText??null,answerJson:s.answerJson??null};
+  if(accepts(s)){
+   const draft=drafts.get(s.order),value=draft.value||{answerText:s.answerText??null,answerJson:s.answerJson??null};
    const state=el('p','','read-save-state');state.setAttribute('role','status');state.setAttribute('aria-live','polite');
-   if(!draft){draft=N.createDraft(day.dayNumber,s.order,null,(text,kind)=>{state.textContent=text;state.dataset.state=kind;});drafts.set(s.order,draft);}
-   draft.showState=(text,kind)=>{state.textContent=text;state.dataset.state=kind;};
+   draft.showState=(text,kind)=>{if(state.isConnected){state.textContent=text;state.dataset.state=kind;}};
+   let control;
    if(['QUESTION','TRY','RECORD'].includes(s.type)){
-    control=el('textarea','','read-answer');control.rows=5;control.maxLength=5000;
-    control.placeholder=s.placeholder||'한 문장이어도 충분합니다.';control.value=value.answerText||'';
-    control.setAttribute('aria-label',s.prompt||'내 기록');
+    control=el('textarea','','read-answer');control.rows=5;control.maxLength=5000;control.placeholder=s.placeholder||'한 문장이어도 충분합니다.';control.value=value.answerText||'';control.setAttribute('aria-label',s.prompt||'내 기록');
    }else{
-    control=el('fieldset','','read-choice-group');const legend=el('legend',s.type==='SCALE'?'지금의 나와 가까운 값':'가까운 항목을 골라주세요.','read-field-label');control.append(legend);
-    const options=s.type==='SCALE'?[1,2,3,4,5]:(s.options||[]);
-    for(const option of options){
-     const v=String(typeof option==='object'?(option.value??option.label):option),labelText=typeof option==='object'?(option.label??v):String(option);
-     const label=el('label','','read-choice'),input=el('input');input.type=s.type==='SCALE'?'radio':'checkbox';input.name='answer-'+s.order;input.value=v;
+    control=el('fieldset','','read-choice-group');control.append(el('legend',s.type==='SCALE'?'지금의 나와 가까운 값':'가까운 항목을 골라주세요.','read-field-label'));
+    for(const option of s.type==='SCALE'?[1,2,3,4,5]:(s.options||[])){
+     const v=String(typeof option==='object'?(option.value??option.label):option),label=el('label','','read-choice'),input=el('input');
+     input.type=s.type==='SCALE'?'radio':'checkbox';input.name='answer-'+s.order;input.value=v;
      input.checked=s.type==='SCALE'?Number(value.answerJson?.value)===Number(v):(value.answerJson?.values||[]).includes(v);
-     label.append(input,document.createTextNode(labelText));control.append(label);
+     label.append(input,document.createTextNode(typeof option==='object'?(option.label??v):String(option)));control.append(label);
     }
    }
    const readValue=()=>{
@@ -42,45 +45,50 @@
     if(s.type==='SCALE'){const picked=control.querySelector('input:checked');return {answerText:null,answerJson:picked?{value:Number(picked.value)}:null};}
     return {answerText:null,answerJson:{values:[...control.querySelectorAll('input:checked')].map(n=>n.value)}};
    };
-   const track=()=>{draft.set(readValue());};control.addEventListener('input',track);control.addEventListener('change',track);
-   section.append(control,state);
-   const local=el('label','','read-local-option'),check=el('input');check.type='checkbox';check.addEventListener('change',()=>draft.setLocal(check.checked));
-   local.append(check,document.createTextNode('이 탭에 미저장 초안 보관 (공용 기기에서는 선택하지 마세요)'));section.append(local);
-   const candidate=draft.localCandidate();if(candidate)section.append(button('이 탭의 미저장 초안 복원',()=>{draft.set(candidate);renderStep();},true));
-   const row=actions();
-   if(index>0)row.append(button('이전',async()=>{track();await draft.flush();index--;renderStep();},true));
-   row.append(button('기록하고 계속',async()=>{
-    const value=readValue();
-    if(s.required&&(['QUESTION','TRY','RECORD'].includes(s.type)?!value.answerText.trim():s.type==='SCALE'?!value.answerJson:!value.answerJson.values.length))throw new Error('지금의 답을 하나 남겨주세요.');
-    track();await draft.commit();s.answerText=value.answerText;s.answerJson=value.answerJson;index++;renderStep();
-   }));
+   const track=()=>draft.set(readValue());control.addEventListener('input',track);control.addEventListener('change',track);section.append(control,state);
+   const local=el('label','','read-local-option'),check=el('input');check.type='checkbox';check.addEventListener('change',()=>draft.setLocal(check.checked));local.append(check,document.createTextNode('이 탭에 미저장 초안 보관 (공용 기기에서는 선택하지 마세요)'));section.append(local);
+   if(draft.localCandidate())section.append(button('이 탭의 미저장 초안 복원',()=>{draft.set(draft.localCandidate());renderStep();},true));
+   async function commit(c){
+    const v=readValue();
+    if(s.required&&(['QUESTION','TRY','RECORD'].includes(s.type)?!v.answerText.trim():s.type==='SCALE'?!v.answerJson:!v.answerJson.values.length))throw new Error('지금의 답을 하나 남겨주세요.');
+    track();const result=await draft.commit();if(!current(c))return null;s.answerText=v.answerText;s.answerJson=v.answerJson;return result;
+   }
+   const row=actions();if(index>0)row.append(button('이전',async c=>{track();await draft.flush();if(current(c)){index--;renderStep();}},true));
+   row.append(button('기록하고 계속',async c=>{if(await commit(c)){index++;renderStep();}}));
    if(s.type==='TRY'){
-    let created=null;const experimentId=crypto.randomUUID();
-    row.append(button('실험으로 옮기기',async()=>{
-     const value=readValue();if(!value.answerText?.trim())throw new Error('해볼 일을 한 문장으로 남겨주세요.');track();await draft.commit();
-     if(!created){const r=await N.work('experiment-save',{id:experimentId,revision:0,weekNumber:Math.max(1,Math.ceil(day.dayNumber/7)),title:value.answerText.trim().slice(0,200),intention:value.answerText.slice(0,2000),reflection:'',durationHours:72,status:'planned'});created=r.experiment;}
-     N.status('TRY에 계획을 남겼습니다. 시작 시각은 TRY에서 직접 정합니다.','ok');
-     if(!row.querySelector('[data-open-try]')){const a=N.link(N.root+'try/','내 실험 열기');a.dataset.openTry='';row.append(a);}
+    const connected=links.get(s.order);
+    if(connected)row.append(N.link(route('try',{week:connected.weekNumber,experiment:connected.id}),'연결한 실험 이어가기'));
+    else row.append(button('이 답으로 작은 실험 만들기',async c=>{
+     if(!readValue().answerText?.trim())throw new Error('해볼 일을 한 문장으로 남겨주세요.');
+     const saved=await commit(c);if(!saved)return;
+     const result=await N.work('experiment-from-answer',{dayNumber:day.dayNumber,stepOrder:s.order,revision:saved.revision,answerId:saved.answerId});
+     if(!current(c))return;
+     const ex=result.experiment;links.set(s.order,{id:ex.id,weekNumber:ex.week_number});
+     N.status(result.created?'내 답에서 실험 하나를 만들었습니다. 시작 시각은 TRY에서 직접 정하세요.':'이 답에 연결된 실험이 있습니다. 기존 계획과 돌아보기는 그대로 유지합니다.','ok');renderStep();
     },true));
+    section.append(el('p','한 답에서 이어가는 실험은 하나입니다. 답을 고쳐도 기존 실험의 계획·돌아보기를 덮어쓰지 않습니다.','read-meta'));
    }
    section.append(row);
   }else{
    if(s.type==='RECORD'){
     const answers=day.steps.slice(0,index).filter(x=>x.answerText?.trim());section.append(el('p','방금 남긴 내 문장을 그대로 다시 읽습니다.','read-step-copy'));
-    for(const answer of answers.slice(-3))section.append(el('blockquote',answer.answerText,'read-own-sentence'));
-    if(!answers.length)section.append(el('p','앞선 질문에서 기록을 남기면 이곳에서 다시 읽을 수 있습니다.','read-empty'));
+    answers.slice(-3).forEach(a=>section.append(el('blockquote',a.answerText,'read-own-sentence')));
+    if(!answers.length)section.append(el('p','앞선 질문에서 남긴 문장을 이곳에서 다시 읽을 수 있습니다.','read-empty'));
    }
-   if(s.type==='LIVE')section.append(N.link(N.root+'live/','LIVE 일정과 내 대화 기록 열기'));
+   if(s.type==='LIVE')section.append(N.link(route('live',weekParams()),'이번 주 대화 준비하기'));
    const row=actions();if(index>0)row.append(button('이전',()=>{index--;renderStep();},true));row.append(button('계속',()=>{index++;renderStep();}));section.append(row);
   }
-  root.append(section);heading.focus({preventScroll:true});
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)window.scrollTo({top:0,behavior:'smooth'});else window.scrollTo(0,0);
+  root.append(section);heading.focus({preventScroll:true});window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
  }
  function renderEnd(){
-  const section=el('section','','read-step');section.append(el('p','MY WORDS','read-eyebrow'),el('h1','오늘은 여기까지.','read-question'),el('p','남긴 기록은 MY NAL에서 다시 읽을 수 있습니다.','read-step-copy'));
+  const section=el('section','','read-step');section.append(el('p','MY WORDS','read-eyebrow'),el('h1','오늘은 여기까지.','read-question'),el('p','내 기록을 마친 뒤 어디로 이어갈지는 직접 선택합니다.','read-step-copy'));
   const row=actions();row.append(button('마지막 질문 다시 보기',()=>{index=Math.max(0,day.steps.length-1);renderStep();},true));
-  const done=button('오늘 기록 마치기',async()=>{await N.daily('complete-day',{dayNumber:day.dayNumber});done.remove();section.querySelector('h1').textContent='오늘의 기록이 남았습니다.';row.append(N.link(N.root+'today/','TODAY로'),N.link(N.root+'my/','내 기록 읽기'));});
-  row.append(done);section.append(row);root.replaceChildren(section);reveal();
+  const done=button('오늘 기록 마치기',async c=>{
+   await N.daily('complete-day',{dayNumber:day.dayNumber});if(!current(c))return;done.remove();section.querySelector('h1').textContent='오늘의 기록이 남았습니다.';
+   const next=el('section','','read-pathway-next');next.append(el('h2','여기에서 이어갈 수 있어요.'));
+   const destinations=actions();destinations.append(N.link(route('today'),'다음 질문 확인'),N.link(route('try',weekParams()),'작은 실험 이어가기'),N.link(route('live',weekParams()),'LIVE 대화 준비'),N.link(route('report'),'내 기록 한 권으로 읽기'));
+   next.append(destinations,el('p','링크를 여는 것만으로 실험·출석·리포트가 완료되거나 저장되지는 않습니다.','read-meta'));section.append(next);
+  });row.append(done);section.append(row);root.replaceChildren(section);reveal();
  }
  function today(data){
   const arrival=data.arrival,section=el('section','','read-hero'),start='/nal/read/start/?season='+encodeURIComponent(N.slug);
@@ -90,44 +98,45 @@
    if(arrival.phase==='prestart')section.append(el('p',arrival.guide?.beforeStart||'첫 질문은 시작일에 열립니다. 그 전에 책과 준비 안내를 확인해 보세요.','read-step-copy'));
    else if(arrival.phase==='cancelled')section.append(el('p','일정 취소와 실제 결제·환불 상태는 별도로 확인합니다.','read-step-copy'));
    section.append(N.link(start,'나의 시작 안내 열기','read-button'),N.link('/nal/my/','전체 MY NAL'));
-   const first=(arrival.liveSessions||[]).find(x=>x.status==='published'&&Date.parse(x.endsAt)>=Date.parse(arrival.serverTime));
-   if(first&&arrival.phase!=='cancelled')section.append(el('p','다음 LIVE · '+first.title+' / '+N.date(first.startsAt),'read-meta'));
+   const first=(arrival.liveSessions||[]).find(x=>x.status==='published'&&Date.parse(x.endsAt)>=Date.parse(arrival.serverTime));if(first&&arrival.phase!=='cancelled')section.append(el('p','다음 LIVE · '+first.title+' / '+N.date(first.startsAt),'read-meta'));
    root.append(section);return;
   }
-  const current=data.currentDay==null?null:Number(data.currentDay),item=(data.journey||[]).find(x=>Number(x.dayNumber)===current&&x.unlocked);
+  const currentDay=data.currentDay==null?null:Number(data.currentDay),item=(data.journey||[]).find(x=>Number(x.dayNumber)===currentDay&&x.unlocked);
   section.append(el('p','TODAY','read-eyebrow'),el('h1',item?.title||'질문이 열릴 자리를 준비하고 있습니다.','read-question'));
-  if(item)section.append(el('p',`DAY ${String(current).padStart(2,'0')} · ${item.estimatedMinutes} MIN`,'read-meta'),N.link(N.dayHref(current),item.progress==='completed'?'내 답 다시 읽기':'오늘의 질문 열기','read-button'));
+  if(item)section.append(el('p',`DAY ${String(currentDay).padStart(2,'0')} · ${item.estimatedMinutes} MIN`,'read-meta'),N.link(N.dayHref(currentDay),item.progress==='completed'?'내 답 다시 읽기':'오늘의 질문 열기','read-button'));
   else section.append(el('p','공개된 질문이 생기면 이곳에서 이어갈 수 있습니다.','read-empty'));
-  if(arrival?.phase==='ended')section.append(el('p','운영 기간은 끝났습니다. 이용권 범위 안에서 내 답과 리포트를 다시 읽을 수 있습니다.','read-meta'),N.link(N.root+'report/','내 리포트'));
-  section.append(N.link(N.root+'my/','내가 남긴 기록'),N.link(N.root+'try/','내 작은 실험'),N.link(start,'시작·준비 안내'));root.append(section);
+  if(arrival?.phase==='ended')section.append(el('p','운영 기간은 끝났습니다. 이용권 범위 안에서 내 답과 리포트를 다시 읽을 수 있습니다.','read-meta'),N.link(route('report'),'내 리포트'));
+  section.append(N.link(route('my'),'내가 남긴 기록'),N.link(route('try'),'내 작은 실험'),N.link(start,'시작·준비 안내'));root.append(section);
  }
  async function render(){
-  const ticket=++run;if(!N.user){root.replaceChildren();root.hidden=true;return;}
+  const ticket=++run;links=new Map();if(!N.user){root.replaceChildren();root.hidden=true;return;}
   try{
    if(page==='today'||page==='journey'){
     const data=await N.daily('bootstrap');if(ticket!==run)return;root.replaceChildren();reveal();
-    if(page==='today')today(data);
-    else{
-     root.append(el('p','JOURNEY','read-eyebrow'),el('h1','다시 돌아와도 괜찮습니다.','read-step-prompt'));
-     const list=el('ol','','read-journey');
-     for(const item of data.journey||[]){const li=el('li'),num=el('span',item.dayNumber===0?'BEFORE':String(item.dayNumber).padStart(2,'0'),'read-meta');li.append(num,el('span',item.title));
-      if(item.unlocked)li.append(N.link(N.dayHref(Number(item.dayNumber)),item.progress==='completed'?'내 답 다시 읽기 →':'열기 →','read-inline-link'));else li.append(el('span','아직 열리지 않았어요.','read-lock'));list.append(li);}
+    if(page==='today')today(data);else{
+     root.append(el('p','JOURNEY','read-eyebrow'),el('h1','다시 돌아와도 괜찮습니다.','read-step-prompt'));const list=el('ol','','read-journey');
+     for(const item of data.journey||[]){const li=el('li');li.append(el('span',item.dayNumber===0?'BEFORE':String(item.dayNumber).padStart(2,'0'),'read-meta'),el('span',item.title));
+      li.append(item.unlocked?N.link(N.dayHref(Number(item.dayNumber)),item.progress==='completed'?'내 답 다시 읽기 →':'열기 →','read-inline-link'):el('span','아직 열리지 않았어요.','read-lock'));list.append(li);}
      if(!list.children.length)root.append(el('p','아직 공개된 질문이 없습니다.','read-empty'));root.append(list);
     }
    }else{
-    const raw=new URLSearchParams(location.search).get('day'),n=page==='before'?0:(raw!==null&&/^\d{1,3}$/.test(raw)?Number(raw):null);
-    if(n===null||n>366)throw new Error('DAY 주소를 확인해 주세요.');
-    const [content,saved]=await Promise.all([N.daily('day',{dayNumber:n}),N.work('drafts',{dayNumber:n})]);
+    const raw=new URLSearchParams(location.search).get('day'),n=page==='before'?0:(raw!==null&&/^\d{1,3}$/.test(raw)?Number(raw):null);if(n===null||n>366)throw new Error('DAY 주소를 확인해 주세요.');
+    const [content,saved,experiments]=await Promise.all([N.daily('day',{dayNumber:n}),N.work('drafts',{dayNumber:n}),N.work('experiments')]);
     if(ticket!==run)return;drafts.forEach(d=>d.dispose());drafts.clear();day=content;index=0;
+    // Use source metadata, never text similarity, to find an existing connected experiment.
+    for(const ex of experiments.experiments||[]){if(ex.source_snapshot?.dayNumber===n&&Number.isInteger(ex.source_snapshot.stepOrder)){
+     links.set(ex.source_snapshot.stepOrder,{id:ex.id,weekNumber:ex.week_number});
+     day.weekNumber=ex.source_snapshot.weekNumber;
+    }}
     const records=new Map((saved.drafts||[]).map(d=>[d.order,d]));
-    for(const s of day.steps||[]){if(!acceptedInput(s))continue;const record=records.get(s.order);const d=N.createDraft(n,s.order,record,(text,kind)=>d.showState?.(text,kind));drafts.set(s.order,d);
+    for(const s of day.steps||[]){if(!accepts(s))continue;const record=records.get(s.order),d=N.createDraft(n,s.order,record,(text,kind)=>d.showState?.(text,kind));drafts.set(s.order,d);
      if(record&&!record.committed){s.answerText=record.payload.answerText;s.answerJson=record.payload.answerJson;}}
     const at=Number(new URLSearchParams(location.search).get('step')),requested=day.steps.findIndex(s=>s.order===at);
     if(requested>=0)index=requested;else{const recent=(saved.drafts||[]).filter(x=>!x.committed).sort((a,b)=>Date.parse(b.updatedAt)-Date.parse(a.updatedAt))[0];if(recent)index=Math.max(0,day.steps.findIndex(s=>s.order===recent.order));}
     if(!day.steps?.length){root.replaceChildren(el('p','이 DAY의 질문을 준비하고 있습니다.','read-empty'));reveal();return;}renderStep();
    }
    N.status('');
-  }catch(e){N.error(e);}
+  }catch(e){if(ticket===run)N.error(e);}
  }
  N.ready.then(ok=>{if(ok)render();});window.addEventListener('nal:session',render);
 })();
