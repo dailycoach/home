@@ -1,0 +1,30 @@
+{
+  "formatVersion": 1,
+  "build": 26,
+  "kind": "forward-continuation-map-not-an-apply-runner",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "sourceManifest": "integration/nal-read/build19/manifest.json",
+  "targetProfile": "after-first-sixteen-layers",
+  "requiredRecordedMigrations": ["20261007131539", "20261007131833", "20261007132041", "20261007134152", "20261007150710", "20261007210247", "20261007211433"],
+  "alreadyAppliedLayerIds": ["build04-workspace", "build05-editorial", "build05-report", "build06-join", "build06-account", "build07-payments", "build07-reconciliation", "build07-integration", "build09-cohorts", "build09-cohort-admin", "build09-admission-bridges", "build10-guide", "build10-studio", "build10-arrival-bridge", "build12-support", "build14-home"],
+  "remainingLayers": [
+    {"id": "build15-pathway", "path": "docs/NAL_READ_BUILD15_PATHWAY.sql"},
+    {"id": "build17-operations", "path": "docs/NAL_READ_BUILD17_OPERATIONS.sql"},
+    {"id": "build18-context", "path": "docs/NAL_READ_BUILD18_CONTEXT.sql"}
+  ],
+  "releaseMustRemain": "off",
+  "rules": [
+    "Read current migration metadata and branch head before changes; this is a recorded state, not live authority.",
+    "Do not replay the first sixteen layers or remove the guard from the original all-layers candidate.",
+    "The original account function now resides in nal_private.account_before_home. Its former public-definition hash is not the current public wrapper hash.",
+    "Next apply only pathway, operator home and scoped context, in that order, with explicit predecessor/replay guards.",
+    "No inquiry, reply, owner/operator role, assignment, participant, order or first-cohort content was created in BUILD26.",
+    "Support must still require verified identity and current ownership/assignment even when READ participation is inactive. General login-less help remains a separate existing public page.",
+    "The account/home runtime booleans must come from the existing server configuration, never from browser feature/role overrides. Home reads do not submit support read receipts or trigger payment-provider work.",
+    "Do not expose private support helpers, preserved account implementations or unused internal refund actions as alternate public endpoints.",
+    "Keep READ OFF and preserve existing PDF/store/provider settings. No blanket database reset/push/history repair for the prior STORE identifier discrepancy.",
+    "Do not stamp all-nineteen-layer completion or activate the newest runtime while three prerequisites remain. User-facing tests remain deferred to the pre-sale phase.",
+    "The BUILD21 ZIP remains immutable source evidence, not a fresh database snapshot; coordinate matching API/frontend sources at the later deployment step."
+  ],
+  "automaticActions": false
+}
