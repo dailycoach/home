@@ -13,22 +13,28 @@
  function safeNext(raw){try{const u=new URL(raw||'/nal/my/',location.origin);
   if(u.origin!==location.origin||!/^\/nal\/(?:my(?:\/|$)|shop\/read(?:\/|$)|read(?:\/|$))/.test(u.pathname))return '/nal/my/';
   for(const key of [...u.searchParams.keys()])if(!['season','view','day','step','order','product','tab','id'].includes(key))u.searchParams.delete(key);
+  // Payment keys are intentionally never persisted in a magic-link return URL.
   return u.pathname+u.search;
  }catch{return '/nal/my/';}}
- async function call(area,action,payload={},seasonSlug){
+ async function request(endpoint,body,timeout=20000){
   if(!session?.access_token)throw Object.assign(new Error('로그인이 필요합니다.'),{status:401});
-  const owner=epoch,c=new AbortController();controllers.add(c);const timer=setTimeout(()=>c.abort(),20000);
-  try{const res=await fetch(config.url+'/functions/v1/nal-account',{method:'POST',cache:'no-store',signal:c.signal,
-   headers:{apikey:config.publishableKey,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({area,action,payload,seasonSlug})});
+  const owner=epoch,c=new AbortController();controllers.add(c);const timer=setTimeout(()=>c.abort(),timeout);
+  try{const res=await fetch(config.url+'/functions/v1/'+endpoint,{method:'POST',cache:'no-store',signal:c.signal,
+   headers:{apikey:config.publishableKey,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify(body)});
    const data=await res.json().catch(()=>({}));if(owner!==epoch)throw new DOMException('Session changed','AbortError');
-   if(!res.ok){if(res.status===401)adopt(null);throw Object.assign(new Error(data.error||'연결하지 못했습니다.'),{status:res.status});}return data;
+   if(!res.ok){if(res.status===401)adopt(null);throw Object.assign(new Error(data.error||'연결하지 못했습니다.'),{status:res.status,recoverable:data.recoverable});}return data;
   }finally{clearTimeout(timer);controllers.delete(c);}
  }
- async function offers(slug=null){await ready;if(!config)throw new Error('계정 연결 설정을 준비하고 있습니다.');
-  const u=new URL(config.url+'/functions/v1/nal-account');u.searchParams.set('action','offers');if(slug)u.searchParams.set('season',slug);
+ const call=(area,action,payload={},seasonSlug)=>request('nal-account',{area,action,payload,seasonSlug});
+ const pay=(action,payload={})=>request('nal-read-payments',{action,payload},60000);
+ async function publicGet(endpoint,params={}){
+  await ready;if(!config)throw new Error('계정 연결 설정을 준비하고 있습니다.');
+  const u=new URL(config.url+'/functions/v1/'+endpoint);for(const [k,v]of Object.entries(params))if(v!=null)u.searchParams.set(k,v);
   const r=await fetch(u,{cache:'no-store',headers:{apikey:config.publishableKey},signal:AbortSignal.timeout(15000)});
   const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'목록을 불러오지 못했습니다.');return data;
  }
+ const offers=slug=>publicGet('nal-account',{action:'offers',season:slug});
+ const payConfig=()=>publicGet('nal-read-payments');
  const ready=(async()=>{
   try{const production=['daily-coach-ing.com','www.daily-coach-ing.com'].includes(location.hostname.toLowerCase());
    const r=await fetch(production?'/nal/data/backend.json':'/nal/data/read-backend.staging.json',{cache:'no-store'});
@@ -61,12 +67,12 @@
   if(!res.ok)throw new Error(data.error||'파일 전달을 준비하고 있습니다.');
   const u=new URL(data.downloadUrl);if(u.origin!==new URL(config.url).origin||!u.pathname.startsWith('/storage/v1/object/sign/'))throw new Error('파일 주소를 확인하지 못했습니다.');return u.href;
  }
- window.NalAccount={ready,call,offers,download,node,status,safeNext,
+ window.NalAccount={ready,call,offers,download,pay,payConfig,node,status,safeNext,
   get user(){return session?.user||null;},get epoch(){return epoch;},
   onChange(fn){callbacks.add(fn);return ()=>callbacks.delete(fn);},
   link(href,text,cls='nal-account-link'){const a=node('a',text,cls);a.href=href;return a;},
   date:v=>v?new Intl.DateTimeFormat('ko-KR',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Seoul'}).format(new Date(v)):'미정',
-  money:v=>Number.isFinite(Number(v))?new Intl.NumberFormat('ko-KR').format(Number(v))+'원':'가격 준비 중',
+  money:v=>v!=null&&v!==''&&Number.isFinite(Number(v))?new Intl.NumberFormat('ko-KR').format(Number(v))+'원':'가격 준비 중',
   read(slug,view='today',extra={}){const u=new URL('/nal/read/open/',location.origin);u.searchParams.set('season',slug);u.searchParams.set('view',view);for(const[k,v]of Object.entries(extra))u.searchParams.set(k,String(v));return u.pathname+u.search;}
  };
 })();

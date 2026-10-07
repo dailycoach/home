@@ -1,0 +1,9 @@
+/* BUILD07 payment/editorial extension — no card fields stored in NAL. */
+.nal-checkout-price{font-size:clamp(2rem,6vw,4rem);font-weight:750;letter-spacing:-.06em;line-height:1.2;}
+.nal-checkout-state{display:grid;grid-template-columns:minmax(6rem,1fr) minmax(0,3fr);max-width:40rem;border-top:1px solid var(--nal-border-soft,#ddd);margin:2rem 0;}
+.nal-checkout-state dt,.nal-checkout-state dd{margin:0;padding:.9rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);line-height:1.7;overflow-wrap:anywhere;}
+.nal-checkout-state dt{color:var(--nal-text-muted,#696a70);font-size:.95rem;}
+.nal-checkout-message{max-width:44rem;padding:1.5rem 0;border-top:2px solid currentColor;font-size:1.1rem;line-height:1.9;word-break:keep-all;}
+.nal-refund-review{padding:1.5rem 0;margin:1.5rem 0;border-top:1px solid var(--nal-border-soft,#ddd);}
+.nal-account-record>code{display:block;font-size:.8rem;overflow-wrap:anywhere;}
+@media(max-width:40rem){.nal-checkout-state{grid-template-columns:6rem minmax(0,1fr);gap:0 .7rem;}.nal-account-actions>*{max-width:100%;}}

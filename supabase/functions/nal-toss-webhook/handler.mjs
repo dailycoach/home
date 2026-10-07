@@ -32,6 +32,10 @@ export function createWebhookHandler({ enabled, lookupPayment, reconcile }) {
       return response(400, { error: 'Invalid verified payment' });
     }
 
+    // BUILD07: ignore only the VERIFIED dedicated READ namespace. Its separate
+    // durable receiver handles READ fulfillment. All existing PDF logic stays below.
+    if (/^nr_[a-f0-9]{32}$/.test(payment.orderId)) return response(200, { ignored: true, handler: 'nal-read-payments-webhook' });
+
     try {
       const result = await reconcile(payment.orderId, payment.paymentKey, payment.totalAmount, payment.status);
       return response(200, { ok: true, status: result?.status || 'pending' });
