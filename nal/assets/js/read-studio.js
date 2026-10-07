@@ -3,6 +3,7 @@
  const el=A.node,root=document.querySelector('[data-account-private]');
  const query=new URLSearchParams(location.search);let slug=query.get('season')||'',week=Number(query.get('week'))||1;
  let generation=0,dirty={guide:false,plan:false},closePresentation=()=>{};
+ let importGuide=null,importPlan=null;
  const blankGuide=()=>({headline:'',introduction:'',forWhom:'',takeAway:'',readingNote:'',beforeStart:'',book:{title:'',author:'',editionNote:''},prepare:[],faq:[]});
  const blankPlan=()=>({aim:'',opening:'',closing:'',followUp:'',agenda:[],debrief:{observed:'',adjust:'',next:''}});
  const hasDirty=()=>dirty.guide||dirty.plan;
@@ -50,7 +51,7 @@
    try{const result=await A.companion('studio-guide-publish',slug,{revision,confirmed:true});if(current(c)){published=result.publishedRevision;paintMeta();A.status('현재 안내 문구의 공개본을 승인했습니다.','ok');}}
    finally{busy=false;unlock();publish.disabled=data.role!=='owner'||dirty.guide;}
   });
-  const paintMeta=()=>{meta.textContent='편집본 v'+revision+' · 공개본 '+(published?'v'+published:'없음')+(published&&published!==revision?' · 이전 공개본은 그대로 유지됩니다.':'');publish.disabled=data.role!=='owner'||dirty.guide;};
+  const paintMeta=()=>{meta.textContent='편집본 v'+revision+' · 공개본 '+(published?'v'+published:'없음')+(published&&published!==revision?' · 이전 공개본은 그대로 유지됩니다.':'')+(dirty.guide?' · 편집창 미저장 변경 있음':'');publish.disabled=data.role!=='owner'||dirty.guide;};
   function changed(){dirty.guide=true;paintMeta();}
   for(const [key,label,max] of [['headline','소개 제목',120],['introduction','프로그램 소개',2000],['forWhom','어떤 분과 함께하나요?',2000],['takeAway','참여하며 무엇을 남기나요?',2000],['readingNote','책 읽기 안내',2000],['beforeStart','시작 전 안내',2000]]){
    form.append(field(label,source[key],v=>{source[key]=v;changed();},{multi:key!=='headline',max}).wrap);
@@ -74,6 +75,15 @@
    try{const result=await A.companion('studio-guide-save',slug,{revision,source:snapshot});if(current(c)){revision=result.revision;published=result.publishedRevision;dirty.guide=false;paintMeta();A.status('안내 초안을 저장했습니다. 공개본은 별도 승인합니다.','ok');}}
    finally{busy=false;unlock();publish.disabled=data.role!=='owner'||dirty.guide;}
   }),publish,A.link('/nal/shop/read/?season='+encodeURIComponent(slug),'현재 공개 상세 보기'));
+  // Import affects only this editor, retaining the currently fetched save revision.
+  // No network save/publish call is issued here and no other editor is rebuilt.
+  importGuide=incoming=>{
+   if(busy||!area.isConnected)throw new Error('안내 저장이 진행 중입니다. 완료 후 원고를 가져와 주세요.');
+   dirty.guide=true;
+   const next=guideEditor({...data,guide:{...data.guide,source:structuredClone(incoming),revision,publishedRevision:published}});
+   area.replaceWith(next);const details=next.closest('details');if(details)details.open=true;
+   next.scrollIntoView({block:'start',behavior:'auto'});
+  };
   area.append(meta,form,actions);paintMeta();return area;
  }
  function planEditor(data){
@@ -83,13 +93,14 @@
   let paintAgenda=()=>{},paintTiming=()=>{};const meta=el('p','','nal-account-meta');
   const mark=()=>{dirty.plan=true;meta.textContent='저장본 v'+revision+' · 현재 화면에 미저장 변경이 있습니다.';};
   function example(){
-   if(plan.agenda.length&&!confirm('현재 진행안을 60분 기본 초안으로 바꿀까요? 저장하기 전까지 서버 원본은 바뀌지 않습니다.'))return;
+   if(plan.agenda.length&&!confirm('현재 진행안을 별도 편집용 60분 예시로 바꿀까요? READ 01의 90분 원고와 다른 예시입니다. 저장하기 전까지 서버 원본은 바뀌지 않습니다.'))return;
    const lines=[['자리에 도착하기',5,'오늘 이 자리에서 함께 살펴보고 싶은 것은 무엇인가요?'],['내 삶의 장면',10,'읽다가 멈춘 문장은 내 삶의 어떤 경험과 연결되나요?'],
     ['해본 일 돌아보기',15,'직접 해보니 무엇이 예상과 달랐나요?'],['질문으로 더 살펴보기',15,'지금 새롭게 묻게 된 질문은 무엇인가요?'],['작은 선택',10,'다음 주에 작게 해볼 한 가지는 무엇인가요?'],['한 문장 남기기',5,'오늘의 나에게 남길 문장은 무엇인가요?']];
+   const previousDebrief=structuredClone(plan.debrief);
    plan={...blankPlan(),aim:'읽고 적은 내용에서 한 가지 알아차림과 작은 실험을 정합니다.',opening:lines[0][2],closing:lines[5][2],
     followUp:'참가자가 선택한 작은 실험과 마지막 한 문장을 각자의 기록에 남기도록 안내합니다.',
-    agenda:lines.map(([title,minutes,prompt])=>({id:'part-'+crypto.randomUUID().slice(0,8),title,minutes,prompt,notes:'공유는 선택입니다. 말하지 않고 머무를 시간도 허용합니다.'}))};
-   mark();paint();
+    agenda:lines.map(([title,minutes,prompt])=>({id:'part-'+crypto.randomUUID().slice(0,8),title,minutes,prompt,notes:'공유는 선택입니다. 말하지 않고 머무를 시간도 허용합니다.'})),debrief:previousDebrief};
+   state='draft';mark();paint();
   }
   function paint(){
    editor.replaceChildren();const form=el('form','','nal-studio-form');form.addEventListener('submit',e=>e.preventDefault());
@@ -98,7 +109,9 @@
    for(const [key,label]of [['aim','이번 주 대화의 목적'],['opening','시작 질문'],['closing','마치는 질문'],['followUp','대화 후 안내할 작은 실행']])form.append(field(label,plan[key],v=>{plan[key]=v;mark();},{multi:true}).wrap);
    const schedule=el('p','','nal-runbook-timing');schedule.setAttribute('aria-live','polite');
    paintTiming=()=>{const total=plan.agenda.reduce((sum,x)=>sum+(Number.isFinite(x.minutes)?x.minutes:0),0),session=data.liveSessions?.find(x=>x.id===sessionId);
-    schedule.textContent='진행안 합계 '+timeText(total)+(session?' / 연결 LIVE '+timeText((Date.parse(session.endsAt)-Date.parse(session.startsAt))/60000)+' · 시작 '+A.date(session.startsAt):' · 실제 일정은 아직 연결하지 않았습니다.');};
+    const actual=session?(Date.parse(session.endsAt)-Date.parse(session.startsAt))/60000:null;
+    schedule.textContent='진행안 합계 '+timeText(total)+(session?' / 연결 LIVE '+timeText(actual)+' · 시작 '+A.date(session.startsAt):' · 실제 일정은 아직 연결하지 않았습니다.')+
+     (actual!==null&&actual!==total?' · 진행안과 LIVE 길이가 다릅니다. 일정이나 원고를 별도로 조정해 주세요.':'');};
    const agenda=block('시간과 질문 순서'),list=el('div');agenda.append(schedule,list);
    paintAgenda=()=>{list.replaceChildren();plan.agenda.forEach((item,index)=>{
     const card=el('section','','nal-studio-card');card.append(el('p','순서 '+(index+1),'nal-account-kicker'));
@@ -125,8 +138,17 @@
     textDownload('NAL-'+slug+'-week-'+week+'-questions.txt',text);
    },true));form.append(actions);editor.append(form);
   }
-  area.append(meta,button('60분 기본 진행안 불러오기',example,true),el('p','기본안은 편집용 예시입니다. 실제 LIVE 시간은 등록된 일정을 따르며 자동 변경하지 않습니다.','nal-account-note'),editor);
+  const generic=el('details','','nal-order-details');generic.append(el('summary','별도 편집용 60분 예시'),button('60분 예시 불러오기',example,true),el('p','READ 01은 위 원고 라이브러리의 90분 진행안을 사용합니다. 이 예시는 다른 구성으로 편집할 때 선택합니다. 실제 일정은 자동 변경하지 않습니다.','nal-account-note'));
+  area.append(meta,generic,editor);
   meta.textContent='저장본 v'+revision+' · '+(state==='ready'?'진행안 작성 완료':'작성 중');paint();
+  importPlan=incoming=>{
+   if(busy||!area.isConnected)throw new Error('진행안 저장이 진행 중입니다. 완료 후 원고를 가져와 주세요.');
+   // Never replace a facilitator's actual debrief with invented empty observations.
+   const previousDebrief=structuredClone(plan.debrief);
+   plan={...structuredClone(incoming),debrief:previousDebrief};state='draft';mark();paint();
+   // sessionId and revision remain from this exact editor; schedule changes are not imported.
+   area.scrollIntoView({block:'start',behavior:'auto'});
+  };
   const material=block('이번 주 공개된 원고');material.append(el('p','참가자가 남긴 답이 아니라, 공개된 DAY 문장과 질문 원문입니다. 편집 중인 원고는 콘텐츠 편집 화면에서 확인합니다.','nal-account-note'));
   for(const day of data.days||[]){const details=el('details','','nal-order-details');details.append(el('summary','DAY '+String(day.dayNumber).padStart(2,'0')+' · '+day.title));
    for(const step of day.steps||[]){const block=el('section','','nal-studio-material');block.append(el('p',step.type+' · STEP '+step.order,'nal-account-kicker'));
@@ -136,10 +158,10 @@
     },true));details.append(block);
    }material.append(details);
   }
-  if(!data.days?.length)material.append(el('p','이번 주 공개 원고가 아직 없습니다. 임의로 질문 원문을 채우지 않습니다.','nal-account-empty'));
+  if(!data.days?.length)material.append(el('p','이번 주 공개 원고가 아직 없습니다. 콘텐츠 편집 원고와 원고 라이브러리를 구분해서 사용하세요.','nal-account-empty'));
   area.append(material);return area;
  }
- async function render(){const ticket=++generation,c=context();closePresentation();dirty={guide:false,plan:false};
+ async function render(){const ticket=++generation,c=context();closePresentation();dirty={guide:false,plan:false};importGuide=null;importPlan=null;
   if(!A.user){root.replaceChildren();root.hidden=true;return;}
   try{const index=await A.companion('studio-seasons',null);if(!current(c))return;
    root.replaceChildren();root.hidden=false;root.append(el('h2','이번 주 대화를 준비합니다.'),el('p','원고·진행안·운영 회고를 한곳에서 엽니다. 개인 답변을 분석하는 화면은 아닙니다.','nal-account-note'));
@@ -154,7 +176,13 @@
    if(!slug){root.append(el('p','시즌을 선택하면 해당 주차의 공개 원고와 저장한 진행안을 불러옵니다.','nal-account-empty'));return;}
    const data=await A.companion('studio-get',slug,{weekNumber:week});if(ticket!==generation||!current(c))return;
    const info=(data.weeks||[]).find(w=>w.number===week);if(info)root.append(el('h2',info.title),el('p',info.subtitle||'','nal-account-note'));
+   const library=el('section');root.append(library);
    const guide=el('details','','nal-order-details');guide.append(el('summary','프로그램 소개·시작 전 안내 편집'),guideEditor(data));root.append(guide,planEditor(data));
+   window.NalReadStudioLibrary?.mount({root:library,seasonSlug:slug,weekNumber:week,
+    isCurrent:()=>current(c)&&library.isConnected,
+    applyGuide:value=>{if(!current(c)||!importGuide)throw new Error('시즌을 다시 열어주세요.');importGuide(value);guide.open=true;},
+    applyPlan:value=>{if(!current(c)||!importPlan)throw new Error('주차를 다시 열어주세요.');importPlan(value);}
+   });
    const history=el('details','','nal-order-details');history.append(el('summary','최근 저장·공개 기록'));
    for(const h of data.history||[])history.append(el('p',A.date(h.created_at)+' · '+(h.kind==='guide'?'시작 안내':'WEEK '+h.week_number+' 진행안')+' v'+h.revision+' · '+(h.event==='published'?'공개 승인':'저장'),'nal-account-meta'));root.append(history);
   }catch(e){if(current(c)&&e.name!=='AbortError')A.status(e.message,'error');}
