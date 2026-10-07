@@ -1,0 +1,32 @@
+{
+  "formatVersion": 1,
+  "build": 25,
+  "kind": "forward-continuation-map-not-an-apply-runner",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "sourceManifest": "integration/nal-read/build19/manifest.json",
+  "targetProfile": "after-first-fourteen-layers",
+  "requiredRecordedMigrations": ["20261007131539", "20261007131833", "20261007132041", "20261007134152", "20261007150710", "20261007210247"],
+  "alreadyAppliedLayerIds": ["build04-workspace", "build05-editorial", "build05-report", "build06-join", "build06-account", "build07-payments", "build07-reconciliation", "build07-integration", "build09-cohorts", "build09-cohort-admin", "build09-admission-bridges", "build10-guide", "build10-studio", "build10-arrival-bridge"],
+  "remainingLayers": [
+    {"id": "build12-support", "path": "docs/NAL_READ_BUILD12_SUPPORT.sql"},
+    {"id": "build14-home", "path": "docs/NAL_READ_BUILD14_HOME.sql"},
+    {"id": "build15-pathway", "path": "docs/NAL_READ_BUILD15_PATHWAY.sql"},
+    {"id": "build17-operations", "path": "docs/NAL_READ_BUILD17_OPERATIONS.sql"},
+    {"id": "build18-context", "path": "docs/NAL_READ_BUILD18_CONTEXT.sql"}
+  ],
+  "releaseMustRemain": "off",
+  "rules": [
+    "Re-read current database history and the Git branch before further changes; this file is a dated record, not live state.",
+    "BUILD24 Git attachment was repaired without rerunning its migration. Its former branch-pointer error is resolved.",
+    "Do not replay any of the fourteen installed layers or remove the guard from the historical all-layers candidate.",
+    "The original bootstrap now resides in nal_private.read_bootstrap_before_arrival; its old public-definition hash is not the current public wrapper's hash.",
+    "No guide, prepared checkbox, facilitator runbook, approved publication, real schedule or admin membership was created by this migration.",
+    "Saving an arrival-guide draft remains separate from owner-approved publication. Preparation checks never unlock a DAY, prove book reading or count as attendance.",
+    "Retain existing private role/access checks and do not expose preserved internal functions as alternative browser endpoints.",
+    "Continue only support, member home, pathway, operator home and scoped context, in that order; do not declare the latest runtime ready before all prerequisites exist.",
+    "Keep READ OFF and preserve existing STORE/PDF/provider settings. No blanket db reset/push/history repair for the prior STORE identifier discrepancy.",
+    "Do not add the all-nineteen-layer completion marker yet. App/browser/Auth/payment/concurrency tests remain deferred to the pre-sale phase.",
+    "The BUILD21 ZIP is immutable source material, not a fresh database snapshot. Coordinate regenerated source outputs before runtime deployment."
+  ],
+  "automaticActions": false
+}

@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "build": 25,
+  "status": "COMPANION_STUDIO_DATABASE_APPLIED_RELEASE_OFF",
+  "projectName": "nal-platform",
+  "observedAtUtc": "2026-10-07T21:03:18.973032+00:00",
+  "reportTimezone": "Asia/Seoul",
+  "developmentParent": "035c92d0ee4d8fd1d0a160d56de49c5c93601b59",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "build24BranchRecovery": {
+    "previousHead": "c15d684cbdbd4a1313eed880b66f14f1f778ab4a",
+    "attachedCommit": "035c92d0ee4d8fd1d0a160d56de49c5c93601b59",
+    "branch": "feat/nal-read-v1",
+    "nonForceExpectedHeadUpdate": "success",
+    "actualRefReadback": "matched",
+    "databaseReapplied": false
+  },
+  "migration": {
+    "version": "20261007210247",
+    "name": "nal_read_build25_companion_studio_integration",
+    "path": "supabase/migrations/20261007210247_nal_read_build25_companion_studio_integration.sql",
+    "toolResult": "success",
+    "historyObserved": true,
+    "transactionCount": 1,
+    "storedSqlBytes": 29087,
+    "storedSqlMd5": "b93463b841fcb9051313311b6d4ad59f",
+    "storedSqlGitBlobSha": "328ee890191457b689c1dd5cf0d5d47b564bd08b",
+    "createdRepositoryBlobSha": "328ee890191457b689c1dd5cf0d5d47b564bd08b"
+  },
+  "layersAppliedThisBuild": ["build10-guide", "build10-studio", "build10-arrival-bridge"],
+  "cumulativeAppliedLayerCount": 14,
+  "totalSourceLayerCount": 19,
+  "remainingLayerCount": 5,
+  "newPrivateTables": ["read_arrival_guides", "read_preparation_checks", "read_companion_history", "read_facilitator_plans"],
+  "observedFunctionObjects": ["public.nal_read_bootstrap", "public.nal_read_companion", "public.nal_read_program_detail", "public.nal_read_studio", "nal_private.read_arrival_guide_check", "nal_private.read_arrival_state", "nal_private.read_bootstrap_before_arrival", "nal_private.read_runbook_check"],
+  "functionCountMeaning": "Eight resulting objects include the retained previous bootstrap implementation; not eight newly deployed Edge services.",
+  "installationMetadata": {
+    "releaseModes": ["off"],
+    "allFourTablesRlsEnabled": true,
+    "anyNewTableAnonOrAuthenticatedPrivilege": false,
+    "allEightObservedFunctionsSecurityInvoker": true,
+    "anyObservedFunctionAnonOrAuthenticatedExecute": false,
+    "allEightObservedFunctionsServiceExecute": true
+  },
+  "postInstallationCounts": {"catalog": 31, "settings": 2, "pdfFiles": 3, "orders": 0, "enrollments": 0, "answers": 0, "admins": 0, "cohorts": 0, "guides": 0, "checks": 0, "history": 0, "plans": 0},
+  "securityAdvisor": {
+    "run": true,
+    "returnedLevels": ["INFO"],
+    "finding": "rls_enabled_no_policy",
+    "findingCountAcrossProject": 33,
+    "observedAtUtc": "2026-10-07T21:03:26.221Z",
+    "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+    "interpretation": "Private server-only tables deliberately have no browser-role policies or direct browser privileges. This is a metadata observation, not a complete security or application-test result."
+  },
+  "boundaries": {"applicationTestsRun": false, "applicationFunctionsExercised": 0, "providerCalls": 0, "contentOrCustomerRowsCreated": false, "edgeDeployment": false, "frontendDeployment": false, "featureFlagChange": false, "roleAssignment": false, "newPaidResources": false, "mainMerge": false, "salesActivation": false},
+  "nextLayer": "build12-support",
+  "important": "Only source layers 12-14 were applied in this build. Do not replay the first fourteen layers or the old clean-baseline nineteen-layer SQL. The latest Edge/frontend bundle still has five missing DB layers."
+}
