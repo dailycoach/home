@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600"><style>
+.sans{font-family:"NanumBarunGothic","Noto Sans CJK KR",Arial,sans-serif}.serif{font-family:"NanumMyeongjo","Noto Serif CJK KR",serif}.meta{letter-spacing:.04em}
+</style>
+<rect width="1200" height="1600" fill="#F4F0E7"/>
+<text x="86" y="92" class="sans meta" font-size="26" font-weight="700" fill="#171B22">DAILYCOACHING</text>
+<text x="1110" y="92" class="sans meta" font-size="24" text-anchor="end" fill="#2E5ED8">AWARENESS / 100</text>
+<line x1="86" y1="126" x2="1110" y2="126" stroke="#2E5ED8" stroke-width="3"/>
+<text x="86" y="194" class="sans meta" font-size="23" font-weight="700" fill="#2E5ED8">POCKET COACHING TOOL</text>
+<text x="1110" y="194" class="sans meta" font-size="23" text-anchor="end" fill="#171B22">03 MINUTES</text>
+<text x="86" y="410" class="sans" font-size="152" font-weight="700" fill="#2E5ED8">03:00</text>
+<text x="90" y="475" class="sans meta" font-size="24" fill="#171B22">BEFORE REACTION</text>
+<text x="86" y="625" class="serif" font-size="78" font-weight="700" fill="#15191F">반응하기 전,</text>
+<text x="86" y="715" class="serif" font-size="78" font-weight="700" fill="#15191F">3분 알아차림</text>
+<text x="88" y="1030" class="serif" font-size="29" fill="#64686C">짧은 에세이와 질문으로,</text>
+<text x="88" y="1082" class="serif" font-size="29" fill="#64686C">반응보다 먼저 지금의 나를 보는 시간.</text>
+<line x1="86" y1="1310" x2="1110" y2="1310" stroke="#B8B5AE" stroke-width="1"/>
+<text x="86" y="1370" class="sans meta" font-size="22" font-weight="700" fill="#171B22">KCW ESSAY EDITION</text>
+<text x="86" y="1415" class="sans" font-size="22" fill="#777A7D">120 × 180 mm · PDF · 16P</text>
+<text x="1110" y="1415" class="sans" font-size="28" font-weight="700" text-anchor="end" fill="#2E5ED8">100원</text>
+</svg>
