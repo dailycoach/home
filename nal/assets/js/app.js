@@ -560,6 +560,47 @@
       </section>`;
   }
 
+
+  function renderStarterShopCollection(items) {
+    const ids = ["nal-small-book-01-mind-reset","nal-small-book-02-relationship","nal-small-book-03-next-step"];
+    const products = ids.map((id) => items.find((item) => item.id === id)).filter(Boolean);
+    if (!products.length) return "";
+    const meta = {
+      "nal-small-book-01-mind-reset": ["01", "나를 만나는 시간", "마음"],
+      "nal-small-book-02-relationship": ["02", "사이를 잇는 시간", "관계"],
+      "nal-small-book-03-next-step": ["03", "앞으로 가는 시간", "다음 한 걸음"]
+    };
+    return `
+      <section class="nal-shop-starter" aria-labelledby="nal-shop-starter-title">
+        <div class="nal-shop-starter__head">
+          <div>
+            <p class="nal-eyebrow">NAL STARTER / FREE</p>
+            <h2 id="nal-shop-starter-title">먼저,<br>가볍게 펼쳐보세요.</h2>
+          </div>
+          <div>
+            <p>NAL STARTER는 판매용 AWARENESS의 축소판이 아닙니다. 마음·관계·다음 한 걸음을 부담 없이 기록해보는 무료 배포자료입니다.</p>
+            <strong>로그인 없이 · 결제 없이 · 바로 PDF 다운로드</strong>
+          </div>
+        </div>
+        <div class="nal-shop-starter__grid">
+          ${products.map((product) => {
+            const [no, line, topic] = meta[product.id];
+            return `<article>
+              <a class="nal-shop-starter__cover" href="${itemRoute("products", product)}">
+                ${imageMarkup(globalThis.NALStore.safePublicUrl(product.coverImage), product.coverImageAlt || product.title, "", { width: 1200, height: 1600 })}
+              </a>
+              <div class="nal-shop-starter__copy">
+                <span>${no} · ${line}</span>
+                <h3><a href="${itemRoute("products", product)}">${escapeHtml(product.title)}</a></h3>
+                <p>${topic}에서 시작하는 NAL 작은 책</p>
+                <div><b>무료</b><small>${product.pageCount ? `${product.pageCount}P` : ""}</small></div>
+              </div>
+            </article>`;
+          }).join("")}
+        </div>
+      </section>`;
+  }
+
   function renderListing() {
     const [label, title, categories, card] = listingConfig();
     const params = new URLSearchParams(location.search);
@@ -572,8 +613,10 @@
       && !params.get("audience")
       && (params.get("sort") || "recommended") === "recommended";
     const awarenessIds = new Set(["dailycoaching-awareness-100","dailycoaching-awareness-1000","dailycoaching-awareness-10000"]);
+    const starterIds = new Set(["nal-small-book-01-mind-reset","nal-small-book-02-relationship","nal-small-book-03-next-step"]);
     const awarenessCollection = isDefaultProductView ? renderAwarenessShopCollection(items) : "";
-    const listItems = isDefaultProductView ? items.filter((item) => !awarenessIds.has(item.id)) : items;
+    const starterCollection = isDefaultProductView ? renderStarterShopCollection(items) : "";
+    const listItems = isDefaultProductView ? items.filter((item) => !awarenessIds.has(item.id) && !starterIds.has(item.id)) : items;
     const listingIntro = collection === "products"
       ? "무료로 펼쳐보는 작은 책과, 실제 삶과 코칭 장면에서 반복해 쓰는 유료 도구를 분리해 보여드립니다."
       : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
@@ -581,6 +624,7 @@
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
       <section class="nal-section nal-listing"><div class="nal-container">
         ${awarenessCollection}
+        ${starterCollection}
         <form class="nal-filter-bar" data-filter-form role="search">
           <label class="nal-form-field nal-filter-search"><span>검색</span><input type="search" name="q" value="${escapeHtml(q)}" placeholder="주제나 이름으로 검색"></label>
           ${collection !== "products" && categories.length ? `<label class="nal-form-field"><span>카테고리</span><select name="category" data-filter><option value="">전체</option>${categories.filter((value) => !value.startsWith("전체") && value !== "지난 모임").map((value) => `<option value="${escapeHtml(value)}"${params.get("category") === value ? " selected" : ""}>${escapeHtml(value)}</option>`).join("")}</select></label>` : ""}
