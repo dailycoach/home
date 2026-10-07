@@ -1,0 +1,35 @@
+{
+  "formatVersion": 1,
+  "build": 20,
+  "observedOn": "2026-10-07",
+  "projectName": "nal-platform",
+  "observationType": "read-only migration/table/function metadata; not functional testing or release approval",
+  "serverMajor": 17,
+  "releaseModesObserved": ["off"],
+  "requiredReadMigrationVersions": ["20261006095820", "20261006095938", "20261006101420", "20261006200849", "20261007024130"],
+  "migrationVersionsObserved": ["20261003042518", "20261003064307", "20261003064633", "20261004002631", "20261004002706", "20261004003752", "20261004003859", "20261004034141", "20261004034846", "20261006095820", "20261006095938", "20261006101420", "20261006200849", "20261007024130"],
+  "baselineFunctions": [
+    {"signature":"nal_private.read_claim_core(uuid, text, uuid, uuid)","definitionMd5":"34993ef41d3b2285c5a228ed80dd2abe","securityDefiner":false},
+    {"signature":"nal_private.read_day_gate(uuid, text, integer)","definitionMd5":"a95f1a51954ece9568d69ce1a8562521","securityDefiner":false},
+    {"signature":"nal_private.read_verified_subject(uuid)","definitionMd5":"a0848b0f06ed730f729c2ba6851949f6","securityDefiner":false},
+    {"signature":"public.nal_get_read_access(uuid, text)","definitionMd5":"8440bbdc14e99a98c94cd114f68d7a53","securityDefiner":false},
+    {"signature":"public.nal_issue_read_enrollment(uuid, text, uuid, uuid)","definitionMd5":"533ebea38afc8b6bbb8c823c62780f3f","securityDefiner":false},
+    {"signature":"public.nal_read_bootstrap(uuid, text)","definitionMd5":"ba3ca631a4924ffa16aa0abd39210cf8","securityDefiner":false},
+    {"signature":"public.nal_read_release_guard(uuid, text)","definitionMd5":"0342872d1ecaff8ab78eaac624e86321","securityDefiner":false}
+  ],
+  "buildLayerObjectsAbsentFromTableInventory": ["nal_private.read_drafts", "nal_private.read_experiments", "nal_private.read_live_sessions", "nal_private.read_editorial_documents", "nal_private.read_offers", "nal_private.read_checkout_orders", "nal_private.read_cohorts", "nal_private.read_arrival_guides", "nal_private.support_threads"],
+  "historyDifference": {
+    "name": "nal_digital_store_foundation",
+    "repositoryReferenceInBuild19": "supabase/migrations/20261003124325_nal_digital_store_foundation.sql",
+    "recordedDatabaseVersion": "20261004002631",
+    "equivalence": "not compared; do not repair history or replay foundation based on names",
+    "actionTaken": "none"
+  },
+  "limitations": [
+    "The seven hashes are drift sentinels, not a complete schema fingerprint or an authorization mechanism.",
+    "No participant answers, messages, payment details or credentials were read.",
+    "No CREATE/ALTER/UPDATE/INSERT/DELETE, role assignment, mode change or migration was executed.",
+    "No app, Auth, payment, browser, concurrency or pre-sale tests were run.",
+    "These observations do not select this project as the deployment target or authorize a production migration."
+  ]
+}

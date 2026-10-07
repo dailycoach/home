@@ -1,0 +1,20 @@
+{
+  "formatVersion": 1,
+  "build": 20,
+  "requiredAncestor": "3825e1582cb3a636f233eb6d4d46102759485ef5",
+  "sourceManifest": "integration/nal-read/build19/manifest.json",
+  "sourceManifestBlob": "9520729addbc06d0658aa513bfcef950853be371",
+  "baselineObservation": "integration/nal-read/build20/baseline-observation.json",
+  "preconditions": "integration/nal-read/build20/preconditions.sql.in",
+  "sqlLayerCount": 19,
+  "databaseOutput": "private/database/after-fix03.forward.sql",
+  "transactionPolicy": "One outer transaction; remove only lexically identified outer BEGIN/COMMIT statements from each original source, preserving function bodies and original files separately.",
+  "publicOutput": "public-overlay",
+  "privateOutput": "private",
+  "assetPolicy": "Rewrite included first-party CSS/JS module references to one commit-derived bundle token in generated output only. Keep original source hashes and transformed output hashes separately.",
+  "existingSitePolicy": "Overlay only. Preserve STORE/PDF assets and real runtime configuration. Do not deploy the package root or use deletion mirroring.",
+  "excludedConfiguration": ["nal/data/backend.json","nal/data/read-backend.staging.json","supabase/config.toml"],
+  "entrypointConsolidation": ["before","today","journey","day","try","live","my","report"],
+  "execution": {"network":false,"database":false,"deployment":false,"tests":false,"providerCalls":false,"installDependencies":false},
+  "generatedInThisBuild": false
+}
