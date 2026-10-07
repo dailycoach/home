@@ -1,6 +1,10 @@
+/* BUILD16 — pair the shared feedback transport with participant modules. */
 (() => {
  if(document.body.dataset.readRouteInvalid){const root=document.querySelector('[data-private-root]');if(root){root.hidden=false;root.textContent='시즌 또는 화면 주소를 확인해 주세요.';}return;}
  const N=window.NalRead;if(!N)return;
+ if(typeof N.errorText!=='function'||typeof N.mayLeave!=='function'||typeof N.focus!=='function'){
+  N.status('화면 구성 파일의 버전이 서로 다릅니다. 작성한 내용을 보관한 뒤 다시 불러와 주세요.','error');return;
+ }
  const baseLink=N.link;
  function generic(raw){
   const u=new URL(raw,location.origin);if(u.origin!==location.origin)return raw;
@@ -12,5 +16,6 @@
  document.querySelectorAll('[data-read-nav] a,[data-report-link]').forEach(a=>a.href=generic(a.href));
  const view=document.body.dataset.readDailyPage||document.body.dataset.readWorkspacePage;
  const file=['before','today','journey','day'].includes(view)?'read-daily.js':view==='report'?'read-report.js':'read-workspace.js';
- const script=document.createElement('script');script.src='/nal/assets/js/'+file+'?v=build15';script.onerror=()=>N.status('화면을 불러오지 못했습니다. 새로고침 후 다시 열어주세요.','error');document.body.append(script);
+ const script=document.createElement('script');script.src='/nal/assets/js/'+file+'?v=build16';
+ script.onerror=()=>N.status('이 화면을 불러오지 못했습니다. 내 기록이 없어진 것은 아닙니다. 작성한 내용이 있다면 보관한 뒤 다시 불러와 주세요.','error');document.body.append(script);
 })();
