@@ -1240,7 +1240,7 @@
       "relatedContentIds": [],
       "published": true,
       "createdAt": "2026-10-04",
-      "updatedAt": "2026-10-07",
+      "updatedAt": "2026-10-08",
       "fileFormat": "PDF",
       "deliveryMethod": "digital-download",
       "licenseType": "personal-use",
@@ -1249,7 +1249,7 @@
       "accessPeriod": null,
       "refundPolicy": "판매 시작 시 디지털 상품의 제공·환불 기준을 상품 상세에 고지합니다.",
       "licenseOptions": [],
-      "version": "7.1",
+      "version": "7.2",
       "policyStatus": "draft",
       "id": "dailycoaching-awareness-100",
       "slug": "dailycoaching-awareness-100",
@@ -1281,14 +1281,15 @@
       "galleryAlts": [],
       "price": 100,
       "components": [
-        "120×180mm PDF 16쪽",
+        "120×180mm PDF 17쪽",
         "김철웅 코치톤 장면형 에세이 5편",
         "3분 알아차림 5문장",
         "60초 작전타임",
-        "ONE PAGE 반복 카드"
+        "ONE PAGE 반복 카드",
+        "OPTIONAL NEXT · S-TOP 워크북 안내 1쪽"
       ],
-      "pageCount": 16,
-      "fileSizeMB": 0.26,
+      "pageCount": 17,
+      "fileSizeMB": 0.27,
       "recommendedFor": [
         "반응하기 전에 잠깐 멈추는 연습이 필요한 사람",
         "감정·생각·몸의 신호를 짧게 정리하고 싶은 사람",
@@ -1296,7 +1297,7 @@
       ],
       "usageIndividual": "하루의 한 장면을 정해 전체를 읽거나, 필요할 때 마지막 한 장 카드만 3분 동안 반복해서 사용합니다.",
       "precautions": "자기성찰을 위한 자료이며 심리진단·치료를 대신하지 않습니다. 불편감이 커지면 사용을 멈추고 필요한 도움을 선택하세요.",
-      "visualNote": "AWARENESS v7.1 포켓 코칭 툴 디자인. NAL STARTER와 분리된 DAILYCOACHING AWARENESS 고유 편집 시스템입니다.",
+      "visualNote": "AWARENESS v7.2 Pocket Coaching Tool. 마지막 1쪽은 강제 업셀이 아니라, 필요할 때만 S-TOP으로 이어지는 선택형 NEXT 페이지입니다.",
       "sampleUrl": "/nal/assets/previews/awareness/dailycoaching-awareness-100-preview.pdf",
       "previewUrl": "/nal/assets/previews/awareness/dailycoaching-awareness-100-preview.pdf",
       "fulfillmentNote": "현재는 상품 미리보기만 제공합니다. 판매 연결 후 결제 및 PDF 제공 방식을 안내합니다.",
@@ -1311,7 +1312,8 @@
         "ESSAY · 작은 선택은 삶에 보내는 답장입니다",
         "60초 작전타임",
         "ONE PAGE · 3분 알아차림 카드",
-        "마지막 에세이 · 다 이해하지 못해도 지나치지 않을 수 있습니다"
+        "마지막 에세이 · 다 이해하지 못해도 지나치지 않을 수 있습니다",
+        "OPTIONAL NEXT · 필요할 때만 S-TOP으로"
       ],
       "featured": true,
       "featuredOrder": 10
@@ -1335,7 +1337,7 @@
       "relatedContentIds": [],
       "published": true,
       "createdAt": "2026-10-04",
-      "updatedAt": "2026-10-07",
+      "updatedAt": "2026-10-08",
       "fileFormat": "PDF",
       "deliveryMethod": "digital-download",
       "licenseType": "personal-use",
@@ -1344,7 +1346,7 @@
       "accessPeriod": null,
       "refundPolicy": "판매 시작 시 디지털 상품의 제공·환불 기준을 상품 상세에 고지합니다.",
       "licenseOptions": [],
-      "version": "7.3",
+      "version": "7.4",
       "policyStatus": "draft",
       "id": "dailycoaching-awareness-1000",
       "slug": "dailycoaching-awareness-1000",
@@ -1378,15 +1380,16 @@
       "galleryAlts": [],
       "price": 1000,
       "components": [
-        "130×195mm PDF 32쪽",
+        "130×195mm PDF 33쪽",
         "김철웅 코치톤 장면형 에세이 8편",
         "S-TOP Signature Map",
         "단계별 기록 워크시트",
         "선택지·마찰·10분 행동 설계",
-        "CASE + ONE PAGE"
+        "CASE + ONE PAGE",
+        "OPTIONAL NEXT · DAILY 플레이북 안내 1쪽"
       ],
-      "pageCount": 32,
-      "fileSizeMB": 0.39,
+      "pageCount": 33,
+      "fileSizeMB": 0.38,
       "recommendedFor": [
         "한 장면에서 반복되는 자동반응을 돌아보고 싶은 사람",
         "코칭 질문을 자기성찰에 적용해보고 싶은 사람",
@@ -1394,7 +1397,7 @@
       ],
       "usageIndividual": "최근 멈춰 있는 장면 하나를 정해 빠른 실습은 15~20분, 전체 읽기와 실습은 약 35~50분 동안 진행합니다.",
       "precautions": "자기성찰·학습용 자료입니다. 상대의 마음이나 성격을 단정하는 진단도구로 사용하지 않습니다.",
-      "visualNote": "AWARENESS v7.3 Signature Workbook. S/T/O/P 자체가 내비게이션과 기록 체계로 작동하는 프리미엄 편집판입니다.",
+      "visualNote": "AWARENESS v7.4 Signature Workbook. 마지막 1쪽은 현재 워크북으로 충분하면 멈추고, 필요할 때만 DAILY 방법론으로 이어지는 선택형 NEXT 페이지입니다.",
       "sampleUrl": "/nal/assets/previews/awareness/dailycoaching-awareness-1000-preview.pdf",
       "previewUrl": "/nal/assets/previews/awareness/dailycoaching-awareness-1000-preview.pdf",
       "fulfillmentNote": "현재는 상품 미리보기만 제공합니다. 판매 연결 후 결제 및 PDF 제공 방식을 안내합니다.",
@@ -1411,7 +1414,8 @@
         "마찰 / 지원 · 10분 행동 · 실행 환경",
         "S-TOP ONE PAGE",
         "CASE 01 · 피드백 장면",
-        "SOURCE & USE"
+        "SOURCE & USE",
+        "OPTIONAL NEXT · 필요할 때만 DAILY로"
       ],
       "featured": true,
       "featuredOrder": 11
