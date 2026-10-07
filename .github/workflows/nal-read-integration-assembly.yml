@@ -1,0 +1,117 @@
+name: NAL READ source assembly only
+
+# A deliberately created, fixed integration branch is the only execution trigger.
+# No push/PR test trigger, schedule, main deployment, artifact/cache service or DB.
+on: create
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nal-read-build21-source-assembly
+  cancel-in-progress: false
+
+jobs:
+  assemble-source:
+    if: >-
+      github.repository == 'dailycoach/home' &&
+      github.event.repository.private == false &&
+      github.event.ref_type == 'branch' &&
+      github.event.ref == 'integration/nal-read-build21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    env:
+      OUTPUT_BRANCH: integration/nal-read-build21
+      SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - name: Read this exact committed source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Assemble source files, not tests or a deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = 'dailycoach/home'
+          test "$GITHUB_REF" = "refs/heads/$OUTPUT_BRANCH"
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test ! -e integration/nal-read/build21/generated/ASSEMBLY.json
+          python3 scripts/assemble-nal-read-build20.py \
+            --source-commit "$SOURCE_SHA" \
+            --out "$RUNNER_TEMP/nal-read-build21-integration"
+
+      - name: Record generated files on the integration branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          export OUTPUT_DIR="$RUNNER_TEMP/nal-read-build21-integration"
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import shutil
+          import subprocess
+
+          source = os.environ['SOURCE_SHA']
+          out = Path(os.environ['OUTPUT_DIR'])
+          if (out / 'INCOMPLETE.txt').exists():
+              raise SystemExit('Assembly is incomplete; no output will be committed')
+          result = json.loads((out / 'ASSEMBLY.json').read_text())
+          if result.get('sourceCommit') != source or result.get('status') != 'ASSEMBLED_NOT_DEPLOYED_NOT_TESTED':
+              raise SystemExit('Assembly result does not match this exact input')
+          if any(result.get(k) is not False for k in ('sqlExecuted', 'testsRun', 'salesEnabled')):
+              raise SystemExit('Unexpected execution state in assembly result')
+          archives = list(out.glob('nal-read-build20-*.zip'))
+          if len(archives) != 1 or archives[0].stat().st_size > 32 * 1024 * 1024:
+              raise SystemExit('Expected one bounded source archive')
+          root = Path('integration/nal-read/build21/generated')
+          root.mkdir(parents=True, exist_ok=False)
+          files = ['ASSEMBLY.json', 'FILE-INVENTORY.json', 'CHECKSUMS.sha256',
+                   'private/database/after-fix03.forward.sql', 'private/database/LAYERS.json',
+                   'private/ASSET-TRANSFORMATIONS.json', 'private/runtime-version.json']
+          for name in files:
+              destination = root / name
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copyfile(out / name, destination)
+          archive = archives[0]
+          shutil.copyfile(archive, root / archive.name)
+          shutil.copyfile(out / (archive.name + '.sha256'), root / (archive.name + '.sha256'))
+          receipt = {**result, 'deliveryBuild': 21, 'archiveFile': archive.name,
+                     'archiveSha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
+                     'archiveBytes': archive.stat().st_size,
+                     'workflowRunId': os.environ['GITHUB_RUN_ID'],
+                     'workflowRunAttempt': os.environ['GITHUB_RUN_ATTEMPT'],
+                     'outputBranch': os.environ['OUTPUT_BRANCH'],
+                     'databaseApplied': False, 'deployed': False,
+                     'artifactStorageUsed': False, 'cacheStorageUsed': False}
+          (root / 'RECEIPT.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + '\n')
+          (root / 'README.md').write_text(
+              '# NAL READ generated integration source\n\n'
+              'Source commit: `' + source + '`. See RECEIPT.json for this actual assembly run.\n\n'
+              'This is not a deployed or tested platform. The SQL is an unapplied candidate. '
+              'The archive contains public-overlay plus private server/DB/editorial source; '
+              'never publish the archive root as a website. No actual keys, customer records '
+              'or runtime connection files are intentionally included.\n\n'
+              'CHECKSUMS.sha256 describes the full archive contents, not only this convenience '
+              'directory. Extract the archive before checking its full internal inventory.\n'
+          )
+          print(json.dumps(receipt, ensure_ascii=False, indent=2))
+          PY
+          # Commit only the dedicated generated-source directory. No normal app files.
+          git add -- integration/nal-read/build21/generated
+          git diff --cached --name-only | while IFS= read -r path; do
+            case "$path" in integration/nal-read/build21/generated/*) ;; *) exit 1 ;; esac
+          done
+          remote_sha="$(git ls-remote origin "refs/heads/$OUTPUT_BRANCH" | cut -f1)"
+          test "$remote_sha" = "$SOURCE_SHA"
+          git -c user.name='NAL source assembly' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m 'build(nal-read): generated integration source only [skip ci]'
+          # Fast-forward only. This fixed branch is not main or the development branch.
+          git push origin "HEAD:refs/heads/$OUTPUT_BRANCH"
+          printf '%s\n' 'Source assembled and recorded. Database not applied; platform not deployed or tested.' >> "$GITHUB_STEP_SUMMARY"
