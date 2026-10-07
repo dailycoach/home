@@ -514,17 +514,73 @@
     return ["NAL NOTE", "읽고 끝나지 않는 다음 경험의 기록", state.site?.categories?.note || [], noteCard];
   }
 
+
+  function renderAwarenessShopCollection(items) {
+    const ids = ["dailycoaching-awareness-100","dailycoaching-awareness-1000","dailycoaching-awareness-10000"];
+    const products = ids.map((id) => items.find((item) => item.id === id)).filter(Boolean);
+    if (!products.length) return "";
+
+    const meta = {
+      "dailycoaching-awareness-100": ["100", "03 MINUTES", "반응 직전, 잠깐 멈추고 싶을 때", "POCKET COACHING TOOL"],
+      "dailycoaching-awareness-1000": ["1000", "ONE SCENE", "한 장면을 직접 풀어보고 싶을 때", "S-TOP SIGNATURE WORKBOOK"],
+      "dailycoaching-awareness-10000": ["10000", "METHOD", "알아차림을 하나의 구조로 익히고 싶을 때", "DAILY PROFESSIONAL PLAYBOOK"]
+    };
+
+    return `
+      <section class="nal-shop-awareness" aria-labelledby="nal-shop-awareness-title">
+        <div class="nal-shop-awareness__head">
+          <div>
+            <p class="nal-eyebrow">DAILYCOACHING AWARENESS / SERIES</p>
+            <h2 id="nal-shop-awareness-title">3분에서<br>방법론까지.</h2>
+          </div>
+          <div class="nal-shop-awareness__intro">
+            <p>같은 내용을 가격별로 나눈 시리즈가 아닙니다.</p>
+            <p>반응 직전의 3분, 한 장면을 풀어보는 S-TOP, 그리고 DAILY라는 반복 가능한 방법론까지. 지금 필요한 깊이에서 시작합니다.</p>
+            <a class="nal-text-link" href="/nal/shop/awareness/">AWARENESS 3종 비교하기 →</a>
+          </div>
+        </div>
+        <div class="nal-shop-awareness__grid">
+          ${products.map((product) => {
+            const [code, depth, when, level] = meta[product.id];
+            const price = product.price === 0 ? "무료" : formatPrice(product.price);
+            return `<article class="nal-shop-awareness-card nal-shop-awareness-card--${code}">
+              <a class="nal-shop-awareness-card__cover" href="${itemRoute("products", product)}">
+                ${imageMarkup(globalThis.NALStore.safePublicUrl(product.coverImage), product.coverImageAlt || product.title, "", { eager: true, width: 1200, height: 1600 })}
+              </a>
+              <div class="nal-shop-awareness-card__copy">
+                <span>${code} · ${level}</span>
+                <strong>${depth}</strong>
+                <h3><a href="${itemRoute("products", product)}">${escapeHtml(product.title)}</a></h3>
+                <p>${when}</p>
+                <div><b>${escapeHtml(price || "판매가 준비 중")}</b><small>${product.pageCount ? `${product.pageCount}P` : ""} · v${escapeHtml(product.version || "")}</small></div>
+              </div>
+            </article>`;
+          }).join("")}
+        </div>
+      </section>`;
+  }
+
   function renderListing() {
     const [label, title, categories, card] = listingConfig();
     const params = new URLSearchParams(location.search);
     const items = getListingItems();
     const q = params.get("q") || "";
+    const isDefaultProductView = collection === "products"
+      && !q
+      && !params.get("format")
+      && !params.get("topic")
+      && !params.get("audience")
+      && (params.get("sort") || "recommended") === "recommended";
+    const awarenessIds = new Set(["dailycoaching-awareness-100","dailycoaching-awareness-1000","dailycoaching-awareness-10000"]);
+    const awarenessCollection = isDefaultProductView ? renderAwarenessShopCollection(items) : "";
+    const listItems = isDefaultProductView ? items.filter((item) => !awarenessIds.has(item.id)) : items;
     const listingIntro = collection === "products"
-      ? "읽고 끝나는 자료보다, 실제 삶과 코칭 장면에서 꺼내 쓰는 도구를 만듭니다."
+      ? "무료로 펼쳐보는 작은 책과, 실제 삶과 코칭 장면에서 반복해 쓰는 유료 도구를 분리해 보여드립니다."
       : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     root.innerHTML = `
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
       <section class="nal-section nal-listing"><div class="nal-container">
+        ${awarenessCollection}
         <form class="nal-filter-bar" data-filter-form role="search">
           <label class="nal-form-field nal-filter-search"><span>검색</span><input type="search" name="q" value="${escapeHtml(q)}" placeholder="주제나 이름으로 검색"></label>
           ${collection !== "products" && categories.length ? `<label class="nal-form-field"><span>카테고리</span><select name="category" data-filter><option value="">전체</option>${categories.filter((value) => !value.startsWith("전체") && value !== "지난 모임").map((value) => `<option value="${escapeHtml(value)}"${params.get("category") === value ? " selected" : ""}>${escapeHtml(value)}</option>`).join("")}</select></label>` : ""}
@@ -535,8 +591,8 @@
           <label class="nal-form-field"><span>정렬</span><select name="sort" data-filter>${(collection === "products" ? [["recommended", "추천순"], ["newest", "최신순"], ["lowPrice", "낮은 가격"], ["highPrice", "높은 가격"]] : [["recommended", "추천순"], ["closing", "모집 상태순"], ["nearest", "가까운 일정순"], ["newest", "신규 등록순"], ["lowPrice", "낮은 가격순"]]).map(([value, label]) => `<option value="${value}"${(params.get("sort") || "recommended") === value ? " selected" : ""}>${label}</option>`).join("")}${collection === "products" ? '<option disabled>인기순 준비</option>' : ""}</select></label>
           <button class="nal-button--primary" type="submit">적용</button>
         </form>
-        <div class="nal-result-summary" role="status"><strong>${items.length}</strong>개의 공개 항목${q ? ` · “${escapeHtml(q)}” 검색 결과` : ""}</div>
-        ${items.length ? `<div class="card-grid">${items.map(card).join("")}</div>` : emptyState("조건에 맞는 공개 항목이 없습니다.", "초안 데이터나 확인되지 않은 일정은 목록에 노출하지 않습니다.", '<a class="nal-button--secondary" href="' + location.pathname + '">필터 초기화</a>')}
+        <div class="nal-result-summary" role="status"><strong>${listItems.length}</strong>개의 ${isDefaultProductView ? "기타 " : ""}공개 항목${q ? ` · “${escapeHtml(q)}” 검색 결과` : ""}</div>
+        ${listItems.length ? `<div class="card-grid">${listItems.map(card).join("")}</div>` : (isDefaultProductView ? "" : emptyState("조건에 맞는 공개 항목이 없습니다.", "초안 데이터나 확인되지 않은 일정은 목록에 노출하지 않습니다.", '<a class="nal-button--secondary" href="' + location.pathname + '">필터 초기화</a>'))}
       </div></section>`;
   }
 
