@@ -4,7 +4,7 @@
     {
       "path": "/nal/",
       "title": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
-      "description": "미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 우선 런칭하는 NAL 커뮤니티 플랫폼입니다.",
+      "description": "NAL의 커뮤니티·클래스와 함께, 무료 NAL STARTER에서 DAILYCOACHING AWARENESS 100·1000·10000까지 일상에서 꺼내 쓰는 마음도구를 연결합니다.",
       "indexable": true
     },
     {
@@ -21,8 +21,8 @@
     },
     {
       "path": "/nal/shop/",
-      "title": "PDF 전자책·워크북 | NAL 마음도구 · 날빛",
-      "description": "PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.",
+      "title": "마음도구 | 무료 작은 책·DAILYCOACHING AWARENESS · NAL 날빛",
+      "description": "NAL STARTER 무료 작은 책과 DAILYCOACHING AWARENESS 100·1000·10000을 역할과 깊이에 따라 구분해 살펴보세요.",
       "indexable": true
     },
     {
@@ -146,21 +146,27 @@
       "indexable": true
     },
     {
+      "path": "/nal/shop/awareness/",
+      "title": "DAILYCOACHING AWARENESS | 3분에서 방법론까지",
+      "description": "AWARENESS 100·1000·10000. 포켓 코칭 도구에서 S-TOP 시그니처 워크북, DAILY Professional Playbook까지 필요한 깊이에 따라 선택하는 알아차림코칭 시리즈.",
+      "indexable": true
+    },
+    {
       "path": "/nal/shop/dailycoaching-awareness-100/",
       "title": "반응하기 전, 3분 알아차림 | NAL 마음도구 · 날빛",
-      "description": "짧은 에세이와 질문으로 지금의 마음·몸·생각을 관찰하고, 반응 전에 가장 작은 선택 하나를 남기는 입문 PDF",
+      "description": "장면형 에세이와 3분 질문으로 자동반응 전에 작은 선택 하나를 남기는 DAILYCOACHING 포켓 코칭 PDF",
       "indexable": true
     },
     {
       "path": "/nal/shop/dailycoaching-awareness-1000/",
       "title": "반응에서 선택으로 | NAL 마음도구 · 날빛",
-      "description": "Step Back·Think by Questions·Options·Proceed의 흐름을 에세이와 실습으로 풀어내는 셀프코칭 PDF 워크북",
+      "description": "김철웅 코치톤 에세이와 S-TOP Signature Map으로 한 장면을 거리·질문·선택·착수까지 연결하는 셀프코칭 워크북",
       "indexable": true
     },
     {
       "path": "/nal/shop/dailycoaching-awareness-10000/",
       "title": "DAILY 알아차림코칭 플레이북 | NAL 마음도구 · 날빛",
-      "description": "Detect·Acknowledge·Inquire·Link·Your Action과 7 Lenses로 경험을 읽고 선택을 행동으로 연결하는 심화 플레이북",
+      "description": "DAILY 5단계·7 Lenses·16편 에세이·3개 사례·7일 실습을 결합한 DAILYCOACHING 알아차림코칭 Publication Master",
       "indexable": true
     },
     {
