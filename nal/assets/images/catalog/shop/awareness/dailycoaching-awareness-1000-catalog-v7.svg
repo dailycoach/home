@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600"><style>
+.sans{font-family:"NanumBarunGothic","Noto Sans CJK KR",Arial,sans-serif}.serif{font-family:"NanumMyeongjo","Noto Serif CJK KR",serif}.meta{letter-spacing:.04em}
+</style>
+<rect width="1200" height="1600" fill="#E9EEEE"/>
+<text x="86" y="92" class="sans meta" font-size="26" font-weight="700" fill="#17212A">DAILYCOACHING</text>
+<text x="1110" y="92" class="sans meta" font-size="24" text-anchor="end" fill="#5B8C98">AWARENESS / 1000</text>
+<line x1="86" y1="126" x2="1110" y2="126" stroke="#5B8C98" stroke-width="3"/>
+<text x="86" y="194" class="sans meta" font-size="23" font-weight="700" fill="#5B8C98">SIGNATURE WORKBOOK</text>
+<text x="1110" y="194" class="sans meta" font-size="23" text-anchor="end" fill="#17212A">S-TOP</text>
+<rect x="86" y="294" width="86" height="10" rx="5" fill="#5B8C98"/>
+<text x="86" y="355" class="sans meta" font-size="20" fill="#5B8C98">S-TOP SELF-COACHING</text>
+<text x="88" y="600" class="serif" font-size="86" font-weight="700" fill="#15191F">반응에서</text>
+<text x="88" y="705" class="serif" font-size="86" font-weight="700" fill="#15191F">선택으로</text>
+<g opacity=".1" fill="#17212A" class="sans" font-size="124" font-weight="700">
+<text x="1020" y="400" text-anchor="middle">S</text><text x="1020" y="590" text-anchor="middle">T</text><text x="1020" y="780" text-anchor="middle">O</text><text x="1020" y="970" text-anchor="middle">P</text>
+</g>
+<text x="88" y="1005" class="serif" font-size="27" fill="#62676B">한 장면을 멈춰 보고, 질문하고,</text>
+<text x="88" y="1054" class="serif" font-size="27" fill="#62676B">선택지를 만들고, 실제 행동까지 이어가는 셀프코칭 워크북.</text>
+<line x1="86" y1="1250" x2="1110" y2="1250" stroke="#B3BABB" stroke-width="1"/>
+<g class="sans" font-size="18" fill="#27313A">
+<circle cx="115" cy="1305" r="10" fill="#78AAB3"/><text x="140" y="1312">S · 거리</text>
+<circle cx="360" cy="1305" r="10" fill="#6A98A3"/><text x="385" y="1312">T · 질문</text>
+<circle cx="605" cy="1305" r="10" fill="#4E7E8B"/><text x="630" y="1312">O · 선택</text>
+<circle cx="850" cy="1305" r="10" fill="#315E72"/><text x="875" y="1312">P · 착수</text>
+</g>
+<text x="86" y="1415" class="sans" font-size="22" fill="#6A6F72">130 × 195 mm · PDF · 32P</text>
+<text x="1110" y="1415" class="sans" font-size="28" font-weight="700" text-anchor="end" fill="#315E72">1,000원</text>
+</svg>
