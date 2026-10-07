@@ -8,7 +8,7 @@
   <div data-account-user hidden><span data-account-email></span><button type="button" data-account-signout class="nal-account-link">로그아웃</button></div>
   <p data-account-status role="status" aria-live="polite" hidden></p>
  </section><div data-account-private hidden></div>
- <footer class="nal-account-footer"><a href="/nal/my/waitlist/">내 대기 신청</a><a href="/nal/my/local/">이 기기의 찜·최근 본 항목</a><a href="/nal/policy/privacy/">개인정보 안내</a><a href="/nal/policy/cancellation/">취소·환불 안내</a><a href="/nal/read/admin/cohorts/">운영자 기수 관리</a></footer>`;
+ <footer class="nal-account-footer"><a href="/nal/my/waitlist/">내 대기 신청</a><a href="/nal/my/local/">이 기기의 찜·최근 본 항목</a><a href="/nal/policy/privacy/">개인정보 안내</a><a href="/nal/policy/cancellation/">취소·환불 안내</a><a href="/nal/read/admin/studio/">진행자 스튜디오</a><a href="/nal/read/admin/cohorts/">운영자 기수 관리</a></footer>`;
  main.querySelector('h1').textContent=h1;main.querySelector('.nal-account-lead').textContent=lead;
  main.querySelector('[data-account-login]').addEventListener('submit',e=>e.preventDefault());
 })();
