@@ -102,6 +102,35 @@ for num, data_name, output_name in SPECS:
                     if y < 42:
                         break
 
+        if idx == len(pages):
+            # Gentle bridge: the free book must remain complete on its own.
+            # AWARENESS is presented only as an optional next tool, never as a paywall.
+            box_x, box_y, box_w, box_h = 28, 58, W - 56, 112
+            c.setFillColor(HexColor("#EEF2F7"))
+            c.roundRect(box_x, box_y, box_w, box_h, 8, fill=1, stroke=0)
+            c.setFillColor(HexColor(accent))
+            c.setFont("Helvetica-Bold", 6.2)
+            c.drawString(box_x + 14, box_y + box_h - 19, "NEXT · DAILYCOACHING AWARENESS 100")
+            c.setFillColor(HexColor("#22211F"))
+            c.setFont("HYSMyeongJo-Medium", 10.2)
+            c.drawString(box_x + 14, box_y + box_h - 42, "반응하기 전, 3분 알아차림")
+            c.setFillColor(HexColor("#5B5B58"))
+            c.setFont("HYSMyeongJo-Medium", 6.8)
+            next_copy = "이 작은 책으로 충분했다면 여기서 멈춰도 됩니다. 조금 더 반복해보고 싶다면, 다음 도구는 반응하기 직전의 3분을 다룹니다."
+            next_y = box_y + box_h - 59
+            for next_line in wrap(next_copy, 34):
+                c.drawString(box_x + 14, next_y, next_line)
+                next_y -= 10
+            c.setFillColor(HexColor(accent))
+            c.setFont("Helvetica-Bold", 5.8)
+            next_url = "daily-coach-ing.com/nal/shop/dailycoaching-awareness-100/"
+            c.drawString(box_x + 14, box_y + 12, next_url)
+            c.linkURL(
+                "https://daily-coach-ing.com/nal/shop/dailycoaching-awareness-100/",
+                (box_x, box_y, box_x + box_w, box_y + box_h),
+                relative=0
+            )
+
         c.setStrokeColor(HexColor("#D8D0C3"))
         c.line(28, 28, W - 28, 28)
         c.setFillColor(HexColor("#77736C"))
