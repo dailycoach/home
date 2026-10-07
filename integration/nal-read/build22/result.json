@@ -1,0 +1,47 @@
+{
+  "formatVersion": 1,
+  "build": 22,
+  "status": "DATABASE_FIRST_TRANCHE_APPLIED_RELEASE_OFF",
+  "projectName": "nal-platform",
+  "observedOn": "2026-10-07",
+  "developmentParent": "c8a3ee9c9b82feb3fa1318c92354087fe23ce4b7",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "assemblyOutputCommit": "8d9e18549827bc6c699e0072d442f02f9200d705",
+  "databaseApplication": "Three successful Supabase apply_migration operations, with OFF/no-enrollment/dependency guards. This is not execution of the full BUILD21 nineteen-layer SQL candidate.",
+  "appliedSourceLayerCount": 5,
+  "totalSourceLayerCount": 19,
+  "remainingSourceLayerCount": 14,
+  "migrations": [
+    {"version":"20261007131539","name":"nal_read_build22_workspace_integration","layers":["build04-workspace"],"toolResult":"success","historyObserved":true},
+    {"version":"20261007131833","name":"nal_read_build22_editorial_report_integration","layers":["build05-editorial","build05-report"],"toolResult":"success","historyObserved":true},
+    {"version":"20261007132041","name":"nal_read_build22_join_account_integration","layers":["build06-join","build06-account"],"toolResult":"success","historyObserved":true}
+  ],
+  "newPrivateTables": ["read_drafts","read_experiments","read_live_sessions","read_live_notes","read_answer_marks","read_editorial_documents","read_editorial_history","read_report_editions","read_offers","read_join_receipts","read_onboarding","account_preferences"],
+  "existingTableColumnsAdded": {"nal_private.read_day_steps":["content_key","measure_key","measure_version","report_key"]},
+  "newDatabaseFunctions": ["public.nal_read_workspace","nal_private.read_manifest_check","public.nal_read_editorial","public.nal_read_report","public.nal_read_offers","public.nal_read_join","public.nal_read_offer_admin","public.nal_account"],
+  "installationMetadata": {
+    "releaseModes":["off"],
+    "newTableCount":12,
+    "allNewTablesRlsEnabled":true,
+    "anyNewTableAnonPrivilege":false,
+    "anyNewTableAuthenticatedPrivilege":false,
+    "newFunctionCount":8,
+    "anyNewFunctionSecurityDefiner":false,
+    "anyNewFunctionAnonExecute":false,
+    "anyNewFunctionAuthenticatedExecute":false,
+    "allNewFunctionsServiceExecute":true
+  },
+  "selectedPostInstallationCounts": {"catalog":31,"settings":2,"pdfFiles":3,"orders":0,"enrollments":0,"answers":0,"admins":0},
+  "securityAdvisor": {
+    "run":true,
+    "returnedLevels":["INFO"],
+    "finding":"rls_enabled_no_policy",
+    "findingCountAcrossProject":20,
+    "interpretation":"Private server-only tables intentionally deny browser roles; informational notices are not a reason to add public policies. This is a limited installation/security metadata read, not a full application security assessment.",
+    "reference":"https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+  },
+  "notPerformed": ["Remaining fourteen source layers","Edge function deployment","Frontend deployment","Auth callback or runtime environment changes","Admin membership assignment","First-season content save/approval/publication","Real or fixture participant records","Payment-provider calls or transactions","Application/unit/browser/Auth/payment/regression tests","Main merge","Customer sales activation","New paid resources"],
+  "fullAssemblyReplayAllowed":false,
+  "nextSourceLayer":"build07-payments",
+  "important":"The database is now a partially integrated target, not the former FIX03-before-BUILD04 baseline. Never replay the old all-layers candidate, mark missing layers applied, or enable the latest client/Edge bundle against this incomplete DB. Read resume-plan.json before continuing."
+}
