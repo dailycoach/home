@@ -1,0 +1,34 @@
+{
+  "formatVersion": 1,
+  "build": 24,
+  "kind": "forward-continuation-map-not-an-apply-runner",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "sourceManifest": "integration/nal-read/build19/manifest.json",
+  "targetProfile": "after-first-eleven-layers",
+  "requiredRecordedMigrations": ["20261007131539", "20261007131833", "20261007132041", "20261007134152", "20261007150710"],
+  "alreadyAppliedLayerIds": ["build04-workspace", "build05-editorial", "build05-report", "build06-join", "build06-account", "build07-payments", "build07-reconciliation", "build07-integration", "build09-cohorts", "build09-cohort-admin", "build09-admission-bridges"],
+  "remainingLayers": [
+    {"id": "build10-guide", "path": "docs/NAL_READ_BUILD10_GUIDE.sql"},
+    {"id": "build10-studio", "path": "docs/NAL_READ_BUILD10_STUDIO.sql"},
+    {"id": "build10-arrival-bridge", "path": "docs/NAL_READ_BUILD10_ARRIVAL_BRIDGE.sql"},
+    {"id": "build12-support", "path": "docs/NAL_READ_BUILD12_SUPPORT.sql"},
+    {"id": "build14-home", "path": "docs/NAL_READ_BUILD14_HOME.sql"},
+    {"id": "build15-pathway", "path": "docs/NAL_READ_BUILD15_PATHWAY.sql"},
+    {"id": "build17-operations", "path": "docs/NAL_READ_BUILD17_OPERATIONS.sql"},
+    {"id": "build18-context", "path": "docs/NAL_READ_BUILD18_CONTEXT.sql"}
+  ],
+  "releaseMustRemain": "off",
+  "rules": [
+    "Re-read actual migration and schema metadata before continuation; this receipt is not current environment authority.",
+    "Do not replay the first eleven layers or remove the clean-baseline guard from the old after-fix03.forward.sql.",
+    "The new cohort triggers require actual configured cohort admission for future enrollments/orders. Do not bypass them to create a sample participant or to expose an unfinished runtime.",
+    "No cohort/date/capacity/offer/attendance/user/owner role was created by BUILD24; installed schema is not configured program data.",
+    "Existing Auth/financial/access checks remain inside private before_cohorts functions. Do not expose those internal functions as alternate browser routes.",
+    "Keep READ OFF, existing PDF/store assets and payment-provider settings unchanged until a separately deliberate integration stage.",
+    "The old STORE migration-history identifier discrepancy remains unresolved; no reset, blanket db push or history repair.",
+    "Do not install the all-nineteen-layer completion marker or activate the latest Edge/frontend bundle while eight layers remain.",
+    "Tests involving login, customers, payments, concurrency, mobile or browser behavior remain deferred to the owner's pre-sale phase. Installation metadata is not PASS.",
+    "The BUILD21 ZIP is immutable source evidence, not a snapshot of this subsequently migrated database. Regenerate matched delivery output when needed."
+  ],
+  "automaticActions": false
+}
