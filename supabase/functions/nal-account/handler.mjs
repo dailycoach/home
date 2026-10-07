@@ -1,5 +1,6 @@
-const ACTIONS={account:new Set(['home','operator-home','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
+const ACTIONS={account:new Set(['home','operator-home','operator-context','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
 const SLUG=/^[a-z0-9-]{1,120}$/;
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 async function readBody(req){
  const r=req.body?.getReader();if(!r)throw new Error('body');let n=0;const parts=[];
  try{for(;;){const {done,value}=await r.read();if(done)break;n+=value.byteLength;if(n>24576){await r.cancel();throw new Error('large');}parts.push(value);}}finally{r.releaseLock();}
@@ -33,9 +34,21 @@ export function createAccountHandler({enabled,origins,authenticate,catalog,opera
     ||(p.seasonSlug!==undefined&&p.seasonSlug!==null&&(typeof p.seasonSlug!=='string'||!SLUG.test(p.seasonSlug)))
     ||(p.search!==undefined&&(typeof p.search!=='string'||p.search.length>120)))return reply(400,{error:'운영 홈은 시즌·검색어·목록 위치만 지정할 수 있습니다.'});
   }
+  if(b.area==='account'&&b.action==='operator-context'){
+   const p=b.payload,fields={orders:['kind','seasonSlug','offset','filter'],support:['kind','seasonSlug','offset','state','category'],'support-thread':['kind','seasonSlug','id','afterSeq']};
+   if(!Object.hasOwn(fields,p.kind)||Object.keys(p).some(k=>!fields[p.kind].includes(k))||typeof p.seasonSlug!=='string'||!SLUG.test(p.seasonSlug))return reply(400,{error:'선택한 기수와 조회 범위를 확인해 주세요.'});
+   if(p.kind==='orders'&&p.filter!==undefined&&p.filter!=='all')return reply(400,{error:'주문 조회 조건을 확인해 주세요.'});
+   if(p.kind==='support'&&((p.state!==undefined&&!['all','open','answered','resolved'].includes(p.state))||(p.category!==undefined&&!['all','account','read','payment','live','technical','other'].includes(p.category))))return reply(400,{error:'문의 조회 조건을 확인해 주세요.'});
+   if(p.kind==='support-thread'&&(!UUID.test(p.id||'')||(p.afterSeq!==undefined&&(!Number.isInteger(p.afterSeq)||p.afterSeq<0||p.afterSeq>1000))))return reply(400,{error:'선택한 기수의 문의와 대화 위치를 확인해 주세요.'});
+  }
   if(Object.hasOwn(b.payload,'offset')&&(!Number.isInteger(b.payload.offset)||b.payload.offset<0||b.payload.offset>10000))return reply(400,{error:'페이지 범위를 확인해 주세요.'});
   try{return reply(200,await operate(user.id,b.area,b.action,b.seasonSlug,b.payload));}
   catch(e){
+   if(b.area==='account'&&b.action==='operator-context'){
+    if(e.code==='42501')return reply(403,{error:'선택한 기수의 기록을 볼 수 있는 운영 권한이나 문의 배정을 확인해 주세요.'});
+    if(['22023','22P02'].includes(e.code))return reply(400,{error:'해당 기수 또는 조회 조건을 찾지 못했습니다. 다른 기수로 대신 표시하지 않습니다.'});
+    return reply(503,{error:'기수별 조회 연결을 확인하지 못했습니다. 전체 목록이나 빈 기록으로 대신 표시하지 않습니다.'});
+   }
    if(b.area==='account'&&b.action==='operator-home'){
     if(e.code==='42501')return reply(403,{error:'운영 홈은 기존 소유자·운영자 계정만 사용할 수 있습니다. 이 화면은 권한을 새로 부여하지 않습니다.'});
     if(['22023','22P02'].includes(e.code))return reply(400,{error:'선택한 시즌이나 목록 조건을 다시 확인해 주세요.'});

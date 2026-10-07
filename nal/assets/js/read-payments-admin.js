@@ -1,21 +1,26 @@
+/* BUILD18 — scope order pagination before rows reach the browser. Financial actions unchanged. */
 (() => {
- 'use strict';const A=window.NalAccount;if(!A)return;
+ 'use strict';const A=window.NalAccount,C=window.NalAdminContext;if(!A)return;
  const el=A.node,root=document.querySelector('[data-account-private]');let run=0;
  const state={pending:'결제 확인 전',paid:'결제 완료',failed:'미완료',partially_refunded:'일부 환불',refunded:'환불 완료',manual_review:'확인 필요'};
  const delivery={not_paid:'결제 전',pending:'참가권 연결 대기',ready:'참여 가능',blocked:'이용권 확인 필요',manual_review:'참가권 확인 필요',refunded:'이용 종료'};
  function button(text,fn){const b=el('button',text,'nal-account-link');b.type='button';b.addEventListener('click',async()=>{const owner=A.epoch;b.disabled=true;try{await fn();}catch(e){if(owner===A.epoch&&e.name!=='AbortError')A.status(e.message,'error');}finally{if(b.isConnected)b.disabled=false;}});return b;}
  function merchant(){const a=A.link('https://app.tosspayments.com/','토스 상점관리자 열기 ↗','nal-account-button');a.target='_blank';a.rel='noopener noreferrer';return a;}
- async function render(){const ticket=++run;if(!A.user){root.replaceChildren();root.hidden=true;return;}
+ const getPage=offset=>C.query('orders',{filter:'all',offset},()=>A.pay('admin-list',{filter:'all',offset}));
+ async function render(){const ticket=++run;root.replaceChildren();if(!A.user){root.hidden=true;return;}root.hidden=false;
   try{
-   const data=await A.pay('admin-list',{filter:'all',offset:0});if(ticket!==run)return;
-   root.replaceChildren();root.hidden=false;
-   root.append(el('h2','돈 관리는 결제사에서, 참여 관리는 날에서.'),
+   if(!C)throw new Error('운영 화면 연결 파일을 다시 불러와 주세요.');const scope=C.read();
+   const data=await getPage(0);if(ticket!==run)return;
+   if(!Array.isArray(data.orders))throw new Error('주문 목록 응답을 확인하지 못했습니다.');
+   root.append(el('h2',scope.seasonSlug?(data.seasonTitle||scope.seasonSlug)+' · 주문':'전체 READ 주문'),
     el('p','실제 취소·환불과 정산은 토스 상점관리자에서 처리하세요. 처리 후에는 날의 주문 상태와 참가권 연결만 다시 확인합니다.','nal-account-note'),merchant());
+   if(scope.seasonSlug)root.append(el('p','선택한 기수의 주문만 표시합니다. 다른 기수는 운영 홈에서 선택하고, 전체 주문은 상단에서 기수 선택을 해제하세요.','nal-account-note'));
    const contents=el('div');root.append(contents);let offset=0;
-   async function append(batchData){if(ticket!==run)return;const batch=(batchData.orders||[]).slice(0,50);offset+=batch.length;
+   async function append(batchData){if(ticket!==run)return;
+    if(!Array.isArray(batchData.orders))throw new Error('주문 목록을 확인하지 못했습니다.');
+    const batch=batchData.orders.slice(0,50);offset+=batch.length;
     for(const q of batch){const s=el('article','','nal-account-record');
-     s.append(el('h3',q.title),el('p',A.money(q.amount)+' · '+(state[q.state]||'확인 필요')),
-      el('p',delivery[q.fulfillment]||'참가권 확인 필요','nal-account-note'));
+     s.append(el('h3',q.title),el('p',A.money(q.amount)+' · '+(state[q.state]||'확인 필요')),el('p',delivery[q.fulfillment]||'참가권 확인 필요','nal-account-note'));
      if(q.refundedAmount)s.append(el('p','반영된 환불액 '+A.money(q.refundedAmount),'nal-account-meta'));
      s.append(el('p','결제사에서 찾을 주문 번호','nal-account-meta'),el('code',q.providerOrderId));
      s.append(button('결제사 주문 번호 복사',async()=>{
@@ -32,11 +37,11 @@
      if(q.fulfillmentReason)detail.append(el('p',q.fulfillmentReason,'nal-account-meta'));if(q.workError)detail.append(el('p',q.workError,'nal-account-meta'));s.append(detail);contents.append(s);
     }
     contents.querySelector('[data-more]')?.remove();
-    if((batchData.orders||[]).length>50){const b=button('다음 주문 보기',async()=>{const next=await A.pay('admin-list',{filter:'all',offset});await append(next);});b.dataset.more='';contents.append(b);}
+    if(batchData.orders.length>50){const b=button('다음 주문 보기',async()=>{const next=await getPage(offset);await append(next);});b.dataset.more='';contents.append(b);}
    }
-   await append(data);if(!offset)contents.append(el('p','아직 READ 결제 기록이 없습니다.','nal-account-empty'));
-   root.append(A.link('/nal/read/admin/offers/','참가상품 설정'),A.link('/nal/read/admin/','콘텐츠 편집'));
-  }catch(e){if(ticket===run&&e.name!=='AbortError')A.status(e.message,'error');}
+   await append(data);if(!offset)contents.append(el('p',scope.seasonSlug?'이 기수에 READ 결제 기록이 없습니다.':'아직 READ 결제 기록이 없습니다.','nal-account-empty'));
+   root.append(A.link(C.href('/nal/read/admin/offers/'),'참가상품 설정'),A.link(C.href('/nal/read/admin/'),'콘텐츠 편집'));
+  }catch(e){if(ticket===run&&e.name!=='AbortError'){if(e.status===401||e.status===403)root.replaceChildren();A.status(e.message,'error');}}
  }
- A.ready.then(ok=>{if(ok)render();});A.onChange(render);
+ A.ready.then(ok=>{if(ok)render();});A.onChange(render);window.addEventListener('popstate',render);
 })();

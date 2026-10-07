@@ -8,7 +8,6 @@ const origins=(Deno.env.get('NAL_ALLOWED_ORIGINS')||'https://daily-coach-ing.com
 const homeRuntime={read:Deno.env.get('NAL_READ_ENABLED')==='true',companion:Deno.env.get('NAL_READ_COMPANION_ENABLED')==='true',
  cohorts:Deno.env.get('NAL_COHORTS_ENABLED')==='true',support:Deno.env.get('NAL_SUPPORT_ENABLED')==='true',
  payments:Deno.env.get('NAL_READ_PAYMENTS_ENABLED')==='true'};
-// Existing editor switches only. Do not read feature/role/identity overrides from the browser.
 const operationsRuntime={editorial:Deno.env.get('NAL_READ_EDITORIAL_ENABLED')==='true',companion:homeRuntime.companion,
  cohorts:homeRuntime.cohorts,support:homeRuntime.support,payments:homeRuntime.payments};
 Deno.serve((req:Request)=>{
@@ -23,7 +22,7 @@ Deno.serve((req:Request)=>{
    const name=area==='account'?'nal_account':area==='join'?'nal_read_join':'nal_read_offer_admin';
    let data:Record<string,unknown>=payload;
    if(area==='account'&&action==='home')data=homeRuntime;
-   if(area==='account'&&action==='operator-home')data={query:payload,runtime:operationsRuntime};
+   if(area==='account'&&['operator-home','operator-context'].includes(action))data={query:payload,runtime:operationsRuntime};
    return auth.rpc(id,name,{p_action:action,p_payload:data,...(area==='join'?{p_season_slug:slug}:{})});
   }
  })(req);

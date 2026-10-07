@@ -1,5 +1,5 @@
 import {STEP_TYPES,INPUT_TYPES,validateManifest,blankManifest} from './read-editorial-contract.mjs';
-const N=window.NalRead;
+const N=window.NalRead,C=window.NalAdminContext;
 if(N){
  const root=document.querySelector('[data-private-root]'),el=N.node;
  let source=null,revision=0,state='empty',role=null,dirty=false,scheduleDirty=false,generation=0,active=0,marker={},scheduleMarker={},liveSessions=[];
@@ -10,8 +10,8 @@ if(N){
   i.addEventListener('input',()=>change(i.value));w.append(el('span',label),i);return w;
  }
  function select(label,options,value,change){const w=el('label','','read-field'),i=el('select');
-  for(const [v,t] of options){const o=el('option',t);o.value=v;i.append(o);}i.value=String(value);i.addEventListener('change',()=>change(i.value));w.append(el('span',label),i);return w;}
- function button(label,fn,primary=false){const b=el('button',label,'read-button'+(primary?'':' secondary'));b.type='button';b.addEventListener('click',async()=>{b.disabled=true;try{await fn();}catch(e){N.error(e);}finally{b.disabled=false;}});return b;}
+  for(const[v,t]of options){const o=el('option',t);o.value=v;i.append(o);}i.value=String(value);i.addEventListener('change',()=>change(i.value));w.append(el('span',label),i);return w;}
+ function button(label,fn,primary=false){const b=el('button',label,'read-button'+(primary?'':' secondary'));b.type='button';b.addEventListener('click',async()=>{b.disabled=true;try{await fn();}catch(e){N.error(e);}finally{if(b.isConnected)b.disabled=false;}});return b;}
  function download(){if(!source)return;const url=URL.createObjectURL(new Blob([JSON.stringify(source,null,2)],{type:'application/json;charset=utf-8'})),a=el('a');a.href=url;a.download=source.season.slug+'.editorial.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);}
  function mark(){dirty=true;state='draft-local';N.setDirty(marker,true);const label=root.querySelector('[data-editor-state]');if(label)label.textContent=stateNames[state];}
  function clearDirty(){dirty=false;scheduleDirty=false;N.setDirty(marker,false);N.setDirty(scheduleMarker,false);}
@@ -36,13 +36,27 @@ if(N){
  }
  async function open(slug){
   if(!leave())return;const ticket=++generation;
-  const data=await call('get',{},slug);if(ticket!==generation)return;
-  role=data.role;source=data.source||blankManifest(slug);revision=data.revision;state=data.state;liveSessions=data.liveSessions||[];active=0;renderEditor();
+  await busy(async()=>{const data=await call('get',{},slug);if(ticket!==generation)return;
+   if(data.source&&data.source.season?.slug!==slug)throw new Error('선택한 시즌과 원고의 주소가 다릅니다. 다른 원고로 대신 열지 않습니다.');
+   role=data.role;source=data.source||blankManifest(slug);revision=data.revision;state=data.state;liveSessions=data.liveSessions||[];active=0;renderEditor();
+  });
  }
  async function library(){
   if(!N.user){root.replaceChildren();root.hidden=true;return;}
   const ticket=++generation;
-  try{const data=await call('list');if(ticket!==generation)return;role=data.role;root.hidden=false;root.replaceChildren();
+  try{
+   if(!C)throw new Error('운영 화면 연결 파일을 다시 불러와 주세요.');const requested=C.read().seasonSlug;
+   const data=await call('list');if(ticket!==generation)return;
+   if(!Array.isArray(data.seasons))throw new Error('원고 목록을 확인하지 못했습니다. 빈 원고를 대신 만들지 않습니다.');
+   role=data.role;root.hidden=false;root.replaceChildren();
+   // A URL is a selection request, not permission or an instruction to create a season.
+   if(requested){
+    if(!data.seasons.some(s=>s.slug===requested)){
+     const clear=N.link('/nal/read/admin/','기수 선택 해제하고 원고 목록 보기');clear.dataset.adminContext='clear';
+     root.append(el('h1','선택한 원고를 찾지 못했습니다.','read-step-prompt'),el('p','현재 운영 계정의 원고 목록에 이 시즌이 없습니다. 다른 시즌이나 새 빈 원고를 대신 열지 않습니다.','read-empty'),clear);return;
+    }
+    await open(requested);return;
+   }
    root.append(el('p','NAL READ · EDITORIAL','read-eyebrow'),el('h1','다음 질문을 만드는 곳.','read-step-prompt'));
    root.append(el('p','원고를 불러와 편집하고, 검토와 승인을 거쳐 참가자용 콘텐츠로 반영합니다. 개인 답변은 이 화면에서 조회하지 않습니다.','read-step-copy'));
    const row=el('div','','read-actions');row.append(button('새 시즌 만들기',()=>{
@@ -52,7 +66,7 @@ if(N){
    const file=el('input');file.type='file';file.accept='.json,application/json';file.setAttribute('aria-label','원고 JSON 파일 불러오기');
    file.addEventListener('change',async()=>{const f=file.files?.[0];if(!f)return;
     try{if(f.size>550000)throw new Error('원고 파일은 550KB 이내로 올려주세요.');const doc=JSON.parse(await f.text());const issues=validateManifest(doc);if(issues.length)throw new Error(issues.slice(0,8).join('\n'));
-     if(!leave())return;const existing=(data.seasons||[]).find(s=>s.slug===doc.season.slug);
+     if(!leave())return;const existing=data.seasons.find(s=>s.slug===doc.season.slug);
      if(existing){const current=await call('get',{},doc.season.slug);revision=current.revision;liveSessions=current.liveSessions||[];}
      else{revision=0;liveSessions=[];}
      source=doc;active=0;mark();renderEditor();N.status('파일을 편집기에 불러왔습니다. 서버 저장이나 공개는 아직 하지 않았습니다.','ok');
@@ -60,7 +74,7 @@ if(N){
    });
    const label=el('label','','read-field');label.append(el('span','기존 원고 JSON 가져오기'),file);row.append(label);root.append(row);
    const list=el('div','','read-record-list');
-   for(const s of data.seasons||[]){const item=el('section','','read-record');item.append(el('h2',s.title),el('p',s.slug+' · '+stateNames[s.state]+' · v'+s.revision,'read-meta'),button('원고 열기',()=>open(s.slug)));list.append(item);}
+   for(const s of data.seasons){const item=el('section','','read-record');item.append(el('h2',s.title),el('p',s.slug+' · '+stateNames[s.state]+' · v'+s.revision,'read-meta'),button('원고 열기',()=>open(s.slug)));list.append(item);}
    if(!list.children.length)list.append(el('p','아직 시즌이 없습니다. 새 원고를 만들거나 준비된 JSON을 가져오세요.','read-empty'));root.append(list);N.status('');
   }catch(e){N.error(e);}
  }
@@ -72,16 +86,15 @@ if(N){
    if(s.type==='SCALE')part.append(el('p','1　2　3　4　5 · 전혀 그렇지 않다 → 매우 그렇다'));
    if(s.type==='MULTI_SELECT')for(const option of s.options||[])part.append(el('p','□ '+option));
    if(['QUESTION','TRY'].includes(s.type))part.append(el('p',s.placeholder||'한 문장이어도 충분합니다.','read-preview-answer'));
-   if(s.type==='RECORD')part.append(el('blockquote','참가자가 앞에서 남긴 답이 이곳에 표시됩니다.','read-own-sentence'));
-   dialog.append(part);
+   if(s.type==='RECORD')part.append(el('blockquote','참가자가 앞에서 남긴 답이 이곳에 표시됩니다.','read-own-sentence'));dialog.append(part);
   }
   dialog.addEventListener('close',()=>dialog.remove());root.append(dialog);dialog.showModal();
  }
  function renderEditor(){
-  root.replaceChildren();root.hidden=false;
+  C.set(source.season.slug,source.season.title);root.replaceChildren();root.hidden=false;
   const top=el('div','','read-editor-top');top.append(el('p','EDITORIAL · v'+revision,'read-eyebrow'),el('h1',source.season.title,'read-step-prompt'));
   const status=el('p',stateNames[state]||state,'read-meta');status.dataset.editorState='';top.append(status);
-  const actions=el('div','','read-actions');actions.append(button('시즌 목록',async()=>{if(leave())await library();}),button('JSON 파일로 보관',download),button('초안 저장',save,true));
+  const actions=el('div','','read-actions');actions.append(button('시즌 목록',async()=>{if(leave()){C.set(null);await library();}}),button('JSON 파일로 보관',download),button('초안 저장',save,true));
   const clone=button('다음 시즌으로 복제',()=>{
    const slug=prompt('복제할 새 시즌 주소','read-02');if(!slug||!/^[a-z0-9-]{1,120}$/.test(slug)||slug===source.season.slug)return;
    source=structuredClone(source);source.season.slug=slug;source.season.title='새 시즌 · '+source.season.title;revision=0;liveSessions=[];mark();renderEditor();
@@ -90,8 +103,7 @@ if(N){
   metadata.append(textInput('시즌 제목',source.season.title,v=>{source.season.title=v;mark();},{max:120}),textInput('부제',source.season.subtitle,v=>{source.season.subtitle=v;mark();},{max:400}));
   source.provenance??={origin:'operator',attributionStatus:'editorial-review-required'};
   metadata.append(textInput('참고 도서 / 자료',source.provenance.bookReference,v=>{source.provenance.bookReference=v;mark();},{max:500}),textInput('편집 메모·출처 확인 사항',source.provenance.note,v=>{source.provenance.note=v;mark();},{multi:true,max:4000}));
-  for(const w of source.weeks){metadata.append(textInput(`WEEK ${w.number} 제목`,w.title,v=>{w.title=v;mark();},{max:120}),textInput(`WEEK ${w.number} 부제`,w.subtitle,v=>{w.subtitle=v;mark();},{max:400}));}
-  root.append(metadata);
+  for(const w of source.weeks){metadata.append(textInput(`WEEK ${w.number} 제목`,w.title,v=>{w.title=v;mark();},{max:120}),textInput(`WEEK ${w.number} 부제`,w.subtitle,v=>{w.subtitle=v;mark();},{max:400}));}root.append(metadata);
   const layout=el('div','','read-editor-layout'),toc=el('nav','','read-editor-toc'),content=el('section','','read-editor-day');toc.setAttribute('aria-label','편집할 DAY');
   const days=[...source.days].sort((a,b)=>a.number-b.number);active=Math.max(0,Math.min(active,days.length-1));
   days.forEach((d,idx)=>{const b=button(`${String(d.number).padStart(2,'0')}　${d.title}`,()=>{active=idx;renderEditor();});if(idx===active)b.setAttribute('aria-current','page');toc.append(b);});
@@ -100,8 +112,7 @@ if(N){
    select('DAY 종류',[['before','시작 전'],['daily','질문'],['try','실험'],['live','LIVE'],['final','마지막']],day.type,v=>{day.type=v;mark();}),
    textInput('예상 소요 시간(분)',day.minutes,v=>{day.minutes=Number(v);mark();},{type:'number'}),button('참가자 화면 미리보기',()=>preview(day)));
   for(let idx=0;idx<day.steps.length;idx++){
-   const s=day.steps[idx],part=el('section','','read-editor-step');
-   const head=el('div','','read-editor-step-head');head.append(el('h3',`STEP ${idx+1}`));
+   const s=day.steps[idx],part=el('section','','read-editor-step'),head=el('div','','read-editor-step-head');head.append(el('h3',`STEP ${idx+1}`));
    const controls=el('div','','read-actions');
    const up=button('위로',()=>{[day.steps[idx-1],day.steps[idx]]=[s,day.steps[idx-1]];mark();renderEditor();});up.disabled=idx===0;
    const down=button('아래로',()=>{[day.steps[idx+1],day.steps[idx]]=[s,day.steps[idx+1]];mark();renderEditor();});down.disabled=idx===day.steps.length-1;
@@ -119,11 +130,9 @@ if(N){
     part.append(el('p','척도는 1~5 정수입니다. 시작과 마지막에 같은 비교 키·버전·질문을 사용해야 리포트에서 비교합니다.','read-meta'));
     part.append(textInput('비교 키 (DAY 0 / 28)',s.measureKey,v=>{if(v)s.measureKey=v;else delete s.measureKey;mark();},{max:120}),textInput('비교 문항 버전',s.measureVersion,v=>{if(v)s.measureVersion=v;else delete s.measureVersion;mark();},{max:120}));
    }
-   part.append(textInput('리포트 연결 키 (선택)',s.reportKey,v=>{if(v)s.reportKey=v;else delete s.reportKey;mark();},{max:120}));
-   content.append(part);
+   part.append(textInput('리포트 연결 키 (선택)',s.reportKey,v=>{if(v)s.reportKey=v;else delete s.reportKey;mark();},{max:120}));content.append(part);
   }
-  content.append(button('질문 STEP 추가',()=>{day.steps.push({key:'question-'+crypto.randomUUID().slice(0,8),type:'QUESTION',prompt:'새 질문을 입력해 주세요.',required:false});mark();renderEditor();}));
-  layout.append(toc,content);root.append(layout);
+  content.append(button('질문 STEP 추가',()=>{day.steps.push({key:'question-'+crypto.randomUUID().slice(0,8),type:'QUESTION',prompt:'새 질문을 입력해 주세요.',required:false});mark();renderEditor();}));layout.append(toc,content);root.append(layout);
   const workflow=el('section','','read-panel');workflow.append(el('h2','검토 → 승인 → 콘텐츠 반영'),el('p','초안 저장은 참가자 화면을 바꾸지 않습니다. 원고를 다시 수정하면 승인 상태가 해제됩니다.'));
   const steps=el('div','','read-actions');const review=button('편집 검토 요청',()=>transition('review'));review.disabled=dirty||state!=='draft';steps.append(review);
   if(role==='owner'){
@@ -139,8 +148,7 @@ if(N){
   panel.append(button('버전 불러오기',async()=>{if(!revision)throw new Error('먼저 초안을 저장하세요.');const data=await call('history');list.replaceChildren();
    for(const h of data.history||[]){const item=el('div','','read-record');item.append(el('p',`v${h.revision} · ${h.event} · ${N.date(h.created_at)}`));
     if(h.event!=='schedule-changed')item.append(button('이 원고를 편집기로 가져오기',async()=>{
-     if(!leave())return;const loaded=await call('history-open',{id:h.id});source=loaded.source;active=0;mark();renderEditor();
-     N.status('과거 원고를 편집기로 가져왔습니다. 저장하면 새 버전이 되며 곧바로 공개되지 않습니다.','ok');
+     if(!leave())return;const loaded=await call('history-open',{id:h.id});source=loaded.source;active=0;mark();renderEditor();N.status('과거 원고를 편집기로 가져왔습니다. 저장하면 새 버전이 되며 곧바로 공개되지 않습니다.','ok');
     }));list.append(item);}
   }),list);root.append(panel);
  }
@@ -149,7 +157,7 @@ if(N){
   const kst=value=>{if(!value)return '';const p=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(value));return p.replace(' ','T');};
   const edit=session=>{
    if(scheduleDirty&&!confirm('저장하지 않은 일정 입력을 버릴까요?'))return;scheduleDirty=false;N.setDirty(scheduleMarker,false);
-   const value={id:session?.id||crypto.randomUUID(),updatedAt:session?.updated_at||null,weekNumber:session?.week_number||1,title:session?.title||'',question:session?.opening_question||'',starts: kst(session?.starts_at),ends:kst(session?.ends_at),joinUrl:session?.join_url||'',status:session?.status||'draft'};
+   const value={id:session?.id||crypto.randomUUID(),updatedAt:session?.updated_at||null,weekNumber:session?.week_number||1,title:session?.title||'',question:session?.opening_question||'',starts:kst(session?.starts_at),ends:kst(session?.ends_at),joinUrl:session?.join_url||'',status:session?.status||'draft'};
    const form=el('fieldset','','read-editor-step');form.append(el('legend',session?'LIVE 일정 수정':'새 LIVE 일정'));
    const change=(key,v)=>{value[key]=v;scheduleDirty=true;N.setDirty(scheduleMarker,true);};
    form.append(textInput('제목',value.title,v=>change('title',v),{max:160}),select('주차',[1,2,3,4].map(n=>[String(n),'WEEK '+n]),value.weekNumber,v=>change('weekNumber',Number(v))),
@@ -159,8 +167,7 @@ if(N){
    form.append(button('일정 저장',async()=>{
     if(dirty)throw new Error('수정 중인 원고부터 저장하세요.');if(!value.starts||!value.ends||!value.title.trim())throw new Error('제목과 시작·종료 시간을 입력해 주세요.');
     const url=new URL(value.joinUrl);if(url.protocol!=='https:'||!/^([a-z0-9-]+\.)?zoom\.us$/.test(url.hostname)||!/^\/(j|my)\//.test(url.pathname))throw new Error('Zoom 참여 주소를 확인해 주세요.');
-    if(value.status==='published'&&!confirm('이 LIVE 일정을 참가자 화면에 표시할까요?'))return;
-    form.disabled=true;
+    if(value.status==='published'&&!confirm('이 LIVE 일정을 참가자 화면에 표시할까요?'))return;form.disabled=true;
     try{await call('schedule-save',{...value,startsAt:new Date(value.starts+':00+09:00').toISOString(),endsAt:new Date(value.ends+':00+09:00').toISOString()});scheduleDirty=false;N.setDirty(scheduleMarker,false);
      const current=await call('get');liveSessions=current.liveSessions||[];renderEditor();N.status('LIVE 일정을 저장했습니다.','ok');
     }finally{form.disabled=false;}
