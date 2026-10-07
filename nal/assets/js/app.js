@@ -897,6 +897,53 @@
   }
 
 
+
+  function renderStarterNextStep(item) {
+    const starterIds = new Set(["nal-small-book-01-mind-reset","nal-small-book-02-relationship","nal-small-book-03-next-step"]);
+    if (!starterIds.has(item.id)) return "";
+    const awareness = byId(publicItems(state.products || []), "dailycoaching-awareness-100");
+    if (!awareness) return "";
+
+    const bridges = {
+      "nal-small-book-01-mind-reset": {
+        title:"마음을 한 번 바라보았다면, 다음은 반응 직전의 3분입니다.",
+        copy:"이 작은 책은 마음을 지나치지 않는 연습에서 시작했습니다. 조금 더 반복 가능한 도구가 필요하다면, AWARENESS 100은 실제 장면에서 반응하기 전 3분을 다룹니다."
+      },
+      "nal-small-book-02-relationship": {
+        title:"관계를 단정하지 않는 연습을, 반응 직전의 3분으로 이어갑니다.",
+        copy:"대화 전에 한 번 더 보고, 사실과 해석을 나누는 연습이 도움이 되었다면 AWARENESS 100에서는 관계뿐 아니라 일상의 여러 장면에서 자동반응을 늦추는 짧은 도구를 사용합니다."
+      },
+      "nal-small-book-03-next-step": {
+        title:"작은 한 걸음을 정했다면, 다음 장면에서는 반응 속도도 바라봅니다.",
+        copy:"이 책이 행동을 작게 만드는 데 머물렀다면 AWARENESS 100은 그 행동 앞에서 마음·몸·생각이 어떻게 먼저 움직이는지 3분 안에 살펴보는 도구입니다."
+      }
+    };
+    const bridge = bridges[item.id];
+    return `
+      <section class="nal-starter-next" aria-labelledby="nal-starter-next-title">
+        <div class="nal-container nal-starter-next__grid">
+          <div class="nal-starter-next__copy">
+            <p class="nal-eyebrow">NEXT · ONLY IF YOU NEED</p>
+            <h2 id="nal-starter-next-title">여기서 멈춰도 됩니다.</h2>
+            <p>${bridge.title}</p>
+            <p>${bridge.copy}</p>
+            <small>무료 자료가 충분했다면 더 구매할 필요는 없습니다. 다음 단계가 필요할 때만 이어가세요.</small>
+          </div>
+          <a class="nal-starter-next__card" href="${itemRoute("products", awareness)}">
+            <div class="nal-starter-next__cover">
+              ${imageMarkup(globalThis.NALStore.safePublicUrl(awareness.coverImage), awareness.coverImageAlt || awareness.title, "", { width:1200, height:1600 })}
+            </div>
+            <div class="nal-starter-next__meta">
+              <span>DAILYCOACHING AWARENESS / 100</span>
+              <strong>${escapeHtml(awareness.title)}</strong>
+              <p>3분 · POCKET COACHING TOOL</p>
+              <b>${formatPrice(awareness.price) || "100원"} · 다음 도구 보기 →</b>
+            </div>
+          </a>
+        </div>
+      </section>`;
+  }
+
   function renderAwarenessSalesStory(item) {
     const tier = {
       "dailycoaching-awareness-100": {
@@ -1070,6 +1117,7 @@
       </section>
 
       ${renderAwarenessSalesStory(item)}
+      ${renderStarterNextStep(item)}
 
       <nav class="nal-commerce-tabs" aria-label="상품 상세 메뉴">
         <div class="nal-container">
