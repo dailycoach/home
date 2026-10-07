@@ -739,7 +739,7 @@
             <div class="nal-awareness-ladder__intro">
               <span>AWARENESS SERIES</span>
               <strong>필요한 깊이만큼 선택합니다.</strong>
-              <p>세 권은 같은 내용을 양만 늘린 버전이 아닙니다. 3분의 멈춤에서 한 장면의 셀프코칭으로, 다시 하나의 방법론으로 깊어집니다.</p>
+              <p>세 권은 같은 내용을 양만 늘린 버전이 아닙니다. 3분의 멈춤에서 한 장면의 셀프코칭으로, 다시 하나의 방법론으로 깊어집니다.</p><a class="nal-text-link" href="/nal/shop/awareness/">AWARENESS 3종 한눈에 보기 →</a>
             </div>
             <div class="nal-awareness-ladder__steps">
               ${ladder.map(([code, depth, id, name]) => {
@@ -950,6 +950,69 @@
     ];
   }
 
+
+  function renderAwarenessSeries() {
+    const ids = ["dailycoaching-awareness-100","dailycoaching-awareness-1000","dailycoaching-awareness-10000"];
+    const products = ids.map((id) => byId(publicItems(state.products || []), id)).filter(Boolean);
+    const meta = {
+      "dailycoaching-awareness-100": ["100", "POCKET COACHING TOOL", "반응 직전, 3분이 필요할 때", "멈춤 → 관찰 → 작은 선택"],
+      "dailycoaching-awareness-1000": ["1000", "S-TOP SIGNATURE WORKBOOK", "한 장면을 실제로 풀고 싶을 때", "거리 → 질문 → 선택 → 착수"],
+      "dailycoaching-awareness-10000": ["10000", "DAILY PROFESSIONAL PLAYBOOK", "알아차림을 방법론으로 익히고 싶을 때", "DAILY 5 Steps → 7 Lenses → 7 Day Practice"]
+    };
+
+    root.innerHTML = `
+      <section class="nal-awareness-series-hero">
+        <div class="nal-container">
+          <p class="nal-eyebrow">DAILYCOACHING AWARENESS / SERIES</p>
+          <div class="nal-awareness-series-hero__grid">
+            <h1>3분에서<br>방법론까지.</h1>
+            <div>
+              <p>같은 내용을 세 번 나눈 상품이 아닙니다. 지금 필요한 깊이에 따라 사용하는 방식이 달라집니다.</p>
+              <p>먼저 멈추고, 한 장면을 질문으로 풀어보고, 필요하다면 DAILY라는 하나의 구조로 반복합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="nal-awareness-series-select">
+        <div class="nal-container">
+          <div class="nal-awareness-series-select__head">
+            <p class="nal-eyebrow">CHOOSE YOUR DEPTH</p>
+            <h2>지금 필요한 만큼만.</h2>
+          </div>
+          <div class="nal-awareness-series-grid">
+            ${products.map((product) => {
+              const [code, level, when, flow] = meta[product.id];
+              const price = product.price === 0 ? "무료" : formatPrice(product.price);
+              return `<article class="nal-awareness-series-card nal-awareness-series-card--${code}">
+                <a class="nal-awareness-series-card__cover" href="${itemRoute("products", product)}">
+                  ${imageMarkup(globalThis.NALStore.safePublicUrl(product.coverImage), product.coverImageAlt || product.title, "", { eager: true, width: 1200, height: 1600 })}
+                </a>
+                <div class="nal-awareness-series-card__body">
+                  <span>${code} · ${level}</span>
+                  <h3><a href="${itemRoute("products", product)}">${escapeHtml(product.title)}</a></h3>
+                  <p class="nal-awareness-series-card__when">${when}</p>
+                  <p>${escapeHtml(product.summary)}</p>
+                  <div class="nal-awareness-series-card__flow">${flow}</div>
+                  <div class="nal-awareness-series-card__meta"><b>${escapeHtml(price || "판매가 준비 중")}</b><span>${product.pageCount ? `${product.pageCount}P` : ""} · ${escapeHtml(product.version || "")}</span></div>
+                  <a class="nal-button--secondary" href="${itemRoute("products", product)}">이 단계 보기</a>
+                </div>
+              </article>`;
+            }).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="nal-awareness-series-philosophy">
+        <div class="nal-container nal-container--narrow">
+          <p class="nal-eyebrow">ONE PHILOSOPHY</p>
+          <h2>사람을 고치기보다,<br>다시 볼 수 있게.</h2>
+          <p>문제보다 존재를 보고, 답보다 질문을 남기고, 변화의 크기보다 다시 선택할 수 있는 힘을 봅니다.</p>
+          <p>어떤 책을 고르든 시작은 같습니다. <strong>지금 내 삶에서 조금 더 정확히 보고 싶은 한 장면은 무엇인가요?</strong></p>
+        </div>
+      </section>`;
+  }
+
   function renderSearch() {
     const q = (new URLSearchParams(location.search).get("q") || "").trim();
     const lowered = q.toLocaleLowerCase("ko");
@@ -990,6 +1053,7 @@
     if (page === "home") renderHome();
     else if (page === "listing") renderListing();
     else if (page === "detail") renderDetail();
+    else if (page === "awareness-series") renderAwarenessSeries();
     else if (page === "my") renderMy();
     else if (page === "search") renderSearch();
     else renderInfo();
