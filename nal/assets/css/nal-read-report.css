@@ -1,0 +1,37 @@
+/* Private report output. Native print/Save as PDF; no hosted generator. */
+.read-report-controls{border:0;padding:1.5rem 0;min-width:0;max-width:45rem;}
+.read-report-controls legend{font-size:1.4rem;font-weight:800;}
+.read-report-controls input:not([type=checkbox]),.read-report-controls textarea{font:inherit;padding:.8rem;width:100%;border:1px solid var(--nal-border);background:var(--nal-surface-subtle);color:var(--nal-text);}
+.read-report-selection{border-block:1px solid var(--nal-border);padding:1rem 0;max-height:30rem;overflow:auto;}
+.read-report-selection summary{font-weight:700;cursor:pointer;}
+.nal-personal-report{max-width:49rem;margin:3rem auto;padding:clamp(1.3rem,4vw,3rem);background:var(--nal-bg);color:var(--nal-text);border-top:3px solid var(--nal-text);}
+.nal-report-cover{min-height:22rem;display:flex;flex-direction:column;justify-content:center;padding:2rem 0;}
+.nal-report-cover h1{font-size:clamp(3rem,9vw,6rem);letter-spacing:-.06em;line-height:1.1;overflow-wrap:anywhere;}
+.nal-report-name{font-size:1.4rem;}
+.nal-report-section{padding:2.5rem 0;border-top:1px solid var(--nal-border);}
+.nal-report-section h2{font-size:1.5rem;line-height:1.5;}
+.nal-report-entry{margin:1.8rem 0;}
+.nal-report-entry p{white-space:pre-wrap;overflow-wrap:anywhere;}
+.nal-report-question{font-size:.95rem;font-weight:700;}
+.nal-report-notice,.nal-report-footer{font-size:.85rem;line-height:1.9;color:var(--nal-text-muted);}
+.nal-report-comparison{width:100%;border-collapse:collapse;font-size:.9rem;}
+.nal-report-comparison caption{text-align:left;padding:1rem 0;}
+.nal-report-comparison th,.nal-report-comparison td{text-align:left;padding:.7rem .4rem;border-bottom:1px solid var(--nal-border);vertical-align:top;overflow-wrap:anywhere;}
+.nal-report-comparison th:first-child{width:64%;}
+@page{size:A4;margin:18mm;}
+@media print{
+ body{color:#111!important;background:#fff!important;font-size:11pt;}
+ .read-topbar,.read-public-intro,.read-bottom-nav,.read-account-panel,.nal-skip-link,noscript{display:none!important;}
+ [data-private-root]>*:not(.nal-personal-report){display:none!important;}
+ .read-shell,[data-private-root],.nal-personal-report{padding:0!important;margin:0!important;width:100%!important;max-width:none!important;border:0!important;background:#fff!important;color:#111!important;}
+ .nal-report-cover{min-height:220mm;break-after:page;}
+ .nal-report-cover h1{font-size:56pt;}
+ .nal-report-section{break-before:page;border:0;padding:0;}
+ .nal-report-section:first-of-type{break-before:auto;}
+ .nal-report-entry{break-inside:avoid;}
+ .nal-report-section h2,.nal-report-section h3{break-after:avoid;}
+ .nal-report-comparison thead{display:table-header-group;}
+ .nal-report-comparison tr{break-inside:avoid;}
+ .read-own-sentence{font-size:12pt;border-color:#333;}
+ .nal-report-notice,.nal-report-footer,.read-meta{color:#444!important;}
+}

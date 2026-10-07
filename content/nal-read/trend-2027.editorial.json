@@ -1,0 +1,218 @@
+{
+ "schemaVersion":2,
+ "season":{"slug":"trend-2027","title":"TREND 2027","subtitle":"트렌드로 나의 다음을 읽다","totalDays":28,"reportTitle":"MY 2027","timezone":"Asia/Seoul"},
+ "provenance":{"origin":"NAL READ 기획 대화 원고를 편집 데이터로 구조화","reviewStatus":"draft","bookReference":"트렌드 코리아 2027","attributionStatus":"editorial-review-required","note":"질문과 해설은 NAL의 편집 초안입니다. 특정 도서의 직접 인용이나 공식 키워드 정의로 표시하지 않습니다. 도서 서지·장별 연결·외부 주장 출처는 편집 승인 단계에서 확정합니다."},
+ "weeks":[
+  {"number":1,"slug":"signal","title":"SIGNAL","subtitle":"나는 지금 어떻게 살고 있는가"},
+  {"number":2,"slug":"action","title":"ACTION","subtitle":"나는 왜 아직 시작하지 않았는가"},
+  {"number":3,"slug":"work","title":"WORK","subtitle":"AI와 일할수록 나는 무엇을 해야 하는가"},
+  {"number":4,"slug":"edge","title":"EDGE","subtitle":"결국 나에게 무엇이 남는가"}
+ ],
+ "days":[
+  {"number":0,"week":null,"title":"지금의 나부터 남겨둡니다","type":"before","minutes":8,"steps":[
+   {"key":"welcome","type":"HOOK","content":"책을 읽기 전에\n지금의 나부터 남겨둡니다."},
+   {"key":"check-guide","type":"IDEA","content":"지금의 느낌을 1~5로 골라주세요. 1은 전혀 그렇지 않다, 5는 매우 그렇다입니다. 진단이나 성적표가 아닙니다. 같은 질문을 마지막 날 다시 만나게 됩니다."},
+   {"key":"life","type":"SCALE","prompt":"나는 요즘 삶에 만족한다.","measureKey":"life-satisfaction","measureVersion":"v1","required":true},
+   {"key":"direction","type":"SCALE","prompt":"나는 내가 원하는 방향을 알고 있다.","measureKey":"direction","measureVersion":"v1","required":true},
+   {"key":"time","type":"SCALE","prompt":"나는 시간을 중요한 곳에 쓰고 있다.","measureKey":"time-use","measureVersion":"v1","required":true},
+   {"key":"action","type":"SCALE","prompt":"나는 생각한 것을 실제로 실행한다.","measureKey":"action","measureVersion":"v1","required":true},
+   {"key":"ai","type":"SCALE","prompt":"나는 AI를 내 일에 적절히 활용한다.","measureKey":"ai-work","measureVersion":"v1","required":true},
+   {"key":"edge","type":"SCALE","prompt":"나는 나만의 강점과 감각을 설명할 수 있다.","measureKey":"self-understanding","measureVersion":"v1","required":true},
+   {"key":"next","type":"SCALE","prompt":"나는 2027년에 무엇을 선택할지 알고 있다.","measureKey":"next-choice","measureVersion":"v1","required":true},
+   {"key":"concern","type":"QUESTION","prompt":"요즘 가장 신경 쓰이는 것은 무엇인가요?","required":true,"reportKey":"before-concern"},
+   {"key":"hope","type":"QUESTION","prompt":"28일 뒤 무엇을 조금 더 잘 알고 싶나요?","required":false,"reportKey":"before-hope"},
+   {"key":"record","type":"RECORD","content":"지금의 나를 남겼습니다. 오늘은 여기서 시작합니다."}
+  ]},
+  {"number":1,"week":1,"title":"재미가 없어진 이유","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"열심히 사는데\n왜 재미가 없을까요?"},
+   {"key":"idea","type":"IDEA","content":"오늘은 재미없는 이유를 단정하지 않습니다. 해야 할 일 사이에서 잠깐 생기가 돌았던 장면 하나를 찾아봅니다."},
+   {"key":"mirror","type":"MULTI_SELECT","prompt":"요즘 내 하루에 가까운 모습은?","options":["해야 할 일이 많다","기다려지는 일이 있다","쉬어도 바쁘다는 생각이 든다","잘 모르겠다"],"required":false},
+   {"key":"question","type":"QUESTION","prompt":"최근 한 달 동안 가장 살아있다고 느낀 순간은 언제였나요?","required":true,"reportKey":"life-signal"},
+   {"key":"record","type":"RECORD","content":"내가 살아있다고 느꼈던 순간을 다시 읽습니다."}
+  ]},
+  {"number":2,"week":1,"title":"나는 왜 이렇게 바쁠까","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"바쁜 것과\n중요한 일을 하는 것은\n같지 않습니다."},
+   {"key":"idea","type":"IDEA","content":"오늘 한 일을 원해서, 필요해서, 그냥 하던 거라서 세 가지로 떠올려봅니다. 꼭 필요한 일까지 없애려는 시간은 아닙니다."},
+   {"key":"question","type":"QUESTION","prompt":"요즘 내가 그냥 습관처럼 하고 있는 일은 무엇인가요?","required":true},
+   {"key":"choice","type":"QUESTION","prompt":"그 일은 계속하고 싶은가요, 방식을 바꾸고 싶은가요?","required":false},
+   {"key":"record","type":"RECORD","content":"바쁨 속에서 내 선택을 하나 찾았습니다."}
+  ]},
+  {"number":3,"week":1,"title":"내 삶의 ROI","type":"daily","minutes":6,"steps":[
+   {"key":"hook","type":"HOOK","content":"나는 지금\n무엇에 가장 많은 삶을 쓰고 있나요?"},
+   {"key":"idea","type":"IDEA","content":"시간·돈·에너지·관계·의미를 살펴봅니다. 관계의 가치를 수익처럼 계산하려는 것이 아니라 내가 주고 있는 것과 얻고 있는 것을 알아차리는 질문입니다."},
+   {"key":"area","type":"MULTI_SELECT","prompt":"다시 살펴보고 싶은 영역은?","options":["시간","돈","에너지","관계","의미"],"required":false},
+   {"key":"question","type":"QUESTION","prompt":"가장 많이 쓰면서 가장 적게 돌려받는다고 느끼는 영역은 어디인가요?","required":true,"reportKey":"life-roi"},
+   {"key":"record","type":"RECORD","content":"정답이 아니라 지금 내가 느낀 균형입니다."}
+  ]},
+  {"number":4,"week":1,"title":"가장 비싼 것","type":"daily","minutes":4,"steps":[
+   {"key":"hook","type":"HOOK","content":"요즘 내 삶에서\n가장 비싼 것은 무엇인가요?"},
+   {"key":"idea","type":"IDEA","content":"돈이 아니라 마음과 시간을 많이 쓰는 일을 떠올려도 좋습니다. 그만큼 소중해서 쓰는 것인지, 멈추기 어려워 쓰는 것인지 잠시 묻습니다."},
+   {"key":"question","type":"QUESTION","prompt":"내 시간과 마음을 가장 많이 가져가는 것은 무엇인가요?","required":true},
+   {"key":"record","type":"RECORD","content":"내 삶에서 큰 자리를 차지한 것을 보았습니다."}
+  ]},
+  {"number":5,"week":1,"title":"이미 알고 있는 신호","type":"daily","minutes":4,"steps":[
+   {"key":"hook","type":"HOOK","content":"사실 이미 알고 있는데\n모르는 척하고 있는 것은 없나요?"},
+   {"key":"idea","type":"IDEA","content":"반복되는 불편함, 부러움, 관심을 하나 골라봅니다. 숨겨진 진실을 맞히기보다 그 장면에 내가 어떤 뜻을 붙이고 있는지 봅니다."},
+   {"key":"question","type":"QUESTION","prompt":"반복해서 나타나는 신호가 내게 하는 말은 무엇일까요?","required":true,"reportKey":"life-signal"},
+   {"key":"record","type":"RECORD","content":"지금 알아차린 신호를 남겨둡니다."}
+  ]},
+  {"number":6,"week":1,"title":"REMOVE ONE","type":"try","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"이번에는\n하나를 더하기보다\n하나를 덜어봅니다."},
+   {"key":"idea","type":"IDEA","content":"멈춰도 괜찮은 작은 습관을 고릅니다. 건강 관리, 돌봄, 필수 업무를 갑자기 중단하지 않습니다. 기간은 TRY에서 직접 정합니다."},
+   {"key":"try","type":"TRY","prompt":"나는 7일 동안 무엇을 조금 덜 해볼까요?","required":true,"reportKey":"experiment-intent"},
+   {"key":"space","type":"QUESTION","prompt":"그 빈자리에 무엇을 남기고 싶나요?","required":false},
+   {"key":"record","type":"RECORD","content":"내가 선택한 만큼만 작게 해봅니다."}
+  ]},
+  {"number":7,"week":1,"title":"LIVE · SIGNAL","type":"live","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"이번 주\n나에게서 무엇을 발견했나요?"},
+   {"key":"question","type":"QUESTION","prompt":"이번 주 가장 예상 밖이었던 내 답은 무엇이었나요?","required":true,"reportKey":"weekly-reflection"},
+   {"key":"live","type":"LIVE","content":"확정된 일정과 나만의 대화 전후 메모는 LIVE에서 엽니다. 아직 실험 중이라면 시작한 만큼만 이야기해도 됩니다."},
+   {"key":"record","type":"RECORD","content":"나는 요즘 무엇을 원하고 있었을까요?"}
+  ]},
+  {"number":8,"week":2,"title":"왜 아직 시작하지 않았나","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"정말 준비가 부족해서\n시작하지 못한 걸까요?"},
+   {"key":"idea","type":"IDEA","content":"실제로 준비가 더 필요한 일도 있습니다. 오늘은 안전하게 작게 시험해볼 수 있는데 오래 미뤄온 일 하나를 골라봅니다."},
+   {"key":"question","type":"QUESTION","prompt":"나는 무엇을 너무 오래 준비하고 있나요?","required":true,"reportKey":"unfinished"},
+   {"key":"record","type":"RECORD","content":"준비와 시작 사이에 있는 내 말을 다시 읽습니다."}
+  ]},
+  {"number":9,"week":2,"title":"미루는 진짜 이유","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"시간이 없어서가\n아닐 수도 있습니다."},
+   {"key":"mirror","type":"MULTI_SELECT","prompt":"지금 내게 가까운 이유는?","options":["잘해야 한다고 생각해서","실패가 걱정돼서","평가받기 싫어서","너무 크게 생각해서","시작점을 몰라서","사실 원하지 않아서","시간이나 자원이 실제로 부족해서","다른 이유가 있어서"],"required":false},
+   {"key":"question","type":"QUESTION","prompt":"아무도 평가하지 않는다면 그래도 미룰까요?","required":true},
+   {"key":"record","type":"RECORD","content":"내 이유를 판단하기 전에 이해해봅니다."}
+  ]},
+  {"number":10,"week":2,"title":"저장만 하고 있는 것","type":"daily","minutes":4,"steps":[
+   {"key":"hook","type":"HOOK","content":"저장한 것은\n아직 써본 것이 아닙니다."},
+   {"key":"idea","type":"IDEA","content":"북마크, 메모, 강의, 책, 초안을 떠올려봅니다. 모은 것을 버리기보다 지금 사용할 수 있는 하나를 꺼내봅니다."},
+   {"key":"question","type":"QUESTION","prompt":"모아둔 것 중 이번 주 실제로 써볼 수 있는 것은 무엇인가요?","required":true},
+   {"key":"record","type":"RECORD","content":"모아둔 것에서 써볼 것을 골랐습니다."}
+  ]},
+  {"number":11,"week":2,"title":"10%만 만들어보기","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"완성하지 마세요.\n10%만 만들어보세요."},
+   {"key":"idea","type":"IDEA","content":"책은 목차 한 장, 강의는 10분 시연, 모임은 세 사람에게 제안하는 것부터 시작할 수 있습니다. 내 상황에서 부담이 작은 형태를 정합니다."},
+   {"key":"question","type":"QUESTION","prompt":"내가 오늘 만들 수 있는 가장 작은 형태는 무엇인가요?","required":true,"reportKey":"minimum-action"},
+   {"key":"record","type":"RECORD","content":"나의 10% 버전을 다시 봅니다."}
+  ]},
+  {"number":12,"week":2,"title":"아무도 평가하지 않는다면","type":"daily","minutes":4,"steps":[
+   {"key":"hook","type":"HOOK","content":"아무도 모른다면\n무엇을 해보고 싶나요?"},
+   {"key":"idea","type":"IDEA","content":"잘하는지 설명할 필요 없이 해보고 싶은 것을 씁니다. 공개하지 않아도, 직업이나 성과로 이어지지 않아도 괜찮습니다."},
+   {"key":"question","type":"QUESTION","prompt":"나는 무엇을 해보고 싶나요?","required":true,"reportKey":"wish"},
+   {"key":"record","type":"RECORD","content":"내가 쓴 문장을 잠깐 그대로 두어봅니다."}
+  ]},
+  {"number":13,"week":2,"title":"72H HAVE-A-GO","type":"try","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"72시간 안에\n하나만 해봅니다."},
+   {"key":"idea","type":"IDEA","content":"완성하거나 공개할 필요는 없습니다. 실제로 해볼 수 있는 작은 행동을 고릅니다. 72시간은 TRY에서 시작하기를 누른 시점부터 셉니다."},
+   {"key":"try","type":"TRY","prompt":"나는 72시간 안에 무엇을 해볼까요?","required":true,"reportKey":"experiment-intent"},
+   {"key":"record","type":"RECORD","content":"실험이 끝나기 전 LIVE가 열리면 진행 중인 이야기를 나눕니다."}
+  ]},
+  {"number":14,"week":2,"title":"LIVE · ACTION","type":"live","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"어디까지\n해봤나요?"},
+   {"key":"question","type":"QUESTION","prompt":"해보기 전과 지금, 무엇이 달라졌나요? 아직 시작하지 않았다면 무엇이 필요했나요?","required":true,"reportKey":"weekly-reflection"},
+   {"key":"live","type":"LIVE","content":"성공 여부보다 시작 전의 생각과 실제 경험을 나눕니다. 실험을 계속할지, 더 작게 바꿀지도 직접 선택합니다."},
+   {"key":"record","type":"RECORD","content":"생각만 할 때는 몰랐던 것을 남깁니다."}
+  ]},
+  {"number":15,"week":3,"title":"AI와 일하는 나","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"내가 꼭 붙잡고 있어야 할 일은\n무엇인가요?"},
+   {"key":"idea","type":"IDEA","content":"AI에 맡길 수 있는 일과 내가 판단할 일을 구분해봅니다. 빠르다는 이유만으로 정확성·책임·개인정보까지 맡기지는 않습니다."},
+   {"key":"question","type":"QUESTION","prompt":"내 업무 중 AI의 도움을 받아볼 수 있는 것은 무엇인가요?","required":true},
+   {"key":"record","type":"RECORD","content":"기술의 가능성보다 내 일의 기준을 먼저 봅니다."}
+  ]},
+  {"number":16,"week":3,"title":"AI / ME / TOGETHER","type":"daily","minutes":7,"steps":[
+   {"key":"hook","type":"HOOK","content":"모든 일을\n내가 할 필요는 없습니다."},
+   {"key":"ai","type":"QUESTION","prompt":"AI의 도움을 받을 일은 무엇인가요?","required":true,"reportKey":"work-ai"},
+   {"key":"me","type":"QUESTION","prompt":"내가 직접 판단하고 책임질 일은 무엇인가요?","required":true,"reportKey":"work-me"},
+   {"key":"together","type":"QUESTION","prompt":"사람과 함께 해야 할 일은 무엇인가요?","required":true,"reportKey":"work-together"},
+   {"key":"record","type":"RECORD","content":"AI × ME × TOGETHER\n내 일의 세 칸이 생겼습니다."}
+  ]},
+  {"number":17,"week":3,"title":"시간이 생겼는데 더 바쁘다","type":"daily","minutes":4,"steps":[
+   {"key":"hook","type":"HOOK","content":"시간이 생겼는데\n왜 더 바빠졌을까요?"},
+   {"key":"idea","type":"IDEA","content":"효율로 생긴 빈자리를 무엇으로 채웠는지 돌아봅니다. AI를 아직 쓰지 않았다면 다른 도움으로 줄어든 시간을 떠올려도 좋습니다."},
+   {"key":"question","type":"QUESTION","prompt":"줄어든 업무 시간을 나는 어디에 다시 쓰고 있나요?","required":true},
+   {"key":"record","type":"RECORD","content":"생긴 시간의 다음 쓰임을 봅니다."}
+  ]},
+  {"number":18,"week":3,"title":"생산성의 함정","type":"daily","minutes":4,"steps":[
+   {"key":"hook","type":"HOOK","content":"더 빨리 한다고\n더 중요한 일을 하는 것은 아닙니다."},
+   {"key":"question","type":"QUESTION","prompt":"중요도를 기준으로 오늘 단 하나만 남긴다면 무엇인가요?","required":true,"reportKey":"work-priority"},
+   {"key":"record","type":"RECORD","content":"오늘 내게 중요한 한 가지를 남겼습니다."}
+  ]},
+  {"number":19,"week":3,"title":"하지 않을 일","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"TO-DO보다\nNOT-TO-DO가 필요할 때가 있습니다."},
+   {"key":"question","type":"QUESTION","prompt":"앞으로 직접 하지 않아도 되는 일 세 가지는 무엇인가요?","placeholder":"한 줄에 하나씩 남겨보세요.","required":true},
+   {"key":"choice","type":"QUESTION","prompt":"그중 지금 놓아주거나 다른 방식을 찾을 하나는 무엇인가요?","required":false},
+   {"key":"record","type":"RECORD","content":"놓아주는 것도 나의 선택입니다."}
+  ]},
+  {"number":20,"week":3,"title":"GIVE ONE TO AI","type":"try","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"이번에는\n작은 일 하나를 맡겨봅니다."},
+   {"key":"idea","type":"IDEA","content":"공개해도 되는 예제 자료로 초안·정리·분류 중 하나를 해봅니다. 고객·학생·동료의 개인정보, 비밀번호, 비공개 문서는 입력하지 않습니다. 결과는 직접 확인합니다."},
+   {"key":"try","type":"TRY","prompt":"AI의 도움을 받아보고 내가 결과를 확인할 일은 무엇인가요?","required":true,"reportKey":"experiment-intent"},
+   {"key":"role","type":"QUESTION","prompt":"이 실험에서 내가 끝까지 맡을 판단은 무엇인가요?","required":false,"reportKey":"work-responsibility"},
+   {"key":"record","type":"RECORD","content":"도구에 맡기는 것과 책임을 맡기는 것은 다릅니다."}
+  ]},
+  {"number":21,"week":3,"title":"LIVE · WORK","type":"live","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"그 일에서\n내가 직접 하고 싶은 것은 무엇인가요?"},
+   {"key":"question","type":"QUESTION","prompt":"나는 앞으로 무엇에 더 많은 시간을 쓰고 싶나요?","required":true,"reportKey":"weekly-reflection"},
+   {"key":"live","type":"LIVE","content":"맡겨본 것, 직접 확인한 것, 계속 내 손으로 하고 싶은 것을 나눕니다."},
+   {"key":"record","type":"RECORD","content":"내 일의 다음 모습을 한 문장으로 남깁니다."}
+  ]},
+  {"number":22,"week":4,"title":"나는 무엇을 잘 보는가","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"나는 무엇을 잘하나요?\n\n나는 무엇을 잘 ‘보나요?’"},
+   {"key":"idea","type":"IDEA","content":"문제, 가능성, 사람의 필요, 장면의 어색함처럼 내가 자주 알아차리는 것을 찾습니다. 다른 사람보다 우월하다고 증명할 필요는 없습니다."},
+   {"key":"question","type":"QUESTION","prompt":"내가 비교적 먼저 알아차리는 것은 무엇인가요?","required":true,"reportKey":"human-edge"},
+   {"key":"record","type":"RECORD","content":"내가 세상을 보는 방식을 남깁니다."}
+  ]},
+  {"number":23,"week":4,"title":"사람들이 나를 찾는 이유","type":"daily","minutes":5,"steps":[
+   {"key":"hook","type":"HOOK","content":"사람들은\n왜 나를 찾을까요?"},
+   {"key":"mirror","type":"MULTI_SELECT","prompt":"내가 떠올리는 이유는? 가까운 것만 골라주세요.","options":["설명","판단","위로","연결","실행","질문","감각","신뢰","통찰","정리","추진","돌봄"],"required":false},
+   {"key":"question","type":"QUESTION","prompt":"사람들이 반복해서 내게 기대하는 것은 무엇인가요? 어떤 경험에서 그렇게 느꼈나요?","required":true,"reportKey":"human-edge"},
+   {"key":"record","type":"RECORD","content":"내 생각과 실제로 들은 말을 구분해 읽어봅니다."}
+  ]},
+  {"number":24,"week":4,"title":"취향도 자산이다","type":"daily","minutes":6,"steps":[
+   {"key":"hook","type":"HOOK","content":"무엇을 좋아하는지\n설명할 수 있나요?"},
+   {"key":"likes","type":"QUESTION","prompt":"좋은 것, 싫은 것, 이상하게 끌리는 것을 각각 떠올려 적어보세요.","required":true},
+   {"key":"question","type":"QUESTION","prompt":"세 목록에 반복되는 기준은 무엇인가요?","required":true,"reportKey":"taste"},
+   {"key":"record","type":"RECORD","content":"내 선택에 반복되는 기준을 봅니다."}
+  ]},
+  {"number":25,"week":4,"title":"WHY × 5","type":"daily","minutes":7,"steps":[
+   {"key":"hook","type":"HOOK","content":"좋다는 말 뒤에는\n나의 기준이 숨어 있습니다."},
+   {"key":"idea","type":"IDEA","content":"좋아하는 대상 하나를 떠올려 왜 좋은지 묻습니다. 더 묻는 것이 도움이 될 때만 이어가세요. 다섯 번을 모두 채우지 않아도 됩니다."},
+   {"key":"why1","type":"QUESTION","prompt":"무엇을 좋아하나요? 왜 좋은가요?","required":true},
+   {"key":"why2","type":"QUESTION","prompt":"그 이유가 내게 중요한 까닭은 무엇인가요?","required":false},
+   {"key":"why3","type":"QUESTION","prompt":"그 안에는 어떤 경험이나 바람이 있나요?","required":false},
+   {"key":"why4","type":"QUESTION","prompt":"그 기준은 다른 선택에서도 나타나나요?","required":false},
+   {"key":"why5","type":"QUESTION","prompt":"나는 결국 무엇을 중요하게 생각하나요?","required":true,"reportKey":"values"},
+   {"key":"record","type":"RECORD","content":"내가 중요하게 생각하는 것을 내 말로 남깁니다."}
+  ]},
+  {"number":26,"week":4,"title":"다시 선택한다면","type":"daily","minutes":6,"steps":[
+   {"key":"hook","type":"HOOK","content":"처음부터 다시 고른다면\n똑같이 선택할까요?"},
+   {"key":"again","type":"QUESTION","prompt":"다시 선택해도 그대로 선택할 것은 무엇인가요?","required":true,"reportKey":"again"},
+   {"key":"change","type":"QUESTION","prompt":"지금이라면 다르게 선택할 것은 무엇인가요? 오늘 조정할 수 있는 작은 부분은?","required":true,"reportKey":"change-choice"},
+   {"key":"record","type":"RECORD","content":"큰 결론보다 지금 조정할 수 있는 선택을 봅니다."}
+  ]},
+  {"number":27,"week":4,"title":"MY NEXT MOVE","type":"try","minutes":7,"steps":[
+   {"key":"hook","type":"HOOK","content":"2027\n\n나는 무엇을 먼저 해볼까요?"},
+   {"key":"wait","type":"QUESTION","prompt":"나는 무엇을 더 기다리지 않을까요?","required":true,"reportKey":"move-wait"},
+   {"key":"less","type":"QUESTION","prompt":"나는 무엇을 덜 할까요?","required":true,"reportKey":"move-less"},
+   {"key":"more","type":"QUESTION","prompt":"나는 무엇을 더 경험할까요?","required":true,"reportKey":"move-more"},
+   {"key":"choose","type":"QUESTION","prompt":"나는 무엇을 직접 선택할까요?","required":true,"reportKey":"move-choose"},
+   {"key":"try","type":"TRY","prompt":"이 선택을 위해 이번 주 먼저 해볼 작은 행동은 무엇인가요?","required":true,"reportKey":"move-first"},
+   {"key":"record","type":"RECORD","content":"내가 고른 다음 한 걸음입니다."}
+  ]},
+  {"number":28,"week":4,"title":"MY 2027 · FINAL LIVE","type":"final","minutes":10,"steps":[
+   {"key":"hook","type":"HOOK","content":"28일 전의 나와\n지금의 나를 다시 봅니다."},
+   {"key":"guide","type":"IDEA","content":"시작할 때와 같은 문항입니다. 1은 전혀 그렇지 않다, 5는 매우 그렇다입니다. 점수의 높고 낮음으로 성장을 판정하지 않습니다. 지금 내가 느끼는 값을 남깁니다."},
+   {"key":"life","type":"SCALE","prompt":"나는 요즘 삶에 만족한다.","measureKey":"life-satisfaction","measureVersion":"v1","required":true},
+   {"key":"direction","type":"SCALE","prompt":"나는 내가 원하는 방향을 알고 있다.","measureKey":"direction","measureVersion":"v1","required":true},
+   {"key":"time","type":"SCALE","prompt":"나는 시간을 중요한 곳에 쓰고 있다.","measureKey":"time-use","measureVersion":"v1","required":true},
+   {"key":"action","type":"SCALE","prompt":"나는 생각한 것을 실제로 실행한다.","measureKey":"action","measureVersion":"v1","required":true},
+   {"key":"ai","type":"SCALE","prompt":"나는 AI를 내 일에 적절히 활용한다.","measureKey":"ai-work","measureVersion":"v1","required":true},
+   {"key":"edge","type":"SCALE","prompt":"나는 나만의 강점과 감각을 설명할 수 있다.","measureKey":"self-understanding","measureVersion":"v1","required":true},
+   {"key":"next","type":"SCALE","prompt":"나는 2027년에 무엇을 선택할지 알고 있다.","measureKey":"next-choice","measureVersion":"v1","required":true},
+   {"key":"notice","type":"QUESTION","prompt":"무엇을 알아차렸나요?","required":true,"reportKey":"final-notice"},
+   {"key":"action-final","type":"QUESTION","prompt":"무엇을 실제로 해봤나요?","required":true,"reportKey":"final-action"},
+   {"key":"choice-final","type":"QUESTION","prompt":"이제 무엇을 선택하나요?","required":true,"reportKey":"final-choice"},
+   {"key":"sentence","type":"QUESTION","prompt":"이 28일을 한 문장으로 남긴다면?","required":true,"reportKey":"final-sentence"},
+   {"key":"live","type":"LIVE","content":"나누고 싶은 만큼만 대화합니다. 참석하지 못해도 내 기록을 마칠 수 있습니다."},
+   {"key":"record","type":"RECORD","content":"내가 남긴 문장과 해본 일은 MY 2027 리포트에서 다시 만납니다."}
+  ]}
+ ]
+}

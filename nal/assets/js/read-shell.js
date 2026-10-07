@@ -5,8 +5,8 @@
  const description=main.querySelector('p')?.textContent||'';
  const slug=document.body.dataset.season||'trend-2027';
  if(!/^[a-z0-9-]{1,120}$/.test(slug))return;
- // Constant layout only. Personalized text is always inserted with textContent in the app.
- main.innerHTML=`<header class="read-topbar"><a class="read-brand" href="/nal/read/">NAL READ</a><span class="read-meta">READ 01 · 28 DAYS</span></header>
+ // Only fixed layout is HTML. Manuscripts and private records use textContent.
+ main.innerHTML=`<header class="read-topbar"><a class="read-brand" href="/nal/read/">NAL READ</a><a class="read-inline-link" data-report-link>MY REPORT →</a></header>
  <section class="read-public-intro"><p class="read-eyebrow">NAL · 날빛</p><h1></h1><p data-description></p></section>
  <div data-private-root hidden></div>
  <section class="read-panel read-account-panel" aria-label="내 계정">
@@ -16,6 +16,7 @@
  </section>`;
  main.querySelector('.read-public-intro h1').textContent=title;
  main.querySelector('[data-description]').textContent=description;
- const nav=document.createElement('nav');nav.className='read-bottom-nav';nav.dataset.readNav='';nav.setAttribute('aria-label','NAL READ 메뉴');
- document.body.append(nav);
+ const report=main.querySelector('[data-report-link]');report.href='/nal/read/'+slug+'/report/';
+ if(document.body.dataset.readWorkspacePage==='report')report.setAttribute('aria-current','page');
+ const nav=document.createElement('nav');nav.className='read-bottom-nav';nav.dataset.readNav='';nav.setAttribute('aria-label','NAL READ 메뉴');document.body.append(nav);
 })();
