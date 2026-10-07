@@ -854,3 +854,105 @@ body[data-page="listing"][data-collection="products"] .nal-filter-bar{
   .nal-home-awareness-step{min-height:280px;padding:26px}
   .nal-home-awareness-step__level{margin-top:34px}
 }
+
+.nal-starter-next{
+  padding:72px 0;
+  background:#fbfaf6;
+  border-top:1px solid rgba(23,33,42,.08);
+  border-bottom:1px solid rgba(23,33,42,.08);
+}
+.nal-starter-next__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
+  gap:clamp(42px,8vw,96px);
+  align-items:center;
+}
+.nal-starter-next__copy h2{
+  margin:14px 0 26px;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:clamp(42px,5.5vw,72px);
+  line-height:1.08;
+  letter-spacing:-.05em;
+  color:#17212a;
+}
+.nal-starter-next__copy>p{
+  max-width:760px;
+  margin:0 0 16px;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:clamp(18px,1.8vw,24px);
+  line-height:1.78;
+  color:#5e6467;
+  word-break:keep-all;
+}
+.nal-starter-next__copy small{
+  display:block;
+  max-width:700px;
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid rgba(23,33,42,.12);
+  color:#7a7f82;
+  line-height:1.6;
+}
+.nal-starter-next__card{
+  display:grid;
+  grid-template-columns:minmax(110px,.74fr) 1.26fr;
+  background:#fff;
+  color:#17212a;
+  text-decoration:none;
+  border:1px solid rgba(23,33,42,.12);
+  box-shadow:0 18px 44px rgba(23,33,42,.07);
+  overflow:hidden;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.nal-starter-next__card:hover,
+.nal-starter-next__card:focus-visible{
+  transform:translateY(-5px);
+  box-shadow:0 24px 56px rgba(23,33,42,.1);
+}
+.nal-starter-next__cover{
+  min-height:100%;
+  background:#ece9e2;
+}
+.nal-starter-next__cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.nal-starter-next__meta{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:26px;
+}
+.nal-starter-next__meta span{
+  color:#2e5ed8;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.nal-starter-next__meta strong{
+  margin:16px 0 10px;
+  font-family:"Gowun Batang","NanumMyeongjo","Noto Serif KR",serif;
+  font-size:24px;
+  line-height:1.35;
+}
+.nal-starter-next__meta p{
+  margin:0 0 22px;
+  color:#6c7276;
+  line-height:1.6;
+}
+.nal-starter-next__meta b{
+  margin-top:auto;
+  color:#2e5ed8;
+  font-size:13px;
+}
+@media(max-width:860px){
+  .nal-starter-next__grid{grid-template-columns:1fr}
+  .nal-starter-next__card{max-width:560px}
+}
+@media(max-width:560px){
+  .nal-starter-next{padding:56px 0}
+  .nal-starter-next__card{grid-template-columns:1fr}
+  .nal-starter-next__cover{height:320px}
+}
