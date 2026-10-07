@@ -35,10 +35,10 @@ export function createReadDailyHandler(deps){
     if(origin&&!origins.includes(origin))return respond(403,{error:'Origin not allowed'});
     if(request.method==='OPTIONS')return respond(204,null);
     if(request.method!=='POST')return respond(405,{error:'Method not allowed'});
-    if(!enabled)return respond(503,{error:'NAL READ daily engine is not enabled'});
     const raw=request.headers.get('authorization')||'';
     const token=raw.startsWith('Bearer ')?raw.slice(7):'';
     if(!token)return respond(401,{error:'Login required'});
+    if(!enabled)return respond(503,{error:'NAL READ daily engine is not enabled'});
     let user;
     try{user=await authenticate(token);}catch{return respond(401,{error:'Invalid session'});}
     if(!UUID.test(user?.id||''))return respond(401,{error:'Invalid session'});

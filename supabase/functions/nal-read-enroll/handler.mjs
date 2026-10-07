@@ -32,11 +32,11 @@ export function createReadEnrollmentHandler(deps) {
     }
     if (request.method !== "POST") return response(405, { error: "Method not allowed" }, origin, origins);
     if (origin && !origins.includes(origin)) return response(403, { error: "Origin not allowed" }, origin, origins);
-    if (!enabled) return response(503, { error: "NAL READ foundation is not enabled" }, origin, origins);
 
     const auth = request.headers.get("authorization") || "";
     const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
     if (!token) return response(401, { error: "Login required" }, origin, origins);
+    if (!enabled) return response(503, { error: "NAL READ foundation is not enabled" }, origin, origins);
 
     let user;
     try { user = await authenticate(token); }

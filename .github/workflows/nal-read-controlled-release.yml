@@ -9,34 +9,34 @@ concurrency:
   cancel-in-progress: true
 jobs:
   release-guard:
-    name: Hosted-equivalent permissions - no Auth table grant
+    name: FIX03 Auth boundary and real runtime permissions
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     services:
       postgres:
         image: postgres:17
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: nal_read_fix02
+        env: {POSTGRES_PASSWORD: postgres, POSTGRES_DB: nal_read_fix03}
         ports: ['5432:5432']
         options: >-
-          --health-cmd "pg_isready -U postgres -d nal_read_fix02"
+          --health-cmd "pg_isready -U postgres -d nal_read_fix03"
           --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       PGHOST: localhost
       PGUSER: postgres
-      PGDATABASE: nal_read_fix02
+      PGDATABASE: nal_read_fix03
       PGPASSWORD: postgres
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
-      - name: Verify recorded migration matches the tested source
+      - name: Auth boundary unit and real handler integration (synthetic Auth responses)
         run: |
-          mkdir -p /tmp/nal-fix02-evidence
-          node scripts/render-nal-read-controlled-release.mjs /tmp/nal-fix02-evidence/nal-read-controlled-release.sql | tee /tmp/nal-fix02-evidence/source-hashes.json
-          cmp /tmp/nal-fix02-evidence/nal-read-controlled-release.sql supabase/migrations/20261006200849_nal_read_fix02_controlled_rollout.sql
-      - name: Disposable baseline with actual Auth permission boundary
+          mkdir -p /tmp/nal-fix03-evidence
+          set -o pipefail
+          node scripts/test-nal-read-fix03-auth.mjs | tee /tmp/nal-fix03-evidence/auth.log
+          node supabase/functions/nal-read-enroll/handler.test.mjs
+          node supabase/functions/nal-read-daily/handler.test.mjs
+      - name: Load recorded baseline - no auth.users runtime grant
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y postgresql-client >/dev/null
@@ -46,22 +46,53 @@ jobs:
           psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006095938_nal_read_wave0_index_hardening.sql
           psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006101420_nal_read_wave1_daily_engine.sql
           psql -X -v ON_ERROR_STOP=1 -c 'alter role service_role bypassrls; grant usage on schema public,auth,nal_private to service_role; grant select,update on public.nal_catalog,public.nal_orders,public.nal_order_items to service_role; revoke all on auth.users from service_role;'
-      - name: Apply recorded forward migration
-        run: psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006200849_nal_read_fix02_controlled_rollout.sql
-      - name: Participant path - preserve permission failures
+          psql -X -v ON_ERROR_STOP=1 -f supabase/migrations/20261006200849_nal_read_fix02_controlled_rollout.sql
+      - name: Regression test must reproduce original Auth permission failure
+        shell: bash
+        run: |
+          set +e
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix03-db.sql >/tmp/nal-fix03-evidence/before.log 2>&1
+          result=$?
+          set -e
+          cat /tmp/nal-fix03-evidence/before.log
+          test "$result" -ne 0
+          grep -F 'permission denied for table users' /tmp/nal-fix03-evidence/before.log
+      - name: Apply correction and verify real service-role path
         shell: bash
         run: |
           set -o pipefail
-          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix02-db.sql 2>&1 | tee /tmp/nal-fix02-evidence/db-tests.log
-      - name: Record fail-closed state after rollback
+          psql -X -v ON_ERROR_STOP=1 -f docs/NAL_READ_FIX03_PATCH.sql
+          psql -X -v ON_ERROR_STOP=1 -f scripts/test-nal-read-fix03-db.sql | tee /tmp/nal-fix03-evidence/after.log
+      - name: Start disposable PostgREST for real header transport
+        run: |
+          docker run --rm -d --name nal-fix03-postgrest --network host \
+            -e PGRST_DB_URI='postgres://postgres:postgres@127.0.0.1:5432/nal_read_fix03' \
+            -e PGRST_DB_ANON_ROLE=anon -e PGRST_DB_SCHEMAS=public \
+            -e PGRST_SERVER_PORT=3300 \
+            -e PGRST_JWT_SECRET='nal-fix03-disposable-jwt-secret-not-for-real-use' \
+            postgrest/postgrest:v13.0.7
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:3300/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          docker logs nal-fix03-postgrest
+          exit 1
+      - name: Real HTTP RPC transport - disposable credentials, not hosted login
+        env: {NAL_QA_ISOLATED_DATABASE: '1'}
+        run: |
+          set -o pipefail
+          node scripts/test-nal-read-fix03-transport.mjs | tee /tmp/nal-fix03-evidence/transport.log
+      - name: Record final OFF state
         if: always()
         run: |
-          psql -X -v ON_ERROR_STOP=1 -c 'select mode from nal_private.read_release_control; select count(*) as remaining_test_permits from nal_private.read_test_allowlist; select count(*) as remaining_users from auth.users;' | tee /tmp/nal-fix02-evidence/after-rollback.log
+          psql -X -v ON_ERROR_STOP=1 -c 'select mode from nal_private.read_release_control; select count(*) as permits from nal_private.read_test_allowlist; select count(*) as users from auth.users;' | tee /tmp/nal-fix03-evidence/final.log
+          docker logs nal-fix03-postgrest > /tmp/nal-fix03-evidence/postgrest.log 2>&1 || true
+          docker stop nal-fix03-postgrest || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: nal-fix02-controlled-release-evidence
-          path: /tmp/nal-fix02-evidence
+          name: nal-fix03-evidence
+          path: /tmp/nal-fix03-evidence
           retention-days: 3
   hosted-perimeter:
     name: Deployed API perimeter only - not real login E2E
@@ -72,8 +103,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
       - name: Missing or invalid token and anonymous table checks
-        env:
-          NAL_QA_OUTPUT: /tmp/nal-read-hosted-perimeter.json
+        env: {NAL_QA_OUTPUT: /tmp/nal-read-hosted-perimeter.json}
         run: node scripts/check-nal-read-hosted-perimeter.mjs
       - uses: actions/upload-artifact@v4
         if: always()
