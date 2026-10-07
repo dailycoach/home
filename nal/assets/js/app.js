@@ -437,6 +437,91 @@
     </article>`;
   }
 
+
+  function renderHomeStarterPath(items) {
+    const ids = ["nal-small-book-01-mind-reset","nal-small-book-02-relationship","nal-small-book-03-next-step"];
+    const products = ids.map((id) => items.find((item) => item.id === id)).filter(Boolean);
+    if (!products.length) return "";
+    const meta = {
+      "nal-small-book-01-mind-reset": ["01", "마음", "지금의 나를 지나치지 않는 시간"],
+      "nal-small-book-02-relationship": ["02", "관계", "다시 말을 건넬 자리를 찾는 시간"],
+      "nal-small-book-03-next-step": ["03", "한 걸음", "다시 움직일 수 있는 크기를 찾는 시간"]
+    };
+    return `
+      <section class="nal-home-starter">
+        <div class="nal-container">
+          <div class="nal-home-starter__head">
+            <div>
+              <p class="nal-eyebrow">04 / NAL STARTER · FREE</p>
+              <h2>먼저,<br>가볍게 펼쳐보세요.</h2>
+            </div>
+            <div>
+              <p>마음이 복잡하거나, 관계의 한 장면이 남아 있거나, 시작이 막막한 날. 정답보다 질문 몇 개와 기록할 자리를 먼저 건넵니다.</p>
+              <strong>로그인 없이 · 결제 없이 · 바로 PDF</strong>
+            </div>
+          </div>
+          <div class="nal-home-starter__grid">
+            ${products.map((product) => {
+              const [no, topic, copy] = meta[product.id];
+              return `<a class="nal-home-starter-card" href="${itemRoute("products", product)}">
+                <div class="nal-home-starter-card__cover">
+                  ${imageMarkup(globalThis.NALStore.safePublicUrl(product.coverImage), product.coverImageAlt || product.title, "", { width:1200, height:1600 })}
+                </div>
+                <div class="nal-home-starter-card__copy">
+                  <span>${no} · ${topic}</span>
+                  <h3>${escapeHtml(product.title)}</h3>
+                  <p>${copy}</p>
+                  <b>무료로 펼쳐보기 →</b>
+                </div>
+              </a>`;
+            }).join("")}
+          </div>
+          <div class="nal-home-starter__footer"><a class="nal-text-link" href="/nal/shop/">무료 작은 책과 마음도구 전체 보기 →</a></div>
+        </div>
+      </section>`;
+  }
+
+  function renderHomeAwarenessPath(items) {
+    const ids = ["dailycoaching-awareness-100","dailycoaching-awareness-1000","dailycoaching-awareness-10000"];
+    const products = ids.map((id) => items.find((item) => item.id === id)).filter(Boolean);
+    if (!products.length) return "";
+    const meta = {
+      "dailycoaching-awareness-100": ["100", "03 MINUTES", "반응 직전의 3분", "POCKET TOOL"],
+      "dailycoaching-awareness-1000": ["1000", "ONE SCENE", "한 장면을 다시 선택까지", "S-TOP WORKBOOK"],
+      "dailycoaching-awareness-10000": ["10000", "METHOD", "반복 가능한 알아차림 방법론", "DAILY PLAYBOOK"]
+    };
+    return `
+      <section class="nal-home-awareness">
+        <div class="nal-container">
+          <div class="nal-home-awareness__intro">
+            <div>
+              <p class="nal-eyebrow">05 / DAILYCOACHING AWARENESS</p>
+              <h2>3분에서<br>방법론까지.</h2>
+            </div>
+            <div>
+              <p>무료 STARTER에서 조금 더 깊이 들어가고 싶을 때, AWARENESS는 사용하는 깊이에 따라 세 단계로 나뉩니다.</p>
+              <p>같은 내용을 늘린 상품이 아니라 <strong>멈춤 → 셀프코칭 → 방법론</strong>으로 사용 방식이 달라집니다.</p>
+              <a class="nal-text-link" href="/nal/shop/awareness/">AWARENESS 3종 비교하기 →</a>
+            </div>
+          </div>
+          <div class="nal-home-awareness__path">
+            ${products.map((product, index) => {
+              const [code, depth, copy, level] = meta[product.id];
+              const price = product.price === 0 ? "무료" : formatPrice(product.price);
+              return `<a class="nal-home-awareness-step nal-home-awareness-step--${code}" href="${itemRoute("products", product)}">
+                <span class="nal-home-awareness-step__index">0${index + 1}</span>
+                <span class="nal-home-awareness-step__level">${level}</span>
+                <strong>${depth}</strong>
+                <h3>${escapeHtml(product.title)}</h3>
+                <p>${copy}</p>
+                <div><b>${escapeHtml(price || "판매 준비 중")}</b><small>${product.pageCount ? `${product.pageCount}P` : ""} · v${escapeHtml(product.version || "")}</small></div>
+              </a>`;
+            }).join("")}
+          </div>
+        </div>
+      </section>`;
+  }
+
   function renderHome() {
     const programs = publicItems(state.programs);
     const activePrograms = programs.filter((item) => !["closed", "completed"].includes(item.status));
@@ -448,7 +533,12 @@
     const classes = programs.filter((item) => item.type === "class" && ["open", "closing", "waiting"].includes(item.status) && isThisWeek(item.startDate));
     const gathers = sortFeatured(activePrograms.filter((item) => item.type === "gather"));
     const products = sortFeatured(publicItems(state.products)).sort((a, b) => Number(isDigitalProduct(b)) - Number(isDigitalProduct(a)) || featuredOrder(a) - featuredOrder(b));
-    const featuredProduct = products[0];
+    const starterIds = new Set(["nal-small-book-01-mind-reset","nal-small-book-02-relationship","nal-small-book-03-next-step"]);
+    const awarenessIds = new Set(["dailycoaching-awareness-100","dailycoaching-awareness-1000","dailycoaching-awareness-10000"]);
+    const starterProducts = products.filter((item) => starterIds.has(item.id));
+    const awarenessProducts = products.filter((item) => awarenessIds.has(item.id));
+    const otherProducts = products.filter((item) => !starterIds.has(item.id) && !awarenessIds.has(item.id));
+    const featuredProduct = starterProducts[0] || awarenessProducts[0] || otherProducts[0] || products[0];
     const hosts = publicItems(state.hosts).filter((item) => item.featured || item.programIds?.length);
     const notes = publicItems(state.content).filter((item) => item.featured);
     const smartStore = safeUrl(state.site?.externalLinks?.smartStore);
@@ -472,12 +562,14 @@
       ${section({ label: "01 / NOW OPEN", title: "지금 모집 중", copy: "현재 신청 가능한 프로그램만 먼저 보여드립니다.", content: recruiting.length ? `<div class="card-grid">${recruiting.map(programCard).join("")}</div>` : emptyState("현재 공개된 모집 일정이 없습니다.", "임의의 날짜나 잔여 좌석을 만들지 않습니다. 실제 일정이 확정되면 모집 상태와 함께 공개합니다."), action: '<a class="nal-text-link" href="/nal/gather/">NAL GATHER 보기 →</a>' })}
       ${section({ label: "02 / THIS WEEK", title: "이번 주 원데이클래스", copy: "가볍게 한 번 참여할 수 있는 프로그램.", content: classes.length ? `<div class="card-grid">${classes.map(programCard).join("")}</div>` : emptyState("이번 주 일정 등록 전입니다.", "날짜·시간·장소가 확인된 클래스만 이 영역에 노출합니다."), action: '<a class="nal-text-link" href="/nal/class/">전체 클래스 보기 →</a>' })}
       ${section({ label: "03 / KEEP MEETING", title: "계속 만나는 커뮤니티", copy: "원데이와 구분되는 정기·시즌·자유 모임.", content: gathers.length ? `<div class="card-grid">${gathers.map(programCard).join("")}</div>` : emptyState("공개된 커뮤니티가 아직 없습니다.", "운영 기간·주기·규칙이 확정된 모임부터 공개합니다.") })}
-      ${section({ label: "04 / NAL SHOP", title: "말로 꺼내기 어려운 마음을 한 장의 카드에서", copy: "감정을 발견하고 대화를 시작하며 생각을 기록하는 도구.", content: products.length ? `<div class="card-grid">${products.map(productCard).join("")}</div>` : emptyState("NAL 상품 카탈로그 준비 중", "상품 구성·가격·배송 정보가 확인되기 전에는 구매 버튼을 노출하지 않습니다.", smartStore ? `<a class="nal-button--lime" href="${smartStore}"${externalAttrs(smartStore)}>운영 중인 스마트스토어 보기</a>` : ""), action: '<a class="nal-text-link" href="/nal/shop/">NAL SHOP 보기 →</a>' })}
-      ${section({ label: "05 / USED TOGETHER", title: "모임에서 사용하는 도구", copy: "공개 데이터에서 실제로 연결된 프로그램과 상품만 함께 보여드립니다.", content: relations.length ? `<div class="nal-relation-grid">${relations.map(({ program, product }) => relationCard(program, product)).join("")}</div>` : emptyState("공개 가능한 연결 상품이 없습니다.", "판매를 위한 억지 연결 없이 실제 사용 관계가 확인된 항목만 공개합니다.") })}
-      ${section({ label: "06 / NAL HOST", title: "추천 진행자", copy: "자격보다 먼저 어떤 방식으로 진행하는지 확인하세요.", content: hosts.length ? `<div class="card-grid">${hosts.map(hostCard).join("")}</div>` : emptyState("진행자 프로필 준비 중", "NAL이 검토한 진행자만 공개합니다."), action: '<a class="nal-text-link" href="/nal/host/">전체 진행자 보기 →</a>' })}
-      ${section({ label: "07 / EXPERIENCE", title: "참여자 경험", copy: "칭찬보다 실제 참여 조건과 발견을 기록합니다.", content: emptyState("공개 동의가 확인된 후기가 아직 없습니다.", "민감한 경험을 임의로 만들거나 공개하지 않습니다.") })}
-      ${section({ label: "08 / NAL NOTE", title: "관심에서 다음 경험으로", copy: "마음·관계·도구 활용법을 관련 프로그램과 연결합니다.", content: notes.length ? `<div class="card-grid">${notes.map(noteCard).join("")}</div>` : emptyState("새 콘텐츠 준비 중", "출처와 관련 프로그램이 확인된 글부터 공개합니다."), action: '<a class="nal-text-link" href="/nal/note/">NAL NOTE 보기 →</a>' })}
-      <section class="nal-letter"><div class="nal-container nal-letter__grid"><div><p class="nal-eyebrow">09 / NAL LETTER</p><h2>새로운 모임과 클래스,<br>일상에서 사용할 질문을.</h2><p>구독 시스템 연결 전에는 이메일을 입력받지 않습니다.</p></div><div class="nal-letter__form" aria-label="NAL LETTER 준비 상태"><input type="email" placeholder="이메일 구독 준비 중" disabled aria-label="이메일 구독 준비 중"><button class="nal-button--primary" type="button" disabled>구독 준비 중</button></div></div></section>`;
+      ${renderHomeStarterPath(starterProducts)}
+      ${renderHomeAwarenessPath(awarenessProducts)}
+      ${section({ label: "06 / MORE MIND TOOLS", title: "다른 방식으로 마음을 꺼내보는 도구", copy: "카드와 질문처럼 다른 형식의 코칭도구도 함께 준비합니다.", content: otherProducts.length ? `<div class="card-grid">${otherProducts.map(productCard).join("")}</div>` : emptyState("추가 마음도구 준비 중", "구성과 사용범위가 확인된 도구부터 공개합니다.", smartStore ? `<a class="nal-button--lime" href="${smartStore}"${externalAttrs(smartStore)}>운영 중인 스마트스토어 보기</a>` : ""), action: '<a class="nal-text-link" href="/nal/shop/">NAL SHOP 전체 보기 →</a>' })}
+      ${section({ label: "07 / USED TOGETHER", title: "모임에서 사용하는 도구", copy: "공개 데이터에서 실제로 연결된 프로그램과 상품만 함께 보여드립니다.", content: relations.length ? `<div class="nal-relation-grid">${relations.map(({ program, product }) => relationCard(program, product)).join("")}</div>` : emptyState("공개 가능한 연결 상품이 없습니다.", "판매를 위한 억지 연결 없이 실제 사용 관계가 확인된 항목만 공개합니다.") })}
+      ${section({ label: "08 / NAL HOST", title: "추천 진행자", copy: "자격보다 먼저 어떤 방식으로 진행하는지 확인하세요.", content: hosts.length ? `<div class="card-grid">${hosts.map(hostCard).join("")}</div>` : emptyState("진행자 프로필 준비 중", "NAL이 검토한 진행자만 공개합니다."), action: '<a class="nal-text-link" href="/nal/host/">전체 진행자 보기 →</a>' })}
+      ${section({ label: "09 / EXPERIENCE", title: "참여자 경험", copy: "칭찬보다 실제 참여 조건과 발견을 기록합니다.", content: emptyState("공개 동의가 확인된 후기가 아직 없습니다.", "민감한 경험을 임의로 만들거나 공개하지 않습니다.") })}
+      ${section({ label: "10 / NAL NOTE", title: "관심에서 다음 경험으로", copy: "마음·관계·도구 활용법을 관련 프로그램과 연결합니다.", content: notes.length ? `<div class="card-grid">${notes.map(noteCard).join("")}</div>` : emptyState("새 콘텐츠 준비 중", "출처와 관련 프로그램이 확인된 글부터 공개합니다."), action: '<a class="nal-text-link" href="/nal/note/">NAL NOTE 보기 →</a>' })}
+      <section class="nal-letter"><div class="nal-container nal-letter__grid"><div><p class="nal-eyebrow">11 / NAL LETTER</p><h2>새로운 모임과 클래스,<br>일상에서 사용할 질문을.</h2><p>구독 시스템 연결 전에는 이메일을 입력받지 않습니다.</p></div><div class="nal-letter__form" aria-label="NAL LETTER 준비 상태"><input type="email" placeholder="이메일 구독 준비 중" disabled aria-label="이메일 구독 준비 중"><button class="nal-button--primary" type="button" disabled>구독 준비 중</button></div></div></section>`;
   }
 
   function getListingItems() {
