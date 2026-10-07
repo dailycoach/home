@@ -1,0 +1,41 @@
+{
+  "formatVersion": 1,
+  "build": 27,
+  "kind": "database-installation-to-runtime-handoff-not-an-execution-script",
+  "sourceCommit": "3ccdbe665435734e5eb6f40922b49ddf9d8ff54e",
+  "sourceManifest": "integration/nal-read/build19/manifest.json",
+  "assembledFrontendReferenceCommit": "8d9e18549827bc6c699e0072d442f02f9200d705",
+  "targetProfile": "after-declared-nineteen-sql-layers",
+  "migrationCoverage": [
+    {"version": "20261007131539", "layers": ["build04-workspace"]},
+    {"version": "20261007131833", "layers": ["build05-editorial", "build05-report"]},
+    {"version": "20261007132041", "layers": ["build06-join", "build06-account"]},
+    {"version": "20261007134152", "layers": ["build07-payments", "build07-reconciliation", "build07-integration"]},
+    {"version": "20261007150710", "layers": ["build09-cohorts", "build09-cohort-admin", "build09-admission-bridges"]},
+    {"version": "20261007210247", "layers": ["build10-guide", "build10-studio", "build10-arrival-bridge"]},
+    {"version": "20261007211433", "layers": ["build12-support", "build14-home"]},
+    {"version": "20261007215922", "layers": ["build15-pathway", "build17-operations", "build18-context"]}
+  ],
+  "remainingDeclaredSqlLayers": [],
+  "releaseModeObserved": "off",
+  "nextImplementationScope": "Match the existing eleven READ/account/support Edge source directories and shared Auth dependencies to the installed DB; then coordinate the frontend overlay and approved runtime configuration.",
+  "edgeFunctionsPresentRequiringSourceRead": ["nal-read-enroll", "nal-read-daily"],
+  "edgeFunctionsMissingAtObservation": ["nal-account", "nal-read-workspace", "nal-read-report", "nal-read-editorial", "nal-read-cohorts", "nal-read-companion", "nal-support", "nal-read-payments", "nal-read-payments-webhook"],
+  "rules": [
+    "Re-read the project, current function inventory/source, database history and development branch before runtime writes. Listed function status is not application validation.",
+    "Do not replay earlier SQL layers or the original after-fix03.forward.sql. This target has an installed chain, not a fresh baseline. Future DB fixes must be separate forward migrations.",
+    "Do not add the historical read_build20_integration marker to make a check pass; it would falsely imply that the original atomic candidate was executed.",
+    "Read existing enrollment/daily Edge source before replacing it. Retain their authentication and existing PDF/STORE boundary. Do not overwrite unrelated functions.",
+    "Include every relative shared module and existing preset dependency when deploying an Edge source. Do not create a new Auth scheme or a second browser Auth client.",
+    "Keep deployment, runtime feature flags, login redirect configuration and customer-sales activation distinct. Do not read or copy secret keys into repository/browser files.",
+    "Never blanket-disable gateway JWT verification. Public safe GET, authenticated user POST and provider webhook have distinct documented authentication boundaries; retain custom verified-subject checks and current role/assignment checks.",
+    "Server feature context for home/operator views must be populated by the Edge configuration, not browser role/runtime overrides. Internal before_* functions are not alternate client endpoints.",
+    "The old test_only release/fulfillment semantics remain; a normal customer-sales mode is still separate implementation, not accomplished by the nineteen SQL installations.",
+    "No actual cohort/date/capacity/guide/runbook/owner membership or test participants were created. Do not invent those inputs or call sample data an approved season.",
+    "Snapshot retention is not solved by the new foreign key: ON DELETE SET NULL removes a link, not source_snapshot text or report editions. Decide and implement erasure/retention behavior before accepting customer records.",
+    "The previous STORE migration identifier discrepancy remains unresolved; do not reset, blanket db push or repair migration history to conceal it.",
+    "Preserve existing free PDFs, images/fonts and live connection files. Deploy only the reviewed frontend overlay, not the private SQL/server source or whole integration ZIP.",
+    "Continue the user's no-new-paid-resource and deferred pre-sale application-testing boundaries. SQL installation success, byte hashes and Advisor INFO results are not QA PASS."
+  ],
+  "automaticActions": false
+}
