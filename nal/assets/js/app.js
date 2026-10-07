@@ -667,6 +667,93 @@
     if (script) script.textContent = JSON.stringify(data);
   }
 
+
+  function renderAwarenessSalesStory(item) {
+    const tier = {
+      "dailycoaching-awareness-100": {
+        code: "100",
+        level: "POCKET COACHING TOOL",
+        mark: "03:00",
+        title: "반응을 바꾸려 하기 전에, 3분 먼저 봅니다.",
+        lead: "답장을 보내기 직전처럼 손이 먼저 움직이는 순간이 있습니다. 그때 필요한 건 더 좋은 답보다, 내가 지금 무엇을 느끼고 어떤 이야기를 만들고 있는지 잠깐 보는 일일지도 모릅니다.",
+        note: "이 책은 3분 안에 문제를 해결하려 하지 않습니다. 다만 자동으로 흘러가던 장면에 아주 작은 틈 하나를 남깁니다.",
+        points: [
+          ["PAUSE", "손이 먼저 움직이는 장면에서 속도를 늦춥니다."],
+          ["NOTICE", "마음·몸·생각·사실을 한 번 나눠 봅니다."],
+          ["CHOICE", "지금 할 수 있는 가장 작은 응답 하나를 남깁니다."]
+        ]
+      },
+      "dailycoaching-awareness-1000": {
+        code: "1000",
+        level: "S-TOP SIGNATURE WORKBOOK",
+        mark: "S T O P",
+        title: "한 장면을 네 번 이동시키면, 선택할 자리가 생깁니다.",
+        lead: "문제가 커질수록 우리는 사람 전체를 설명하려 합니다. “나는 왜 이럴까.” 그런데 큰 질문은 때때로 답보다 판정을 먼저 부릅니다. 이 워크북은 다시 한 장면으로 돌아옵니다.",
+        note: "거리 → 질문 → 선택 → 착수. S-TOP은 잘해야 하는 방법보다, 다시 선택할 수 있게 만드는 흐름에 가깝습니다.",
+        points: [
+          ["STEP BACK", "장면과 나 사이에 관찰할 거리를 만듭니다."],
+          ["THINK", "사실·감정·생각·욕구·패턴을 질문으로 봅니다."],
+          ["OPTIONS → PROCEED", "익숙한 반응 밖의 선택을 만들고 10분 행동으로 옮깁니다."]
+        ]
+      },
+      "dailycoaching-awareness-10000": {
+        code: "10000",
+        level: "DAILY PROFESSIONAL PLAYBOOK",
+        mark: "D A I L Y",
+        title: "알아차림을 한 번의 통찰이 아니라, 반복 가능한 방법론으로.",
+        lead: "좋은 통찰이 있었는데 같은 장면에서 다시 예전처럼 반응할 때가 있습니다. 이해가 부족해서라기보다, 새로운 선택이 아직 삶의 언어가 되지 않았기 때문일 수 있습니다.",
+        note: "DAILY는 신호를 발견하고, 있는 것을 인정하고, 질문으로 탐색한 뒤, 내가 지키고 싶은 방향과 다음 행동까지 연결하는 DAILYCOACHING의 실천 구조입니다.",
+        points: [
+          ["5 STEPS", "Detect · Acknowledge · Inquire · Link · Your Action"],
+          ["7 LENSES", "몸·감정·생각·동기·행동·관계·의미를 함께 봅니다."],
+          ["PRACTICE", "3개 사례와 7일 반복 실습으로 방법을 삶의 언어로 익힙니다."]
+        ]
+      }
+    }[item.id];
+    if (!tier) return "";
+
+    const ladder = [
+      ["100", "3분", "dailycoaching-awareness-100", "POCKET"],
+      ["1000", "한 장면", "dailycoaching-awareness-1000", "S-TOP"],
+      ["10000", "방법론", "dailycoaching-awareness-10000", "DAILY"]
+    ];
+
+    return `
+      <section class="nal-awareness-story nal-awareness-story--${tier.code}" aria-labelledby="awareness-story-title">
+        <div class="nal-container">
+          <div class="nal-awareness-story__head">
+            <div>
+              <p class="nal-eyebrow">DAILYCOACHING AWARENESS / ${tier.level}</p>
+              <h2 id="awareness-story-title">${tier.title}</h2>
+            </div>
+            <strong class="nal-awareness-story__mark" aria-hidden="true">${tier.mark}</strong>
+          </div>
+          <div class="nal-awareness-story__essay">
+            <p>${tier.lead}</p>
+            <p>${tier.note}</p>
+          </div>
+          <div class="nal-awareness-story__points">
+            ${tier.points.map(([label, copy], index) => `<article><span>0${index + 1}</span><h3>${label}</h3><p>${copy}</p></article>`).join("")}
+          </div>
+          <div class="nal-awareness-ladder" aria-label="AWARENESS 제품 단계">
+            <div class="nal-awareness-ladder__intro">
+              <span>AWARENESS SERIES</span>
+              <strong>필요한 깊이만큼 선택합니다.</strong>
+              <p>세 권은 같은 내용을 양만 늘린 버전이 아닙니다. 3분의 멈춤에서 한 장면의 셀프코칭으로, 다시 하나의 방법론으로 깊어집니다.</p>
+            </div>
+            <div class="nal-awareness-ladder__steps">
+              ${ladder.map(([code, depth, id, name]) => {
+                const current = id === item.id;
+                return `<a class="${current ? "is-current" : ""}" href="/nal/shop/${id}/"${current ? ' aria-current="page"' : ""}>
+                  <span>${code}</span><strong>${depth}</strong><small>${name}</small>
+                </a>`;
+              }).join("")}
+            </div>
+          </div>
+        </div>
+      </section>`;
+  }
+
   function renderProductDetail(item) {
     remember("products", item.id);
     updateProductMetadata(item);
@@ -752,6 +839,8 @@
           </aside>
         </div>
       </section>
+
+      ${renderAwarenessSalesStory(item)}
 
       <nav class="nal-commerce-tabs" aria-label="상품 상세 메뉴">
         <div class="nal-container">
