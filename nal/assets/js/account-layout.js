@@ -8,7 +8,16 @@
   <div data-account-user hidden><span data-account-email></span><button type="button" data-account-signout class="nal-account-link">로그아웃</button></div>
   <p data-account-status role="status" aria-live="polite" hidden></p>
  </section><div data-account-private hidden></div>
- <footer class="nal-account-footer"><a href="/nal/help/">이용 도움말</a><a href="/nal/my/waitlist/">내 대기 신청</a><a href="/nal/my/local/">이 기기의 찜·최근 본 항목</a><a href="/nal/policy/privacy/">개인정보 안내</a><a href="/nal/policy/cancellation/">취소·환불 안내</a><a href="/nal/read/admin/studio/">진행자 스튜디오</a><a href="/nal/read/admin/cohorts/">운영자 기수 관리</a><a href="/nal/read/admin/support/">운영자 문의함</a></footer>`;
+ <footer class="nal-account-footer"><a href="/nal/help/">이용 도움말</a><a href="/nal/my/waitlist/">내 대기 신청</a><a href="/nal/my/local/">이 기기의 찜·최근 본 항목</a><a href="/nal/policy/privacy/">개인정보 안내</a><a href="/nal/policy/cancellation/">취소·환불 안내</a><a href="/nal/read/admin/home/">운영 홈</a><a href="/nal/read/admin/studio/">진행자 스튜디오</a><a href="/nal/read/admin/cohorts/">운영자 기수 관리</a><a href="/nal/read/admin/support/">운영자 문의함</a></footer>`;
  main.querySelector('h1').textContent=h1;main.querySelector('.nal-account-lead').textContent=lead;
  main.querySelector('[data-account-login]').addEventListener('submit',e=>e.preventDefault());
+ // Return navigation is not authorization. All operation pages retain their server checks.
+ if(location.pathname.startsWith('/nal/read/admin/')&&location.pathname!=='/nal/read/admin/home/'){
+  const nav=document.createElement('nav');nav.className='nal-admin-return';nav.setAttribute('aria-label','운영 작업 이동');
+  const a=document.createElement('a'),url=new URL('/nal/read/admin/home/',location.origin),q=new URLSearchParams(location.search);
+  if(/^[a-z0-9-]{1,120}$/.test(q.get('season')||''))url.searchParams.set('season',q.get('season'));
+  if(/^[1-4]$/.test(q.get('week')||''))url.searchParams.set('week',q.get('week'));
+  a.href=url.pathname+url.search;a.textContent='← 운영 홈으로';a.className='nal-account-link';nav.append(a);
+  main.querySelector('.nal-account-header').after(nav);
+ }
 })();

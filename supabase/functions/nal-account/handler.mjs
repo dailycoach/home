@@ -1,4 +1,4 @@
-const ACTIONS={account:new Set(['home','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
+const ACTIONS={account:new Set(['home','operator-home','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
 const SLUG=/^[a-z0-9-]{1,120}$/;
 async function readBody(req){
  const r=req.body?.getReader();if(!r)throw new Error('body');let n=0;const parts=[];
@@ -26,11 +26,21 @@ export function createAccountHandler({enabled,origins,authenticate,catalog,opera
   let b;try{b=await readBody(req);}catch(e){return reply(e.message==='large'?413:400,{error:'입력 내용을 확인해 주세요.'});}
   if(!b||typeof b!=='object'||Array.isArray(b)||!Object.hasOwn(ACTIONS,b.area)||!ACTIONS[b.area].has(b.action)
    ||!b.payload||typeof b.payload!=='object'||Array.isArray(b.payload)||(b.area==='join'&&!SLUG.test(b.seasonSlug||'')))return reply(400,{error:'입력 내용을 확인해 주세요.'});
-  // Home owns no client-provided identity, feature flags or diagnostic payload.
   if(b.area==='account'&&b.action==='home'&&Object.keys(b.payload).length)return reply(400,{error:'홈은 추가 정보 없이 현재 계정으로 불러옵니다.'});
+  if(b.area==='account'&&b.action==='operator-home'){
+   const p=b.payload;
+   if(Object.keys(p).some(k=>!['seasonSlug','search','offset'].includes(k))
+    ||(p.seasonSlug!==undefined&&p.seasonSlug!==null&&(typeof p.seasonSlug!=='string'||!SLUG.test(p.seasonSlug)))
+    ||(p.search!==undefined&&(typeof p.search!=='string'||p.search.length>120)))return reply(400,{error:'운영 홈은 시즌·검색어·목록 위치만 지정할 수 있습니다.'});
+  }
   if(Object.hasOwn(b.payload,'offset')&&(!Number.isInteger(b.payload.offset)||b.payload.offset<0||b.payload.offset>10000))return reply(400,{error:'페이지 범위를 확인해 주세요.'});
   try{return reply(200,await operate(user.id,b.area,b.action,b.seasonSlug,b.payload));}
   catch(e){
+   if(b.area==='account'&&b.action==='operator-home'){
+    if(e.code==='42501')return reply(403,{error:'운영 홈은 기존 소유자·운영자 계정만 사용할 수 있습니다. 이 화면은 권한을 새로 부여하지 않습니다.'});
+    if(['22023','22P02'].includes(e.code))return reply(400,{error:'선택한 시즌이나 목록 조건을 다시 확인해 주세요.'});
+    return reply(503,{error:'운영 정보를 불러오지 못했습니다. 준비가 완료됐거나 기록이 없는 것으로 판단하지 않습니다.'});
+   }
    if(e.code==='40001')return reply(409,{error:'다른 화면에서 변경됐습니다. 내용을 보관한 뒤 다시 열어주세요.'});
    if(e.code==='42501')return reply(403,{error:'참가권·공개 상태·관리 권한을 확인해 주세요. 자동으로 권한을 복구하지 않습니다.'});
    if(['22023','22P02','22007','22008','23505','23514','23502'].includes(e.code))return reply(400,{error:'연결 상품·신청 안내 버전·참가 조건이 달라졌습니다. 새로고침 후 확인해 주세요.'});
