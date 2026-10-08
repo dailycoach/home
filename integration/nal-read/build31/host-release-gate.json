@@ -1,0 +1,404 @@
+{
+  "formatVersion": 1,
+  "build": 31,
+  "status": "PAGES_MAIN_CONFIRMED_DRAFT_PR_PREPARED_NO_LIVE_CHANGE",
+  "repo": "dailycoach/home",
+  "pages": {
+    "workflow": "pages build and deployment",
+    "runId": 37710942545,
+    "runUrl": "https://github.com/dailycoach/home/actions/runs/37710942545",
+    "event": "dynamic",
+    "mainSourceSha": "1ccaa503aa7823ab1711ed70f1880bc83084b671",
+    "observedStatus": "completed",
+    "conclusion": "success",
+    "jobs": {
+      "build": "success",
+      "report-build-status": "success",
+      "deploy": "success"
+    },
+    "hostDomainFromCname": "daily-coach-ing.com",
+    "liveDomainHttpVerified": false,
+    "limits": "GitHub Pages workflow identifies last deployed main SHA. Direct live-domain HTTP retrieval failed; CDN/browser outcome was not checked."
+  },
+  "candidate": {
+    "hostPrNumber": 166,
+    "url": "https://github.com/dailycoach/home/pull/166",
+    "draft": true,
+    "merged": false,
+    "base": "main",
+    "parent": "1ccaa503aa7823ab1711ed70f1880bc83084b671",
+    "head": "integration/nal-read-build30-host-candidate",
+    "headSha": "0dd95e697e2a246c4fa1953b8bbc7f7d7a75ffbe",
+    "changes": {
+      "added": 79,
+      "modified": 1,
+      "removed": 0
+    },
+    "onlyModifiedExisting": "nal/my/index.html",
+    "allChangesUnder": "nal/",
+    "paths": [
+      {
+        "path": "nal/assets/css/nal-account-home.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-account.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-admin-context.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-operations.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-cohorts.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-companion.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-editorial.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-feedback.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-payments.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-report.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-studio-library.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read-workspace.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-read.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/css/nal-support.css",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/account-home.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/account-layout.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/account-overview.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/account-session.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-admin-context.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-checkout.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-cohorts-admin.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-cohorts.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-daily.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-editorial-contract.mjs",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-editorial-loader.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-editorial.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-join.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-legacy-route.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-offers-admin.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-open-context.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-open-loader.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-operations.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-payment-return.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-payments-admin.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-program-sections.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-report.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-routes.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-session.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-shell.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-start.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-studio-library.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-studio.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-support.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read-workspace.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/assets/js/read.js",
+        "status": "added"
+      },
+      {
+        "path": "nal/auth/callback/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/data/read-seasons.json",
+        "status": "added"
+      },
+      {
+        "path": "nal/help/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/my/help/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/my/index.html",
+        "status": "modified"
+      },
+      {
+        "path": "nal/my/local/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/my/payments/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/my/waitlist/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/cohorts/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/home/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/offers/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/payments/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/studio/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/admin/support/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/auth/callback/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/checkout/fail/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/checkout/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/checkout/success/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/cohorts/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/join/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/open/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/start/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/before/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/day/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/journey/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/live/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/my/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/report/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/today/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/try/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/read/trend-2027/welcome/index.html",
+        "status": "added"
+      },
+      {
+        "path": "nal/shop/read/index.html",
+        "status": "added"
+      }
+    ]
+  },
+  "development": {
+    "branch": "feat/nal-read-v1",
+    "headBeforeThisReceipt": "6954a392c346041c91900cb19917d8d0255ba6bb",
+    "relatedDevPr": "https://github.com/dailycoach/home/pull/160",
+    "frontendBundle": "read29-54ef9714",
+    "sourceFiles": 79,
+    "compatibilityFiles": 1
+  },
+  "preserve": [
+    "CNAME",
+    "index.html",
+    "nal/index.html",
+    "nal/assets/css/nal.css",
+    "nal/assets/js/theme.js",
+    "nal/assets/js/app.js",
+    "nal/assets/js/store.js",
+    "nal/assets/js/backend.js",
+    "nal/data/backend.json",
+    "nal/data/products.json",
+    "nal/shop/index.html",
+    "existing PDFs/images/fonts"
+  ],
+  "beforePublishing": [
+    "Confirm live GitHub Pages source settings and main HEAD again; do not assume deployed CDN content from Git metadata alone.",
+    "Review new MY account home versus preserved old local wishlist at /nal/my/local/ and its #wishlist compatibility route.",
+    "Keep PR #166 Draft until the owner's separate production-publication decision. Merging triggers GitHub Pages publication.",
+    "Keep READ release and payment flags OFF and retain existing production backend JSON, Auth callback and merchant configuration.",
+    "Resolve current test_only production release semantics and personal-data retention/erasure before real customers.",
+    "At the customer's pre-sale checkpoint, run the deferred full Auth/browser/mobile/payment/concurrency regression QA.",
+    "If main advances, regenerate the candidate from current main and reconcile rather than force an outdated integration."
+  ],
+  "revertPolicy": "After a future authorized host publication, revert that exact site-integration commit via a new commit, preserving unrelated newer changes; never reset main, rewrite history or delete-sync the site.",
+  "executedNow": {
+    "hostMainChanged": false,
+    "pagesSettingsChanged": false,
+    "productionFeatureFlagsChanged": false,
+    "readReleaseModeChanged": false,
+    "paymentProviderCalled": false,
+    "newPaidResources": false,
+    "browserTestsRun": false,
+    "mergePerformed": false
+  }
+}
