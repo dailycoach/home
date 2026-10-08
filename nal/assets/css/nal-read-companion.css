@@ -1,0 +1,38 @@
+/* BUILD10: published program guide, arrival checklist and facilitator studio. */
+.nal-program-section{padding:2.3rem 0;border-top:1px solid var(--nal-border-soft,#ddd);max-width:54rem;}
+.nal-program-section h2{font-size:clamp(1.4rem,3vw,2.1rem);line-height:1.4;letter-spacing:-.035em;}
+.nal-program-copy{line-height:1.95;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;max-width:48rem;}
+.nal-program-week{padding:1.4rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-program-week h3{font-size:1.25rem;letter-spacing:-.025em;line-height:1.5;}
+.nal-arrival-heading{font-size:clamp(2rem,5.8vw,4.5rem);line-height:1.25;letter-spacing:-.05em;word-break:keep-all;overflow-wrap:anywhere;}
+.nal-preparation-form{max-width:48rem;padding:2rem 0;border-top:1px solid var(--nal-border-soft,#ddd);}
+.nal-preparation-item{display:flex;gap:1rem;align-items:flex-start;line-height:1.8;padding:1.2rem 0;cursor:pointer;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-preparation-item input{width:1.2rem;height:1.2rem;flex-shrink:0;margin-top:.35rem;accent-color:var(--nal-text,#202126);}
+.nal-preparation-item>span{display:grid;gap:.4rem;min-width:0;}
+.nal-preparation-form>.nal-account-button{margin-top:1.5rem;}
+.nal-studio-block{padding:2rem 0;border-top:1px solid var(--nal-border-soft,#ddd);max-width:56rem;}
+.nal-studio-field{display:grid;gap:.6rem;margin:1.3rem 0;line-height:1.7;max-width:48rem;}
+.nal-studio-field>span{font-weight:650;}
+.nal-studio-field input,.nal-studio-field textarea,.nal-studio-field select{max-width:100%;width:100%;min-height:3rem;padding:.8rem;font:inherit;line-height:1.75;color:inherit;background:var(--nal-surface-subtle,transparent);border:0;border-bottom:1px solid var(--nal-border,#ccc);}
+.nal-studio-field textarea{resize:vertical;min-height:7rem;}
+.nal-studio-card{padding:1.2rem 0 1.6rem 1.3rem;border-inline-start:2px solid var(--nal-border,#ccc);margin:1.5rem 0;}
+.nal-studio-material{padding:1.2rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-studio-material blockquote{margin:1rem 0;padding-inline-start:1rem;border-inline-start:2px solid currentColor;}
+.nal-runbook-timing{line-height:1.8;font-weight:700;padding:1rem 0;}
+.nal-order-details{padding:1rem 0;border-top:1px solid var(--nal-border-soft,#ddd);margin:1rem 0;}
+.nal-order-details summary{min-height:44px;padding:.6rem 0;cursor:pointer;font-weight:650;line-height:1.8;}
+.nal-run-presenter{box-sizing:border-box;position:fixed;inset:0;margin:0;width:100vw;max-width:none;height:100dvh;max-height:none;overflow:auto;padding:clamp(1.4rem,5vw,4rem);border:0;color:var(--nal-text,#202126);background:var(--nal-bg,#f5f1e8);}
+.nal-run-presenter::backdrop{background:var(--nal-bg,#f5f1e8);}
+.nal-presenter-toolbar{display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap;padding:.7rem 0;}
+.nal-presenter-question{font-size:clamp(2rem,5.5vw,5.5rem);letter-spacing:-.055em;line-height:1.35;max-width:22ch;word-break:keep-all;overflow-wrap:anywhere;white-space:pre-wrap;margin:clamp(2rem,8vh,6rem) auto;}
+.nal-presenter-step{font-size:1.1rem;line-height:1.7;text-align:center;}
+.nal-presenter-clock{display:block;text-align:center;font-variant-numeric:tabular-nums;font-size:1.3rem;margin:1.5rem;}
+body[data-account-page=arrival] .nal-account-shell:has([data-account-private]:not([hidden])) .nal-account-hero{display:none;}
+body[data-account-page=arrival] [data-account-private]{padding-top:2rem;}
+@media(max-width:42rem){.nal-studio-card{padding-inline-start:.8rem;}.nal-program-section{padding:1.7rem 0;}.nal-preparation-item{gap:.7rem;}.nal-presenter-toolbar{justify-content:center;}}
+@media print{
+ body:has(.nal-run-presenter[open])>:not(.nal-run-presenter){display:none!important;}
+ .nal-run-presenter[open]{display:block!important;position:static!important;inset:auto;width:auto;height:auto;max-height:none;margin:0;padding:0;color:#000;background:#fff;}
+ .nal-run-presenter .nal-presenter-toolbar,.nal-run-presenter .nal-presenter-clock,.nal-run-presenter .nal-account-note{display:none!important;}
+ .nal-presenter-question{font-size:30pt;max-width:none;margin:2rem 0;}
+}
