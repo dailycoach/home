@@ -1,0 +1,48 @@
+{
+  "build": 35,
+  "status": "OWNER_PRIVACY_REVIEW_FRONTEND_SOURCE_ONLY",
+  "parent": "8154280c645715e33bf702bb28093229f3ca5d16",
+  "sourceOnly": true,
+  "applied": {
+    "newPaths": [
+      "nal/read/admin/privacy/index.html",
+      "nal/assets/js/read-privacy-review.js",
+      "nal/assets/css/nal-privacy-review.css"
+    ],
+    "modifiedPaths": [
+      "nal/assets/js/account-session.js",
+      "nal/assets/js/read-operations.js"
+    ],
+    "allowedReviewActions": [
+      "queue",
+      "preview",
+      "start-review"
+    ],
+    "deniedActions": [
+      "approve-journal",
+      "execute-journal",
+      "toggle-erasure",
+      "delete-account"
+    ],
+    "currentOwnerRoleCheckedUsing": "NalAccount.call('account','operator-home',{})",
+    "authentication": "existing NalAccount session and Bearer; no second Auth client",
+    "errorMode": "fail closed; 404/503 is not an empty queue"
+  },
+  "missing": {
+    "reviewEdge": "nal-read-privacy-admin NOT DEPLOYED",
+    "authBoundary": "p_owner_id binding in trusted RPC caller NOT INTEGRATED; previous privileged edit was safety-blocked",
+    "privacyPolicyApproved": false,
+    "firstCohortConfigured": false
+  },
+  "unchanged": {
+    "readReleaseMode": "off",
+    "databaseErasureGate": false,
+    "databaseMigrationsAppliedThisBuild": 0,
+    "edgeFunctionsDeployedThisBuild": 0,
+    "newPaidResources": 0,
+    "customerRecordsModified": 0,
+    "mainMerge": false,
+    "hostDraftPR166Changed": false,
+    "applicationTests": "deferred until presale"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "build": 35,
+  "pending": "SECURITY_REVIEWED_OWNER_EDGE_BOUNDARY",
+  "frontendPage": "/nal/read/admin/privacy/",
+  "frontendMethod": "window.NalAccount.privacyReview(action, payload)",
+  "apiSlug": "nal-read-privacy-admin",
+  "apiDeployment": "none",
+  "intendedServerFlag": "NAL_PRIVACY_ADMIN_ENABLED",
+  "flagDefault": false,
+  "intendedRpc": "public.nal_read_privacy_admin(p_owner_id uuid,p_action text,p_payload jsonb)",
+  "userPrincipalMustBe": "current verified Auth user ID, never browser-supplied p_owner_id",
+  "blocker": "Existing shared RPC module injects p_user_id and privileged source modification was blocked. Do not evade the block with a replacement endpoint or alternate writer.",
+  "allowedRoutes": [
+    "queue",
+    "preview",
+    "start-review"
+  ],
+  "prohibitedRoutes": [
+    "approve-journal",
+    "execute-journal",
+    "turn-on-erasure"
+  ],
+  "existingReleaseControls": [
+    "READ off",
+    "journal_erasure_enabled false",
+    "privacy notice version null"
+  ],
+  "scope": "No raw participant journal text, no owner grants, no Auth/account deletion, no financial/legal-record deletion",
+  "next": "Obtain security-approved implementation route for verified p_owner_id and add independently OFF-gated Edge endpoint; then reconcile host Draft PR #166 only after privacy notice approval."
+}

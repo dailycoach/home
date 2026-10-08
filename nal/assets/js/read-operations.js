@@ -23,7 +23,8 @@
  function directory(role){
   const s=block('작업 공간'),links=row();
   links.append(link('editor','시즌·DAY 원고'),studio('주차별 진행안·안내문'),link('support',season?'선택 기수 문의함':role==='owner'?'전체 문의함':'배정된 문의함'));
-  if(role==='owner')links.append(link('cohorts','기수·참가자'),link('offers','상품·참여 조건'),link('payments','주문·참가권'));
+  if(role==='owner')links.append(link('cohorts','기수·참가자'),link('offers','상품·참여 조건'),link('payments','주문·참가권'),
+   A.link('/nal/read/admin/privacy/','개인정보 요청 검토 · 준비 중','nal-account-link'));
   s.append(links);note(s,'선택한 기수로 원고·상품·참가자·주문·문의 화면을 엽니다. 스튜디오는 주차도 유지합니다. 일반 문의까지 보려면 기수 선택을 해제하세요.');return s;
  }
  function workOrder(){
