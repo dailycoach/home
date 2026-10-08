@@ -1,0 +1,47 @@
+{
+  "formatVersion": 1,
+  "build": 33,
+  "kind": "DISABLED_ERASURE_REVIEW_HANDOFF",
+  "readReleaseMustRemain": "off",
+  "repository": "dailycoach/home",
+  "databaseMigrationVersion": "20261008044411",
+  "accountEdge": {
+    "slug": "nal-account",
+    "observedVersion": 2,
+    "memberPrivacyArea": "privacy",
+    "memberGate": "NAL_PRIVACY_REQUEST_ENABLED",
+    "memberGateDefault": "off",
+    "adminReviewRoute": "not deployed",
+    "desiredGate": "NAL_PRIVACY_ADMIN_ENABLED",
+    "desiredGateDefault": "off"
+  },
+  "ownerReviewRpc": "public.nal_read_privacy_admin(uuid,text,jsonb)",
+  "actions": [
+    "queue",
+    "preview",
+    "start-review",
+    "approve-journal",
+    "execute-journal"
+  ],
+  "erasureExecutor": {
+    "name": "nal_private.read_privacy_journal_erase(uuid,uuid,uuid,text)",
+    "enabled": false,
+    "policyVersion": null,
+    "minimumPrivileges": "service_role invoke; separate privileged DB authorization to set control",
+    "requiresReadOff": true,
+    "doesNotRunInMigration": true,
+    "actualDeletions": 0
+  },
+  "policyAndOperationGates": [
+    "Review and approve the real public privacy notice with controller identity, contact, transfers, service-specific retention, logs, backups and storage treatment.",
+    "Resolve membership/onboarding, contracts, financial records, complaint retention and Auth/session closure in separate workflows; journal deletion never deletes those records.",
+    "Review the risk and legitimate legal basis for retaining execution receipts containing user IDs; receipts are minimal but still personal data.",
+    "Require explicit named operator authorization and separate privileged migration to enable journal erasure; there is no enable action in browser/Edge or service_role.",
+    "Preserve original member request and withdrawn states. Existing requested-state withdrawal remains available during owner review; after approval, require human escalation for cancellation pending execution.",
+    "Preflight based on eight named journal tables, including experiment/source snapshot and report copies. Confirm data ownership and exact policy version.",
+    "Do not describe a journal-only database deletion as full erasure of backups, logs, browser caches, Storage files, Auth records or statutory financial/support evidence.",
+    "Do not merge GitHub Pages host PR 166 or activate payment/READ while first cohort inputs and customer pre-sale verification are outstanding.",
+    "No automated tests until the owner's requested pre-sale QA stage; metadata installation checks are not functional PASS."
+  ],
+  "nextAction": "BUILD34 review UI/Edge source with default-off gate, scoped owner role and no implementation bypass."
+}

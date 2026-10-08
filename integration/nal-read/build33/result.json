@@ -1,0 +1,98 @@
+{
+  "formatVersion": 1,
+  "build": 33,
+  "status": "PRIVACY_REVIEW_AND_DISABLED_ERASURE_EXECUTOR_INSTALLED",
+  "project": "nal-platform",
+  "sourceBranch": "feat/nal-read-v1",
+  "parentCommit": "cc8c3a813aa4166d9eb8b8c5ddaf37179a06a13e",
+  "migration": {
+    "version": "20261008044411",
+    "name": "nal_read_build33_privacy_review_erasure_disabled",
+    "path": "supabase/migrations/20261008044411_nal_read_build33_privacy_review_erasure_disabled.sql",
+    "success": true,
+    "storedBytes": 21718,
+    "gitBlobSha": "069a625f000cb976dd59ce68bcf4412706537d51"
+  },
+  "db": {
+    "newTables": [
+      "nal_private.read_privacy_execution_control",
+      "nal_private.read_privacy_journal_reviews",
+      "nal_private.read_privacy_journal_receipts"
+    ],
+    "newFunctions": [
+      "nal_private.read_privacy_journal_plan(uuid)",
+      "nal_private.read_privacy_journal_erase(uuid,uuid,uuid,text)",
+      "public.nal_read_privacy_admin(uuid,text,jsonb)"
+    ],
+    "rlsEnabledOnNewTables": true,
+    "anonAuthenticatedDirectAccess": false,
+    "serviceRoleExecuteOnRpcs": true,
+    "executorSecurityDefiner": true,
+    "executorLocatedInPrivateSchema": true,
+    "approvedPolicyVersion": null,
+    "erasureSwitchEnabled": false,
+    "readReleaseMode": "off",
+    "privacyRequestCount": 0,
+    "reviewCount": 0,
+    "receiptCount": 0,
+    "ownerMembershipCount": 0,
+    "personalRecordsDeleted": 0
+  },
+  "implementation": {
+    "includedJournalStores": [
+      "nal_private.read_answer_marks",
+      "nal_private.read_report_editions",
+      "nal_private.read_experiments",
+      "nal_private.read_live_notes",
+      "nal_private.read_preparation_checks",
+      "nal_private.read_drafts",
+      "public.nal_read_day_progress",
+      "public.nal_read_answers"
+    ],
+    "derivedCopiesCovered": [
+      "read_experiments.source_snapshot",
+      "read_report_editions.snapshot",
+      "read_report_editions.request_body"
+    ],
+    "fingerprint": "SHA-256 of scoped row identities and content digests; returns no journal text",
+    "approvalRequires": [
+      "verified existing owner",
+      "original member request",
+      "matching policy version",
+      "matching scoped fingerprint",
+      "fresh nonce within 24 hours",
+      "separate privileged erasure switch",
+      "READ OFF maintenance"
+    ],
+    "invariant": "User-request state remains requested and withdrawable while only being reviewed; approved request state becomes under-review.",
+    "excluded": [
+      "orders",
+      "payments",
+      "refunds",
+      "support threads",
+      "Auth users/sessions",
+      "Storage",
+      "logs",
+      "backups",
+      "browser cache"
+    ]
+  },
+  "observation": {
+    "securityAdvisor": {
+      "severity": "INFO",
+      "finding": "rls_enabled_no_policy",
+      "projectFindingCount": 40
+    },
+    "privacyLogicExercised": false,
+    "businessTestsRun": false,
+    "personalRecordsDeleted": 0,
+    "paymentsCalled": false,
+    "ownerCreated": false,
+    "featureFlagsChanged": false,
+    "edgeDeployed": false,
+    "frontendDeployed": false,
+    "mainMerged": false,
+    "newPaidResources": false
+  },
+  "next": "BUILD34: source-only owner privacy review route and participant request/status UI behind independent OFF flags; confirm notice and lawful data retention before any erasure activation. Keep host PR 166 Draft."
+}
