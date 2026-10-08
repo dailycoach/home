@@ -39,7 +39,7 @@ const pages = [
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
     title: 'PDF 전자책·워크북 | NAL 마음도구 · 날빛', description: 'PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.',
     label: 'NAL MIND TOOLS', heading: 'PDF 전자책부터 워크북·코칭도구까지',
-    copy: '읽고 끝나는 자료보다, 실제 삶과 코칭 장면에서 꺼내 쓰는 도구를 만듭니다.', schemaType: 'CollectionPage'
+    copy: '무료 스타터 세 권을 먼저 공개했습니다. 마음 정리·관계 대화·다음 한 걸음, 로그인과 결제 없이 읽고 내려받을 수 있습니다.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/note/', attrs: 'data-page="listing" data-collection="content"',
@@ -113,16 +113,18 @@ for (const item of publicItems(products)) {
     attrs: `data-page="detail" data-collection="products" data-slug="${item.slug}"`,
     title: `${item.title} | NAL 마음도구 · 날빛`,
     description: text(item, 'summary', 'description'),
-    label: 'NAL 마음도구', heading: item.title,
-    copy: item.deliveryType === 'digital'
+    label: item.price === 0 && item.stockStatus === 'available' ? 'NAL · 날빛 작은 책 · 무료 스타터' : 'NAL 마음도구', heading: item.title,
+    copy: item.price === 0 && item.stockStatus === 'available'
+      ? `PDF · ${item.pageCount}쪽 · 무료 · 로그인과 결제 없이 바로 다운로드`
+      : item.deliveryType === 'digital'
       ? '파일형식·페이지수·미리보기·다운로드·이용 범위는 확정된 내용만 공개합니다.'
       : '가격·재고·배송 정보는 확정된 내용만 공개합니다. 현재 등록 상태를 확인해 주세요.',
     schemaType: 'Product',
     product: item,
     ogImage: item.coverImage,
     ogImageAlt: item.coverImageAlt || `${item.title} 상품 비주얼 콘셉트`,
-    ogImageWidth: item.deliveryType === 'digital' ? 1200 : 1600,
-    ogImageHeight: item.deliveryType === 'digital' ? 1600 : 1600
+    ogImageWidth: item.price === 0 && item.deliveryType === 'digital' ? 756 : item.deliveryType === 'digital' ? 1200 : 1600,
+    ogImageHeight: item.price === 0 && item.deliveryType === 'digital' ? 1110 : item.deliveryType === 'digital' ? 1600 : 1600
   });
 }
 
@@ -243,7 +245,9 @@ function fallbackExtras(page) {
     const item = collections[collectionName].find((entry) => entry.slug === slug && entry.published);
     if (!item) return '';
     const source = item.sourceUrl ? `<a class="nal-button nal-button--secondary" href="${escapeHtml(item.sourceUrl)}">확인된 원문 보기</a>` : '';
-    return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}</div></section>`;
+    const freePdf = collectionName === 'products' && item.price === 0 && item.stockStatus === 'available' && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(item.purchaseUrl || '');
+    const freeActions = freePdf ? `<p><strong>PDF · ${Number(item.pageCount) || 0}쪽 · 무료 · 개인 열람·인쇄 가능</strong></p><p><a class="nal-button nal-button--primary" href="${escapeHtml(item.purchaseUrl)}" download>무료 PDF 다운로드</a> <a class="nal-button nal-button--ghost" href="${escapeHtml(item.previewUrl || item.purchaseUrl)}" target="_blank" rel="noopener noreferrer">전체 PDF 읽기</a></p><p>회원가입과 결제 없이 받을 수 있습니다.</p>` : '';
+    return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}${freeActions}</div></section>`;
   }
   return '';
 }
@@ -291,7 +295,7 @@ function html(page) {
   <script src="/nal/assets/js/product-routes.js?v=awareness-ladder-1" defer></script>
   <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=awareness-ladder-1" defer></script>
+  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=nal-free-ux-20261008" defer></script>
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
@@ -309,7 +313,7 @@ ${fallbackExtras(page)}
   <div data-mobile-cta></div>
   <div data-site-footer></div>
   <div class="nal-toast" data-toast role="status" aria-live="polite" aria-atomic="true"></div>
-  <noscript><p class="nal-noscript">NAL의 목록과 상세 정보를 보려면 브라우저에서 JavaScript를 사용해 주세요.</p></noscript>
+  <noscript><p class="nal-noscript">${page.product?.price === 0 && page.product?.purchaseUrl ? `<a href="${escapeHtml(page.product.purchaseUrl)}" download>무료 PDF 다운로드</a>` : "NAL의 목록과 상세 정보를 보려면 브라우저에서 JavaScript를 사용해 주세요."}</p></noscript>
 </body>
 </html>
 `;
