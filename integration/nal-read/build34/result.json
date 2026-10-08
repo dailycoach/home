@@ -1,0 +1,48 @@
+{
+  "formatVersion": 1,
+  "build": 34,
+  "status": "PARTIAL_MEMBER_PRIVACY_STATUS_UI_COMMITTED_ADMIN_ROUTE_BLOCKED",
+  "project": "NAL READ / dailycoach/home",
+  "basedOnCommit": "f2445684cb80df0735a2db92baca624aa9fb959d",
+  "newSourcePaths": [
+    "nal/my/privacy/index.html",
+    "nal/assets/js/read-privacy-member.js",
+    "nal/assets/css/nal-privacy.css"
+  ],
+  "updatedSourcePaths": [
+    "nal/my/index.html",
+    "nal/assets/js/account-layout.js"
+  ],
+  "features": {
+    "memberInventory": "wired to existing nal-account area=privacy action=inventory",
+    "memberRequestStatus": "wired to area=privacy action=status",
+    "memberWithdraw": "wired to area=privacy action=withdraw with explicit confirmation",
+    "newRequestSubmission": "not exposed; approved notice version unavailable",
+    "ownerAdminReview": "NOT implemented/deployed; protected GitHub source write was blocked",
+    "ownerDeleteExecution": "not exposed/activated"
+  },
+  "protectedBackend": {
+    "existingMemberEndpoint": "nal-account v2, server gate NAL_PRIVACY_REQUEST_ENABLED default OFF",
+    "newOwnerEndpoint": "not deployed",
+    "reviewRpc": "public.nal_read_privacy_admin(uuid,text,jsonb)",
+    "requiredPrincipalParameter": "p_owner_id",
+    "sharedAuthCurrentlyInjects": "p_user_id",
+    "dataDeleteGate": "nal_private.read_privacy_execution_control.journal_erasure_enabled=false"
+  },
+  "boundaries": {
+    "readRelease": "off",
+    "policyApproved": false,
+    "firstCohortImported": false,
+    "firstCohortPublished": false,
+    "actualDataDeleted": 0,
+    "roleGranted": false,
+    "apiDeployed": false,
+    "frontendDeployed": false,
+    "hostCandidatePR166Updated": false,
+    "mainMerged": false,
+    "presaleTestsRun": false,
+    "newPaidResources": false
+  },
+  "reason": "Backend shared-auth privilege/path write blocked by tool safety check. Do not retry same write via alternate writer. Member UI is source-only and non-deployed; no misleading runtime completion claim.",
+  "next": "Security-reviewed owner-auth RPC boundary, then separately default-OFF owner queue/preview/start-review endpoint with no approve/execute browser path; update host integration draft independently after actual privacy notice/legal policy approval."
+}

@@ -1,0 +1,54 @@
+{
+  "formatVersion": 1,
+  "build": 34,
+  "type": "PRIVACY_OWNER_REVIEW_SECURE_HANDOFF",
+  "current": {
+    "privacyRequestDB": "20261008035821 installed",
+    "privacyReviewDB": "20261008044411 installed",
+    "memberAuthEdge": "nal-account v2",
+    "memberPrivacyFlag": "NAL_PRIVACY_REQUEST_ENABLED, default OFF",
+    "erasureDbEnabled": false,
+    "approvedPolicyVersion": null
+  },
+  "neededBackend": {
+    "route": "nal-read-privacy-admin",
+    "gatewayVerifyJwt": true,
+    "newServerFlag": "NAL_PRIVACY_ADMIN_ENABLED, default OFF",
+    "methods": [
+      "POST",
+      "OPTIONS"
+    ],
+    "authentication": "Use per-request createReadAuthBoundary; identity must come from verified current Supabase user and admin API, not client role or user metadata",
+    "procedure": "public.nal_read_privacy_admin",
+    "principalArgument": "p_owner_id",
+    "authLibraryIssue": "Current _shared/nal-read-auth.mjs always adds p_user_id; do not invoke owner RPC with wrong parameter or trust browser p_owner_id",
+    "whitelistedActions": [
+      "queue",
+      "preview",
+      "start-review"
+    ],
+    "excludedActions": [
+      "approve-journal",
+      "execute-journal"
+    ],
+    "actorRole": "Existing DB owner membership; no auto-assign",
+    "notes": [
+      "Keep the independent DB erasure control false and do not implement any enable/override route.",
+      "Never add service-role key to frontend or permit browser-chosen owner ID.",
+      "Scope is owner-only review of counts/status, not exposure of private reflective text.",
+      "The source edit touching the shared authentication module and new privileged route was blocked by tool safety checks; do not work around this via another writer."
+    ]
+  },
+  "neededNotice": {
+    "actualControllerContact": null,
+    "approvedNoticeVersion": null,
+    "custodialRetention": null,
+    "requestIntakeLegalSignoff": false,
+    "customerFacingNewSubmission": "blocked until legally reviewed and separate server flag enabled"
+  },
+  "host": {
+    "existingHostDraftPR": 166,
+    "mergeAllowedNow": false,
+    "why": "BUILD34 member UI lives only on feat/nal-read-v1; host-only main-based candidate PR166 must be recomposed later to include these files, with MY NAL STORE/local compatibility and fresh main ref checks."
+  }
+}
