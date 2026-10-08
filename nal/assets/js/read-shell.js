@@ -33,6 +33,6 @@
  const report=main.querySelector('[data-report-link]');report.href='/nal/read/'+slug+'/report/';if(page==='report')report.setAttribute('aria-current','page');
  if(!document.querySelector('[data-read-nav]')){const nav=document.createElement('nav');nav.className='read-bottom-nav';nav.dataset.readNav='';nav.setAttribute('aria-label','NAL READ 메뉴');document.body.append(nav);}
  // Shared legacy shells receive the same small feedback stylesheet when this source is loaded.
- if(!document.querySelector('[data-read-feedback-style]')){const style=document.createElement('link');style.rel='stylesheet';style.href='/nal/assets/css/nal-read-feedback.css?v=build16';style.dataset.readFeedbackStyle='';document.head.append(style);}
+ if(!document.querySelector('[data-read-feedback-style]')){const style=document.createElement('link');style.rel='stylesheet';style.href='/nal/assets/css/nal-read-feedback.css?v=read29-54ef9714';style.dataset.readFeedbackStyle='';document.head.append(style);}
  main.querySelector('[data-daily-auth-form]').addEventListener('submit',e=>e.preventDefault());
 })();

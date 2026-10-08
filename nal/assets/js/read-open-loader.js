@@ -16,6 +16,6 @@
  document.querySelectorAll('[data-read-nav] a,[data-report-link]').forEach(a=>a.href=generic(a.href));
  const view=document.body.dataset.readDailyPage||document.body.dataset.readWorkspacePage;
  const file=['before','today','journey','day'].includes(view)?'read-daily.js':view==='report'?'read-report.js':'read-workspace.js';
- const script=document.createElement('script');script.src='/nal/assets/js/'+file+'?v=build20';
+ const script=document.createElement('script');script.src='/nal/assets/js/'+file+'?v=read29-54ef9714';
  script.onerror=()=>N.status('이 화면을 불러오지 못했습니다. 기록이 없는 것으로 판단하지 않습니다. 작성한 내용을 보관한 뒤 다시 불러와 주세요.','error');document.body.append(script);
 })();
