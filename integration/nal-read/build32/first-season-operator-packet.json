@@ -1,0 +1,172 @@
+{
+  "formatVersion": 1,
+  "build": 32,
+  "kind": "NAL_READ_FIRST_SEASON_OPERATOR_BINDER_DRAFT_ONLY",
+  "preparedFor": "NAL READ 01",
+  "release": "off",
+  "hasBeenImported": false,
+  "hasBeenPublished": false,
+  "hasBeenSold": false,
+  "program": {
+    "family": "NAL READ",
+    "programKey": "nal-read",
+    "seasonSlug": "trend-2027",
+    "proposedCohortNumber": 1,
+    "displayTitle": "TREND 2027",
+    "readingReference": "『트렌드 코리아 2027』",
+    "createdSeasonDatabaseRow": false,
+    "editorialStatus": "draft",
+    "attributionReview": "required",
+    "timezone": "Asia/Seoul",
+    "schedule": null,
+    "capacity": null,
+    "venue": null,
+    "offer": {
+      "productId": null,
+      "participationMode": null,
+      "priceWon": null,
+      "policyVersion": null,
+      "agreementText": null,
+      "refundPolicyReviewed": false,
+      "booksProvided": null,
+      "salesStatus": "off"
+    },
+    "person": {
+      "ownerUserId": null,
+      "operatorUserIds": [],
+      "invitationSent": false
+    }
+  },
+  "editorial": {
+    "path": "content/nal-read/trend-2027.editorial.json",
+    "gitBlob": "749fd994e7c53017ea6f19aaaae2bf8503ad96c6",
+    "schemaVersion": 2,
+    "sections": {
+      "day0": 1,
+      "days1To28": 28,
+      "weeks": 4,
+      "steps": 147
+    },
+    "action": "Import as an editable draft via the existing editorial interface; do not call publish.",
+    "structuralReviewBeforePublish": [
+      "Before/after 7 scale-pair wording parity",
+      "Published source attribution and ISBN check",
+      "DAY 0-28 ordering",
+      "Original NAL wording; no fabricated book quotations",
+      "Consent and privacy notice approved"
+    ]
+  },
+  "guide": {
+    "path": "supabase/functions/nal-read-companion/presets/trend-2027-guide.mjs",
+    "gitBlob": "0cfffc33d849a8c9f22bcdfdb9cc8cccaa27d625",
+    "status": "authoring-source-not-imported",
+    "proposedCheckCount": 6,
+    "proposedFaqCount": 10,
+    "action": "Use Studio 'import draft' only; owner must approve the separate guide publication."
+  },
+  "runbooks": {
+    "path": "supabase/functions/nal-read-companion/presets/trend-2027-weeks.mjs",
+    "gitBlob": "46c670e16ad4b03245f4b00c6f9f1528cd02e04f",
+    "status": "authoring-source-not-imported",
+    "weekCount": 4,
+    "sessionPlanMinutes": 90,
+    "weekTitles": [
+      "SIGNAL — 내가 바쁜 동안, 놓친 신호",
+      "ACTION — 준비만 하던 일에, 첫 흔적을 남기기",
+      "WORK — AI에 맡겨도, 내게 남는 판단",
+      "EDGE — 내 선택에 반복되는 기준을 읽기"
+    ],
+    "liveSessions": [
+      {
+        "weekNumber": 1,
+        "status": "not-scheduled",
+        "startsAt": null,
+        "endsAt": null,
+        "zoomUrl": null,
+        "confirmedHost": null
+      },
+      {
+        "weekNumber": 2,
+        "status": "not-scheduled",
+        "startsAt": null,
+        "endsAt": null,
+        "zoomUrl": null,
+        "confirmedHost": null
+      },
+      {
+        "weekNumber": 3,
+        "status": "not-scheduled",
+        "startsAt": null,
+        "endsAt": null,
+        "zoomUrl": null,
+        "confirmedHost": null
+      },
+      {
+        "weekNumber": 4,
+        "status": "not-scheduled",
+        "startsAt": null,
+        "endsAt": null,
+        "zoomUrl": null,
+        "confirmedHost": null
+      }
+    ]
+  },
+  "closureGates": [
+    {
+      "id": "OWNER_IDENTITY",
+      "state": "missing",
+      "required": "Verified owner membership; no synthetic owner"
+    },
+    {
+      "id": "COHORT_SCHEDULE",
+      "state": "missing",
+      "required": "Four actual LIVE dates/times and course start/end"
+    },
+    {
+      "id": "COHORT_CAPACITY",
+      "state": "missing",
+      "required": "Owner-approved capacity and waitlist rule"
+    },
+    {
+      "id": "PRODUCT_LINK",
+      "state": "missing",
+      "required": "Actual catalog product ID and selected free/paid participation"
+    },
+    {
+      "id": "PARTICIPANT_TERMS",
+      "state": "missing",
+      "required": "Actual price or free offer, policy version, cancellation text and book supply"
+    },
+    {
+      "id": "EDITORIAL_APPROVAL",
+      "state": "draft",
+      "required": "Operator saves, owner explicitly approves and publishes content"
+    },
+    {
+      "id": "GUIDE_APPROVAL",
+      "state": "draft",
+      "required": "Guide and facilitation plans saved; guide owner-published separately"
+    },
+    {
+      "id": "PRIVACY_RETENTION",
+      "state": "not-final",
+      "required": "Controller/contact/cookie/cache/backups legal policy + actionable erasure executor"
+    },
+    {
+      "id": "RUNTIME",
+      "state": "disabled",
+      "required": "Site draft host PR remains unmerged, server feature flags remain off"
+    },
+    {
+      "id": "PRESALE_QA",
+      "state": "deferred",
+      "required": "Run owner's real user/Auth/payment/mobile tests just before sale"
+    }
+  ],
+  "prohibitions": [
+    "No fictitious dates/capacity/Zoom/price/attendance",
+    "Do not create customer or operator Auth identities",
+    "Do not publish the editorial source just because this binder exists",
+    "No external messages or payment provider calls"
+  ]
+}

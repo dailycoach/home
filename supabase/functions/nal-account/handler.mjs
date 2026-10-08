@@ -1,4 +1,4 @@
-const ACTIONS={account:new Set(['home','operator-home','operator-context','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save'])};
+const ACTIONS={account:new Set(['home','operator-home','operator-context','profile','profile-save','files','orders','programs','registrations','reports']),join:new Set(['options','claim','welcome']),'offers-admin':new Set(['list','save']),privacy:new Set(['inventory','status','request','withdraw'])};
 const SLUG=/^[a-z0-9-]{1,120}$/;
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 async function readBody(req){
@@ -6,7 +6,7 @@ async function readBody(req){
  try{for(;;){const {done,value}=await r.read();if(done)break;n+=value.byteLength;if(n>24576){await r.cancel();throw new Error('large');}parts.push(value);}}finally{r.releaseLock();}
  const out=new Uint8Array(n);let at=0;for(const p of parts){out.set(p,at);at+=p.byteLength;}return JSON.parse(new TextDecoder().decode(out));
 }
-export function createAccountHandler({enabled,origins,authenticate,catalog,operate}){
+export function createAccountHandler({enabled,privacyEnabled=false,origins,authenticate,catalog,operate}){
  return async req=>{
   const origin=req.headers.get('origin')||'';
   const reply=(status,b)=>new Response(status===204?null:JSON.stringify(b),{status,headers:{
@@ -27,6 +27,8 @@ export function createAccountHandler({enabled,origins,authenticate,catalog,opera
   let b;try{b=await readBody(req);}catch(e){return reply(e.message==='large'?413:400,{error:'입력 내용을 확인해 주세요.'});}
   if(!b||typeof b!=='object'||Array.isArray(b)||!Object.hasOwn(ACTIONS,b.area)||!ACTIONS[b.area].has(b.action)
    ||!b.payload||typeof b.payload!=='object'||Array.isArray(b.payload)||(b.area==='join'&&!SLUG.test(b.seasonSlug||'')))return reply(400,{error:'입력 내용을 확인해 주세요.'});
+  if(b.area==='privacy'&&!privacyEnabled)return reply(503,{error:'개인정보 요청 접수는 아직 준비 중입니다. 기존 고객지원 채널을 이용해 주세요.'});
+  if(b.area==='privacy'&&b.seasonSlug!==undefined)return reply(400,{error:'개인정보 요청은 기수에 종속되지 않습니다.'});
   if(b.area==='account'&&b.action==='home'&&Object.keys(b.payload).length)return reply(400,{error:'홈은 추가 정보 없이 현재 계정으로 불러옵니다.'});
   if(b.area==='account'&&b.action==='operator-home'){
    const p=b.payload;
@@ -44,6 +46,12 @@ export function createAccountHandler({enabled,origins,authenticate,catalog,opera
   if(Object.hasOwn(b.payload,'offset')&&(!Number.isInteger(b.payload.offset)||b.payload.offset<0||b.payload.offset>10000))return reply(400,{error:'페이지 범위를 확인해 주세요.'});
   try{return reply(200,await operate(user.id,b.area,b.action,b.seasonSlug,b.payload));}
   catch(e){
+   if(b.area==='privacy'){
+    if(e.code==='42501')return reply(403,{error:'본인 확인을 다시 진행해 주세요.'});
+    if(e.code==='40001')return reply(409,{error:'검토가 시작된 요청은 여기에서 철회할 수 없습니다.'});
+    if(['22023','22P02','23505'].includes(e.code))return reply(400,{error:'요청 종류·본인 확인·접수 번호를 확인해 주세요.'});
+    return reply(503,{error:'요청을 접수하거나 조회하지 못했습니다. 파기가 완료된 것으로 표시하지 않습니다.'});
+   }
    if(b.area==='account'&&b.action==='operator-context'){
     if(e.code==='42501')return reply(403,{error:'선택한 기수의 기록을 볼 수 있는 운영 권한이나 문의 배정을 확인해 주세요.'});
     if(['22023','22P02'].includes(e.code))return reply(400,{error:'해당 기수 또는 조회 조건을 찾지 못했습니다. 다른 기수로 대신 표시하지 않습니다.'});

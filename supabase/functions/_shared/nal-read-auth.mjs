@@ -1,6 +1,6 @@
 /** A NEW boundary must be constructed for EACH HTTP request. No token is logged or stored. */
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-const RPCS=new Set(['nal_get_read_access','nal_issue_read_enrollment','nal_read_bootstrap','nal_get_read_day','nal_save_read_answer','nal_complete_read_day','nal_read_workspace','nal_read_editorial','nal_read_report','nal_account','nal_read_join','nal_read_offer_admin','nal_read_payment_user','nal_read_payment_admin','nal_read_cohort_user','nal_read_cohort_admin','nal_read_companion','nal_read_studio','nal_support_user','nal_support_admin']);
+const RPCS=new Set(['nal_get_read_access','nal_issue_read_enrollment','nal_read_bootstrap','nal_get_read_day','nal_save_read_answer','nal_complete_read_day','nal_read_workspace','nal_read_editorial','nal_read_report','nal_account','nal_read_join','nal_read_offer_admin','nal_read_payment_user','nal_read_payment_admin','nal_read_cohort_user','nal_read_cohort_admin','nal_read_companion','nal_read_studio','nal_support_user','nal_support_admin','nal_read_privacy']);
 const INVALID=()=>new Error('Invalid session');
 const validDate=(v)=>typeof v==='string' && v.length<50 && Number.isFinite(Date.parse(v));
 function eligible(user,now){

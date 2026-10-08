@@ -1,0 +1,106 @@
+{
+  "formatVersion": 1,
+  "build": 32,
+  "kind": "DATA_INVENTORY_AND_ERASURE_SCOPE_NOT_AUTOMATIC_RETENTION",
+  "sources": [
+    "https://www.law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=003400000&languageType=KO&lsNm=%EC%A0%84%EC%9E%90%EC%83%81%EA%B1%B0%EB%9E%98+%EB%93%B1%EC%97%90%EC%84%9C%EC%9D%98+%EC%86%8C%EB%B9%84%EC%9E%90%EB%B3%B4%ED%98%B8%EC%97%90+%EA%B4%80%ED%95%9C+%EB%B2%95%EB%A5%A0+%EC%8B%9C%ED%96%89%EB%A0%B9&paras=1",
+    "https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=1&cciNo=1&cnpClsNo=3&csmSeq=1702",
+    "https://supabase.com/docs/guides/auth/managing-user-data"
+  ],
+  "categories": [
+    {
+      "category": "self-coaching journal",
+      "basis": "user-provided program record",
+      "tables": [
+        "nal_private.read_drafts",
+        "public.nal_read_answers",
+        "public.nal_read_day_progress",
+        "nal_private.read_experiments",
+        "nal_private.read_answer_marks",
+        "nal_private.read_report_editions",
+        "nal_private.read_preparation_checks",
+        "nal_private.read_live_notes"
+      ],
+      "derivedCopies": [
+        "read_experiments.source_snapshot",
+        "read_report_editions.snapshot",
+        "read_report_editions.request_body"
+      ],
+      "userErasureEligibility": "separately review and implement; the BUILD32 request API only collects a review request",
+      "legalHold": "no blanket finance hold should be applied to unrelated reflective narrative without basis",
+      "automaticRetentionMonths": null
+    },
+    {
+      "category": "account & participation",
+      "basis": "ongoing service relationship",
+      "tables": [
+        "auth.users",
+        "nal_private.account_preferences",
+        "public.nal_read_enrollments",
+        "nal_private.read_onboarding",
+        "nal_private.read_waitlist",
+        "nal_private.read_cohort_attendance"
+      ],
+      "userErasureEligibility": "requires account lifecycle and role/FK/storage blockers review",
+      "automaticRetentionMonths": null
+    },
+    {
+      "category": "contract, payment and delivery",
+      "basis": "electronic commerce recordkeeping if applicable",
+      "tables": [
+        "public.nal_orders",
+        "public.nal_order_items",
+        "public.nal_payments",
+        "public.nal_digital_entitlements",
+        "public.nal_product_entitlements",
+        "nal_private.read_checkout_orders",
+        "nal_private.read_payment_refunds",
+        "nal_private.read_join_receipts"
+      ],
+      "legalGuide": "contract/cancellation and payment/delivery records: generally five years where commerce decree article 6 applies; segregate retained records",
+      "automaticRetentionMonths": null,
+      "reviewNeeded": true
+    },
+    {
+      "category": "consumer complaint/dispute",
+      "basis": "e-commerce dispute records if applicable",
+      "tables": [
+        "nal_private.support_threads",
+        "nal_private.support_messages",
+        "nal_private.support_commands"
+      ],
+      "legalGuide": "consumer complaint/dispute records: generally three years where commerce decree article 6 applies; classify non-dispute inquiries separately",
+      "automaticRetentionMonths": null,
+      "reviewNeeded": true
+    },
+    {
+      "category": "advertisement",
+      "basis": "e-commerce marketing records if applicable",
+      "tables": [],
+      "legalGuide": "advertisement records: generally six months; do not invent ad records",
+      "automaticRetentionMonths": null
+    }
+  ],
+  "currentExecutionBoundary": {
+    "privacyRpc": "public.nal_read_privacy(uuid,text,jsonb)",
+    "requestsTable": "nal_private.read_privacy_requests",
+    "scopes": [
+      "read-journal",
+      "account-closure-review"
+    ],
+    "actions": [
+      "inventory",
+      "status",
+      "request",
+      "withdraw"
+    ],
+    "deletionExecutorExists": false,
+    "personalRecordDeleted": false,
+    "autoPurgeEnabled": false,
+    "edgeFlag": "NAL_PRIVACY_REQUEST_ENABLED",
+    "edgeFlagDefault": "off",
+    "publicSitePolicyUpdated": false,
+    "backupAndLogErasureImplemented": false
+  },
+  "caution": "This is a scoped preparation/triage design, not a legal conclusion, not an account deletion feature, not a certification of compliance."
+}
