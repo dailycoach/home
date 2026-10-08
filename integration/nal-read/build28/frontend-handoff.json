@@ -1,0 +1,15 @@
+{
+  "formatVersion": 1,
+  "build": 28,
+  "kind": "edge-to-frontend-handoff",
+  "sourceCommit": "1a1a8dce28b2c2d3cc646053c5dcf53aaae61392",
+  "next": "Align frontend runtime references and connection files to the deployed function names while keeping READ/recruitment/payment activation separate.",
+  "rules": [
+    "Do not change feature flags, Auth callbacks, merchant settings or READ release mode as part of frontend source alignment.",
+    "Do not expose service-role keys. Browser configuration may contain only the existing public project URL/publishable key format already used by NAL.",
+    "Keep public GET functions gateway-JWT-off only where their handler performs method separation; authenticated writes still require the shared custom verified identity boundary.",
+    "Keep webhook gateway JWT off and its handler namespace filter; do not repoint the existing PDF Toss webhook.",
+    "Do not add a second browser Auth client or duplicate session store.",
+    "Pre-sale application/browser/payment tests remain deferred by owner instruction."
+  ]
+}

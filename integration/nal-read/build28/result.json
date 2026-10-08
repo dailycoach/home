@@ -1,0 +1,123 @@
+{
+  "formatVersion": 1,
+  "build": 28,
+  "status": "EDGE_RUNTIME_SOURCES_DEPLOYED_FEATURES_NOT_ACTIVATED",
+  "projectName": "nal-platform",
+  "sourceCommit": "1a1a8dce28b2c2d3cc646053c5dcf53aaae61392",
+  "dbChainCommit": "4f8c22bd7d511c368295bb3b57a464c67c41332e",
+  "databaseDeclaredLayers": "19/19 installed",
+  "sharedAuth": {
+    "strategy": "deployed hardening preserved; RPC allowlist extended to full current runtime set",
+    "browserMetadataAuthorization": false
+  },
+  "functions": [
+    {
+      "slug": "nal-account",
+      "version": 1,
+      "verifyJwt": false,
+      "status": "ACTIVE",
+      "bundleSha256": "0001511d54a4dcd165d7d56fddca88f718b7eb629fda9f8588d522d96d846c33"
+    },
+    {
+      "slug": "nal-read-cohorts",
+      "version": 1,
+      "verifyJwt": false,
+      "status": "ACTIVE",
+      "bundleSha256": "52f643e9e7d83643d3ef7b1ff77a7971480ad75fe221ba78d9e5eab41948b831"
+    },
+    {
+      "slug": "nal-read-companion",
+      "version": 1,
+      "verifyJwt": false,
+      "status": "ACTIVE",
+      "bundleSha256": "245bdf03e98110c99bc41a7f6a722c512f8723f36936fdbef83b30751065d199"
+    },
+    {
+      "slug": "nal-read-daily",
+      "version": 4,
+      "verifyJwt": true,
+      "status": "ACTIVE",
+      "bundleSha256": "060b5c7aa56570b5ac188a2538d8664a35563ebfc575de23896d039874e0eda2"
+    },
+    {
+      "slug": "nal-read-editorial",
+      "version": 1,
+      "verifyJwt": true,
+      "status": "ACTIVE",
+      "bundleSha256": "2340b671d276a4126552147b802a360cdafa836deb7ff36eebffbc5ccdb705b3"
+    },
+    {
+      "slug": "nal-read-enroll",
+      "version": 3,
+      "verifyJwt": true,
+      "status": "ACTIVE",
+      "bundleSha256": "d90a80c6402ea76079b8d607f752dcb0dde37900c7bbc88a6c1ade524fa73f37"
+    },
+    {
+      "slug": "nal-read-payments",
+      "version": 1,
+      "verifyJwt": false,
+      "status": "ACTIVE",
+      "bundleSha256": "50a4d9f83618d8a41d4419606c7370720b504d0c7dc1c2bbc65e4dbf3408b740"
+    },
+    {
+      "slug": "nal-read-payments-webhook",
+      "version": 1,
+      "verifyJwt": false,
+      "status": "ACTIVE",
+      "bundleSha256": "b36c65edee4d94a729f4861b52090e14d29283409ea1f6c384a0bfb52dc34c40"
+    },
+    {
+      "slug": "nal-read-report",
+      "version": 1,
+      "verifyJwt": true,
+      "status": "ACTIVE",
+      "bundleSha256": "6958b2db4d074bbcad7b351f72cfecfe32ccd1c126376a6fcc0a3ea75b229f36"
+    },
+    {
+      "slug": "nal-read-workspace",
+      "version": 1,
+      "verifyJwt": true,
+      "status": "ACTIVE",
+      "bundleSha256": "615e9b55cdcdc4ead55918c492e70ddca9c6fa8622a968fe894dd92592c2e9ab"
+    },
+    {
+      "slug": "nal-support",
+      "version": 1,
+      "verifyJwt": true,
+      "status": "ACTIVE",
+      "bundleSha256": "9091911eda01e36631d9a4760aa978f0016a5aac2fd912587ac5c16cb6542ebe"
+    }
+  ],
+  "jwtPolicy": {
+    "gatewayTrue": [
+      "nal-read-enroll",
+      "nal-read-daily",
+      "nal-read-workspace",
+      "nal-read-report",
+      "nal-read-editorial",
+      "nal-support"
+    ],
+    "gatewayFalseWithHandlerBoundary": [
+      "nal-account",
+      "nal-read-cohorts",
+      "nal-read-companion",
+      "nal-read-payments"
+    ],
+    "gatewayFalseWebhook": [
+      "nal-read-payments-webhook"
+    ]
+  },
+  "deploymentBoundary": {
+    "environmentOrFeatureFlagsChanged": false,
+    "readReleaseModeChanged": false,
+    "frontendDeployed": false,
+    "userOrContentRowsCreated": false,
+    "providerCalls": 0,
+    "applicationTestsRun": false,
+    "newPaidResources": false,
+    "mainMerge": false,
+    "salesActivated": false
+  },
+  "note": "ACTIVE means the function bundle deployed. It is not proof of enabled environment flags, working customer flow, source-runtime invocation success or sales readiness."
+}
