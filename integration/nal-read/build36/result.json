@@ -1,0 +1,65 @@
+{
+  "formatVersion": 1,
+  "build": 36,
+  "status": "FRONTEND_OWNER_REVIEW_INTERLOCK_SOURCE_ONLY_BACKEND_REMAINS_BLOCKED",
+  "parentHead": "3321595d47082e054ea0d77e5d8e08f43638bb43",
+  "observedProject": {
+    "project": "nal-platform",
+    "readRelease": "off",
+    "journalErasureEnabled": false,
+    "privacyPolicyVersion": null,
+    "ownerCount": 0,
+    "reviewCount": 0,
+    "requestCount": 0,
+    "adminReviewEdgeDeployed": false,
+    "memberEdgeVersion": 2
+  },
+  "changedFiles": [
+    "nal/assets/js/read-privacy-review.js",
+    "nal/read/admin/privacy/index.html"
+  ],
+  "newFiles": [
+    "nal/data/read-privacy-review.release.json",
+    "integration/nal-read/build36/result.json",
+    "integration/nal-read/build36/security-review-contract.json",
+    "docs/NAL_READ_BUILD36_OWNER_REVIEW_LOCK.md"
+  ],
+  "clientSecurity": {
+    "uiReleaseManifestDefaultOff": true,
+    "failClosedOnMissingMalformedOrUnavailableManifest": true,
+    "allowedActions": [
+      "queue",
+      "preview",
+      "start-review"
+    ],
+    "prohibitedActions": [
+      "approve-journal",
+      "execute-journal",
+      "enable-erasure"
+    ],
+    "manifestDoesNotReplaceServerAuth": true
+  },
+  "privilegedBackend": {
+    "sourceTouched": false,
+    "authBindingStatus": "blocked_by_prior_safety_gate",
+    "ownerRpcPrincipalName": "p_owner_id",
+    "sharedAuthInjects": "p_user_id",
+    "newEdgeDeployed": false,
+    "roleGranted": false,
+    "erasureRpcEnabled": false
+  },
+  "excluded": [
+    "main merge",
+    "GitHub Pages deployment",
+    "host candidate PR166 change",
+    "DB migration",
+    "Edge deployment",
+    "feature variable changes",
+    "legal approval",
+    "real user/owner fixture",
+    "real deletion",
+    "application/auth/payment testing",
+    "new paid services"
+  ],
+  "next": "Approved secure binding + independent default-OFF owner endpoint under proper security path; thereafter validated notice/retention and host candidate reconciliation before pre-sale QA."
+}

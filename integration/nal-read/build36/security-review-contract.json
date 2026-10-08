@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "system": "NAL READ Owner Privacy Review — security gate contract",
+  "state": "NOT_AUTHORIZED_FOR_DEPLOYMENT",
+  "existingCode": {
+    "sharedAuthPath": "supabase/functions/_shared/nal-read-auth.mjs",
+    "verifiedSubject": "per-request Auth user check; x-nal-read-verified header sent with service_role secret",
+    "currentDefaultRpcArg": "p_user_id",
+    "targetRpc": "public.nal_read_privacy_admin(uuid,text,jsonb)",
+    "targetArg": "p_owner_id",
+    "existingBrowserTransport": "window.NalAccount.privacyReview(action,payload)",
+    "existingFrontendActions": [
+      "queue",
+      "preview",
+      "start-review"
+    ]
+  },
+  "gates": {
+    "plannedBackendRoute": "nal-read-privacy-admin",
+    "serverFlag": "NAL_PRIVACY_ADMIN_ENABLED",
+    "defaultState": "OFF",
+    "gateway": "verify_jwt true; authenticated POST; no GET private dataset",
+    "roleCheck": "Fresh authenticated user via existing Supabase Auth + current nal_private.admins owner membership; never user metadata or client role",
+    "trustedRpcPrincipal": "p_owner_id obtained exclusively from validated bearer and Auth admin, not client data",
+    "payloadAllowlist": "queue {} | preview {requestId UUID} | start-review {requestId UUID,confirmed:true}",
+    "noBrowserActions": [
+      "approve-journal",
+      "execute-journal",
+      "modify_execution_control"
+    ],
+    "databaseErasure": "nal_private.read_privacy_execution_control.journal_erasure_enabled remains false",
+    "responseHandling": "Counts + derived copy counts only; no participant text; fail closed on malformed/unavailable"
+  },
+  "requiredHumanReview": [
+    "Security approval for exact p_owner_id authenticated RPC adapter. Previous GitHub write for privileged auth was blocked; do not work around via alternate writer or a new privileged database alias.",
+    "Approved privacy notice version and controller/contact, storage/backup/retention schedule.",
+    "Owner role assigned only via documented governance, not seeded by this task.",
+    "Release-specific server env feature flag managed separately after authorization.",
+    "Separate operational erasure policy and customer presale QA; static client gate never replaces server enforcement."
+  ],
+  "frontendInterlock": "nal/data/read-privacy-review.release.json is read-only public state; intentionally false, not a security principal or Supabase authorization artifact."
+}

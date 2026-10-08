@@ -7,6 +7,22 @@
  const A=window.NalAccount,root=document.querySelector('[data-account-private]');
  if(!A||!root)return;
  const el=A.node;
+ // Frontend release interlock only; this is NOT an authorization decision.
+ // No runtime call is made while the reviewed deployment manifest is absent or OFF.
+ const reviewGateUrl='/nal/data/read-privacy-review.release.json';
+ async function reviewUiReleased(){
+  try{
+   const response=await fetch(reviewGateUrl,{method:'GET',cache:'no-store',credentials:'same-origin',redirect:'error',signal:AbortSignal.timeout(8000)});
+   if(!response.ok||!String(response.headers.get('content-type')||'').toLowerCase().includes('application/json'))return false;
+   const gate=await response.json();
+   return gate?.schemaVersion===1&&gate?.module==='nal-read-owner-privacy-review'&&
+    gate?.uiEnabled===true&&gate?.ownerAuthBindingReviewed===true&&
+    gate?.independentServerGateConfigured===true&&gate?.approvedPrivacyNotice===true&&
+    gate?.backendDeployed===true&&gate?.destructiveApiExposed===false&&
+    Array.isArray(gate.actions)&&gate.actions.length===3&&
+    ['queue','preview','start-review'].every(x=>gate.actions.includes(x));
+  }catch{return false;}
+ }
  const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[89ab][0-9a-f]{12}$/i;
  const UUID_V4=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
  const scopes={'read-journal':'개인 기록 검토','account-closure-review':'계정·법정 보존 검토'};
@@ -91,6 +107,12 @@
   const status=section('운영 검토 연결'),message=el('p','기존 소유자 권한을 확인하고 있습니다.','nal-account-note');
   message.setAttribute('role','status');message.setAttribute('aria-live','polite');status.append(message);root.append(status);
   try{
+   // Never invoke a dormant owner API solely because someone opens this URL.
+   if(!await reviewUiReleased()){
+    if(current(ctx))message.textContent='개인정보 검토 기능은 보안 및 고지 검토가 완료된 뒤 연결됩니다. 이 화면은 아직 요청 목록을 조회하거나 검토를 시작하지 않습니다.';
+    return;
+   }
+   if(!current(ctx))return;
    const home=await A.call('account','operator-home',{});
    if(!current(ctx))return;
    if(home?.role!=='owner'){message.textContent='이 화면은 기존 소유자 계정에만 제공됩니다. 운영자 권한은 새로 발급되지 않습니다.';return;}

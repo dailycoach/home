@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-read-owner-privacy-review",
+  "uiEnabled": false,
+  "ownerAuthBindingReviewed": false,
+  "independentServerGateConfigured": false,
+  "approvedPrivacyNotice": false,
+  "backendDeployed": false,
+  "destructiveApiExposed": false,
+  "actions": [
+    "queue",
+    "preview",
+    "start-review"
+  ],
+  "releaseRule": "All explicit release acknowledgments must be true. This file is only an optional client-side interlock, never an authorization source or evidence of legal compliance.",
+  "whyDisabled": [
+    "Prior privileged shared RPC authorization change was blocked",
+    "Owner RPC p_owner_id binding not implemented",
+    "nal-read-privacy-admin not deployed",
+    "No approved public privacy notice/controller",
+    "No owner membership or real review requests"
+  ],
+  "doesNotGrant": [
+    "JWT authentication",
+    "DB owner role",
+    "service_role",
+    "erasure permission",
+    "customer release"
+  ]
+}
