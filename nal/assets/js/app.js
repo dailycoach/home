@@ -381,6 +381,7 @@
   function productCard(item) {
     const route = itemRoute("products", item);
     const digital = isDigitalProduct(item);
+    const freeReady = digital && item.price === 0 && item.stockStatus === "available";
     const meta = [
       digital ? item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일") : productFormatLabel(item),
       Number.isInteger(item.pageCount) && item.pageCount > 0 ? `${item.pageCount}쪽` : "",
@@ -389,7 +390,7 @@
     return `<article class="nal-card nal-card--product${digital ? " nal-card--digital" : ""}" data-catalog-id="${escapeHtml(item.id)}">
       <div class="nal-card__media">${imageMarkup(globalThis.NALStore.safePublicUrl(item.coverImage), item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일")) : "실물"}</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
       <div class="nal-card__body"><p class="nal-card__eyebrow">${escapeHtml(productFormatLabel(item))}</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
-      <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${item.price === 0 ? "무료" : formatPrice(item.price) || "판매 준비 중"}</span><span>${escapeHtml(stockLabel(item.stockStatus))}</span></div></div>
+      <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${freeReady ? "무료 PDF" : formatPrice(item.price) || "판매 준비 중"}</span><span>${escapeHtml(freeReady ? "로그인·결제 없이 이용" : stockLabel(item.stockStatus))}</span></div></div>
     </article>`;
   }
 
@@ -520,7 +521,7 @@
     const items = getListingItems();
     const q = params.get("q") || "";
     const listingIntro = collection === "products"
-      ? "읽고 끝나는 자료보다, 실제 삶과 코칭 장면에서 꺼내 쓰는 도구를 만듭니다."
+      ? "무료 스타터 세 권을 먼저 공개했습니다. 마음 정리·관계 대화·다음 한 걸음, 로그인과 결제 없이 읽고 내려받을 수 있습니다."
       : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     root.innerHTML = `
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
@@ -662,7 +663,7 @@
     if (cover) data.image = new URL(cover, canonicalOrigin).href;
     data.additionalProperty = [["파일형식",item.fileFormat],["페이지",item.pageCount],["저자",item.author]].filter(([,value])=>value != null).map(([name,value])=>({"@type":"PropertyValue",name,value}));
     const purchase = globalThis.NALStore.purchase(item, "");
-    if (purchase.label === "구매하기") data.offers = { "@type": "Offer", price: item.price, priceCurrency: "KRW", availability: "https://schema.org/InStock", url: purchase.url };
+    if (purchase.url && (purchase.label === "구매하기" || purchase.label === "무료 다운로드")) data.offers = { "@type": "Offer", price: item.price, priceCurrency: "KRW", availability: "https://schema.org/InStock", url: purchase.url };
     const script = document.querySelector('script[type="application/ld+json"]');
     if (script) script.textContent = JSON.stringify(data);
   }
@@ -680,17 +681,18 @@
     const price = item.price === 0 ? "무료" : formatPrice(item.price);
     const originalPrice = formatPrice(item.originalPrice);
     const hasPrice = Boolean(price);
-    const stockText = stockLabel(item.stockStatus) || status || "판매 상태 확인";
+    const freeDownload = digital && item.price === 0 && item.stockStatus === "available" && label === "무료 다운로드" && url.startsWith("/");
+    const stockText = freeDownload ? "무료 다운로드 가능" : stockLabel(item.stockStatus) || status || "판매 상태 확인";
     const optionItems = asArray(item.options).filter(Boolean);
     const license = licenseLabel(item);
     const format = productFormatLabel(item);
     const delivery = digital ? digitalDeliveryLabel(item) : (item.shippingPolicy || "스마트스토어 상품 페이지에서 배송 조건을 확인합니다.");
-    const directFreeDownload = item.price === 0 && label === "무료 다운로드" && url.startsWith("/");
+    const directFreeDownload = freeDownload;
     const commerceButton = url
       ? `<a class="nal-commerce-buy" href="${escapeHtml(url)}"${directFreeDownload ? " download" : externalAttrs(url)}>${escapeHtml(label)}</a>`
       : `<button class="nal-commerce-buy" type="button" aria-describedby="product-purchase-status" disabled>${escapeHtml(label)}</button>`;
     const previewButton = previewUrl
-      ? `<a class="nal-commerce-preview" href="${escapeHtml(previewUrl)}"${externalAttrs(previewUrl)}>${escapeHtml(item.fileFormat || "자료")} 미리보기</a>`
+      ? `<a class="nal-commerce-preview" href="${escapeHtml(previewUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(freeDownload ? "PDF 바로 읽기" : (item.fileFormat || "자료") + " 미리보기")}</a>`
       : "";
     const fileFacts = digital ? [
       ["파일", item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "")],
@@ -747,7 +749,7 @@
               ${wishButton("products", item, true)}
             </div>
             <p class="nal-commerce-note" id="product-purchase-status">${escapeHtml(reason)}</p><p class="nal-commerce-note">${digital
-              ? (label === "구매하기" ? "구매 후 제공 방식과 다운로드 조건은 실제 판매 페이지의 안내를 따릅니다." : "판매가 열리면 PDF 제공 방식·이용 범위·환불 조건을 함께 안내합니다.")
+              ? (freeDownload ? "이 책은 무료 공개본입니다. 개인 기기에서 읽거나 개인 인쇄할 수 있으며 회원가입도 필요하지 않습니다." : label === "구매하기" ? "구매 후 제공 방식과 다운로드 조건은 실제 판매 페이지의 안내를 따릅니다." : "판매가 열리면 PDF 제공 방식·이용 범위·환불 조건을 함께 안내합니다.")
               : (url && label === "구매하기" ? "외부 스마트스토어의 실제 상품 주문 화면으로 이동합니다." : "개별 상품 판매가 열리기 전에는 스마트스토어의 현재 판매 상품을 확인할 수 있습니다.")}</p>
           </aside>
         </div>
@@ -757,7 +759,7 @@
         <div class="nal-container">
           <a href="#product-info">상품정보</a>
           <a href="#product-use">${digital ? "목차·활용" : "사용방법"}</a>
-          ${previewUrl ? '<a href="#product-preview">미리보기</a>' : ""}
+          ${previewUrl ? `<a href="#product-preview">${freeDownload ? "바로 읽기" : "미리보기"}</a>` : ""}
           <a href="#product-delivery">${digital ? "다운로드·이용" : "배송·교환"}</a>
           ${programs.length ? '<a href="#product-programs">관련 프로그램</a>' : ""}
         </div>
@@ -788,17 +790,17 @@
             ${item.precautions ? `<div class="nal-commerce-caution"><strong>사용 전 확인</strong><p>${escapeHtml(item.precautions)}</p></div>` : ""}
           </section>
 
-          ${previewUrl ? `<section id="product-preview" class="nal-commerce-section"><h2>미리보기</h2><p>구매 전 공개된 샘플을 확인하세요.</p><a class="nal-button--secondary" href="${escapeHtml(previewUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "자료"))} 미리보기 열기</a></section>` : ""}
+          ${previewUrl ? `<section id="product-preview" class="nal-commerce-section"><h2>${freeDownload ? "PDF 바로 읽기" : "미리보기"}</h2><p>${freeDownload ? "무료로 공개된 전체 PDF를 새 창에서 읽을 수 있습니다." : "구매 전 공개된 샘플을 확인하세요."}</p><a class="nal-button--secondary" href="${escapeHtml(previewUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(freeDownload ? "전체 PDF 읽기" : (item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "자료")) + " 미리보기 열기")}</a></section>` : ""}
           <section id="product-delivery" class="nal-commerce-section">
             <p class="nal-eyebrow">${digital ? "DOWNLOAD & LICENSE" : "DELIVERY & POLICY"}</p>
             <h2>${digital ? "다운로드·이용 안내" : "배송·교환 안내"}</h2>
-            ${digital ? '<p>본 상품은 디지털 파일입니다. 상품별 이용범위와 인쇄 가능 여부를 확인해주세요.</p><p>구매한 파일의 무단 복제·재배포·공유는 허용되지 않습니다. 실제 환불 가능 여부는 상품 상세의 디지털 상품 환불 기준을 확인해주세요.</p>' : ""}
+            ${digital ? (freeDownload ? '<p>이 자료는 무료로 제공됩니다. 개인 열람·개인 인쇄는 가능하며 파일의 재판매·재업로드·재배포 및 수업·기관·코칭 고객 대상 복제 배포는 허용되지 않습니다.</p>' : '<p>본 상품은 디지털 파일입니다. 상품별 이용범위와 인쇄 가능 여부를 확인해주세요.</p><p>구매한 파일의 무단 복제·재배포·공유는 허용되지 않습니다. 실제 환불 가능 여부는 상품 상세의 디지털 상품 환불 기준을 확인해주세요.</p>') : ""}
             ${digital && item.policyStatus !== "reviewed" ? '<p>이용 조건 검토 중입니다. 판매 시작 전 확정된 조건을 공개합니다.</p>' : ""}
             ${digital && asArray(item.licenseOptions).length ? `<h3>이용권 옵션</h3><ul class="nal-commerce-license-options">${item.licenseOptions.map(option=>`<li><strong>${escapeHtml(globalThis.NALStore.licenses[option.licenseType] || option.label)}</strong><span>${formatPrice(option.price) || "조건 준비 중"}</span>${globalThis.NALStore.safePublicUrl(option.purchaseUrl) && Number.isFinite(option.price) ? `<a href="${escapeHtml(globalThis.NALStore.safePublicUrl(option.purchaseUrl))}"${externalAttrs(option.purchaseUrl)}>이용권 판매 안내</a>` : ""}</li>`).join("")}</ul>` : ""}
             ${digital
               ? (digitalPolicy.length ? valueList(digitalPolicy, "nal-check-list") : "<p>판매 시작 전입니다. 다운로드 방식, 이용 가능 범위, 인쇄 가능 여부와 디지털 상품 환불 기준은 판매 페이지에서 함께 공개합니다.</p>")
               : (physicalPolicies.length ? valueList(physicalPolicies, "nal-check-list") : "<p>배송비·출고일·교환·반품 기준은 실제 판매가 시작된 스마트스토어 상품 페이지의 조건을 기준으로 합니다.</p>")}
-            <p>${digital ? '다시 받기: NAL 구매자료 보관함은 연결 준비 중입니다. 현재 구매한 판매채널의 제공 안내를 확인해주세요.' : '배송·교환 조건은 판매채널에서 확인해주세요.'}</p>
+            <p>${digital ? (freeDownload ? "다시 받고 싶을 때는 이 상품 페이지에서 무료로 내려받을 수 있습니다." : "다시 받기: NAL 구매자료 보관함은 연결 준비 중입니다. 현재 구매한 판매채널의 제공 안내를 확인해주세요.") : "배송·교환 조건은 판매채널에서 확인해주세요."}</p>
             ${safeUrl(state.site?.externalLinks?.inquiry) ? `<a class="nal-text-link" href="${escapeHtml(safeUrl(state.site.externalLinks.inquiry))}">상품 문의 →</a>` : ""}
             ${digital && !item.refundPolicy ? '<p>디지털 상품 환불 기준은 판매 시작 전 확정된 내용을 공개합니다.</p>' : ""}
           </section>
@@ -813,7 +815,7 @@
           ${commerceButton}
         </aside>
       </div>`;
-    renderStickyCta(digital ? format : stockText, label, url, "product-purchase-status");
+    renderStickyCta(freeDownload ? `무료 PDF · ${item.pageCount}쪽` : digital ? format : stockText, label, url, "product-purchase-status");
   }
 
   function renderDetail() {
@@ -893,7 +895,7 @@
 
   function renderStickyCta(status, label, url, descriptionId = "") {
     if (!mobileCtaSlot) return;
-    mobileCtaSlot.innerHTML = `<div class="nal-sticky-cta"><div><span>${escapeHtml(status || "상태 확인")}</span><strong>${escapeHtml(label)}</strong></div>${url ? `<a class="nal-button--primary" href="${url}"${externalAttrs(url)}>${escapeHtml(label)}</a>` : `<button class="nal-button--primary"${descriptionId ? ` aria-describedby="${escapeHtml(descriptionId)}"` : ""} disabled>${escapeHtml(label)}</button>`}</div>`;
+    mobileCtaSlot.innerHTML = `<div class="nal-sticky-cta"><div><span>${escapeHtml(status || "상태 확인")}</span><strong>${escapeHtml(label)}</strong></div>${url ? `<a class="nal-button--primary" href="${escapeHtml(url)}"${label === "무료 다운로드" && url.startsWith("/") ? " download" : externalAttrs(url)}>${escapeHtml(label)}</a>` : `<button class="nal-button--primary"${descriptionId ? ` aria-describedby="${escapeHtml(descriptionId)}"` : ""} disabled>${escapeHtml(label)}</button>`}</div>`;
   }
 
   function renderCurrentPage() {
