@@ -1,0 +1,106 @@
+{
+  "formatVersion": 1,
+  "build": 32,
+  "status": "FIRST_COHORT_BINDER_AND_PRIVACY_REVIEW_INTAKE_INSTALLED_NO_DELETION",
+  "repository": "dailycoach/home",
+  "developmentBranch": "feat/nal-read-v1",
+  "sourceCommit": "77edb1ef8282ef688dbbbe0e222ba67ee0f6ceb5",
+  "project": "nal-platform",
+  "database": {
+    "migration": {
+      "version": "20261008035821",
+      "name": "nal_read_build32_privacy_request_boundary",
+      "success": true,
+      "sqlGitBlobSha": "9c782b8d1e575058eaa33e65a4212dedbc128dea",
+      "sqlBytes": 8757
+    },
+    "newTable": "nal_private.read_privacy_requests",
+    "newRpc": "public.nal_read_privacy(uuid,text,jsonb)",
+    "readReleaseModeObserved": "off",
+    "rlsEnabled": true,
+    "anonTableRead": false,
+    "authenticatedTableRead": false,
+    "anonRpcExecute": false,
+    "authenticatedRpcExecute": false,
+    "serviceRpcExecute": true,
+    "securityInvoker": true,
+    "privacyRequestsCount": 0,
+    "actualPersonalRecordsErased": 0,
+    "accountsDeleted": 0
+  },
+  "edge": {
+    "name": "nal-account",
+    "observedVersion": 2,
+    "status": "ACTIVE",
+    "verifyJwt": false,
+    "publicGetExisting": true,
+    "postRequiresBearerVerifiedAuth": true,
+    "newRequestRouter": "privacy",
+    "newGateVariable": "NAL_PRIVACY_REQUEST_ENABLED",
+    "codeDefault": "false",
+    "environmentVariableValueRead": false,
+    "environmentVariableChanged": false,
+    "bundleSha256": "418e29cabd3ac10e7cf6715f05833caa85b4f863ca53259b6391c77c7abf34ed",
+    "deployedFileParity": {
+      "nal-account/index.ts": true,
+      "nal-account/handler.mjs": true,
+      "_shared/nal-read-auth.mjs": true
+    }
+  },
+  "season": {
+    "seasonSlug": "trend-2027",
+    "editorialSourceSha": "749fd994e7c53017ea6f19aaaae2bf8503ad96c6",
+    "draftDaysIncludingDayZero": 29,
+    "draftSteps": 147,
+    "weeks": 4,
+    "seasonDbRows": 0,
+    "ownerRoles": 0,
+    "realCohortDates": null,
+    "liveTimeAndZoom": null,
+    "capacity": null,
+    "price": null,
+    "catalogProductId": null,
+    "editorialSavedToDb": false,
+    "firstSeasonPublished": false,
+    "existingGuideAndRunbookSourcesPreserved": true
+  },
+  "legalAndPrivacy": {
+    "erasureRequestScopes": [
+      "read-journal",
+      "account-closure-review"
+    ],
+    "actions": [
+      "inventory",
+      "request",
+      "status",
+      "withdraw"
+    ],
+    "actualJournalDeleteExecutorImplemented": false,
+    "legalRetentionSegregationImplemented": false,
+    "authAccountClosureImplemented": false,
+    "storageBackupsAndLogsErasureImplemented": false,
+    "publicPolicyUpdated": false,
+    "operatorPolicyFinalApproval": false,
+    "distinction": "Receipt/intake is not data erasure or an account close; snapshots, reports, legal order/support records and Auth must be handled separately."
+  },
+  "runtimeBoundaries": {
+    "pagesDraftHostPR": 166,
+    "devDraftPR": 160,
+    "mainChanged": false,
+    "pagesDeployment": false,
+    "newPaidResources": false,
+    "realLoginCustomerWorkflowTested": false,
+    "paymentOrProviderCall": false,
+    "legalDataMoved": false,
+    "actualPrivacyRequestSubmitted": false,
+    "releaseFlagChanged": false
+  },
+  "securityAdvisor": {
+    "type": "security",
+    "issuesReported": 37,
+    "level": "INFO",
+    "name": "rls_enabled_no_policy",
+    "interpretation": "private service-only tables require privilege checks; not platform PASS"
+  },
+  "next": "Separate reviewed journal erasure executor with source_snapshot/report-copies cleanup and evidence; lawful financial/dispute retention quarantine and account/session lifecycle; user-visible policy and first-cohort operator approval before activating real customers."
+}

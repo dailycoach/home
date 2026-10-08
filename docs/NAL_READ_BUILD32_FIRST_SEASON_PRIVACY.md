@@ -37,3 +37,13 @@
 - 개인정보 보호법 제21조 파기·분리관리: https://m.easylaw.go.kr/MOB/CsmInfoRetrieve.laf?ccfNo=1&cciNo=1&cnpClsNo=3&csmSeq=1702
 - 전자상거래법 시행령 제6조: https://www.law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=003400000&languageType=KO&lsNm=%EC%A0%84%EC%9E%90%EC%83%81%EA%B1%B0%EB%9E%98+%EB%93%B1%EC%97%90%EC%84%9C%EC%9D%98+%EC%86%8C%EB%B9%84%EC%9E%90%EB%B3%B4%ED%98%B8%EC%97%90+%EA%B4%80%ED%95%9C+%EB%B2%95%EB%A5%A0+%EC%8B%9C%ED%96%89%EB%A0%B9&paras=1
 - Supabase 사용자 삭제와 JWT·Storage 관련 제한: https://supabase.com/docs/guides/auth/managing-user-data
+
+## BUILD32 실제 배포 결과 보완
+
+- DB 개인정보 접수 마이그레이션 실제 적용 이력: `20261008035821 / nal_read_build32_privacy_request_boundary` (SQL 8,757 bytes).
+- 신규 개인정보 요청 테이블 RLS 활성화, anon/authenticated 직접 테이블 읽기·RPC 실행 불가, service_role만 함수 실행 허용.
+- `nal-account` Edge Function v2 배포 완료. 기존 기능의 공개 GET 경계는 보존했고, `privacy` POST는 기존 Bearer 사용자 검증과 **별도 `NAL_PRIVACY_REQUEST_ENABLED` 기본 OFF**를 사용한다. 실제 환경 변수 값을 읽거나 변경하지 않았으며, 사용자 요청은 호출하지 않았다.
+- 배포한 `index.ts`, `handler.mjs`, `nal-read-auth.mjs` 3개는 브랜치 소스와 일치했다. 배포 번들 SHA256: `418e29cabd3ac10e7cf6715f05833caa85b4f863ca53259b6391c77c7abf34ed`.
+- DB 관찰 시점에 시즌/주문/READ 참가자/개인정보 요청 0건, READ 공개 OFF. 보안 Advisor는 서버 전용 RLS 무정책 INFO 37건을 반환했다. 이는 기능·보안 전체 검증 합격을 의미하지 않는다.
+- 현재 삭제 실행기, 고객 개인정보 화면, 실제 개인정보 고지 교체, 운영자 승인과 첫 시즌 DB 입력은 아직 **미완료**다.
+- 결과 영수증: `integration/nal-read/build32/result.json`. 검토용 고지 초안: `docs/NAL_READ_BUILD32_PRIVACY_NOTICE_DRAFT.md`.
