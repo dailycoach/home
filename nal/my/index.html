@@ -11,6 +11,11 @@
  <link rel="canonical" href="https://daily-coach-ing.com/nal/my/">
  <meta property="og:title" content="MY NAL · 오늘 이어갈 자리">
  <meta property="og:image" content="https://daily-coach-ing.com/nal/assets/images/nal-og.png">
+ <script>
+  // The old STORE used /nal/my/#wishlist for device-local favorites.
+  // Keep that legacy link working without running an extra Auth client.
+  if (location.hash === '#wishlist') location.replace('/nal/my/local/#wishlist');
+ </script>
  <script src="/nal/assets/js/theme.js?v=read29-54ef9714"></script>
  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=read29-54ef9714">
  <link rel="stylesheet" href="/nal/assets/css/nal-account.css?v=read29-54ef9714">
