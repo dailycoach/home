@@ -1,0 +1,73 @@
+{
+  "formatVersion": 1,
+  "build": 30,
+  "status": "MAIN_BASED_HOST_CANDIDATE_CREATED_NOT_DEPLOYED_NOT_TESTED",
+  "repository": "dailycoach/home",
+  "hostSourceEvidence": "main branch and CNAME indicate GitHub Pages static-site structure; live HTTP hosting was not independently accessible",
+  "observedMainCommit": "1ccaa503aa7823ab1711ed70f1880bc83084b671",
+  "sourceCommit": "859c7b3e20374a968e1216b74644a2d13dbcd4c3",
+  "sourceAssetVersion": "read29-54ef9714",
+  "comparisonBeforeCompatibility": {
+    "sourceReadOverlayFiles": 79,
+    "absentFromMain": 78,
+    "modifiedExisting": 1,
+    "identicalExisting": 0,
+    "changedExisting": [
+      "nal/my/index.html"
+    ],
+    "unchangedHostFiles": [
+      "CNAME",
+      "index.html",
+      "nal/index.html",
+      "nal/assets/css/nal.css",
+      "nal/assets/js/theme.js",
+      "nal/assets/js/app.js",
+      "nal/assets/js/store.js",
+      "nal/assets/js/backend.js",
+      "nal/data/backend.json",
+      "nal/data/products.json",
+      "nal/shop/index.html"
+    ]
+  },
+  "candidate": {
+    "branch": "integration/nal-read-build30-host-candidate",
+    "commit": "0dd95e697e2a246c4fa1953b8bbc7f7d7a75ffbe",
+    "parentMainCommit": "1ccaa503aa7823ab1711ed70f1880bc83084b671",
+    "newPaths": 79,
+    "modifiedPaths": 1,
+    "totalChangedPaths": 80,
+    "sourceBlobEquality": "All 80 candidate files match the source commit blobs; all other main files retain baseline blobs",
+    "addedSpecialPath": "nal/my/local/index.html",
+    "modifiedExisting": "nal/my/index.html"
+  },
+  "localLegacyCompatibility": {
+    "oldDeviceLocalPage": "/nal/my/",
+    "preservedNewPage": "/nal/my/local/",
+    "oldDeepLink": "/nal/my/#wishlist",
+    "forwardedDeepLink": "/nal/my/local/#wishlist",
+    "existingDeviceStorageKeys": "Unchanged; current main app.js and STORE scripts preserved",
+    "localPageScriptVersion": "nal-free-ux-20261008",
+    "newReadHomeLocation": "/nal/my/",
+    "effect": "Source-level compatibility path. Not browser-tested, not publicly deployed."
+  },
+  "exclusions": {
+    "mainChanged": false,
+    "publicHostingDeployExecuted": false,
+    "pageSourceSettingsChanged": false,
+    "featureFlagChanged": false,
+    "readReleaseChanged": false,
+    "supabaseSQLApplied": false,
+    "edgeFunctionDeployed": false,
+    "actualLoginOrPaymentExecuted": false,
+    "websiteOrBrowserTestsRun": false,
+    "paidResourcesAdded": false
+  },
+  "deploymentGate": [
+    "A GitHub candidate branch is not a published Pages preview URL. Do not claim a live website until the actual hosting configuration and deployment are observed.",
+    "Before any public host action, read the current main head; it must equal the recorded parent, or rebuild and reconcile instead of blindly cherry-picking.",
+    "Apply only the 80 authorized path changes and no delete-sync; preserve STORE/PDF assets, backend config, global theme and other NAL pages.",
+    "Do not treat the original BUILD29 79-file overlay alone as enough to replace /nal/my/: the device-local compatibility page and hash forwarding from BUILD30 are required.",
+    "Leave READ and checkout off, do not change Auth callbacks/keys/prices, and do not seed first-cohort/owner/customer data.",
+    "User's full app/browser/Auth/payment test gate remains immediately before customer sales; this source comparison is not that gate."
+  ]
+}
