@@ -1,0 +1,512 @@
+{
+  "meta": {
+    "formatVersion": 1,
+    "build": 29,
+    "status": "GIT_OVERLAY_ASSEMBLED_NOT_DEPLOYED_NOT_TESTED",
+    "sourceCommit": "e8e2d7ba543cc196bbd063344a0da878ebf6db75",
+    "assetVersion": "read29-54ef9714",
+    "count": 79,
+    "counts": {
+      "html": 33,
+      "js": 31,
+      "css": 14,
+      "data": 1
+    },
+    "sourceBlobReuse": true,
+    "contains": [
+      "READ-only HTML",
+      "READ/account JS and CSS",
+      "read-seasons.json"
+    ],
+    "absent": [
+      "nal/data/backend.json",
+      "nal/data/read-backend.staging.json",
+      "backend secrets",
+      "Supabase Edge source",
+      "SQL",
+      "STORE/PDF assets",
+      "global nal.css/theme.js"
+    ],
+    "noRuntimeChange": true,
+    "noCustomerPublication": true,
+    "testsNotRun": true,
+    "paidResourcesNotAdded": true,
+    "outputPrefix": "integration/nal-read/build29/public-overlay/nal/"
+  },
+  "files": [
+    {
+      "path": "nal/assets/css/nal-account-home.css",
+      "blob": "1778e5ccbf77fc9bede1dd2e8b3c1c57f35e3837",
+      "bytes": 3631,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-account.css",
+      "blob": "52c9ea680ead8ccdcd7efc1870e3fbc31fa561f0",
+      "bytes": 4441,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-admin-context.css",
+      "blob": "c77ca8cfe47a0f5dd6ea741da3815553c6ed4a5f",
+      "bytes": 993,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-operations.css",
+      "blob": "cde34b2723acbba284d08ff00988701d791db372",
+      "bytes": 3344,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-cohorts.css",
+      "blob": "afa8040113ed7e78aa8dc709d95257726c571734",
+      "bytes": 1828,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-companion.css",
+      "blob": "c874cdd76d8d22ac948bca70925084ef9ca98e1a",
+      "bytes": 4127,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-editorial.css",
+      "blob": "9e7c2e6ec92034aba83f01f009560f7de45178c5",
+      "bytes": 2192,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-feedback.css",
+      "blob": "bd784abb9fb602ef51a61761813b4fcd8549c0d8",
+      "bytes": 3183,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-payments.css",
+      "blob": "2164b5de8ed505284069782ee95b2df6310571f3",
+      "bytes": 2352,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-report.css",
+      "blob": "b92adcfa881f4749a17e721972343817e21f994d",
+      "bytes": 2865,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-studio-library.css",
+      "blob": "487c8e033dbd1f6341a1136bdf2e8f5291e3e10a",
+      "bytes": 1556,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read-workspace.css",
+      "blob": "540dad0b8e1c07becc005300abb98cb0509c0825",
+      "bytes": 5468,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-read.css",
+      "blob": "7415ff4d954bd5dc3918532f3d2f0eb40b102ea5",
+      "bytes": 4943,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/css/nal-support.css",
+      "blob": "3b4dec518cac6335e69f04842a33cf36e9ff7a57",
+      "bytes": 3254,
+      "kind": "css"
+    },
+    {
+      "path": "nal/assets/js/account-home.js",
+      "blob": "540e7222138bd7112462674175f942f24f434422",
+      "bytes": 10571,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/account-layout.js",
+      "blob": "1561f60a1698de10ffa3466baf16924dc06c03cb",
+      "bytes": 3062,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/account-overview.js",
+      "blob": "23d4ee9f8ce0e07aaf0f2ca2cbcd368845555440",
+      "bytes": 14795,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/account-session.js",
+      "blob": "40ea70b4f2d86a0f7c4bf40d6ce4e92e2e562d61",
+      "bytes": 7775,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-admin-context.js",
+      "blob": "4046e4e7998052f12e16c3074f5a2193723b610f",
+      "bytes": 7627,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-checkout.js",
+      "blob": "bb4a456ac12025528ac49af96c1d59b1f37017e5",
+      "bytes": 16198,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-cohorts-admin.js",
+      "blob": "78aec89a939c2257999e61047bf7edf34ff81735",
+      "bytes": 13719,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-cohorts.js",
+      "blob": "1237cfff62d5cd369f7c551b2cbd9194327e9426",
+      "bytes": 8553,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-daily.js",
+      "blob": "6dcbe7b4de48ee9f30c4e326428ead5b7e0b3f33",
+      "bytes": 17268,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-editorial-contract.mjs",
+      "blob": "3ccf60009c9851d049f4336aacb6fd2d720a9177",
+      "bytes": 4778,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-editorial-loader.js",
+      "blob": "0e0bc1999d9818089c4b5f8e8e9dd5c512239a60",
+      "bytes": 580,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-editorial.js",
+      "blob": "a28e8a586f7d66cb1b211bb5f3d71115a926b857",
+      "bytes": 20699,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-join.js",
+      "blob": "79e35885d50770c388f250b1c051ee890ba45c41",
+      "bytes": 8927,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-legacy-route.js",
+      "blob": "1b0274a317ad66b700f16730741b52ad7659648f",
+      "bytes": 1270,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-offers-admin.js",
+      "blob": "4df1ab70ce32aa6afdd93b316dc6d99244553cf5",
+      "bytes": 5377,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-open-context.js",
+      "blob": "7798ef07f5da2a89659fb2e85a323ab36b8df34d",
+      "bytes": 752,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-open-loader.js",
+      "blob": "693ba35f6149d1b861e1f78b21e92dcceee5ae5e",
+      "bytes": 1737,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-operations.js",
+      "blob": "59d19cbe0bb048b843e6d138281db8198b1bedae",
+      "bytes": 19411,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-payment-return.js",
+      "blob": "39846eaeaa49226535f9661bf180511e95483a22",
+      "bytes": 719,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-payments-admin.js",
+      "blob": "2aef827c3c92e90ac0d333a9649c7c6ba6a3f2ce",
+      "bytes": 5484,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-program-sections.js",
+      "blob": "88759d48cfbdc5be1c3f4e9273afe851653f7b00",
+      "bytes": 2339,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-report.js",
+      "blob": "23ce110c407e461b817354eae2650a05c067c43a",
+      "bytes": 12888,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-routes.js",
+      "blob": "655cf6a1d52ebae8d209f46e4d6af8ff95ff87be",
+      "bytes": 2713,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-session.js",
+      "blob": "8936c62f7a7d4f4620700901d17653824cafe29a",
+      "bytes": 17337,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-shell.js",
+      "blob": "5a14ad5d43433fe25b48dffa42a3470b9fc30152",
+      "bytes": 4969,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-start.js",
+      "blob": "cca901399c6d11a76016d9ae53bb41943f90198e",
+      "bytes": 6731,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-studio-library.js",
+      "blob": "06b896ff1800392799ddfdf27078b59455152ea6",
+      "bytes": 8422,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-studio.js",
+      "blob": "de79513064091b99dc9c20b25151dd346a163887",
+      "bytes": 23718,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-support.js",
+      "blob": "d31d80e51267e5b8c40c044b0fbc75b31d72a644",
+      "bytes": 19542,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read-workspace.js",
+      "blob": "c7dff6798f79d163a767a8e9473f0cbdf6270c75",
+      "bytes": 21135,
+      "kind": "js"
+    },
+    {
+      "path": "nal/assets/js/read.js",
+      "blob": "78e52a2678f02f3c5728cb3848655140b46b83d3",
+      "bytes": 9120,
+      "kind": "js"
+    },
+    {
+      "path": "nal/auth/callback/index.html",
+      "blob": "3c210ecc6214218083edecd55994c26e77f199ea",
+      "bytes": 1181,
+      "kind": "html"
+    },
+    {
+      "path": "nal/data/read-seasons.json",
+      "blob": "e0fba2abc4b515ec602fdac0d83567d8e8b428f1",
+      "bytes": 490,
+      "kind": "data"
+    },
+    {
+      "path": "nal/help/index.html",
+      "blob": "a95dff097444a3c56dbd55e3f1e37b660caa20e5",
+      "bytes": 5439,
+      "kind": "html"
+    },
+    {
+      "path": "nal/my/help/index.html",
+      "blob": "3e6633b8919f98910ce1b58bdcfa0dd5f22f5331",
+      "bytes": 2086,
+      "kind": "html"
+    },
+    {
+      "path": "nal/my/index.html",
+      "blob": "11f11e5b7bf56b95e5351e0559731abb5ae30cc8",
+      "bytes": 2408,
+      "kind": "html"
+    },
+    {
+      "path": "nal/my/payments/index.html",
+      "blob": "36eb163266aafad7d02557b3d633de39732f603d",
+      "bytes": 1719,
+      "kind": "html"
+    },
+    {
+      "path": "nal/my/waitlist/index.html",
+      "blob": "f4a0de00e04c3c70acdb75e08ffb4518d820c230",
+      "bytes": 1654,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/cohorts/index.html",
+      "blob": "6ee60e4a5d9fe9bc2e6d4ff438b47cb545f386c0",
+      "bytes": 1842,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/home/index.html",
+      "blob": "88d6963386d30d799d456eb3f34f698fb15f947f",
+      "bytes": 1981,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/index.html",
+      "blob": "c29426c4cbf20d14716dd76edeaafcd6d797afc6",
+      "bytes": 3001,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/offers/index.html",
+      "blob": "040054e2ee2c331c3cf25b252eeb5ae29f2a105a",
+      "bytes": 1764,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/payments/index.html",
+      "blob": "4ba9178303c25bfa7dbf34e9d0fccec4473e8b30",
+      "bytes": 1999,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/studio/index.html",
+      "blob": "dfc91bc6b03f44e7aa9996d63f78c0934afa3ace",
+      "bytes": 2052,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/admin/support/index.html",
+      "blob": "0a818f612849d1283c39b40d42e11cd667913ac7",
+      "bytes": 2213,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/auth/callback/index.html",
+      "blob": "13216d9b742d8f139f54437efae22fdb78982c9d",
+      "bytes": 1876,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/checkout/fail/index.html",
+      "blob": "418a48a639959aff215a4a406a552b6263b37077",
+      "bytes": 1871,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/checkout/index.html",
+      "blob": "d9ca4bcf8f8d72a0c41d1946a928d19091e83dfb",
+      "bytes": 1988,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/checkout/success/index.html",
+      "blob": "932825a7b1aac4107f2b61eeb024eef96ffa8d7e",
+      "bytes": 1936,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/cohorts/index.html",
+      "blob": "360020eab1321f226c9e63fb30d7c5273ca3e4e4",
+      "bytes": 1621,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/index.html",
+      "blob": "426df72ea85ddc60b976573680752204357b1071",
+      "bytes": 3148,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/join/index.html",
+      "blob": "26128e84402dfa707429ff9bd05d998a2d9f95dc",
+      "bytes": 1904,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/open/index.html",
+      "blob": "ded6b5eed53930dc04bb8918b82b6e998c11f275",
+      "bytes": 2030,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/start/index.html",
+      "blob": "8208eff279ea8f12d680d62dd9810a9f581ac9a9",
+      "bytes": 1878,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/before/index.html",
+      "blob": "7da91942f381aebc4c2b20d8029a687061c435c4",
+      "bytes": 1124,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/day/index.html",
+      "blob": "ade26a8d2ac1da92e05ef52e3b0ce2e988f4c60d",
+      "bytes": 1104,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/index.html",
+      "blob": "9c9fe03effa2a84cf0aa763bd9b4f4912a16a178",
+      "bytes": 3481,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/journey/index.html",
+      "blob": "3c763e0d37d8e3592db4ed3206a0c86967933705",
+      "bytes": 1119,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/live/index.html",
+      "blob": "ed178e38c4909fecb483e830b5d25d861021a30d",
+      "bytes": 1103,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/my/index.html",
+      "blob": "18bc1ac68453255966470d8654528233b06a5cd8",
+      "bytes": 1115,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/report/index.html",
+      "blob": "7619b9136bbb1e18856dc91f9e1a8a65e5e8baf7",
+      "bytes": 1121,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/today/index.html",
+      "blob": "d1f7376775ce9d801b8079c408aad4d7d67455b9",
+      "bytes": 1092,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/try/index.html",
+      "blob": "7e512ec3d914e4886acb92d53c9fdf8f2f41db98",
+      "bytes": 1107,
+      "kind": "html"
+    },
+    {
+      "path": "nal/read/trend-2027/welcome/index.html",
+      "blob": "168ccb4831d444e53ffb10bcfc1ca9336d26ee4a",
+      "bytes": 2932,
+      "kind": "html"
+    },
+    {
+      "path": "nal/shop/read/index.html",
+      "blob": "330ee7751e7142a971f5d9af46a024c90cc603d1",
+      "bytes": 1940,
+      "kind": "html"
+    }
+  ]
+}

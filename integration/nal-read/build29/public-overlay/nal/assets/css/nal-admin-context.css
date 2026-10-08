@@ -1,0 +1,8 @@
+/* BUILD18: visible season scope shared by existing editors. */
+.nal-admin-context-bar{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;align-items:center;padding:.8rem 0;border-block:1px solid var(--nal-border-soft,#ddd);margin:.8rem 0 1.5rem;}
+.nal-admin-context-bar p{flex:1 1 20rem;margin:.3rem 0;font-size:.95rem;font-weight:650;line-height:1.8;overflow-wrap:anywhere;}
+.nal-admin-context-bar a{display:inline-flex;align-items:center;min-height:44px;font-size:.86rem;line-height:1.7;text-decoration:underline;text-underline-offset:.25em;}
+.nal-admin-context-bar :focus-visible{outline:3px solid var(--nal-focus,#4055d8);outline-offset:3px;}
+.nal-admin-season-select{display:grid;gap:.6rem;margin:1.4rem 0;line-height:1.8;font-weight:650;}
+.nal-admin-season-select select{width:100%;min-height:48px;font:inherit;color:inherit;background:var(--nal-bg,#f5f1e8);border:0;border-bottom:1px solid var(--nal-border,#bbb);padding:.7rem;}
+@media print{.nal-admin-context-bar{display:none!important;}}
