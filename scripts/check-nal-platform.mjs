@@ -90,6 +90,11 @@ const [{ programs }, { products }, { hosts }, { content }, site] = await Promise
   json('nal/data/site.json')
 ]);
 
+// Do not allow staged storefront code to quietly turn on paid customer flows.
+for (const key of ['storePurchase', 'checkout', 'secureDownload']) {
+  check(site.features?.[key] === false, `NAL paid release gate ${key} must remain OFF`);
+}
+
 const requiredProgram = [
   'id', 'slug', 'type', 'title', 'subtitle', 'summary', 'description', 'category', 'tags', 'coverImage', 'coverImageMobile', 'coverImageAlt', 'gallery',
   'hostId', 'format', 'location', 'address', 'onlineUrl', 'startDate', 'endDate', 'startTime', 'endTime', 'duration',
@@ -142,8 +147,17 @@ for (const item of products) {
   );
   for (const id of item.relatedProgramIds) check(programIds.has(id), `product ${item.id} unknown program ${id}`);
   for (const id of item.relatedContentIds) check(contentIds.has(id), `product ${item.id} unknown content ${id}`);
+  // "Unpublished" means hidden from discovery, not that an archived free edition
+  // or a future-priced, disabled product must erase its historical metadata.
   if (!item.published) {
-    for (const key of ['price', 'originalPrice', 'stock']) check(item[key] === null, `draft product ${item.id} must keep ${key} null`);
+    check(
+      item.price === null || (typeof item.price === 'number' && Number.isFinite(item.price) && item.price >= 0),
+      `unpublished product ${item.id} invalid price`
+    );
+    check(
+      item.stockStatus !== 'available' || (item.productType === 'pdfEbook' && item.price === 0),
+      `unpublished product ${item.id} must not be a purchasable paid item`
+    );
   }
 }
 
@@ -169,8 +183,51 @@ check(publicPrograms.filter((item) => item.type === 'gather').length === 4, 'exp
 check(targetPrograms.filter((item) => item.type === 'gather' && item.published).length === 4, 'expected all 4 target gathers public');
 check(targetPrograms.filter((item) => item.type === 'class' && item.published).length === 4, 'expected all 4 target classes public');
 check(publicPrograms.some((item) => item.id === 'art-psychology-coaching-6week'), 'existing art psychology coaching 6-week program must remain public');
-check(publicProducts.length === 4, 'expected exactly 4 public products');
-check(targetProducts.filter((item) => item.published).length === 4, 'expected all 4 target products public');
+check(targetProducts.filter((item) => item.published).length === 4, 'expected all 4 physical-card products public');
+
+// Current canonical store: four physical cards, three permanently free starter PDFs,
+// and three priced-but-not-yet-for-sale AWARENESS workbooks. Future products may be added.
+const freeStarterIds = [
+  'nal-small-book-01-mind-reset',
+  'nal-small-book-02-relationship',
+  'nal-small-book-03-next-step'
+];
+const awarenessPrices = new Map([
+  ['dailycoaching-awareness-100', 100],
+  ['dailycoaching-awareness-1000', 1000],
+  ['dailycoaching-awareness-10000', 10000]
+]);
+check(publicProducts.length >= productTargetIds.size + freeStarterIds.length + awarenessPrices.size,
+  'missing public baseline products');
+for (const id of freeStarterIds) {
+  const item = products.find((product) => product.id === id);
+  check(Boolean(item?.published), `free starter ${id} must remain published`);
+  check(item?.price === 0 && item?.stockStatus === 'available' && item?.deliveryType === 'digital',
+    `free starter ${id} must remain a free, available digital product`);
+  const freePdf = item?.purchaseUrl;
+  check(
+    typeof freePdf === 'string' &&
+    /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(freePdf) &&
+    item?.sampleUrl === freePdf && item?.previewUrl === freePdf,
+    `free starter ${id} must link the same public final PDF for reading and download`
+  );
+  if (typeof freePdf === 'string' && freePdf.startsWith('/nal/assets/downloads/free/')) {
+    const filename = freePdf.slice(1);
+    const present = await exists(filename);
+    check(present, `free starter ${id} PDF is missing: ${filename}`);
+    if (present) {
+      const pdf = await readFile(path.join(root, filename));
+      check(pdf.subarray(0, 5).toString('ascii') === '%PDF-' && pdf.length > 1024,
+        `free starter ${id} must point to a valid nonempty PDF`);
+    }
+  }
+}
+for (const [id, expectedPrice] of awarenessPrices) {
+  const item = products.find((product) => product.id === id);
+  check(Boolean(item?.published), `AWARENESS ${id} must remain visible`);
+  check(item?.price === expectedPrice && item?.stockStatus === 'comingSoon' && item?.purchaseUrl === null,
+    `AWARENESS ${id} must keep the agreed price and checkout-disabled status`);
+}
 
 for (const item of targetPrograms) {
   check(item.published, `target program ${item.id} must be public`);
@@ -199,10 +256,31 @@ for (const item of targetProducts) {
 }
 
 const catalogFiles = await collectFiles(path.join(root, 'nal/assets/images/catalog'));
-check(catalogFiles.length === 28, `expected exactly 28 catalog images, found ${catalogFiles.length}`);
+check(catalogFiles.length >= 28, `expected at least 28 catalog images, found ${catalogFiles.length}`);
 for (const file of catalogFiles) {
-  check(file.endsWith('.webp'), `catalog image must be WebP: ${path.relative(root, file)}`);
-  check(/^[a-z0-9-]+\.webp$/.test(path.basename(file)), `catalog filename must use lowercase and hyphens: ${path.basename(file)}`);
+  const relative = path.relative(root, file).split(path.sep).join('/');
+  const extension = path.extname(file).toLowerCase();
+  const isRetailArtwork = relative.startsWith('nal/assets/images/catalog/shop/retail/');
+  check(
+    extension === '.webp' || (isRetailArtwork && ['.png', '.svg'].includes(extension)),
+    `unsupported catalog image format: ${relative}`
+  );
+  check(/^[a-z0-9-]+\.(?:webp|png|svg)$/.test(path.basename(file)),
+    `catalog filename must use lowercase and hyphens: ${path.basename(file)}`);
+  if (extension === '.svg') {
+    const svg = await readFile(file, 'utf8');
+    check(/<svg\b/i.test(svg) && !/<script\b|<foreignObject\b|\bon[a-z]+\s*=|javascript:/i.test(svg),
+      `unsafe catalog SVG: ${relative}`);
+  }
+  if (extension === '.png') {
+    const png = await readFile(file);
+    const signature = Buffer.from('89504e470d0a1a0a', 'hex');
+    const valid = png.length >= 24 && png.subarray(0, 8).equals(signature);
+    check(valid, `invalid PNG catalog cover: ${relative}`);
+    if (valid) check(png.readUInt32BE(16) > 0 && png.readUInt32BE(20) > 0,
+      `invalid PNG dimensions: ${relative}`);
+    check((await stat(file)).size <= 2 * 1024 * 1024, `oversized PNG catalog cover: ${relative}`);
+  }
 }
 
 for (const item of hosts) {
@@ -219,7 +297,22 @@ for (const item of programs) {
   const relative = `nal/${item.type}/${item.slug}/index.html`;
   check((await exists(relative)) === item.published, `${relative} publication mismatch`);
 }
-for (const item of products) check((await exists(`nal/shop/${item.slug}/index.html`)) === item.published, `product ${item.slug} publication mismatch`);
+for (const item of products) {
+  const relative = `nal/shop/${item.slug}/index.html`;
+  const present = await exists(relative);
+  if (item.published) {
+    check(present, `public product ${item.id} missing detail page`);
+  } else if (present) {
+    // Historical URLs must remain usable, but must not present hidden products as
+    // public pages or retain an independent purchase route.
+    const source = await readFile(path.join(root, relative), 'utf8');
+    const target = source.match(/<meta http-equiv="refresh" content="0;url=(\/nal\/[^"]+)">/i)?.[1];
+    check(/<meta name="robots" content="noindex/i.test(source), `unpublished product ${item.id} must be noindex`);
+    check(Boolean(target) && target.startsWith('/nal/'), `unpublished product ${item.id} must redirect`);
+    if (target) check(await exists(`${target.slice(1)}index.html`),
+      `unpublished product ${item.id} redirect target missing: ${target}`);
+  }
+}
 for (const item of hosts) check((await exists(`nal/host/${item.slug}/index.html`)) === item.published, `host ${item.slug} publication mismatch`);
 for (const item of content) check((await exists(`nal/note/${item.slug}/index.html`)) === item.published, `content ${item.slug} publication mismatch`);
 
@@ -229,19 +322,34 @@ const canonicals = new Set();
 for (const file of htmlFiles) {
   const source = await readFile(file, 'utf8');
   const relative = path.relative(root, file);
+  const noindex = /<meta\s+name="robots"\s+content="noindex/i.test(source);
+  const redirect = source.match(/<meta\s+http-equiv="refresh"\s+content="0;url=(\/nal\/[^"]+)"/i)?.[1];
   check(/<html lang="ko">/.test(source), `${relative} missing lang`);
-  check(/<meta name="description" content="[^"]+">/.test(source), `${relative} missing description`);
-  check(/<meta property="og:title"/.test(source), `${relative} missing og:title`);
-  check(/<meta property="og:image" content="https:\/\/daily-coach-ing\.com\/[^\"]+\.(?:png|webp)">/.test(source), `${relative} missing same-origin OG image`);
-  check(/<a class="nal-skip-link" href="#main-content">/.test(source), `${relative} missing skip link`);
-  check(/<main id="main-content" data-page-root/.test(source), `${relative} missing main root`);
-  check(source.includes('<script src="/nal/assets/js/theme.js"></script>'), `${relative} missing early theme script`);
-  check(source.indexOf('/nal/assets/js/theme.js') < source.indexOf('<link rel="stylesheet"'), `${relative} theme must run before styles`);
-  const canonical = source.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
-  check(Boolean(canonical), `${relative} missing canonical`);
-  if (canonical) {
-    check(!canonicals.has(canonical), `${relative} duplicate canonical ${canonical}`);
-    canonicals.add(canonical);
+  check(/<title>[^<]+<\/title>/.test(source), `${relative} missing title`);
+  if (redirect) {
+    check(noindex, `${relative} redirect must be noindex`);
+    check(await exists(`${redirect.slice(1)}index.html`), `${relative} redirect target missing`);
+  } else if (noindex) {
+    // Checkout, previews and other utility screens deliberately have no public
+    // canonical or site-wide marketing template. Still require a readable main.
+    check(/<main(?:\s|>)/i.test(source), `${relative} noindex utility missing main`);
+  } else {
+    check(/<meta name="description" content="[^"]+">/.test(source), `${relative} missing description`);
+    check(/<meta property="og:title"/.test(source), `${relative} missing og:title`);
+    check(/<meta property="og:image" content="https:\/\/daily-coach-ing\.com\/[^"]+\.(?:png|webp)">/.test(source),
+      `${relative} missing same-origin OG image`);
+    check(/<a class="nal-skip-link" href="#main-content">/.test(source), `${relative} missing skip link`);
+    check(/<main id="main-content" data-page-root/.test(source), `${relative} missing main root`);
+    check(source.includes('<script src="/nal/assets/js/theme.js"></script>'), `${relative} missing early theme script`);
+    check(source.indexOf('/nal/assets/js/theme.js') >= 0 &&
+      source.indexOf('/nal/assets/js/theme.js') < source.indexOf('<link rel="stylesheet"'),
+      `${relative} theme must run before styles`);
+    const canonical = source.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
+    check(Boolean(canonical), `${relative} missing canonical`);
+    if (canonical) {
+      check(!canonicals.has(canonical), `${relative} duplicate indexable canonical ${canonical}`);
+      canonicals.add(canonical);
+    }
   }
   for (const block of source.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
     try { JSON.parse(block[1]); } catch { failures.push(`${relative} invalid JSON-LD`); }
@@ -281,10 +389,17 @@ check(robots.includes('Sitemap: https://daily-coach-ing.com/sitemap.xml'), 'robo
 
 for (const file of htmlFiles) {
   const source = await readFile(file, 'utf8');
+  const relative = path.relative(root, file).split(path.sep).join('/');
+  const ownUrl = `https://daily-coach-ing.com/${relative.replace(/index\.html$/, '')}`;
   const canonical = source.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
-  const noindex = /name="robots" content="noindex/i.test(source);
-  if (canonical) check(noindex || sitemap.includes(`<loc>${canonical}</loc>`), `indexable ${canonical} missing from sitemap`);
-  if (canonical) check(!noindex || !sitemap.includes(`<loc>${canonical}</loc>`), `noindex ${canonical} must not be in sitemap`);
+  const noindex = /<meta\s+name="robots"\s+content="noindex/i.test(source);
+  if (noindex) {
+    // A legacy redirect may canonically point to its published destination.
+    // Its *own* URL, not that destination, must be excluded from the sitemap.
+    check(!sitemap.includes(`<loc>${ownUrl}</loc>`), `noindex ${ownUrl} must not be in sitemap`);
+  } else if (canonical) {
+    check(sitemap.includes(`<loc>${canonical}</loc>`), `indexable ${canonical} missing from sitemap`);
+  }
 }
 
 const textCorpus = [JSON.stringify({ programs, products, hosts, content, site }), runtime].join('\n');

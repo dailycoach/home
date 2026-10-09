@@ -1,0 +1,33 @@
+name: NAL Platform Contract CI
+
+on:
+  pull_request:
+    paths:
+      - "scripts/check-nal-platform.mjs"
+      - "scripts/test-nal-platform-contract-guards.mjs"
+      - "nal/**"
+      - "sitemap.xml"
+      - ".github/workflows/nal-platform-contract-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  platform-contract:
+    name: NAL static catalog, page and theme checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check platform validator syntax
+        run: node --check scripts/check-nal-platform.mjs
+      - name: Check catalog routes and indexing
+        run: node scripts/check-nal-platform.mjs
+      - name: Check theme behavior
+        run: node scripts/check-nal-theme.mjs
+      - name: Verify failure guardrails with temporary local mutations
+        run: node scripts/test-nal-platform-contract-guards.mjs
