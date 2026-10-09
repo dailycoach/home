@@ -1,0 +1,16 @@
+/* BUILD11: editorial source library. Reuse existing NAL typography and colors. */
+.nal-studio-library{max-width:56rem;padding:2rem 0;margin:1.5rem 0;border-block:2px solid var(--nal-text,#202126);}
+.nal-studio-library>h2{font-size:clamp(1.5rem,4vw,2.7rem);line-height:1.35;letter-spacing:-.045em;}
+.nal-library-section{padding:1.35rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-library-section h3,.nal-library-section h4{line-height:1.5;letter-spacing:-.025em;}
+.nal-library-section blockquote{margin:1rem 0;padding-inline-start:1rem;border-inline-start:2px solid currentColor;font-size:1.15rem;}
+.nal-library-section details>summary{min-height:44px;cursor:pointer;line-height:1.7;display:flex;align-items:center;}
+.nal-library-rhythm{font-weight:700;line-height:1.95;white-space:normal;overflow-wrap:anywhere;padding:1rem 0;}
+.nal-library-outline{padding-inline-start:1.5rem;line-height:1.9;}
+.nal-library-outline li{padding:.5rem 0;}
+.nal-library-outline [aria-current=true]{font-weight:750;text-decoration:underline;text-underline-offset:.3em;}
+.nal-library-warning{border-inline-start:3px solid currentColor;padding:.6rem 1rem;line-height:1.8;}
+.nal-studio-library .nal-account-actions{gap:.75rem;align-items:stretch;}
+.nal-studio-library .nal-account-button{white-space:normal;max-width:100%;line-height:1.6;}
+@media(max-width:42rem){.nal-studio-library{padding:1.4rem 0;}.nal-studio-library .nal-account-actions{flex-direction:column;}}
+@media print{body:has(.nal-run-presenter[open]) .nal-studio-library{display:none!important;}}

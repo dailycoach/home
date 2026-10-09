@@ -1,0 +1,14 @@
+/* BUILD35 — typography-first review, no external assets */
+.nal-privacy-review-notice{font-size:.94rem;line-height:1.85;color:var(--nal-text-muted,#696a70);margin:1rem auto 2rem}
+.nal-review-section{padding:1.9rem 0;border-top:1px solid var(--nal-border-soft,#ddd);max-width:58rem}
+.nal-review-section>h2{font-size:clamp(1.2rem,3.2vw,1.7rem);letter-spacing:-.025em;line-height:1.5}
+.nal-review-section h3{font-size:1.04rem;letter-spacing:-.018em;line-height:1.65}
+.nal-review-item{padding:1.1rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd)}
+.nal-review-item .nal-account-link{justify-content:flex-start}
+.nal-review-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.6rem;margin:1rem 0 2rem}
+.nal-review-count{border-top:1px solid var(--nal-border-soft,#ddd);padding:.75rem 0;min-width:0}
+.nal-review-count dt{font-size:.88rem;color:var(--nal-text-muted,#696a70)}
+.nal-review-count dd{font-size:1.25rem;font-weight:700;margin:.35rem 0;line-height:1.5}
+.nal-review-section .nal-account-note{max-width:48rem;line-height:1.85}
+@media(max-width:36rem){.nal-review-counts{grid-template-columns:minmax(0,1fr)}}
+@media print{.nal-review-section .nal-account-actions,.nal-review-item .nal-account-link{display:none!important}}

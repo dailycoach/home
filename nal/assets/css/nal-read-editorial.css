@@ -1,0 +1,21 @@
+/* BUILD05 — NAL editorial workbench; no new paid UI library. */
+.read-editor-shell{max-width:90rem;}
+.read-editor-top{padding:2rem 0;border-bottom:1px solid var(--nal-border);}
+.read-editor-layout{display:grid;grid-template-columns:minmax(12rem,19rem) minmax(0,1fr);gap:3rem;margin:2rem 0;align-items:start;}
+.read-editor-toc{position:sticky;top:1rem;max-height:85vh;overflow:auto;display:grid;gap:.1rem;}
+.read-editor-toc .read-button{background:transparent;color:inherit;border:0;border-radius:0;justify-content:flex-start;text-align:left;font-weight:500;font-size:.9rem;padding:.65rem;}
+.read-editor-toc [aria-current=page]{border-left:3px solid var(--nal-text);font-weight:800;}
+.read-editor-day{min-width:0;}
+.read-editor-step{border:0;border-top:1px solid var(--nal-border);padding:1.5rem 0;margin:1.5rem 0;min-width:0;}
+.read-editor-step-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.read-editor-step-head .read-button{font-size:.8rem;padding:.5rem .8rem;min-height:44px;}
+.read-editor-shell textarea,.read-editor-shell input,.read-editor-shell select{font:inherit;color:var(--nal-text);background:var(--nal-surface-subtle);border:1px solid var(--nal-border);padding:.8rem;line-height:1.7;max-width:100%;}
+.read-editor-shell textarea{resize:vertical;min-height:7rem;}
+.read-editor-shell summary{font-weight:800;cursor:pointer;min-height:44px;padding:.6rem 0;}
+.read-editor-preview{color:var(--nal-text);background:var(--nal-bg);border:1px solid var(--nal-border);width:min(46rem,calc(100vw - 2rem));max-height:90vh;padding:clamp(1.2rem,4vw,3rem);}
+.read-editor-preview::backdrop{background:rgb(0 0 0/.55);}
+.read-preview-step{padding:2rem 0;border-top:1px solid var(--nal-border);}
+.read-preview-step h3,.read-preview-step p{white-space:pre-wrap;overflow-wrap:anywhere;}
+.read-preview-answer{min-height:6rem;border-bottom:1px solid var(--nal-border);color:var(--nal-text-muted);}
+.read-status{white-space:pre-wrap;}
+@media(max-width:55rem){.read-editor-layout{grid-template-columns:1fr;gap:1rem}.read-editor-toc{position:static;max-height:14rem;border-bottom:1px solid var(--nal-border)}.read-editor-toc .read-button{font-size:1rem}}

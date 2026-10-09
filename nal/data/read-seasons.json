@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0",
+  "seasons": [
+    {
+      "slug": "trend-2027",
+      "number": 1,
+      "title": "TREND 2027",
+      "subtitle": "28-DAY SELF-COACHING SERIES",
+      "eyebrow": "NAL READ 01",
+      "summary": "책을 읽고 끝내지 않고, 28일 동안 질문하고 해보고 기록하는 셀프코칭 시리즈.",
+      "weeks": ["SIGNAL", "ACTION", "WORK", "EDGE"],
+      "dayCount": 28,
+      "liveCount": 4,
+      "status": "draft",
+      "published": false
+    }
+  ]
+}
