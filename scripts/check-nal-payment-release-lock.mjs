@@ -24,8 +24,8 @@ for(const key of ['merchantKeysVerified','webhookRegisteredVerified','originalPu
 'approvedPrivacyPolicy','approvedDigitalRefundPolicy','approvedOperatorLegalDetails','realPaymentQAApproved','releaseApproved']) {
   check(review[key]===false,'payment release approval '+key+' must remain false');
 }
-check(Array.isArray(review.unresolvedBlockers)&&review.unresolvedBlockers.length>=5,'P5 release blockers missing');
-for(const code of ['P5-01','P5-02','P5-03','P5-04','P5-05']){
+check(Array.isArray(review.unresolvedBlockers)&&review.unresolvedBlockers.length>=6,'P5 release blockers missing');
+for(const code of ['P5-01','P5-02','P5-03','P5-04','P5-05','P5-06']){
   check(review.unresolvedBlockers.some(x=>x.id===code&&x.status==='OPEN'),'P5 unresolved blocker '+code+' must remain visible');
 }
 for(const key of ['storePurchase','checkout','secureDownload','account','orderLibrary']){
@@ -82,4 +82,4 @@ if(failures.length){
   for(const reason of failures)console.error('- '+reason);
   process.exit(1);
 }
-console.log('NAL P5 release lock PASS: free PDFs preserved, paid store/Edge gates OFF, webhook provider recheck, private downloads and 5 open blockers');
+console.log('NAL P5 release lock PASS: free PDFs preserved, paid store/Edge gates OFF, webhook provider recheck, private downloads and 6 open blockers');
