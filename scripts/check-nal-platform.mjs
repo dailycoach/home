@@ -90,6 +90,11 @@ const [{ programs }, { products }, { hosts }, { content }, site] = await Promise
   json('nal/data/site.json')
 ]);
 
+// Do not allow staged storefront code to quietly turn on paid customer flows.
+for (const key of ['storePurchase', 'checkout', 'secureDownload']) {
+  check(site.features?.[key] === false, `NAL paid release gate ${key} must remain OFF`);
+}
+
 const requiredProgram = [
   'id', 'slug', 'type', 'title', 'subtitle', 'summary', 'description', 'category', 'tags', 'coverImage', 'coverImageMobile', 'coverImageAlt', 'gallery',
   'hostId', 'format', 'location', 'address', 'onlineUrl', 'startDate', 'endDate', 'startTime', 'endTime', 'duration',
@@ -199,11 +204,28 @@ for (const id of freeStarterIds) {
   check(Boolean(item?.published), `free starter ${id} must remain published`);
   check(item?.price === 0 && item?.stockStatus === 'available' && item?.deliveryType === 'digital',
     `free starter ${id} must remain a free, available digital product`);
+  const freePdf = item?.purchaseUrl;
+  check(
+    typeof freePdf === 'string' &&
+    /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(freePdf) &&
+    item?.sampleUrl === freePdf && item?.previewUrl === freePdf,
+    `free starter ${id} must link the same public final PDF for reading and download`
+  );
+  if (typeof freePdf === 'string' && freePdf.startsWith('/nal/assets/downloads/free/')) {
+    const filename = freePdf.slice(1);
+    const present = await exists(filename);
+    check(present, `free starter ${id} PDF is missing: ${filename}`);
+    if (present) {
+      const pdf = await readFile(path.join(root, filename));
+      check(pdf.subarray(0, 5).toString('ascii') === '%PDF-' && pdf.length > 1024,
+        `free starter ${id} must point to a valid nonempty PDF`);
+    }
+  }
 }
 for (const [id, expectedPrice] of awarenessPrices) {
   const item = products.find((product) => product.id === id);
   check(Boolean(item?.published), `AWARENESS ${id} must remain visible`);
-  check(item?.price === expectedPrice && item?.stockStatus === 'comingSoon',
+  check(item?.price === expectedPrice && item?.stockStatus === 'comingSoon' && item?.purchaseUrl === null,
     `AWARENESS ${id} must keep the agreed price and checkout-disabled status`);
 }
 
