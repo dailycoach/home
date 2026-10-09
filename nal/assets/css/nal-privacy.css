@@ -1,0 +1,16 @@
+/* BUILD34 — text-first privacy request status; no new font or visual assets. */
+.nal-privacy-public{font-size:.95rem;line-height:1.9;padding:1rem 0 2rem;color:var(--nal-text-muted,#696a70);}
+.nal-privacy-section{padding:2rem 0;border-top:1px solid var(--nal-border-soft,#ddd);max-width:55rem;}
+.nal-privacy-section>h2{font-size:clamp(1.25rem,3vw,1.7rem);letter-spacing:-.035em;line-height:1.45;margin:0 0 1.2rem;}
+.nal-privacy-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.3rem 2rem;margin:1.4rem 0 2rem;}
+.nal-privacy-metric{padding:1rem 0;border-top:1px solid var(--nal-border-soft,#ddd);min-width:0;}
+.nal-privacy-metric dt{font-size:.92rem;line-height:1.65;color:var(--nal-text-muted,#696a70);}
+.nal-privacy-metric dd{font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;letter-spacing:-.035em;line-height:1.65;margin:.2rem 0;}
+.nal-privacy-item{padding:1.2rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-privacy-item h3{font-size:1.1rem;line-height:1.7;margin:0;word-break:keep-all;}
+.nal-privacy-state{font-size:.93rem;font-weight:650;}
+.nal-privacy-section .nal-account-link{justify-content:flex-start;}
+.nal-privacy-section .nal-account-note{max-width:48rem;}
+.nal-privacy-section [role=status]{min-height:1.8rem;}
+@media(max-width:36rem){.nal-privacy-counts{grid-template-columns:minmax(0,1fr);gap:.25rem;}.nal-privacy-section{padding:1.45rem 0;}}
+@media print{.nal-privacy-public,.nal-privacy-section .nal-account-actions{display:none!important;}}

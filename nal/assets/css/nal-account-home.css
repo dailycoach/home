@@ -1,0 +1,34 @@
+/* BUILD14: editorial account home. No external imagery, fonts, charts or widgets. */
+body[data-account-page=my]:not([data-my-view=guest]) .nal-account-shell:has([data-account-private]:not([hidden])) .nal-account-hero{display:none;}
+body[data-account-page=my] .nal-account-tabs{margin-top:0;}
+body[data-account-page=my] .nal-account-tabs a{min-width:2.5rem;text-align:center;}
+.nal-home-overview{padding:1rem 0 3rem;}
+.nal-home-overview>.nal-account-actions{justify-content:space-between;align-items:center;margin-bottom:1.4rem;}
+.nal-home-section{padding:1.6rem 0;border-top:1px solid var(--nal-border-soft,#ddd);min-width:0;}
+.nal-home-section>h2{font-size:1.1rem;font-weight:700;letter-spacing:-.025em;line-height:1.7;margin:0 0 1.3rem;}
+.nal-home-current{padding:1rem 0 2rem;max-width:58rem;}
+.nal-home-question{font-size:clamp(2.2rem,6.5vw,4.7rem);line-height:1.25;letter-spacing:-.055em;word-break:keep-all;overflow-wrap:anywhere;max-width:20ch;margin:1.3rem 0;}
+.nal-home-kicker{font-size:.82rem;font-weight:650;letter-spacing:.06em;line-height:1.7;color:var(--nal-text-muted,#696a70);overflow-wrap:anywhere;}
+.nal-home-meta{font-size:.9rem;line-height:1.85;color:var(--nal-text-muted,#696a70);overflow-wrap:anywhere;}
+.nal-home-note{font-size:.95rem;line-height:1.9;color:var(--nal-text-muted,#696a70);white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;max-width:48rem;}
+.nal-home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(2rem,5vw,4rem);align-items:start;}
+.nal-home-grid>.nal-home-section>.nal-home-section{padding:1.1rem 0 1.6rem;}
+.nal-home-grid .nal-home-section .nal-home-section>h2{font-size:1rem;margin-bottom:.8rem;}
+.nal-home-line{padding:.75rem 0 1rem;border-bottom:1px solid var(--nal-border-soft,#ddd);overflow-wrap:anywhere;}
+.nal-home-line:last-child{border-bottom:0;}
+.nal-home-line h3{font-size:clamp(1.05rem,2.2vw,1.25rem);letter-spacing:-.025em;line-height:1.6;word-break:keep-all;margin:.6rem 0;}
+.nal-home-line .nal-account-link{justify-content:flex-start;text-align:left;padding-inline:0;}
+.nal-home-other-programs,.nal-home-operator{padding:1rem 0;margin:.8rem 0;border-top:1px solid var(--nal-border-soft,#ddd);}
+.nal-home-other-programs summary,.nal-home-operator summary{min-height:44px;line-height:1.8;font-weight:650;cursor:pointer;padding:.6rem 0;}
+.nal-home-program{padding:1.5rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-home-program h3{font-size:1.4rem;line-height:1.6;letter-spacing:-.03em;word-break:keep-all;overflow-wrap:anywhere;}
+.nal-home-feedback{line-height:1.9;min-height:1.9em;font-size:.95rem;padding:.4rem 0;}
+.nal-home-feedback:empty{display:none;}
+.nal-home-overview .nal-account-button{min-height:48px;max-width:100%;line-height:1.7;}
+.nal-home-current .nal-account-actions{margin-top:1.8rem;}
+.nal-home-current>.nal-account-actions>.nal-account-button{padding:.85rem 1.4rem;}
+.nal-home-operator{margin-top:2rem;}
+.nal-home-overview :focus-visible{outline:3px solid var(--nal-focus,#4055d8);outline-offset:4px;}
+@media(max-width:50rem){.nal-home-grid{grid-template-columns:minmax(0,1fr);}.nal-home-question{max-width:18ch;}.nal-home-current{padding:.5rem 0 1.3rem;}}
+@media(max-width:30rem){.nal-home-current>.nal-account-actions>.nal-account-button{width:100%;}.nal-home-overview>.nal-account-actions{align-items:flex-start;flex-direction:column;gap:.2rem;}.nal-account-tabs{column-gap:.9rem;}}
+@media print{.nal-home-operator,.nal-home-overview>.nal-account-actions,.nal-home-overview .nal-account-actions{display:none!important;}.nal-home-grid{display:block;}.nal-home-line{break-inside:avoid;}}

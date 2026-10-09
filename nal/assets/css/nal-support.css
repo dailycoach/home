@@ -1,0 +1,30 @@
+/* BUILD12 — support conversation, existing NAL tokens, no tracking or third-party widget. */
+.nal-support-field{display:grid;gap:.6rem;margin:1rem 0;line-height:1.7;max-width:48rem;}
+.nal-support-field>span{font-weight:650;}
+.nal-support-field input,.nal-support-field select,.nal-support-field textarea{width:100%;max-width:100%;min-height:3rem;padding:.85rem;font:inherit;line-height:1.8;color:var(--nal-text,#202126);background:var(--nal-surface-subtle,transparent);border:0;border-bottom:1px solid var(--nal-border,#bbb);}
+.nal-support-field textarea{resize:vertical;min-height:10rem;}
+.nal-support-filters{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin:1.5rem 0;}
+.nal-support-filters .nal-support-field{flex:1;min-width:10rem;margin:0;}
+.nal-support-item{padding:1.4rem 0;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-support-subject{display:block;min-height:44px;font-weight:700;font-size:clamp(1.1rem,3vw,1.5rem);line-height:1.6;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:.25em;}
+.nal-support-unread{display:inline-block;font-size:.82rem;font-weight:650;margin:.6rem 0;padding:.3rem .6rem;border:1px solid currentColor;}
+.nal-support-privacy{max-width:48rem;font-size:.92rem;line-height:1.95;border-inline-start:2px solid currentColor;padding:.7rem 1rem;margin:1.4rem 0;word-break:keep-all;}
+.nal-support-context{max-width:48rem;margin:1.5rem 0;padding:1rem 0;border-block:1px solid var(--nal-border-soft,#ddd);}
+.nal-support-context h3{font-size:.95rem;}
+.nal-support-context code{display:block;overflow-wrap:anywhere;font-size:.84rem;}
+.nal-support-thread-header h2{font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.4;word-break:keep-all;overflow-wrap:anywhere;}
+.nal-support-messages{max-width:48rem;margin:2rem 0;}
+.nal-support-message{padding:1.1rem 0 1.8rem;border-bottom:1px solid var(--nal-border-soft,#ddd);}
+.nal-support-message.from-staff{padding-inline-start:1rem;border-inline-start:2px solid var(--nal-text,#202126);margin-block:1rem;}
+.nal-support-message-body{font-size:1.05rem;line-height:1.95;white-space:pre-wrap;overflow-wrap:anywhere;}
+.nal-support-feedback{min-height:1.8em;font-size:.94rem;line-height:1.8;}
+.nal-support-reply{padding:1.2rem 0;}
+.nal-support-assignment{max-width:48rem;padding:2rem 0;border-top:1px solid var(--nal-border,#ccc);}
+.nal-support-help{max-width:52rem;padding:2rem 0;}
+.nal-support-help details{border-top:1px solid var(--nal-border-soft,#ddd);padding:1rem 0;}
+.nal-support-help summary{min-height:44px;cursor:pointer;line-height:1.7;font-weight:700;padding:.5rem 0;}
+.nal-support-help p{line-height:1.9;max-width:46rem;word-break:keep-all;}
+.nal-support-help .nal-account-link{justify-content:flex-start;}
+.nal-account-shell :focus-visible{outline:3px solid var(--nal-focus,#4055d8);outline-offset:3px;}
+@media(max-width:42rem){.nal-support-filters{align-items:stretch;}.nal-support-filters>.nal-account-button{width:100%;}.nal-support-context{margin:1rem 0;}.nal-support-message.from-staff{padding-inline-start:.7rem;}}
+@media print{.nal-support-compose,.nal-support-reply,.nal-support-assignment,.nal-account-login-panel,.nal-support-filters,.nal-account-actions{display:none!important;}.nal-support-message{break-inside:avoid;}}

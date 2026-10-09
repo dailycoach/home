@@ -1,0 +1,21 @@
+/* BUILD09 — text-first cohort selection and operational roster. */
+.nal-cohort-list{margin:2.5rem 0;}
+.nal-cohort-card{padding:2rem 0;border-top:1px solid var(--nal-border-soft,#ddd);}
+.nal-cohort-card h2,.nal-cohort-card h3{letter-spacing:-.025em;line-height:1.4;}
+.nal-cohort-facts{padding:1rem 0;border-block:1px solid var(--nal-border-soft,#ddd);margin:1.5rem 0;}
+.nal-cohort-facts p{line-height:1.85;}
+.nal-cohort-status{font-size:1.15rem;font-weight:650;line-height:1.8;margin:2rem 0;}
+.nal-cohort-deadline{font-weight:700;line-height:1.8;text-decoration:underline;text-underline-offset:.25em;}
+.nal-cohort-editor{margin:1rem 0 2rem;}
+.nal-cohort-roster{padding:1.5rem 0;border-top:1px solid var(--nal-border-soft,#ddd);}
+.nal-cohort-roster .nal-account-button{margin:.5rem .5rem .5rem 0;}
+.nal-attendance-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:.75rem;padding:1rem 0;}
+.nal-attendance-row label{display:grid;gap:.6rem;line-height:1.6;}
+.nal-attendance-row select{min-height:44px;padding:.65rem;font:inherit;color:inherit;background:var(--nal-bg,#f5f1e8);border:1px solid var(--nal-border-soft,#ccc);}
+.nal-cohort-roster h4{font-size:1.1rem;margin:.6rem 0;}
+.nal-order-details summary{min-height:44px;cursor:pointer;line-height:1.8;padding:.6rem 0;}
+.nal-order-details{margin:1rem 0;border-top:1px solid var(--nal-border-soft,#ddd);}
+.nal-account-header nav{align-items:center;}
+.nal-account-footer a{min-height:44px;display:inline-flex;align-items:center;}
+@media(max-width:42rem){.nal-attendance-row{grid-template-columns:minmax(0,1fr);}.nal-cohort-roster .nal-account-button{max-width:100%;}.nal-cohort-facts{padding:.7rem 0;}}
+@media print{.nal-cohort-editor,.nal-account-login-panel,.nal-account-footer,.nal-account-button,.nal-attendance-row button{display:none!important;}}
