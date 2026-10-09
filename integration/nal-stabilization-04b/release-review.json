@@ -47,5 +47,12 @@
     "payment keys",
     "pricing"
   ],
-  "status": "B1_CONTRACT_ONLY_B2_BLOCKED"
+  "status": "B1_CONTRACT_ONLY_B2_BLOCKED",
+  "ownerReviewContractDefaults": {
+    "enabled": false,
+    "ownerAuthReviewed": false,
+    "privacyNoticeApproved": false,
+    "backendApproved": false,
+    "destructiveApiExposed": false
+  }
 }
