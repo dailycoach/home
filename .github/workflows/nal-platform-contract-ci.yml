@@ -9,6 +9,7 @@ on:
       - "scripts/test-nal-catalog-contract.mjs"
       - "scripts/check-nal-catalog-consistency.mjs"
       - "scripts/check-nal-read-integration-snapshot.mjs"
+      - "scripts/test-nal-read-integration-negative.mjs"
       - "integration/nal-stabilization-03/**"
       - "nal/**"
       - "sitemap.xml"
@@ -42,3 +43,5 @@ jobs:
         run: node scripts/check-nal-catalog-consistency.mjs
       - name: Check current READ-host integration snapshot without deployment
         run: node scripts/check-nal-read-integration-snapshot.mjs
+      - name: Verify READ release and file-integrity guards fail closed
+        run: node scripts/test-nal-read-integration-negative.mjs
