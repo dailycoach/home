@@ -14,6 +14,9 @@ on:
       - "scripts/test-nal-privacy-lock-negative.mjs"
       - "scripts/test-nal-privacy-owner-ui.mjs"
       - "scripts/test-nal-privacy-auth-reference.mjs"
+      - "scripts/test-nal-owner-review-protocol.mjs"
+      - "integration/nal-stabilization-04b/**"
+      - "docs/NAL_STABILIZATION_04B.md"
       - "integration/nal-stabilization-04/**"
       - "docs/NAL_STABILIZATION_04.md"
       - "integration/nal-stabilization-03/**"
@@ -59,3 +62,5 @@ jobs:
         run: node scripts/test-nal-privacy-lock-negative.mjs
       - name: Regress existing Auth helper with fake users and no network requests
         run: node scripts/test-nal-privacy-auth-reference.mjs
+      - name: Check P4-B synthetic owner identity and RPC binding (NO real privileged calls)
+        run: node scripts/test-nal-owner-review-protocol.mjs
