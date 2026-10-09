@@ -52,7 +52,7 @@ P5-02: Original edition and catalog consistency. The active private files are v4
 
 P5-03: Merchant readiness. Validate Toss test/live mode, client and server keys, merchant registration, settlement and receipts, success/fail callback, PAYMENT_STATUS_CHANGED webhook registration, provider API errors, retries and real end-to-end TEST-mode payment and cancellation immediately before sale. These checks have NOT occurred here.
 
-P5-04: Webhook authenticity, rate limits, idempotency and event races. A provider re-fetch currently verifies financial truth; before release independently review sender authentication/signatures where supported, request quotas, payment-key reuse, out-of-order cancellation events and duplicate entitlement issuance.
+P5-04: Webhook authenticity, rate limits, idempotency and event races. Toss documentation limits the tosspayments-webhook-signature header to payout.changed/seller.changed; PAYMENT_STATUS_CHANGED does not advertise this signature. The product webhook must keep re-fetching authoritative provider payment, and independently review request quotas, payment-key reuse, out-of-order cancellation events and duplicate entitlement issuance. Do NOT invent a nonexistent payment-webhook HMAC contract.
 
 P5-05: Already issued signed links can remain usable until they expire, even after refund. Existing server limits signature lifetime to 600 seconds and denies new downloads on revoked/failed access, but this does not instantly invalidate a previously signed URL. Refund disclosures and support procedures must account for it.
 
