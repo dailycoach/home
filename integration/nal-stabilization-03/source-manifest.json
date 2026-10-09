@@ -1,0 +1,897 @@
+{
+  "schemaVersion": 1,
+  "mode": "read-only-integration-candidate",
+  "reference": {
+    "mainCommit": "1ccaa503aa7823ab1711ed70f1880bc83084b671",
+    "stabilizedP2Commit": "bd4709efeb0796c4881e3d08d00e4b5ace20bedb",
+    "readSourceCommit": "277025e4f88d5befa863d6d8c98fcec35fdcdf30",
+    "hostOldCommit": "0dd95e697e2a246c4fa1953b8bbc7f7d7a75ffbe",
+    "releaseMode": "off"
+  },
+  "customerReleaseApproved": false,
+  "sourceReadFiles": [
+    {
+      "path": "nal/assets/css/nal-account-home.css",
+      "sha": "1778e5ccbf77fc9bede1dd2e8b3c1c57f35e3837"
+    },
+    {
+      "path": "nal/assets/css/nal-account.css",
+      "sha": "52c9ea680ead8ccdcd7efc1870e3fbc31fa561f0"
+    },
+    {
+      "path": "nal/assets/css/nal-admin-context.css",
+      "sha": "c77ca8cfe47a0f5dd6ea741da3815553c6ed4a5f"
+    },
+    {
+      "path": "nal/assets/css/nal-operations.css",
+      "sha": "cde34b2723acbba284d08ff00988701d791db372"
+    },
+    {
+      "path": "nal/assets/css/nal-privacy-review.css",
+      "sha": "cba48ed20e6b270cb563a20659a85dcb6e8c0a65"
+    },
+    {
+      "path": "nal/assets/css/nal-privacy.css",
+      "sha": "c4618b676aa0dcfba0f76fa53871e9ea38db9f72"
+    },
+    {
+      "path": "nal/assets/css/nal-read-cohorts.css",
+      "sha": "afa8040113ed7e78aa8dc709d95257726c571734"
+    },
+    {
+      "path": "nal/assets/css/nal-read-companion.css",
+      "sha": "c874cdd76d8d22ac948bca70925084ef9ca98e1a"
+    },
+    {
+      "path": "nal/assets/css/nal-read-editorial.css",
+      "sha": "9e7c2e6ec92034aba83f01f009560f7de45178c5"
+    },
+    {
+      "path": "nal/assets/css/nal-read-feedback.css",
+      "sha": "bd784abb9fb602ef51a61761813b4fcd8549c0d8"
+    },
+    {
+      "path": "nal/assets/css/nal-read-payments.css",
+      "sha": "2164b5de8ed505284069782ee95b2df6310571f3"
+    },
+    {
+      "path": "nal/assets/css/nal-read-report.css",
+      "sha": "b92adcfa881f4749a17e721972343817e21f994d"
+    },
+    {
+      "path": "nal/assets/css/nal-read-studio-library.css",
+      "sha": "487c8e033dbd1f6341a1136bdf2e8f5291e3e10a"
+    },
+    {
+      "path": "nal/assets/css/nal-read-workspace.css",
+      "sha": "540dad0b8e1c07becc005300abb98cb0509c0825"
+    },
+    {
+      "path": "nal/assets/css/nal-read.css",
+      "sha": "7415ff4d954bd5dc3918532f3d2f0eb40b102ea5"
+    },
+    {
+      "path": "nal/assets/css/nal-support.css",
+      "sha": "3b4dec518cac6335e69f04842a33cf36e9ff7a57"
+    },
+    {
+      "path": "nal/assets/js/account-home.js",
+      "sha": "540e7222138bd7112462674175f942f24f434422"
+    },
+    {
+      "path": "nal/assets/js/account-layout.js",
+      "sha": "31711e75493d376b2872babc504f263352aa9aab"
+    },
+    {
+      "path": "nal/assets/js/account-overview.js",
+      "sha": "23d4ee9f8ce0e07aaf0f2ca2cbcd368845555440"
+    },
+    {
+      "path": "nal/assets/js/account-session.js",
+      "sha": "ff3779818870ab5ba752b7eefbd3fdae21cf4b2d"
+    },
+    {
+      "path": "nal/assets/js/read-admin-context.js",
+      "sha": "4046e4e7998052f12e16c3074f5a2193723b610f"
+    },
+    {
+      "path": "nal/assets/js/read-checkout.js",
+      "sha": "bb4a456ac12025528ac49af96c1d59b1f37017e5"
+    },
+    {
+      "path": "nal/assets/js/read-cohorts-admin.js",
+      "sha": "78aec89a939c2257999e61047bf7edf34ff81735"
+    },
+    {
+      "path": "nal/assets/js/read-cohorts.js",
+      "sha": "1237cfff62d5cd369f7c551b2cbd9194327e9426"
+    },
+    {
+      "path": "nal/assets/js/read-daily.js",
+      "sha": "6dcbe7b4de48ee9f30c4e326428ead5b7e0b3f33"
+    },
+    {
+      "path": "nal/assets/js/read-editorial-contract.mjs",
+      "sha": "3ccf60009c9851d049f4336aacb6fd2d720a9177"
+    },
+    {
+      "path": "nal/assets/js/read-editorial-loader.js",
+      "sha": "0e0bc1999d9818089c4b5f8e8e9dd5c512239a60"
+    },
+    {
+      "path": "nal/assets/js/read-editorial.js",
+      "sha": "a28e8a586f7d66cb1b211bb5f3d71115a926b857"
+    },
+    {
+      "path": "nal/assets/js/read-join.js",
+      "sha": "79e35885d50770c388f250b1c051ee890ba45c41"
+    },
+    {
+      "path": "nal/assets/js/read-legacy-route.js",
+      "sha": "1b0274a317ad66b700f16730741b52ad7659648f"
+    },
+    {
+      "path": "nal/assets/js/read-offers-admin.js",
+      "sha": "4df1ab70ce32aa6afdd93b316dc6d99244553cf5"
+    },
+    {
+      "path": "nal/assets/js/read-open-context.js",
+      "sha": "7798ef07f5da2a89659fb2e85a323ab36b8df34d"
+    },
+    {
+      "path": "nal/assets/js/read-open-loader.js",
+      "sha": "693ba35f6149d1b861e1f78b21e92dcceee5ae5e"
+    },
+    {
+      "path": "nal/assets/js/read-operations.js",
+      "sha": "e13422110e21c05b12f8c33aae250e8505449d7b"
+    },
+    {
+      "path": "nal/assets/js/read-payment-return.js",
+      "sha": "39846eaeaa49226535f9661bf180511e95483a22"
+    },
+    {
+      "path": "nal/assets/js/read-payments-admin.js",
+      "sha": "2aef827c3c92e90ac0d333a9649c7c6ba6a3f2ce"
+    },
+    {
+      "path": "nal/assets/js/read-privacy-member.js",
+      "sha": "2736ebda7d61c76f0e11d582465e983054e7855c"
+    },
+    {
+      "path": "nal/assets/js/read-privacy-review.js",
+      "sha": "717da7f293d049822166bae7f4a3eb0413476830"
+    },
+    {
+      "path": "nal/assets/js/read-program-sections.js",
+      "sha": "88759d48cfbdc5be1c3f4e9273afe851653f7b00"
+    },
+    {
+      "path": "nal/assets/js/read-report.js",
+      "sha": "23ce110c407e461b817354eae2650a05c067c43a"
+    },
+    {
+      "path": "nal/assets/js/read-routes.js",
+      "sha": "655cf6a1d52ebae8d209f46e4d6af8ff95ff87be"
+    },
+    {
+      "path": "nal/assets/js/read-session.js",
+      "sha": "8936c62f7a7d4f4620700901d17653824cafe29a"
+    },
+    {
+      "path": "nal/assets/js/read-shell.js",
+      "sha": "5a14ad5d43433fe25b48dffa42a3470b9fc30152"
+    },
+    {
+      "path": "nal/assets/js/read-start.js",
+      "sha": "cca901399c6d11a76016d9ae53bb41943f90198e"
+    },
+    {
+      "path": "nal/assets/js/read-studio-library.js",
+      "sha": "06b896ff1800392799ddfdf27078b59455152ea6"
+    },
+    {
+      "path": "nal/assets/js/read-studio.js",
+      "sha": "de79513064091b99dc9c20b25151dd346a163887"
+    },
+    {
+      "path": "nal/assets/js/read-support.js",
+      "sha": "d31d80e51267e5b8c40c044b0fbc75b31d72a644"
+    },
+    {
+      "path": "nal/assets/js/read-workspace.js",
+      "sha": "c7dff6798f79d163a767a8e9473f0cbdf6270c75"
+    },
+    {
+      "path": "nal/assets/js/read.js",
+      "sha": "78e52a2678f02f3c5728cb3848655140b46b83d3"
+    },
+    {
+      "path": "nal/auth/callback/index.html",
+      "sha": "3c210ecc6214218083edecd55994c26e77f199ea"
+    },
+    {
+      "path": "nal/data/read-backend.staging.json",
+      "sha": "665b2cff0538256abf7cd375e2ad9dc10989057c"
+    },
+    {
+      "path": "nal/data/read-privacy-review.release.json",
+      "sha": "0ab753757238f377a2f8f8a22cf89f0fd5d1970c"
+    },
+    {
+      "path": "nal/data/read-seasons.json",
+      "sha": "e0fba2abc4b515ec602fdac0d83567d8e8b428f1"
+    },
+    {
+      "path": "nal/help/index.html",
+      "sha": "a95dff097444a3c56dbd55e3f1e37b660caa20e5"
+    },
+    {
+      "path": "nal/my/help/index.html",
+      "sha": "3e6633b8919f98910ce1b58bdcfa0dd5f22f5331"
+    },
+    {
+      "path": "nal/my/index.html",
+      "sha": "1a2dda418c8b5468c3eacf57a08507e47d636ce2"
+    },
+    {
+      "path": "nal/my/local/index.html",
+      "sha": "b5cbde30a3bbcadbfff3a01d6fdf3691c8a6d114"
+    },
+    {
+      "path": "nal/my/payments/index.html",
+      "sha": "36eb163266aafad7d02557b3d633de39732f603d"
+    },
+    {
+      "path": "nal/my/privacy/index.html",
+      "sha": "f0aae5e4b332ff6c831d92b73d3e71c9dc043e30"
+    },
+    {
+      "path": "nal/my/waitlist/index.html",
+      "sha": "f4a0de00e04c3c70acdb75e08ffb4518d820c230"
+    },
+    {
+      "path": "nal/read/admin/cohorts/index.html",
+      "sha": "6ee60e4a5d9fe9bc2e6d4ff438b47cb545f386c0"
+    },
+    {
+      "path": "nal/read/admin/home/index.html",
+      "sha": "88d6963386d30d799d456eb3f34f698fb15f947f"
+    },
+    {
+      "path": "nal/read/admin/index.html",
+      "sha": "c29426c4cbf20d14716dd76edeaafcd6d797afc6"
+    },
+    {
+      "path": "nal/read/admin/offers/index.html",
+      "sha": "040054e2ee2c331c3cf25b252eeb5ae29f2a105a"
+    },
+    {
+      "path": "nal/read/admin/payments/index.html",
+      "sha": "4ba9178303c25bfa7dbf34e9d0fccec4473e8b30"
+    },
+    {
+      "path": "nal/read/admin/privacy/index.html",
+      "sha": "6ce2a56a7a186200de441b77a7ee71c5a7acb63f"
+    },
+    {
+      "path": "nal/read/admin/studio/index.html",
+      "sha": "dfc91bc6b03f44e7aa9996d63f78c0934afa3ace"
+    },
+    {
+      "path": "nal/read/admin/support/index.html",
+      "sha": "0a818f612849d1283c39b40d42e11cd667913ac7"
+    },
+    {
+      "path": "nal/read/auth/callback/index.html",
+      "sha": "13216d9b742d8f139f54437efae22fdb78982c9d"
+    },
+    {
+      "path": "nal/read/checkout/fail/index.html",
+      "sha": "418a48a639959aff215a4a406a552b6263b37077"
+    },
+    {
+      "path": "nal/read/checkout/index.html",
+      "sha": "d9ca4bcf8f8d72a0c41d1946a928d19091e83dfb"
+    },
+    {
+      "path": "nal/read/checkout/success/index.html",
+      "sha": "932825a7b1aac4107f2b61eeb024eef96ffa8d7e"
+    },
+    {
+      "path": "nal/read/cohorts/index.html",
+      "sha": "360020eab1321f226c9e63fb30d7c5273ca3e4e4"
+    },
+    {
+      "path": "nal/read/index.html",
+      "sha": "426df72ea85ddc60b976573680752204357b1071"
+    },
+    {
+      "path": "nal/read/join/index.html",
+      "sha": "26128e84402dfa707429ff9bd05d998a2d9f95dc"
+    },
+    {
+      "path": "nal/read/open/index.html",
+      "sha": "ded6b5eed53930dc04bb8918b82b6e998c11f275"
+    },
+    {
+      "path": "nal/read/start/index.html",
+      "sha": "8208eff279ea8f12d680d62dd9810a9f581ac9a9"
+    },
+    {
+      "path": "nal/read/trend-2027/before/index.html",
+      "sha": "7da91942f381aebc4c2b20d8029a687061c435c4"
+    },
+    {
+      "path": "nal/read/trend-2027/day/index.html",
+      "sha": "ade26a8d2ac1da92e05ef52e3b0ce2e988f4c60d"
+    },
+    {
+      "path": "nal/read/trend-2027/index.html",
+      "sha": "9c9fe03effa2a84cf0aa763bd9b4f4912a16a178"
+    },
+    {
+      "path": "nal/read/trend-2027/journey/index.html",
+      "sha": "3c763e0d37d8e3592db4ed3206a0c86967933705"
+    },
+    {
+      "path": "nal/read/trend-2027/live/index.html",
+      "sha": "ed178e38c4909fecb483e830b5d25d861021a30d"
+    },
+    {
+      "path": "nal/read/trend-2027/my/index.html",
+      "sha": "18bc1ac68453255966470d8654528233b06a5cd8"
+    },
+    {
+      "path": "nal/read/trend-2027/report/index.html",
+      "sha": "7619b9136bbb1e18856dc91f9e1a8a65e5e8baf7"
+    },
+    {
+      "path": "nal/read/trend-2027/today/index.html",
+      "sha": "d1f7376775ce9d801b8079c408aad4d7d67455b9"
+    },
+    {
+      "path": "nal/read/trend-2027/try/index.html",
+      "sha": "7e512ec3d914e4886acb92d53c9fdf8f2f41db98"
+    },
+    {
+      "path": "nal/read/trend-2027/welcome/index.html",
+      "sha": "168ccb4831d444e53ffb10bcfc1ca9336d26ee4a"
+    },
+    {
+      "path": "nal/shop/read/index.html",
+      "sha": "330ee7751e7142a971f5d9af46a024c90cc603d1"
+    }
+  ],
+  "preservedBaseFiles": [
+    {
+      "path": "nal/assets/css/launch.css",
+      "sha": "f586f794d08f39412c0c967f193e1407f10a8f67"
+    },
+    {
+      "path": "nal/assets/css/nal-checkout.css",
+      "sha": "e9e1c35dba48d1e5d14d199c9d6f309301267ac3"
+    },
+    {
+      "path": "nal/assets/css/nal-small-book-preview.css",
+      "sha": "893ce11784386074fc0bce51a1ca00b8a07f4be0"
+    },
+    {
+      "path": "nal/assets/css/nal.css",
+      "sha": "66c50069bb8352df7bf16c0334684efc94eacc66"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-small-book-01-mind-reset-retail-v7-20261007.pdf",
+      "sha": "dbb05f9d24a50b327a8b0eda349e9504a50ddee2"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-small-book-01-mind-reset-v7.pdf",
+      "sha": "dbb05f9d24a50b327a8b0eda349e9504a50ddee2"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-small-book-02-relationship-retail-v7-20261007.pdf",
+      "sha": "ee03fdc82f0a8893d6a0ef12b9414bb9d0664436"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-small-book-02-relationship-v7.pdf",
+      "sha": "ee03fdc82f0a8893d6a0ef12b9414bb9d0664436"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-small-book-03-next-step-retail-v7-20261007.pdf",
+      "sha": "406b1bac30cb0a4b2120e070dc7c9ca90caa51e0"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-small-book-03-next-step-v7.pdf",
+      "sha": "406b1bac30cb0a4b2120e070dc7c9ca90caa51e0"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-starter-01-mind-reset.pdf",
+      "sha": "01289d20c54b6b4fe6378cdc194b0bcce9f5ef7d"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-starter-02-relationship-dialogue.pdf",
+      "sha": "689af2211114247785799d682321de644f0402e0"
+    },
+    {
+      "path": "nal/assets/downloads/free/nal-starter-03-next-step.pdf",
+      "sha": "a0defe998ff63c4cf20486e9822e5ca5493a759c"
+    },
+    {
+      "path": "nal/assets/fonts/FONT_LICENSES.md",
+      "sha": "5fe037a85a9870dcdc06561c4d659c5b68273794"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-art-current-mind-cover.webp",
+      "sha": "1ab4caf68e388a6846425ec8bb04b212401b840f"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-art-current-mind-mobile.webp",
+      "sha": "20fccad7fdffcdcf9047586890cefee543242033"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-direction-collage-cover.webp",
+      "sha": "d4f4a80bf6b3e52043159edd71bea8f9f0d6a4f2"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-direction-collage-mobile.webp",
+      "sha": "ebf03036580ec9cd8dac1525b7580f7d5d64fc53"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-cover.webp",
+      "sha": "8a344613f1361a153efb66c228829e9bd989b097"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-mobile.webp",
+      "sha": "9a519ba7409ee32c94e051f5456bee2e6ff44805"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-cover.webp",
+      "sha": "5ac26254c12d521f6645a10b0a7df1d8d3db94a8"
+    },
+    {
+      "path": "nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-mobile.webp",
+      "sha": "1c765101f5441a8ecb279fa8c20164a272f88d56"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-cover.webp",
+      "sha": "67d67f34464f6f869732d6d6422bd74b4a985303"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-mobile.webp",
+      "sha": "c0bb25d65ef19bbcdf24fc1a3d42b382e4680853"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-cover.webp",
+      "sha": "2b22f3d9d25e44a838257ae8052f4cc828b21463"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-mobile.webp",
+      "sha": "f4048d1f4f615afa507ff0f4dc2852e6b849a3bc"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-cover.webp",
+      "sha": "5a9cc1788490491dc02b5d3776c749f04d7dc2d2"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-mobile.webp",
+      "sha": "f89c94988c1bfaa0af0ce96b91654a00a3fb9897"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-cover.webp",
+      "sha": "d552ae4b7885dcb0f7681dd81ac3308f8dbfa3b1"
+    },
+    {
+      "path": "nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-mobile.webp",
+      "sha": "1831b92c5e24574ec6c9fd96ba841ef0a4297ddb"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/awareness/dailycoaching-awareness-100-cover.webp",
+      "sha": "a9e6b223e65f9c7552497aa5102eee65308d38a2"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/awareness/dailycoaching-awareness-1000-cover.webp",
+      "sha": "a7a1a775edabaa413dafd072c74e98afd7e02387"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/awareness/dailycoaching-awareness-10000-cover.webp",
+      "sha": "10a5c40f894036f34573539c9ee6c2735dbacd33"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/free/nal-starter-01-mind-reset-cover.webp",
+      "sha": "72a8d5bb5520bc3d20ae8e2bd1acfddb44df40b6"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/free/nal-starter-02-relationship-dialogue-cover.webp",
+      "sha": "a8e690a210e7fd00cfd241be5264728a91a7dcc7"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/free/nal-starter-03-next-step-cover.webp",
+      "sha": "2f0c859b959624c1bb02e22a1c72c490de615640"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-coaching-question-cards-cover.webp",
+      "sha": "b1f236d36e967e86b1f8a574f4506481e1125cfb"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-coaching-question-cards-detail.webp",
+      "sha": "43091daf730891543d85c4af4be26e07bdbea291"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-coaching-question-cards-use.webp",
+      "sha": "cb594ec53405ce72163ee65e1b6a3e728ad6eb3d"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-emotion-cards-cover.webp",
+      "sha": "ea84982e70d5d4e09541131733a466edcdbba853"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-emotion-cards-detail.webp",
+      "sha": "c7a30d626e5e4c360a51d6405df87222999bc97b"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-emotion-cards-use.webp",
+      "sha": "63bdda1a4dbe27eff1089ffc7d979ded8d7737b0"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-relationship-question-cards-cover.webp",
+      "sha": "c5922daf56a194eaee3cc6a1b3500ec25acb041e"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-relationship-question-cards-detail.webp",
+      "sha": "3a3d05d9bf6eb224453407c60248af6ad3a9eca0"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-relationship-question-cards-use.webp",
+      "sha": "cc8579902593d5f1d1c7750f0f87da8d39546f1a"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-strength-cards-cover.webp",
+      "sha": "0d2b56ad6aa89e04bbc78d5709600593df86cf73"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-strength-cards-detail.webp",
+      "sha": "518b7736812afae9b28531a9d36918cbfb1f62bd"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/nal-shop-strength-cards-use.webp",
+      "sha": "a87ce78eac1b13ab83a20d15b11f3060fce9f009"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-01-cover-retail-v7.png",
+      "sha": "689f5929a772387b71485a3c7ce8ebbbfff74b7b"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-01-cover.svg",
+      "sha": "40a3c6528c6417cf1786922af4a100a46e9b428c"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-02-cover-retail-v7.png",
+      "sha": "4d4fa731728f77c48943b788477915a64b28261a"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-02-cover.svg",
+      "sha": "0900a4364f70b9d342780e5c77735e5f42fa709c"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-03-cover-retail-v7.png",
+      "sha": "e10cd64804d7c589d3af7dd82ca310b1ba0d36df"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-03-cover.svg",
+      "sha": "6b84d3b94f38933aea1561acc50fdb9e5c3bb78d"
+    },
+    {
+      "path": "nal/assets/images/catalog/shop/retail/nal-small-book-set-cover.svg",
+      "sha": "3edd89dabc248ecb7bd32d0ab57020ebf929fdd4"
+    },
+    {
+      "path": "nal/assets/images/nal-og.png",
+      "sha": "0192db483445ce05b94451f2fb48dfcffc2d6fbe"
+    },
+    {
+      "path": "nal/assets/images/nal-og.svg",
+      "sha": "44bf9ea2613733c1957847be82e15eee33375117"
+    },
+    {
+      "path": "nal/assets/images/nal-symbol.svg",
+      "sha": "3b31c5355ea43f5e328ae4d440c08ad5e788c723"
+    },
+    {
+      "path": "nal/assets/images/SHOOTING_GUIDE.md",
+      "sha": "a0d1420c1086b3f61f9185fbcd473196b2448dcf"
+    },
+    {
+      "path": "nal/assets/js/app.js",
+      "sha": "6347aa57f64fd7b08c2e542a3301e57cf8975064"
+    },
+    {
+      "path": "nal/assets/js/backend.js",
+      "sha": "9e9c3f720dc2d91d7fa48dd3d4e0f8b86dbb525e"
+    },
+    {
+      "path": "nal/assets/js/checkout.js",
+      "sha": "9ee7ec55c42fa7b08e84350fc895dba45c43db63"
+    },
+    {
+      "path": "nal/assets/js/launch.js",
+      "sha": "8ac9bcf8d2bae9def17b5b458b6759e13eb27e37"
+    },
+    {
+      "path": "nal/assets/js/product-routes.js",
+      "sha": "b0f5e857e965ef1420647854c0a3a43a6c7ae0bd"
+    },
+    {
+      "path": "nal/assets/js/store.js",
+      "sha": "0a86a8edcc1f40a4dabc448aea4d4c5507809a20"
+    },
+    {
+      "path": "nal/assets/js/theme.js",
+      "sha": "a31e795309eeec962c78aa86b1bade1ea25c82e5"
+    },
+    {
+      "path": "nal/assets/previews/awareness/dailycoaching-awareness-100-preview.pdf",
+      "sha": "0f41c87977ff54329271f8f09ece8e7b3a95dc22"
+    },
+    {
+      "path": "nal/assets/previews/awareness/dailycoaching-awareness-1000-preview.pdf",
+      "sha": "35f4d13809b61498c669d07edd7f2e2665b8f750"
+    },
+    {
+      "path": "nal/assets/previews/awareness/dailycoaching-awareness-10000-preview.pdf",
+      "sha": "97a4ca99ee10ab03323cb393d6bae46e68b806ae"
+    },
+    {
+      "path": "nal/checkout/fail/index.html",
+      "sha": "fb47f40154e97476f248104fe788953d03900dda"
+    },
+    {
+      "path": "nal/checkout/index.html",
+      "sha": "df4b08d87fdeeef6722b023d5f8582cc874ff4b8"
+    },
+    {
+      "path": "nal/checkout/success/index.html",
+      "sha": "815f0d1d5876e7fd39dc542caa89952fd9555049"
+    },
+    {
+      "path": "nal/class/art-current-mind/index.html",
+      "sha": "106aacc17f9b620ccaba5d44f4a401d7f5b481bd"
+    },
+    {
+      "path": "nal/class/art-psychology-coaching-6week/index.html",
+      "sha": "6718a003c3ee5c3a3aed8bc0903dfab6c895ac1f"
+    },
+    {
+      "path": "nal/class/direction-collage/index.html",
+      "sha": "21b8cc5fe386893141cc5eb74f98ae7bf4f0e171"
+    },
+    {
+      "path": "nal/class/index.html",
+      "sha": "37b657a0e45c0d0c119b4defad6b224644062243"
+    },
+    {
+      "path": "nal/class/meet-myself-with-emotion-cards/index.html",
+      "sha": "4a615401c318d886a8e5ffbf13c7f2f6dd08e69b"
+    },
+    {
+      "path": "nal/class/relationship-dialogue-style/index.html",
+      "sha": "1771adb174db0e0b7679df589c475a674f284ee7"
+    },
+    {
+      "path": "nal/data/backend.json",
+      "sha": "75a4129c5571f249b128d46fb6aecd8bafa21d81"
+    },
+    {
+      "path": "nal/data/content.json",
+      "sha": "6332195bb2643d45eca4d3166131c2b398eb125f"
+    },
+    {
+      "path": "nal/data/hosts.json",
+      "sha": "c8d130a28fe458d4d68ce029b395d81deb48aff3"
+    },
+    {
+      "path": "nal/data/launches.json",
+      "sha": "b8daacabec1686a39e9050838bfdb94606479e54"
+    },
+    {
+      "path": "nal/data/nal-free-small-book-v7-01.json",
+      "sha": "923f2c4e3d52111f1b6c15fb458f642aa53f5aca"
+    },
+    {
+      "path": "nal/data/nal-free-small-book-v7-02.json",
+      "sha": "470f256cc9f9305bfabdf871fdc48a3db3e29a03"
+    },
+    {
+      "path": "nal/data/nal-free-small-book-v7-03.json",
+      "sha": "9b1f34ff549806e64a7e400158c7c0bba5b66baf"
+    },
+    {
+      "path": "nal/data/pdf-ebook-product-template.json",
+      "sha": "3907ad63aede99bb92dceece4c0e72ec3aeede9e"
+    },
+    {
+      "path": "nal/data/product.schema.json",
+      "sha": "e0f08d07925436983d43bbb25eb163c173ac9e04"
+    },
+    {
+      "path": "nal/data/products.json",
+      "sha": "1b8e07ce71d2d1ccd191791ed18ee5ff0477e011"
+    },
+    {
+      "path": "nal/data/programs.json",
+      "sha": "fdb6196f9b61cbffe32fe31791656b7fea1107c4"
+    },
+    {
+      "path": "nal/data/routes.json",
+      "sha": "cea5ba259d190dbc43433263b0c4809a9016c6f3"
+    },
+    {
+      "path": "nal/data/site.json",
+      "sha": "967201f3533be4918e5572937d9dba8ea8cb5924"
+    },
+    {
+      "path": "nal/faq/index.html",
+      "sha": "6c9dacd0eff7b2789865283b84ccd7202ceade9a"
+    },
+    {
+      "path": "nal/gather/coaches-dialogue-practice/index.html",
+      "sha": "4caa706730514b9d54d2e0dfcb41e5da571e0c19"
+    },
+    {
+      "path": "nal/gather/emotion-card-conversation/index.html",
+      "sha": "6023aa6f09ae09ff997992f80c5e8f7f156b268c"
+    },
+    {
+      "path": "nal/gather/flowing-river-coaches/index.html",
+      "sha": "0f7416c8e451d4125a8d2967e0285d92d7ba38c4"
+    },
+    {
+      "path": "nal/gather/index.html",
+      "sha": "327d7d6c425b07ce9e616d8551fd45fc6a7ae9ba"
+    },
+    {
+      "path": "nal/gather/self-understanding-writing/index.html",
+      "sha": "8e3d18ae8b9222f59b5edb009a4b0d57bc7a47dc"
+    },
+    {
+      "path": "nal/host/index.html",
+      "sha": "d23ab867aa07be2e5701a4badcb858f2284ec6ca"
+    },
+    {
+      "path": "nal/host/kim-cheol-woong/index.html",
+      "sha": "9d128504cd62dc5d4856ddf6da471e33735d46eb"
+    },
+    {
+      "path": "nal/host/park-jia/index.html",
+      "sha": "6d8d810d5dd77294ed441714e8297e4797bc2028"
+    },
+    {
+      "path": "nal/index.html",
+      "sha": "2188ec6cf30a0ed87423acf05268cc4c4f6d70a1"
+    },
+    {
+      "path": "nal/note/art-psychology-coaching-guide/index.html",
+      "sha": "88c0b4a4e7d86aff27e7284c78c40bdd3d235b9a"
+    },
+    {
+      "path": "nal/note/index.html",
+      "sha": "582a69da45dfebc2ce861bc5fbb1337f0dd61ab9"
+    },
+    {
+      "path": "nal/notice/index.html",
+      "sha": "89244145c1f5c50c019f039c601dc7093cbe5831"
+    },
+    {
+      "path": "nal/partnership/index.html",
+      "sha": "370a50430759d3c83b177e23be9956a38b417ef5"
+    },
+    {
+      "path": "nal/policy/cancellation/index.html",
+      "sha": "1d18371f27a75f173276eefd752e66d3ac57da91"
+    },
+    {
+      "path": "nal/policy/privacy/index.html",
+      "sha": "7d1c78798a1dd79c09039b7c4cb07879cba32bd6"
+    },
+    {
+      "path": "nal/policy/shipping/index.html",
+      "sha": "3e969c3842d3720889f0887456bfa0ea4a5f96e0"
+    },
+    {
+      "path": "nal/policy/terms/index.html",
+      "sha": "f7000fa906f066ab8ee2511c5f765d28f549f502"
+    },
+    {
+      "path": "nal/search/index.html",
+      "sha": "716b1e3af58d98ba1f5bb54810781dcc47d1868c"
+    },
+    {
+      "path": "nal/shop/coaching-question-cards/index.html",
+      "sha": "340ad032fcecac11484d5b728ea2c04a6d97c309"
+    },
+    {
+      "path": "nal/shop/dailycoaching-awareness-100/index.html",
+      "sha": "0756d4ab9d4cb537e7369345cc28494d1b7e9f15"
+    },
+    {
+      "path": "nal/shop/dailycoaching-awareness-1000/index.html",
+      "sha": "00ce3dead9eabcf735913c6c2145c8a9b1e52188"
+    },
+    {
+      "path": "nal/shop/dailycoaching-awareness-10000/index.html",
+      "sha": "95ea1d4cc86b6742f7bae33fdfaff64995d0afb7"
+    },
+    {
+      "path": "nal/shop/emotion-cards/index.html",
+      "sha": "0da7a82cb2c3ad7b139adf56018abd478d25fbd2"
+    },
+    {
+      "path": "nal/shop/index.html",
+      "sha": "68b524d639898b526b3178568a06195a570311c2"
+    },
+    {
+      "path": "nal/shop/item/index.html",
+      "sha": "8c6388d416d7e613f5553086e48d7038b8b88a9b"
+    },
+    {
+      "path": "nal/shop/nal-small-book-01-mind-reset/index.html",
+      "sha": "5e96bd2438d3585972f7bb22e66150a70cbc3cb1"
+    },
+    {
+      "path": "nal/shop/nal-small-book-01-mind-reset/preview/index.html",
+      "sha": "1f85f9a1fc265a837a8482b99242a61174ae9515"
+    },
+    {
+      "path": "nal/shop/nal-small-book-02-relationship/index.html",
+      "sha": "eafc719c3c51a4d3e86d6a380c499b9b8ca156b6"
+    },
+    {
+      "path": "nal/shop/nal-small-book-02-relationship/preview/index.html",
+      "sha": "7f7ebae9b40d0cc62f9950c151be893d6481a7dd"
+    },
+    {
+      "path": "nal/shop/nal-small-book-03-next-step/index.html",
+      "sha": "9614263f57f937ed9f21e5de812afd431fa29df8"
+    },
+    {
+      "path": "nal/shop/nal-small-book-03-next-step/preview/index.html",
+      "sha": "4a2ee16160b4e5a3b1668ac0a1e6a72aabe73a94"
+    },
+    {
+      "path": "nal/shop/nal-small-book-set-01-03/index.html",
+      "sha": "d3ef3f765cb3c4546223d8c030a5db89589e2da3"
+    },
+    {
+      "path": "nal/shop/nal-small-book-set-01-03/preview/index.html",
+      "sha": "d28a8f2c545d4f8bc9c157c5cfb1960a86b4984d"
+    },
+    {
+      "path": "nal/shop/nal-starter-01-mind-reset/index.html",
+      "sha": "1a143209c695340d5cb573bfdb345381ee9b3e45"
+    },
+    {
+      "path": "nal/shop/nal-starter-02-relationship-dialogue/index.html",
+      "sha": "859dfcf2523cca7cb49bc087a5faae0d132d78ce"
+    },
+    {
+      "path": "nal/shop/nal-starter-03-next-step/index.html",
+      "sha": "f7e222e08edea62500d7a81d3207695ca86ab342"
+    },
+    {
+      "path": "nal/shop/relationship-question-cards/index.html",
+      "sha": "a063731a8d8baa016d0257261388ae09374358d2"
+    },
+    {
+      "path": "nal/shop/strength-cards/index.html",
+      "sha": "e7808ec21748c2563d9164a5acbe1478b1adeb04"
+    }
+  ],
+  "onlyBaseFileReplaced": "nal/my/index.html",
+  "requiredPrivacyInterlocks": {
+    "uiEnabled": false,
+    "ownerAuthBindingReviewed": false,
+    "independentServerGateConfigured": false,
+    "approvedPrivacyNotice": false,
+    "backendDeployed": false,
+    "destructiveApiExposed": false
+  }
+}
