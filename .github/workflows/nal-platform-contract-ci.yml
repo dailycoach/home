@@ -15,6 +15,7 @@ on:
       - "scripts/test-nal-privacy-owner-ui.mjs"
       - "scripts/test-nal-privacy-auth-reference.mjs"
       - "integration/nal-stabilization-04/**"
+      - "docs/NAL_STABILIZATION_04.md"
       - "integration/nal-stabilization-03/**"
       - "nal/**"
       - "sitemap.xml"
