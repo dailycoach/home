@@ -15,6 +15,11 @@ on:
       - "scripts/test-nal-privacy-owner-ui.mjs"
       - "scripts/test-nal-privacy-auth-reference.mjs"
       - "scripts/test-nal-owner-review-protocol.mjs"
+      - "scripts/check-nal-payment-release-lock.mjs"
+      - "scripts/test-nal-payment-release-negative.mjs"
+      - "scripts/test-nal-payment-transition.mjs"
+      - "integration/nal-stabilization-05/**"
+      - "docs/NAL_STABILIZATION_05.md"
       - "integration/nal-stabilization-04b/**"
       - "docs/NAL_STABILIZATION_04B.md"
       - "integration/nal-stabilization-04/**"
@@ -64,3 +69,13 @@ jobs:
         run: node scripts/test-nal-privacy-auth-reference.mjs
       - name: Check P4-B synthetic owner identity and RPC binding (NO real privileged calls)
         run: node scripts/test-nal-owner-review-protocol.mjs
+      - name: Inspect P5 paid release OFF gates and postponed refund patch
+        run: node scripts/check-nal-payment-release-lock.mjs
+      - name: Reject payment gating and SQL approval tampering
+        run: node scripts/test-nal-payment-release-negative.mjs
+      - name: Test P5 refund and out-of-order settlement model without payment
+        run: node scripts/test-nal-payment-transition.mjs
+      - name: Regress installed Toss handler contracts offline
+        run: node scripts/test-nal-toss-payments.mjs
+      - name: Regress private download handler contracts offline
+        run: node scripts/test-nal-digital-download.mjs
