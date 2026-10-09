@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "project": "NAL · 날빛",
+  "phase": "P5_AUDIT_AND_SYNTHETIC",
+  "currentOperation": {
+    "productionCommerceEnabled": false,
+    "paidCheckoutEnabled": false,
+    "paidDownloadEnabled": false,
+    "nalReadEnabled": false,
+    "customerPaymentTestsRun": false
+  },
+  "merchantKeysVerified": false,
+  "webhookRegisteredVerified": false,
+  "originalPublicationVersionVerified": false,
+  "approvedPrivacyPolicy": false,
+  "approvedDigitalRefundPolicy": false,
+  "approvedOperatorLegalDetails": false,
+  "realPaymentQAApproved": false,
+  "releaseApproved": false,
+  "unresolvedBlockers": [
+    {
+      "id": "P5-01",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "description": "Current product reconciliation SQL allows DONE to follow a refunded/revoked order and can clear revoked_at."
+    },
+    {
+      "id": "P5-02",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "description": "Three active AWARENESS private PDFs are v4.2; v7 publishing candidate is not merged to production."
+    },
+    {
+      "id": "P5-03",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "description": "Toss merchant keys, webhook registration, approved policies and full real checkout/refund are not verified."
+    },
+    {
+      "id": "P5-04",
+      "status": "OPEN",
+      "severity": "MEDIUM",
+      "description": "PAYMENT_STATUS_CHANGED has no documented webhook-signature header (Toss signature header is for payout/seller events). Preserve provider API re-fetch, review rate limits, duplicate signals and stale settlement."
+    },
+    {
+      "id": "P5-05",
+      "status": "OPEN",
+      "severity": "MEDIUM",
+      "description": "Signed URLs remain usable up to their expiry after refund; policy and support handling not yet approved."
+    },
+    {
+      "id": "P5-06",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "description": "The paid entitlement reconciler re-checks live catalog price, not a frozen edition/price snapshot; price changes after authorization need a reviewed recovery path."
+    }
+  ],
+  "permittedLocalWork": [
+    "read-only Supabase SQL and metadata audit",
+    "isolated synthetic handler tests",
+    "review-only future SQL patch proposal",
+    "CI release OFF guards"
+  ],
+  "forbiddenActions": [
+    "merge to main",
+    "configure or reveal merchant keys",
+    "enable checkout or delivery",
+    "register live webhook",
+    "approve invoices or refunds",
+    "create paid orders",
+    "create/revoke entitlements",
+    "modify production DB or Storage"
+  ]
+}
