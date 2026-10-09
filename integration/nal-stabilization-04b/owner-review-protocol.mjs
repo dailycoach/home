@@ -31,7 +31,8 @@ function exactKeys(obj,keys) {
     && keys.every(k => Object.hasOwn(obj,k));
 }
 function allowedRelease(x) {
-  return !!x && x.enabled === true && x.ownerAuthReviewed === true
+  // Reject unreviewed or misspelled server flags instead of treating them as harmless.
+  return exactKeys(x,Object.keys(DEFAULT_RELEASE)) && x.enabled === true && x.ownerAuthReviewed === true
     && x.privacyNoticeApproved === true && x.backendApproved === true
     && x.destructiveApiExposed === false;
 }
