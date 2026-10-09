@@ -49,6 +49,8 @@ Supabase platform documentation: `verify_jwt` checks do not by themselves prove 
 - `scripts/check-nal-privacy-release-lock.mjs`: checks owner gate OFF, action allowlists, reviewed UI path, staging backend disconnected, no privileged Edge handler, member privacy request disabled in browser, account/paid OFF.
 - `scripts/test-nal-privacy-owner-ui.mjs`: synthetic DOM/VM checks: disabled/malformed/rejected gate must **never call owner RPC**; non-owner cannot queue; mock owner only gets queue. **No real credentials/network.**
 - `scripts/test-nal-privacy-lock-negative.mjs`: 11 source tampering scenarios must fail closed and then restore the pristine source.
+- `integration/nal-stabilization-04/reference/`: **inert audit-only source snapshots** of the exact deployed `nal-account` v2 shared Auth helper and account handler, pinned by Git blob SHA. These files are **not under `supabase/functions/`**, and are not deployed or invoked by the live app.
+- `scripts/test-nal-privacy-auth-reference.mjs`: synthetic Auth server simulation with NO real tokens, NO network and NO database operations. Checks invalid/banned/anonymous/mismatched user, forged role metadata, owner-RPC allowlist rejection, user-ID injection, session invalidation, default-disabled privacy intake and denied HTTP origins. Does not claim end-to-end Auth or server deployment approval.
 - Existing P1/P2/P3 catalog/integration CI runs unchanged, with P4 checks appended.
 
 ### Release decision
