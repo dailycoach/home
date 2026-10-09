@@ -179,4 +179,13 @@ assert.equal(staticFlags.backendDeployed,false);
 assert.equal(staticFlags.uiEnabled,false);
 cases++;
 
+const releaseChecklist=JSON.parse(await readFile('integration/nal-stabilization-04b/release-review.json','utf8'));
+assert.deepEqual(releaseChecklist.ownerReviewContractDefaults,DEFAULT_RELEASE);
+assert.equal(releaseChecklist.productionEnabled,false);
+assert.equal(releaseChecklist.canDeploy,false);
+assert.equal(releaseChecklist.stage,'P4-B1_DESIGN_SYNTHETIC');
+assert.deepEqual(releaseChecklist.ownerRpc.allowed,['queue','preview','start-review']);
+assert.deepEqual(releaseChecklist.ownerRpc.forbidden,['approve-journal','execute-journal']);
+cases++;
+
 console.log(`NAL P4-B owner identity-to-RPC protocol simulation PASS: ${cases} cases, no network, no auth tokens, no privilege grants or DB writes`);
