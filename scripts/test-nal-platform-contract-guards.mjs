@@ -53,7 +53,7 @@ const tests = [
       assert(source.includes('noindex,follow'));
       return source.replace('noindex,follow', 'index,follow');
     },
-    message: 'unpublished product nal-starter-01-mind-reset must be noindex'
+    message: 'nal/shop/nal-starter-01-mind-reset/index.html redirect must be noindex'
   },
   {
     name: 'reject noindex redirect URL in sitemap',
