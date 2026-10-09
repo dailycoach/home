@@ -12,6 +12,7 @@ const checkout=await readFile('supabase/functions/nal-toss-checkout/handler.mjs'
 const webhook=await readFile('supabase/functions/nal-toss-webhook/handler.mjs','utf8');
 const download=await readFile('supabase/functions/nal-digital-download/handler.mjs','utf8');
 const paymentsRuntime=await readFile('integration/nal-stabilization-04/reference/nal-read-auth.mjs','utf8');
+const guardedSql=await readFile('integration/nal-stabilization-05/PROPOSAL_ONLY_reconcile_terminal_guard.sql','utf8');
 const failures=[];
 const check=(value,reason)=>{if(!value)failures.push(reason);};
 
@@ -30,6 +31,16 @@ for(const code of ['P5-01','P5-02','P5-03','P5-04','P5-05']){
 for(const key of ['storePurchase','checkout','secureDownload','account','orderLibrary']){
   check(site.features?.[key]===false,'live storefront gate '+key+' must remain OFF');
 }
+check(guardedSql.includes("current_setting('nal.p5_change_approved',true)") &&
+      guardedSql.includes("P5 paid settlement patch not approved for execution") &&
+      guardedSql.includes("Production payment function changed since P5 audit") &&
+      guardedSql.includes("Terminal or revoked order requires settlement review") &&
+      guardedSql.includes("o.status in ('refunded','refund_requested','cancelled')") &&
+      guardedSql.includes("e.revoked_at is not null"),
+      'P5 deferred SQL patch missing approval/terminal replay guard');
+check(!guardedSql.includes("SET LOCAL nal.p5_change_approved='approved'"),
+      'P5 SQL proposal must never auto-grant review approval');
+
 const free=new Map([
 ['nal-small-book-01-mind-reset',37],['nal-small-book-02-relationship',39],['nal-small-book-03-next-step',37]
 ]);
