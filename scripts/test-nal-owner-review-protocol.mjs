@@ -49,7 +49,7 @@ async function allow(data,dependencies,action,owner=UID) {
 async function deny(data,dependencies,code) {
   const response=await prepareOwnerReviewBinding(data,dependencies);
   assert.equal(response.ok,false,JSON.stringify(response));
-  assert.equal(response.code,code,\`Expected \${code}, got \${JSON.stringify(response)}\`);
+  assert.equal(response.code,code,`Expected ${code}, got ${JSON.stringify(response)}`);
   assert(!('rpcArgs' in response),'No denied request may prepare privileged RPC args');
   cases++;
 }
@@ -179,4 +179,4 @@ assert.equal(staticFlags.backendDeployed,false);
 assert.equal(staticFlags.uiEnabled,false);
 cases++;
 
-console.log(\`NAL P4-B owner identity-to-RPC protocol simulation PASS: \${cases} cases, no network, no auth tokens, no privilege grants or DB writes\`);
+console.log(`NAL P4-B owner identity-to-RPC protocol simulation PASS: ${cases} cases, no network, no auth tokens, no privilege grants or DB writes`);
