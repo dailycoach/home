@@ -5,6 +5,9 @@ on:
     paths:
       - "scripts/check-nal-platform.mjs"
       - "scripts/test-nal-platform-contract-guards.mjs"
+      - "scripts/nal-catalog-contract.mjs"
+      - "scripts/test-nal-catalog-contract.mjs"
+      - "scripts/check-nal-catalog-consistency.mjs"
       - "nal/**"
       - "sitemap.xml"
       - ".github/workflows/nal-platform-contract-ci.yml"
@@ -31,3 +34,7 @@ jobs:
         run: node scripts/check-nal-theme.mjs
       - name: Verify failure guardrails with temporary local mutations
         run: node scripts/test-nal-platform-contract-guards.mjs
+      - name: Verify public catalog drift detectors offline
+        run: node scripts/test-nal-catalog-contract.mjs
+      - name: Compare live public Supabase RPC with repository catalog
+        run: node scripts/check-nal-catalog-consistency.mjs
