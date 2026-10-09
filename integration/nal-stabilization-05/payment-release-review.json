@@ -40,13 +40,19 @@
       "id": "P5-04",
       "status": "OPEN",
       "severity": "MEDIUM",
-      "description": "Webhook re-fetch verifies provider state, but caller authenticity/rate limits and stale signals need independent security review."
+      "description": "PAYMENT_STATUS_CHANGED has no documented webhook-signature header (Toss signature header is for payout/seller events). Preserve provider API re-fetch, review rate limits, duplicate signals and stale settlement."
     },
     {
       "id": "P5-05",
       "status": "OPEN",
       "severity": "MEDIUM",
       "description": "Signed URLs remain usable up to their expiry after refund; policy and support handling not yet approved."
+    },
+    {
+      "id": "P5-06",
+      "status": "OPEN",
+      "severity": "HIGH",
+      "description": "The paid entitlement reconciler re-checks live catalog price, not a frozen edition/price snapshot; price changes after authorization need a reviewed recovery path."
     }
   ],
   "permittedLocalWork": [
