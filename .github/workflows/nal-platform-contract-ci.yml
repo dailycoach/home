@@ -10,6 +10,10 @@ on:
       - "scripts/check-nal-catalog-consistency.mjs"
       - "scripts/check-nal-read-integration-snapshot.mjs"
       - "scripts/test-nal-read-integration-negative.mjs"
+      - "scripts/check-nal-privacy-release-lock.mjs"
+      - "scripts/test-nal-privacy-lock-negative.mjs"
+      - "scripts/test-nal-privacy-owner-ui.mjs"
+      - "integration/nal-stabilization-04/**"
       - "integration/nal-stabilization-03/**"
       - "nal/**"
       - "sitemap.xml"
@@ -45,3 +49,9 @@ jobs:
         run: node scripts/check-nal-read-integration-snapshot.mjs
       - name: Verify READ release and file-integrity guards fail closed
         run: node scripts/test-nal-read-integration-negative.mjs
+      - name: Inspect P4 privacy release lock and absent owner server handler
+        run: node scripts/check-nal-privacy-release-lock.mjs
+      - name: Exercise P4 privacy owner browser gate with synthetic session only
+        run: node scripts/test-nal-privacy-owner-ui.mjs
+      - name: Verify P4 privacy lock rejects accidental feature and route activation
+        run: node scripts/test-nal-privacy-lock-negative.mjs
