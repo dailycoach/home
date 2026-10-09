@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "recordType": "NAL_OWNER_AUTH_RELEASE_REVIEW",
+  "asOf": "2026-10-10",
+  "productionEnabled": false,
+  "canDeploy": false,
+  "stage": "P4-B1_DESIGN_SYNTHETIC",
+  "ownerRpc": {
+    "name": "nal_read_privacy_admin",
+    "paramOwner": "p_owner_id",
+    "allowed": [
+      "queue",
+      "preview",
+      "start-review"
+    ],
+    "forbidden": [
+      "approve-journal",
+      "execute-journal"
+    ]
+  },
+  "untrustedFields": [
+    "ownerId",
+    "owner_id",
+    "p_owner_id",
+    "p_user_id",
+    "role",
+    "user_metadata",
+    "is_admin"
+  ],
+  "runtimeGates": {
+    "independentServerFeatureFlag": "OFF",
+    "ownerAuthReviewed": false,
+    "privacyNoticeApproved": false,
+    "ownerApiDeployed": false,
+    "readRelease": "off",
+    "journalErasureEnabled": false
+  },
+  "excludedChanges": [
+    "supabase/functions/*",
+    "supabase/migrations/*",
+    "nal/data/*",
+    "nal/assets/*",
+    "production main",
+    "owner membership",
+    "Auth user account",
+    "live customer records",
+    "payment keys",
+    "pricing"
+  ],
+  "status": "B1_CONTRACT_ONLY_B2_BLOCKED",
+  "ownerReviewContractDefaults": {
+    "enabled": false,
+    "ownerAuthReviewed": false,
+    "privacyNoticeApproved": false,
+    "backendApproved": false,
+    "destructiveApiExposed": false
+  }
+}
