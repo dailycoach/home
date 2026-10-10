@@ -13,7 +13,7 @@ export const DEFAULT_COMMERCE_RELEASE = Object.freeze({
   privacyNoticeApproved:false,refundGuardReviewed:false,
   emailSenderReady:false,deliveryReviewed:false,customerReleaseApproved:false
 });
-const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[89ab][0-9a-f]{12}$/i;
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const ID=/^[a-z0-9-]{1,120}$/;
 const CLAIM=/^[A-Za-z0-9_-]{40,128}$/;
 const EMAIL=/^[A-Z0-9._%+-]{1,64}@[A-Z0-9.-]{1,180}\.[A-Z]{2,30}$/i;
