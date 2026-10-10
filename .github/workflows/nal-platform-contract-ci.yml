@@ -20,6 +20,10 @@ on:
       - "scripts/test-nal-payment-transition.mjs"
       - "integration/nal-stabilization-05/**"
       - "docs/NAL_STABILIZATION_05.md"
+      - "integration/nal-commerce-lite/**"
+      - "docs/NAL_COMMERCE_LITE_01.md"
+      - "scripts/check-nal-commerce-lite.mjs"
+      - "scripts/test-nal-commerce-lite-*.mjs"
       - "integration/nal-stabilization-04b/**"
       - "docs/NAL_STABILIZATION_04B.md"
       - "integration/nal-stabilization-04/**"
@@ -79,3 +83,11 @@ jobs:
         run: node scripts/test-nal-toss-payments.mjs
       - name: Regress private download handler contracts offline
         run: node scripts/test-nal-digital-download.mjs
+      - name: Audit guest commerce source gate and unstaged PG infrastructure
+        run: node scripts/check-nal-commerce-lite.mjs
+      - name: Simulate no-account storefront, offline release and receipt fragment
+        run: node scripts/test-nal-commerce-lite-client.mjs
+      - name: Simulate guest payment, provider authority, refund and PDF proof
+        run: node scripts/test-nal-commerce-lite-server.mjs
+      - name: Verify idempotent guest receipt outbox without email provider
+        run: node scripts/test-nal-commerce-lite-outbox.mjs
