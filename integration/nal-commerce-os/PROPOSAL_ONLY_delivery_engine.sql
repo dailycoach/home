@@ -121,7 +121,7 @@ BEGIN
    AND f.status='active' AND f.revoked_at IS NULL)
  OR (p_event_kind='revoke' AND o.status IN('refund_requested','refunded')
    AND o.revoked_at IS NOT NULL AND f.status='revoked' AND f.revoked_at IS NOT NULL) );
- IF NOT valid_state THEN
+ IF valid_state IS DISTINCT FROM TRUE THEN
   UPDATE nal_private.commerce_os_delivery_jobs
    SET state='cancelled',lease_id=NULL,lease_until=NULL,updated_at=now()
    WHERE order_id=o.id AND event_kind=p_event_kind;
@@ -186,7 +186,7 @@ BEGIN
    (p_event_kind='grant' AND o.status='paid' AND o.revoked_at IS NULL AND f.status='active' AND f.revoked_at IS NULL)
    OR (p_event_kind='revoke' AND o.status IN('refund_requested','refunded') AND o.revoked_at IS NOT NULL AND f.status='revoked')
  );
- IF NOT allowed THEN
+ IF allowed IS DISTINCT FROM TRUE THEN
   UPDATE nal_private.commerce_os_delivery_jobs SET
    state='cancelled',lease_id=NULL,lease_until=NULL,updated_at=now()
   WHERE order_id=o.id AND event_kind=p_event_kind;
@@ -305,8 +305,9 @@ BEGIN
  END IF;
  SELECT * INTO f FROM nal_private.commerce_os_fulfillments WHERE order_id=o.id;
  SELECT * INTO s FROM nal_private.commerce_os_slots WHERE id=f.slot_id;
- IF o.status<>'paid' OR o.revoked_at IS NOT NULL OR f.status<>'active'
- OR f.revoked_at IS NOT NULL OR f.kind IS DISTINCT FROM t.fulfillment_kind
+ IF o.status<>'paid' OR o.revoked_at IS NOT NULL OR f.order_id IS NULL
+ OR f.status<>'active' OR f.revoked_at IS NOT NULL
+ OR f.kind IS DISTINCT FROM t.fulfillment_kind OR s.id IS NULL
  OR s.slot_status<>'available' OR s.starts_at<=now()
  THEN RETURN false; END IF;
  UPDATE nal_private.commerce_os_pass_claims
