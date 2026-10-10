@@ -66,7 +66,7 @@ const argsByFunction={
  commerce_os_can_receipt_deliver:[['p_order_id','uuid'],['p_token_digest','text']]
 };
 function parseResult(raw,kind){
- if(kind==='boolean')return raw==='t';
+ if(kind==='boolean')return raw==='t'||raw==='true';
  if(!raw||raw==='null')return null;
  try{return JSON.parse(raw);}catch{throw Error('INVALID_ISOLATED_DB_JSON');}
 }
