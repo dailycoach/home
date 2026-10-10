@@ -46,7 +46,22 @@ async function allFiles(dir, found = []) {
   return found;
 }
 const actual = new Set(await allFiles(path.resolve(root, 'nal')));
-const expected = new Set([...imported, ...protectedFiles]);
+// P6: only these NEW staged commerce-lite paths are outside the original
+// 88 READ / 130 preserved NAL snapshots. No legacy asset may be overwritten.
+const commerceLitePaths = Object.freeze([
+  'nal/assets/css/nal-commerce-lite.css',
+  'nal/assets/js/nal-commerce-lite.js',
+  'nal/data/commerce-lite.release.json',
+  'nal/commerce/index.html',
+  'nal/commerce/complete/index.html',
+  'nal/commerce/claim/index.html'
+]);
+for(const filename of commerceLitePaths) {
+  check(!imported.has(filename) && !protectedFiles.has(filename),
+    'commerce-lite path overlaps original READ or protected NAL source: '+filename);
+  check(actual.has(filename),'staged commerce-lite path missing: '+filename);
+}
+const expected = new Set([...imported, ...protectedFiles, ...commerceLitePaths]);
 check(actual.size === expected.size, `NAL file count drift expected ${expected.size} got ${actual.size}`);
 for (const filename of actual) check(expected.has(filename), `untracked NAL path in integration: ${filename}`);
 
