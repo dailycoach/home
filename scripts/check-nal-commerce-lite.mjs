@@ -71,7 +71,7 @@ check(backend.includes("payment.source==='provider-server-lookup'")
  'payment authority must derive from server/provider not redirect');
 check(backend.includes('store.reserveReceiptProof')&&backend.includes('store.finishReceiptProof'),
  'one-time email receipt reservation absent');
-check(backend.includes('createSignedDownload')&&backend.includes("ledger.state!=='paid'"),
+check(backend.includes('createSignedDownload')&&backend.includes("ledger?.state!=='paid'"),
  'delivery must be blocked unless provider DONE and paid ledger');
 check(guestLedger.includes("NAL GUEST COMMERCE SCHEMA IS NOT APPROVED")
  &&guestLedger.includes("current_setting('nal.commerce_lite_schema_approved', true)"),
