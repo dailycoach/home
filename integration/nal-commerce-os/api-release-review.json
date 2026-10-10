@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-commerce-os-api",
+  "stage": "P7_C_SOURCE_AND_EPHEMERAL_POSTGRES",
+  "customerCheckoutEnabled": false,
+  "serverApiDeployed": false,
+  "merchantProviderChosen": false,
+  "merchantCredentialsConnected": false,
+  "publicEndpointEnabled": false,
+  "privateDbBridgeDeployed": false,
+  "pgPaymentAdapterReviewed": false,
+  "emailDeliveryConnected": false,
+  "buyerReceiptConnected": false,
+  "privateStorageSignerConnected": false,
+  "privacyAndRefundPolicyApproved": false,
+  "liveUserTestingApproved": false,
+  "launchApproved": false,
+  "provider": null,
+  "supportedSourceContracts": {
+    "existingPdfGuestActions": [
+      "create",
+      "status",
+      "download",
+      "redeem"
+    ],
+    "programPreparation": [
+      "reading_circle",
+      "class_session"
+    ],
+    "programCustomerPaymentRoute": "not-connected",
+    "refundProcessing": "server-verified-pg-projection-only",
+    "receiptOutbox": "private-source-only",
+    "checkoutClaim": "server-HMAC-bound-to-request-email-product-and-provider",
+    "signedDownloadSecondsMaximum": 300
+  },
+  "blockers": [
+    "PG is not yet selected, no live server-side provider verification",
+    "No public program checkout route, only server-side program order preparation",
+    "Production Supabase DB has no unified guest or receipt ledger",
+    "Private DB access client and Edge entrypoint require security review",
+    "No actual email sender and no private Storage signer deployed",
+    "P4-B2 owner Auth incomplete; READ remains separate",
+    "Final private PDF edition and buyer data retention/legal notices pending",
+    "Real payment, cancellation and delivery QA reserved for immediately before sale"
+  ],
+  "noProductionEffects": true,
+  "preserved": [
+    "NAL free starters v7",
+    "existing READ",
+    "main branch",
+    "P7-B isolated ledger"
+  ]
+}

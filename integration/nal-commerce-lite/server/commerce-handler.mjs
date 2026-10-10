@@ -124,6 +124,7 @@ function safeOrderShape(order){
 export function createCommerceLiteHandler({
   release=DEFAULT_COMMERCE_RELEASE,allowedOrigins=['https://daily-coach-ing.com'],
   minimumAmountWon=100,provider,store,catalog,delivery,limit,
+  issueClaim=async()=>newProof(),
   storageOrigin='https://invalid.supabase.co'
 }={}) {
   return async function handle(request) {
@@ -141,6 +142,7 @@ export function createCommerceLiteHandler({
     if(!ready(release)||!Number.isSafeInteger(minimumAmountWon)||minimumAmountWon<100
        ||!provider?.code||!Array.isArray(provider.checkoutOrigins)||!provider.checkoutOrigins.length
        ||typeof catalog?.findPaidProduct!=='function'
+       ||typeof issueClaim!=='function'
        ||typeof store?.createPending!=='function'
        ||typeof store?.findByClaim!=='function'
        ||typeof store?.applyProviderResult!=='function'
@@ -177,7 +179,14 @@ export function createCommerceLiteHandler({
         const product=await catalog.findPaidProduct(data.productId);
         if(!productOK(product,minimumAmountWon))
           return json(409,{error:'PRODUCT_NOT_FOR_SALE'},origin,allowed);
-        const claimToken=newProof(),claimDigest=await digest(claimToken);
+        // Production composition uses a server-HMAC proof bound to idempotency
+        // UUID, verified email, product and provider. Default random behavior
+        // retains existing OFF/mock contract and never enables payment itself.
+        const claimToken=await issueClaim({
+          requestId:data.requestId,email,productId:data.productId,providerCode:provider.code
+        });
+        if(!proof(claimToken))throw Error('INVALID_SERVER_CLAIM');
+        const claimDigest=await digest(claimToken);
         const order=await store.createPending({
           requestId:data.requestId,email,claimDigest,providerCode:provider.code,
           product:{
