@@ -145,6 +145,8 @@ export function createCommerceLiteHandler({
        ||typeof store?.findByClaim!=='function'
        ||typeof store?.applyProviderResult!=='function'
        ||typeof store?.queueReceiptOnce!=='function'
+       ||typeof store?.reserveReceiptProof!=='function'
+       ||typeof store?.finishReceiptProof!=='function'
        ||typeof provider?.createCheckout!=='function'
        ||typeof provider?.lookupPayment!=='function'
        ||typeof delivery?.createSignedDownload!=='function'
@@ -161,7 +163,7 @@ export function createCommerceLiteHandler({
       return json(400,{error:'INVALID_BODY'},origin,allowed);
 
     const action=data.action;
-    if(!['create','status','download'].includes(action))
+    if(!['create','status','download','redeem'].includes(action))
       return json(400,{error:'INVALID_ACTION'},origin,allowed);
     if(action==='create') {
       if(!exact(data,['action','productId','email','accepted','requestId'])
@@ -194,6 +196,47 @@ export function createCommerceLiteHandler({
         return json(200,{orderId:order.id,claimToken,checkoutUrl},origin,allowed);
       }catch{
         return json(503,{error:'CHECKOUT_NOT_READY'},origin,allowed);
+      }
+    }
+
+    if(action==='redeem') {
+      if(!exact(data,['action','orderId','receiptToken'])||
+        !UUID.test(data.orderId||'')||!proof(data.receiptToken))
+        return json(400,{error:'INVALID_RECEIPT_PROOF'},origin,allowed);
+      let reserved=false;
+      let tokenDigest;
+      try{
+        if(await limit.allow({action,origin})!==true)
+          return json(429,{error:'TRY_LATER'},origin,allowed);
+        tokenDigest=await digest(data.receiptToken);
+        // The private DB port must atomically check token one-time TTL, payment
+        // revocation and place a short-lived reservation against concurrent use.
+        const order=await store.reserveReceiptProof({orderId:data.orderId,tokenDigest});
+        if(!safeOrderShape(order)||order.id!==data.orderId)
+          return json(403,{error:'RECEIPT_NOT_VALID'},origin,allowed);
+        reserved=true;
+        const payment=await provider.lookupPayment(order);
+        if(!approvedPayment(payment,order))
+          return json(503,{error:'PAYMENT_REVIEW_REQUIRED'},origin,allowed);
+        const ledger=await store.applyProviderResult({orderId:order.id,verifiedPayment:payment});
+        if(ledger?.state!=='paid'||payment.status!=='DONE')
+          return json(403,{error:'DOWNLOAD_NOT_AUTHORIZED'},origin,allowed);
+        const signed=await delivery.createSignedDownload({
+          orderId:order.id,receiptTokenDigest:tokenDigest,maxSeconds:300
+        });
+        if(!validDownload(signed?.downloadUrl,storageOrigin))
+          return json(503,{error:'DELIVERY_NOT_READY'},origin,allowed);
+        if(await store.finishReceiptProof({orderId:order.id,tokenDigest,issued:true})!==true)
+          return json(503,{error:'RECEIPT_FINALIZE_FAILED'},origin,allowed);
+        reserved=false;
+        return json(200,{downloadUrl:signed.downloadUrl},origin,allowed);
+      }catch{
+        return json(503,{error:'RECEIPT_VERIFICATION_UNAVAILABLE'},origin,allowed);
+      }finally{
+        if(reserved){
+          try{await store.finishReceiptProof({orderId:data.orderId,tokenDigest,issued:false});}
+          catch{ /* A pending claim recovers only via DB reservation timeout. */ }
+        }
       }
     }
 
