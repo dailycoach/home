@@ -169,7 +169,11 @@ export function createCommerceLiteHandler({
       if(!exact(data,['action','productId','email','accepted','requestId'])
         ||!ID.test(data.productId||'')||!UUID.test(data.requestId||'')
         ||data.accepted!==true||!EMAIL.test(normalizeEmail(data.email))
-      )return json(400,{error:'INVALID_ORDER_INPUT'},origin,allowed);
+      )return json(400,{error:'INVALID_ORDER_INPUT',diagnostic:{
+         fields:exact(data,['action','productId','email','accepted','requestId']),
+         id:ID.test(data.productId||''),requestId:UUID.test(data.requestId||''),
+         accepted:data.accepted===true,email:EMAIL.test(normalizeEmail(data.email))
+      }},origin,allowed);
       const email=normalizeEmail(data.email);
       try{
         if(await limit.allow({email,action,origin})!==true)
