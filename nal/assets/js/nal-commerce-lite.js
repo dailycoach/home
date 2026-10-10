@@ -217,11 +217,51 @@
       }else setMessage('결제 승인 결과를 확인 중입니다. 확인 전에는 다운로드가 제공되지 않습니다.');
     }catch{setMessage('결제 확인에 실패했습니다. 중복 결제하지 말고 고객지원에 문의해 주세요.','error');}
   }
+  function takeReceiptFragment() {
+    // Never leave a one-time proof in navigation history after opening the email.
+    const hash=scope.location.hash||'';
+    try{scope.history.replaceState(null,'',scope.location.pathname+scope.location.search);}catch{}
+    try {
+      const data=new URLSearchParams(hash.replace(/^#/,''));
+      const orderId=data.get('order'),receiptToken=data.get('token');
+      if(!ORDER_ID.test(orderId||'')||!SAFE_TOKEN.test(receiptToken||''))return null;
+      if([...data.keys()].some(k=>!['order','token'].includes(k)))return null;
+      return {orderId,receiptToken};
+    }catch{return null;}
+  }
+  async function bootClaim(gate,receipt) {
+    if(!canRelease(gate)) {
+      setMessage('구매자 이메일 다운로드는 연결 준비 중입니다. 현재 실결제·자동전달은 제공하지 않습니다.');
+      return;
+    }
+    if(!receipt) {
+      setMessage('다운로드 확인 링크가 유효하지 않거나 이미 사용됐습니다. 고객지원에 문의해 주세요.','error');
+      return;
+    }
+    try{
+      const config=await publicJson('/nal/data/backend.json');
+      const result=await serverJson(config,'redeem',receipt);
+      const url=validSignedUrl(result?.downloadUrl,config);
+      if(!url)throw Error('invalid signed URL');
+      setMessage('구매 내역과 본인 이메일 링크를 확인했습니다. 아래 버튼을 눌러 PDF를 받으세요.');
+      const button=$('#ncl-receipt-download');
+      if(button){
+        button.hidden=false;
+        button.addEventListener('click',()=>{
+          button.disabled=true;
+          scope.location.assign(url);
+        },{once:true});
+      }
+    }catch{
+      setMessage('다운로드를 확인하지 못했습니다. 결제되었다면 다시 결제하지 말고 고객지원에 문의해 주세요.','error');
+    }
+  }
   async function boot(){
     if(!scope.document)return;
     try{
       const gate=await publicJson('/nal/data/commerce-lite.release.json');
-      if(scope.document.body?.dataset.commercePage==='complete')await bootComplete(gate);
+      if(scope.document.body?.dataset.commercePage==='claim')await bootClaim(gate,takeReceiptFragment());
+      else if(scope.document.body?.dataset.commercePage==='complete')await bootComplete(gate);
       else if(scope.document.body?.dataset.commercePage==='checkout'){
         const data=await publicJson('/nal/data/products.json');
         await bootCheckout(gate,data.products);
