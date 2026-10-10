@@ -22,6 +22,13 @@ on:
       - "docs/NAL_STABILIZATION_05.md"
       - "integration/nal-commerce-lite/**"
       - "docs/NAL_COMMERCE_LITE_01.md"
+      - "integration/nal-commerce-os/**"
+      - "docs/NAL_COMMERCE_OS_ADMIN_01.md"
+      - "scripts/check-nal-commerce-os-admin.mjs"
+      - "scripts/test-nal-commerce-os-order.mjs"
+      - "scripts/test-nal-commerce-os-negative.mjs"
+      - "scripts/test-nal-commerce-admin-api.mjs"
+      - "scripts/test-nal-commerce-admin-ui.mjs"
       - "scripts/check-nal-commerce-lite.mjs"
       - "scripts/test-nal-commerce-lite-*.mjs"
       - "integration/nal-stabilization-04b/**"
@@ -91,3 +98,13 @@ jobs:
         run: node scripts/test-nal-commerce-lite-server.mjs
       - name: Verify idempotent guest receipt outbox without email provider
         run: node scripts/test-nal-commerce-lite-outbox.mjs
+      - name: Check Commerce Admin default-OFF source and owner safety
+        run: node scripts/check-nal-commerce-os-admin.mjs
+      - name: Exercise unified PDF reading/class order policy in isolation
+        run: node scripts/test-nal-commerce-os-order.mjs
+      - name: Verify Commerce Admin rejects unauthorized owner and payment commands
+        run: node scripts/test-nal-commerce-admin-api.mjs
+      - name: Verify six-section Admin UI is OFF until server bridge released
+        run: node scripts/test-nal-commerce-admin-ui.mjs
+      - name: Detect unsafe admin, publishing and booking changes
+        run: node scripts/test-nal-commerce-os-negative.mjs
