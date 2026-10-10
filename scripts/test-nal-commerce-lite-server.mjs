@@ -7,7 +7,7 @@ const ORIGIN='https://daily-coach-ing.com';
 const STORAGE='https://abcdefghijklmnopqrst.supabase.co';
 const PAYMENT_ORIGIN='https://pay.example.invalid';
 const ORDER='11111111-1111-4111-8111-111111111111';
-const REQUEST='22222222-2222-4222-8222-222222222222';
+const REQUEST=crypto.randomUUID();
 const RECIPIENT='someone@example.invalid';
 const ID='dailycoaching-awareness-1000';
 const release={enabled:true,providerConfigured:true,ledgerReviewed:true,privacyNoticeApproved:true,
@@ -152,11 +152,6 @@ for (const [name,invalid] of [
  const f=fixture();
  await expect(f.handler,invalid,400,name==='body action mismatch'?'INVALID_ACTION':'INVALID_ORDER_INPUT');
  assert.equal(f.stats.create,0,name);
-}
-{
- const info=await req(create).json();
- const rxEmail=/^[A-Z0-9._%+-]{1,64}@[A-Z0-9.-]{1,180}\\.[A-Z]{2,30}$/i;
- console.log('NAL-COMMERCE-DEBUG',JSON.stringify({payload:info,keys:Object.keys(info),trimmedEmail:info.email?.trim()?.toLowerCase(),email:rxEmail.test(info.email?.trim()?.toLowerCase()),requestId:info.requestId}));
 }
 {
  const f=fixture({catalog:{findPaidProduct:async()=>({...LIVE,stockStatus:'comingSoon'})}});
