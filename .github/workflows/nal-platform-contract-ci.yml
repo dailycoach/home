@@ -26,6 +26,11 @@ on:
       - "scripts/check-nal-commerce-os-ledger.mjs"
       - "docs/NAL_COMMERCE_OS_LEDGER_02.md"
       - "docs/NAL_COMMERCE_OS_API_03.md"
+      - "docs/NAL_COMMERCE_OS_DELIVERY_04.md"
+      - "scripts/check-nal-commerce-os-delivery.mjs"
+      - "scripts/test-nal-commerce-os-delivery-worker.mjs"
+      - "scripts/test-nal-commerce-os-delivery-negative.mjs"
+      - "scripts/test-nal-commerce-os-delivery-races.mjs"
       - "scripts/check-nal-commerce-os-api.mjs"
       - "scripts/test-nal-commerce-os-api-bridge.mjs"
       - "scripts/test-nal-commerce-os-api-postgres.mjs"
@@ -121,6 +126,12 @@ jobs:
         run: node scripts/check-nal-commerce-os-api.mjs
       - name: Simulate P7-C HMAC order reuse, PG verification, PDF delivery and program seats
         run: node scripts/test-nal-commerce-os-api-bridge.mjs
+      - name: Lock unified PDF/reading/class delivery behind server and legal approval
+        run: node scripts/check-nal-commerce-os-delivery.mjs
+      - name: Simulate fail-closed three-kind delivery worker, refund/retry and private links
+        run: node scripts/test-nal-commerce-os-delivery-worker.mjs
+      - name: Reject unsafe delivery/email/sql release changes
+        run: node scripts/test-nal-commerce-os-delivery-negative.mjs
 
   commerce-ledger-postgres:
     name: NAL P7-B isolated Postgres order/seat integrity
@@ -186,3 +197,19 @@ jobs:
           test "$(psql -X -Atc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='nal_private' AND p.proname LIKE 'commerce_os_%'")" = 11
           psql -X -Atc "SELECT CASE WHEN has_table_privilege('anon','nal_private.commerce_os_receipt_tokens','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
           psql -X -Atc "SELECT CASE WHEN has_function_privilege('authenticated','nal_private.commerce_os_order_by_claim(uuid,text)','EXECUTE') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+
+      - name: Install P7-D unified delivery SQL only in disposable Postgres
+        run: psql -X -v ON_ERROR_STOP=1 -c "SET nal.commerce_os_ci_approval='isolated'" -f integration/nal-commerce-os/PROPOSAL_ONLY_delivery_engine.sql
+      - name: Verify payment-driven email notifications, pass tokens and refund cancellation
+        run: psql -X -v ON_ERROR_STOP=1 -f integration/nal-commerce-os/tests/05_delivery_assertions.sql
+      - name: Prepare isolated email lease and pass-claim competition fixtures
+        run: psql -X -v ON_ERROR_STOP=1 -f integration/nal-commerce-os/tests/06_delivery_race_fixtures.sql
+      - name: Race 8 email workers and 8 attendee one-time pass claimants
+        run: node scripts/test-nal-commerce-os-delivery-races.mjs
+      - name: Assert only new private tables/functions were added, no client access
+        run: |
+          test "$(psql -X -Atc "SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='nal_private' AND c.relkind='r' AND c.relname LIKE 'commerce_os_%'")" = 11
+          test "$(psql -X -Atc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='nal_private' AND p.proname LIKE 'commerce_os_%'")" = 17
+          psql -X -Atc "SELECT CASE WHEN has_table_privilege('anon','nal_private.commerce_os_delivery_jobs','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+          psql -X -Atc "SELECT CASE WHEN has_function_privilege('authenticated','nal_private.commerce_os_lease_delivery(uuid,text)','EXECUTE') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+          psql -X -Atc "SELECT CASE WHEN has_table_privilege('authenticated','nal_private.commerce_os_pass_claims','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
