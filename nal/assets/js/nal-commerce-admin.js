@@ -209,6 +209,8 @@
       if(mark!==app.generation||tab!==app.current)return;
       if(tab==='overview')renderOverview(data);
       else renderList(tab,data);
+      const access=$('#na-access-label');
+      if(access)access.textContent='운영자 데이터 연결 확인됨';
     }catch{
       if(mark!==app.generation)return;
       clearPrivate();
@@ -225,8 +227,14 @@
     const id=form.elements.id.value.trim().toLowerCase();
     const title=form.elements.title.value.trim();
     const isProgram=app.current==='programs';
+    const starts=isProgram?new Date($('#na-draft-starts').value):null;
+    if(isProgram&&(!Number.isFinite(starts.getTime())||starts.getTime()<=Date.now())){
+      const message=$('#na-draft-status');
+      if(message)message.textContent='현재보다 뒤의 유효한 운영 시작 시간을 입력해 주세요.';
+      return;
+    }
     const request=isProgram?{
-      id,title,kind,startsAt:new Date($('#na-draft-starts').value).toISOString(),
+      id,title,kind,startsAt:starts.toISOString(),
       capacity:Number($('#na-draft-capacity').value),expectedRevision:app.editRevision
     }:{
       id,title,kind,description:$('#na-draft-description').value,
