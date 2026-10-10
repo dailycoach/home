@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-commerce-os-delivery",
+  "phase": "P7_D_SOURCE_AND_DISPOSABLE_POSTGRES",
+  "productionEnabled": false,
+  "unifiedWorkerEnabled": false,
+  "deliverySqlMigrated": false,
+  "emailProviderConnected": false,
+  "emailDomainVerified": false,
+  "ownerAuthReviewed": false,
+  "privacyPolicyApproved": false,
+  "refundPolicyApproved": false,
+  "paidPdfFilesVerified": false,
+  "consumerPassPagePublished": false,
+  "programCheckoutPublished": false,
+  "programClaimsReleaseApproved": false,
+  "actualEmailSent": false,
+  "actualPassIssuedToCustomer": false,
+  "liveDeliveryApproved": false,
+  "legacyPdfReceiptWorkerEnabled": false,
+  "supported": [
+    "private_pdf",
+    "reading_pass",
+    "class_pass"
+  ],
+  "ledgerTables": [
+    "commerce_os_delivery_jobs",
+    "commerce_os_pass_claims"
+  ],
+  "customerRoutes": {
+    "pdf": "/nal/commerce/claim/",
+    "program": "/nal/commerce/pass/"
+  },
+  "programClaimRouteStatus": "not-created-or-live",
+  "workerDeliverySemantics": "at-least-once; provider idempotency key required before live",
+  "blockedBy": [
+    "Real transactional email provider not selected or connected",
+    "No published verified program-pass customer claim route",
+    "P4-B2 owner Auth and legal/privacy/refund approvals incomplete",
+    "Live PDF v7 private original edition/hash and signer not verified",
+    "Production SQL migration and Edge worker require independent review",
+    "PG not selected; merchant order validation not live",
+    "No real customer booking, card payment or email QA before sale"
+  ],
+  "noProductionEffects": true
+}
