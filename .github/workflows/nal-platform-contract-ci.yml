@@ -108,3 +108,54 @@ jobs:
         run: node scripts/test-nal-commerce-admin-ui.mjs
       - name: Detect unsafe admin, publishing and booking changes
         run: node scripts/test-nal-commerce-os-negative.mjs
+
+  commerce-ledger-postgres:
+    name: NAL P7-B isolated Postgres order/seat integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: synthetic-only-local-pg
+          POSTGRES_DB: nal_ci_ledger
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d nal_ci_ledger"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=12
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: synthetic-only-local-pg
+      PGDATABASE: nal_ci_ledger
+      PGCONNECT_TIMEOUT: "5"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Ensure client is connected to ephemeral database
+        run: |
+          if ! command -v psql >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq postgresql-client
+          fi
+          test "$PGDATABASE" = nal_ci_ledger
+          psql -X -v ON_ERROR_STOP=1 -Atc "SELECT current_database()" | grep -qx nal_ci_ledger
+      - name: Install independent SQL and synthetic-only fixtures (NOT Supabase)
+        run: psql -X -v ON_ERROR_STOP=1 -f integration/nal-commerce-os/tests/01_bootstrap.sql
+      - name: Validate order snapshot, refund/seat transitions and expiry in real Postgres
+        run: psql -X -v ON_ERROR_STOP=1 -f integration/nal-commerce-os/tests/02_transactional_assertions.sql
+      - name: Simulate concurrent reservations and idempotent order retries
+        run: node scripts/test-nal-commerce-os-db-concurrency.mjs
+      - name: Assert schema stays private and safe
+        run: |
+          test "$(psql -X -Atc "SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='nal_private' AND c.relkind='r' AND c.relname LIKE 'commerce_os_%'")" = 7
+          test "$(psql -X -Atc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='nal_private' AND p.proname LIKE 'commerce_os_%'")" = 5
+          psql -X -v ON_ERROR_STOP=1 -Atc "SELECT CASE WHEN has_table_privilege('anon','nal_private.commerce_os_orders','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+          psql -X -v ON_ERROR_STOP=1 -Atc "SELECT CASE WHEN has_function_privilege('authenticated','nal_private.commerce_os_begin_order(uuid,text,text,text,uuid,text,text,text)','EXECUTE') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
