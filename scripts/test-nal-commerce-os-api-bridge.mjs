@@ -50,7 +50,7 @@ const extractDigest=async token=>{
 async function build({release=allOn,lookupOverride=null,badSigner=false}={}){
  const orders=new Map(),requestIds=new Map(),events=new Map(),receipts=new Set();
  const tokens=new Map(),log=[],slots=structuredClone(approvedSessions);
- const issuer=await createServerOrderIssuer(settings);
+ const issuer=await createServerOrderIssuer({...settings,secretBytes:settings.issuerSecret});
  let status='READY',eventRevision=0;
  const provider={
   code:'testpg',merchantId:settings.merchantId,checkoutOrigins:[PG],minimumAmountWon:100,
