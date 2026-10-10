@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-commerce-lite",
+  "phase": "SOURCE_ONLY",
+  "clientEnabled": false,
+  "serverReady": false,
+  "pgConfigured": false,
+  "approvedPrivacyNotice": false,
+  "approvedTermsAndRefunds": false,
+  "settlementGuardReviewed": false,
+  "fulfillmentReady": false,
+  "emailReceiptReady": false,
+  "customerReleaseApproved": false,
+  "provider": null,
+  "minimumAmountWon": null,
+  "allowedCheckoutOrigins": [],
+  "whyDisabled": [
+    "Payment provider and contract not selected",
+    "Guest-order server persistence and verified settlement not deployed",
+    "Existing refund-to-DONE entitlement regrant defect unpatched on hosted DB",
+    "Legal/privacy/refund disclosures not approved",
+    "Automated transactional email sender not connected",
+    "Customer pre-sale end-to-end validation not performed"
+  ],
+  "doesNotEnable": [
+    "Toss payment",
+    "PG authorization",
+    "READ accounts",
+    "owner privileges",
+    "digital entitlement",
+    "private PDF signing"
+  ]
+}
