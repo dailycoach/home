@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 
 if(process.env.PGDATABASE!=='nal_ci_ledger')throw Error('NOT_AN_EPHEMERAL_TEST_DATABASE');
 const run=sql=>new Promise((resolve,reject)=>{
- const child=spawn('psql',['-X','-At','-v','ON_ERROR_STOP=1','-c',sql],{
+ const child=spawn('psql',['-X','-At','-q','-v','ON_ERROR_STOP=1','-c',sql],{
   env:process.env,stdio:['ignore','pipe','pipe']
  });
  let stdout='',stderr='';
