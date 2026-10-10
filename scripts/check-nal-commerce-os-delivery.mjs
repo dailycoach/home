@@ -76,7 +76,7 @@ check(oldSql.includes('REFUNDED_ORDER_CANNOT_BE_REGRANTED')
  'P7-B refund and signed PDF predicates must remain');
 check(worker.includes('DEFAULT_DELIVERY_RELEASE')
  &&worker.includes('enabled:false')
- &&worker.includes('eligibility.recheck(job)')
+ &&(worker.match(/await eligibility\.recheck\(job\)/g)||[]).length===2
  &&worker.includes('mailer.send(message)')
  &&worker.includes('queue.complete({')
  &&worker.includes('idempotencyKey'),
