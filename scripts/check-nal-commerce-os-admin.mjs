@@ -56,7 +56,8 @@ check(api.includes("isExistingOwner(who.id)")&&api.includes('verifiedByAuthServe
  'server must check verified identity and owner role');
 check(api.includes("!['create','download']")===false,
  'admin must not import customer checkout state machine');
-check(api.includes("published:false,saleStatus:'draft'"),
+const guardedDraftReturns=(api.match(/published:false,saleStatus:'draft'/g)||[]).length;
+check(guardedDraftReturns===2&&!api.includes("published:true,saleStatus:'draft'"),
  'admin drafts must never set publication to true');
 check(api.includes("['catalog-draft-save'")===false,
  'admin action allowlist should retain centralized ADMIN_ACTIONS');
