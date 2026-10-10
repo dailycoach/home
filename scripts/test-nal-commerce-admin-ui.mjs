@@ -19,6 +19,7 @@ class Element{
  setAttribute(key,value){this.attributes[key]=value;}
  removeAttribute(key){delete this.attributes[key];}
  scrollIntoView(){}
+ reset(){}
 }
 function fake({gate=original,bridge=null,rejectGate=false}={}){
  const calls=[],elements=new Map();
