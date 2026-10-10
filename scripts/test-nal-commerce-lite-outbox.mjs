@@ -60,7 +60,7 @@ for(const opt of [{paid:false},{revoked:true},{failSend:true},{failRecord:true}]
  const result=await processOneReceipt(f.deps);
  assert.deepEqual(result,{state:'retry'});
  assert(f.calls.includes('retry:DELIVERY_RETRY'));
- if(!opt.paid||opt.revoked)assert(!f.calls.includes('send'));
+ if(opt.paid===false||opt.revoked===true)assert(!f.calls.includes('send'));
  checks++;
 }
 console.log('NAL COMMERCE LITE email receipt outbox simulation PASS: '+checks+' cases, no real emails or private file delivery');
