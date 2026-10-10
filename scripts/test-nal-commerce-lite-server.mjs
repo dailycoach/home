@@ -154,6 +154,11 @@ for (const [name,invalid] of [
  assert.equal(f.stats.create,0,name);
 }
 {
+ const info=await req(create).json();
+ const rxEmail=/^[A-Z0-9._%+-]{1,64}@[A-Z0-9.-]{1,180}\\.[A-Z]{2,30}$/i;
+ console.log('NAL-COMMERCE-DEBUG',JSON.stringify({payload:info,keys:Object.keys(info),trimmedEmail:info.email?.trim()?.toLowerCase(),email:rxEmail.test(info.email?.trim()?.toLowerCase()),requestId:info.requestId}));
+}
+{
  const f=fixture({catalog:{findPaidProduct:async()=>({...LIVE,stockStatus:'comingSoon'})}});
  await expect(f.handler,create,409,'PRODUCT_NOT_FOR_SALE');
  assert.equal(f.stats.create,0);
