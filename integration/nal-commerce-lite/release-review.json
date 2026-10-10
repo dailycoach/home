@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "system": "NAL COMMERCE LITE",
+  "stage": "SOURCE_BUILT_REVIEW_REQUIRED",
+  "asOf": "2026-10-10",
+  "productionEnabled": false,
+  "readyForPaidSale": false,
+  "sourceBranch": "feat/nal-commerce-lite-v1",
+  "preservedOriginalSite": "main",
+  "guestFlow": [
+    "select published digital product",
+    "email + approved policy acknowledgement",
+    "server verifies published price/version & immutable snapshot",
+    "server provider checkout redirect",
+    "server provider API authoritative confirmation",
+    "atomic monotonic paid ledger",
+    "immediate same-tab signed PDF",
+    "idempotent receipt email outbox",
+    "one-time email fragment claim signed PDF"
+  ],
+  "provider": {
+    "code": null,
+    "clientKey": null,
+    "secretKey": null,
+    "checkoutOrigins": [],
+    "chosen": false,
+    "configured": false
+  },
+  "server": {
+    "deployed": false,
+    "databaseMigrationApplied": false,
+    "guestLedgerApproved": false,
+    "settlementMonotonicApproved": false,
+    "customerAuthNotRequired": true
+  },
+  "email": {
+    "senderConnected": false,
+    "automaticReceiptDeployed": false
+  },
+  "site": {
+    "customerPagesPublished": false,
+    "publicIndexing": false,
+    "freeStarter3StillDirect": true,
+    "storePurchase": false,
+    "checkout": false,
+    "readIntegration": false
+  },
+  "openGates": [
+    "Choose PG",
+    "PG/merchant contract and minimum sale amount",
+    "Approved operator identity and privacy/refund legal notice",
+    "Independent review of guest purchase session and ownership proof",
+    "Isolated PostgreSQL order, refund, concurrency and one-time receipt verification",
+    "Encrypted/appropriate email provider + rate-limited receipt worker",
+    "Active PDF edition/hash/private object review (v4.2 vs planned v7)",
+    "Authorized real provider TEST checkout, cancellation and signed download just before first sale",
+    "Separate P4 owner Auth security review"
+  ]
+}
