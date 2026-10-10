@@ -63,9 +63,11 @@ check(delivery.includes("token_digest char(64)")
  &&delivery.includes("TOO_MANY_PASS_CLAIMS")
  &&delivery.includes("t.reserved_until>now()"),
  'one-time program-pass proof and bounded replay controls missing');
-check(delivery.includes('ENABLE ROW LEVEL SECURITY')
- &&delivery.includes('FROM PUBLIC,anon,authenticated')
- &&delivery.includes('TO service_role')
+check((delivery.match(/ENABLE ROW LEVEL SECURITY/g)||[]).length===2
+ &&(delivery.match(/FROM PUBLIC,anon,authenticated/g)||[]).length===2
+ &&(delivery.match(/TO service_role/g)||[]).length===2
+ &&delivery.includes('REVOKE ALL ON TABLE')
+ &&delivery.includes('REVOKE ALL ON FUNCTION')
  &&!delivery.includes('SECURITY DEFINER')
  &&!delivery.includes('REVOKE ALL ON ALL'),
  'P7-D private grant/RLS security boundary missing');
