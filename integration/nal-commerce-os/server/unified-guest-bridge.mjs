@@ -228,6 +228,10 @@ export function createUnifiedGuestBridge({
    const original=await db.getPrivatePdf({orderId});
    if(!original||original.active!==true||original.bucketId!==PK
      ||original.storageObjectExists!==true||original.editionApproved!==true
+     ||!PRODUCT.test(original.offerId||'')
+     ||typeof original.orderEdition!=='string'
+     ||original.fileEdition!==original.orderEdition
+     ||!original.objectPath?.startsWith(original.offerId+'/')
      ||typeof original.objectPath!=='string'||!OBJECT.test(original.objectPath)
      ||original.objectPath.includes('..')
      ||typeof original.downloadName!=='string'
