@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-commerce-os-ledger",
+  "stage": "P7_B_ISOLATED_POSTGRES_ONLY",
+  "productionEnabled": false,
+  "sqlMigrationApplied": false,
+  "publicCheckoutEnabled": false,
+  "ownerAuthApproved": false,
+  "paymentProviderSelected": false,
+  "paymentWebhookConfigured": false,
+  "serverEdgeDeployed": false,
+  "customerBookingEnabled": false,
+  "testedDatabaseName": "nal_ci_ledger",
+  "sqlSource": "integration/nal-commerce-os/PROPOSAL_ONLY_unified_order_ledger.sql",
+  "testType": "ephemeral PostgreSQL 16 GitHub Actions service only",
+  "kinds": [
+    "pdf",
+    "reading_circle",
+    "class_session"
+  ],
+  "invariants": [
+    "immutable price/version/license snapshot",
+    "atomic SELECT FOR UPDATE slot hold",
+    "one seat reservation per order",
+    "unique idempotency request id",
+    "provider server proof required",
+    "refund cannot regrant paid entitlement",
+    "expiry releases held seat exactly once",
+    "late charged order requires review",
+    "private service_role-only data and functions"
+  ],
+  "blockers": [
+    "Independent SQL and security review",
+    "P4-B2 owner auth",
+    "PG contract and provider server validation",
+    "Privacy/refund notices",
+    "receipt email and private file signer",
+    "User approval before live deployment"
+  ],
+  "noProductionWrites": true
+}
