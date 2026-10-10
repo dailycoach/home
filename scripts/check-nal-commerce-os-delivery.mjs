@@ -50,8 +50,13 @@ check(delivery.includes('PRIMARY KEY(order_id,event_kind)')
 check(delivery.includes('valid_state IS DISTINCT FROM TRUE')
  &&delivery.includes('allowed IS DISTINCT FROM TRUE'),
  'nullable authorization must fail closed');
-check(delivery.includes("state='cancelled',lease_id=NULL,lease_until=NULL")
- &&delivery.includes("state='revoked',reserved_until=NULL"),
+const triggerStart=delivery.indexOf('CREATE FUNCTION nal_private.commerce_os_after_fulfillment()');
+const triggerEnd=delivery.indexOf('END $fn$;',triggerStart);
+const triggerSource=delivery.slice(triggerStart,triggerEnd);
+check(triggerStart>=0&&triggerEnd>triggerStart
+ &&triggerSource.includes("state='cancelled',lease_id=NULL,lease_until=NULL")
+ &&triggerSource.includes("state='revoked',reserved_until=NULL")
+ &&triggerSource.includes("WHERE order_id=NEW.order_id AND event_kind='grant'"),
  'refund must cancel unsent notices and unredeemed program pass links');
 check(delivery.includes("token_digest char(64)")
  &&delivery.includes("state='redeemed'")
