@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-commerce-admin",
+  "phase": "SOURCE_ONLY",
+  "uiEnabled": false,
+  "ownerAuthReviewed": false,
+  "serverGateConfigured": false,
+  "privacyNoticeApproved": false,
+  "writePermissionsReviewed": false,
+  "backendDeployed": false,
+  "productionApproved": false,
+  "publicProductSalesEnabled": false,
+  "actions": {
+    "read": [
+      "overview",
+      "catalog-list",
+      "program-list",
+      "orders-list",
+      "bookings-list",
+      "delivery-list",
+      "order-detail"
+    ],
+    "drafts": [
+      "catalog-draft-save",
+      "session-draft-save"
+    ],
+    "prohibited": [
+      "approve-payment",
+      "execute-refund",
+      "refund-approve",
+      "grant-owner",
+      "publish-live",
+      "send-email",
+      "sign-download",
+      "set-price-live"
+    ]
+  },
+  "blockedBy": [
+    "No authorized owner membership",
+    "P4-B2 production Auth adapter unapproved",
+    "No admin server deployment",
+    "Unreviewed legal privacy policy",
+    "Payment provider not selected",
+    "No atomic order/session inventory backend or approved SQL migration"
+  ],
+  "publicBehavior": "Show structural admin navigation and unavailable notice; never show simulated metrics or send API requests",
+  "doesNotGrant": [
+    "owner authorization",
+    "service_role",
+    "DB access",
+    "paid sale",
+    "refund",
+    "financial reconciliation"
+  ]
+}
