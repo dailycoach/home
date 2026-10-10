@@ -5,7 +5,7 @@ const sql=await readFile('integration/nal-commerce-os/PROPOSAL_ONLY_unified_orde
 const approval=JSON.parse(await readFile('integration/nal-commerce-os/ledger-release-review.json','utf8'));
 const src=await readFile('integration/nal-commerce-os/order-engine.mjs','utf8');
 const gate=JSON.parse(await readFile('nal/data/commerce-admin.release.json','utf8'));
-const lite=JSON.parse(await readFile('nal/data/commerce-lite.release.json','utf8');
+const lite=JSON.parse(await readFile('nal/data/commerce-lite.release.json','utf8'));
 const site=JSON.parse(await readFile('nal/data/site.json','utf8'));
 const errors=[];const check=(ok,msg)=>{if(!ok)errors.push(msg);};
 check(approval.module==='nal-commerce-os-ledger'&&approval.stage==='P7_B_ISOLATED_POSTGRES_ONLY',
