@@ -23,6 +23,8 @@ on:
       - "integration/nal-commerce-lite/**"
       - "docs/NAL_COMMERCE_LITE_01.md"
       - "integration/nal-commerce-os/**"
+      - "scripts/check-nal-commerce-os-ledger.mjs"
+      - "docs/NAL_COMMERCE_OS_LEDGER_02.md"
       - "docs/NAL_COMMERCE_OS_ADMIN_01.md"
       - "scripts/check-nal-commerce-os-admin.mjs"
       - "scripts/test-nal-commerce-os-order.mjs"
@@ -108,6 +110,8 @@ jobs:
         run: node scripts/test-nal-commerce-admin-ui.mjs
       - name: Detect unsafe admin, publishing and booking changes
         run: node scripts/test-nal-commerce-os-negative.mjs
+      - name: Verify P7-B isolated unified ledger is OFF and secured
+        run: node scripts/check-nal-commerce-os-ledger.mjs
 
   commerce-ledger-postgres:
     name: NAL P7-B isolated Postgres order/seat integrity
