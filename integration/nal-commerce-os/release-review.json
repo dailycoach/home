@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "project": "NAL · 날빛",
+  "module": "nal-commerce-os",
+  "stage": "P7_A_SOURCE_ONLY",
+  "asOf": "2026-10-10",
+  "productionEnabled": false,
+  "publicCheckoutEnabled": false,
+  "adminDashboardDeployed": false,
+  "adminApiDeployed": false,
+  "approvedOwnerMembership": false,
+  "activeProviderConfigured": false,
+  "databaseMigrated": false,
+  "availableDomains": [
+    {
+      "code": "pdf",
+      "label": "마음도구",
+      "fulfillment": "private_pdf"
+    },
+    {
+      "code": "reading_circle",
+      "label": "독서모임",
+      "fulfillment": "reading_pass"
+    },
+    {
+      "code": "class_session",
+      "label": "클래스",
+      "fulfillment": "class_pass"
+    }
+  ],
+  "allowedAdminActions": [
+    "overview",
+    "catalog-list",
+    "program-list",
+    "orders-list",
+    "bookings-list",
+    "delivery-list",
+    "order-detail",
+    "catalog-draft-save",
+    "session-draft-save"
+  ],
+  "excludedActions": [
+    "issue-payment",
+    "execute-refund",
+    "capture-payment",
+    "publish-live",
+    "grant-owner",
+    "assign-role",
+    "sign-download",
+    "notify-customers",
+    "create-provider-payout",
+    "pay-host"
+  ],
+  "blockedBy": [
+    "No owner membership",
+    "P4-B2 server authentication review pending",
+    "No privileged admin Edge API",
+    "Atomic order/session inventory DB absent",
+    "No PG selected",
+    "Legal/privacy/refund notice unapproved",
+    "Paid edition mapping unresolved",
+    "Pre-sale end-to-end QA not performed"
+  ],
+  "protectedAssets": {
+    "readSourceFiles": 88,
+    "storefrontProtectedFiles": 130,
+    "commerceLiteFiles": 6,
+    "newAdminFiles": 4
+  }
+}
