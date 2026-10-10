@@ -6,8 +6,9 @@ import { mintReceiptLink } from './receipt-link.mjs';
  * after operator/legal approval. No standalone cron or mail service is deployed.
  *
  * takeOne() leases a single verified-paid order job; getPaidGuestOrder() rechecks
- * latest payment/refund state. rotate() stores hash and invalidates prior token.
- * markSent() closes idempotent outbox; markRetry() retains the job on failure.
+ * latest payment/refund state. issue() stores a digest with bounded active-token count;
+ * a previously emailed token must NOT be invalidated solely by a retry.
+ * markSent() closes the outbox; markRetry() retains the job on failure.
  */
 export async function processOneReceipt({
   release=false,outbox,orders,tokens,mailer,now=Date.now,
@@ -17,7 +18,7 @@ export async function processOneReceipt({
     typeof outbox?.markSent!=='function' ||
     typeof outbox?.markRetry!=='function' ||
     typeof orders?.getPaidGuestOrder!=='function' ||
-    typeof tokens?.rotate!=='function' ||
+    typeof tokens?.issue!=='function' ||
     typeof mailer?.send!=='function') return {state:'disabled'};
   let job=null;
   try {
@@ -29,7 +30,7 @@ export async function processOneReceipt({
       ||paid.id!==job.orderId ||typeof paid.email!=='string'
       ||!paid.email.includes('@')) throw Error('ORDER_NOT_AUTHORIZED');
     const receipt=await mintReceiptLink({orderId:paid.id,now:now()});
-    if(await tokens.rotate({
+    if(await tokens.issue({
       orderId:paid.id,tokenDigest:receipt.tokenDigest,expiresAt:receipt.expiresAt
     })!==true)throw Error('RECEIPT_NOT_STORED');
     await mailer.send({
