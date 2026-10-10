@@ -28,12 +28,12 @@ RESET ROLE;
 SET ROLE service_role;
 DO $pdf$
 DECLARE
- original jsonb; duplicate jsonb; order_id uuid; booked int; event jsonb;
+ original jsonb; duplicate jsonb; v_order_id uuid; booked int; event jsonb;
 BEGIN
  original:=nal_private.commerce_os_begin_order(
  'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','synthetic@example.invalid',repeat('a',64),
  'pdf-test',NULL,'testpg','provider-order-pdf-01','merchant-fixture');
- order_id:=(original->>'orderId')::uuid;
+ v_order_id:=(original->>'orderId')::uuid;
  ASSERT (original->>'amountWon')::int=4900;
  ASSERT original->>'state'='pending';
 
@@ -55,42 +55,42 @@ BEGIN
  UPDATE nal_private.commerce_os_offers
  SET price_won=6900,edition='next-edition' WHERE id='pdf-test';
  ASSERT EXISTS(SELECT 1 FROM nal_private.commerce_os_order_lines
-   WHERE order_id=order_id AND unit_amount_won=4900 AND edition_snapshot='approved-v7');
+   WHERE order_id=v_order_id AND unit_amount_won=4900 AND edition_snapshot='approved-v7');
 
- event:=nal_private.commerce_os_apply_provider(order_id,'provider-order-pdf-01','merchant-fixture',
+ event:=nal_private.commerce_os_apply_provider(v_order_id,'provider-order-pdf-01','merchant-fixture',
  'payment-pdf','4900'::int,'KRW','DONE','event-pdf-paid',true);
  ASSERT event->>'state'='paid';
  ASSERT event->>'effect'='private_pdf';
- ASSERT nal_private.commerce_os_can_deliver(order_id,repeat('a',64),'private_pdf');
- ASSERT NOT nal_private.commerce_os_can_deliver(order_id,repeat('b',64),'private_pdf');
- ASSERT NOT nal_private.commerce_os_can_deliver(order_id,repeat('a',64),'reading_pass');
+ ASSERT nal_private.commerce_os_can_deliver(v_order_id,repeat('a',64),'private_pdf');
+ ASSERT NOT nal_private.commerce_os_can_deliver(v_order_id,repeat('b',64),'private_pdf');
+ ASSERT NOT nal_private.commerce_os_can_deliver(v_order_id,repeat('a',64),'reading_pass');
 
- duplicate:=nal_private.commerce_os_apply_provider(order_id,'provider-order-pdf-01','merchant-fixture',
+ duplicate:=nal_private.commerce_os_apply_provider(v_order_id,'provider-order-pdf-01','merchant-fixture',
  'payment-pdf',4900,'KRW','DONE','event-pdf-paid',true);
  ASSERT duplicate->>'idempotent'='true';
- ASSERT (SELECT count(*) FROM nal_private.commerce_os_fulfillments WHERE order_id=order_id)=1;
+ ASSERT (SELECT count(*) FROM nal_private.commerce_os_fulfillments WHERE order_id=v_order_id)=1;
 
- event:=nal_private.commerce_os_apply_provider(order_id,'provider-order-pdf-01','merchant-fixture',
+ event:=nal_private.commerce_os_apply_provider(v_order_id,'provider-order-pdf-01','merchant-fixture',
  'payment-pdf',4900,'KRW','CANCELED','event-pdf-refund',true);
  ASSERT event->>'state'='refunded';
- ASSERT NOT nal_private.commerce_os_can_deliver(order_id,repeat('a',64),'private_pdf');
+ ASSERT NOT nal_private.commerce_os_can_deliver(v_order_id,repeat('a',64),'private_pdf');
  ASSERT EXISTS(SELECT 1 FROM nal_private.commerce_os_fulfillments
-   WHERE order_id=order_id AND status='revoked' AND revoked_at IS NOT NULL);
+   WHERE order_id=v_order_id AND status='revoked' AND revoked_at IS NOT NULL);
 
  BEGIN
-   PERFORM nal_private.commerce_os_apply_provider(order_id,'provider-order-pdf-01','merchant-fixture',
+   PERFORM nal_private.commerce_os_apply_provider(v_order_id,'provider-order-pdf-01','merchant-fixture',
      'payment-pdf',4900,'KRW','DONE','late-paid-observation',true);
    RAISE EXCEPTION 'Refunded order re-granted PDF';
  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
- ASSERT (SELECT status FROM nal_private.commerce_os_orders WHERE id=order_id)='refunded';
+ ASSERT (SELECT status FROM nal_private.commerce_os_orders WHERE id=v_order_id)='refunded';
 
  BEGIN
-   PERFORM nal_private.commerce_os_apply_provider(order_id,'provider-order-pdf-01','merchant-fixture',
+   PERFORM nal_private.commerce_os_apply_provider(v_order_id,'provider-order-pdf-01','merchant-fixture',
      'payment-pdf',4999,'KRW','DONE','mismatched-amount',true);
    RAISE EXCEPTION 'Mismatched payment price accepted';
  EXCEPTION WHEN check_violation THEN NULL; END;
  BEGIN
-   PERFORM nal_private.commerce_os_apply_provider(order_id,'provider-order-pdf-01','merchant-fixture',
+   PERFORM nal_private.commerce_os_apply_provider(v_order_id,'provider-order-pdf-01','merchant-fixture',
      'payment-pdf',4900,'KRW','DONE','unverified',false);
    RAISE EXCEPTION 'Unverified browser payment accepted';
  EXCEPTION WHEN insufficient_privilege THEN NULL; END;
