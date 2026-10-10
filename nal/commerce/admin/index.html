@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F5F1E8">
+<title>COMMERCE ADMIN | NAL · 날빛</title>
+<meta name="description" content="NAL 마음도구·모임·클래스 통합 운영. 관리자 인증과 서버 연결은 별도 승인 후 제공합니다.">
+<link rel="canonical" href="https://daily-coach-ing.com/nal/commerce/admin/">
+<link rel="stylesheet" href="/nal/assets/css/nal-commerce-admin.css?v=c1">
+<script src="/nal/assets/js/nal-commerce-admin.js?v=c1" defer></script>
+</head>
+<body data-commerce-admin="v1">
+<a class="na-skip" href="#main">본문으로 이동</a>
+<div class="na-shell">
+<aside class="na-rail" aria-label="NAL 운영 메뉴">
+ <div class="na-brand"><a href="/nal/">NAL <span>· 날빛</span></a><small>COMMERCE ADMIN</small></div>
+ <nav id="na-navigation" aria-label="운영 메뉴">
+  <button type="button" data-admin-nav="overview" aria-current="page"><span>01</span> 운영현황</button>
+  <button type="button" data-admin-nav="catalog"><span>02</span> 마음도구</button>
+  <button type="button" data-admin-nav="programs"><span>03</span> 모임·클래스</button>
+  <button type="button" data-admin-nav="bookings"><span>04</span> 참가·예약</button>
+  <button type="button" data-admin-nav="orders"><span>05</span> 주문·결제</button>
+  <button type="button" data-admin-nav="delivery"><span>06</span> 파일 전달</button>
+ </nav>
+ <div class="na-rail-bottom">
+  <p>입력한 정보는 승인된 서버로만 연결합니다. 이 화면만으로 운영자 권한이 생기지 않습니다.</p>
+  <a href="/nal/shop/">스토어 돌아가기 <span aria-hidden="true">↗</span></a>
+ </div>
+</aside>
+<div class="na-workspace">
+ <header class="na-top"><span>STORE / ORDER / PROGRAM</span><div class="na-gate" id="na-access-label">관리자 연결 대기</div></header>
+ <main id="main" tabindex="-1">
+  <section class="na-heading">
+   <p class="na-eyebrow">NAL COMMERCE OS / OPERATOR DESK</p>
+   <h1>운영을,<br><em>한곳에서.</em></h1>
+   <p>마음도구 한 권부터 모임 신청과 클래스 예약까지, 복잡한 관리 대신 필요한 일만 보여줍니다.</p>
+  </section>
+  <section class="na-status" aria-labelledby="na-status-heading">
+   <h2 id="na-status-heading">서버 연결 상태</h2>
+   <p id="na-message" role="status" aria-live="polite">운영자 인증과 개인정보 처리 기준을 검토하고 있습니다. 실제 주문·회원·결제 자료는 표시하지 않습니다.</p>
+  </section>
+
+  <div id="na-private" hidden>
+   <section id="na-overview" data-admin-panel="overview" aria-labelledby="na-overview-title">
+    <div class="na-panel-heading"><h2 id="na-overview-title">운영현황</h2><p>숫자는 검증된 서버에서만 불러옵니다.</p></div>
+    <div class="na-metrics">
+     <article><h3>전체 주문</h3><strong data-metric="totalOrders">—</strong></article>
+     <article><h3>결제 완료</h3><strong data-metric="paidOrders">—</strong></article>
+     <article><h3>확인 대기</h3><strong data-metric="pendingOrders">—</strong></article>
+     <article><h3>환불 검토</h3><strong data-metric="refundReviews">—</strong></article>
+     <article><h3>결제 완료 총액</h3><strong data-metric="grossWon">—</strong></article>
+     <article><h3>진행 중 프로그램</h3><strong data-metric="activePrograms">—</strong></article>
+    </div>
+    <p class="na-small">위 금액은 완료 주문 기준의 합계입니다. PG 정산 입금액이나 세금계산서 금액을 의미하지 않습니다.</p>
+   </section>
+
+   <section id="na-list" aria-labelledby="na-list-title" hidden>
+    <div class="na-panel-heading"><h2 id="na-list-title">목록</h2><p id="na-list-desc">서버의 최신 자료를 조회합니다.</p></div>
+    <div class="na-controls"><label for="na-filter">종류 또는 상태</label>
+    <select id="na-filter"><option value="all">전체</option></select>
+    <button id="na-refresh" type="button">새로 불러오기</button></div>
+    <div class="na-list" id="na-list-records"><p>목록을 불러오는 중입니다.</p></div>
+    <div class="na-pagination"><button id="na-prev" type="button" disabled>이전</button><span id="na-page-caption">—</span><button id="na-next" type="button" disabled>다음</button></div>
+   </section>
+
+   <section id="na-draft" aria-labelledby="na-draft-title" hidden>
+    <div class="na-panel-heading"><h2 id="na-draft-title">비공개 초안 편집</h2><p>여기서는 판매 개시·모집 공개·수수료 정산을 실행하지 않습니다.</p></div>
+    <form id="na-draft-form" novalidate>
+      <div class="na-form-grid">
+       <label>관리용 ID <input type="text" id="na-draft-id" name="id" autocomplete="off" required pattern="[a-z0-9-]+" maxlength="120" placeholder="nal-new-title"></label>
+       <label>유형<select name="kind" id="na-draft-kind"><option value="pdf">마음도구 PDF</option><option value="reading_circle">독서모임</option><option value="class_session">클래스</option></select></label>
+       <label class="na-wide">제목<input type="text" id="na-draft-name" name="title" required maxlength="120" autocomplete="off"></label>
+       <label class="na-wide" id="na-draft-description-field">상품 소개<textarea id="na-draft-description" rows="3" maxlength="1200"></textarea></label>
+       <label id="na-draft-price-field">가격 (원)<input type="number" id="na-draft-price" min="0" max="100000000" step="1" value="0" inputmode="numeric"></label>
+       <label id="na-draft-starts-field" hidden>운영 시작<input type="datetime-local" id="na-draft-starts"></label>
+       <label id="na-draft-capacity-field" hidden>정원<input type="number" id="na-draft-capacity" min="1" max="1000" step="1" value="10"></label>
+      </div>
+      <p class="na-small">수정은 서버의 기존 운영자 인증과 버전 확인을 통과한 경우에만 비공개 초안으로 저장됩니다.</p>
+      <button class="na-primary" type="submit" id="na-save">초안 저장</button>
+      <button class="na-secondary" type="reset">비우기</button>
+      <p id="na-draft-status" aria-live="polite" role="status"></p>
+    </form>
+   </section>
+
+   <section id="na-order-detail" hidden aria-labelledby="na-order-detail-title">
+     <div class="na-panel-heading"><h2 id="na-order-detail-title">주문 확인</h2>
+     <p>결제 상태는 확인만 할 수 있습니다. 승인·취소·환불 실행 버튼은 제공하지 않습니다.</p></div>
+     <dl id="na-order-fields" class="na-detail"></dl>
+     <button type="button" class="na-secondary" id="na-order-close">목록으로 돌아가기</button>
+   </section>
+  </div>
+ </main>
+ <footer class="na-footer"><span>© NAL · 날빛</span><a href="/nal/policy/privacy/">개인정보처리방침</a></footer>
+</div>
+</div>
+</body>
+</html>

@@ -61,7 +61,22 @@ for(const filename of commerceLitePaths) {
     'commerce-lite path overlaps original READ or protected NAL source: '+filename);
   check(actual.has(filename),'staged commerce-lite path missing: '+filename);
 }
-const expected = new Set([...imported, ...protectedFiles, ...commerceLitePaths]);
+// P7: add ONLY the four private Commerce Admin source assets on this Draft
+// stack. READ 88, protected storefront 130 and original Commerce Lite 6
+// retain unchanged Git blob SHA verification and do not acquire privileges.
+const commerceAdminPaths = Object.freeze([
+  'nal/commerce/admin/index.html',
+  'nal/assets/css/nal-commerce-admin.css',
+  'nal/assets/js/nal-commerce-admin.js',
+  'nal/data/commerce-admin.release.json'
+]);
+for(const filename of commerceAdminPaths){
+  check(!imported.has(filename)&&!protectedFiles.has(filename)
+    &&!commerceLitePaths.includes(filename),
+    'Commerce Admin path overlaps protected source: '+filename);
+  check(actual.has(filename),'staged Commerce Admin path missing: '+filename);
+}
+const expected = new Set([...imported, ...protectedFiles, ...commerceLitePaths, ...commerceAdminPaths]);
 check(actual.size === expected.size, `NAL file count drift expected ${expected.size} got ${actual.size}`);
 for (const filename of actual) check(expected.has(filename), `untracked NAL path in integration: ${filename}`);
 
