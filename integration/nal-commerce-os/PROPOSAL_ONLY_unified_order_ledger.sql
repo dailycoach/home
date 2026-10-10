@@ -422,9 +422,43 @@ ALTER TABLE nal_private.commerce_os_order_lines ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nal_private.commerce_os_seat_reservations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nal_private.commerce_os_fulfillments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE nal_private.commerce_os_provider_events ENABLE ROW LEVEL SECURITY;
-REVOKE ALL ON ALL TABLES IN SCHEMA nal_private FROM PUBLIC,anon,authenticated;
-GRANT SELECT,INSERT,UPDATE ON ALL TABLES IN SCHEMA nal_private TO service_role;
-GRANT USAGE,SELECT ON ALL SEQUENCES IN SCHEMA nal_private TO service_role;
-REVOKE ALL ON ALL FUNCTIONS IN SCHEMA nal_private FROM PUBLIC,anon,authenticated;
-GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA nal_private TO service_role;
+-- Scope permissions ONLY to these new proposal objects. Never rewrite ACLs
+-- on existing READ, account, support or other private schema functions.
+REVOKE ALL ON TABLE
+ nal_private.commerce_os_offers,
+ nal_private.commerce_os_slots,
+ nal_private.commerce_os_orders,
+ nal_private.commerce_os_order_lines,
+ nal_private.commerce_os_seat_reservations,
+ nal_private.commerce_os_fulfillments,
+ nal_private.commerce_os_provider_events
+ FROM PUBLIC,anon,authenticated;
+
+GRANT SELECT,INSERT,UPDATE ON TABLE
+ nal_private.commerce_os_offers,
+ nal_private.commerce_os_slots,
+ nal_private.commerce_os_orders,
+ nal_private.commerce_os_seat_reservations,
+ nal_private.commerce_os_fulfillments
+ TO service_role;
+GRANT SELECT,INSERT ON TABLE
+ nal_private.commerce_os_order_lines,
+ nal_private.commerce_os_provider_events
+ TO service_role;
+GRANT USAGE,SELECT ON SEQUENCE nal_private.commerce_os_provider_events_id_seq TO service_role;
+
+REVOKE ALL ON FUNCTION
+ nal_private.commerce_os_protect_order(),
+ nal_private.commerce_os_begin_order(uuid,text,text,text,uuid,text,text,text),
+ nal_private.commerce_os_expire_order(uuid),
+ nal_private.commerce_os_apply_provider(uuid,text,text,text,integer,text,text,text,boolean),
+ nal_private.commerce_os_can_deliver(uuid,text,text)
+ FROM PUBLIC,anon,authenticated;
+GRANT EXECUTE ON FUNCTION
+ nal_private.commerce_os_protect_order(),
+ nal_private.commerce_os_begin_order(uuid,text,text,text,uuid,text,text,text),
+ nal_private.commerce_os_expire_order(uuid),
+ nal_private.commerce_os_apply_provider(uuid,text,text,text,integer,text,text,text,boolean),
+ nal_private.commerce_os_can_deliver(uuid,text,text)
+ TO service_role;
 COMMIT;
