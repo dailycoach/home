@@ -51,7 +51,7 @@ async function build({release=allOn,lookupOverride=null,badSigner=false}={}){
  const orders=new Map(),requestIds=new Map(),events=new Map(),receipts=new Set();
  const tokens=new Map(),log=[],slots=structuredClone(approvedSessions);
  const issuer=await createServerOrderIssuer(settings);
- let status='READY';
+ let status='READY',eventRevision=0;
  const provider={
   code:'testpg',merchantId:settings.merchantId,checkoutOrigins:[PG],minimumAmountWon:100,
   createCheckout:async o=>{log.push('checkout');return {checkoutUrl:PG+'/pay/'+o.providerOrderId};},
@@ -63,7 +63,7 @@ async function build({release=allOn,lookupOverride=null,badSigner=false}={}){
     providerCode:'testpg',orderId:o.id,providerOrderId:o.providerOrderId,
     merchantId:'synthetic-merchant',amountWon:o.amountWon,currency:'KRW',
     status,paymentKey:'payment-synthetic-'+o.id.slice(0,8),
-    providerEventId:'event-'+status.toLowerCase()+'-'+o.id.slice(0,8)
+    providerEventId:'event-'+status.toLowerCase()+'-'+o.id.slice(0,8)+'-'+eventRevision
    };
   }
  };
@@ -130,7 +130,7 @@ async function build({release=allOn,lookupOverride=null,badSigner=false}={}){
       ||args.p_merchant_id!==o.merchantId||args.p_amount_won!==o.amountWon
       ||args.p_currency!=='KRW')throw Error('PROVIDER_BINDING_REJECTED');
     const key=args.p_provider_event_id;
-    if(events.has(key))return events.get(key);
+    if(events.has(key))return {...events.get(key),state:o.status,idempotent:true,effect:'none'};
     const next=planVerifiedSettlement(o,{
       authoritative:true,source:'provider-server-lookup',orderId:o.id,
       providerOrderId:o.providerOrderId,merchantId:o.merchantId,
@@ -192,10 +192,10 @@ async function build({release=allOn,lookupOverride=null,badSigner=false}={}){
  const api=composeCommerceApi({release,issuer,provider,db,signPrivatePdf,limit,
    storageOrigin:STORAGE,allowedOrigins:[SITE]});
  return {api,db,issuer,offers,slots,orders,requestIds,events,receipts,tokens,log,
-   setStatus:v=>{status=v;},provider};
+   setStatus:v=>{status=v;},bumpEvent:()=>{eventRevision++;},provider};
 }
 {
- assert.rejects(createServerOrderIssuer({...settings,issuerSecret:undefined,secretBytes:new Uint8Array(32)}));
+ await assert.rejects(createServerOrderIssuer({...settings,issuerSecret:undefined,secretBytes:new Uint8Array(32)}));
  // A private key must be provided separately; never a fixed client/public key.
  await assert.rejects(createServerOrderIssuer({secretBytes:new Uint8Array(32),
    providerCode:'testpg',merchantId:'synthetic-merchant'}));
@@ -270,8 +270,13 @@ async function build({release=allOn,lookupOverride=null,badSigner=false}={}){
  const forbidden=await reply(await f.api.handler(request({...proof,action:'download'})));
  eq(forbidden.status,403,'refund denies new signed URL');
  f.setStatus('DONE');
+ const duplicate=await reply(await f.api.handler(request(proof)));
+ eq(duplicate.status,200,'duplicate old DONE may be acknowledged idempotently');
+ eq(duplicate.json.state,'refunded','duplicate old DONE must return CURRENT refunded state');
+ eq(duplicate.json.canDownload,false,'duplicate DONE cannot regain PDF permission');
+ f.bumpEvent();
  const replay=await reply(await f.api.handler(request(proof)));
- eq(replay.status,503,'late DONE rejected after refund');
+ eq(replay.status,503,'new stale DONE event rejected after refund');
  eq([...f.orders.values()][0].status,'refunded','refund terminal unchanged');
 }
 {
