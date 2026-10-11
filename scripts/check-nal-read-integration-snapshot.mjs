@@ -76,7 +76,21 @@ for(const filename of commerceAdminPaths){
     'Commerce Admin path overlaps protected source: '+filename);
   check(actual.has(filename),'staged Commerce Admin path missing: '+filename);
 }
-const expected = new Set([...imported, ...protectedFiles, ...commerceLitePaths, ...commerceAdminPaths]);
+// P7-E adds ONLY four separately staged customer pass assets. Previously
+// protected READ 88, storefront 130, Commerce Lite 6 and Admin 4 stay SHA locked.
+const commercePassPaths=Object.freeze([
+ 'nal/commerce/pass/index.html',
+ 'nal/assets/js/nal-commerce-pass.js',
+ 'nal/assets/css/nal-commerce-pass.css',
+ 'nal/data/commerce-pass.release.json'
+]);
+for(const filename of commercePassPaths){
+ check(!imported.has(filename)&&!protectedFiles.has(filename)
+  &&!commerceLitePaths.includes(filename)&&!commerceAdminPaths.includes(filename),
+  'Commerce Pass path overlaps existing protected assets: '+filename);
+ check(actual.has(filename),'staged Commerce Pass asset missing: '+filename);
+}
+const expected = new Set([...imported, ...protectedFiles, ...commerceLitePaths, ...commerceAdminPaths,...commercePassPaths]);
 check(actual.size === expected.size, `NAL file count drift expected ${expected.size} got ${actual.size}`);
 for (const filename of actual) check(expected.has(filename), `untracked NAL path in integration: ${filename}`);
 
