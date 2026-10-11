@@ -1,0 +1,96 @@
+name: NAL Positive Writing 03 Free Release
+
+on:
+  push:
+    branches:
+      - feat/nal-positive-writing-03-free-v11
+    paths:
+      - "scripts/nal-positive-writing-03/**"
+      - ".github/workflows/nal-positive-writing-03-free.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nal-positive-writing-03-free-v11
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF environment
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install --disable-pip-version-check reportlab==4.2.5 PyMuPDF==1.26.5 Pillow==11.1.0 pypdf==5.9.0 jsonschema==4.25.1
+      - name: Rebuild editorial PDFs from final v1.1 manuscript
+        run: python scripts/nal-positive-writing-03/build_series03_v11.py
+      - name: Validate all files and register free product
+        run: python scripts/nal-positive-writing-03/register_release.py
+      - name: Regenerate public NAL pages
+        run: |
+          node --check nal/assets/js/app.js
+          node --check scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Validate three books' navigation, download paths, and unaffected sales
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ROOT=Path('.')
+          products=json.loads((ROOT/'nal/data/products.json').read_text(encoding='utf8'))['products']
+          ids=['nal-positive-writing-14days','nal-positive-writing-02-relationships','nal-positive-writing-03-small-starts']
+          for id in ids:
+              product=next(x for x in products if x.get('id')==id)
+              assert product['published'] and product['price']==0 and product['stockStatus']=='available', id
+              page=ROOT/'nal/shop'/id/'index.html'
+              html=page.read_text(encoding='utf8')
+              for other in ids:
+                  assert '/nal/shop/'+other+'/' in html, (page,other)
+          p=next(x for x in products if x.get('id')==ids[2])
+          assert len(p['freeDownloads'])==3
+          page=(ROOT/'nal/shop'/ids[2]/'index.html').read_text(encoding='utf8')
+          for f in p['freeDownloads']:
+              url=f['url']
+              assert url in page, url
+              assert (ROOT/url.lstrip('/')).is_file(), url
+          assert 'nal-positive-writing-03-small-starts' in (ROOT/'nal/shop/index.html').read_text()
+          js=(ROOT/'nal/assets/js/app.js').read_text()
+          assert 'const writingSeriesNav' in js and 'const positiveSeries' in js
+          assert all(id in (ROOT/'nal/assets/js/product-routes.js').read_text() for id in ids)
+          assert all(id in (ROOT/'sitemap.xml').read_text() for id in ids)
+          assert all(not (prod.get('price') is not None and prod.get('price')>0 and prod.get('purchaseUrl','') in [x['url'] for x in p['freeDownloads']]) for prod in products)
+          print('NAL positive-writing 01/02/03: navigation, 3 download variants, no checkout, SEO PASS')
+          PY
+      - name: Commit generated assets and public registry
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/assets/downloads/free/nal-positive-writing-03-small-starts-v11-a5.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-03-small-starts-v11-a4-print.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-03-small-starts-v11-fillable.pdf
+          git add nal/assets/images/catalog/shop/retail/nal-positive-writing-03-small-starts-v11-cover.png
+          git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
+          git add nal/shop/index.html nal/shop/nal-positive-writing-03-small-starts/index.html
+          git add nal/shop/nal-positive-writing-14days/index.html nal/shop/nal-positive-writing-02-relationships/index.html
+          git add sitemap.xml
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No asset changes"
+            exit 0
+          fi
+          git commit -m "build(nal): publish verified 40-page third volume and series links [skip ci]"
+          git push origin "HEAD:$GITHUB_REF_NAME"
