@@ -245,3 +245,25 @@ jobs:
           test "$(psql -X -Atc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='nal_private' AND p.proname LIKE 'commerce_os_%'")" = 21
           psql -X -Atc "SELECT CASE WHEN has_table_privilege('anon','nal_private.commerce_os_pass_resend_jobs','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
           psql -X -Atc "SELECT CASE WHEN has_function_privilege('authenticated','nal_private.commerce_os_queue_pass_resend(uuid,text,uuid)','EXECUTE') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+
+  pass-source:
+    name: NAL P7-E source and customer pass safety (no live RPC)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify protected READ and public storefront source hashes
+        run: node scripts/check-nal-read-integration-snapshot.mjs
+      - name: Confirm P7-D notification sender and P7-E customer page stay OFF
+        run: node scripts/check-nal-commerce-os-delivery.mjs
+      - name: Check one-time pass and original-buyer-only resend source constraints
+        run: node scripts/check-nal-commerce-os-pass.mjs
+      - name: Simulate customer pass fragment removal and no premature API
+        run: node scripts/test-nal-commerce-pass-browser.mjs
+      - name: Simulate pass verification, refund checks and authorized resend worker
+        run: node scripts/test-nal-commerce-os-pass-server.mjs
+      - name: Inject forbidden token and resend mutations to prove fail-closed
+        run: node scripts/test-nal-commerce-pass-negative.mjs
