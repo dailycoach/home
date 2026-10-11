@@ -79,9 +79,11 @@ check(sql.includes("o.claim_digest IS DISTINCT FROM p_claim_digest")
 check(sql.includes('FOR UPDATE')&&sql.includes("p_request_id")
  &&sql.includes('UNIQUE')&&sql.includes('lease_id IS DISTINCT FROM p_lease_id'),
  'resend idempotency, row-lock and lease checks absent');
-check(sql.includes('ENABLE ROW LEVEL SECURITY')
- &&sql.includes('FROM PUBLIC,anon,authenticated')
- &&sql.includes('TO service_role')
+check((sql.match(/ENABLE ROW LEVEL SECURITY/g)||[]).length===1
+ &&(sql.match(/FROM PUBLIC,anon,authenticated/g)||[]).length===2
+ &&(sql.match(/TO service_role/g)||[]).length===2
+ &&sql.includes('REVOKE ALL ON TABLE')
+ &&sql.includes('REVOKE ALL ON FUNCTION')
  &&!sql.includes('SECURITY DEFINER')
  &&!sql.includes('REVOKE ALL ON ALL'),
  'no public DB grants or security-definer on program resend');
