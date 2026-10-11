@@ -1,0 +1,80 @@
+name: NAL Positive Writing v2 Page Build
+
+on:
+  push:
+    branches: [feat/nal-positive-writing-free-v2]
+    paths:
+      - ".github/workflows/nal-positive-writing-pages-v2.yml"
+      - "scripts/generate-nal-pages.mjs"
+      - "nal/data/products.json"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check source syntax
+        run: |
+          node --check nal/assets/js/app.js
+          node --check nal/assets/js/store.js
+          node --check scripts/generate-nal-pages.mjs
+          node --check scripts/generate-nal-sitemap.mjs
+          node --check scripts/nal-product-model.mjs
+      - name: Verify catalog and release binaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          catalog=json.loads(Path('nal/data/products.json').read_text())
+          p=next(x for x in catalog['products'] if x['id']=='nal-positive-writing-14days')
+          assert p['published'] and p['price']==0 and p['stockStatus']=='available'
+          assert p['pageCount']==40 and len(p['freeDownloads'])==3
+          for o in p['freeDownloads']:
+              assert o['url'].startswith('/nal/assets/downloads/free/')
+              assert Path(o['url'].lstrip('/')).is_file(),o['url']
+              assert Path(o['url'].lstrip('/')).stat().st_size>200000
+          assert Path(p['coverImage'].lstrip('/')).is_file()
+          assert len({x['slug'] for x in catalog['products']})==len(catalog['products'])
+          print('Catalog and public release binary assets verified')
+          PY
+      - name: Regenerate NAL pages and sitemap
+        run: |
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Validate product routes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          new=Path('nal/shop/nal-positive-writing-14days/index.html').read_text()
+          listing=Path('nal/shop/index.html').read_text()
+          routes=Path('nal/assets/js/product-routes.js').read_text()
+          sitemap=Path('sitemap.xml').read_text()
+          assert '긍정문장 따라 쓰기' in new
+          assert 'nal-positive-writing-14days-v2-a5.pdf' in new
+          assert 'nal-positive-writing-14days-v2-a4-print.pdf' in new
+          assert 'nal-positive-writing-14days-v2-fillable.pdf' in new
+          assert 'nal-positive-writing-14days/' in listing
+          assert 'nal-positive-writing-14days' in routes
+          assert '/nal/shop/nal-positive-writing-14days/' in sitemap
+          print('Page, listing, routes and sitemap PASS')
+          PY
+      - name: Commit generated site routes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/shop/index.html nal/shop/nal-positive-writing-14days/index.html nal/assets/js/product-routes.js nal/data/routes.json sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Routes unchanged"
+            exit 0
+          fi
+          git commit -m "build(nal): publish free positive-writing workbook route [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
