@@ -1,0 +1,105 @@
+name: NAL Positive Writing 02 Free Assets
+
+on:
+  push:
+    branches:
+      - feat/nal-positive-writing-02-free-v21
+    paths:
+      - scripts/generate-nal-positive-writing-02-v21.py
+      - .github/workflows/nal-positive-writing-02-free.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nal-positive-writing-02-free
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install reproducible Korean PDF environment
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install --disable-pip-version-check reportlab==4.2.5 PyMuPDF==1.26.5 Pillow==11.1.0
+      - name: Generate complete second-volume digital assets
+        run: python scripts/generate-nal-positive-writing-02-v21.py
+      - name: Validate and publish product in branch only after files exist
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import fitz
+          from PIL import Image
+          root=Path('.')
+          slug='nal-positive-writing-02-relationships'
+          asset_dir=root/'nal/assets/downloads/free'
+          paths=[asset_dir/(slug+'-v21-a5.pdf'), asset_dir/(slug+'-v21-a4-print.pdf'), asset_dir/(slug+'-v21-fillable.pdf')]
+          for p in paths:
+              assert p.exists() and p.stat().st_size>30000, p
+              document=fitz.open(p)
+              assert len(document)==40, (p,len(document))
+              assert '답장이 늦어지는 동안에도 내 하루는 계속된다.' in '\n'.join(page.get_text() for page in document),p
+          forms=sum(len(list(page.widgets() or [])) for page in fitz.open(paths[2]))
+          assert forms>=66,forms
+          with Image.open(root/'nal/assets/images/catalog/shop/retail'/(slug+'-v21-cover.png')) as im:
+              assert im.size==(1200,1600),im.size
+          catalog=root/'nal/data/products.json'
+          data=json.loads(catalog.read_text(encoding='utf8'))
+          item=next(x for x in data['products'] if x['slug']==slug)
+          assert item['price']==0 and item['deliveryType']=='digital'
+          assert len(item['freeDownloads'])==3
+          assert all((root/'nal/assets/downloads/free'/Path(x['url']).name).exists() for x in item['freeDownloads'])
+          item['fileSizeMB']=round(paths[0].stat().st_size/1_000_000,2)
+          item['published']=True
+          catalog.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+          print('40 pages x 3, form fields',forms,'and cover passed')
+          PY
+      - name: Regenerate NAL public pages and sitemap
+        run: |
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Verify published second-volume links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          slug='nal-positive-writing-02-relationships'
+          p=Path('nal/shop')/slug/'index.html'
+          content=p.read_text()
+          for suffix in ['-v21-a5.pdf','-v21-a4-print.pdf','-v21-fillable.pdf']:
+              assert slug+suffix in content,(p,suffix)
+          listing=Path('nal/shop/index.html').read_text()
+          assert slug in listing
+          routes=Path('nal/assets/js/product-routes.js').read_text()
+          assert slug in routes
+          print('NAL storefront, all three variant links, listing and route PASS')
+          PY
+      - name: Commit reviewed static assets and product only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/assets/downloads/free/nal-positive-writing-02-relationships-v21-a5.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-02-relationships-v21-a4-print.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-02-relationships-v21-fillable.pdf
+          git add nal/assets/images/catalog/shop/retail/nal-positive-writing-02-relationships-v21-cover.png
+          git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
+          git add nal/shop/index.html nal/shop/nal-positive-writing-02-relationships/index.html
+          git add sitemap.xml
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No generated assets changed"
+            exit 0
+          fi
+          git commit -m "build(nal): verified positive-writing vol 02 free PDFs and public pages [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
