@@ -39,7 +39,7 @@ const pages = [
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
     title: 'PDF 전자책·워크북 | NAL 마음도구 · 날빛', description: 'PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.',
     label: 'NAL MIND TOOLS', heading: 'PDF 전자책부터 워크북·코칭도구까지',
-    copy: '무료 스타터 세 권을 먼저 공개했습니다. 마음 정리·관계 대화·다음 한 걸음, 로그인과 결제 없이 읽고 내려받을 수 있습니다.', schemaType: 'CollectionPage'
+    copy: '무료 스타터 세 권에 더해 14일 긍정문장 따라 쓰기를 공개합니다. 회원가입과 결제 없이 원하는 PDF를 받아보세요.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/note/', attrs: 'data-page="listing" data-collection="content"',
@@ -246,7 +246,10 @@ function fallbackExtras(page) {
     if (!item) return '';
     const source = item.sourceUrl ? `<a class="nal-button nal-button--secondary" href="${escapeHtml(item.sourceUrl)}">확인된 원문 보기</a>` : '';
     const freePdf = collectionName === 'products' && item.price === 0 && item.stockStatus === 'available' && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(item.purchaseUrl || '');
-    const freeActions = freePdf ? `<p><strong>PDF · ${Number(item.pageCount) || 0}쪽 · 무료 · 개인 열람·인쇄 가능</strong></p><p><a class="nal-button nal-button--primary" href="${escapeHtml(item.purchaseUrl)}" download>무료 PDF 다운로드</a> <a class="nal-button nal-button--ghost" href="${escapeHtml(item.previewUrl || item.purchaseUrl)}" target="_blank" rel="noopener noreferrer">전체 PDF 읽기</a></p><p>회원가입과 결제 없이 받을 수 있습니다.</p>` : '';
+    const otherFormats = freePdf ? (item.freeDownloads || [])
+      .filter(option => option.url !== item.purchaseUrl && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(option.url))
+      .map(option => `<a class="nal-button nal-button--ghost" href="${escapeHtml(option.url)}" download>${escapeHtml(option.label)} PDF 다운로드</a>`).join(" ") : "";
+    const freeActions = freePdf ? `<p><strong>PDF · ${Number(item.pageCount) || 0}쪽 · 무료 · 개인 열람·인쇄 가능</strong></p><p><a class="nal-button nal-button--primary" href="${escapeHtml(item.purchaseUrl)}" download>무료 PDF 다운로드</a> <a class="nal-button nal-button--ghost" href="${escapeHtml(item.previewUrl || item.purchaseUrl)}" target="_blank" rel="noopener noreferrer">전체 PDF 읽기</a></p><p>회원가입과 결제 없이 받을 수 있습니다.</p>${otherFormats ? `<p>${otherFormats}</p>` : ""}` : '';
     return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}${freeActions}</div></section>`;
   }
   return '';
