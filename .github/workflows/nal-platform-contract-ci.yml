@@ -27,6 +27,13 @@ on:
       - "docs/NAL_COMMERCE_OS_LEDGER_02.md"
       - "docs/NAL_COMMERCE_OS_API_03.md"
       - "docs/NAL_COMMERCE_OS_DELIVERY_04.md"
+      - "docs/NAL_COMMERCE_OS_PASS_05.md"
+      - "scripts/check-nal-commerce-os-pass.mjs"
+      - "scripts/test-nal-commerce-pass-browser.mjs"
+      - "scripts/test-nal-commerce-os-pass-server.mjs"
+      - "scripts/test-nal-commerce-pass-negative.mjs"
+      - "scripts/test-nal-commerce-pass-postgres.mjs"
+      - "scripts/test-nal-commerce-os-pass-resend-races.mjs"
       - "scripts/check-nal-commerce-os-delivery.mjs"
       - "scripts/test-nal-commerce-os-delivery-worker.mjs"
       - "scripts/test-nal-commerce-os-delivery-negative.mjs"
@@ -132,9 +139,17 @@ jobs:
         run: node scripts/test-nal-commerce-os-delivery-worker.mjs
       - name: Reject unsafe delivery/email/sql release changes
         run: node scripts/test-nal-commerce-os-delivery-negative.mjs
+      - name: Lock customer pass and resend release against unauthorized access
+        run: node scripts/check-nal-commerce-os-pass.mjs
+      - name: Verify customer pass noindex page, secure fragment and OFF behavior
+        run: node scripts/test-nal-commerce-pass-browser.mjs
+      - name: Simulate one-use attendee pass and proof-gated resend worker
+        run: node scripts/test-nal-commerce-os-pass-server.mjs
+      - name: Reject unsafe P7-E pass/resend/security mutations
+        run: node scripts/test-nal-commerce-pass-negative.mjs
 
   commerce-ledger-postgres:
-    name: NAL P7-B isolated Postgres order/seat integrity
+    name: NAL P7-B to P7-E isolated Postgres commerce integrity
     runs-on: ubuntu-latest
     timeout-minutes: 9
     services:
@@ -213,3 +228,42 @@ jobs:
           psql -X -Atc "SELECT CASE WHEN has_table_privilege('anon','nal_private.commerce_os_delivery_jobs','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
           psql -X -Atc "SELECT CASE WHEN has_function_privilege('authenticated','nal_private.commerce_os_lease_delivery(uuid,text)','EXECUTE') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
           psql -X -Atc "SELECT CASE WHEN has_table_privilege('authenticated','nal_private.commerce_os_pass_claims','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+
+      - name: Install P7-E buyer-proof-only resend SQL in disposable database
+        run: psql -X -v ON_ERROR_STOP=1 -c "SET nal.commerce_os_ci_approval='isolated'" -f integration/nal-commerce-os/PROPOSAL_ONLY_pass_resend.sql
+      - name: Validate private resend SQL, cooldown, refund cancellation and fixture
+        run: psql -X -v ON_ERROR_STOP=1 -f integration/nal-commerce-os/tests/07_pass_resend_assertions.sql
+      - name: Race 8 same-time buyer requests and 8 email worker leases
+        run: node scripts/test-nal-commerce-os-pass-resend-races.mjs
+      - name: Verify rolling day cap and buyer-origin proof isolation
+        run: psql -X -v ON_ERROR_STOP=1 -f integration/nal-commerce-os/tests/08_pass_resend_limits.sql
+      - name: Test real pass HTTP flow through isolated Postgres and mock PG
+        run: node scripts/test-nal-commerce-pass-postgres.mjs
+      - name: Assert P7-E private schema isolation and exact new object count
+        run: |
+          test "$(psql -X -Atc "SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='nal_private' AND c.relkind='r' AND c.relname LIKE 'commerce_os_%'")" = 12
+          test "$(psql -X -Atc "SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='nal_private' AND p.proname LIKE 'commerce_os_%'")" = 21
+          psql -X -Atc "SELECT CASE WHEN has_table_privilege('anon','nal_private.commerce_os_pass_resend_jobs','SELECT') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+          psql -X -Atc "SELECT CASE WHEN has_function_privilege('authenticated','nal_private.commerce_os_queue_pass_resend(uuid,text,uuid)','EXECUTE') THEN 'FAIL' ELSE 'PASS' END" | grep -qx PASS
+
+  pass-source:
+    name: NAL P7-E source and customer pass safety (no live RPC)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify protected READ and public storefront source hashes
+        run: node scripts/check-nal-read-integration-snapshot.mjs
+      - name: Confirm P7-D notification sender and P7-E customer page stay OFF
+        run: node scripts/check-nal-commerce-os-delivery.mjs
+      - name: Check one-time pass and original-buyer-only resend source constraints
+        run: node scripts/check-nal-commerce-os-pass.mjs
+      - name: Simulate customer pass fragment removal and no premature API
+        run: node scripts/test-nal-commerce-pass-browser.mjs
+      - name: Simulate pass verification, refund checks and authorized resend worker
+        run: node scripts/test-nal-commerce-os-pass-server.mjs
+      - name: Inject forbidden token and resend mutations to prove fail-closed
+        run: node scripts/test-nal-commerce-pass-negative.mjs

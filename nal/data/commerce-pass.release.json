@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "module": "nal-commerce-pass",
+  "phase": "P7_E_SOURCE_ONLY",
+  "uiEnabled": false,
+  "serverReady": false,
+  "passClaimReviewed": false,
+  "guestProofReviewed": false,
+  "providerSettlementReviewed": false,
+  "programSaleApproved": false,
+  "programClaimPageApproved": false,
+  "resendEnabled": false,
+  "resendRateLimitReviewed": false,
+  "emailSenderConnected": false,
+  "buyerPrivacyApproved": false,
+  "productionApproved": false,
+  "allowedActions": [
+    "verify",
+    "confirm",
+    "resend"
+  ],
+  "receiptTokenInUrl": "fragment-only",
+  "buyerPasswordRequired": false,
+  "privateDataAllowed": [
+    "kind",
+    "title",
+    "startsAt",
+    "slotId",
+    "state"
+  ],
+  "privateDataBlocked": [
+    "buyerEmail",
+    "phone",
+    "meetingUrl",
+    "hostAccessToken",
+    "storagePath",
+    "paymentKey"
+  ],
+  "customerPaymentExecution": false,
+  "blockedBy": [
+    "No real PG",
+    "No live private pass SQL migration",
+    "No actual pass Edge function",
+    "No live email provider",
+    "No customer reading/class checkout flow",
+    "Legal/owner review pending"
+  ],
+  "noProductionEffects": true
+}

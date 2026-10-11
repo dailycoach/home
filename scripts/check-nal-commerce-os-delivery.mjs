@@ -10,6 +10,10 @@ const oldSql=await text('integration/nal-commerce-os/PROPOSAL_ONLY_unified_order
 const worker=await text('integration/nal-commerce-os/server/unified-delivery-worker.mjs');
 const links=await text('integration/nal-commerce-os/server/delivery-links.mjs');
 const failures=[];const check=(value,reason)=>{if(!value)failures.push(reason);};
+const passGate=await json('nal/data/commerce-pass.release.json');
+check(passGate.uiEnabled===false&&passGate.serverReady===false
+ &&passGate.resendEnabled===false&&passGate.productionApproved===false,
+ 'new P7-E pass page must remain hard OFF');
 check(review.schemaVersion===1&&review.module==='nal-commerce-os-delivery'
  &&review.phase==='P7_D_SOURCE_AND_DISPOSABLE_POSTGRES','P7-D release identity mismatch');
 for(const [key,value] of Object.entries(review)){
@@ -22,7 +26,7 @@ for(const [key,value] of Object.entries(review)){
 }
 check(review.noProductionEffects===true && review.legacyPdfReceiptWorkerEnabled===false,
  'P7-D and legacy PDF receipt workers must both remain OFF');
-check(review.programClaimRouteStatus==='not-created-or-live',
+check(review.programClaimRouteStatus==='staged-no-server',
  'program claim route must not be falsely declared available');
 for(const field of ['storePurchase','checkout','secureDownload','account','orderLibrary']){
  check(site.features?.[field]===false,'production NAL feature '+field+' enabled');
@@ -89,7 +93,7 @@ check(links.includes("getRandomValues(data)")
 for(const path of [
  'supabase/functions/nal-commerce-delivery/index.ts',
  'supabase/functions/nal-commerce-os-delivery/index.ts',
- 'nal/commerce/pass/index.html'
+
 ]){
  try{await access(path);failures.push('Unapproved delivery endpoint/consumer pass UI exists: '+path);}catch{}
 }
