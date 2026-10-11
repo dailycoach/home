@@ -1378,7 +1378,7 @@
       "sourceUrl": null,
       "relatedProgramIds": [],
       "relatedContentIds": [],
-      "published": false,
+      "published": true,
       "createdAt": "2026-10-11",
       "updatedAt": "2026-10-11",
       "fileFormat": "PDF",
@@ -1434,7 +1434,7 @@
         "A5 소책자 · A4 흑백 인쇄 · 디지털 입력형 PDF"
       ],
       "pageCount": 40,
-      "fileSizeMB": 0.38,
+      "fileSizeMB": 0.29,
       "recommendedFor": [
         "관계 속에서 자주 마음을 뒤로 미루는 사람",
         "서운함이나 비교를 돌아보고 싶은 사람",
