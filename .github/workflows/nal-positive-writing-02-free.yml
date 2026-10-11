@@ -96,7 +96,7 @@ jobs:
           git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
           git add nal/shop/index.html nal/shop/nal-positive-writing-02-relationships/index.html
           git add sitemap.xml
-          git diff --cached --check
+          git diff --cached --check -- nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js nal/shop/index.html nal/shop/nal-positive-writing-02-relationships/index.html sitemap.xml
           if git diff --cached --quiet; then
             echo "No generated assets changed"
             exit 0
