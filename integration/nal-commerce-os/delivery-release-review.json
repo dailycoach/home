@@ -31,7 +31,7 @@
     "pdf": "/nal/commerce/claim/",
     "program": "/nal/commerce/pass/"
   },
-  "programClaimRouteStatus": "not-created-or-live",
+  "programClaimRouteStatus": "staged-no-server",
   "workerDeliverySemantics": "at-least-once; provider idempotency key required before live",
   "blockedBy": [
     "Real transactional email provider not selected or connected",
