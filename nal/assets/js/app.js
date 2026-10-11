@@ -682,6 +682,10 @@
     const originalPrice = formatPrice(item.originalPrice);
     const hasPrice = Boolean(price);
     const freeDownload = digital && item.price === 0 && item.stockStatus === "available" && label === "무료 다운로드" && url.startsWith("/");
+    const otherFreeDownloads = freeDownload ? asArray(item.freeDownloads)
+      .filter((option) => option && option.url !== url
+        && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(option.url)
+        && typeof option.label === "string" && option.label.trim()) : [];
     const stockText = freeDownload ? "무료 다운로드 가능" : stockLabel(item.stockStatus) || status || "판매 상태 확인";
     const optionItems = asArray(item.options).filter(Boolean);
     const license = licenseLabel(item);
@@ -748,6 +752,10 @@
               ${previewButton}
               ${wishButton("products", item, true)}
             </div>
+            ${otherFreeDownloads.length ? `<div class="nal-free-download-formats" aria-label="다른 형식의 무료 PDF">
+              <p class="nal-free-download-formats__heading">다른 형식으로 받기</p>
+              <ul>${otherFreeDownloads.map((option) => `<li><a href="${escapeHtml(option.url)}" download>${escapeHtml(option.label)} 내려받기</a><small>${escapeHtml(option.description || "")}</small></li>`).join("")}</ul>
+            </div>` : ""}
             <p class="nal-commerce-note" id="product-purchase-status">${escapeHtml(reason)}</p><p class="nal-commerce-note">${digital
               ? (freeDownload ? "이 책은 무료 공개본입니다. 개인 기기에서 읽거나 개인 인쇄할 수 있으며 회원가입도 필요하지 않습니다." : label === "구매하기" ? "구매 후 제공 방식과 다운로드 조건은 실제 판매 페이지의 안내를 따릅니다." : "판매가 열리면 PDF 제공 방식·이용 범위·환불 조건을 함께 안내합니다.")
               : (url && label === "구매하기" ? "외부 스마트스토어의 실제 상품 주문 화면으로 이동합니다." : "개별 상품 판매가 열리기 전에는 스마트스토어의 현재 판매 상품을 확인할 수 있습니다.")}</p>

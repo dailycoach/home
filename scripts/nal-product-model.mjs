@@ -13,6 +13,7 @@ export async function productValidator() {
     const errors = validate(product) ? [] : validate.errors.map(e => `${e.instancePath || '/'} ${e.message}`);
     const urls = ['coverImage','purchaseUrl','sourceUrl','sampleUrl','previewUrl'].map(key=>[key,product[key]]);
     (product.gallery || []).forEach((url,i)=>urls.push([`gallery/${i}`,url]));
+    (product.freeDownloads || []).forEach((entry,i)=>urls.push([`freeDownloads/${i}/url`,entry.url]));
     (product.licenseOptions || []).forEach((option,i)=>urls.push([`licenseOptions/${i}/purchaseUrl`,option.purchaseUrl]));
     for (const [key,value] of urls) if (value != null && !globalThis.NALStore.safePublicUrl(value)) errors.push(`${key}: only safe public HTTPS or root-relative URLs are allowed`);
     if (product.gallery?.length !== product.galleryAlts?.length) errors.push('gallery and galleryAlts must have the same length');

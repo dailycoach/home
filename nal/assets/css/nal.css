@@ -5291,3 +5291,14 @@
   }
   @media(max-width:21rem) {body[data-collection="products"] .card-grid {grid-template-columns:minmax(0,1fr)}}
 }
+
+/* NAL free workbook: alternative printable and fillable formats */
+@layer nal-components {
+  .nal-free-download-formats { margin-top:1.15rem; padding-top:1.1rem; border-top:1px solid var(--nal-border, #dedbd4); }
+  .nal-free-download-formats__heading { margin:0 0 .65rem; font-size:.88rem; font-weight:700; }
+  .nal-free-download-formats ul { list-style:none; padding:0; margin:0; display:grid; gap:.65rem; }
+  .nal-free-download-formats li { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:.35rem .85rem; }
+  .nal-free-download-formats a { color:inherit; text-decoration:underline; text-underline-offset:3px; font-weight:650; }
+  .nal-free-download-formats a:focus-visible { outline:3px solid var(--nal-focus, #235f93); outline-offset:3px; }
+  .nal-free-download-formats small { display:block; font-size:.75rem; opacity:.75; flex:1 1 100%; line-height:1.45; }
+}
