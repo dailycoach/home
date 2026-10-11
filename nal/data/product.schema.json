@@ -454,6 +454,35 @@
         "string",
         "null"
       ]
+    },
+    "freeDownloads": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "description",
+          "url"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 55
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^/nal/assets/downloads/free/[a-z0-9-]+\\.pdf$"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "required": [
@@ -665,6 +694,31 @@
           },
           "policyStatus": {
             "const": "reviewed"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "freeDownloads": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "freeDownloads"
+        ]
+      },
+      "then": {
+        "properties": {
+          "price": {
+            "const": 0
+          },
+          "stockStatus": {
+            "const": "available"
+          },
+          "deliveryType": {
+            "const": "digital"
           }
         }
       }
