@@ -1,4 +1,5 @@
 name: NAL Positive Writing 06 Free Release
+# Rebuild gate: six-volume storefront syntax corrected.
 on:
   push:
     branches:
