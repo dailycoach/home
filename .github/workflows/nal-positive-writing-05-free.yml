@@ -1,0 +1,100 @@
+name: NAL Positive Writing 05 Free Release
+on:
+  push:
+    branches:
+      - feat/nal-positive-writing-05-free-v11
+    paths:
+      - "scripts/nal-positive-writing-05/**"
+      - ".github/workflows/nal-positive-writing-05-free.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nal-positive-writing-05-free-v11
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Korean PDF dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install --disable-pip-version-check reportlab==4.2.5 PyMuPDF==1.26.5 Pillow==11.1.0 pypdf==5.9.0 jsonschema==4.25.1
+      - name: Generate and validate vol 05 v1.1
+        run: python scripts/nal-positive-writing-05/register_release.py
+      - name: Rebuild NAL storefront and SEO routes
+        run: |
+          node --check nal/assets/js/app.js
+          node --check scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Verify all five books and fifteen direct downloads
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import fitz
+          ROOT=Path(".")
+          ids=[
+            "nal-positive-writing-14days",
+            "nal-positive-writing-02-relationships",
+            "nal-positive-writing-03-small-starts",
+            "nal-positive-writing-04-self-care",
+            "nal-positive-writing-05-small-joys",
+          ]
+          data=json.loads((ROOT/"nal/data/products.json").read_text(encoding="utf-8"))["products"]
+          assert len(set(p["id"] for p in data if p.get("id")))==len([p for p in data if p.get("id")])
+          listing=(ROOT/"nal/shop/index.html").read_text(encoding="utf-8")
+          routes=(ROOT/"nal/assets/js/product-routes.js").read_text(encoding="utf-8")
+          sitemap=(ROOT/"sitemap.xml").read_text(encoding="utf-8")
+          assert "긍정문장 따라 쓰기 5권" in listing
+          assert "긍정문장 따라 쓰기 5권" in (ROOT/"nal/assets/js/app.js").read_text(encoding="utf-8")
+          for id in ids:
+              b=next(p for p in data if p.get("id")==id)
+              assert b["published"] and b["price"]==0 and b["stockStatus"]=="available",id
+              assert b["deliveryType"]=="digital" and len(b["freeDownloads"])==3,id
+              html=(ROOT/"nal/shop"/id/"index.html").read_text(encoding="utf-8")
+              for other in ids:
+                  assert f"/nal/shop/{other}/" in html,(id,other)
+              for v in b["freeDownloads"]:
+                  asset=ROOT/v["url"].lstrip("/")
+                  assert asset.exists() and asset.stat().st_size>100000,asset
+                  if id==ids[-1]:
+                      assert v["url"] in html,(id,v["url"])
+                      with fitz.open(asset) as pdf:
+                          assert pdf.page_count==40,asset
+              assert id in listing and id in routes and id in sitemap,id
+          assert (ROOT/"nal/assets/images/catalog/shop/retail/nal-positive-writing-05-small-joys-v11-cover.png").exists()
+          print("PASS: five series links, 15 free PDF variants, no login/checkout and SEO")
+          PY
+      - name: Commit only public assets and storefront data to release branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a5.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a4-print.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-fillable.pdf
+          git add nal/assets/images/catalog/shop/retail/nal-positive-writing-05-small-joys-v11-cover.png
+          git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
+          git add nal/shop sitemap.xml
+          git diff --cached --check -- nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js nal/shop sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No generated assets changed"
+            exit 0
+          fi
+          git commit -m "build(nal): publish verified fifth writing volume and five-book navigation [skip ci]"
+          git push origin "HEAD:$GITHUB_REF_NAME"
