@@ -521,7 +521,7 @@
     const items = getListingItems();
     const q = params.get("q") || "";
     const positiveSeries = collection === "products"
-      ? [["nal-positive-writing-14days","01","나에게 건네는 말"],["nal-positive-writing-02-relationships","02","관계 속에서도 나를 잃지 않는 말"],["nal-positive-writing-03-small-starts","03","작은 시작을 믿는 말"],["nal-positive-writing-04-self-care","04","지친 날에도 나를 돌보는 말"],["nal-positive-writing-05-small-joys","05","오늘의 작은 기쁨을 발견하는 말"],["nal-positive-writing-06-changing-days","06","낯선 내일에도 나를 믿는 말"]
+      ? [["nal-positive-writing-14days","01","나에게 건네는 말"],["nal-positive-writing-02-relationships","02","관계 속에서도 나를 잃지 않는 말"],["nal-positive-writing-03-small-starts","03","작은 시작을 믿는 말"],["nal-positive-writing-04-self-care","04","지친 날에도 나를 돌보는 말"],["nal-positive-writing-05-small-joys","05","오늘의 작은 기쁨을 발견하는 말"],["nal-positive-writing-06-changing-days","06","낯선 내일에도 나를 믿는 말"]]
         .map(([id,number,subtitle]) => {
           const product=publicItems(state.products).find(p=>p.id===id);
           return product ? `<a href="/nal/shop/${escapeHtml(product.slug)}/"><span>${number} / ${escapeHtml(subtitle)}</span><strong>${escapeHtml(product.title)}</strong><small>14일 · 40쪽 · 무료</small></a>` : "";
