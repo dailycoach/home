@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "2.0",
+  "releaseStatus": "asset-ready / not published",
+  "proposedAssetPaths": {
+    "A5": "/nal/assets/downloads/free/nal-positive-writing-07-self-respect-v11-a5.pdf",
+    "A4": "/nal/assets/downloads/free/nal-positive-writing-07-self-respect-v11-a4-print.pdf",
+    "fill": "/nal/assets/downloads/free/nal-positive-writing-07-self-respect-v11-fillable.pdf",
+    "cover": "/nal/assets/images/catalog/shop/retail/nal-positive-writing-07-self-respect-v11-cover.png"
+  },
+  "product": {
+    "id": "nal-positive-writing-07-self-respect",
+    "slug": "nal-positive-writing-07-self-respect",
+    "title": "실수한 날에도 나를 존중하는 말",
+    "subtitle": "실수와 후회를 지나, 책임과 자기존중을 함께 살피는 14일",
+    "author": "DAILYCOACHING · NAL",
+    "summary": "실수와 후회 앞에서 책임을 인정하면서 자신을 함부로 단정하지 않도록 돕는 14일 필사 워크북.",
+    "description": "실수를 지우거나 무조건 괜찮다고 덮지 않습니다. 사실과 자기평가의 구분, 사과와 기다림, 후회의 반복, 내 책임과 다른 사람의 몫, 다시 선택하는 방법을 에세이·긍정문장·필사·기록으로 살피는 NAL 일곱 번째 무료 워크북입니다.",
+    "category": "날빛 작은 책 · 무료",
+    "tags": [
+      "날빛",
+      "긍정문장",
+      "따라쓰기",
+      "실수",
+      "후회",
+      "자기존중",
+      "책임",
+      "자기용서",
+      "무료 워크북"
+    ],
+    "coverImage": "/nal/assets/images/catalog/shop/retail/nal-positive-writing-07-self-respect-v11-cover.png",
+    "coverImageAlt": "웜테라코타·아이보리 타이포그래피 NAL 긍정문장 시리즈 07 실수한 날에도 나를 존중하는 말 표지",
+    "gallery": [],
+    "galleryAlts": [],
+    "price": 0,
+    "originalPrice": null,
+    "productType": "pdfWorkbook",
+    "deliveryType": "digital",
+    "stock": null,
+    "stockStatus": "comingSoon",
+    "options": [],
+    "components": [
+      "A5 컬러 소책자 PDF · 40쪽",
+      "A4 흑백 인쇄판 PDF · 40쪽",
+      "한글 디지털 입력형 PDF · 40쪽",
+      "14일 필사와 7일 다시 선택 기록"
+    ],
+    "cardCount": null,
+    "pageCount": 40,
+    "recommendedFor": [
+      "실수를 떠올릴 때 나 자신까지 부정하게 되는 사람",
+      "잘못을 인정하되 다른 사람의 몫도 구분하고 싶은 사람",
+      "후회를 반복하는 대신 다음 행동을 정하고 싶은 사람"
+    ],
+    "usageIndividual": "하루 한 장면을 읽고 문장을 따라 쓴 뒤 지금의 나에게 맞게 바꿉니다. 사과와 접촉은 상황이 적절하고 안전할 때에만 선택합니다. 순서를 바꾸거나 빈칸으로 두어도 됩니다.",
+    "usageCouple": null,
+    "usageGroup": null,
+    "precautions": "자기성찰을 위한 무료 자료입니다. 피해나 책임을 축소하지 않으며 타인의 용서와 연락을 강요하지 않습니다. 심리·건강 진단, 치료 또는 법률 자문을 대신하지 않습니다. 개인 열람·인쇄 가능, 무단 재판매·재업로드·재배포 금지.",
+    "visualNote": "웜테라코타·아이보리 타이포그래피 표지, 긍정문장 시리즈 07 / 무료 마음도구 10.",
+    "shippingPolicy": null,
+    "exchangePolicy": null,
+    "refundPolicy": "무료 제공 콘텐츠로 결제 및 환불 대상이 아닙니다.",
+    "purchaseUrl": null,
+    "sampleUrl": null,
+    "previewUrl": null,
+    "sourceUrl": null,
+    "relatedProgramIds": [],
+    "relatedContentIds": [],
+    "featured": false,
+    "featuredOrder": null,
+    "published": false,
+    "createdAt": "2026-10-13",
+    "updatedAt": "2026-10-13",
+    "fileFormat": "PDF",
+    "fileSizeMB": 0.34,
+    "deliveryMethod": "digital-download",
+    "licenseType": "personal-use",
+    "printingAllowed": true,
+    "downloadLimit": null,
+    "accessPeriod": "제한 없음",
+    "fulfillmentNote": "무료 파일 제작 완료 상태입니다. 스토어 공개 전 다운로드 파일의 최종 브라우저·앱 검증이 필요합니다.",
+    "audiences": [
+      "개인"
+    ],
+    "topics": [
+      "자기이해",
+      "감정",
+      "글쓰기"
+    ],
+    "tableOfContents": [
+      "여는 말",
+      "프롤로그",
+      "사용 안내",
+      "쓰기 전 체크인",
+      "01 실수의 크기",
+      "02 놓친 약속",
+      "03 서둘러 한 말",
+      "04 기다림의 존중",
+      "05 틀린 자리 보기",
+      "06 되감기 멈춤",
+      "07 남들 앞의 실수",
+      "08 짧은 인정",
+      "09 되돌릴 수 없는 일",
+      "10 내 몫과 남의 몫",
+      "11 다시 놓친 메모",
+      "12 오래된 후회",
+      "13 자기용서의 속도",
+      "14 다시 쥔 펜",
+      "14일 돌아보기",
+      "나의 한 문장",
+      "7일 다시 선택",
+      "에필로그"
+    ],
+    "licenseOptions": [],
+    "version": "1.1-free",
+    "policyStatus": "reviewed",
+    "policyVersion": null,
+    "freeDownloads": [
+      {
+        "label": "A5 컬러 소책자",
+        "description": "읽기와 필사를 위한 40쪽 컬러 PDF",
+        "url": "/nal/assets/downloads/free/nal-positive-writing-07-self-respect-v11-a5.pdf"
+      },
+      {
+        "label": "A4 흑백 인쇄판",
+        "description": "출력해 손글씨로 기록하는 40쪽 PDF",
+        "url": "/nal/assets/downloads/free/nal-positive-writing-07-self-respect-v11-a4-print.pdf"
+      },
+      {
+        "label": "디지털 한글 입력형",
+        "description": "PDF 양식 지원 앱에서 입력하는 40쪽 PDF · 기기별 호환성 확인",
+        "url": "/nal/assets/downloads/free/nal-positive-writing-07-self-respect-v11-fillable.pdf"
+      }
+    ]
+  }
+}
