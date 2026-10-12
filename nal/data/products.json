@@ -1732,6 +1732,130 @@
           "url": "/nal/assets/downloads/free/nal-positive-writing-04-self-care-v11-fillable.pdf"
         }
       ]
+    },
+    {
+      "id": "nal-positive-writing-05-small-joys",
+      "slug": "nal-positive-writing-05-small-joys",
+      "title": "오늘의 작은 기쁨을 발견하는 말",
+      "subtitle": "기쁨을 억지로 찾아내기보다, 지나온 순간에 잠시 머무는 14일",
+      "author": "DAILYCOACHING · NAL",
+      "summary": "평범한 하루의 풍경·감각·기억·친절을 돌아보며 작은 기쁨을 내 말로 발견하는 14일 긍정문장 필사 워크북.",
+      "description": "무조건 행복하라고 말하지 않습니다. 기쁜 일이 떠오르지 않는 날도 존중하면서 실제로 지나온 장면을 읽고, 따라 쓰고, 자기 말로 바꾸는 날빛 긍정문장 따라 쓰기 다섯 번째 권입니다. 14일 에세이, 필사, 장면 메모, 7일 발견 기록을 담았습니다.",
+      "category": "날빛 작은 책 · 무료",
+      "tags": [
+        "날빛",
+        "긍정문장",
+        "따라쓰기",
+        "일상",
+        "감사",
+        "작은 기쁨",
+        "에세이",
+        "무료 워크북"
+      ],
+      "coverImage": "/nal/assets/images/catalog/shop/retail/nal-positive-writing-05-small-joys-v11-cover.png",
+      "coverImageAlt": "따뜻한 오커색과 아이보리 타이포그래피 NAL 긍정문장 따라 쓰기 05 오늘의 작은 기쁨을 발견하는 말 표지",
+      "gallery": [],
+      "galleryAlts": [],
+      "price": 0,
+      "originalPrice": null,
+      "productType": "pdfWorkbook",
+      "deliveryType": "digital",
+      "stock": null,
+      "stockStatus": "available",
+      "options": [],
+      "components": [
+        "A5 컬러 소책자 PDF · 40쪽",
+        "A4 흑백 인쇄판 PDF · 40쪽",
+        "한글 디지털 입력형 PDF · 40쪽",
+        "14일 필사와 7일의 작은 발견 기록"
+      ],
+      "cardCount": null,
+      "pageCount": 40,
+      "recommendedFor": [
+        "하루가 비슷하게 흘러간다고 느껴질 때",
+        "감사를 억지로 해야 한다는 부담을 줄이고 싶을 때",
+        "평범한 일상에서 기억하고 싶은 순간을 찾고 싶을 때"
+      ],
+      "usageIndividual": "하루 한 편의 생활 장면을 읽고 한 문장을 따라 쓰며 내 경험에 맞는 말로 바꿉니다. 마음에 닿지 않는 날은 건너뛰어도 됩니다.",
+      "usageCouple": null,
+      "usageGroup": null,
+      "precautions": "일상 성찰을 위한 무료 자료이며 감사·기쁨을 강요하지 않습니다. 건강·심리 진단이나 치료를 대신하지 않습니다. 개인 열람·인쇄 가능, 재판매·재업로드·무단 재배포 금지.",
+      "visualNote": "오커·웜아이보리 타이포그래피 표지, 긍정문장 시리즈 05 / 무료 마음도구 08.",
+      "shippingPolicy": null,
+      "exchangePolicy": null,
+      "refundPolicy": "무료 제공 콘텐츠로 결제 및 환불 대상이 아닙니다.",
+      "purchaseUrl": "/nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a5.pdf",
+      "sampleUrl": "/nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a5.pdf",
+      "previewUrl": "/nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a5.pdf",
+      "sourceUrl": null,
+      "relatedProgramIds": [],
+      "relatedContentIds": [],
+      "featured": true,
+      "featuredOrder": 8,
+      "published": true,
+      "createdAt": "2026-10-12",
+      "updatedAt": "2026-10-12",
+      "fileFormat": "PDF",
+      "fileSizeMB": 0.32,
+      "deliveryMethod": "digital-download",
+      "licenseType": "personal-use",
+      "printingAllowed": true,
+      "downloadLimit": null,
+      "accessPeriod": "제한 없음",
+      "fulfillmentNote": "로그인·결제 없이 A5·A4·디지털 입력형 PDF를 바로 받습니다. 개인 열람·인쇄용입니다. 일부 PDF 앱의 한글 입력 표시가 다를 수 있습니다.",
+      "audiences": [
+        "개인"
+      ],
+      "topics": [
+        "자기이해",
+        "감정",
+        "글쓰기"
+      ],
+      "tableOfContents": [
+        "여는 말",
+        "프롤로그",
+        "사용 안내",
+        "쓰기 전 체크인",
+        "01 익숙한 풍경",
+        "02 작은 온기",
+        "03 기다리는 시간",
+        "04 반가운 기억",
+        "05 받은 친절",
+        "06 반복되는 하루",
+        "07 지나온 기록",
+        "08 기쁘지 않은 날",
+        "09 작은 수고",
+        "10 변하는 풍경",
+        "11 나눈 웃음",
+        "12 고마움 전하기",
+        "13 나에게 남긴 말",
+        "14 내가 고르는 순간",
+        "14일 돌아보기",
+        "나의 한 문장",
+        "7일의 작은 발견",
+        "에필로그"
+      ],
+      "licenseOptions": [],
+      "version": "1.1-free",
+      "policyStatus": "reviewed",
+      "policyVersion": null,
+      "freeDownloads": [
+        {
+          "label": "A5 컬러 소책자",
+          "description": "읽기·태블릿 필사용 40쪽 PDF",
+          "url": "/nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a5.pdf"
+        },
+        {
+          "label": "A4 흑백 인쇄판",
+          "description": "A4 출력·손글씨 기록용 40쪽 PDF",
+          "url": "/nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-a4-print.pdf"
+        },
+        {
+          "label": "디지털 한글 입력형",
+          "description": "PDF 양식 앱에서 입력하는 40쪽 PDF · 앱별 호환성 확인",
+          "url": "/nal/assets/downloads/free/nal-positive-writing-05-small-joys-v11-fillable.pdf"
+        }
+      ]
     }
   ],
   "digitalProductFields": {
