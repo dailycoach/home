@@ -1,0 +1,94 @@
+name: NAL Positive Writing 04 Free Release
+on:
+  push:
+    branches:
+      - feat/nal-positive-writing-04-free-v11
+    paths:
+      - "scripts/nal-positive-writing-04/**"
+      - ".github/workflows/nal-positive-writing-04-free.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nal-positive-writing-04-free-v11
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Korean PDF build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install --disable-pip-version-check reportlab==4.2.5 PyMuPDF==1.26.5 Pillow==11.1.0 pypdf==5.9.0 jsonschema==4.25.1
+      - name: Rebuild verified editorial v1.1 and register zero-price product
+        run: python scripts/nal-positive-writing-04/register_release.py
+      - name: Rebuild storefront, SEO, and static no-JS fallbacks
+        run: |
+          node --check nal/assets/js/app.js
+          node --check scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Four-book links and safe free download gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import fitz
+          R=Path('.')
+          IDs=['nal-positive-writing-14days','nal-positive-writing-02-relationships','nal-positive-writing-03-small-starts','nal-positive-writing-04-self-care']
+          C=json.loads((R/'nal/data/products.json').read_text(encoding='utf8'))['products']
+          assert len(set(p['id'] for p in C if p.get('id')))==len([p for p in C if p.get('id')])
+          for ident in IDs:
+              b=next(p for p in C if p.get('id')==ident)
+              assert b['published'] and b['price']==0 and b['stockStatus']=='available',ident
+              assert b['deliveryType']=='digital' and len(b['freeDownloads'])==3,ident
+              html=(R/'nal/shop'/ident/'index.html').read_text(encoding='utf8')
+              for name in IDs:
+                  assert '/nal/shop/'+name+'/' in html,(ident,name)
+              for variant in b['freeDownloads']:
+                  path=R/variant['url'].lstrip('/')
+                  assert path.is_file(),path
+                  if ident==IDs[-1]:
+                      with fitz.open(path) as book:
+                          assert book.page_count==40,(ident,path)
+                      assert variant['url'] in html,variant['url']
+          assert '긍정문장 따라 쓰기 4권' in (R/'nal/shop/index.html').read_text(encoding='utf8')
+          routes=(R/'nal/assets/js/product-routes.js').read_text(encoding='utf8')
+          assert all(x in routes for x in IDs)
+          assert all(x in (R/'sitemap.xml').read_text(encoding='utf8') for x in IDs)
+          assert 'const positiveSeries' in (R/'nal/assets/js/app.js').read_text(encoding='utf8')
+          assert (R/'nal/assets/images/catalog/shop/retail/nal-positive-writing-04-self-care-v11-cover.png').is_file()
+          assert not any(b.get('price',0)>0 and b.get('purchaseUrl') in [v['url'] for p in C if p['id']==IDs[-1] for v in p['freeDownloads']] for b in C if b.get('price') is not None)
+          print("PASS: 4 series, 12 free PDF variants, detail links, listing, sitemap, checkout unchanged")
+          PY
+      - name: Commit static PDF releases and catalog (branch only)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/assets/downloads/free/nal-positive-writing-04-self-care-v11-a5.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-04-self-care-v11-a4-print.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-04-self-care-v11-fillable.pdf
+          git add nal/assets/images/catalog/shop/retail/nal-positive-writing-04-self-care-v11-cover.png
+          git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
+          git add nal/shop sitemap.xml
+          git diff --cached --check -- nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js nal/shop sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No generated differences"
+            exit 0
+          fi
+          git commit -m "build(nal): publish verified fourth writing volume and all series routes [skip ci]"
+          git push origin "HEAD:$GITHUB_REF_NAME"

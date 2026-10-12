@@ -5308,7 +5308,7 @@
 .nal-positive-series .nal-eyebrow {font-size: .72rem; letter-spacing: .12em; color: #526858; margin: 0 0 .65rem}
 .nal-positive-series h2 {font-size: clamp(1.24rem,2.3vw,1.8rem); line-height: 1.35; margin: 0 0 .55rem}
 .nal-positive-series p:not(.nal-eyebrow) {margin: 0 0 1.25rem; line-height: 1.65; color: #606a60}
-.nal-positive-series__items {display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .75rem}
+.nal-positive-series__items {display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .75rem}
 .nal-positive-series__items a {display: flex; flex-direction: column; gap: .45rem; min-width: 0; padding: 1.1rem 1.25rem; color: inherit; text-decoration: none; background: #fffefa; border: 1px solid #d9dcd3; border-radius: .3rem; transition: border-color .18s}
 .nal-positive-series__items a:hover,.nal-positive-series__items a:focus-visible {border-color: #526858}
 .nal-positive-series__items a[aria-current="page"] {border: 2px solid #526858}
@@ -5316,4 +5316,5 @@
 .nal-positive-series__items strong {font-weight: 600; font-size: 1.02rem; line-height: 1.45; overflow-wrap: anywhere}
 .nal-positive-series__items small {font-size: .78rem; color: #606a60}
 .nal-positive-series--detail {background: #f8f7f1}
+@media(max-width: 980px) and (min-width: 641px) {.nal-positive-series__items{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width: 640px) {.nal-positive-series{padding: 2rem 0}.nal-positive-series__items{grid-template-columns:1fr}.nal-positive-series__items a{padding:.9rem 1.05rem}}
