@@ -39,7 +39,7 @@ const pages = [
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
     title: 'PDF 전자책·워크북 | NAL 마음도구 · 날빛', description: 'PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.',
     label: 'NAL MIND TOOLS', heading: 'PDF 전자책부터 워크북·코칭도구까지',
-    copy: '무료 작은 책과 긍정문장 따라 쓰기 5권을 공개합니다. 자기이해·관계·실행·자기돌봄·일상의 기쁨을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다.', schemaType: 'CollectionPage'
+    copy: '무료 작은 책과 긍정문장 따라 쓰기 6권을 공개합니다. 자기이해·관계·실행·자기돌봄·일상의 기쁨·변화와 불확실성을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/note/', attrs: 'data-page="listing" data-collection="content"',
