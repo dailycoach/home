@@ -521,18 +521,18 @@
     const items = getListingItems();
     const q = params.get("q") || "";
     const positiveSeries = collection === "products"
-      ? [["nal-positive-writing-14days","01","나에게 건네는 말"],["nal-positive-writing-02-relationships","02","관계 속에서도 나를 잃지 않는 말"],["nal-positive-writing-03-small-starts","03","작은 시작을 믿는 말"],["nal-positive-writing-04-self-care","04","지친 날에도 나를 돌보는 말"],["nal-positive-writing-05-small-joys","05","오늘의 작은 기쁨을 발견하는 말"]]
+      ? [["nal-positive-writing-14days","01","나에게 건네는 말"],["nal-positive-writing-02-relationships","02","관계 속에서도 나를 잃지 않는 말"],["nal-positive-writing-03-small-starts","03","작은 시작을 믿는 말"],["nal-positive-writing-04-self-care","04","지친 날에도 나를 돌보는 말"],["nal-positive-writing-05-small-joys","05","오늘의 작은 기쁨을 발견하는 말"],["nal-positive-writing-06-changing-days","06","낯선 내일에도 나를 믿는 말"]]
         .map(([id,number,subtitle]) => {
           const product=publicItems(state.products).find(p=>p.id===id);
           return product ? `<a href="/nal/shop/${escapeHtml(product.slug)}/"><span>${number} / ${escapeHtml(subtitle)}</span><strong>${escapeHtml(product.title)}</strong><small>14일 · 40쪽 · 무료</small></a>` : "";
         }).join("")
       : "";
     const listingIntro = collection === "products"
-      ? "무료 작은 책과 긍정문장 따라 쓰기 5권을 공개합니다. 자기이해·관계·실행·자기돌봄·일상의 기쁨을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다."
+      ? "무료 작은 책과 긍정문장 따라 쓰기 6권을 공개합니다. 자기이해·관계·실행·자기돌봄·일상의 기쁨·변화와 불확실성을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다."
       : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     root.innerHTML = `
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
-      ${positiveSeries ? `<section class="nal-positive-series" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><p class="nal-eyebrow">POSITIVE WRITING / 01—05</p><h2>오늘 나에게 필요한 말부터</h2><p>자기이해·관계·작은 실행·자기돌봄·일상의 기쁨까지. 원하는 권부터 무료로 펼쳐 보세요.</p><div class="nal-positive-series__items">${positiveSeries}</div></div></section>` : ""}
+      ${positiveSeries ? `<section class="nal-positive-series" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><p class="nal-eyebrow">POSITIVE WRITING / 01—06</p><h2>오늘 나에게 필요한 말부터</h2><p>자기이해·관계·작은 실행·자기돌봄·일상의 기쁨·변화의 시간까지. 원하는 권부터 무료로 펼쳐 보세요.</p><div class="nal-positive-series__items">${positiveSeries}</div></div></section>` : ""}
       <section class="nal-section nal-listing"><div class="nal-container">
         <form class="nal-filter-bar" data-filter-form role="search">
           <label class="nal-form-field nal-filter-search"><span>검색</span><input type="search" name="q" value="${escapeHtml(q)}" placeholder="주제나 이름으로 검색"></label>
@@ -684,7 +684,7 @@
     const status = stockLabel(item.stockStatus);
     const smartStore = safeUrl(state.site?.externalLinks?.smartStore);
     const previewUrl = globalThis.NALStore.preview(item);
-    const writingIds=["nal-positive-writing-14days","nal-positive-writing-02-relationships","nal-positive-writing-03-small-starts","nal-positive-writing-04-self-care","nal-positive-writing-05-small-joys"];
+    const writingIds=["nal-positive-writing-14days","nal-positive-writing-02-relationships","nal-positive-writing-03-small-starts","nal-positive-writing-04-self-care","nal-positive-writing-05-small-joys","nal-positive-writing-06-changing-days"];
     const writingSeriesNav=writingIds.includes(item.id) ? writingIds.map((id,i)=>{
       const p=publicItems(state.products).find(entry=>entry.id===id);
       return p ? `<a href="/nal/shop/${escapeHtml(p.slug)}/"${p.id===item.id?' aria-current="page"':''}><span>0${i+1}</span><strong>${escapeHtml(p.title)}</strong></a>` : "";

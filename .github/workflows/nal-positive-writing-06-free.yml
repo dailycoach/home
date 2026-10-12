@@ -1,0 +1,108 @@
+name: NAL Positive Writing 06 Free Release
+# Rebuild gate: six-volume storefront syntax corrected.
+on:
+  push:
+    branches:
+      - feat/nal-positive-writing-06-free-v11
+    paths:
+      - "scripts/nal-positive-writing-06/**"
+      - ".github/workflows/nal-positive-writing-06-free.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nal-positive-writing-06-free-v11
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Korean PDF dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install --disable-pip-version-check reportlab==4.2.5 PyMuPDF==1.26.5 Pillow==11.1.0 pypdf==5.9.0 jsonschema==4.25.1
+      - name: Generate verified volume 06 v1.1 from signed-off manuscript
+        run: python scripts/nal-positive-writing-06/register_release.py
+      - name: Generate public NAL pages and sitemap
+        run: |
+          node --check nal/assets/js/app.js
+          node --check scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Validate 6 books, 18 no-checkout downloads and navigation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import fitz
+          R = Path('.')
+          ids = [
+            'nal-positive-writing-14days',
+            'nal-positive-writing-02-relationships',
+            'nal-positive-writing-03-small-starts',
+            'nal-positive-writing-04-self-care',
+            'nal-positive-writing-05-small-joys',
+            'nal-positive-writing-06-changing-days',
+          ]
+          all_products=json.loads((R/'nal/data/products.json').read_text(encoding='utf8'))['products']
+          assert len(set(p['id'] for p in all_products if p.get('id')))==len([p for p in all_products if p.get('id')])
+          listing=(R/'nal/shop/index.html').read_text(encoding='utf8')
+          app=(R/'nal/assets/js/app.js').read_text(encoding='utf8')
+          routes=(R/'nal/assets/js/product-routes.js').read_text(encoding='utf8')
+          sitemap=(R/'sitemap.xml').read_text(encoding='utf8')
+          assert '긍정문장 따라 쓰기 6권' in listing
+          assert '긍정문장 따라 쓰기 6권' in app
+          assert '01—06' in app
+          assert '6권 시리즈' in (R/'nal/shop'/ids[0]/'index.html').read_text(encoding='utf8')
+          for ident in ids:
+              p=next(row for row in all_products if row.get('id')==ident)
+              assert p['published'] is True and p['price']==0 and p['stockStatus']=='available',ident
+              assert p['deliveryType']=='digital' and len(p['freeDownloads'])==3,ident
+              html=(R/'nal/shop'/ident/'index.html').read_text(encoding='utf8')
+              for other in ids:
+                  assert '/nal/shop/'+other+'/' in html,(ident,other)
+              for var in p['freeDownloads']:
+                  asset=R/var['url'].lstrip('/')
+                  assert asset.exists() and asset.stat().st_size>100_000,asset
+                  if ident==ids[-1]:
+                      assert var['url'] in html,(ident,var['url'])
+                      with fitz.open(asset) as pdf:
+                          assert pdf.page_count==40,(ident,asset)
+              assert ident in listing and ident in routes and ident in sitemap,ident
+          assert (R/'nal/assets/images/catalog/shop/retail/nal-positive-writing-06-changing-days-v11-cover.png').exists()
+          paid=[p for p in all_products if isinstance(p.get('price'),int) and p['price']>0]
+          freebies={o['url'] for p in all_products if p.get('id')==ids[-1] for o in p.get('freeDownloads',[])}
+          assert all(p.get('purchaseUrl') not in freebies for p in paid)
+          print('PASS: 6 free books / 18 PDF variants / SEO / all cross-links / paid products isolated')
+          PY
+      - name: Commit generated public assets and catalog to release branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/assets/downloads/free/nal-positive-writing-06-changing-days-v11-a5.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-06-changing-days-v11-a4-print.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-06-changing-days-v11-fillable.pdf
+          git add nal/assets/images/catalog/shop/retail/nal-positive-writing-06-changing-days-v11-cover.png
+          git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
+          git add nal/shop sitemap.xml
+          git diff --cached --check -- nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js nal/shop sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "build(nal): stage verified sixth free workbook and 6-book navigation [skip ci]"
+          git push origin "HEAD:$GITHUB_REF_NAME"
