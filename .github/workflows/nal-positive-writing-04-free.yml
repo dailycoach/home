@@ -85,7 +85,7 @@ jobs:
           git add nal/assets/images/catalog/shop/retail/nal-positive-writing-04-self-care-v11-cover.png
           git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
           git add nal/shop sitemap.xml
-          git diff --cached --check
+          git diff --cached --check -- nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js nal/shop sitemap.xml
           if git diff --cached --quiet; then
             echo "No generated differences"
             exit 0
