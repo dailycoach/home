@@ -39,7 +39,7 @@ const pages = [
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
     title: 'PDF 전자책·워크북 | NAL 마음도구 · 날빛', description: 'PDF 전자책부터 워크북·코칭도구까지, 미리보기와 상품별 이용범위를 확인하세요.',
     label: 'NAL MIND TOOLS', heading: 'PDF 전자책부터 워크북·코칭도구까지',
-    copy: '무료 작은 책과 긍정문장 따라 쓰기 7권을 공개합니다. 자기이해·관계·실행·자기돌봄·일상의 기쁨·변화와 불확실성·실수와 자기존중을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다.', schemaType: 'CollectionPage'
+    copy: '무료 작은 책과 긍정문장 따라 쓰기 8권을 공개합니다. 자기이해·관계·실행·자기돌봄·일상의 기쁨·변화와 불확실성·실수와 자기존중·비교와 나의 기준을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/note/', attrs: 'data-page="listing" data-collection="content"',
@@ -250,9 +250,9 @@ function fallbackExtras(page) {
       .filter(option => option.url !== item.purchaseUrl && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(option.url))
       .map(option => `<a class="nal-button nal-button--ghost" href="${escapeHtml(option.url)}" download>${escapeHtml(option.label)} PDF 다운로드</a>`).join(" ") : "";
     const freeActions = freePdf ? `<p><strong>PDF · ${Number(item.pageCount) || 0}쪽 · 무료 · 개인 열람·인쇄 가능</strong></p><p><a class="nal-button nal-button--primary" href="${escapeHtml(item.purchaseUrl)}" download>무료 PDF 다운로드</a> <a class="nal-button nal-button--ghost" href="${escapeHtml(item.previewUrl || item.purchaseUrl)}" target="_blank" rel="noopener noreferrer">전체 PDF 읽기</a></p><p>회원가입과 결제 없이 받을 수 있습니다.</p>${otherFormats ? `<p>${otherFormats}</p>` : ""}` : '';
-    const writingIds=['nal-positive-writing-14days','nal-positive-writing-02-relationships','nal-positive-writing-03-small-starts','nal-positive-writing-04-self-care','nal-positive-writing-05-small-joys','nal-positive-writing-06-changing-days','nal-positive-writing-07-self-respect'];
+    const writingIds=['nal-positive-writing-14days','nal-positive-writing-02-relationships','nal-positive-writing-03-small-starts','nal-positive-writing-04-self-care','nal-positive-writing-05-small-joys','nal-positive-writing-06-changing-days','nal-positive-writing-07-self-respect','nal-positive-writing-08-my-own-pace'];
     const writingSeriesNav=collectionName==='products' && writingIds.includes(item.id)
-      ? `<nav class="nal-positive-series nal-positive-series--detail" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><h2>긍정문장 따라 쓰기 · 7권 시리즈</h2><div class="nal-positive-series__items">${writingIds.map((id,i)=>{const book=products.find(p=>p.id===id&&p.published);return book ? `<a href="/nal/shop/${escapeHtml(book.slug)}/"${book.id===item.id?' aria-current="page"':''}><span>0${i+1}</span><strong>${escapeHtml(book.title)}</strong><small>무료 · 14일</small></a>`:'';}).join('')}</div></div></nav>`
+      ? `<nav class="nal-positive-series nal-positive-series--detail" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><h2>긍정문장 따라 쓰기 · 8권 시리즈</h2><div class="nal-positive-series__items">${writingIds.map((id,i)=>{const book=products.find(p=>p.id===id&&p.published);return book ? `<a href="/nal/shop/${escapeHtml(book.slug)}/"${book.id===item.id?' aria-current="page"':''}><span>0${i+1}</span><strong>${escapeHtml(book.title)}</strong><small>무료 · 14일</small></a>`:'';}).join('')}</div></div></nav>`
       : '';
     return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose">${item.coverImage ? `<figure class="nal-static-detail-image">${fallbackImage(item, collectionName, true)}</figure>` : ''}<p>${escapeHtml(item.summary ?? item.headline ?? item.description ?? '상세 준비 중')}</p>${source}${freeActions}</div></section>${writingSeriesNav}`;
   }
