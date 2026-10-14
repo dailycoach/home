@@ -1,0 +1,111 @@
+name: NAL Positive Writing 08 Free Release
+on:
+  push:
+    branches:
+      - feat/nal-positive-writing-08-free-v11
+    paths:
+      - "scripts/nal-positive-writing-08/**"
+      - ".github/workflows/nal-positive-writing-08-free.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nal-positive-writing-08-free-v11
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Korean PDF build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-nanum
+          python -m pip install --disable-pip-version-check reportlab==4.2.5 PyMuPDF==1.26.5 Pillow==11.1.0 pypdf==5.9.0 jsonschema==4.25.1
+      - name: Generate approved volume 08 PDFs and update public product catalog
+        run: python scripts/nal-positive-writing-08/register_release.py
+      - name: Build storefront and sitemap
+        run: |
+          node --check nal/assets/js/app.js
+          node --check scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-pages.mjs
+          node scripts/generate-nal-sitemap.mjs
+      - name: Validate eight free volumes, 24 PDF variants, navigation and paid isolation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import fitz
+          from PIL import Image
+          R=Path(".")
+          ids=[
+            "nal-positive-writing-14days",
+            "nal-positive-writing-02-relationships",
+            "nal-positive-writing-03-small-starts",
+            "nal-positive-writing-04-self-care",
+            "nal-positive-writing-05-small-joys",
+            "nal-positive-writing-06-changing-days",
+            "nal-positive-writing-07-self-respect",
+            "nal-positive-writing-08-my-own-pace",
+          ]
+          products=json.loads((R/"nal/data/products.json").read_text(encoding="utf-8"))["products"]
+          listing=(R/"nal/shop/index.html").read_text(encoding="utf-8")
+          app=(R/"nal/assets/js/app.js").read_text(encoding="utf-8")
+          routes=(R/"nal/assets/js/product-routes.js").read_text(encoding="utf-8")
+          sitemap=(R/"sitemap.xml").read_text(encoding="utf-8")
+          assert len(set(p["id"] for p in products if p.get("id")))==len([p for p in products if p.get("id")])
+          assert "긍정문장 따라 쓰기 8권" in listing and "01—08" in app
+          assert "8권 시리즈" in (R/"nal/shop"/ids[0]/"index.html").read_text(encoding="utf-8")
+          for ident in ids:
+            p=next(x for x in products if x.get("id")==ident)
+            assert p["published"] is True and p["price"]==0 and p["stockStatus"]=="available",ident
+            assert p["deliveryType"]=="digital" and len(p["freeDownloads"])==3,ident
+            assert p["purchaseUrl"]==p["freeDownloads"][0]["url"],ident
+            html=(R/"nal/shop"/ident/"index.html").read_text(encoding="utf-8")
+            for other in ids:
+              assert "/nal/shop/"+other+"/" in html,(ident,other)
+            for option in p["freeDownloads"]:
+              asset=R/option["url"].lstrip("/")
+              assert asset.is_file() and asset.stat().st_size>100000,asset
+              if ident==ids[-1]:
+                assert option["url"] in html,option["url"]
+                with fitz.open(asset) as pdf:
+                  assert pdf.page_count==40,asset
+            assert ident in routes and ident in sitemap and ident in listing,ident
+          cover=R/"nal/assets/images/catalog/shop/retail/nal-positive-writing-08-my-own-pace-v11-cover.png"
+          with Image.open(cover) as image:
+            assert image.size==(1200,1600)
+          new_free={x["url"] for p in products if p["id"]==ids[-1] for x in p["freeDownloads"]}
+          paid=[p for p in products if isinstance(p.get("price"),int) and p["price"]>0]
+          assert all(p.get("purchaseUrl") not in new_free for p in paid)
+          print("PASS: 8 public free books / 24 PDFs / all cross-links / SEO / checkout unchanged")
+          PY
+      - name: Commit generated public assets only to release branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nal/assets/downloads/free/nal-positive-writing-08-my-own-pace-v11-a5.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-08-my-own-pace-v11-a4-print.pdf
+          git add nal/assets/downloads/free/nal-positive-writing-08-my-own-pace-v11-fillable.pdf
+          git add nal/assets/images/catalog/shop/retail/nal-positive-writing-08-my-own-pace-v11-cover.png
+          git add nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js
+          git add nal/shop sitemap.xml
+          git diff --cached --check -- nal/data/products.json nal/data/routes.json nal/assets/js/product-routes.js nal/shop sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No generated asset changes"
+            exit 0
+          fi
+          git commit -m "build(nal): publish verified eighth free workbook and series navigation [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
