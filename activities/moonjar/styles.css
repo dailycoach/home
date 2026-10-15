@@ -74,7 +74,7 @@
 .card-form .card-field[hidden]{display:none!important}
 .card-field span{display:block;margin-bottom:6px;color:var(--muted)}
 .card-field input,.card-field textarea{display:block;width:100%;max-width:100%;min-height:50px;padding:12px;border:1px solid #aeb9af;border-radius:4px;background:var(--surface);color:var(--ink);font-size:16px;line-height:1.6;resize:vertical}
-.card-controls{border-top:1px solid var(--line);padding-top:18px;margin-top:10px}
+.card-controls{border-top:1px solid var(--line);padding-top:18px;margin:22px 0 0 auto;max-width:430px}
 .card-controls .primary{width:100%;font-size:16px;min-height:52px}
 .card-controls .micro{margin-top:10px;font-size:13px}
 .result-layout>.comparison-scene{padding:clamp(12px,2.2vw,28px);background:#fffefa;border:1px solid #d8dad1;box-shadow:0 14px 45px #2535360d}
@@ -86,6 +86,7 @@
   .card-modal-grid{display:flex;flex-direction:column;gap:18px}
   .card-modal-grid .card-form{order:0;width:100%}
   .card-modal-grid .card-preview{order:1;width:100%;padding:14px}
+  .card-controls{max-width:none;margin:16px 0 0}
   .card-preview img{max-width:290px}
   .card-modal>.card-privacy{font-size:14px;margin-bottom:16px}
   .result-layout>.comparison-scene{padding:12px 14px}
