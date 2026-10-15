@@ -57,6 +57,9 @@ async function entryMatrix(browser,engine,width,height) {
     await page.locator('.piece-choice[data-action="add:A01"]').tap();
     const tray=page.locator('#controls-panel.mobile-active');
     await tray.waitFor({state:'visible',timeout:10000});
+    await page.waitForFunction(()=>document.querySelector('#controls-panel.mobile-active .control-inline-status')?.textContent?.includes('조각'),{timeout:12000});
+    verify(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
+      `${name} success toast must not obscure the mobile editing tray`);
     const svg=page.locator('#art');
     const initial=await svg.locator('[data-node]').first().getAttribute('transform');
     await tray.locator('[data-action="move:24:0"]').tap();
