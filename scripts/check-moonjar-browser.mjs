@@ -69,6 +69,7 @@ try{
     `the selected nacre must be visible outside the controls, not hidden under the panel: ${JSON.stringify(view)}`);
   check(view.trayBottom<=view.viewport-40,'editor drawer must not cover the bottom toolbar');
   await page.screenshot({path:`${out}/02-canvas-first-editor-390.png`,fullPage:true});
+  await page.screenshot({path:`${out}/02b-editor-actual-viewport-390.png`,fullPage:false});
   await editorTray.locator('[data-action="panel:canvas"]').click();
   check(!(await editorTray.isVisible()),'close control should restore uncluttered artwork');
   await page.locator('[data-action="panel:controls"]').click();
