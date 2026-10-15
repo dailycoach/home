@@ -121,6 +121,7 @@ async function privacyMatrix(browser,engine){
     await page.locator('.hero-actions [data-action="start-free"]').waitFor({state:'visible'});
     verify(await page.locator('#art [data-node]').count()===0,`${engine} private mode intentionally does not restore on reload`);
     await page.locator('[data-action="projects"]').click();
+    await page.locator('.projects-page .empty-state').waitFor({state:'visible',timeout:12000});
     verify((await page.locator('.empty-state').count())===1,`${engine} memory mode not in stored projects`);
     verify(errors.length===0,`${engine} privacy browser errors: ${errors.join(' | ')}`);
     recordResult(`${engine}-non-persistent`,'PASS');
