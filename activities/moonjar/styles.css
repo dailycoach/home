@@ -34,7 +34,7 @@
   .scene-lead .text-button{min-height:44px;font-size:14px}
   .scene-lead .micro{font-size:12px;margin-top:6px}
   .control-live-preview{display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:6;background:var(--page);border-block:1px solid var(--line);padding:9px 8px;margin:0 0 18px;box-shadow:0 8px 14px #2535360a}
-  .control-live-preview svg{width:105px;max-height:120px;flex:none;aspect-ratio:8/9;pointer-events:none;background:#fff}
+  .control-live-preview svg{width:clamp(112px,36vw,158px);max-height:178px;flex:none;aspect-ratio:8/9;pointer-events:none;background:#fff}
   .control-live-preview figcaption{font-size:14px;line-height:1.6;color:var(--muted);word-break:keep-all}
   .paused .look-prompt{padding:16px 18px;margin-bottom:15px}
   .paused .look-prompt h2{font-size:22px}
