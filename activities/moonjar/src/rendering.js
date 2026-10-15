@@ -127,10 +127,10 @@ export async function exportCardPNG(scene, materials, copy = {}, scale = 1) {
     const serif = '"Batang", "AppleMyungjo", "Noto Serif KR", serif';
     const sans = 'system-ui, "Malgun Gothic", sans-serif';
     const titleStyle=planCardText(ctx,title || '나를 담고, 다시 보다',{
-      maxWidth:1320,maxLines:2,preferred:100,minimum:70,step:2,family:serif
+      maxWidth:1320,maxLines:2,preferred:110,minimum:76,step:2,family:serif
     });
     const sentenceStyle=planCardText(ctx,sentence,{
-      maxWidth:1300,maxLines:3,preferred:66,minimum:48,step:2,family:sans
+      maxWidth:1300,maxLines:3,preferred:76,minimum:52,step:2,family:sans
     });
 
     // Warm paper, protected artwork area and a quiet editorial hierarchy.
