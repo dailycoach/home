@@ -79,7 +79,7 @@ async function entryMatrix(browser,engine,width,height) {
     verify(await svg.locator('.selection').count()===1,`${name} finger tap selects nacre`);
 
     // The guided reflection remains optional and the current doc survives reload.
-    await page.locator('[data-action="panel:story"]').tap();
+    await page.locator('.mobile-tabs [data-action="panel:story"]').tap();
     await page.locator('.scene-nav [data-action="scene:return"]').tap();
     const note=page.locator('#story-panel [data-field="noticed"]');
     await note.fill(`테스트 ${engine} ${width} 알아차림`);
