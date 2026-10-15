@@ -179,3 +179,19 @@
   #controls-panel.mobile-active{max-height:40dvh;bottom:calc(68px + env(safe-area-inset-bottom))}
   .studio.controls-active .stage-shell{max-height:calc(100dvh - 40dvh - 95px)}
 }
+
+
+/* Avoid transient success toasts obscuring the small-screen editor tools. */
+#controls-panel .control-inline-status:empty{display:none}
+@media(max-width:767px){
+  #controls-panel.mobile-active .control-inline-status{
+    padding:7px 11px;
+    margin:2px 0 8px;
+    border-radius:6px;
+    background:#E9F0E9;
+    color:#375749;
+    font-size:12px;
+    line-height:1.5;
+    word-break:keep-all;
+  }
+}
