@@ -17,10 +17,25 @@ test('tool registry, sitemap and canonical point to the existing domain route',(
  const listed=JSON.parse(read('pages.json')).filter(p=>p.url==='/activities/moonjar/');assert.equal(listed.length,1);assert.equal(listed[0].category,'activities');
  assert.match(read('sitemap.xml'),/<loc>https:\/\/daily-coach-ing.com\/activities\/moonjar\/<\/loc>/);
  assert.match(page,/<link rel="canonical" href="https:\/\/daily-coach-ing.com\/activities\/moonjar\/">/);
- for(const file of ['styles.css','src/app.js','src/domain.js','src/persistence.js','src/rendering.js','data/story.json','data/manifest.json','data/schema.json','data/empty.json','assets/opening.webp'])assert.ok(existsSync(new URL(`activities/moonjar/${file}`,root)),file);
+ for(const file of ['styles.css','src/app.js','src/domain.js','src/persistence.js','src/rendering.js','data/story.json','data/manifest.json','data/schema.json','data/empty.json','assets/moonjar-original.svg'])assert.ok(existsSync(new URL(`activities/moonjar/${file}`,root)),file);
 });
-test('public app retains source attribution and omits private approval correspondence',()=>{
- const m=JSON.parse(read('activities/moonjar/data/manifest.json'));assert.equal(m.openingImage.credit,'사진 출처: 국립중앙박물관');assert.equal(m.openingImage.sourceUrl,'https://www.museum.go.kr/');assert.equal(m.pieces.length,96);assert.equal(m.canvases.length,2);assert.ok(!('projectImageUseApproval' in m));
- const app=read('activities/moonjar/src/app.js');assert.match(app,/photo.credit/);assert.match(app,/photo.sourceUrl/);
- assert.match(page,/connect-src 'self'/);assert.ok(!/supabase|analytics|gtag|stripe|firebase|openai/i.test(page));
+test('public app contains an original vector hero, not the removed museum photograph',()=>{
+ const m=JSON.parse(read('activities/moonjar/data/manifest.json'));
+ assert.equal(m.heroArtwork.src,'assets/moonjar-original.svg');
+ assert.equal(m.heroArtwork.creator,'DAILYCOACHING');
+ assert.ok(!('openingImage' in m));
+ assert.equal(m.pieces.length,96);
+ assert.equal(m.canvases.length,2);
+ assert.ok(!('projectImageUseApproval' in m));
+ const art=read('activities/moonjar/assets/moonjar-original.svg');
+ assert.match(art,/<svg xmlns=/);
+ assert.match(art,/viewBox="0 0 780 920"/);
+ assert.doesNotMatch(art,/<script|onload=|<foreignObject/i);
+ assert.ok(!existsSync(new URL('activities/moonjar/assets/opening.webp',root)),'removed museum photo must not remain');
+ const app=read('activities/moonjar/src/app.js');
+ assert.match(app,/manifest.heroArtwork/);
+ assert.doesNotMatch(app,/openingImage|photo.sourceUrl|museum.go.kr|opening.webp/);
+ assert.doesNotMatch(JSON.stringify(m),/opening.webp|museum.go.kr/);
+ assert.match(page,/connect-src 'self'/);
+ assert.ok(!/supabase|analytics|gtag|stripe|firebase|openai/i.test(page));
 });
