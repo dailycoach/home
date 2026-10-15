@@ -45,15 +45,30 @@ try{
 
   await page.locator('[data-action="panel:palette"]').click();
   await page.locator('[data-action="add:A01"]').click();
-  await page.locator('#controls-panel.mobile-active .control-live-preview').waitFor({state:'visible'});
+  const editorTray=page.locator('#controls-panel.mobile-active');
+  await editorTray.waitFor({state:'visible'});
   check(await page.locator('#art [data-node]').count()===1,'one piece must be present');
+  check(await editorTray.locator('[data-action="panel:canvas"]').isVisible(),
+    'editor tray must have a way to return to just the artwork');
+  check(await editorTray.locator('.control-live-preview').count()===0,
+    'mobile drawer must not duplicate the art in a tiny SVG');
   const before=await page.locator('#art [data-node]').first().getAttribute('transform');
-  await page.locator('[data-action="move:24:0"]').click();
+  await editorTray.locator('[data-action="move:24:0"]').click();
   const after=await page.locator('#art [data-node]').first().getAttribute('transform');
-  const live=await page.locator('.control-live-preview svg [data-node]').first().getAttribute('transform');
   check(before!==after,'move button should alter selected node');
-  check(after===live,'control preview must show the latest composition transform');
-  await page.screenshot({path:`${out}/02-live-preview-390.png`,fullPage:true});
+  const view=await page.evaluate(()=>{
+    const art=document.querySelector('#art').getBoundingClientRect();
+    const tray=document.querySelector('#controls-panel').getBoundingClientRect();
+    const visiblePixels=Math.max(0,Math.min(art.bottom,tray.top,innerHeight)-Math.max(0,art.top));
+    return {visiblePixels,artBottom:art.bottom,trayTop:tray.top,trayBottom:tray.bottom,viewport:innerHeight};
+  });
+  check(view.visiblePixels>=160,`real artwork must stay visible while adjusting: ${JSON.stringify(view)}`);
+  check(view.trayBottom<=view.viewport-40,'editor drawer must not cover the bottom toolbar');
+  await page.screenshot({path:`${out}/02-canvas-first-editor-390.png`,fullPage:true});
+  await editorTray.locator('[data-action="panel:canvas"]').click();
+  check(!(await editorTray.isVisible()),'close control should restore uncluttered artwork');
+  await page.locator('[data-action="panel:controls"]').click();
+  check(await editorTray.isVisible(),'controls remain reachable from bottom navigation');
 
   await page.locator('[data-action="panel:look"]').click();
   check(await page.locator('main.studio.paused').count()===1,'look mode should pause editor');
@@ -112,6 +127,11 @@ try{
 
   await cardChecks.nth(0).check();
   await cardChecks.nth(1).check();
+  // Deliberately too much text must be rejected without hidden ellipsis.
+  await card.locator('.card-field textarea').fill('가'.repeat(100));
+  await page.waitForFunction(()=>document.querySelector('#modal .card-preview p[role="status"]')?.textContent?.includes('짧게 다듬어'),{timeout:20000});
+  check(await card.locator('[data-action="download-card"]').isDisabled(),
+    'overlong personal text must not silently ellipsize and export');
   await card.locator('.card-field input').fill('나만의 작품 제목');
   await card.locator('.card-field textarea').fill('오늘 나를 한 걸음 더 알아보았다.');
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640
