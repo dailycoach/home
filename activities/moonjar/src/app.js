@@ -294,7 +294,10 @@ function setPanel(id, reveal = false) {
     // The compact editor floats below the *actual canvas*. Never scroll down to
     // the controls as that would hide the artwork the participant is changing.
     const revealTarget=id==='controls'||id==='canvas'?$('#stage-shell'):$(`#${id}-panel`);
-    revealTarget?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+    // For the editor, scroll immediately so the selected fragment is not
+    // briefly hidden behind a floating tray while the page is still moving.
+    const immediate=id==='controls'||id==='canvas'||matchMedia('(prefers-reduced-motion:reduce)').matches;
+    revealTarget?.scrollIntoView({block:'start',behavior:immediate?'instant':'smooth'});
   }
 }
 
