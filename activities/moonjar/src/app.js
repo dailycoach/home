@@ -1,6 +1,6 @@
 import {Editor, clone, clamp, angle, scaledDimensions, newProject, importAsNew, parseImport, validateProject} from './domain.js';
 import {openRepository, SaveQueue} from './persistence.js';
-import {Materials, renderSVG, exportPNG, download, assetURL} from './rendering.js';
+import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from './rendering.js';
 
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
@@ -8,7 +8,7 @@ let story, manifest, schema, empty, materials, repository = null;
 let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null;
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
 let activeGesture = null, dialogReturn = null, statusDetail = '', available = false, hasStored = false, documentInvalid = false;
-let opening = false, viewScene = 'arrival', controlTab = 'move';
+let opening = false, viewScene = 'arrival', controlTab = 'move', leadExpanded = true;
 const primaryFields = {arrival:'currentWord',vessel:'firstMind',nacre:'selectedLightNote',arrange:'importantToMe',reframe:'observed',name:'title',return:'noticed'};
 
 function el(tag, text, attrs = {}) {
@@ -86,7 +86,7 @@ async function openProject(doc, saveHere, expected = null, targetView = null) {
   });
   statusDetail='';status = readOnly ? 'readonly' : persistent ? expected === null ? 'dirty' : 'saved' : 'memory';
   if (persistent && !readOnly) { queue = new SaveQueue(repository, expected, statusChanged); if (expected === null) queue.schedule(editor.doc); }
-  documentInvalid=false; zoom = 1; paused = false; panel = doc.mode==='guided'?'story':'palette';
+  documentInvalid=false; zoom = 1; paused = false; leadExpanded = true; panel = doc.mode==='guided'?'story':'palette';
   viewScene=doc.currentScene==='ending'?'arrange':doc.currentScene;
   currentView = targetView || (editor.doc.currentScene === 'ending' ? 'result' : 'studio');
   location.hash = `/${currentView}/${doc.projectId}`; render();
@@ -165,6 +165,7 @@ function renderSceneLead() {
   const target = $('#scene-lead');
   if (!target) return;
   target.hidden = editor.doc.mode !== 'guided';
+  target.classList.toggle('is-collapsed',!leadExpanded);
   target.replaceChildren();
   if (target.hidden) return;
   const s = story.scenes.find(s => s.id === viewScene) || story.scenes[0];
@@ -174,7 +175,10 @@ function renderSceneLead() {
     el('p', s.shortEssay, {class:'lead-essay'}),
     el('p', s.focusQuestion, {class:'lead-question'}),
     button('이 장면의 마음 기록하기', 'panel:story', {class:'text-button'}),
-    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'})
+    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'}),
+    button(leadExpanded ? '이야기 접고 작품에 집중' : '이야기 다시 보기', 'toggle-lead', {
+      class:'lead-toggle', 'aria-expanded':String(leadExpanded), 'aria-controls':'scene-lead'
+    })
   );
 }
 function renderLookPrompt() {
@@ -249,7 +253,7 @@ function pieceNote(){
 }
 function saveOptions(){
   const root=el('div',null,{class:'save-options'});
-  for(const [label,action,detail] of [['작품 이미지 저장','export-png','작품만 PNG로 남깁니다.'],['편집 파일로 보관','export-json','작품과 기록을 다음에 다시 열 수 있습니다.'],['기록지 인쇄·PDF 저장','print-options','인쇄에 넣을 기록을 직접 고릅니다.']]){
+  for(const [label,action,detail] of [['작품 이미지 저장','export-png','작품만 PNG로 남깁니다.'],['작품 카드 만들기','card-options','넣고 싶은 제목·한 문장만 직접 선택해 담습니다.'],['편집 파일로 보관','export-json','작품과 기록을 다음에 다시 열 수 있습니다.'],['기록지 인쇄·PDF 저장','print-options','인쇄에 넣을 기록을 직접 고릅니다.']]){
     const row=el('div'),b=button(label,action);b.onclick=()=>{closeDialog();};row.append(b,el('p',detail,{class:'micro'}));root.append(row);
   }openDialog('작품과 기록 남기기',root);
 }
@@ -372,6 +376,91 @@ async function imageExport(scale=1){
     const retry=button('다시 시도','retry-png'),small=button('800 × 900으로 시도','small-png');retry.onclick=()=>{closeDialog();safely(()=>imageExport(scale));};small.onclick=()=>{closeDialog();safely(()=>imageExport(0.5));};root.append(retry,small);openDialog('이미지를 만들지 못했어요',root);
   }
 }
+// Card export never reads hidden journal fields unless the user has checked
+// the precise text they want in the finished image.
+function cardOptions() {
+  if (!editor) return;
+  const scene = clone(editor.doc.scene);
+  const root = el('div',null,{class:'card-modal'});
+  root.append(el('p','작품만 담긴 카드에서 시작합니다. 제목과 한 문장은 직접 선택했을 때에만 이미지에 들어갑니다.',{class:'card-privacy'}));
+  const grid = el('div',null,{class:'card-modal-grid'}),form=el('section',null,{class:'card-form'}),figure=el('figure',null,{class:'card-preview'});
+  const image=el('img',null,{alt:'작품 카드 미리보기',width:'320',height:'480'}),previewState=el('p','미리보기를 준비하고 있어요.',{class:'micro',role:'status','aria-live':'polite'});
+  figure.append(image,el('figcaption','작품 카드 · 1600 × 2400 PNG'),previewState);
+  const titleOption=el('label',null,{class:'check-row'}),titleCheck=el('input',null,{type:'checkbox'});
+  titleOption.append(titleCheck,document.createTextNode('작품 제목 함께 담기'));
+  const titleField=el('label',null,{class:'card-field'}),titleText=el('span','카드에 넣을 제목');
+  const titleInput=el('input',null,{type:'text',maxlength:'50',placeholder:'예: 지금의 나에게 남겨둔 자리'});
+  titleInput.value=[...(editor.doc.title||'')].slice(0,50).join('');
+  titleField.append(titleText,titleInput);titleField.hidden=true;
+  const sentenceOption=el('label',null,{class:'check-row'}),sentenceCheck=el('input',null,{type:'checkbox'});
+  sentenceOption.append(sentenceCheck,document.createTextNode('나에게 남는 한 문장 함께 담기'));
+  const sentenceField=el('label',null,{class:'card-field'}),sentenceText=el('span','카드에 넣을 한 문장');
+  const sentenceInput=el('textarea',null,{maxlength:'100',rows:3,placeholder:'직접 고른 한 문장만 담아요.'});
+  sentenceInput.value=[...(editor.doc.reflections.name.keySentence||'')].slice(0,100).join('');
+  sentenceField.append(sentenceText,sentenceInput);sentenceField.hidden=true;
+
+  const controls=el('div',null,{class:'card-controls'});
+  const save=button('이 모습으로 카드 저장','download-card',{class:'primary'}),status=el('p','성찰 기록과 조각 메모는 카드에 포함되지 않습니다.',{class:'micro'});
+  save.disabled=true;
+  controls.append(save,status);
+  form.append(titleOption,titleField,sentenceOption,sentenceField,controls);
+  grid.append(figure,form);
+  root.append(grid);
+
+  let url=null, timer=null, generation=0, disposed=false;
+  const selectedCopy=()=>({
+    title:titleCheck.checked?titleInput.value:'',
+    sentence:sentenceCheck.checked?sentenceInput.value:''
+  });
+  const updateFields=()=>{
+    titleField.hidden=!titleCheck.checked;
+    sentenceField.hidden=!sentenceCheck.checked;
+  };
+  function updatePreview() {
+    const id=++generation;
+    clearTimeout(timer);
+    save.disabled=true;
+    previewState.textContent='선택한 문구로 미리보기를 만드는 중이에요.';
+    timer=setTimeout(async()=>{
+      try {
+        await document.fonts.ready;
+        const blob=await exportCardPNG(scene,materials,selectedCopy(),0.4);
+        if(disposed||id!==generation||!modal.open||!root.isConnected)return;
+        const nextURL=URL.createObjectURL(blob),oldURL=url;
+        image.src=nextURL;
+        url=nextURL;
+        if(oldURL)URL.revokeObjectURL(oldURL);
+        previewState.textContent='미리보기와 같은 구성으로 저장됩니다.';
+        save.disabled=false;
+      } catch(error) {
+        if(disposed||id!==generation)return;
+        previewState.textContent=error.message||'미리보기를 만들지 못했어요. 선택한 문구를 바꿔 다시 시도해 주세요.';
+      }
+    },180);
+  }
+  titleCheck.addEventListener('change',()=>{updateFields();updatePreview();});
+  sentenceCheck.addEventListener('change',()=>{updateFields();updatePreview();});
+  titleInput.addEventListener('input',updatePreview);
+  sentenceInput.addEventListener('input',updatePreview);
+  save.onclick=()=>safely(async()=>{
+    const copy=selectedCopy();
+    save.disabled=true;
+    try {
+      const blob=await exportCardPNG(scene,materials,copy);
+      download(blob,filename('card.png'));
+      notice('선택한 문구만 담은 작품 카드 내려받기를 요청했어요.');
+    } finally {
+      if(!disposed)save.disabled=false;
+    }
+  });
+  modal.addEventListener('close',()=>{
+    disposed=true;generation++;
+    clearTimeout(timer);
+    if(url)URL.revokeObjectURL(url);
+  },{once:true});
+  openDialog('내 작품 카드 만들기',root);
+  updatePreview();
+}
 async function finish(){if(editable()){editor.navigate('ending');await queue?.flush();}location.hash=`/result/${editor.doc.projectId}`;result();}
 function result(){
   currentView='result';main.className='result-page';main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state'}));
@@ -380,7 +469,7 @@ function result(){
   const words=el('div',null,{class:'starting-words'});words.append(el('h3','처음의 말'),el('p',editor.doc.reflections.arrival.currentWord||'남기지 않음'));copy.append(words,inputField('ending',{id:'presentWord',label:'지금 내 마음에 머무는 말',maxLength:2000},editor.doc.reflections.ending.presentWord));
   const returnFields=story.scenes.find(s=>s.id==='return').fields.filter(f=>['situation','action','support'].includes(f.id)&&editor.doc.reflections.return[f.id].trim());
   if(returnFields.length){const dailyReturn=el('section',null,{class:'daily-return'});dailyReturn.append(el('h3','내가 남긴 일상의 선택'));for(const f of returnFields)dailyReturn.append(el('h4',f.label),el('p',editor.doc.reflections.return[f.id]));copy.append(dailyReturn);}
-  const actions=el('div',null,{class:'result-actions'});actions.append(button('편집 계속하기','continue',{class:'primary'}),button('작품 이미지 저장','export-png'),button('편집 파일로 보관','export-json'),button('기록지 인쇄·PDF 저장','print-options'));
+  const actions=el('div',null,{class:'result-actions'});actions.append(button('편집 계속하기','continue',{class:'primary'}),button('작품 이미지 저장','export-png'),button('작품 카드 만들기','card-options'),button('편집 파일로 보관','export-json'),button('기록지 인쇄·PDF 저장','print-options'));
   copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}),el('p',story.ui.localNotice,{class:'micro'}),el('p',story.ending.lastLine));layout.append(art,copy);main.append(layout,el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));renderStatus();
 }
 async function projects(){
@@ -500,9 +589,10 @@ const actions={
   clear:()=>{if(editable())confirmAction('작품 비우기','조각과 조각 메모를 비웁니다. 성찰 글은 유지되며 이 작업은 실행 취소할 수 있습니다.',()=>{editor.clear();changed();},'비우기');},
   'zoom-in':()=>{zoom=clamp(zoom+0.25,0.5,2.5);renderCanvas();},'zoom-out':()=>{zoom=clamp(zoom-0.25,0.5,2.5);renderCanvas();},fit:()=>{zoom=1;renderCanvas();},
   pause:()=>setPanel(paused?(editor.doc.mode==='guided'?'story':'palette'):'look'),
+  'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();},
   snapshot,compare,finish,'piece-note':pieceNote,'save-options':saveOptions,
   continue:()=>{paused=false;viewScene='arrange';if(!readOnly)editor.navigate('arrange');location.hash=`/studio/${editor.doc.projectId}`;studio();},
-  'export-png':()=>imageExport(),'export-json':backup,
+  'export-png':()=>imageExport(),'card-options':cardOptions,'export-json':backup,
   'export-text':()=>{download(new Blob([JSON.stringify({title:editor.doc.title,reflections:editor.doc.reflections,pieceNotes:editor.doc.pieceNotes},null,2)],{type:'text/plain;charset=utf-8'}),filename('txt'));notice('입력한 글 전체의 텍스트 내려받기를 요청했어요.');},
   import:()=>$('#import-file').click(),'print-options':printOptions,
   'retry-save':async()=>{if(!validateProject(editor.doc,schema,manifest).length){documentInvalid=false;await queue?.retry(editor.doc);}else notice('글자 수 제한을 먼저 확인해 주세요.');},
@@ -522,7 +612,7 @@ document.addEventListener('click',event=>{
     else if(type==='select'){editor.selected=a;renderCanvas();renderControls();setPanel('controls',true);}
     else if(type==='panel')setPanel(a,true);
     else if(type==='scene'){
-      viewScene=a;
+      viewScene=a;leadExpanded=true;
       if(!readOnly)editor.navigate(a);
       $('.scene-nav')?.replaceWith(navigation());
       renderStory();renderSceneLead();renderLookPrompt();renderCanvas();
