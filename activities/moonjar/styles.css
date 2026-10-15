@@ -120,3 +120,62 @@
   .hero-figure{width:min(73vw,260px)}
   .hero-figure img{max-height:280px}
 }
+
+
+/* WAVE 4: artwork-first floating mobile editor, not a detached miniature.
+   The complete SVG paper stays visible above a compact accessible control tray. */
+.control-drawer-top{display:none}
+.card-copy-limit{font-size:13px;line-height:1.65;color:var(--muted);margin-top:10px}
+.card-preview img{box-shadow:0 20px 42px #24393025}
+.card-preview figcaption{letter-spacing:.035em}
+@media(max-width:767px){
+  .studio.controls-active .stage-shell{
+    max-height:calc(100dvh - min(36dvh,316px) - 112px);
+    scroll-margin-top:10px;
+  }
+  #controls-panel.mobile-active{
+    display:block;
+    position:fixed;
+    bottom:calc(72px + env(safe-area-inset-bottom));
+    left:0;
+    right:0;
+    z-index:18;
+    width:100%;
+    max-height:min(36dvh,316px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    background:#FFFEFA;
+    padding:12px 18px 10px;
+    border:1px solid #CBD3CB;
+    border-bottom:0;
+    border-radius:18px 18px 0 0;
+    box-shadow:0 -15px 38px #25353625;
+  }
+  #controls-panel.mobile-active .control-drawer-top{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    margin:0 0 8px;
+    border-bottom:1px solid #E1E5DD;
+    padding-bottom:8px;
+  }
+  .control-drawer-label{font-size:15px;font-weight:650;color:var(--accent);line-height:1.45}
+  .control-drawer-close{min-width:48px;min-height:44px;font-size:13px;border:0;background:#EEF2EC;padding:8px 11px}
+  #controls-panel.mobile-active > .panel-heading{margin:0 0 5px}
+  #controls-panel.mobile-active .control-tabs{margin:5px 0}
+  #controls-panel.mobile-active .controls-grid{margin:8px 0;grid-template-columns:repeat(4,minmax(0,1fr))}
+  #controls-panel.mobile-active .controls-grid button{min-height:50px}
+  #controls-panel.mobile-active .piece-note-button{min-height:44px;text-align:center}
+  #controls-panel.mobile-active .control-live-preview{display:none}
+  .studio.paused #controls-panel.mobile-active{display:none}
+  .mobile-tabs{z-index:20}
+}
+@media(max-width:380px){
+  #controls-panel.mobile-active{padding-inline:12px}
+  #controls-panel.mobile-active .control-drawer-label{font-size:14px}
+}
+@media(max-height:620px) and (max-width:767px){
+  #controls-panel.mobile-active{max-height:40dvh;bottom:calc(68px + env(safe-area-inset-bottom))}
+  .studio.controls-active .stage-shell{max-height:calc(100dvh - 40dvh - 95px)}
+}
