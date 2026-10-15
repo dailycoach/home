@@ -95,10 +95,13 @@ async function entryMatrix(browser,engine,width,height) {
     verify(await page.locator('#story-panel [data-field="noticed"]').inputValue()===`테스트 ${engine} ${width} 알아차림`,`${name} reflection restored`);
     await ensureNoOverflow(page,`${name} restored`);
     await screenshot(page,`restored-${name}`);
-
     const meta=await page.locator('#art').evaluate(el=>({
       images:el.querySelectorAll('image').length,nodes:el.querySelectorAll('[data-node]').length
     }));
+    await page.locator('[data-action="projects"]').click();
+    await page.locator('.projects-page .project-card').first().waitFor({state:'visible',timeout:12000});
+    verify(await page.locator('.projects-page .project-card').count()===1,
+      `${name} one saved project should produce exactly one list card`);
     recordResult(name,'PASS',{position,meta});
     verify(errors.length===0,`${name} browser errors: ${errors.join(' | ')}`);
   }catch(error){
