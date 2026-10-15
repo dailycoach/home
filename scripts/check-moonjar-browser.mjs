@@ -57,7 +57,7 @@ try{
   await page.locator('[data-action="scene:name"]').click();
   const titleInput=page.locator('#story-panel [data-section="title"][data-field="title"]');
   await titleInput.fill('오늘의 이름은 내게 남겨두기');
-  await page.locator('[data-action="scene:return"]').click();
+  await page.locator('.scene-nav [data-action="scene:return"]').click();
   check((await page.locator('#scene-lead').innerText()).includes('오늘 알아차린 것을 삶에 적용해본다면'),'DAILY return question missing');
   check(await page.locator('#story-panel .mobile-record-title').isVisible(),'mobile guided reflection should have a concise record heading');
   check(!(await page.locator('#story-panel > .short-essay').isVisible()),'mobile guided reflection should not repeat the introductory essay');
