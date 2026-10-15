@@ -39,3 +39,13 @@
   .paused .look-prompt{padding:16px 18px;margin-bottom:15px}
   .paused .look-prompt h2{font-size:22px}
 }
+
+/* Reflection panel: do not repeat the same introduction below the mobile artwork */
+.mobile-record-title{display:none}
+@media(max-width:767px){
+  .studio.mode-guided .story-panel > .eyebrow,
+  .studio.mode-guided .story-panel > h2,
+  .studio.mode-guided .story-panel > .short-essay{display:none}
+  .studio.mode-guided .story-panel > .mobile-record-title{display:block;font-weight:600;font-size:16px;margin:0 0 13px;color:var(--accent)}
+  .studio.mode-guided .story-panel > .focus-question{font-size:21px;margin:10px 0 12px}
+}
