@@ -115,6 +115,7 @@ async function privacyMatrix(browser,engine){
     await page.locator('[data-action="start-free"]').tap();
     await page.locator('[data-action="panel:palette"]').tap();
     await page.locator('[data-action="add:A01"]').tap();
+    await page.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
     verify(await page.locator('#art [data-node]').count()===1,`${engine} memory work created`);
     await page.reload({waitUntil:'networkidle'});
     await page.locator('.hero-actions [data-action="start-free"]').waitFor({state:'visible'});
