@@ -80,14 +80,14 @@ test('pause reflection shows the question for the current scene, without auto-in
   assert.equal(hasAction(prompt,'panel:story'),true);
 });
 
-test('mobile controls render a live artwork thumbnail using the current composition',()=>{
+test('mobile controls expose a close action and avoid redrawing a redundant tiny SVG artwork',()=>{
   const {ui,elements,renders}=harness();
   ui.set('guided','arrange');ui.renderControls();
   const panel=elements.get('#controls-panel');
-  const live=panel.children[0];
-  assert.equal(live.className,'control-live-preview');
-  assert.equal(live.children[0].attrs.viewBox,'0 0 1600 1800');
-  assert.equal(renders(),1);
+  assert.equal(panel.children[0].className,'control-drawer-top');
+  assert.equal(hasAction(panel,'panel:canvas'),true);
+  assert.equal(renders(),0);
+  assert.match(collectText(panel),/작품을 보며 조절하기/);
 });
 
 test('reflection text inputs carry native maximum length; last scene starts with noticed',()=>{
