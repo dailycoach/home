@@ -229,14 +229,9 @@ function renderControls() {
   const target = $('#controls-panel'); if (!target) return;
   const advancedOpen=$('details',target)?.open||false;target.replaceChildren();
   const n = editor.node; if (!n) {target.append(el('p','조각을 누르거나 자개 목록에서 선택하면 조절할 수 있어요.',{class:'muted'}));return;}
-  const livePreview = el('figure',null,{class:'control-live-preview'});
-  const previewSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
-  previewSVG.setAttribute('viewBox','0 0 1600 1800');
-  previewSVG.setAttribute('aria-hidden','true');
-  previewSVG.setAttribute('focusable','false');
-  renderSVG(previewSVG,editor.doc.scene,materials,n.instanceId);
-  livePreview.append(previewSVG,el('figcaption','조절하는 동안 현재 작품을 함께 볼 수 있어요.'));
-  target.append(livePreview);
+  const drawerTop=el('div',null,{class:'control-drawer-top'});
+  drawerTop.append(el('p','작품을 보며 조절하기',{class:'control-drawer-label'}),button('조절 닫기 ×','panel:canvas',{class:'control-drawer-close','aria-label':'조절 패널 닫고 달항아리 보기'}));
+  target.append(drawerTop);
   const h = el('div',null,{class:'panel-heading'}); h.append(el('h2',`${n.assetId} 조각`),el('span',`${Math.round(n.rotation)}° · ${Math.round(n.width)} × ${Math.round(n.height)}`,{class:'micro'}));target.append(h);
   const tabs=el('div',null,{class:'control-tabs','aria-label':'조절 종류'});
   for(const [id,label] of [['move','이동'],['rotate','회전'],['size','크기']])tabs.append(button(label,`control:${id}`,{'aria-pressed':String(controlTab===id)}));target.append(tabs);
@@ -292,7 +287,12 @@ function setPanel(id, reveal = false) {
   for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
   document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
   const pauseButton=$('[data-action="pause"]');if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
-  if(reveal&&id!=='look'&&matchMedia('(max-width:767px)').matches)$(`#${id}-panel`)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+  if(reveal && id!=='look' && matchMedia('(max-width:767px)').matches){
+    // The compact editor floats below the *actual canvas*. Never scroll down to
+    // the controls as that would hide the artwork the participant is changing.
+    const revealTarget=id==='controls'||id==='canvas'?$('#stage-shell'):$(`#${id}-panel`);
+    revealTarget?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+  }
 }
 
 function canvasPoint(svg, event) {
@@ -394,20 +394,24 @@ function cardOptions() {
   titleOption.append(titleCheck,document.createTextNode('작품 제목 함께 담기'));
   const titleField=el('label',null,{class:'card-field'}),titleText=el('span','카드에 넣을 제목');
   const titleInput=el('input',null,{type:'text',maxlength:'50',placeholder:'예: 지금의 나에게 남겨둔 자리'});
-  titleInput.value=[...(editor.doc.title||'')].slice(0,50).join('');
+  titleInput.value=editor.doc.title||'';
+  titleInput.setAttribute('aria-describedby','card-copy-limit');
+
   titleField.append(titleText,titleInput);titleField.hidden=true;
   const sentenceOption=el('label',null,{class:'check-row'}),sentenceCheck=el('input',null,{type:'checkbox'});
   sentenceOption.append(sentenceCheck,document.createTextNode('나에게 남는 한 문장 함께 담기'));
   const sentenceField=el('label',null,{class:'card-field'}),sentenceText=el('span','카드에 넣을 한 문장');
   const sentenceInput=el('textarea',null,{maxlength:'100',rows:3,placeholder:'직접 고른 한 문장만 담아요.'});
-  sentenceInput.value=[...(editor.doc.reflections.name.keySentence||'')].slice(0,100).join('');
+  sentenceInput.value=editor.doc.reflections.name.keySentence||'';
+  sentenceInput.setAttribute('aria-describedby','card-copy-limit');
   sentenceField.append(sentenceText,sentenceInput);sentenceField.hidden=true;
 
   const controls=el('div',null,{class:'card-controls'});
   const save=button('이 모습으로 카드 저장','download-card',{class:'primary'}),status=el('p','성찰 기록과 조각 메모는 카드에 포함되지 않습니다.',{class:'micro'});
   save.disabled=true;
   controls.append(save,status);
-  form.append(titleOption,titleField,sentenceOption,sentenceField);
+  const cardLimit=el('p','원본 기록은 수정하지 않습니다. 카드용 제목 50자, 한 문장 100자까지 사용할 수 있으며, 글이 넘치면 생략하지 않고 수정하도록 안내합니다.',{id:'card-copy-limit',class:'card-copy-limit'});
+  form.append(titleOption,titleField,sentenceOption,sentenceField,cardLimit);
   grid.append(figure,form);
   // Read the preview before the final download button, especially on phones.
   root.append(grid,controls);
@@ -435,11 +439,13 @@ function cardOptions() {
         image.src=nextURL;
         url=nextURL;
         if(oldURL)URL.revokeObjectURL(oldURL);
+        image.style.opacity='1';
         previewState.textContent='미리보기와 같은 구성으로 저장됩니다.';
         save.disabled=false;
       } catch(error) {
         if(disposed||id!==generation)return;
-        previewState.textContent=error.message||'미리보기를 만들지 못했어요. 선택한 문구를 바꿔 다시 시도해 주세요.';
+        image.style.opacity='.35';
+        previewState.textContent=error.message||'미리보기를 만들지 못했어요. 카드 문구를 다듬어 다시 시도해 주세요.';
       }
     },180);
   }
