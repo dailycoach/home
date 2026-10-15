@@ -1,0 +1,1850 @@
+{
+  "manifestVersion": "1.0.0",
+  "assetPackVersion": "moonjar-png-v3",
+  "pieceCount": 96,
+  "canvasCount": 2,
+  "coordinateSystem": {
+    "width": 1600,
+    "height": 1800,
+    "aspectRatio": "8:9",
+    "unit": "logical-pixel",
+    "origin": "top-left",
+    "nodeAnchor": "center"
+  },
+  "palettes": [
+    {
+      "id": "A",
+      "name": "샴페인",
+      "slug": "champagne",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043355.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "B",
+      "name": "민트",
+      "slug": "mint",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043356.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "C",
+      "name": "블루",
+      "slug": "blue",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043357.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "D",
+      "name": "로즈",
+      "slug": "rose",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043358.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "E",
+      "name": "펄",
+      "slug": "pearl",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043359.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "F",
+      "name": "딥블루",
+      "slug": "deep-blue",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043352.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "G",
+      "name": "코럴",
+      "slug": "coral",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043353.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    },
+    {
+      "id": "H",
+      "name": "라일락",
+      "slug": "lilac",
+      "count": 12,
+      "sourceImage": "reference/source_images/1000043354.png",
+      "meaningPolicy": "색 이름은 자료 분류이며 성격·감정의 고정된 의미가 아닙니다."
+    }
+  ],
+  "pieces": [
+    {
+      "id": "A01",
+      "paletteId": "A",
+      "label": "샴페인 01",
+      "src": "assets/pieces/A/A01.png",
+      "width": 192,
+      "height": 194,
+      "aspectRatio": 0.98969072,
+      "alphaBounds": [
+        4,
+        4,
+        188,
+        190
+      ],
+      "hasTransparency": true,
+      "byteSize": 64632,
+      "sha256": "7f0351c95fc0a5fe08a717ea6cedaecb9b2d93e7a0ccbbe16dbba737b9df7c60"
+    },
+    {
+      "id": "A02",
+      "paletteId": "A",
+      "label": "샴페인 02",
+      "src": "assets/pieces/A/A02.png",
+      "width": 145,
+      "height": 155,
+      "aspectRatio": 0.93548387,
+      "alphaBounds": [
+        4,
+        4,
+        141,
+        151
+      ],
+      "hasTransparency": true,
+      "byteSize": 40242,
+      "sha256": "9515c99bd1de0975d8c06cfebc14ee050f5b1c1df6cd89f406f479095181fb32"
+    },
+    {
+      "id": "A03",
+      "paletteId": "A",
+      "label": "샴페인 03",
+      "src": "assets/pieces/A/A03.png",
+      "width": 225,
+      "height": 232,
+      "aspectRatio": 0.96982759,
+      "alphaBounds": [
+        4,
+        4,
+        221,
+        228
+      ],
+      "hasTransparency": true,
+      "byteSize": 93799,
+      "sha256": "71913cc64a88edc9b7d6426563dbf7e4db9f88dbd2f9569ef342acb5fd7efc52"
+    },
+    {
+      "id": "A04",
+      "paletteId": "A",
+      "label": "샴페인 04",
+      "src": "assets/pieces/A/A04.png",
+      "width": 240,
+      "height": 146,
+      "aspectRatio": 1.64383562,
+      "alphaBounds": [
+        4,
+        4,
+        236,
+        142
+      ],
+      "hasTransparency": true,
+      "byteSize": 65223,
+      "sha256": "deb21e1add2e2857977f261ccf9205addc2588c42ae432970ffcf927adea6ad0"
+    },
+    {
+      "id": "A05",
+      "paletteId": "A",
+      "label": "샴페인 05",
+      "src": "assets/pieces/A/A05.png",
+      "width": 149,
+      "height": 500,
+      "aspectRatio": 0.298,
+      "alphaBounds": [
+        4,
+        4,
+        145,
+        496
+      ],
+      "hasTransparency": true,
+      "byteSize": 110019,
+      "sha256": "a9d7008fbab937450fb334cdb1f77597e5579a1913c26bd42b1eb306956142bb"
+    },
+    {
+      "id": "A06",
+      "paletteId": "A",
+      "label": "샴페인 06",
+      "src": "assets/pieces/A/A06.png",
+      "width": 167,
+      "height": 491,
+      "aspectRatio": 0.3401222,
+      "alphaBounds": [
+        4,
+        4,
+        163,
+        487
+      ],
+      "hasTransparency": true,
+      "byteSize": 130896,
+      "sha256": "449bc04b2f1f046d1c649f96c7431fdf77d3169980c890be85ce37a372b17b37"
+    },
+    {
+      "id": "A07",
+      "paletteId": "A",
+      "label": "샴페인 07",
+      "src": "assets/pieces/A/A07.png",
+      "width": 321,
+      "height": 271,
+      "aspectRatio": 1.18450185,
+      "alphaBounds": [
+        4,
+        4,
+        317,
+        267
+      ],
+      "hasTransparency": true,
+      "byteSize": 153111,
+      "sha256": "ab9001e039e034984959184f08bd1ae0aba5b8221c06b36e6098874897bdd00f"
+    },
+    {
+      "id": "A08",
+      "paletteId": "A",
+      "label": "샴페인 08",
+      "src": "assets/pieces/A/A08.png",
+      "width": 308,
+      "height": 232,
+      "aspectRatio": 1.32758621,
+      "alphaBounds": [
+        4,
+        4,
+        304,
+        228
+      ],
+      "hasTransparency": true,
+      "byteSize": 140882,
+      "sha256": "44ac5bf2426f7752c9a299d015264eabe04f18914f7244e26a18ae359a7f7a29"
+    },
+    {
+      "id": "A09",
+      "paletteId": "A",
+      "label": "샴페인 09",
+      "src": "assets/pieces/A/A09.png",
+      "width": 353,
+      "height": 217,
+      "aspectRatio": 1.62672811,
+      "alphaBounds": [
+        4,
+        4,
+        349,
+        213
+      ],
+      "hasTransparency": true,
+      "byteSize": 123417,
+      "sha256": "a86bc4a5d8e1da89a876e47199031cdb364071c67dff9f31082875aa516c227e"
+    },
+    {
+      "id": "A10",
+      "paletteId": "A",
+      "label": "샴페인 10",
+      "src": "assets/pieces/A/A10.png",
+      "width": 311,
+      "height": 244,
+      "aspectRatio": 1.27459016,
+      "alphaBounds": [
+        4,
+        4,
+        307,
+        240
+      ],
+      "hasTransparency": true,
+      "byteSize": 127575,
+      "sha256": "55e38a42516d0de07107f3d3a0f1a8ec662197576651d0daa51bd5d8097d7932"
+    },
+    {
+      "id": "A11",
+      "paletteId": "A",
+      "label": "샴페인 11",
+      "src": "assets/pieces/A/A11.png",
+      "width": 116,
+      "height": 140,
+      "aspectRatio": 0.82857143,
+      "alphaBounds": [
+        4,
+        4,
+        112,
+        136
+      ],
+      "hasTransparency": true,
+      "byteSize": 31979,
+      "sha256": "e25ac5ca98d8dd6bd71363d438b576fc9fc8c1ae5e326f0d09455693bd061bd9"
+    },
+    {
+      "id": "A12",
+      "paletteId": "A",
+      "label": "샴페인 12",
+      "src": "assets/pieces/A/A12.png",
+      "width": 126,
+      "height": 115,
+      "aspectRatio": 1.09565217,
+      "alphaBounds": [
+        4,
+        4,
+        122,
+        111
+      ],
+      "hasTransparency": true,
+      "byteSize": 29257,
+      "sha256": "148e300f91dae18504c8b5c2e8437eaa85bd62f01a76fe0506d40e04726a5947"
+    },
+    {
+      "id": "B01",
+      "paletteId": "B",
+      "label": "민트 01",
+      "src": "assets/pieces/B/B01.png",
+      "width": 170,
+      "height": 114,
+      "aspectRatio": 1.49122807,
+      "alphaBounds": [
+        4,
+        4,
+        166,
+        110
+      ],
+      "hasTransparency": true,
+      "byteSize": 34122,
+      "sha256": "2c47621673f1ec55f48eac3540524e49249d5ef71d289feab4890b395f50c809"
+    },
+    {
+      "id": "B02",
+      "paletteId": "B",
+      "label": "민트 02",
+      "src": "assets/pieces/B/B02.png",
+      "width": 143,
+      "height": 125,
+      "aspectRatio": 1.144,
+      "alphaBounds": [
+        4,
+        4,
+        139,
+        121
+      ],
+      "hasTransparency": true,
+      "byteSize": 30732,
+      "sha256": "f445dba030e86a0ddd0deddbcb207fb42dc403551fa1906fea517cbc32f4715d"
+    },
+    {
+      "id": "B03",
+      "paletteId": "B",
+      "label": "민트 03",
+      "src": "assets/pieces/B/B03.png",
+      "width": 247,
+      "height": 216,
+      "aspectRatio": 1.14351852,
+      "alphaBounds": [
+        4,
+        4,
+        243,
+        212
+      ],
+      "hasTransparency": true,
+      "byteSize": 85655,
+      "sha256": "f6dc689f82ca71d194289599b593b338c7056d45e117bcfeb5a0d0225f5e86d2"
+    },
+    {
+      "id": "B04",
+      "paletteId": "B",
+      "label": "민트 04",
+      "src": "assets/pieces/B/B04.png",
+      "width": 220,
+      "height": 229,
+      "aspectRatio": 0.96069869,
+      "alphaBounds": [
+        4,
+        4,
+        216,
+        225
+      ],
+      "hasTransparency": true,
+      "byteSize": 89719,
+      "sha256": "ebe4f08f528fa90135e49677fb176524fab8990b8a606de641bbb2d664b031e2"
+    },
+    {
+      "id": "B05",
+      "paletteId": "B",
+      "label": "민트 05",
+      "src": "assets/pieces/B/B05.png",
+      "width": 150,
+      "height": 434,
+      "aspectRatio": 0.34562212,
+      "alphaBounds": [
+        4,
+        4,
+        146,
+        430
+      ],
+      "hasTransparency": true,
+      "byteSize": 108560,
+      "sha256": "e9af6d51588bbe9c419b786b1acfc92c180476ac36897af5ff6e16a1d9251122"
+    },
+    {
+      "id": "B06",
+      "paletteId": "B",
+      "label": "민트 06",
+      "src": "assets/pieces/B/B06.png",
+      "width": 136,
+      "height": 367,
+      "aspectRatio": 0.37057221,
+      "alphaBounds": [
+        4,
+        4,
+        132,
+        363
+      ],
+      "hasTransparency": true,
+      "byteSize": 85308,
+      "sha256": "feaa3d63d876165bac68bdbcb8905816c0da94a78a04d6520dbc0e3ca983c87b"
+    },
+    {
+      "id": "B07",
+      "paletteId": "B",
+      "label": "민트 07",
+      "src": "assets/pieces/B/B07.png",
+      "width": 396,
+      "height": 278,
+      "aspectRatio": 1.42446043,
+      "alphaBounds": [
+        4,
+        4,
+        392,
+        274
+      ],
+      "hasTransparency": true,
+      "byteSize": 191242,
+      "sha256": "d9c30e0115f984b16a2b78cacbc13fa0595609f94d138ee70c8560e805401c1d"
+    },
+    {
+      "id": "B08",
+      "paletteId": "B",
+      "label": "민트 08",
+      "src": "assets/pieces/B/B08.png",
+      "width": 354,
+      "height": 236,
+      "aspectRatio": 1.5,
+      "alphaBounds": [
+        4,
+        4,
+        350,
+        232
+      ],
+      "hasTransparency": true,
+      "byteSize": 151446,
+      "sha256": "10567fcc9b214f788479bf2322211c968d16463def5c45dad7045ded1d80f610"
+    },
+    {
+      "id": "B09",
+      "paletteId": "B",
+      "label": "민트 09",
+      "src": "assets/pieces/B/B09.png",
+      "width": 162,
+      "height": 399,
+      "aspectRatio": 0.40601504,
+      "alphaBounds": [
+        4,
+        4,
+        158,
+        395
+      ],
+      "hasTransparency": true,
+      "byteSize": 102136,
+      "sha256": "833525a722954339e311d13854037b27f8f998a7bbe03cfc295eae050688bfc0"
+    },
+    {
+      "id": "B10",
+      "paletteId": "B",
+      "label": "민트 10",
+      "src": "assets/pieces/B/B10.png",
+      "width": 266,
+      "height": 210,
+      "aspectRatio": 1.26666667,
+      "alphaBounds": [
+        4,
+        4,
+        262,
+        206
+      ],
+      "hasTransparency": true,
+      "byteSize": 75788,
+      "sha256": "ed7ac4dd2f41d58baf58d2f435d6e1b581adad6924a22bc7e08f33d60ff1aa8e"
+    },
+    {
+      "id": "B11",
+      "paletteId": "B",
+      "label": "민트 11",
+      "src": "assets/pieces/B/B11.png",
+      "width": 102,
+      "height": 129,
+      "aspectRatio": 0.79069767,
+      "alphaBounds": [
+        4,
+        4,
+        98,
+        125
+      ],
+      "hasTransparency": true,
+      "byteSize": 24786,
+      "sha256": "5c6082b74daedef0293a134d7d29b192ce43cb17d13dbce8b3d6f6b161035e44"
+    },
+    {
+      "id": "B12",
+      "paletteId": "B",
+      "label": "민트 12",
+      "src": "assets/pieces/B/B12.png",
+      "width": 115,
+      "height": 122,
+      "aspectRatio": 0.94262295,
+      "alphaBounds": [
+        4,
+        4,
+        111,
+        118
+      ],
+      "hasTransparency": true,
+      "byteSize": 28266,
+      "sha256": "66c6d40e91d966f9fdd81757ae2aa0c7d361138a2d6547dd86ad9d5bea41dbcc"
+    },
+    {
+      "id": "C01",
+      "paletteId": "C",
+      "label": "블루 01",
+      "src": "assets/pieces/C/C01.png",
+      "width": 160,
+      "height": 151,
+      "aspectRatio": 1.05960265,
+      "alphaBounds": [
+        4,
+        4,
+        156,
+        147
+      ],
+      "hasTransparency": true,
+      "byteSize": 40180,
+      "sha256": "fe7dfa3f3842add1226861c235763915914b86adb9485d4ed3fe0bd742a94572"
+    },
+    {
+      "id": "C02",
+      "paletteId": "C",
+      "label": "블루 02",
+      "src": "assets/pieces/C/C02.png",
+      "width": 141,
+      "height": 159,
+      "aspectRatio": 0.88679245,
+      "alphaBounds": [
+        4,
+        4,
+        137,
+        155
+      ],
+      "hasTransparency": true,
+      "byteSize": 34565,
+      "sha256": "278e8658ecb6ad3adbd84967c9d3ea0a5de2a69329f7337d92f8ee3fb21eac14"
+    },
+    {
+      "id": "C03",
+      "paletteId": "C",
+      "label": "블루 03",
+      "src": "assets/pieces/C/C03.png",
+      "width": 242,
+      "height": 213,
+      "aspectRatio": 1.13615023,
+      "alphaBounds": [
+        4,
+        4,
+        238,
+        209
+      ],
+      "hasTransparency": true,
+      "byteSize": 92875,
+      "sha256": "a326e296e6a5e75cf9fecb42ae5828e4c3964d1bfc1afc192dccb9265da0c913"
+    },
+    {
+      "id": "C04",
+      "paletteId": "C",
+      "label": "블루 04",
+      "src": "assets/pieces/C/C04.png",
+      "width": 217,
+      "height": 179,
+      "aspectRatio": 1.2122905,
+      "alphaBounds": [
+        4,
+        4,
+        213,
+        175
+      ],
+      "hasTransparency": true,
+      "byteSize": 67118,
+      "sha256": "4cdf64913464159429cac03823a1144b9d079617eb97282eb39d90809c028807"
+    },
+    {
+      "id": "C05",
+      "paletteId": "C",
+      "label": "블루 05",
+      "src": "assets/pieces/C/C05.png",
+      "width": 134,
+      "height": 485,
+      "aspectRatio": 0.27628866,
+      "alphaBounds": [
+        4,
+        4,
+        130,
+        481
+      ],
+      "hasTransparency": true,
+      "byteSize": 106263,
+      "sha256": "fbe416083bebfbb2f3c494b7128ea4b6bf359a12f2e66279c2e38208fa13d011"
+    },
+    {
+      "id": "C06",
+      "paletteId": "C",
+      "label": "블루 06",
+      "src": "assets/pieces/C/C06.png",
+      "width": 123,
+      "height": 479,
+      "aspectRatio": 0.25678497,
+      "alphaBounds": [
+        4,
+        4,
+        119,
+        475
+      ],
+      "hasTransparency": true,
+      "byteSize": 98017,
+      "sha256": "dc473ee00eb40fbfb73ba526c03bc97d2bf16a3092e6de474483f9498eb98fa5"
+    },
+    {
+      "id": "C07",
+      "paletteId": "C",
+      "label": "블루 07",
+      "src": "assets/pieces/C/C07.png",
+      "width": 271,
+      "height": 264,
+      "aspectRatio": 1.02651515,
+      "alphaBounds": [
+        4,
+        4,
+        267,
+        260
+      ],
+      "hasTransparency": true,
+      "byteSize": 132506,
+      "sha256": "5fd11ab8542ebb925b054897433c2ce18633923659c37b6664241a955b992b7e"
+    },
+    {
+      "id": "C08",
+      "paletteId": "C",
+      "label": "블루 08",
+      "src": "assets/pieces/C/C08.png",
+      "width": 309,
+      "height": 242,
+      "aspectRatio": 1.2768595,
+      "alphaBounds": [
+        4,
+        4,
+        305,
+        238
+      ],
+      "hasTransparency": true,
+      "byteSize": 128758,
+      "sha256": "bd85950206a94df4374bbf2be8940e05c594f58360328901eab05ea9e6964b93"
+    },
+    {
+      "id": "C09",
+      "paletteId": "C",
+      "label": "블루 09",
+      "src": "assets/pieces/C/C09.png",
+      "width": 392,
+      "height": 218,
+      "aspectRatio": 1.79816514,
+      "alphaBounds": [
+        4,
+        4,
+        388,
+        214
+      ],
+      "hasTransparency": true,
+      "byteSize": 128744,
+      "sha256": "d83ae1d5ed8d01ec811a212cba1bc0bb9272551e2e7cde3cb9218e027970b2e2"
+    },
+    {
+      "id": "C10",
+      "paletteId": "C",
+      "label": "블루 10",
+      "src": "assets/pieces/C/C10.png",
+      "width": 229,
+      "height": 348,
+      "aspectRatio": 0.65804598,
+      "alphaBounds": [
+        4,
+        4,
+        225,
+        344
+      ],
+      "hasTransparency": true,
+      "byteSize": 137851,
+      "sha256": "82c6bb2f430b7a91736ecc92ff0ba13ed44cec6279f43e0ba36b2df8253c8175"
+    },
+    {
+      "id": "C11",
+      "paletteId": "C",
+      "label": "블루 11",
+      "src": "assets/pieces/C/C11.png",
+      "width": 140,
+      "height": 150,
+      "aspectRatio": 0.93333333,
+      "alphaBounds": [
+        4,
+        4,
+        136,
+        146
+      ],
+      "hasTransparency": true,
+      "byteSize": 32742,
+      "sha256": "3243710edbd313d2f96a54e1d74e7609bbbe24d0d4a7ea109b1cc933066bcaf7"
+    },
+    {
+      "id": "C12",
+      "paletteId": "C",
+      "label": "블루 12",
+      "src": "assets/pieces/C/C12.png",
+      "width": 126,
+      "height": 130,
+      "aspectRatio": 0.96923077,
+      "alphaBounds": [
+        4,
+        4,
+        122,
+        126
+      ],
+      "hasTransparency": true,
+      "byteSize": 27472,
+      "sha256": "c993754069675df9047b151377e1de7261d535c7ca36a4863bf5e1ad493b2170"
+    },
+    {
+      "id": "D01",
+      "paletteId": "D",
+      "label": "로즈 01",
+      "src": "assets/pieces/D/D01.png",
+      "width": 141,
+      "height": 171,
+      "aspectRatio": 0.8245614,
+      "alphaBounds": [
+        4,
+        4,
+        137,
+        167
+      ],
+      "hasTransparency": true,
+      "byteSize": 39760,
+      "sha256": "a7bf3b1778a7d7f2f5247a9676c930fb957bde9479d658365f195cc46aa7350a"
+    },
+    {
+      "id": "D02",
+      "paletteId": "D",
+      "label": "로즈 02",
+      "src": "assets/pieces/D/D02.png",
+      "width": 152,
+      "height": 126,
+      "aspectRatio": 1.20634921,
+      "alphaBounds": [
+        4,
+        4,
+        148,
+        122
+      ],
+      "hasTransparency": true,
+      "byteSize": 30521,
+      "sha256": "2cd9e7aae5cb86a2d853b73f9f6cbaf6097738f376dd58149ce41277ac649a96"
+    },
+    {
+      "id": "D03",
+      "paletteId": "D",
+      "label": "로즈 03",
+      "src": "assets/pieces/D/D03.png",
+      "width": 226,
+      "height": 194,
+      "aspectRatio": 1.16494845,
+      "alphaBounds": [
+        4,
+        4,
+        222,
+        190
+      ],
+      "hasTransparency": true,
+      "byteSize": 72149,
+      "sha256": "5a63d22b30c0c4e1e2b8e53338f03e902b8c8f5dfcb029e30912d6ae9b9d358d"
+    },
+    {
+      "id": "D04",
+      "paletteId": "D",
+      "label": "로즈 04",
+      "src": "assets/pieces/D/D04.png",
+      "width": 206,
+      "height": 208,
+      "aspectRatio": 0.99038462,
+      "alphaBounds": [
+        4,
+        4,
+        202,
+        204
+      ],
+      "hasTransparency": true,
+      "byteSize": 69426,
+      "sha256": "40388c6a13228e557b0b68283965581ceabf0e93b4a14ad155aaee118615200d"
+    },
+    {
+      "id": "D05",
+      "paletteId": "D",
+      "label": "로즈 05",
+      "src": "assets/pieces/D/D05.png",
+      "width": 112,
+      "height": 549,
+      "aspectRatio": 0.20400729,
+      "alphaBounds": [
+        4,
+        4,
+        108,
+        545
+      ],
+      "hasTransparency": true,
+      "byteSize": 101322,
+      "sha256": "fe361b3627eebf4a6aedee763bfbecb6981be0818b40e9bd02352c3654cc9e85"
+    },
+    {
+      "id": "D06",
+      "paletteId": "D",
+      "label": "로즈 06",
+      "src": "assets/pieces/D/D06.png",
+      "width": 144,
+      "height": 297,
+      "aspectRatio": 0.48484848,
+      "alphaBounds": [
+        4,
+        4,
+        140,
+        293
+      ],
+      "hasTransparency": true,
+      "byteSize": 78574,
+      "sha256": "11a84d37809ab81ae9ea2e613bd1a83fdcc057fc12855cce06af42f2ead914fb"
+    },
+    {
+      "id": "D07",
+      "paletteId": "D",
+      "label": "로즈 07",
+      "src": "assets/pieces/D/D07.png",
+      "width": 306,
+      "height": 292,
+      "aspectRatio": 1.04794521,
+      "alphaBounds": [
+        4,
+        4,
+        302,
+        288
+      ],
+      "hasTransparency": true,
+      "byteSize": 161540,
+      "sha256": "fcd5758c5dafc30f3325c974c14ac1ebaf457bcca6c30ae68979b6e8db3146ed"
+    },
+    {
+      "id": "D08",
+      "paletteId": "D",
+      "label": "로즈 08",
+      "src": "assets/pieces/D/D08.png",
+      "width": 306,
+      "height": 266,
+      "aspectRatio": 1.15037594,
+      "alphaBounds": [
+        4,
+        4,
+        302,
+        262
+      ],
+      "hasTransparency": true,
+      "byteSize": 141289,
+      "sha256": "8768687fecba086e7d223663f3ee067dd8e2f0e374e8f307d384f3fa90d6015f"
+    },
+    {
+      "id": "D09",
+      "paletteId": "D",
+      "label": "로즈 09",
+      "src": "assets/pieces/D/D09.png",
+      "width": 496,
+      "height": 269,
+      "aspectRatio": 1.84386617,
+      "alphaBounds": [
+        4,
+        4,
+        492,
+        265
+      ],
+      "hasTransparency": true,
+      "byteSize": 222606,
+      "sha256": "b95f802ec3c2051f1c8a7c9a40951a4f5c70c2e7a3d4c6f21858c03597b84f93"
+    },
+    {
+      "id": "D10",
+      "paletteId": "D",
+      "label": "로즈 10",
+      "src": "assets/pieces/D/D10.png",
+      "width": 372,
+      "height": 275,
+      "aspectRatio": 1.35272727,
+      "alphaBounds": [
+        4,
+        4,
+        368,
+        271
+      ],
+      "hasTransparency": true,
+      "byteSize": 145980,
+      "sha256": "e6b815c315844b96ae9912b721b6a7bfcbdd00649c8b66d95b376bf32ce036e9"
+    },
+    {
+      "id": "D11",
+      "paletteId": "D",
+      "label": "로즈 11",
+      "src": "assets/pieces/D/D11.png",
+      "width": 151,
+      "height": 141,
+      "aspectRatio": 1.07092199,
+      "alphaBounds": [
+        4,
+        4,
+        147,
+        137
+      ],
+      "hasTransparency": true,
+      "byteSize": 32552,
+      "sha256": "3b7e42567cab2566766370fe4895b8a92f5ec636179145bcf22b8fe57ed92b5f"
+    },
+    {
+      "id": "D12",
+      "paletteId": "D",
+      "label": "로즈 12",
+      "src": "assets/pieces/D/D12.png",
+      "width": 155,
+      "height": 119,
+      "aspectRatio": 1.30252101,
+      "alphaBounds": [
+        4,
+        4,
+        151,
+        115
+      ],
+      "hasTransparency": true,
+      "byteSize": 34611,
+      "sha256": "1d4b599cf3a35dbdf0ccac8f2aec493e3c928d823add4861d664cc0aa9c73a6a"
+    },
+    {
+      "id": "E01",
+      "paletteId": "E",
+      "label": "펄 01",
+      "src": "assets/pieces/E/E01.png",
+      "width": 168,
+      "height": 168,
+      "aspectRatio": 1.0,
+      "alphaBounds": [
+        4,
+        4,
+        164,
+        164
+      ],
+      "hasTransparency": true,
+      "byteSize": 42038,
+      "sha256": "6fd91296b003f40380f1e36a207e98c5bd3d0ceefefc49c3b647d770b98577fc"
+    },
+    {
+      "id": "E02",
+      "paletteId": "E",
+      "label": "펄 02",
+      "src": "assets/pieces/E/E02.png",
+      "width": 153,
+      "height": 136,
+      "aspectRatio": 1.125,
+      "alphaBounds": [
+        4,
+        4,
+        149,
+        132
+      ],
+      "hasTransparency": true,
+      "byteSize": 31454,
+      "sha256": "be3700d1f6fb9b50fa04bb4b5b2eebbe4657677d320a454114d7885e7727ad7c"
+    },
+    {
+      "id": "E03",
+      "paletteId": "E",
+      "label": "펄 03",
+      "src": "assets/pieces/E/E03.png",
+      "width": 220,
+      "height": 186,
+      "aspectRatio": 1.1827957,
+      "alphaBounds": [
+        4,
+        4,
+        216,
+        182
+      ],
+      "hasTransparency": true,
+      "byteSize": 59175,
+      "sha256": "35bde907e7e451cd3aba52337786a17ee49edb6843f2238472f58c349944c028"
+    },
+    {
+      "id": "E04",
+      "paletteId": "E",
+      "label": "펄 04",
+      "src": "assets/pieces/E/E04.png",
+      "width": 164,
+      "height": 201,
+      "aspectRatio": 0.8159204,
+      "alphaBounds": [
+        4,
+        4,
+        160,
+        197
+      ],
+      "hasTransparency": true,
+      "byteSize": 53499,
+      "sha256": "836924c411a7bc98855c22b24cb261262ae15e5eb00c1754976444558f0bf507"
+    },
+    {
+      "id": "E05",
+      "paletteId": "E",
+      "label": "펄 05",
+      "src": "assets/pieces/E/E05.png",
+      "width": 121,
+      "height": 462,
+      "aspectRatio": 0.26190476,
+      "alphaBounds": [
+        4,
+        4,
+        117,
+        458
+      ],
+      "hasTransparency": true,
+      "byteSize": 86755,
+      "sha256": "3fc241b0a1b5620ba0b3bc4294cdcb6e514a9926622cf025a6dc3e9f4458f441"
+    },
+    {
+      "id": "E06",
+      "paletteId": "E",
+      "label": "펄 06",
+      "src": "assets/pieces/E/E06.png",
+      "width": 112,
+      "height": 457,
+      "aspectRatio": 0.24507659,
+      "alphaBounds": [
+        4,
+        4,
+        108,
+        453
+      ],
+      "hasTransparency": true,
+      "byteSize": 75529,
+      "sha256": "1095f0631b4106bc5c4825a335ede0d41489ab2733678f3ef97477e13e423466"
+    },
+    {
+      "id": "E07",
+      "paletteId": "E",
+      "label": "펄 07",
+      "src": "assets/pieces/E/E07.png",
+      "width": 371,
+      "height": 221,
+      "aspectRatio": 1.67873303,
+      "alphaBounds": [
+        4,
+        4,
+        367,
+        217
+      ],
+      "hasTransparency": true,
+      "byteSize": 125097,
+      "sha256": "b1ee032ba5b7ddb42f94658ac69926bc1ee21fd5b9f4b75c7592a0ecdaffd605"
+    },
+    {
+      "id": "E08",
+      "paletteId": "E",
+      "label": "펄 08",
+      "src": "assets/pieces/E/E08.png",
+      "width": 315,
+      "height": 240,
+      "aspectRatio": 1.3125,
+      "alphaBounds": [
+        4,
+        4,
+        311,
+        236
+      ],
+      "hasTransparency": true,
+      "byteSize": 123609,
+      "sha256": "312f7d896390a294a18d07a3f60498436f8d886ab2592dfff3e18d1372bd369b"
+    },
+    {
+      "id": "E09",
+      "paletteId": "E",
+      "label": "펄 09",
+      "src": "assets/pieces/E/E09.png",
+      "width": 391,
+      "height": 152,
+      "aspectRatio": 2.57236842,
+      "alphaBounds": [
+        4,
+        4,
+        387,
+        148
+      ],
+      "hasTransparency": true,
+      "byteSize": 80429,
+      "sha256": "38e7a495d8d9e6e9cd3e5fc2849b19d30435c48031af2da587a01dadb234f3ad"
+    },
+    {
+      "id": "E10",
+      "paletteId": "E",
+      "label": "펄 10",
+      "src": "assets/pieces/E/E10.png",
+      "width": 301,
+      "height": 227,
+      "aspectRatio": 1.32599119,
+      "alphaBounds": [
+        4,
+        4,
+        297,
+        223
+      ],
+      "hasTransparency": true,
+      "byteSize": 96903,
+      "sha256": "b7d0426f6117a51db4185e8c49698d2c5da014ba2fefef8fd48c1170cc1817ed"
+    },
+    {
+      "id": "E11",
+      "paletteId": "E",
+      "label": "펄 11",
+      "src": "assets/pieces/E/E11.png",
+      "width": 120,
+      "height": 122,
+      "aspectRatio": 0.98360656,
+      "alphaBounds": [
+        4,
+        4,
+        116,
+        118
+      ],
+      "hasTransparency": true,
+      "byteSize": 25370,
+      "sha256": "289afb7a72004a1e2ed98ccb18ee97575d71b0292c12fe506d2751a10300f702"
+    },
+    {
+      "id": "E12",
+      "paletteId": "E",
+      "label": "펄 12",
+      "src": "assets/pieces/E/E12.png",
+      "width": 103,
+      "height": 128,
+      "aspectRatio": 0.8046875,
+      "alphaBounds": [
+        4,
+        4,
+        99,
+        124
+      ],
+      "hasTransparency": true,
+      "byteSize": 23170,
+      "sha256": "6337d1e69925adf91094e8cd298f6f6cc37cae7bd9459fb7e1c9782cd24c74ab"
+    },
+    {
+      "id": "F01",
+      "paletteId": "F",
+      "label": "딥블루 01",
+      "src": "assets/pieces/F/F01.png",
+      "width": 198,
+      "height": 188,
+      "aspectRatio": 1.05319149,
+      "alphaBounds": [
+        4,
+        4,
+        194,
+        184
+      ],
+      "hasTransparency": true,
+      "byteSize": 76235,
+      "sha256": "e2902e64b56cd783d462b35746b00d5c96bd776b35e99c03f6443b5d28f474b4"
+    },
+    {
+      "id": "F02",
+      "paletteId": "F",
+      "label": "딥블루 02",
+      "src": "assets/pieces/F/F02.png",
+      "width": 154,
+      "height": 152,
+      "aspectRatio": 1.01315789,
+      "alphaBounds": [
+        4,
+        4,
+        150,
+        148
+      ],
+      "hasTransparency": true,
+      "byteSize": 47428,
+      "sha256": "b68f24d06d2728b1ae5fb2b7cda38ca7e8955213edee022af60f280e1e78bcc4"
+    },
+    {
+      "id": "F03",
+      "paletteId": "F",
+      "label": "딥블루 03",
+      "src": "assets/pieces/F/F03.png",
+      "width": 233,
+      "height": 217,
+      "aspectRatio": 1.07373272,
+      "alphaBounds": [
+        4,
+        4,
+        229,
+        213
+      ],
+      "hasTransparency": true,
+      "byteSize": 90734,
+      "sha256": "a58189315d163d75cb4002a6190541c66fdadbf9931ec63149d2a948eb958aea"
+    },
+    {
+      "id": "F04",
+      "paletteId": "F",
+      "label": "딥블루 04",
+      "src": "assets/pieces/F/F04.png",
+      "width": 226,
+      "height": 171,
+      "aspectRatio": 1.32163743,
+      "alphaBounds": [
+        4,
+        4,
+        222,
+        167
+      ],
+      "hasTransparency": true,
+      "byteSize": 73847,
+      "sha256": "3aed044d19c9e1a9d2b251fa12d028c05a36bcf83223160dac840e98b03855a8"
+    },
+    {
+      "id": "F05",
+      "paletteId": "F",
+      "label": "딥블루 05",
+      "src": "assets/pieces/F/F05.png",
+      "width": 126,
+      "height": 474,
+      "aspectRatio": 0.26582278,
+      "alphaBounds": [
+        4,
+        4,
+        122,
+        470
+      ],
+      "hasTransparency": true,
+      "byteSize": 105540,
+      "sha256": "476b1b8c726942751c22230d40dd364bb2a97d0fca0d2ae2c181057c63ed4b08"
+    },
+    {
+      "id": "F06",
+      "paletteId": "F",
+      "label": "딥블루 06",
+      "src": "assets/pieces/F/F06.png",
+      "width": 110,
+      "height": 465,
+      "aspectRatio": 0.23655914,
+      "alphaBounds": [
+        4,
+        4,
+        106,
+        461
+      ],
+      "hasTransparency": true,
+      "byteSize": 88596,
+      "sha256": "5b845c6d12370575753557e0eb1defa18867de388b5ec1439819e51823cd4960"
+    },
+    {
+      "id": "F07",
+      "paletteId": "F",
+      "label": "딥블루 07",
+      "src": "assets/pieces/F/F07.png",
+      "width": 377,
+      "height": 206,
+      "aspectRatio": 1.83009709,
+      "alphaBounds": [
+        4,
+        4,
+        373,
+        202
+      ],
+      "hasTransparency": true,
+      "byteSize": 146252,
+      "sha256": "e1f0c390900562edd6554ba92ec8e78aaf7f6ca7403bfa0f5b1e392413bdc169"
+    },
+    {
+      "id": "F08",
+      "paletteId": "F",
+      "label": "딥블루 08",
+      "src": "assets/pieces/F/F08.png",
+      "width": 350,
+      "height": 195,
+      "aspectRatio": 1.79487179,
+      "alphaBounds": [
+        4,
+        4,
+        346,
+        191
+      ],
+      "hasTransparency": true,
+      "byteSize": 117113,
+      "sha256": "d8cbb05fc5096f053f98e08919477277ce03d2824bf28c3b23f6bf30d31198af"
+    },
+    {
+      "id": "F09",
+      "paletteId": "F",
+      "label": "딥블루 09",
+      "src": "assets/pieces/F/F09.png",
+      "width": 202,
+      "height": 338,
+      "aspectRatio": 0.59763314,
+      "alphaBounds": [
+        4,
+        4,
+        198,
+        334
+      ],
+      "hasTransparency": true,
+      "byteSize": 122882,
+      "sha256": "f3b444aaee1396c619a80afae27d7810b0ada8a30d4950c7bc24222124f2ba3a"
+    },
+    {
+      "id": "F10",
+      "paletteId": "F",
+      "label": "딥블루 10",
+      "src": "assets/pieces/F/F10.png",
+      "width": 200,
+      "height": 293,
+      "aspectRatio": 0.68259386,
+      "alphaBounds": [
+        4,
+        4,
+        196,
+        289
+      ],
+      "hasTransparency": true,
+      "byteSize": 98051,
+      "sha256": "0c2ad3d3681046e9e09a271ef8ae1a7318c3adf58ec5579270e5bbf20cb7a123"
+    },
+    {
+      "id": "F11",
+      "paletteId": "F",
+      "label": "딥블루 11",
+      "src": "assets/pieces/F/F11.png",
+      "width": 142,
+      "height": 153,
+      "aspectRatio": 0.92810458,
+      "alphaBounds": [
+        4,
+        4,
+        138,
+        149
+      ],
+      "hasTransparency": true,
+      "byteSize": 41691,
+      "sha256": "32b58ab53bd8442cab1a7a6ef95df7ba2bda8aa1ea3dd59c4747ba7875383f20"
+    },
+    {
+      "id": "F12",
+      "paletteId": "F",
+      "label": "딥블루 12",
+      "src": "assets/pieces/F/F12.png",
+      "width": 114,
+      "height": 134,
+      "aspectRatio": 0.85074627,
+      "alphaBounds": [
+        4,
+        4,
+        110,
+        130
+      ],
+      "hasTransparency": true,
+      "byteSize": 30325,
+      "sha256": "c729812725096e1b8a09b6898bdcbd255760e02ae2af3ad5fd364221436fab45"
+    },
+    {
+      "id": "G01",
+      "paletteId": "G",
+      "label": "코럴 01",
+      "src": "assets/pieces/G/G01.png",
+      "width": 165,
+      "height": 144,
+      "aspectRatio": 1.14583333,
+      "alphaBounds": [
+        4,
+        4,
+        161,
+        140
+      ],
+      "hasTransparency": true,
+      "byteSize": 40240,
+      "sha256": "5b2a711974d431d4018b36f705bc932a3dd644d20727c0dcb505f63c4ca00f51"
+    },
+    {
+      "id": "G02",
+      "paletteId": "G",
+      "label": "코럴 02",
+      "src": "assets/pieces/G/G02.png",
+      "width": 132,
+      "height": 156,
+      "aspectRatio": 0.84615385,
+      "alphaBounds": [
+        4,
+        4,
+        128,
+        152
+      ],
+      "hasTransparency": true,
+      "byteSize": 37218,
+      "sha256": "afd7c4b6924083b2b95dea01a8f20d8c1b1d2f4a7765665429ce623a54f22473"
+    },
+    {
+      "id": "G03",
+      "paletteId": "G",
+      "label": "코럴 03",
+      "src": "assets/pieces/G/G03.png",
+      "width": 296,
+      "height": 188,
+      "aspectRatio": 1.57446809,
+      "alphaBounds": [
+        4,
+        4,
+        292,
+        184
+      ],
+      "hasTransparency": true,
+      "byteSize": 99463,
+      "sha256": "8c7af1243ccea3a4f3b2a281efeb76def6a540f23ca70fd1aaa416cf8307029e"
+    },
+    {
+      "id": "G04",
+      "paletteId": "G",
+      "label": "코럴 04",
+      "src": "assets/pieces/G/G04.png",
+      "width": 211,
+      "height": 212,
+      "aspectRatio": 0.99528302,
+      "alphaBounds": [
+        4,
+        4,
+        207,
+        208
+      ],
+      "hasTransparency": true,
+      "byteSize": 78831,
+      "sha256": "94a655d2514f9aab7241d1c1ef62de53ab658afee17d0c15f9675b693e08888b"
+    },
+    {
+      "id": "G05",
+      "paletteId": "G",
+      "label": "코럴 05",
+      "src": "assets/pieces/G/G05.png",
+      "width": 165,
+      "height": 416,
+      "aspectRatio": 0.39663462,
+      "alphaBounds": [
+        4,
+        4,
+        161,
+        412
+      ],
+      "hasTransparency": true,
+      "byteSize": 119190,
+      "sha256": "e77956bc278f1bc4ad297eaad881b18615647e8834267baedbdd51d5ec592f6a"
+    },
+    {
+      "id": "G06",
+      "paletteId": "G",
+      "label": "코럴 06",
+      "src": "assets/pieces/G/G06.png",
+      "width": 129,
+      "height": 350,
+      "aspectRatio": 0.36857143,
+      "alphaBounds": [
+        4,
+        4,
+        125,
+        346
+      ],
+      "hasTransparency": true,
+      "byteSize": 78272,
+      "sha256": "5ffe0a79c2afe767b2b29c0e306a526784354660cc0b2cb57013026de8416a68"
+    },
+    {
+      "id": "G07",
+      "paletteId": "G",
+      "label": "코럴 07",
+      "src": "assets/pieces/G/G07.png",
+      "width": 274,
+      "height": 286,
+      "aspectRatio": 0.95804196,
+      "alphaBounds": [
+        4,
+        4,
+        270,
+        282
+      ],
+      "hasTransparency": true,
+      "byteSize": 136189,
+      "sha256": "cd8c55fefe15c20619ca56201e39a55397b2d86cc9b3ad20547747ac0b36d6e8"
+    },
+    {
+      "id": "G08",
+      "paletteId": "G",
+      "label": "코럴 08",
+      "src": "assets/pieces/G/G08.png",
+      "width": 338,
+      "height": 200,
+      "aspectRatio": 1.69,
+      "alphaBounds": [
+        4,
+        4,
+        334,
+        196
+      ],
+      "hasTransparency": true,
+      "byteSize": 130325,
+      "sha256": "c04af45d8a4325492eae9761f3ea88eb712920de4303bb633b8d6748b10be046"
+    },
+    {
+      "id": "G09",
+      "paletteId": "G",
+      "label": "코럴 09",
+      "src": "assets/pieces/G/G09.png",
+      "width": 444,
+      "height": 191,
+      "aspectRatio": 2.32460733,
+      "alphaBounds": [
+        4,
+        4,
+        440,
+        187
+      ],
+      "hasTransparency": true,
+      "byteSize": 137157,
+      "sha256": "6fd290a868c9c252d00014d0987115383c2a8d52ad802c30d915ab02178e2acc"
+    },
+    {
+      "id": "G10",
+      "paletteId": "G",
+      "label": "코럴 10",
+      "src": "assets/pieces/G/G10.png",
+      "width": 418,
+      "height": 224,
+      "aspectRatio": 1.86607143,
+      "alphaBounds": [
+        4,
+        4,
+        414,
+        220
+      ],
+      "hasTransparency": true,
+      "byteSize": 153594,
+      "sha256": "296d02467ae2d7c6b0a8b2e198cd0c470deef145756cd8142b0e76dc2e10e9af"
+    },
+    {
+      "id": "G11",
+      "paletteId": "G",
+      "label": "코럴 11",
+      "src": "assets/pieces/G/G11.png",
+      "width": 119,
+      "height": 125,
+      "aspectRatio": 0.952,
+      "alphaBounds": [
+        4,
+        4,
+        115,
+        121
+      ],
+      "hasTransparency": true,
+      "byteSize": 29285,
+      "sha256": "3ee37e95deba440f8148c9309d0cab44b0cde5b143d7ec49d4d976fc9154dd0a"
+    },
+    {
+      "id": "G12",
+      "paletteId": "G",
+      "label": "코럴 12",
+      "src": "assets/pieces/G/G12.png",
+      "width": 112,
+      "height": 125,
+      "aspectRatio": 0.896,
+      "alphaBounds": [
+        4,
+        4,
+        108,
+        121
+      ],
+      "hasTransparency": true,
+      "byteSize": 27657,
+      "sha256": "0425959202ef9b336df4ee4c68d86d4776773165b909de4e16fbf36528bb5469"
+    },
+    {
+      "id": "H01",
+      "paletteId": "H",
+      "label": "라일락 01",
+      "src": "assets/pieces/H/H01.png",
+      "width": 236,
+      "height": 196,
+      "aspectRatio": 1.20408163,
+      "alphaBounds": [
+        4,
+        4,
+        232,
+        192
+      ],
+      "hasTransparency": true,
+      "byteSize": 79942,
+      "sha256": "99c8a94cfce541aeef3fbf58c6a69b6ac0ebb63eb310aa571c20a1348fcdb019"
+    },
+    {
+      "id": "H02",
+      "paletteId": "H",
+      "label": "라일락 02",
+      "src": "assets/pieces/H/H02.png",
+      "width": 185,
+      "height": 159,
+      "aspectRatio": 1.16352201,
+      "alphaBounds": [
+        4,
+        4,
+        181,
+        155
+      ],
+      "hasTransparency": true,
+      "byteSize": 46237,
+      "sha256": "4a21fb5cc3f2519b6a8d65e1335ed5545dfe71e69f18aef977d2a4020d5d535b"
+    },
+    {
+      "id": "H03",
+      "paletteId": "H",
+      "label": "라일락 03",
+      "src": "assets/pieces/H/H03.png",
+      "width": 244,
+      "height": 241,
+      "aspectRatio": 1.01244813,
+      "alphaBounds": [
+        4,
+        4,
+        240,
+        237
+      ],
+      "hasTransparency": true,
+      "byteSize": 106151,
+      "sha256": "98fe0f7f86d7882de439076d9e43b99f9415449f2dcb49529ffab8878114d1e4"
+    },
+    {
+      "id": "H04",
+      "paletteId": "H",
+      "label": "라일락 04",
+      "src": "assets/pieces/H/H04.png",
+      "width": 227,
+      "height": 210,
+      "aspectRatio": 1.08095238,
+      "alphaBounds": [
+        4,
+        4,
+        223,
+        206
+      ],
+      "hasTransparency": true,
+      "byteSize": 84889,
+      "sha256": "7b5d2b13776966af0f5b22994be8893cda688bdec83b977dfe3da127572990eb"
+    },
+    {
+      "id": "H05",
+      "paletteId": "H",
+      "label": "라일락 05",
+      "src": "assets/pieces/H/H05.png",
+      "width": 192,
+      "height": 341,
+      "aspectRatio": 0.56304985,
+      "alphaBounds": [
+        4,
+        4,
+        188,
+        337
+      ],
+      "hasTransparency": true,
+      "byteSize": 118319,
+      "sha256": "f51a4a160defcba2353d068dc797ea6c1f24af464344f9c51211f8230c36adb1"
+    },
+    {
+      "id": "H06",
+      "paletteId": "H",
+      "label": "라일락 06",
+      "src": "assets/pieces/H/H06.png",
+      "width": 123,
+      "height": 476,
+      "aspectRatio": 0.25840336,
+      "alphaBounds": [
+        4,
+        4,
+        119,
+        472
+      ],
+      "hasTransparency": true,
+      "byteSize": 94983,
+      "sha256": "78bbbfb25c5c37f4e4278a7df7e394772123cecd7004af48a501664fe775c39b"
+    },
+    {
+      "id": "H07",
+      "paletteId": "H",
+      "label": "라일락 07",
+      "src": "assets/pieces/H/H07.png",
+      "width": 364,
+      "height": 258,
+      "aspectRatio": 1.41085271,
+      "alphaBounds": [
+        4,
+        4,
+        360,
+        254
+      ],
+      "hasTransparency": true,
+      "byteSize": 170902,
+      "sha256": "76740cf5ae324b7f0417285ed74e2b223bf9bf65f8d7679ae6d75f2ea7a8cc97"
+    },
+    {
+      "id": "H08",
+      "paletteId": "H",
+      "label": "라일락 08",
+      "src": "assets/pieces/H/H08.png",
+      "width": 313,
+      "height": 278,
+      "aspectRatio": 1.12589928,
+      "alphaBounds": [
+        4,
+        4,
+        309,
+        274
+      ],
+      "hasTransparency": true,
+      "byteSize": 152111,
+      "sha256": "c7359df7719940dbc1f74ab149e9801754a4f381bd1779eeaf42be76dd89f013"
+    },
+    {
+      "id": "H09",
+      "paletteId": "H",
+      "label": "라일락 09",
+      "src": "assets/pieces/H/H09.png",
+      "width": 288,
+      "height": 234,
+      "aspectRatio": 1.23076923,
+      "alphaBounds": [
+        4,
+        4,
+        284,
+        230
+      ],
+      "hasTransparency": true,
+      "byteSize": 115061,
+      "sha256": "95daf0c70ee665f8635b8644a215bf30b8b9c92e3d3f89751e9ff09937b3b975"
+    },
+    {
+      "id": "H10",
+      "paletteId": "H",
+      "label": "라일락 10",
+      "src": "assets/pieces/H/H10.png",
+      "width": 304,
+      "height": 202,
+      "aspectRatio": 1.5049505,
+      "alphaBounds": [
+        4,
+        4,
+        300,
+        198
+      ],
+      "hasTransparency": true,
+      "byteSize": 102151,
+      "sha256": "a2d0a4a393f9d5a5851e60988ac9e7ca0f278ea548a15b9bd4acd279ad3e7c03"
+    },
+    {
+      "id": "H11",
+      "paletteId": "H",
+      "label": "라일락 11",
+      "src": "assets/pieces/H/H11.png",
+      "width": 113,
+      "height": 121,
+      "aspectRatio": 0.9338843,
+      "alphaBounds": [
+        4,
+        4,
+        109,
+        117
+      ],
+      "hasTransparency": true,
+      "byteSize": 27836,
+      "sha256": "8b754b279f0149adad65be83e280e3e81d74a8a4587e9cc8b4378b2d020b760e"
+    },
+    {
+      "id": "H12",
+      "paletteId": "H",
+      "label": "라일락 12",
+      "src": "assets/pieces/H/H12.png",
+      "width": 128,
+      "height": 107,
+      "aspectRatio": 1.19626168,
+      "alphaBounds": [
+        4,
+        4,
+        124,
+        103
+      ],
+      "hasTransparency": true,
+      "byteSize": 26275,
+      "sha256": "a13a75c89ed804d927303064a82a63b2f04de6526307f4e67f08e9668ed46ff3"
+    }
+  ],
+  "canvases": [
+    {
+      "id": "outline-light",
+      "theme": "light",
+      "src": "assets/canvas_light.png",
+      "width": 1600,
+      "height": 1800,
+      "byteSize": 73630,
+      "sha256": "35fa126a23c43e9db2f053e63b48bbaed0fbef2451c4c56e860e922034a85ae6",
+      "backgroundRgb": [
+        255,
+        255,
+        255
+      ],
+      "isSilhouetteMask": false
+    },
+    {
+      "id": "outline-dark",
+      "theme": "dark",
+      "src": "assets/canvas_dark.png",
+      "width": 1600,
+      "height": 1800,
+      "byteSize": 83018,
+      "sha256": "2d7eb6d75b7ddfe891751bdb0ac397e55f716ad63956f2f1d16819370f14b1b5",
+      "backgroundRgb": [
+        18,
+        35,
+        42
+      ],
+      "isSilhouetteMask": false
+    }
+  ],
+  "openingImage": {
+    "id": "opening-photo",
+    "src": "assets/opening.webp",
+    "title": "달항아리",
+    "credit": "사진 출처: 국립중앙박물관",
+    "sourceName": "국립중앙박물관",
+    "sourceUrl": "https://www.museum.go.kr/"
+  }
+}

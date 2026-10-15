@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="자개를 고르고 놓으며, 지금의 나를 조금 더 알아보는 개인 작업실.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://daily-coach-ing.com/activities/moonjar/">
+  <title>빛을 담는 달항아리 · DAILYCOACHING</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <button class="brand" data-action="home" aria-label="빛을 담는 달항아리 첫 화면"><span class="brand-seal" aria-hidden="true">月</span><span>빛을 담는 달항아리<small>DAILYCOACHING</small></span></button>
+    <nav aria-label="도움과 작업"><a class="site-home-link desktop-label" href="/">데일리코칭</a><button data-action="projects">내 작업</button><button data-action="guide" class="desktop-label">진행 안내</button><button data-action="materials" aria-label="재료와 개인 저장 안내">이용 안내</button></nav>
+  </header>
+  <main id="main" tabindex="-1"><p class="loading">작업실을 준비하고 있어요.</p></main>
+  <footer class="site-footer"><span>나를 담고, 다시 보다.</span><span>개인의 말과 작품을 원격 서버에 전송하지 않습니다.</span></footer>
+  <div id="notice" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal" aria-labelledby="modal-title"><div class="dialog-top"><h2 id="modal-title"></h2><button id="modal-close" aria-label="창 닫기">닫기 ×</button></div><div id="modal-body"></div></dialog>
+  <input id="import-file" type="file" accept=".json,.moonjar.json,application/json" hidden>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

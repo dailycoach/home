@@ -1,0 +1,63 @@
+{
+  "format": "dailycoaching.moonjar.project",
+  "schemaVersion": "1.0.0",
+  "contentVersion": "story-v3-web-v1.0.0",
+  "assetPackVersion": "moonjar-png-v3",
+  "projectId": "demo-project-0001",
+  "revision": 0,
+  "createdAt": "2026-10-15T00:00:00Z",
+  "updatedAt": "2026-10-15T00:00:00Z",
+  "mode": "guided",
+  "currentScene": "arrival",
+  "title": "",
+  "scene": {
+    "templateId": "outline-v3",
+    "width": 1600,
+    "height": 1800,
+    "theme": "light",
+    "placementMode": "free",
+    "nodes": []
+  },
+  "pieceNotes": {},
+  "reflections": {
+    "arrival": {
+      "bodySignal": "",
+      "currentWord": "",
+      "intention": ""
+    },
+    "vessel": {
+      "firstMind": "",
+      "secondMind": "",
+      "whatTheySay": ""
+    },
+    "nacre": {
+      "selectedLightNote": ""
+    },
+    "arrange": {
+      "easyMoment": "",
+      "hesitantMoment": "",
+      "importantToMe": ""
+    },
+    "reframe": {
+      "observed": "",
+      "interpretation": "",
+      "wantToExplore": "",
+      "changed": "",
+      "kept": ""
+    },
+    "name": {
+      "noticed": "",
+      "keySentence": ""
+    },
+    "return": {
+      "noticed": "",
+      "situation": "",
+      "action": "",
+      "support": ""
+    },
+    "ending": {
+      "presentWord": ""
+    }
+  },
+  "snapshots": []
+}
