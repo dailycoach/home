@@ -123,11 +123,10 @@ function home() {
   startArea.append(actions,el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'}));
   if (!available) startArea.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 작업 중 편집 파일로 보관해 주세요.',{class:'error'}));
   if(globalThis.__MOONJAR_BUNDLE__)startArea.append(el('p','단일 파일 검토본입니다. 브라우저에 따라 자동 저장이 제한될 수 있으니 중요한 작업은 편집 파일로 보관해 주세요.',{class:'micro'}));
-  const photo=manifest.openingImage;
+  const artwork=manifest.heroArtwork;
   const figure = el('figure',null,{class:'hero-figure'}),caption=el('figcaption');
-  caption.append(el('span','흙에서 온 그릇과 바다에서 온 빛'),el('br'));
-  caption.append(el('a',photo.credit,{href:photo.sourceUrl,target:'_blank',rel:'noopener noreferrer',class:'photo-credit'}));
-  figure.append(el('img',null,{src:assetURL(photo.src),alt:`달항아리 · ${photo.credit}`,width:'780',height:'920'}),caption);
+  caption.append(el('span',artwork.title),el('br'),el('small',artwork.credit,{class:'artwork-credit'}));
+  figure.append(el('img',null,{src:assetURL(artwork.src),alt:artwork.description,width:'780',height:'920',decoding:'async'}),caption);
   section.append(copy,figure,startArea); main.append(section);
   const intro = el('section',null,{class:'intro-line'}); intro.append(el('h2',story.opening.title),el('p',story.opening.paragraphs[0]),el('p',story.opening.paragraphs[1]),el('p','내가 선택한 조각과 말은 내게 남습니다. 중요한 작업은 편집 파일로 따로 보관해 주세요.',{class:'muted'})); main.append(intro);
 }
@@ -527,9 +526,9 @@ function about(){
     ['편집 파일과 작품 이미지','PNG에는 작품만 넣습니다. 편집 파일은 성찰 기록과 조각 메모를 포함하는 비암호화 개인 백업입니다. 가져오기는 항상 새 작업으로 열며 기존 파일을 덮어쓰지 않습니다.'],
     ['다시 실행과 되돌리기','작품의 실행 취소는 현재 세션의 최대 100회 조작을 보관합니다. 새로고침 뒤에는 최신 작품·기록·남긴 배치를 복원하며 실행 취소 이력은 복원하지 않습니다.'],
     ['오프라인과 인쇄','완전한 오프라인 앱은 아닙니다. 첫 실행과 아직 읽지 않은 재료에는 파일을 제공하는 환경이 필요합니다. 기록지의 PDF 저장은 브라우저 인쇄 대화상자를 사용하며, 브라우저마다 UI가 다릅니다.'],
-    ['이미지 출처와 사용','첫 화면 달항아리 사진 출처: 국립중앙박물관. 이 프로젝트의 이미지 사용에 대한 사용자 승인을 반영했습니다.']
+    ['시작 화면의 오리지널 이미지','첫 화면은 DAILYCOACHING을 위해 새로 그린 벡터 달항아리 일러스트입니다. 특정 소장품 사진을 사용하지 않았습니다. 꾸미기 도안과 자개 PNG의 공개 이용 권한은 별도로 확인해야 합니다.']
   ])main.append(el('h2',h),el('p',t));
-  main.append(el('p',null));main.lastElementChild.append(el('a',manifest.openingImage.credit,{href:manifest.openingImage.sourceUrl,target:'_blank',rel:'noopener noreferrer'}));
+  main.append(el('p',manifest.heroArtwork.credit,{class:'micro'}));
   main.append(el('h2','원문과 참고 자료'),el('p','본 콘텐츠는 제공된 PDF V3와 웹 전환 콘텐츠에 근거합니다. DAILY는 Detect / Acknowledge / Inquire / Link / Your Action을 따릅니다.'));
   for(const s of story.materialSources){const p=el('p',s.citation);if(s.url){const a=el('a',' 자료 보기',{href:s.url,target:'_blank',rel:'noreferrer noopener'});p.append(a);}main.append(p);}
 }
