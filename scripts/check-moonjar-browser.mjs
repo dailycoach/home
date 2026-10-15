@@ -90,16 +90,16 @@ try{
   await page.locator('main.result-page [data-action="card-options"]').click();
   await page.locator('#modal .card-preview img').waitFor({state:'visible'});
   const card=page.locator('#modal');
-  const checks=card.locator('input[type="checkbox"]');
-  check(await checks.count()===2,'card must offer separate title/sentence choices');
-  check(await checks.nth(0).isChecked()===false && await checks.nth(1).isChecked()===false,
+  const cardChecks=card.locator('input[type="checkbox"]');
+  check(await cardChecks.count()===2,'card must offer separate title/sentence choices');
+  check(await cardChecks.nth(0).isChecked()===false && await cardChecks.nth(1).isChecked()===false,
     'private written words must be excluded by default');
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
   check(!(await card.locator('.card-field').first().isVisible()),'card title editor should be hidden until opt-in');
   await page.screenshot({path:`${out}/06-card-private-default-390.png`,fullPage:true});
 
-  await checks.nth(0).check();
-  await checks.nth(1).check();
+  await cardChecks.nth(0).check();
+  await cardChecks.nth(1).check();
   await card.locator('.card-field input').fill('나만의 작품 제목');
   await card.locator('.card-field textarea').fill('오늘 나를 한 걸음 더 알아보았다.');
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640
