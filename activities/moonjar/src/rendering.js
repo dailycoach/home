@@ -79,21 +79,37 @@ export function normalizeCardCopy(copy = {}) {
   return {title, sentence};
 }
 
-function cardLines(ctx, value, maxWidth, maxLines) {
-  const lines = [''];
-  for (const char of value.replaceAll('\r','')) {
-    if (char === '\n') { lines.push(''); continue; }
-    const last = lines.length - 1;
-    if (lines[last] && ctx.measureText(lines[last] + char).width > maxWidth) lines.push(char);
-    else lines[last] += char;
-  }
-  if (lines.length > maxLines) {
-    lines.length = maxLines;
-    let last = lines[maxLines - 1].trimEnd();
-    while (last && ctx.measureText(last + '…').width > maxWidth) last = [...last].slice(0, -1).join('');
-    lines[maxLines - 1] = last.trimEnd() + '…';
+// Card typography never truncates or hides a participant's chosen words.
+// If a phrase cannot fit legibly, the participant edits only the optional
+// card copy; the private original reflection remains untouched.
+function wrapCardLines(ctx, text, maxWidth) {
+  const lines = [];
+  for (const paragraph of String(text).replaceAll('\r','').split('\n')) {
+    let row = '';
+    for (const char of paragraph) {
+      const next = row + char;
+      if (row && ctx.measureText(next).width > maxWidth) {
+        lines.push(row); row = char;
+      } else row = next;
+    }
+    lines.push(row);
   }
   return lines;
+}
+
+export function planCardText(ctx, input, {
+  maxWidth=1320, maxLines=2, preferred=98, minimum=68, step=2,
+  family='"Batang", "AppleMyungjo", "Noto Serif KR", serif'
+}={}) {
+  const text = String(input ?? '').trim();
+  if (!text) return {size:preferred, lines:[]};
+  for (let size=preferred; size>=minimum; size-=step) {
+    ctx.font = `500 ${size}px ${family}`;
+    const lines=wrapCardLines(ctx,text,maxWidth);
+    if(lines.length <= maxLines && lines.every(line=>ctx.measureText(line).width<=maxWidth))
+      return {size,lines};
+  }
+  throw new Error('작품 카드에 글을 모두 담기 어려워요. 원본 기록은 그대로 두고 카드용 문구만 조금 짧게 다듬어 주세요.');
 }
 
 export async function exportCardPNG(scene, materials, copy = {}, scale = 1) {
@@ -107,54 +123,79 @@ export async function exportCardPNG(scene, materials, copy = {}, scale = 1) {
     const ctx = canvas.getContext('2d');
     if (!ctx) throw new Error('작품 카드 이미지 작업 공간을 만들지 못했어요.');
     ctx.scale(scale, scale);
-    ctx.fillStyle = '#F6F3ED';
-    ctx.fillRect(0, 0, 1600, 2400);
 
-    // The *exact same* underlying scene renderer powers artwork and card.
-    // Leave the whole 1600×1800 artwork unmodified and scale it into the paper.
+    const serif = '"Batang", "AppleMyungjo", "Noto Serif KR", serif';
+    const sans = 'system-ui, "Malgun Gothic", sans-serif';
+    const titleStyle=planCardText(ctx,title || '나를 담고, 다시 보다',{
+      maxWidth:1320,maxLines:2,preferred:100,minimum:70,step:2,family:serif
+    });
+    const sentenceStyle=planCardText(ctx,sentence,{
+      maxWidth:1300,maxLines:3,preferred:66,minimum:48,step:2,family:sans
+    });
+
+    // Warm paper, protected artwork area and a quiet editorial hierarchy.
+    ctx.fillStyle = '#F5F3ED';
+    ctx.fillRect(0,0,1600,2400);
+    ctx.fillStyle = '#FFFEFA';
+    ctx.fillRect(64,62,1472,2280);
+    ctx.strokeStyle = '#CED4CB';
+    ctx.lineWidth=2;
+    ctx.strokeRect(64,62,1472,2280);
+
+    ctx.fillStyle='#536F61';
+    ctx.font=`600 35px ${sans}`;
+    ctx.textAlign='left';
+    ctx.fillText('DAILYCOACHING   /   MOONJAR',120,145);
+    ctx.textAlign='right';
+    ctx.fillStyle='#627A6F';
+    ctx.font=`33px ${serif}`;
+    ctx.fillText('빛을 담는 달항아리',1480,145);
+    ctx.strokeStyle='#D2D9CF';
+    ctx.beginPath();ctx.moveTo(118,186);ctx.lineTo(1482,186);ctx.stroke();
+
+    // The work itself is displayed in full without cropping, including
+    // nacre intentionally placed outside the outline.
+    const artScale=sentence ? .78 : .85;
+    const artX=(1600-1600*artScale)/2;
+    const artY=222;
+    ctx.fillStyle=scene.theme==='dark'?'#12232A':'#FFFFFF';
+    ctx.fillRect(artX-8,artY-8,1600*artScale+16,1800*artScale+16);
     ctx.save();
-    ctx.translate(72, 74);
-    ctx.scale(0.91, 0.91);
-    drawScene(ctx, scene, images);
+    ctx.translate(artX,artY);
+    ctx.scale(artScale,artScale);
+    drawScene(ctx,scene,images);
     ctx.restore();
-    ctx.strokeStyle = '#DBDDD5';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(72, 74, 1456, 1638);
+    ctx.strokeStyle='#C7CEC4';
+    ctx.strokeRect(artX-8,artY-8,1600*artScale+16,1800*artScale+16);
 
-    ctx.fillStyle = '#577368';
-    ctx.textAlign = 'left';
-    ctx.font = '500 27px system-ui, sans-serif';
-    ctx.fillText('DAILYCOACHING  /  MOONJAR', 118, 1790);
+    const headingY=sentence?1792:1877;
+    ctx.textAlign='left';
+    ctx.fillStyle='#2B3D37';
+    ctx.font=`500 ${titleStyle.size}px ${serif}`;
+    const headingLeading=116;
+    titleStyle.lines.forEach((line,i)=>ctx.fillText(line,126,headingY+i*headingLeading));
 
-    ctx.fillStyle = '#263B37';
-    ctx.font = '58px "Noto Serif KR", "AppleMyungjo", "Batang", serif';
-    const label = title || '나를 담고, 다시 보다';
-    const headingLines = cardLines(ctx, label, 1344, 2);
-    headingLines.forEach((line, i) => ctx.fillText(line, 118, 1882 + i * 86));
-
-    if (sentence) {
-      ctx.fillStyle = '#4D605A';
-      ctx.font = '39px system-ui, "Malgun Gothic", sans-serif';
-      cardLines(ctx, sentence, 1320, 3)
-        .forEach((line, i) => ctx.fillText(line, 118, 2095 + i * 61));
+    if(sentenceStyle.lines.length){
+      ctx.fillStyle='#536C61';
+      ctx.font=`450 ${sentenceStyle.size}px ${sans}`;
+      const firstSentenceY=headingY+titleStyle.lines.length*headingLeading+34;
+      sentenceStyle.lines.forEach((line,i)=>ctx.fillText(line,126,firstSentenceY+i*70));
     }
 
-    ctx.strokeStyle = '#CED3CC';
-    ctx.beginPath();
-    ctx.moveTo(118, 2293);
-    ctx.lineTo(1482, 2293);
-    ctx.stroke();
-    ctx.fillStyle = '#657570';
-    ctx.font = '500 27px system-ui, sans-serif';
-    ctx.fillText('빛을 담는 달항아리', 118, 2350);
-    ctx.textAlign = 'right';
-    ctx.fillText('나를 담고, 다시 보다', 1482, 2350);
+    ctx.strokeStyle='#CFD6CD';
+    ctx.beginPath();ctx.moveTo(120,2260);ctx.lineTo(1480,2260);ctx.stroke();
+    ctx.textAlign='left';
+    ctx.fillStyle='#657970';
+    ctx.font=`31px ${sans}`;
+    ctx.fillText('나를 담고, 다시 보다',120,2320);
+    ctx.textAlign='right';
+    ctx.fillText('빛을 담는 달항아리',1480,2320);
 
     return await new Promise((resolve, reject) => canvas.toBlob(blob =>
       blob ? resolve(blob) : reject(new Error('작품 카드 PNG를 만들지 못했어요.')), 'image/png'));
   } finally {
-    canvas.width = 0;
-    canvas.height = 0;
+    canvas.width=0;
+    canvas.height=0;
     images.clear();
   }
 }
