@@ -60,9 +60,13 @@ try{
     const art=document.querySelector('#art').getBoundingClientRect();
     const tray=document.querySelector('#controls-panel').getBoundingClientRect();
     const visiblePixels=Math.max(0,Math.min(art.bottom,tray.top,innerHeight)-Math.max(0,art.top));
-    return {visiblePixels,artBottom:art.bottom,trayTop:tray.top,trayBottom:tray.bottom,viewport:innerHeight};
+    const nacre=document.querySelector('#art [data-id]').getBoundingClientRect();
+    const selectedCenter=(nacre.top+nacre.bottom)/2;
+    return {visiblePixels,selectedCenter,artTop:art.top,artBottom:art.bottom,trayTop:tray.top,trayBottom:tray.bottom,viewport:innerHeight};
   });
-  check(view.visiblePixels>=160,`real artwork must stay visible while adjusting: ${JSON.stringify(view)}`);
+  check(view.visiblePixels>=260,`at least most of the actual artwork must remain visible: ${JSON.stringify(view)}`);
+  check(view.selectedCenter>0 && view.selectedCenter<view.trayTop-12,
+    `the selected nacre must be visible outside the controls, not hidden under the panel: ${JSON.stringify(view)}`);
   check(view.trayBottom<=view.viewport-40,'editor drawer must not cover the bottom toolbar');
   await page.screenshot({path:`${out}/02-canvas-first-editor-390.png`,fullPage:true});
   await editorTray.locator('[data-action="panel:canvas"]').click();
