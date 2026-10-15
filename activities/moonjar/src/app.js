@@ -9,6 +9,7 @@ let editor = null, queue = null, persistent = true, readOnly = false, releaseLoc
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
 let activeGesture = null, dialogReturn = null, statusDetail = '', available = false, hasStored = false, documentInvalid = false;
 let opening = false, viewScene = 'arrival', controlTab = 'move', leadExpanded = true;
+let projectListEpoch=0; // Ignore asynchronous results from obsolete/double navigation.
 const primaryFields = {arrival:'currentWord',vessel:'firstMind',nacre:'selectedLightNote',arrange:'importantToMe',reframe:'observed',name:'title',return:'noticed'};
 
 function el(tag, text, attrs = {}) {
@@ -491,10 +492,15 @@ function result(){
   copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}),el('p',story.ui.localNotice,{class:'micro'}),el('p',story.ending.lastLine));layout.append(art,copy);main.append(layout,el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));renderStatus();
 }
 async function projects(){
-  await queue?.flush();currentView='projects';main.className='projects-page';main.replaceChildren(header('이 기기의 작업','이 브라우저에 보관한 작업입니다. 자동으로 다른 기기와 동기화되지 않습니다.'));
+  const epoch=++projectListEpoch;
+  await queue?.flush();
+  if(epoch!==projectListEpoch)return;
+  currentView='projects';main.className='projects-page';main.replaceChildren(header('이 기기의 작업','이 브라우저에 보관한 작업입니다. 자동으로 다른 기기와 동기화되지 않습니다.'));
   const actions=el('div',null,{class:'button-row'});actions.append(button('편집 파일 열기','import'),button('새 작업 시작','home'));main.append(actions);
   if(!repository){main.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 편집 파일을 열거나 화면에만 유지하며 시작할 수 있습니다.'));return;}
-  const stored=await repository.list(),list=stored.filter(d=>!validateProject(d,schema,manifest).length).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+  const stored=await repository.list();
+  if(epoch!==projectListEpoch||currentView!=='projects')return;
+  const list=stored.filter(d=>!validateProject(d,schema,manifest).length).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
   hasStored=stored.length>0;
   if(stored.length!==list.length)main.append(el('p','읽을 수 없는 저장 항목이 있어 목록에서 열지 않았습니다. 원본 항목은 삭제하지 않았습니다. 보관한 편집 파일을 열어 주세요.',{class:'error'}));
   if(!list.length)main.append(el('p','이 기기에 보관된 작업이 없습니다. 편집 파일이 있다면 열어 주세요.',{class:'empty-state'}));
