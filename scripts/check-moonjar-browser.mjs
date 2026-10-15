@@ -173,6 +173,10 @@ try{
   for(const [id,x,y] of examples){
     await p2.locator(`[data-action="palette:${id[0]}"]`).click();
     await p2.locator(`[data-action="add:${id}"]`).click();
+    // Numerical positions are intentionally an advanced disclosure; open it
+    // as a person would before editing the test-only example arrangement.
+    const geometry=p2.locator('#controls-panel details');
+    if(!(await geometry.evaluate(el=>el.open))) await geometry.locator('summary').click();
     const xField=p2.locator('[data-coordinate="x"]');
     await xField.fill(String(x));
     await xField.press('Tab');
