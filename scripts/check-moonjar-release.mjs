@@ -48,6 +48,9 @@ async function entryMatrix(browser,engine,width,height) {
     verify(await buttons.count()===2,`${name} two start options`);
     await page.locator('[data-action="start-guided"]').click();
     await page.locator('#art').waitFor({state:'visible'});
+    verify(await page.locator('#save-state').getAttribute('role')==='status'
+      && await page.locator('#save-state').getAttribute('aria-live')==='polite',
+      `${name} save status must be announced accessibly`);
     verify(await page.locator('#scene-lead').isVisible(),`${name} guided scene visible`);
     await ensureNoOverflow(page,`${name} guided studio`);
     await page.locator('[data-action="panel:palette"]').click();
@@ -73,6 +76,8 @@ async function entryMatrix(browser,engine,width,height) {
 
     // Touch the real artwork after closing the tool drawer.
     await tray.locator('[data-action="panel:canvas"]').tap();
+    verify(await page.locator('#stage-shell').evaluate(node=>document.activeElement===node),
+      `${name} focus must return to artwork after closing controls`);
     await svg.locator('[data-id]').first().scrollIntoViewIfNeeded();
     const b=await svg.locator('[data-id]').first().boundingBox();
     await page.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);
