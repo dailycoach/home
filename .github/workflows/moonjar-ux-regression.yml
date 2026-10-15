@@ -7,6 +7,7 @@ on:
       - 'tests/moonjar/**'
       - 'scripts/check-moonjar.mjs'
       - 'scripts/check-moonjar-browser.mjs'
+      - 'scripts/check-moonjar-release.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
 permissions:
@@ -56,4 +57,36 @@ jobs:
         with:
           name: moonjar-mobile-ux-qa
           path: artifacts/moonjar-mobile-ux-qa
+          retention-days: 7
+
+  release-matrix:
+    needs: browser-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit for emulation
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Serve independent static Moonjar app
+        run: |
+          python3 -m http.server 4173 >/tmp/moonjar-release-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/activities/moonjar/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/moonjar-release-http.log
+          exit 1
+      - name: Run touch, responsive, privacy and 160-piece matrix
+        run: node scripts/check-moonjar-release.mjs
+      - name: Upload release evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-release-matrix
+          path: artifacts/moonjar-release-matrix
           retention-days: 7
