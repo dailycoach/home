@@ -169,15 +169,20 @@ function renderSceneLead() {
   target.replaceChildren();
   if (target.hidden) return;
   const s = story.scenes.find(s => s.id === viewScene) || story.scenes[0];
-  target.append(
-    el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
-    el('h2', s.title),
+  const body=el('div',null,{id:'scene-lead-content',class:'scene-lead-body'});
+  body.hidden=!leadExpanded;
+  body.append(
     el('p', s.shortEssay, {class:'lead-essay'}),
     el('p', s.focusQuestion, {class:'lead-question'}),
     button('이 장면의 마음 기록하기', 'panel:story', {class:'text-button'}),
-    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'}),
+    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'})
+  );
+  target.append(
+    el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
+    el('h2', s.title),
+    body,
     button(leadExpanded ? '이야기 접고 작품에 집중' : '이야기 다시 보기', 'toggle-lead', {
-      class:'lead-toggle', 'aria-expanded':String(leadExpanded), 'aria-controls':'scene-lead'
+      class:'lead-toggle', 'aria-expanded':String(leadExpanded), 'aria-controls':'scene-lead-content'
     })
   );
 }
