@@ -403,9 +403,10 @@ function cardOptions() {
   const save=button('이 모습으로 카드 저장','download-card',{class:'primary'}),status=el('p','성찰 기록과 조각 메모는 카드에 포함되지 않습니다.',{class:'micro'});
   save.disabled=true;
   controls.append(save,status);
-  form.append(titleOption,titleField,sentenceOption,sentenceField,controls);
+  form.append(titleOption,titleField,sentenceOption,sentenceField);
   grid.append(figure,form);
-  root.append(grid);
+  // Read the preview before the final download button, especially on phones.
+  root.append(grid,controls);
 
   let url=null, timer=null, generation=0, disposed=false;
   const selectedCopy=()=>({
