@@ -1,0 +1,26 @@
+name: Moonjar UX Regression
+
+on:
+  pull_request:
+    paths:
+      - 'activities/moonjar/**'
+      - 'tests/moonjar/**'
+      - 'scripts/check-moonjar.mjs'
+      - '.github/workflows/moonjar-ux-regression.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check original assets and JS syntax
+        run: node scripts/check-moonjar.mjs
+      - name: Test Moonjar domain, storage and UX wiring
+        run: node --test tests/moonjar/*.test.js
