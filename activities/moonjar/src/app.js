@@ -17,7 +17,20 @@ function el(tag, text, attrs = {}) {
   for (const [k,v] of Object.entries(attrs)) n.setAttribute(k, v); return n;
 }
 function button(text, action, attrs = {}) { return el('button', text, {'data-action': action, type:'button', ...attrs}); }
-function notice(message) { const n = $('#notice'); n.textContent = message; n.classList.add('visible'); clearTimeout(notice.timer); notice.timer = setTimeout(() => n.classList.remove('visible'), 5000); }
+function notice(message) {
+  const n=$('#notice');
+  const inline=matchMedia('(max-width:767px)').matches ? $('#controls-panel.mobile-active .control-inline-status') : null;
+  if(inline){
+    inline.textContent=message;
+    clearTimeout(notice.timer);
+    n.classList.remove('visible');
+    return;
+  }
+  n.textContent=message;
+  n.classList.add('visible');
+  clearTimeout(notice.timer);
+  notice.timer=setTimeout(()=>n.classList.remove('visible'),5000);
+}
 function openDialog(title, content) {
   dialogReturn = document.activeElement; $('#modal-title').textContent = title; body.replaceChildren(content); modal.showModal();
 }
@@ -232,7 +245,7 @@ function renderControls() {
   const n = editor.node; if (!n) {target.append(el('p','조각을 누르거나 자개 목록에서 선택하면 조절할 수 있어요.',{class:'muted'}));return;}
   const drawerTop=el('div',null,{class:'control-drawer-top'});
   drawerTop.append(el('p','작품을 보며 조절하기',{class:'control-drawer-label'}),button('조절 닫기 ×','panel:canvas',{class:'control-drawer-close','aria-label':'조절 패널 닫고 달항아리 보기'}));
-  target.append(drawerTop);
+  target.append(drawerTop,el('p','',{class:'control-inline-status',role:'status','aria-live':'polite'}));
   const h = el('div',null,{class:'panel-heading'}); h.append(el('h2',`${n.assetId} 조각`),el('span',`${Math.round(n.rotation)}° · ${Math.round(n.width)} × ${Math.round(n.height)}`,{class:'micro'}));target.append(h);
   const tabs=el('div',null,{class:'control-tabs','aria-label':'조절 종류'});
   for(const [id,label] of [['move','이동'],['rotate','회전'],['size','크기']])tabs.append(button(label,`control:${id}`,{'aria-pressed':String(controlTab===id)}));target.append(tabs);
