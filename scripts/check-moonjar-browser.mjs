@@ -1,7 +1,7 @@
 // Browser smoke for the real Moonjar app (local static serving).
 // Node 22+, Playwright Chromium. Captures screenshots and does not mutate production.
 import assert from 'node:assert/strict';
-import {mkdir,stat} from 'node:fs/promises';
+import {mkdir,stat,readFile} from 'node:fs/promises';
 import {chromium} from 'playwright';
 
 const base='http://127.0.0.1:4173/activities/moonjar/';
@@ -25,6 +25,14 @@ try{
   check(leadRect && canvasRect && leadRect.y<canvasRect.y,'guided story question should precede canvas on mobile');
   check((await lead.innerText()).includes('지금 이 자리에 온 나는 어떤 상태인가요'),'arrival focus question missing');
   await page.screenshot({path:`${out}/01-guided-arrival-390.png`,fullPage:true});
+  const beforeFold = await lead.boundingBox();
+  await lead.locator('[data-action="toggle-lead"]').click();
+  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),'guided story should collapse without leaving the scene');
+  const afterFold = await lead.boundingBox();
+  check(afterFold.height < beforeFold.height * 0.7,'folded scene should visibly release space for artwork');
+  await page.screenshot({path:`${out}/01b-guided-focus-390.png`,fullPage:true});
+  await lead.locator('[data-action="toggle-lead"]').click();
+  check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'guided story should expand again');
 
   await page.locator('[data-action="panel:palette"]').click();
   await page.locator('[data-action="add:A01"]').click();
@@ -46,6 +54,9 @@ try{
   await page.locator('#look-prompt [data-action="panel:story"]').click();
   check(await page.locator('main.studio.paused').count()===0,'returning to story should exit pause');
 
+  await page.locator('[data-action="scene:name"]').click();
+  const titleInput=page.locator('#story-panel [data-section="title"][data-field="title"]');
+  await titleInput.fill('오늘의 이름은 내게 남겨두기');
   await page.locator('[data-action="scene:return"]').click();
   check((await page.locator('#scene-lead').innerText()).includes('오늘 알아차린 것을 삶에 적용해본다면'),'DAILY return question missing');
   check(await page.locator('#story-panel .mobile-record-title').isVisible(),'mobile guided reflection should have a concise record heading');
@@ -72,6 +83,38 @@ try{
   const savedPath=await download.path();
   check((await stat(savedPath)).size>2000,'PNG export must be non-empty');
   await page.screenshot({path:`${out}/04-reloaded-work-390.png`,fullPage:true});
+
+  // Export opt-in personal card only after a deliberately confirmed preview.
+  await page.locator('.studio-bar [data-action="finish"]').click();
+  await page.locator('main.result-page').waitFor();
+  await page.locator('main.result-page [data-action="card-options"]').click();
+  await page.locator('#modal .card-preview img').waitFor({state:'visible'});
+  const card=page.locator('#modal');
+  const checks=card.locator('input[type="checkbox"]');
+  check(await checks.count()===2,'card must offer separate title/sentence choices');
+  check(await checks.nth(0).isChecked()===false && await checks.nth(1).isChecked()===false,
+    'private written words must be excluded by default');
+  await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
+  check(!(await card.locator('.card-field').first().isVisible()),'card title editor should be hidden until opt-in');
+  await page.screenshot({path:`${out}/06-card-private-default-390.png`,fullPage:true});
+
+  await checks.nth(0).check();
+  await checks.nth(1).check();
+  await card.locator('.card-field input').fill('나만의 작품 제목');
+  await card.locator('.card-field textarea').fill('오늘 나를 한 걸음 더 알아보았다.');
+  await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640
+    && document.querySelector('#modal [data-action="download-card"]')?.disabled===false,{timeout:20000});
+  check(await card.locator('.card-field').first().isVisible(),'only opted title should show input');
+  await page.screenshot({path:`${out}/07-card-opt-in-preview-390.png`,fullPage:true});
+  const [cardDownload]=await Promise.all([
+    page.waitForEvent('download',{timeout:30000}),
+    card.locator('[data-action="download-card"]').click()
+  ]);
+  const cardBytes=await readFile(await cardDownload.path());
+  check(cardDownload.suggestedFilename().endsWith('.card.png'),'card name must be distinguishable from artwork-only PNG');
+  check(cardBytes.readUInt32BE(16)===1600 && cardBytes.readUInt32BE(20)===2400,
+    'card must export full-resolution 1600×2400 PNG');
+  check(cardBytes.length>4000,'card PNG must contain rendered artwork');
 
   const desktop=await browser.newContext({viewport:{width:1440,height:900},deviceScaleFactor:1,acceptDownloads:true});
   const p2=await desktop.newPage();
