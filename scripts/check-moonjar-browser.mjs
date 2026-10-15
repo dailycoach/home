@@ -96,6 +96,9 @@ try{
     'private written words must be excluded by default');
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
   check(!(await card.locator('.card-field').first().isVisible()),'card title editor should be hidden until opt-in');
+  check(await card.locator('.card-preview').evaluate(el =>
+    Boolean(el.compareDocumentPosition(document.querySelector('#modal [data-action="download-card"]')) & Node.DOCUMENT_POSITION_FOLLOWING)
+  ),'card preview must precede final download in reading order');
   await page.screenshot({path:`${out}/06-card-private-default-390.png`,fullPage:true});
 
   await cardChecks.nth(0).check();
@@ -106,6 +109,8 @@ try{
     && document.querySelector('#modal [data-action="download-card"]')?.disabled===false,{timeout:20000});
   check(await card.locator('.card-field').first().isVisible(),'only opted title should show input');
   await page.screenshot({path:`${out}/07-card-opt-in-preview-390.png`,fullPage:true});
+  await card.locator('.card-preview img').scrollIntoViewIfNeeded();
+  await page.screenshot({path:`${out}/07b-card-reviewed-before-save-390.png`,fullPage:false});
   const [cardDownload]=await Promise.all([
     page.waitForEvent('download',{timeout:30000}),
     card.locator('[data-action="download-card"]').click()
