@@ -1,0 +1,156 @@
+{
+  "format": "dailycoaching.moonjar.project",
+  "schemaVersion": "1.0.0",
+  "contentVersion": "story-v3-web-v1.0.0",
+  "assetPackVersion": "moonjar-png-v3",
+  "projectId": "test-valid-six-pieces",
+  "revision": 0,
+  "createdAt": "2026-10-15T00:00:00Z",
+  "updatedAt": "2026-10-15T00:00:00Z",
+  "mode": "guided",
+  "currentScene": "arrange",
+  "title": "검수용 가상 작품",
+  "scene": {
+    "templateId": "outline-v3",
+    "width": 1600,
+    "height": 1800,
+    "theme": "light",
+    "placementMode": "free",
+    "nodes": [
+      {
+        "instanceId": "test-node-0001",
+        "kind": "piece",
+        "assetId": "A01",
+        "x": 500,
+        "y": 550,
+        "width": 217.732,
+        "height": 220.0,
+        "rotation": -30,
+        "locked": false,
+        "imageUrl": "https://example.invalid/untrusted.png"
+      },
+      {
+        "instanceId": "test-node-0002",
+        "kind": "piece",
+        "assetId": "B05",
+        "x": 740,
+        "y": 550,
+        "width": 76.0369,
+        "height": 220.0,
+        "rotation": -15,
+        "locked": false
+      },
+      {
+        "instanceId": "test-node-0003",
+        "kind": "piece",
+        "assetId": "C09",
+        "x": 980,
+        "y": 550,
+        "width": 220.0,
+        "height": 122.3469,
+        "rotation": 0,
+        "locked": false
+      },
+      {
+        "instanceId": "test-node-0004",
+        "kind": "piece",
+        "assetId": "D07",
+        "x": 500,
+        "y": 970,
+        "width": 220.0,
+        "height": 209.9346,
+        "rotation": 15,
+        "locked": false
+      },
+      {
+        "instanceId": "test-node-0005",
+        "kind": "piece",
+        "assetId": "F11",
+        "x": 740,
+        "y": 970,
+        "width": 204.183,
+        "height": 220.0,
+        "rotation": 30,
+        "locked": false
+      },
+      {
+        "instanceId": "test-node-0006",
+        "kind": "piece",
+        "assetId": "H03",
+        "x": 980,
+        "y": 970,
+        "width": 220.0,
+        "height": 217.2951,
+        "rotation": 45,
+        "locked": false
+      }
+    ]
+  },
+  "pieceNotes": {
+    "test-node-0001": {
+      "label": "검수용 메모",
+      "memory": "실제 참여자의 기록이 아닌 테스트 데이터입니다."
+    },
+    "test-node-0002": {
+      "label": "검수용 메모",
+      "memory": "실제 참여자의 기록이 아닌 테스트 데이터입니다."
+    },
+    "test-node-0003": {
+      "label": "검수용 메모",
+      "memory": "실제 참여자의 기록이 아닌 테스트 데이터입니다."
+    },
+    "test-node-0004": {
+      "label": "검수용 메모",
+      "memory": "실제 참여자의 기록이 아닌 테스트 데이터입니다."
+    },
+    "test-node-0005": {
+      "label": "검수용 메모",
+      "memory": "실제 참여자의 기록이 아닌 테스트 데이터입니다."
+    },
+    "test-node-0006": {
+      "label": "검수용 메모",
+      "memory": "실제 참여자의 기록이 아닌 테스트 데이터입니다."
+    }
+  },
+  "reflections": {
+    "arrival": {
+      "bodySignal": "",
+      "currentWord": "",
+      "intention": ""
+    },
+    "vessel": {
+      "firstMind": "",
+      "secondMind": "",
+      "whatTheySay": ""
+    },
+    "nacre": {
+      "selectedLightNote": ""
+    },
+    "arrange": {
+      "easyMoment": "",
+      "hesitantMoment": "",
+      "importantToMe": ""
+    },
+    "reframe": {
+      "observed": "",
+      "interpretation": "",
+      "wantToExplore": "",
+      "changed": "",
+      "kept": ""
+    },
+    "name": {
+      "noticed": "",
+      "keySentence": ""
+    },
+    "return": {
+      "noticed": "",
+      "situation": "",
+      "action": "",
+      "support": ""
+    },
+    "ending": {
+      "presentWord": ""
+    }
+  },
+  "snapshots": []
+}
