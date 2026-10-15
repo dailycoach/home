@@ -1,6 +1,6 @@
 import {Editor, clone, clamp, angle, scaledDimensions, newProject, importAsNew, parseImport, validateProject} from './domain.js';
 import {openRepository, SaveQueue} from './persistence.js';
-import {Materials, renderSVG, exportPNG, download, assetURL} from './rendering.js';
+import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from './rendering.js';
 
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
@@ -8,15 +8,29 @@ let story, manifest, schema, empty, materials, repository = null;
 let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null;
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
 let activeGesture = null, dialogReturn = null, statusDetail = '', available = false, hasStored = false, documentInvalid = false;
-let opening = false, viewScene = 'arrival', controlTab = 'move';
-const primaryFields = {arrival:'currentWord',vessel:'firstMind',nacre:'selectedLightNote',arrange:'importantToMe',reframe:'observed',name:'title',return:'action'};
+let opening = false, viewScene = 'arrival', controlTab = 'move', leadExpanded = true;
+let projectListEpoch=0; // Ignore asynchronous results from obsolete/double navigation.
+const primaryFields = {arrival:'currentWord',vessel:'firstMind',nacre:'selectedLightNote',arrange:'importantToMe',reframe:'observed',name:'title',return:'noticed'};
 
 function el(tag, text, attrs = {}) {
   const n = document.createElement(tag); if (text !== null && text !== undefined) n.textContent = text;
   for (const [k,v] of Object.entries(attrs)) n.setAttribute(k, v); return n;
 }
 function button(text, action, attrs = {}) { return el('button', text, {'data-action': action, type:'button', ...attrs}); }
-function notice(message) { const n = $('#notice'); n.textContent = message; n.classList.add('visible'); clearTimeout(notice.timer); notice.timer = setTimeout(() => n.classList.remove('visible'), 5000); }
+function notice(message) {
+  const n=$('#notice');
+  const inline=matchMedia('(max-width:767px)').matches ? $('#controls-panel.mobile-active .control-inline-status') : null;
+  if(inline){
+    inline.textContent=message;
+    clearTimeout(notice.timer);
+    n.classList.remove('visible');
+    return;
+  }
+  n.textContent=message;
+  n.classList.add('visible');
+  clearTimeout(notice.timer);
+  notice.timer=setTimeout(()=>n.classList.remove('visible'),5000);
+}
 function openDialog(title, content) {
   dialogReturn = document.activeElement; $('#modal-title').textContent = title; body.replaceChildren(content); modal.showModal();
 }
@@ -86,7 +100,7 @@ async function openProject(doc, saveHere, expected = null, targetView = null) {
   });
   statusDetail='';status = readOnly ? 'readonly' : persistent ? expected === null ? 'dirty' : 'saved' : 'memory';
   if (persistent && !readOnly) { queue = new SaveQueue(repository, expected, statusChanged); if (expected === null) queue.schedule(editor.doc); }
-  documentInvalid=false; zoom = 1; paused = false; panel = doc.mode==='guided'?'story':'palette';
+  documentInvalid=false; zoom = 1; paused = false; leadExpanded = true; panel = doc.mode==='guided'?'story':'palette';
   viewScene=doc.currentScene==='ending'?'arrange':doc.currentScene;
   currentView = targetView || (editor.doc.currentScene === 'ending' ? 'result' : 'studio');
   location.hash = `/${currentView}/${doc.projectId}`; render();
@@ -123,11 +137,10 @@ function home() {
   startArea.append(actions,el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'}));
   if (!available) startArea.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 작업 중 편집 파일로 보관해 주세요.',{class:'error'}));
   if(globalThis.__MOONJAR_BUNDLE__)startArea.append(el('p','단일 파일 검토본입니다. 브라우저에 따라 자동 저장이 제한될 수 있으니 중요한 작업은 편집 파일로 보관해 주세요.',{class:'micro'}));
-  const photo=manifest.openingImage;
+  const artwork=manifest.heroArtwork;
   const figure = el('figure',null,{class:'hero-figure'}),caption=el('figcaption');
-  caption.append(el('span','흙에서 온 그릇과 바다에서 온 빛'),el('br'));
-  caption.append(el('a',photo.credit,{href:photo.sourceUrl,target:'_blank',rel:'noopener noreferrer',class:'photo-credit'}));
-  figure.append(el('img',null,{src:assetURL(photo.src),alt:`달항아리 · ${photo.credit}`,width:'780',height:'920'}),caption);
+  caption.append(el('span',artwork.title),el('br'),el('small',artwork.credit,{class:'artwork-credit'}));
+  figure.append(el('img',null,{src:assetURL(artwork.src),alt:artwork.description,width:'780',height:'920',decoding:'async'}),caption);
   section.append(copy,figure,startArea); main.append(section);
   const intro = el('section',null,{class:'intro-line'}); intro.append(el('h2',story.opening.title),el('p',story.opening.paragraphs[0]),el('p',story.opening.paragraphs[1]),el('p','내가 선택한 조각과 말은 내게 남습니다. 중요한 작업은 편집 파일로 따로 보관해 주세요.',{class:'muted'})); main.append(intro);
 }
@@ -137,27 +150,65 @@ function navigation() {
   return nav;
 }
 function studio() {
-  currentView = 'studio'; main.className = `studio ${paused ? 'paused' : ''}`; main.replaceChildren();
-  const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state'}));
+  currentView = 'studio'; main.className = `studio ${editor.doc.mode==='guided' ? 'mode-guided' : ''} ${paused ? 'paused' : ''}`; main.replaceChildren();
+  const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
   left.append(el('span',persistent ? '이 기기 · 이 브라우저' : '공용 기기용 · 자동 복원 없음',{class:'micro storage-context'}));
   const actions = el('div',null,{class:'button-row'}); actions.append(button(editor.doc.mode === 'free' ? '이야기와 함께' : '자유롭게 꾸미기','toggle-mode'),button('마무리','finish',{class:'primary'})); bar.append(left,actions);
   main.append(bar,navigation(),el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));
   const workspace = el('div',null,{class:'workspace'});
   const rail = el('aside',null,{id:'palette-panel',class:'palette-panel','aria-label':'자개 재료'});
   const stage = el('section',null,{class:'stage-area','aria-label':'작품 편집 영역'});
+  const sceneLead = el('section',null,{id:'scene-lead',class:'scene-lead','aria-label':'현재 장면의 이야기'});
   const viewtools = el('div',null,{class:'view-toolbar'});
   viewtools.append(button('−','zoom-out',{'aria-label':'작품 보기 축소'}),button('전체 보기','fit'),button('+','zoom-in',{'aria-label':'작품 보기 확대'}),button('바탕 비교','compare'),button(paused ? '꾸미기로 돌아가기' : '잠시 바라보기','pause',{class:'pause-button'}));
-  const shell = el('div',null,{class:'stage-shell',id:'stage-shell'}), paper = el('div',null,{class:'paper',id:'paper'});
+  const lookPrompt = el('aside',null,{id:'look-prompt',class:'look-prompt','aria-label':'잠시 바라보기 질문'});
+  const shell = el('div',null,{class:'stage-shell',id:'stage-shell',tabindex:'-1','aria-label':'달항아리 작품 영역'}), paper = el('div',null,{class:'paper',id:'paper'});
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
   svg.id = 'art'; svg.classList.add('art'); svg.setAttribute('viewBox','0 0 1600 1800'); svg.setAttribute('role','img'); svg.setAttribute('aria-label','달항아리 작품. 조각 선택과 조절은 자개 목록과 조절 버튼으로도 할 수 있습니다.');
-  paper.append(svg); shell.append(paper); stage.append(viewtools,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
+  paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
   const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('저장·보관','save-options')); stage.append(edittools);
   const firstHint=el('p','자개를 한 번 누르면 종이 위에 놓입니다. 끌지 않고도 큰 조절 버튼으로 움직일 수 있어요.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
   const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'}); stage.append(controls);
   const record = el('aside',null,{id:'story-panel',class:'story-panel','aria-label':'이야기와 선택 기록'});
   workspace.append(rail,stage,record); main.append(workspace);
   const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','자개'],['controls','조절'],['story','기록'],['look','바라보기']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
-  renderPalette(); renderStory(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
+  renderPalette(); renderStory(); renderSceneLead(); renderLookPrompt(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
+}
+function renderSceneLead() {
+  const target = $('#scene-lead');
+  if (!target) return;
+  target.hidden = editor.doc.mode !== 'guided';
+  target.classList.toggle('is-collapsed',!leadExpanded);
+  target.replaceChildren();
+  if (target.hidden) return;
+  const s = story.scenes.find(s => s.id === viewScene) || story.scenes[0];
+  const body=el('div',null,{id:'scene-lead-content',class:'scene-lead-body'});
+  body.hidden=!leadExpanded;
+  body.append(
+    el('p', s.shortEssay, {class:'lead-essay'}),
+    el('p', s.focusQuestion, {class:'lead-question'}),
+    button('이 장면의 마음 기록하기', 'panel:story', {class:'text-button'}),
+    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'})
+  );
+  target.append(
+    el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
+    el('h2', s.title),
+    body,
+    button(leadExpanded ? '이야기 접고 작품에 집중' : '이야기 다시 보기', 'toggle-lead', {
+      class:'lead-toggle', 'aria-expanded':String(leadExpanded), 'aria-controls':'scene-lead-content'
+    })
+  );
+}
+function renderLookPrompt() {
+  const target = $('#look-prompt');
+  if (!target) return;
+  const s = story.scenes.find(s => s.id === viewScene) || story.scenes[3];
+  target.replaceChildren(
+    el('p', `${s.name} · 잠시 바라보기`, {class:'eyebrow'}),
+    el('h2', s.focusQuestion),
+    el('p', '답을 정하지 않아도 좋습니다. 지금 눈에 들어오는 것과 마음에서 일어나는 것을 잠시 바라봅니다.', {class:'micro'}),
+    button('내 말로 기록해 보기', 'panel:story', {class:'text-button'})
+  );
 }
 function renderPalette() {
   const target = $('#palette-panel'); if (!target) return; target.replaceChildren();
@@ -192,6 +243,9 @@ function renderControls() {
   const target = $('#controls-panel'); if (!target) return;
   const advancedOpen=$('details',target)?.open||false;target.replaceChildren();
   const n = editor.node; if (!n) {target.append(el('p','조각을 누르거나 자개 목록에서 선택하면 조절할 수 있어요.',{class:'muted'}));return;}
+  const drawerTop=el('div',null,{class:'control-drawer-top'});
+  drawerTop.append(el('p','작품을 보며 조절하기',{class:'control-drawer-label'}),button('조절 닫기 ×','panel:canvas',{class:'control-drawer-close','aria-label':'조절 패널 닫고 달항아리 보기'}));
+  target.append(drawerTop,el('p','',{class:'control-inline-status',role:'status','aria-live':'polite'}));
   const h = el('div',null,{class:'panel-heading'}); h.append(el('h2',`${n.assetId} 조각`),el('span',`${Math.round(n.rotation)}° · ${Math.round(n.width)} × ${Math.round(n.height)}`,{class:'micro'}));target.append(h);
   const tabs=el('div',null,{class:'control-tabs','aria-label':'조절 종류'});
   for(const [id,label] of [['move','이동'],['rotate','회전'],['size','크기']])tabs.append(button(label,`control:${id}`,{'aria-pressed':String(controlTab===id)}));target.append(tabs);
@@ -212,27 +266,29 @@ function pieceNote(){
 }
 function saveOptions(){
   const root=el('div',null,{class:'save-options'});
-  for(const [label,action,detail] of [['작품 이미지 저장','export-png','작품만 PNG로 남깁니다.'],['편집 파일로 보관','export-json','작품과 기록을 다음에 다시 열 수 있습니다.'],['기록지 인쇄·PDF 저장','print-options','인쇄에 넣을 기록을 직접 고릅니다.']]){
+  for(const [label,action,detail] of [['작품 이미지 저장','export-png','작품만 PNG로 남깁니다.'],['작품 카드 만들기','card-options','넣고 싶은 제목·한 문장만 직접 선택해 담습니다.'],['편집 파일로 보관','export-json','작품과 기록을 다음에 다시 열 수 있습니다.'],['기록지 인쇄·PDF 저장','print-options','인쇄에 넣을 기록을 직접 고릅니다.']]){
     const row=el('div'),b=button(label,action);b.onclick=()=>{closeDialog();};row.append(b,el('p',detail,{class:'micro'}));root.append(row);
   }openDialog('작품과 기록 남기기',root);
 }
 function inputField(section, field, value) {
   const wrap = el('label',null,{class:'record-field'});wrap.append(el('span',field.label));
-  const input=el(field.maxLength<=200?'input':'textarea',null,{'data-section':section,'data-field':field.id,'data-limit':field.maxLength,rows:3});input.value=value;input.disabled=readOnly||paused;
+  const input=el(field.maxLength<=200?'input':'textarea',null,{'data-section':section,'data-field':field.id,'data-limit':field.maxLength,maxlength:field.maxLength,rows:3});input.value=value;input.disabled=readOnly||paused;
   if(field.hint) input.placeholder=field.hint;
   const count=el('small',`${[...value].length} / ${field.maxLength}`,{class:'length-count'});wrap.append(input,count);return wrap;
 }
 function renderStory() {
   const target = $('#story-panel'); if (!target) return; target.replaceChildren();
   const s=story.scenes.find(s=>s.id===viewScene)||story.scenes[3];
+  target.append(el('p','이 장면의 기록',{class:'mobile-record-title'}));
   target.append(el('p',`${String(s.order).padStart(2,'0')} / 07 · ${s.name}`,{class:'eyebrow'}),el('h2',s.title),el('p',s.shortEssay,{class:'short-essay'}));
-  const details=el('details',null,{class:'essay'});details.append(el('summary',story.ui.openEssay));for(const p of s.essay) details.append(el('p',p));target.append(details);
-  const daily=el('details',null,{class:'daily-note'});daily.append(el('summary','이 장면의 알아차림'));for(const key of s.daily) {const d=story.daily.find(d=>d.key===key);daily.append(el('p',`${d.en} · ${d.ko}`));}target.append(daily);
+  const details=el('details',null,{class:'essay'});details.append(el('summary',story.ui.openEssay));for(const p of s.essay) details.append(el('p',p));
+  const daily=el('details',null,{class:'daily-note'});daily.append(el('summary','이 장면의 알아차림'));for(const key of s.daily) {const d=story.daily.find(d=>d.key===key);daily.append(el('p',`${d.en} · ${d.ko}`));}
   target.append(el('h3',s.focusQuestion,{class:'focus-question'}),el('p',story.ui.recordHint,{class:'micro'}));
   const fields=[...(s.titleField?[{section:'title',field:s.titleField,value:editor.doc.title}]:[]),...s.fields.map(f=>({section:s.id,field:f,value:editor.doc.reflections[s.id][f.id]}))];
   const more=el('details',null,{class:'more-records'});more.append(el('summary','조금 더 살펴보기 · 선택 기록'));
   for(const item of fields){const field=inputField(item.section,item.field,item.value);(item.field.id===primaryFields[s.id]?target:more).append(field);}
   if(more.children.length>1)target.append(more);
+  target.append(details,daily);
   if(s.id==='reframe') target.append(button('남긴 배치와 바탕 비교','compare'));
   target.append(el('p',s.nextCopy,{class:'next-copy'}));
   const nav=el('div',null,{class:'scene-actions'});if(s.order>1)nav.append(button('이전',`scene:${story.scenes[s.order-2].id}`));nav.append(button(s.order===7?'마무리':'다음 장면',s.order===7?'finish':`scene:${story.scenes[s.order].id}`,{class:'primary'}));target.append(nav);
@@ -240,12 +296,24 @@ function renderStory() {
 }
 function setPanel(id, reveal = false) {
   panel=id;
+  const previousControls=main.classList.contains('controls-active');
+  main.classList.toggle('controls-active',id==='controls');
+  if(previousControls!==(id==='controls') && !paused)renderCanvas();
   if(id==='look') { paused=true; main.classList.add('paused');renderCanvas();renderControls(); }
   else if(paused) { paused=false;main.classList.remove('paused');renderCanvas();renderControls(); }
   for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
   document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
   const pauseButton=$('[data-action="pause"]');if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
-  if(reveal&&id!=='look'&&matchMedia('(max-width:767px)').matches)$(`#${id}-panel`)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+  if(id==='canvas')$('#stage-shell')?.focus?.({preventScroll:true});
+  if(reveal && id!=='look' && matchMedia('(max-width:767px)').matches){
+    // The compact editor floats below the *actual canvas*. Never scroll down to
+    // the controls as that would hide the artwork the participant is changing.
+    const revealTarget=id==='controls'||id==='canvas'?$('#stage-shell'):$(`#${id}-panel`);
+    // For the editor, scroll immediately so the selected fragment is not
+    // briefly hidden behind a floating tray while the page is still moving.
+    const immediate=id==='controls'||id==='canvas'||matchMedia('(prefers-reduced-motion:reduce)').matches;
+    revealTarget?.scrollIntoView({block:'start',behavior:immediate?'instant':'smooth'});
+  }
 }
 
 function canvasPoint(svg, event) {
@@ -333,22 +401,119 @@ async function imageExport(scale=1){
     const retry=button('다시 시도','retry-png'),small=button('800 × 900으로 시도','small-png');retry.onclick=()=>{closeDialog();safely(()=>imageExport(scale));};small.onclick=()=>{closeDialog();safely(()=>imageExport(0.5));};root.append(retry,small);openDialog('이미지를 만들지 못했어요',root);
   }
 }
+// Card export never reads hidden journal fields unless the user has checked
+// the precise text they want in the finished image.
+function cardOptions() {
+  if (!editor) return;
+  const scene = clone(editor.doc.scene);
+  const root = el('div',null,{class:'card-modal'});
+  root.append(el('p','작품만 담긴 카드에서 시작합니다. 제목과 한 문장은 직접 선택했을 때에만 이미지에 들어갑니다.',{class:'card-privacy'}));
+  const grid = el('div',null,{class:'card-modal-grid'}),form=el('section',null,{class:'card-form'}),figure=el('figure',null,{class:'card-preview'});
+  const image=el('img',null,{alt:'작품 카드 미리보기',width:'320',height:'480'}),previewState=el('p','미리보기를 준비하고 있어요.',{class:'micro',role:'status','aria-live':'polite'});
+  figure.append(image,el('figcaption','작품 카드 · 1600 × 2400 PNG'),previewState);
+  const titleOption=el('label',null,{class:'check-row'}),titleCheck=el('input',null,{type:'checkbox'});
+  titleOption.append(titleCheck,document.createTextNode('작품 제목 함께 담기'));
+  const titleField=el('label',null,{class:'card-field'}),titleText=el('span','카드에 넣을 제목');
+  const titleInput=el('input',null,{type:'text',maxlength:'50',placeholder:'예: 지금의 나에게 남겨둔 자리'});
+  titleInput.value=editor.doc.title||'';
+  titleInput.setAttribute('aria-describedby','card-copy-limit');
+
+  titleField.append(titleText,titleInput);titleField.hidden=true;
+  const sentenceOption=el('label',null,{class:'check-row'}),sentenceCheck=el('input',null,{type:'checkbox'});
+  sentenceOption.append(sentenceCheck,document.createTextNode('나에게 남는 한 문장 함께 담기'));
+  const sentenceField=el('label',null,{class:'card-field'}),sentenceText=el('span','카드에 넣을 한 문장');
+  const sentenceInput=el('textarea',null,{maxlength:'100',rows:3,placeholder:'직접 고른 한 문장만 담아요.'});
+  sentenceInput.value=editor.doc.reflections.name.keySentence||'';
+  sentenceInput.setAttribute('aria-describedby','card-copy-limit');
+  sentenceField.append(sentenceText,sentenceInput);sentenceField.hidden=true;
+
+  const controls=el('div',null,{class:'card-controls'});
+  const save=button('이 모습으로 카드 저장','download-card',{class:'primary'}),status=el('p','성찰 기록과 조각 메모는 카드에 포함되지 않습니다.',{class:'micro'});
+  save.disabled=true;
+  controls.append(save,status);
+  const cardLimit=el('p','원본 기록은 수정하지 않습니다. 카드용 제목 50자, 한 문장 100자까지 사용할 수 있으며, 글이 넘치면 생략하지 않고 수정하도록 안내합니다.',{id:'card-copy-limit',class:'card-copy-limit'});
+  form.append(titleOption,titleField,sentenceOption,sentenceField,cardLimit);
+  grid.append(figure,form);
+  // Read the preview before the final download button, especially on phones.
+  root.append(grid,controls);
+
+  let url=null, timer=null, generation=0, disposed=false;
+  const selectedCopy=()=>({
+    title:titleCheck.checked?titleInput.value:'',
+    sentence:sentenceCheck.checked?sentenceInput.value:''
+  });
+  const updateFields=()=>{
+    titleField.hidden=!titleCheck.checked;
+    sentenceField.hidden=!sentenceCheck.checked;
+  };
+  function updatePreview() {
+    const id=++generation;
+    clearTimeout(timer);
+    save.disabled=true;
+    previewState.textContent='선택한 문구로 미리보기를 만드는 중이에요.';
+    timer=setTimeout(async()=>{
+      try {
+        await document.fonts.ready;
+        const blob=await exportCardPNG(scene,materials,selectedCopy(),0.4);
+        if(disposed||id!==generation||!modal.open||!root.isConnected)return;
+        const nextURL=URL.createObjectURL(blob),oldURL=url;
+        image.src=nextURL;
+        url=nextURL;
+        if(oldURL)URL.revokeObjectURL(oldURL);
+        image.style.opacity='1';
+        previewState.textContent='미리보기와 같은 구성으로 저장됩니다.';
+        save.disabled=false;
+      } catch(error) {
+        if(disposed||id!==generation)return;
+        image.style.opacity='.35';
+        previewState.textContent=error.message||'미리보기를 만들지 못했어요. 카드 문구를 다듬어 다시 시도해 주세요.';
+      }
+    },180);
+  }
+  titleCheck.addEventListener('change',()=>{updateFields();updatePreview();});
+  sentenceCheck.addEventListener('change',()=>{updateFields();updatePreview();});
+  titleInput.addEventListener('input',updatePreview);
+  sentenceInput.addEventListener('input',updatePreview);
+  save.onclick=()=>safely(async()=>{
+    const copy=selectedCopy();
+    save.disabled=true;
+    try {
+      const blob=await exportCardPNG(scene,materials,copy);
+      download(blob,filename('card.png'));
+      notice('선택한 문구만 담은 작품 카드 내려받기를 요청했어요.');
+    } finally {
+      if(!disposed)save.disabled=false;
+    }
+  });
+  modal.addEventListener('close',()=>{
+    disposed=true;generation++;
+    clearTimeout(timer);
+    if(url)URL.revokeObjectURL(url);
+  },{once:true});
+  openDialog('내 작품 카드 만들기',root);
+  updatePreview();
+}
 async function finish(){if(editable()){editor.navigate('ending');await queue?.flush();}location.hash=`/result/${editor.doc.projectId}`;result();}
 function result(){
-  currentView='result';main.className='result-page';main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state'}));
+  currentView='result';main.className='result-page';main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
   const layout=el('div',null,{class:'result-layout'}),art=scenePreview(editor.doc.scene,editor.doc.title||''),copy=el('section');
   copy.append(el('p',editor.doc.title||'이름 없이 남긴 작품',{class:'eyebrow'}),el('h2',story.ending.anchor));for(const p of story.ending.paragraphs)copy.append(el('p',p));
   const words=el('div',null,{class:'starting-words'});words.append(el('h3','처음의 말'),el('p',editor.doc.reflections.arrival.currentWord||'남기지 않음'));copy.append(words,inputField('ending',{id:'presentWord',label:'지금 내 마음에 머무는 말',maxLength:2000},editor.doc.reflections.ending.presentWord));
   const returnFields=story.scenes.find(s=>s.id==='return').fields.filter(f=>['situation','action','support'].includes(f.id)&&editor.doc.reflections.return[f.id].trim());
   if(returnFields.length){const dailyReturn=el('section',null,{class:'daily-return'});dailyReturn.append(el('h3','내가 남긴 일상의 선택'));for(const f of returnFields)dailyReturn.append(el('h4',f.label),el('p',editor.doc.reflections.return[f.id]));copy.append(dailyReturn);}
-  const actions=el('div',null,{class:'result-actions'});actions.append(button('편집 계속하기','continue',{class:'primary'}),button('작품 이미지 저장','export-png'),button('편집 파일로 보관','export-json'),button('기록지 인쇄·PDF 저장','print-options'));
+  const actions=el('div',null,{class:'result-actions'});actions.append(button('편집 계속하기','continue',{class:'primary'}),button('작품 이미지 저장','export-png'),button('작품 카드 만들기','card-options'),button('편집 파일로 보관','export-json'),button('기록지 인쇄·PDF 저장','print-options'));
   copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}),el('p',story.ui.localNotice,{class:'micro'}),el('p',story.ending.lastLine));layout.append(art,copy);main.append(layout,el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));renderStatus();
 }
 async function projects(){
-  await queue?.flush();currentView='projects';main.className='projects-page';main.replaceChildren(header('이 기기의 작업','이 브라우저에 보관한 작업입니다. 자동으로 다른 기기와 동기화되지 않습니다.'));
+  const epoch=++projectListEpoch;
+  await queue?.flush();
+  if(epoch!==projectListEpoch)return;
+  currentView='projects';main.className='projects-page';main.replaceChildren(header('이 기기의 작업','이 브라우저에 보관한 작업입니다. 자동으로 다른 기기와 동기화되지 않습니다.'));
   const actions=el('div',null,{class:'button-row'});actions.append(button('편집 파일 열기','import'),button('새 작업 시작','home'));main.append(actions);
   if(!repository){main.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 편집 파일을 열거나 화면에만 유지하며 시작할 수 있습니다.'));return;}
-  const stored=await repository.list(),list=stored.filter(d=>!validateProject(d,schema,manifest).length).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
+  const stored=await repository.list();
+  if(epoch!==projectListEpoch||currentView!=='projects')return;
+  const list=stored.filter(d=>!validateProject(d,schema,manifest).length).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
   hasStored=stored.length>0;
   if(stored.length!==list.length)main.append(el('p','읽을 수 없는 저장 항목이 있어 목록에서 열지 않았습니다. 원본 항목은 삭제하지 않았습니다. 보관한 편집 파일을 열어 주세요.',{class:'error'}));
   if(!list.length)main.append(el('p','이 기기에 보관된 작업이 없습니다. 편집 파일이 있다면 열어 주세요.',{class:'empty-state'}));
@@ -393,9 +558,9 @@ function about(){
     ['편집 파일과 작품 이미지','PNG에는 작품만 넣습니다. 편집 파일은 성찰 기록과 조각 메모를 포함하는 비암호화 개인 백업입니다. 가져오기는 항상 새 작업으로 열며 기존 파일을 덮어쓰지 않습니다.'],
     ['다시 실행과 되돌리기','작품의 실행 취소는 현재 세션의 최대 100회 조작을 보관합니다. 새로고침 뒤에는 최신 작품·기록·남긴 배치를 복원하며 실행 취소 이력은 복원하지 않습니다.'],
     ['오프라인과 인쇄','완전한 오프라인 앱은 아닙니다. 첫 실행과 아직 읽지 않은 재료에는 파일을 제공하는 환경이 필요합니다. 기록지의 PDF 저장은 브라우저 인쇄 대화상자를 사용하며, 브라우저마다 UI가 다릅니다.'],
-    ['이미지 출처와 사용','첫 화면 달항아리 사진 출처: 국립중앙박물관. 이 프로젝트의 이미지 사용에 대한 사용자 승인을 반영했습니다.']
+    ['시작 화면의 오리지널 이미지','첫 화면은 DAILYCOACHING을 위해 새로 그린 벡터 달항아리 일러스트입니다. 특정 소장품 사진을 사용하지 않았습니다. 꾸미기 도안과 자개 PNG의 공개 이용 권한은 별도로 확인해야 합니다.']
   ])main.append(el('h2',h),el('p',t));
-  main.append(el('p',null));main.lastElementChild.append(el('a',manifest.openingImage.credit,{href:manifest.openingImage.sourceUrl,target:'_blank',rel:'noopener noreferrer'}));
+  main.append(el('p',manifest.heroArtwork.credit,{class:'micro'}));
   main.append(el('h2','원문과 참고 자료'),el('p','본 콘텐츠는 제공된 PDF V3와 웹 전환 콘텐츠에 근거합니다. DAILY는 Detect / Acknowledge / Inquire / Link / Your Action을 따릅니다.'));
   for(const s of story.materialSources){const p=el('p',s.citation);if(s.url){const a=el('a',' 자료 보기',{href:s.url,target:'_blank',rel:'noreferrer noopener'});p.append(a);}main.append(p);}
 }
@@ -461,9 +626,10 @@ const actions={
   clear:()=>{if(editable())confirmAction('작품 비우기','조각과 조각 메모를 비웁니다. 성찰 글은 유지되며 이 작업은 실행 취소할 수 있습니다.',()=>{editor.clear();changed();},'비우기');},
   'zoom-in':()=>{zoom=clamp(zoom+0.25,0.5,2.5);renderCanvas();},'zoom-out':()=>{zoom=clamp(zoom-0.25,0.5,2.5);renderCanvas();},fit:()=>{zoom=1;renderCanvas();},
   pause:()=>setPanel(paused?(editor.doc.mode==='guided'?'story':'palette'):'look'),
+  'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();},
   snapshot,compare,finish,'piece-note':pieceNote,'save-options':saveOptions,
   continue:()=>{paused=false;viewScene='arrange';if(!readOnly)editor.navigate('arrange');location.hash=`/studio/${editor.doc.projectId}`;studio();},
-  'export-png':()=>imageExport(),'export-json':backup,
+  'export-png':()=>imageExport(),'card-options':cardOptions,'export-json':backup,
   'export-text':()=>{download(new Blob([JSON.stringify({title:editor.doc.title,reflections:editor.doc.reflections,pieceNotes:editor.doc.pieceNotes},null,2)],{type:'text/plain;charset=utf-8'}),filename('txt'));notice('입력한 글 전체의 텍스트 내려받기를 요청했어요.');},
   import:()=>$('#import-file').click(),'print-options':printOptions,
   'retry-save':async()=>{if(!validateProject(editor.doc,schema,manifest).length){documentInvalid=false;await queue?.retry(editor.doc);}else notice('글자 수 제한을 먼저 확인해 주세요.');},
@@ -482,7 +648,17 @@ document.addEventListener('click',event=>{
     else if(type==='control'){if(['move','rotate','size'].includes(a)){controlTab=a;renderControls();$(`[data-action="control:${a}"]`)?.focus({preventScroll:true});}}
     else if(type==='select'){editor.selected=a;renderCanvas();renderControls();setPanel('controls',true);}
     else if(type==='panel')setPanel(a,true);
-    else if(type==='scene'){viewScene=a;if(!readOnly)editor.navigate(a);$('.scene-nav')?.replaceWith(navigation());renderStory();renderCanvas();setPanel('story',true);const heading=$('#story-panel h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});queue?.flush();}
+    else if(type==='scene'){
+      viewScene=a;leadExpanded=true;
+      if(!readOnly)editor.navigate(a);
+      $('.scene-nav')?.replaceWith(navigation());
+      renderStory();renderSceneLead();renderLookPrompt();renderCanvas();
+      const showMobileLead=matchMedia('(max-width:767px)').matches && editor.doc.mode==='guided';
+      setPanel('story',!showMobileLead);
+      if(showMobileLead)$('#scene-lead')?.scrollIntoView({block:'start',behavior:'auto'});
+      else {const heading=$('#story-panel h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});}
+      queue?.flush();
+    }
     else if(type==='move'&&editable()){const n=editor.node;if(n){editor.transform({x:n.x+Number(a),y:n.y+Number(c)});changed();}}
     else if(type==='rotate'&&editable()){const n=editor.node;if(n){editor.transform({rotation:n.rotation+Number(a)});changed();}}
     else if(type==='size'&&editable()){editor.transform({factor:Number(a)});changed();}
