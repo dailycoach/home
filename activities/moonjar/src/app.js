@@ -137,7 +137,7 @@ function navigation() {
 }
 function studio() {
   currentView = 'studio'; main.className = `studio ${editor.doc.mode==='guided' ? 'mode-guided' : ''} ${paused ? 'paused' : ''}`; main.replaceChildren();
-  const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state'}));
+  const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
   left.append(el('span',persistent ? '이 기기 · 이 브라우저' : '공용 기기용 · 자동 복원 없음',{class:'micro storage-context'}));
   const actions = el('div',null,{class:'button-row'}); actions.append(button(editor.doc.mode === 'free' ? '이야기와 함께' : '자유롭게 꾸미기','toggle-mode'),button('마무리','finish',{class:'primary'})); bar.append(left,actions);
   main.append(bar,navigation(),el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));
@@ -148,7 +148,7 @@ function studio() {
   const viewtools = el('div',null,{class:'view-toolbar'});
   viewtools.append(button('−','zoom-out',{'aria-label':'작품 보기 축소'}),button('전체 보기','fit'),button('+','zoom-in',{'aria-label':'작품 보기 확대'}),button('바탕 비교','compare'),button(paused ? '꾸미기로 돌아가기' : '잠시 바라보기','pause',{class:'pause-button'}));
   const lookPrompt = el('aside',null,{id:'look-prompt',class:'look-prompt','aria-label':'잠시 바라보기 질문'});
-  const shell = el('div',null,{class:'stage-shell',id:'stage-shell'}), paper = el('div',null,{class:'paper',id:'paper'});
+  const shell = el('div',null,{class:'stage-shell',id:'stage-shell',tabindex:'-1','aria-label':'달항아리 작품 영역'}), paper = el('div',null,{class:'paper',id:'paper'});
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
   svg.id = 'art'; svg.classList.add('art'); svg.setAttribute('viewBox','0 0 1600 1800'); svg.setAttribute('role','img'); svg.setAttribute('aria-label','달항아리 작품. 조각 선택과 조절은 자개 목록과 조절 버튼으로도 할 수 있습니다.');
   paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
@@ -290,6 +290,7 @@ function setPanel(id, reveal = false) {
   for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
   document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
   const pauseButton=$('[data-action="pause"]');if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
+  if(id==='canvas')$('#stage-shell')?.focus?.({preventScroll:true});
   if(reveal && id!=='look' && matchMedia('(max-width:767px)').matches){
     // The compact editor floats below the *actual canvas*. Never scroll down to
     // the controls as that would hide the artwork the participant is changing.
@@ -480,7 +481,7 @@ function cardOptions() {
 }
 async function finish(){if(editable()){editor.navigate('ending');await queue?.flush();}location.hash=`/result/${editor.doc.projectId}`;result();}
 function result(){
-  currentView='result';main.className='result-page';main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state'}));
+  currentView='result';main.className='result-page';main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
   const layout=el('div',null,{class:'result-layout'}),art=scenePreview(editor.doc.scene,editor.doc.title||''),copy=el('section');
   copy.append(el('p',editor.doc.title||'이름 없이 남긴 작품',{class:'eyebrow'}),el('h2',story.ending.anchor));for(const p of story.ending.paragraphs)copy.append(el('p',p));
   const words=el('div',null,{class:'starting-words'});words.append(el('h3','처음의 말'),el('p',editor.doc.reflections.arrival.currentWord||'남기지 않음'));copy.append(words,inputField('ending',{id:'presentWord',label:'지금 내 마음에 머무는 말',maxLength:2000},editor.doc.reflections.ending.presentWord));
