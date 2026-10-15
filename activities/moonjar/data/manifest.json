@@ -1839,12 +1839,14 @@
       "isSilhouetteMask": false
     }
   ],
-  "openingImage": {
-    "id": "opening-photo",
-    "src": "assets/opening.webp",
-    "title": "달항아리",
-    "credit": "사진 출처: 국립중앙박물관",
-    "sourceName": "국립중앙박물관",
-    "sourceUrl": "https://www.museum.go.kr/"
+  "heroArtwork": {
+    "id": "moonjar-original",
+    "src": "assets/moonjar-original.svg",
+    "title": "흙에서 온 그릇과 바다에서 온 빛",
+    "description": "유백색 달항아리와 주변의 다섯 자개 빛 조각을 표현한 DAILYCOACHING 오리지널 벡터 일러스트.",
+    "credit": "DAILYCOACHING 오리지널 일러스트",
+    "creator": "DAILYCOACHING",
+    "medium": "original SVG vector illustration",
+    "rightsNote": "특정 소장품의 사진을 사용하지 않고 새로 그린 달항아리 형상입니다."
   }
 }
