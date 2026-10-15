@@ -48,6 +48,8 @@ try{
 
   await page.locator('[data-action="scene:return"]').click();
   check((await page.locator('#scene-lead').innerText()).includes('오늘 알아차린 것을 삶에 적용해본다면'),'DAILY return question missing');
+  check(await page.locator('#story-panel .mobile-record-title').isVisible(),'mobile guided reflection should have a concise record heading');
+  check(!(await page.locator('#story-panel > .short-essay').isVisible()),'mobile guided reflection should not repeat the introductory essay');
   const noticed=page.locator('#story-panel > .record-field [data-field="noticed"]');
   check(await noticed.count()===1,'return focus field should be noticed, not action');
   await noticed.fill('오늘은 나를 더 천천히 바라보려고 한다.');
@@ -76,6 +78,7 @@ try{
   p2.on('pageerror',err=>errors.push(`DESKTOP: ${err.message}`));
   await p2.goto(base,{waitUntil:'networkidle'});
   await p2.locator('[data-action="start-free"]').click();
+  await p2.locator('main.studio #story-panel').waitFor({state:'visible',timeout:10000});
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
   check(await p2.locator('.story-panel').isVisible(),'desktop story panel should remain available');
   await p2.screenshot({path:`${out}/05-free-desktop-1440.png`,fullPage:true});
