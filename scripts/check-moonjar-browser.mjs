@@ -17,6 +17,15 @@ try{
   page.on('pageerror',err=>errors.push(`PAGE: ${err.message}`));
   page.on('requestfailed',req=>errors.push(`LOAD: ${req.url()} ${req.failure()?.errorText}`));
   await page.goto(base,{waitUntil:'networkidle',timeout:30000});
+  const mobileHero=page.locator('.hero-figure img');
+  await mobileHero.evaluate(img=>img.decode());
+  check((await mobileHero.getAttribute('src')).endsWith('assets/moonjar-original.svg'),
+    'mobile entry must use original SVG, not the removed photo');
+  check(await mobileHero.evaluate(img=>img.naturalWidth===780 && img.naturalHeight===920),
+    'new self-drawn illustration must load at its 780×920 viewBox');
+  check(await page.locator('a[href*="museum.go.kr"]').count()===0,
+    'no institution image source link should appear in published app');
+  await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
   await page.locator('#scene-lead').waitFor({state:'visible'});
   const lead=page.locator('#scene-lead');
@@ -125,6 +134,10 @@ try{
   const p2=await desktop.newPage();
   p2.on('pageerror',err=>errors.push(`DESKTOP: ${err.message}`));
   await p2.goto(base,{waitUntil:'networkidle'});
+  await p2.locator('.hero-figure img').evaluate(img=>img.decode());
+  check(await p2.locator('.hero-figure img[src$="moonjar-original.svg"]').count()===1,
+    'desktop entry must display the original artwork');
+  await p2.screenshot({path:`${out}/00-original-hero-desktop-1440.png`,fullPage:true});
   await p2.locator('[data-action="start-free"]').click();
   await p2.locator('main.studio #story-panel').waitFor({state:'visible',timeout:10000});
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
