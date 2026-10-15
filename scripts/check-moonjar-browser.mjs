@@ -163,6 +163,30 @@ try{
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
   check(await p2.locator('.story-panel').isVisible(),'desktop story panel should remain available');
   await p2.screenshot({path:`${out}/05-free-desktop-1440.png`,fullPage:true});
+
+  // Visual stress: several colors and layers. This is test-only composition,
+  // never a default psychological "right answer" shown to participants.
+  const examples=[
+    ['A01',540,460],['A08',900,520],['B02',620,750],['B09',1070,700],
+    ['C04',460,960],['F01',845,990],['G03',665,1270],['H07',1060,1310]
+  ];
+  for(const [id,x,y] of examples){
+    await p2.locator(`[data-action="palette:${id[0]}"]`).click();
+    await p2.locator(`[data-action="add:${id}"]`).click();
+    const xField=p2.locator('[data-coordinate="x"]');
+    await xField.fill(String(x));
+    await xField.press('Tab');
+    const yField=p2.locator('[data-coordinate="y"]');
+    await yField.fill(String(y));
+    await yField.press('Tab');
+  }
+  check(await p2.locator('#art [data-node]').count()===examples.length,
+    'multi-piece composition must retain every selected fragment');
+  await p2.screenshot({path:`${out}/08-multi-piece-artwork-desktop-1440.png`,fullPage:true});
+  await p2.locator('.studio-bar [data-action="finish"]').click();
+  await p2.locator('main.result-page [data-action="card-options"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
+  await p2.screenshot({path:`${out}/09-multi-piece-card-desktop-1440.png`,fullPage:true});
   await desktop.close(); await context.close();
   check(errors.length===0,`browser errors: ${errors.join('; ')}`);
   console.log(`MOONJAR BROWSER PASS: ${checks} assertions. Screenshots: ${out}`);
