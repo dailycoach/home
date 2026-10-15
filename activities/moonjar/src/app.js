@@ -137,7 +137,7 @@ function navigation() {
   return nav;
 }
 function studio() {
-  currentView = 'studio'; main.className = `studio ${paused ? 'paused' : ''}`; main.replaceChildren();
+  currentView = 'studio'; main.className = `studio ${editor.doc.mode==='guided' ? 'mode-guided' : ''} ${paused ? 'paused' : ''}`; main.replaceChildren();
   const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state'}));
   left.append(el('span',persistent ? '이 기기 · 이 브라우저' : '공용 기기용 · 자동 복원 없음',{class:'micro storage-context'}));
   const actions = el('div',null,{class:'button-row'}); actions.append(button(editor.doc.mode === 'free' ? '이야기와 함께' : '자유롭게 꾸미기','toggle-mode'),button('마무리','finish',{class:'primary'})); bar.append(left,actions);
@@ -262,14 +262,16 @@ function inputField(section, field, value) {
 function renderStory() {
   const target = $('#story-panel'); if (!target) return; target.replaceChildren();
   const s=story.scenes.find(s=>s.id===viewScene)||story.scenes[3];
+  target.append(el('p','이 장면의 기록',{class:'mobile-record-title'}));
   target.append(el('p',`${String(s.order).padStart(2,'0')} / 07 · ${s.name}`,{class:'eyebrow'}),el('h2',s.title),el('p',s.shortEssay,{class:'short-essay'}));
-  const details=el('details',null,{class:'essay'});details.append(el('summary',story.ui.openEssay));for(const p of s.essay) details.append(el('p',p));target.append(details);
-  const daily=el('details',null,{class:'daily-note'});daily.append(el('summary','이 장면의 알아차림'));for(const key of s.daily) {const d=story.daily.find(d=>d.key===key);daily.append(el('p',`${d.en} · ${d.ko}`));}target.append(daily);
+  const details=el('details',null,{class:'essay'});details.append(el('summary',story.ui.openEssay));for(const p of s.essay) details.append(el('p',p));
+  const daily=el('details',null,{class:'daily-note'});daily.append(el('summary','이 장면의 알아차림'));for(const key of s.daily) {const d=story.daily.find(d=>d.key===key);daily.append(el('p',`${d.en} · ${d.ko}`));}
   target.append(el('h3',s.focusQuestion,{class:'focus-question'}),el('p',story.ui.recordHint,{class:'micro'}));
   const fields=[...(s.titleField?[{section:'title',field:s.titleField,value:editor.doc.title}]:[]),...s.fields.map(f=>({section:s.id,field:f,value:editor.doc.reflections[s.id][f.id]}))];
   const more=el('details',null,{class:'more-records'});more.append(el('summary','조금 더 살펴보기 · 선택 기록'));
   for(const item of fields){const field=inputField(item.section,item.field,item.value);(item.field.id===primaryFields[s.id]?target:more).append(field);}
   if(more.children.length>1)target.append(more);
+  target.append(details,daily);
   if(s.id==='reframe') target.append(button('남긴 배치와 바탕 비교','compare'));
   target.append(el('p',s.nextCopy,{class:'next-copy'}));
   const nav=el('div',null,{class:'scene-actions'});if(s.order>1)nav.append(button('이전',`scene:${story.scenes[s.order-2].id}`));nav.append(button(s.order===7?'마무리':'다음 장면',s.order===7?'finish':`scene:${story.scenes[s.order].id}`,{class:'primary'}));target.append(nav);
