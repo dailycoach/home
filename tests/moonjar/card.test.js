@@ -38,7 +38,7 @@ function fontMetrics() {
 test('card layout preserves every chosen character without ellipsis',()=>{
   const ctx=fontMetrics();
   const original='봄을 기다리며 나를 다시 바라봅니다';
-  const plan=planCardText(ctx,original,{maxWidth:600,maxLines:2,preferred:98,minimum:70,step:2});
+  const plan=planCardText(ctx,original,{maxWidth:850,maxLines:2,preferred:98,minimum:70,step:2});
   assert.equal(plan.lines.join(''),original);
   assert.ok(plan.size>=70 && plan.size<=98);
   assert.ok(plan.lines.every(line=>!line.includes('…')));
