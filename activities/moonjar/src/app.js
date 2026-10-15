@@ -9,7 +9,7 @@ let editor = null, queue = null, persistent = true, readOnly = false, releaseLoc
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
 let activeGesture = null, dialogReturn = null, statusDetail = '', available = false, hasStored = false, documentInvalid = false;
 let opening = false, viewScene = 'arrival', controlTab = 'move';
-const primaryFields = {arrival:'currentWord',vessel:'firstMind',nacre:'selectedLightNote',arrange:'importantToMe',reframe:'observed',name:'title',return:'action'};
+const primaryFields = {arrival:'currentWord',vessel:'firstMind',nacre:'selectedLightNote',arrange:'importantToMe',reframe:'observed',name:'title',return:'noticed'};
 
 function el(tag, text, attrs = {}) {
   const n = document.createElement(tag); if (text !== null && text !== undefined) n.textContent = text;
@@ -145,19 +145,48 @@ function studio() {
   const workspace = el('div',null,{class:'workspace'});
   const rail = el('aside',null,{id:'palette-panel',class:'palette-panel','aria-label':'자개 재료'});
   const stage = el('section',null,{class:'stage-area','aria-label':'작품 편집 영역'});
+  const sceneLead = el('section',null,{id:'scene-lead',class:'scene-lead','aria-label':'현재 장면의 이야기'});
   const viewtools = el('div',null,{class:'view-toolbar'});
   viewtools.append(button('−','zoom-out',{'aria-label':'작품 보기 축소'}),button('전체 보기','fit'),button('+','zoom-in',{'aria-label':'작품 보기 확대'}),button('바탕 비교','compare'),button(paused ? '꾸미기로 돌아가기' : '잠시 바라보기','pause',{class:'pause-button'}));
+  const lookPrompt = el('aside',null,{id:'look-prompt',class:'look-prompt','aria-label':'잠시 바라보기 질문'});
   const shell = el('div',null,{class:'stage-shell',id:'stage-shell'}), paper = el('div',null,{class:'paper',id:'paper'});
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
   svg.id = 'art'; svg.classList.add('art'); svg.setAttribute('viewBox','0 0 1600 1800'); svg.setAttribute('role','img'); svg.setAttribute('aria-label','달항아리 작품. 조각 선택과 조절은 자개 목록과 조절 버튼으로도 할 수 있습니다.');
-  paper.append(svg); shell.append(paper); stage.append(viewtools,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
+  paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
   const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('저장·보관','save-options')); stage.append(edittools);
   const firstHint=el('p','자개를 한 번 누르면 종이 위에 놓입니다. 끌지 않고도 큰 조절 버튼으로 움직일 수 있어요.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
   const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'}); stage.append(controls);
   const record = el('aside',null,{id:'story-panel',class:'story-panel','aria-label':'이야기와 선택 기록'});
   workspace.append(rail,stage,record); main.append(workspace);
   const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','자개'],['controls','조절'],['story','기록'],['look','바라보기']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
-  renderPalette(); renderStory(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
+  renderPalette(); renderStory(); renderSceneLead(); renderLookPrompt(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
+}
+function renderSceneLead() {
+  const target = $('#scene-lead');
+  if (!target) return;
+  target.hidden = editor.doc.mode !== 'guided';
+  target.replaceChildren();
+  if (target.hidden) return;
+  const s = story.scenes.find(s => s.id === viewScene) || story.scenes[0];
+  target.append(
+    el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
+    el('h2', s.title),
+    el('p', s.shortEssay, {class:'lead-essay'}),
+    el('p', s.focusQuestion, {class:'lead-question'}),
+    button('이 장면의 마음 기록하기', 'panel:story', {class:'text-button'}),
+    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'})
+  );
+}
+function renderLookPrompt() {
+  const target = $('#look-prompt');
+  if (!target) return;
+  const s = story.scenes.find(s => s.id === viewScene) || story.scenes[3];
+  target.replaceChildren(
+    el('p', `${s.name} · 잠시 바라보기`, {class:'eyebrow'}),
+    el('h2', s.focusQuestion),
+    el('p', '답을 정하지 않아도 좋습니다. 지금 눈에 들어오는 것과 마음에서 일어나는 것을 잠시 바라봅니다.', {class:'micro'}),
+    button('내 말로 기록해 보기', 'panel:story', {class:'text-button'})
+  );
 }
 function renderPalette() {
   const target = $('#palette-panel'); if (!target) return; target.replaceChildren();
@@ -192,6 +221,14 @@ function renderControls() {
   const target = $('#controls-panel'); if (!target) return;
   const advancedOpen=$('details',target)?.open||false;target.replaceChildren();
   const n = editor.node; if (!n) {target.append(el('p','조각을 누르거나 자개 목록에서 선택하면 조절할 수 있어요.',{class:'muted'}));return;}
+  const livePreview = el('figure',null,{class:'control-live-preview'});
+  const previewSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  previewSVG.setAttribute('viewBox','0 0 1600 1800');
+  previewSVG.setAttribute('aria-hidden','true');
+  previewSVG.setAttribute('focusable','false');
+  renderSVG(previewSVG,editor.doc.scene,materials,n.instanceId);
+  livePreview.append(previewSVG,el('figcaption','조절하는 동안 현재 작품을 함께 볼 수 있어요.'));
+  target.append(livePreview);
   const h = el('div',null,{class:'panel-heading'}); h.append(el('h2',`${n.assetId} 조각`),el('span',`${Math.round(n.rotation)}° · ${Math.round(n.width)} × ${Math.round(n.height)}`,{class:'micro'}));target.append(h);
   const tabs=el('div',null,{class:'control-tabs','aria-label':'조절 종류'});
   for(const [id,label] of [['move','이동'],['rotate','회전'],['size','크기']])tabs.append(button(label,`control:${id}`,{'aria-pressed':String(controlTab===id)}));target.append(tabs);
@@ -218,7 +255,7 @@ function saveOptions(){
 }
 function inputField(section, field, value) {
   const wrap = el('label',null,{class:'record-field'});wrap.append(el('span',field.label));
-  const input=el(field.maxLength<=200?'input':'textarea',null,{'data-section':section,'data-field':field.id,'data-limit':field.maxLength,rows:3});input.value=value;input.disabled=readOnly||paused;
+  const input=el(field.maxLength<=200?'input':'textarea',null,{'data-section':section,'data-field':field.id,'data-limit':field.maxLength,maxlength:field.maxLength,rows:3});input.value=value;input.disabled=readOnly||paused;
   if(field.hint) input.placeholder=field.hint;
   const count=el('small',`${[...value].length} / ${field.maxLength}`,{class:'length-count'});wrap.append(input,count);return wrap;
 }
@@ -482,7 +519,17 @@ document.addEventListener('click',event=>{
     else if(type==='control'){if(['move','rotate','size'].includes(a)){controlTab=a;renderControls();$(`[data-action="control:${a}"]`)?.focus({preventScroll:true});}}
     else if(type==='select'){editor.selected=a;renderCanvas();renderControls();setPanel('controls',true);}
     else if(type==='panel')setPanel(a,true);
-    else if(type==='scene'){viewScene=a;if(!readOnly)editor.navigate(a);$('.scene-nav')?.replaceWith(navigation());renderStory();renderCanvas();setPanel('story',true);const heading=$('#story-panel h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});queue?.flush();}
+    else if(type==='scene'){
+      viewScene=a;
+      if(!readOnly)editor.navigate(a);
+      $('.scene-nav')?.replaceWith(navigation());
+      renderStory();renderSceneLead();renderLookPrompt();renderCanvas();
+      const showMobileLead=matchMedia('(max-width:767px)').matches && editor.doc.mode==='guided';
+      setPanel('story',!showMobileLead);
+      if(showMobileLead)$('#scene-lead')?.scrollIntoView({block:'start',behavior:'auto'});
+      else {const heading=$('#story-panel h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});}
+      queue?.flush();
+    }
     else if(type==='move'&&editable()){const n=editor.node;if(n){editor.transform({x:n.x+Number(a),y:n.y+Number(c)});changed();}}
     else if(type==='rotate'&&editable()){const n=editor.node;if(n){editor.transform({rotation:n.rotation+Number(a)});changed();}}
     else if(type==='size'&&editable()){editor.transform({factor:Number(a)});changed();}
