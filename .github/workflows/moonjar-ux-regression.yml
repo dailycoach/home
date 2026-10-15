@@ -6,6 +6,7 @@ on:
       - 'activities/moonjar/**'
       - 'tests/moonjar/**'
       - 'scripts/check-moonjar.mjs'
+      - 'scripts/check-moonjar-browser.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
 permissions:
@@ -24,3 +25,35 @@ jobs:
         run: node scripts/check-moonjar.mjs
       - name: Test Moonjar domain, storage and UX wiring
         run: node --test tests/moonjar/*.test.js
+
+  browser-smoke:
+    needs: qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve the real static Moonjar page
+        run: |
+          python3 -m http.server 4173 >/tmp/moonjar-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/activities/moonjar/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/moonjar-http.log
+          exit 1
+      - name: Mobile and desktop Chromium smoke
+        run: node scripts/check-moonjar-browser.mjs
+      - name: Attach browser captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-mobile-ux-qa
+          path: artifacts/moonjar-mobile-ux-qa
+          retention-days: 7
