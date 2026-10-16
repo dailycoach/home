@@ -194,6 +194,7 @@ try{
   check(await p2.locator('dialog .background-option .comparison-scene').count()===4,
     'picker includes porcelain day/night and original legacy day/night');
   await p2.locator('dialog [data-action="apply-canvas:legacy-outline-v3:light"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('canvas_light.png'));
   check((await p2.locator('#art image').first().getAttribute('href'))?.includes('canvas_light.png'),
     'explicit legacy option restores original line-art background');
   await p2.locator('.view-toolbar [data-action="compare"]').click();
@@ -209,6 +210,7 @@ try{
   await p2.screenshot({path:`${out}/05b-porcelain-night-workspace-1440.png`,fullPage:true});
   await p2.locator('.view-toolbar [data-action="compare"]').click();
   await p2.locator('dialog [data-action="apply-canvas:porcelain-v2:light"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('/porcelain-day.png'));
   check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-day.png'),
     'day/night switching returns to daylight V2');
 
