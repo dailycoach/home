@@ -30,7 +30,7 @@ export function installNacreVisibility({document: doc = globalThis.document, Obs
     note.className = 'nacre-visibility-note';
     note.setAttribute('role', 'status');
     note.setAttribute('aria-live', 'polite');
-    note.textContent = '편집할 때만 조각의 윤곽을 도와주는 보기 옵션입니다. 저장한 작품과 카드는 원본 그대로입니다.';
+    note.textContent = '조각의 윤곽을 더 쉽게 봅니다. 저장한 작품과 카드에는 표시되지 않습니다.';
 
     function paint() {
       control.textContent = active ? '윤곽 보기 끄기' : '조각 윤곽 보기';
@@ -47,7 +47,7 @@ export function installNacreVisibility({document: doc = globalThis.document, Obs
     const pause = toolbar.querySelector('.pause-button');
     if (pause) toolbar.insertBefore(control, pause);
     else toolbar.append(control);
-    toolbar.insertAdjacentElement('afterend', note);
+    toolbar.append(note);
     paint();
   };
 
