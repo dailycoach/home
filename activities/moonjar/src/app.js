@@ -306,7 +306,7 @@ function setPanel(id, reveal = false) {
   const previousControls=main.classList.contains('controls-active');
   main.classList.toggle('controls-active',id==='controls');
   if(previousControls!==(id==='controls') && !paused)renderCanvas();
-  if(id==='look') { paused=true; main.classList.add('paused');renderCanvas();renderControls(); }
+  if(id==='look') { paused=true; main.classList.add('paused');renderLookPrompt();renderCanvas();renderControls(); }
   else if(paused) { paused=false;main.classList.remove('paused');renderCanvas();renderControls(); }
   for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
   document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
