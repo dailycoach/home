@@ -403,10 +403,12 @@ function compare(){
       b.onclick=()=>{
         if(!editable())return;
         const activeEditor=editor;
-        const apply=async()=>{
+        const apply=async(confirmed=false)=>{
           // Confirm all required pixels are available before changing saved art.
+          // A dismissed preview must not unexpectedly update the document
+          // when the async background image finishes loading.
           await materials.load(backgroundKey(previewScene));
-          if(editor!==activeEditor||!editable())return;
+          if(editor!==activeEditor||(!confirmed&&!modal.open)||!editable())return;
           editor.setCanvas(variant.id,theme);
           if(modal.open)closeDialog();
           renderCanvas();renderControls();changed();
@@ -418,8 +420,8 @@ function compare(){
           closeDialog();
           confirmAction('기존 작품의 배경을 바꿀까요?',
             '오래전에 만든 작품의 자개 위치와 기록은 그대로 남지만, 달항아리 모양이 새로운 백자로 달라집니다. 원래 바탕으로 다시 바꾸거나 실행 취소할 수도 있어요.',
-            apply,'확인하고 바꾸기');
-        } else safely(apply);
+            ()=>apply(true),'확인하고 바꾸기');
+        } else safely(()=>apply(false));
       };
       figure.append(b);previews.append(figure);
     }
