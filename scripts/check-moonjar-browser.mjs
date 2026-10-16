@@ -81,6 +81,19 @@ try{
   await page.screenshot({path:`${out}/02b-editor-actual-viewport-390.png`,fullPage:false});
   await editorTray.locator('[data-action="panel:canvas"]').click();
   check(!(await editorTray.isVisible()),'close control should restore uncluttered artwork');
+  const edgeGuide=page.locator('#nacre-visibility-switch');
+  await edgeGuide.waitFor({state:'visible'});
+  check(await edgeGuide.getAttribute('aria-pressed')==='false','nacre outline aid must be off by default');
+  const nacreImage=page.locator('#art g[data-node] > image[data-id]').first();
+  check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','no guide filter before opt-in');
+  await edgeGuide.click();
+  check(await edgeGuide.getAttribute('aria-pressed')==='true','nacre outline aid must be switchable');
+  check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)!=='none','guide applies CSS filter only in studio');
+  check(await page.locator('#nacre-visibility-note').isVisible(),'guide displays an optional access explanation');
+  await page.screenshot({path:`${out}/02c-nacre-visibility-on-390.png`,fullPage:false});
+  await edgeGuide.click();
+  check(await edgeGuide.getAttribute('aria-pressed')==='false','guide can be disabled');
+  check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','guide clears visual change without editing source');
   await page.locator('[data-action="panel:controls"]').click();
   check(await editorTray.isVisible(),'controls remain reachable from bottom navigation');
 
@@ -112,6 +125,9 @@ try{
   check(await page.locator('#story-panel [data-field="noticed"]').inputValue()==='오늘은 나를 더 천천히 바라보려고 한다.','saved reflection must survive reload');
   check(page.url()===projectURL,'reloaded project route should remain stable');
 
+  const reloadGuide=page.locator('#nacre-visibility-switch');
+  check(await reloadGuide.getAttribute('aria-pressed')==='false','guide choice is session-only');
+  await reloadGuide.click();
   await page.locator('[data-action="save-options"]').click();
   const [download]=await Promise.all([
     page.waitForEvent('download',{timeout:20000}),
@@ -120,6 +136,15 @@ try{
   check(download.suggestedFilename().endsWith('.png'),'art export must be PNG');
   const savedPath=await download.path();
   check((await stat(savedPath)).size>2000,'PNG export must be non-empty');
+  const guidePng=await readFile(savedPath);
+  await reloadGuide.click();
+  await page.locator('[data-action="save-options"]').click();
+  const [normalDownload]=await Promise.all([
+    page.waitForEvent('download',{timeout:20000}),
+    page.locator('dialog [data-action="export-png"]').click(),
+  ]);
+  const normalPng=await readFile(await normalDownload.path());
+  check(normalPng.equals(guidePng),'editing-only contrast guide must never appear in exported PNG');
   await page.screenshot({path:`${out}/04-reloaded-work-390.png`,fullPage:true});
 
   // Export opt-in personal card only after a deliberately confirmed preview.
