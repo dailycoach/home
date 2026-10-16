@@ -385,6 +385,14 @@
           "items": {
             "$ref": "#/$defs/pieceNode"
           }
+        },
+        "canvasVariant": {
+          "type": "string",
+          "enum": [
+            "legacy-outline-v3",
+            "porcelain-v2"
+          ],
+          "description": "Optional visual background: absent is a legacy outline-v3 project."
         }
       },
       "required": [

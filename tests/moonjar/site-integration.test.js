@@ -43,8 +43,8 @@ test('public app contains an original vector hero, not the removed museum photog
 test('post-evaluation design stylesheet loads after main CSS and ownership wording is correct',()=>{
   const page=read('activities/moonjar/index.html');
   assert.ok(page.includes('styles.css?v=20261016-2'));
-  assert.ok(page.includes('refinement.css?v=20261016-2'));
-  assert.ok(page.indexOf('styles.css?v=20261016-2')<page.indexOf('refinement.css?v=20261016-2'));
+  assert.ok(page.includes('refinement.css?v=20261016-porcelain-v2'));
+  assert.ok(page.indexOf('styles.css?v=20261016-2')<page.indexOf('refinement.css?v=20261016-porcelain-v2'));
   const css=read('activities/moonjar/refinement.css');
   assert.match(css,/result-overview/);
   assert.match(css,/max-width:767px/);

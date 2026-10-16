@@ -1,0 +1,34 @@
+{
+  "version": "porcelain-v2.0",
+  "coordinateSystem": {
+    "width": 1600,
+    "height": 1800
+  },
+  "variants": {
+    "day": {
+      "src": "assets/moonjar-v2/porcelain-day.png",
+      "originalSvg": "assets/moonjar-v2/master/porcelain-day.svg",
+      "thumbnail": "assets/moonjar-v2/thumbnail-day.webp",
+      "width": 1600,
+      "height": 1800,
+      "sha256": "bba50e825f0109c499cf05cd94059da1681d2eda7d86a474296400eced779a1a",
+      "byteSize": 1036859,
+      "svgSha256": "0443d1424dd009a4813eec2c97c33158b5c29b97013d430d86f268adaf243f6e",
+      "creator": "DAILYCOACHING",
+      "original": true
+    },
+    "night": {
+      "src": "assets/moonjar-v2/porcelain-night.png",
+      "originalSvg": "assets/moonjar-v2/master/porcelain-night.svg",
+      "thumbnail": "assets/moonjar-v2/thumbnail-night.webp",
+      "width": 1600,
+      "height": 1800,
+      "sha256": "8732c7eec7313289063b70726b6b5ca47f381c0c60c45545e46438d9ef4b463f",
+      "byteSize": 992085,
+      "svgSha256": "2cf5197e42a4ab5adcd95cccaade018a329e94818df39f03bf71befa28cfca12",
+      "creator": "DAILYCOACHING",
+      "original": true
+    }
+  },
+  "existingV3AssetsUnchanged": true
+}

@@ -1,4 +1,4 @@
-import {Editor, clone, clamp, angle, scaledDimensions, newProject, importAsNew, parseImport, validateProject} from './domain.js';
+import {Editor, clone, clamp, angle, scaledDimensions, newProject, importAsNew, parseImport, validateProject, backgroundKey} from './domain.js';
 import {openRepository, SaveQueue} from './persistence.js';
 import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from './rendering.js';
 
@@ -160,7 +160,7 @@ function studio() {
   const stage = el('section',null,{class:'stage-area','aria-label':'작품 편집 영역'});
   const sceneLead = el('section',null,{id:'scene-lead',class:'scene-lead','aria-label':'현재 장면의 이야기'});
   const viewtools = el('div',null,{class:'view-toolbar'});
-  viewtools.append(button('−','zoom-out',{'aria-label':'작품 보기 축소'}),button('전체 보기','fit'),button('+','zoom-in',{'aria-label':'작품 보기 확대'}),button('바탕 비교','compare'),button(paused ? '꾸미기로 돌아가기' : '잠시 바라보기','pause',{class:'pause-button'}));
+  viewtools.append(button('−','zoom-out',{'aria-label':'작품 보기 축소'}),button('전체 보기','fit'),button('+','zoom-in',{'aria-label':'작품 보기 확대'}),button('나의 바탕','compare'),button(paused ? '꾸미기로 돌아가기' : '잠시 바라보기','pause',{class:'pause-button'}));
   const lookPrompt = el('aside',null,{id:'look-prompt',class:'look-prompt','aria-label':'잠시 바라보기 질문'});
   const shell = el('div',null,{class:'stage-shell',id:'stage-shell',tabindex:'-1','aria-label':'달항아리 작품 영역'}), paper = el('div',null,{class:'paper',id:'paper'});
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
@@ -296,7 +296,7 @@ function renderStory() {
   for(const item of fields){const field=inputField(item.section,item.field,item.value);(item.field.id===primaryFields[s.id]?target:more).append(field);}
   if(more.children.length>1)target.append(more);
   target.append(details,daily);
-  if(s.id==='reframe') target.append(button('남긴 배치와 바탕 비교','compare'));
+  if(s.id==='reframe') target.append(button('남긴 배치와 바탕 보기','compare'));
   target.append(el('p',s.nextCopy,{class:'next-copy'}));
   const nav=el('div',null,{class:'scene-actions'});if(s.order>1)nav.append(button('이전',`scene:${story.scenes[s.order-2].id}`));nav.append(button(s.order===7?'마무리':'다음 장면',s.order===7?'finish':`scene:${story.scenes[s.order].id}`,{class:'primary'}));target.append(nav);
   target.append(button('지금은 건너뛰기',s.order===7?'finish':`scene:${story.scenes[s.order].id}`,{class:'text-button'}));
@@ -379,16 +379,61 @@ function scenePreview(scene,label){
   svg.setAttribute('viewBox','0 0 1600 1800');svg.setAttribute('role','img');svg.setAttribute('aria-label',label);renderSVG(svg,scene,materials);figure.append(svg,el('figcaption',label));return figure;
 }
 function compare(){
-  const root=el('div');root.append(el('p',paused?'지금은 바라보기입니다. 바탕과 남긴 배치를 비교해 보세요.':'바탕은 미리보기입니다. 아래에서 직접 선택해야 작품에 적용됩니다.'));
-  const themes=el('div',null,{class:'comparison-grid'});
-  for(const theme of ['light','dark']){
-    const scene=clone(editor.doc.scene);scene.theme=theme;
-    const f=scenePreview(scene,theme==='light'?'밝은 바탕':'어두운 바탕'),b=button('이 바탕으로 작업하기',`apply-theme:${theme}`);b.disabled=readOnly||paused;b.onclick=()=>{if(editable()){editor.theme(theme);closeDialog();renderCanvas();renderControls();}};f.append(b);themes.append(f);
+  const root=el('div',null,{class:'background-picker'});
+  root.append(el('p',paused
+    ? '지금은 바라보기입니다. 배경을 비교한 다음 꾸미기로 돌아가 선택하세요.'
+    : '마음에 드는 바탕을 선택할 수 있습니다. 자개의 위치와 크기는 바뀌지 않습니다.',{class:'muted'}));
+  const current=editor.doc.scene.canvasVariant||'legacy-outline-v3';
+  const variants=[
+    {id:'porcelain-v2',label:'오리지널 백자',note:'새로운 유백색 백자. 햇살 낮과 달빛 밤.'},
+    {id:'legacy-outline-v3',label:'기존 도안',note:'이전에 만든 작품의 선화 도안을 그대로 유지합니다.'}
+  ];
+  for(const variant of variants){
+    const group=el('section',null,{class:'background-option'});
+    group.append(el('h3',variant.label),el('p',variant.note,{class:'micro'}));
+    const previews=el('div',null,{class:'comparison-grid'});
+    for(const theme of ['light','dark']){
+      const previewScene=clone(editor.doc.scene);
+      previewScene.canvasVariant=variant.id;
+      previewScene.theme=theme;
+      const figure=scenePreview(previewScene,theme==='light'?'햇살 낮':'달빛 밤');
+      const active=current===variant.id&&editor.doc.scene.theme===theme;
+      const b=button(active?'현재 사용 중':'이 바탕 적용하기',`apply-canvas:${variant.id}:${theme}`,{'aria-pressed':String(active)});
+      b.disabled=readOnly||paused||active;
+      b.onclick=()=>{
+        if(!editable())return;
+        const activeEditor=editor;
+        const apply=async(confirmed=false)=>{
+          // Confirm all required pixels are available before changing saved art.
+          // A dismissed preview must not unexpectedly update the document
+          // when the async background image finishes loading.
+          await materials.load(backgroundKey(previewScene));
+          if(editor!==activeEditor||(!confirmed&&!modal.open)||!editable())return;
+          editor.setCanvas(variant.id,theme);
+          if(modal.open)closeDialog();
+          renderCanvas();renderControls();changed();
+          notice(`${variant.label} · ${theme==='light'?'햇살 낮':'달빛 밤'}으로 바꿨어요. 자개는 같은 자리에 있습니다.`);
+        };
+        if(current==='legacy-outline-v3'&&variant.id==='porcelain-v2'){
+          // The picker is already a modal; close it before showing the
+          // separate confirmation to avoid showModal() on an open dialog.
+          closeDialog();
+          confirmAction('기존 작품의 배경을 바꿀까요?',
+            '오래전에 만든 작품의 자개 위치와 기록은 그대로 남지만, 달항아리 모양이 새로운 백자로 달라집니다. 원래 바탕으로 다시 바꾸거나 실행 취소할 수도 있어요.',
+            ()=>apply(true),'확인하고 바꾸기');
+        } else safely(()=>apply(false));
+      };
+      figure.append(b);previews.append(figure);
+    }
+    group.append(previews);root.append(group);
   }
-  root.append(themes,el('h3','남긴 배치와 지금'));
+  root.append(el('h3','남겨둔 배치와 지금'));
   if(!editor.doc.snapshots.length)root.append(el('p','아직 남긴 배치가 없습니다. 원할 때 「배치 남기기」를 누르세요.'));
-  else {const grid=el('div',null,{class:'comparison-grid'});for(const s of editor.doc.snapshots)grid.append(scenePreview(s.scene,s.label));grid.append(scenePreview(editor.doc.scene,'지금의 배치'));root.append(grid);}
-  root.append(el('p',story.scenes[4].truthNote,{class:'micro'}));openDialog('같은 작품, 다른 시선',root);
+  else {const grid=el('div',null,{class:'comparison-grid'});
+    for(const shot of editor.doc.snapshots)grid.append(scenePreview(shot.scene,shot.label));
+    grid.append(scenePreview(editor.doc.scene,'지금의 배치'));root.append(grid);}
+  root.append(el('p',story.scenes[4].truthNote,{class:'micro'}));
+  openDialog('나의 달항아리 바탕',root);
 }
 function backup(){
   const root=el('div');root.append(el('p','편집 파일에는 성찰 기록과 조각 메모가 함께 들어갑니다. 암호화되지 않은 개인 백업이므로 공유 전에 내용을 확인해 주세요.'));
@@ -671,8 +716,18 @@ document.addEventListener('input',event=>{
   if(used>limit&&!input.parentElement.querySelector('button'))input.parentElement.append(button('전체 글 텍스트 보관','export-text'));
 });
 document.addEventListener('change',event=>{
-  const input=event.target;if(!editor||!input.dataset.coordinate||!editable())return;
-  if(Number.isFinite(input.valueAsNumber)){editor.transform({[input.dataset.coordinate]:input.valueAsNumber});changed();}
+  const input=event.target;
+  if(!editor||!input.dataset.coordinate||!editable())return;
+  if(!Number.isFinite(input.valueAsNumber))return;
+  // Do NOT replace the controls DOM in a native change/blur event.
+  // Rebuilding it synchronously unmounts the focused field, re-enters
+  // change/focus handlers and can throw replaceChildren NotFoundError.
+  // A position edit only needs an art redraw and the numeric summary updated.
+  editor.transform({[input.dataset.coordinate]:input.valueAsNumber});
+  renderCanvas();
+  const current=editor.node;
+  const summary=$('#controls-panel .panel-heading .micro');
+  if(current&&summary)summary.textContent=`${Math.round(current.rotation)}° · ${Math.round(current.width)} × ${Math.round(current.height)}`;
 });
 document.addEventListener('focusout',event=>{if(event.target.dataset.field&&!event.target.isComposing)queue?.flush();});
 
@@ -758,7 +813,7 @@ async function route(){
 }
 async function init(){
   const bundled=globalThis.__MOONJAR_BUNDLE__?.data;
-  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261016-2`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
+  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261016-porcelain-v2`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
   materials=new Materials(manifest);
   try{repository=await openRepository();available=true;hasStored=(await repository.list()).length>0;}catch{available=false;}
   await route();

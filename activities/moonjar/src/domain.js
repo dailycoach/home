@@ -2,6 +2,13 @@ export const clone = value => structuredClone(value);
 export const uid = () => crypto.randomUUID().replaceAll('-', '_');
 export const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
 export const angle = n => ((n + 180) % 360 + 360) % 360 - 180;
+export const canvasVariantOf = scene => scene.canvasVariant || 'legacy-outline-v3';
+export function backgroundKey(scene) {
+  const variant=canvasVariantOf(scene);
+  if(!['legacy-outline-v3','porcelain-v2'].includes(variant)) throw new Error('지원하지 않는 달항아리 바탕입니다.');
+  if(!['light','dark'].includes(scene.theme)) throw new Error('지원하지 않는 바탕 색상입니다.');
+  return variant==='porcelain-v2' ? `porcelain-${scene.theme}` : `canvas-${scene.theme}`;
+}
 export function scaledDimensions(width, height, factor) {
   // Keep floating-point products strictly within the schema's inclusive bounds.
   const margin = 1e-6;
@@ -147,6 +154,10 @@ export class Editor {
   toggleLock() { if (this.node) this.commit(() => { this.node.locked = !this.node.locked; }); }
   clear() { this.commit(d => { d.scene.nodes = []; d.pieceNotes = {}; }); this.selected = null; }
   theme(theme) { this.commit(d => { d.scene.theme = theme; }); }
+  setCanvas(variant,theme) {
+    backgroundKey({canvasVariant:variant,theme});
+    this.commit(d => { d.scene.canvasVariant=variant; d.scene.theme=theme; });
+  }
   text(section, field, value) {
     const target = section === 'piece' ? (this.doc.pieceNotes[this.selected] ||= {label:'', memory:''}) : section === 'title' ? this.doc : this.doc.reflections[section];
     if (target[field] === value) return;
@@ -163,7 +174,7 @@ export class Editor {
 
 export function drawScene(ctx, scene, images) {
   ctx.clearRect(0, 0, 1600, 1800);
-  ctx.drawImage(images.get(`canvas-${scene.theme}`), 0, 0, 1600, 1800);
+  ctx.drawImage(images.get(backgroundKey(scene)), 0, 0, 1600, 1800);
   for (const n of scene.nodes) {
     ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(n.rotation * Math.PI / 180);
     ctx.drawImage(images.get(n.assetId), -n.width / 2, -n.height / 2, n.width, n.height); ctx.restore();

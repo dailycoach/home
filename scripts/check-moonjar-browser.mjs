@@ -35,6 +35,8 @@ try{
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
   await page.locator('#scene-lead').waitFor({state:'visible'});
+  check((await page.locator('#art image').first().getAttribute('href'))?.includes('moonjar-v2/porcelain-day.png'),
+    'new guided project begins on porcelain V2; legacy background remains separate');
   const lead=page.locator('#scene-lead');
   const leadRect=await lead.boundingBox();
   const canvasRect=await page.locator('#art').boundingBox();
@@ -142,6 +144,15 @@ try{
   check(await cardChecks.nth(0).isChecked()===false && await cardChecks.nth(1).isChecked()===false,
     'private written words must be excluded by default');
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
+  const footerState=await card.locator('.card-controls').evaluate(el=>{
+    const rect=el.getBoundingClientRect(),dialog=el.closest('dialog').getBoundingClientRect();
+    return {position:getComputedStyle(el).position,top:rect.top,bottom:rect.bottom,
+      dialogTop:dialog.top,dialogBottom:dialog.bottom,viewport:window.innerHeight};
+  });
+  check(footerState.position==='sticky','mobile art-card save control should remain sticky');
+  check(footerState.bottom<=footerState.dialogBottom+2 && footerState.top>=footerState.dialogTop-2,
+    `mobile save control should be accessible inside postcard dialog: ${JSON.stringify(footerState)}`);
+  await page.screenshot({path:`${out}/06b-mobile-card-sticky-save-390.png`,fullPage:false});
   check(!(await card.locator('.card-field').first().isVisible()),'card title editor should be hidden until opt-in');
   check(await card.locator('.card-preview').evaluate(el =>
     Boolean(el.compareDocumentPosition(document.querySelector('#modal [data-action="download-card"]')) & Node.DOCUMENT_POSITION_FOLLOWING)
@@ -186,6 +197,31 @@ try{
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
   check(await p2.locator('.story-panel').isVisible(),'desktop story panel should remain available');
   await p2.screenshot({path:`${out}/05-free-desktop-1440.png`,fullPage:true});
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-day.png'),
+    'new free work starts with the original porcelain day');
+  await p2.locator('.view-toolbar [data-action="compare"]').click();
+  check(await p2.locator('dialog .background-option .comparison-scene').count()===4,
+    'picker includes porcelain day/night and original legacy day/night');
+  await p2.locator('dialog [data-action="apply-canvas:legacy-outline-v3:light"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('canvas_light.png'));
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('canvas_light.png'),
+    'explicit legacy option restores original line-art background');
+  await p2.locator('.view-toolbar [data-action="compare"]').click();
+  await p2.locator('dialog [data-action="apply-canvas:porcelain-v2:dark"]').click();
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('canvas_light.png'),
+    'previewing a new vessel must not change an existing legacy outline yet');
+  check(await p2.locator('dialog [data-action="confirmed"]').isVisible(),
+    'legacy-to-porcelain change must require a second explicit confirmation');
+  await p2.locator('dialog [data-action="confirmed"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('/porcelain-night.png'));
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-night.png'),
+    'explicit moonlit porcelain appears');
+  await p2.screenshot({path:`${out}/05b-porcelain-night-workspace-1440.png`,fullPage:true});
+  await p2.locator('.view-toolbar [data-action="compare"]').click();
+  await p2.locator('dialog [data-action="apply-canvas:porcelain-v2:light"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('/porcelain-day.png'));
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-day.png'),
+    'day/night switching returns to daylight V2');
 
   // Visual stress: several colors and layers. This is test-only composition,
   // never a default psychological "right answer" shown to participants.
@@ -206,6 +242,12 @@ try{
     const yField=p2.locator('[data-coordinate="y"]');
     await yField.fill(String(y));
     await yField.press('Tab');
+    const msg=await p2.locator('#notice').textContent();
+    check(!/replaceChildren|NotFoundError|Failed to execute|removeChild/.test(msg||''),
+      `numeric coordinate edit must not remount a field during blur: ${msg}`);
+    check(await p2.locator('[data-coordinate="x"]').count()===1
+       && await p2.locator('[data-coordinate="y"]').count()===1,
+      'numeric fields must remain available after moving selected nacre');
   }
   check(await p2.locator('#art [data-node]').count()===examples.length,
     'multi-piece composition must retain every selected fragment');
@@ -215,6 +257,42 @@ try{
   await p2.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
   await p2.screenshot({path:`${out}/09-multi-piece-card-desktop-1440.png`,fullPage:true});
   await desktop.close(); await context.close();
+
+  // A real V3-format JSON from before porcelain V2 must not be silently upgraded.
+  const legacyContext=await browser.newContext({viewport:{width:1280,height:900},acceptDownloads:true});
+  const p3=await legacyContext.newPage();
+  p3.on('pageerror',err=>errors.push(`LEGACY: ${err.message}`));
+  await p3.goto(base,{waitUntil:'networkidle'});
+  const legacy=await p3.evaluate(async()=>{
+    const d=await (await fetch('data/empty.json')).json();
+    delete d.scene.canvasVariant;
+    d.scene.theme='dark';
+    return d;
+  });
+  await p3.locator('#import-file').setInputFiles({
+    name:'original-v3-project.moonjar.json',mimeType:'application/json',
+    buffer:Buffer.from(JSON.stringify(legacy))
+  });
+  await p3.locator('dialog [data-action="import-confirm"]').waitFor({state:'visible'});
+  await p3.locator('dialog [data-action="import-confirm"]').click();
+  await p3.locator('#art').waitFor({state:'visible'});
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
+    'an imported pre-V2 dark project must preserve its exact old PNG background');
+  await p3.screenshot({path:`${out}/10-old-V3-import-preserved.png`,fullPage:true});
+  await p3.locator('.view-toolbar [data-action="compare"]').click();
+  check(await p3.locator('dialog .background-option .comparison-scene').count()===4,
+    'legacy users can preview V2 without changing their saved work');
+  await p3.locator('dialog [data-action="apply-canvas:porcelain-v2:light"]').click();
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
+    'legacy import still displays its original dark outline until confirmed');
+  await p3.locator('dialog [data-action="confirmed"]').click();
+  await p3.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('porcelain-day.png'));
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('porcelain-day.png'),
+    'legacy work switches only after explicit choice');
+  await p3.locator('[data-action="undo"]').click();
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
+    'undo restores the legacy background and all piece coordinates');
+  await legacyContext.close();
   check(errors.length===0,`browser errors: ${errors.join('; ')}`);
   console.log(`MOONJAR BROWSER PASS: ${checks} assertions. Screenshots: ${out}`);
 }catch(error){

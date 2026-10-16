@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1800" viewBox="0 0 1600 1800">
+ <title>달항아리 백자 달빛 밤 · DAILYCOACHING 자체제작 벡터 마스터</title>
+ <desc>원본 사진을 사용하지 않고 새로 그린 유백색 달항아리. 입구와 굽, 부드럽고 비대칭인 둥근 몸통, 완만한 빛과 도자기의 질감을 표현한다. 자개는 별도 레이어에 자유 배치한다.</desc>
+ <defs>
+  <linearGradient id="background" x1=".5" y1="0" x2=".5" y2="1"><stop stop-color="#142831"/><stop offset="1" stop-color="#1E353C"/></linearGradient>
+  <radialGradient id="halo" cx="49%" cy="48%" r="57%"><stop stop-color="#68898D" stop-opacity=".55"/><stop offset=".5" stop-color="#1F3D45" stop-opacity=".21"/><stop offset="1" stop-color="#1F3D45" stop-opacity="0"/></radialGradient>
+  <linearGradient id="vessel" x1="0" y1="0.18" x2="1" y2=".86">
+    <stop stop-color="#DCE9E3"/><stop offset=".16" stop-color="#F3F8F4"/><stop offset=".40" stop-color="#ECF4EF"/><stop offset=".58" stop-color="#DCE9E3"/><stop offset=".80" stop-color="#CBDDD5"/><stop offset=".95" stop-color="#AEC8C2"/><stop offset="1" stop-color="#7F9FA0"/>
+  </linearGradient>
+  <radialGradient id="vesselLight" cx="35%" cy="27%" r="74%">
+    <stop stop-color="#F7FAF8" stop-opacity=".62"/><stop offset=".22" stop-color="#F7FAF8" stop-opacity=".33"/><stop offset=".65" stop-color="#F7FAF8" stop-opacity=".04"/><stop offset="1" stop-color="#F7FAF8" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="edgeShade" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#A1C7C8" stop-opacity=".16"/><stop offset=".2" stop-color="#A1C7C8" stop-opacity="0"/><stop offset=".72" stop-color="#A1C7C8" stop-opacity="0"/><stop offset="1" stop-color="#A1C7C8" stop-opacity=".25"/></linearGradient>
+  <linearGradient id="rim" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#F4FAF6"/><stop offset=".46" stop-color="#98ADB1"/><stop offset=".62" stop-color="#F6F8F1"/><stop offset="1" stop-color="#98ADB1"/></linearGradient>
+  <linearGradient id="inside" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#637D88"/><stop offset=".52" stop-color="#A4BAB8"/><stop offset="1" stop-color="#E0EAE5"/></linearGradient>
+  <radialGradient id="glaze" cx="50%" cy="43%" r="58%"><stop stop-color="#F7FAF8" stop-opacity=".08"/><stop offset=".6" stop-color="#B0C6C5" stop-opacity=".02"/><stop offset="1" stop-color="#B0C6C5" stop-opacity=".16"/></radialGradient>
+  <radialGradient id="contact" cx="50%" cy="50%" r="50%"><stop stop-color="#03161C" stop-opacity=".32"/><stop offset=".66" stop-color="#03161C" stop-opacity=".08"/><stop offset="1" stop-color="#03161C" stop-opacity="0"/></radialGradient>
+  <clipPath id="clayClip"><path d="M 654,282 C 650,311 637,333 602,357 C 450,454 336,568 271,716 C 210,850 209,994 264,1139 C 333,1316 479,1437 655,1498 Q 663,1519 671,1535 C 742,1553 850,1553 922,1537 Q 934,1519 941,1498 C 1141,1422 1304,1320 1366,1148 C 1419,1001 1400,826 1334,694 C 1261,541 1146,443 996,354 C 963,335 949,313 946,282 Z"/></clipPath>
+ </defs>
+ <rect width="1600" height="1800" fill="url(#background)"/>
+ <ellipse cx="798" cy="913" rx="790" ry="810" fill="url(#halo)"/>
+ <ellipse cx="799" cy="1570" rx="398" ry="54" fill="url(#contact)" />
+ <path d="M 654,282 C 650,311 637,333 602,357 C 450,454 336,568 271,716 C 210,850 209,994 264,1139 C 333,1316 479,1437 655,1498 Q 663,1519 671,1535 C 742,1553 850,1553 922,1537 Q 934,1519 941,1498 C 1141,1422 1304,1320 1366,1148 C 1419,1001 1400,826 1334,694 C 1261,541 1146,443 996,354 C 963,335 949,313 946,282 Z" fill="#072731" fill-opacity=".16" transform="translate(10 13)"/>
+ <path d="M 654,282 C 650,311 637,333 602,357 C 450,454 336,568 271,716 C 210,850 209,994 264,1139 C 333,1316 479,1437 655,1498 Q 663,1519 671,1535 C 742,1553 850,1553 922,1537 Q 934,1519 941,1498 C 1141,1422 1304,1320 1366,1148 C 1419,1001 1400,826 1334,694 C 1261,541 1146,443 996,354 C 963,335 949,313 946,282 Z" fill="url(#vessel)" stroke="#B9CECE" stroke-width="2.1"/>
+ <g clip-path="url(#clayClip)">
+   <rect x="208" y="280" width="1199" height="1285" fill="url(#vesselLight)"/>
+   <rect x="208" y="280" width="1199" height="1285" fill="url(#edgeShade)"/>
+   <rect x="208" y="280" width="1199" height="1285" fill="url(#glaze)"/>
+   <path d="M 397,468 C 288,605 270,840 302,1060 C 315,1170 365,1290 429,1339" fill="none" stroke="#F7FAF8" stroke-width="68" stroke-linecap="round" stroke-opacity=".15"/>
+   <path d="M 1105,419 C 1312,598 1371,826 1333,1089 C 1297,1230 1205,1360 1145,1395" fill="none" stroke="#A1C7C8" stroke-width="62" stroke-opacity=".065"/>
+   <path d="M 286,884 C 550,852 945,867 1349,884" stroke="#648891" stroke-width="4" stroke-opacity=".055" fill="none" />
+   <path d="M 279,916 C 550,900 962,903 1353,925" stroke="#F7FAF8" stroke-width="6" stroke-opacity=".07" fill="none" />
+ </g>
+ <path d="M 656,277 C 693,295 911,301 944,275" fill="none" stroke="#98ADB1" stroke-width="20" stroke-linecap="round" opacity=".72"/>
+ <path d="M 658,270 C 677,291 924,297 946,269" fill="none" stroke="#F7FAF8" stroke-width="10" opacity=".65"/>
+ <ellipse cx="801" cy="266" rx="153" ry="22" fill="url(#rim)" stroke="#B9CECE" stroke-width="2.3"/>
+ <ellipse cx="802" cy="264" rx="135" ry="14" fill="url(#inside)" stroke="#98ADB1" stroke-width=".7"/>
+ <path d="M 650,268 C 672,287 926,288 953,267" fill="none" stroke="#F7FAF8" stroke-width="8" opacity=".82"/>
+ <path d="M 663,284 C 685,297 921,297 940,285" fill="none" stroke="#648891" stroke-width="3" opacity=".30"/>
+ <path d="M 654,1500 C 722,1516 883,1524 946,1499 L 925,1534 C 849,1554 745,1555 672,1536 Z" fill="url(#rim)" stroke="#B9CECE" stroke-width="1.3" opacity=".78"/>
+ <path d="M 681,1531 Q 800,1565 915,1532" fill="none" stroke="#648891" stroke-width="2.2" stroke-opacity=".48"/>
+ <path d="M 682,1524 C 760,1540 856,1542 918,1524" fill="none" stroke="#F7FAF8" stroke-width="4" stroke-opacity=".34"/>
+</svg>
