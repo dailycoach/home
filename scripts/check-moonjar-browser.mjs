@@ -144,6 +144,15 @@ try{
   check(await cardChecks.nth(0).isChecked()===false && await cardChecks.nth(1).isChecked()===false,
     'private written words must be excluded by default');
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
+  const footerState=await card.locator('.card-controls').evaluate(el=>{
+    const rect=el.getBoundingClientRect(),dialog=el.closest('dialog').getBoundingClientRect();
+    return {position:getComputedStyle(el).position,top:rect.top,bottom:rect.bottom,
+      dialogTop:dialog.top,dialogBottom:dialog.bottom,viewport:window.innerHeight};
+  });
+  check(footerState.position==='sticky','mobile art-card save control should remain sticky');
+  check(footerState.bottom<=footerState.dialogBottom+2 && footerState.top>=footerState.dialogTop-2,
+    `mobile save control should be accessible inside postcard dialog: ${JSON.stringify(footerState)}`);
+  await page.screenshot({path:`${out}/06b-mobile-card-sticky-save-390.png`,fullPage:false});
   check(!(await card.locator('.card-field').first().isVisible()),'card title editor should be hidden until opt-in');
   check(await card.locator('.card-preview').evaluate(el =>
     Boolean(el.compareDocumentPosition(document.querySelector('#modal [data-action="download-card"]')) & Node.DOCUMENT_POSITION_FOLLOWING)
