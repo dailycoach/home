@@ -699,8 +699,18 @@ document.addEventListener('input',event=>{
   if(used>limit&&!input.parentElement.querySelector('button'))input.parentElement.append(button('전체 글 텍스트 보관','export-text'));
 });
 document.addEventListener('change',event=>{
-  const input=event.target;if(!editor||!input.dataset.coordinate||!editable())return;
-  if(Number.isFinite(input.valueAsNumber)){editor.transform({[input.dataset.coordinate]:input.valueAsNumber});changed();}
+  const input=event.target;
+  if(!editor||!input.dataset.coordinate||!editable())return;
+  if(!Number.isFinite(input.valueAsNumber))return;
+  // Do NOT replace the controls DOM in a native change/blur event.
+  // Rebuilding it synchronously unmounts the focused field, re-enters
+  // change/focus handlers and can throw replaceChildren NotFoundError.
+  // A position edit only needs an art redraw and the numeric summary updated.
+  editor.transform({[input.dataset.coordinate]:input.valueAsNumber});
+  renderCanvas();
+  const current=editor.node;
+  const summary=$('#controls-panel .panel-heading .micro');
+  if(current&&summary)summary.textContent=`${Math.round(current.rotation)}° · ${Math.round(current.width)} × ${Math.round(current.height)}`;
 });
 document.addEventListener('focusout',event=>{if(event.target.dataset.field&&!event.target.isComposing)queue?.flush();});
 
