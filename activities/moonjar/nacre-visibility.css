@@ -46,7 +46,7 @@
 }
 @media(prefers-contrast:more){
   .studio.nacre-guide-visible #art g[data-node] > image[data-id]{
-    filter:drop-shadow(0 0 3px rgba(22,46,40,.95))
-           drop-shadow(0 0 1px rgba(255,255,255,.95));
+    filter:drop-shadow(0 0 7px rgba(22,46,40,.98))
+           drop-shadow(0 0 2px rgba(255,255,255,.96));
   }
 }
