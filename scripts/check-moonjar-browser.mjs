@@ -198,6 +198,12 @@ try{
     'explicit legacy option restores original line-art background');
   await p2.locator('.view-toolbar [data-action="compare"]').click();
   await p2.locator('dialog [data-action="apply-canvas:porcelain-v2:dark"]').click();
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('canvas_light.png'),
+    'previewing a new vessel must not change an existing legacy outline yet');
+  check(await p2.locator('dialog [data-action="confirmed"]').isVisible(),
+    'legacy-to-porcelain change must require a second explicit confirmation');
+  await p2.locator('dialog [data-action="confirmed"]').click();
+  await p2.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('/porcelain-night.png'));
   check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-night.png'),
     'explicit moonlit porcelain appears');
   await p2.screenshot({path:`${out}/05b-porcelain-night-workspace-1440.png`,fullPage:true});
@@ -266,6 +272,10 @@ try{
   check(await p3.locator('dialog .background-option .comparison-scene').count()===4,
     'legacy users can preview V2 without changing their saved work');
   await p3.locator('dialog [data-action="apply-canvas:porcelain-v2:light"]').click();
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
+    'legacy import still displays its original dark outline until confirmed');
+  await p3.locator('dialog [data-action="confirmed"]').click();
+  await p3.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('porcelain-day.png'));
   check((await p3.locator('#art image').first().getAttribute('href'))?.includes('porcelain-day.png'),
     'legacy work switches only after explicit choice');
   await p3.locator('[data-action="undo"]').click();
