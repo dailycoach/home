@@ -1,6 +1,8 @@
 name: Moonjar V2 Porcelain Asset Build
 on:
-  pull_request:
+  push:
+    branches:
+      - design/moonjar-v2-background-audit-20261016
     paths:
       - 'scripts/build-moonjar-v2.py'
       - '.github/workflows/moonjar-v2-asset-build.yml'
@@ -9,14 +11,14 @@ permissions:
   pull-requests: read
 jobs:
   generate:
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'design/moonjar-v2-background-audit-20261016') }}
+    if: ${{ github.ref == 'refs/heads/design/moonjar-v2-background-audit-20261016' }}
     runs-on: ubuntu-latest
     timeout-minutes: 14
     steps:
       - name: Checkout source PR branch (never main)
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.ref_name }}
           fetch-depth: 1
           persist-credentials: true
       - uses: actions/setup-python@v5
@@ -52,7 +54,7 @@ jobs:
             echo 'No porcelain asset changes'
           else
             git commit -m 'art(moonjar): generate two porcelain SVG PNG WebP assets with checksums'
-            git push origin "HEAD:${{ github.head_ref }}"
+            git push origin "HEAD:${{ github.ref_name }}"
           fi
       - name: Upload export proofs
         if: always()
