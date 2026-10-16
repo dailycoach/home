@@ -518,7 +518,7 @@ function result(){
   // the page by default, and the image/card never includes them automatically.
   const actions=el('div',null,{class:'result-actions'});
   actions.append(
-    button('나의 작품 카드 만들기','card-options',{class:'primary'}),
+    button('작품 카드 만들기','card-options',{class:'primary'}),
     button('작품 이미지만 저장','export-png'),
     button('다시 꾸미기','continue'),
     button('편집 파일로 보관','export-json'),
