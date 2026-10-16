@@ -261,3 +261,23 @@ button.primary:hover{background:#315a46}
     font-size:16px;
   }
 }
+
+
+/* V2 original porcelain background comparison */
+.background-picker>.muted{margin-bottom:17px}
+.background-option{margin:18px 0 23px;padding:16px 0 3px;border-top:1px solid #D5DDD4}
+.background-option>h3{font-size:18px;font-weight:670;color:#365a49}
+.background-option>p{margin-top:6px}
+.background-option .comparison-grid{margin:14px 0 20px;gap:13px}
+.background-option .comparison-scene{padding:11px;background:#fffdf8;border:1px solid #E2E4DB;border-radius:13px;box-shadow:0 7px 22px #2d503716}
+.background-option .comparison-scene svg{border-radius:9px;border-color:#D3DDD2}
+.background-option .comparison-scene button{font-size:13px;min-height:44px}
+.background-option .comparison-scene button[aria-pressed=true]{background:#E6F0E9;border-color:#6A9882}
+@media(max-width:767px){
+.background-picker{min-width:0}
+.background-option{padding-top:13px}
+.background-option .comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.background-option .comparison-scene{padding:8px}
+.background-option .comparison-scene button{font-size:12px;min-width:0;white-space:normal;padding:7px 5px}
+.background-option .comparison-scene figcaption{font-size:12px}
+}
