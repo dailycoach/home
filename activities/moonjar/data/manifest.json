@@ -949,7 +949,7 @@
       "src": "assets/pieces/E/E01.png",
       "width": 168,
       "height": 168,
-      "aspectRatio": 1.0,
+      "aspectRatio": 1,
       "alphaBounds": [
         4,
         4,
@@ -1848,5 +1848,54 @@
     "creator": "DAILYCOACHING",
     "medium": "original SVG vector illustration",
     "rightsNote": "특정 소장품의 사진을 사용하지 않고 새로 그린 달항아리 형상입니다."
+  },
+  "backgroundVariants": {
+    "legacy-outline-v3": {
+      "label": "기존 도안",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "assets": [
+        "assets/canvas_light.png",
+        "assets/canvas_dark.png"
+      ],
+      "inHouseDesign": true
+    },
+    "porcelain-v2": {
+      "label": "오리지널 백자",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "assets": {
+        "day": {
+          "src": "assets/moonjar-v2/porcelain-day.png",
+          "originalSvg": "assets/moonjar-v2/master/porcelain-day.svg",
+          "thumbnail": "assets/moonjar-v2/thumbnail-day.webp",
+          "width": 1600,
+          "height": 1800,
+          "sha256": "8cbb45a8e92462538862bf95019edae304298a0a221a21ce9103cd81222b5b3c",
+          "byteSize": 486424,
+          "svgSha256": "83cf68e0dc26e2bfd0f89a5740adaf8b28b370a7a53c5b8b00b9b88a4d700faf",
+          "creator": "DAILYCOACHING",
+          "original": true
+        },
+        "night": {
+          "src": "assets/moonjar-v2/porcelain-night.png",
+          "originalSvg": "assets/moonjar-v2/master/porcelain-night.svg",
+          "thumbnail": "assets/moonjar-v2/thumbnail-night.webp",
+          "width": 1600,
+          "height": 1800,
+          "sha256": "3aa1470521f7d583df97a232d1d89cbd7aad239b08d74cf5c5d9460887cac6b6",
+          "byteSize": 499423,
+          "svgSha256": "3d1ef7b9c2cb83bd977ada41b74f94929a1959ba4653bfdd58889245945174dc",
+          "creator": "DAILYCOACHING",
+          "original": true
+        }
+      },
+      "creator": "DAILYCOACHING",
+      "inHouseDesign": true
+    }
   }
 }
