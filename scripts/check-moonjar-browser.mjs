@@ -225,6 +225,12 @@ try{
     const yField=p2.locator('[data-coordinate="y"]');
     await yField.fill(String(y));
     await yField.press('Tab');
+    const msg=await p2.locator('#notice').textContent();
+    check(!/replaceChildren|NotFoundError|Failed to execute|removeChild/.test(msg||''),
+      `numeric coordinate edit must not remount a field during blur: ${msg}`);
+    check(await p2.locator('[data-coordinate="x"]').count()===1
+       && await p2.locator('[data-coordinate="y"]').count()===1,
+      'numeric fields must remain available after moving selected nacre');
   }
   check(await p2.locator('#art [data-node]').count()===examples.length,
     'multi-piece composition must retain every selected fragment');
