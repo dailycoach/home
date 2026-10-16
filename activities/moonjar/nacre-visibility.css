@@ -26,6 +26,7 @@
   top:calc(100% + 8px);
   right:8px;
   z-index:9;
+  pointer-events:none; /* This explanation must never block editing gestures. */
   width:min(270px,75vw);
   margin:0;
   padding:8px 12px;
