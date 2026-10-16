@@ -127,6 +127,10 @@ try{
   check(!(await page.locator('.result-essay').evaluate(el=>el.open)),'long ending essay must be optional');
   check(await page.locator('.result-actions [data-action="card-options"].primary').isVisible(),
     'creating a personal art card is the result page primary action');
+  const ctaBox=await page.locator('.result-actions [data-action="card-options"]').boundingBox();
+  const actionsBox=await page.locator('.result-actions').boundingBox();
+  check(ctaBox && actionsBox && ctaBox.width>actionsBox.width*0.9,
+    'artwork card button must actually span the full result row, not only have primary markup');
   await page.screenshot({path:`${out}/05a-artwork-first-result-390.png`,fullPage:true});
   await page.locator('main.result-page [data-action="card-options"]').click();
   await page.locator('#modal .card-preview img').waitFor({state:'visible'});
