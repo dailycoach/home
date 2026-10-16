@@ -37,8 +37,8 @@
    helps pastel fragments stand out on porcelain without decorating the art.
    Importantly scoped to editor SVG, never result preview / PNG / postcard. */
 .studio.nacre-guide-visible #art g[data-node] > image[data-id]{
-  filter:drop-shadow(0 0 2px rgba(36,64,51,.78))
-         drop-shadow(0 0 .7px rgba(250,249,243,.9));
+  filter:drop-shadow(0 0 6px rgba(36,64,51,.90))
+         drop-shadow(0 0 3px rgba(250,249,243,.94));
 }
 @media(max-width:767px){
   .studio .nacre-visibility-switch{font-size:12px;padding:8px 9px}
