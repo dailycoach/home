@@ -1,0 +1,52 @@
+/* Studio-only, non-destructive nacre edge guide.
+   No original images, project geometry, saving or canvas exports are altered. */
+.studio .nacre-visibility-switch{
+  font-size:13px;
+  font-weight:600;
+  padding:8px 11px;
+  min-height:44px;
+  color:#3f6856;
+  border:1px solid #a8bfae;
+  border-radius:9px;
+  background:#f8faf5;
+}
+.studio .nacre-visibility-switch[aria-pressed="true"]{
+  background:#e2f0e5;
+  border-color:#4c7b60;
+  box-shadow:inset 0 0 0 1px #4c7b60;
+  color:#244b36;
+}
+.studio .nacre-visibility-switch:focus-visible{
+  outline:3px solid #315e4d;
+  outline-offset:3px;
+}
+.studio .nacre-visibility-note{
+  max-width:700px;
+  margin:0 auto 9px;
+  padding:8px 12px;
+  border-left:3px solid #6e9b7d;
+  border-radius:4px;
+  background:#eef3e9;
+  font-size:13px;
+  line-height:1.65;
+  color:#345b49;
+  word-break:keep-all;
+}
+.studio .nacre-visibility-note[hidden]{display:none!important}
+/* The image has intrinsic transparency. A small alpha-aware double outline
+   helps pastel fragments stand out on porcelain without decorating the art.
+   Importantly scoped to editor SVG, never result preview / PNG / postcard. */
+.studio.nacre-guide-visible #art g[data-node] > image[data-id]{
+  filter:drop-shadow(0 0 2px rgba(36,64,51,.78))
+         drop-shadow(0 0 .7px rgba(250,249,243,.9));
+}
+@media(max-width:767px){
+  .studio .nacre-visibility-switch{font-size:12px;padding:8px 9px}
+  .studio .nacre-visibility-note{font-size:12px;margin:0 10px 8px;padding:7px 11px}
+}
+@media(prefers-contrast:more){
+  .studio.nacre-guide-visible #art g[data-node] > image[data-id]{
+    filter:drop-shadow(0 0 3px rgba(22,46,40,.95))
+           drop-shadow(0 0 1px rgba(255,255,255,.95));
+  }
+}
