@@ -281,3 +281,49 @@ button.primary:hover{background:#315a46}
 .background-option .comparison-scene button{font-size:12px;min-width:0;white-space:normal;padding:7px 5px}
 .background-option .comparison-scene figcaption{font-size:12px}
 }
+
+
+/* V2 final art-card review: keep opt-in export accessible after visual review.
+   The modal remains the scroll container, with a sticky footer in the artwork card.
+   No card copy is selected by default and no journal data is auto-exported. */
+#modal .card-modal-grid{align-items:start}
+#modal .card-modal-grid .card-form{align-self:start}
+#modal .card-modal-grid .card-preview{
+  border:1px solid #d8ded3;
+  box-shadow:0 7px 23px #40544710;
+}
+#modal .card-controls .primary{
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+@media (max-width:767px){
+  #modal .card-controls{
+    position:sticky;
+    bottom:-18px;
+    z-index:4;
+    max-width:none;
+    margin:16px -8px 0;
+    padding:12px 8px max(18px,env(safe-area-inset-bottom));
+    background:rgba(250,249,243,.98);
+    border-top:1px solid #c8d6ca;
+    border-radius:12px 12px 0 0;
+    box-shadow:0 -12px 27px #213e3225;
+  }
+  #modal .card-controls .primary{
+    min-height:56px;
+    width:100%;
+    border-radius:10px;
+  }
+  #modal .card-controls .micro{
+    font-size:12px;
+    line-height:1.35;
+    margin-top:4px;
+  }
+  #modal .card-modal-grid{gap:12px}
+  #modal .card-preview{padding:10px}
+}
+@media (max-width:360px){
+  #modal .card-controls{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+  #modal .card-controls .micro{font-size:11px}
+}
