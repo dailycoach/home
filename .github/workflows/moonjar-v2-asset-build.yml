@@ -1,0 +1,64 @@
+name: Moonjar V2 Porcelain Asset Build
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-moonjar-v2.py'
+      - '.github/workflows/moonjar-v2-asset-build.yml'
+permissions:
+  contents: write
+  pull-requests: read
+jobs:
+  generate:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository && startsWith(github.head_ref, 'design/moonjar-v2-background-audit-20261016') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout source PR branch (never main)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install local raster tooling
+        run: pip install 'cairosvg==2.7.1' 'Pillow==11.2.1'
+      - name: Generate exact SVG, 1600x1800 PNG and 400x450 thumbnails
+        run: python scripts/build-moonjar-v2.py
+      - name: Check generated raster dimensions and metadata
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import json,hashlib
+          root=Path('activities/moonjar/assets/moonjar-v2')
+          v=json.loads((root/'variants.json').read_text())['variants']
+          assert set(v)=={'day','night'}
+          for kind,data in v.items():
+              p=root/f'porcelain-{kind}.png'
+              with Image.open(p) as im: assert im.size==(1600,1800)
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==data['sha256']
+              with Image.open(root/f'thumbnail-{kind}.webp') as im: assert im.size==(400,450)
+              assert (root/'master'/f'porcelain-{kind}.svg').exists()
+          print('V2 porcelain assets valid')
+          PY
+      - name: Commit only original porcelain files to this PR branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add activities/moonjar/assets/moonjar-v2
+          if git diff --cached --quiet; then
+            echo 'No porcelain asset changes'
+          else
+            git commit -m 'art(moonjar): generate two porcelain SVG PNG WebP assets with checksums'
+            git push origin "HEAD:${{ github.head_ref }}"
+          fi
+      - name: Upload export proofs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-v2-original-assets
+          path: |
+            activities/moonjar/assets/moonjar-v2/
+          retention-days: 14
