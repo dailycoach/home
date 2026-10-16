@@ -246,3 +246,18 @@ button.primary:hover{background:#315a46}
 @media(prefers-reduced-motion:reduce){
   .piece-choice:hover,.piece-choice:focus-visible{transform:none}
 }
+
+/* Stronger specificity than legacy :first-child grid reset. */
+.result-actions button[data-action="card-options"]:first-child{
+  grid-column:1/-1!important;
+  min-height:57px;
+  font-size:17px;
+  white-space:nowrap;
+}
+@media(max-width:767px){
+  .result-actions button[data-action="card-options"]:first-child{
+    grid-column:1/-1!important;
+    min-height:54px;
+    font-size:16px;
+  }
+}
