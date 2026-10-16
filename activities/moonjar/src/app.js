@@ -203,10 +203,17 @@ function renderLookPrompt() {
   const target = $('#look-prompt');
   if (!target) return;
   const s = story.scenes.find(s => s.id === viewScene) || story.scenes[3];
+  // Pause questions follow the *actual making activity*, never an inferred
+  // psychological trait. Someone who adds a piece in the first scene is
+  // already making choices, even if they haven't navigated to scene four.
+  const choosing = editor?.doc.scene.nodes.length>0 && ['arrival','vessel','nacre'].includes(viewScene);
+  const focus = choosing ? (story.scenes.find(item=>item.id==='arrange')||s) : s;
   target.replaceChildren(
-    el('p', `${s.name} · 잠시 바라보기`, {class:'eyebrow'}),
-    el('h2', s.focusQuestion),
-    el('p', '답을 정하지 않아도 좋습니다. 지금 눈에 들어오는 것과 마음에서 일어나는 것을 잠시 바라봅니다.', {class:'micro'}),
+    el('p', `${focus.name} · 잠시 바라보기`, {class:'eyebrow'}),
+    el('h2', focus.focusQuestion),
+    el('p', choosing
+      ? '자개를 고르고 놓는 동안 무엇이 중요해졌나요? 특별한 이유가 없어도 괜찮습니다. 지금의 모습을 살펴봅니다.'
+      : '답을 정하지 않아도 좋습니다. 지금 눈에 들어오는 것과 마음에서 일어나는 것을 잠시 바라봅니다.', {class:'micro'}),
     button('내 말로 기록해 보기', 'panel:story', {class:'text-button'})
   );
 }
@@ -299,7 +306,7 @@ function setPanel(id, reveal = false) {
   const previousControls=main.classList.contains('controls-active');
   main.classList.toggle('controls-active',id==='controls');
   if(previousControls!==(id==='controls') && !paused)renderCanvas();
-  if(id==='look') { paused=true; main.classList.add('paused');renderCanvas();renderControls(); }
+  if(id==='look') { paused=true; main.classList.add('paused');renderLookPrompt();renderCanvas();renderControls(); }
   else if(paused) { paused=false;main.classList.remove('paused');renderCanvas();renderControls(); }
   for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
   document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
@@ -493,16 +500,73 @@ function cardOptions() {
   openDialog('내 작품 카드 만들기',root);
   updatePreview();
 }
-async function finish(){if(editable()){editor.navigate('ending');await queue?.flush();}location.hash=`/result/${editor.doc.projectId}`;result();}
+async function finish(){
+  if(editable()){editor.navigate('ending');await queue?.flush();}
+  // Avoid keeping an editor-operation toast over the newly opened art gallery.
+  const toast=$('#notice');
+  toast?.classList.remove('visible');
+  clearTimeout(notice.timer);
+  location.hash=`/result/${editor.doc.projectId}`;
+  result();
+}
 function result(){
-  currentView='result';main.className='result-page';main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
-  const layout=el('div',null,{class:'result-layout'}),art=scenePreview(editor.doc.scene,editor.doc.title||''),copy=el('section');
-  copy.append(el('p',editor.doc.title||'이름 없이 남긴 작품',{class:'eyebrow'}),el('h2',story.ending.anchor));for(const p of story.ending.paragraphs)copy.append(el('p',p));
-  const words=el('div',null,{class:'starting-words'});words.append(el('h3','처음의 말'),el('p',editor.doc.reflections.arrival.currentWord||'남기지 않음'));copy.append(words,inputField('ending',{id:'presentWord',label:'지금 내 마음에 머무는 말',maxLength:2000},editor.doc.reflections.ending.presentWord));
-  const returnFields=story.scenes.find(s=>s.id==='return').fields.filter(f=>['situation','action','support'].includes(f.id)&&editor.doc.reflections.return[f.id].trim());
-  if(returnFields.length){const dailyReturn=el('section',null,{class:'daily-return'});dailyReturn.append(el('h3','내가 남긴 일상의 선택'));for(const f of returnFields)dailyReturn.append(el('h4',f.label),el('p',editor.doc.reflections.return[f.id]));copy.append(dailyReturn);}
-  const actions=el('div',null,{class:'result-actions'});actions.append(button('편집 계속하기','continue',{class:'primary'}),button('작품 이미지 저장','export-png'),button('작품 카드 만들기','card-options'),button('편집 파일로 보관','export-json'),button('기록지 인쇄·PDF 저장','print-options'));
-  copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}),el('p',story.ui.localNotice,{class:'micro'}),el('p',story.ending.lastLine));layout.append(art,copy);main.append(layout,el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));renderStatus();
+  currentView='result';
+  main.className='result-page';
+  main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
+
+  const layout=el('div',null,{class:'result-layout'});
+  const art=scenePreview(editor.doc.scene,editor.doc.title||'나의 달항아리');
+  const copy=el('section',null,{class:'result-copy'});
+  copy.append(
+    el('p',editor.doc.title||'이름 없이 남긴 작품',{class:'eyebrow'}),
+    el('h2',story.ending.anchor),
+    el('p','이 작품을 만드는 동안 내가 고르고, 머뭇거리고, 그대로 두었던 순간도 작품의 일부입니다. 나만의 모습으로 간직해 보세요.',{class:'result-overview'})
+  );
+  // The result is an artwork first. Journal reflections are not exposed on
+  // the page by default, and the image/card never includes them automatically.
+  const actions=el('div',null,{class:'result-actions'});
+  actions.append(
+    button('작품 카드 만들기','card-options',{class:'primary'}),
+    button('작품 이미지만 저장','export-png'),
+    button('다시 꾸미기','continue'),
+    button('편집 파일로 보관','export-json'),
+    button('기록지 인쇄·PDF 저장','print-options')
+  );
+  copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}));
+
+  const recap=el('details',null,{class:'reflection-recap'});
+  recap.append(el('summary','나의 말과 선택 다시 보기 · 나만 확인'));
+  const words=el('div',null,{class:'starting-words'});
+  words.append(el('h3','처음의 말'),el('p',editor.doc.reflections.arrival.currentWord||'남기지 않음'));
+  recap.append(words);
+  const returnFields=story.scenes.find(s=>s.id==='return').fields.filter(f=>
+    ['noticed','situation','action','support'].includes(f.id)
+    && editor.doc.reflections.return[f.id].trim()
+  );
+  if(returnFields.length){
+    const dailyReturn=el('section',null,{class:'daily-return'});
+    dailyReturn.append(el('h3','내가 알아차리고 선택한 것'));
+    for(const f of returnFields){
+      dailyReturn.append(el('h4',f.label),el('p',editor.doc.reflections.return[f.id]));
+    }
+    recap.append(dailyReturn);
+  }
+  recap.append(inputField('ending',{
+    id:'presentWord',label:'지금 내 마음에 머무는 말',maxLength:2000
+  },editor.doc.reflections.ending.presentWord));
+  copy.append(recap);
+
+  const essay=el('details',null,{class:'result-essay'});
+  essay.append(el('summary','마무리 이야기 천천히 읽기'));
+  for(const p of story.ending.paragraphs)essay.append(el('p',p));
+  copy.append(
+    essay,
+    el('p',story.ending.lastLine,{class:'result-epilogue'}),
+    el('p',story.ui.localNotice,{class:'micro'})
+  );
+  layout.append(art,copy);
+  main.append(layout,el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));
+  renderStatus();
 }
 async function projects(){
   const epoch=++projectListEpoch;
@@ -558,7 +622,7 @@ function about(){
     ['편집 파일과 작품 이미지','PNG에는 작품만 넣습니다. 편집 파일은 성찰 기록과 조각 메모를 포함하는 비암호화 개인 백업입니다. 가져오기는 항상 새 작업으로 열며 기존 파일을 덮어쓰지 않습니다.'],
     ['다시 실행과 되돌리기','작품의 실행 취소는 현재 세션의 최대 100회 조작을 보관합니다. 새로고침 뒤에는 최신 작품·기록·남긴 배치를 복원하며 실행 취소 이력은 복원하지 않습니다.'],
     ['오프라인과 인쇄','완전한 오프라인 앱은 아닙니다. 첫 실행과 아직 읽지 않은 재료에는 파일을 제공하는 환경이 필요합니다. 기록지의 PDF 저장은 브라우저 인쇄 대화상자를 사용하며, 브라우저마다 UI가 다릅니다.'],
-    ['시작 화면의 오리지널 이미지','첫 화면은 DAILYCOACHING을 위해 새로 그린 벡터 달항아리 일러스트입니다. 특정 소장품 사진을 사용하지 않았습니다. 꾸미기 도안과 자개 PNG의 공개 이용 권한은 별도로 확인해야 합니다.']
+    ['디자인과 이미지','첫 화면은 DAILYCOACHING의 오리지널 벡터 달항아리 그림입니다. 자개 도안 8종과 파생 조각 96개는 운영자가 직접 디자인한 자료입니다. 달항아리 배경 도안 두 종의 자산 출처는 별도 관리합니다.']
   ])main.append(el('h2',h),el('p',t));
   main.append(el('p',manifest.heroArtwork.credit,{class:'micro'}));
   main.append(el('h2','원문과 참고 자료'),el('p','본 콘텐츠는 제공된 PDF V3와 웹 전환 콘텐츠에 근거합니다. DAILY는 Detect / Acknowledge / Inquire / Link / Your Action을 따릅니다.'));
@@ -694,7 +758,7 @@ async function route(){
 }
 async function init(){
   const bundled=globalThis.__MOONJAR_BUNDLE__?.data;
-  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json`);if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
+  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261016-2`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
   materials=new Materials(manifest);
   try{repository=await openRepository();available=true;hasStored=(await repository.list()).length>0;}catch{available=false;}
   await route();

@@ -97,3 +97,12 @@ test('reflection text inputs carry native maximum length; last scene starts with
   assert.equal(input.attrs.maxlength,'120');
   assert.match(source,/return:'noticed'/);
 });
+
+test('a placed nacre piece prompts choices even when user stays on arrival',()=>{
+  const {ui,elements}=harness();
+  ui.set('guided','arrival');
+  ui.renderLookPrompt();
+  const prompt=elements.get('#look-prompt');
+  assert.match(collectText(prompt),/무엇을 기준으로 이 자리를 고르고 있나요/);
+  assert.doesNotMatch(collectText(prompt),/지금 이 자리에 온 나는 어떤 상태인가요/);
+});

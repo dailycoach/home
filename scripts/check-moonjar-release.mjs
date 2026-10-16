@@ -46,6 +46,9 @@ async function entryMatrix(browser,engine,width,height) {
     await ensureNoOverflow(page,`${name} entry`);
     const buttons=page.locator('.hero-actions [data-action="start-guided"], .hero-actions [data-action="start-free"]');
     verify(await buttons.count()===2,`${name} two start options`);
+    const primary=await page.locator('.hero-actions [data-action="start-guided"]').boundingBox();
+    verify(primary && primary.y+primary.height<=height,
+      `${name} main action must be in first mobile viewport, not hidden below a tall hero: ${JSON.stringify(primary)}`);
     await page.locator('[data-action="start-guided"]').click();
     await page.locator('#art').waitFor({state:'visible'});
     verify(await page.locator('#save-state').getAttribute('role')==='status'

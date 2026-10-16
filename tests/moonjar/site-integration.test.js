@@ -39,3 +39,18 @@ test('public app contains an original vector hero, not the removed museum photog
  assert.match(page,/connect-src 'self'/);
  assert.ok(!/supabase|analytics|gtag|stripe|firebase|openai/i.test(page));
 });
+
+test('post-evaluation design stylesheet loads after main CSS and ownership wording is correct',()=>{
+  const page=read('activities/moonjar/index.html');
+  assert.ok(page.includes('styles.css?v=20261016-2'));
+  assert.ok(page.includes('refinement.css?v=20261016-2'));
+  assert.ok(page.indexOf('styles.css?v=20261016-2')<page.indexOf('refinement.css?v=20261016-2'));
+  const css=read('activities/moonjar/refinement.css');
+  assert.match(css,/result-overview/);
+  assert.match(css,/max-width:767px/);
+  const app=read('activities/moonjar/src/app.js');
+  assert.match(app,/자개 도안 8종과 파생 조각 96개는 운영자가 직접 디자인한 자료/);
+  assert.match(app,/class:'reflection-recap'/);
+  assert.match(app,/class:'result-essay'/);
+  assert.doesNotMatch(app,/자개 PNG의 공개 이용 권한은 별도로 확인/);
+});

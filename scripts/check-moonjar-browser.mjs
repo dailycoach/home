@@ -25,6 +25,13 @@ try{
     'new self-drawn illustration must load at its 780×920 viewBox');
   check(await page.locator('a[href*="museum.go.kr"]').count()===0,
     'no institution image source link should appear in published app');
+  // The revised first screen must make the primary action discoverable without
+  // scrolling past a giant hero picture or storage form.
+  const firstCTA=await page.locator('.hero-actions [data-action="start-guided"]').boundingBox();
+  check(firstCTA && firstCTA.y+firstCTA.height <= 844,
+    `mobile first start button should fit initial 390x844 viewport, got ${JSON.stringify(firstCTA)}`);
+  check(await page.locator('link[href*="refinement.css"]').count()===1,'refinement CSS must be loaded');
+
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
   await page.locator('#scene-lead').waitFor({state:'visible'});
@@ -78,7 +85,7 @@ try{
   await page.locator('[data-action="panel:look"]').click();
   check(await page.locator('main.studio.paused').count()===1,'look mode should pause editor');
   check(await page.locator('#look-prompt h2').isVisible(),'look mode must display the current reflection question');
-  check((await page.locator('#look-prompt h2').innerText()).includes('상태인가요'),'reflection question should match current scene');
+  check((await page.locator('#look-prompt h2').innerText()).includes('기준으로'),'first placed piece should trigger actual choice-awareness question, not only arrival');
   await page.screenshot({path:`${out}/03-pause-question-390.png`,fullPage:true});
   await page.locator('#look-prompt [data-action="panel:story"]').click();
   check(await page.locator('main.studio.paused').count()===0,'returning to story should exit pause');
@@ -116,6 +123,17 @@ try{
   // Export opt-in personal card only after a deliberately confirmed preview.
   await page.locator('.studio-bar [data-action="finish"]').click();
   await page.locator('main.result-page').waitFor();
+  check(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
+    'editor toast must not cover the finished artwork gallery');
+  check(!(await page.locator('.reflection-recap').evaluate(el=>el.open)),'private reflection recap is collapsed by default');
+  check(!(await page.locator('.result-essay').evaluate(el=>el.open)),'long ending essay must be optional');
+  check(await page.locator('.result-actions [data-action="card-options"].primary').isVisible(),
+    'creating a personal art card is the result page primary action');
+  const ctaBox=await page.locator('.result-actions [data-action="card-options"]').boundingBox();
+  const actionsBox=await page.locator('.result-actions').boundingBox();
+  check(ctaBox && actionsBox && ctaBox.width>actionsBox.width*0.9,
+    'artwork card button must actually span the full result row, not only have primary markup');
+  await page.screenshot({path:`${out}/05a-artwork-first-result-390.png`,fullPage:true});
   await page.locator('main.result-page [data-action="card-options"]').click();
   await page.locator('#modal .card-preview img').waitFor({state:'visible'});
   const card=page.locator('#modal');
