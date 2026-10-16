@@ -35,3 +35,6 @@
 - 개발: `activities/moonjar/src/{app,rendering}.js`, `activities/moonjar/styles.css`
 - 검증: `tests/moonjar/*.test.js`, `scripts/check-moonjar-browser.mjs`
 - 증빙: GitHub Actions → Moonjar UX Regression → `moonjar-mobile-ux-qa`
+
+## 2026-10-16 후속 정정
+자개 원본 8종과 파생 96개 조각은 운영자가 자체 제작·디자인한 자료로 확인되었습니다. 이 문서의 자개 이용권 미확인 경고는 해당 사용자 확인 이후 더 이상 현재 상태를 설명하지 않습니다. 달항아리 바탕 두 종은 별도 출처 기록 대상으로 남깁니다.
