@@ -786,7 +786,7 @@ async function route(){
 }
 async function init(){
   const bundled=globalThis.__MOONJAR_BUNDLE__?.data;
-  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261016-2`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
+  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261016-porcelain-v2`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
   materials=new Materials(manifest);
   try{repository=await openRepository();available=true;hasStored=(await repository.list()).length>0;}catch{available=false;}
   await route();
