@@ -1875,9 +1875,9 @@
           "thumbnail": "assets/moonjar-v2/thumbnail-day.webp",
           "width": 1600,
           "height": 1800,
-          "sha256": "8cbb45a8e92462538862bf95019edae304298a0a221a21ce9103cd81222b5b3c",
-          "byteSize": 486424,
-          "svgSha256": "83cf68e0dc26e2bfd0f89a5740adaf8b28b370a7a53c5b8b00b9b88a4d700faf",
+          "sha256": "7fa5152636ee25be2c61e38f057363a1b636004d2c2d71967823f8537f5fc7ad",
+          "byteSize": 1036859,
+          "svgSha256": "0443d1424dd009a4813eec2c97c33158b5c29b97013d430d86f268adaf243f6e",
           "creator": "DAILYCOACHING",
           "original": true
         },
@@ -1887,9 +1887,9 @@
           "thumbnail": "assets/moonjar-v2/thumbnail-night.webp",
           "width": 1600,
           "height": 1800,
-          "sha256": "3aa1470521f7d583df97a232d1d89cbd7aad239b08d74cf5c5d9460887cac6b6",
-          "byteSize": 499423,
-          "svgSha256": "3d1ef7b9c2cb83bd977ada41b74f94929a1959ba4653bfdd58889245945174dc",
+          "sha256": "8c84049f979fb1e62e1c3e57d1a4502a3fc04a44675fe9bea567178a855d2e3c",
+          "byteSize": 992085,
+          "svgSha256": "2cf5197e42a4ab5adcd95cccaade018a329e94818df39f03bf71befa28cfca12",
           "creator": "DAILYCOACHING",
           "original": true
         }
