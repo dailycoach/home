@@ -1,11 +1,16 @@
-import {drawScene} from './domain.js';
+import {drawScene, backgroundKey} from './domain.js';
 const NS = 'http://www.w3.org/2000/svg';
 const element = (name, attrs) => { const el = document.createElementNS(NS, name); for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, v); return el; };
 export const assetURL = path => globalThis.__MOONJAR_BUNDLE__?.assets[path] || path;
 export class Materials {
   constructor(manifest) { this.manifest = manifest; this.cache = new Map(); }
   asset(id) { return this.manifest.pieces.find(a => a.id === id); }
-  path(id) { return assetURL(id.startsWith('canvas-') ? `assets/canvas_${id.slice(7)}.png` : this.asset(id)?.src); }
+  path(id) {
+    if(id==='porcelain-light')return assetURL('assets/moonjar-v2/porcelain-day.png');
+    if(id==='porcelain-dark')return assetURL('assets/moonjar-v2/porcelain-night.png');
+    if(id==='canvas-light'||id==='canvas-dark')return assetURL(`assets/canvas_${id.slice(7)}.png`);
+    return assetURL(this.asset(id)?.src);
+  }
   load(id) {
     if (this.cache.has(id)) return this.cache.get(id);
     const promise = new Promise((resolve, reject) => {
@@ -16,7 +21,7 @@ export class Materials {
     this.cache.set(id, promise); return promise;
   }
   async forScene(scene) {
-    const ids = [...new Set([`canvas-${scene.theme}`, ...scene.nodes.map(n => n.assetId)])];
+    const ids = [...new Set([backgroundKey(scene), ...scene.nodes.map(n => n.assetId)])];
     return new Map(await Promise.all(ids.map(async id => [id, await this.load(id)])));
   }
 }
@@ -30,7 +35,7 @@ export function renderSVG(svg, scene, materials, selectedId = null, previewNode 
     svg.querySelector('.selection')?.remove();
   }else{
     svg.replaceChildren();
-    svg.append(element('image', {href: materials.path(`canvas-${scene.theme}`), x: 0, y: 0, width: 1600, height: 1800, 'pointer-events': 'none'}));
+    svg.append(element('image', {href: materials.path(backgroundKey(scene)), x: 0, y: 0, width: 1600, height: 1800, 'pointer-events': 'none'}));
     for (const n of scene.nodes) {
       const g = element('g', {transform: `translate(${n.x} ${n.y}) rotate(${n.rotation})`, 'data-node': n.instanceId});
       g.append(element('image', {href: materials.path(n.assetId), x: -n.width / 2, y: -n.height / 2, width: n.width, height: n.height, 'data-id': n.instanceId}));
