@@ -13,7 +13,7 @@
 |---|---|---|
 | `master/porcelain-day.svg` | Daylight 수정 가능 오리지널 벡터 | 편집가능 XML / 외부 사진 링크 없음 |
 | `master/porcelain-night.svg` | Moonlit 수정 가능 오리지널 벡터 | 낮/밤 동일 윤곽 shape |
-| `porcelain-day.png` | 1600×1800 아트워크 | SHA256 `3291e02097dcf6a09a1d52133bbec285a1e64af6caa776689e10e7d3131f2f48` |
+| `porcelain-day.png` | 1600×1800 아트워크 | SHA256 `bba50e825f0109c499cf05cd94059da1681d2eda7d86a474296400eced779a1a` |
 | `porcelain-night.png` | 1600×1800 아트워크 | SHA256는 패키지 variants.json에서 확인 |
 | `thumbnail-{day,night}.webp` | 400×450 디자인 선택 미리보기 | 해상도 통과 |
 | `qa/01_before_after_empty.png` | 기존/신규 빈 작품 4면 비교 | 생성 완료 |
