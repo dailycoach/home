@@ -500,7 +500,15 @@ function cardOptions() {
   openDialog('내 작품 카드 만들기',root);
   updatePreview();
 }
-async function finish(){if(editable()){editor.navigate('ending');await queue?.flush();}location.hash=`/result/${editor.doc.projectId}`;result();}
+async function finish(){
+  if(editable()){editor.navigate('ending');await queue?.flush();}
+  // Avoid keeping an editor-operation toast over the newly opened art gallery.
+  const toast=$('#notice');
+  toast?.classList.remove('visible');
+  clearTimeout(notice.timer);
+  location.hash=`/result/${editor.doc.projectId}`;
+  result();
+}
 function result(){
   currentView='result';
   main.className='result-page';
