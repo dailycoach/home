@@ -234,6 +234,38 @@ try{
   await p2.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
   await p2.screenshot({path:`${out}/09-multi-piece-card-desktop-1440.png`,fullPage:true});
   await desktop.close(); await context.close();
+
+  // A real V3-format JSON from before porcelain V2 must not be silently upgraded.
+  const legacyContext=await browser.newContext({viewport:{width:1280,height:900},acceptDownloads:true});
+  const p3=await legacyContext.newPage();
+  p3.on('pageerror',err=>errors.push(`LEGACY: ${err.message}`));
+  await p3.goto(base,{waitUntil:'networkidle'});
+  const legacy=await p3.evaluate(async()=>{
+    const d=await (await fetch('data/empty.json')).json();
+    delete d.scene.canvasVariant;
+    d.scene.theme='dark';
+    return d;
+  });
+  await p3.locator('#import-file').setInputFiles({
+    name:'original-v3-project.moonjar.json',mimeType:'application/json',
+    buffer:Buffer.from(JSON.stringify(legacy))
+  });
+  await p3.locator('dialog [data-action="import-confirm"]').waitFor({state:'visible'});
+  await p3.locator('dialog [data-action="import-confirm"]').click();
+  await p3.locator('#art').waitFor({state:'visible'});
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
+    'an imported pre-V2 dark project must preserve its exact old PNG background');
+  await p3.screenshot({path:`${out}/10-old-V3-import-preserved.png`,fullPage:true});
+  await p3.locator('.view-toolbar [data-action="compare"]').click();
+  check(await p3.locator('dialog .background-option .comparison-scene').count()===4,
+    'legacy users can preview V2 without changing their saved work');
+  await p3.locator('dialog [data-action="apply-canvas:porcelain-v2:light"]').click();
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('porcelain-day.png'),
+    'legacy work switches only after explicit choice');
+  await p3.locator('[data-action="undo"]').click();
+  check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
+    'undo restores the legacy background and all piece coordinates');
+  await legacyContext.close();
   check(errors.length===0,`browser errors: ${errors.join('; ')}`);
   console.log(`MOONJAR BROWSER PASS: ${checks} assertions. Screenshots: ${out}`);
 }catch(error){
