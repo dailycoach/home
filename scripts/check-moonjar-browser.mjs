@@ -35,6 +35,8 @@ try{
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
   await page.locator('#scene-lead').waitFor({state:'visible'});
+  check((await page.locator('#art image').first().getAttribute('href'))?.includes('moonjar-v2/porcelain-day.png'),
+    'new guided project begins on porcelain V2; legacy background remains separate');
   const lead=page.locator('#scene-lead');
   const leadRect=await lead.boundingBox();
   const canvasRect=await page.locator('#art').boundingBox();
@@ -186,6 +188,23 @@ try{
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
   check(await p2.locator('.story-panel').isVisible(),'desktop story panel should remain available');
   await p2.screenshot({path:`${out}/05-free-desktop-1440.png`,fullPage:true});
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-day.png'),
+    'new free work starts with the original porcelain day');
+  await p2.locator('.view-toolbar [data-action="compare"]').click();
+  check(await p2.locator('dialog .background-option .comparison-scene').count()===4,
+    'picker includes porcelain day/night and original legacy day/night');
+  await p2.locator('dialog [data-action="apply-canvas:legacy-outline-v3:light"]').click();
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('canvas_light.png'),
+    'explicit legacy option restores original line-art background');
+  await p2.locator('.view-toolbar [data-action="compare"]').click();
+  await p2.locator('dialog [data-action="apply-canvas:porcelain-v2:dark"]').click();
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-night.png'),
+    'explicit moonlit porcelain appears');
+  await p2.screenshot({path:`${out}/05b-porcelain-night-workspace-1440.png`,fullPage:true});
+  await p2.locator('.view-toolbar [data-action="compare"]').click();
+  await p2.locator('dialog [data-action="apply-canvas:porcelain-v2:light"]').click();
+  check((await p2.locator('#art image').first().getAttribute('href'))?.includes('/porcelain-day.png'),
+    'day/night switching returns to daylight V2');
 
   // Visual stress: several colors and layers. This is test-only composition,
   // never a default psychological "right answer" shown to participants.
