@@ -110,3 +110,11 @@ test('each exact new PNG, master SVG and thumbnail is registered with the true f
    assert.ok(readFileSync(new URL(entry.thumbnail,root)).length>4000);
  }
 });
+
+test('integrated V2 artwork matches the two exact images approved for design review, byte for byte',()=>{
+ const variants=manifest.backgroundVariants['porcelain-v2'].assets;
+ assert.equal(variants.day.sha256,'bba50e825f0109c499cf05cd94059da1681d2eda7d86a474296400eced779a1a');
+ assert.equal(variants.night.sha256,'8732c7eec7313289063b70726b6b5ca47f381c0c60c45545e46438d9ef4b463f');
+ assert.equal(variants.day.byteSize,1036859);
+ assert.equal(variants.night.byteSize,992085);
+});
