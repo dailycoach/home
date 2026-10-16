@@ -18,8 +18,7 @@ function harness() {
       if(s==='#nacre-visibility-switch')return this.button;
       if(s==='.pause-button')return this.pause;
       return null;
-    },insertBefore(b){this.button=b;},append(b){this.button=b;},
-    insertAdjacentElement(where,n){assert.equal(where,'afterend');root.note=n;}};
+    },insertBefore(b){this.button=b;},append(n){if(this.button)root.note=n;else this.button=n;}};
   };
   const document={querySelector:s=>s==='#main'?root:null,
     createElement:tag=>{
@@ -46,7 +45,7 @@ test('viewer guide is off by default, accessible, and switchable',()=>{
   assert.equal(button.getAttribute('aria-pressed'),'true');
   assert.equal(env.root.classList.contains('nacre-guide-visible'),true);
   assert.equal(env.root.note.hidden,false);
-  assert.match(env.root.note.textContent,/원본 그대로/);
+  assert.match(env.root.note.textContent,/저장한 작품과 카드에는 표시되지 않습니다/);
   button.click();
   assert.equal(button.getAttribute('aria-pressed'),'false');
   dispose();
