@@ -123,6 +123,8 @@ try{
   // Export opt-in personal card only after a deliberately confirmed preview.
   await page.locator('.studio-bar [data-action="finish"]').click();
   await page.locator('main.result-page').waitFor();
+  check(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
+    'editor toast must not cover the finished artwork gallery');
   check(!(await page.locator('.reflection-recap').evaluate(el=>el.open)),'private reflection recap is collapsed by default');
   check(!(await page.locator('.result-essay').evaluate(el=>el.open)),'long ending essay must be optional');
   check(await page.locator('.result-actions [data-action="card-options"].primary').isVisible(),
