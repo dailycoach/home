@@ -20,15 +20,21 @@
   outline:3px solid #315e4d;
   outline-offset:3px;
 }
+.studio .view-toolbar{position:relative}
 .studio .nacre-visibility-note{
-  max-width:700px;
-  margin:0 auto 9px;
+  position:absolute;
+  top:calc(100% + 8px);
+  right:8px;
+  z-index:9;
+  width:min(270px,75vw);
+  margin:0;
   padding:8px 12px;
   border-left:3px solid #6e9b7d;
-  border-radius:4px;
+  border-radius:6px;
   background:#eef3e9;
+  box-shadow:0 6px 16px #27453318;
   font-size:13px;
-  line-height:1.65;
+  line-height:1.5;
   color:#345b49;
   word-break:keep-all;
 }
@@ -41,8 +47,27 @@
          drop-shadow(0 0 3px rgba(250,249,243,.94));
 }
 @media(max-width:767px){
-  .studio .nacre-visibility-switch{font-size:12px;padding:8px 9px}
-  .studio .nacre-visibility-note{font-size:12px;margin:0 10px 8px;padding:7px 11px}
+  /* Float the extra control over the empty corner of the artwork. It must not
+     force a third toolbar row or reduce the visible working canvas height. */
+  .studio .view-toolbar{z-index:8}
+  .studio .nacre-visibility-switch{
+    position:absolute;
+    top:calc(100% + 10px);
+    right:12px;
+    z-index:9;
+    font-size:12px;
+    padding:8px 10px;
+    min-height:43px;
+    background:rgba(251,253,249,.95);
+    box-shadow:0 4px 12px #344f4223;
+  }
+  .studio .nacre-visibility-note{
+    top:calc(100% + 58px);
+    right:12px;
+    width:min(240px,67vw);
+    padding:7px 10px;
+    font-size:12px;
+  }
 }
 @media(prefers-contrast:more){
   .studio.nacre-guide-visible #art g[data-node] > image[data-id]{
