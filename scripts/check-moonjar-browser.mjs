@@ -258,9 +258,15 @@ try{
     ['A01',540,460],['A08',900,520],['B02',620,750],['B09',1070,700],
     ['C04',460,960],['F01',845,990],['G03',665,1270],['H07',1060,1310]
   ];
-  for(const [id,x,y] of examples){
+  for(const [index,[id,x,y]] of examples.entries()){
     await p2.locator(`[data-action="palette:${id[0]}"]`).click();
     await p2.locator(`[data-action="add:${id}"]`).click();
+    // Asset decoding is asynchronous. Wait for each addition before entering
+    // its numeric location: otherwise the last palette may still be loading.
+    await p2.waitForFunction(
+      expected=>document.querySelectorAll('#art [data-node]').length===expected,
+      index+1,{timeout:12000}
+    );
     // Numerical positions are intentionally an advanced disclosure; open it
     // as a person would before editing the test-only example arrangement.
     const geometry=p2.locator('#controls-panel details');
