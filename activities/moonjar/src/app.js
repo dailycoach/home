@@ -413,6 +413,9 @@ function compare(){
           notice(`${variant.label} · ${theme==='light'?'햇살 낮':'달빛 밤'}으로 바꿨어요. 자개는 같은 자리에 있습니다.`);
         };
         if(current==='legacy-outline-v3'&&variant.id==='porcelain-v2'){
+          // The picker is already a modal; close it before showing the
+          // separate confirmation to avoid showModal() on an open dialog.
+          closeDialog();
           confirmAction('기존 작품의 배경을 바꿀까요?',
             '오래전에 만든 작품의 자개 위치와 기록은 그대로 남지만, 달항아리 모양이 새로운 백자로 달라집니다. 원래 바탕으로 다시 바꾸거나 실행 취소할 수도 있어요.',
             apply,'확인하고 바꾸기');
