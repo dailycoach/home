@@ -3,8 +3,8 @@
  * This is a viewing aid: it never changes project JSON, original images,
  * SVG geometry, downloadable PNG, postcards, or print content.
  */
-export function installNacreVisibility({document: doc = globalThis.document} = {}) {
-  if (!doc) return () => {};
+export function installNacreVisibility({document: doc = globalThis.document, Observer = globalThis.MutationObserver} = {}) {
+  if (!doc || !Observer) return () => {};
   const root = doc.querySelector('#main');
   if (!root) return () => {};
   let active = false;
@@ -51,7 +51,7 @@ export function installNacreVisibility({document: doc = globalThis.document} = {
     paint();
   };
 
-  const observer = new MutationObserver(records => {
+  const observer = new Observer(records => {
     // The main app replaces its view as a whole. Reinstall the control only
     // after a view replacement, not on every editing step or style change.
     if (records.some(r => r.type === 'childList')) enhance();
