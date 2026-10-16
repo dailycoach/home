@@ -33,7 +33,7 @@ test('actual delegated move, rotate and resize commands cannot edit a paused com
 });
 test('comparison applies no theme while paused, including its explicit apply callbacks',()=>{
  const {c,e,created}=harness();c.flags(true,false);const before=clone(e.doc);c.compare();
- const buttons=created.filter(n=>n.dataset.action?.startsWith('apply-theme:'));assert.equal(buttons.length,2);
+ const buttons=created.filter(n=>n.dataset.action?.startsWith('apply-canvas:'));assert.equal(buttons.length,4);
  for(const b of buttons){assert.equal(b.disabled,true);b.onclick();}assert.deepEqual(e.doc,before);
 });
 test('a piece that finishes loading after entering pause is not added',async()=>{
