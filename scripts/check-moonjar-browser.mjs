@@ -86,7 +86,11 @@ try{
   check(await edgeGuide.getAttribute('aria-pressed')==='false','nacre outline aid must be off by default');
   const nacreImage=page.locator('#art g[data-node] > image[data-id]').first();
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','no guide filter before opt-in');
+  const toolbarHeightBefore=(await page.locator('.view-toolbar').boundingBox()).height;
   await edgeGuide.click();
+  const toolbarHeightAfter=(await page.locator('.view-toolbar').boundingBox()).height;
+  check(Math.abs(toolbarHeightAfter-toolbarHeightBefore)<3,
+    `opening the guide must not push the artwork downward: before=${toolbarHeightBefore}, after=${toolbarHeightAfter}`);
   check(await edgeGuide.getAttribute('aria-pressed')==='true','nacre outline aid must be switchable');
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)!=='none','guide applies CSS filter only in studio');
   check(await page.locator('#nacre-visibility-note').isVisible(),'guide displays an optional access explanation');
