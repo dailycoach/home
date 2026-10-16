@@ -287,6 +287,15 @@ try{
   check(await p2.locator('#art [data-node]').count()===examples.length,
     'multi-piece composition must retain every selected fragment');
   await p2.screenshot({path:`${out}/08-multi-piece-artwork-desktop-1440.png`,fullPage:true});
+  const desktopGuide=p2.locator('#nacre-visibility-switch');
+  await desktopGuide.click();
+  check(await desktopGuide.getAttribute('aria-pressed')==='true',
+    'desktop outline guide is independently available');
+  check(await p2.locator('#art g[data-node] > image[data-id]').evaluateAll(images=>
+    images.length===8 && images.every(image=>getComputedStyle(image).filter!=='none')
+  ),'all eight differently colored fragments receive editing-only edge aid');
+  await p2.screenshot({path:`${out}/08b-multi-piece-guide-on-desktop-1440.png`,fullPage:true});
+  await desktopGuide.click();
   await p2.locator('.studio-bar [data-action="finish"]').click();
   await p2.locator('main.result-page [data-action="card-options"]').click();
   await p2.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640,{timeout:20000});
