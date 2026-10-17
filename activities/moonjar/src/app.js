@@ -250,7 +250,13 @@ function renderPalette() {
   const batch=button(batchCount>0?`이 색상 자개 ${batchCount}개 한 번에 놓기`:'조각 200개를 모두 놓았어요',
     'batch:12',{class:'batch-add', 'aria-label':`선택한 ${palette} 색상군에서 자개 ${batchCount}개를 한 번에 배치`});
   batch.disabled=left===0||readOnly;
-  target.append(batch,el('p','여러 조각은 빈 자리에 임시로 놓여요. 원하는 곳으로 마음껏 옮기고 크기를 바꿀 수 있어요.',{class:'micro batch-hint'}));
+  const quickActions=el('div',null,{class:'quick-fill-actions'});
+  const undo=button('↶','undo',{'aria-label':'방금 놓은 조각 또는 묶음을 실행 취소'});
+  const redo=button('↷','redo',{'aria-label':'취소한 조각 또는 묶음을 다시 실행'});
+  undo.disabled=!editor.past.length||readOnly||paused;
+  redo.disabled=!editor.future.length||readOnly||paused;
+  quickActions.append(batch,undo,redo);
+  target.append(quickActions,el('p','여러 조각은 빈 자리에 임시로 놓여요. 원하는 곳으로 마음껏 옮기고 크기를 바꿀 수 있어요.',{class:'micro batch-hint'}));
   const pieces = el('div',null,{class:'piece-grid'});
   for (const a of manifest.pieces.filter(a => a.paletteId===palette)) {
     const b = button('',`add:${a.id}`,{'aria-label':`${a.label} 추가`,class:'piece-choice'}), image = el('img',null,{src:assetURL(`assets/thumbs/${palette}/${a.id}.webp`),alt:'',loading:'lazy',width:'144',height:'144'}), label = el('span',a.id);
