@@ -425,7 +425,11 @@ function changed(){
   const paletteScroll=$('#palette-panel')?.scrollTop||0;
   renderCanvas();renderControls();renderPalette();
   const palette=$('#palette-panel');if(palette)palette.scrollTop=paletteScroll;
-  if(action)[...document.querySelectorAll('[data-action]')].find(b=>b.dataset.action===action)?.focus({preventScroll:true});
+  if(action){
+    const candidates=[...document.querySelectorAll('[data-action]')].filter(b=>b.dataset.action===action);
+    const firstVisible=candidates.find(b=>b.closest('#palette-panel.mobile-active'))||candidates[0];
+    firstVisible?.focus({preventScroll:true});
+  }
 }
 async function addPiece(id, source){
   if(!editable())return;
