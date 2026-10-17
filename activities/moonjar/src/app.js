@@ -238,13 +238,15 @@ function renderLookPrompt() {
   );
 }
 function renderPalette() {
-  const target = $('#palette-panel'); if (!target) return; target.replaceChildren();
+  const target = $('#palette-panel'); if (!target) return;
+  const paletteTabScroll=$('.palette-tabs',target)?.scrollLeft||0;
+  target.replaceChildren();
   const top = el('div',null,{class:'panel-heading'}); top.append(el('h2','자개로 마음껏 채우기'),el('span',`96종 · 놓은 조각 ${editor.doc.scene.nodes.length}/200`,{class:'micro'}));
   target.append(top,el('p','조각을 계속 눌러 놓고, 옮기고, 겹쳐 보세요. 항아리를 가득 덮어도, 여백을 남겨도 좋아요.',{class:'panel-intro'}),
     el('p','',{class:'palette-inline-status',role:'status','aria-live':'polite'}));
   const colors = el('div',null,{class:'palette-tabs','aria-label':'색상군'});
   const swatches = ['#d0b995','#b4d1bf','#b8cede','#d8b5c2','#d8d5c9','#607c9f','#d99b8a','#c5b3cf'];
-  manifest.palettes.forEach((p,i) => { const b = button(p.name,`palette:${p.id}`,{'aria-pressed':String(p.id===palette)}); const dot = el('span',null,{class:'swatch','aria-hidden':'true'});dot.style.background = swatches[i];b.prepend(dot);colors.append(b); }); target.append(colors);
+  manifest.palettes.forEach((p,i) => { const b = button(p.name,`palette:${p.id}`,{'aria-pressed':String(p.id===palette)}); const dot = el('span',null,{class:'swatch','aria-hidden':'true'});dot.style.background = swatches[i];b.prepend(dot);colors.append(b); }); target.append(colors);colors.scrollLeft=paletteTabScroll;
   const left=200-editor.doc.scene.nodes.length;
   const batchCount=Math.min(12,left);
   const batch=button(batchCount>0?`${batchCount}개 한 번에 채우기`:'조각 200개를 모두 놓았어요',
