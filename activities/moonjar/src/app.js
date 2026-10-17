@@ -351,8 +351,13 @@ function renderStory() {
   target.append(details,daily);
   if(s.id==='reframe') target.append(button('남긴 배치와 바탕 보기','compare'));
   target.append(el('p',s.nextCopy,{class:'next-copy'}));
-  const nav=el('div',null,{class:'scene-actions'});if(s.order>1)nav.append(button('이전',`scene:${story.scenes[s.order-2].id}`));nav.append(button(s.order===7?'마무리':'다음 장면',s.order===7?'finish':`scene:${story.scenes[s.order].id}`,{class:'primary'}));target.append(nav);
-  target.append(button('지금은 건너뛰기',s.order===7?'finish':`scene:${story.scenes[s.order].id}`,{class:'text-button'}));
+  // Reading is an optional accompaniment to artwork, never a seven-step
+  // questionnaire that must be completed before filling the jar.
+  const nav=el('div',null,{class:'scene-actions'});
+  nav.append(button('자개 계속 꾸미기','panel:palette',{class:'primary'}));
+  if(s.order<7)nav.append(button('다른 이야기 더 읽기',`scene:${story.scenes[s.order].id}`,{class:'text-button'}));
+  else nav.append(button('완성하기','finish',{class:'text-button'}));
+  target.append(nav);
 }
 function setPanel(id, reveal = false) {
   panel=id;
