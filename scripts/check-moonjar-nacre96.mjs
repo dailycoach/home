@@ -70,6 +70,16 @@ try{
     Object.defineProperty(globalThis,'__moonjarWave8QA',{
       value:{materials,scene,nodes,makeTheme,exportPNG,svg},configurable:true
     });
+    // Isolate only the actual artwork for this 96-piece QA contact sheet.
+    // The normal story and palette columns must not occlude rows of fragments.
+    const workspace=document.querySelector('.workspace');
+    workspace.style.display='block';
+    workspace.style.width='1700px';
+    const stage=document.querySelector('.stage-area');
+    stage.style.width='1700px';
+    stage.style.maxWidth='none';
+    document.querySelector('#palette-panel').style.display='none';
+    document.querySelector('#story-panel').style.display='none';
     const paper=document.querySelector('#paper');
     const shell=document.querySelector('#stage-shell');
     paper.style.width='1600px';
@@ -111,9 +121,14 @@ try{
     fail(shadowCount===96,theme+' should give all 96 fragments the temporary edge effect');
     const normalCount=await page.locator('#art g[data-node] > image[data-id]').count();
     fail(normalCount===96,'no piece should be removed when guide is shown');
+    // The guide's information tooltip floats above the production canvas.
+    // Hide ONLY that tooltip for the QA art screenshot, never the actual guide
+    // CSS filter. Restore it before clicking the toggle off.
+    await page.locator('#nacre-visibility-note').evaluate(el=>{el.style.visibility='hidden';});
     await page.locator('#art').screenshot({
       path:`${output}/${theme}-96-guide.png`,animations:'disabled',timeout:20000
     });
+    await page.locator('#nacre-visibility-note').evaluate(el=>{el.style.visibility='';});
     const guided=await page.evaluate(async()=>{
       const {scene,materials,exportPNG}=globalThis.__moonjarWave8QA;
       const blob=await exportPNG(scene,materials);
