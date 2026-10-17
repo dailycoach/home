@@ -44,7 +44,7 @@ test('repeated batch filling spreads 96 nacre pieces while preserving every orig
   assert.ok(different.size>=40,'batch filling should distribute rather than hide all fragments under one');
   assert.deepEqual(validate(e.doc),[]);
   const before=clone(e.doc);
-  assert.throws(()=>e.addBatch(ids),'200 cap still protects projects over 200');
+  assert.throws(()=>e.addBatch(Array(105).fill('A01')),'200 cap still protects projects over 200');
   assert.deepEqual(e.doc,before,'failed batch must not lose or partially add pieces');
   e.addBatch(ids.slice(0,12));
   assert.equal(e.doc.scene.nodes.length,108);
