@@ -19,7 +19,9 @@ function el(tag, text, attrs = {}) {
 function button(text, action, attrs = {}) { return el('button', text, {'data-action': action, type:'button', ...attrs}); }
 function notice(message) {
   const n=$('#notice');
-  const inline=matchMedia('(max-width:767px)').matches ? $('#controls-panel.mobile-active .control-inline-status') : null;
+  const inline=matchMedia('(max-width:767px)').matches
+    ? ($('#palette-panel.mobile-active .palette-inline-status')||$('#controls-panel.mobile-active .control-inline-status'))
+    : null;
   if(inline){
     inline.textContent=message;
     clearTimeout(notice.timer);
@@ -253,7 +255,7 @@ function renderPalette() {
   for (const a of manifest.pieces.filter(a => a.paletteId===palette)) {
     const b = button('',`add:${a.id}`,{'aria-label':`${a.label} 추가`,class:'piece-choice'}), image = el('img',null,{src:assetURL(`assets/thumbs/${palette}/${a.id}.webp`),alt:'',loading:'lazy',width:'144',height:'144'}), label = el('span',a.id);
     image.onerror = () => { label.textContent = `${a.id} 미리보기 재시도`; image.hidden=true; b.dataset.previewFailed='true'; };
-    b.append(image,label); b.disabled = readOnly; pieces.append(b);
+    b.append(image,label); b.disabled = readOnly||editor.doc.scene.nodes.length>=200; pieces.append(b);
   }
   target.append(pieces,el('p',story.ui.staticMaterial,{class:'micro'}));
   const details = el('details',null,{class:'layer-list'}); details.append(el('summary',`놓인 조각 ${editor.doc.scene.nodes.length}개 · 목록으로 선택`));
@@ -366,10 +368,10 @@ function setPanel(id, reveal = false) {
   if(reveal && id!=='look' && matchMedia('(max-width:767px)').matches){
     // The compact editor floats below the *actual canvas*. Never scroll down to
     // the controls as that would hide the artwork the participant is changing.
-    const revealTarget=id==='controls'||id==='canvas'?$('#stage-shell'):$(`#${id}-panel`);
+    const revealTarget=['controls','canvas','palette'].includes(id)?$('#stage-shell'):$(`#${id}-panel`);
     // For the editor, scroll immediately so the selected fragment is not
     // briefly hidden behind a floating tray while the page is still moving.
-    const immediate=id==='controls'||id==='canvas'||matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const immediate=['controls','canvas','palette'].includes(id)||matchMedia('(prefers-reduced-motion:reduce)').matches;
     revealTarget?.scrollIntoView({block:'start',behavior:immediate?'instant':'smooth'});
   }
 }
@@ -408,7 +410,9 @@ function attachCanvas(svg) {
 }
 function changed(){
   const action=document.activeElement?.dataset.action;
+  const paletteScroll=$('#palette-panel')?.scrollTop||0;
   renderCanvas();renderControls();renderPalette();
+  const palette=$('#palette-panel');if(palette)palette.scrollTop=paletteScroll;
   if(action)[...document.querySelectorAll('[data-action]')].find(b=>b.dataset.action===action)?.focus({preventScroll:true});
 }
 async function addPiece(id, source){
@@ -416,8 +420,34 @@ async function addPiece(id, source){
   if(source?.dataset.previewFailed){const img=$('img',source);img.hidden=false;img.src=assetURL(`assets/thumbs/${id[0]}/${id}.webp`);source.dataset.previewFailed='';$('span',source).textContent=id;}
   source?.setAttribute('aria-busy','true');if(source)source.disabled=true;
   const targetEditor=editor;
-  try{await materials.load(id);if(editor!==targetEditor||!editable())return;editor.add(id);changed();if(matchMedia('(max-width:767px)').matches)setPanel('controls',true);notice(`${id} 조각을 놓았어요. 이동·회전·크기 버튼으로 조절할 수 있습니다.`);}
+  try{
+    await materials.load(id);
+    if(editor!==targetEditor||!editable())return;
+    editor.add(id);changed();
+    const next=$(`[data-action="add:${id}"]`);next?.focus?.({preventScroll:true});
+    notice(`${id} 조각을 놓았어요. 계속 눌러 채우거나 조절 탭에서 옮겨보세요.`);
+  }
   finally{source?.removeAttribute('aria-busy');if(source)source.disabled=false;}
+}
+async function addColorBatch(source) {
+  if(!editable())return;
+  const remaining=200-editor.doc.scene.nodes.length;
+  if(remaining<=0)throw new Error('200개를 모두 놓았어요. 자유롭게 옮기거나 원하는 조각을 지워보세요.');
+  const ids=manifest.pieces.filter(p=>p.paletteId===palette).slice(0,Math.min(12,remaining)).map(p=>p.id);
+  const targetEditor=editor,selectedPalette=palette;
+  source?.setAttribute('aria-busy','true');if(source)source.disabled=true;
+  try{
+    await Promise.all(ids.map(id=>materials.load(id)));
+    if(editor!==targetEditor||!editable())return;
+    editor.addBatch(ids);
+    changed();
+    // Never force the participant into controls or a note-entry modal.
+    // New pieces are temporary scattered placements, not a "correct" pattern.
+    $('[data-action="batch:12"]')?.focus?.({preventScroll:true});
+    notice(`${selectedPalette} 색상 ${ids.length}개를 놓았어요. 계속 채우거나 원하는 대로 옮겨보세요.`);
+  }finally{
+    source?.removeAttribute('aria-busy');if(source)source.disabled=false;
+  }
 }
 function snapshot(){
   if(!editable())return;
@@ -798,6 +828,7 @@ const actions={
   pause:()=>setPanel(paused?(editor.doc.mode==='guided'?'story':'palette'):'look'),
   'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();},
   snapshot,compare,finish,'piece-note':pieceNote,'save-options':saveOptions,
+  'batch:12':()=>addColorBatch($('[data-action="batch:12"]')),
   continue:()=>{paused=false;viewScene='arrange';if(!readOnly)editor.navigate('arrange');location.hash=`/studio/${editor.doc.projectId}`;studio();},
   'export-png':()=>imageExport(),'card-options':cardOptions,'export-json':backup,
   'export-text':()=>{download(new Blob([JSON.stringify({title:editor.doc.title,reflections:editor.doc.reflections,pieceNotes:editor.doc.pieceNotes},null,2)],{type:'text/plain;charset=utf-8'}),filename('txt'));notice('입력한 글 전체의 텍스트 내려받기를 요청했어요.');},
@@ -821,7 +852,8 @@ document.addEventListener('click',event=>{
     else if(type==='scene'){
       viewScene=a;leadExpanded=true;
       if(!readOnly)editor.navigate(a);
-      $('.scene-nav')?.replaceWith(navigation());
+      const chapters=$('.scene-chapters'),wasOpen=chapters?.open||false;
+      if(chapters){chapters.replaceWith(navigation());$('.scene-chapters').open=wasOpen;}
       renderStory();renderSceneLead();renderLookPrompt();renderCanvas();
       const showMobileLead=matchMedia('(max-width:767px)').matches && editor.doc.mode==='guided';
       setPanel('story',!showMobileLead);
