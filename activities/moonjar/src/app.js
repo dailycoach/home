@@ -123,7 +123,7 @@ function home() {
   currentView = 'home'; main.className = 'home'; main.replaceChildren();
   const section = el('section', null, {class:'hero'}), copy = el('div', null, {class:'hero-copy'});
   copy.append(el('p', '나를 담고, 다시 보다', {class:'eyebrow'}), el('h1', '빛을 담는\n달항아리'));
-  copy.append(el('p', '자개를 고르고 놓으며,\n지금의 나를 조금 더 알아봅니다.', {class:'hero-lead'}));
+  copy.append(el('p', '자개를 마음껏 놓고, 겹치고,\n달항아리를 나만의 빛으로 채워보세요.', {class:'hero-lead'}));
   copy.append(el('p', story.opening.paragraphs[2], {class:'hero-note'}));
   const options = el('fieldset', null, {class:'storage-choice'}); options.append(el('legend','기록을 어떻게 남길까요?'));
   for (const [id, text, checked] of [['storage-personal','이 기기에 저장하며 시작', available],['storage-memory','기록을 남기지 않고 시작',!available]]) {
@@ -131,7 +131,7 @@ function home() {
     if (id === 'storage-personal' && !available) input.disabled = true; label.append(input,document.createTextNode(text)); options.append(label);
   }
   const startArea=el('div',null,{class:'hero-start'});startArea.append(options);
-  const actions = el('div',null,{class:'hero-actions'}); actions.append(button(story.ui.startGuided,'start-guided',{class:'primary'}), button(story.ui.startFree,'start-free'));
+  const actions = el('div',null,{class:'hero-actions'}); actions.append(button(story.ui.startFree,'start-free',{class:'primary'}), button(story.ui.startGuided,'start-guided'));
   if (editor || hasStored) actions.append(button('이어서 하기','resume',{class:'text-button'}));
   actions.append(button('편집 파일 열기','import',{class:'text-button'}));
   startArea.append(actions,el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'}));
@@ -145,16 +145,24 @@ function home() {
   const intro = el('section',null,{class:'intro-line'}); intro.append(el('h2',story.opening.title),el('p',story.opening.paragraphs[0]),el('p',story.opening.paragraphs[1]),el('p','내가 선택한 조각과 말은 내게 남습니다. 중요한 작업은 편집 파일로 따로 보관해 주세요.',{class:'muted'})); main.append(intro);
 }
 function navigation() {
-  const nav = el('nav',null,{class:'scene-nav','aria-label':'이야기 장면'});
-  for (const s of story.scenes) nav.append(button(`${String(s.order).padStart(2,'0')} ${s.name}`,`scene:${s.id}`,{'aria-current':viewScene === s.id ? 'step' : 'false'}));
-  return nav;
+  // All seven source chapters stay available, but reading and answering
+  // them is never a prerequisite for freely covering the moon jar in nacre.
+  const menu=el('details',null,{class:'scene-chapters'});
+  const summary=el('summary','달항아리 이야기 더 보기 · 선택');
+  const nav=el('nav',null,{class:'scene-nav','aria-label':'선택해서 읽는 일곱 이야기'});
+  for(const s of story.scenes)nav.append(
+    button(`${String(s.order).padStart(2,'0')} ${s.name}`,`scene:${s.id}`,
+      {'aria-current':viewScene===s.id?'step':'false'})
+  );
+  menu.append(summary,nav);
+  return menu;
 }
 function studio() {
   currentView = 'studio'; main.className = `studio ${editor.doc.mode==='guided' ? 'mode-guided' : ''} ${paused ? 'paused' : ''}`; main.replaceChildren();
   const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
   left.append(el('span',persistent ? '이 기기 · 이 브라우저' : '공용 기기용 · 자동 복원 없음',{class:'micro storage-context'}));
-  const actions = el('div',null,{class:'button-row'}); actions.append(button(editor.doc.mode === 'free' ? '이야기와 함께' : '자유롭게 꾸미기','toggle-mode'),button('마무리','finish',{class:'primary'})); bar.append(left,actions);
-  main.append(bar,navigation(),el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));
+  const actions = el('div',null,{class:'button-row'}); actions.append(button(editor.doc.mode === 'free' ? '이야기 읽으며 꾸미기' : '자개 마음껏 꾸미기','toggle-mode'),button('완성하기','finish',{class:'primary'})); bar.append(left,actions);
+  main.append(bar);if(editor.doc.mode==='guided')main.append(navigation());main.append(el('div',null,{id:'storage-warning',class:'storage-warning',hidden:''}));
   const workspace = el('div',null,{class:'workspace'});
   const rail = el('aside',null,{id:'palette-panel',class:'palette-panel','aria-label':'자개 재료'});
   const stage = el('section',null,{class:'stage-area','aria-label':'작품 편집 영역'});
@@ -167,11 +175,11 @@ function studio() {
   svg.id = 'art'; svg.classList.add('art'); svg.setAttribute('viewBox','0 0 1600 1800'); svg.setAttribute('role','img'); svg.setAttribute('aria-label','달항아리 작품. 조각 선택과 조절은 자개 목록과 조절 버튼으로도 할 수 있습니다.');
   paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
   const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('저장·보관','save-options')); stage.append(edittools);
-  const firstHint=el('p','자개를 한 번 누르면 종이 위에 놓입니다. 끌지 않고도 큰 조절 버튼으로 움직일 수 있어요.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
+  const firstHint=el('p','자개를 하나씩 놓거나, 같은 색상군에서 12개씩 채울 수 있어요. 조각마다 뜻을 붙일 필요는 없습니다.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
   const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'}); stage.append(controls);
   const record = el('aside',null,{id:'story-panel',class:'story-panel','aria-label':'이야기와 선택 기록'});
   workspace.append(rail,stage,record); main.append(workspace);
-  const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','자개'],['controls','조절'],['story','기록'],['look','바라보기']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
+  const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','채우기'],['controls','조절'],['look','바라보기'],['story','기록(선택)']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
   renderPalette(); renderStory(); renderSceneLead(); renderLookPrompt(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
 }
 function renderSceneLead() {
@@ -187,8 +195,8 @@ function renderSceneLead() {
   body.append(
     el('p', s.shortEssay, {class:'lead-essay'}),
     el('p', s.focusQuestion, {class:'lead-question'}),
-    button('이 장면의 마음 기록하기', 'panel:story', {class:'text-button'}),
-    el('p', '기록은 선택입니다. 바로 자개를 고르고 놓아도 괜찮습니다.', {class:'micro'})
+    button('원하면 기록하기', 'panel:story', {class:'text-button'}),
+    el('p', '이야기는 읽기만 해도 좋습니다. 자개를 마음껏 놓아보세요.', {class:'micro'})
   );
   target.append(
     el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
