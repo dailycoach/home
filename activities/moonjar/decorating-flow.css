@@ -177,3 +177,41 @@
   .studio{--moonjar-palette-height:40dvh}
   .studio #palette-panel.mobile-active .panel-intro{display:none}
 }
+
+
+/* Keep undo within reach while a fixed materials drawer covers page controls. */
+.studio .quick-fill-actions{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 45px 45px;
+  align-items:stretch;
+  gap:7px;
+  margin-top:7px;
+}
+.studio .quick-fill-actions .batch-add{
+  min-width:0;
+  height:100%;
+  margin:0;
+}
+.studio .quick-fill-actions>button:not(.batch-add){
+  min-width:44px;
+  min-height:50px;
+  padding:6px;
+  font-size:21px;
+  line-height:1;
+  color:#395a49;
+  background:#fffdf8;
+  border:1px solid #c6d7c8;
+  border-radius:9px;
+}
+.studio .quick-fill-actions>button:disabled{opacity:.42;cursor:not-allowed}
+@media(max-width:767px){
+  .studio #palette-panel.mobile-active .quick-fill-actions{
+    gap:6px;
+    grid-template-columns:minmax(0,1fr) 44px 44px;
+  }
+  .studio #palette-panel.mobile-active .quick-fill-actions .batch-add{
+    min-height:48px;
+    font-size:13px;
+    padding:6px 9px;
+  }
+}
