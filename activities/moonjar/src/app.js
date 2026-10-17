@@ -247,7 +247,7 @@ function renderPalette() {
   manifest.palettes.forEach((p,i) => { const b = button(p.name,`palette:${p.id}`,{'aria-pressed':String(p.id===palette)}); const dot = el('span',null,{class:'swatch','aria-hidden':'true'});dot.style.background = swatches[i];b.prepend(dot);colors.append(b); }); target.append(colors);
   const left=200-editor.doc.scene.nodes.length;
   const batchCount=Math.min(12,left);
-  const batch=button(batchCount>0?`이 색상 자개 ${batchCount}개 한 번에 놓기`:'조각 200개를 모두 놓았어요',
+  const batch=button(batchCount>0?`${batchCount}개 한 번에 채우기`:'조각 200개를 모두 놓았어요',
     'batch:12',{class:'batch-add', 'aria-label':`선택한 ${palette} 색상군에서 자개 ${batchCount}개를 한 번에 배치`});
   batch.disabled=left===0||readOnly;
   const quickActions=el('div',null,{class:'quick-fill-actions'});
