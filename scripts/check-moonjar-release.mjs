@@ -46,7 +46,7 @@ async function entryMatrix(browser,engine,width,height) {
     await ensureNoOverflow(page,`${name} entry`);
     const buttons=page.locator('.hero-actions [data-action="start-guided"], .hero-actions [data-action="start-free"]');
     verify(await buttons.count()===2,`${name} two start options`);
-    const primary=await page.locator('.hero-actions [data-action="start-guided"]').boundingBox();
+    const primary=await page.locator('.hero-actions [data-action="start-free"]').boundingBox();
     verify(primary && primary.y+primary.height<=height,
       `${name} main action must be in first mobile viewport, not hidden below a tall hero: ${JSON.stringify(primary)}`);
     await page.locator('[data-action="start-guided"]').click();
@@ -58,11 +58,17 @@ async function entryMatrix(browser,engine,width,height) {
     await ensureNoOverflow(page,`${name} guided studio`);
     await page.locator('[data-action="panel:palette"]').click();
     await page.locator('.piece-choice[data-action="add:A01"]').tap();
-    const tray=page.locator('#controls-panel.mobile-active');
-    await tray.waitFor({state:'visible',timeout:10000});
-    await page.waitForFunction(()=>document.querySelector('#controls-panel.mobile-active .control-inline-status')?.textContent?.includes('조각'),{timeout:12000});
+    await page.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
+    verify(await page.locator('#palette-panel.mobile-active').isVisible(),
+      `${name} rapid decorating keeps palette available`);
+    verify(!(await page.locator('#controls-panel').isVisible()),
+      `${name} adding does not force a controls sheet`);
+    await page.waitForFunction(()=>document.querySelector('#palette-panel.mobile-active .palette-inline-status')?.textContent?.includes('조각'),{timeout:12000});
     verify(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
-      `${name} success toast must not obscure the mobile editing tray`);
+      `${name} success toast must not obscure the palette`);
+    const tray=page.locator('#controls-panel.mobile-active');
+    await page.locator('.mobile-tabs [data-action="panel:controls"]').tap();
+    await tray.waitFor({state:'visible',timeout:10000});
     const svg=page.locator('#art');
     const initial=await svg.locator('[data-node]').first().getAttribute('transform');
     await tray.locator('[data-action="move:24:0"]').tap();
@@ -91,6 +97,7 @@ async function entryMatrix(browser,engine,width,height) {
 
     // The guided reflection remains optional and the current doc survives reload.
     await page.locator('.mobile-tabs [data-action="panel:story"]').tap();
+    await page.locator('.scene-chapters > summary').tap();
     await page.locator('.scene-nav [data-action="scene:return"]').tap();
     const note=page.locator('#story-panel [data-field="noticed"]');
     await note.fill(`테스트 ${engine} ${width} 알아차림`);
