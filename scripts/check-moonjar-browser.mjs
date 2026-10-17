@@ -385,7 +385,7 @@ try{
   await p4.screenshot({path:`${out}/10-free-12-nacre-mobile-390.png`,fullPage:false});
   await p4.locator('[data-action="batch:12"]').click();
   await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===24,{timeout:20000});
-  await p4.locator('.art-toolbar [data-action="undo"]').click();
+  await p4.locator('#palette-panel.mobile-active .quick-fill-actions [data-action="undo"]').click();
   check(await p4.locator('#art [data-node]').count()===12,'whole last batch undoes in one step');
   await p4.locator('.mobile-tabs [data-action="panel:controls"]').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
