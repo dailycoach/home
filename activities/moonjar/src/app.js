@@ -367,6 +367,7 @@ function setPanel(id, reveal = false) {
   if(id==='look') { paused=true; main.classList.add('paused');renderLookPrompt();renderCanvas();renderControls(); }
   else if(paused) { paused=false;main.classList.remove('paused');renderCanvas();renderControls(); }
   for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
+  if(matchMedia('(max-width:767px)').matches && ['palette','controls','canvas'].includes(id))renderCanvas();
   document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
   const pauseButton=$('[data-action="pause"]');if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
   if(id==='canvas')$('#stage-shell')?.focus?.({preventScroll:true});
