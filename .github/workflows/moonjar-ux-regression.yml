@@ -7,6 +7,7 @@ on:
       - 'tests/moonjar/**'
       - 'scripts/check-moonjar.mjs'
       - 'scripts/check-moonjar-browser.mjs'
+      - 'scripts/check-moonjar-nacre96.mjs'
       - 'scripts/check-moonjar-release.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
@@ -55,6 +56,15 @@ jobs:
           exit 1
       - name: Mobile and desktop Chromium smoke
         run: node scripts/check-moonjar-browser.mjs
+      - name: Check all 96 source images on day and night porcelain
+        run: node scripts/check-moonjar-nacre96.mjs
+      - name: Attach nacre source visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-nacre96-visual-qa
+          path: artifacts/moonjar-nacre96
+          retention-days: 7
       - name: Attach browser captures
         if: always()
         uses: actions/upload-artifact@v4
