@@ -210,10 +210,19 @@ function renderSceneLead() {
 function renderLookPrompt() {
   const target = $('#look-prompt');
   if (!target) return;
+  if(editor.doc.mode==='free'){
+    const hasPieces=editor.doc.scene.nodes.length>0;
+    target.replaceChildren(
+      el('p','잠시 바라보기 · 선택',{class:'eyebrow'}),
+      el('h2',hasPieces?'지금 작품에서 가장 먼저 눈에 들어오는 곳은 어디인가요?':'이 비어 있는 그릇을 바라보면 무엇이 보이나요?'),
+      el('p','아름답게 꾸민 이유를 설명하지 않아도 괜찮습니다. 그대로 바라보거나 다시 채워도 좋아요.',{class:'micro'}),
+      button('계속 꾸미기','panel:palette',{class:'primary'}),
+      button('원하면 한마디 남기기','panel:story',{class:'text-button'})
+    );
+    return;
+  }
   const s = story.scenes.find(s => s.id === viewScene) || story.scenes[3];
-  // Pause questions follow the *actual making activity*, never an inferred
-  // psychological trait. Someone who adds a piece in the first scene is
-  // already making choices, even if they haven't navigated to scene four.
+  // The legacy narrative stays available, without interpreting piece choices.
   const choosing = editor?.doc.scene.nodes.length>0 && ['arrival','vessel','nacre'].includes(viewScene);
   const focus = choosing ? (story.scenes.find(item=>item.id==='arrange')||s) : s;
   target.replaceChildren(
@@ -222,15 +231,24 @@ function renderLookPrompt() {
     el('p', choosing
       ? '자개를 고르고 놓는 동안 무엇이 중요해졌나요? 특별한 이유가 없어도 괜찮습니다. 지금의 모습을 살펴봅니다.'
       : '답을 정하지 않아도 좋습니다. 지금 눈에 들어오는 것과 마음에서 일어나는 것을 잠시 바라봅니다.', {class:'micro'}),
-    button('내 말로 기록해 보기', 'panel:story', {class:'text-button'})
+    button('다시 꾸미기','panel:palette',{class:'primary'}),
+    button('원하면 기록하기', 'panel:story', {class:'text-button'})
   );
 }
 function renderPalette() {
   const target = $('#palette-panel'); if (!target) return; target.replaceChildren();
-  const top = el('div',null,{class:'panel-heading'}); top.append(el('h2','빛 고르기'),el('span','8가지 빛 · 96조각',{class:'micro'})); target.append(top,el('p',story.ui.addPieceHint,{class:'panel-intro'}));
+  const top = el('div',null,{class:'panel-heading'}); top.append(el('h2','자개로 마음껏 채우기'),el('span',`96종 · 놓은 조각 ${editor.doc.scene.nodes.length}/200`,{class:'micro'}));
+  target.append(top,el('p','조각을 계속 눌러 놓고, 옮기고, 겹쳐 보세요. 항아리를 가득 덮어도, 여백을 남겨도 좋아요.',{class:'panel-intro'}),
+    el('p','',{class:'palette-inline-status',role:'status','aria-live':'polite'}));
   const colors = el('div',null,{class:'palette-tabs','aria-label':'색상군'});
   const swatches = ['#d0b995','#b4d1bf','#b8cede','#d8b5c2','#d8d5c9','#607c9f','#d99b8a','#c5b3cf'];
   manifest.palettes.forEach((p,i) => { const b = button(p.name,`palette:${p.id}`,{'aria-pressed':String(p.id===palette)}); const dot = el('span',null,{class:'swatch','aria-hidden':'true'});dot.style.background = swatches[i];b.prepend(dot);colors.append(b); }); target.append(colors);
+  const left=200-editor.doc.scene.nodes.length;
+  const batchCount=Math.min(12,left);
+  const batch=button(batchCount>0?`이 색상 자개 ${batchCount}개 한 번에 놓기`:'조각 200개를 모두 놓았어요',
+    'batch:12',{class:'batch-add', 'aria-label':`선택한 ${palette} 색상군에서 자개 ${batchCount}개를 한 번에 배치`});
+  batch.disabled=left===0||readOnly;
+  target.append(batch,el('p','여러 조각은 빈 자리에 임시로 놓여요. 원하는 곳으로 마음껏 옮기고 크기를 바꿀 수 있어요.',{class:'micro batch-hint'}));
   const pieces = el('div',null,{class:'piece-grid'});
   for (const a of manifest.pieces.filter(a => a.paletteId===palette)) {
     const b = button('',`add:${a.id}`,{'aria-label':`${a.label} 추가`,class:'piece-choice'}), image = el('img',null,{src:assetURL(`assets/thumbs/${palette}/${a.id}.webp`),alt:'',loading:'lazy',width:'144',height:'144'}), label = el('span',a.id);
@@ -267,15 +285,20 @@ function renderControls() {
   const groups={move:[['←','move:-24:0','왼쪽으로 이동'],['↑','move:0:-24','위로 이동'],['↓','move:0:24','아래로 이동'],['→','move:24:0','오른쪽으로 이동']],rotate:[['↶ 15°','rotate:-15','왼쪽으로 15도 회전'],['↷ 15°','rotate:15','오른쪽으로 15도 회전']],size:[['− 작게','size:0.9','비율 유지하며 작게'],['+ 크게','size:1.1','비율 유지하며 크게']]};
   function tools(items){const row=el('div',null,{class:'controls-grid'});for(const [label,action,name] of items){const b=button(label,action,{'aria-label':name});b.disabled=readOnly||paused||(n.locked&&!['lock','duplicate'].includes(action));row.append(b);}return row;}
   target.append(tools(groups[controlTab]));
-  const note=button('이 조각에 말 남기기','piece-note',{class:'piece-note-button'});note.disabled=readOnly||paused;target.append(note);
+  // Meaning-making is not a step of decorating. Legacy piece notes remain accessible under advanced options.
   if(n.locked)target.append(el('p','잠긴 조각입니다. 더 조절하기에서 잠금을 풀 수 있어요.',{class:'micro'}));
   const geometry = el('details');geometry.open=advancedOpen;geometry.append(el('summary','더 조절하기 · 순서, 복제, 잠금, 수치'));
   geometry.append(tools([['중앙','center','종이 중앙으로 이동'],['앞으로','forward','겹침 순서 앞으로'],['뒤로','backward','겹침 순서 뒤로'],['복제','duplicate','선택 조각 복제'],[n.locked?'잠금 해제':'잠금','lock','선택 조각 잠금 전환'],['삭제','delete','선택 조각 삭제']]));
-  const coords=el('div',null,{class:'coordinates'});for(const axis of ['x','y']) { const label=el('label',axis==='x'?'가로 위치':'세로 위치');const input=el('input',null,{type:'number',min:0,max:axis==='x'?1600:1800,value:n[axis],'data-coordinate':axis,'aria-label':axis==='x'?'조각 가로 좌표':'조각 세로 좌표'});input.disabled=n.locked||readOnly||paused;label.append(input);coords.append(label); }geometry.append(coords);target.append(geometry);
+  const coords=el('div',null,{class:'coordinates'});for(const axis of ['x','y']) { const label=el('label',axis==='x'?'가로 위치':'세로 위치');const input=el('input',null,{type:'number',min:0,max:axis==='x'?1600:1800,value:n[axis],'data-coordinate':axis,'aria-label':axis==='x'?'조각 가로 좌표':'조각 세로 좌표'});input.disabled=n.locked||readOnly||paused;label.append(input);coords.append(label); }geometry.append(coords);
+  const savedNote=editor.doc.pieceNotes[n.instanceId];
+  const note=button(savedNote?.label||savedNote?.memory?'기존 조각 메모 보기·수정':'조각 메모 남기기 · 선택',
+    'piece-note',{class:'piece-note-button'});
+  note.disabled=readOnly||paused;
+  geometry.append(note);target.append(geometry);
 }
 function pieceNote(){
   if(!editable()||!editor.node)return;
-  const root=el('div');root.append(el('p','이 조각에 떠오르는 이름이나 말을 남길 수 있어요. 비워두어도 됩니다.'));
+  const root=el('div');root.append(el('p','자개마다 메시지를 적을 필요는 없습니다. 특별히 기억하고 싶은 말이 있을 때에만 남겨보세요.'));
   for(const f of story.scenes.find(s=>s.id==='nacre').instanceFields)root.append(inputField('piece',f,editor.doc.pieceNotes[editor.selected]?.[f.id]||''));
   const done=button('작품으로 돌아가기','close-note',{class:'primary'});done.onclick=closeDialog;root.append(done);openDialog(`${editor.node.assetId} · 조각의 이야기`,root);
 }
@@ -293,6 +316,26 @@ function inputField(section, field, value) {
 }
 function renderStory() {
   const target = $('#story-panel'); if (!target) return; target.replaceChildren();
+  if(editor.doc.mode==='free'){
+    const reflection=story.scenes.find(item=>item.id==='return');
+    const noticed=reflection.fields.find(field=>field.id==='noticed');
+    const action=reflection.fields.find(field=>field.id==='action');
+    const name=story.scenes.find(item=>item.id==='name');
+    target.append(
+      el('p','꾸민 뒤 원할 때만 · 한 번 돌아보기',{class:'eyebrow'}),
+      el('h2','나의 달항아리를 바라보며'),
+      el('p','자개 하나하나에 뜻을 담지 않아도 괜찮습니다. 작품을 있는 그대로 바라보고, 지금 내게 남는 것이 있다면 한마디만 남겨보세요.',{class:'short-essay'}),
+      inputField('return',noticed,editor.doc.reflections.return.noticed)
+    );
+    const extra=el('details',null,{class:'more-records'});
+    extra.append(
+      el('summary','조금 더 적고 싶다면 · 선택'),
+      inputField('title',name.titleField,editor.doc.title),
+      inputField('return',action,editor.doc.reflections.return.action)
+    );
+    target.append(extra,button('완성한 작품 보기','finish',{class:'primary'}));
+    return;
+  }
   const s=story.scenes.find(s=>s.id===viewScene)||story.scenes[3];
   target.append(el('p','이 장면의 기록',{class:'mobile-record-title'}));
   target.append(el('p',`${String(s.order).padStart(2,'0')} / 07 · ${s.name}`,{class:'eyebrow'}),el('h2',s.title),el('p',s.shortEssay,{class:'short-essay'}));
