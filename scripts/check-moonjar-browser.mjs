@@ -52,9 +52,15 @@ try{
   await lead.locator('[data-action="toggle-lead"]').click();
   check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'guided story should expand again');
 
-  await page.locator('[data-action="panel:palette"]').click();
+  await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await page.locator('[data-action="add:A01"]').click();
+  await page.locator('#art [data-node]').first().waitFor({state:'attached'});
+  check(await page.locator('#palette-panel.mobile-active').isVisible(),
+    'after adding a piece, keep the material palette open for continued filling');
+  check(!(await page.locator('#controls-panel').isVisible()),
+    'adding a piece should not force the user into the adjust step');
   const editorTray=page.locator('#controls-panel.mobile-active');
+  await page.locator('.mobile-tabs [data-action="panel:controls"]').click();
   await editorTray.waitFor({state:'visible'});
   check(await page.locator('#art [data-node]').count()===1,'one piece must be present');
   check(await editorTray.locator('[data-action="panel:canvas"]').isVisible(),
@@ -109,6 +115,10 @@ try{
   await page.locator('#look-prompt [data-action="panel:story"]').click();
   check(await page.locator('main.studio.paused').count()===0,'returning to story should exit pause');
 
+  const optionalChapters=page.locator('.scene-chapters');
+  check(await optionalChapters.count()===1 && !(await optionalChapters.evaluate(node=>node.open)),
+    'guided story menu is optional and collapsed when decorating');
+  await optionalChapters.locator('summary').click();
   await page.locator('[data-action="scene:name"]').click();
   const titleInput=page.locator('#story-panel [data-section="title"][data-field="title"]');
   await titleInput.fill('오늘의 이름은 내게 남겨두기');
@@ -223,6 +233,8 @@ try{
   await p2.screenshot({path:`${out}/00-original-hero-desktop-1440.png`,fullPage:true});
   await p2.locator('[data-action="start-free"]').click();
   await p2.locator('main.studio #story-panel').waitFor({state:'visible',timeout:10000});
+  check(await p2.locator('.scene-chapters').count()===0,
+    'free-form decorating should not display a seven-stage progress bar');
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
   check(await p2.locator('.story-panel').isVisible(),'desktop story panel should remain available');
   await p2.screenshot({path:`${out}/05-free-desktop-1440.png`,fullPage:true});
@@ -337,6 +349,61 @@ try{
   check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
     'undo restores the legacy background and all piece coordinates');
   await legacyContext.close();
+
+  // Genuine rapid-decorating scenario: cover the vessel without stopping to
+  // assign 12 meanings or being redirected to controls after every fragment.
+  const carefree=await browser.newContext({viewport:{width:390,height:844},
+    deviceScaleFactor:1,isMobile:true,hasTouch:true,acceptDownloads:true});
+  const p4=await carefree.newPage();
+  p4.on('pageerror',err=>errors.push(`FREEFORM: ${err.message}`));
+  await p4.goto(base,{waitUntil:'networkidle'});
+  check((await p4.locator('.hero-actions button.primary').getAttribute('data-action'))==='start-free',
+    'freely decorating is the first and primary entrance');
+  await p4.locator('[data-action="start-free"]').click();
+  check(await p4.locator('.scene-chapters').count()===0,'free mode has no stepper');
+  const palettePanel=p4.locator('#palette-panel.mobile-active');
+  await palettePanel.waitFor({state:'visible'});
+  check(await p4.locator('.batch-add').isVisible(),
+    'the one-action option to place twelve nacre pieces is available');
+  await p4.locator('[data-action="batch:12"]').click();
+  await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===12,{timeout:20000});
+  check(await palettePanel.isVisible(),'batch must leave the palette visible');
+  check(!(await p4.locator('#controls-panel').isVisible()),'batch must not force an adjust modal');
+  check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
+    'individual message writing is not a required step in the default controls');
+  const spread=await p4.locator('#art [data-node]').evaluateAll(groups=>
+    new Set(groups.map(g=>g.getAttribute('transform'))).size
+  );
+  check(spread>=11,'multiple nacre should spread across the vessel instead of invisibly stacking');
+  const above=await p4.evaluate(()=>{
+    const art=document.querySelector('#art').getBoundingClientRect();
+    const sheet=document.querySelector('#palette-panel').getBoundingClientRect();
+    return {visible:Math.min(art.bottom,sheet.top,innerHeight)-Math.max(0,art.top),
+      paletteTop:sheet.top,paletteBottom:sheet.bottom};
+  });
+  check(above.visible>=120,`artwork must remain visible above the palette while filling: ${JSON.stringify(above)}`);
+  await p4.screenshot({path:`${out}/10-free-12-nacre-mobile-390.png`,fullPage:false});
+  await p4.locator('[data-action="batch:12"]').click();
+  await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===24,{timeout:20000});
+  await p4.locator('#palette-panel.mobile-active .quick-fill-actions [data-action="undo"]').click();
+  check(await p4.locator('#art [data-node]').count()===12,'whole last batch undoes in one step');
+  await p4.locator('.mobile-tabs [data-action="panel:controls"]').click();
+  check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
+    'repeat messages remain tucked away while moving fragments');
+  await p4.locator('#controls-panel details > summary').click();
+  check(await p4.locator('#controls-panel .piece-note-button').isVisible(),
+    'legacy individual notes are still reachable if explicitly requested');
+  await p4.locator('.mobile-tabs [data-action="panel:look"]').click();
+  check((await p4.locator('#look-prompt h2').innerText()).includes('눈에 들어오는'),
+    'free-form looking asks one gentle question, not individual fragment meanings');
+  await p4.locator('#look-prompt [data-action="panel:story"]').click();
+  check(await p4.locator('#story-panel > .record-field').count()===1,
+    'free-mode reflection offers one optional field, not seven questionnaires');
+  await p4.locator('.studio-bar [data-action="finish"]').click();
+  await p4.locator('main.result-page').waitFor();
+  await p4.screenshot({path:`${out}/11-free-12-nacre-finished-390.png`,fullPage:true});
+  await carefree.close();
+
   check(errors.length===0,`browser errors: ${errors.join('; ')}`);
   console.log(`MOONJAR BROWSER PASS: ${checks} assertions. Screenshots: ${out}`);
 }catch(error){

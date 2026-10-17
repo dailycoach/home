@@ -19,6 +19,56 @@ test('fresh projects have new IDs and current times; optional fields stay empty'
 test('all 96 original assets add with correct proportions and unique instance IDs',()=>{
   const e=make();for(const a of manifest.pieces)e.add(a.id);assert.equal(e.doc.scene.nodes.length,96);assert.deepEqual(validate(e.doc),[]);assert.equal(new Set(e.doc.scene.nodes.map(n=>n.instanceId)).size,96);
 });
+test('a dozen fragments can be added at once to fill the jar without repeated note prompts',()=>{
+  const e=make();
+  const first=manifest.pieces.slice(0,12).map(p=>p.id);
+  e.addBatch(first);
+  assert.equal(e.doc.scene.nodes.length,12);
+  assert.equal(e.past.length,1,'one batch is a single undoable action');
+  assert.equal(e.doc.scene.nodes.map(n=>n.assetId).join(','),first.join(','));
+  assert.equal(new Set(e.doc.scene.nodes.map(n=>`${n.x},${n.y}`)).size,12,
+    'new fragments should not stack as an invisible pile in the same spot');
+  assert.ok(e.doc.scene.nodes.every(n=>n.x>=0&&n.x<=1600&&n.y>=0&&n.y<=1800));
+  assert.ok(Object.values(e.doc.pieceNotes).every(v=>v.label===''&&v.memory===''));
+  e.undo();assert.equal(e.doc.scene.nodes.length,0);
+  e.redo();assert.equal(e.doc.scene.nodes.length,12);
+  assert.deepEqual(validate(e.doc),[]);
+});
+
+test('repeated batch filling spreads 96 nacre pieces while preserving every original',()=>{
+  const e=make();
+  const ids=manifest.pieces.map(p=>p.id);
+  for(let i=0;i<8;i++)e.addBatch(ids.slice(i*12,(i+1)*12));
+  assert.equal(e.doc.scene.nodes.length,96);
+  const different=new Set(e.doc.scene.nodes.map(n=>`${n.x},${n.y}`));
+  assert.ok(different.size>=40,'batch filling should distribute rather than hide all fragments under one');
+  assert.deepEqual(validate(e.doc),[]);
+  const before=clone(e.doc);
+  assert.throws(()=>e.addBatch(Array(105).fill('A01')),'200 cap still protects projects over 200');
+  assert.deepEqual(e.doc,before,'failed batch must not lose or partially add pieces');
+  e.addBatch(ids.slice(0,12));
+  assert.equal(e.doc.scene.nodes.length,108);
+});
+
+test('200-piece limit and invalid-asset batch remain atomic',()=>{
+  const e=make();
+  const group=Array(12).fill('A01');
+  for(let i=0;i<16;i++)e.addBatch(group);
+  assert.equal(e.doc.scene.nodes.length,192);
+  const before=clone(e.doc);
+  assert.throws(()=>e.addBatch(group));
+  assert.deepEqual(e.doc,before);
+  e.addBatch(group.slice(0,8));
+  assert.equal(e.doc.scene.nodes.length,200);
+  assert.deepEqual(validate(e.doc),[]);
+  const frozen=clone(e.doc);
+  assert.throws(()=>e.addBatch(['A01']));
+  assert.deepEqual(e.doc,frozen);
+  const second=make(),fresh=clone(second.doc);
+  assert.throws(()=>second.addBatch(['A01','INVALID']));
+  assert.deepEqual(second.doc,fresh);
+});
+
 test('same asset can be used three times with independent notes',()=>{
   const e=make();for(let i=0;i<3;i++)e.add('A01');e.text('piece','memory','세 번째의 기억');assert.equal(e.doc.scene.nodes.length,3);assert.equal(Object.values(e.doc.pieceNotes).filter(n=>n.memory).length,1);
 });
