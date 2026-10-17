@@ -52,7 +52,7 @@ try{
   await lead.locator('[data-action="toggle-lead"]').click();
   check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'guided story should expand again');
 
-  await page.locator('[data-action="panel:palette"]').click();
+  await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await page.locator('[data-action="add:A01"]').click();
   await page.locator('#art [data-node]').first().waitFor({state:'attached'});
   check(await page.locator('#palette-panel.mobile-active').isVisible(),
