@@ -160,7 +160,7 @@ function navigation() {
   return menu;
 }
 function studio() {
-  currentView = 'studio'; main.className = `studio ${editor.doc.mode==='guided' ? 'mode-guided' : ''} ${paused ? 'paused' : ''}`; main.replaceChildren();
+  currentView = 'studio'; main.className = `studio ${editor.doc.mode==='guided' ? 'mode-guided' : 'mode-free'} ${paused ? 'paused' : ''}`; main.replaceChildren();
   const bar = el('div',null,{class:'studio-bar'}), left = el('div'); left.append(el('span','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
   left.append(el('span',persistent ? '이 기기 · 이 브라우저' : '공용 기기용 · 자동 복원 없음',{class:'micro storage-context'}));
   const actions = el('div',null,{class:'button-row'}); actions.append(button(editor.doc.mode === 'free' ? '이야기 읽으며 꾸미기' : '자개 마음껏 꾸미기','toggle-mode'),button('완성하기','finish',{class:'primary'})); bar.append(left,actions);
@@ -902,7 +902,7 @@ async function route(){
 }
 async function init(){
   const bundled=globalThis.__MOONJAR_BUNDLE__?.data;
-  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261016-porcelain-v2`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
+  [story,manifest,schema,empty]=bundled?['story','manifest','schema','empty'].map(name=>clone(bundled[name])):await Promise.all(['story','manifest','schema','empty'].map(async name=>{const r=await fetch(`data/${name}.json?v=20261017-free-v1`,{cache:'no-cache'});if(!r.ok)throw new Error(`${name} 자료가 없습니다.`);return r.json();}));
   materials=new Materials(manifest);
   try{repository=await openRepository();available=true;hasStored=(await repository.list()).length>0;}catch{available=false;}
   await route();
