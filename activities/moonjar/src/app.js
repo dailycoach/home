@@ -431,6 +431,8 @@ async function addPiece(id, source){
     if(editor!==targetEditor||!editable())return;
     editor.add(id);changed();
     const next=$(`[data-action="add:${id}"]`);next?.focus?.({preventScroll:true});
+    if(matchMedia('(max-width:767px)').matches&&panel==='palette')
+      $('#stage-shell')?.scrollIntoView({block:'start',behavior:'instant'});
     notice(`${id} 조각을 놓았어요. 계속 눌러 채우거나 조절 탭에서 옮겨보세요.`);
   }
   finally{source?.removeAttribute('aria-busy');if(source)source.disabled=false;}
@@ -450,6 +452,8 @@ async function addColorBatch(source) {
     // Never force the participant into controls or a note-entry modal.
     // New pieces are temporary scattered placements, not a "correct" pattern.
     $('[data-action="batch:12"]')?.focus?.({preventScroll:true});
+    if(matchMedia('(max-width:767px)').matches&&panel==='palette')
+      $('#stage-shell')?.scrollIntoView({block:'start',behavior:'instant'});
     notice(`${selectedPalette} 색상 ${ids.length}개를 놓았어요. 계속 채우거나 원하는 대로 옮겨보세요.`);
   }finally{
     source?.removeAttribute('aria-busy');if(source)source.disabled=false;
