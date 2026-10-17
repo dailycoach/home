@@ -56,7 +56,7 @@ async function entryMatrix(browser,engine,width,height) {
       `${name} save status must be announced accessibly`);
     verify(await page.locator('#scene-lead').isVisible(),`${name} guided scene visible`);
     await ensureNoOverflow(page,`${name} guided studio`);
-    await page.locator('[data-action="panel:palette"]').click();
+    await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
     await page.locator('.piece-choice[data-action="add:A01"]').tap();
     await page.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
     verify(await page.locator('#palette-panel.mobile-active').isVisible(),
@@ -129,7 +129,7 @@ async function privacyMatrix(browser,engine){
     await page.goto(HOST+PATH,{waitUntil:'networkidle'});
     await page.locator('#storage-memory').check();
     await page.locator('[data-action="start-free"]').tap();
-    await page.locator('[data-action="panel:palette"]').tap();
+    await page.locator('.mobile-tabs [data-action="panel:palette"]').tap();
     await page.locator('[data-action="add:A01"]').tap();
     await page.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
     verify(await page.locator('#art [data-node]').count()===1,`${engine} memory work created`);
