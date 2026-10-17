@@ -29,7 +29,7 @@ function harness() {
     };
     return e;
   }
-  for(const key of ['#main','#modal','#modal-body','#modal-title','#modal-close','#import-file','#notice','#scene-lead','#look-prompt','#controls-panel']) elements.set(key,stub());
+  for(const key of ['#main','#modal','#modal-body','#modal-title','#modal-close','#import-file','#notice','#scene-lead','#look-prompt','#controls-panel','#story-panel']) elements.set(key,stub());
   const document = {
     querySelector:key=>elements.get(key)||null,
     querySelectorAll:()=>[],
@@ -43,11 +43,11 @@ function harness() {
   });
   vm.runInContext(source+`
     globalThis.moonjarUX = {
-      renderSceneLead,renderLookPrompt,renderControls,inputField,
+      renderSceneLead,renderLookPrompt,renderControls,renderStory,inputField,
       set(mode,scene) {
         story=globalThis.fixtureStory;materials={};viewScene=scene;
         const piece={instanceId:'n1',assetId:'A01',rotation:0,width:200,height:200,locked:false,x:500,y:700};
-        editor={doc:{mode,scene:{nodes:[piece],theme:'light'}},selected:'n1',get node(){return this.doc.scene.nodes[0];}};
+        editor={doc:{mode,scene:{nodes:[piece],theme:'light'},pieceNotes:{n1:{label:'',memory:''}},reflections:{return:{noticed:'',action:''}},title:''},selected:'n1',get node(){return this.doc.scene.nodes[0];}};
       }
     };
   `,context);
@@ -105,4 +105,24 @@ test('a placed nacre piece prompts choices even when user stays on arrival',()=>
   const prompt=elements.get('#look-prompt');
   assert.match(collectText(prompt),/무엇을 기준으로 이 자리를 고르고 있나요/);
   assert.doesNotMatch(collectText(prompt),/지금 이 자리에 온 나는 어떤 상태인가요/);
+});
+
+test('free decorating keeps only one optional reflection instead of repeating messages for each piece',()=>{
+  const {ui,elements}=harness();
+  ui.set('free','arrange');
+  ui.renderStory();
+  const record=elements.get('#story-panel');
+  assert.match(collectText(record),/자개 하나하나에 뜻을 담지 않아도 괜찮습니다/);
+  assert.equal(record.children.filter(child=>child.className==='record-field').length,1);
+  assert.equal(hasAction(record,'finish'),true);
+  assert.equal(hasAction(record,'piece-note'),false);
+});
+
+test('free looking is optional and points back to decorating',()=>{
+  const {ui,elements}=harness();
+  ui.set('free','arrange');ui.renderLookPrompt();
+  const prompt=elements.get('#look-prompt');
+  assert.match(collectText(prompt),/눈에 들어오는 곳/);
+  assert.equal(hasAction(prompt,'panel:palette'),true);
+  assert.equal(hasAction(prompt,'panel:story'),true);
 });
