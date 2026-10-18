@@ -314,6 +314,35 @@ main.result-page > .storage-warning:not([hidden]){
   overflow:auto;
 }
 
+/* A desktop artwork should have the room, not an empty controls dock.
+   Batch actions also need to be readable without wrapping into tall buttons. */
+@media (min-width:768px){
+  main.studio #first-piece-hint{display:none!important}
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
+  main.studio .palette-panel .quick-fill-actions{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+  main.studio .palette-panel .quick-fill-actions .batch-add{
+    grid-column:1 / -1;
+    min-height:50px;
+    margin:0;
+    padding:8px 9px;
+    font-size:13px;
+    line-height:1.45;
+    white-space:normal;
+  }
+  main.studio .palette-panel .quick-fill-actions>button:not(.batch-add){
+    grid-column:auto;
+    min-width:0;
+    width:100%;
+    min-height:39px;
+    height:39px;
+    font-size:18px;
+  }
+}
+
 /* Tablet: narrow columns become palette + artwork, with story accessible
    in the right-hand region of the artwork's side-by-side workspace. */
 @media (min-width:768px) and (max-width:1199px){
