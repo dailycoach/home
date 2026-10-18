@@ -213,6 +213,10 @@ main.studio.paused .stage-area{
   min-height:0;
   overflow:hidden;
 }
+/* Quiet viewing is a gallery scene, not editing controls overlaid on art. */
+main.studio.paused .view-toolbar,
+main.studio.paused .art-toolbar{display:none!important}
+main.studio.paused .nacre-visibility-switch{display:none!important}
 main.studio.paused .stage-shell{max-height:none!important}
 main.studio .look-prompt{
   flex:0 0 auto;
