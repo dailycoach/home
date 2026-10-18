@@ -89,6 +89,10 @@ try{
     shell.style.width='1640px';
     shell.style.maxWidth='none';
     svg.style.width='1600px';
+    // The single-screen editor measures its shell with ResizeObserver.
+    // Let the real layout settle before rendering this separate QA scene,
+    // otherwise a pending editor resize would erase the test-only captions.
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
     return {count:codes.length,palettes:[...new Set(codes.map(c=>c.paletteId))],nodes:nodes.length};
   });
   fail(initial.count===96,'manifest must have exactly 96 original nacre PNGs');

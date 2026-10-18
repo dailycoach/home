@@ -43,8 +43,10 @@ test('public app contains an original vector hero, not the removed museum photog
 test('post-evaluation design stylesheet loads after main CSS and ownership wording is correct',()=>{
   const page=read('activities/moonjar/index.html');
   assert.ok(page.includes('styles.css?v=20261016-2'));
-  assert.ok(page.includes('refinement.css?v=20261016-porcelain-v2'));
-  assert.ok(page.indexOf('styles.css?v=20261016-2')<page.indexOf('refinement.css?v=20261016-porcelain-v2'));
+  assert.ok(page.includes('refinement.css?v=20261019-atelier-v1'));
+  const order=['styles.css?v=20261016-2','nacre-visibility.css?v=20261017-w7','decorating-flow.css?v=20261017-free-v1','refinement.css?v=20261019-atelier-v1'];
+  assert.ok(order.every((asset,i)=>page.indexOf(asset)>=0 && (i===0||page.indexOf(order[i-1])<page.indexOf(asset))),
+    'visual atelier theme must load last, after all interaction layers');
   const css=read('activities/moonjar/refinement.css');
   assert.match(css,/result-overview/);
   assert.match(css,/max-width:767px/);

@@ -19,19 +19,28 @@ function el(tag, text, attrs = {}) {
 function button(text, action, attrs = {}) { return el('button', text, {'data-action': action, type:'button', ...attrs}); }
 function notice(message) {
   const n=$('#notice');
-  const inline=matchMedia('(max-width:767px)').matches
-    ? ($('#palette-panel.mobile-active .palette-inline-status')||$('#controls-panel.mobile-active .control-inline-status'))
-    : null;
+  // Feedback belongs beside the hand that is working. Full-width black
+  // overlays obscure the vessel and save controls, especially in landscape.
+  const inline=currentView==='studio' ? (
+    $('#controls-panel.mobile-active .control-inline-status')
+    || $('#palette-panel.mobile-active .palette-inline-status')
+    || $('#palette-panel .palette-inline-status')
+    || $('#controls-panel .control-inline-status')
+  ) : null;
   if(inline){
     inline.textContent=message;
     clearTimeout(notice.timer);
+    clearTimeout(notice.inlineTimer);
     n.classList.remove('visible');
+    notice.inlineTimer=setTimeout(()=>{
+      if(inline.isConnected && inline.textContent===message)inline.textContent='';
+    },4200);
     return;
   }
   n.textContent=message;
   n.classList.add('visible');
   clearTimeout(notice.timer);
-  notice.timer=setTimeout(()=>n.classList.remove('visible'),5000);
+  notice.timer=setTimeout(()=>n.classList.remove('visible'),4000);
 }
 function openDialog(title, content) {
   dialogReturn = document.activeElement; $('#modal-title').textContent = title; body.replaceChildren(content); modal.showModal();
@@ -102,7 +111,7 @@ async function openProject(doc, saveHere, expected = null, targetView = null) {
   });
   statusDetail='';status = readOnly ? 'readonly' : persistent ? expected === null ? 'dirty' : 'saved' : 'memory';
   if (persistent && !readOnly) { queue = new SaveQueue(repository, expected, statusChanged); if (expected === null) queue.schedule(editor.doc); }
-  documentInvalid=false; zoom = 1; paused = false; leadExpanded = true; panel = doc.mode==='guided'?'story':'palette';
+  documentInvalid=false; zoom = 1; paused = false; leadExpanded = false; panel = doc.mode==='guided'?'canvas':'palette';
   viewScene=doc.currentScene==='ending'?'arrange':doc.currentScene;
   currentView = targetView || (editor.doc.currentScene === 'ending' ? 'result' : 'studio');
   location.hash = `/${currentView}/${doc.projectId}`; render();
@@ -127,6 +136,7 @@ function home() {
   copy.append(el('p', '나를 담고, 다시 보다', {class:'eyebrow'}), el('h1', '빛을 담는\n달항아리'));
   copy.append(el('p', '자개를 마음껏 놓고, 겹치고,\n달항아리를 나만의 빛으로 채워보세요.', {class:'hero-lead'}));
   copy.append(el('p', story.opening.paragraphs[2], {class:'hero-note'}));
+  copy.append(button('달항아리의 이야기 보기', 'opening-story', {class:'hero-story-link text-button'}));
   const options = el('fieldset', null, {class:'storage-choice'}); options.append(el('legend','기록을 어떻게 남길까요?'));
   for (const [id, text, checked] of [['storage-personal','이 기기에 저장하며 시작', available],['storage-memory','기록을 남기지 않고 시작',!available]]) {
     const label = el('label'), input = el('input',null,{type:'radio',name:'storage',id}); input.checked = checked;
@@ -144,7 +154,15 @@ function home() {
   caption.append(el('span',artwork.title),el('br'),el('small',artwork.credit,{class:'artwork-credit'}));
   figure.append(el('img',null,{src:assetURL(artwork.src),alt:artwork.description,width:'780',height:'920',decoding:'async'}),caption);
   section.append(copy,figure,startArea); main.append(section);
-  const intro = el('section',null,{class:'intro-line'}); intro.append(el('h2',story.opening.title),el('p',story.opening.paragraphs[0]),el('p',story.opening.paragraphs[1]),el('p','내가 선택한 조각과 말은 내게 남습니다. 중요한 작업은 편집 파일로 따로 보관해 주세요.',{class:'muted'})); main.append(intro);
+  // Home is one visual scene. The original introduction stays available in a dialog.
+}
+function openingStory(){
+  const content=el('div',null,{class:'opening-story'});
+  content.append(el('h3',story.opening.title));
+  for(const paragraph of story.opening.paragraphs)content.append(el('p',paragraph));
+  content.append(el('p','선택한 조각과 말은 내 기기에만 남습니다. 중요한 작업은 편집 파일로도 보관해 주세요.',{class:'micro'}));
+  content.append(button('이야기를 덮고 시작하기','close-opening-story',{class:'primary'}));
+  openDialog('달항아리의 이야기',content);
 }
 function navigation() {
   // All seven source chapters stay available, but reading and answering
@@ -178,11 +196,15 @@ function studio() {
   paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
   const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('저장·보관','save-options')); stage.append(edittools);
   const firstHint=el('p','자개를 하나씩 놓거나, 같은 색상군에서 12개씩 채울 수 있어요. 조각마다 뜻을 붙일 필요는 없습니다.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
-  const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'}); stage.append(controls);
+  // Workbench architecture: tool inspector is a workspace sibling. On wide
+  // screens it docks beside the reflection notebook rather than squeezing the
+  // artwork. On phones it remains the same accessible bottom drawer.
+  const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'});
   const record = el('aside',null,{id:'story-panel',class:'story-panel','aria-label':'이야기와 선택 기록'});
-  workspace.append(rail,stage,record); main.append(workspace);
+  workspace.append(rail,stage,controls,record); main.append(workspace);
   const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','채우기'],['controls','조절'],['look','바라보기'],['story','기록(선택)']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
   renderPalette(); renderStory(); renderSceneLead(); renderLookPrompt(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
+  observeStudioGeometry();
 }
 function renderSceneLead() {
   const target = $('#scene-lead');
@@ -196,13 +218,13 @@ function renderSceneLead() {
   body.hidden=!leadExpanded;
   body.append(
     el('p', s.shortEssay, {class:'lead-essay'}),
-    el('p', s.focusQuestion, {class:'lead-question'}),
     button('원하면 기록하기', 'panel:story', {class:'text-button'}),
     el('p', '이야기는 읽기만 해도 좋습니다. 자개를 마음껏 놓아보세요.', {class:'micro'})
   );
   target.append(
     el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
     el('h2', s.title),
+    el('p', s.focusQuestion, {class:'lead-question'}),
     body,
     button(leadExpanded ? '이야기 접고 작품에 집중' : '이야기 다시 보기', 'toggle-lead', {
       class:'lead-toggle', 'aria-expanded':String(leadExpanded), 'aria-controls':'scene-lead-content'
@@ -271,13 +293,43 @@ function renderPalette() {
     const li = el('li'), b = button(`${n.assetId} ${editor.doc.pieceNotes[n.instanceId]?.label || ''}${n.locked ? ' · 잠김':''}`,`select:${n.instanceId}`,{'aria-pressed':String(n.instanceId===editor.selected)}); li.append(b); list.append(li);
   } details.append(list); target.append(details,button('작품 비우기','clear',{class:'text-button danger'}));
 }
+let canvasResizeObserver=null;
+let canvasResizeFrame=0;
+function observeStudioGeometry(){
+  canvasResizeObserver?.disconnect();
+  cancelAnimationFrame(canvasResizeFrame);
+  const shell=$('#stage-shell');
+  if(!shell || !('ResizeObserver' in window))return;
+  canvasResizeObserver=new ResizeObserver(()=>{
+    cancelAnimationFrame(canvasResizeFrame);
+    canvasResizeFrame=requestAnimationFrame(()=>{
+      if(shell.isConnected && currentView==='studio')fitArtworkToFrame();
+    });
+  });
+  canvasResizeObserver.observe(shell);
+}
+function fitArtworkToFrame(){
+  const paper=$('#paper'),shell=$('#stage-shell');
+  if(!paper||!shell)return;
+  const styles=getComputedStyle(shell);
+  const padX=(parseFloat(styles.paddingLeft)||0)+(parseFloat(styles.paddingRight)||0);
+  const padY=(parseFloat(styles.paddingTop)||0)+(parseFloat(styles.paddingBottom)||0);
+  const screenLayout=getComputedStyle(main).getPropertyValue('--moonjar-single-screen').trim()==='1';
+  const availableHeight=screenLayout
+    ? Math.max(80,shell.clientHeight-padY-4)
+    : (parseFloat(styles.maxHeight)||window.innerHeight*0.72)-padY-4;
+  const availableWidth=Math.max(80,shell.clientWidth-padX-4);
+  const fit=Math.max(72,Math.min(640,availableWidth,availableHeight*8/9));
+  const next=Math.round(fit*zoom);
+  // Shell-resize reactions are presentation only: never replace the SVG
+  // nodes while a finger, keyboard or accessibility tool is selecting one.
+  if(parseFloat(paper.style.width)!==next)paper.style.width=next+'px';
+  paper.style.maxWidth='none';
+}
 function renderCanvas(preview = null) {
   const svg = $('#art'); if (!svg) return;
   renderSVG(svg,editor.doc.scene,materials,paused ? null:editor.selected,preview);
-  const paper = $('#paper'),shell=$('#stage-shell');
-  const availableHeight=parseFloat(getComputedStyle(shell).maxHeight)||window.innerHeight*0.72;
-  const fit=Math.max(120,Math.min(640,shell.clientWidth-18,(availableHeight-28)*8/9));
-  paper.style.width=`${fit*zoom}px`;paper.style.maxWidth='none';
+  fitArtworkToFrame();
   if ($('#first-piece-hint')) $('#first-piece-hint').hidden=editor.doc.scene.nodes.length>0||paused;
   if ($('#undo')) $('#undo').disabled = !editor.past.length || readOnly || paused;
   if ($('#redo')) $('#redo').disabled = !editor.future.length || readOnly || paused;
@@ -369,24 +421,45 @@ function renderStory() {
 }
 function setPanel(id, reveal = false) {
   panel=id;
+  const mobile=matchMedia('(max-width:767px)').matches;
+  const compact=matchMedia('(max-width:1199px)').matches;
   const previousControls=main.classList.contains('controls-active');
   main.classList.toggle('controls-active',id==='controls');
-  if(previousControls!==(id==='controls') && !paused)renderCanvas();
-  if(id==='look') { paused=true; main.classList.add('paused');renderLookPrompt();renderCanvas();renderControls(); }
-  else if(paused) { paused=false;main.classList.remove('paused');renderCanvas();renderControls(); }
-  for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
-  if(matchMedia('(max-width:767px)').matches && ['palette','controls','canvas'].includes(id))renderCanvas();
-  document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
-  const pauseButton=$('[data-action="pause"]');if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
+  if(editor.doc.mode==='guided' && mobile && ['palette','controls'].includes(id) && leadExpanded){
+    leadExpanded=false;
+    renderSceneLead();
+  }
+  if(id==='look'){
+    paused=true;main.classList.add('paused');renderLookPrompt();renderControls();
+  } else if(paused){
+    paused=false;main.classList.remove('paused');renderControls();
+  }
+  for(const p of ['palette','controls','story']) $('#'+p+'-panel')?.classList.toggle('mobile-active',id===p);
+  const stage=$('.stage-area');
+  if(stage)stage.inert=compact&&id==='story';
+  document.querySelectorAll('.mobile-tabs button').forEach(
+    b=>b.setAttribute('aria-pressed',String(b.dataset.action==='panel:'+id))
+  );
+  const pauseButton=$('[data-action="pause"]');
+  if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
+  renderCanvas();
+  // Never scroll the document while switching tools; drawers own their overflow.
   if(id==='canvas')$('#stage-shell')?.focus?.({preventScroll:true});
-  if(reveal && id!=='look' && matchMedia('(max-width:767px)').matches){
-    // The compact editor floats below the *actual canvas*. Never scroll down to
-    // the controls as that would hide the artwork the participant is changing.
-    const revealTarget=['controls','canvas','palette'].includes(id)?$('#stage-shell'):$(`#${id}-panel`);
-    // For the editor, scroll immediately so the selected fragment is not
-    // briefly hidden behind a floating tray while the page is still moving.
-    const immediate=['controls','canvas','palette'].includes(id)||matchMedia('(prefers-reduced-motion:reduce)').matches;
-    revealTarget?.scrollIntoView({block:'start',behavior:immediate?'instant':'smooth'});
+  if(reveal && compact){
+    if(id==='story'){
+      const storyPanel=$('#story-panel');
+      if(storyPanel)storyPanel.scrollTop=0;
+      const heading=$('#story-panel h2');
+      heading?.setAttribute('tabindex','-1');
+      heading?.focus({preventScroll:true});
+    } else if(id==='look'){
+      const heading=$('#look-prompt h2');
+      heading?.setAttribute('tabindex','-1');
+      heading?.focus({preventScroll:true});
+    } else if(id==='controls'||id==='palette'){
+      const shell=$('#stage-shell');
+      if(shell && !previousControls && id==='controls' && zoom===1) shell.scrollTop=0;
+    }
   }
 }
 
@@ -443,8 +516,7 @@ async function addPiece(id, source){
     if(editor!==targetEditor||!editable())return;
     editor.add(id);changed();
     const next=$(`[data-action="add:${id}"]`);next?.focus?.({preventScroll:true});
-    if(matchMedia('(max-width:767px)').matches&&panel==='palette')
-      $('#stage-shell')?.scrollIntoView({block:'start',behavior:'instant'});
+    // The viewport stays stationary as new fragments are added.
     notice(`${id} 조각을 놓았어요. 계속 눌러 채우거나 조절 탭에서 옮겨보세요.`);
   }
   finally{source?.removeAttribute('aria-busy');if(source)source.disabled=false;}
@@ -464,8 +536,7 @@ async function addColorBatch(source) {
     // Never force the participant into controls or a note-entry modal.
     // New pieces are temporary scattered placements, not a "correct" pattern.
     $('[data-action="batch:12"]')?.focus?.({preventScroll:true});
-    if(matchMedia('(max-width:767px)').matches&&panel==='palette')
-      $('#stage-shell')?.scrollIntoView({block:'start',behavior:'instant'});
+    // The viewport stays stationary as new fragments are added.
     notice(`${selectedPalette} 색상 ${ids.length}개를 놓았어요. 계속 채우거나 원하는 대로 옮겨보세요.`);
   }finally{
     source?.removeAttribute('aria-busy');if(source)source.disabled=false;
@@ -836,6 +907,7 @@ document.addEventListener('focusout',event=>{if(event.target.dataset.field&&!eve
 
 const actions={
   home:()=>{location.hash='/';home();},
+  'opening-story':openingStory,'close-opening-story':closeDialog,
   'start-guided':()=>start('guided'),'start-free':()=>start('free'),
   resume:()=>{if(editor){location.hash=`/studio/${editor.doc.projectId}`;studio();}else{location.hash='/projects';return projects();}},
   projects:()=>{location.hash='/projects';return projects();},
@@ -872,14 +944,14 @@ document.addEventListener('click',event=>{
     else if(type==='select'){editor.selected=a;renderCanvas();renderControls();setPanel('controls',true);}
     else if(type==='panel')setPanel(a,true);
     else if(type==='scene'){
-      viewScene=a;leadExpanded=true;
+      viewScene=a;leadExpanded=false;
       if(!readOnly)editor.navigate(a);
       const chapters=$('.scene-chapters'),wasOpen=chapters?.open||false;
       if(chapters){chapters.replaceWith(navigation());$('.scene-chapters').open=wasOpen;}
       renderStory();renderSceneLead();renderLookPrompt();renderCanvas();
       const showMobileLead=matchMedia('(max-width:767px)').matches && editor.doc.mode==='guided';
       setPanel('story',!showMobileLead);
-      if(showMobileLead)$('#scene-lead')?.scrollIntoView({block:'start',behavior:'auto'});
+      if(showMobileLead){const lead=$('#scene-lead');if(lead)lead.scrollTop=0;}
       else {const heading=$('#story-panel h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});}
       queue?.flush();
     }
@@ -904,7 +976,7 @@ window.addEventListener('beforeunload',event=>{
 });
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')queue?.flush();});
 window.addEventListener('hashchange',()=>safely(route));
-window.addEventListener('resize',()=>{if(editor&&currentView==='studio')renderCanvas();});
+window.addEventListener('resize',()=>{if(editor&&currentView==='studio')fitArtworkToFrame();});
 function render(){if(currentView==='result')result();else if(editor)studio();else home();}
 async function route(){
   const [view,id]=location.hash.replace(/^#\/?/,'').split('/');
