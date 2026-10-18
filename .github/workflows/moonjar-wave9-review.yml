@@ -30,6 +30,8 @@ jobs:
           path: |
             activities/moonjar/assets/pieces/
             activities/moonjar/data/manifest.json
+            activities/moonjar/assets/moonjar-v2/porcelain-day.png
+            activities/moonjar/assets/moonjar-v2/porcelain-night.png
             design/moonjar-wave9/porcelain-day.svg
             design/moonjar-wave9/porcelain-night.svg
           retention-days: 3
