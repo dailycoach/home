@@ -1,0 +1,36 @@
+name: Moonjar WAVE9 96-source materials review
+
+on:
+  pull_request:
+    paths:
+      - 'design/moonjar-wave9/**'
+      - 'scripts/check-moonjar-wave9-compat.mjs'
+      - 'docs/moonjar-wave9-96-material-qa.md'
+      - '.github/workflows/moonjar-wave9-review.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify original pieces and published material hashes
+        run: node scripts/check-moonjar.mjs
+      - name: Package authentic 96 transparent PNGs and both unpublished SVG studies for art review
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-wave9-authentic-96-materials
+          path: |
+            activities/moonjar/assets/pieces/
+            activities/moonjar/data/manifest.json
+            design/moonjar-wave9/porcelain-day.svg
+            design/moonjar-wave9/porcelain-night.svg
+          retention-days: 3
+          if-no-files-found: error
