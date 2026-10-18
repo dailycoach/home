@@ -109,6 +109,7 @@ main.studio > .workspace{
   flex:1 1 0;
   display:grid;
   grid-template-columns:minmax(210px,250px) minmax(0,1fr) minmax(230px,288px);
+  grid-template-rows:auto minmax(0,1fr);
   gap:0;
   width:100%;
   max-width:1760px;
@@ -343,6 +344,39 @@ main.result-page > .storage-warning:not([hidden]){
   }
 }
 
+/* In a wide art studio the inspector belongs to the reading/notes rail,
+   not below the actual vessel. Both right-rail panels scroll internally. */
+@media (min-width:1200px){
+  main.studio .palette-panel{grid-column:1;grid-row:1 / 3}
+  main.studio .stage-area{grid-column:2;grid-row:1 / 3}
+  main.studio .controls-panel{
+    display:block;
+    grid-column:3;
+    grid-row:1;
+    align-self:start;
+    width:100%;
+    max-height:min(44dvh,390px);
+    min-height:0;
+    margin:0;
+    padding:16px 19px;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    border-left:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:#f4f0e7;
+  }
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
+  main.studio .controls-panel .controls-grid button{min-height:44px;font-size:13px}
+  main.studio .controls-panel .control-tabs button{min-height:43px;font-size:13px}
+  main.studio .story-panel{
+    grid-column:3;
+    grid-row:2;
+    align-self:stretch;
+    min-height:0;
+    height:100%;
+    overflow-y:auto;
+  }
+}
 /* Tablet and narrow landscape: preserve palette + vessel but give the
    writing screen a discoverable tab and a correctly scoped overlay.
    Previously the journal was hidden at 768–1199px with no navigation. */
@@ -351,13 +385,14 @@ main.result-page > .storage-warning:not([hidden]){
     position:relative;
     display:grid;
     grid-template-columns:224px minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr) auto;
     min-height:0;
     overflow:hidden;
     padding-inline:16px;
   }
   main.studio .palette-panel{
     grid-column:1;
-    grid-row:1;
+    grid-row:1 / 3;
     min-height:0;
     overflow-y:auto;
     padding:20px 13px;
@@ -393,7 +428,19 @@ main.result-page > .storage-warning:not([hidden]){
     visibility:hidden;
     pointer-events:none;
   }
-  main.studio .controls-panel{max-height:min(22dvh,173px)}
+  main.studio .controls-panel{
+    grid-column:2;
+    grid-row:2;
+    align-self:end;
+    min-height:0;
+    max-height:min(22dvh,173px);
+    padding:9px 14px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    border-top:1px solid var(--line);
+    background:var(--surface);
+  }
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
   main.studio .mobile-tabs{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
@@ -483,7 +530,7 @@ main.result-page > .storage-warning:not([hidden]){
     overflow-y:auto;
     overscroll-behavior:contain;
   }
-  main.studio .stage-area:has(.controls-panel .panel-heading) .stage-shell{
+  main.studio .workspace:has(.controls-panel .panel-heading) .stage-shell{
     margin-right:191px;
   }
   main.studio .controls-panel .panel-heading h2{font-size:14px}
