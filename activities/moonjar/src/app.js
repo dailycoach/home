@@ -19,19 +19,28 @@ function el(tag, text, attrs = {}) {
 function button(text, action, attrs = {}) { return el('button', text, {'data-action': action, type:'button', ...attrs}); }
 function notice(message) {
   const n=$('#notice');
-  const inline=matchMedia('(max-width:767px)').matches
-    ? ($('#palette-panel.mobile-active .palette-inline-status')||$('#controls-panel.mobile-active .control-inline-status'))
-    : null;
+  // Feedback belongs beside the hand that is working. Full-width black
+  // overlays obscure the vessel and save controls, especially in landscape.
+  const inline=currentView==='studio' ? (
+    $('#controls-panel.mobile-active .control-inline-status')
+    || $('#palette-panel.mobile-active .palette-inline-status')
+    || $('#palette-panel .palette-inline-status')
+    || $('#controls-panel .control-inline-status')
+  ) : null;
   if(inline){
     inline.textContent=message;
     clearTimeout(notice.timer);
+    clearTimeout(notice.inlineTimer);
     n.classList.remove('visible');
+    notice.inlineTimer=setTimeout(()=>{
+      if(inline.isConnected && inline.textContent===message)inline.textContent='';
+    },4200);
     return;
   }
   n.textContent=message;
   n.classList.add('visible');
   clearTimeout(notice.timer);
-  notice.timer=setTimeout(()=>n.classList.remove('visible'),5000);
+  notice.timer=setTimeout(()=>n.classList.remove('visible'),4000);
 }
 function openDialog(title, content) {
   dialogReturn = document.activeElement; $('#modal-title').textContent = title; body.replaceChildren(content); modal.showModal();
