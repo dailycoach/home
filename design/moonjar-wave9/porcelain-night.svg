@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1800" viewBox="0 0 1600 1800">
+<title>PORCELAIN | MOONLIGHT — DAILYCOACHING independent WAVE 9 study</title>
+<desc>Original asymmetric porcelain moon jar; understated natural kiln glaze and hand-shaped rim. No photographs, no copied museum image. Original 1600 by 1800 coordinate system.</desc>
+<defs>
+  <linearGradient id="paper" x1=".14" y1="0" x2=".88" y2="1"><stop stop-color="#25312F"/><stop offset="1" stop-color="#111A1B"/></linearGradient>
+  <radialGradient id="air" cx="49%" cy="41%" r="64%"><stop stop-color="#FCFCF5" stop-opacity=".18"/><stop offset="1" stop-color="#FCFCF5" stop-opacity="0"/></radialGradient>
+  <radialGradient id="vessel" cx="33%" cy="29%" r="91%"><stop stop-color="#FFFFFC"/><stop offset=".22" stop-color="#FCFCF5"/><stop offset=".44" stop-color="#EBEDE5"/><stop offset=".72" stop-color="#D7DCD4"/><stop offset="1" stop-color="#636F68"/></radialGradient>
+  <linearGradient id="vesselFalloff" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#485B55" stop-opacity=".17"/><stop offset=".15" stop-color="#758077" stop-opacity="0"/><stop offset=".60" stop-color="#F6F5EE" stop-opacity="0"/><stop offset="1" stop-color="#4D5C53" stop-opacity=".24"/></linearGradient>
+  <linearGradient id="rimMaterial" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#F9F7EC"/><stop offset=".5" stop-color="#D7DCD4"/><stop offset="1" stop-color="#AEB4A9"/></linearGradient>
+  <linearGradient id="inside" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#636F68"/><stop offset="1" stop-color="#ECEDE4"/></linearGradient>
+  <radialGradient id="contact" cx="50%" cy="50%" r="50%"><stop stop-color="#050808" stop-opacity=".26"/><stop offset=".68" stop-color="#050808" stop-opacity=".06"/><stop offset="1" stop-color="#050808" stop-opacity="0"/></radialGradient>
+  <clipPath id="bodyClip"><path d="M 656,302 C 653,329 639,353 602,374 C 452,469 343,586 265,760 C 204,896 208,1053 279,1211 C 361,1389 525,1496 681,1524 C 743,1538 858,1540 926,1520 C 1095,1472 1261,1345 1333,1163 C 1397,1002 1390,839 1325,703 C 1253,538 1138,449 995,373 C 952,349 940,330 941,302 Z"/></clipPath>
+</defs>
+<rect width="1600" height="1800" fill="url(#paper)" />
+<rect width="1600" height="1800" fill="url(#air)" />
+<ellipse cx="793" cy="1559" rx="423" ry="54" fill="url(#contact)" />
+<path d="M681 1508 Q793 1531 927 1514 L915 1546 Q804 1565 691 1547 Z" fill="url(#rimMaterial)" stroke="#B3B3A8" stroke-opacity=".18" stroke-width="1.3"/>
+<path d="M 656,302 C 653,329 639,353 602,374 C 452,469 343,586 265,760 C 204,896 208,1053 279,1211 C 361,1389 525,1496 681,1524 C 743,1538 858,1540 926,1520 C 1095,1472 1261,1345 1333,1163 C 1397,1002 1390,839 1325,703 C 1253,538 1138,449 995,373 C 952,349 940,330 941,302 Z" fill="#050808" fill-opacity=".075" transform="translate(8 10)"/>
+<path d="M 656,302 C 653,329 639,353 602,374 C 452,469 343,586 265,760 C 204,896 208,1053 279,1211 C 361,1389 525,1496 681,1524 C 743,1538 858,1540 926,1520 C 1095,1472 1261,1345 1333,1163 C 1397,1002 1390,839 1325,703 C 1253,538 1138,449 995,373 C 952,349 940,330 941,302 Z" fill="url(#vessel)" stroke="#D7DCD4" stroke-opacity=".52" stroke-width="1.7"/>
+<g clip-path="url(#bodyClip)">
+ <rect x="195" y="290" width="1220" height="1255" fill="url(#vesselFalloff)"/>
+ <path d="M269 934 C485 939 1051 945 1334 932" fill="none" stroke="#8D958A" stroke-opacity=".095" stroke-width="3"/>
+ <path d="M264 954 C503 959 1109 958 1352 947" fill="none" stroke="#FEFFF8" stroke-opacity=".21" stroke-width="7"/>
+ <path d="M327 713 C330 591 495 438 638 386" fill="none" stroke="#FFFDF8" stroke-width="64" stroke-opacity=".065" stroke-linecap="round"/>
+ <path d="M285 1022 C335 1265 497 1433 661 1490" fill="none" stroke="#F8F7F1" stroke-width="38" stroke-opacity=".065" stroke-linecap="round"/>
+</g>
+<!-- Hand-joined lip: one soft, narrow elliptical opening, no artificial hole. -->
+<g transform="rotate(-1.1 801 302)">
+ <path d="M650 298 Q804 271 950 294 L947 321 Q806 342 657 318 Z" fill="url(#rimMaterial)" stroke="#9EA59B" stroke-opacity=".32" stroke-width="2" />
+ <ellipse cx="802" cy="293" rx="151" ry="18" fill="url(#rimMaterial)" stroke="#979D91" stroke-opacity=".43" stroke-width="1.6" />
+ <ellipse cx="802" cy="291.5" rx="134" ry="10.7" fill="url(#inside)"/>
+ <path d="M659 290 Q803 272 947 291" fill="none" stroke="#FFFFFA" stroke-width="5" stroke-opacity=".79" />
+ <path d="M663 311 Q802 331 946 311" fill="none" stroke="#F3F0E9" stroke-width="5" stroke-opacity=".52" />
+</g>
+</svg>
