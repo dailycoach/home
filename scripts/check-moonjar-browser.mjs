@@ -195,6 +195,9 @@ try{
 
   const reloadGuide=page.locator('#nacre-visibility-switch');
   check(await reloadGuide.getAttribute('aria-pressed')==='false','guide choice is session-only');
+  // The journal occupies its own viewport after reload. Switch back to
+  // the artwork before using editor-only visual controls and exports.
+  await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await reloadGuide.click();
   await page.locator('[data-action="save-options"]').click();
   const [download]=await Promise.all([
