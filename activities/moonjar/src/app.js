@@ -102,7 +102,7 @@ async function openProject(doc, saveHere, expected = null, targetView = null) {
   });
   statusDetail='';status = readOnly ? 'readonly' : persistent ? expected === null ? 'dirty' : 'saved' : 'memory';
   if (persistent && !readOnly) { queue = new SaveQueue(repository, expected, statusChanged); if (expected === null) queue.schedule(editor.doc); }
-  documentInvalid=false; zoom = 1; paused = false; leadExpanded = true; panel = doc.mode==='guided'?'canvas':'palette';
+  documentInvalid=false; zoom = 1; paused = false; leadExpanded = false; panel = doc.mode==='guided'?'canvas':'palette';
   viewScene=doc.currentScene==='ending'?'arrange':doc.currentScene;
   currentView = targetView || (editor.doc.currentScene === 'ending' ? 'result' : 'studio');
   location.hash = `/${currentView}/${doc.projectId}`; render();
@@ -206,13 +206,13 @@ function renderSceneLead() {
   body.hidden=!leadExpanded;
   body.append(
     el('p', s.shortEssay, {class:'lead-essay'}),
-    el('p', s.focusQuestion, {class:'lead-question'}),
     button('원하면 기록하기', 'panel:story', {class:'text-button'}),
     el('p', '이야기는 읽기만 해도 좋습니다. 자개를 마음껏 놓아보세요.', {class:'micro'})
   );
   target.append(
     el('p', `${String(s.order).padStart(2, '0')} / 07 · ${s.name}`, {class:'eyebrow'}),
     el('h2', s.title),
+    el('p', s.focusQuestion, {class:'lead-question'}),
     body,
     button(leadExpanded ? '이야기 접고 작품에 집중' : '이야기 다시 보기', 'toggle-lead', {
       class:'lead-toggle', 'aria-expanded':String(leadExpanded), 'aria-controls':'scene-lead-content'
@@ -926,7 +926,7 @@ document.addEventListener('click',event=>{
     else if(type==='select'){editor.selected=a;renderCanvas();renderControls();setPanel('controls',true);}
     else if(type==='panel')setPanel(a,true);
     else if(type==='scene'){
-      viewScene=a;leadExpanded=true;
+      viewScene=a;leadExpanded=false;
       if(!readOnly)editor.navigate(a);
       const chapters=$('.scene-chapters'),wasOpen=chapters?.open||false;
       if(chapters){chapters.replaceWith(navigation());$('.scene-chapters').open=wasOpen;}
