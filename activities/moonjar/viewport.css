@@ -517,6 +517,11 @@ main.result-page > .storage-warning:not([hidden]){
   main.studio .controls-panel:not(:has(.panel-heading)){display:none}
   main.studio .controls-panel:has(.panel-heading){
     position:absolute;
+    /* An absolutely positioned grid item must not inherit grid-row:2.
+       That would place its containing block below the visible workbench. */
+    grid-column:auto;
+    grid-row:auto;
+    align-self:auto;
     top:44px;
     right:8px;
     bottom:5px;
