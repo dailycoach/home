@@ -102,7 +102,7 @@ async function openProject(doc, saveHere, expected = null, targetView = null) {
   });
   statusDetail='';status = readOnly ? 'readonly' : persistent ? expected === null ? 'dirty' : 'saved' : 'memory';
   if (persistent && !readOnly) { queue = new SaveQueue(repository, expected, statusChanged); if (expected === null) queue.schedule(editor.doc); }
-  documentInvalid=false; zoom = 1; paused = false; leadExpanded = true; panel = doc.mode==='guided'?'story':'palette';
+  documentInvalid=false; zoom = 1; paused = false; leadExpanded = true; panel = doc.mode==='guided'?'canvas':'palette';
   viewScene=doc.currentScene==='ending'?'arrange':doc.currentScene;
   currentView = targetView || (editor.doc.currentScene === 'ending' ? 'result' : 'studio');
   location.hash = `/${currentView}/${doc.projectId}`; render();
