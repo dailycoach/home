@@ -91,14 +91,17 @@ try{
   check(leadRect && canvasRect && leadRect.y<canvasRect.y,'guided story question should precede canvas on mobile');
   check((await lead.innerText()).includes('지금 이 자리에 온 나는 어떤 상태인가요'),'arrival focus question missing');
   await page.screenshot({path:`${out}/01-guided-arrival-390.png`,fullPage:true});
-  const beforeFold = await lead.boundingBox();
+  const compactLead = await lead.boundingBox();
+  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),
+    'guided story starts as a single compact question, not an essay requiring scroll');
   await lead.locator('[data-action="toggle-lead"]').click();
-  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),'guided story should collapse without leaving the scene');
-  const afterFold = await lead.boundingBox();
-  check(afterFold.height < beforeFold.height * 0.7,'folded scene should visibly release space for artwork');
+  check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'original essay can be expanded');
+  const expandedLead=await lead.boundingBox();
+  check(expandedLead.height>compactLead.height*1.12,
+    `expanding the optional story should use the available panel space: ${JSON.stringify({compactLead,expandedLead})}`);
+  await lead.locator('[data-action="toggle-lead"]').click();
+  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),'guided question can be collapsed again');
   await page.screenshot({path:`${out}/01b-guided-focus-390.png`,fullPage:true});
-  await lead.locator('[data-action="toggle-lead"]').click();
-  check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'guided story should expand again');
 
   await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await page.locator('[data-action="add:A01"]').click();
