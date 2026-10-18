@@ -187,9 +187,12 @@ function studio() {
   paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
   const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('저장·보관','save-options')); stage.append(edittools);
   const firstHint=el('p','자개를 하나씩 놓거나, 같은 색상군에서 12개씩 채울 수 있어요. 조각마다 뜻을 붙일 필요는 없습니다.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
-  const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'}); stage.append(controls);
+  // Workbench architecture: tool inspector is a workspace sibling. On wide
+  // screens it docks beside the reflection notebook rather than squeezing the
+  // artwork. On phones it remains the same accessible bottom drawer.
+  const controls = el('section',null,{id:'controls-panel',class:'controls-panel','aria-label':'선택 조각 조절'});
   const record = el('aside',null,{id:'story-panel',class:'story-panel','aria-label':'이야기와 선택 기록'});
-  workspace.append(rail,stage,record); main.append(workspace);
+  workspace.append(rail,stage,controls,record); main.append(workspace);
   const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','채우기'],['controls','조절'],['look','바라보기'],['story','기록(선택)']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
   renderPalette(); renderStory(); renderSceneLead(); renderLookPrompt(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
   observeStudioGeometry();
