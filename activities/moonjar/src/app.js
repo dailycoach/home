@@ -127,6 +127,7 @@ function home() {
   copy.append(el('p', '나를 담고, 다시 보다', {class:'eyebrow'}), el('h1', '빛을 담는\n달항아리'));
   copy.append(el('p', '자개를 마음껏 놓고, 겹치고,\n달항아리를 나만의 빛으로 채워보세요.', {class:'hero-lead'}));
   copy.append(el('p', story.opening.paragraphs[2], {class:'hero-note'}));
+  copy.append(button('달항아리의 이야기 보기', 'opening-story', {class:'hero-story-link text-button'}));
   const options = el('fieldset', null, {class:'storage-choice'}); options.append(el('legend','기록을 어떻게 남길까요?'));
   for (const [id, text, checked] of [['storage-personal','이 기기에 저장하며 시작', available],['storage-memory','기록을 남기지 않고 시작',!available]]) {
     const label = el('label'), input = el('input',null,{type:'radio',name:'storage',id}); input.checked = checked;
@@ -144,7 +145,15 @@ function home() {
   caption.append(el('span',artwork.title),el('br'),el('small',artwork.credit,{class:'artwork-credit'}));
   figure.append(el('img',null,{src:assetURL(artwork.src),alt:artwork.description,width:'780',height:'920',decoding:'async'}),caption);
   section.append(copy,figure,startArea); main.append(section);
-  const intro = el('section',null,{class:'intro-line'}); intro.append(el('h2',story.opening.title),el('p',story.opening.paragraphs[0]),el('p',story.opening.paragraphs[1]),el('p','내가 선택한 조각과 말은 내게 남습니다. 중요한 작업은 편집 파일로 따로 보관해 주세요.',{class:'muted'})); main.append(intro);
+  // Home is one visual scene. The original introduction stays available in a dialog.
+}
+function openingStory(){
+  const content=el('div',null,{class:'opening-story'});
+  content.append(el('h3',story.opening.title));
+  for(const paragraph of story.opening.paragraphs)content.append(el('p',paragraph));
+  content.append(el('p','선택한 조각과 말은 내 기기에만 남습니다. 중요한 작업은 편집 파일로도 보관해 주세요.',{class:'micro'}));
+  content.append(button('이야기를 덮고 시작하기','close-opening-story',{class:'primary'}));
+  openDialog('달항아리의 이야기',content);
 }
 function navigation() {
   // All seven source chapters stay available, but reading and answering
@@ -183,6 +192,7 @@ function studio() {
   workspace.append(rail,stage,record); main.append(workspace);
   const mobile = el('nav',null,{class:'mobile-tabs','aria-label':'작업 도구'}); for (const [id,label] of [['palette','채우기'],['controls','조절'],['look','바라보기'],['story','기록(선택)']]) mobile.append(button(label,`panel:${id}`,{'aria-pressed':String(panel===id)})); main.append(mobile);
   renderPalette(); renderStory(); renderSceneLead(); renderLookPrompt(); renderCanvas(); renderControls(); renderStatus(); setPanel(panel); attachCanvas(svg);
+  observeStudioGeometry();
 }
 function renderSceneLead() {
   const target = $('#scene-lead');
@@ -271,13 +281,38 @@ function renderPalette() {
     const li = el('li'), b = button(`${n.assetId} ${editor.doc.pieceNotes[n.instanceId]?.label || ''}${n.locked ? ' · 잠김':''}`,`select:${n.instanceId}`,{'aria-pressed':String(n.instanceId===editor.selected)}); li.append(b); list.append(li);
   } details.append(list); target.append(details,button('작품 비우기','clear',{class:'text-button danger'}));
 }
+let canvasResizeObserver=null;
+let canvasResizeFrame=0;
+function observeStudioGeometry(){
+  canvasResizeObserver?.disconnect();
+  cancelAnimationFrame(canvasResizeFrame);
+  const shell=$('#stage-shell');
+  if(!shell || !('ResizeObserver' in window))return;
+  canvasResizeObserver=new ResizeObserver(()=>{
+    cancelAnimationFrame(canvasResizeFrame);
+    canvasResizeFrame=requestAnimationFrame(()=>{
+      if(shell.isConnected && currentView==='studio')renderCanvas();
+    });
+  });
+  canvasResizeObserver.observe(shell);
+}
 function renderCanvas(preview = null) {
   const svg = $('#art'); if (!svg) return;
   renderSVG(svg,editor.doc.scene,materials,paused ? null:editor.selected,preview);
   const paper = $('#paper'),shell=$('#stage-shell');
-  const availableHeight=parseFloat(getComputedStyle(shell).maxHeight)||window.innerHeight*0.72;
-  const fit=Math.max(120,Math.min(640,shell.clientWidth-18,(availableHeight-28)*8/9));
-  paper.style.width=`${fit*zoom}px`;paper.style.maxWidth='none';
+  if(!paper||!shell)return;
+  const styles=getComputedStyle(shell);
+  const padX=(parseFloat(styles.paddingLeft)||0)+(parseFloat(styles.paddingRight)||0);
+  const padY=(parseFloat(styles.paddingTop)||0)+(parseFloat(styles.paddingBottom)||0);
+  // Size the vessel against the available screen-space, not total page height.
+  const screenLayout=getComputedStyle(main).getPropertyValue('--moonjar-single-screen').trim()==='1';
+  const availableHeight=screenLayout
+    ? Math.max(80,shell.clientHeight-padY-4)
+    : (parseFloat(styles.maxHeight)||window.innerHeight*0.72)-padY-4;
+  const availableWidth=Math.max(80,shell.clientWidth-padX-4);
+  const fit=Math.max(72,Math.min(640,availableWidth,availableHeight*8/9));
+  paper.style.width=Math.round(fit*zoom)+'px';
+  paper.style.maxWidth='none';
   if ($('#first-piece-hint')) $('#first-piece-hint').hidden=editor.doc.scene.nodes.length>0||paused;
   if ($('#undo')) $('#undo').disabled = !editor.past.length || readOnly || paused;
   if ($('#redo')) $('#redo').disabled = !editor.future.length || readOnly || paused;
@@ -369,24 +404,44 @@ function renderStory() {
 }
 function setPanel(id, reveal = false) {
   panel=id;
+  const mobile=matchMedia('(max-width:767px)').matches;
   const previousControls=main.classList.contains('controls-active');
   main.classList.toggle('controls-active',id==='controls');
-  if(previousControls!==(id==='controls') && !paused)renderCanvas();
-  if(id==='look') { paused=true; main.classList.add('paused');renderLookPrompt();renderCanvas();renderControls(); }
-  else if(paused) { paused=false;main.classList.remove('paused');renderCanvas();renderControls(); }
-  for(const p of ['palette','controls','story']) $(`#${p}-panel`)?.classList.toggle('mobile-active',id===p);
-  if(matchMedia('(max-width:767px)').matches && ['palette','controls','canvas'].includes(id))renderCanvas();
-  document.querySelectorAll('.mobile-tabs button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.action===`panel:${id}`)));
-  const pauseButton=$('[data-action="pause"]');if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
+  if(editor.doc.mode==='guided' && mobile && ['palette','controls'].includes(id) && leadExpanded){
+    leadExpanded=false;
+    renderSceneLead();
+  }
+  if(id==='look'){
+    paused=true;main.classList.add('paused');renderLookPrompt();renderControls();
+  } else if(paused){
+    paused=false;main.classList.remove('paused');renderControls();
+  }
+  for(const p of ['palette','controls','story']) $('#'+p+'-panel')?.classList.toggle('mobile-active',id===p);
+  const stage=$('.stage-area');
+  if(stage)stage.inert=mobile&&id==='story';
+  document.querySelectorAll('.mobile-tabs button').forEach(
+    b=>b.setAttribute('aria-pressed',String(b.dataset.action==='panel:'+id))
+  );
+  const pauseButton=$('[data-action="pause"]');
+  if(pauseButton)pauseButton.textContent=paused?'꾸미기로 돌아가기':'잠시 바라보기';
+  renderCanvas();
+  // Never scroll the document while switching tools; drawers own their overflow.
   if(id==='canvas')$('#stage-shell')?.focus?.({preventScroll:true});
-  if(reveal && id!=='look' && matchMedia('(max-width:767px)').matches){
-    // The compact editor floats below the *actual canvas*. Never scroll down to
-    // the controls as that would hide the artwork the participant is changing.
-    const revealTarget=['controls','canvas','palette'].includes(id)?$('#stage-shell'):$(`#${id}-panel`);
-    // For the editor, scroll immediately so the selected fragment is not
-    // briefly hidden behind a floating tray while the page is still moving.
-    const immediate=['controls','canvas','palette'].includes(id)||matchMedia('(prefers-reduced-motion:reduce)').matches;
-    revealTarget?.scrollIntoView({block:'start',behavior:immediate?'instant':'smooth'});
+  if(reveal && mobile){
+    if(id==='story'){
+      const storyPanel=$('#story-panel');
+      if(storyPanel)storyPanel.scrollTop=0;
+      const heading=$('#story-panel h2');
+      heading?.setAttribute('tabindex','-1');
+      heading?.focus({preventScroll:true});
+    } else if(id==='look'){
+      const heading=$('#look-prompt h2');
+      heading?.setAttribute('tabindex','-1');
+      heading?.focus({preventScroll:true});
+    } else if(id==='controls'||id==='palette'){
+      const shell=$('#stage-shell');
+      if(shell && !previousControls && id==='controls' && zoom===1) shell.scrollTop=0;
+    }
   }
 }
 
@@ -836,6 +891,7 @@ document.addEventListener('focusout',event=>{if(event.target.dataset.field&&!eve
 
 const actions={
   home:()=>{location.hash='/';home();},
+  'opening-story':openingStory,'close-opening-story':closeDialog,
   'start-guided':()=>start('guided'),'start-free':()=>start('free'),
   resume:()=>{if(editor){location.hash=`/studio/${editor.doc.projectId}`;studio();}else{location.hash='/projects';return projects();}},
   projects:()=>{location.hash='/projects';return projects();},
@@ -879,7 +935,7 @@ document.addEventListener('click',event=>{
       renderStory();renderSceneLead();renderLookPrompt();renderCanvas();
       const showMobileLead=matchMedia('(max-width:767px)').matches && editor.doc.mode==='guided';
       setPanel('story',!showMobileLead);
-      if(showMobileLead)$('#scene-lead')?.scrollIntoView({block:'start',behavior:'auto'});
+      if(showMobileLead){const lead=$('#scene-lead');if(lead)lead.scrollTop=0;}
       else {const heading=$('#story-panel h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});}
       queue?.flush();
     }
