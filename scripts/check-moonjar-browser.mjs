@@ -31,6 +31,30 @@ try{
   check(firstCTA && firstCTA.y+firstCTA.height <= 844,
     `mobile first start button should fit initial 390x844 viewport, got ${JSON.stringify(firstCTA)}`);
   check(await page.locator('link[href*="refinement.css"]').count()===1,'refinement CSS must be loaded');
+  // Design gate: editorial craft system must win over earlier functional CSS.
+  const artDirection=await page.evaluate(async()=>{
+    await document.fonts.ready;
+    const root=getComputedStyle(document.documentElement);
+    const c=getComputedStyle(document.querySelector('.hero-actions .primary'));
+    const masthead=getComputedStyle(document.querySelector('.site-header'));
+    const heading=getComputedStyle(document.querySelector('.hero-copy h1'));
+    const links=[...document.querySelectorAll('head link[rel="stylesheet"]')].map(l=>l.getAttribute('href'));
+    return {
+      page:root.getPropertyValue('--page').trim(),
+      primary:c.backgroundColor,
+      primaryRadius:parseFloat(c.borderTopLeftRadius),
+      headerImage:masthead.backgroundImage,
+      headingFamily:heading.fontFamily,
+      files:links
+    };
+  });
+  check(artDirection.page==='#f4f0e8',`porcelain-paper visual token must apply: ${JSON.stringify(artDirection)}`);
+  check(artDirection.primary==='rgb(48, 57, 48)' && artDirection.primaryRadius<=4,
+    'primary call-to-action should be ink-dark with restrained corners');
+  check(artDirection.headerImage==='none','no generated-looking gradient on the masthead');
+  check(artDirection.headingFamily.includes('Moonjar Gowun'),'self-hosted Korean editorial heading must apply');
+  check(artDirection.files.at(-1)?.includes('refinement.css?v=20261019-atelier-v1'),
+    'final art-direction CSS must load after palette/drawer functionality');
 
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
