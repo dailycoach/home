@@ -53,12 +53,36 @@ try{
     'primary call-to-action should be ink-dark with restrained corners');
   check(artDirection.headerImage==='none','no generated-looking gradient on the masthead');
   check(artDirection.headingFamily.includes('Moonjar Gowun'),'self-hosted Korean editorial heading must apply');
-  check(artDirection.files.at(-1)?.includes('refinement.css?v=20261019-atelier-v1'),
-    'final art-direction CSS must load after palette/drawer functionality');
+  check(artDirection.files.at(-2)?.includes('refinement.css?v=20261019-atelier-v1'),
+    'atelier appearance must load after legacy tool styles');
+  check(artDirection.files.at(-1)?.includes('viewport.css?v=20261019-one-screen-v1'),
+    'viewport layout must load after appearance and interaction layers');
+  const homeShell=await page.evaluate(()=>({
+    bodyOverflow:getComputedStyle(document.body).overflow,
+    mainHeight:document.querySelector('main').getBoundingClientRect().height,
+    viewport:window.innerHeight,
+    introScroll:!!document.querySelector('main.home .intro-line')
+  }));
+  check(homeShell.bodyOverflow==='hidden' && homeShell.mainHeight<=homeShell.viewport &&
+    !homeShell.introScroll, `home must use a single composed scene: ${JSON.stringify(homeShell)}`);
+  await page.locator('main.home [data-action="opening-story"]').click();
+  check(await page.locator('#modal .opening-story').isVisible(),
+    'long opening narration is accessible in an optional dialog instead of a page-scroll block');
+  await page.locator('#modal [data-action="close-opening-story"]').click();
 
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
   await page.locator('#scene-lead').waitFor({state:'visible'});
+  const stationary=await page.evaluate(()=>{
+    const work=document.querySelector('main.studio').getBoundingClientRect();
+    const stage=document.querySelector('#stage-shell').getBoundingClientRect();
+    return {bodyOverflow:getComputedStyle(document.body).overflow,
+      pageY:window.scrollY,viewport:innerHeight,workBottom:work.bottom,
+      canvasHeight:stage.height,stageBottom:stage.bottom};
+  });
+  check(stationary.bodyOverflow==='hidden' && stationary.pageY===0 &&
+    stationary.workBottom<=stationary.viewport+1 && stationary.canvasHeight>=130,
+    `guided studio must fit one screen and keep the jar visible: ${JSON.stringify(stationary)}`);
   check((await page.locator('#art image').first().getAttribute('href'))?.includes('moonjar-v2/porcelain-day.png'),
     'new guided project begins on porcelain V2; legacy background remains separate');
   const lead=page.locator('#scene-lead');
@@ -107,6 +131,8 @@ try{
   check(view.selectedCenter>0 && view.selectedCenter<view.trayTop-12,
     `the selected nacre must be visible outside the controls, not hidden under the panel: ${JSON.stringify(view)}`);
   check(view.trayBottom<=view.viewport-40,'editor drawer must not cover the bottom toolbar');
+  check(await page.evaluate(()=>scrollY===0 && getComputedStyle(document.body).overflow==='hidden'),
+    'changing tool panels must never scroll the document');
   await page.screenshot({path:`${out}/02-canvas-first-editor-390.png`,fullPage:true});
   await page.screenshot({path:`${out}/02b-editor-actual-viewport-390.png`,fullPage:false});
   await editorTray.locator('[data-action="panel:canvas"]').click();
@@ -188,6 +214,11 @@ try{
   // Export opt-in personal card only after a deliberately confirmed preview.
   await page.locator('.studio-bar [data-action="finish"]').click();
   await page.locator('main.result-page').waitFor();
+  check(await page.evaluate(()=>{
+    const content=document.querySelector('main.result-page').getBoundingClientRect();
+    return getComputedStyle(document.body).overflow==='hidden'
+      && scrollY===0 && content.bottom<=innerHeight+1;
+  }),'finished artwork and archive actions must remain within a single scene');
   check(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
     'editor toast must not cover the finished artwork gallery');
   check(!(await page.locator('.reflection-recap').evaluate(el=>el.open)),'private reflection recap is collapsed by default');
