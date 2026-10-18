@@ -86,6 +86,21 @@ async function run(name,browser,width,height,label){
         ok(withInspector.notes?.h>120,id+' journal remains visible under the right-hand editor inspector');
       }
     }
+    ok(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
+      id+' feedback must never cover the art and toolbar');
+    if(compact&&!isPhone){
+      await page.locator('.mobile-tabs [data-action="panel:controls"]').click();
+      const inspector=page.locator('#controls-panel');
+      ok(await inspector.isVisible(),id+' tool inspector reachable on tablet/landscape');
+      const before=await page.locator('#art [data-node]').first().getAttribute('transform');
+      await inspector.locator('[data-action="move:24:0"]').click();
+      const after=await page.locator('#art [data-node]').first().getAttribute('transform');
+      ok(before!==after,id+' tablet/landscape inspector moves a real fragment');
+      ok((await geometry(page)).scrollY===0,id+' tool editing keeps page stationary');
+      if(name==='chromium'&&label==='small-landscape'){
+        await page.screenshot({path:DIR+'/'+id+'-inspector.png',animations:'disabled'});
+      }
+    }
     if(compact){
       await page.locator('.mobile-tabs [data-action="panel:story"]').click();
       const notes=page.locator('#story-panel.mobile-active');
