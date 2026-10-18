@@ -544,7 +544,7 @@ main.result-page > .storage-warning:not([hidden]){
   }
   main.studio{
     --moonjar-palette-height:min(39dvh,312px);
-    --moonjar-controls-height:min(32dvh,257px);
+    --moonjar-controls-height:min(30dvh,231px);
   }
   main.studio:has(#palette-panel.mobile-active) .stage-area{
     padding-bottom:calc(var(--moonjar-palette-height) + 2px);
