@@ -771,39 +771,38 @@ dialog::backdrop{background:rgba(22,29,23,.62)}
   .site-header nav{gap:0;margin-left:auto}
   .site-header nav button{min-width:44px;padding:8px 5px;font-size:12px}
   .site-footer{padding:25px 20px 95px}
+  /* A large original vessel takes the role of a cover illustration.
+     The primary decorate CTA still needs to remain in the 390×844 fold. */
   .hero{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(115px,34%);
-    grid-template-rows:auto auto;
-    align-items:center;
-    column-gap:10px;
-    row-gap:4px;
-    padding:32px 20px 43px;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:24px 20px 39px;
   }
-  .hero-copy{grid-column:1;grid-row:1;align-self:center;width:100%;max-width:none}
-  .hero-copy .eyebrow{margin:0 0 10px;font-size:10px;letter-spacing:.11em}
-  .hero-copy h1{font-size:clamp(31px,8.3vw,45px);line-height:1.25;letter-spacing:-.055em}
-  .hero-lead{margin-top:14px;font-size:14px;line-height:1.62;white-space:normal}
-  .hero-note{margin-top:9px;font-size:12px;line-height:1.65}
+  .hero-copy{order:0;align-self:stretch;width:100%;max-width:none}
+  .hero-copy .eyebrow{margin:0 0 8px;font-size:10px;letter-spacing:.13em}
+  .hero-copy h1{font-size:clamp(38px,9vw,48px);line-height:1.19;letter-spacing:-.055em}
+  .hero-lead{margin-top:12px;font-size:15px;line-height:1.6;white-space:pre-line}
+  .hero-note{margin-top:8px;font-size:12px;line-height:1.65;max-width:345px}
   .hero-figure{
-    grid-column:2;
-    grid-row:1;
+    order:1;
+    width:min(69vw,270px);
+    max-width:270px;
     align-self:center;
-    order:initial;
-    width:100%;
-    max-width:none;
-    padding-left:9px;
-    border-left:1px solid #cbc3b3;
+    padding:0;
+    margin:6px auto 0;
+    border:0;
   }
-  .hero-figure img{max-height:255px}
-  .hero-figure figcaption{margin-top:5px;font-size:10px;line-height:1.5}
+  .hero-figure img{max-height:266px}
+  .hero-figure figcaption{margin-top:0;font-size:10px;line-height:1.45;text-align:center}
   .hero-figure figcaption>span{display:none}
   .hero-figure figcaption .artwork-credit{font-size:10px;line-height:1.4}
-  .hero-start{grid-column:1/-1;grid-row:2;order:initial;width:100%;max-width:none;margin-top:7px}
-  .hero-start .storage-choice{max-width:none;margin:12px 0 16px;padding:12px 0 0}
+  .hero-start{order:2;align-self:stretch;width:100%;max-width:none;margin-top:2px}
+  .hero-start .storage-choice{max-width:none;margin:8px 0 14px;padding:12px 0 0}
   .storage-choice legend{font-size:12px}
-  .storage-choice label{gap:8px;min-height:39px;font-size:13px}
-  .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+  .storage-choice label{gap:8px;min-height:38px;font-size:13px}
+  .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
   .hero-actions button{min-width:0;min-height:51px;padding:9px 8px;font-size:13px;white-space:normal}
   .hero-actions .primary{padding-inline:10px;font-size:14px}
   .hero-actions .text-button{min-height:40px;font-size:12px;padding:5px}
@@ -950,11 +949,12 @@ dialog::backdrop{background:rgba(22,29,23,.62)}
   .toast{bottom:85px}
 }
 @media (max-width:360px){
-  .hero{grid-template-columns:minmax(0,1fr) 110px;column-gap:7px;padding-inline:15px}
-  .hero-copy h1{font-size:30px}
-  .hero-lead{font-size:13px}
+  .hero{padding-inline:16px}
+  .hero-copy h1{font-size:38px}
+  .hero-lead{font-size:14px}
   .hero-note{font-size:11px}
-  .hero-figure img{max-height:205px}
+  .hero-figure{width:min(63vw,225px)}
+  .hero-figure img{max-height:240px}
   .hero-actions .primary{font-size:12px}
   .studio-bar button{padding:8px 6px;font-size:11px}
   .mobile-tabs button{font-size:11px}
