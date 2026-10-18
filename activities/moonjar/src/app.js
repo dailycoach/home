@@ -291,28 +291,33 @@ function observeStudioGeometry(){
   canvasResizeObserver=new ResizeObserver(()=>{
     cancelAnimationFrame(canvasResizeFrame);
     canvasResizeFrame=requestAnimationFrame(()=>{
-      if(shell.isConnected && currentView==='studio')renderCanvas();
+      if(shell.isConnected && currentView==='studio')fitArtworkToFrame();
     });
   });
   canvasResizeObserver.observe(shell);
 }
-function renderCanvas(preview = null) {
-  const svg = $('#art'); if (!svg) return;
-  renderSVG(svg,editor.doc.scene,materials,paused ? null:editor.selected,preview);
-  const paper = $('#paper'),shell=$('#stage-shell');
+function fitArtworkToFrame(){
+  const paper=$('#paper'),shell=$('#stage-shell');
   if(!paper||!shell)return;
   const styles=getComputedStyle(shell);
   const padX=(parseFloat(styles.paddingLeft)||0)+(parseFloat(styles.paddingRight)||0);
   const padY=(parseFloat(styles.paddingTop)||0)+(parseFloat(styles.paddingBottom)||0);
-  // Size the vessel against the available screen-space, not total page height.
   const screenLayout=getComputedStyle(main).getPropertyValue('--moonjar-single-screen').trim()==='1';
   const availableHeight=screenLayout
     ? Math.max(80,shell.clientHeight-padY-4)
     : (parseFloat(styles.maxHeight)||window.innerHeight*0.72)-padY-4;
   const availableWidth=Math.max(80,shell.clientWidth-padX-4);
   const fit=Math.max(72,Math.min(640,availableWidth,availableHeight*8/9));
-  paper.style.width=Math.round(fit*zoom)+'px';
+  const next=Math.round(fit*zoom);
+  // Shell-resize reactions are presentation only: never replace the SVG
+  // nodes while a finger, keyboard or accessibility tool is selecting one.
+  if(parseFloat(paper.style.width)!==next)paper.style.width=next+'px';
   paper.style.maxWidth='none';
+}
+function renderCanvas(preview = null) {
+  const svg = $('#art'); if (!svg) return;
+  renderSVG(svg,editor.doc.scene,materials,paused ? null:editor.selected,preview);
+  fitArtworkToFrame();
   if ($('#first-piece-hint')) $('#first-piece-hint').hidden=editor.doc.scene.nodes.length>0||paused;
   if ($('#undo')) $('#undo').disabled = !editor.past.length || readOnly || paused;
   if ($('#redo')) $('#redo').disabled = !editor.future.length || readOnly || paused;
@@ -958,7 +963,7 @@ window.addEventListener('beforeunload',event=>{
 });
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')queue?.flush();});
 window.addEventListener('hashchange',()=>safely(route));
-window.addEventListener('resize',()=>{if(editor&&currentView==='studio')renderCanvas();});
+window.addEventListener('resize',()=>{if(editor&&currentView==='studio')fitArtworkToFrame();});
 function render(){if(currentView==='result')result();else if(editor)studio();else home();}
 async function route(){
   const [view,id]=location.hash.replace(/^#\/?/,'').split('/');
