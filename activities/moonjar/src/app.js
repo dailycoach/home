@@ -410,6 +410,7 @@ function renderStory() {
 function setPanel(id, reveal = false) {
   panel=id;
   const mobile=matchMedia('(max-width:767px)').matches;
+  const compact=matchMedia('(max-width:1199px)').matches;
   const previousControls=main.classList.contains('controls-active');
   main.classList.toggle('controls-active',id==='controls');
   if(editor.doc.mode==='guided' && mobile && ['palette','controls'].includes(id) && leadExpanded){
@@ -423,7 +424,7 @@ function setPanel(id, reveal = false) {
   }
   for(const p of ['palette','controls','story']) $('#'+p+'-panel')?.classList.toggle('mobile-active',id===p);
   const stage=$('.stage-area');
-  if(stage)stage.inert=mobile&&id==='story';
+  if(stage)stage.inert=compact&&id==='story';
   document.querySelectorAll('.mobile-tabs button').forEach(
     b=>b.setAttribute('aria-pressed',String(b.dataset.action==='panel:'+id))
   );
@@ -432,7 +433,7 @@ function setPanel(id, reveal = false) {
   renderCanvas();
   // Never scroll the document while switching tools; drawers own their overflow.
   if(id==='canvas')$('#stage-shell')?.focus?.({preventScroll:true});
-  if(reveal && mobile){
+  if(reveal && compact){
     if(id==='story'){
       const storyPanel=$('#story-panel');
       if(storyPanel)storyPanel.scrollTop=0;
