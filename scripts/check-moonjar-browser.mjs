@@ -414,6 +414,11 @@ try{
   await p4.locator('.mobile-tabs [data-action="panel:controls"]').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
     'repeat messages remain tucked away while moving fragments');
+  // A batch insertion deliberately does not auto-select a fragment. Select
+  // one from the accessible palette list before opening its advanced tools.
+  await p4.locator('.mobile-tabs [data-action="panel:palette"]').click();
+  await p4.locator('#palette-panel .layer-list > summary').click();
+  await p4.locator('#palette-panel .layer-list li button').first().click();
   await p4.locator('#controls-panel details > summary').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible(),
     'legacy individual notes are still reachable if explicitly requested');
