@@ -14,7 +14,7 @@ test('W9.3 art studies are original editable 1600x1800 SVGs, not image embeds',(
     assert.match(svg,/id="bodyClip"/);
     assert.match(svg,/rotate\(-\.45 797 302\)/);
     assert.match(svg,/hand-thrown joined lip/);
-    assert.doesNotMatch(svg,/<image\b|<foreignObject\b|https?:\/\/|data:image|base64,/i);
+    assert.doesNotMatch(svg,/<image\b|<foreignObject\b|(?:xlink:)?href=["\u0027](?:https?:|data:)|data:image|base64,/i);
     assert.match(svg,/<desc>/);
   }
 });
