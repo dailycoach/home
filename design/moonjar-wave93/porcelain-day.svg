@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1800" viewBox="0 0 1600 1800">
+<title>PORCELAIN | DAY / V3.1 — DAILYCOACHING independent WAVE 9.3 study</title>
+<desc>Original asymmetric porcelain moon jar; understated natural kiln glaze and hand-shaped rim. No photographs, no copied museum image. Original 1600 by 1800 coordinate system.</desc>
+<defs>
+  <linearGradient id="paper" x1=".14" y1="0" x2=".88" y2="1"><stop stop-color="#EEE9E0"/><stop offset="1" stop-color="#E2DDD3"/></linearGradient>
+  <radialGradient id="air" cx="49%" cy="41%" r="64%"><stop stop-color="#FDFCF7" stop-opacity=".18"/><stop offset="1" stop-color="#FDFCF7" stop-opacity="0"/></radialGradient>
+  <radialGradient id="vessel" cx="33%" cy="29%" r="91%"><stop stop-color="#FFFFFC"/><stop offset=".22" stop-color="#FDFCF7"/><stop offset=".44" stop-color="#F1F0E8"/><stop offset=".72" stop-color="#DEDCD0"/><stop offset="1" stop-color="#92988C"/></radialGradient>
+  <linearGradient id="vesselFalloff" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#485B55" stop-opacity=".17"/><stop offset=".15" stop-color="#758077" stop-opacity="0"/><stop offset=".60" stop-color="#F6F5EE" stop-opacity="0"/><stop offset="1" stop-color="#4D5C53" stop-opacity=".24"/></linearGradient>
+  <linearGradient id="rimMaterial" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#F9F7EC"/><stop offset=".5" stop-color="#DEDCD0"/><stop offset="1" stop-color="#AEB4A9"/></linearGradient>
+  <linearGradient id="inside" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#92988C"/><stop offset="1" stop-color="#ECEDE4"/></linearGradient>
+  <radialGradient id="contact" cx="50%" cy="50%" r="50%"><stop stop-color="#554B3E" stop-opacity=".26"/><stop offset=".68" stop-color="#554B3E" stop-opacity=".06"/><stop offset="1" stop-color="#554B3E" stop-opacity="0"/></radialGradient>
+  <clipPath id="bodyClip"><path d="M 654,302 C 650,327 638,353 603,376 C 459,467 339,591 268,758 C 197,924 219,1058 288,1216 C 366,1390 523,1494 682,1524 C 750,1542 862,1537 925,1521 C 1092,1474 1249,1351 1332,1165 C 1395,1006 1390,841 1325,696 C 1253,542 1136,446 994,374 C 956,351 942,328 943,301 Z"/></clipPath>
+</defs>
+<rect width="1600" height="1800" fill="url(#paper)" />
+<rect width="1600" height="1800" fill="url(#air)" />
+<ellipse cx="793" cy="1559" rx="423" ry="54" fill="url(#contact)" />
+<path d="M681 1508 Q793 1531 927 1514 L915 1546 Q804 1565 691 1547 Z" fill="url(#rimMaterial)" stroke="#B3B3A8" stroke-opacity=".18" stroke-width="1.3"/>
+<path d="M 654,302 C 650,327 638,353 603,376 C 459,467 339,591 268,758 C 197,924 219,1058 288,1216 C 366,1390 523,1494 682,1524 C 750,1542 862,1537 925,1521 C 1092,1474 1249,1351 1332,1165 C 1395,1006 1390,841 1325,696 C 1253,542 1136,446 994,374 C 956,351 942,328 943,301 Z" fill="#554B3E" fill-opacity=".075" transform="translate(8 10)"/>
+<path d="M 654,302 C 650,327 638,353 603,376 C 459,467 339,591 268,758 C 197,924 219,1058 288,1216 C 366,1390 523,1494 682,1524 C 750,1542 862,1537 925,1521 C 1092,1474 1249,1351 1332,1165 C 1395,1006 1390,841 1325,696 C 1253,542 1136,446 994,374 C 956,351 942,328 943,301 Z" fill="url(#vessel)" stroke="#DEDCD0" stroke-opacity=".52" stroke-width="1.7"/>
+<g clip-path="url(#bodyClip)">
+ <rect x="195" y="290" width="1220" height="1255" fill="url(#vesselFalloff)"/>
+ <path d="M269 934 C485 939 1051 945 1334 932" fill="none" stroke="#8D958A" stroke-opacity=".095" stroke-width="3"/>
+ <path d="M264 954 C503 959 1109 958 1352 947" fill="none" stroke="#FEFFF8" stroke-opacity=".21" stroke-width="7"/>
+ <path d="M327 713 C330 591 495 438 638 386" fill="none" stroke="#FFFDF8" stroke-width="64" stroke-opacity=".065" stroke-linecap="round"/>
+ <path d="M285 1022 C335 1265 497 1433 661 1490" fill="none" stroke="#F8F7F1" stroke-width="38" stroke-opacity=".065" stroke-linecap="round"/>
+</g>
+<!-- A hand-thrown joined lip: slight leaning and soft irregularity.
+     No black artificial hole, strong outlines or circular vector-stamp. -->
+<g transform="rotate(-.45 797 302)">
+  <path d="M 650,296 C 708,285 875,278 946,294 L 944,317 Q 813,334 656,313 Z"
+        fill="url(#rimMaterial)" stroke="#A3A49B" stroke-opacity=".29" stroke-width="1.2"/>
+  <path d="M 657,293 C 703,276 898,277 942,292 C 907,306 712,308 657,293 Z"
+        fill="url(#rimMaterial)" stroke="#C4C8B9" stroke-opacity=".38" stroke-width="1.2"/>
+  <path d="M 673,290 C 715,281 894,282 926,291 C 874,298 731,299 673,290 Z"
+        fill="url(#inside)" opacity=".77"/>
+  <path d="M 650,292 Q 748,277 861,280 Q 918,281 947,291"
+        fill="none" stroke="#FFFEF5" stroke-width="4" stroke-opacity=".71"/>
+  <path d="M 663,312 C 745,323 845,328 938,311"
+        fill="none" stroke="#E9E8DC" stroke-width="3.6" stroke-opacity=".52"/>
+</g>
+</svg>
