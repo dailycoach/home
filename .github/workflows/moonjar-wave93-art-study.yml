@@ -1,0 +1,62 @@
+name: Moonjar WAVE 9.3 Art Study
+
+on:
+  pull_request:
+    paths:
+      - 'design/moonjar-wave93/**'
+      - 'scripts/render-moonjar-wave93.py'
+      - 'tests/moonjar/art-study-wave93.test.js'
+      - 'docs/moonjar-wave93-material-art-review-20261019.md'
+      - '.github/workflows/moonjar-wave93-art-study.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  art-source-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify all original PNG hashes and study isolation
+        run: node --test tests/moonjar/art-study-wave93.test.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install deterministic study renderer
+        run: |
+          python -m pip install --disable-pip-version-check \
+            numpy==2.3.5 pillow==12.3.0 cairosvg==2.8.2 opencv-python-headless==4.13.0.92
+      - name: Generate two original WAVE 9.3 art study backgrounds
+        run: python scripts/render-moonjar-wave93.py --out artifacts/moonjar-wave93/first
+      - name: Regenerate and compare SHA and geometry
+        run: |
+          python scripts/render-moonjar-wave93.py --out artifacts/moonjar-wave93/second
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          a=Path('artifacts/moonjar-wave93/first')
+          b=Path('artifacts/moonjar-wave93/second')
+          for file in ['porcelain-day.svg','porcelain-night.svg',
+                       'porcelain-day.png','porcelain-night.png',
+                       'preview-day.webp','preview-night.webp',
+                       'study-manifest.json']:
+              da=hashlib.sha256((a/file).read_bytes()).hexdigest()
+              db=hashlib.sha256((b/file).read_bytes()).hexdigest()
+              assert da==db,file
+          m=json.loads((a/'study-manifest.json').read_text())
+          assert m['productionIntegrated'] is False
+          assert m['originalPieceAssetsModified'] is False
+          assert m['dimensions']==[1600,1800]
+          print('WAVE9.3 PASS · 7 reproducible artifacts · 96 unchanged originals')
+          PY
+      - name: Upload both isolated art study variants
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-wave93-original-porcelain
+          path: artifacts/moonjar-wave93/first
+          retention-days: 7
