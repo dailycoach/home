@@ -78,6 +78,13 @@ async function run(name,browser,width,height,label){
     }else{
       await page.locator('#palette-panel [data-action="add:A01"]').click();
       await page.locator('#art [data-node]').first().waitFor({state:'attached'});
+      if(width>=1200){
+        const withInspector=await geometry(page);
+        ok(withInspector.art.h>=start.art.h*0.88,
+          id+' selecting a piece must NOT steal the art area for an inspector: '+
+          JSON.stringify({before:start.art,after:withInspector.art}));
+        ok(withInspector.notes?.h>120,id+' journal remains visible under the right-hand editor inspector');
+      }
     }
     if(compact){
       await page.locator('.mobile-tabs [data-action="panel:story"]').click();
