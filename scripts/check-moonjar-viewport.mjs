@@ -37,10 +37,10 @@ async function geometry(page){
       result:rect('.result-layout')};
   });
 }
-async function run(name,launcher,width,height,label){
+async function run(name,browser,width,height,label){
   const isPhone=width<768;
   const compact=width<1200;
-  const context=await launcher.newContext({viewport:{width,height},
+  const context=await browser.newContext({viewport:{width,height},
     isMobile:isPhone,hasTouch:compact,deviceScaleFactor:1,
     acceptDownloads:true,locale:'ko-KR',reducedMotion:'reduce'});
   const page=await context.newPage();
@@ -127,7 +127,9 @@ async function run(name,launcher,width,height,label){
 let failed=null;
 try{
   for(const [name,launcher] of [['chromium',chromium],['webkit',webkit]]){
-    for(const [w,h,label] of sizes)await run(name,launcher,w,h,label);
+    const browser=await launcher.launch({headless:true});
+    try { for(const [w,h,label] of sizes)await run(name,browser,w,h,label); }
+    finally { await browser.close(); }
   }
 }catch(error){failed=error;process.exitCode=1;}
 finally{
