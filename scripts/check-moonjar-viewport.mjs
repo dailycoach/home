@@ -96,7 +96,14 @@ async function run(name,browser,width,height,label){
       await inspector.locator('[data-action="move:24:0"]').click();
       const after=await page.locator('#art [data-node]').first().getAttribute('transform');
       ok(before!==after,id+' tablet/landscape inspector moves a real fragment');
-      ok((await geometry(page)).scrollY===0,id+' tool editing keeps page stationary');
+      const selected=await geometry(page);
+      ok(selected.art?.h>=75&&selected.art.y>=selected.stage.y-3
+        && selected.art.bottom<=selected.stage.bottom+4,
+        id+' selected inspector must leave the real vessel on screen: '+JSON.stringify(selected));
+      ok(await page.evaluate(()=>document.querySelector('.workspace').scrollTop===0
+        && document.querySelector('.stage-area').scrollTop===0),
+        id+' no hidden programmatic scroll of the workspace or stage');
+      ok(selected.scrollY===0,id+' tool editing keeps page stationary');
       if(name==='chromium'&&label==='small-landscape'){
         await page.screenshot({path:DIR+'/'+id+'-inspector.png',animations:'disabled'});
       }
