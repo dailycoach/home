@@ -369,7 +369,7 @@ try{
   await p3.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('porcelain-day.png'));
   check((await p3.locator('#art image').first().getAttribute('href'))?.includes('porcelain-day.png'),
     'legacy work switches only after explicit choice');
-  await p3.locator('[data-action="undo"]').click();
+  await p3.locator('.art-toolbar [data-action="undo"]').click();
   check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
     'undo restores the legacy background and all piece coordinates');
   await legacyContext.close();
