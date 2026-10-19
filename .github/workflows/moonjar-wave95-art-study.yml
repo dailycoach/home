@@ -40,12 +40,13 @@ jobs:
         run: python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/study
       - name: Compose A tactile craft and B editorial hanji with identical authentic 96-piece source
         run: python -u scripts/render-moonjar-wave95.py
-      - name: Check 20 render hashes, four cards, off-jar freedom and full pixels
-        run: python scripts/check-moonjar-wave95.py
       - name: Copy static comparison gallery and review for downloadable QA
         run: |
           cp design/moonjar-wave95/review.html artifacts/moonjar-wave95/index.html
+          cp design/moonjar-wave95/blind-review.html artifacts/moonjar-wave95/blind-review.html
           cp docs/moonjar-wave95-dual-medium-design-study-20261019.md artifacts/moonjar-wave95/REVIEW_NOTES_KO.md
+      - name: Check 20 render hashes, four cards, off-jar freedom and full pixels
+        run: python scripts/check-moonjar-wave95.py
       - name: Attach reproducible art-direction comparison
         if: always()
         uses: actions/upload-artifact@v4
