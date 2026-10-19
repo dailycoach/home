@@ -162,8 +162,31 @@ function renderImage(){chosen();document.querySelectorAll('[data-theme],[data-co
 function tab(name){if(!['view','card','pilot'].includes(name))return;state.tab=name;document.querySelectorAll('[data-tab]').forEach(b=>{const selected=b.dataset.tab===name;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!=='panel-'+name);$('#preview-stage').classList.toggle('card-mode',name==='card');renderImage();}
 function nextFrame(){return new Promise(resolve=>requestAnimationFrame(resolve));}
 async function getArtImage(){const image=new Image();image.decoding='async';image.src=ensureArt();await image.decode();return image;}
-function textFit(ctx,text,maxWidth,requested,min=39){for(let size=requested;size>=min;size-=2){ctx.font=`${size}px "Batang","Noto Serif CJK KR",serif`;if(ctx.measureText(text).width<=maxWidth)return size;}return min;}
-function splitLines(ctx,text,width,maxLines=2){const lines=[];const words=String(text).replaceAll('\r','').split('\n');for(const paragraph of words){let line='';for(const ch of paragraph){if(ctx.measureText(line+ch).width>width&&line){lines.push(line);line=ch;}else{line+=ch;}}lines.push(line);}return lines.slice(0,maxLines);}
+function fitCardLines(ctx,input,maxWidth,preferred,minimum,maxLines,kind){
+  const text=String(input).replaceAll('\\r','').trim();
+  if(!text)return {size:preferred,lines:[]};
+  const family='"Batang","Noto Serif CJK KR",serif';
+  for(let size=preferred;size>=minimum;size-=2){
+    ctx.font=size+'px '+family;
+    const lines=[];
+    for(const paragraph of text.split('\\n')){
+      let line='';
+      for(const char of paragraph){
+        const trial=line+char;
+        if(line&&ctx.measureText(trial).width>maxWidth){
+          lines.push(line);line=char;
+        }else line=trial;
+      }
+      lines.push(line);
+    }
+    if(lines.length<=maxLines
+       && lines.every(line=>ctx.measureText(line).width<=maxWidth)){
+      return {size,lines};
+    }
+  }
+  // Never truncate someone's chosen title or text on an archive image.
+  throw Error(kind+'이(가) 카드 두 줄을 넘습니다. 카드용 문구를 조금 짧게 다듬어 주세요.');
+}
 async function paintCard(){const canvas=$('#card-preview');const ctx=canvas.getContext('2d');if(!ctx)throw Error('이미지 렌더러를 사용할 수 없습니다.');
 canvas.width=1600;canvas.height=2400;
 const night=state.theme==='night';const porcelain=await getArtImage();
@@ -173,10 +196,23 @@ ctx.fillStyle='#82775E';ctx.font='400 21px system-ui,"Malgun Gothic",sans-serif'
 ctx.save();ctx.drawImage(porcelain,115,222,1370,1541);ctx.restore();
 ctx.strokeStyle='#b9afa0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(115,1831);ctx.lineTo(1485,1831);ctx.stroke();
 ctx.fillStyle='#8a7655';ctx.font='500 23px system-ui,"Malgun Gothic",sans-serif';ctx.fillText('빛을 담는 달항아리',115,1905);
-ctx.textAlign='right';ctx.fillStyle='#72786f';ctx.font='22px system-ui,"Malgun Gothic",sans-serif';ctx.fillText(night?'MOONLIGHT':'DAYLIGHT',1485,1905);ctx.textAlign='left';
+ctx.textAlign='right';ctx.fillStyle='#72786f';ctx.font='22px system-ui,"Malgun Gothic",sans-serif';ctx.fillText(state.mine?'MY ARTWORK':night?'MOONLIGHT':'DAYLIGHT',1485,1905);ctx.textAlign='left';
 const include=$('#include-copy').checked;const title=$('#card-title').value.trim();const line=$('#card-line').value.trim();
-if(include&&title){ctx.fillStyle='#27352D';ctx.font=`${textFit(ctx,title,1320,92,43)}px "Batang","Noto Serif CJK KR",serif`;ctx.fillText(title,115,2027);}
-if(include&&line){ctx.fillStyle='#4F5B53';ctx.font='39px "Batang","Noto Serif CJK KR",serif';const lines=splitLines(ctx,line,1360,2);lines.forEach((txt,i)=>ctx.fillText(txt,115,2091+i*60));}
+let titleLines=0;
+if(include&&title){
+  const plan=fitCardLines(ctx,title,1320,90,44,2,'제목');
+  ctx.fillStyle='#27352D';
+  ctx.font=plan.size+'px "Batang","Noto Serif CJK KR",serif';
+  titleLines=plan.lines.length;
+  plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,(titleLines===2?1982:2027)+i*72));
+}
+if(include&&line){
+  const plan=fitCardLines(ctx,line,1360,39,29,2,'문장');
+  ctx.fillStyle='#4F5B53';
+  ctx.font=plan.size+'px "Batang","Noto Serif CJK KR",serif';
+  const start=titleLines===2?2138:titleLines===1?2106:2026;
+  plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,start+i*53));
+}
 ctx.fillStyle='#8a8a7e';ctx.font='22px system-ui,"Malgun Gothic",sans-serif';ctx.fillText('자개와 여백을 담은 한 점의 기록',115,2270);
 ctx.textAlign='right';ctx.fillText('ART STUDY  ·  ORIGINAL 96 NACRE PIECES',1485,2270);ctx.textAlign='left';
 return canvas;}
