@@ -1,0 +1,56 @@
+name: Moonjar WAVE 9.5 Dual Art Research
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/render-moonjar-wave95.py'
+      - 'scripts/moonjar_wave95_helpers.py'
+      - 'scripts/check-moonjar-wave95.py'
+      - 'design/moonjar-wave95/**'
+      - 'docs/moonjar-wave95-dual-medium-design-study-20261019.md'
+      - '.github/workflows/moonjar-wave95-art-study.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-a-b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify all 96 unmodified original materials
+        run: |
+          node scripts/check-moonjar.mjs
+          node --test tests/moonjar/*.test.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install reproducible research image environment
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          python -m pip install --disable-pip-version-check \
+            numpy==2.3.5 pillow==12.3.0 cairosvg==2.8.2 opencv-python-headless==4.13.0.92
+      - name: Rebuild unpublished source porcelain V3.2 without altering operating assets
+        run: python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/study
+      - name: Compose A tactile craft and B editorial hanji with identical authentic 96-piece source
+        run: python -u scripts/render-moonjar-wave95.py
+      - name: Check 20 render hashes, four cards, off-jar freedom and full pixels
+        run: python scripts/check-moonjar-wave95.py
+      - name: Copy static comparison gallery and review for downloadable QA
+        run: |
+          cp design/moonjar-wave95/review.html artifacts/moonjar-wave95/index.html
+          cp docs/moonjar-wave95-dual-medium-design-study-20261019.md artifacts/moonjar-wave95/REVIEW_NOTES_KO.md
+      - name: Attach reproducible art-direction comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-wave95-a-b-art-review
+          path: artifacts/moonjar-wave95
+          retention-days: 7
+          if-no-files-found: warn
