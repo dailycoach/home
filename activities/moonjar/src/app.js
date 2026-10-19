@@ -4,6 +4,7 @@ import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from
 
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
+const craftAStudyFlag=new URLSearchParams(location.search).get('artStudy')==='craft-a';
 let story, manifest, schema, empty, materials, repository = null;
 let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null;
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
@@ -189,6 +190,7 @@ function studio() {
   const sceneLead = el('section',null,{id:'scene-lead',class:'scene-lead','aria-label':'현재 장면의 이야기'});
   const viewtools = el('div',null,{class:'view-toolbar'});
   viewtools.append(button('−','zoom-out',{'aria-label':'작품 보기 축소'}),button('전체 보기','fit'),button('+','zoom-in',{'aria-label':'작품 보기 확대'}),button('나의 바탕','compare'),button(paused ? '꾸미기로 돌아가기' : '잠시 바라보기','pause',{class:'pause-button'}));
+  if(craftAStudyFlag)viewtools.append(button('A형 공예 미술 시안','craft-a-preview',{class:'craft-a-preview-trigger'}));
   const lookPrompt = el('aside',null,{id:'look-prompt',class:'look-prompt','aria-label':'잠시 바라보기 질문'});
   const shell = el('div',null,{class:'stage-shell',id:'stage-shell',tabindex:'-1','aria-label':'달항아리 작품 영역'}), paper = el('div',null,{class:'paper',id:'paper'});
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
@@ -728,6 +730,141 @@ async function finish(){
   location.hash=`/result/${editor.doc.projectId}`;
   result();
 }
+
+/**
+ * WAVE 9.7 preview gate: production project documents NEVER store the art
+ * direction. Opening this dialog freezes only a clone of the current work.
+ * All archived exports retain their existing behavior and byte contract.
+ */
+async function craftAPreview(){
+  if(!craftAStudyFlag||!editor)return;
+  const snapshot=clone(editor.doc.scene);
+  const root=el('section',null,{class:'craft-a-dialog'});
+  const heading=el('div',null,{class:'craft-a-header'});
+  heading.append(
+    el('p','ART LAB 09.7  ·  A형 공예 시안',{class:'eyebrow'}),
+    el('h3','같은 나의 작품, 다른 백자의 숨결.'),
+    el('p','이 미술 연구는 기존 작업을 바꾸거나 저장하지 않습니다. 미리보기와 내려받기에만 임시로 적용됩니다.',{class:'micro'})
+  );
+  const layout=el('div',null,{class:'craft-a-layout'});
+  const figure=el('figure',null,{class:'craft-a-figure'});
+  const picture=el('img',null,{alt:'현재 작품의 A형 공예 표현 미리보기',width:'360',height:'405'});
+  const caption=el('figcaption','내 작품의 자개 위치·크기·회전은 그대로 유지합니다.');
+  figure.append(picture,caption);
+  const panel=el('section',null,{class:'craft-a-side'});
+  const status=el('p','작품을 준비하고 있어요.',{class:'micro',role:'status','aria-live':'polite'});
+  const tabs=el('div',null,{class:'craft-a-tabs'});
+  const workTab=button('A형 작품','preview-art',{class:'primary'});
+  const oldTab=button('현재 작품과 비교','preview-original');
+  const cardTab=button('A형 소장 카드','preview-card');
+  for(const b of [workTab,oldTab,cardTab])b.type='button';
+  tabs.append(workTab,oldTab,cardTab);
+  panel.append(el('h4','작품을 천천히 바라보기'),tabs,status);
+
+  const words=el('section',null,{class:'craft-a-copy'});
+  words.append(el('h4','카드에 남길 말 · 선택'));
+  const checkTitle=el('input',null,{type:'checkbox','aria-label':'작품 제목 포함'});
+  const titleRow=el('label',null,{class:'check-row'});titleRow.append(checkTitle,document.createTextNode('제목 포함'));
+  const title=el('input',null,{type:'text',maxlength:'50',placeholder:'나의 작품 제목',class:'craft-a-text'});
+  const checkSentence=el('input',null,{type:'checkbox','aria-label':'한 문장 포함'});
+  const sentenceRow=el('label',null,{class:'check-row'});sentenceRow.append(checkSentence,document.createTextNode('한 문장 포함'));
+  const sentence=el('textarea',null,{maxlength:'100',rows:'2',placeholder:'직접 고른 한 문장',class:'craft-a-text'});
+  const titleLabel=el('label','카드 제목',{class:'micro'}), sentenceLabel=el('label','카드 문장',{class:'micro'});
+  titleLabel.append(title);sentenceLabel.append(sentence);
+  titleLabel.hidden=true;sentenceLabel.hidden=true;
+  words.append(titleRow,titleLabel,sentenceRow,sentenceLabel);
+  panel.append(words);
+  const actions=el('div',null,{class:'craft-a-actions'});
+  const saveWork=button('A형 작품 PNG 저장','save-a-png');
+  const saveCard=button('A형 카드 PNG 저장','save-a-card',{class:'primary'});
+  saveWork.disabled=true;saveCard.disabled=true;
+  actions.append(saveWork,saveCard);
+  panel.append(actions,el('p','백자 표현은 연구 시안이며 실제 나전 재료의 물리적 재현이 아닙니다. 원본 자개 96종과 사용자의 모든 위치·기록은 그대로 보존합니다.',{class:'micro craft-a-disclaimer'}));
+  layout.append(figure,panel);root.append(heading,layout);
+  openDialog('A형 공예 작품 — 검토 전용',root);
+
+  let previousURL=null;
+  let disposed=false,mode='art',requested=0;
+  let craftBlob=null,oldBlob=null,cardBlob=null;
+  function setPreview(blob,message){
+    if(disposed||!modal.open||!root.isConnected)return;
+    const next=URL.createObjectURL(blob);
+    const old=previousURL;previousURL=next;
+    picture.src=next;
+    if(old)URL.revokeObjectURL(old);
+    caption.textContent=message;
+  }
+  const selectedCopy=()=>({
+    title:checkTitle.checked?title.value:'',
+    sentence:checkSentence.checked?sentence.value:''
+  });
+  async function view(kind){
+    mode=kind;
+    const id=++requested;
+    for(const [tab,key] of [[workTab,'art'],[oldTab,'original'],[cardTab,'card']])
+      tab.setAttribute('aria-pressed',String(key===kind));
+    status.textContent='선택한 모습을 준비하고 있습니다.';
+    saveCard.disabled=true;
+    try{
+      const {createCraftACard}=await import('./craft-a-study.js');
+      if(kind==='art')setPreview(craftBlob,'A형 공예 연구 · 현재 작품에서 재구성한 미리보기');
+      if(kind==='original'){
+        oldBlob ||= await exportPNG(snapshot,materials);
+        if(disposed||id!==requested)return;
+        setPreview(oldBlob,'기존 도안과 출력 방식 · 기존 작품 파일은 바뀌지 않습니다.');
+      }
+      if(kind==='card'){
+        cardBlob=await createCraftACard(craftBlob,selectedCopy());
+        if(disposed||id!==requested)return;
+        setPreview(cardBlob,'A형 아트카드 · 1600 × 2400 PNG · 개인 기록 기본 제외');
+      }
+      if(disposed||id!==requested)return;
+      status.textContent=kind==='original'?'기존 표현입니다. 연구용 A형 결과만 별도 저장할 수 있습니다.'
+        : '표시된 A형 시안은 같은 이미지 생성 코드를 사용합니다.';
+      saveCard.disabled=false;
+    }catch(e){
+      if(disposed||id!==requested)return;
+      status.textContent=e.message||'미술 시안을 만들지 못했습니다.';
+      saveCard.disabled=true;
+    }
+  }
+  const onCopyChange=()=>{
+    titleLabel.hidden=!checkTitle.checked;
+    sentenceLabel.hidden=!checkSentence.checked;
+    cardBlob=null;saveCard.disabled=false;
+    if(mode==='card')void view('card');
+  };
+  for(const input of [checkTitle,checkSentence])input.addEventListener('change',onCopyChange);
+  for(const input of [title,sentence])input.addEventListener('input',onCopyChange);
+  workTab.onclick=()=>void view('art');
+  oldTab.onclick=()=>void view('original');
+  cardTab.onclick=()=>void view('card');
+  saveWork.onclick=()=>{if(craftBlob)download(craftBlob,'moonjar-a-study-art.png');};
+  saveCard.onclick=()=>safely(async()=>{
+    if(!craftBlob||disposed)return;
+    saveCard.disabled=true;
+    try{
+      const {createCraftACard}=await import('./craft-a-study.js');
+      const blob=cardBlob||await createCraftACard(craftBlob,selectedCopy());
+      cardBlob=blob;
+      if(!disposed)download(blob,'moonjar-a-study-card.png');
+    }catch(e){status.textContent=e.message||'카드를 생성하지 못했습니다.';}
+    finally{if(!disposed)saveCard.disabled=false;}
+  });
+  modal.addEventListener('close',()=>{
+    disposed=true;requested++;
+    if(previousURL)URL.revokeObjectURL(previousURL);
+  },{once:true});
+  try{
+    const {createCraftAArtwork}=await import('./craft-a-study.js');
+    craftBlob=await createCraftAArtwork(snapshot,materials);
+    if(disposed)return;
+    saveWork.disabled=false;
+    await view('art');
+  }catch(e){
+    if(!disposed)status.textContent=e.message||'미술 시안을 불러올 수 없습니다.';
+  }
+}
 function result(){
   currentView='result';
   main.className='result-page';
@@ -751,6 +888,7 @@ function result(){
     button('편집 파일로 보관','export-json'),
     button('기록지 인쇄·PDF 저장','print-options')
   );
+  if(craftAStudyFlag)actions.append(button('A형 공예 미술 시안','craft-a-preview',{class:'craft-a-preview-trigger'}));
   copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
@@ -922,6 +1060,7 @@ const actions={
   pause:()=>setPanel(paused?(editor.doc.mode==='guided'?'story':'palette'):'look'),
   'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();},
   snapshot,compare,finish,'piece-note':pieceNote,'save-options':saveOptions,
+  'craft-a-preview':craftAPreview,
   'batch:12':()=>addColorBatch($('[data-action="batch:12"]')),
   continue:()=>{paused=false;viewScene='arrange';if(!readOnly)editor.navigate('arrange');location.hash=`/studio/${editor.doc.projectId}`;studio();},
   'export-png':()=>imageExport(),'card-options':cardOptions,'export-json':backup,
