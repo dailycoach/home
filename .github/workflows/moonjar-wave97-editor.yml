@@ -1,0 +1,66 @@
+name: Moonjar WAVE 9.7 A-Only Editor Preview
+
+on:
+  pull_request:
+    paths:
+      - 'activities/moonjar/**'
+      - 'scripts/build-moonjar-wave97-preview.py'
+      - 'scripts/check-moonjar-wave97-browser.mjs'
+      - 'tests/moonjar/**'
+      - 'docs/moonjar-wave97-a-editor-preview.md'
+      - '.github/workflows/moonjar-wave97-editor.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  study-editor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 29
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate original Moonjar assets and unchanged scene schema
+        run: |
+          node scripts/check-moonjar.mjs
+          node --test tests/moonjar/*.test.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install the locked original porcelain art study renderer
+        run: |
+          python -m pip install --disable-pip-version-check \
+            numpy==2.3.5 pillow==12.3.0 cairosvg==2.8.2 opencv-python-headless==4.13.0.92
+      - name: Recreate exact V3.2 white porcelain day and night master PNGs
+        run: |
+          python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/study
+      - name: Assemble isolated A-only preview and verify original porcelain hashes
+        run: python scripts/build-moonjar-wave97-preview.py
+      - name: Install Chromium and WebKit for actual browser interaction QA
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Serve working Moonjar app with generated preview-only assets
+        run: |
+          python3 -m http.server 4173 >/tmp/moonjar-w97-http.log 2>&1 &
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:4173/activities/moonjar/?artStudy=craft-a >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/moonjar-w97-http.log
+          exit 1
+      - name: Verify legacy editor + pixel-identical A portrait PNG and archives
+        run: node scripts/check-moonjar-wave97-browser.mjs
+      - name: Attach complete portable preview, real artifact screenshots and QA logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-wave97-a-editor-preview
+          path: |
+            artifacts/moonjar-wave97-preview/
+            artifacts/moonjar-wave97-browser/
+          retention-days: 7
+          if-no-files-found: warn
