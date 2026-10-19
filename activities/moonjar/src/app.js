@@ -160,11 +160,7 @@ function home() {
   const actions = el('div',null,{class:'hero-actions'}); actions.append(button(story.ui.startFree,'start-free',{class:'primary'}), button(story.ui.startGuided,'start-guided'));
   if (editor || hasStored) actions.append(button('이어서 하기','resume',{class:'text-button'}));
   actions.append(button('편집 파일 열기','import',{class:'text-button'}));
-  startArea.append(
-    actions,
-    el('p','① 자개를 고르고  ② 마음껏 놓고  ③ 작품을 간직해요.',{class:'micro journey-path',id:'journey-path'}),
-    el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'})
-  );
+  startArea.append(actions,el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'}));
   if (!available) startArea.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 작업 중 편집 파일로 보관해 주세요.',{class:'error'}));
   if(globalThis.__MOONJAR_BUNDLE__)startArea.append(el('p','단일 파일 검토본입니다. 브라우저에 따라 자동 저장이 제한될 수 있으니 중요한 작업은 편집 파일로 보관해 주세요.',{class:'micro'}));
   const artwork=manifest.heroArtwork;
@@ -178,6 +174,19 @@ function openingStory(){
   const content=el('div',null,{class:'opening-story'});
   content.append(el('h3',story.opening.title));
   for(const paragraph of story.opening.paragraphs)content.append(el('p',paragraph));
+  // The original cover's visual composition must NOT shift when we explain
+  // the journey. The steps live inside the already-optional story dialog.
+  const path=el('ol',null,{class:'opening-steps','aria-label':'이용 순서'});
+  for(const [name,detail] of [
+    ['자개 고르기','마음에 드는 빛과 모양을 선택합니다.'],
+    ['마음껏 놓기','항아리 안과 밖에 자유롭게 놓고 바라봅니다.'],
+    ['작품 간직하기','원하면 작품과 편집 파일을 직접 저장합니다.']
+  ]){
+    const item=el('li');
+    item.append(el('strong',name),el('span',detail));
+    path.append(item);
+  }
+  content.append(path);
   content.append(el('p','선택한 조각과 말은 내 기기에만 남습니다. 중요한 작업은 편집 파일로도 보관해 주세요.',{class:'micro'}));
   content.append(button('이야기를 덮고 시작하기','close-opening-story',{class:'primary'}));
   openDialog('달항아리의 이야기',content);
