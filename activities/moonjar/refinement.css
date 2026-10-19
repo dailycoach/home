@@ -1221,6 +1221,19 @@ dialog::backdrop{background:rgba(22,29,23,.62)}
 }
 
 /* Material notes and privacy: readable, grouped, and non-decorative. */
+.materials-guide .materials-related-links{margin:19px 0 0}
+.materials-guide .materials-related-links a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  padding:8px 0;
+  color:#6b593a;
+  border-bottom:1px solid #ad9a78;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+.materials-guide .materials-related-links a:hover{color:#354135;border-color:#354135}
 .materials-guide .materials-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
