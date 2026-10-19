@@ -366,9 +366,21 @@ function pieceNote(){
 }
 function saveOptions(){
   const root=el('div',null,{class:'save-options'});
-  for(const [label,action,detail] of [['작품 이미지 저장','export-png','작품만 PNG로 남깁니다.'],['작품 카드 만들기','card-options','넣고 싶은 제목·한 문장만 직접 선택해 담습니다.'],['편집 파일로 보관','export-json','작품과 기록을 다음에 다시 열 수 있습니다.'],['기록지 인쇄·PDF 저장','print-options','인쇄에 넣을 기록을 직접 고릅니다.']]){
-    const row=el('div'),b=button(label,action);b.onclick=()=>{closeDialog();};row.append(b,el('p',detail,{class:'micro'}));root.append(row);
-  }openDialog('작품과 기록 남기기',root);
+  root.append(el('p','어떤 형태로 작품을 남길까요? 선택한 방식으로만 저장하며, 개인 기록은 자동으로 작품 이미지에 넣지 않습니다.',{class:'save-options-intro'}));
+  const grid=el('div',null,{class:'save-options-grid'});
+  const choices=[
+    ['01','작품 이미지만 저장','export-png','달항아리와 자개를 PNG 이미지로 저장합니다.'],
+    ['02','작품 카드 만들기','card-options','원할 때만 제목과 한 문장을 담습니다.'],
+    ['03','편집 파일로 보관','export-json','나중에 자개 배치를 이어서 수정할 수 있습니다. 개인 기록도 함께 들어갑니다.'],
+    ['04','기록지 인쇄·PDF 저장','print-options','출력할 기록을 직접 선택합니다.']
+  ];
+  for(const [number,label,action,detail] of choices){
+    const item=el('article',null,{class:'save-option'});
+    const b=button(label,action,{'aria-label':label});b.onclick=()=>{closeDialog();};
+    item.append(el('span',number,{class:'save-option-number','aria-hidden':'true'}),b,el('p',detail,{class:'micro'}));
+    grid.append(item);
+  }
+  root.append(grid);openDialog('작품과 기록 남기기',root);
 }
 function inputField(section, field, value) {
   const wrap = el('label',null,{class:'record-field'});wrap.append(el('span',field.label));
@@ -751,7 +763,7 @@ function result(){
     button('편집 파일로 보관','export-json'),
     button('기록지 인쇄·PDF 저장','print-options')
   );
-  copy.append(actions,el('p',story.ui.privacyImage,{class:'micro'}));
+  copy.append(el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
   recap.append(el('summary','나의 말과 선택 다시 보기 · 나만 확인'));
@@ -792,19 +804,30 @@ async function projects(){
   await queue?.flush();
   if(epoch!==projectListEpoch)return;
   currentView='projects';main.className='projects-page';main.replaceChildren(header('이 기기의 작업','이 브라우저에 보관한 작업입니다. 자동으로 다른 기기와 동기화되지 않습니다.'));
-  const actions=el('div',null,{class:'button-row'});actions.append(button('편집 파일 열기','import'),button('새 작업 시작','home'));main.append(actions);
+  const actions=el('div',null,{class:'button-row project-top-actions'});actions.append(button('편집 파일 열기','import'),button('새 작업 시작','home'));main.append(actions);
   if(!repository){main.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 편집 파일을 열거나 화면에만 유지하며 시작할 수 있습니다.'));return;}
   const stored=await repository.list();
   if(epoch!==projectListEpoch||currentView!=='projects')return;
   const list=stored.filter(d=>!validateProject(d,schema,manifest).length).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
   hasStored=stored.length>0;
   if(stored.length!==list.length)main.append(el('p','읽을 수 없는 저장 항목이 있어 목록에서 열지 않았습니다. 원본 항목은 삭제하지 않았습니다. 보관한 편집 파일을 열어 주세요.',{class:'error'}));
-  if(!list.length)main.append(el('p','이 기기에 보관된 작업이 없습니다. 편집 파일이 있다면 열어 주세요.',{class:'empty-state'}));
+  if(!list.length){
+    const emptyState=el('section',null,{class:'archive-empty','aria-label':'저장된 작품 없음'});
+    emptyState.append(el('p','PERSONAL ARCHIVE',{class:'eyebrow'}),el('h2','아직 이곳에 놓아둔 작품이 없습니다.'),el('p','작품을 시작하거나, 이전에 내려받은 편집 파일을 열어 이어갈 수 있어요. 자동 저장은 다른 기기와 동기화되지 않습니다.'));
+    emptyState.append(button('첫 작품 시작하기','home',{class:'primary'}),button('편집 파일 열기','import'));
+    main.append(emptyState);
+  }
   const cards=el('div',null,{class:'project-list'});
   for(const d of list){
-    const card=el('article',null,{class:'project-card'});card.append(scenePreview(d.scene,d.title||'이름 없이 남긴 작품'));card.append(el('h2',d.title||story.ui.noTitle),el('p',`${new Date(d.updatedAt).toLocaleString('ko-KR')} · ${d.scene.nodes.length}조각`,{class:'micro'}));
-    card.append(button('이어서 하기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger'}));cards.append(card);
-  }main.append(cards,el('p','같은 브라우저를 쓰는 사람도 이 목록을 열 수 있습니다. 공용 기기에서는 기록을 남기지 않는 모드를 선택하세요.',{class:'micro'}));
+    const card=el('article',null,{class:'project-card'});
+    card.append(scenePreview(d.scene,d.title||'이름 없이 남긴 작품'));
+    const info=el('div',null,{class:'project-card-info'});
+    info.append(el('p','MY WORK · 개인 보관',{class:'eyebrow'}),el('h2',d.title||story.ui.noTitle),el('p',`최근 작업 ${new Date(d.updatedAt).toLocaleString('ko-KR')} · 자개 ${d.scene.nodes.length}개`,{class:'micro project-meta'}));
+    const controls=el('div',null,{class:'project-card-actions'});
+    controls.append(button('이어서 꾸미기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger','aria-label':`「${d.title||'이름 없는 작품'}」 삭제`}));
+    info.append(controls);card.append(info);cards.append(card);
+  }
+  main.append(cards,el('p','같은 브라우저를 쓰는 사람도 이 목록을 열 수 있습니다. 공용 기기에서는 기록을 남기지 않는 모드를 선택하세요.',{class:'micro archive-privacy'}));
 }
 async function renameProject(id){
   const doc=await repository.get(id);if(!doc)return;
@@ -823,16 +846,45 @@ async function deleteProject(id){
   },'삭제');
 }
 function guide(){
-  currentView='guide';main.className='reading-page';main.replaceChildren(header('함께 머무는 60분','진행자를 위한 안내 · 참여자의 기록을 조회하거나 수집하지 않습니다.'));
-  main.append(el('p','모든 질문과 공유는 선택입니다. 말하고 싶지 않은 이야기는 요청하지 않습니다. 빈 항아리로 마무리할 수 있습니다.'));
-  const table=el('table'),thead=el('thead'),tr=el('tr');for(const h of ['장면','시간','중심 질문'])tr.append(el('th',h));thead.append(tr);table.append(thead);const tbody=el('tbody');
-  for(const t of story.facilitator.timing){const s=story.scenes.find(s=>s.id===t.scene),r=el('tr');r.append(el('td',s.name),el('td',`${t.minutes}분`),el('td',s.focusQuestion));tbody.append(r);}table.append(tbody);main.append(table);
-  for(const d of story.daily)main.append(el('h2',`${d.key} · ${d.en}`),el('p',`${d.ko} — ${d.question}`));
-  main.append(el('p','작품의 색과 위치에 의미를 부여하지 않습니다. 참여자가 자신의 의미를 찾도록 기다립니다. 불편하면 멈추거나 건너뛰도록 안내합니다.'));
+  currentView='guide';
+  main.className='reading-page facilitator-guide';
+  main.replaceChildren(header('함께 머무는 60분','진행자를 위한 안내 · 참여자의 기록을 조회하거나 수집하지 않습니다.'));
+  const intro=el('section',null,{class:'guide-intro'});
+  intro.append(el('p','FACILITATOR’S GUIDE',{class:'eyebrow'}),el('h2','지시하기보다, 함께 바라보는 시간.'),el('p','모든 질문과 공유는 선택입니다. 말하고 싶지 않은 이야기는 요청하지 않습니다. 빈 항아리로 마무리할 수 있습니다.'));
+  main.append(intro);
+  const schedule=el('section',null,{class:'guide-section'});
+  schedule.append(el('h2','60분 진행 흐름'));
+  const table=el('table',null,{class:'facilitator-timing'});
+  table.append(el('caption','60분 아트코칭 진행 흐름'));
+  const thead=el('thead'),tr=el('tr');
+  for(const h of ['장면','시간','중심 질문'])tr.append(el('th',h,{scope:'col'}));
+  thead.append(tr);table.append(thead);
+  const tbody=el('tbody');
+  for(const t of story.facilitator.timing){
+    const scene=story.scenes.find(s=>s.id===t.scene),r=el('tr');
+    r.append(el('td',scene.name,{'data-label':'장면'}),el('td',`${t.minutes}분`,{'data-label':'시간'}),el('td',scene.focusQuestion,{'data-label':'중심 질문'}));
+    tbody.append(r);
+  }
+  table.append(tbody);schedule.append(table);main.append(schedule);
+  const principles=el('section',null,{class:'guide-section guide-daily'});
+  principles.append(el('p','DAILY · AWARENESS',{class:'eyebrow'}),el('h2','진행자가 지켜야 할 질문의 태도'));
+  const grid=el('div',null,{class:'guide-principles'});
+  for(const d of story.daily){
+    const item=el('article',null,{class:'guide-principle'});
+    item.append(el('p',d.en,{class:'guide-principle-en'}),el('h3',d.key),el('p',`${d.ko} — ${d.question}`));
+    grid.append(item);
+  }
+  principles.append(grid);main.append(principles);
+  main.append(el('aside','작품의 색과 위치에 의미를 부여하지 않습니다. 참여자가 자신의 의미를 찾도록 기다립니다. 불편하면 멈추거나 건너뛰도록 안내합니다.',{class:'guide-safety','aria-label':'진행 윤리 안내'}));
 }
 function about(){
-  currentView='materials';main.className='reading-page';main.replaceChildren(header('재료와 개인 저장 안내'));
-  for(const [h,t] of [
+  currentView='materials';
+  main.className='reading-page materials-guide';
+  main.replaceChildren(header('재료와 개인 저장 안내'));
+  const intro=el('section',null,{class:'materials-intro'});
+  intro.append(el('p','MATERIALS & PRIVACY',{class:'eyebrow'}),el('h2','작품은 자유롭게. 기록은 신중하게.'),el('p','자개를 놓는 방법에 정답은 없습니다. 다만 작품과 개인 기록의 보관 방식은 시작하기 전에 확인해 주세요.'));
+  main.append(intro);
+  const information=[
     ['자개의 빛','제공된 자개 PNG 96개와 1600 × 1800 달항아리 도안 두 종을 사용합니다. 화면 속 자개는 정적인 2D 이미지이며 회전으로 실제 자개의 광학 반사를 재현하지 않습니다.'],
     ['자유로운 배치','항아리 안이나 밖, 종이 영역 안에 조각을 놓을 수 있습니다. 조각 수와 배치에 정답은 없습니다.'],
     ['저장은 이 브라우저에','작품과 기록은 이 기기·이 브라우저·현재 출처의 IndexedDB에 저장합니다. 영구 보존이나 기기 간 동기화를 보장하지 않습니다. 시크릿 모드, 브라우저 데이터 삭제, 앱 내 브라우저에서 보관 내용이 사라질 수 있습니다. 중요한 작업은 편집 파일로 보관하세요.'],
@@ -842,12 +894,34 @@ function about(){
     ['다시 실행과 되돌리기','작품의 실행 취소는 현재 세션의 최대 100회 조작을 보관합니다. 새로고침 뒤에는 최신 작품·기록·남긴 배치를 복원하며 실행 취소 이력은 복원하지 않습니다.'],
     ['오프라인과 인쇄','완전한 오프라인 앱은 아닙니다. 첫 실행과 아직 읽지 않은 재료에는 파일을 제공하는 환경이 필요합니다. 기록지의 PDF 저장은 브라우저 인쇄 대화상자를 사용하며, 브라우저마다 UI가 다릅니다.'],
     ['디자인과 이미지','첫 화면은 DAILYCOACHING의 오리지널 벡터 달항아리 그림입니다. 자개 도안 8종과 파생 조각 96개는 운영자가 직접 디자인한 자료입니다. 달항아리 배경 도안 두 종의 자산 출처는 별도 관리합니다.']
-  ])main.append(el('h2',h),el('p',t));
-  main.append(el('p',manifest.heroArtwork.credit,{class:'micro'}));
-  main.append(el('h2','원문과 참고 자료'),el('p','본 콘텐츠는 제공된 PDF V3와 웹 전환 콘텐츠에 근거합니다. DAILY는 Detect / Acknowledge / Inquire / Link / Your Action을 따릅니다.'));
-  for(const s of story.materialSources){const p=el('p',s.citation);if(s.url){const a=el('a',' 자료 보기',{href:s.url,target:'_blank',rel:'noreferrer noopener'});p.append(a);}main.append(p);}
+  ];
+  const groups=[
+    ['창작의 자유','달항아리와 자개를 다루는 방법',information.slice(0,2)],
+    ['보관과 개인정보','나의 작업이 어디에 남는지',information.slice(2,5)],
+    ['저장·출력·출처','완성 작품을 안전하게 간직하기',information.slice(5)]
+  ];
+  for(const [heading,caption,items] of groups){
+    const section=el('section',null,{class:'materials-section'});
+    section.append(el('p',caption,{class:'eyebrow'}),el('h2',heading));
+    const grid=el('div',null,{class:'materials-grid'});
+    for(const [title,paragraph] of items){
+      const article=el('article',null,{class:'materials-item'});
+      article.append(el('h3',title),el('p',paragraph));grid.append(article);
+    }
+    section.append(grid);main.append(section);
+  }
+  const sources=el('section',null,{class:'materials-section materials-sources'});
+  sources.append(el('p',manifest.heroArtwork.credit,{class:'micro'}),el('h2','원문과 참고 자료'),el('p','본 콘텐츠는 제공된 PDF V3와 웹 전환 콘텐츠에 근거합니다. DAILY는 Detect / Acknowledge / Inquire / Link / Your Action을 따릅니다.'));
+  for(const source of story.materialSources){
+    const p=el('p',source.citation);
+    if(source.url){
+      const a=el('a','자료 보기',{href:source.url,target:'_blank',rel:'noreferrer noopener'});
+      p.append(a);
+    }
+    sources.append(p);
+  }
+  main.append(sources);
 }
-
 function printOptions(){
   const root=el('div');root.append(el('p','종이에 남길 항목을 직접 고르세요. 선택한 내용만 브라우저 인쇄 화면에 나타납니다.'));
   const fields=[['title','작품 제목'],['art','작품 이미지'],['reflections','성찰 기록'],['notes','조각 이름과 메모']];
