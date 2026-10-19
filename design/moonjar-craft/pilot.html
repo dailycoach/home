@@ -163,13 +163,13 @@ function tab(name){if(!['view','card','pilot'].includes(name))return;state.tab=n
 function nextFrame(){return new Promise(resolve=>requestAnimationFrame(resolve));}
 async function getArtImage(){const image=new Image();image.decoding='async';image.src=ensureArt();await image.decode();return image;}
 function fitCardLines(ctx,input,maxWidth,preferred,minimum,maxLines,kind){
-  const text=String(input).replaceAll('\\r','').trim();
+  const text=String(input).replaceAll('\r','').trim();
   if(!text)return {size:preferred,lines:[]};
   const family='"Batang","Noto Serif CJK KR",serif';
   for(let size=preferred;size>=minimum;size-=2){
     ctx.font=size+'px '+family;
     const lines=[];
-    for(const paragraph of text.split('\\n')){
+    for(const paragraph of text.split('\n')){
       let line='';
       for(const char of paragraph){
         const trial=line+char;
