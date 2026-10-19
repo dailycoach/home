@@ -856,7 +856,7 @@ function guide(){
   // uses buttons instead of fragment links, so the current guide route stays
   // intact while readers jump between the three parts.
   const toc=el('nav',null,{class:'guide-toc','aria-label':'진행 안내 차례'});
-  for(const [name,id] of [['01  ·  60분 진행 흐름','guide-schedule'],['02  ·  DAILY 질문','guide-daily'],['03  ·  진행 윤리','guide-ethics']]){
+  for(const [name,id] of [['01 · 진행 순서','guide-schedule'],['02 · DAILY 질문','guide-daily'],['03 · 진행 윤리','guide-ethics']]){
     const jump=el('button',name,{type:'button',class:'guide-jump'});
     jump.addEventListener('click',()=>{
       const target=main.querySelector('#'+id);
