@@ -1,0 +1,66 @@
+name: Moonjar WAVE 9.4 Porcelain Surface Art Review
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/render-moonjar-wave94.py'
+      - 'docs/moonjar-wave94-ceramic-nacre-art-review-20261019.md'
+      - '.github/workflows/moonjar-wave94-art-study.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  porcelain-art-study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate published 96 nacre originals and V3.1 isolation
+        run: |
+          node scripts/check-moonjar.mjs
+          node --test tests/moonjar/art-study-wave93.test.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install locked deterministic art renderer
+        run: |
+          python -m pip install --disable-pip-version-check \
+            numpy==2.3.5 pillow==12.3.0 cairosvg==2.8.2 opencv-python-headless==4.13.0.92
+      - name: Generate independent V3.2 original night and day backgrounds
+        run: python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/first
+      - name: Compare a second independent reproduction and hashes
+        run: |
+          python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/second
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          a=Path('artifacts/moonjar-wave94/first')
+          b=Path('artifacts/moonjar-wave94/second')
+          for file in ('porcelain-day.svg','porcelain-night.svg',
+                       'porcelain-day.png','porcelain-night.png',
+                       'preview-day.webp','preview-night.webp','study-manifest.json'):
+              assert hashlib.sha256((a/file).read_bytes()).hexdigest()==hashlib.sha256((b/file).read_bytes()).hexdigest(),file
+          doc=json.loads((a/'study-manifest.json').read_text())
+          assert doc['productionIntegrated'] is False
+          assert doc['originalNacreChanged'] is False
+          assert doc['dimensions']==[1600,1800]
+          # Deterministic researcher-supplied targets, not style/art judgments.
+          expected={
+            'day':'7a3221962cad4f4dda870efd5228da2c8e763ad06ff226ea543ddbc448ceb674',
+            'night':'3ee24ef9e940577a9c9390abfe886f155794e1dad187a8e9c7535b61081faa1d'
+          }
+          for kind,pnghash in expected.items():
+              assert doc['variants'][kind]['png_sha256']==pnghash,(kind,doc['variants'][kind]['png_sha256'])
+          print('MOONJAR W9.4 ART STUDY PASS | all 7 files byte-identical | SHA of night and day verified')
+          PY
+      - name: Upload independent art source results
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-wave94-original-white-porcelain
+          path: artifacts/moonjar-wave94/first
+          retention-days: 7
