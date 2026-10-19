@@ -146,7 +146,11 @@ function home() {
   const actions = el('div',null,{class:'hero-actions'}); actions.append(button(story.ui.startFree,'start-free',{class:'primary'}), button(story.ui.startGuided,'start-guided'));
   if (editor || hasStored) actions.append(button('이어서 하기','resume',{class:'text-button'}));
   actions.append(button('편집 파일 열기','import',{class:'text-button'}));
-  startArea.append(actions,el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'}));
+  startArea.append(
+    actions,
+    el('p','① 자개를 고르고  ② 마음껏 놓고  ③ 작품을 간직해요.',{class:'micro journey-path',id:'journey-path'}),
+    el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'})
+  );
   if (!available) startArea.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 작업 중 편집 파일로 보관해 주세요.',{class:'error'}));
   if(globalThis.__MOONJAR_BUNDLE__)startArea.append(el('p','단일 파일 검토본입니다. 브라우저에 따라 자동 저장이 제한될 수 있으니 중요한 작업은 편집 파일로 보관해 주세요.',{class:'micro'}));
   const artwork=manifest.heroArtwork;
@@ -742,7 +746,7 @@ async function finish(){
 }
 function result(){
   currentView='result';
-  main.className='result-page';
+  main.className=persistent?'result-page':'result-page result-memory-only';
   main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
 
   const layout=el('div',null,{class:'result-layout'});
@@ -755,6 +759,21 @@ function result(){
   );
   // The result is an artwork first. Journal reflections are not exposed on
   // the page by default, and the image/card never includes them automatically.
+  // Memory-only creation has no persistent revision or autosave; completion
+  // must not look like a successful archival save. The same existing
+  // export-json action remains available below with an explicit description.
+  if(!persistent){
+    const reminder=el('aside',null,{
+      class:'result-memory-reminder',
+      role:'note',
+      'aria-label':'임시 작업 보관 안내'
+    });
+    reminder.append(
+      el('strong','이번 작품은 이 화면에만 남아 있습니다.'),
+      el('p','화면을 닫으면 작품과 기록을 다시 열 수 없어요. 나중에 이어 꾸미려면 아래의 「편집 파일로 보관」을 선택해 주세요. 편집 파일에는 개인 기록도 포함됩니다.')
+    );
+    copy.append(reminder);
+  }
   const actions=el('div',null,{class:'result-actions'});
   actions.append(
     button('작품 카드 만들기','card-options',{class:'primary'}),
