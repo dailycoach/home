@@ -25,7 +25,11 @@ async function scenario(browserType,engine,width,height){
   ok(await page.evaluate(()=>getComputedStyle(document.body).overflow==='hidden'),name+' one-screen home');
   await shot(page,name,'home');
 
-  await page.locator('.site-header [data-action="guide"]').click();
+  // The desktop header intentionally hides facilitator-only navigation on phones.
+  // Mobile participants still reach it from the visible materials/privacy page.
+  await page.locator('.site-header [data-action="materials"]').click();
+  await page.locator('main.materials-guide').waitFor();
+  await page.locator('.materials-related-links a[href="#/guide"]').click();
   await page.locator('main.facilitator-guide').waitFor();
   ok(await page.locator('.facilitator-timing tbody tr').count()>=6,name+' all coaching schedule stages preserved');
   ok(await page.locator('.guide-principle').count()===5,name+' 5 DAILY dimensions present');
