@@ -1570,3 +1570,71 @@ main.result-page .result-privacy-note{
   #modal .save-option{column-gap:7px;padding:9px}
   #modal .save-option p.micro{font-size:11px}
 }
+
+
+/* WAVE 10.0 / First-visit and completion-state guidance.
+   Maintains the original ATELIER workbench, type palette, moonjar and
+   mother-of-pearl design. These are low-chrome reading signals. */
+main.home .hero-start>.journey-path{
+  margin:7px 0 2px;
+  padding:0;
+  color:#756b54;
+  font-size:11px;
+  line-height:1.65;
+  letter-spacing:.01em;
+  word-break:keep-all;
+}
+main.home .hero-start>.journey-path + .micro{
+  margin-top:5px;
+}
+main.result-page .result-memory-reminder{
+  margin:9px 0 15px;
+  padding:12px 14px;
+  border-left:3px solid var(--atelier-brass);
+  background:#eee7db;
+  color:#424e41;
+  font-size:13px;
+  line-height:1.75;
+}
+main.result-page .result-memory-reminder strong{
+  display:block;
+  margin:0 0 4px;
+  font-family:var(--atelier-display);
+  color:#3a453a;
+  font-size:16px;
+  line-height:1.5;
+}
+main.result-page .result-memory-reminder p{
+  margin:0;
+  color:#596558;
+  font-size:12px;
+  line-height:1.8;
+}
+/* The existing personal-backup action is more legible when this work is
+   memory-only; no duplicate CTA or recording is introduced. */
+main.result-page.result-memory-only .result-actions button[data-action="export-json"]{
+  border-color:#a38c62;
+  background:#ede4d4;
+  color:#3a4237;
+  font-weight:700;
+}
+@media(max-width:767px){
+  main.home .hero-start>.journey-path{
+    font-size:10px;
+    line-height:1.45;
+    margin:4px 0 0;
+  }
+  main.home .hero-start>.journey-path + .micro{
+    font-size:10px;
+    line-height:1.4;
+    margin:3px 0 0;
+  }
+  main.result-page .result-memory-reminder{
+    margin:7px 0 10px;
+    padding:9px 10px;
+    font-size:12px;
+    line-height:1.55;
+  }
+  main.result-page .result-memory-reminder strong{font-size:14px;margin-bottom:3px}
+  main.result-page .result-memory-reminder p{font-size:11px;line-height:1.6}
+}
