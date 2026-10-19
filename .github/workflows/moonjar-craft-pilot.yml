@@ -45,6 +45,7 @@ jobs:
       - name: Build pixel-lossless offline A-only archive experience
         run: |
           python scripts/build-moonjar-craft-pilot.py
+          cp docs/moonjar-wave96-a-only-pilot.md artifacts/moonjar-craft-pilot/README_KO.md
           python - <<'PY'
           import json
           from pathlib import Path
