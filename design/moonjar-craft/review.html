@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>달항아리 · 2.5D 공예형 미술 검토</title>
+<style>
+:root{--page:#f3f0e9;--paper:#fcfaf5;--line:#d8d1c4;--ink:#2f3d36;--bronze:#907955}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font:16px/1.6 system-ui,"Malgun Gothic",sans-serif;color:var(--ink);background:var(--page)}
+button,a{font:inherit}
+header{border-bottom:1px solid var(--line);padding:16px clamp(17px,3vw,46px);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+header strong{letter-spacing:.17em;font-size:12px}
+header span{font-size:11px;color:#6e756b;letter-spacing:.09em}
+main{max-width:1450px;margin:auto;padding:clamp(20px,4vw,55px)}
+.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--bronze)}
+h1{font:400 clamp(32px,5vw,65px)/1.31 Georgia,"Batang",serif;letter-spacing:-.055em;margin:9px 0}
+.intro{color:#6a7067;max-width:780px;font-size:14px;line-height:1.85;margin:10px 0 28px}
+.workspace{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:0;border:1px solid var(--line)}
+.art{display:grid;place-items:center;min-width:0;padding:clamp(13px,2vw,30px);background:#e8e4da}
+.art img{display:block;width:min(100%,570px);aspect-ratio:8/9;object-fit:contain;box-shadow:0 5px 20px #1a242017;background:#ddd8cd}
+.panel{background:var(--paper);padding:clamp(21px,3vw,40px);border-left:1px solid var(--line)}
+.panel h2{font:400 24px/1.45 Georgia,"Batang",serif;margin:0 0 22px}
+.group{padding:17px 0;border-top:1px solid var(--line)}
+.group h3{margin:0 0 11px;font-size:12px;letter-spacing:.08em;color:#777365}
+.options{display:flex;flex-wrap:wrap;gap:8px}
+button{cursor:pointer;min-height:43px;padding:10px 15px;border:1px solid #bfb5a6;color:var(--ink);background:transparent}
+button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:white}
+.links{display:grid;gap:8px;margin:23px 0 12px}
+.links a{color:var(--ink);text-underline-offset:4px;font-size:14px}
+.note{font-size:12px;color:#6b716a;line-height:1.85}
+.details{margin-top:22px;border-block:1px solid var(--line);padding:15px 0}
+.details summary{cursor:pointer;font-size:14px}
+.details p{font-size:13px;color:#667067}
+footer{max-width:1450px;margin:auto;padding:22px clamp(20px,4vw,55px);border-top:1px solid var(--line);font-size:12px;color:#677168}
+@media(max-width:770px){.workspace{grid-template-columns:1fr}.panel{border-left:0;border-top:1px solid var(--line)}main{padding:22px 14px}.art{padding:15px}.intro{font-size:13px}.panel{padding:25px 18px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background .12s ease,color .12s ease}}
+</style>
+</head>
+<body>
+<header><strong>DAILYCOACHING / ART ATELIER</strong><span>MOONJAR · TACTILE CRAFT STUDY</span></header>
+<main>
+<p class="eyebrow">WAVE 9.5 · SINGLE ART DIRECTION</p>
+<h1>빛을 담는 달항아리</h1>
+<p class="intro">달항아리 자체의 고요함과 사용자 자개 배치의 자유를 중심에 둡니다. 이 파일은 작품성 검토를 위한 독립적인 시안이며, 실제 앱의 편집 기능이나 저장 결과를 변경하지 않습니다.</p>
+<div class="workspace">
+<section class="art" aria-label="달항아리 작품 감상"><img id="artwork" src="artwork/craft-day-08.png" alt="한지빛 낮 백자 위에 자개 8개를 놓은 작품" width="1600" height="1800"></section>
+<aside class="panel">
+<h2>한 점의 작품을<br>천천히 바라보다.</h2>
+<div class="group"><h3>빛의 시간</h3><div class="options" role="group" aria-label="백자 낮과 밤">
+<button data-theme="day" aria-pressed="true" type="button">한지빛 낮</button>
+<button data-theme="night" aria-pressed="false" type="button">달빛 밤</button>
+</div></div>
+<div class="group"><h3>자개 배치 수</h3><div class="options" role="group" aria-label="실제 원본 자개 배치 밀도">
+<button data-count="0" aria-pressed="false" type="button">비어 있는 그릇</button>
+<button data-count="1" aria-pressed="false" type="button">1개</button>
+<button data-count="8" aria-pressed="true" type="button">8개</button>
+<button data-count="48" aria-pressed="false" type="button">48개</button>
+<button data-count="96" aria-pressed="false" type="button">96개</button>
+</div></div>
+<div class="links"><a id="image-link" href="artwork/craft-day-08.png" download>현재 작품 이미지 보관</a><a id="card-link" href="cards/craft-day-art-card.png" download>작품 카드 예시 보기 · 저장</a></div>
+<p class="note">자개 96종은 원본을 변형하거나 다른 이미지로 대체하지 않았습니다. 고정된 배치는 품질 검토를 위한 예시이며 표현상의 정답이 아닙니다.</p>
+<details class="details"><summary>본 시안의 한계와 운영 상태</summary>
+<p>디지털 곡면 음영과 반사 효과의 연구이며 실제 나전 물성을 물리적으로 재현하지 않습니다. 자개를 항아리 밖에 놓는 자유도 유지합니다. 기존 작품과 데이터는 변경되지 않았습니다. 판매상품 또는 운영용 최종 작품 디자인은 아직 승인되지 않았습니다.</p>
+</details>
+</aside>
+</div>
+</main>
+<footer>DAILYCOACHING · 원본 자개 96종 자체 제작 · 독립 검토용 시안 · 운영 사이트 미배포</footer>
+<script>
+(()=>{'use strict';const $=s=>document.querySelector(s);let theme='day',count=8;
+function render(){
+  const id='craft-'+theme+'-'+String(count).padStart(2,'0');
+  const img=$('#artwork');img.src='artwork/'+id+'.png';
+  img.alt=(theme==='day'?'한지빛 낮':'달빛 밤')+' 백자 위에 자개 '+count+'개를 자유롭게 놓은 미술 연구 작품';
+  $('#image-link').href=img.src;
+  $('#card-link').href='cards/craft-'+theme+'-art-card.png';
+  document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme)));
+  document.querySelectorAll('[data-count]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.count)===count)));
+}
+document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{theme=b.dataset.theme;render();});
+document.querySelectorAll('[data-count]').forEach(b=>b.onclick=()=>{count=Number(b.dataset.count);render();});
+})();
+</script>
+</body>
+</html>
