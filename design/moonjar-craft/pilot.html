@@ -200,17 +200,17 @@ ctx.textAlign='right';ctx.fillStyle='#72786f';ctx.font='22px system-ui,"Malgun G
 const include=$('#include-copy').checked;const title=$('#card-title').value.trim();const line=$('#card-line').value.trim();
 let titleLines=0;
 if(include&&title){
-  const plan=fitCardLines(ctx,title,1320,90,44,2,'제목');
+  const plan=fitCardLines(ctx,title,1320,76,42,2,'제목');
   ctx.fillStyle='#27352D';
   ctx.font=plan.size+'px "Batang","Noto Serif CJK KR",serif';
   titleLines=plan.lines.length;
-  plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,(titleLines===2?1982:2027)+i*72));
+  plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,(titleLines===2?2028:2030)+i*70));
 }
 if(include&&line){
   const plan=fitCardLines(ctx,line,1360,39,29,2,'문장');
   ctx.fillStyle='#4F5B53';
   ctx.font=plan.size+'px "Batang","Noto Serif CJK KR",serif';
-  const start=titleLines===2?2138:titleLines===1?2106:2026;
+  const start=titleLines===2?2160:titleLines===1?2116:2035;
   plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,start+i*53));
 }
 ctx.fillStyle='#8a8a7e';ctx.font='22px system-ui,"Malgun Gothic",sans-serif';ctx.fillText('자개와 여백을 담은 한 점의 기록',115,2270);
