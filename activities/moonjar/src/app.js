@@ -4,7 +4,8 @@ import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from
 
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
-const craftAStudyFlag=new URLSearchParams(location.search).get('artStudy')==='craft-a';
+// Guard research mode without relying on URLSearchParams in embedded/testing runtimes.
+const craftAStudyFlag=/(?:^|[?&])artStudy=craft-a(?:&|$)/.test(location?.search||'');
 let story, manifest, schema, empty, materials, repository = null;
 let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null;
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
