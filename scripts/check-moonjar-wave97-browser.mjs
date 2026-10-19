@@ -170,9 +170,11 @@ async function run(kind,launcher,width,height){
     ok(revisionAfter===revisionBefore,
       name+' opening preview, comparing and generating art never modifies or persists a project: before='+
       revisionBefore+' after='+revisionAfter);
-    await page.locator('[data-action="export-json"]').first().click();
+    await page.locator('.art-toolbar [data-action="save-options"]').click();
     const downloadDialog=page.locator('#modal');
     await downloadDialog.waitFor({state:'visible'});
+    await downloadDialog.locator('[data-action="export-json"]').click();
+    await downloadDialog.locator('[data-action="download-json"]').waitFor({state:'visible'});
     const normalDownload=page.waitForEvent('download');
     await downloadDialog.locator('[data-action="download-json"]').click();
     const docFile=OUT+'/'+name+'-backup.moonjar.json';
