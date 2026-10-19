@@ -5,7 +5,7 @@ import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
 let story, manifest, schema, empty, materials, repository = null;
-let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null;
+let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null, lockCompletion = null;
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
 let activeGesture = null, dialogReturn = null, statusDetail = '', available = false, hasStored = false, documentInvalid = false;
 let opening = false, viewScene = 'arrival', controlTab = 'move', leadExpanded = true;
@@ -80,15 +80,29 @@ function renderStatus() {
 }
 async function dispose() {
   await queue?.stop(); queue = null;
-  if (releaseLock) { releaseLock(); releaseLock = null; }
+  // A same-document route from studio/result → projects DOES NOT unload the
+  // old page. Finishing a Web Lock callback is asynchronous, so immediately
+  // reacquiring with ifAvailable:true can incorrectly report this very tab
+  // as another editor. Wait for the lock request promise to settle.
+  const pending = lockCompletion;
+  lockCompletion = null;
+  if (releaseLock) {
+    const release = releaseLock;
+    releaseLock = null;
+    release();
+  }
+  if (pending) await pending.catch(() => {});
 }
 async function acquireLock(id) {
   if (!navigator.locks) return true; // Transaction revision checks still apply.
   return new Promise(resolve => {
-    navigator.locks.request(`moonjar-edit-${id}`, {mode:'exclusive', ifAvailable:true}, async lock => {
+    const request = navigator.locks.request(`moonjar-edit-${id}`, {mode:'exclusive', ifAvailable:true}, async lock => {
       if (!lock) { resolve(false); return; }
-      resolve(true); await new Promise(done => { releaseLock = done; });
-    }).catch(() => resolve(true));
+      resolve(true);
+      await new Promise(done => { releaseLock = done; });
+    });
+    lockCompletion = request;
+    request.catch(() => resolve(true));
   });
 }
 async function openProject(doc, saveHere, expected = null, targetView = null) {
