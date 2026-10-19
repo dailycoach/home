@@ -61,7 +61,13 @@ async function run(kind,launcher,width,height){
 
     await page.locator('.piece-choice[data-action="add:A01"]').click();
     await page.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
-    await page.waitForTimeout(430);
+    // The original autosave queue must have settled BEFORE this study opens.
+    // Otherwise an unrelated pending write may complete during the dialog,
+    // making the revision comparison falsely attribute it to art preview.
+    await page.waitForFunction(()=>{
+      const text=document.querySelector('#save-state')?.textContent||'';
+      return text.includes('이 기기에 저장됨');
+    },{timeout:15000});
     const revisionBefore=await getRevision(page);
     const native=await page.locator('#art image').first().getAttribute('href');
     ok(native.includes('porcelain-day.png'),name+' native canvas still uses existing V2 background');
@@ -162,7 +168,8 @@ async function run(kind,launcher,width,height){
       name+' real SVG editor retains its original placed piece after study');
     const revisionAfter=await getRevision(page);
     ok(revisionAfter===revisionBefore,
-      name+' opening preview, comparing and generating art never modifies or persists a project');
+      name+' opening preview, comparing and generating art never modifies or persists a project: before='+
+      revisionBefore+' after='+revisionAfter);
     await page.locator('[data-action="export-json"]').first().click();
     const downloadDialog=page.locator('#modal');
     await downloadDialog.waitFor({state:'visible'});
