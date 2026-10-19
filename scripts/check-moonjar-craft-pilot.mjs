@@ -74,7 +74,7 @@ async function scenario(browser,engine,width,height,files=false){
     }
     await page.screenshot({path:evidence+'/'+name+'-card-view.png',animations:'disabled',fullPage:false});
     await page.locator('[data-tab="pilot"]').click();
-    await page.locator('#score-keep').fill('7');
+    await page.locator('#score-keep').evaluate(el=>{el.value='7';el.dispatchEvent(new Event('input',{bubbles:true}))});
     await page.locator('#pilot-comment').fill('달항아리의 형태가 좀 더 자연스럽기를 바랍니다.');
     await page.locator('input[name="willingness"][value="30000"]').check();
     if(files){
