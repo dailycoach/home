@@ -883,7 +883,9 @@ function about(){
   main.replaceChildren(header('재료와 개인 저장 안내'));
   const intro=el('section',null,{class:'materials-intro'});
   intro.append(el('p','MATERIALS & PRIVACY',{class:'eyebrow'}),el('h2','작품은 자유롭게. 기록은 신중하게.'),el('p','자개를 놓는 방법에 정답은 없습니다. 다만 작품과 개인 기록의 보관 방식은 시작하기 전에 확인해 주세요.'));
-  main.append(intro);
+  const related=el('p',null,{class:'materials-related-links'});
+  related.append(el('a','진행자를 위한 60분 안내 보기 →',{href:'#/guide'}));
+  intro.append(related);main.append(intro);
   const information=[
     ['자개의 빛','제공된 자개 PNG 96개와 1600 × 1800 달항아리 도안 두 종을 사용합니다. 화면 속 자개는 정적인 2D 이미지이며 회전으로 실제 자개의 광학 반사를 재현하지 않습니다.'],
     ['자유로운 배치','항아리 안이나 밖, 종이 영역 안에 조각을 놓을 수 있습니다. 조각 수와 배치에 정답은 없습니다.'],
