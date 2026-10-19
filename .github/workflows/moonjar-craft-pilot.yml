@@ -1,0 +1,74 @@
+name: Moonjar WAVE 9.6 A-Only Archive Pilot
+
+on:
+  pull_request:
+    paths:
+      - 'design/moonjar-craft/pilot.html'
+      - 'scripts/build-moonjar-craft-pilot.py'
+      - 'scripts/check-moonjar-craft-pilot.mjs'
+      - '.github/workflows/moonjar-craft-pilot.yml'
+      - 'docs/moonjar-wave96-a-only-pilot.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  craft-archive-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify unchanged originals and existing Moonjar domain behavior
+        run: |
+          node scripts/check-moonjar.mjs
+          node --test tests/moonjar/*.test.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install locked art build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          python -m pip install --disable-pip-version-check \
+            numpy==2.3.5 pillow==12.3.0 cairosvg==2.8.2 opencv-python-headless==4.13.0.92
+      - name: Rebuild unchanged W9.4 porcelain in a private artifacts workspace
+        run: python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/study
+      - name: Compose A-only art and local study cards
+        run: |
+          python -u scripts/render-moonjar-craft.py
+          cp design/moonjar-craft/review.html artifacts/moonjar-craft/index.html
+          python scripts/check-moonjar-craft.py
+      - name: Build pixel-lossless offline A-only archive experience
+        run: |
+          python scripts/build-moonjar-craft-pilot.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          folder=Path('artifacts/moonjar-craft-pilot')
+          m=json.loads((folder/'source-qa.json').read_text())
+          assert m['artCount']==10
+          assert m['artDirection']=='A TACTILE CRAFT ONLY'
+          assert m['telemetry'] is False
+          assert all(c['pixelPerfectWebP'] for c in m['artwork'].values())
+          print('OFFLINE PILOT: verified ten lossless WebP entries and no telemetry')
+          PY
+      - name: Install Chromium and WebKit for privacy and layout smoke
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Verify actual browser card downloads and opt-in evaluation JSON
+        run: node scripts/check-moonjar-craft-pilot.mjs
+      - name: Attach A-only archive pilot with artworks, cards, and tested offline HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-wave96-a-only-archive-pilot
+          path: |
+            artifacts/moonjar-craft-pilot/
+            artifacts/moonjar-craft/cards/
+          retention-days: 7
+          if-no-files-found: warn
