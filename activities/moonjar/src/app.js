@@ -812,7 +812,7 @@ async function projects(){
   hasStored=stored.length>0;
   if(stored.length!==list.length)main.append(el('p','읽을 수 없는 저장 항목이 있어 목록에서 열지 않았습니다. 원본 항목은 삭제하지 않았습니다. 보관한 편집 파일을 열어 주세요.',{class:'error'}));
   if(!list.length){
-    const emptyState=el('section',null,{class:'archive-empty','aria-label':'저장된 작품 없음'});
+    const emptyState=el('section',null,{class:'archive-empty empty-state','aria-label':'저장된 작품 없음'});
     emptyState.append(el('p','PERSONAL ARCHIVE',{class:'eyebrow'}),el('h2','아직 이곳에 놓아둔 작품이 없습니다.'),el('p','작품을 시작하거나, 이전에 내려받은 편집 파일을 열어 이어갈 수 있어요. 자동 저장은 다른 기기와 동기화되지 않습니다.'));
     emptyState.append(button('첫 작품 시작하기','home',{class:'primary'}),button('편집 파일 열기','import'));
     main.append(emptyState);
