@@ -1638,3 +1638,31 @@ main.result-page.result-memory-only .result-actions button[data-action="export-j
   main.result-page .result-memory-reminder strong{font-size:14px;margin-bottom:3px}
   main.result-page .result-memory-reminder p{font-size:11px;line-height:1.6}
 }
+
+
+/* The temporary session cannot be resumed unless a project JSON is kept.
+   A temporary work’s first action is the recoverable file, not an image. */
+main.result-page.result-memory-only .result-actions button[data-action="export-json"]{
+  grid-column:1 / -1;
+  min-height:54px;
+  border:1px solid var(--atelier-dark);
+  background:var(--atelier-dark);
+  color:#fffdf8;
+  font-size:15px;
+  font-weight:700;
+}
+main.result-page.result-memory-only .result-actions button[data-action="export-json"]:hover{
+  background:#445043;
+}
+main.result-page.result-memory-only .result-actions button[data-action="card-options"]{
+  grid-column:1 / -1;
+  min-height:49px;
+  border:1px solid #b9ab96;
+  background:#faf7f0;
+  color:#333f35;
+  font-size:14px;
+  font-weight:650;
+}
+main.result-page.result-memory-only .result-actions button[data-action="card-options"]:hover{
+  background:#ede8dd;
+}
