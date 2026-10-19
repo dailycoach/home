@@ -27,6 +27,16 @@ async function run(kind,launcher,width,height){
     isMobile:width<767,hasTouch:width<767,deviceScaleFactor:1,
     acceptDownloads:true,locale:'ko-KR',reducedMotion:'reduce'});
   const page=await ctx.newPage();
+  // Observe the exact browser-owned Blob before object URLs are revoked.
+  // CSP intentionally blocks fetch(blob:); never weaken production connect-src.
+  await page.addInitScript(()=>{
+    const make=URL.createObjectURL.bind(URL);
+    const revoke=URL.revokeObjectURL.bind(URL);
+    const objects=new Map();
+    Object.defineProperty(window,'__moonjarQABlobs',{value:objects});
+    URL.createObjectURL=(blob)=>{const url=make(blob);objects.set(url,blob);return url;};
+    URL.revokeObjectURL=url=>{objects.delete(url);return revoke(url);};
+  });
   const errors=[];
   page.on('pageerror',e=>errors.push('JS '+e.message));
   page.on('requestfailed',r=>errors.push('LOAD '+r.url()+' '+r.failure()?.errorText));
@@ -67,7 +77,7 @@ async function run(kind,launcher,width,height){
     ok(await dialog.locator('.craft-a-copy .check-row input:checked').count()===0,
       name+' user/private words are excluded by default');
     const previewURL=await dialog.locator('.craft-a-figure img').getAttribute('src');
-    const previewBuffer=await page.evaluate(async src=>Array.from(new Uint8Array(await (await fetch(src)).arrayBuffer())),previewURL);
+    const previewBuffer=await page.evaluate(async src=>Array.from(new Uint8Array(await window.__moonjarQABlobs.get(src).arrayBuffer())),previewURL);
     const previewHash=sha(Buffer.from(previewBuffer));
     if(kind==='chromium')await page.screenshot({path:OUT+'/'+name+'-art.png',animations:'disabled'});
     const requestedPNG=page.waitForEvent('download');
@@ -86,7 +96,7 @@ async function run(kind,launcher,width,height){
       && document.querySelector('.craft-a-figure figcaption')?.textContent?.includes('기존 도안'),{timeout:15000});
     const originalHash=await page.evaluate(async()=>{
       const img=document.querySelector('.craft-a-figure img');
-      const ab=await (await fetch(img.src)).arrayBuffer();
+      const ab=await window.__moonjarQABlobs.get(img.src).arrayBuffer();
       const raw=await crypto.subtle.digest('SHA-256',ab);
       return [...new Uint8Array(raw)].map(n=>n.toString(16).padStart(2,'0')).join('');
     });
@@ -111,7 +121,7 @@ async function run(kind,launcher,width,height){
       const picture=new Blob([Uint8Array.from(bytes)],{type:'image/png'});
       const artwork=await createImageBitmap(picture);
       const cardsrc=document.querySelector('.craft-a-figure img').src;
-      const card=await createImageBitmap(await (await fetch(cardsrc)).blob());
+      const card=await createImageBitmap(window.__moonjarQABlobs.get(cardsrc));
       const a=document.createElement('canvas');a.width=1600;a.height=2400;
       const x=a.getContext('2d',{willReadFrequently:true});
       x.drawImage(artwork,140,218,1320,1485);
