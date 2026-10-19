@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f2efe8">
+<title>빛을 담는 달항아리 | A형 공예 미술 시연</title>
+<style>
+:root{--paper:#f2efe8;--surface:#fdfbf6;--ink:#303b34;--mute:#74746a;--line:#d8d0c3;--brass:#927e5e}
+*{box-sizing:border-box}
+html,body{margin:0;font-family:system-ui,"Malgun Gothic",sans-serif;color:var(--ink);background:var(--paper);min-width:280px}
+body{height:100vh;height:100dvh;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.45}
+a{color:inherit;text-underline-offset:4px}
+:focus-visible{outline:2px solid #9a7035;outline-offset:3px}
+.site-header{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:16px clamp(17px,3vw,52px);border-bottom:1px solid var(--line);background:var(--surface)}
+.wordmark{font-weight:600;letter-spacing:.16em;font-size:12px}
+.edition{font-size:11px;color:var(--mute);letter-spacing:.05em;text-align:right}
+main{display:flex;flex-direction:column;width:100%;max-width:1680px;min-height:0;height:100%;margin:0 auto;padding:clamp(12px,2vw,34px) clamp(12px,2.4vw,40px);overflow:hidden}
+.intro{display:flex;align-items:end;justify-content:space-between;gap:22px;flex:0 0 auto;padding:0 3px 17px}
+.kicker{color:var(--brass);font-weight:600;font-size:10px;letter-spacing:.2em;margin:0 0 4px}
+h1{font-family:"Batang","Noto Serif CJK KR",serif;font-size:clamp(23px,2.9vw,44px);font-weight:400;letter-spacing:-.05em;margin:0;line-height:1.3}
+.intro .explain{color:var(--mute);font-size:12px;max-width:470px;line-height:1.7;margin:0 0 2px}
+.workshop{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.52fr);flex:1;min-height:0;border-block:1px solid var(--line);background:var(--surface)}
+.artside{position:relative;min-width:0;min-height:0;display:grid;place-items:center;padding:clamp(11px,2vw,28px);background:#e7e2d9;overflow:hidden}
+.preview-stage{width:min(100%,calc((100dvh - 210px)*.87),590px);max-height:100%;aspect-ratio:8/9;display:grid;place-items:center;position:relative;background:#dedbd0;box-shadow:0 4px 19px #12181319}
+.preview-stage>img{height:100%;width:100%;display:block;object-fit:contain}
+.preview-stage>canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}
+.preview-stage.card-mode{aspect-ratio:2/3;width:min(100%,calc((100dvh - 210px)*.63),410px)}
+.preview-stage.card-mode>img{display:none}.preview-stage.card-mode>canvas{display:block}
+.art-cap{position:absolute;left:18px;bottom:15px;padding:8px 10px;background:#f9f6eeeb;border:1px solid #e4ddd1;font-size:10px;letter-spacing:.05em;color:#49574c}
+.rail{display:flex;flex-direction:column;min-width:0;min-height:0;padding:0;background:var(--surface);border-left:1px solid var(--line)}
+.mode-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));flex:0 0 auto;border-bottom:1px solid var(--line)}
+.mode-tabs button{border:0;border-top:3px solid transparent;background:none;color:#798078;padding:14px 6px;min-height:57px;font-size:12px}
+.mode-tabs button[aria-selected=true]{border-top-color:var(--brass);background:#f4f0e7;color:var(--ink);font-weight:600}
+.panel{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:clamp(18px,2.5vw,33px)}
+.panel[hidden]{display:none!important}
+.panel h2{font:400 clamp(23px,2.2vw,34px)/1.4 "Batang","Noto Serif CJK KR",serif;letter-spacing:-.045em;margin:0 0 17px}
+.eyebrow{font-size:11px;letter-spacing:.15em;font-weight:600;color:var(--brass);margin:0 0 10px}
+.desc{color:var(--mute);font-size:13px;line-height:1.8;margin:0 0 17px}
+.field{border-top:1px solid var(--line);padding:15px 0}
+.field h3{font-size:12px;font-weight:600;color:#6a6a60;margin:0 0 11px;letter-spacing:.045em}
+.field input[type=file]{display:block;width:100%;font-size:12px;color:var(--ink);margin:6px 0 9px}
+.field input[type=file]::file-selector-button{border:1px solid var(--line);background:var(--surface);padding:10px 13px;margin-right:10px;color:var(--ink)}
+.choices{display:flex;gap:7px;flex-wrap:wrap}
+.choices button{border:1px solid #c8bdae;background:transparent;color:#515d52;min-height:43px;padding:8px 14px;font-size:12px;border-radius:0}
+.choices button[aria-pressed=true]{background:var(--ink);color:white;border-color:var(--ink)}
+.cta{border:1px solid var(--ink);background:var(--ink);color:white;min-height:45px;padding:11px 18px;font-size:13px}
+.secondary{background:none;color:var(--ink);border:1px solid #b2a898;min-height:43px;padding:10px 16px;font-size:12px}
+.buttonline{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.help{color:var(--mute);font-size:12px;line-height:1.75;margin-top:15px}
+input[type=text],textarea{border:1px solid var(--line);background:white;color:var(--ink);width:100%;padding:12px 13px;font-size:14px;border-radius:0}
+input[type=text]{min-height:45px}textarea{min-height:75px;resize:vertical}
+label.label{display:block;font-size:12px;margin:12px 0 6px;font-weight:600}
+label.check{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.65;margin:14px 0 8px;cursor:pointer}
+.check input{width:17px;height:17px;accent-color:var(--brass);flex:0 0 17px}
+.rating{width:100%;accent-color:var(--brass);height:26px}
+.scale{display:flex;justify-content:space-between;color:var(--mute);font-size:11px}
+.ratinglabel{font-size:12px;color:var(--ink);display:flex;justify-content:space-between;gap:12px;line-height:1.6;margin:10px 0 2px}
+.metric{font-size:13px;color:var(--brass)}
+.footer-note{font-size:11px;color:var(--mute);margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.inline-status{font-size:12px;color:#36564a;min-height:20px;line-height:1.6;margin:10px 0 0}
+.select-money{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.select-money label{border:1px solid var(--line);padding:9px 10px;font-size:12px;display:flex;align-items:center;gap:7px;min-height:42px}
+.select-money input{accent-color:var(--brass)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:767px){
+ .site-header{min-height:54px;padding:11px 16px}.wordmark{font-size:11px;letter-spacing:.08em}.edition{font-size:9px}
+ main{padding:9px 0 0}.intro{padding:2px 16px 10px;gap:4px;flex-wrap:nowrap}.intro h1{font-size:24px}.intro .explain{display:none}
+ .workshop{display:flex;flex-direction:column;min-height:0;border-bottom:0}
+ .artside{flex:1 1 0;min-height:0;padding:9px 12px}
+ .preview-stage{width:min(100%,calc((100dvh - 388px)*.85),345px);max-height:100%}
+ .preview-stage.card-mode{width:min(100%,calc((100dvh - 388px)*.59),241px)}
+ .art-cap{font-size:9px;padding:5px 7px;left:12px;bottom:11px}
+ .rail{flex:0 0 clamp(274px,39dvh,340px);min-height:0;border-left:0;border-top:1px solid var(--line)}
+ .mode-tabs button{min-height:44px;padding:9px 4px;font-size:11px}
+ .panel{padding:14px 17px 24px}.panel h2{font-size:22px;margin:0 0 10px}.eyebrow{margin:0 0 3px}
+ .desc{font-size:12px;margin:0 0 8px}.field{padding:10px 0}.field h3{margin-bottom:7px}
+ .choices button{min-height:40px;padding:7px 12px}
+ .footer-note{margin-top:10px}
+}
+@media(max-height:660px) and (max-width:767px){
+ .rail{flex-basis:47dvh}.intro{padding-bottom:5px}
+ .preview-stage{width:min(100%,calc((100dvh - 300px)*.86))}
+ .preview-stage.card-mode{width:min(100%,calc((100dvh - 300px)*.61))}
+}
+@media(prefers-reduced-motion:no-preference){button{transition:background-color .13s ease,color .13s ease}}
+@media print{body{height:auto;overflow:visible}main{overflow:visible}.workshop{display:block}.rail{display:none}.artside{display:block}.preview-stage{margin:auto}}
+</style>
+</head>
+<body>
+<header class="site-header"><strong class="wordmark">DAILYCOACHING <span aria-hidden="true" style="color:#a08c64">/</span> ART ATELIER</strong><span class="edition">MOONJAR · A TYPE ONLY · OFFLINE STUDY</span></header>
+<main>
+<div class="intro"><div><p class="kicker">WAVE 9.6 · A SINGLE ART DIRECTION</p><h1>빛을 담는 달항아리</h1></div><p class="explain">한 점의 백자와 내가 고른 조각. 이 화면은 작품을 감상하고 간직하고 싶은 마음을 평가하기 위한 미술 연구 시연입니다.</p></div>
+<div class="workshop">
+<section class="artside" aria-label="나의 달항아리 감상 공간">
+  <div class="preview-stage" id="preview-stage">
+    <img id="art-image" alt="한지빛 낮, 자개 8개를 배치한 달항아리 작품" width="1600" height="1800">
+    <canvas id="card-preview" width="1600" height="2400" role="img" aria-label="내가 선택한 작품 카드 미리보기"></canvas>
+  </div>
+  <span class="art-cap" id="art-caption">ART STUDY / 낮 · 자개 8개</span>
+</section>
+<div class="rail">
+ <div role="tablist" class="mode-tabs" aria-label="작품과 평가 메뉴">
+  <button type="button" role="tab" aria-selected="true" aria-controls="panel-view" id="tab-view" data-tab="view">작품 감상</button>
+  <button type="button" role="tab" aria-selected="false" aria-controls="panel-card" id="tab-card" tabindex="-1" data-tab="card">카드 만들기</button>
+  <button type="button" role="tab" aria-selected="false" aria-controls="panel-pilot" id="tab-pilot" tabindex="-1" data-tab="pilot">소장 가치 평가</button>
+ </div>
+ <section class="panel" id="panel-view" role="tabpanel" aria-labelledby="tab-view">
+   <p class="eyebrow">01 / THE WORK</p><h2>작품을 바라보는 시간</h2>
+   <p class="desc">백자의 형태와 자개의 색을 천천히 살펴보세요. 자개 수를 바꿔도 정답은 없습니다. 이 페이지에서 조각 위치는 품질 검토용 예시입니다.</p>
+   <div class="field"><h3>빛의 시간</h3><div class="choices" role="group" aria-label="낮밤 선택"><button type="button" data-theme="day" aria-pressed="true">한지빛 낮</button><button type="button" data-theme="night" aria-pressed="false">달빛 밤</button></div></div>
+   <div class="field"><h3>자개 구성</h3><div class="choices" role="group" aria-label="원본 자개 배치 수"><button type="button" data-count="0" aria-pressed="false">빈 그릇</button><button type="button" data-count="1" aria-pressed="false">1개</button><button type="button" data-count="8" aria-pressed="true">8개</button><button type="button" data-count="48" aria-pressed="false">48개</button><button type="button" data-count="96" aria-pressed="false">96개</button></div></div>
+   <div class="field">
+     <h3>내가 직접 만든 작품으로 보기 (선택)</h3>
+     <label class="label" for="user-art">기존 달항아리 작업실에서 저장한 작품 PNG</label>
+     <input type="file" id="user-art" accept="image/png,.png" aria-describedby="upload-note">
+     <p class="help" id="upload-note">1600×1800 PNG · 최대 10MiB. 파일은 이 화면의 메모리에서만 열며 서버로 보내지 않습니다. 사용자 작품은 자동 업로드되지 않습니다.</p>
+     <button class="secondary" type="button" id="clear-art" hidden>내 작품 닫고 예시로 돌아가기</button>
+     <p class="inline-status" id="upload-status" role="status" aria-live="polite"></p>
+   </div>
+   <div class="buttonline"><button class="cta" type="button" data-tabgo="card">이 작품으로 카드 만들기 →</button></div>
+   <p class="help">예시 작품은 실제 이용자가 만든 작품이 아닙니다. 자개 96종은 모두 DAILYCOACHING 자체 제작 원본을 사용했습니다.</p>
+ </section>
+ <section class="panel" id="panel-card" role="tabpanel" aria-labelledby="tab-card" hidden>
+   <p class="eyebrow">02 / ART ARCHIVE</p><h2>작품을 간직한다면</h2>
+   <p class="desc">작품이 먼저 보이는 한 가지 공예형 아카이브 카드입니다. 제목과 문장은 원할 때만 포함하세요.</p>
+   <label class="label" for="card-title">카드에 남길 제목 (선택)</label><input id="card-title" type="text" maxlength="36" placeholder="제목 없이도 저장할 수 있어요" autocomplete="off">
+   <label class="label" for="card-line">작품 곁에 남길 한 문장 (선택)</label><textarea id="card-line" maxlength="70" placeholder="개인적인 내용은 입력하지 않아도 됩니다."></textarea>
+   <label class="check"><input id="include-copy" type="checkbox">내가 입력한 제목과 문장을 저장할 작품 카드에 포함합니다.</label>
+   <div class="buttonline"><button class="cta" type="button" id="download-card">작품 카드 PNG 저장</button><button class="secondary" type="button" id="download-original">작품 원본 PNG 저장</button></div>
+   <p class="inline-status" id="card-status" role="status" aria-live="polite"></p>
+   <p class="footer-note">카드 규격 1600 × 2400px. 이 페이지의 문장은 자동 저장하거나 외부 서버로 보내지 않습니다. 다운로드 시에만 선택한 문구를 이미지로 출력합니다.</p>
+ </section>
+ <section class="panel" id="panel-pilot" role="tabpanel" aria-labelledby="tab-pilot" hidden>
+   <p class="eyebrow">03 / ART PRODUCT PILOT</p><h2>내 곁에 두고 싶은 작품인가요?</h2>
+   <p class="desc">아름다움뿐 아니라 소장·인쇄·유료 체험 의향을 따로 평가합니다. 실제 구매를 뜻하지 않는 시험 질문입니다.</p>
+   <div class="field"><label class="ratinglabel" for="score-work">작품 자체가 한 점의 미술처럼 느껴지는가 <output class="metric" id="out-work">4/7</output></label><input class="rating" type="range" id="score-work" min="1" max="7" step="1" value="4"><div class="scale"><span>전혀 그렇지 않음</span><span>매우 그렇다</span></div></div>
+   <div class="field"><label class="ratinglabel" for="score-keep">완성한 이미지를 소장하고 싶은가 <output class="metric" id="out-keep">4/7</output></label><input class="rating" type="range" id="score-keep" min="1" max="7" step="1" value="4"><div class="scale"><span>전혀 그렇지 않음</span><span>매우 그렇다</span></div></div>
+   <div class="field"><label class="ratinglabel" for="score-print">이 작품을 실제로 출력해 두고 싶은가 <output class="metric" id="out-print">4/7</output></label><input class="rating" type="range" id="score-print" min="1" max="7" step="1" value="4"><div class="scale"><span>전혀 그렇지 않음</span><span>매우 그렇다</span></div></div>
+   <div class="field"><h3>전문가가 진행하는 60~90분 아트코칭 참여 비용으로 고려할 금액</h3><div class="select-money" role="radiogroup" aria-label="유료 체험 참여 비용 가설">
+     <label><input type="radio" name="willingness" value="0">무료만 참여</label><label><input type="radio" name="willingness" value="10000">1만원 내외</label><label><input type="radio" name="willingness" value="30000">3만원 내외</label><label><input type="radio" name="willingness" value="50000">5만원 이상</label><label><input type="radio" name="willingness" value="unknown">잘 모르겠음</label></div></div>
+   <label class="label" for="pilot-comment">아쉬웠던 점이나 개선 의견 (선택)</label><textarea id="pilot-comment" maxlength="400" placeholder="색채, 백자 형태, 자개 밀도, 작품 카드 등…"></textarea>
+   <div class="buttonline"><button class="cta" type="button" id="download-review">내 평가 JSON 저장</button></div>
+   <p class="inline-status" id="pilot-status" role="status" aria-live="polite"></p>
+   <p class="footer-note">성명, 연락처, 진단 정보는 요청하지 않습니다. 응답은 어디에도 전송되지 않으며, 저장 버튼을 누른 경우에만 본인 기기에 JSON이 만들어집니다. 자발적 제출 전까지 진행자도 볼 수 없습니다. 개인의 가격 응답은 실제 구매율이 아닙니다.</p>
+ </section>
+</div></div>
+</main>
+<script src="art-data.js"></script>
+<script>
+(()=>{'use strict';
+const $=s=>document.querySelector(s);
+const state={theme:'day',count:8,tab:'view',mine:null};
+const art=key=>window.__MOONJAR_A_STUDY__?.artwork?.[key];
+const sourceKey=()=>`craft-${state.theme}-${String(state.count).padStart(2,'0')}`;
+let cardTimer;
+function ensureArt(){const image=state.mine||art(sourceKey());if(!image)throw Error('작품 데이터를 읽지 못했습니다. 압축을 다시 확인해 주세요.');return image;}
+function chosen(){document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===state.theme)));document.querySelectorAll('[data-count]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.count)===state.count)));}
+function describe(){return state.mine?'내가 완성한 작품':(state.theme==='day'?'한지빛 낮':'달빛 밤')+' · 자개 '+state.count+'개';}
+function renderImage(){chosen();document.querySelectorAll('[data-theme],[data-count]').forEach(b=>b.disabled=!!state.mine);$('#clear-art').hidden=!state.mine;$('#art-image').src=ensureArt();$('#art-image').alt=describe()+'를 담은 A형 달항아리 미술 시연';$('#art-caption').textContent=(state.tab==='card'?'ARCHIVE STUDY / ':'ART STUDY / ')+describe();if(state.tab==='card')scheduleCard();}
+function tab(name){if(!['view','card','pilot'].includes(name))return;state.tab=name;document.querySelectorAll('[data-tab]').forEach(b=>{const selected=b.dataset.tab===name;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!=='panel-'+name);$('#preview-stage').classList.toggle('card-mode',name==='card');renderImage();}
+function nextFrame(){return new Promise(resolve=>requestAnimationFrame(resolve));}
+async function getArtImage(){const image=new Image();image.decoding='async';image.src=ensureArt();await image.decode();return image;}
+function fitCardLines(ctx,input,maxWidth,preferred,minimum,maxLines,kind){
+  const text=String(input).replaceAll('\r','').trim();
+  if(!text)return {size:preferred,lines:[]};
+  const family='"Batang","Noto Serif CJK KR",serif';
+  for(let size=preferred;size>=minimum;size-=2){
+    ctx.font=size+'px '+family;
+    const lines=[];
+    for(const paragraph of text.split('\n')){
+      let line='';
+      for(const char of paragraph){
+        const trial=line+char;
+        if(line&&ctx.measureText(trial).width>maxWidth){
+          lines.push(line);line=char;
+        }else line=trial;
+      }
+      lines.push(line);
+    }
+    if(lines.length<=maxLines
+       && lines.every(line=>ctx.measureText(line).width<=maxWidth)){
+      return {size,lines};
+    }
+  }
+  // Never truncate someone's chosen title or text on an archive image.
+  throw Error(kind+'이(가) 카드 두 줄을 넘습니다. 카드용 문구를 조금 짧게 다듬어 주세요.');
+}
+async function paintCard(){const canvas=$('#card-preview');const ctx=canvas.getContext('2d');if(!ctx)throw Error('이미지 렌더러를 사용할 수 없습니다.');
+canvas.width=1600;canvas.height=2400;
+const night=state.theme==='night';const porcelain=await getArtImage();
+ctx.fillStyle='#F4F1EA';ctx.fillRect(0,0,1600,2400);
+ctx.fillStyle='#38443B';ctx.font='500 26px system-ui,"Malgun Gothic",sans-serif';ctx.fillText('DAILYCOACHING',115,136);
+ctx.fillStyle='#82775E';ctx.font='400 21px system-ui,"Malgun Gothic",sans-serif';ctx.textAlign='right';ctx.fillText('MOONJAR  /  ART ARCHIVE',1485,136);ctx.textAlign='left';
+ctx.save();ctx.drawImage(porcelain,115,222,1370,1541);ctx.restore();
+ctx.strokeStyle='#b9afa0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(115,1831);ctx.lineTo(1485,1831);ctx.stroke();
+ctx.fillStyle='#8a7655';ctx.font='500 23px system-ui,"Malgun Gothic",sans-serif';ctx.fillText('빛을 담는 달항아리',115,1905);
+ctx.textAlign='right';ctx.fillStyle='#72786f';ctx.font='22px system-ui,"Malgun Gothic",sans-serif';ctx.fillText(state.mine?'MY ARTWORK':night?'MOONLIGHT':'DAYLIGHT',1485,1905);ctx.textAlign='left';
+const include=$('#include-copy').checked;const title=$('#card-title').value.trim();const line=$('#card-line').value.trim();
+let titleLines=0;
+if(include&&title){
+  const plan=fitCardLines(ctx,title,1320,76,42,2,'제목');
+  ctx.fillStyle='#27352D';
+  ctx.font=plan.size+'px "Batang","Noto Serif CJK KR",serif';
+  titleLines=plan.lines.length;
+  plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,(titleLines===2?2028:2030)+i*70));
+}
+if(include&&line){
+  const plan=fitCardLines(ctx,line,1360,39,29,2,'문장');
+  ctx.fillStyle='#4F5B53';
+  ctx.font=plan.size+'px "Batang","Noto Serif CJK KR",serif';
+  const start=titleLines===2?2160:titleLines===1?2116:2035;
+  plan.lines.forEach((txt,i)=>ctx.fillText(txt,115,start+i*53));
+}
+ctx.fillStyle='#8a8a7e';ctx.font='22px system-ui,"Malgun Gothic",sans-serif';ctx.fillText('자개와 여백을 담은 한 점의 기록',115,2270);
+ctx.textAlign='right';ctx.fillText('ART STUDY  ·  ORIGINAL 96 NACRE PIECES',1485,2270);ctx.textAlign='left';
+return canvas;}
+async function renderCard(){try{await paintCard();$('#card-status').textContent='작품 카드 미리보기가 준비되었습니다.';}catch(e){$('#card-status').textContent='미리보기를 만들지 못했습니다. '+(e.message||'');}}
+function scheduleCard(){clearTimeout(cardTimer);cardTimer=setTimeout(renderCard,70);}
+function download(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.download=filename;a.href=url;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+async function cardExport(){try{const c=await paintCard();const blob=await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(Error('PNG를 만들 수 없습니다.')),'image/png'));download(blob,`MOONJAR_ART_ARCHIVE_${state.theme}_${state.count}.png`);$('#card-status').textContent='선택한 카드 PNG를 이 기기에 저장하도록 요청했습니다.';}catch(e){$('#card-status').textContent=e.message;}}
+async function originalExport(){try{const image=await getArtImage();const c=document.createElement('canvas');c.width=1600;c.height=1800;c.getContext('2d').drawImage(image,0,0);const blob=await new Promise((r,j)=>c.toBlob(b=>b?r(b):j(Error('PNG 저장 실패')),'image/png'));download(blob,`MOONJAR_ORIGINAL_${state.theme}_${state.count}.png`);$('#card-status').textContent='원본 작품 PNG 저장을 요청했습니다.';}catch(e){$('#card-status').textContent=e.message;}}
+function pilotExport(){const rates={art:Number($('#score-work').value),keep:Number($('#score-keep').value),print:Number($('#score-print').value)};const answer={schema:'MOONJAR_A_STUDY_V1',study:'single-craft-direction',createdAt:new Date().toISOString(),scene:state.mine?{source:'local-user-png',pieceCount:null}:{source:'example',theme:state.theme,pieceCount:state.count},ratings:rates,priceHypothesis:document.querySelector('input[name=willingness]:checked')?.value||null,comment:$('#pilot-comment').value.trim().slice(0,400),note:'자발적 시험 응답; 서버 전송 없음; 미술 선호·구매의향은 실제 구매와 다름'};download(new Blob([JSON.stringify(answer,null,2)],{type:'application/json;charset=utf-8'}),'MOONJAR_A_STUDY_RESPONSE.json');$('#pilot-status').textContent='응답 JSON을 이 기기에 저장하도록 요청했습니다. 서버로 전송하지 않았습니다.';}
+$('#user-art').addEventListener('change',async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  if(file.size>10*1024*1024||file.type!=='image/png'){e.target.value='';$('#upload-status').textContent='10MiB 이하의 PNG 작품만 열 수 있습니다.';return;}
+  try{
+    const url=await new Promise((resolve,reject)=>{
+      const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(Error('PNG 파일을 읽지 못했습니다.'));reader.readAsDataURL(file);
+    });
+    const img=new Image();img.src=url;await img.decode();
+    if(img.naturalWidth!==1600||img.naturalHeight!==1800)throw Error('작품은 1600×1800 PNG여야 합니다.');
+    state.mine=url;
+    $('#upload-status').textContent='내 작품을 이 화면에만 열었습니다. 카드 만들기로 간직할 수 있습니다.';
+    renderImage();
+  }catch(error){e.target.value='';$('#upload-status').textContent=error.message||'작품을 열지 못했습니다.';}
+});
+$('#clear-art').onclick=()=>{
+  state.mine=null;$('#user-art').value='';$('#upload-status').textContent='예시 작품으로 돌아왔습니다.';renderImage();
+};
+for(const b of document.querySelectorAll('[data-theme]'))b.onclick=()=>{state.theme=b.dataset.theme;renderImage();};
+for(const b of document.querySelectorAll('[data-count]'))b.onclick=()=>{state.count=Number(b.dataset.count);renderImage();};
+for(const b of document.querySelectorAll('[data-tab]')){b.onclick=()=>tab(b.dataset.tab);b.onkeydown=e=>{if(['ArrowRight','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();const arr=['view','card','pilot'];const ix=arr.indexOf(state.tab);const newIx=e.key==='Home'?0:e.key==='End'?2:(ix+(e.key==='ArrowRight'?1:2))%3;tab(arr[newIx]);$('#tab-'+arr[newIx]).focus();}};}
+for(const b of document.querySelectorAll('[data-tabgo]'))b.onclick=()=>tab(b.dataset.tabgo);
+$('#card-title').addEventListener('input',scheduleCard);$('#card-line').addEventListener('input',scheduleCard);$('#include-copy').addEventListener('change',scheduleCard);
+$('#download-card').onclick=cardExport;$('#download-original').onclick=originalExport;$('#download-review').onclick=pilotExport;
+for(const id of ['work','keep','print'])$('#score-'+id).addEventListener('input',()=>$('#out-'+id).textContent=$('#score-'+id).value+'/7');
+try{renderImage();}catch(e){const note=document.createElement('p');note.textContent=e.message;document.querySelector('.artside').append(note);}
+})();
+</script>
+</body></html>
