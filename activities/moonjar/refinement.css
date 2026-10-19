@@ -1575,18 +1575,6 @@ main.result-page .result-privacy-note{
 /* WAVE 10.0 / First-visit and completion-state guidance.
    Maintains the original ATELIER workbench, type palette, moonjar and
    mother-of-pearl design. These are low-chrome reading signals. */
-main.home .hero-start>.journey-path{
-  margin:7px 0 2px;
-  padding:0;
-  color:#756b54;
-  font-size:11px;
-  line-height:1.65;
-  letter-spacing:.01em;
-  word-break:keep-all;
-}
-main.home .hero-start>.journey-path + .micro{
-  margin-top:5px;
-}
 main.result-page .result-memory-reminder{
   margin:9px 0 15px;
   padding:12px 14px;
@@ -1619,16 +1607,6 @@ main.result-page.result-memory-only .result-actions button[data-action="export-j
   font-weight:700;
 }
 @media(max-width:767px){
-  main.home .hero-start>.journey-path{
-    font-size:10px;
-    line-height:1.45;
-    margin:4px 0 0;
-  }
-  main.home .hero-start>.journey-path + .micro{
-    font-size:10px;
-    line-height:1.4;
-    margin:3px 0 0;
-  }
   main.result-page .result-memory-reminder{
     margin:7px 0 10px;
     padding:9px 10px;
@@ -1665,4 +1643,56 @@ main.result-page.result-memory-only .result-actions button[data-action="card-opt
 }
 main.result-page.result-memory-only .result-actions button[data-action="card-options"]:hover{
   background:#ede8dd;
+}
+
+
+/* Optional first-visit interpretation belongs to the story dialog, never
+   in the accepted one-screen hero's visual composition. */
+.opening-story .opening-steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  counter-reset:step;
+  list-style:none;
+  margin:21px 0 16px;
+  padding:18px 0 17px;
+  border-block:1px solid var(--line);
+}
+.opening-story .opening-steps li{
+  min-width:0;
+  position:relative;
+  margin:0;
+  padding:0;
+  color:#596559;
+}
+.opening-story .opening-steps li::before{
+  counter-increment:step;
+  content:counter(step,decimal-leading-zero);
+  display:block;
+  margin-bottom:8px;
+  color:var(--atelier-brass);
+  font-family:var(--atelier-display);
+  font-size:13px;
+  font-weight:700;
+}
+.opening-story .opening-steps strong{
+  display:block;
+  margin-bottom:5px;
+  color:var(--atelier-dark);
+  font-family:var(--atelier-display);
+  font-size:17px;
+  line-height:1.5;
+}
+.opening-story .opening-steps span{
+  display:block;
+  font-size:12px;
+  line-height:1.8;
+  color:#657164;
+}
+@media(max-width:520px){
+  .opening-story .opening-steps{grid-template-columns:1fr;gap:12px}
+  .opening-story .opening-steps li{padding-left:33px}
+  .opening-story .opening-steps li::before{position:absolute;left:0;top:1px}
+  .opening-story .opening-steps strong{font-size:15px;margin:0}
+  .opening-story .opening-steps span{font-size:12px}
 }
