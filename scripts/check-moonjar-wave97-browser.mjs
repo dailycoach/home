@@ -154,7 +154,11 @@ async function run(kind,launcher,width,height){
 
     await dialog.locator('[aria-label="한 문장 포함"]').check();
     await dialog.locator('.craft-a-copy textarea').fill('이것은 오직 내가 선택한 문장입니다.');
-    await page.waitForTimeout(240);
+    await page.waitForFunction(()=>{
+      const button=document.querySelector('.craft-a-dialog [data-action="save-a-card"]');
+      const status=document.querySelector('.craft-a-side > p[role="status"]')?.textContent||'';
+      return !!button&&!button.disabled&&status.includes('같은 이미지');
+    },{timeout:20000});
     ok(!await dialog.locator('[data-action="save-a-card"]').isDisabled(),
       name+' user-opt-in sentence can be included');
     await dialog.locator('.craft-a-copy textarea').fill('첫째\n둘째\n셋째');
