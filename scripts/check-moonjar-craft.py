@@ -54,5 +54,5 @@ for theme in ('day','night'):
 gallery=(ART/'index.html').read_text(encoding='utf-8')
 assert 'https://' not in gallery and '<script src=' not in gallery
 assert 'data-theme' in gallery and 'data-count' in gallery
-assert 'craft-day-' in gallery and 'craft-night-' in gallery
+assert 'craft-day-08.png' in gallery and 'data-theme="night"' in gallery and "'craft-'+theme" in gallery
 print('MOONJAR A-ONLY QA PASS: 96 immutable original nacre sources, 10 craft scenes, 2 cards, two off-jar freedom checks')
