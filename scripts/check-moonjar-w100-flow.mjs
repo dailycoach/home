@@ -92,9 +92,25 @@ async function session(engine,launcher,width,height){
   await persistPage.locator('.project-card').first().waitFor();
   ok(await persistPage.locator('.project-card').count()===1,tag+' persistent artwork reopens in personal archive');
   const resume=persistPage.locator('.project-card [data-action^="open:"]').first();
+  ok((await resume.innerText()).includes('완성 작품 보기'),
+    tag+' completed archive item offers to revisit the artwork, not pretending it is unfinished');
   await resume.click();
-  await persistPage.locator('#art [data-node]').first().waitFor();
-  ok(await persistPage.locator('#art [data-node]').count()===1,tag+' original nacre position survives re-open');
+  await persistPage.locator('main.result-page').waitFor();
+  ok(await persistPage.locator('.result-layout>.comparison-scene').count()===1,
+    tag+' stored completed artwork reopens in its intended gallery view');
+  await persistPage.locator('.result-actions [data-action="continue"]').click();
+  await persistPage.locator('#art [data-node]').first().waitFor({state:'attached'});
+  ok(await persistPage.locator('#art [data-node]').count()===1,
+    tag+' original nacre survives optional re-edit of completed artwork');
+  await persistPage.waitForFunction(()=>document.querySelector('#save-state')?.textContent?.includes('저장됨'),null,{timeout:15000});
+  await persistPage.goto(BASE+'#/projects',{waitUntil:'networkidle'});
+  const unfinished=persistPage.locator('.project-card [data-action^="open:"]').first();
+  ok((await unfinished.innerText()).includes('이어서 꾸미기'),
+    tag+' unfinished archive item offers direct editing');
+  await unfinished.click();
+  await persistPage.locator('#art [data-node]').first().waitFor({state:'attached'});
+  ok(await persistPage.locator('#art [data-node]').count()===1,
+    tag+' unfinished archive entry returns to the authoring studio');
   ok(persistErrors.length===0,tag+' persisted flow has no runtime errors '+persistErrors.join(' | '));
   await saved.close();
   matrix.push({name:tag,passed:true});
