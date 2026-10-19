@@ -47,10 +47,12 @@ async function session(engine,launcher,width,height){
   ok(notice.includes('화면에만')&&notice.includes('다시 열 수 없어요'),tag+' no misleading claim of permanent storage');
   ok(notice.includes('개인 기록도 포함'),tag+' non-encrypted personal backup privacy explicit');
   ok(await page.locator('.result-actions button').count()===5,tag+' five original completion choices, no duplicate CTA');
+  ok((await page.locator('.result-actions button').first().getAttribute('data-action'))==='export-json',
+     tag+' recoverable edit-file export is primary in both layout and keyboard order');
   const strongBorder=await page.locator('.result-actions [data-action="export-json"]').evaluate(
      e=>getComputedStyle(e).borderTopColor
   );
-  ok(strongBorder==='rgb(163, 140, 98)',tag+' ephemeral project backup option visually distinguishable');
+  ok(strongBorder==='rgb(48, 57, 48)',tag+' temporary recovery action has the established ink primary styling');
   ok((await page.locator('#save-state').innerText()).includes('화면에만'),tag+' accurate save state shown');
   const art=page.locator('.result-layout>.comparison-scene');
   ok(await art.count()===1,tag+' creative result unchanged');
@@ -86,6 +88,8 @@ async function session(engine,launcher,width,height){
   await persistPage.locator('.studio-bar [data-action="finish"]').click();
   await persistPage.locator('main.result-page:not(.result-memory-only)').waitFor();
   ok(await persistPage.locator('.result-memory-reminder').count()===0,tag+' no false storage warning for persistent work');
+  ok((await persistPage.locator('.result-actions button').first().getAttribute('data-action'))==='card-options',
+    tag+' saved art retains original card-first completion design');
   await persistPage.waitForFunction(()=>document.querySelector('#save-state')?.textContent?.includes('저장됨'),null,{timeout:15000});
   await persistPage.screenshot({path:OUT+'/'+tag+'-persistent-finish.png'});
   await persistPage.goto(BASE+'#/projects',{waitUntil:'networkidle'});
