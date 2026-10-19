@@ -70,6 +70,10 @@ async function scenario(browserType,engine,width,height){
   ok((await first.evaluate(el=>el.open))===before,name+' second Enter restores disclosure');
   ok(await page.locator('.materials-disclosure>p').count()===9,
      name+' no original disclosures silently removed');
+  const beforeSymbol=await first.locator('summary').evaluate(el=>getComputedStyle(el,'::before').content);
+  ok(beforeSymbol==='none'||beforeSymbol==='normal',
+     name+' legacy left-side +/- removed; no doubled collapse symbol: '+beforeSymbol);
+  await page.evaluate(()=>document.activeElement?.blur?.());
   await noOverflow(page,name+' materials');
   await shot(page,name,'materials');
 
