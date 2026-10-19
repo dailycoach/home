@@ -843,7 +843,7 @@ async function projects(){
     const info=el('div',null,{class:'project-card-info'});
     info.append(el('p','MY WORK · 개인 보관',{class:'eyebrow'}),el('h2',d.title||story.ui.noTitle),el('p',`최근 작업 ${new Date(d.updatedAt).toLocaleString('ko-KR')} · 자개 ${d.scene.nodes.length}개`,{class:'micro project-meta'}));
     const controls=el('div',null,{class:'project-card-actions'});
-    controls.append(button('이어서 꾸미기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger','aria-label':`「${d.title||'이름 없는 작품'}」 삭제`}));
+    controls.append(button(d.currentScene==='ending'?'완성 작품 보기':'이어서 꾸미기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger','aria-label':`「${d.title||'이름 없는 작품'}」 삭제`}));
     info.append(controls);card.append(info);cards.append(card);
   }
   main.append(cards,el('p','같은 브라우저를 쓰는 사람도 이 목록을 열 수 있습니다. 공용 기기에서는 기록을 남기지 않는 모드를 선택하세요.',{class:'micro archive-privacy'}));
