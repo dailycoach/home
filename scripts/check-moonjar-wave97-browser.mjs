@@ -153,8 +153,11 @@ async function run(kind,launcher,width,height){
     const revisionAfter=await getRevision(page);
     ok(revisionAfter===revisionBefore,
       name+' opening preview, comparing and generating art never modifies or persists a project');
-    const normalDownload=page.waitForEvent('download');
     await page.locator('[data-action="export-json"]').first().click();
+    const downloadDialog=page.locator('#modal');
+    await downloadDialog.waitFor({state:'visible'});
+    const normalDownload=page.waitForEvent('download');
+    await downloadDialog.locator('[data-action="download-json"]').click();
     const docFile=OUT+'/'+name+'-backup.moonjar.json';
     await (await normalDownload).saveAs(docFile);
     const backup=JSON.parse(await readFile(docFile,'utf8'));
