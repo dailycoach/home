@@ -852,7 +852,22 @@ function guide(){
   const intro=el('section',null,{class:'guide-intro'});
   intro.append(el('p','FACILITATOR’S GUIDE',{class:'eyebrow'}),el('h2','지시하기보다, 함께 바라보는 시간.'),el('p','모든 질문과 공유는 선택입니다. 말하고 싶지 않은 이야기는 요청하지 않습니다. 빈 항아리로 마무리할 수 있습니다.'));
   main.append(intro);
-  const schedule=el('section',null,{class:'guide-section'});
+  // The URL hash is already an app router. In-page navigation deliberately
+  // uses buttons instead of fragment links, so the current guide route stays
+  // intact while readers jump between the three parts.
+  const toc=el('nav',null,{class:'guide-toc','aria-label':'진행 안내 차례'});
+  for(const [name,id] of [['01  ·  60분 진행 흐름','guide-schedule'],['02  ·  DAILY 질문','guide-daily'],['03  ·  진행 윤리','guide-ethics']]){
+    const jump=el('button',name,{type:'button',class:'guide-jump'});
+    jump.addEventListener('click',()=>{
+      const target=main.querySelector('#'+id);
+      if(!target)return;
+      target.scrollIntoView({block:'start',behavior:'instant'});
+      target.focus({preventScroll:true});
+    });
+    toc.append(jump);
+  }
+  main.append(toc);
+  const schedule=el('section',null,{class:'guide-section',id:'guide-schedule',tabindex:'-1'});
   schedule.append(el('h2','60분 진행 흐름'));
   const table=el('table',null,{class:'facilitator-timing'});
   table.append(el('caption','60분 아트코칭 진행 흐름'));
@@ -866,7 +881,7 @@ function guide(){
     tbody.append(r);
   }
   table.append(tbody);schedule.append(table);main.append(schedule);
-  const principles=el('section',null,{class:'guide-section guide-daily'});
+  const principles=el('section',null,{class:'guide-section guide-daily',id:'guide-daily',tabindex:'-1'});
   principles.append(el('p','DAILY · AWARENESS',{class:'eyebrow'}),el('h2','진행자가 지켜야 할 질문의 태도'));
   const grid=el('div',null,{class:'guide-principles'});
   for(const d of story.daily){
@@ -875,7 +890,7 @@ function guide(){
     grid.append(item);
   }
   principles.append(grid);main.append(principles);
-  main.append(el('aside','작품의 색과 위치에 의미를 부여하지 않습니다. 참여자가 자신의 의미를 찾도록 기다립니다. 불편하면 멈추거나 건너뛰도록 안내합니다.',{class:'guide-safety','aria-label':'진행 윤리 안내'}));
+  main.append(el('aside','작품의 색과 위치에 의미를 부여하지 않습니다. 참여자가 자신의 의미를 찾도록 기다립니다. 불편하면 멈추거나 건너뛰도록 안내합니다.',{class:'guide-safety',id:'guide-ethics',tabindex:'-1','aria-label':'진행 윤리 안내'}));
 }
 function about(){
   currentView='materials';
@@ -885,7 +900,9 @@ function about(){
   intro.append(el('p','MATERIALS & PRIVACY',{class:'eyebrow'}),el('h2','작품은 자유롭게. 기록은 신중하게.'),el('p','자개를 놓는 방법에 정답은 없습니다. 다만 작품과 개인 기록의 보관 방식은 시작하기 전에 확인해 주세요.'));
   const related=el('p',null,{class:'materials-related-links'});
   related.append(el('a','진행자를 위한 60분 안내 보기 →',{href:'#/guide'}));
-  intro.append(related);main.append(intro);
+  intro.append(related);
+  intro.append(el('p','자동 저장을 선택하면 작품과 기록은 이 브라우저에 남습니다. 편집 파일에는 개인 기록이 포함되므로 공유 전에 확인하세요.',{class:'materials-key-note'}));
+  main.append(intro);
   const information=[
     ['자개의 빛','제공된 자개 PNG 96개와 1600 × 1800 달항아리 도안 두 종을 사용합니다. 화면 속 자개는 정적인 2D 이미지이며 회전으로 실제 자개의 광학 반사를 재현하지 않습니다.'],
     ['자유로운 배치','항아리 안이나 밖, 종이 영역 안에 조각을 놓을 수 있습니다. 조각 수와 배치에 정답은 없습니다.'],
@@ -902,13 +919,22 @@ function about(){
     ['보관과 개인정보','나의 작업이 어디에 남는지',information.slice(2,5)],
     ['저장·출력·출처','완성 작품을 안전하게 간직하기',information.slice(5)]
   ];
+  // Desktop keeps every explanation visible. On small screens only optional
+  // supporting material starts folded; storage/privacy boundaries start OPEN.
+  // The full original paragraphs stay available as native keyboard-accessible
+  // disclosure content. Readers can always expand any heading.
+  const smallScreen=typeof matchMedia==='function'&&matchMedia('(max-width:767px)').matches;
+  const keepOpen=new Set(['저장은 이 브라우저에','기록을 남기지 않는 모드','개인 기록의 경계','편집 파일과 작품 이미지']);
   for(const [heading,caption,items] of groups){
     const section=el('section',null,{class:'materials-section'});
     section.append(el('p',caption,{class:'eyebrow'}),el('h2',heading));
     const grid=el('div',null,{class:'materials-grid'});
     for(const [title,paragraph] of items){
-      const article=el('article',null,{class:'materials-item'});
-      article.append(el('h3',title),el('p',paragraph));grid.append(article);
+      const detail=el('details',null,{class:'materials-item materials-disclosure'});
+      detail.open=!smallScreen||keepOpen.has(title);
+      const summary=el('summary',null,{class:'materials-summary'});
+      summary.append(el('h3',title));
+      detail.append(summary,el('p',paragraph));grid.append(detail);
     }
     section.append(grid);main.append(section);
   }
