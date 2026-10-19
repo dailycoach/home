@@ -98,11 +98,19 @@ async function session(engine,launcher,width,height){
   await persistPage.locator('main.result-page').waitFor();
   ok(await persistPage.locator('.result-layout>.comparison-scene').count()===1,
     tag+' stored completed artwork reopens in its intended gallery view');
+  console.log('W10 REOPENED STATUS',tag,await persistPage.locator('#save-state').innerText());
   await persistPage.locator('.result-actions [data-action="continue"]').click();
   await persistPage.locator('#art [data-node]').first().waitFor({state:'attached'});
   ok(await persistPage.locator('#art [data-node]').count()===1,
     tag+' original nacre survives optional re-edit of completed artwork');
-  await persistPage.waitForFunction(()=>document.querySelector('#save-state')?.textContent?.includes('저장됨'),null,{timeout:15000});
+  try{
+    await persistPage.waitForFunction(()=>document.querySelector('#save-state')?.textContent?.includes('저장됨'),null,{timeout:10000});
+  }catch(err){
+    const status=await persistPage.locator('#save-state').innerText().catch(()=>'(missing status element)');
+    const url=persistPage.url();
+    await persistPage.screenshot({path:OUT+'/'+tag+'-reopened-debug.png'});
+    throw new Error(tag+' continued artwork cannot be saved: '+status+' URL='+url+'; '+String(err));
+  }
   await persistPage.goto(BASE+'#/projects',{waitUntil:'networkidle'});
   const unfinished=persistPage.locator('.project-card [data-action^="open:"]').first();
   ok((await unfinished.innerText()).includes('이어서 꾸미기'),
