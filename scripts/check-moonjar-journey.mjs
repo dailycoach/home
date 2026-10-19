@@ -35,6 +35,16 @@ async function scenario(browserType,engine,width,height){
   ok(await page.locator('.guide-principle').count()===5,name+' 5 DAILY dimensions present');
   ok((await page.locator('.guide-safety').innerText()).includes('의미를 부여하지 않습니다'),name+' ethical guidance retained');
   await noOverflow(page,name+' guide');
+  ok(await page.locator('.guide-toc button').count()===3,name+' three chapter jump links');
+  const originalRoute=await page.evaluate(()=>location.hash);
+  await page.locator('.guide-toc button').nth(1).click();
+  ok(await page.evaluate(()=>document.activeElement?.id==='guide-daily'),
+     name+' keyboard focus follows DAILY shortcut');
+  ok(await page.evaluate(()=>location.hash)===originalRoute,
+     name+' chapter shortcuts do not accidentally leave hash-routed guide');
+  await page.locator('.guide-toc button').nth(2).click();
+  ok(await page.evaluate(()=>document.activeElement?.id==='guide-ethics'),
+     name+' ethical principles shortcut remains accessible');
   const rowType=await page.locator('.facilitator-timing tbody tr').first().evaluate(e=>getComputedStyle(e).display);
   ok(width<=767?rowType==='grid':rowType==='table-row',name+' timetable responsive without hidden rows');
   await shot(page,name,'guide');
@@ -44,6 +54,22 @@ async function scenario(browserType,engine,width,height){
   ok(await page.locator('.materials-item').count()===9,name+' material/privacy paragraphs preserved');
   ok(await page.locator('.materials-section').count()===4,name+' grouped sections and attribution');
   ok((await page.locator('main').innerText()).includes('IndexedDB'),name+' local storage warning visible');
+  ok(await page.locator('.materials-disclosure').count()===9,
+     name+' all 9 help paragraphs are native disclosure content');
+  const opens=await page.locator('.materials-disclosure').evaluateAll(nodes=>nodes.filter(n=>n.open).length);
+  ok(width<=767?opens===4:opens===9,
+     name+' mobile starts with four private-data facts visible, desktop all 9: '+opens);
+  ok((await page.locator('.materials-key-note').innerText()).includes('개인 기록'),
+     name+' critical archive privacy note always visible');
+  const first=page.locator('.materials-disclosure').first();
+  const before=await first.evaluate(el=>el.open);
+  await first.locator('summary').focus();
+  await page.keyboard.press('Enter');
+  ok((await first.evaluate(el=>el.open))!==before,name+' native keyboard disclosure toggles');
+  await page.keyboard.press('Enter');
+  ok((await first.evaluate(el=>el.open))===before,name+' second Enter restores disclosure');
+  ok(await page.locator('.materials-disclosure>p').count()===9,
+     name+' no original disclosures silently removed');
   await noOverflow(page,name+' materials');
   await shot(page,name,'materials');
 
@@ -67,6 +93,22 @@ async function scenario(browserType,engine,width,height){
   ok((await page.locator('.save-options-intro').innerText()).includes('개인 기록은 자동'),name+' private data notice at saving');
   const cols=await page.locator('.save-options-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').filter(Boolean).length);
   ok(width<=767?cols===1:cols===2,name+' responsive save dialog');
+  const saveBounds=await page.evaluate(()=>{
+    const d=document.querySelector('#modal'),last=document.querySelector('#modal .save-option:last-child'),
+      v=d.getBoundingClientRect(),b=last.getBoundingClientRect();
+    return {modalTop:v.top,modalBottom:v.bottom,lastTop:b.top,lastBottom:b.bottom,
+      clientHeight:d.clientHeight,scrollHeight:d.scrollHeight,viewport:innerHeight};
+  });
+  if(width===390&&height>=800){
+    ok(saveBounds.lastBottom<=Math.min(saveBounds.modalBottom-4,height-4),
+      name+' all four save outcomes visible without hidden last CTA: '+JSON.stringify(saveBounds));
+  }
+  if(width<=350){
+    await page.locator('.save-option').last().scrollIntoViewIfNeeded();
+    const visible=await page.locator('.save-option').last().boundingBox();
+    ok(visible&&visible.y>=0&&visible.y+visible.height<=height,
+       name+' 320px short phone can scroll dialog to last save option');
+  }
   await shot(page,name,'save-choices');
   await page.locator('#modal-close').click();
 
@@ -96,10 +138,10 @@ async function scenario(browserType,engine,width,height){
 }
 let error=null;
 try{for(const [driver,engine,width,height] of [
- [chromium,'chromium',390,844],[chromium,'chromium',1440,900],[webkit,'webkit',390,844]
+ [chromium,'chromium',320,568],[chromium,'chromium',390,844],[chromium,'chromium',1440,900],[webkit,'webkit',390,844]
 ])await scenario(driver,engine,width,height);}
 catch(e){error=e;process.exitCode=1;}
 finally{
  await writeFile(out+'/results.json',JSON.stringify({checks,results,note:'Browser simulation only, not physical mobile or AT evaluation.'},null,2));
- console.log('MOONJAR JOURNEY QA',checks,'checks;',results.filter(r=>r.passed).length+'/3 passed',error?'FAILED':'PASSED');
+ console.log('MOONJAR JOURNEY QA',checks,'checks;',results.filter(r=>r.passed).length+'/4 passed',error?'FAILED':'PASSED');
 }
