@@ -92,6 +92,41 @@ async function scenario(browser,engine,width,height,files=false){
         name+' personal contact info not collected');
     }
     await page.screenshot({path:evidence+'/'+name+'-pilot-view.png',animations:'disabled',fullPage:false});
+    if(files){
+      // Reuse the source-authentic QA composition as a synthetic user upload.
+      // The upload must remain in browser memory and must NOT become part
+      // of the voluntary JSON response.
+      await page.locator('[data-tab="view"]').click();
+      await page.locator('#user-art').setInputFiles(resolve('artifacts/moonjar-craft/artwork/craft-day-08.png'));
+      await page.waitForFunction(()=>document.querySelector('#upload-status')?.textContent?.includes('내 작품을'),{timeout:10000});
+      check(await page.locator('[data-theme="night"]').isDisabled(),name+' imported user art does not silently change theme');
+      check((await page.locator('#art-caption').innerText()).includes('내가 완성한 작품'),
+        name+' imported art displayed in place of stock examples');
+      await page.locator('[data-tab="card"]').click();
+      const mineJob=page.waitForEvent('download');
+      await page.locator('#download-card').click();
+      const saved=await mineJob;
+      const savedPath=evidence+'/'+name+'-uploaded-art-card.png';
+      await saved.saveAs(savedPath);
+      const savedPng=await readFile(savedPath);
+      check(savedPng.readUInt32BE(16)===1600&&savedPng.readUInt32BE(20)===2400,
+        name+' imported art can become a 1600x2400 A-only card');
+      await page.locator('[data-tab="pilot"]').click();
+      const mineReviewJob=page.waitForEvent('download');
+      await page.locator('#download-review').click();
+      const review=await mineReviewJob;
+      const reviewPath=evidence+'/'+name+'-uploaded-art-review.json';
+      await review.saveAs(reviewPath);
+      const json=JSON.parse(await readFile(reviewPath,'utf8'));
+      check(json.scene.source==='local-user-png'&&json.scene.pieceCount===null,
+        name+' JSON notes own art without pretending to know its piece count');
+      check(!(await readFile(reviewPath,'utf8')).includes('data:image'),
+        name+' private participant image is never contained in exported survey');
+      await page.locator('[data-tab="view"]').click();
+      await page.locator('#clear-art').click();
+      check(await page.locator('[data-count="8"]').isEnabled(),
+        name+' participant can clear local preview and return to examples');
+    }
     check(errors.length===0,name+' no browser errors or remote requests: '+errors.join(' | '));
     results.push({name,status:'PASS',width,height});
     console.log('A-ONLY PILOT PASS',name);
