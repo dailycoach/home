@@ -29,12 +29,20 @@ async function session(engine,launcher,width,height){
   const page=await memory.newPage(),errors=listen(page);
   await page.goto(BASE,{waitUntil:'networkidle',timeout:30000});
   ok(await page.locator('.hero').count()===1,tag+' keeps the original art-led entry');
-  const steps=await page.locator('.journey-path').innerText();
-  ok(steps.includes('①')&&steps.includes('②')&&steps.includes('③'),tag+' describes the three optional creative stages');
-  ok((await page.locator('.hero-start>.micro').count())>=2,tag+' retains login and record-optional disclosure');
+  ok(await page.locator('.journey-path').count()===0,tag+' cover layout is not displaced by unnecessary new text');
+  ok((await page.locator('.hero-start>.micro').count())===1,
+    tag+' original login and optional-record disclosure still a single quiet line');
   const cta=await page.locator('.hero-actions [data-action="start-free"]').boundingBox();
   if(height>=800)ok(cta&&cta.y>=0&&cta.y+cta.height<=height+1,tag+' first start CTA remains on-screen');
   await page.screenshot({path:OUT+'/'+tag+'-home.png'});
+  await page.locator('main.home [data-action="opening-story"]').click();
+  await page.locator('#modal .opening-story').waitFor({state:'visible'});
+  ok(await page.locator('#modal .opening-steps li').count()===3,
+    tag+' optional story dialog explains three stages without changing first screen');
+  ok((await page.locator('#modal .opening-story').innerText()).includes('중요한 작업은 편집 파일로'),
+    tag+' privacy/backup language remains available with the three stages');
+  await page.locator('#modal [data-action="close-opening-story"]').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('#storage-memory').check();
   await page.locator('.hero-actions [data-action="start-free"]').click();
   await page.locator('#art').waitFor({state:'visible'});
