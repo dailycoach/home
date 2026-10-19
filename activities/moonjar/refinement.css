@@ -1453,6 +1453,11 @@ main.result-page .result-privacy-note{
   border-radius:2px;
 }
 .materials-guide .materials-disclosure .materials-summary::-webkit-details-marker{display:none}
+/* The legacy global summary::before generates a second +/- marker. */
+.materials-guide .materials-disclosure .materials-summary::before{
+  content:none;
+  display:none;
+}
 .materials-guide .materials-disclosure .materials-summary::after{
   content:"＋";
   flex:0 0 auto;
