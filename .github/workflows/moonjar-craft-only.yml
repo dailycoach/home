@@ -1,0 +1,54 @@
+name: Moonjar Craft-Only Art Research
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/render-moonjar-craft.py'
+      - 'scripts/moonjar_craft_helpers.py'
+      - 'scripts/check-moonjar-craft.py'
+      - 'design/moonjar-craft/**'
+      - 'docs/moonjar-craft-only-decision-20261019.md'
+      - '.github/workflows/moonjar-craft-only.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  craft-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Assert published Moonjar works and 96 original sources unchanged
+        run: |
+          node scripts/check-moonjar.mjs
+          node --test tests/moonjar/*.test.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install locked art study dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          python -m pip install --disable-pip-version-check \
+            numpy==2.3.5 pillow==12.3.0 cairosvg==2.8.2 opencv-python-headless==4.13.0.92
+      - name: Rebuild original WAVE 9.4 porcelain study
+        run: python scripts/render-moonjar-wave94.py --source-svg design/moonjar-wave93 --out artifacts/moonjar-wave94/study
+      - name: Create only A tactile craft compositions and archive card
+        run: python -u scripts/render-moonjar-craft.py
+      - name: Stage independent single-direction review page
+        run: cp design/moonjar-craft/review.html artifacts/moonjar-craft/index.html
+      - name: Verify ten A-only scenes, two cards, unchanged originals and free placement
+        run: python scripts/check-moonjar-craft.py
+      - name: Attach stand-alone craft research artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-craft-a-only-art-review
+          path: artifacts/moonjar-craft
+          retention-days: 7
+          if-no-files-found: warn
