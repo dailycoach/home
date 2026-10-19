@@ -112,7 +112,7 @@ function planText(ctx,text,{maxWidth=1310,maxLines=2,preferred=84,minimum=44,lab
       return {size,lines};
     }
   }
-  throw new Error(label+'를 생략하지 않고 담을 공간이 부족합니다. 카드용 문구를 조금 줄여주세요.');
+  throw new Error(label+'은 두 줄까지만 담을 수 있습니다. 글을 자르지 않고 보존하려면 카드용 문구를 조금 줄여주세요.');
 }
 export async function createCraftACard(artworkPNG,copy={}){
   const normalized=normalizeCardCopy(copy);
