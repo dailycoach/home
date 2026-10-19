@@ -54,7 +54,7 @@ async function scenario(browser,engine,width,height,files=false){
     await page.locator('#card-line').fill('여백을 남기기로 했다');
     await page.locator('#include-copy').check();
     // The participant's card copy must never be silently cut off.
-    await page.locator('#card-line').fill('첫째 줄\\n둘째 줄\\n셋째 줄');
+    await page.locator('#card-line').fill('첫째 줄\n둘째 줄\n셋째 줄');
     await page.waitForFunction(()=>document.querySelector('#card-status')?.textContent?.includes('두 줄'),{timeout:10000});
     check(true,name+' three explicit lines are rejected instead of being silently truncated');
     await page.locator('#card-title').fill('나의 봄빛 달항아리와 오늘의 여백을 닮은 작은 기록 하나');
