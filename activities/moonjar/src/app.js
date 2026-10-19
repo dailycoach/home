@@ -5,7 +5,7 @@ import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
 let story, manifest, schema, empty, materials, repository = null;
-let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null;
+let editor = null, queue = null, persistent = true, readOnly = false, releaseLock = null, lockCompletion = null;
 let panel = 'palette', palette = 'A', zoom = 1, paused = false, currentView = 'home', status = 'memory';
 let activeGesture = null, dialogReturn = null, statusDetail = '', available = false, hasStored = false, documentInvalid = false;
 let opening = false, viewScene = 'arrival', controlTab = 'move', leadExpanded = true;
@@ -80,15 +80,29 @@ function renderStatus() {
 }
 async function dispose() {
   await queue?.stop(); queue = null;
-  if (releaseLock) { releaseLock(); releaseLock = null; }
+  // A same-document route from studio/result → projects DOES NOT unload the
+  // old page. Finishing a Web Lock callback is asynchronous, so immediately
+  // reacquiring with ifAvailable:true can incorrectly report this very tab
+  // as another editor. Wait for the lock request promise to settle.
+  const pending = lockCompletion;
+  lockCompletion = null;
+  if (releaseLock) {
+    const release = releaseLock;
+    releaseLock = null;
+    release();
+  }
+  if (pending) await pending.catch(() => {});
 }
 async function acquireLock(id) {
   if (!navigator.locks) return true; // Transaction revision checks still apply.
   return new Promise(resolve => {
-    navigator.locks.request(`moonjar-edit-${id}`, {mode:'exclusive', ifAvailable:true}, async lock => {
+    const request = navigator.locks.request(`moonjar-edit-${id}`, {mode:'exclusive', ifAvailable:true}, async lock => {
       if (!lock) { resolve(false); return; }
-      resolve(true); await new Promise(done => { releaseLock = done; });
-    }).catch(() => resolve(true));
+      resolve(true);
+      await new Promise(done => { releaseLock = done; });
+    });
+    lockCompletion = request;
+    request.catch(() => resolve(true));
   });
 }
 async function openProject(doc, saveHere, expected = null, targetView = null) {
@@ -160,6 +174,19 @@ function openingStory(){
   const content=el('div',null,{class:'opening-story'});
   content.append(el('h3',story.opening.title));
   for(const paragraph of story.opening.paragraphs)content.append(el('p',paragraph));
+  // The original cover's visual composition must NOT shift when we explain
+  // the journey. The steps live inside the already-optional story dialog.
+  const path=el('ol',null,{class:'opening-steps','aria-label':'이용 순서'});
+  for(const [name,detail] of [
+    ['자개 고르기','마음에 드는 빛과 모양을 선택합니다.'],
+    ['마음껏 놓기','항아리 안과 밖에 자유롭게 놓고 바라봅니다.'],
+    ['작품 간직하기','원하면 작품과 편집 파일을 직접 저장합니다.']
+  ]){
+    const item=el('li');
+    item.append(el('strong',name),el('span',detail));
+    path.append(item);
+  }
+  content.append(path);
   content.append(el('p','선택한 조각과 말은 내 기기에만 남습니다. 중요한 작업은 편집 파일로도 보관해 주세요.',{class:'micro'}));
   content.append(button('이야기를 덮고 시작하기','close-opening-story',{class:'primary'}));
   openDialog('달항아리의 이야기',content);
@@ -742,7 +769,7 @@ async function finish(){
 }
 function result(){
   currentView='result';
-  main.className='result-page';
+  main.className=persistent?'result-page':'result-page result-memory-only';
   main.replaceChildren(header(story.ending.title),el('p','',{id:'save-state',class:'save-state',role:'status','aria-live':'polite'}));
 
   const layout=el('div',null,{class:'result-layout'});
@@ -755,14 +782,36 @@ function result(){
   );
   // The result is an artwork first. Journal reflections are not exposed on
   // the page by default, and the image/card never includes them automatically.
+  // Memory-only creation has no persistent revision or autosave; completion
+  // must not look like a successful archival save. The same existing
+  // export-json action remains available below with an explicit description.
+  if(!persistent){
+    const reminder=el('aside',null,{
+      class:'result-memory-reminder',
+      role:'note',
+      'aria-label':'임시 작업 보관 안내'
+    });
+    reminder.append(
+      el('strong','이번 작품은 이 화면에만 남아 있습니다.'),
+      el('p','화면을 닫으면 작품과 기록을 다시 열 수 없어요. 나중에 이어 꾸미려면 아래의 「편집 파일로 보관」을 선택해 주세요. 편집 파일에는 개인 기록도 포함됩니다.')
+    );
+    copy.append(reminder);
+  }
   const actions=el('div',null,{class:'result-actions'});
-  actions.append(
-    button('작품 카드 만들기','card-options',{class:'primary'}),
-    button('작품 이미지만 저장','export-png'),
-    button('다시 꾸미기','continue'),
-    button('편집 파일로 보관','export-json'),
-    button('기록지 인쇄·PDF 저장','print-options')
-  );
+  const card=button('작품 카드 만들기','card-options',{class:'primary'});
+  const image=button('작품 이미지만 저장','export-png');
+  const continueWork=button('다시 꾸미기','continue');
+  const editBackup=button('편집 파일로 보관','export-json');
+  const print=button('기록지 인쇄·PDF 저장','print-options');
+  if(persistent){
+    actions.append(card,image,continueWork,editBackup,print);
+  }else{
+    // Do not let a decorative PNG/card download impersonate a recoverable
+    // editing backup on a shared device or temporary memory-only session.
+    // Exactly the same five actions remain available, with the actual
+    // recoverable export first in both visual and keyboard reading order.
+    actions.append(editBackup,card,image,continueWork,print);
+  }
   copy.append(el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
@@ -824,7 +873,7 @@ async function projects(){
     const info=el('div',null,{class:'project-card-info'});
     info.append(el('p','MY WORK · 개인 보관',{class:'eyebrow'}),el('h2',d.title||story.ui.noTitle),el('p',`최근 작업 ${new Date(d.updatedAt).toLocaleString('ko-KR')} · 자개 ${d.scene.nodes.length}개`,{class:'micro project-meta'}));
     const controls=el('div',null,{class:'project-card-actions'});
-    controls.append(button('이어서 꾸미기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger','aria-label':`「${d.title||'이름 없는 작품'}」 삭제`}));
+    controls.append(button(d.currentScene==='ending'?'완성 작품 보기':'이어서 꾸미기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger','aria-label':`「${d.title||'이름 없는 작품'}」 삭제`}));
     info.append(controls);card.append(info);cards.append(card);
   }
   main.append(cards,el('p','같은 브라우저를 쓰는 사람도 이 목록을 열 수 있습니다. 공용 기기에서는 기록을 남기지 않는 모드를 선택하세요.',{class:'micro archive-privacy'}));

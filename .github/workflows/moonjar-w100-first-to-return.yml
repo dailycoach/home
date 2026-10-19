@@ -1,0 +1,50 @@
+name: Moonjar WAVE 10 First Visit to Archive
+
+on:
+  pull_request:
+    paths:
+      - 'activities/moonjar/**'
+      - 'scripts/check-moonjar-w100-flow.mjs'
+      - 'docs/moonjar-w100-first-to-return-ux.md'
+      - '.github/workflows/moonjar-w100-first-to-return.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  first-to-return:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preserve original 96 nacre sources and legacy project schema
+        run: |
+          node scripts/check-moonjar.mjs
+          node --test tests/moonjar/*.test.js
+      - name: Install real browser engines
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Serve private PR Moonjar app (not production)
+        run: |
+          python3 -m http.server 4173 >/tmp/moonjar-w100.log 2>&1 &
+          for i in {1..25}; do
+            curl -fsS http://127.0.0.1:4173/activities/moonjar/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/moonjar-w100.log
+          exit 1
+      - name: Verify first visit, private temporary completion, backup and saved return
+        run: node scripts/check-moonjar-w100-flow.mjs
+      - name: Attach mobile/desktop journey screenshots and outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-w100-first-to-return
+          path: artifacts/moonjar-w100-first-to-return/
+          retention-days: 7
+          if-no-files-found: warn

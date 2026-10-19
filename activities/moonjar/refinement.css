@@ -1570,3 +1570,129 @@ main.result-page .result-privacy-note{
   #modal .save-option{column-gap:7px;padding:9px}
   #modal .save-option p.micro{font-size:11px}
 }
+
+
+/* WAVE 10.0 / First-visit and completion-state guidance.
+   Maintains the original ATELIER workbench, type palette, moonjar and
+   mother-of-pearl design. These are low-chrome reading signals. */
+main.result-page .result-memory-reminder{
+  margin:9px 0 15px;
+  padding:12px 14px;
+  border-left:3px solid var(--atelier-brass);
+  background:#eee7db;
+  color:#424e41;
+  font-size:13px;
+  line-height:1.75;
+}
+main.result-page .result-memory-reminder strong{
+  display:block;
+  margin:0 0 4px;
+  font-family:var(--atelier-display);
+  color:#3a453a;
+  font-size:16px;
+  line-height:1.5;
+}
+main.result-page .result-memory-reminder p{
+  margin:0;
+  color:#596558;
+  font-size:12px;
+  line-height:1.8;
+}
+/* The existing personal-backup action is more legible when this work is
+   memory-only; no duplicate CTA or recording is introduced. */
+main.result-page.result-memory-only .result-actions button[data-action="export-json"]{
+  border-color:#a38c62;
+  background:#ede4d4;
+  color:#3a4237;
+  font-weight:700;
+}
+@media(max-width:767px){
+  main.result-page .result-memory-reminder{
+    margin:7px 0 10px;
+    padding:9px 10px;
+    font-size:12px;
+    line-height:1.55;
+  }
+  main.result-page .result-memory-reminder strong{font-size:14px;margin-bottom:3px}
+  main.result-page .result-memory-reminder p{font-size:11px;line-height:1.6}
+}
+
+
+/* The temporary session cannot be resumed unless a project JSON is kept.
+   A temporary work’s first action is the recoverable file, not an image. */
+main.result-page.result-memory-only .result-actions button[data-action="export-json"]{
+  grid-column:1 / -1;
+  min-height:54px;
+  border:1px solid var(--atelier-dark);
+  background:var(--atelier-dark);
+  color:#fffdf8;
+  font-size:15px;
+  font-weight:700;
+}
+main.result-page.result-memory-only .result-actions button[data-action="export-json"]:hover{
+  background:#445043;
+}
+main.result-page.result-memory-only .result-actions button[data-action="card-options"]{
+  grid-column:1 / -1;
+  min-height:49px;
+  border:1px solid #b9ab96;
+  background:#faf7f0;
+  color:#333f35;
+  font-size:14px;
+  font-weight:650;
+}
+main.result-page.result-memory-only .result-actions button[data-action="card-options"]:hover{
+  background:#ede8dd;
+}
+
+
+/* Optional first-visit interpretation belongs to the story dialog, never
+   in the accepted one-screen hero's visual composition. */
+.opening-story .opening-steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  counter-reset:step;
+  list-style:none;
+  margin:21px 0 16px;
+  padding:18px 0 17px;
+  border-block:1px solid var(--line);
+}
+.opening-story .opening-steps li{
+  min-width:0;
+  position:relative;
+  margin:0;
+  padding:0;
+  color:#596559;
+}
+.opening-story .opening-steps li::before{
+  counter-increment:step;
+  content:counter(step,decimal-leading-zero);
+  display:block;
+  margin-bottom:8px;
+  color:var(--atelier-brass);
+  font-family:var(--atelier-display);
+  font-size:13px;
+  font-weight:700;
+}
+.opening-story .opening-steps strong{
+  display:block;
+  margin-bottom:5px;
+  color:var(--atelier-dark);
+  font-family:var(--atelier-display);
+  font-size:17px;
+  line-height:1.5;
+}
+.opening-story .opening-steps span{
+  display:block;
+  font-size:12px;
+  line-height:1.8;
+  color:#657164;
+}
+@media(max-width:520px){
+  .opening-story .opening-steps{grid-template-columns:1fr;gap:12px}
+  .opening-story .opening-steps li{padding-left:33px}
+  .opening-story .opening-steps li::before{position:absolute;left:0;top:1px}
+  .opening-story .opening-steps strong{font-size:15px;margin:0}
+  .opening-story .opening-steps span{font-size:12px}
+}
