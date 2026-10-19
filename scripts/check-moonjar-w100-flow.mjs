@@ -80,7 +80,9 @@ async function session(engine,launcher,width,height){
   await persistPage.locator('.hero-actions [data-action="start-free"]').click();
   await persistPage.locator('#art').waitFor();
   await persistPage.locator('#palette-panel [data-action="add:A01"]').click();
-  await persistPage.locator('#art [data-node]').first().waitFor();
+  // SVG <g> attachment proves the piece was added; very small-screen
+  // CSS may make that shape not meet Playwright's "visible" heuristic.
+  await persistPage.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
   await persistPage.locator('.studio-bar [data-action="finish"]').click();
   await persistPage.locator('main.result-page:not(.result-memory-only)').waitFor();
   ok(await persistPage.locator('.result-memory-reminder').count()===0,tag+' no false storage warning for persistent work');
