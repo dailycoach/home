@@ -10,7 +10,7 @@ const schema=JSON.parse(read('data/schema.json'));
 
 test('A preview is opt-in query only, not a saved art style',()=>{
  const source=read('src/app.js');
- assert.match(source,/get\('artStudy'\)==='craft-a'/);
+ assert.match(source,/artStudy=craft-a/);
  assert.match(source,/if\(craftAStudyFlag\)viewtools\.append/);
  assert.match(source,/if\(craftAStudyFlag\)actions\.append/);
  assert.match(source,/const snapshot=clone\(editor\.doc\.scene\)/);
