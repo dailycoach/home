@@ -1385,3 +1385,188 @@ main.result-page .result-privacy-note{
   #modal .save-option-number{margin-bottom:5px}
   #modal .save-option button{min-height:45px}
 }
+
+
+/* WAVE 9.9 / READING & SAVING MICRO-POLISH. Do not touch the original
+   white-porcelain graphics, main atelier grid or editor interaction styles. */
+
+/* Guide chapter index: keyboard-operated buttons avoid the hash-router
+   collision created by conventional #id anchors. */
+.facilitator-guide .guide-toc{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+  margin:0 0 clamp(20px,3vw,37px);
+}
+.facilitator-guide .guide-toc .guide-jump{
+  min-width:0;
+  min-height:46px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:2px;
+  background:#faf7f0;
+  color:#4a5547;
+  font-size:13px;
+  font-weight:600;
+  text-align:left;
+  line-height:1.65;
+  box-shadow:none;
+}
+.facilitator-guide .guide-toc .guide-jump:hover{
+  background:var(--atelier-soft);
+  border-color:#ad9b7d;
+}
+.facilitator-guide :is(#guide-schedule,#guide-daily,#guide-ethics){
+  scroll-margin-top:16px;
+}
+.facilitator-guide :is(#guide-schedule,#guide-daily,#guide-ethics):focus{
+  outline:none;
+}
+.facilitator-guide :is(#guide-schedule,#guide-daily,#guide-ethics):focus-visible{
+  outline:2px solid var(--atelier-brass);
+  outline-offset:4px;
+}
+
+/* Do not hide the consequence of saving private notes behind a disclosure. */
+.materials-guide .materials-key-note{
+  display:block;
+  padding:13px 16px;
+  margin:19px 0 2px;
+  border-left:3px solid var(--atelier-brass);
+  background:var(--atelier-soft);
+  color:#414e41;
+  font-size:13px;
+  line-height:1.85;
+  max-width:800px;
+}
+.materials-guide .materials-disclosure{
+  min-width:0;
+}
+.materials-guide .materials-disclosure .materials-summary{
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:11px;
+  min-height:48px;
+  list-style:none;
+  cursor:pointer;
+  border-radius:2px;
+}
+.materials-guide .materials-disclosure .materials-summary::-webkit-details-marker{display:none}
+/* The legacy global summary::before generates a second +/- marker. */
+.materials-guide .materials-disclosure .materials-summary::before{
+  content:none;
+  display:none;
+}
+.materials-guide .materials-disclosure .materials-summary::after{
+  content:"＋";
+  flex:0 0 auto;
+  font:400 18px/1.45 var(--atelier-body);
+  color:#877451;
+  margin-top:1px;
+}
+.materials-guide .materials-disclosure[open] .materials-summary::after{content:"−"}
+.materials-guide .materials-disclosure .materials-summary h3{
+  margin:0;
+}
+.materials-guide .materials-disclosure .materials-summary:hover h3{
+  color:#77603b;
+}
+.materials-guide .materials-disclosure>.materials-summary:focus-visible{
+  outline:2px solid var(--atelier-brass);
+  outline-offset:3px;
+}
+.materials-guide .materials-disclosure>p{
+  margin:7px 0 0;
+  padding-right:13px;
+}
+
+/* The save dialog needs all four choices visible in ordinary phone height.
+   For 320px short phones, retain native dialog scrolling instead of hiding
+   or clipping any of the four actions. */
+@media(max-width:767px){
+  .facilitator-guide .guide-toc{
+    gap:5px;
+    margin:-2px 0 17px;
+  }
+  .facilitator-guide .guide-toc .guide-jump{
+    min-height:51px;
+    padding:9px 7px;
+    font-size:11px;
+    text-align:center;
+  }
+  .facilitator-guide .guide-intro{padding-bottom:14px}
+  .materials-guide .materials-intro{padding-bottom:13px}
+  .materials-guide .materials-key-note{font-size:12px;margin-top:12px}
+  .materials-guide .materials-item{
+    padding:10px 0 12px;
+  }
+  .materials-guide .materials-disclosure .materials-summary{
+    align-items:center;
+  }
+  .materials-guide .materials-disclosure .materials-summary h3{font-size:18px}
+  .materials-guide .materials-disclosure:not([open]){padding-bottom:7px}
+  .materials-guide .materials-disclosure>p{padding-right:5px}
+  #modal:has(.save-options){
+    width:min(94vw,430px);
+    max-width:94vw;
+    max-height:calc(100dvh - 24px);
+    padding:14px 17px max(16px,env(safe-area-inset-bottom));
+    overscroll-behavior:contain;
+    scrollbar-width:thin;
+  }
+  #modal:has(.save-options) .dialog-top{
+    padding-bottom:10px;
+    margin-bottom:10px;
+  }
+  #modal:has(.save-options) .dialog-top h2{font-size:21px}
+  #modal:has(.save-options) .dialog-top button{
+    min-height:44px;
+    padding:8px 10px;
+  }
+  #modal .save-options-intro{
+    margin:0 0 11px;
+    font-size:12px;
+    line-height:1.65;
+  }
+  #modal .save-options-grid{grid-template-columns:1fr;gap:8px}
+  #modal .save-option{
+    display:grid;
+    grid-template-columns:22px minmax(0,1fr);
+    grid-template-rows:auto auto;
+    column-gap:10px;
+    align-items:start;
+    min-height:0;
+    padding:9px 11px;
+  }
+  #modal .save-option-number{
+    grid-column:1;
+    grid-row:1 / 3;
+    margin:6px 0 0;
+    font-size:11px;
+  }
+  #modal .save-option button{
+    grid-column:2;
+    grid-row:1;
+    margin:0;
+    min-height:44px;
+    padding:8px 10px;
+    text-align:left;
+    font-size:13px;
+  }
+  #modal .save-option p.micro{
+    grid-column:2;
+    grid-row:2;
+    margin:5px 0 0;
+    padding:0 1px;
+    color:#596559;
+    font-size:11px;
+    line-height:1.55;
+    max-width:none;
+  }
+}
+@media(max-width:350px){
+  #modal:has(.save-options){max-height:calc(100dvh - 12px);padding:12px}
+  #modal .save-option{column-gap:7px;padding:9px}
+  #modal .save-option p.micro{font-size:11px}
+}
