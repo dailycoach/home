@@ -789,13 +789,20 @@ function result(){
     copy.append(reminder);
   }
   const actions=el('div',null,{class:'result-actions'});
-  actions.append(
-    button('작품 카드 만들기','card-options',{class:'primary'}),
-    button('작품 이미지만 저장','export-png'),
-    button('다시 꾸미기','continue'),
-    button('편집 파일로 보관','export-json'),
-    button('기록지 인쇄·PDF 저장','print-options')
-  );
+  const card=button('작품 카드 만들기','card-options',{class:'primary'});
+  const image=button('작품 이미지만 저장','export-png');
+  const continueWork=button('다시 꾸미기','continue');
+  const editBackup=button('편집 파일로 보관','export-json');
+  const print=button('기록지 인쇄·PDF 저장','print-options');
+  if(persistent){
+    actions.append(card,image,continueWork,editBackup,print);
+  }else{
+    // Do not let a decorative PNG/card download impersonate a recoverable
+    // editing backup on a shared device or temporary memory-only session.
+    // Exactly the same five actions remain available, with the actual
+    // recoverable export first in both visual and keyboard reading order.
+    actions.append(editBackup,card,image,continueWork,print);
+  }
   copy.append(el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
