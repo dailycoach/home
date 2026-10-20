@@ -22,6 +22,8 @@ async function scenario(browserType,engine,width,height){
  try{
   await page.goto(base,{waitUntil:'networkidle',timeout:35000});
   ok(await page.locator('.hero').count()===1,name+' original artistic homepage intact');
+  ok(await page.locator('.home-journey span').count()===3,name+' first-time visitor sees three small steps');
+  ok((await page.locator('.home-journey').innerText()).includes('작품 간직하기'),name+' journey ends with keeping the artwork');
   ok(await page.evaluate(()=>getComputedStyle(document.body).overflow==='hidden'),name+' one-screen home');
   await shot(page,name,'home');
 
@@ -120,6 +122,7 @@ async function scenario(browserType,engine,width,height){
   await page.locator('main.result-page').waitFor();
   ok(await page.locator('.result-actions-label').innerText()==='작품을 간직하는 방법',name+' completion action hierarchy');
   ok(await page.locator('.result-actions button').count()===5,name+' legacy completion options intact');
+  ok((await page.locator('.completion-next').innerText()).includes('기록은 선택한 경우에만'),name+' post-completion privacy guidance remains visible');
   await shot(page,name,'result');
   await page.locator('.result-actions [data-action="card-options"]').click();
   await page.locator('#modal .card-modal').waitFor();
