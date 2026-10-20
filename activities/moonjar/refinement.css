@@ -1570,3 +1570,54 @@ main.result-page .result-privacy-note{
   #modal .save-option{column-gap:7px;padding:9px}
   #modal .save-option p.micro{font-size:11px}
 }
+
+/* WAVE 10.0: the full journey without replacing approved atelier appearance.
+   Tiny textual wayfinding only. Preserve the hero art, workbench and 96 nacre. */
+.home .home-journey{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px 13px;
+  margin:11px 0 0;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+  color:#696b5c;
+  font-size:11px;
+  letter-spacing:.01em;
+  line-height:1.65;
+}
+.home .home-journey span{white-space:nowrap}
+.result-page .completion-next{
+  margin:10px 0 8px;
+  padding:13px 16px;
+  border-left:2px solid var(--atelier-brass);
+  background:var(--atelier-soft);
+  color:var(--atelier-dark);
+}
+.result-page .completion-next strong{
+  display:block;
+  margin:0 0 3px;
+  font-size:13px;
+  font-weight:700;
+}
+.result-page .completion-next p{
+  margin:0;
+  font-size:12px;
+  line-height:1.72;
+  color:#5a6559;
+}
+@media(max-width:767px){
+  .home .home-journey{
+    font-size:10px;
+    line-height:1.5;
+    margin-top:7px;
+    padding-top:7px;
+    gap:3px 9px;
+  }
+  .result-page .completion-next{
+    padding:10px 12px;
+    margin:7px 0 5px;
+  }
+  .result-page .completion-next strong{font-size:12px}
+  .result-page .completion-next p{font-size:11px;line-height:1.55}
+}
