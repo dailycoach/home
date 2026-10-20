@@ -147,6 +147,9 @@ function home() {
   if (editor || hasStored) actions.append(button('이어서 하기','resume',{class:'text-button'}));
   actions.append(button('편집 파일 열기','import',{class:'text-button'}));
   startArea.append(actions,el('p','로그인 없이 · 기록은 선택 · 자유롭게 배치',{class:'micro'}));
+  const journey=el('div',null,{class:'home-journey','aria-label':'활동의 세 단계'});
+  journey.append(el('span','01  자개를 고르고 배치'),el('span','02  천천히 바라보기'),el('span','03  작품 간직하기'));
+  startArea.append(journey);
   if (!available) startArea.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 작업 중 편집 파일로 보관해 주세요.',{class:'error'}));
   if(globalThis.__MOONJAR_BUNDLE__)startArea.append(el('p','단일 파일 검토본입니다. 브라우저에 따라 자동 저장이 제한될 수 있으니 중요한 작업은 편집 파일로 보관해 주세요.',{class:'micro'}));
   const artwork=manifest.heroArtwork;
@@ -763,7 +766,9 @@ function result(){
     button('편집 파일로 보관','export-json'),
     button('기록지 인쇄·PDF 저장','print-options')
   );
-  copy.append(el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
+  const nextGuide=el('aside',null,{class:'completion-next','aria-label':'작품 완성 후 선택'});
+  nextGuide.append(el('strong','완성한 작품, 어떻게 남길까요?'),el('p','작품 카드로 간직하거나, PNG 이미지만 저장할 수 있어요. 다시 꾸미거나 편집 파일로 보관해도 좋습니다. 기록은 선택한 경우에만 출력됩니다.'));
+  copy.append(nextGuide,el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
   recap.append(el('summary','나의 말과 선택 다시 보기 · 나만 확인'));
