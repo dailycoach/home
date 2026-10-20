@@ -31,10 +31,58 @@ try{
   check(firstCTA && firstCTA.y+firstCTA.height <= 844,
     `mobile first start button should fit initial 390x844 viewport, got ${JSON.stringify(firstCTA)}`);
   check(await page.locator('link[href*="refinement.css"]').count()===1,'refinement CSS must be loaded');
+  // Design gate: editorial craft system must win over earlier functional CSS.
+  const artDirection=await page.evaluate(async()=>{
+    await document.fonts.ready;
+    const root=getComputedStyle(document.documentElement);
+    const c=getComputedStyle(document.querySelector('.hero-actions .primary'));
+    const masthead=getComputedStyle(document.querySelector('.site-header'));
+    const heading=getComputedStyle(document.querySelector('.hero-copy h1'));
+    const links=[...document.querySelectorAll('head link[rel="stylesheet"]')].map(l=>l.getAttribute('href'));
+    return {
+      page:root.getPropertyValue('--page').trim(),
+      primary:c.backgroundColor,
+      primaryRadius:parseFloat(c.borderTopLeftRadius),
+      headerImage:masthead.backgroundImage,
+      headingFamily:heading.fontFamily,
+      files:links
+    };
+  });
+  check(artDirection.page==='#f4f0e8',`porcelain-paper visual token must apply: ${JSON.stringify(artDirection)}`);
+  check(artDirection.primary==='rgb(48, 57, 48)' && artDirection.primaryRadius<=4,
+    'primary call-to-action should be ink-dark with restrained corners');
+  check(artDirection.headerImage==='none','no generated-looking gradient on the masthead');
+  check(artDirection.headingFamily.includes('Moonjar Gowun'),'self-hosted Korean editorial heading must apply');
+  check(artDirection.files.at(-2)?.includes('refinement.css?v=20261019-atelier-v1'),
+    'atelier appearance must load after legacy tool styles');
+  check(artDirection.files.at(-1)?.includes('viewport.css?v=20261019-one-screen-v1'),
+    'viewport layout must load after appearance and interaction layers');
+  const homeShell=await page.evaluate(()=>({
+    bodyOverflow:getComputedStyle(document.body).overflow,
+    mainHeight:document.querySelector('main').getBoundingClientRect().height,
+    viewport:window.innerHeight,
+    introScroll:!!document.querySelector('main.home .intro-line')
+  }));
+  check(homeShell.bodyOverflow==='hidden' && homeShell.mainHeight<=homeShell.viewport &&
+    !homeShell.introScroll, `home must use a single composed scene: ${JSON.stringify(homeShell)}`);
+  await page.locator('main.home [data-action="opening-story"]').click();
+  check(await page.locator('#modal .opening-story').isVisible(),
+    'long opening narration is accessible in an optional dialog instead of a page-scroll block');
+  await page.locator('#modal [data-action="close-opening-story"]').click();
 
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
   await page.locator('[data-action="start-guided"]').click();
   await page.locator('#scene-lead').waitFor({state:'visible'});
+  const stationary=await page.evaluate(()=>{
+    const work=document.querySelector('main.studio').getBoundingClientRect();
+    const stage=document.querySelector('#stage-shell').getBoundingClientRect();
+    return {bodyOverflow:getComputedStyle(document.body).overflow,
+      pageY:window.scrollY,viewport:innerHeight,workBottom:work.bottom,
+      canvasHeight:stage.height,stageBottom:stage.bottom};
+  });
+  check(stationary.bodyOverflow==='hidden' && stationary.pageY===0 &&
+    stationary.workBottom<=stationary.viewport+1 && stationary.canvasHeight>=130,
+    `guided studio must fit one screen and keep the jar visible: ${JSON.stringify(stationary)}`);
   check((await page.locator('#art image').first().getAttribute('href'))?.includes('moonjar-v2/porcelain-day.png'),
     'new guided project begins on porcelain V2; legacy background remains separate');
   const lead=page.locator('#scene-lead');
@@ -43,18 +91,27 @@ try{
   check(leadRect && canvasRect && leadRect.y<canvasRect.y,'guided story question should precede canvas on mobile');
   check((await lead.innerText()).includes('지금 이 자리에 온 나는 어떤 상태인가요'),'arrival focus question missing');
   await page.screenshot({path:`${out}/01-guided-arrival-390.png`,fullPage:true});
-  const beforeFold = await lead.boundingBox();
+  const compactLead = await lead.boundingBox();
+  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),
+    'guided story starts as a single compact question, not an essay requiring scroll');
   await lead.locator('[data-action="toggle-lead"]').click();
-  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),'guided story should collapse without leaving the scene');
-  const afterFold = await lead.boundingBox();
-  check(afterFold.height < beforeFold.height * 0.7,'folded scene should visibly release space for artwork');
+  check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'original essay can be expanded');
+  const expandedLead=await lead.boundingBox();
+  check(expandedLead.height>compactLead.height*1.12,
+    `expanding the optional story should use the available panel space: ${JSON.stringify({compactLead,expandedLead})}`);
+  await lead.locator('[data-action="toggle-lead"]').click();
+  check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),'guided question can be collapsed again');
   await page.screenshot({path:`${out}/01b-guided-focus-390.png`,fullPage:true});
-  await lead.locator('[data-action="toggle-lead"]').click();
-  check(!(await lead.evaluate(el=>el.classList.contains('is-collapsed'))),'guided story should expand again');
 
-  await page.locator('[data-action="panel:palette"]').click();
+  await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await page.locator('[data-action="add:A01"]').click();
+  await page.locator('#art [data-node]').first().waitFor({state:'attached'});
+  check(await page.locator('#palette-panel.mobile-active').isVisible(),
+    'after adding a piece, keep the material palette open for continued filling');
+  check(!(await page.locator('#controls-panel').isVisible()),
+    'adding a piece should not force the user into the adjust step');
   const editorTray=page.locator('#controls-panel.mobile-active');
+  await page.locator('.mobile-tabs [data-action="panel:controls"]').click();
   await editorTray.waitFor({state:'visible'});
   check(await page.locator('#art [data-node]').count()===1,'one piece must be present');
   check(await editorTray.locator('[data-action="panel:canvas"]').isVisible(),
@@ -77,6 +134,8 @@ try{
   check(view.selectedCenter>0 && view.selectedCenter<view.trayTop-12,
     `the selected nacre must be visible outside the controls, not hidden under the panel: ${JSON.stringify(view)}`);
   check(view.trayBottom<=view.viewport-40,'editor drawer must not cover the bottom toolbar');
+  check(await page.evaluate(()=>scrollY===0 && getComputedStyle(document.body).overflow==='hidden'),
+    'changing tool panels must never scroll the document');
   await page.screenshot({path:`${out}/02-canvas-first-editor-390.png`,fullPage:true});
   await page.screenshot({path:`${out}/02b-editor-actual-viewport-390.png`,fullPage:false});
   await editorTray.locator('[data-action="panel:canvas"]').click();
@@ -109,11 +168,15 @@ try{
   await page.locator('#look-prompt [data-action="panel:story"]').click();
   check(await page.locator('main.studio.paused').count()===0,'returning to story should exit pause');
 
+  const optionalChapters=page.locator('.scene-chapters');
+  check(await optionalChapters.count()===1 && !(await optionalChapters.evaluate(node=>node.open)),
+    'guided story menu is optional and collapsed when decorating');
+  await optionalChapters.locator('summary').click();
   await page.locator('[data-action="scene:name"]').click();
   const titleInput=page.locator('#story-panel [data-section="title"][data-field="title"]');
   await titleInput.fill('오늘의 이름은 내게 남겨두기');
   await page.locator('.scene-nav [data-action="scene:return"]').click();
-  check((await page.locator('#scene-lead').innerText()).includes('오늘 알아차린 것을 삶에 적용해본다면'),'DAILY return question missing');
+  check((await page.locator('#story-panel').innerText()).includes('오늘 알아차린 것을 삶에 적용해본다면'),'DAILY return question missing from the visible writing screen');
   check(await page.locator('#story-panel .mobile-record-title').isVisible(),'mobile guided reflection should have a concise record heading');
   check(!(await page.locator('#story-panel > .short-essay').isVisible()),'mobile guided reflection should not repeat the introductory essay');
   const noticed=page.locator('#story-panel > .record-field [data-field="noticed"]');
@@ -125,12 +188,16 @@ try{
   await page.reload({waitUntil:'networkidle'});
   await page.locator('#art [data-node]').first().waitFor();
   check(await page.locator('#art [data-node]').count()===1,'saved artwork must survive reload');
-  await page.locator('#story-panel [data-field="noticed"]').waitFor();
+  await page.locator('.mobile-tabs [data-action="panel:story"]').click();
+  await page.locator('#story-panel [data-field="noticed"]').waitFor({state:'visible'});
   check(await page.locator('#story-panel [data-field="noticed"]').inputValue()==='오늘은 나를 더 천천히 바라보려고 한다.','saved reflection must survive reload');
   check(page.url()===projectURL,'reloaded project route should remain stable');
 
   const reloadGuide=page.locator('#nacre-visibility-switch');
   check(await reloadGuide.getAttribute('aria-pressed')==='false','guide choice is session-only');
+  // The journal occupies its own viewport after reload. Switch back to
+  // the artwork before using editor-only visual controls and exports.
+  await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await reloadGuide.click();
   await page.locator('[data-action="save-options"]').click();
   const [download]=await Promise.all([
@@ -154,6 +221,11 @@ try{
   // Export opt-in personal card only after a deliberately confirmed preview.
   await page.locator('.studio-bar [data-action="finish"]').click();
   await page.locator('main.result-page').waitFor();
+  check(await page.evaluate(()=>{
+    const content=document.querySelector('main.result-page').getBoundingClientRect();
+    return getComputedStyle(document.body).overflow==='hidden'
+      && scrollY===0 && content.bottom<=innerHeight+1;
+  }),'finished artwork and archive actions must remain within a single scene');
   check(!(await page.locator('#notice').evaluate(el=>el.classList.contains('visible'))),
     'editor toast must not cover the finished artwork gallery');
   check(!(await page.locator('.reflection-recap').evaluate(el=>el.open)),'private reflection recap is collapsed by default');
@@ -223,6 +295,8 @@ try{
   await p2.screenshot({path:`${out}/00-original-hero-desktop-1440.png`,fullPage:true});
   await p2.locator('[data-action="start-free"]').click();
   await p2.locator('main.studio #story-panel').waitFor({state:'visible',timeout:10000});
+  check(await p2.locator('.scene-chapters').count()===0,
+    'free-form decorating should not display a seven-stage progress bar');
   check(!(await p2.locator('#scene-lead').isVisible()),'free mode must not force guided lead');
   check(await p2.locator('.story-panel').isVisible(),'desktop story panel should remain available');
   await p2.screenshot({path:`${out}/05-free-desktop-1440.png`,fullPage:true});
@@ -333,10 +407,70 @@ try{
   await p3.waitForFunction(()=>document.querySelector('#art image')?.getAttribute('href')?.includes('porcelain-day.png'));
   check((await p3.locator('#art image').first().getAttribute('href'))?.includes('porcelain-day.png'),
     'legacy work switches only after explicit choice');
-  await p3.locator('[data-action="undo"]').click();
+  await p3.locator('.art-toolbar [data-action="undo"]').click();
   check((await p3.locator('#art image').first().getAttribute('href'))?.includes('canvas_dark.png'),
     'undo restores the legacy background and all piece coordinates');
   await legacyContext.close();
+
+  // Genuine rapid-decorating scenario: cover the vessel without stopping to
+  // assign 12 meanings or being redirected to controls after every fragment.
+  const carefree=await browser.newContext({viewport:{width:390,height:844},
+    deviceScaleFactor:1,isMobile:true,hasTouch:true,acceptDownloads:true});
+  const p4=await carefree.newPage();
+  p4.on('pageerror',err=>errors.push(`FREEFORM: ${err.message}`));
+  await p4.goto(base,{waitUntil:'networkidle'});
+  check((await p4.locator('.hero-actions button.primary').getAttribute('data-action'))==='start-free',
+    'freely decorating is the first and primary entrance');
+  await p4.locator('[data-action="start-free"]').click();
+  check(await p4.locator('.scene-chapters').count()===0,'free mode has no stepper');
+  const palettePanel=p4.locator('#palette-panel.mobile-active');
+  await palettePanel.waitFor({state:'visible'});
+  check(await p4.locator('.batch-add').isVisible(),
+    'the one-action option to place twelve nacre pieces is available');
+  await p4.locator('[data-action="batch:12"]').click();
+  await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===12,{timeout:20000});
+  check(await palettePanel.isVisible(),'batch must leave the palette visible');
+  check(!(await p4.locator('#controls-panel').isVisible()),'batch must not force an adjust modal');
+  check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
+    'individual message writing is not a required step in the default controls');
+  const spread=await p4.locator('#art [data-node]').evaluateAll(groups=>
+    new Set(groups.map(g=>g.getAttribute('transform'))).size
+  );
+  check(spread>=11,'multiple nacre should spread across the vessel instead of invisibly stacking');
+  const above=await p4.evaluate(()=>{
+    const art=document.querySelector('#art').getBoundingClientRect();
+    const sheet=document.querySelector('#palette-panel').getBoundingClientRect();
+    return {visible:Math.min(art.bottom,sheet.top,innerHeight)-Math.max(0,art.top),
+      paletteTop:sheet.top,paletteBottom:sheet.bottom};
+  });
+  check(above.visible>=120,`artwork must remain visible above the palette while filling: ${JSON.stringify(above)}`);
+  await p4.screenshot({path:`${out}/10-free-12-nacre-mobile-390.png`,fullPage:false});
+  await p4.locator('[data-action="batch:12"]').click();
+  await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===24,{timeout:20000});
+  await p4.locator('#palette-panel.mobile-active .quick-fill-actions [data-action="undo"]').click();
+  check(await p4.locator('#art [data-node]').count()===12,'whole last batch undoes in one step');
+  await p4.locator('.mobile-tabs [data-action="panel:controls"]').click();
+  check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
+    'repeat messages remain tucked away while moving fragments');
+  // A batch insertion deliberately does not auto-select a fragment. Select
+  // one from the accessible palette list before opening its advanced tools.
+  await p4.locator('.mobile-tabs [data-action="panel:palette"]').click();
+  await p4.locator('#palette-panel .layer-list > summary').click();
+  await p4.locator('#palette-panel .layer-list li button').first().click();
+  await p4.locator('#controls-panel details > summary').click();
+  check(await p4.locator('#controls-panel .piece-note-button').isVisible(),
+    'legacy individual notes are still reachable if explicitly requested');
+  await p4.locator('.mobile-tabs [data-action="panel:look"]').click();
+  check((await p4.locator('#look-prompt h2').innerText()).includes('눈에 들어오는'),
+    'free-form looking asks one gentle question, not individual fragment meanings');
+  await p4.locator('#look-prompt [data-action="panel:story"]').click();
+  check(await p4.locator('#story-panel > .record-field').count()===1,
+    'free-mode reflection offers one optional field, not seven questionnaires');
+  await p4.locator('.studio-bar [data-action="finish"]').click();
+  await p4.locator('main.result-page').waitFor();
+  await p4.screenshot({path:`${out}/11-free-12-nacre-finished-390.png`,fullPage:true});
+  await carefree.close();
+
   check(errors.length===0,`browser errors: ${errors.join('; ')}`);
   console.log(`MOONJAR BROWSER PASS: ${checks} assertions. Screenshots: ${out}`);
 }catch(error){

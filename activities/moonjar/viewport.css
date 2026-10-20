@@ -1,0 +1,1002 @@
+/*
+ * MOONJAR / ONE-SCREEN ATELIER — application layout, 2026-10-19
+ *
+ * Global page scroll is replaced by a fixed-height studio composition.
+ * Only meaningful content regions scroll: the optional original story,
+ * material tray, journal, exports and accessible dialogs.
+ * A mobile user always retains a visible artwork and bottom navigation.
+ * This stylesheet owns layout. refinement.css owns appearance.
+ */
+
+/* App shell applies only to three interaction scenes, not the guide,
+   materials information or the saved-project library. */
+body:has(> main:is(.home,.studio,.result-page)):not(.printing){
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr);
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  min-height:0;
+  max-height:100dvh;
+  overflow:hidden;
+}
+body:has(> main:is(.home,.studio,.result-page)):not(.printing) > .site-header{
+  grid-row:1;
+  min-width:0;
+}
+body:has(> main:is(.home,.studio,.result-page)):not(.printing) > main{
+  grid-row:2;
+  min-width:0;
+  min-height:0;
+  height:100%;
+  max-height:100%;
+  overflow:hidden;
+}
+body:has(> main:is(.home,.studio,.result-page)):not(.printing) > .site-footer{
+  display:none;
+}
+
+/* Opening: one composed scene; extra reading lives in an explicit dialog.
+   Very short screens may scroll the *home scene* locally for accessibility. */
+main.home{
+  display:grid;
+  align-content:safe center;
+  justify-items:stretch;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+main.home .hero{
+  width:100%;
+  max-width:1460px;
+  margin:0 auto;
+  padding-block:clamp(19px,2.6dvh,40px);
+}
+main.home .hero-copy h1{font-size:clamp(47px,5.3vw,79px)}
+main.home .hero-figure img{max-height:min(57dvh,570px)}
+main.home .hero-story-link{
+  display:inline-block;
+  margin:10px 0 0;
+  padding:5px 0;
+  min-width:0;
+  min-height:35px;
+  font-size:12px;
+  color:#665738;
+}
+.opening-story{max-width:640px;margin:auto}
+.opening-story h3{
+  margin:0 0 26px;
+  color:var(--atelier-dark);
+  font-family:var(--atelier-display);
+  font-size:24px;
+  font-weight:700;
+  line-height:1.55;
+}
+.opening-story p{margin:0 0 19px;line-height:2.04;font-size:15px}
+.opening-story .micro{padding-top:18px;border-top:1px solid var(--line);font-size:13px}
+.opening-story .primary{margin-top:17px}
+
+/* Studio: header | status | optional story chapters | immersive three-column
+   work area. No body scroll, no page-height collection of boxes. */
+main.studio{
+  --moonjar-single-screen:1;
+  display:flex;
+  flex-direction:column;
+  padding:0!important;
+  overflow:clip!important;
+}
+main.studio > .studio-bar{
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+  width:100%;
+  max-width:none;
+  min-height:60px;
+  margin:0;
+  padding:9px clamp(14px,3vw,45px);
+}
+main.studio > .scene-chapters{flex:0 0 auto}
+main.studio > .storage-warning:not([hidden]){
+  flex:0 0 auto;
+  max-height:22dvh;
+  margin:0;
+  padding:11px clamp(16px,3vw,40px);
+  overflow-y:auto;
+  z-index:9;
+}
+main.studio > .workspace{
+  flex:1 1 0;
+  display:grid;
+  grid-template-columns:minmax(210px,250px) minmax(0,1fr) minmax(230px,288px);
+  grid-template-rows:auto minmax(0,1fr);
+  gap:0;
+  width:100%;
+  max-width:1760px;
+  min-width:0;
+  min-height:0;
+  margin:0 auto;
+  padding:0 clamp(10px,1.3vw,24px);
+  overflow:clip;
+  align-items:stretch;
+}
+main.studio .palette-panel,
+main.studio .story-panel{
+  display:block;
+  min-height:0;
+  height:100%;
+  max-height:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior-y:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#bdb2a0 transparent;
+}
+main.studio .stage-area{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  flex-wrap:nowrap;
+  min-width:0;
+  min-height:0;
+  height:100%;
+  padding-block:12px 15px;
+  overflow:clip;
+}
+main.studio .view-toolbar{
+  flex:0 0 auto;
+  flex-wrap:nowrap;
+  align-items:center;
+  overflow-x:auto;
+  overflow-y:hidden;
+  min-width:0;
+  margin:0 0 9px;
+  padding-bottom:2px;
+  scrollbar-width:thin;
+}
+main.studio .view-toolbar button{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+main.studio .stage-shell{
+  display:block;
+  flex:1 1 0;
+  min-height:0!important;
+  max-height:none!important;
+  height:auto;
+  overflow:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+}
+main.studio .paper{
+  max-width:none;
+  height:auto;
+  margin-inline:auto;
+}
+main.studio .canvas-hint{
+  flex:0 0 auto;
+  margin:6px 0 8px;
+  line-height:1.4;
+}
+main.studio .art-toolbar{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:5px;
+  flex:0 0 auto;
+  margin:0 0 7px;
+}
+main.studio .art-toolbar button{
+  min-width:0;
+  min-height:44px;
+  padding:7px 5px;
+  white-space:normal;
+}
+main.studio .first-piece-hint{
+  flex:0 0 auto;
+  font-size:12px;
+  line-height:1.5;
+}
+main.studio .controls-panel{
+  flex:0 1 auto;
+  max-height:min(25dvh,240px);
+  min-height:0;
+  margin:0;
+  padding:9px 0 0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+main.studio .controls-panel:has(.panel-heading) {
+  border-top:1px solid var(--line);
+}
+main.studio .mobile-tabs{flex:0 0 auto}
+main.studio.paused .stage-area{
+  min-height:0;
+  overflow:clip;
+}
+/* Quiet viewing is a gallery scene, not editing controls overlaid on art. */
+main.studio.paused .view-toolbar,
+main.studio.paused .art-toolbar,
+main.studio.paused .controls-panel{display:none!important}
+main.studio.paused .nacre-visibility-switch{display:none!important}
+main.studio.paused .stage-shell{max-height:none!important}
+main.studio .look-prompt{
+  flex:0 0 auto;
+  max-height:min(26dvh,220px);
+  overflow-y:auto;
+  margin-bottom:9px;
+}
+main.studio .scene-lead:not([hidden]){
+  flex:0 0 auto;
+  max-height:min(24dvh,210px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+
+/* Final room: archive print on left, choices/notes in independently
+   scrollable right panel, no tall page and no lost primary action. */
+main.result-page{
+  display:flex;
+  flex-direction:column;
+  width:min(100%,1520px);
+  max-width:none;
+  margin:0 auto;
+  padding:17px clamp(19px,4vw,64px) 22px;
+}
+main.result-page .page-heading{
+  flex:0 0 auto;
+  margin-bottom:5px;
+  padding-bottom:8px;
+}
+main.result-page .page-heading .eyebrow{margin-bottom:3px}
+main.result-page .page-heading h1{font-size:clamp(23px,2.6vw,36px)}
+main.result-page > .save-state{
+  flex:0 0 auto;
+  margin:0 0 9px;
+  font-size:12px;
+}
+main.result-page .result-layout{
+  flex:1 1 0;
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  align-items:stretch;
+  gap:clamp(18px,4vw,62px);
+  min-height:0;
+  width:100%;
+  overflow:hidden;
+}
+main.result-page .result-layout>.comparison-scene{
+  position:static;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:0;
+  height:100%;
+  max-height:100%;
+  overflow:hidden;
+  margin:0;
+  padding:clamp(8px,1.5vw,20px);
+}
+main.result-page .result-layout>.comparison-scene svg{
+  display:block;
+  flex:0 1 auto;
+  width:auto;
+  height:100%;
+  max-width:100%;
+  max-height:100%;
+  min-height:0;
+  object-fit:contain;
+  margin:auto;
+}
+main.result-page .result-layout>.comparison-scene figcaption{
+  flex:0 0 auto;
+  max-height:38px;
+  overflow:hidden;
+  margin:6px auto 0;
+  color:var(--muted);
+  font-size:12px;
+}
+main.result-page .result-copy{
+  min-height:0;
+  height:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  padding:9px 5px 20px 0;
+}
+main.result-page .result-copy>.eyebrow{font-size:11px;margin-bottom:7px}
+main.result-page .result-copy>h2{font-size:clamp(21px,2.3vw,31px)}
+main.result-page .result-copy .result-overview{font-size:14px}
+main.result-page > .storage-warning:not([hidden]){
+  flex:0 0 auto;
+  max-height:20dvh;
+  overflow:auto;
+}
+
+/* A desktop artwork should have the room, not an empty controls dock.
+   Batch actions also need to be readable without wrapping into tall buttons. */
+@media (min-width:768px){
+  main.studio #first-piece-hint{display:none!important}
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
+  main.studio .palette-panel .quick-fill-actions{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+  main.studio .palette-panel .quick-fill-actions .batch-add{
+    grid-column:1 / -1;
+    min-height:50px;
+    margin:0;
+    padding:8px 9px;
+    font-size:13px;
+    line-height:1.45;
+    white-space:normal;
+  }
+  main.studio .palette-panel .quick-fill-actions>button:not(.batch-add){
+    grid-column:auto;
+    min-width:0;
+    width:100%;
+    min-height:39px;
+    height:39px;
+    font-size:18px;
+  }
+}
+
+/* In a wide art studio the inspector belongs to the reading/notes rail,
+   not below the actual vessel. Both right-rail panels scroll internally. */
+@media (min-width:1200px){
+  main.studio .palette-panel{grid-column:1;grid-row:1 / 3}
+  main.studio .stage-area{grid-column:2;grid-row:1 / 3}
+  main.studio .controls-panel{
+    display:block;
+    grid-column:3;
+    grid-row:1;
+    align-self:start;
+    width:100%;
+    max-height:min(44dvh,390px);
+    min-height:0;
+    margin:0;
+    padding:16px 19px;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    border-left:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:#f4f0e7;
+  }
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
+  main.studio .controls-panel .controls-grid button{min-height:44px;font-size:13px}
+  main.studio .controls-panel .control-tabs button{min-height:43px;font-size:13px}
+  main.studio .story-panel{
+    grid-column:3;
+    grid-row:2;
+    align-self:stretch;
+    min-height:0;
+    height:100%;
+    overflow-y:auto;
+  }
+}
+/* Tablet and narrow landscape: preserve palette + vessel but give the
+   writing screen a discoverable tab and a correctly scoped overlay.
+   Previously the journal was hidden at 768–1199px with no navigation. */
+@media (min-width:768px) and (max-width:1199px){
+  main.studio > .workspace{
+    position:relative;
+    display:grid;
+    grid-template-columns:224px minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr) auto;
+    min-height:0;
+    overflow:clip;
+    padding-inline:16px;
+  }
+  main.studio .palette-panel{
+    grid-column:1;
+    grid-row:1 / 3;
+    min-height:0;
+    overflow-y:auto;
+    padding:20px 13px;
+  }
+  main.studio .stage-area{
+    grid-column:2;
+    grid-row:1;
+    padding:11px 16px 10px;
+    min-height:0;
+    height:100%;
+  }
+  main.studio .story-panel{
+    display:none!important;
+    position:absolute!important;
+    inset:0 16px 0 240px;
+    grid-column:auto;
+    width:auto;
+    height:100%;
+    max-height:100%;
+    margin:0;
+    padding:22px 28px;
+    border:0;
+    overflow-x:hidden;
+    overflow-y:auto;
+    background:var(--page);
+    z-index:17;
+  }
+  main.studio .story-panel.mobile-active{
+    display:block!important;
+    box-shadow:inset 1px 0 var(--line);
+  }
+  main.studio:has(#story-panel.mobile-active) .stage-area{
+    visibility:hidden;
+    pointer-events:none;
+  }
+  main.studio .controls-panel{
+    grid-column:2;
+    grid-row:2;
+    align-self:end;
+    min-height:0;
+    max-height:min(22dvh,173px);
+    padding:9px 14px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    border-top:1px solid var(--line);
+    background:var(--surface);
+  }
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
+  main.studio .mobile-tabs{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    flex:0 0 auto;
+    position:relative;
+    bottom:auto;
+    order:initial;
+    min-height:56px;
+    width:100%;
+    padding:5px 14px 7px;
+    border-top:1px solid #bcb3a3;
+    background:var(--page);
+    z-index:20;
+  }
+  main.studio .mobile-tabs button{
+    min-height:44px;
+    min-width:0;
+    border:0;
+    border-top:2px solid transparent;
+    border-radius:0;
+    background:transparent;
+    font-size:13px;
+    box-shadow:none;
+  }
+  main.studio .mobile-tabs button[aria-pressed=true]{
+    border:0;
+    border-top:2px solid var(--atelier-brass);
+    background:#eee8dc;
+    box-shadow:none;
+    color:#2e3a31;
+  }
+}
+/* Short landscape is a wide workbench, NOT a squashed desktop page.
+   Tool controls become an inspector beside the art, preserving canvas height. */
+@media (min-width:768px) and (max-width:1199px) and (max-height:550px){
+  body:has(> main:is(.home,.studio,.result-page)):not(.printing) > .site-header{
+    min-height:48px;
+    padding:5px 16px;
+    gap:9px;
+  }
+  .site-header .brand{font-size:13px;gap:7px}
+  .site-header .brand-seal{height:31px;width:31px;font-size:17px}
+  .site-header .brand small{margin-top:1px;font-size:8px}
+  .site-header nav{gap:3px}
+  .site-header nav button,.site-home-link{min-height:35px;padding:4px 8px;font-size:11px}
+  main.studio > .studio-bar{min-height:43px;padding:4px 16px;gap:7px}
+  main.studio .studio-bar .button-row{gap:5px;flex-wrap:nowrap}
+  main.studio .studio-bar .button-row button{
+    min-height:36px;
+    padding:5px 9px;
+    font-size:11px;
+    white-space:nowrap;
+  }
+  main.studio .stage-area{padding:5px 10px 6px}
+  main.studio .view-toolbar{
+    flex:0 0 auto;
+    min-height:37px;
+    max-height:39px;
+    margin:0 0 3px;
+    gap:4px;
+  }
+  main.studio .view-toolbar button{min-height:35px;padding:5px 8px;font-size:11px}
+  main.studio .stage-shell{
+    flex:1 1 0;
+    min-height:0!important;
+    padding:5px;
+    overflow:auto;
+  }
+  main.studio .paper{border-width:3px}
+  main.studio .art-toolbar{flex:0 0 auto;margin:2px 0 1px;gap:4px}
+  main.studio .art-toolbar button{min-height:36px;padding:5px 3px;font-size:11px}
+  main.studio .canvas-hint,main.studio #first-piece-hint{display:none!important}
+  main.studio .controls-panel:not(:has(.panel-heading)){display:none}
+  main.studio .controls-panel:has(.panel-heading){
+    position:absolute;
+    /* An absolutely positioned grid item must not inherit grid-row:2.
+       That would place its containing block below the visible workbench. */
+    grid-column:auto;
+    grid-row:auto;
+    align-self:auto;
+    top:44px;
+    right:8px;
+    bottom:5px;
+    z-index:8;
+    width:187px;
+    min-height:0;
+    max-height:none;
+    margin:0;
+    padding:8px 10px 12px;
+    border:1px solid #d0c5b3;
+    background:var(--surface);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+  main.studio .workspace:has(.controls-panel .panel-heading) .stage-shell{
+    margin-right:191px;
+  }
+  main.studio .controls-panel .panel-heading h2{font-size:14px}
+  main.studio .controls-panel .control-tabs button{min-height:32px;font-size:11px}
+  main.studio .controls-panel .controls-grid{gap:3px}
+  main.studio .controls-panel .controls-grid button{
+    min-width:0;
+    min-height:34px;
+    padding:4px 2px;
+    font-size:11px;
+  }
+  main.studio .look-prompt{max-height:82px;padding:5px 9px;margin-bottom:4px}
+  main.studio .look-prompt h2{font-size:15px}
+  main.studio .scene-lead:not([hidden]){max-height:75px;padding:5px 9px;margin:0 0 3px}
+  main.studio .scene-lead h2{font-size:15px}
+  main.studio .scene-lead .lead-question{font-size:12px;margin:2px 0}
+  main.studio .mobile-tabs{min-height:44px;padding:1px 8px}
+  main.studio .mobile-tabs button{min-height:40px;font-size:12px}
+  main.result-page{padding:8px 18px}
+  main.result-page .page-heading{margin:0;padding:0 0 3px}
+  main.result-page .page-heading .eyebrow{display:none}
+  main.result-page .page-heading h1{font-size:22px}
+  main.result-page > .save-state{margin:2px 0 4px}
+  main.result-page .result-layout{gap:12px}
+  main.result-page .result-copy{padding-block:0}
+  main.result-page .result-copy>h2{font-size:21px}
+  main.result-page .result-copy .result-overview{font-size:12px;line-height:1.5}
+}
+
+/* Mobile: single workstation. Drawing never scrolls out of view.
+   Materials / adjust controls float INSIDE the remaining workstation
+   (not on top of the document), and the canvas resizes above them.
+   A journal opens as a separate full-height workspace view. */
+@media (max-width:767px){
+  body:has(> main:is(.home,.studio,.result-page)):not(.printing) > .site-header{
+    min-height:56px;
+    padding-block:8px;
+  }
+  main.home{display:block;overflow-y:auto!important}
+  main.home .hero{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    width:100%;
+    padding:17px 21px 21px;
+  }
+  main.home .hero-copy{order:0}
+  main.home .hero-copy .eyebrow{margin:0 0 4px}
+  main.home .hero-copy h1{font-size:clamp(35px,9vw,44px);line-height:1.19}
+  main.home .hero-lead{margin-top:8px;line-height:1.55;font-size:14px;white-space:normal}
+  main.home .hero-note{margin-top:5px;font-size:11px;line-height:1.55}
+  main.home .hero-story-link{margin-top:4px;font-size:11px;min-height:29px}
+  main.home .hero-figure{
+    order:1;
+    width:min(58vw,225px);
+    max-width:225px;
+    margin:0 auto;
+    padding:0;
+    border:0;
+  }
+  main.home .hero-figure img{max-height:min(25dvh,218px)}
+  main.home .hero-figure figcaption{margin:0;line-height:1.3}
+  main.home .hero-start{order:2;align-self:stretch;width:100%;margin:2px 0 0}
+  main.home .hero-start .storage-choice{margin:7px 0 10px;padding:9px 0 0}
+  main.home .storage-choice label{min-height:33px;font-size:12px}
+  main.home .storage-choice legend{font-size:11px}
+  main.home .hero-actions{gap:6px;margin-bottom:8px}
+  main.home .hero-actions button{min-height:45px;padding:7px 6px;font-size:12px}
+  main.home .hero-actions .primary{font-size:13px}
+  main.home .hero-actions .text-button{min-height:37px}
+  main.home .hero-start>.micro{font-size:11px}
+
+  main.studio > .studio-bar{
+    min-height:49px;
+    padding:6px 11px;
+  }
+  main.studio .studio-bar .button-row{gap:5px;flex-wrap:nowrap}
+  main.studio .studio-bar .button-row button{
+    min-height:39px;
+    padding:7px 9px;
+    font-size:11px;
+    white-space:normal;
+  }
+  main.studio .scene-chapters>summary{min-height:37px;padding:5px 15px;font-size:11px}
+  main.studio .scene-chapters .scene-nav{
+    display:flex;
+    min-height:44px;
+    max-height:60px;
+    overflow-x:auto;
+  }
+  main.studio > .workspace{
+    position:relative;
+    display:block;
+    flex:1 1 0;
+    width:100%;
+    height:auto;
+    min-height:0;
+    overflow:clip;
+    padding:0;
+  }
+  main.studio .stage-area{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+    min-height:0;
+    overflow:clip;
+    padding:7px 10px 10px;
+  }
+  main.studio .view-toolbar{
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    gap:4px;
+    max-height:46px;
+    margin:0 0 5px;
+    scrollbar-width:none;
+  }
+  main.studio .view-toolbar button{
+    min-width:36px;
+    min-height:40px;
+    padding:6px 8px;
+    font-size:11px;
+  }
+  main.studio .stage-shell{
+    flex:1 1 0;
+    min-height:0!important;
+    max-height:none!important;
+    height:auto;
+    padding:5px 4px;
+    scrollbar-gutter:auto;
+    box-shadow:none;
+    border:0;
+    background:var(--atelier-paper);
+  }
+  main.studio .paper{max-width:none;border-width:3px;box-shadow:0 2px 14px #25291e24}
+  main.studio .canvas-hint,main.studio #first-piece-hint{display:none!important}
+  main.studio .art-toolbar{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:5px;
+    flex:0 0 auto;
+    width:100%;
+    min-height:41px;
+    margin:5px 0 0;
+  }
+  main.studio .art-toolbar button{
+    flex:initial;
+    min-width:0;
+    min-height:41px;
+    padding:6px 3px;
+    font-size:11px;
+    white-space:nowrap;
+  }
+  main.studio .art-toolbar button:nth-child(4){flex-basis:auto}
+  main.studio .scene-lead:not([hidden]){
+    display:block;
+    flex:0 0 auto;
+    max-height:clamp(83px,17dvh,140px);
+    overflow-y:auto;
+    margin:0 0 6px;
+    padding:9px 11px;
+  }
+  main.studio .scene-lead h2{font-size:17px;line-height:1.36}
+  main.studio .scene-lead .lead-essay{font-size:12px}
+  main.studio .scene-lead .lead-question{font-size:14px}
+  main.studio .scene-lead .lead-toggle{min-height:35px;padding:5px 7px;font-size:11px}
+  main.studio .scene-lead.is-collapsed{
+    max-height:150px;
+    overflow:hidden;
+    padding:8px 12px 7px;
+  }
+  main.studio .scene-lead.is-collapsed .eyebrow{margin:0 0 2px;font-size:10px}
+  main.studio .scene-lead.is-collapsed h2{font-size:17px;line-height:1.3}
+  main.studio .scene-lead.is-collapsed>.lead-question{
+    display:block!important;
+    color:#435044;
+    font-size:13px;
+    line-height:1.46;
+    margin:4px 0;
+  }
+  main.studio .scene-lead.is-collapsed>.lead-toggle{
+    display:inline-flex;
+    align-items:center;
+    margin:2px 0 0;
+    min-height:28px;
+    padding:4px 7px;
+  }
+  main.studio .scene-lead:not(.is-collapsed):not([hidden]){
+    max-height:min(25dvh,220px);
+  }
+  main.studio.mode-guided:has(#palette-panel.mobile-active) .scene-lead,
+  main.studio.mode-guided:has(#controls-panel.mobile-active) .scene-lead{
+    display:none!important;
+  }
+  main.studio .look-prompt{
+    max-height:min(25dvh,170px);
+    padding:10px 13px;
+    margin:0 0 7px;
+  }
+  main.studio .look-prompt h2{font-size:17px;line-height:1.5}
+  main.studio .look-prompt .micro{font-size:11px;margin-top:5px}
+  main.studio .look-prompt button{min-height:36px;padding:6px 9px;font-size:11px}
+  main.studio.paused .stage-area{min-height:0}
+  main.studio.paused .view-toolbar{margin-bottom:5px}
+  main.studio .nacre-visibility-switch{
+    top:calc(100% + 3px);
+    min-height:35px;
+    right:8px;
+    font-size:11px;
+    padding:5px 8px;
+  }
+  main.studio .mobile-tabs{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    flex:0 0 auto;
+    min-height:57px;
+    position:relative;
+    bottom:auto;
+    order:initial;
+    z-index:22;
+    width:100%;
+    margin:0;
+    padding:5px 8px calc(5px + env(safe-area-inset-bottom));
+    box-shadow:none;
+    background:var(--page);
+    border-top:1px solid #bcb3a3;
+  }
+  main.studio .mobile-tabs button{
+    min-width:0;
+    min-height:45px;
+    font-size:12px;
+    line-height:1.2;
+    border-radius:0;
+  }
+  main.studio{
+    --moonjar-palette-height:min(39dvh,312px);
+    --moonjar-controls-height:min(30dvh,231px);
+  }
+  main.studio:has(#palette-panel.mobile-active) .stage-area{
+    padding-bottom:calc(var(--moonjar-palette-height) + 2px);
+  }
+  main.studio:has(#controls-panel.mobile-active) .stage-area{
+    padding-bottom:calc(var(--moonjar-controls-height) + 2px);
+  }
+  main.studio .palette-panel,
+  main.studio .story-panel,
+  main.studio .controls-panel{display:none}
+  main.studio:not(.paused) #palette-panel.mobile-active{
+    display:block;
+    position:absolute!important;
+    z-index:16;
+    inset:auto 0 0 0;
+    top:auto!important;
+    bottom:0!important;
+    width:100%;
+    height:var(--moonjar-palette-height);
+    max-height:var(--moonjar-palette-height)!important;
+    padding:11px 14px 10px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    border:1px solid #cbbfac;
+    border-bottom:0;
+    border-radius:9px 9px 0 0;
+    background:var(--surface);
+    box-shadow:0 -3px 12px #262d2426;
+  }
+  main.studio #palette-panel.mobile-active .palette-tabs{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    gap:5px;
+    margin:5px 0 7px;
+    padding:0 0 3px;
+    scrollbar-width:thin;
+  }
+  main.studio #palette-panel.mobile-active .panel-intro{display:none}
+  main.studio #palette-panel.mobile-active .panel-heading{margin:0 0 4px}
+  main.studio #palette-panel.mobile-active .panel-heading h2{font-size:16px}
+  main.studio #palette-panel.mobile-active .panel-heading .micro{font-size:10px}
+  main.studio #palette-panel.mobile-active .palette-tabs button{min-height:39px;font-size:11px}
+  main.studio #palette-panel.mobile-active .piece-choice{min-height:75px}
+  main.studio #palette-panel.mobile-active .piece-choice img{height:46px}
+  main.studio #palette-panel.mobile-active .quick-fill-actions{gap:5px}
+  main.studio #palette-panel.mobile-active .quick-fill-actions .batch-add{min-height:44px}
+  main.studio #palette-panel.mobile-active .batch-hint{margin-bottom:6px;font-size:10px}
+  main.studio #controls-panel.mobile-active{
+    display:block!important;
+    position:absolute!important;
+    z-index:18;
+    inset:auto 0 0 0;
+    bottom:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%;
+    height:var(--moonjar-controls-height);
+    max-height:var(--moonjar-controls-height)!important;
+    margin:0;
+    padding:10px 14px;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    border:1px solid #cbbfac;
+    border-bottom:0;
+    border-radius:9px 9px 0 0;
+    background:var(--surface);
+    box-shadow:0 -3px 12px #262d2426;
+  }
+  main.studio #controls-panel.mobile-active .control-drawer-top{display:flex}
+  main.studio #controls-panel.mobile-active .control-tabs{margin:5px 0}
+  main.studio #controls-panel.mobile-active .controls-grid{margin:6px 0}
+  main.studio #controls-panel.mobile-active .controls-grid button{min-height:44px}
+  main.studio #story-panel.mobile-active{
+    display:block;
+    position:absolute;
+    z-index:18;
+    inset:0;
+    width:100%;
+    height:100%;
+    min-height:0;
+    max-height:none;
+    padding:20px 20px 50px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior-y:contain;
+    border:0;
+    border-radius:0;
+    background:var(--page);
+    box-shadow:none;
+  }
+  main.studio:has(#story-panel.mobile-active) .stage-area{
+    visibility:hidden;
+    pointer-events:none;
+  }
+  main.studio:has(#story-panel.mobile-active) .story-panel h2{
+    font-size:clamp(22px,6vw,30px);
+  }
+  main.studio:has(#story-panel.mobile-active) .story-panel .record-field{
+    margin-block:15px;
+  }
+  main.studio .story-panel .record-field input,
+  main.studio .story-panel .record-field textarea{
+    scroll-margin-top:35px;
+  }
+  main.studio .save-state{font-size:11px}
+  main.studio .storage-warning:not([hidden]){max-height:24dvh;padding:10px 14px}
+  .toast{bottom:calc(67px + env(safe-area-inset-bottom))}
+
+  main.result-page{
+    display:flex;
+    flex-direction:column;
+    padding:8px 15px 8px;
+    overflow:hidden;
+  }
+  main.result-page .page-heading{
+    flex:0 0 auto;
+    padding:0 0 5px;
+    margin:0 0 3px;
+  }
+  main.result-page .page-heading .eyebrow{display:none}
+  main.result-page .page-heading h1{font-size:22px}
+  main.result-page > .save-state{margin-bottom:5px;font-size:11px}
+  main.result-page .result-layout{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    flex:1 1 0;
+    min-height:0;
+    height:100%;
+  }
+  main.result-page .result-layout>.comparison-scene{
+    flex:1 1 0;
+    min-height:0;
+    max-height:none;
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#efeae1;
+    padding:6px;
+  }
+  main.result-page .result-layout>.comparison-scene svg{
+    width:auto;
+    max-width:100%;
+    height:100%;
+    max-height:100%;
+    object-fit:contain;
+  }
+  main.result-page .result-layout>.comparison-scene figcaption{
+    margin:3px 0 0;
+    font-size:10px;
+    max-height:16px;
+  }
+  main.result-page .result-copy{
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    height:auto;
+    max-height:min(35dvh,302px);
+    width:100%;
+    overflow-y:auto;
+    padding:8px 4px 12px;
+    border-top:1px solid var(--line);
+    scrollbar-width:thin;
+  }
+  main.result-page .result-copy>.eyebrow{order:1;margin:0 0 4px;font-size:10px}
+  main.result-page .result-copy>h2{order:2;margin:0 0 6px;font-size:21px}
+  main.result-page .result-copy>.result-overview{order:3;font-size:12px;line-height:1.55}
+  main.result-page .result-copy>.result-actions{
+    order:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    margin:0 0 10px;
+  }
+  main.result-page .result-actions button[data-action="card-options"]{
+    grid-column:1/-1;
+    min-height:49px;
+    font-size:15px;
+  }
+  main.result-page .result-actions button{min-height:39px;font-size:11px}
+  main.result-page .result-copy>.micro{order:4}
+  main.result-page .result-copy>.reflection-recap{order:5}
+  main.result-page .result-copy>.result-essay{order:6}
+  main.result-page .result-copy>.result-epilogue{order:7}
+  main.result-page .result-copy>.micro:last-child{order:8}
+  main.result-page .reflection-recap{margin:12px 0}
+  main.result-page .result-essay{margin:12px 0}
+  main.result-page .storage-warning:not([hidden]){max-height:17dvh;margin-top:7px}
+}
+
+@media (max-width:360px){
+  main.home .hero{padding:12px 15px 18px}
+  main.home .hero-copy h1{font-size:34px}
+  main.home .hero-figure{width:min(53vw,195px)}
+  main.home .hero-figure img{max-height:min(22dvh,193px)}
+  main.studio{--moonjar-palette-height:min(36dvh,277px);--moonjar-controls-height:min(30dvh,236px)}
+  main.studio .studio-bar .button-row button{font-size:10px;padding-inline:5px}
+  main.studio .view-toolbar button{padding:5px 7px}
+  main.studio .mobile-tabs button{font-size:11px}
+  main.result-page .result-copy{max-height:min(38dvh,280px)}
+}
+@media (max-height:650px) and (max-width:767px){
+  main.home .hero-figure img{max-height:18dvh}
+  main.studio{--moonjar-palette-height:34dvh;--moonjar-controls-height:28dvh}
+  main.studio .scene-lead:not([hidden]){max-height:94px}
+  main.studio .stage-area{padding-block:4px 6px}
+  main.result-page .result-copy{max-height:39dvh}
+}
+
+/* Respect the user's reading/printing context. Browser print is NOT clipped
+   to the fixed-height interactive shell. */
+@media print{
+  body:has(> main:is(.home,.studio,.result-page)){
+    display:block!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+}

@@ -9,6 +9,7 @@ on:
       - 'scripts/check-moonjar-browser.mjs'
       - 'scripts/check-moonjar-nacre96.mjs'
       - 'scripts/check-moonjar-release.mjs'
+      - 'scripts/check-moonjar-viewport.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
 permissions:
@@ -97,6 +98,15 @@ jobs:
           exit 1
       - name: Run touch, responsive, privacy and 160-piece matrix
         run: node scripts/check-moonjar-release.mjs
+      - name: Run single-screen compact, landscape and journal matrix
+        run: node scripts/check-moonjar-viewport.mjs
+      - name: Attach one-screen screenshot and geometry evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-viewport-review
+          path: artifacts/moonjar-viewport
+          retention-days: 7
       - name: Upload release evidence
         if: always()
         uses: actions/upload-artifact@v4

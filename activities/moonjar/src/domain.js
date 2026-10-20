@@ -93,6 +93,34 @@ export function importAsNew(doc) {
   return Object.assign(copy, {projectId: uid(), revision: 0, createdAt: now, updatedAt: now});
 }
 
+// New fragments start across the vessel instead of piling into its centre.
+// These are temporary placement suggestions, never a prescribed artwork.
+// Anyone can freely move pieces outside the outline after adding.
+export function nextNacrePlacement(nodes) {
+  const slots=[];
+  for(let row=0;row<9;row++){
+    const y=350+row*145;
+    for(let col=0;col<7;col++){
+      const x=350+col*150+(row%2?60:0);
+      const normalized=((x-800)/545)**2+((y-910)/675)**2;
+      if(normalized<=1.02)slots.push({x,y,distance:normalized});
+    }
+  }
+  slots.sort((a,b)=>a.distance-b.distance||a.y-b.y||a.x-b.x);
+  for(const slot of slots) {
+    const occupied=nodes.some(n=>(n.x-slot.x)**2+(n.y-slot.y)**2<145**2);
+    if(!occupied)return {x:slot.x,y:slot.y};
+  }
+  // A densely covered vessel may intentionally have overlapping fragments.
+  // Stagger the next layer instead of refusing another piece.
+  const fallback=slots[nodes.length%slots.length]||{x:800,y:900};
+  const turn=Math.floor(nodes.length/slots.length);
+  return {
+    x:clamp(fallback.x+((turn%3)-1)*46,0,1600),
+    y:clamp(fallback.y+((turn%4)-1.5)*37,0,1800)
+  };
+}
+
 export class Editor {
   constructor(doc, manifest, onChange = () => {}) {
     this.doc = clone(doc); this.manifest = manifest; this.onChange = onChange;
@@ -115,13 +143,30 @@ export class Editor {
     if (!this.future.length) return;
     this.past.push(this.artwork()); Object.assign(this.doc, this.future.pop()); this.stamp();
   }
-  add(assetId) {
-    if (this.doc.scene.nodes.length >= 200) throw new Error('한 작업에는 조각을 200개까지 놓을 수 있어요. 편집 파일로 보관한 뒤 새 작업을 시작할 수 있습니다.');
-    const a = this.manifest.pieces.find(a => a.id === assetId);
-    if (!a) throw new Error('제공되지 않은 자개입니다.');
-    const size = 200 / Math.max(a.width, a.height), instanceId = uid();
-    this.commit(d => { d.scene.nodes.push({instanceId, kind: 'piece', assetId, x: 760 + (d.scene.nodes.length % 5) * 24, y: 860 + (d.scene.nodes.length % 5) * 24, width: a.width * size, height: a.height * size, rotation: 0, locked: false}); d.pieceNotes[instanceId] = {label: '', memory: ''}; });
-    this.selected = instanceId;
+  add(assetId) { this.addBatch([assetId]); }
+  addBatch(assetIds) {
+    if (!Array.isArray(assetIds)||!assetIds.length) throw new Error('추가할 자개를 골라 주세요.');
+    if(this.doc.scene.nodes.length + assetIds.length > 200)
+      throw new Error('한 작업에는 조각을 200개까지 놓을 수 있어요. 이미 놓인 조각은 그대로 유지됩니다.');
+    const assets=assetIds.map(id=>{
+      const asset=this.manifest.pieces.find(a=>a.id===id);
+      if(!asset)throw new Error('제공되지 않은 자개입니다.');
+      return asset;
+    });
+    let lastId=null;
+    this.commit(doc=>{
+      for(const asset of assets){
+        const instanceId=uid(),size=200/Math.max(asset.width,asset.height);
+        const position=nextNacrePlacement(doc.scene.nodes);
+        doc.scene.nodes.push({
+          instanceId,kind:'piece',assetId:asset.id,x:position.x,y:position.y,
+          width:asset.width*size,height:asset.height*size,rotation:0,locked:false
+        });
+        doc.pieceNotes[instanceId]={label:'',memory:''};
+        lastId=instanceId;
+      }
+    });
+    this.selected=lastId;
   }
   transform(patch) {
     if (!this.node || this.node.locked) return;
