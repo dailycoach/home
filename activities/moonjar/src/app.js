@@ -368,13 +368,25 @@ function fitArtworkToFrame(){
   const availableWidth=Math.max(80,stage.clientWidth-number(host.paddingLeft)-number(host.paddingRight)-padX-4);
   const fit=Math.max(72,Math.min(640,availableWidth,availableHeight*8/9));
   const next=Math.round(fit*zoom);
+  const frameWidth=Math.min(next,Math.round(fit));
+  const previousWidth=parseFloat(paper.style.width);
+  const center=previousWidth?{
+    x:(shell.scrollLeft+shell.clientWidth/2-number(styles.paddingLeft))/previousWidth,
+    y:(shell.scrollTop+shell.clientHeight/2-number(styles.paddingTop))/(previousWidth*9/8)
+  }:null;
   // Shell-resize reactions are presentation only: never replace the SVG
   // nodes while a finger, keyboard or accessibility tool is selecting one.
   if(parseFloat(paper.style.width)!==next)paper.style.width=next+'px';
   paper.style.maxWidth='none';
-  shell.style.height=Math.ceil(next*9/8+padY)+'px';
-  shell.style.maxWidth=Math.ceil(next+padX)+'px';
-  stage.style.setProperty('--artwork-width',Math.ceil(next+padX)+'px');
+  // Magnification scrolls inside the fitted frame instead of pushing the
+  // viewing tools off screen. Keep toolbar width stable when zooming out.
+  shell.style.height=Math.ceil(frameWidth*9/8+padY)+'px';
+  shell.style.maxWidth=Math.ceil(frameWidth+padX)+'px';
+  stage.style.setProperty('--artwork-width',Math.ceil(Math.round(fit)+padX)+'px');
+  if(center&&previousWidth!==next&&zoom>1){
+    shell.scrollLeft=center.x*next-shell.clientWidth/2+number(styles.paddingLeft);
+    shell.scrollTop=center.y*next*9/8-shell.clientHeight/2+number(styles.paddingTop);
+  }
 }
 function renderCanvas(preview = null) {
   const svg = $('#art'); if (!svg) return;

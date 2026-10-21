@@ -48,6 +48,7 @@
   grid-row: 1/4;
   align-self: stretch;
   min-width: 0;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
