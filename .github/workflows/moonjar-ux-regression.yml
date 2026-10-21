@@ -13,6 +13,7 @@ on:
       - 'scripts/check-moonjar-atelier.mjs'
       - 'scripts/check-moonjar-refinement.mjs'
       - 'scripts/check-moonjar-art-direction.mjs'
+      - 'scripts/check-moonjar-quick-delete.mjs'
       - 'scripts/moonjar-browser-helpers.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
@@ -119,6 +120,15 @@ jobs:
         run: node scripts/check-moonjar-refinement.mjs
       - name: Verify V3.2 whole silhouettes, artwork geometry and archive fixtures
         run: node scripts/check-moonjar-art-direction.mjs
+      - name: Test direct piece deletion, undo and accidental-drag guard
+        run: node scripts/check-moonjar-quick-delete.mjs
+      - name: Attach direct delete touch and keyboard evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-direct-delete
+          path: artifacts/moonjar-quick-delete
+          retention-days: 14
       - name: Attach V3.2 actual art direction and action geometry evidence
         if: always()
         uses: actions/upload-artifact@v4

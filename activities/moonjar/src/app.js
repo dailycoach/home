@@ -1,6 +1,6 @@
 import {Editor, clone, clamp, angle, scaledDimensions, newProject, importAsNew, parseImport, validateProject, backgroundKey} from './domain.js';
 import {openRepository, SaveQueue} from './persistence.js';
-import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from './rendering.js';
+import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from './rendering.js?v=20261022-quick-delete';
 
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
@@ -568,17 +568,33 @@ function canvasPoint(svg, event) {
   return point.matrixTransform(svg.getScreenCTM().inverse());
 }
 function attachCanvas(svg) {
+  // The same direct delete handle works with keyboard and assistive input.
+  svg.addEventListener('keydown',event=>{
+    if(event.target.dataset.handle!=='delete'||!['Enter',' '].includes(event.key)||paused||readOnly)return;
+    event.preventDefault();
+    editor.selected=event.target.dataset.id;
+    if(!editor.node||editor.node.locked)return;
+    editor.remove();changed();
+    notice('선택한 조각을 삭제했어요. ↶ 취소로 되돌릴 수 있어요.');
+  });
   svg.addEventListener('pointerdown',event=>{
     if(paused||readOnly||event.button!==0)return;
     const id=event.target.closest('[data-id]')?.dataset.id;
     if(!id){editor.selected=null;renderCanvas();renderControls();return;}
+    const mode=event.target.dataset.handle||'move';
     editor.selected=id;const node=editor.node;renderControls();renderCanvas();
     if(node.locked)return;
-    const p=canvasPoint(svg,event), mode=event.target.dataset.handle||'move';
-    activeGesture={pointerId:event.pointerId,id,mode,start:p,node:clone(node)};svg.setPointerCapture(event.pointerId);event.preventDefault();
+    const p=canvasPoint(svg,event);
+    activeGesture={pointerId:event.pointerId,id,mode,start:p,node:clone(node),startClient:{x:event.clientX,y:event.clientY},cancelled:false};
+    svg.setPointerCapture(event.pointerId);event.preventDefault();
   });
   svg.addEventListener('pointermove',event=>{
     const g=activeGesture;if(!g||g.pointerId!==event.pointerId)return;
+    if(g.mode==='delete'){
+      // A finger moving across the handle is not a deliberate deletion.
+      if(Math.hypot(event.clientX-g.startClient.x,event.clientY-g.startClient.y)>12)g.cancelled=true;
+      return;
+    }
     const p=canvasPoint(svg,event),n=clone(g.node);
     if(g.mode==='move'){n.x=clamp(g.node.x+p.x-g.start.x,0,1600);n.y=clamp(g.node.y+p.y-g.start.y,0,1800);}
     if(g.mode==='rotate')n.rotation=angle(g.node.rotation+(Math.atan2(p.y-n.y,p.x-n.x)-Math.atan2(g.start.y-n.y,g.start.x-n.x))*180/Math.PI);
@@ -589,6 +605,15 @@ function attachCanvas(svg) {
   });
   function end(event){
     const g=activeGesture;if(!g||g.pointerId!==event.pointerId)return;activeGesture=null;
+    if(g.mode==='delete'){
+      const tapped=event.type==='pointerup'&&!g.cancelled
+        &&Math.hypot(event.clientX-g.startClient.x,event.clientY-g.startClient.y)<=12;
+      if(tapped&&!paused&&!readOnly&&editor.selected===g.id&&editor.node&&!editor.node.locked){
+        editor.remove();changed();
+        notice('선택한 조각을 삭제했어요. ↶ 취소로 되돌릴 수 있어요.');
+      }else{renderCanvas();renderControls();}
+      return;
+    }
     if(event.type!=='pointercancel'&&g.preview&&!paused&&!readOnly)editor.commit(d=>Object.assign(d.scene.nodes.find(n=>n.instanceId===g.id),g.preview));
     renderCanvas();renderControls();
   }
