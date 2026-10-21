@@ -1,0 +1,128 @@
+{
+  "generatedAt": "2026-10-21T08:35:42.328Z",
+  "checks": 179,
+  "results": [
+    {
+      "name": "chromium-320",
+      "result": "PASS",
+      "position": {
+        "visible": 321.75,
+        "chip": 317.23748779296875,
+        "tray": 670
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "chromium-360",
+      "result": "PASS",
+      "position": {
+        "visible": 366.75,
+        "chip": 340.48748779296875,
+        "tray": 662
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "chromium-390",
+      "result": "PASS",
+      "position": {
+        "visible": 400.5,
+        "chip": 357.92498779296875,
+        "tray": 662
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "chromium-430",
+      "result": "PASS",
+      "position": {
+        "visible": 445.5,
+        "chip": 381.17498779296875,
+        "tray": 662
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "chromium-non-persistent",
+      "result": "PASS"
+    },
+    {
+      "name": "desktop-160-piece-stress",
+      "result": "PASS",
+      "buildMs": 67.80000000074506,
+      "renderMs": 3.900000002235174,
+      "nodes": 160,
+      "pieces": 160,
+      "undoDepth": 100
+    },
+    {
+      "name": "webkit-320",
+      "result": "PASS",
+      "position": {
+        "visible": 321.75,
+        "chip": 317.23748779296875,
+        "tray": 669.984375
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "webkit-360",
+      "result": "PASS",
+      "position": {
+        "visible": 366.75,
+        "chip": 340.48748779296875,
+        "tray": 661.984375
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "webkit-390",
+      "result": "PASS",
+      "position": {
+        "visible": 400.5,
+        "chip": 357.92498779296875,
+        "tray": 661.984375
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "webkit-430",
+      "result": "PASS",
+      "position": {
+        "visible": 445.5,
+        "chip": 381.17498779296875,
+        "tray": 661.984375
+      },
+      "meta": {
+        "images": 2,
+        "nodes": 1
+      }
+    },
+    {
+      "name": "webkit-non-persistent",
+      "result": "PASS"
+    }
+  ],
+  "note": "Chromium mobile emulation and Playwright WebKit engine only. No physical iPhone/Android device has been tested."
+}

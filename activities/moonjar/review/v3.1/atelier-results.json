@@ -1,0 +1,142 @@
+{
+  "checks": 268,
+  "results": [
+    {
+      "name": "chromium-320x568",
+      "result": "PASS",
+      "art": {
+        "x": 73.5,
+        "y": 110,
+        "width": 173,
+        "height": 194.625
+      }
+    },
+    {
+      "name": "chromium-360x800",
+      "result": "PASS",
+      "art": {
+        "x": 29.5,
+        "y": 110,
+        "width": 301,
+        "height": 338.625
+      }
+    },
+    {
+      "name": "chromium-390x844",
+      "result": "PASS",
+      "art": {
+        "x": 28.5,
+        "y": 110,
+        "width": 333,
+        "height": 374.625
+      }
+    },
+    {
+      "name": "chromium-430x932",
+      "result": "PASS",
+      "art": {
+        "x": 17,
+        "y": 110,
+        "width": 396,
+        "height": 445.5
+      }
+    },
+    {
+      "name": "chromium-768x1024",
+      "result": "PASS",
+      "art": {
+        "x": 240,
+        "y": 213,
+        "width": 503,
+        "height": 565.875
+      }
+    },
+    {
+      "name": "chromium-1024x768",
+      "result": "PASS",
+      "art": {
+        "x": 441.5,
+        "y": 213,
+        "width": 356,
+        "height": 400.5
+      }
+    },
+    {
+      "name": "chromium-1440x900",
+      "result": "PASS",
+      "art": {
+        "x": 444,
+        "y": 213,
+        "width": 522,
+        "height": 587.25
+      }
+    },
+    {
+      "name": "chromium-844x390",
+      "result": "PASS",
+      "art": {
+        "x": 464,
+        "y": 162,
+        "width": 101,
+        "height": 113.625
+      }
+    },
+    {
+      "name": "legacy-export-import-pixels-conflict",
+      "result": "PASS",
+      "pixels": {
+        "png": [
+          1600,
+          1800
+        ],
+        "card": [
+          1600,
+          2400
+        ],
+        "different": 0,
+        "total": 2880000
+      }
+    },
+    {
+      "name": "memory-and-navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "real-idb-quota-failure",
+      "result": "PASS"
+    },
+    {
+      "name": "webkit-320x568",
+      "result": "PASS",
+      "art": {
+        "x": 73.5,
+        "y": 110,
+        "width": 173,
+        "height": 194.625
+      }
+    },
+    {
+      "name": "webkit-390x844",
+      "result": "PASS",
+      "art": {
+        "x": 28.5,
+        "y": 110,
+        "width": 333,
+        "height": 374.625
+      }
+    },
+    {
+      "name": "webkit-844x390",
+      "result": "PASS",
+      "art": {
+        "x": 464,
+        "y": 162,
+        "width": 101,
+        "height": 113.625
+      }
+    }
+  ],
+  "passed": true,
+  "error": null,
+  "notes": "Real browser engines, simulated viewports. Physical Android/iPhone and assistive technology not tested."
+}

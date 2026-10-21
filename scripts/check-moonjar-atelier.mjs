@@ -36,8 +36,8 @@ async function scenario(browser,engine,width,height){
   await shot(page,name+'-materials');
   await page.locator('[data-action="add:A01"]').click();await page.locator('#art [data-node]').waitFor();
   await page.locator('[data-action="batch:12"]').click();await page.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===13);ok(await page.locator('#art [data-node]').count()===13,name+' twelve more original fragments');
-  await page.locator('#palette-panel [data-action=undo]').click();ok(await page.locator('#art [data-node]').count()===1,name+' batch undo atomic');
-  await page.locator('#palette-panel [data-action=redo]').click();ok(await page.locator('#art [data-node]').count()===13,name+' batch redo');
+  await page.locator('.art-toolbar [data-action=undo]').click();ok(await page.locator('#art [data-node]').count()===1,name+' batch undo atomic');
+  await page.locator('.art-toolbar [data-action=redo]').click();ok(await page.locator('#art [data-node]').count()===13,name+' batch redo');
   if(width<1200)await page.locator('[data-action="panel:controls"]').click();
   const before=await page.locator('#art [data-node]').last().getAttribute('transform');
   await page.locator('#controls-panel [data-action="move:24:0"]').click();

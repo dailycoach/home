@@ -103,7 +103,7 @@ main.studio {
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: #6c6458 transparent;
-  background: var(--surface);
+  background: #22231f;
 }
 .panel-heading {
   display: flex;
@@ -234,6 +234,7 @@ main.studio {
   height: 100%;
   overflow: hidden;
   padding: 14px 18px 10px;
+  background: #20231f;
 }
 .view-toolbar {
   display: flex;
@@ -259,6 +260,8 @@ main.studio {
   padding: 8px;
   overscroll-behavior: contain;
   scrollbar-width: thin;
+  border: 1px solid #45483f;
+  background: #292c26;
 }
 .paper {
   margin: auto;
@@ -326,6 +329,9 @@ main.studio {
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
   margin: 10px 0;
+}
+.advanced-control {
+  display: none;
 }
 .control-tabs button {
   font-size: 12px;
@@ -555,9 +561,13 @@ main.studio {
   }
 }
 @media (max-width: 767px) {
+  body:has(main.studio) > .site-header {
+    min-height: 52px;
+    padding-block: 4px;
+  }
   .studio-bar {
-    min-height: 54px;
-    padding: 5px 12px;
+    min-height: 46px;
+    padding: 1px 12px;
     gap: 7px;
   }
   .studio-bar .button-row {
@@ -568,7 +578,7 @@ main.studio {
     font-size: 11px;
   }
   .studio-bar > .button-row > [data-action="toggle-mode"] {
-    max-width: 104px;
+    display: none;
   }
   .storage-context {
     display: none;
@@ -585,8 +595,8 @@ main.studio {
     padding: 5px 10px;
   }
   .studio {
-    --dock-height: min(34dvh, 294px);
-    --controls-height: min(29dvh, 245px);
+    --dock-height: min(29dvh, 240px);
+    --controls-height: 124px;
   }
   .workspace {
     display: block;
@@ -600,11 +610,10 @@ main.studio {
     padding: 5px 10px 6px;
   }
   .stage-shell {
-    padding: 4px 0;
+    padding: 4px;
   }
   .view-toolbar {
-    margin: 0 0 4px;
-    min-height: 44px;
+    display: none;
   }
   .view-toolbar button {
     min-height: 44px;
@@ -614,6 +623,12 @@ main.studio {
   }
   .canvas-hint {
     display: none;
+  }
+  .art-toolbar [data-action="snapshot"] {
+    display: none;
+  }
+  .art-toolbar .compact-view {
+    display: block;
   }
   .art-toolbar {
     margin-top: 4px;
@@ -655,7 +670,7 @@ main.studio {
     max-height: var(--controls-height);
   }
   .palette-panel .panel-heading {
-    margin: 0 0 5px;
+    display: none;
   }
   .palette-panel .panel-heading h2 {
     font-size: 17px;
@@ -678,8 +693,11 @@ main.studio {
     min-height: 44px;
   }
   .quick-fill-actions {
+    grid-template-columns: 1fr;
     margin: 6px 0;
-    gap: 5px;
+  }
+  .quick-fill-actions > button:not(.batch-add) {
+    display: none;
   }
   .batch-add {
     font-size: 12px;
@@ -690,37 +708,76 @@ main.studio {
     margin: 9px 0;
   }
   .piece-choice {
-    min-height: 76px;
+    min-height: 64px;
   }
   .piece-choice img {
-    height: 48px;
+    height: 38px;
   }
   .palette-panel .layer-list {
     margin-top: 12px;
   }
+  .studio:not(.paused) .controls-panel.mobile-active {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    grid-template-rows: 44px auto;
+    align-content: start;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: 0;
+  }
   .control-drawer-top {
-    margin-bottom: 3px;
+    display: contents;
   }
-  .control-drawer-label {
-    font-size: 12px;
-  }
+  .control-drawer-label,
   .controls-panel .panel-heading {
-    margin: 2px 0 5px;
+    display: none;
   }
-  .controls-panel .panel-heading h2 {
-    font-size: 16px;
+  .control-drawer-close {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 44px;
+    padding: 3px;
   }
   .control-tabs {
-    margin: 5px 0;
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
   }
-  .controls-grid {
-    margin: 5px 0;
+  .control-tabs button {
+    min-width: 0;
+    padding: 5px 2px;
+    font-size: 11px;
+  }
+  .advanced-control {
+    display: block;
+  }
+  .controls-panel > .controls-grid {
+    grid-column: 1/-1;
+    grid-row: 2;
+    margin: 0;
   }
   .controls-grid button {
     min-height: 44px;
   }
-  .controls-panel details {
-    margin-top: 10px;
+  .controls-panel .advanced-geometry {
+    display: none;
+  }
+  .controls-panel .advanced-selected {
+    grid-column: 1/-1;
+    margin: 0;
+    border: 0;
+  }
+  .controls-panel .advanced-selected > summary {
+    display: none;
+  }
+  .control-inline-status:not(:empty) {
+    grid-column: 1/-1;
+    grid-row: 3;
+    margin: 0;
+  }
+  .controls-panel > .micro {
+    grid-column: 1/-1;
   }
   .story-panel.mobile-active {
     display: block;
@@ -890,8 +947,8 @@ main.studio {
 }
 @media (max-width: 350px), (max-width: 767px) and (max-height: 650px) {
   .studio {
-    --dock-height: 170px;
-    --controls-height: 165px;
+    --dock-height: 144px;
+    --controls-height: 116px;
   }
   .studio-bar {
     padding-inline: 10px;
@@ -1040,17 +1097,8 @@ main.studio {
   }
 }
 
-.compact-view {
-  display: none;
-}
-@media (max-width: 767px) and (max-height: 650px) {
-  .studio .view-toolbar {
+@media (min-width: 768px) {
+  .compact-view {
     display: none;
-  }
-  .studio .art-toolbar [data-action="snapshot"] {
-    display: none;
-  }
-  .studio .art-toolbar .compact-view {
-    display: block;
   }
 }

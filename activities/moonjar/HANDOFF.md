@@ -1,42 +1,40 @@
-# MOONJAR STUDIO V3 · THE ATELIER 인계
+# MOONJAR STUDIO V3.1 · 최종 Chat 검증 인계
 
-**상태: PARTIAL — 실제 구현·로컬 브라우저 QA·Draft PR 제출, Work 프리뷰 연결 gate 미해결.**
-
-## 구현과 보존
-
-B안 공방 방향으로 인장 없는 워드마크, 단일 꾸미기 CTA, 실제 제품 재료로 만든 첫 화면, 명시적 시작 선택, 어두운 공방과 자개 트레이, 잠시 바라보기, 작품 전시·내 작업·안내를 연결했다. 현재 열린 작품도 내 작업에서 이름을 바로 바꿀 수 있다. 짧은 화면에서 보기 도구는 접근 가능한 별도 창으로 옮겼다.
-
-기존 DB·스키마·사용자 기록·96개 PNG·4가지 배경·좌표·200개 한도·100회 undo·스냅샷·저장 충돌·PNG/카드/JSON/인쇄 경로를 보존했다. domain/rendering/persistence와 전체 data, nacre-visibility.js는 base와 바이트 단위로 동일하다. 새 프레임워크·서버·외부 데이터 전송은 추가하지 않았다.
-
-## 저장소
+**구현·로컬 실제 브라우저 QA PASS / Work preview BLOCKED / Draft PR 유지 / NOT DEPLOYED.**
 
 - Repository: https://github.com/dailycoach/home
-- Base: `main`, `6faa99110b2662ba67a88068edc6c12a8c916833`
-- Branch: `design/moonjar-atelier-v3`
-- 최종 SHA: 함께 제출하는 Draft PR head와 최종 응답에 명시.
-- PR target: main, **Draft**, NOT DEPLOYED. main ref는 제출 시 base와 동일한지 다시 확인한다.
-- 전체 변경 파일 및 이유: [CHANGED_FILES.md](review/v3/CHANGED_FILES.md)
+- 기존 Draft PR: https://github.com/dailycoach/home/pull/208
+- 작업 branch: `design/moonjar-atelier-v3` (기존 PR에 후속 커밋)
+- V3.1 시작 SHA: `99c7cda61e84487afdfd02213fe80401a9c7c256`
+- main 기준 SHA: `6faa99110b2662ba67a88068edc6c12a8c916833`
+- 최종 SHA와 원격 CI 실행 URL: PR 본문 및 최종 응답에 제출. 심사 시 반드시 현재 PR head와 일치하는지 확인한다.
 
-## 증거 열기
+## 수정 요약
 
-- [PHASE 0 / BASELINE](BASELINE.md)
-- [전체 QA 결과와 별도 채팅 체크리스트](QA.md)
-- [B안 전체 비교](review/v3/comparison-intro.png), [헤더·CTA 집중 비교](review/v3/comparison-focused.png)
-- [8개 영역 실제 브라우저 캡처 모음](review/v3/journey-overview.png)
-- [390 첫 화면](review/v3/after/intro-390.png), [공방](review/v3/after/studio-390.png), [완성](review/v3/after/gallery-390.png)
-- [320 시작](review/v3/after/start-320.png), [공방](review/v3/after/studio-320.png), [저장](review/v3/after/save-320.png)
-- [1440 첫 화면](review/v3/after/intro-1440.png), [공방](review/v3/after/studio-1440.png), [완성](review/v3/after/gallery-1440.png)
-- [원본 무결성](review/v3/asset-integrity.json), [핵심 파일 무변경](review/v3/protected-files.json)
-- [V3 구조화 결과](review/v3/atelier-results.json), [실행 로그](review/v3/logs/)
+320~430 첫 화면의 글자와 실제 작품을 별도 영역에 배치했다. 320 작업실은 동일 장면에서 SVG 높이 약 160→223px로 확대했다. 보기·배치 창과 네 조절 탭으로 상시 도구 밀도를 낮추고 모든 기능을 유지했다. START의 하단 시작 CTA는 첫 화면에 보이며 저장/비저장 설명은 그대로다. 보관함은 작품을 크게 전시하고, 이어 꾸미기가 편집기로 복귀하도록 고쳤다.
 
-## 테스트 및 제한
+도메인·렌더러·persistence·윤곽 모듈과 기존 data/assets 214개는 무변경이다. DB 초기화·마이그레이션·원본 이미지 교체 없음. 기존 전체 테스트 74 + 959개 브라우저 assertions에 신규 730개를 추가해 모두 실제 실행·통과했다.
 
-74 단위 테스트, 959 실제 브라우저 assertions가 통과했다(반복 회귀 포함). 신규 V3 검사는 268 assertions / 14 scenarios. 검사한 legacy 작품에서 1600×1800 SVG와 PNG의 픽셀 차이 0. 모든 사용자 데이터 쓰기·실패·삭제 테스트는 격리한 가상 브라우저에서만 수행했다.
+## 검토 자료
 
-Work 프리뷰 탭은 `ERR_BLOCKED_BY_CLIENT`로 연결되지 않았다. 따라서 `design-qa.md`는 strict preview gate 기준 blocked다. 로컬 Chromium/WebKit의 실제 조작·캡처·콘솔 검사는 통과했다. 실제 Android/iPhone, 스크린리더, 200% 글자 확대와 OS 인쇄 대화상자는 미검증이다. 최종 디자인 심사·독립 기능 검증은 별도 ChatGPT 채팅에서 수행한다.
+- [QA 결과·실행 명령·범위·제한](QA.md)
+- [전후·레퍼런스 시각 검토](design-qa.md)
+- [시작 PR 재확인](review/v3.1/RECHECK.md)
+- [변경 파일 전체와 이유](review/v3.1/CHANGED_FILES.md)
+- [INTRO 전후](review/v3.1/compare-intro-320.png), [작업실 전후](review/v3.1/compare-studio-320.png), [START 전후](review/v3.1/compare-start-320.png), [같은 기존 작품의 보관함 전후](review/v3.1/compare-archive-390.png)
+- [Chromium 실제 모바일 12개 화면](review/v3.1/chromium-mobile-overview.png), [WebKit](review/v3.1/webkit-mobile-overview.png)
+- [필수 14개 화면 × 2엔진 개별 캡처](review/v3.1/after/), [보호 파일 무결성](review/v3.1/protected-integrity.json), [로그](review/v3.1/logs/)
 
-운영 DB는 출처별로 격리되므로 별도 프리뷰에서 운영 작품이 보이지 않는 것이 데이터 삭제를 뜻하지 않는다. 이 변경에는 DB 마이그레이션이 없다. 운영 출처의 실제 작품으로 최종 확인할 때는 편집 파일 백업을 먼저 확보한다.
+## 별도 ChatGPT 채팅의 최종 검증
 
-**main 병합 및 운영 배포를 수행하지 않았다.**
+1. PR #208의 Draft, head SHA, 두 CI 실행을 확인한다. main 병합·배포는 아직 금지다.
+2. B안과 320/360/390/430 실제 캡처를 심사한다. 모든 제목/본문의 선명도, 잘린 작품 창의 아트디렉션, 버튼 밀도와 충분한 터치 영역을 검토한다.
+3. 320에서 선택·이동·회전·크기·undo/redo·보기·배치·저장, 390에서 추가/고급 조절과 보관함 재편집을 독립 확인한다. 편집 좌표·색은 출력과 같아야 한다.
+4. 운영 출처의 실제 기존 작품은 먼저 JSON 백업하고 실기기에서 열기·수정·복원한다. 다른 preview 출처가 운영 IndexedDB를 공유하지 않는 것은 정상이다. 사용자 저장소를 초기화하지 않는다.
+5. 실제 Android/iPhone·VoiceOver/TalkBack·200% 글자 설정·OS 인쇄/PDF 저장을 확인한다. 미검증 항목은 PASS로 간주하지 않는다.
+6. Work preview는 재시도에서 동일 오류가 발생해 BLOCKED다. 환경 연결 복구와 최종 디자인 승인을 별개로 확인한다.
+7. 모든 최종 승인 후 별도 명시적 지시에 의해서만 운영 배포를 판단한다. 이 작업은 배포를 수행하지 않았다.
+
+디자인 9점은 목표이며 자동 승인 점수가 아니다. 새 프로젝트나 프레임워크를 만들지 않았고 다른 제품 코드를 변경하지 않았다. Moonjar 전용 검사·워크플로만 범위 밖 최소 변경이다.
 
 PRODUCTION DEPLOYMENT: NOT PERFORMED

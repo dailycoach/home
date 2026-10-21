@@ -1,0 +1,1076 @@
+{
+  "base": "99c7cda61e84487afdfd02213fe80401a9c7c256",
+  "files": [
+    {
+      "path": "activities/moonjar/src/domain.js",
+      "sha256": "e081c51dfc8888884b88979a04d94ba54e80f5d76282e43552dcb3f0157c16bd",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/src/rendering.js",
+      "sha256": "e8c9630994afc49ffa9d6ae136da08432c264c61aa3d0b8023c455838d16dcee",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/src/persistence.js",
+      "sha256": "d3a14b010fdf58517aece04328a390d4dfd576f0c6b06c73f835cff564c60dc0",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/src/nacre-visibility.js",
+      "sha256": "d1651dfd7c179176bad2302edc2fbad275f093e090d2fb1121d29367fd6471ed",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/data/empty.json",
+      "sha256": "48c8e12baa1802aa57a15119574b7fae4ec47ab9cd83284d21b98753c3ced0a2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/data/manifest.json",
+      "sha256": "9da05eca5df8ddc864d1d30f6a7d0af9f403d8c8154fbb8334e2cae77296d4e9",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/data/schema.json",
+      "sha256": "b7a941e13ec86bf9487023d0c98a8dde60988fb966162c1d7176d43e4fcd4cd0",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/data/story.json",
+      "sha256": "6b3d8eef74e994dfe8730533f4e157156db671d1a111dad8a3157204df24ef6a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/canvas_dark.png",
+      "sha256": "2d7eb6d75b7ddfe891751bdb0ac397e55f716ad63956f2f1d16819370f14b1b5",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/canvas_light.png",
+      "sha256": "35fa126a23c43e9db2f053e63b48bbaed0fbef2451c4c56e860e922034a85ae6",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/fonts/LICENSE.txt",
+      "sha256": "82e9c8a4b203261f10ddba1296422d64914ff3d4b7bd8a12896d03f0f088d70a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/fonts/PretendardVariable.woff2",
+      "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/icons/LICENSE",
+      "sha256": "b5b1f1da112d18ea2147decfd48ddc1bf2b5aeb6c265381579340e95b15a2bb2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/icons/list.svg",
+      "sha256": "fb1851842c74b40a3f42ce3d6ae0e67ede556b624218e79c0f4ead7d9ceec51f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-original.svg",
+      "sha256": "310943ec03b8d28a8f92d3a2af23230ec9596c90f7c5e8ecd3c2aea2454f4145",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/master/porcelain-day.svg",
+      "sha256": "0443d1424dd009a4813eec2c97c33158b5c29b97013d430d86f268adaf243f6e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/master/porcelain-night.svg",
+      "sha256": "2cf5197e42a4ab5adcd95cccaade018a329e94818df39f03bf71befa28cfca12",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/porcelain-day.png",
+      "sha256": "bba50e825f0109c499cf05cd94059da1681d2eda7d86a474296400eced779a1a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/porcelain-night.png",
+      "sha256": "8732c7eec7313289063b70726b6b5ca47f381c0c60c45545e46438d9ef4b463f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/thumbnail-day.webp",
+      "sha256": "cde4323cb118221ae47c981d8923079215deda28bb63a620327b8c0553eb19e7",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/thumbnail-night.webp",
+      "sha256": "ff92745983c128c953970d5b57d3055c87b8c3d71264b5e31a54cbb98956ed14",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/moonjar-v2/variants.json",
+      "sha256": "98554b4fde1775606c64d08cea30b72bbc371e5499b5d5b3e5b89ee1a72b3f3b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A01.png",
+      "sha256": "7f0351c95fc0a5fe08a717ea6cedaecb9b2d93e7a0ccbbe16dbba737b9df7c60",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A02.png",
+      "sha256": "9515c99bd1de0975d8c06cfebc14ee050f5b1c1df6cd89f406f479095181fb32",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A03.png",
+      "sha256": "71913cc64a88edc9b7d6426563dbf7e4db9f88dbd2f9569ef342acb5fd7efc52",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A04.png",
+      "sha256": "deb21e1add2e2857977f261ccf9205addc2588c42ae432970ffcf927adea6ad0",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A05.png",
+      "sha256": "a9d7008fbab937450fb334cdb1f77597e5579a1913c26bd42b1eb306956142bb",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A06.png",
+      "sha256": "449bc04b2f1f046d1c649f96c7431fdf77d3169980c890be85ce37a372b17b37",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A07.png",
+      "sha256": "ab9001e039e034984959184f08bd1ae0aba5b8221c06b36e6098874897bdd00f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A08.png",
+      "sha256": "44ac5bf2426f7752c9a299d015264eabe04f18914f7244e26a18ae359a7f7a29",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A09.png",
+      "sha256": "a86bc4a5d8e1da89a876e47199031cdb364071c67dff9f31082875aa516c227e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A10.png",
+      "sha256": "55e38a42516d0de07107f3d3a0f1a8ec662197576651d0daa51bd5d8097d7932",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A11.png",
+      "sha256": "e25ac5ca98d8dd6bd71363d438b576fc9fc8c1ae5e326f0d09455693bd061bd9",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/A/A12.png",
+      "sha256": "148e300f91dae18504c8b5c2e8437eaa85bd62f01a76fe0506d40e04726a5947",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B01.png",
+      "sha256": "2c47621673f1ec55f48eac3540524e49249d5ef71d289feab4890b395f50c809",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B02.png",
+      "sha256": "f445dba030e86a0ddd0deddbcb207fb42dc403551fa1906fea517cbc32f4715d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B03.png",
+      "sha256": "f6dc689f82ca71d194289599b593b338c7056d45e117bcfeb5a0d0225f5e86d2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B04.png",
+      "sha256": "ebe4f08f528fa90135e49677fb176524fab8990b8a606de641bbb2d664b031e2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B05.png",
+      "sha256": "e9af6d51588bbe9c419b786b1acfc92c180476ac36897af5ff6e16a1d9251122",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B06.png",
+      "sha256": "feaa3d63d876165bac68bdbcb8905816c0da94a78a04d6520dbc0e3ca983c87b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B07.png",
+      "sha256": "d9c30e0115f984b16a2b78cacbc13fa0595609f94d138ee70c8560e805401c1d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B08.png",
+      "sha256": "10567fcc9b214f788479bf2322211c968d16463def5c45dad7045ded1d80f610",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B09.png",
+      "sha256": "833525a722954339e311d13854037b27f8f998a7bbe03cfc295eae050688bfc0",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B10.png",
+      "sha256": "ed7ac4dd2f41d58baf58d2f435d6e1b581adad6924a22bc7e08f33d60ff1aa8e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B11.png",
+      "sha256": "5c6082b74daedef0293a134d7d29b192ce43cb17d13dbce8b3d6f6b161035e44",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/B/B12.png",
+      "sha256": "66c6d40e91d966f9fdd81757ae2aa0c7d361138a2d6547dd86ad9d5bea41dbcc",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C01.png",
+      "sha256": "fe7dfa3f3842add1226861c235763915914b86adb9485d4ed3fe0bd742a94572",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C02.png",
+      "sha256": "278e8658ecb6ad3adbd84967c9d3ea0a5de2a69329f7337d92f8ee3fb21eac14",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C03.png",
+      "sha256": "a326e296e6a5e75cf9fecb42ae5828e4c3964d1bfc1afc192dccb9265da0c913",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C04.png",
+      "sha256": "4cdf64913464159429cac03823a1144b9d079617eb97282eb39d90809c028807",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C05.png",
+      "sha256": "fbe416083bebfbb2f3c494b7128ea4b6bf359a12f2e66279c2e38208fa13d011",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C06.png",
+      "sha256": "dc473ee00eb40fbfb73ba526c03bc97d2bf16a3092e6de474483f9498eb98fa5",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C07.png",
+      "sha256": "5fd11ab8542ebb925b054897433c2ce18633923659c37b6664241a955b992b7e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C08.png",
+      "sha256": "bd85950206a94df4374bbf2be8940e05c594f58360328901eab05ea9e6964b93",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C09.png",
+      "sha256": "d83ae1d5ed8d01ec811a212cba1bc0bb9272551e2e7cde3cb9218e027970b2e2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C10.png",
+      "sha256": "82c6bb2f430b7a91736ecc92ff0ba13ed44cec6279f43e0ba36b2df8253c8175",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C11.png",
+      "sha256": "3243710edbd313d2f96a54e1d74e7609bbbe24d0d4a7ea109b1cc933066bcaf7",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/C/C12.png",
+      "sha256": "c993754069675df9047b151377e1de7261d535c7ca36a4863bf5e1ad493b2170",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D01.png",
+      "sha256": "a7bf3b1778a7d7f2f5247a9676c930fb957bde9479d658365f195cc46aa7350a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D02.png",
+      "sha256": "2cd9e7aae5cb86a2d853b73f9f6cbaf6097738f376dd58149ce41277ac649a96",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D03.png",
+      "sha256": "5a63d22b30c0c4e1e2b8e53338f03e902b8c8f5dfcb029e30912d6ae9b9d358d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D04.png",
+      "sha256": "40388c6a13228e557b0b68283965581ceabf0e93b4a14ad155aaee118615200d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D05.png",
+      "sha256": "fe361b3627eebf4a6aedee763bfbecb6981be0818b40e9bd02352c3654cc9e85",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D06.png",
+      "sha256": "11a84d37809ab81ae9ea2e613bd1a83fdcc057fc12855cce06af42f2ead914fb",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D07.png",
+      "sha256": "fcd5758c5dafc30f3325c974c14ac1ebaf457bcca6c30ae68979b6e8db3146ed",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D08.png",
+      "sha256": "8768687fecba086e7d223663f3ee067dd8e2f0e374e8f307d384f3fa90d6015f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D09.png",
+      "sha256": "b95f802ec3c2051f1c8a7c9a40951a4f5c70c2e7a3d4c6f21858c03597b84f93",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D10.png",
+      "sha256": "e6b815c315844b96ae9912b721b6a7bfcbdd00649c8b66d95b376bf32ce036e9",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D11.png",
+      "sha256": "3b7e42567cab2566766370fe4895b8a92f5ec636179145bcf22b8fe57ed92b5f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/D/D12.png",
+      "sha256": "1d4b599cf3a35dbdf0ccac8f2aec493e3c928d823add4861d664cc0aa9c73a6a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E01.png",
+      "sha256": "6fd91296b003f40380f1e36a207e98c5bd3d0ceefefc49c3b647d770b98577fc",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E02.png",
+      "sha256": "be3700d1f6fb9b50fa04bb4b5b2eebbe4657677d320a454114d7885e7727ad7c",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E03.png",
+      "sha256": "35bde907e7e451cd3aba52337786a17ee49edb6843f2238472f58c349944c028",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E04.png",
+      "sha256": "836924c411a7bc98855c22b24cb261262ae15e5eb00c1754976444558f0bf507",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E05.png",
+      "sha256": "3fc241b0a1b5620ba0b3bc4294cdcb6e514a9926622cf025a6dc3e9f4458f441",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E06.png",
+      "sha256": "1095f0631b4106bc5c4825a335ede0d41489ab2733678f3ef97477e13e423466",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E07.png",
+      "sha256": "b1ee032ba5b7ddb42f94658ac69926bc1ee21fd5b9f4b75c7592a0ecdaffd605",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E08.png",
+      "sha256": "312f7d896390a294a18d07a3f60498436f8d886ab2592dfff3e18d1372bd369b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E09.png",
+      "sha256": "38e7a495d8d9e6e9cd3e5fc2849b19d30435c48031af2da587a01dadb234f3ad",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E10.png",
+      "sha256": "b7d0426f6117a51db4185e8c49698d2c5da014ba2fefef8fd48c1170cc1817ed",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E11.png",
+      "sha256": "289afb7a72004a1e2ed98ccb18ee97575d71b0292c12fe506d2751a10300f702",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/E/E12.png",
+      "sha256": "6337d1e69925adf91094e8cd298f6f6cc37cae7bd9459fb7e1c9782cd24c74ab",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F01.png",
+      "sha256": "e2902e64b56cd783d462b35746b00d5c96bd776b35e99c03f6443b5d28f474b4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F02.png",
+      "sha256": "b68f24d06d2728b1ae5fb2b7cda38ca7e8955213edee022af60f280e1e78bcc4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F03.png",
+      "sha256": "a58189315d163d75cb4002a6190541c66fdadbf9931ec63149d2a948eb958aea",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F04.png",
+      "sha256": "3aed044d19c9e1a9d2b251fa12d028c05a36bcf83223160dac840e98b03855a8",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F05.png",
+      "sha256": "476b1b8c726942751c22230d40dd364bb2a97d0fca0d2ae2c181057c63ed4b08",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F06.png",
+      "sha256": "5b845c6d12370575753557e0eb1defa18867de388b5ec1439819e51823cd4960",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F07.png",
+      "sha256": "e1f0c390900562edd6554ba92ec8e78aaf7f6ca7403bfa0f5b1e392413bdc169",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F08.png",
+      "sha256": "d8cbb05fc5096f053f98e08919477277ce03d2824bf28c3b23f6bf30d31198af",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F09.png",
+      "sha256": "f3b444aaee1396c619a80afae27d7810b0ada8a30d4950c7bc24222124f2ba3a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F10.png",
+      "sha256": "0c2ad3d3681046e9e09a271ef8ae1a7318c3adf58ec5579270e5bbf20cb7a123",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F11.png",
+      "sha256": "32b58ab53bd8442cab1a7a6ef95df7ba2bda8aa1ea3dd59c4747ba7875383f20",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/F/F12.png",
+      "sha256": "c729812725096e1b8a09b6898bdcbd255760e02ae2af3ad5fd364221436fab45",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G01.png",
+      "sha256": "5b2a711974d431d4018b36f705bc932a3dd644d20727c0dcb505f63c4ca00f51",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G02.png",
+      "sha256": "afd7c4b6924083b2b95dea01a8f20d8c1b1d2f4a7765665429ce623a54f22473",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G03.png",
+      "sha256": "8c7af1243ccea3a4f3b2a281efeb76def6a540f23ca70fd1aaa416cf8307029e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G04.png",
+      "sha256": "94a655d2514f9aab7241d1c1ef62de53ab658afee17d0c15f9675b693e08888b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G05.png",
+      "sha256": "e77956bc278f1bc4ad297eaad881b18615647e8834267baedbdd51d5ec592f6a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G06.png",
+      "sha256": "5ffe0a79c2afe767b2b29c0e306a526784354660cc0b2cb57013026de8416a68",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G07.png",
+      "sha256": "cd8c55fefe15c20619ca56201e39a55397b2d86cc9b3ad20547747ac0b36d6e8",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G08.png",
+      "sha256": "c04af45d8a4325492eae9761f3ea88eb712920de4303bb633b8d6748b10be046",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G09.png",
+      "sha256": "6fd290a868c9c252d00014d0987115383c2a8d52ad802c30d915ab02178e2acc",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G10.png",
+      "sha256": "296d02467ae2d7c6b0a8b2e198cd0c470deef145756cd8142b0e76dc2e10e9af",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G11.png",
+      "sha256": "3ee37e95deba440f8148c9309d0cab44b0cde5b143d7ec49d4d976fc9154dd0a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/G/G12.png",
+      "sha256": "0425959202ef9b336df4ee4c68d86d4776773165b909de4e16fbf36528bb5469",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H01.png",
+      "sha256": "99c8a94cfce541aeef3fbf58c6a69b6ac0ebb63eb310aa571c20a1348fcdb019",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H02.png",
+      "sha256": "4a21fb5cc3f2519b6a8d65e1335ed5545dfe71e69f18aef977d2a4020d5d535b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H03.png",
+      "sha256": "98fe0f7f86d7882de439076d9e43b99f9415449f2dcb49529ffab8878114d1e4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H04.png",
+      "sha256": "7b5d2b13776966af0f5b22994be8893cda688bdec83b977dfe3da127572990eb",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H05.png",
+      "sha256": "f51a4a160defcba2353d068dc797ea6c1f24af464344f9c51211f8230c36adb1",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H06.png",
+      "sha256": "78bbbfb25c5c37f4e4278a7df7e394772123cecd7004af48a501664fe775c39b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H07.png",
+      "sha256": "76740cf5ae324b7f0417285ed74e2b223bf9bf65f8d7679ae6d75f2ea7a8cc97",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H08.png",
+      "sha256": "c7359df7719940dbc1f74ab149e9801754a4f381bd1779eeaf42be76dd89f013",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H09.png",
+      "sha256": "95daf0c70ee665f8635b8644a215bf30b8b9c92e3d3f89751e9ff09937b3b975",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H10.png",
+      "sha256": "a2d0a4a393f9d5a5851e60988ac9e7ca0f278ea548a15b9bd4acd279ad3e7c03",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H11.png",
+      "sha256": "8b754b279f0149adad65be83e280e3e81d74a8a4587e9cc8b4378b2d020b760e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/pieces/H/H12.png",
+      "sha256": "a13a75c89ed804d927303064a82a63b2f04de6526307f4e67f08e9668ed46ff3",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A01.webp",
+      "sha256": "30124b200d5dca2d86ac2c69c608dde571d4ffc62f1039fc7f491a750d2f4c85",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A02.webp",
+      "sha256": "3701c8ed5871bd3db33d4abaa2d32fc884801c7568f9803d1573b27bd75af8e5",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A03.webp",
+      "sha256": "8543042c53cd0386bccffe20589046a907cc14036e7593911a1cf5e184ca9f6e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A04.webp",
+      "sha256": "83eb8c1c88fa5ddfc4ebcabf1c8d3dbcc81d7900e19f4371770568f73c8f4204",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A05.webp",
+      "sha256": "06f180c2c6f12b5400e12b0f059d744b923083e8e43564435ab15460092c65df",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A06.webp",
+      "sha256": "699eb0be783fa1b5a26cffe7d591b38add6114711a27b90c00c4fa3bebde238d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A07.webp",
+      "sha256": "6537648c92f685d909e06d660987e658e4d678b6f913e1a8a3e29a174d76adbb",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A08.webp",
+      "sha256": "1c1ecc97f168ac2143e22289a4b73de2bb207b04a5296a235f3472e4535d3de0",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A09.webp",
+      "sha256": "8adb97b7febe0f020fcb0419373f2128c6807f32e4cf3abcf9799921b2b94491",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A10.webp",
+      "sha256": "a8998980320243baab2f0b1545b19b279ea45c8915f5f654643116f56ff31e8a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A11.webp",
+      "sha256": "300f8f4448ff91ed60d9512c0096a852952885bf7a65115946f100c95c851eea",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/A/A12.webp",
+      "sha256": "b2e34d8bfc71d929dd43c7032386a2804003153244e69f7c942cce164d6f27ec",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B01.webp",
+      "sha256": "f7f0598b068774cb65543ef4f550a03818dc7e1553d930ac19d1172edee5bcdd",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B02.webp",
+      "sha256": "bd9a26f42c9a0a8d92cdb61e9970e0d37f6d7e3af11a2d808e0fbb41bf8666d4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B03.webp",
+      "sha256": "1323c3a10bde0334dfef53aabedbb3cefe6ce0f5c3b81c23bdca536c1293fd38",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B04.webp",
+      "sha256": "56405036c9a7677b5bd231ace53fe6e1c5f675cb8cb5f2ed239e52ff18e771ea",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B05.webp",
+      "sha256": "8b3867dfbe9dbd3504dae72556546a8b07ff846316931c1e89538adf814a577f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B06.webp",
+      "sha256": "36c201702f0add42a68cbb7908640529d0b818506b0a5ad154ac7f65f437a221",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B07.webp",
+      "sha256": "0a66073652db5c7558fcfcb367f1f68a4f67497c26040787069d91c9c397183a",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B08.webp",
+      "sha256": "c0d6d10c89afcbe2c75e89dc930dbe3b2bb28c2294d5fd39b97f54f3513e041d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B09.webp",
+      "sha256": "9521ba3b5a01b60453c54b1c2a9c96433d094db7d9675ef30302c6c3ba7e78b2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B10.webp",
+      "sha256": "ac02508f81fe720d6781e2d17c539df98bb189946757cbf27e98567462e0d390",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B11.webp",
+      "sha256": "3eae21c0b1c1cdf872079bc2551ff2731502d562449ffb44033000ee3043ed39",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/B/B12.webp",
+      "sha256": "c87904066f7995063795d590519c0a73c400a84ec09d144f9e8a5ee8df2b77df",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C01.webp",
+      "sha256": "2d491f4a4878a0ec93f6b1a74e3c893c1c2eaf30a69357f40c60467ad37c1649",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C02.webp",
+      "sha256": "66ce6514e18887dd34c53c87c646901d234159baf189dd11f597abdb0ac404db",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C03.webp",
+      "sha256": "21bddb6af0af3f68c3287d5fd423f52f05f051efd912e5c8082e8ee2917c0427",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C04.webp",
+      "sha256": "59aa2eaf8c1d6aac3d0f68b033e9e52a7cc9849c7b2e2baff7ba5be289aa1de8",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C05.webp",
+      "sha256": "1b6f5a1685881bf4db0ed23a3de3dc6b72994dc96b0f57996078f8ca663bfbe4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C06.webp",
+      "sha256": "f911514d52f7dff12f49880b70bbc491a6aa8e695a141df428471c77c5d4e92e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C07.webp",
+      "sha256": "486800f0062b5e00b724d535f2f1594bff81f3477b2ce83e14f7be4c5dd072c0",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C08.webp",
+      "sha256": "76fcb06450c375a96ae3277e8e81c8a80053da20fb4a1bbd2d34bb5ba93ac4f2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C09.webp",
+      "sha256": "bfadcf74bd0ba4583cac3bd1a7f2c239ab0aed4e25e542da3c786aea90b4c9e8",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C10.webp",
+      "sha256": "c665eb7a5b9632b0ec0134ec2ad08e1179ae5db189f0e8d63e4ebd918eccf1eb",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C11.webp",
+      "sha256": "2550791152468cbece453df260b7c534697497c6dbb2a015c7a494cb511ce1fe",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/C/C12.webp",
+      "sha256": "d780a32e4c18562a51c2bc252545433aafd9a653ea3bc2e9adea382b2cd5a111",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D01.webp",
+      "sha256": "71656a5d398bb9ca8b7c13b7090a68d89f67f33425d9a6d4708c374fe1ae1a92",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D02.webp",
+      "sha256": "2ef544599427bd1a0c95bc7ac49d3bd4ccf450226339a31f7877365f95bf4080",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D03.webp",
+      "sha256": "c7be193e9e3860d9f29c99d157434361462aa33e8abea9b876999d2d8229b662",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D04.webp",
+      "sha256": "1a00e29f7790fe631fb4eded4c7d794f302f253214e8149dff891dd1c74f8980",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D05.webp",
+      "sha256": "ade356d255e3d5204ed6f0353fbe47d3e0c3724ffbdc1a75770867b3868fcfb6",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D06.webp",
+      "sha256": "c888d8b510cbfce245df61f15996c67a25f2ee95b99135faf354f07ae5921b9e",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D07.webp",
+      "sha256": "25ea8bcfcc0c24b849a2d5c3519ba8f575065d3b0ea2aa29412e01ee19bb8567",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D08.webp",
+      "sha256": "2a7b978219c2d1e9a2c38a7d60d52a09e31b87613e2e589945cb355be9c814ae",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D09.webp",
+      "sha256": "b3adfe42f505fbb63ce6819eaa68eadc63399674ce1790cf7e8cd84757158cc9",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D10.webp",
+      "sha256": "15513b7681c54a1c400c0e5062a6de1072082691f6488fc415b7c34ed8b8aac9",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D11.webp",
+      "sha256": "551490ca15bbf78e09a567b74f8c076da5d35897049be9dd06c0af41b81b0560",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/D/D12.webp",
+      "sha256": "4a54e9f479beec080d312cca780792f381e3c9a3f28949ae5f7f3dd618c3b051",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E01.webp",
+      "sha256": "466a15e701e7eea3b88db01c08ae4abd8f626467f4f3e682b9c0095e8ea1c86f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E02.webp",
+      "sha256": "c76c5ea72b45e89b36191fb021e159d34a64a01c384bdbc5d9fc1e688d180057",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E03.webp",
+      "sha256": "5c73556811ed281bfbb5c1c5058dd86f99a925ddb97d6ea5b098ed40ec3ad639",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E04.webp",
+      "sha256": "fe88ebd35c16f10d4c303984f5412b64d234fdb9dd3f9012f36549b5755e2c66",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E05.webp",
+      "sha256": "05abeca77af583fba6d59c84c93045ce079c473dd8992d82cd44e2738d138c7b",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E06.webp",
+      "sha256": "8e76330f930cf88f3f4d0a1287d606012e5f746d862e06369e575ae7e15dd557",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E07.webp",
+      "sha256": "46b380d6b80311bf3fbf81af73f27e1af830e2db3a478bcf0c40970d938c5da9",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E08.webp",
+      "sha256": "3a72b225f295b244a3302e1efd02ffa7481fbc060b5144f8ad22eb2be0604187",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E09.webp",
+      "sha256": "95593bce77633d0c524194239706df68f7179f9b91a79c495cf5e8aab0d8d9ef",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E10.webp",
+      "sha256": "d0695c865869f52eafc595591bb83c1a67db673a98ffda9d081473fb2d2a9827",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E11.webp",
+      "sha256": "764f0852736a8a874bfeb70e6d582c9f5758adffa78cd7d1914b1dfa629520f4",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/E/E12.webp",
+      "sha256": "66ac080efaf7e74191ddb495a49d50cd62c5e8d3b6a515bc66aeca041cf2e329",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F01.webp",
+      "sha256": "df3c9fa46f9ea2e1284617b7d8dff64f886bad59356fb919fe1c12a1466d4716",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F02.webp",
+      "sha256": "b1128a1dcc1905aed7973504a179548da0ee03613a69559cf84826ff2459b34c",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F03.webp",
+      "sha256": "1864c1201899ba54efc8bcba08fe419b77f1195487eef4f3863e6faa683aa50d",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F04.webp",
+      "sha256": "05a4144eb2e3d703d5b7de572b455f8d4dd163fb34643f9568224f4a6f1646e7",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F05.webp",
+      "sha256": "6d24974d1f365f67fb666f812c57cab69e572dba2daf9530b2441b86f61337b1",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F06.webp",
+      "sha256": "f0ba81845887b7bd97be059b6bd647174f9dd4b4b1e1e89a8060559ed83ea6aa",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F07.webp",
+      "sha256": "aab199bf4f9dec2df49d4467c6ad18b3859c629fb55f5f318c3c2303b9d3e261",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F08.webp",
+      "sha256": "fbec8b2fc3ce948f2da035e731a51bf07fc44b03547bed79c9bffb57e961a10f",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F09.webp",
+      "sha256": "2a87a0ce68b3628b15760aa3c17c2416761adf5d6553d02304bc67436ef949b1",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F10.webp",
+      "sha256": "ff08d8db7b800d581216d44e03022add8f02699c687c13b0272dbd9c05f77bde",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F11.webp",
+      "sha256": "d271d80b0e53c309e34b9aaa218d4912e963949fa50de84102b6cf75d6b4efd1",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/F/F12.webp",
+      "sha256": "cbba2eaca9f8174e8bbd999dfc52a182c8f5c2f6ae9c446f2eb5b1ff8b9f4954",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G01.webp",
+      "sha256": "9480f769fb96080b19e3e1a950e95163d4d0b0947d35709a97e74509e08463ca",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G02.webp",
+      "sha256": "7851db76ed9af88ffe8444bb7c6ad531dcb7c9533b871249342154dfd6bad1fa",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G03.webp",
+      "sha256": "f793bbeb591679dd62cbbe1211692a652f3c7b9dd524216149a083a7fcac7265",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G04.webp",
+      "sha256": "5a54518b8297611d7097359ead8297ba6b249c574cbc3d279c7a6b145f2d0023",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G05.webp",
+      "sha256": "0f66df9f00411329a76e8354cb6a37d869dda52a8d12271c09f33d2121e727b2",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G06.webp",
+      "sha256": "f7a2e1d4a802e0a720a9b4c59ea0e330acc59c15c2a80665baab5c647a6f6453",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G07.webp",
+      "sha256": "cc08dc112956df3d80989068dc7f58a2e9e2dfbdefa0a38433289272a305e3dc",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G08.webp",
+      "sha256": "e07d5e443e4a69205b77f73811c34222cac805ae00acc6daa6dc3ed8477cda49",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G09.webp",
+      "sha256": "825eea5480552e838c0d13240e0a0c153373541981e1e2922157b396479bb448",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G10.webp",
+      "sha256": "d6c4feea6de802637b82836f307c1b72d93c250257055405c5c5fd369af01d06",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G11.webp",
+      "sha256": "d8cd2f4eb92f1b538df1df0b97e6a6f827137f364e82df871dd672355ce41b24",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/G/G12.webp",
+      "sha256": "3c1e76d23002b27a7e1db1d5ab39bfe1b0394b14b3ec67fac43d9d21c8e4d019",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H01.webp",
+      "sha256": "217934cf7123d475cafc9f37dfbab25600abb178d6a5a7ac86cd91008d59933c",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H02.webp",
+      "sha256": "7a5ed1ccd22c0fb3ce886fb4e3b0ab73faf9f0bc6ba8f13a26d3362d43b936a1",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H03.webp",
+      "sha256": "2148a8a2ac04dbbd6f3dfc3a5093050f8e7913c287c2dc6ca2616eefa9149209",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H04.webp",
+      "sha256": "7710941e487bacdb5c45da451a783f997981ec7778bb3e493506f8b1ef13ed86",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H05.webp",
+      "sha256": "c816a6bc5cf67a6ba63f943c1be070b78b2358abbe2ab2d3859d7d2fd83d7457",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H06.webp",
+      "sha256": "bfac733d7b51eabde05eb3822855d279dfde256dc4326d334ec9661bc1905947",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H07.webp",
+      "sha256": "40393c8b60a69f8ff97ed1bbce810dcd5f19fceb1a6118a99fdfb4cf5fc45f43",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H08.webp",
+      "sha256": "09e6be6e57574c423e3c5ee63200edf9a0ec0d13bc715dbcd6053c90e2ac74cd",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H09.webp",
+      "sha256": "f680bad50de85353a87503c2e4ae9ce330dcc2e2a1ec0a0fdb8de12e9010e2ca",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H10.webp",
+      "sha256": "7010c67aff07bf5924056ecea659b57cd0bdfbb8c2e7e3179790f7b89ca8021c",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H11.webp",
+      "sha256": "5e65502e4bf9ab1a6a3d8a667f31d8247e6d469e044d7d1c5d7111dfa5309076",
+      "unchanged": true
+    },
+    {
+      "path": "activities/moonjar/assets/thumbs/H/H12.webp",
+      "sha256": "d27c8c5ee958ce7b02250a1da662439dccbd62f85e216502105e6fd1df1d978d",
+      "unchanged": true
+    }
+  ],
+  "passed": true
+}

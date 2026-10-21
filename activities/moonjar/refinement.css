@@ -136,172 +136,118 @@
   white-space: nowrap;
   border-top: 1px solid var(--line);
 }
+/* The copy and live scene occupy separate tracks: porcelain never sits behind
+   a letter. The scene is a deliberate cropped workshop window, not a backdrop. */
 @media (max-width: 767px) {
   .hero {
-    display: block;
     min-height: 0;
-    padding: 26px 24px;
-    height: 100%;
+    padding: 24px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto auto;
+    gap: 18px 14px;
   }
   .hero-copy {
-    position: relative;
-    pointer-events: none;
+    align-self: center;
   }
   .hero-copy .eyebrow {
     font-size: 10px;
     margin-bottom: 16px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
   .hero-copy h1 {
-    font-size: clamp(34px, 9.3vw, 42px);
-    line-height: 1.32;
+    font-size: clamp(28px, 7.7vw, 34px);
+    line-height: 1.4;
   }
   .hero-lead {
     font-size: 13px;
     line-height: 1.8;
-    margin-top: 22px;
-    max-width: 116px;
+    margin-top: 20px;
   }
   .hero-figure {
-    position: absolute;
-    inset: 0;
-    max-height: none;
-    width: 100%;
-    z-index: -1;
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 0;
+    height: 100%;
+    max-height: 460px;
+    align-self: center;
+    overflow: hidden;
+    border: 1px solid #3f4846;
+    border-radius: 80px 80px 5px 5px;
   }
   .hero-figure svg {
     height: 100%;
-    width: 100%;
     max-height: none;
+    width: 100%;
   }
   .hero-figure figcaption {
     display: none;
   }
   .hero-start {
-    position: absolute;
-    left: 24px;
-    right: 24px;
-    bottom: 130px;
+    grid-column: 1/-1;
+    grid-row: 2;
     max-width: none;
   }
   .hero-actions .hero-cta {
-    min-height: 60px;
+    min-height: 56px;
     font-size: 18px;
-    background: #171715;
   }
   .hero-start > .micro {
     text-align: center;
-    margin-top: 9px;
+    margin-top: 8px;
     font-size: 10px;
   }
   .hero-resume {
-    position: absolute;
-    bottom: 96px;
-    left: 0;
-    font-size: 12px;
+    width: 100%;
     min-height: 44px;
+    font-size: 12px;
+    padding: 6px;
   }
   .atelier-links {
-    position: absolute;
-    left: 24px;
-    right: 24px;
-    bottom: 19px;
+    grid-column: 1/-1;
+    grid-row: 3;
     max-width: none;
     gap: 8px;
   }
   .atelier-links img {
-    height: 62px;
+    height: 56px;
   }
   .atelier-links span {
     font-size: 11px;
     padding: 8px 2px;
-  }
-  .hero-figure::selection {
-    background: transparent;
+    white-space: normal;
   }
 }
-@media (max-width: 350px) {
+@media (max-width: 350px), (max-width: 767px) and (max-height: 650px) {
   .hero {
-    padding: 19px 20px;
-  }
-  .hero-copy h1 {
-    font-size: 33px;
+    padding: 16px 20px;
+    gap: 12px 10px;
   }
   .hero-copy .eyebrow {
     font-size: 9px;
-    margin-bottom: 11px;
-  }
-  .hero-lead {
-    font-size: 12px;
-    margin-top: 14px;
-    line-height: 1.7;
-  }
-  .hero-start {
-    left: 20px;
-    right: 20px;
-    bottom: 118px;
-  }
-  .atelier-links {
-    left: 20px;
-    right: 20px;
-    bottom: 15px;
-  }
-  .atelier-links img {
-    height: 54px;
-  }
-  .atelier-links span {
-    font-size: 10px;
-  }
-  .hero-figure {
-    inset: 0;
-    width: 100%;
-  }
-  .hero-actions .hero-cta {
-    min-height: 52px;
-    font-size: 17px;
-  }
-}
-@media (max-width: 767px) and (max-height: 650px) {
-  .hero {
-    padding-top: 16px;
-  }
-  .hero-copy .eyebrow {
     margin-bottom: 10px;
   }
   .hero-copy h1 {
-    font-size: 32px;
-    line-height: 1.24;
+    font-size: 27px;
+    line-height: 1.35;
   }
   .hero-lead {
     font-size: 12px;
-    line-height: 1.6;
-    margin-top: 12px;
-  }
-  .hero-figure {
-    inset: 0;
-    width: 100%;
-  }
-  .hero-start {
-    bottom: 106px;
+    line-height: 1.65;
+    margin-top: 14px;
   }
   .hero-actions .hero-cta {
     min-height: 50px;
     font-size: 17px;
   }
   .hero-start > .micro {
-    margin-top: 6px;
-  }
-  .atelier-links {
-    bottom: 11px;
+    margin-top: 5px;
   }
   .atelier-links img {
-    height: 45px;
+    height: 38px;
   }
   .atelier-links span {
-    padding: 7px 2px;
-  }
-  .hero-resume {
-    bottom: 83px;
+    font-size: 10px;
+    padding: 6px 2px;
   }
 }
 @media (min-width: 768px) and (max-height: 650px) {
@@ -349,17 +295,5 @@
   }
   .hero-figure figcaption {
     display: none;
-  }
-}
-
-/* Text over the native night scene must retain AA contrast even above porcelain. */
-@media (max-width: 767px) {
-  .hero-start > .micro {
-    background: #171715;
-    padding: 4px 8px;
-  }
-  .hero-resume {
-    background: #171715;
-    padding-inline: 12px;
   }
 }

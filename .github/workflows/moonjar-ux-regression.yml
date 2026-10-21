@@ -11,6 +11,7 @@ on:
       - 'scripts/check-moonjar-release.mjs'
       - 'scripts/check-moonjar-viewport.mjs'
       - 'scripts/check-moonjar-atelier.mjs'
+      - 'scripts/check-moonjar-refinement.mjs'
       - 'scripts/moonjar-browser-helpers.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
@@ -113,6 +114,15 @@ jobs:
         run: node scripts/check-moonjar-release.mjs
       - name: Run single-screen compact, landscape and journal matrix
         run: node scripts/check-moonjar-viewport.mjs
+      - name: Verify V3.1 legibility, larger mobile artwork and gallery resume
+        run: node scripts/check-moonjar-refinement.mjs
+      - name: Attach V3.1 responsive browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-refinement-v31
+          path: artifacts/moonjar-refinement-v31
+          retention-days: 14
       - name: Attach one-screen screenshot and geometry evidence
         if: always()
         uses: actions/upload-artifact@v4

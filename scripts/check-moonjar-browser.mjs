@@ -50,9 +50,9 @@ try{
     'primary call-to-action should be ink-dark with restrained corners');
   check(artDirection.headerImage==='none','no generated-looking gradient on the masthead');
   check(artDirection.headingFamily.includes('Moonjar Gowun'),'self-hosted Korean editorial heading must apply');
-  check(artDirection.files[1]?.includes('refinement.css?v=20261021-v3'),
+  check(artDirection.files[1]?.includes('refinement.css?v=20261021-v3.1'),
     'atelier appearance must load after legacy tool styles');
-  check(artDirection.files[2]?.includes('viewport.css?v=20261021-v3'),
+  check(artDirection.files[2]?.includes('viewport.css?v=20261021-v3.1'),
     'viewport layout must load after appearance and interaction layers');
   const homeShell=await page.evaluate(()=>({
     bodyOverflow:getComputedStyle(document.body).overflow,
@@ -142,14 +142,15 @@ try{
   await page.screenshot({path:`${out}/02b-editor-actual-viewport-390.png`,fullPage:false});
   await editorTray.locator('[data-action="panel:canvas"]').click();
   check(!(await editorTray.isVisible()),'close control should restore uncluttered artwork');
+  await page.locator('.compact-view').click();
   const edgeGuide=page.locator('#nacre-visibility-switch');
   await edgeGuide.waitFor({state:'visible'});
   check(await edgeGuide.getAttribute('aria-pressed')==='false','nacre outline aid must be off by default');
   const nacreImage=page.locator('#art g[data-node] > image[data-id]').first();
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','no guide filter before opt-in');
-  const toolbarHeightBefore=(await page.locator('.view-toolbar').boundingBox()).height;
+  const toolbarHeightBefore=(await page.locator('#stage-shell').boundingBox()).height;
   await edgeGuide.click();
-  const toolbarHeightAfter=(await page.locator('.view-toolbar').boundingBox()).height;
+  const toolbarHeightAfter=(await page.locator('#stage-shell').boundingBox()).height;
   check(Math.abs(toolbarHeightAfter-toolbarHeightBefore)<3,
     `opening the guide must not push the artwork downward: before=${toolbarHeightBefore}, after=${toolbarHeightAfter}`);
   check(await edgeGuide.getAttribute('aria-pressed')==='true','nacre outline aid must be switchable');
@@ -160,6 +161,8 @@ try{
   await edgeGuide.click();
   check(await edgeGuide.getAttribute('aria-pressed')==='false','guide can be disabled');
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','guide clears visual change without editing source');
+  await page.locator('#modal-close').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('[data-action="panel:controls"]').click();
   check(await editorTray.isVisible(),'controls remain reachable from bottom navigation');
 
@@ -202,7 +205,10 @@ try{
   // The journal occupies its own viewport after reload. Switch back to
   // the artwork before using editor-only visual controls and exports.
   await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
+  await page.locator('.compact-view').click();
   await reloadGuide.click();
+  await page.locator('#modal-close').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('[data-action="save-options"]').click();
   const [download]=await Promise.all([
     page.waitForEvent('download',{timeout:20000}),
@@ -212,7 +218,10 @@ try{
   const savedPath=await download.path();
   check((await stat(savedPath)).size>2000,'PNG export must be non-empty');
   const guidePng=await readFile(savedPath);
+  await page.locator('.compact-view').click();
   await reloadGuide.click();
+  await page.locator('#modal-close').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('[data-action="save-options"]').click();
   const [normalDownload]=await Promise.all([
     page.waitForEvent('download',{timeout:20000}),
@@ -456,7 +465,7 @@ try{
   await p4.screenshot({path:`${out}/10-free-12-nacre-mobile-390.png`,fullPage:false});
   await p4.locator('[data-action="batch:12"]').click();
   await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===24,{timeout:20000});
-  await p4.locator('#palette-panel.mobile-active .quick-fill-actions [data-action="undo"]').click();
+  await p4.locator('.art-toolbar [data-action="undo"]').click();
   check(await p4.locator('#art [data-node]').count()===12,'whole last batch undoes in one step');
   await p4.locator('.mobile-tabs [data-action="panel:controls"]').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
@@ -466,7 +475,7 @@ try{
   await p4.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await p4.locator('#palette-panel .layer-list > summary').click();
   await p4.locator('#palette-panel .layer-list li button').first().click();
-  await p4.locator('#controls-panel details > summary').click();
+  await p4.locator('#controls-panel [data-action="control:advanced"]').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible(),
     'legacy individual notes are still reachable if explicitly requested');
   await p4.locator('.mobile-tabs [data-action="panel:look"]').click();
