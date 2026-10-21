@@ -10,6 +10,10 @@ on:
       - 'scripts/check-moonjar-nacre96.mjs'
       - 'scripts/check-moonjar-release.mjs'
       - 'scripts/check-moonjar-viewport.mjs'
+      - 'scripts/check-moonjar-atelier.mjs'
+      - 'scripts/check-moonjar-refinement.mjs'
+      - 'scripts/check-moonjar-art-direction.mjs'
+      - 'scripts/moonjar-browser-helpers.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
 permissions:
@@ -59,6 +63,17 @@ jobs:
         run: node scripts/check-moonjar-browser.mjs
       - name: Check all 96 source images on day and night porcelain
         run: node scripts/check-moonjar-nacre96.mjs
+      - name: Verify Atelier V3 start, local privacy, legacy import and output pixels
+        env:
+          MOONJAR_CHROMIUM_ONLY: '1'
+        run: node scripts/check-moonjar-atelier.mjs
+      - name: Attach Atelier V3 actual browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-atelier-v3-review
+          path: artifacts/moonjar-atelier-v3
+          retention-days: 14
       - name: Attach nacre source visual review
         if: always()
         uses: actions/upload-artifact@v4
@@ -100,6 +115,24 @@ jobs:
         run: node scripts/check-moonjar-release.mjs
       - name: Run single-screen compact, landscape and journal matrix
         run: node scripts/check-moonjar-viewport.mjs
+      - name: Verify V3.1 legibility, larger mobile artwork and gallery resume
+        run: node scripts/check-moonjar-refinement.mjs
+      - name: Verify V3.2 whole silhouettes, artwork geometry and archive fixtures
+        run: node scripts/check-moonjar-art-direction.mjs
+      - name: Attach V3.2 actual art direction and action geometry evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-art-direction-v32
+          path: artifacts/moonjar-art-direction-v32
+          retention-days: 14
+      - name: Attach V3.1 responsive browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-refinement-v31
+          path: artifacts/moonjar-refinement-v31
+          retention-days: 14
       - name: Attach one-screen screenshot and geometry evidence
         if: always()
         uses: actions/upload-artifact@v4

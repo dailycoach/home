@@ -1,3 +1,4 @@
+import {beginWork,settleArtwork} from './moonjar-browser-helpers.mjs';
 // WAVE 8: verify all 96 original nacre PNGs against both porcelain themes.
 // Includes real rendered SVG screenshots and bit-identical ON/OFF exported art.
 // Browser simulation, not a replacement for actual Android/iPhone hardware QA.
@@ -23,7 +24,7 @@ try{
   page.on('pageerror',error=>errors.push(error.message));
   page.on('requestfailed',request=>errors.push(request.url()+': '+request.failure()?.errorText));
   await page.goto(url,{waitUntil:'networkidle',timeout:30000});
-  await page.locator('[data-action="start-free"]').click();
+  await beginWork(page,'free');
   await page.locator('#nacre-visibility-switch').waitFor({state:'visible',timeout:15000});
 
   const initial=await page.evaluate(async()=>{

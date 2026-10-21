@@ -1,3 +1,4 @@
+import {beginWork,settleArtwork} from './moonjar-browser-helpers.mjs';
 // Browser smoke for the real Moonjar app (local static serving).
 // Node 22+, Playwright Chromium. Captures screenshots and does not mutate production.
 import assert from 'node:assert/strict';
@@ -17,17 +18,13 @@ try{
   page.on('pageerror',err=>errors.push(`PAGE: ${err.message}`));
   page.on('requestfailed',req=>errors.push(`LOAD: ${req.url()} ${req.failure()?.errorText}`));
   await page.goto(base,{waitUntil:'networkidle',timeout:30000});
-  const mobileHero=page.locator('.hero-figure img');
-  await mobileHero.evaluate(img=>img.decode());
-  check((await mobileHero.getAttribute('src')).endsWith('assets/moonjar-original.svg'),
-    'mobile entry must use original SVG, not the removed photo');
-  check(await mobileHero.evaluate(img=>img.naturalWidth===780 && img.naturalHeight===920),
-    'new self-drawn illustration must load at its 780×920 viewBox');
+  check(await page.locator('.hero-figure svg image').count()===13,'intro renders the actual porcelain plus twelve original nacre images');
+  check((await page.locator('.hero-figure svg image').first().getAttribute('href')).endsWith('porcelain-night.png'),'intro uses the exact product porcelain');
   check(await page.locator('a[href*="museum.go.kr"]').count()===0,
     'no institution image source link should appear in published app');
   // The revised first screen must make the primary action discoverable without
   // scrolling past a giant hero picture or storage form.
-  const firstCTA=await page.locator('.hero-actions [data-action="start-guided"]').boundingBox();
+  const firstCTA=await page.locator('.hero-cta').boundingBox();
   check(firstCTA && firstCTA.y+firstCTA.height <= 844,
     `mobile first start button should fit initial 390x844 viewport, got ${JSON.stringify(firstCTA)}`);
   check(await page.locator('link[href*="refinement.css"]').count()===1,'refinement CSS must be loaded');
@@ -48,14 +45,14 @@ try{
       files:links
     };
   });
-  check(artDirection.page==='#f4f0e8',`porcelain-paper visual token must apply: ${JSON.stringify(artDirection)}`);
-  check(artDirection.primary==='rgb(48, 57, 48)' && artDirection.primaryRadius<=4,
+  check(artDirection.page==='#171715',`porcelain-paper visual token must apply: ${JSON.stringify(artDirection)}`);
+  check(artDirection.primary==='rgb(23, 23, 21)' && artDirection.primaryRadius>=40,
     'primary call-to-action should be ink-dark with restrained corners');
   check(artDirection.headerImage==='none','no generated-looking gradient on the masthead');
   check(artDirection.headingFamily.includes('Moonjar Gowun'),'self-hosted Korean editorial heading must apply');
-  check(artDirection.files.at(-2)?.includes('refinement.css?v=20261019-atelier-v1'),
+  check(artDirection.files[1]?.includes('refinement.css?v=20261021-v3.2'),
     'atelier appearance must load after legacy tool styles');
-  check(artDirection.files.at(-1)?.includes('viewport.css?v=20261019-one-screen-v1'),
+  check(artDirection.files[2]?.includes('viewport.css?v=20261021-v3.2'),
     'viewport layout must load after appearance and interaction layers');
   const homeShell=await page.evaluate(()=>({
     bodyOverflow:getComputedStyle(document.body).overflow,
@@ -70,8 +67,9 @@ try{
     'long opening narration is accessible in an optional dialog instead of a page-scroll block');
   await page.locator('#modal [data-action="close-opening-story"]').click();
 
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/00-original-hero-mobile-390.png`,fullPage:true});
-  await page.locator('[data-action="start-guided"]').click();
+  await beginWork(page,'guided');
   await page.locator('#scene-lead').waitFor({state:'visible'});
   const stationary=await page.evaluate(()=>{
     const work=document.querySelector('main.studio').getBoundingClientRect();
@@ -90,6 +88,7 @@ try{
   const canvasRect=await page.locator('#art').boundingBox();
   check(leadRect && canvasRect && leadRect.y<canvasRect.y,'guided story question should precede canvas on mobile');
   check((await lead.innerText()).includes('지금 이 자리에 온 나는 어떤 상태인가요'),'arrival focus question missing');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/01-guided-arrival-390.png`,fullPage:true});
   const compactLead = await lead.boundingBox();
   check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),
@@ -101,6 +100,7 @@ try{
     `expanding the optional story should use the available panel space: ${JSON.stringify({compactLead,expandedLead})}`);
   await lead.locator('[data-action="toggle-lead"]').click();
   check(await lead.evaluate(el=>el.classList.contains('is-collapsed')),'guided question can be collapsed again');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/01b-guided-focus-390.png`,fullPage:true});
 
   await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
@@ -136,27 +136,33 @@ try{
   check(view.trayBottom<=view.viewport-40,'editor drawer must not cover the bottom toolbar');
   check(await page.evaluate(()=>scrollY===0 && getComputedStyle(document.body).overflow==='hidden'),
     'changing tool panels must never scroll the document');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/02-canvas-first-editor-390.png`,fullPage:true});
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/02b-editor-actual-viewport-390.png`,fullPage:false});
   await editorTray.locator('[data-action="panel:canvas"]').click();
   check(!(await editorTray.isVisible()),'close control should restore uncluttered artwork');
+  await page.locator('.compact-view').click();
   const edgeGuide=page.locator('#nacre-visibility-switch');
   await edgeGuide.waitFor({state:'visible'});
   check(await edgeGuide.getAttribute('aria-pressed')==='false','nacre outline aid must be off by default');
   const nacreImage=page.locator('#art g[data-node] > image[data-id]').first();
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','no guide filter before opt-in');
-  const toolbarHeightBefore=(await page.locator('.view-toolbar').boundingBox()).height;
+  const toolbarHeightBefore=(await page.locator('#stage-shell').boundingBox()).height;
   await edgeGuide.click();
-  const toolbarHeightAfter=(await page.locator('.view-toolbar').boundingBox()).height;
+  const toolbarHeightAfter=(await page.locator('#stage-shell').boundingBox()).height;
   check(Math.abs(toolbarHeightAfter-toolbarHeightBefore)<3,
     `opening the guide must not push the artwork downward: before=${toolbarHeightBefore}, after=${toolbarHeightAfter}`);
   check(await edgeGuide.getAttribute('aria-pressed')==='true','nacre outline aid must be switchable');
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)!=='none','guide applies CSS filter only in studio');
   check(await page.locator('#nacre-visibility-note').isVisible(),'guide displays an optional access explanation');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/02c-nacre-visibility-on-390.png`,fullPage:false});
   await edgeGuide.click();
   check(await edgeGuide.getAttribute('aria-pressed')==='false','guide can be disabled');
   check(await nacreImage.evaluate(el=>getComputedStyle(el).filter)==='none','guide clears visual change without editing source');
+  await page.locator('#modal-close').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('[data-action="panel:controls"]').click();
   check(await editorTray.isVisible(),'controls remain reachable from bottom navigation');
 
@@ -164,6 +170,7 @@ try{
   check(await page.locator('main.studio.paused').count()===1,'look mode should pause editor');
   check(await page.locator('#look-prompt h2').isVisible(),'look mode must display the current reflection question');
   check((await page.locator('#look-prompt h2').innerText()).includes('기준으로'),'first placed piece should trigger actual choice-awareness question, not only arrival');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/03-pause-question-390.png`,fullPage:true});
   await page.locator('#look-prompt [data-action="panel:story"]').click();
   check(await page.locator('main.studio.paused').count()===0,'returning to story should exit pause');
@@ -198,7 +205,10 @@ try{
   // The journal occupies its own viewport after reload. Switch back to
   // the artwork before using editor-only visual controls and exports.
   await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
+  await page.locator('.compact-view').click();
   await reloadGuide.click();
+  await page.locator('#modal-close').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('[data-action="save-options"]').click();
   const [download]=await Promise.all([
     page.waitForEvent('download',{timeout:20000}),
@@ -208,7 +218,10 @@ try{
   const savedPath=await download.path();
   check((await stat(savedPath)).size>2000,'PNG export must be non-empty');
   const guidePng=await readFile(savedPath);
+  await page.locator('.compact-view').click();
   await reloadGuide.click();
+  await page.locator('#modal-close').click();
+  await page.locator('#modal').waitFor({state:'hidden'});
   await page.locator('[data-action="save-options"]').click();
   const [normalDownload]=await Promise.all([
     page.waitForEvent('download',{timeout:20000}),
@@ -216,6 +229,7 @@ try{
   ]);
   const normalPng=await readFile(await normalDownload.path());
   check(normalPng.equals(guidePng),'editing-only contrast guide must never appear in exported PNG');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/04-reloaded-work-390.png`,fullPage:true});
 
   // Export opt-in personal card only after a deliberately confirmed preview.
@@ -236,6 +250,7 @@ try{
   const actionsBox=await page.locator('.result-actions').boundingBox();
   check(ctaBox && actionsBox && ctaBox.width>actionsBox.width*0.9,
     'artwork card button must actually span the full result row, not only have primary markup');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/05a-artwork-first-result-390.png`,fullPage:true});
   await page.locator('main.result-page [data-action="card-options"]').click();
   await page.locator('#modal .card-preview img').waitFor({state:'visible'});
@@ -253,11 +268,13 @@ try{
   check(footerState.position==='sticky','mobile art-card save control should remain sticky');
   check(footerState.bottom<=footerState.dialogBottom+2 && footerState.top>=footerState.dialogTop-2,
     `mobile save control should be accessible inside postcard dialog: ${JSON.stringify(footerState)}`);
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/06b-mobile-card-sticky-save-390.png`,fullPage:false});
   check(!(await card.locator('.card-field').first().isVisible()),'card title editor should be hidden until opt-in');
   check(await card.locator('.card-preview').evaluate(el =>
     Boolean(el.compareDocumentPosition(document.querySelector('#modal [data-action="download-card"]')) & Node.DOCUMENT_POSITION_FOLLOWING)
   ),'card preview must precede final download in reading order');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/06-card-private-default-390.png`,fullPage:true});
 
   await cardChecks.nth(0).check();
@@ -272,8 +289,10 @@ try{
   await page.waitForFunction(()=>document.querySelector('#modal .card-preview img')?.naturalWidth===640
     && document.querySelector('#modal [data-action="download-card"]')?.disabled===false,{timeout:20000});
   check(await card.locator('.card-field').first().isVisible(),'only opted title should show input');
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/07-card-opt-in-preview-390.png`,fullPage:true});
   await card.locator('.card-preview img').scrollIntoViewIfNeeded();
+  await settleArtwork(page);
   await page.screenshot({path:`${out}/07b-card-reviewed-before-save-390.png`,fullPage:false});
   const [cardDownload]=await Promise.all([
     page.waitForEvent('download',{timeout:30000}),
@@ -289,11 +308,10 @@ try{
   const p2=await desktop.newPage();
   p2.on('pageerror',err=>errors.push(`DESKTOP: ${err.message}`));
   await p2.goto(base,{waitUntil:'networkidle'});
-  await p2.locator('.hero-figure img').evaluate(img=>img.decode());
-  check(await p2.locator('.hero-figure img[src$="moonjar-original.svg"]').count()===1,
+  check(await p2.locator('.hero-figure svg image').count()===13,
     'desktop entry must display the original artwork');
   await p2.screenshot({path:`${out}/00-original-hero-desktop-1440.png`,fullPage:true});
-  await p2.locator('[data-action="start-free"]').click();
+  await beginWork(p2,'free');
   await p2.locator('main.studio #story-panel').waitFor({state:'visible',timeout:10000});
   check(await p2.locator('.scene-chapters').count()===0,
     'free-form decorating should not display a seven-stage progress bar');
@@ -419,9 +437,9 @@ try{
   const p4=await carefree.newPage();
   p4.on('pageerror',err=>errors.push(`FREEFORM: ${err.message}`));
   await p4.goto(base,{waitUntil:'networkidle'});
-  check((await p4.locator('.hero-actions button.primary').getAttribute('data-action'))==='start-free',
+  check((await p4.locator('.hero-actions button.primary').getAttribute('data-action'))==='start-options',
     'freely decorating is the first and primary entrance');
-  await p4.locator('[data-action="start-free"]').click();
+  await beginWork(p4,'free');
   check(await p4.locator('.scene-chapters').count()===0,'free mode has no stepper');
   const palettePanel=p4.locator('#palette-panel.mobile-active');
   await palettePanel.waitFor({state:'visible'});
@@ -447,7 +465,7 @@ try{
   await p4.screenshot({path:`${out}/10-free-12-nacre-mobile-390.png`,fullPage:false});
   await p4.locator('[data-action="batch:12"]').click();
   await p4.waitForFunction(()=>document.querySelectorAll('#art [data-node]').length===24,{timeout:20000});
-  await p4.locator('#palette-panel.mobile-active .quick-fill-actions [data-action="undo"]').click();
+  await p4.locator('.art-toolbar [data-action="undo"]').click();
   check(await p4.locator('#art [data-node]').count()===12,'whole last batch undoes in one step');
   await p4.locator('.mobile-tabs [data-action="panel:controls"]').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible()===false,
@@ -457,7 +475,7 @@ try{
   await p4.locator('.mobile-tabs [data-action="panel:palette"]').click();
   await p4.locator('#palette-panel .layer-list > summary').click();
   await p4.locator('#palette-panel .layer-list li button').first().click();
-  await p4.locator('#controls-panel details > summary').click();
+  await p4.locator('#controls-panel [data-action="control:advanced"]').click();
   check(await p4.locator('#controls-panel .piece-note-button').isVisible(),
     'legacy individual notes are still reachable if explicitly requested');
   await p4.locator('.mobile-tabs [data-action="panel:look"]').click();

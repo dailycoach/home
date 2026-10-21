@@ -1,0 +1,1200 @@
+{
+  "baseline": "3cc8d51c00e8a2ccb0426dd5c1445d20ee36b921",
+  "purpose": "Complete V3.2 file receipt, excluding this manifest itself to avoid a self-hash. Immutable blob IDs permit recovery during staged publication; final PR tree contains all listed evidence.",
+  "files": [
+    {
+      "path": ".github/workflows/moonjar-ux-regression.yml",
+      "bytes": 5191,
+      "gitBlobSHA": "9c8b6aa16524ff0831e1b8f095ff7f71f7a54c28",
+      "sha256": "b7d62cc736ca6dead44d1dd364937cdd2bd3cca66e0d95220163b9774a3efcd5"
+    },
+    {
+      "path": "activities/moonjar/HANDOFF.md",
+      "bytes": 4093,
+      "gitBlobSHA": "b4fec4605cdf41584fb403c44699760f7c6adad6",
+      "sha256": "5e1597549eaac45e77794c29fad150c1e325a224961835f72a1a8fda2e2f12a4"
+    },
+    {
+      "path": "activities/moonjar/QA.md",
+      "bytes": 10744,
+      "gitBlobSHA": "38196caa9cf3712046745e0e2221a4e00f3959d9",
+      "sha256": "6eb93c718a72bf2501cf39adf4e0cc5470e46720f8d0a59c04c73c4177da855a"
+    },
+    {
+      "path": "activities/moonjar/design-qa.md",
+      "bytes": 6878,
+      "gitBlobSHA": "e8a24fe09d34bb391d7f1609404480e943b9060a",
+      "sha256": "dfb15d70dba3638a4ccccb3a4f65c245c29f79c25dd837b65b9f3e16a4afa5b0"
+    },
+    {
+      "path": "activities/moonjar/index.html",
+      "bytes": 2380,
+      "gitBlobSHA": "b79ac5a5a39a6de69d8af0a56959135dae656911",
+      "sha256": "59ba3f2c1d6cc0e03c9ff8cda5283c4f0ffe71408b8272b8e03034d9ebd267e1"
+    },
+    {
+      "path": "activities/moonjar/refinement.css",
+      "bytes": 6210,
+      "gitBlobSHA": "1eb1f4d8882205d8daa32cd2f6319e9139641e68",
+      "sha256": "bfcd830e3e5bc8640c55e8263a8187e7cb099251bdcc0b9fed4b9dde262cbdae"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/CAPTURES.md",
+      "bytes": 5529,
+      "gitBlobSHA": "13a3b9b0958a7136fd4cc6ff4e09cfb99f42d586",
+      "sha256": "1179100682bee33f4987a0b808f17248274540dedb3b52183d1d7841ec29ba9b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/CHANGED_FILES.md",
+      "bytes": 16763,
+      "gitBlobSHA": "e207f5c938b50a600d74aa96df9ed78dc271238b",
+      "sha256": "cb3cec3896856ea716f3c740f75b3293a304de7bb955938525f04be05207a796"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/RECHECK.md",
+      "bytes": 1712,
+      "gitBlobSHA": "b210d6f3d489fb46e5f67aca51a6bacf4fb8cd5b",
+      "sha256": "9822d7b4ad8529988b237fa24d33e66e9acbc903b27b90b3fb94c8989dea84da"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-1024x768-intro.png",
+      "bytes": 276082,
+      "gitBlobSHA": "4e05cc2a9500b9e7ac217685cc6e925f7534eaa8",
+      "sha256": "bd4f4df9fa0f517c0e27e756160826844d77614dc8d1f2fa655ed2e3ff92970d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-1440x900-archive-multiple.png",
+      "bytes": 201078,
+      "gitBlobSHA": "62800d6de9b10f540f83d2f8afa3932596462b47",
+      "sha256": "ea4d89ec3750b7a468cf793410703d82980d64c2651aa7016be6f511d0cde024"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-1440x900-archive-porcelain.png",
+      "bytes": 186048,
+      "gitBlobSHA": "5200c723f3463275ed440da785fd68ffa280d5eb",
+      "sha256": "5229457c0ffd46a1abf108b492bdf4a5105fb402a3cf62d8358c770a88451931"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-1440x900-free-personal-selected.png",
+      "bytes": 309336,
+      "gitBlobSHA": "56ccfed505b06ecd2ae83f1587c262de57bf2e41",
+      "sha256": "c0676f0c0861e8f62b378b344ddabf27034175c6f97c71423735dc7f5bfe5068"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-1440x900-free-personal-zoom.png",
+      "bytes": 450635,
+      "gitBlobSHA": "b517e8bd7a9399efe9ba50eeda42d224fabc9b5a",
+      "sha256": "683eb36ac7d150911e2172ea72ee5a8058f3c9e7c4d1ad461d1bf7c4828c9f80"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-1440x900-intro.png",
+      "bytes": 409097,
+      "gitBlobSHA": "c86ccec31faa3562cbf6062eccfbf51c04eb0293",
+      "sha256": "52cc5f4cc947b870c9e7a3990317f693600e7ff57f5abc2ea5ea6174343a3a71"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-advanced.png",
+      "bytes": 45511,
+      "gitBlobSHA": "26d818f2163fea3e352160c429d4f7d42da31c2a",
+      "sha256": "41cdc65c8f3405a2f45378a7d9425d93989209389c78ffd07b2217c0e0744d20"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-move.png",
+      "bytes": 42484,
+      "gitBlobSHA": "9a18a490aefec7199e500ae18782e32630fd1d4e",
+      "sha256": "df08622e869b6f1a14933f0265305669914f54f77a1649ac69d52493c429a262"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-reflection.png",
+      "bytes": 60016,
+      "gitBlobSHA": "2d7f2d3aa4d741308bfba73176d348479580151e",
+      "sha256": "54e1486d4fc5d715ba778973cb206592c4719df767da3e76fdf0e5e5ba8e1a3e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-rotate.png",
+      "bytes": 43093,
+      "gitBlobSHA": "2384faa57db46937aa43321bb0dbe8911d8a63a7",
+      "sha256": "000753fdaf1516ea229a13ede7539195ef3868bf20382a84efbc36415428d394"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-selected.png",
+      "bytes": 41769,
+      "gitBlobSHA": "991c4347ef01ca8acf483c3382e60da1a3e0b01f",
+      "sha256": "0de68630ed84786cd377ba08b084cc7ec8019d5a111deded891e9b38e4fd9f2e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-size.png",
+      "bytes": 43493,
+      "gitBlobSHA": "662cbc8fc3c9a75740a35398c8a417a9ed469c4c",
+      "sha256": "906c4c53ec1a9016374de0a587f6b23b9bfe805a2616ba84ccea300dd946f6da"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-free-personal-zoom.png",
+      "bytes": 58001,
+      "gitBlobSHA": "f04acb1da5e0910f9bc80ded27107a01790d6059",
+      "sha256": "caf4e0e570478a0ac8a429620a78868b0f0e42bad6724aacbbd608043b57ac2d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-intro.png",
+      "bytes": 68434,
+      "gitBlobSHA": "7a331751c80c23b38b7c10925bed21ff2dbc08c8",
+      "sha256": "5bade54ce8a8f5439e3b7b37079bcb98ee2013971297f346655d9832dd84fa4a"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-320x568-start.png",
+      "bytes": 38349,
+      "gitBlobSHA": "718b07e50e3fb90f92d56dcbf284bac278f4464e",
+      "sha256": "d3debc28f081465e091a88467f0b36285cdfbb360efc3e13277814507b9fec91"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-360x800-intro.png",
+      "bytes": 115973,
+      "gitBlobSHA": "eb06d77cf90281fd73dad2f1c07558e558425911",
+      "sha256": "3082ee3200c886a8467b40ae8bc62477ad7bc3ac46e8ec9ee8e0772f81a6ba29"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-archive-empty.png",
+      "bytes": 55155,
+      "gitBlobSHA": "8474c8906876ea8bccd3456bff2699cd951bee1f",
+      "sha256": "65165cc98dbe9045e95d49fe44c5c0290641a93578c6ffb23b3480ec851a2dc0"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-archive-legacy.png",
+      "bytes": 72628,
+      "gitBlobSHA": "165a0298a876d3fa504c0eb9b6ba933a99d51d2a",
+      "sha256": "2c5824bed7bcf180b883a3ca3eb01a7fa2a096561c1fff95dd8cf6a1c3b15334"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-archive-long-title.png",
+      "bytes": 140146,
+      "gitBlobSHA": "013ccd0f57381b5329a705e957aeffdc4fd3774e",
+      "sha256": "1ca9a74d263d080cf5837e42bc36a6cbee850c8c5e3012d183093cbbc401bd65"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-archive-multiple.png",
+      "bytes": 265555,
+      "gitBlobSHA": "5f5d3f27eea032f0e3fc6a957237614e596f20fb",
+      "sha256": "08d25ccd1c669f30c614b0dfe19e0200d23c7658e6ba8ceaf9871b981127352e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-archive-porcelain.png",
+      "bytes": 119582,
+      "gitBlobSHA": "eaef581c832aa64f4033e30b6016816a6dd33ebd",
+      "sha256": "570885422264d305b9f7f6dd81703f6560ad3679606f50e3580e53e1981431d9"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-advanced.png",
+      "bytes": 92575,
+      "gitBlobSHA": "718920a1e7b4ae0fb659aa84180383bbd99985b0",
+      "sha256": "e4dd9ec3a84f5d26c03ec2b5ca5c385dc80c7a6abc1774afd0cc518609aecea4"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-move.png",
+      "bytes": 88464,
+      "gitBlobSHA": "a59ce78f5bff7461d941f504be93d3b670f74ecf",
+      "sha256": "2ef63932f9fc3954f5063bf7794b23957b4d748b36b96cbe8b0567d23154e1ba"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-reflection.png",
+      "bytes": 97377,
+      "gitBlobSHA": "db5082f42434706ac5768ecb7dda7697a57e07fd",
+      "sha256": "583df33f1a1277c4f7f46c48ce96879ecebabcb8099317271d19f6d968e3e785"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-rotate.png",
+      "bytes": 90016,
+      "gitBlobSHA": "7a1a565f2bc36cd4ae69db4059a01fa2afbb6365",
+      "sha256": "82d1fd49264c1f7a2aa02957a40058d6cbe93c7ddb759feb64f674a124b7b5cb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-selected.png",
+      "bytes": 87654,
+      "gitBlobSHA": "564c8b4892bf1e1865adef29f6577cf62d35df67",
+      "sha256": "8fa8a647512848e45fcae7d750113505341aa77b1909f2b4680c5d306d8349f5"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-size.png",
+      "bytes": 90756,
+      "gitBlobSHA": "85272a311f8c61ce1231c7c6e342913a5e71f0ef",
+      "sha256": "82b61fa7125ae1d30e0f79d4a50f3074c42f83a820639c73a43ad8c6723fd92d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-free-personal-zoom.png",
+      "bytes": 136988,
+      "gitBlobSHA": "fc7caeda5c59691f566e3d608635be84ee4094cd",
+      "sha256": "7488561182f31c9881327da26df1e280dfbb82e69fbcc8a4a8ea85ca30549078"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-gallery.png",
+      "bytes": 88746,
+      "gitBlobSHA": "071bd1a18f53ee449bb6a6cfb76a789c2731cd09",
+      "sha256": "0ac5cf2e37f6d5886e41f43441b15b85c41341bcc1b0e25f821ac38b4719980c"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-intro.png",
+      "bytes": 126953,
+      "gitBlobSHA": "c284d3b27641e7c4b7ab946c6ac6a5ef75849bd3",
+      "sha256": "2a07853933c2fada2f6df4c5be424a07db676da8440332694676582cffc5ebd4"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-materials-guide.png",
+      "bytes": 198458,
+      "gitBlobSHA": "1dd1fbb8a43ea95fe6bfeeea7670997f5be10162",
+      "sha256": "fbe7cd9545348be8d8d6023f8a56cc35b74cb95998ac19a38649d5a5360664bf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-materials.png",
+      "bytes": 105582,
+      "gitBlobSHA": "baeb724ada015b1bfa9cb3723c73a006849ee7d3",
+      "sha256": "ec2202fd76477f2de362cd23512cbd9bac6b2e84c6a844abac32f0ff4709f285"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-reflection.png",
+      "bytes": 97377,
+      "gitBlobSHA": "db5082f42434706ac5768ecb7dda7697a57e07fd",
+      "sha256": "583df33f1a1277c4f7f46c48ce96879ecebabcb8099317271d19f6d968e3e785"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-390x844-start.png",
+      "bytes": 47974,
+      "gitBlobSHA": "7e960a577f8299037197884b15c2cbcb0351b1d6",
+      "sha256": "620d89b33736ceea85d5d92a126a4dab9b95b156d03848f4b397506295b8371b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-430x932-free-personal-selected.png",
+      "bytes": 98503,
+      "gitBlobSHA": "d9bb9fcb627985671bb4cd99843f6d34e49a1360",
+      "sha256": "3873e499133fc787475de2a9de034c87aa7499c4b31e596df57a72079240713d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-430x932-free-personal-zoom.png",
+      "bytes": 157344,
+      "gitBlobSHA": "8dc18797388fd819ebcfeef8196a772553ebf2c0",
+      "sha256": "77d4884d2dd9a60e3036a0300b7147e6b693242b7f186130976695287ef75cae"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-430x932-intro.png",
+      "bytes": 142817,
+      "gitBlobSHA": "499a1fcb135a117b994a313346d7c3fa0153e3f7",
+      "sha256": "1024fd6b8c1d730e75a7cd7b89ab0b3717ca80c530536bbcb9b9671eca3a41a0"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-768x1024-intro.png",
+      "bytes": 280570,
+      "gitBlobSHA": "dae36422569d801a5503465a7efc21cbbb81fb44",
+      "sha256": "906d7f89a2a821efdb271796cbe593690daca2e06ff02bb8d0f707c565c67973"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-844x390-free-personal-selected.png",
+      "bytes": 59264,
+      "gitBlobSHA": "71abf92ab5125d8f0e9618c98a88d03d32b3f40d",
+      "sha256": "636bd50667eae60ef82d7480fa63b8167f5d8bb8e9401c359d745919743181bf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-844x390-free-personal-zoom.png",
+      "bytes": 69811,
+      "gitBlobSHA": "56452b727f8cb4da07cbffb3213ca2998b1abee6",
+      "sha256": "d2faf76ea3c6bfe67ed5ca724c0b57619fd76f1d27900e67d5c021d5496e9c93"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/chromium-844x390-intro.png",
+      "bytes": 115119,
+      "gitBlobSHA": "12736643d4815af363519abd5391a714b3be4ae9",
+      "sha256": "3c0628d96edf6652f20631c6ff061c1fccec9313f709ee0b3c6f77e72544246e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-1024x768-intro.png",
+      "bytes": 327363,
+      "gitBlobSHA": "c10f1e3e3eec010abc68f9925c9771688ddfb799",
+      "sha256": "19ba68c3eec2e3a36233daab6592cd255344b15ddb7da8d55e01f92f3a0bfcfb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-1440x900-archive-multiple.png",
+      "bytes": 280849,
+      "gitBlobSHA": "db49242f3333e2fb479f92981e6aa0cfbf819a25",
+      "sha256": "45831a9a9126c31c0fbe62b5ce34893be10abac3100e0f5dad585443cf110965"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-1440x900-archive-porcelain.png",
+      "bytes": 224821,
+      "gitBlobSHA": "9df4e4190d3282f7c2756dd275017c0570028d06",
+      "sha256": "80e1fc6f2578b205e5e8f2e210742f4fefcc8c0f114c28f5255b54eb6569abd0"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-1440x900-free-personal-selected.png",
+      "bytes": 374081,
+      "gitBlobSHA": "823a413bff658358e61f7d1a6068d47aabbd42da",
+      "sha256": "c90c181440d92a5def75a7f58431a98b7ae83bdd7eccc22fc94550916c3ef6eb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-1440x900-free-personal-zoom.png",
+      "bytes": 500292,
+      "gitBlobSHA": "76f34089d92d961545216bd67e544a4f5a87bee8",
+      "sha256": "f899b17f6fe1dad02b6d1f92e44be14f22c65c6c44d71c640f0602c8eb0da3d5"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-1440x900-intro.png",
+      "bytes": 507824,
+      "gitBlobSHA": "6bebc32f90866b8a2cda80bc9b432e2f80d873a6",
+      "sha256": "cb660f29396bc0f178f8b08163b5e44e85b6cf08bb644e9c853f442d02d662bf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-advanced.png",
+      "bytes": 61632,
+      "gitBlobSHA": "81066a53cd2c6c73156397fb7263b18eabd6701a",
+      "sha256": "4da9bc2e25711dc95d2df55ca5aaea13f01a57fceeb82521d1fe00fcf555ed9b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-move.png",
+      "bytes": 57395,
+      "gitBlobSHA": "8e19859b02ea4421ab4cceceb1bc75f4f3dd464e",
+      "sha256": "cb676c5db9882dd674c8a22ce4989a027389692704bd76a86a5d25f518d0cf0e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-reflection.png",
+      "bytes": 80483,
+      "gitBlobSHA": "67e15800bef8a954d2d821c887e36ca7c93b21f3",
+      "sha256": "d260320ea1e2e374082ae15c627971417a3289ff5b446a38260dbf9a43967627"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-rotate.png",
+      "bytes": 58606,
+      "gitBlobSHA": "b0d76f71b335021518b16710c740124e82c71484",
+      "sha256": "7a235d6cd0d988bf9d8eedceed79409f486fe5e625d5345530303635d4fa5205"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-selected.png",
+      "bytes": 57432,
+      "gitBlobSHA": "a8c0222d7d5d00603d6abfad06faa9042b66040f",
+      "sha256": "51ee1a8ac3b6b55029118fc9d41d05820510d0a971784c163930957d394295b8"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-size.png",
+      "bytes": 58728,
+      "gitBlobSHA": "7fcae34567dfd4c283eae36bddad0884add79aaa",
+      "sha256": "01111a75f9ba451abcbdaf26103368b1780a71aa443016c619602905424e8ea4"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-free-personal-zoom.png",
+      "bytes": 79165,
+      "gitBlobSHA": "e71701c4719d85179202a064acc2e65692122030",
+      "sha256": "72eecb94ab203f8d21ed8e8db722ce3b93f04cdda6165ae5169f8e0dc55c3f22"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-intro.png",
+      "bytes": 81148,
+      "gitBlobSHA": "c0844969f146e3bc2d8182085170856af3c8351d",
+      "sha256": "976033394eda404edd7c860bbdd9067b8ac70648bed848f9a36950fd133c51c3"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-320x568-start.png",
+      "bytes": 50080,
+      "gitBlobSHA": "4580aa1cdf45bb56ce85620f5dd0770616d08fbb",
+      "sha256": "36d06c34117c9480c88524a1481d0931cbd0db424ae5fa0722df26a7ad4cde50"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-360x800-intro.png",
+      "bytes": 138149,
+      "gitBlobSHA": "20260656dc3699e4dfa85a5683b5da26856409d2",
+      "sha256": "5d6015733eed99b09252869c82bf0118ab7aa8978d729524d19b1332a9adc811"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-archive-empty.png",
+      "bytes": 67524,
+      "gitBlobSHA": "a99c0f0cb4bbeec52f9ae1e6b6807e9b287a241a",
+      "sha256": "4d2360aa4d7d6530fcdde5e9cc031edde0ae59c966be5dee29f8deee90f501d7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-archive-legacy.png",
+      "bytes": 80755,
+      "gitBlobSHA": "873ac02eb207a0bcc6e83711dc7f69866a302f37",
+      "sha256": "4e3926f4237e37f13b27a9f2c8c46920f8982abf9cfac0e5d4b6963ca9850609"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-archive-long-title.png",
+      "bytes": 185693,
+      "gitBlobSHA": "d7d18e685a1eda98f29ace0a331267585f2f8aa1",
+      "sha256": "bab5290cf9668a8a4adcb208634bb4dda9770a3ab1e75916ae07817411c820e2"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-archive-multiple.png",
+      "bytes": 347395,
+      "gitBlobSHA": "f9068b630cac440c1b7b1b333bd48cf97914b3b7",
+      "sha256": "b6fb2e7a2a79c778d666cbbfee47a98561929a75af3246c955f01b12335de1f7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-archive-porcelain.png",
+      "bytes": 161123,
+      "gitBlobSHA": "0bfb85c4280fc3b5018110d45ac334adb4d89981",
+      "sha256": "dc310a9db7cb246e6a5ba1f6dfd61756dbc49b0df64e0fcea614036021c8d69c"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-advanced.png",
+      "bytes": 128031,
+      "gitBlobSHA": "eb323ed8adc371689b4b4ee50497985fc651dfd0",
+      "sha256": "ba0d08fc9ffaf0cfba6a2bf8e669980ba4f6befec9d5ae3a2596aa63043399e0"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-move.png",
+      "bytes": 122891,
+      "gitBlobSHA": "51f37ab6b47173d1e4bbe19bef27cc3b7a88f9c1",
+      "sha256": "bf4638818208ac2bb078bcdf41c217cde1d30bf34b7e68eebd8288de5a4edb4f"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-reflection.png",
+      "bytes": 134367,
+      "gitBlobSHA": "3c5cb90d84fe07ae0ca985d5640657810419404a",
+      "sha256": "32d49c1982a290c32bc06bd184ca94a7e17fcaa1e12903c787a6a3d9ae714b82"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-rotate.png",
+      "bytes": 124766,
+      "gitBlobSHA": "7be0f51f9a37b8915d4d691a73c606644bdb15f6",
+      "sha256": "22e38ad53e300119cd28192eab9fe7ff0401f08d33b12d241898103e31ad0980"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-selected.png",
+      "bytes": 122927,
+      "gitBlobSHA": "cfd0b1edce570242edb22546b8e1c8919ceeaa1c",
+      "sha256": "c7dc8a08ec1eb39bb93ace0e99556e7adce7a9f24a98f0436f5e5f6eec68dcd2"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-size.png",
+      "bytes": 125466,
+      "gitBlobSHA": "4246911ebbe49b5928a44bee68c51da13476d56a",
+      "sha256": "2e238becee331ebb237bd7dd7c17ac7a5b78e4157d8a291a2712e45e31126603"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-free-personal-zoom.png",
+      "bytes": 178479,
+      "gitBlobSHA": "c2fca448d394123a530908268a06dd1c77cd929b",
+      "sha256": "43f366ee34ecb221028d2b62d23d30fd1264a6995649d77ab5cfbfa61ebf4215"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-gallery.png",
+      "bytes": 121312,
+      "gitBlobSHA": "189824483697647be6a252c336367c9a465733f0",
+      "sha256": "895e1374db54d40792c7856c9b6530a4264c8e8c24c4a62c2a24180fc5de6ae0"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-intro.png",
+      "bytes": 154814,
+      "gitBlobSHA": "9ab457240fdd00129eb910dab391e3fb2a508c17",
+      "sha256": "923e5f8fed2a3f23cc644202fb5cfb449ea343b4e57070021d67761405d74c85"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-materials-guide.png",
+      "bytes": 259896,
+      "gitBlobSHA": "687effae377869f6f8dc77abaaf765ea4464fb96",
+      "sha256": "9421b9df9527f36666105587e6f9cf035f342bc80cbf6fc1ec11f43fcc2b1077"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-materials.png",
+      "bytes": 138987,
+      "gitBlobSHA": "6fbb0ce2f33bd8279bc8603e895aa9a96fac73db",
+      "sha256": "12d787831dc5402f926c8cc6aee7c807092ed451eaa6332333a1dd05a0321380"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-reflection.png",
+      "bytes": 134367,
+      "gitBlobSHA": "3c5cb90d84fe07ae0ca985d5640657810419404a",
+      "sha256": "32d49c1982a290c32bc06bd184ca94a7e17fcaa1e12903c787a6a3d9ae714b82"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-390x844-start.png",
+      "bytes": 55292,
+      "gitBlobSHA": "d9a6792ce8e285c04c8865e298c19e846c99757b",
+      "sha256": "3cd1e1d1216d4ba10b7bfce6ae1705bcbcaf4113931f309358cbde77d0e7db56"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-430x932-free-personal-selected.png",
+      "bytes": 142712,
+      "gitBlobSHA": "74b3b609b2957f34393b60e4fa9cfdb6ae1b686e",
+      "sha256": "6f732a57bd939e3e0b6ac0fe0b6e008a33520d36dca6fa8ddc8da822ded3ea99"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-430x932-free-personal-zoom.png",
+      "bytes": 208772,
+      "gitBlobSHA": "b3de547861f2784b2ab4839969c17f59a6504854",
+      "sha256": "c826ce1d8cbbcc481922d1f0e64ee84badd5f0d95bf50aaba1d03c2d72d360e7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-430x932-intro.png",
+      "bytes": 177305,
+      "gitBlobSHA": "637d6e339a78ee3e638bf69cddacf32bb1492fef",
+      "sha256": "739d817c3ad9ea105c2b0a0e3afd0a19c6c134220302c490e91d9d187025e86d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-768x1024-intro.png",
+      "bytes": 338814,
+      "gitBlobSHA": "01ccc27983428305cfaa86c7a34346f1e58febb2",
+      "sha256": "b0e1d3de4e09d6051c04c4e836d9d7cc197474b85c5076cf46bfab12860d11da"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-844x390-free-personal-selected.png",
+      "bytes": 65781,
+      "gitBlobSHA": "23153a604da563afcd75f792ed54e49b0c51dac4",
+      "sha256": "3b96f4996f2cdb67fe6ad00f43b9f44f19697a5f21575058b1dd0aa9afd44ea5"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-844x390-free-personal-zoom.png",
+      "bytes": 77383,
+      "gitBlobSHA": "f278c8120aec89dac5b7d3d1dfca77b5d1e80199",
+      "sha256": "cab6902f680135fd41b2b77ad01e1a9425a06500b54b66531eea9f12ecc08af5"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/after/webkit-844x390-intro.png",
+      "bytes": 146871,
+      "gitBlobSHA": "aa179e59cd0a45a774fcafe19d5525c53ba24612",
+      "sha256": "e3490ed51694751497cd162a1d94c347e1fba194c1fcc1782ef60c0108ede87a"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/art-direction-results.json",
+      "bytes": 331534,
+      "gitBlobSHA": "24d434b2b4745571b5e26b83d11ebe73fedb1916",
+      "sha256": "527509eaae6dbd5ad6abc97f28c22afd4510b0ad659925da1eeff5b0a5332f3e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/artwork-before-after.json",
+      "bytes": 14107,
+      "gitBlobSHA": "15468452d8c3b277b3560a0ecb446c7beaf33ebf",
+      "sha256": "2bedffc07cac17b3f4f4cd63068b5b562988806f78e769c0d02fbb277066a351"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/artwork-geometry.json",
+      "bytes": 253378,
+      "gitBlobSHA": "a29b764ce451a265d9d3cbad4f9df107bc180d24",
+      "sha256": "cbc85cbdd54481af896d3a59c307f0f7f53b7c1dd48a1ea6a051b046c7a4db25"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/atelier-results.json",
+      "bytes": 2594,
+      "gitBlobSHA": "f7da8b7c6ec9060d3663f71f92c949b8e7182b2b",
+      "sha256": "966293e07f982214239187ffe044b828c589bfa428cc83a3fd54697c0b98ef60"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/baseline-geometry.json",
+      "bytes": 5945,
+      "gitBlobSHA": "9c7c0393660c2884da58a00b8027f0f0d08851a1",
+      "sha256": "4a5ca1a3e93d12a45d416554dd547a1614e56bb7c3842f335f627b7ff8295a0b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/baseline-results.json",
+      "bytes": 165414,
+      "gitBlobSHA": "6e2b445e372b998be635897209e7b312a927bafd",
+      "sha256": "61d7aeab06614b1df2f9fd3052d94d54b03bfcf81db03ea9878f866340224ae8"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-1024x768-intro.png",
+      "bytes": 276082,
+      "gitBlobSHA": "4e05cc2a9500b9e7ac217685cc6e925f7534eaa8",
+      "sha256": "bd4f4df9fa0f517c0e27e756160826844d77614dc8d1f2fa655ed2e3ff92970d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-1440x900-archive-multiple.png",
+      "bytes": 238748,
+      "gitBlobSHA": "613f7cba284e3e5a4dae0c68b3a204abd331fae8",
+      "sha256": "a223ec7efe094613686478aa9637a6a10901a278c024c9fc8f32a8f4da6982f3"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-1440x900-archive-porcelain.png",
+      "bytes": 149395,
+      "gitBlobSHA": "b3c58d7377438725dbe1ee762ab965d00837d708",
+      "sha256": "c918750b664a2d146b39fd603da06c5dfe276ec3e2317d6ae5afb543ce037418"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-1440x900-free-personal-selected.png",
+      "bytes": 309302,
+      "gitBlobSHA": "8891822cc714a43c3dc96d56f74043aa96205975",
+      "sha256": "9ec28ca7a63a2a1d5b69b17d8b3ca649ad9a59fcb13d8f1fd1fec0b59a7b2df6"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-1440x900-intro.png",
+      "bytes": 409097,
+      "gitBlobSHA": "c86ccec31faa3562cbf6062eccfbf51c04eb0293",
+      "sha256": "52cc5f4cc947b870c9e7a3990317f693600e7ff57f5abc2ea5ea6174343a3a71"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-320x568-free-personal-selected.png",
+      "bytes": 20645,
+      "gitBlobSHA": "7018ad1f3bfe48670b2791407825bb07c8f5e429",
+      "sha256": "cc208926baa63874e509509e9c3257f5addc7ef9f7b75d1c57fad6e5b8b92d08"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-320x568-intro.png",
+      "bytes": 84483,
+      "gitBlobSHA": "6ce300be77eb81d58e89d1337de194b0778ee66c",
+      "sha256": "b6e529c36cbed8e5e968ec4a58fbaf61318be0f39f0f56cd83b89a42e9870a31"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-360x800-intro.png",
+      "bytes": 121854,
+      "gitBlobSHA": "2ae52bb17c6061d4524c61702b08379a420a899b",
+      "sha256": "98099366acfb6cfa4e6d7bb6729137d08269682384e9d4aa62cf2bbde07df2cf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-archive-empty.png",
+      "bytes": 58517,
+      "gitBlobSHA": "7475447cfa62f0a8d2399116a6d327bef93e5202",
+      "sha256": "33e6f218579383e9bfac7692b5a94509a781300ad05bc26080f8c9aebca054f5"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-archive-legacy.png",
+      "bytes": 69542,
+      "gitBlobSHA": "3432eafdc5bfc486bebea6720315bdd2d1619479",
+      "sha256": "b532e161b817583f42cceda4ef3a8857ea8ab7e2edbf638872e5fe0c3c8035b4"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-archive-long-title.png",
+      "bytes": 131767,
+      "gitBlobSHA": "d6fa97db48ac1e46e328dd88c35e53672d1f0041",
+      "sha256": "fff8ff25c540d5bab5f5bfb3bb4e0cbfa4416654c2a2b9acb55d6204e244edeb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-archive-multiple.png",
+      "bytes": 246284,
+      "gitBlobSHA": "cef76b474598ba4a5c57a262be22fb1acc032d85",
+      "sha256": "3b25569fe119f45bb27ff5d3e0688dc5385efe5821a72c7c7619dfbc61a3ac87"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-archive-porcelain.png",
+      "bytes": 111525,
+      "gitBlobSHA": "cbf0f72ae797e155170520d527dde5ab80fabe82",
+      "sha256": "1c0f40011f55b0f8e2c2b8047036ccd4e60eac2b4a28727f24a19eed4b0aa8fe"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-free-personal-selected.png",
+      "bytes": 87534,
+      "gitBlobSHA": "4dfa4e8c564de4c1811965f3afe0bb6fdcc6838e",
+      "sha256": "85ffc8d29940e41ff5dfd7df28a4b0e7e0ed8c91d4606b59868da58a135a4a21"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-390x844-intro.png",
+      "bytes": 130082,
+      "gitBlobSHA": "7ba7f2f3f9538b42909fa1fc26c1a5896b3b2b9a",
+      "sha256": "6e4418ee650e1c2dbc25c7bfcf520c8d4f7f30032795051434b61780a207e88a"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-430x932-free-personal-selected.png",
+      "bytes": 98417,
+      "gitBlobSHA": "e39683c2f47d8d3253963ca4adbdbb468380195b",
+      "sha256": "936c9205fb1fbc3d32016bcfd5b3716b947da6eab82ab3779dd94d9410fd8a71"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-430x932-intro.png",
+      "bytes": 140380,
+      "gitBlobSHA": "0a6454b42451a2ee4acfc601d51b9e11d1555d43",
+      "sha256": "29c5f0720c13cf6dafc42086ec0eeb15b5fead71bd1625565e214e8d0215e110"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-768x1024-intro.png",
+      "bytes": 280570,
+      "gitBlobSHA": "dae36422569d801a5503465a7efc21cbbb81fb44",
+      "sha256": "906d7f89a2a821efdb271796cbe593690daca2e06ff02bb8d0f707c565c67973"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-844x390-free-personal-selected.png",
+      "bytes": 59267,
+      "gitBlobSHA": "f788c75b7b9c2a9d8f5b85674d6de14c42fc258b",
+      "sha256": "4d0cd19adbe2d2102c97ac044b05d5855b6b0d05f8f9c125c3162056873c7a39"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/chromium-844x390-intro.png",
+      "bytes": 111321,
+      "gitBlobSHA": "969df5b31d7b8bd2b3576e9521a900ac1a206090",
+      "sha256": "84554d1634fa425b74fd288cdbf4f269aaa4069436f9b70720501fdd3f3b06f7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-1024x768-intro.png",
+      "bytes": 327363,
+      "gitBlobSHA": "c10f1e3e3eec010abc68f9925c9771688ddfb799",
+      "sha256": "19ba68c3eec2e3a36233daab6592cd255344b15ddb7da8d55e01f92f3a0bfcfb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-1440x900-archive-multiple.png",
+      "bytes": 309974,
+      "gitBlobSHA": "3ba769fd87de523753cd3eb2efb2a1fd101bba2c",
+      "sha256": "8b5688f72faa15581e743267d46ee7ac30715aa9d481c928278786e06982a869"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-1440x900-archive-porcelain.png",
+      "bytes": 205610,
+      "gitBlobSHA": "ef972588cd9afe78131dcf374dc28f7e99a59570",
+      "sha256": "13fcd023311e0a73ecc986bbd11419b955e71cf9010237d2d67775ad04ccad19"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-1440x900-free-personal-selected.png",
+      "bytes": 373926,
+      "gitBlobSHA": "70dc3b25bab95cdb569a4e48f1c8bae9739321e1",
+      "sha256": "581b3defe83435bdb1f84d43a94a6a4f6605541a95acf8174259d7e5314f1097"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-1440x900-intro.png",
+      "bytes": 507824,
+      "gitBlobSHA": "6bebc32f90866b8a2cda80bc9b432e2f80d873a6",
+      "sha256": "cb660f29396bc0f178f8b08163b5e44e85b6cf08bb644e9c853f442d02d662bf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-320x568-free-personal-selected.png",
+      "bytes": 57563,
+      "gitBlobSHA": "8da409a822cf060c4e956569a2255d4339473d94",
+      "sha256": "46844005ca40995b5c68a2809b575beb49c5b9017f529f0a2fcbb8ae93eb65df"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-320x568-intro.png",
+      "bytes": 101019,
+      "gitBlobSHA": "256b8a2ee9ccdf7455f6739a74531386b4106b2b",
+      "sha256": "1e650be9b3bfa7c6d723c91b4defd9c382cf52a2ee917af22b8c3782896fc9ec"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-360x800-intro.png",
+      "bytes": 143861,
+      "gitBlobSHA": "da9f129ec2bfe2396fdb9879e604d2de4165251c",
+      "sha256": "de6804a5f4db52b126c08407031dc4bee5496adc4420f1ba5d772fbf9b28ae3a"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-archive-empty.png",
+      "bytes": 71558,
+      "gitBlobSHA": "6232e69a1da77a5dc00a5959a62c09f1337cfa2e",
+      "sha256": "d4514636c6f09789369e86d0edda8eef03d729359c316df221a84a37bd3aa6cb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-archive-legacy.png",
+      "bytes": 77768,
+      "gitBlobSHA": "629b610539e3d0bb84a9cfc33d0bba312c6e373a",
+      "sha256": "d9e2ba56ebb9e75a0b7772cb5e4bccb3b2eb2fa0192a47bf5e1c57d7fc7b1bd7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-archive-long-title.png",
+      "bytes": 169566,
+      "gitBlobSHA": "8025ec7d05ba48a5a97fe452143db418ac11daa3",
+      "sha256": "45857cba2168eb01d0310abedf77761946337d09a0c2f434e54533bd80ffc4ed"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-archive-multiple.png",
+      "bytes": 312252,
+      "gitBlobSHA": "27b01de02265f0f63754390b8797c43218c27480",
+      "sha256": "ad1e2e675c26eb73cd0f609112dd17a07288bb7f7f85fcc12bfa594141ce2524"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-archive-porcelain.png",
+      "bytes": 144913,
+      "gitBlobSHA": "519487cc914a2feba9e39060f3f108ec4ca94e70",
+      "sha256": "70ed9838f3d805722bcc1e00ee9d1861ee002370de1b3082988b03de985a5a7b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-free-personal-selected.png",
+      "bytes": 123055,
+      "gitBlobSHA": "36a6ec009cab169e4e0aad50d127b9e3f0500a57",
+      "sha256": "26f1a1ea85baf6cf3cb3cae22984b690fbf43169ad3d32cab68ec82c929f9ffa"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-390x844-intro.png",
+      "bytes": 153473,
+      "gitBlobSHA": "7054398552476c1e9acd174d1c4e3e7804f004e6",
+      "sha256": "6e913404fec1e6cb3f0e68faf8e0d3971a257e8fbfb806ee1e7123de159b813b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-430x932-free-personal-selected.png",
+      "bytes": 142795,
+      "gitBlobSHA": "8372ae229f410ddcb252fa815cd398f20f10c754",
+      "sha256": "8bdf807a174a59ff9fa7e85901a1ac762eca31ec54e19ada2b2dc7e625adafc3"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-430x932-intro.png",
+      "bytes": 166283,
+      "gitBlobSHA": "ae5147905728c81af9dc320f387651f4c878ff9b",
+      "sha256": "b67002a69c8704f19d159eb31d23f880d23c9e1ee55208930a7a1f72257498df"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-768x1024-intro.png",
+      "bytes": 338814,
+      "gitBlobSHA": "01ccc27983428305cfaa86c7a34346f1e58febb2",
+      "sha256": "b0e1d3de4e09d6051c04c4e836d9d7cc197474b85c5076cf46bfab12860d11da"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-844x390-free-personal-selected.png",
+      "bytes": 65501,
+      "gitBlobSHA": "0d46c3abf9e02aab82955bd99945b1aad7fc4f60",
+      "sha256": "ef80d20311def140b2a8ec749d78040b5cff0144229c4929e43dc09b5c577a25"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/before/webkit-844x390-intro.png",
+      "bytes": 142921,
+      "gitBlobSHA": "b2ea716d855c4bf7b0fc6e3dc72c4c96fa9ece96",
+      "sha256": "cd1dec6fb128f79962e75e681842be617431636d84cb2bed45c8767a590aae87"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/build-comparisons.py",
+      "bytes": 3323,
+      "gitBlobSHA": "7cc14a53716bf2f026ce86ac45e9cd3ea37740de",
+      "sha256": "9e582705e9d6f9272c5807c5a1a04e659ebfe4ecfc260776f3df883bfd94b7cf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/capture-index.json",
+      "bytes": 44744,
+      "gitBlobSHA": "bf7310dc922646439b5ffa0f93814666f33a3831",
+      "sha256": "239704d6898132f2336750e48cfe6d8c383ca2d85d44c99d3b41026a123fc06d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/cloud/README.md",
+      "bytes": 1187,
+      "gitBlobSHA": "c08ee63d48e30d03e8c3fe39c52cffac0438e0e6",
+      "sha256": "16dc607cbd7668bd073f5d1e17b6598ecc28f0e30957ac75c1b64925879e496e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/cloud/intro-1363x936.jpg",
+      "bytes": 74308,
+      "gitBlobSHA": "e3cd478517ed41bae760de2c27eadd8e6bec2cfe",
+      "sha256": "47748d980cde5701842c81be379931ee35dfe1f65b4192de384841e5064de65d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/cloud/start-error-1363x936.jpg",
+      "bytes": 45897,
+      "gitBlobSHA": "8a0ffe0fc7597860615d6440919561b388c5dba1",
+      "sha256": "46d80c21daf0b13e5a84550010baaa785cfe2a3ab099207b63f59d6bcda5cf8f"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-desktop-chromium.png",
+      "bytes": 265696,
+      "gitBlobSHA": "a5299da577353abd15561c98ef8664f8fb3f98c5",
+      "sha256": "f49d5b6a62d7e2c231a39e68228626e7c6e29c27c15b136d95b6ec5154ca0a72"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-desktop-webkit.png",
+      "bytes": 277929,
+      "gitBlobSHA": "ca5f74a50b9f8cd20a63122bdda7cbb98e3e8f63",
+      "sha256": "fbd378e3f76f8f1da69efef1d7048c89c4cb8a42a787697987df28fe6a558859"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-empty-chromium.png",
+      "bytes": 114822,
+      "gitBlobSHA": "263055e2f457eb7fe77a3ff1b6237444e22933b8",
+      "sha256": "0a0a5f99c019279ee7e979195eeadbde7c91735e1c868d5925b6b6117eff823d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-empty-webkit.png",
+      "bytes": 123650,
+      "gitBlobSHA": "564cfa760a8a11d2fe77c696803ed9ad4c3cc404",
+      "sha256": "90b2428947c030f5eaf14b33c67b051b7074ccf5027edc9f57de28f288518fa6"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-legacy-chromium.png",
+      "bytes": 130240,
+      "gitBlobSHA": "b4ec5bf2731ab57db9677af0cef58e7b31d581bf",
+      "sha256": "13f0bdd5eb168793979a426264ae21b0566e71fde5c4c2b2c83ab85335527f14"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-legacy-webkit.png",
+      "bytes": 130303,
+      "gitBlobSHA": "903951a9b46da2d9d307c0439d33cc5ab9c93d6f",
+      "sha256": "bc1c0dd9eab6715cd48722c98f41cfc913c2eb584b53ab4b48548d4d373311a4"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-long-title-chromium.png",
+      "bytes": 236646,
+      "gitBlobSHA": "b7cbd33926d39478d68e2abaea7227e356fea39d",
+      "sha256": "efdb464a0286795c008e00ac109f62ac49750173e8e8e2a18f251f1137362fb8"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-long-title-webkit.png",
+      "bytes": 287379,
+      "gitBlobSHA": "7d6ef73c083b6eee59016996dc83bce3990734b6",
+      "sha256": "1418b68f21836abc8487b4952c2dacd002b7541a6d1cc37d1bb37cd362e691e2"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-multiple-chromium.png",
+      "bytes": 470590,
+      "gitBlobSHA": "699fd8b6e70468463fc6300726f81c321d6c8757",
+      "sha256": "9e3786c694721d0dd41816febdf167987729c46ac5b30c860cc0286ef9ddd30b"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-multiple-webkit.png",
+      "bytes": 563489,
+      "gitBlobSHA": "9a32b9b8524dbf012d5b18c00346224db852d11c",
+      "sha256": "cfc32fcef242e4a07507ff30c4a9ed2dbcecd53f04341e7f8d335a4c08f008c3"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-porcelain-chromium.png",
+      "bytes": 213705,
+      "gitBlobSHA": "b2cb7b289cf5a564a2391310dd803619a1effdaf",
+      "sha256": "a500027c073db887cc3ec52b04e82b391dd499c9806f5181bd8f4c496247d808"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-archive-porcelain-webkit.png",
+      "bytes": 262517,
+      "gitBlobSHA": "fc620cdba61f8e5236bb8aacb6b95ce38e8f9b45",
+      "sha256": "5b9e7368092c417051a385a154754928fe7eb0c68de04a8f690a3b9b5d0a22bc"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-1440-chromium.png",
+      "bytes": 181301,
+      "gitBlobSHA": "e33d8f9517a62055d6bcd2691230c0ecf3ef230c",
+      "sha256": "3d9fa2317d3d8671f4ccb553731eae1b588b4792a98013c5c60c71f1b0213b28"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-1440-webkit.png",
+      "bytes": 187017,
+      "gitBlobSHA": "e45eab82f52f941bee0e89f1518509622078164c",
+      "sha256": "38e076ba945db45914caa20e2d31162cc245b47e88830a75139cb3d3ec0020ba"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-320-chromium.png",
+      "bytes": 61635,
+      "gitBlobSHA": "eeefb2045224d578ab612cd9a0761dec80bff4a9",
+      "sha256": "68fb364beb7baa9c78da8b15e4c27d81630592e51a59f0d88aecdde94d0ef4dd"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-320-webkit.png",
+      "bytes": 80790,
+      "gitBlobSHA": "3385d43f629ef071ac8e16736922d59795dd91ff",
+      "sha256": "233f5b480fe83577ee4580b4a3c97fbb47f26fee50704f23a8f47155415cde31"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-390-chromium.png",
+      "bytes": 171208,
+      "gitBlobSHA": "d3a2d5dfcb8d4c808513938409e85f85c5184643",
+      "sha256": "339e42fd6074feb1f5a16f32165722d3d736e06efee76aa3f9578de339bf1e21"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-390-webkit.png",
+      "bytes": 224744,
+      "gitBlobSHA": "701ec6bc693725f3b95332510c8cd86c8c76f2e1",
+      "sha256": "a7e0c16b1ea5123cf25ab7838995e74b1959468ffec936f052a8f2c252d619e2"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-430-chromium.png",
+      "bytes": 195490,
+      "gitBlobSHA": "1c9033e3b5ad8478e5da04f556f6f9f1fe32d6e1",
+      "sha256": "6bd733a3eb3bfb6c3903343852aa06ca8a22b08333fab4b2367d118dacbc1e8e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-430-webkit.png",
+      "bytes": 263344,
+      "gitBlobSHA": "9b39b20b68d6ffcf80e23ec6bfe5880f4fa05e85",
+      "sha256": "97ba44c38a6cab7aa7d324fe126042d73845131ac56b6024bc4c221318103423"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-atelier-detail-390.png",
+      "bytes": 140755,
+      "gitBlobSHA": "6f7ff75b2c2df39210693f14514510cb1390ed39",
+      "sha256": "aaf362fbe4faa4029795dbe2dcb29cb9fbc7b1c046c7f30ce9725aba8a397963"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-320-chromium.png",
+      "bytes": 161395,
+      "gitBlobSHA": "f285b36bf1397735818075d29cf3cfc102d82253",
+      "sha256": "1d407a067fe85709080ff56a6e774367c90757471489628d881d10017e8f807c"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-320-webkit.png",
+      "bytes": 175487,
+      "gitBlobSHA": "4029bea64130b63cbf6bd102598aa111395989e7",
+      "sha256": "d64877011f57fba5f6e251534cb6ec4f40f0c9b6d0f5ffca7d117880fe3871c1"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-360-chromium.png",
+      "bytes": 243673,
+      "gitBlobSHA": "6047a74ee5b87570d26b29321e01b848777ac19e",
+      "sha256": "138b5ede79b1de045bf6782c1b4105af49c92f969094166116cfdb86ec446464"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-360-webkit.png",
+      "bytes": 262104,
+      "gitBlobSHA": "f067d6ac27b325574993bcd7c146b1894efd5430",
+      "sha256": "4ca6fcc2b9473d650c316733d2f10ba76c5b4be45f56a5293712721e8356b214"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-390-chromium.png",
+      "bytes": 263783,
+      "gitBlobSHA": "b98d7d6a0acdaf44b133c6ecb07c3e9af0d5d258",
+      "sha256": "774bb78182bbfd35d3a7100b5bd39a02fc21ca2c025cd05ee30a33f4b97cd783"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-390-webkit.png",
+      "bytes": 285674,
+      "gitBlobSHA": "bdd54c77df5d483b8e5baa52beee19f83c35d00c",
+      "sha256": "df75d1ae66be0508f314b85a6b52c98c8ccbeb9d657305f2d76754278cee490e"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-430-chromium.png",
+      "bytes": 290116,
+      "gitBlobSHA": "bf280f4d63828a50f8b082ca005914821970344f",
+      "sha256": "40dc3b230e0c5caf504ac7c9c4dad34e2f905038a007680ecc20c6bb63dbd8a3"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-430-webkit.png",
+      "bytes": 317082,
+      "gitBlobSHA": "ff76a581068c10ecb035cd5229aca7f785d27a68",
+      "sha256": "f4e278eb9a17fee7c0345ec9f0ac0805fd0172ef7974c3fc90c1fc040ed352eb"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-detail.png",
+      "bytes": 117668,
+      "gitBlobSHA": "bc0ae910515d53fb995f112d6363d4d14ba57d4c",
+      "sha256": "c944f933e8d63d110d5d90e49cf0b130047f9236afa9be60cf5271c2db52adaf"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compare-intro-source-320.png",
+      "bytes": 447308,
+      "gitBlobSHA": "b773e1b1bc8b854b72dcbcfcfc1904c7b0540c39",
+      "sha256": "01db4c2a0a8a2e2e24f43e1d5fb6a4612d5355ff724078861f6cdef1d963c390"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/compatibility.json",
+      "bytes": 4845,
+      "gitBlobSHA": "c0b9a566ede739104ec48da8634d7413bff51def",
+      "sha256": "dee491f5ed86e2d767e30d3a756d8974e0b8c755744a53f81eda33f3e32f3616"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/iterations/README.md",
+      "bytes": 2090,
+      "gitBlobSHA": "79b444608a1a800498b5380e0d6680f2e364a296",
+      "sha256": "43495247f04fb665146390da7465509d41aa629edce6f8c73b65a42bce3ded13"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/iterations/zoom-before-390.png",
+      "bytes": 113343,
+      "gitBlobSHA": "f23637671f9bdd22a536b643619e082433021930",
+      "sha256": "0c74047498e59cba0aa64cfccca20c4c4f0c92aeec1faee9024e2a05a25eddf8"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/art-direction.log",
+      "bytes": 2751,
+      "gitBlobSHA": "b0194b84674c8698f234a6b1ad846f9499f38514",
+      "sha256": "1f0cd43c29b0bf48944980b7933321ac3d43ceae298b338ad7eaef6acf668ad0"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/assets.log",
+      "bytes": 281,
+      "gitBlobSHA": "ccf95a0b5fc2e7aed3d55f95a47e6f9880b4c9ad",
+      "sha256": "3b2e3b169d4599cbf207a47aefa2e7de196de023095c42a0a1a61394deffddf9"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/atelier.log",
+      "bytes": 371,
+      "gitBlobSHA": "ef915a11358c31c97681d8030dfa2147d61497b0",
+      "sha256": "311256eebd6f944fb9ab76f821914379ba95f6bb1cfc0d6c8a9742fc450afcf7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/baseline-capture.log",
+      "bytes": 1016,
+      "gitBlobSHA": "1a374efe477d812a76d9aee62df157118601c5e2",
+      "sha256": "199c194ccce35b1255ccf1487fed69b6674ac9001ea63e191fd20667c32cdc47"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/browser.log",
+      "bytes": 82,
+      "gitBlobSHA": "92aaccb85c548a457a7d21f20d88ab66e852f261",
+      "sha256": "da3f6a2ff21272910399d4339fdc09ea41b4291e1c8fd5f647cc07395f95903d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/compatibility.log",
+      "bytes": 197,
+      "gitBlobSHA": "5294975b4176a96fa00aa17b1b482512a2f8914a",
+      "sha256": "a9ab83ab9b6a38d586d36fa804edcbf1f2c02ca2b99dd635faa4de05ba2b3bc3"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/iterations/mobile-webkit-wheel-unsupported.log",
+      "bytes": 1693,
+      "gitBlobSHA": "3c15658227dcdf80133b9282ecf2e195b7d3dcef",
+      "sha256": "f0b3b6398e31bf4449f51472db2d91813a0428729fa88e5b52a0f341bffe8916"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/journey.log",
+      "bytes": 200,
+      "gitBlobSHA": "8f0668ca73c53ba32466a7d0008f55f1fe20450f",
+      "sha256": "a9aeda224b528ea941531aaca9b11ab963c2d7331d660ca8181f6e7fec961ffd"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/nacre96.log",
+      "bytes": 46,
+      "gitBlobSHA": "35531ce039d22556969b001f5fe6f6ad20a68614",
+      "sha256": "7f2dc6e80927473ae3dca50e18e6467694cf4ca02e64f8da6e951e5c04e245cd"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/refinement.log",
+      "bytes": 770,
+      "gitBlobSHA": "f7eb97666aecdcc0cda67e2046e5a9329e6e23da",
+      "sha256": "b27b0f6c5ce4ea5f2a1539df3d10ab2a790337ee701b7c5581701afbcbf6d7b7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/release.log",
+      "bytes": 323,
+      "gitBlobSHA": "492a611045ef9af1eaab1e72e3aca24fc3e09966",
+      "sha256": "3138208967bf2eb83f9e943ce2b4dfd58f70e8a90caad811a7c56e1bdab91577"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/unit.log",
+      "bytes": 6762,
+      "gitBlobSHA": "2440e7dd09411bfd32eaf9699c613c93a3b58b27",
+      "sha256": "c33a93b7dc22fe33c71668f3feaf7783534eb9a0c6529b7f0a8ecd3f4fdad1a7"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/logs/viewport.log",
+      "bytes": 493,
+      "gitBlobSHA": "0d6a2ef72ec051fe40d7678d15c2e88013897d65",
+      "sha256": "271e16dfdde4cb929273f5b4263646ff249baaff081fdfae95b5d558f759977d"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/protected-integrity.json",
+      "bytes": 65002,
+      "gitBlobSHA": "5dc188acd572ccdff848fc89e290edd893ff0183",
+      "sha256": "84eeb0ee6a9913049bed0f1911225cc281c16a4adac81e9cb4f29404a93da34a"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/qa-summary.json",
+      "bytes": 799,
+      "gitBlobSHA": "0818057507d7f6b6e58778295c1ba15c4b4bb47c",
+      "sha256": "031f805422d6765f887695caa7be86843e066e116c3d997d1628d595e07ebc16"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/refinement-results.json",
+      "bytes": 101044,
+      "gitBlobSHA": "ff43e29c2b8118b2bb6f86e7dff5c71b62f4f1fe",
+      "sha256": "e70e8c46e6d5bc0ef5063162ae14f6a830572bdbb00d40cece0da503f341de02"
+    },
+    {
+      "path": "activities/moonjar/review/v3.2/verify-compatibility.mjs",
+      "bytes": 3376,
+      "gitBlobSHA": "cb17044d644a907ad540e206340fc5dd22801fc1",
+      "sha256": "c5364890d475d8a2122f0bee6636b054c2a24a8b2423a80583104682c3cf3a15"
+    },
+    {
+      "path": "activities/moonjar/src/app.js",
+      "bytes": 90591,
+      "gitBlobSHA": "638ff232a428e877392eea9af85c58f197a8dc6b",
+      "sha256": "ba0e702e26171c2366809b7c1b7b3a900312ddb21e392a627d6fdad1e803499b"
+    },
+    {
+      "path": "activities/moonjar/styles.css",
+      "bytes": 23067,
+      "gitBlobSHA": "a75fb133604980498d2fdd388385f92ac72740f5",
+      "sha256": "b70af48f680b987b8d77e5b84fe54aba7922800677f0bdfe0399e82f745632bf"
+    },
+    {
+      "path": "activities/moonjar/viewport.css",
+      "bytes": 21654,
+      "gitBlobSHA": "b5cdd750b5e1d31a60b778023dae32653aa88be0",
+      "sha256": "dbc5d42242ceeb78e95ac6691992c2f2a3b611bb69568e8c3cf90f37a24bb2ec"
+    },
+    {
+      "path": "scripts/check-moonjar-art-direction.mjs",
+      "bytes": 19657,
+      "gitBlobSHA": "e7fc618fa7850c720a19277ea6b370b8a9dc2190",
+      "sha256": "790bf58e043c4b422158f538ccf8b3f94dd20009bdacc00d0b77591857ee7e9c"
+    },
+    {
+      "path": "scripts/check-moonjar-browser.mjs",
+      "bytes": 34256,
+      "gitBlobSHA": "488e7565a14b302b963efcff85da71ee18e9141c",
+      "sha256": "acd37ab68dd86afa2ca65fe71588e8123e600d7b9503b3eb8a682bff2789235f"
+    },
+    {
+      "path": "tests/moonjar/site-integration.test.js",
+      "bytes": 4141,
+      "gitBlobSHA": "5525532ee08500a2f50212777fb72f45d74c7b45",
+      "sha256": "0b6472b55efb9694356dd22f3ce9e4d7c33531a6074f8cb8a80113b941d62df2"
+    }
+  ]
+}

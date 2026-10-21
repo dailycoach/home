@@ -1,0 +1,308 @@
+{
+  "assertions": 212,
+  "results": [
+    {
+      "id": "chromium-small-phone",
+      "status": "PASS",
+      "artStart": {
+        "x": 73.5,
+        "y": 110,
+        "w": 173,
+        "h": 194.625,
+        "bottom": 304.625,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 61,
+        "w": 320,
+        "h": 507,
+        "bottom": 568,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "chromium-mobile",
+      "status": "PASS",
+      "artStart": {
+        "x": 28.5,
+        "y": 110,
+        "w": 333,
+        "h": 374.625,
+        "bottom": 484.625,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 61,
+        "w": 390,
+        "h": 783,
+        "bottom": 844,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "chromium-tablet-boundary",
+      "status": "PASS",
+      "artStart": {
+        "x": 254.5,
+        "y": 213,
+        "w": 474,
+        "h": 533.25,
+        "bottom": 746.25,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 76,
+        "w": 768,
+        "h": 824,
+        "bottom": 900,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "chromium-small-landscape",
+      "status": "PASS",
+      "artStart": {
+        "x": 464,
+        "y": 162,
+        "w": 101,
+        "h": 113.625,
+        "bottom": 275.625,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 53,
+        "w": 844,
+        "h": 337,
+        "bottom": 390,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "chromium-tablet-landscape",
+      "status": "PASS",
+      "artStart": {
+        "x": 441.5,
+        "y": 213,
+        "w": 356,
+        "h": 400.5,
+        "bottom": 613.5,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 76,
+        "w": 1024,
+        "h": 692,
+        "bottom": 768,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "chromium-desktop",
+      "status": "PASS",
+      "artStart": {
+        "x": 444,
+        "y": 213,
+        "w": 522,
+        "h": 587.25,
+        "bottom": 800.25,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 76,
+        "w": 1440,
+        "h": 824,
+        "bottom": 900,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": false
+    },
+    {
+      "id": "webkit-small-phone",
+      "status": "PASS",
+      "artStart": {
+        "x": 73.5,
+        "y": 110,
+        "w": 173,
+        "h": 194.625,
+        "bottom": 304.625,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 61,
+        "w": 320,
+        "h": 507,
+        "bottom": 568,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "webkit-mobile",
+      "status": "PASS",
+      "artStart": {
+        "x": 28.5,
+        "y": 110,
+        "w": 333,
+        "h": 374.625,
+        "bottom": 484.625,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 61,
+        "w": 390,
+        "h": 782.984375,
+        "bottom": 843.984375,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "webkit-tablet-boundary",
+      "status": "PASS",
+      "artStart": {
+        "x": 254.5,
+        "y": 213,
+        "w": 474,
+        "h": 533.25,
+        "bottom": 746.25,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 76,
+        "w": 768,
+        "h": 824,
+        "bottom": 900,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "webkit-small-landscape",
+      "status": "PASS",
+      "artStart": {
+        "x": 464,
+        "y": 162,
+        "w": 101,
+        "h": 113.625,
+        "bottom": 275.625,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 53,
+        "w": 844,
+        "h": 337,
+        "bottom": 390,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "webkit-tablet-landscape",
+      "status": "PASS",
+      "artStart": {
+        "x": 441.5,
+        "y": 213,
+        "w": 356,
+        "h": 400.5,
+        "bottom": 613.5,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 76,
+        "w": 1024,
+        "h": 692,
+        "bottom": 768,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": true
+    },
+    {
+      "id": "webkit-desktop",
+      "status": "PASS",
+      "artStart": {
+        "x": 444,
+        "y": 213,
+        "w": 522,
+        "h": 587.25,
+        "bottom": 800.25,
+        "display": "block",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "artAfter": {
+        "x": 0,
+        "y": 76,
+        "w": 1440,
+        "h": 824,
+        "bottom": 900,
+        "display": "flex",
+        "visibility": "visible",
+        "overflow": "hidden"
+      },
+      "journal": false
+    }
+  ],
+  "passed": true,
+  "runDate": "2026-10-21T08:36:00.859Z",
+  "caveat": "Simulated Chromium and WebKit engines, not physical iOS/Android; virtual keyboard behavior is not verified."
+}

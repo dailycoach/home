@@ -1,0 +1,79 @@
+# 변경 파일 전체 목록
+
+프로덕션 변경은 activities/moonjar/에 한정한다. 그 밖의 변경은 해당 앱의 테스트·fixture 계약 갱신·PR 검사만이며, 사이트 루트·다른 활동·NAL·RS 구현은 수정하지 않았다.
+
+- index: 한자 인장 제거, 워드마크와 메뉴, CSS 로드 책임 정리.
+- app: 명시적 START 상태, 실제 원본 렌더러로 구성한 cover, 라우트 이동 경고, 현재 작품 이름 변경, 짧은 화면 보기 도구.
+- CSS: 공통/cover/studio/선택적 윤곽의 책임 분리.
+- fonts/icons: 정식 자체 호스팅 폰트와 Phosphor 메뉴 아이콘, 각각의 라이선스.
+- tests/scripts/workflow: 새 UI 진입 경로와 시각 토큰으로 기존 검사를 갱신하고, 기존 데이터·출력·실제 IDB 실패 검사를 추가. 기존 도메인·저장 테스트를 삭제하거나 저장 실패를 무시하지 않았다.
+- review/docs: base 전후 실제 캡처, 비교판, 해시와 원시 실행 로그, 재검증 안내.
+
+- `.github/workflows/moonjar-ux-regression.yml`
+- `activities/moonjar/BASELINE.md`
+- `activities/moonjar/HANDOFF.md`
+- `activities/moonjar/QA.md`
+- `activities/moonjar/assets/fonts/LICENSE.txt`
+- `activities/moonjar/assets/fonts/PretendardVariable.woff2`
+- `activities/moonjar/assets/icons/LICENSE`
+- `activities/moonjar/assets/icons/list.svg`
+- `activities/moonjar/design-qa.md`
+- `activities/moonjar/index.html`
+- `activities/moonjar/nacre-visibility.css`
+- `activities/moonjar/refinement.css`
+- `activities/moonjar/review/v3/CHANGED_FILES.md`
+- `activities/moonjar/review/v3/after/archive-390.png`
+- `activities/moonjar/review/v3/after/gallery-1440.png`
+- `activities/moonjar/review/v3/after/gallery-390.png`
+- `activities/moonjar/review/v3/after/guide-390.png`
+- `activities/moonjar/review/v3/after/help-390.png`
+- `activities/moonjar/review/v3/after/intro-1440.png`
+- `activities/moonjar/review/v3/after/intro-320.png`
+- `activities/moonjar/review/v3/after/intro-390.png`
+- `activities/moonjar/review/v3/after/materials-390.png`
+- `activities/moonjar/review/v3/after/reflection-390.png`
+- `activities/moonjar/review/v3/after/save-320.png`
+- `activities/moonjar/review/v3/after/save-390.png`
+- `activities/moonjar/review/v3/after/start-320.png`
+- `activities/moonjar/review/v3/after/start-390.png`
+- `activities/moonjar/review/v3/after/studio-1440.png`
+- `activities/moonjar/review/v3/after/studio-320.png`
+- `activities/moonjar/review/v3/after/studio-390.png`
+- `activities/moonjar/review/v3/asset-integrity.json`
+- `activities/moonjar/review/v3/atelier-results.json`
+- `activities/moonjar/review/v3/before/intro-1440.png`
+- `activities/moonjar/review/v3/before/intro-390.png`
+- `activities/moonjar/review/v3/before/studio-1440.png`
+- `activities/moonjar/review/v3/before/studio-390.png`
+- `activities/moonjar/review/v3/comparison-focused.png`
+- `activities/moonjar/review/v3/comparison-intro.png`
+- `activities/moonjar/review/v3/journey-overview.png`
+- `activities/moonjar/review/v3/journey-results.json`
+- `activities/moonjar/review/v3/logs/baseline-browser.log`
+- `activities/moonjar/review/v3/logs/baseline-journey.log`
+- `activities/moonjar/review/v3/logs/baseline-nacre96.log`
+- `activities/moonjar/review/v3/logs/baseline-release.log`
+- `activities/moonjar/review/v3/logs/baseline-unit-tests.log`
+- `activities/moonjar/review/v3/logs/baseline-viewport.log`
+- `activities/moonjar/review/v3/logs/unit-tests.log`
+- `activities/moonjar/review/v3/logs/v3-atelier.log`
+- `activities/moonjar/review/v3/logs/v3-browser.log`
+- `activities/moonjar/review/v3/logs/v3-journey.log`
+- `activities/moonjar/review/v3/logs/v3-nacre96.log`
+- `activities/moonjar/review/v3/logs/v3-release.log`
+- `activities/moonjar/review/v3/logs/v3-viewport.log`
+- `activities/moonjar/review/v3/protected-files.json`
+- `activities/moonjar/review/v3/reference-B.png`
+- `activities/moonjar/review/v3/release-results.json`
+- `activities/moonjar/review/v3/viewport-results.json`
+- `activities/moonjar/src/app.js`
+- `activities/moonjar/styles.css`
+- `activities/moonjar/viewport.css`
+- `scripts/check-moonjar-atelier.mjs`
+- `scripts/check-moonjar-browser.mjs`
+- `scripts/check-moonjar-journey.mjs`
+- `scripts/check-moonjar-nacre96.mjs`
+- `scripts/check-moonjar-release.mjs`
+- `scripts/check-moonjar-viewport.mjs`
+- `scripts/moonjar-browser-helpers.mjs`
+- `tests/moonjar/site-integration.test.js`

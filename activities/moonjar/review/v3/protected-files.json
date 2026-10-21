@@ -1,0 +1,50 @@
+[
+  {
+    "path": "activities/moonjar/src/domain.js",
+    "beforeSHA256": "e081c51dfc8888884b88979a04d94ba54e80f5d76282e43552dcb3f0157c16bd",
+    "afterSHA256": "e081c51dfc8888884b88979a04d94ba54e80f5d76282e43552dcb3f0157c16bd",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/src/rendering.js",
+    "beforeSHA256": "e8c9630994afc49ffa9d6ae136da08432c264c61aa3d0b8023c455838d16dcee",
+    "afterSHA256": "e8c9630994afc49ffa9d6ae136da08432c264c61aa3d0b8023c455838d16dcee",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/src/persistence.js",
+    "beforeSHA256": "d3a14b010fdf58517aece04328a390d4dfd576f0c6b06c73f835cff564c60dc0",
+    "afterSHA256": "d3a14b010fdf58517aece04328a390d4dfd576f0c6b06c73f835cff564c60dc0",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/src/nacre-visibility.js",
+    "beforeSHA256": "d1651dfd7c179176bad2302edc2fbad275f093e090d2fb1121d29367fd6471ed",
+    "afterSHA256": "d1651dfd7c179176bad2302edc2fbad275f093e090d2fb1121d29367fd6471ed",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/data/story.json",
+    "beforeSHA256": "6b3d8eef74e994dfe8730533f4e157156db671d1a111dad8a3157204df24ef6a",
+    "afterSHA256": "6b3d8eef74e994dfe8730533f4e157156db671d1a111dad8a3157204df24ef6a",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/data/manifest.json",
+    "beforeSHA256": "9da05eca5df8ddc864d1d30f6a7d0af9f403d8c8154fbb8334e2cae77296d4e9",
+    "afterSHA256": "9da05eca5df8ddc864d1d30f6a7d0af9f403d8c8154fbb8334e2cae77296d4e9",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/data/schema.json",
+    "beforeSHA256": "b7a941e13ec86bf9487023d0c98a8dde60988fb966162c1d7176d43e4fcd4cd0",
+    "afterSHA256": "b7a941e13ec86bf9487023d0c98a8dde60988fb966162c1d7176d43e4fcd4cd0",
+    "identical": true
+  },
+  {
+    "path": "activities/moonjar/data/empty.json",
+    "beforeSHA256": "48c8e12baa1802aa57a15119574b7fae4ec47ab9cd83284d21b98753c3ced0a2",
+    "afterSHA256": "48c8e12baa1802aa57a15119574b7fae4ec47ab9cd83284d21b98753c3ced0a2",
+    "identical": true
+  }
+]
