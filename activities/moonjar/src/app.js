@@ -139,7 +139,9 @@ function header(title, subtitle) {
 function home() {
   currentView='home';main.className='home';main.replaceChildren();
   const section=el('section',null,{class:'hero'}),copy=el('div',null,{class:'hero-copy'});
-  copy.append(el('p','손끝에서 시작되는 나의 이야기',{class:'eyebrow'}),el('h1','오늘,\n나를 담는\n작은 공방'),el('p','자개를 선택하고,\n자유롭게 배치하며,\n나만의 이야기를\n완성하는 시간.',{class:'hero-lead'}));
+  const title=el('h1');
+  ['오늘,','나를 담는','작은 공방'].forEach((line,i)=>{if(i)title.append(document.createTextNode(' '));title.append(el('span',line,{class:'hero-title-line'}));});
+  copy.append(el('p','손끝에서 시작되는 나의 이야기',{class:'eyebrow'}),title,el('p','자개를 선택하고,\n자유롭게 배치하며,\n나만의 이야기를\n완성하는 시간.',{class:'hero-lead'}));
   // A real scene with the exact original porcelain and nacre, rendered by the
   // same renderer as the editor. Never a flattened app screenshot or a new jar.
   const demo=clone(empty.scene);demo.theme='dark';
@@ -157,6 +159,11 @@ function home() {
     const item=button('',action);item.append(el('img',null,{src:assetURL(src),alt:'',width:'100',height:'90'}),el('span',label));links.append(item);
   }
   section.append(copy,figure,startArea,links);main.append(section);
+  frameIntro();
+}
+function frameIntro(){
+  const svg=$('.hero-figure svg');
+  if(svg)svg.setAttribute('preserveAspectRatio',matchMedia('(max-width:767px)').matches?'xMidYMid meet':'xMidYMid slice');
 }
 function startPage(){
   currentView='start';main.className='start-page';main.replaceChildren();
@@ -228,8 +235,8 @@ function studio() {
   const shell = el('div',null,{class:'stage-shell',id:'stage-shell',tabindex:'-1','aria-label':'달항아리 작품 영역'}), paper = el('div',null,{class:'paper',id:'paper'});
   const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
   svg.id = 'art'; svg.classList.add('art'); svg.setAttribute('viewBox','0 0 1600 1800'); svg.setAttribute('role','img'); svg.setAttribute('aria-label','달항아리 작품. 조각 선택과 조절은 자개 목록과 조절 버튼으로도 할 수 있습니다.');
-  paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
-  const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('보기·배치','view-options',{class:'compact-view'}),button('저장·보관','save-options')); stage.append(edittools);
+  paper.append(svg); shell.append(paper); stage.append(sceneLead,viewtools,lookPrompt,shell);
+  const edittools = el('div',null,{class:'art-toolbar'}); edittools.append(button('↶ 취소','undo',{id:'undo','aria-label':'작품 실행 취소'}),button('↷ 다시','redo',{id:'redo','aria-label':'작품 다시 실행'}),button('배치 남기기','snapshot'),button('보기·배치','view-options',{class:'compact-view'}),button('저장·보관','save-options')); stage.append(edittools,el('p',story.ui.freePlacementHint,{class:'canvas-hint'}));
   const firstHint=el('p','자개를 하나씩 놓거나, 같은 색상군에서 12개씩 채울 수 있어요. 조각마다 뜻을 붙일 필요는 없습니다.',{id:'first-piece-hint',class:'first-piece-hint'});stage.append(firstHint);
   // Workbench architecture: tool inspector is a workspace sibling. On wide
   // screens it docks beside the reflection notebook rather than squeezing the
@@ -340,25 +347,34 @@ function observeStudioGeometry(){
       if(shell.isConnected && currentView==='studio')fitArtworkToFrame();
     });
   });
-  canvasResizeObserver.observe(shell);
+  canvasResizeObserver.observe($('.stage-area'));
 }
 function fitArtworkToFrame(){
   const paper=$('#paper'),shell=$('#stage-shell');
   if(!paper||!shell)return;
-  const styles=getComputedStyle(shell);
-  const padX=(parseFloat(styles.paddingLeft)||0)+(parseFloat(styles.paddingRight)||0);
-  const padY=(parseFloat(styles.paddingTop)||0)+(parseFloat(styles.paddingBottom)||0);
+  const stage=$('.stage-area'),styles=getComputedStyle(shell),host=getComputedStyle(stage);
+  const number=v=>parseFloat(v)||0;
+  const padX=number(styles.paddingLeft)+number(styles.paddingRight)+number(styles.borderLeftWidth)+number(styles.borderRightWidth);
+  const padY=number(styles.paddingTop)+number(styles.paddingBottom)+number(styles.borderTopWidth)+number(styles.borderBottomWidth);
   const screenLayout=getComputedStyle(main).getPropertyValue('--moonjar-single-screen').trim()==='1';
+  // Measure the stable workspace, not the shell we are sizing. This prevents
+  // width-limited portrait art from leaving an empty frame below the canvas.
+  const occupied=[...stage.children].filter(n=>n!==shell&&getComputedStyle(n).display!=='none').reduce((sum,n)=>{
+    const cs=getComputedStyle(n);return sum+n.getBoundingClientRect().height+number(cs.marginTop)+number(cs.marginBottom);
+  },0);
   const availableHeight=screenLayout
-    ? Math.max(80,shell.clientHeight-padY-4)
+    ? Math.max(80,stage.clientHeight-number(host.paddingTop)-number(host.paddingBottom)-occupied-padY-4)
     : (parseFloat(styles.maxHeight)||window.innerHeight*0.72)-padY-4;
-  const availableWidth=Math.max(80,shell.clientWidth-padX-4);
+  const availableWidth=Math.max(80,stage.clientWidth-number(host.paddingLeft)-number(host.paddingRight)-padX-4);
   const fit=Math.max(72,Math.min(640,availableWidth,availableHeight*8/9));
   const next=Math.round(fit*zoom);
   // Shell-resize reactions are presentation only: never replace the SVG
   // nodes while a finger, keyboard or accessibility tool is selecting one.
   if(parseFloat(paper.style.width)!==next)paper.style.width=next+'px';
   paper.style.maxWidth='none';
+  shell.style.height=Math.ceil(next*9/8+padY)+'px';
+  shell.style.maxWidth=Math.ceil(next+padX)+'px';
+  stage.style.setProperty('--artwork-width',Math.ceil(next+padX)+'px');
 }
 function renderCanvas(preview = null) {
   const svg = $('#art'); if (!svg) return;
@@ -411,6 +427,11 @@ function viewOptions(){
       toolbar.removeEventListener('click',closeForAction);
       if(owner.isConnected&&!$('.view-toolbar',owner))$('#look-prompt',owner).before(toolbar);
     },{once:true});
+  }
+  if(editor.doc.mode==='guided'&&matchMedia('(max-width:767px) and (max-height:650px)').matches){
+    const chapters=navigation();chapters.open=true;
+    chapters.addEventListener('click',e=>{if(e.target.closest('[data-action]'))closeDialog();});
+    root.append(chapters);
   }
   const choices=mobile?[]:[['작품 보기 축소','zoom-out'],['작품 전체 보기','fit'],['작품 보기 확대','zoom-in'],['나의 바탕 · 네 가지 도안','compare'],['잠시 바라보기','pause']];
   choices.push(['배치 남기기','snapshot'],[editor.doc.mode==='free'?'이야기 읽으며 꾸미기':'자유롭게 꾸미기','toggle-mode']);
@@ -861,8 +882,8 @@ async function projects(){
   await queue?.flush();
   if(epoch!==projectListEpoch)return;
   currentView='projects';main.className='projects-page';main.replaceChildren(header('이 기기의 작업','이 브라우저에 보관한 작업입니다. 자동으로 다른 기기와 동기화되지 않습니다.'));
-  const actions=el('div',null,{class:'button-row project-top-actions'});actions.append(button('편집 파일 열기','import'),button('새 작업 시작','home'));main.append(actions);
-  if(!repository){main.append(el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 편집 파일을 열거나 화면에만 유지하며 시작할 수 있습니다.'));return;}
+  const actions=el('div',null,{class:'button-row project-top-actions'});actions.append(button('편집 파일 열기','import'),button('새 작업 시작','home'));
+  if(!repository){main.append(actions,el('p','이 환경에서는 자동 저장을 사용할 수 없어요. 편집 파일을 열거나 화면에만 유지하며 시작할 수 있습니다.'));return;}
   const stored=await repository.list();
   if(epoch!==projectListEpoch||currentView!=='projects')return;
   const list=stored.filter(d=>!validateProject(d,schema,manifest).length).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
@@ -873,18 +894,21 @@ async function projects(){
     emptyState.append(el('p','개인 작업 보관함',{class:'eyebrow'}),el('h2','아직 이곳에 놓아둔 작품이 없습니다.'),el('p','작품을 시작하거나, 이전에 내려받은 편집 파일을 열어 이어갈 수 있어요. 자동 저장은 다른 기기와 동기화되지 않습니다.'));
     emptyState.append(button('첫 작품 시작하기','home',{class:'primary'}),button('편집 파일 열기','import'));
     main.append(emptyState);
-  }
+  }else main.append(actions);
   const cards=el('div',null,{class:'project-list'});
   for(const d of list){
     const card=el('article',null,{class:'project-card'});
     card.append(scenePreview(d.scene,d.title||'이름 없이 남긴 작품'));
     const info=el('div',null,{class:'project-card-info'});
-    info.append(el('p','이 브라우저에 보관',{class:'eyebrow'}),el('h2',d.title||story.ui.noTitle),el('p',`최근 작업 ${new Date(d.updatedAt).toLocaleString('ko-KR')} · 자개 ${d.scene.nodes.length}개`,{class:'micro project-meta'}));
+    const meta=el('p',null,{class:'micro project-meta'});
+    meta.append(el('time','최근 수정 '+new Date(d.updatedAt).toLocaleString('ko-KR',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}),{datetime:d.updatedAt}),el('span',`자개 ${d.scene.nodes.length}개`));
+    info.append(el('h2',d.title||story.ui.noTitle),meta);
     const controls=el('div',null,{class:'project-card-actions'});
     controls.append(button('이어서 꾸미기',`open:${d.projectId}`,{class:'primary'}),button('제목 변경',`rename:${d.projectId}`),button('삭제',`delete-project:${d.projectId}`,{class:'danger','aria-label':`「${d.title||'이름 없는 작품'}」 삭제`}));
     info.append(controls);card.append(info);cards.append(card);
   }
-  main.append(cards,el('p','같은 브라우저를 쓰는 사람도 이 목록을 열 수 있습니다. 공용 기기에서는 기록을 남기지 않는 모드를 선택하세요.',{class:'micro archive-privacy'}));
+  if(list.length)main.append(cards);
+  main.append(el('p','같은 브라우저를 쓰는 사람도 이 목록을 열 수 있습니다. 공용 기기에서는 기록을 남기지 않는 모드를 선택하세요.',{class:'micro archive-privacy'}));
 }
 async function renameProject(id){
   await queue?.flush();
@@ -1087,7 +1111,7 @@ const actions={
   clear:()=>{if(editable())confirmAction('작품 비우기','조각과 조각 메모를 비웁니다. 성찰 글은 유지되며 이 작업은 실행 취소할 수 있습니다.',()=>{editor.clear();changed();},'비우기');},
   'zoom-in':()=>{zoom=clamp(zoom+0.25,0.5,2.5);renderCanvas();},'zoom-out':()=>{zoom=clamp(zoom-0.25,0.5,2.5);renderCanvas();},fit:()=>{zoom=1;renderCanvas();},
   pause:()=>setPanel(paused?'palette':'look'),
-  'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();},
+  'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();fitArtworkToFrame();},
   snapshot,compare,finish,'view-options':viewOptions,'piece-note':pieceNote,'save-options':saveOptions,
   'batch:12':()=>addColorBatch($('[data-action="batch:12"]')),
   continue:()=>{paused=false;viewScene='arrange';if(!readOnly)editor.navigate('arrange');location.hash=`/studio/${editor.doc.projectId}`;studio();},
@@ -1146,7 +1170,7 @@ window.addEventListener('beforeunload',event=>{
 });
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')queue?.flush();});
 window.addEventListener('hashchange',()=>safely(route));
-window.addEventListener('resize',()=>{if(editor&&currentView==='studio')fitArtworkToFrame();});
+window.addEventListener('resize',()=>{frameIntro();if(editor&&currentView==='studio')fitArtworkToFrame();});
 function render(){if(currentView==='result')result();else if(editor)studio();else home();}
 let renderedHash='',routeEpoch=0;
 async function route(){

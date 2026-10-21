@@ -50,9 +50,9 @@ try{
     'primary call-to-action should be ink-dark with restrained corners');
   check(artDirection.headerImage==='none','no generated-looking gradient on the masthead');
   check(artDirection.headingFamily.includes('Moonjar Gowun'),'self-hosted Korean editorial heading must apply');
-  check(artDirection.files[1]?.includes('refinement.css?v=20261021-v3.1'),
+  check(artDirection.files[1]?.includes('refinement.css?v=20261021-v3.2'),
     'atelier appearance must load after legacy tool styles');
-  check(artDirection.files[2]?.includes('viewport.css?v=20261021-v3.1'),
+  check(artDirection.files[2]?.includes('viewport.css?v=20261021-v3.2'),
     'viewport layout must load after appearance and interaction layers');
   const homeShell=await page.evaluate(()=>({
     bodyOverflow:getComputedStyle(document.body).overflow,

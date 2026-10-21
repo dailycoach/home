@@ -735,25 +735,25 @@ details > p {
 }
 .project-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-  margin: 30px 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  align-items: start;
+  gap: 40px;
+  margin: 32px 0;
 }
 .project-card {
   min-width: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 18px;
-  padding: 0 0 26px;
+  padding: 0 0 24px;
   border-bottom: 1px solid var(--line);
 }
 .project-card > .comparison-scene {
-  padding: 18px;
-  background: #242722;
-  border: 1px solid #45483f;
+  padding: 0;
+  background: transparent;
 }
 .project-card > .comparison-scene svg {
-  max-height: 430px;
+  max-height: 500px;
   width: 100%;
   object-fit: contain;
 }
@@ -765,23 +765,39 @@ details > p {
 }
 .project-card h2 {
   font-size: 23px;
+  line-height: 1.45;
   overflow-wrap: anywhere;
 }
 .project-meta {
-  margin: 10px 0 17px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 9px 0 18px;
+}
+.project-list:has(> .project-card:only-child) {
+  grid-template-columns: minmax(0, 420px);
+  justify-content: center;
 }
 .project-card-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .project-card-actions > button {
-  min-width: 0;
-  padding-inline: 7px;
+  min-width: 44px;
+  padding-inline: 9px;
   font-size: 12px;
 }
 .project-card-actions > .primary {
-  grid-column: 1/-1;
+  flex: 1 1 130px;
+}
+.project-card-actions > button:not(.primary) {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+.project-card-actions > button.danger {
+  color: var(--error);
 }
 .archive-empty {
   padding: 50px 0;

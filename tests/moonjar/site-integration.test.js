@@ -42,7 +42,7 @@ test('public app contains an original vector hero, not the removed museum photog
 
 test('post-evaluation design stylesheet loads after main CSS and ownership wording is correct',()=>{
   const page=read('activities/moonjar/index.html');
-  const order=['styles.css?v=20261021-v3.1','refinement.css?v=20261021-v3.1','viewport.css?v=20261021-v3.1','nacre-visibility.css?v=20261021-v3.1'];
+  const order=['styles.css?v=20261021-v3.2','refinement.css?v=20261021-v3.2','viewport.css?v=20261021-v3.2','nacre-visibility.css?v=20261021-v3.2'];
   assert.ok(order.every((asset,i)=>page.indexOf(asset)>=0 && (i===0||page.indexOf(order[i-1])<page.indexOf(asset))));
   assert.ok(!page.includes('decorating-flow.css'),'legacy collision layer is no longer loaded');
   assert.ok(!page.includes('brand-seal'),'wordmark does not include a replacement emblem');

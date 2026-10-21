@@ -228,13 +228,14 @@ main.studio {
   grid-row: 1/3;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
   min-width: 0;
   min-height: 0;
   height: 100%;
   overflow: hidden;
   padding: 14px 18px 10px;
-  background: #20231f;
+  background: var(--page);
 }
 .view-toolbar {
   display: flex;
@@ -254,14 +255,16 @@ main.studio {
   min-width: 44px;
 }
 .stage-shell {
-  flex: 1 1 0;
+  flex: 0 0 auto;
+  align-self: center;
+  width: 100%;
   min-height: 0;
   overflow: auto;
   padding: 8px;
   overscroll-behavior: contain;
   scrollbar-width: thin;
   border: 1px solid #45483f;
-  background: #292c26;
+  background: #242621;
 }
 .paper {
   margin: auto;
@@ -280,6 +283,9 @@ main.studio {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 5px;
   margin-top: 9px;
+  width: 100%;
+  max-width: var(--artwork-width, 100%);
+  align-self: center;
 }
 .art-toolbar button {
   font-size: 12px;
@@ -605,6 +611,7 @@ main.studio {
     overflow: hidden;
   }
   .stage-area {
+    justify-content: flex-end;
     height: 100%;
     width: 100%;
     padding: 5px 10px 6px;
@@ -876,6 +883,7 @@ main.studio {
     margin: 2px;
   }
   .studio.paused .stage-area {
+    justify-content: center;
     padding-bottom: 12px;
   }
   .result-page {
@@ -949,6 +957,10 @@ main.studio {
   .studio {
     --dock-height: 144px;
     --controls-height: 116px;
+  }
+  .studio:has(#palette-panel.mobile-active) > .scene-chapters,
+  .studio:has(#controls-panel.mobile-active) > .scene-chapters {
+    display: none;
   }
   .studio-bar {
     padding-inline: 10px;
@@ -1098,6 +1110,9 @@ main.studio {
 }
 
 @media (min-width: 768px) {
+  .art-toolbar {
+    min-width: min(100%, 320px);
+  }
   .compact-view {
     display: none;
   }
