@@ -57,9 +57,31 @@ export function renderSVG(svg, scene, materials, selectedId = null, previewNode 
     g.append(element('rect', {x: -w / 2 - 12, y: -h / 2 - 12, width: w + 24, height: h + 24, fill: 'none', stroke: '#49685D', 'stroke-width': 5, 'stroke-dasharray': n.locked ? '16 10' : 'none', 'pointer-events':'none'}));
     if (!n.locked) {
       g.append(element('line', {x1: 0, y1: -h / 2 - 12, x2: 0, y2: -h / 2 - 95, stroke: '#49685D', 'stroke-width': 5, 'pointer-events':'none'}));
-      for (const [mode, x, y] of [['rotate',0,-h / 2 - 95],['resize',w / 2 + 12,h / 2 + 12]]) {
-        g.append(element('circle', {cx: x, cy: y, r: 42, fill: '#FFFEFA', stroke: '#49685D', 'stroke-width': 5, 'data-id': n.instanceId, 'data-handle': mode}));
-        const label = element('text', {x, y: y + 14, 'text-anchor':'middle', 'font-size':48, fill:'#253536', 'pointer-events':'none'}); label.textContent = mode === 'rotate' ? '↻' : '↗'; g.append(label);
+      // Contextual delete sits opposite resize; the saved artwork and PNG
+      // export never contain editing handles. Locked pieces expose none.
+      for (const [mode, x, y] of [['rotate',0,-h / 2 - 95],['resize',w / 2 + 12,h / 2 + 12],['delete',-w / 2 - 12,h / 2 + 12]]) {
+        const destructive = mode === 'delete';
+        const handle = element('circle', {
+          cx:x, cy:y, r:destructive ? 50 : 42,
+          fill:destructive ? '#FFF8F5' : '#FFFEFA',
+          stroke:destructive ? '#9C4942' : '#49685D',
+          'stroke-width':5, 'data-id':n.instanceId, 'data-handle':mode,
+          ...(destructive ? {role:'button',tabindex:0,'aria-label':'선택한 조각 삭제',style:'cursor:pointer;touch-action:manipulation'} : {})
+        });
+        if(destructive) {
+          const tip=element('title');tip.textContent='선택한 조각 삭제 · ↶ 취소로 되돌리기';handle.append(tip);
+        }
+        g.append(handle);
+        if(destructive) {
+          g.append(element('path', {
+            d:'M -18 -16 H 18 M -11 -22 H 11 M -14 -10 L -12 18 Q -12 22 -8 22 H 8 Q 12 22 12 18 L 14 -10 M -5 -4 V 13 M 5 -4 V 13',
+            transform:`translate(${x} ${y})`,fill:'none',stroke:'#9C4942',
+            'stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round','pointer-events':'none'
+          }));
+        } else {
+          const label = element('text', {x, y: y + 14, 'text-anchor':'middle', 'font-size':48, fill:'#253536', 'pointer-events':'none'});
+          label.textContent = mode === 'rotate' ? '↻' : '↗';g.append(label);
+        }
       }
     }
     svg.append(g);
