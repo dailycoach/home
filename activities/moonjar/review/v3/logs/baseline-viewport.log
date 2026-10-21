@@ -1,0 +1,13 @@
+VIEWPORT PASS: chromium-small-phone
+VIEWPORT PASS: chromium-mobile
+VIEWPORT PASS: chromium-tablet-boundary
+VIEWPORT PASS: chromium-small-landscape
+VIEWPORT PASS: chromium-tablet-landscape
+VIEWPORT PASS: chromium-desktop
+VIEWPORT PASS: webkit-small-phone
+VIEWPORT PASS: webkit-mobile
+VIEWPORT PASS: webkit-tablet-boundary
+VIEWPORT PASS: webkit-small-landscape
+VIEWPORT PASS: webkit-tablet-landscape
+VIEWPORT PASS: webkit-desktop
+MOONJAR VIEWPORT MATRIX: 212 assertions, 12/12 scenarios; PASSED

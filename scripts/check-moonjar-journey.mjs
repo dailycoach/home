@@ -1,3 +1,4 @@
+import {beginWork,settleArtwork,menuAction} from './moonjar-browser-helpers.mjs';
 // Whole-journey browser QA: screens beyond porcelain and nacre art.
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -6,7 +7,8 @@ const base='http://127.0.0.1:4173/activities/moonjar/',out='artifacts/moonjar-jo
 await mkdir(out,{recursive:true});
 let checks=0;const results=[];
 function ok(x,msg){assert.ok(x,msg);checks++;}
-async function shot(page,name,stage){await page.screenshot({path:out+'/'+name+'-'+stage+'.png',fullPage:['guide','materials','archive','projects'].includes(stage)})}
+async function shot(page,name,stage){await settleArtwork(page);
+  await page.screenshot({path:out+'/'+name+'-'+stage+'.png',fullPage:['guide','materials','archive','projects'].includes(stage)})}
 async function noOverflow(page,name){
  const width=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  ok(width<=2,name+' no document horizontal overflow: '+width);
@@ -22,14 +24,14 @@ async function scenario(browserType,engine,width,height){
  try{
   await page.goto(base,{waitUntil:'networkidle',timeout:35000});
   ok(await page.locator('.hero').count()===1,name+' original artistic homepage intact');
-  ok(await page.locator('.home-journey span').count()===3,name+' first-time visitor sees three small steps');
-  ok((await page.locator('.home-journey').innerText()).includes('작품 간직하기'),name+' journey ends with keeping the artwork');
+  ok(await page.locator('.atelier-links button').count()===3,name+' three workshop destinations');
+  ok(await page.locator('.hero-actions>.primary').count()===1,name+' one primary entry action');
   ok(await page.evaluate(()=>getComputedStyle(document.body).overflow==='hidden'),name+' one-screen home');
   await shot(page,name,'home');
 
   // The desktop header intentionally hides facilitator-only navigation on phones.
   // Mobile participants still reach it from the visible materials/privacy page.
-  await page.locator('.site-header [data-action="materials"]').click();
+  await menuAction(page,'materials');
   await page.locator('main.materials-guide').waitFor();
   await page.locator('.materials-related-links a[href="#/guide"]').click();
   await page.locator('main.facilitator-guide').waitFor();
@@ -51,7 +53,7 @@ async function scenario(browserType,engine,width,height){
   ok(width<=767?rowType==='grid':rowType==='table-row',name+' timetable responsive without hidden rows');
   await shot(page,name,'guide');
 
-  await page.locator('.site-header [data-action="materials"]').click();
+  await menuAction(page,'materials');
   await page.locator('main.materials-guide').waitFor();
   ok(await page.locator('.materials-item').count()===9,name+' material/privacy paragraphs preserved');
   ok(await page.locator('.materials-section').count()===4,name+' grouped sections and attribution');
@@ -88,7 +90,7 @@ async function scenario(browserType,engine,width,height){
 
   await page.locator('.archive-empty [data-action="home"]').click();
   await page.locator('main.home').waitFor();
-  await page.locator('main.home [data-action="start-free"]').click();
+  await beginWork(page,'free');
   await page.locator('#art').waitFor({state:'visible'});
   ok(await page.evaluate(()=>getComputedStyle(document.body).overflow==='hidden'),name+' original editor layout unchanged');
   await page.locator('#palette-panel [data-action="add:A01"]').click();

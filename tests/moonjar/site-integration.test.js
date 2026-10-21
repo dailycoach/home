@@ -42,14 +42,13 @@ test('public app contains an original vector hero, not the removed museum photog
 
 test('post-evaluation design stylesheet loads after main CSS and ownership wording is correct',()=>{
   const page=read('activities/moonjar/index.html');
-  assert.ok(page.includes('styles.css?v=20261016-2'));
-  assert.ok(page.includes('refinement.css?v=20261019-atelier-v1'));
-  const order=['styles.css?v=20261016-2','nacre-visibility.css?v=20261017-w7','decorating-flow.css?v=20261017-free-v1','refinement.css?v=20261019-atelier-v1'];
-  assert.ok(order.every((asset,i)=>page.indexOf(asset)>=0 && (i===0||page.indexOf(order[i-1])<page.indexOf(asset))),
-    'visual atelier theme must load last, after all interaction layers');
-  const css=read('activities/moonjar/refinement.css');
+  const order=['styles.css?v=20261021-v3','refinement.css?v=20261021-v3','viewport.css?v=20261021-v3','nacre-visibility.css?v=20261021-v3'];
+  assert.ok(order.every((asset,i)=>page.indexOf(asset)>=0 && (i===0||page.indexOf(order[i-1])<page.indexOf(asset))));
+  assert.ok(!page.includes('decorating-flow.css'),'legacy collision layer is no longer loaded');
+  assert.ok(!page.includes('brand-seal'),'wordmark does not include a replacement emblem');
+  const css=read('activities/moonjar/styles.css');
   assert.match(css,/result-overview/);
-  assert.match(css,/max-width:767px/);
+  assert.match(css,/max-width:\s*767px/);
   const app=read('activities/moonjar/src/app.js');
   assert.match(app,/자개 도안 8종과 파생 조각 96개는 운영자가 직접 디자인한 자료/);
   assert.match(app,/class:'reflection-recap'/);

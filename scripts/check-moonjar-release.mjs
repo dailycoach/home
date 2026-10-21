@@ -1,3 +1,4 @@
+import {beginWork,settleArtwork} from './moonjar-browser-helpers.mjs';
 // WAVE 5 browser verification on the actual local static app, never production.
 // Chromium mobile emulation and WebKit engine are NOT physical Android/iPhone tests.
 import assert from 'node:assert/strict';
@@ -28,6 +29,7 @@ async function ensureNoOverflow(page,name){
   verify(values.doc <= values.inner+2,`${name} overflows viewport: ${JSON.stringify(values)}`);
 }
 async function screenshot(page,name) {
+  await settleArtwork(page);
   await page.screenshot({path:`${ART}/${name}.png`,fullPage:false,animations:'disabled'});
 }
 async function entryMatrix(browser,engine,width,height) {
@@ -40,16 +42,12 @@ async function entryMatrix(browser,engine,width,height) {
   const name=`${engine}-${width}`;
   try {
     await page.goto(HOST+PATH,{waitUntil:'networkidle',timeout:30000});
-    const hero=page.locator('.hero-figure img');
-    await hero.evaluate(img=>img.decode());
-    verify(await hero.evaluate(img=>img.naturalWidth>0 && img.naturalHeight>0),`${name} hero asset`);
+    verify(await page.locator('.hero-figure svg image').count()===13,`${name} real source art`);
     await ensureNoOverflow(page,`${name} entry`);
-    const buttons=page.locator('.hero-actions [data-action="start-guided"], .hero-actions [data-action="start-free"]');
-    verify(await buttons.count()===2,`${name} two start options`);
-    const primary=await page.locator('.hero-actions [data-action="start-free"]').boundingBox();
-    verify(primary && primary.y+primary.height<=height,
-      `${name} main action must be in first mobile viewport, not hidden below a tall hero: ${JSON.stringify(primary)}`);
-    await page.locator('[data-action="start-guided"]').click();
+    verify(await page.locator('.hero-actions .hero-cta').count()===1,`${name} one primary start action`);
+    const primary=await page.locator('.hero-cta').boundingBox();
+    verify(primary&&primary.y+primary.height<=height,`${name} primary action fits viewport`);
+    await beginWork(page,'guided');
     await page.locator('#art').waitFor({state:'visible'});
     verify(await page.locator('#save-state').getAttribute('role')==='status'
       && await page.locator('#save-state').getAttribute('aria-live')==='polite',
@@ -111,7 +109,7 @@ async function entryMatrix(browser,engine,width,height) {
     const meta=await page.locator('#art').evaluate(el=>({
       images:el.querySelectorAll('image').length,nodes:el.querySelectorAll('[data-node]').length
     }));
-    await page.locator('[data-action="projects"]').click();
+    await page.locator('.site-header [data-action="projects"]').click();
     await page.locator('.projects-page .project-card').first().waitFor({state:'visible',timeout:12000});
     verify(await page.locator('.projects-page .project-card').count()===1,
       `${name} one saved project should produce exactly one list card`);
@@ -127,16 +125,15 @@ async function privacyMatrix(browser,engine){
   const page=await context.newPage(),errors=[];attachEvents(page,errors);
   try{
     await page.goto(HOST+PATH,{waitUntil:'networkidle'});
-    await page.locator('#storage-memory').check();
-    await page.locator('[data-action="start-free"]').tap();
+    await beginWork(page,'free','memory');
     await page.locator('.mobile-tabs [data-action="panel:palette"]').tap();
     await page.locator('[data-action="add:A01"]').tap();
     await page.locator('#art [data-node]').first().waitFor({state:'attached',timeout:12000});
     verify(await page.locator('#art [data-node]').count()===1,`${engine} memory work created`);
     await page.reload({waitUntil:'networkidle'});
-    await page.locator('.hero-actions [data-action="start-free"]').waitFor({state:'visible'});
+    await page.locator('.hero-cta').waitFor({state:'visible'});
     verify(await page.locator('#art [data-node]').count()===0,`${engine} private mode intentionally does not restore on reload`);
-    await page.locator('[data-action="projects"]').click();
+    await page.locator('.site-header [data-action="projects"]').click();
     await page.locator('.projects-page .empty-state').first().waitFor({state:'visible',timeout:12000});
     verify((await page.locator('.projects-page .empty-state').count())===1,
       `${engine} project list must render exactly once and contain no memory-mode artwork`);

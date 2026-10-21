@@ -1,3 +1,4 @@
+import {beginWork,settleArtwork} from './moonjar-browser-helpers.mjs';
 // Moonjar viewport regression. Real Chromium/WebKit pages, NOT physical phones.
 // Ensures the editorial one-screen interaction does not hide tabs, journal,
 // tactile material selection, or the finished artwork at compact sizes.
@@ -51,11 +52,11 @@ async function run(name,browser,width,height,label){
   let result={id};
   try{
     await page.goto(ROOT,{waitUntil:'networkidle',timeout:30000});
-    await page.locator('.hero-actions [data-action="start-free"]').waitFor();
+    await page.locator('.hero-cta').waitFor();
     let home=await geometry(page);
     ok(home.scrollY===0&&home.bodyOverflow==='hidden',id+' first scene does not scroll the document');
     ok(home.main.bottom<=height+1,id+' intro is a bounded composition');
-    await page.locator('.hero-actions [data-action="start-free"]').click();
+    await beginWork(page,'free');
     await page.locator('#art').waitFor({state:'visible',timeout:12000});
     let start=await geometry(page);
     ok(start.bodyOverflow==='hidden'&&start.scrollY===0,id+' studio is one screen');
@@ -73,7 +74,8 @@ async function run(name,browser,width,height,label){
       const afterAdd=await geometry(page);
       ok(afterAdd.scrollY===0&&afterAdd.art.h>=75,id+' no scroll jump on material placement');
       if(height>=740&&name==='chromium'&&label==='mobile'){
-        await page.screenshot({path:DIR+'/'+id+'-palette.png',animations:'disabled'});
+        await settleArtwork(page);
+  await page.screenshot({path:DIR+'/'+id+'-palette.png',animations:'disabled'});
       }
     }else{
       await page.locator('#palette-panel [data-action="add:A01"]').click();
@@ -105,7 +107,8 @@ async function run(name,browser,width,height,label){
         id+' no hidden programmatic scroll of the workspace or stage');
       ok(selected.scrollY===0,id+' tool editing keeps page stationary');
       if(name==='chromium'&&label==='small-landscape'){
-        await page.screenshot({path:DIR+'/'+id+'-inspector.png',animations:'disabled'});
+        await settleArtwork(page);
+  await page.screenshot({path:DIR+'/'+id+'-inspector.png',animations:'disabled'});
       }
     }
     if(compact){
@@ -118,7 +121,8 @@ async function run(name,browser,width,height,label){
       const noteRect=await geometry(page);
       ok(noteRect.notes?.bottom<=height+1,id+' journal fits inside canvas station');
       if(name==='chromium'&&(label==='tablet-boundary'||label==='small-landscape')){
-        await page.screenshot({path:DIR+'/'+id+'-journal.png',animations:'disabled'});
+        await settleArtwork(page);
+  await page.screenshot({path:DIR+'/'+id+'-journal.png',animations:'disabled'});
       }
       await page.locator('.mobile-tabs [data-action="panel:palette"]').click();
       ok(!(await page.locator('.stage-area').evaluate(el=>el.inert)),
@@ -131,7 +135,8 @@ async function run(name,browser,width,height,label){
       await input.fill('오늘은 고르는 일을 즐겼다.');
     }
     if(name==='chromium'&&['mobile','desktop','small-landscape'].includes(label)){
-      await page.screenshot({path:DIR+'/'+id+'-studio.png',animations:'disabled'});
+      await settleArtwork(page);
+  await page.screenshot({path:DIR+'/'+id+'-studio.png',animations:'disabled'});
     }
     await page.locator('.studio-bar [data-action="finish"]').click();
     await page.locator('main.result-page').waitFor({state:'visible'});
@@ -141,7 +146,8 @@ async function run(name,browser,width,height,label){
     ok(await page.locator('main.result-page [data-action="card-options"]').count()===1,
       id+' result still includes opt-in art card');
     if(name==='chromium'&&['mobile','desktop'].includes(label)){
-      await page.screenshot({path:DIR+'/'+id+'-result.png',animations:'disabled'});
+      await settleArtwork(page);
+  await page.screenshot({path:DIR+'/'+id+'-result.png',animations:'disabled'});
     }
     ok(errors.length===0,id+' browser errors: '+errors.join(' | '));
     result={id,status:'PASS',artStart:start.art,artAfter:finish.main,journal:compact};

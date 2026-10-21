@@ -10,6 +10,8 @@ on:
       - 'scripts/check-moonjar-nacre96.mjs'
       - 'scripts/check-moonjar-release.mjs'
       - 'scripts/check-moonjar-viewport.mjs'
+      - 'scripts/check-moonjar-atelier.mjs'
+      - 'scripts/moonjar-browser-helpers.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
 permissions:
@@ -59,6 +61,17 @@ jobs:
         run: node scripts/check-moonjar-browser.mjs
       - name: Check all 96 source images on day and night porcelain
         run: node scripts/check-moonjar-nacre96.mjs
+      - name: Verify Atelier V3 start, local privacy, legacy import and output pixels
+        env:
+          MOONJAR_CHROMIUM_ONLY: '1'
+        run: node scripts/check-moonjar-atelier.mjs
+      - name: Attach Atelier V3 actual browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-atelier-v3-review
+          path: artifacts/moonjar-atelier-v3
+          retention-days: 14
       - name: Attach nacre source visual review
         if: always()
         uses: actions/upload-artifact@v4
