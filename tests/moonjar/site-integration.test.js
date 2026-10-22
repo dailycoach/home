@@ -42,7 +42,7 @@ test('public app contains an original vector hero, not the removed museum photog
 
 test('post-evaluation design stylesheet loads after main CSS and ownership wording is correct',()=>{
   const page=read('activities/moonjar/index.html');
-  const order=['styles.css?v=20261021-v3.2','refinement.css?v=20261021-v3.2','viewport.css?v=20261021-v3.2','nacre-visibility.css?v=20261021-v3.2'];
+  const order=['styles.css?v=20261022-photo-journal','refinement.css?v=20261021-v3.2','viewport.css?v=20261021-v3.2','nacre-visibility.css?v=20261021-v3.2'];
   assert.ok(order.every((asset,i)=>page.indexOf(asset)>=0 && (i===0||page.indexOf(order[i-1])<page.indexOf(asset))));
   assert.ok(!page.includes('decorating-flow.css'),'legacy collision layer is no longer loaded');
   assert.ok(!page.includes('brand-seal'),'wordmark does not include a replacement emblem');
@@ -54,4 +54,17 @@ test('post-evaluation design stylesheet loads after main CSS and ownership wordi
   assert.match(app,/class:'reflection-recap'/);
   assert.match(app,/class:'result-essay'/);
   assert.doesNotMatch(app,/자개 PNG의 공개 이용 권한은 별도로 확인/);
+});
+
+test('photo story requires explicit field selection and adds mobile-native sharing with fallback',()=>{
+  const app=read('activities/moonjar/src/app.js');
+  const writer=read('activities/moonjar/src/photo-journal.js');
+  assert.match(page,/src\/app\.js\?v=20261022-photo-journal/);
+  assert.match(app,/photoJournalOptions/);
+  assert.match(app,/photo-journal-field/);
+  assert.match(app,/navigator\.canShare/);
+  assert.match(app,/download:fileName\(index\)/);
+  assert.match(writer,/exportPhotoJournalPNGs/);
+  assert.match(writer,/drawScene/);
+  assert.doesNotMatch(writer,/fetch\s*\(|sendBeacon|XMLHttpRequest|WebSocket/);
 });
