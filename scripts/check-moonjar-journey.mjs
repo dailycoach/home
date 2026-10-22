@@ -97,7 +97,7 @@ async function scenario(browserType,engine,width,height){
   await page.locator('#art [data-node]').first().waitFor();
   await page.locator('.art-toolbar [data-action="save-options"]').click();
   await page.locator('#modal .save-options-grid').waitFor({state:'visible'});
-  ok(await page.locator('.save-option').count()===4,name+' four saves separated by outcome');
+  ok(await page.locator('.save-option').count()===5,name+' five saves separated by outcome');
   ok((await page.locator('.save-options-intro').innerText()).includes('개인 기록은 자동'),name+' private data notice at saving');
   const cols=await page.locator('.save-options-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').filter(Boolean).length);
   ok(width<=767?cols===1:cols===2,name+' responsive save dialog');
@@ -109,7 +109,7 @@ async function scenario(browserType,engine,width,height){
   });
   if(width===390&&height>=800){
     ok(saveBounds.lastBottom<=Math.min(saveBounds.modalBottom-4,height-4),
-      name+' all four save outcomes visible without hidden last CTA: '+JSON.stringify(saveBounds));
+      name+' all five save outcomes visible without hidden last CTA: '+JSON.stringify(saveBounds));
   }
   if(width<=350){
     await page.locator('.save-option').last().scrollIntoViewIfNeeded();
@@ -123,7 +123,7 @@ async function scenario(browserType,engine,width,height){
   await page.locator('.studio-bar [data-action="finish"]').click();
   await page.locator('main.result-page').waitFor();
   ok(await page.locator('.result-actions-label').innerText()==='작품을 간직하는 방법',name+' completion action hierarchy');
-  ok(await page.locator('.result-actions button').count()===5,name+' legacy completion options intact');
+  ok(await page.locator('.result-actions button').count()===6,name+' original completion options and new photo action intact');
   ok((await page.locator('.completion-next').innerText()).includes('기록은 선택한 경우에만'),name+' post-completion privacy guidance remains visible');
   await shot(page,name,'result');
   await page.locator('.result-actions [data-action="card-options"]').click();
