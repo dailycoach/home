@@ -54,7 +54,7 @@ async function scenario(browser,engine,width,height){
   await page.locator('#look-prompt [data-action="panel:palette"]').click();
   ok(await page.locator('#art [data-node]').count()===13,name+' return from reflection loses nothing');
   await page.locator('[data-action=finish]').first().click();await page.locator('.result-layout').waitFor();await shot(page,name+'-gallery');await bounded(page,name+' gallery');
-  ok(await page.locator('.result-actions button').count()===5,name+' all five completion actions');
+  ok(await page.locator('.result-actions button').count()===6,name+' all six completion actions');
   await page.locator('[data-action=card-options]').click();await page.locator('.card-modal').waitFor();
   ok(await page.locator('.card-modal input:checked').count()===0,name+' card private text opt-in');await page.locator('#modal-close').click();
   await page.locator('.site-header [data-action=projects]').click();await page.locator('.project-card').waitFor();await shot(page,name+'-archive');
