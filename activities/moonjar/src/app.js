@@ -1,6 +1,7 @@
 import {Editor, clone, clamp, angle, scaledDimensions, newProject, importAsNew, parseImport, validateProject, backgroundKey} from './domain.js';
 import {openRepository, SaveQueue} from './persistence.js';
 import {Materials, renderSVG, exportPNG, exportCardPNG, download, assetURL} from './rendering.js?v=20261022-quick-delete';
+import {collectPhotoEntries, exportPhotoJournalPNGs} from './photo-journal.js?v=20261022-photo-journal';
 
 const $ = (s, root = document) => root.querySelector(s);
 const main = $('#main'), modal = $('#modal'), body = $('#modal-body');
@@ -457,10 +458,11 @@ function saveOptions(){
   root.append(el('p','어떤 형태로 작품을 남길까요? 선택한 방식으로만 저장하며, 개인 기록은 자동으로 작품 이미지에 넣지 않습니다.',{class:'save-options-intro'}));
   const grid=el('div',null,{class:'save-options-grid'});
   const choices=[
-    ['01','작품 이미지만 저장','export-png','달항아리와 자개를 PNG 이미지로 저장합니다.'],
-    ['02','작품 카드 만들기','card-options','원할 때만 제목과 한 문장을 담습니다.'],
-    ['03','편집 파일로 보관','export-json','나중에 자개 배치를 이어서 수정할 수 있습니다. 개인 기록도 함께 들어갑니다.'],
-    ['04','기록지 인쇄·PDF 저장','print-options','출력할 기록을 직접 선택합니다.']
+    ['01','내 작품·글 사진으로 저장','photo-journal','작품과 직접 고른 제목·기록을 휴대폰 사진으로 간직합니다. 글이 길면 여러 장으로 나눕니다.'],
+    ['02','작품 이미지만 저장','export-png','달항아리와 자개만 PNG 이미지로 저장합니다.'],
+    ['03','작품 카드 만들기','card-options','원할 때만 제목과 한 문장을 담습니다.'],
+    ['04','편집 파일로 보관','export-json','나중에 자개 배치를 이어서 수정할 수 있습니다. 개인 기록도 함께 들어갑니다.'],
+    ['05','기록지 인쇄·PDF 저장','print-options','출력할 기록을 직접 선택합니다.']
   ];
   for(const [number,label,action,detail] of choices){
     const item=el('article',null,{class:'save-option'});
@@ -844,6 +846,142 @@ function cardOptions() {
   openDialog('내 작품 카드 만들기',root);
   updatePreview();
 }
+
+/**
+ * The participant explicitly selects every personal text field. Browser-local
+ * image rendering never uploads writing. Share is invoked directly in the
+ * click handler from pre-rendered Blobs to retain mobile user activation.
+ */
+function photoJournalOptions(){
+  if(!editor)return;
+  const doc=clone(editor.doc);
+  const entries=collectPhotoEntries(doc,story);
+  const title=entries.find(item=>item.id==='title');
+  const writings=entries.filter(item=>item.id!=='title');
+  const root=el('section',null,{class:'photo-journal-modal'});
+  root.append(
+    el('p','내 작품과 직접 고른 제목·글을 사진으로 만듭니다. 선택하지 않은 기록은 포함하지 않습니다. 길게 쓴 글도 자르지 않고 여러 장으로 나눕니다.',{class:'photo-journal-intro'}),
+    el('p','이미지는 이 기기에서만 생성됩니다. 사진 앱에 보관하거나 다른 앱으로 보내는 것은 직접 선택합니다.',{class:'micro'})
+  );
+  const options=el('div',null,{class:'photo-journal-options'});
+  const titleRow=el('label',null,{class:'check-row'});
+  const titleCheck=el('input',null,{type:'checkbox','data-photo-field':'title'});
+  titleCheck.checked=false;
+  if(title){
+    titleRow.append(titleCheck,el('span','내가 쓴 작품 제목 포함'));
+    options.append(titleRow);
+  }
+  const selectionCount=el('span','',{class:'micro',role:'status','aria-live':'polite'});
+  const records=el('details',null,{class:'photo-journal-records'});
+  const summary=el('summary','내가 쓴 내용 선택');
+  records.append(summary);
+  const selectActions=el('div',null,{class:'photo-select-actions'});
+  const selectAll=el('button','작성한 글 전체 선택',{type:'button'});
+  const selectNone=el('button','모두 해제',{type:'button'});
+  selectActions.append(selectAll,selectNone);records.append(selectActions);
+  const boxes=new Map();
+  for(const item of writings){
+    const line=el('label',null,{class:'check-row photo-journal-field'});
+    const check=el('input',null,{type:'checkbox','data-photo-field':item.id});
+    check.checked=false;
+    line.append(check,el('span',item.label));
+    records.append(line);boxes.set(item.id,check);
+    check.addEventListener('change',refresh);
+  }
+  if(writings.length)options.append(records);
+  else options.append(el('p','아직 작성한 내용이 없다면 작품과 제목만 사진으로 저장할 수 있어요.',{class:'micro'}));
+  root.append(options,selectionCount);
+  const controls=el('div',null,{class:'photo-journal-actions'});
+  const share=el('button','사진 앱에 저장·공유',{type:'button',class:'primary'});
+  share.disabled=true;
+  const feedback=el('p','이미지를 준비하고 있어요.',{class:'micro',role:'status','aria-live':'polite'});
+  controls.append(share,feedback);root.append(controls);
+  root.append(el('p','아이폰 Safari: 공유 메뉴에서 ‘이미지 저장’을 선택하세요. Android Chrome: 공유 메뉴 또는 PNG 내려받기를 이용하세요. 카카오톡 내부 브라우저에서 저장 메뉴가 안 보이면 Safari/Chrome으로 열어 주세요.',{class:'micro photo-save-help'}));
+  const gallery=el('div',null,{class:'photo-journal-gallery','aria-label':'저장할 사진 미리보기'});
+  root.append(gallery);
+
+  let disposed=false,generation=0,timer=null,ready=[],urls=[];
+  const clearURLs=()=>{for(const url of urls)URL.revokeObjectURL(url);urls=[];};
+  const chosen=()=>entries.filter(item=>item.id==='title'?titleCheck.checked:boxes.get(item.id)?.checked);
+  const fileName=index=>`moonjar-${new Date().toISOString().slice(0,10).replaceAll('-','')}-${doc.projectId.slice(0,8)}-photo-${String(index+1).padStart(2,'0')}.png`;
+  const filesFrom=(blobs)=>blobs.map((blob,i)=>new File([blob],fileName(i),{type:'image/png'}));
+  const canFileShare=(files)=>{
+    if(!files.length||typeof File==='undefined'||typeof navigator.share!=='function'||typeof navigator.canShare!=='function')return false;
+    try{return navigator.canShare({files});}catch{return false;}
+  };
+  function shareFiles(files){
+    // Do not await canvas work here: Web Share requires this very click's gesture.
+    try{
+      const promise=navigator.share({files,title:'나의 달항아리 사진'});
+      promise.then(()=>{if(!disposed)feedback.textContent='공유 메뉴가 열렸습니다. 사진 앱에 실제로 저장됐는지 확인해 주세요.';})
+        .catch(error=>{if(!disposed&&error.name!=='AbortError')feedback.textContent='사진 공유를 열지 못했어요. 아래 PNG 내려받기 또는 이미지 길게 누르기를 이용해 주세요.';});
+    }catch{
+      feedback.textContent='이 브라우저에서는 사진 공유를 열 수 없어요. 아래 PNG 내려받기 또는 이미지 길게 누르기를 이용해 주세요.';
+    }
+  }
+  function renderReady(blobs){
+    ready=blobs;
+    clearURLs();gallery.replaceChildren();
+    let files=[];
+    try{files=filesFrom(blobs);}catch{/* Download links still work. */}
+    const shareAll=canFileShare(files);
+    share.disabled=!shareAll;
+    feedback.textContent=`${blobs.length}장 준비 완료. ${shareAll?'‘사진 앱에 저장·공유’를 누르고 저장 위치를 고르세요.':'사진을 길게 누르거나 아래 PNG를 내려받아 주세요.'}`;
+    blobs.forEach((blob,index)=>{
+      const url=URL.createObjectURL(blob);urls.push(url);
+      const item=el('figure',null,{class:'photo-journal-page'});
+      const img=el('img',null,{src:url,alt:`내 작품과 내가 고른 기록 ${index+1}/${blobs.length}장`,loading:'lazy'});
+      const actions=el('div',null,{class:'photo-journal-page-actions'});
+      const link=el('a',`${index+1}장 PNG 내려받기`,{href:url,download:fileName(index)});
+      actions.append(link);
+      if(!shareAll&&files.length){
+        const one=files[index];
+        if(canFileShare([one])){
+          const b=el('button','이 사진 저장·공유',{type:'button'});
+          b.addEventListener('click',()=>shareFiles([one]));
+          actions.prepend(b);
+        }
+      }
+      item.append(img,el('figcaption',`${index+1} / ${blobs.length}장`),actions);
+      gallery.append(item);
+    });
+  }
+  function refresh(){
+    const picked=chosen();
+    const count=picked.length;
+    selectionCount.textContent=`사진에 포함할 개인 기록 ${count}개 선택됨`;
+    const id=++generation;
+    clearTimeout(timer);share.disabled=true;ready=[];
+    gallery.replaceChildren();
+    clearURLs();
+    feedback.textContent='선택한 내용으로 사진을 준비하고 있어요.';
+    timer=setTimeout(async()=>{
+      try{
+        await document.fonts.ready;
+        const blobs=await exportPhotoJournalPNGs(doc.scene,materials,picked);
+        if(disposed||generation!==id)return;
+        renderReady(blobs);
+      }catch(error){
+        if(disposed||generation!==id)return;
+        feedback.textContent=error.message||'이미지를 만들지 못했습니다. 항목을 줄여 다시 시도해 주세요.';
+      }
+    },170);
+  }
+  titleCheck.addEventListener('change',refresh);
+  selectAll.addEventListener('click',()=>{for(const box of boxes.values())box.checked=true;refresh();});
+  selectNone.addEventListener('click',()=>{for(const box of boxes.values())box.checked=false;titleCheck.checked=false;refresh();});
+  share.addEventListener('click',()=>{
+    if(share.disabled||!ready.length)return;
+    const files=filesFrom(ready);
+    if(canFileShare(files))shareFiles(files);
+  });
+  modal.addEventListener('close',()=>{
+    disposed=true;generation++;clearTimeout(timer);ready=[];clearURLs();
+  },{once:true});
+  openDialog('내 작품과 글을 사진으로 간직하기',root);
+  refresh();
+}
+
 async function finish(){
   if(editable()){editor.navigate('ending');await queue?.flush();}
   // Avoid keeping an editor-operation toast over the newly opened art gallery.
@@ -870,14 +1008,15 @@ function result(){
   // the page by default, and the image/card never includes them automatically.
   const actions=el('div',null,{class:'result-actions'});
   actions.append(
-    button('작품 카드 만들기','card-options',{class:'primary'}),
+    button('내 작품·글 사진으로 저장','photo-journal',{class:'primary'}),
+    button('작품 카드 만들기','card-options'),
     button('작품 이미지만 저장','export-png'),
     button('다시 꾸미기','continue'),
     button('편집 파일로 보관','export-json'),
     button('기록지 인쇄·PDF 저장','print-options')
   );
   const nextGuide=el('aside',null,{class:'completion-next','aria-label':'작품 완성 후 선택'});
-  nextGuide.append(el('strong','완성한 작품, 어떻게 남길까요?'),el('p','작품 카드로 간직하거나, PNG 이미지만 저장할 수 있어요. 다시 꾸미거나 편집 파일로 보관해도 좋습니다. 기록은 선택한 경우에만 출력됩니다.'));
+  nextGuide.append(el('strong','완성한 작품, 어떻게 남길까요?'),el('p','사진으로 저장할 때 제목과 내가 쓴 글을 직접 고를 수 있어요. 긴 글은 여러 장으로 나누고, PDF와 편집 파일도 그대로 사용할 수 있습니다.'));
   copy.append(nextGuide,el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
@@ -1149,7 +1288,7 @@ const actions={
   'zoom-in':()=>{zoom=clamp(zoom+0.25,0.5,2.5);renderCanvas();},'zoom-out':()=>{zoom=clamp(zoom-0.25,0.5,2.5);renderCanvas();},fit:()=>{zoom=1;renderCanvas();},
   pause:()=>setPanel(paused?'palette':'look'),
   'toggle-lead':()=>{leadExpanded=!leadExpanded;renderSceneLead();fitArtworkToFrame();},
-  snapshot,compare,finish,'view-options':viewOptions,'piece-note':pieceNote,'save-options':saveOptions,
+  snapshot,compare,finish,'view-options':viewOptions,'piece-note':pieceNote,'save-options':saveOptions,'photo-journal':photoJournalOptions,
   'batch:12':()=>addColorBatch($('[data-action="batch:12"]')),
   continue:()=>{paused=false;viewScene='arrange';if(!readOnly)editor.navigate('arrange');location.hash=`/studio/${editor.doc.projectId}`;studio();},
   'export-png':()=>imageExport(),'card-options':cardOptions,'export-json':backup,
