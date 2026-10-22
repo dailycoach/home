@@ -1,0 +1,42 @@
+name: NAL Moonjar Class and Gather QA
+on:
+  pull_request:
+    paths:
+      - 'nal/data/programs.json'
+      - 'nal/data/routes.json'
+      - 'nal/data/hosts.json'
+      - 'nal/class/moonjar-nacre-artcoaching/**'
+      - 'nal/gather/moonjar-reflection-circle/**'
+      - 'index.html'
+      - 'index-source-disc.html'
+      - 'pages.json'
+      - 'sitemap.xml'
+      - 'activities/moonjar/index.html'
+      - 'scripts/check-nal-platform.mjs'
+      - 'tests/nal/moonjar-catalog-privacy.test.mjs'
+      - 'tests/moonjar/site-integration.test.js'
+      - '.github/workflows/nal-moonjar-publication-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate NAL catalogs, routes, safety and unchanged assets
+        run: node scripts/check-nal-platform.mjs
+      - name: Check public link suppression and workshop preservation
+        run: node --test tests/nal/moonjar-catalog-privacy.test.mjs tests/moonjar/site-integration.test.js
+      - name: Validate scripts and generated JSON
+        run: |
+          node --check scripts/generate-nal-pages.mjs
+          node --check scripts/generate-nal-sitemap.mjs
+          node --check nal/assets/js/app.js
+          node --input-type=module -e "import fs from 'node:fs'; for(const p of ['nal/data/programs.json','nal/data/routes.json','nal/data/hosts.json','pages.json']) JSON.parse(fs.readFileSync(p,'utf8'));"
