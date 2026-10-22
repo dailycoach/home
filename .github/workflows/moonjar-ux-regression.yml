@@ -14,6 +14,7 @@ on:
       - 'scripts/check-moonjar-refinement.mjs'
       - 'scripts/check-moonjar-art-direction.mjs'
       - 'scripts/check-moonjar-quick-delete.mjs'
+      - 'scripts/check-moonjar-photo-journal.mjs'
       - 'scripts/moonjar-browser-helpers.mjs'
       - '.github/workflows/moonjar-ux-regression.yml'
 
@@ -37,6 +38,38 @@ jobs:
         run: node scripts/check-moonjar.mjs
       - name: Test Moonjar domain, storage and UX wiring
         run: node --test tests/moonjar/*.test.js
+
+  photo-journal:
+    needs: qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit for gallery saving validation
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Serve independent Moonjar release candidate
+        run: |
+          python3 -m http.server 4173 >/tmp/moonjar-photo-http.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/activities/moonjar/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/moonjar-photo-http.log
+          exit 1
+      - name: Validate opted-in photo pages and native share click
+        run: node scripts/check-moonjar-photo-journal.mjs
+      - name: Keep photo previews and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moonjar-photo-journal
+          path: artifacts/moonjar-photo-journal
+          retention-days: 14
 
   browser-smoke:
     needs: qa
