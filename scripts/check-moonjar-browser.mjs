@@ -244,12 +244,14 @@ try{
     'editor toast must not cover the finished artwork gallery');
   check(!(await page.locator('.reflection-recap').evaluate(el=>el.open)),'private reflection recap is collapsed by default');
   check(!(await page.locator('.result-essay').evaluate(el=>el.open)),'long ending essay must be optional');
-  check(await page.locator('.result-actions [data-action="card-options"].primary').isVisible(),
-    'creating a personal art card is the result page primary action');
-  const ctaBox=await page.locator('.result-actions [data-action="card-options"]').boundingBox();
+  check(await page.locator('.result-actions [data-action="photo-journal"].primary').isVisible(),
+    'new artwork-and-writing photo action is the primary action');
+  check(await page.locator('.result-actions [data-action="card-options"]').isVisible(),
+    'existing personal art card remains available without losing functionality');
+  const ctaBox=await page.locator('.result-actions [data-action="photo-journal"]').boundingBox();
   const actionsBox=await page.locator('.result-actions').boundingBox();
   check(ctaBox && actionsBox && ctaBox.width>actionsBox.width*0.9,
-    'artwork card button must actually span the full result row, not only have primary markup');
+    'photo journal primary button spans the result row on mobile');
   await settleArtwork(page);
   await page.screenshot({path:`${out}/05a-artwork-first-result-390.png`,fullPage:true});
   await page.locator('main.result-page [data-action="card-options"]').click();
