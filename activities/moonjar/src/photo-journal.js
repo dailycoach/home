@@ -132,34 +132,26 @@ export async function exportPhotoJournalPNGs(scene,materials,entries,scale=1){
   canvas.width=Math.round(W*scale);canvas.height=Math.round(H*scale);
   const ctx=canvas.getContext('2d');
   if(!ctx)throw new Error('사진을 만들 작업 공간이 부족합니다.');
-  const layout=document.createElement('canvas').getContext('2d');
-  const pages=paginatePhotoEntries(layout,entries);
-  const images=await materials.forScene(scene);
+  const sheet=document.createElement('canvas');
+  sheet.width=W;sheet.height=H;
+  const sheetCtx=sheet.getContext('2d');
+  if(!sheetCtx)throw new Error('사진을 만들 메모리가 부족합니다.');
+  const pages=paginatePhotoEntries(sheetCtx,entries);
   const blobs=[];
+  let images;
   try{
+    images=await materials.forScene(scene);
     for(let i=0;i<pages.length;i++){
-      ctx.setTransform(scale,0,0,scale,0,0);
-      // Painting is done in logical 1600×2400 coordinates.
-      ctx.save();ctx.scale(1/scale,1/scale);
-      // Reapply the output scaling below without reducing layout fidelity.
-      ctx.restore();
-      ctx.setTransform(scale,0,0,scale,0,0);
-      // Draw at full logical dimensions on a context whose transform is scaled.
-      // paintSheet resets its transform internally: use an offscreen logical
-      // backing canvas so 0.4/0.5 previews share exact geometry.
-      const sheet=document.createElement('canvas');
-      sheet.width=W;sheet.height=H;
-      const sheetCtx=sheet.getContext('2d');
-      if(!sheetCtx)throw new Error('사진을 만들 메모리가 부족합니다.');
       paintSheet(sheetCtx,pages[i],i,pages.length,scene,images);
-      ctx.clearRect(0,0,W,H);
-      ctx.drawImage(sheet,0,0,W,H);
-      sheet.width=0;sheet.height=0;
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(sheet,0,0,canvas.width,canvas.height);
       const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('사진 파일을 만들지 못했습니다.')),'image/png'));
       blobs.push(blob);
     }
     return blobs;
   }finally{
-    canvas.width=0;canvas.height=0;images.clear();
+    canvas.width=0;canvas.height=0;sheet.width=0;sheet.height=0;
+    images?.clear();
   }
 }
