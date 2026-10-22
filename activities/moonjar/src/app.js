@@ -1016,7 +1016,7 @@ function result(){
     button('기록지 인쇄·PDF 저장','print-options')
   );
   const nextGuide=el('aside',null,{class:'completion-next','aria-label':'작품 완성 후 선택'});
-  nextGuide.append(el('strong','완성한 작품, 어떻게 남길까요?'),el('p','사진으로 저장할 때 제목과 내가 쓴 글을 직접 고를 수 있어요. 긴 글은 여러 장으로 나누고, PDF와 편집 파일도 그대로 사용할 수 있습니다.'));
+  nextGuide.append(el('strong','완성한 작품, 어떻게 남길까요?'),el('p','사진으로 저장할 때 제목과 내가 쓴 글을 직접 고를 수 있어요. 긴 글은 여러 장으로 나누고, PDF와 편집 파일도 그대로 사용할 수 있습니다. 기록은 선택한 경우에만 이미지에 포함됩니다.'));
   copy.append(nextGuide,el('p','작품을 간직하는 방법',{class:'result-actions-label'}),actions,el('p',story.ui.privacyImage,{class:'micro result-privacy-note'}));
 
   const recap=el('details',null,{class:'reflection-recap'});
