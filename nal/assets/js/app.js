@@ -381,14 +381,15 @@
   function productCard(item) {
     const route = itemRoute("products", item);
     const digital = isDigitalProduct(item);
+    const essential = item.id === "nal-life-control-01-plan-changes";
     const freeReady = digital && item.price === 0 && item.stockStatus === "available";
     const meta = [
       digital ? item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일") : productFormatLabel(item),
       Number.isInteger(item.pageCount) && item.pageCount > 0 ? `${item.pageCount}쪽` : "",
       licenseLabel(item)
     ].filter(Boolean).join(" · ");
-    return `<article class="nal-card nal-card--product${digital ? " nal-card--digital" : ""}" data-catalog-id="${escapeHtml(item.id)}">
-      <div class="nal-card__media">${imageMarkup(globalThis.NALStore.safePublicUrl(item.coverImage), item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일")) : "실물"}</span></div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
+    return `<article class="nal-card nal-card--product${digital ? " nal-card--digital" : ""}${essential ? " nal-card--essential" : ""}" data-catalog-id="${escapeHtml(item.id)}">
+      <div class="nal-card__media">${imageMarkup(globalThis.NALStore.safePublicUrl(item.coverImage), item.coverImageAlt || `${item.title} 상품 이미지`, "", { width: digital ? 1200 : 1600, height: digital ? 1600 : 1600 })}<div class="nal-card__badges"><span class="nal-badge--shop">${digital ? escapeHtml(item.fileFormat || (globalThis.NALStore.type(item)?.startsWith("pdf") ? "PDF" : "디지털 파일")) : "실물"}</span>${essential ? '<span class="nal-essential-card-label">NAL 필독서</span>' : ""}</div><div class="nal-card__wish">${wishButton("products", item)}</div></div>
       <div class="nal-card__body"><p class="nal-card__eyebrow">${escapeHtml(productFormatLabel(item))}</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
       <p class="nal-card__summary">${escapeHtml(item.summary)}</p>${meta ? `<p class="nal-card__product-meta">${escapeHtml(meta)}</p>` : ""}<div class="nal-card__footer"><span class="nal-card__delivery">${freeReady ? "무료 PDF" : formatPrice(item.price) || "판매 준비 중"}</span><span>${escapeHtml(freeReady ? "로그인·결제 없이 이용" : stockLabel(item.stockStatus))}</span></div></div>
     </article>`;
@@ -528,10 +529,31 @@
         }).join("")
       : "";
     const listingIntro = collection === "products"
-      ? "무료 작은 책과 긍정문장 따라 쓰기 8권을 공개합니다. 자기이해·관계·실행·자기돌봄·기쁨·변화·자기존중·나의 기준을 14일씩 기록해 보세요. 결제와 로그인은 필요하지 않습니다."
+      ? "처음 펼칠 책으로 《계획이 어긋난 날에도》를 무료로 권합니다. 여덟 편의 에세이를 읽고 나의 선택을 한 문장씩 남겨 보세요. 다른 무료 책과 따라쓰기 시리즈도 로그인·결제 없이 이용할 수 있습니다."
       : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
+    const showEssential = collection === "products" && !["q","format","topic","audience","category"].some(key => params.get(key)) && (!params.get("sort") || params.get("sort") === "recommended");
+    const essentialHtml = showEssential ? `<section class="nal-essential-spotlight" aria-label="NAL 무료 필독서 추천">
+  <div class="nal-container nal-essential-spotlight__inner">
+    <div class="nal-essential-spotlight__copy">
+      <p class="nal-essential-spotlight__eyebrow"><span aria-hidden="true">✦</span> NAL EDITOR'S PICK · 필독서</p>
+      <p class="nal-essential-spotlight__lead">지금, 가장 먼저 펼칠 한 권</p>
+      <h2>계획이<br>어긋난 날에도</h2>
+      <p class="nal-essential-spotlight__sub">뜻대로 되지 않는 하루에도,<br>내 손에 남아 있는 선택을 알아보는 시간.</p>
+      <p class="nal-essential-spotlight__description">여덟 편의 일상 에세이와 각각의 질문 한 장. 글마다 길이를 달리해 천천히 읽고, 오늘의 작은 한걸음을 남깁니다.</p>
+      <div class="nal-essential-spotlight__meta"><strong>무료 공개</strong><span>김철웅 · PDF 35쪽</span><span>로그인 없이 이용</span></div>
+      <div class="nal-essential-spotlight__actions">
+        <a class="nal-essential-spotlight__download" href="/nal/assets/downloads/free/nal-life-control-01-plan-changes.pdf" download>무료 PDF 받기 <span aria-hidden="true">↗</span></a>
+        <a class="nal-essential-spotlight__detail" href="/nal/shop/nal-life-control-01-plan-changes/">책 살펴보기 <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <a class="nal-essential-spotlight__cover" href="/nal/shop/nal-life-control-01-plan-changes/" aria-label="필독서 계획이 어긋난 날에도 상품 상세">
+      <img src="/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp" alt="짙은 숲색과 금박 느낌 타이포그래피의 계획이 어긋난 날에도 실제 표지" width="1200" height="1600" loading="eager" decoding="async">
+    </a>
+  </div>
+</section>` : "";
     root.innerHTML = `
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
+      ${essentialHtml}
       ${positiveSeries ? `<section class="nal-positive-series" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><p class="nal-eyebrow">POSITIVE WRITING / 01—08</p><h2>오늘 나에게 필요한 말부터</h2><p>자기이해부터 비교와 나의 기준까지. 원하는 권부터 무료로 펼쳐 보세요.</p><div class="nal-positive-series__items">${positiveSeries}</div></div></section>` : ""}
       <section class="nal-section nal-listing"><div class="nal-container">
         <form class="nal-filter-bar" data-filter-form role="search">
