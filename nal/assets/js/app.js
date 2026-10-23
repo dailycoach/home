@@ -529,7 +529,7 @@
         }).join("")
       : "";
     const listingIntro = collection === "products"
-      ? "처음 펼칠 책으로 《계획이 어긋난 날에도》를 무료로 권합니다. 여덟 편의 에세이를 읽고 나의 선택을 한 문장씩 남겨 보세요. 다른 무료 책과 따라쓰기 시리즈도 로그인·결제 없이 이용할 수 있습니다."
+      ? "NAL 무료 필독서 1·2권을 먼저 만나보세요. 계획이 어긋나는 순간부터 마음이 뜻대로 움직이지 않는 날까지, 에세이와 질문으로 천천히 읽습니다. 다른 무료 책과 따라쓰기 시리즈도 로그인·결제 없이 이용할 수 있습니다."
       : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     const showEssential = collection === "products" && !["q","format","topic","audience","category"].some(key => params.get(key)) && (!params.get("sort") || params.get("sort") === "recommended");
     const essentialHtml = showEssential ? `<section class="nal-essential-spotlight" aria-label="NAL 무료 필독서 추천">
@@ -545,6 +545,7 @@
         <a class="nal-essential-spotlight__download" href="/nal/assets/downloads/free/nal-life-control-01-plan-changes.pdf" download>무료 PDF 받기 <span aria-hidden="true">↗</span></a>
         <a class="nal-essential-spotlight__detail" href="/nal/shop/nal-life-control-01-plan-changes/">책 살펴보기 <span aria-hidden="true">→</span></a>
       </div>
+      <p class="nal-essential-spotlight__next">이어 읽기 <span aria-hidden="true">02</span> <a href="/nal/shop/nal-life-control-02-mind-not-always-obey/">마음까지 내 뜻대로 되지는 않아서 →</a></p>
     </div>
     <a class="nal-essential-spotlight__cover" href="/nal/shop/nal-life-control-01-plan-changes/" aria-label="필독서 계획이 어긋난 날에도 상품 상세">
       <img src="/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp" alt="짙은 숲색과 금박 느낌 타이포그래피의 계획이 어긋난 날에도 실제 표지" width="1200" height="1600" loading="eager" decoding="async">
