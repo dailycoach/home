@@ -552,8 +552,8 @@
   </div>
 </section>` : "";
     root.innerHTML = `
-      <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
       ${essentialHtml}
+      <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
       ${positiveSeries ? `<section class="nal-positive-series" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><p class="nal-eyebrow">POSITIVE WRITING / 01—08</p><h2>오늘 나에게 필요한 말부터</h2><p>자기이해부터 비교와 나의 기준까지. 원하는 권부터 무료로 펼쳐 보세요.</p><div class="nal-positive-series__items">${positiveSeries}</div></div></section>` : ""}
       <section class="nal-section nal-listing"><div class="nal-container">
         <form class="nal-filter-bar" data-filter-form role="search">

@@ -24,3 +24,7 @@
 @media(max-width:760px){.nal-essential-spotlight__inner{grid-template-columns:1fr;gap:2.5rem;padding-block:3rem 3.4rem}.nal-essential-spotlight__cover{width:min(61vw,250px)}.nal-essential-spotlight__actions a{flex:1;min-width:145px}.nal-essential-spotlight__meta{font-size:.8rem}}
 @media(max-width:400px){.nal-essential-spotlight__actions{flex-direction:column;align-items:stretch}.nal-essential-spotlight__actions a{width:100%}}
 @media(prefers-reduced-motion:reduce){.nal-essential-spotlight__actions a,.nal-essential-spotlight__cover{transition:none!important;transform:none!important}}
+
+/* Keep the book first and reduce the height of the generic catalog heading. */
+body[data-page="listing"][data-collection="products"] .nal-page-hero{min-height:auto;padding-block:clamp(2rem,4vw,3.5rem)}
+body[data-page="listing"][data-collection="products"] .nal-page-hero h1{font-size:clamp(1.8rem,3vw,3.5rem)}
