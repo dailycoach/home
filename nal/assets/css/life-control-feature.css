@@ -28,3 +28,9 @@
 /* Keep the book first and reduce the height of the generic catalog heading. */
 body[data-page="listing"][data-collection="products"] .nal-page-hero{min-height:auto;padding-block:clamp(2rem,4vw,3.5rem)}
 body[data-page="listing"][data-collection="products"] .nal-page-hero h1{font-size:clamp(1.8rem,3vw,3.5rem)}
+
+/* Second reading in the first must-read spotlight. */
+.nal-essential-spotlight__next{margin:1.25rem 0 0;color:#e4c994;font-size:.87rem;line-height:1.65;letter-spacing:.02em}
+.nal-essential-spotlight__next span{display:inline-block;padding:0 .4rem;font-weight:800;color:#f4d3a2}
+.nal-essential-spotlight__next a{color:#f4d3a2!important;text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px}
+.nal-essential-spotlight__next a:hover,.nal-essential-spotlight__next a:focus-visible{color:#fff1d0!important}
