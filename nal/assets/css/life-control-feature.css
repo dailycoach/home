@@ -1,0 +1,26 @@
+/* NAL ESSENTIAL READING / 무료 필독서 2026-10-24 */
+.nal-essential-spotlight{background:#12281c;color:#f8f2e6;isolation:isolate;overflow:hidden}
+.nal-essential-spotlight__inner{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(200px,.7fr);align-items:center;gap:clamp(2rem,7vw,6.25rem);padding-block:clamp(3rem,7vw,6.5rem)}
+.nal-essential-spotlight__copy{max-width:650px;min-width:0}
+.nal-essential-spotlight__eyebrow{margin:0 0 clamp(1.1rem,3vw,2rem);font-size:.77rem;font-weight:750;letter-spacing:.17em;color:#dec299}
+.nal-essential-spotlight__eyebrow span{margin-right:.6rem;font-size:.7rem}
+.nal-essential-spotlight__lead{font-size:clamp(.87rem,1.4vw,1.1rem);letter-spacing:.06em;color:#d4dacd;margin:0 0 .8rem}
+.nal-essential-spotlight h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-weight:700;font-size:clamp(2.7rem,6.2vw,5.55rem);line-height:1.17;letter-spacing:-.06em;color:#faf5e9;margin:0 0 1.4rem}
+.nal-essential-spotlight__sub{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;color:#efddbf;font-size:clamp(1.05rem,2vw,1.5rem);line-height:1.75;margin:0 0 1.25rem}
+.nal-essential-spotlight__description{color:#c3ccbf;font-size:clamp(.9rem,1.15vw,1rem);line-height:1.95;max-width:33rem;margin:0 0 1.5rem}
+.nal-essential-spotlight__meta{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem 1rem;margin-bottom:1.9rem;color:#e2ded4;font-size:.88rem}
+.nal-essential-spotlight__meta strong{font-size:.78rem;letter-spacing:.08em;font-weight:750;color:#e4c28d;padding:.35rem .65rem;border:1px solid rgba(224,189,132,.55);border-radius:2px}
+.nal-essential-spotlight__actions{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.nal-essential-spotlight__actions a{display:inline-flex;justify-content:center;align-items:center;gap:1rem;min-height:48px;padding:.8rem 1.3rem;text-decoration:none;font-size:.94rem;font-weight:760;border-radius:3px;transition:background .2s ease,color .2s ease,transform .2s ease}
+.nal-essential-spotlight__download{color:#11251a!important;background:#e2bb83}
+.nal-essential-spotlight__download:hover,.nal-essential-spotlight__download:focus-visible{background:#f7dbac;transform:translateY(-2px)}
+.nal-essential-spotlight__detail{color:#f7f0e4!important;border:1px solid rgba(245,239,220,.52)}
+.nal-essential-spotlight__detail:hover,.nal-essential-spotlight__detail:focus-visible{background:rgba(255,255,255,.09)}
+.nal-essential-spotlight__cover{display:block;width:min(100%,332px);margin-inline:auto;box-shadow:0 23px 53px rgba(2,11,5,.45);transform:rotate(1.5deg);transition:transform .24s ease}
+.nal-essential-spotlight__cover:hover,.nal-essential-spotlight__cover:focus-visible{transform:rotate(0deg) translateY(-4px)}
+.nal-essential-spotlight__cover img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:1px solid rgba(223,174,101,.38)}
+.nal-card--essential{outline:2px solid #b9935e;outline-offset:-2px}
+.nal-essential-card-label{display:inline-flex;align-items:center;justify-content:center;padding:.3rem .53rem;background:#132c1e;color:#f1d1a2;font-size:.75rem;font-weight:700;letter-spacing:.04em}
+@media(max-width:760px){.nal-essential-spotlight__inner{grid-template-columns:1fr;gap:2.5rem;padding-block:3rem 3.4rem}.nal-essential-spotlight__cover{width:min(61vw,250px)}.nal-essential-spotlight__actions a{flex:1;min-width:145px}.nal-essential-spotlight__meta{font-size:.8rem}}
+@media(max-width:400px){.nal-essential-spotlight__actions{flex-direction:column;align-items:stretch}.nal-essential-spotlight__actions a{width:100%}}
+@media(prefers-reduced-motion:reduce){.nal-essential-spotlight__actions a,.nal-essential-spotlight__cover{transition:none!important;transform:none!important}}
