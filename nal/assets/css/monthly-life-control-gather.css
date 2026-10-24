@@ -52,7 +52,7 @@
 .nal-genz__book-info h3{color:inherit!important;font-size:clamp(1.07rem,1.53vw,1.47rem)!important;line-height:1.43!important;letter-spacing:-.055em!important;margin:0!important;font-weight:900!important;word-break:keep-all}
 .nal-genz__book-info p{font-size:clamp(.84rem,1.06vw,.96rem);line-height:1.63;margin:0;color:inherit;opacity:.86;word-break:keep-all}
 .nal-genz__book-info a{color:inherit!important;font-size:.88rem;font-weight:850;text-decoration:underline;text-underline-offset:.27em;margin-top:auto;align-self:start;min-height:44px;display:flex;align-items:center}
-.nal-genz__books-note{margin:1.3rem 0 0;color:#bac2b1;font-size:.85rem}
+.nal-genz__books-note{display:none;margin:1.3rem 0 0;color:#bac2b1;font-size:.85rem}
 .nal-genz__feature{background:var(--genz-blue);color:#fff;overflow:hidden}
 .nal-genz__feature-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,.48fr);gap:clamp(1.3rem,5vw,6rem);align-items:center;padding-block:clamp(3.7rem,7vw,6.8rem)}
 .nal-genz__feature-kicker{font-size:.85rem;font-weight:900;letter-spacing:.055em;color:var(--genz-lime);margin:0 0 1.25rem}
@@ -96,6 +96,7 @@
 .nal-genz-preview__wrap{grid-template-columns:1fr 1fr}
 }
 @media(max-width:540px){
+.nal-genz__books-note{display:block}
 .nal-genz__wrap,.nal-genz-preview__wrap{width:min(100% - 2.3rem,1350px)}
 .nal-genz__topline{margin-bottom:1.55rem}
 .nal-genz__title{font-size:clamp(2.9rem,11.5vw,4.25rem)!important}
