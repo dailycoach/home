@@ -30,6 +30,7 @@
   const collection = body.dataset.collection || "";
   const pageType = body.dataset.type || "";
   const slug = body.dataset.slug || new URLSearchParams(location.search).get("slug") || "";
+  const monthlyGatherInitialMarkup = page === "detail" && collection === "programs" && slug === "life-control-monthly" && root ? root.innerHTML : "";
   let lastDrawerTrigger = null;
   let state = {
     site: null,
@@ -327,7 +328,12 @@
   function programCard(item) {
     if (item.id === "life-control-monthly-gather") {
       const route = itemRoute("programs", item);
-      return `<article class="nal-card nal-card--gather nal-card--reading" data-catalog-id="${escapeHtml(item.id)}"><div class="nal-card__body"><p class="nal-card__eyebrow">매달 함께 읽는 모임</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3><p class="nal-card__summary">책은 가볍게 읽고, 마음에 남은 문장 하나를 나눕니다. 마지막 주에는 나만의 글을 남깁니다.</p><p class="nal-card__details">Zoom · 매월 4회 · 회당 60분</p></div></article>`;
+      const cover = "/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp";
+      return '<article class="nal-card nal-card--gather nal-card--reading" data-catalog-id="' + escapeHtml(item.id) + '">'
+        + '<div class="nal-card__media">' + imageMarkup(cover, "요즘 나, 이렇습니다. 월간 소책자 표지", "", {width:1200,height:1600}) + '</div>'
+        + '<div class="nal-card__body"><p class="nal-card__eyebrow">매달 함께 읽는 모임</p><h3 class="nal-card__title"><a href="' + route + '">'
+        + escapeHtml(item.title) + '</a></h3><p class="nal-card__summary">세 권을 읽고, 마지막에는 요즘의 나를 기록하는 시간.</p>'
+        + '<p class="nal-card__details">Zoom · 매월 네 번</p></div></article>';
     }
     const route = itemRoute("programs", item);
     const date = formatDate(item);
@@ -558,7 +564,7 @@
     </a>
   </div>
 </section>` : "";
-    const monthlyGatherPromo = collection === "programs" && pageType === "gather" && !["q","category","status","format"].some(k => params.get(k)) && (!params.get("sort") || params.get("sort") === "recommended") && publicItems(state.programs).some(entry => entry.id === "life-control-monthly-gather") ? "<section class=\"nal-reading-teaser\" aria-label=\"삶의 통제권 연습 정기 독서모임\">\n<div class=\"nal-container nal-reading-teaser__inner\">\n  <div class=\"nal-reading-teaser__intro\">\n    <p class=\"nal-reading-teaser__kicker\">매달 함께 읽는 자리</p>\n    <h2>삶의 통제권 연습</h2>\n    <p>매주 책 한 권을 핑계로 모입니다. 다 읽지 못해도 괜찮아요. 마지막 주에는 <strong>《요즘 나, 이렇습니다.》</strong>로 한 달을 남깁니다.</p>\n  </div>\n  <a href=\"/nal/gather/life-control-monthly/\">모임 살펴보기 →</a>\n</div></section>" : "";
+    const monthlyGatherPromo = collection === "programs" && pageType === "gather" && !["q","category","status","format"].some(k => params.get(k)) && (!params.get("sort") || params.get("sort") === "recommended") && publicItems(state.programs).some(entry => entry.id === "life-control-monthly-gather") ? "<section class=\"nal-genz-preview\" aria-label=\"삶의 통제권 연습 정기 독서모임\">\n  <div class=\"nal-genz-preview__wrap\">\n    <div>\n      <p class=\"nal-genz-preview__eyebrow\">NAL · 월간 독서모임 / Zoom</p>\n      <h2>계획대로는 안 됐으니까,<br>같이 읽자.</h2>\n      <p>책은 세 권, 만남은 네 번. 마지막엔 《요즘 나, 이렇습니다.》로 내 한 달을 기록해요.</p>\n      <a class=\"nal-genz-preview__link\" href=\"/nal/gather/life-control-monthly/\">모임 살펴보기 ↗</a>\n    </div>\n    <div class=\"nal-genz-preview__covers\" aria-label=\"시리즈 세 권과 새로운 4주차 소책자\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp\" alt=\"삶의 통제권 연습 1권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-02-cover.webp\" alt=\"삶의 통제권 연습 2권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-03-cover.webp\" alt=\"삶의 통제권 연습 3권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp\" alt=\"요즘 나, 이렇습니다. 새로운 4주차 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n    </div>\n  </div>\n</section>" : "";
     const listedItems = monthlyGatherPromo ? items.filter(entry => entry.id !== "life-control-monthly-gather") : items;
     root.innerHTML = `
       ${essentialHtml}${monthlyGatherPromo}
@@ -640,13 +646,13 @@
   function renderMonthlyGatherDetail(item) {
     remember("programs", item.id);
     const url = safeUrl(item.applicationUrl);
-    const openForRegistration = ["open", "closing", "waiting"].includes(item.status)
-      && /^https:\/\/open\.kakao\.com\/o\/[a-zA-Z0-9]+\/?$/.test(url);
-    const action = openForRegistration
-      ? `<a class="nal-reading__join-link" href="${escapeHtml(url)}"${externalAttrs(url)}>카카오톡으로 참여하기 →</a>`
-      : '<p class="nal-reading__join-status">다음 모임 신청 안내는 준비 중입니다.</p>';
-    const markup = "<section class=\"nal-reading__hero\" aria-labelledby=\"reading-title\">\n  <div class=\"nal-container\"><div class=\"nal-reading__inner\">\n    <p class=\"nal-reading__eyebrow\">날빛에서 함께 읽는 모임</p>\n    <p class=\"nal-reading__series\">삶의 통제권 연습</p>\n    <h1 id=\"reading-title\">이번 주도<br>생각처럼 살지는<br>못했습니다.</h1>\n    <div class=\"nal-reading__hero-copy\">\n      <p>일요일 밤에 세워둔 계획이 수요일엔 벌써 지워져 있고, 별일 아닌 말 한마디가 온종일 마음에 남기도 합니다.</p>\n      <p>잘 살아보려는 마음이 없었던 건 아닌데요.</p>\n      <p>그래서 한 달에 네 번, 짧은 책을 함께 읽고 이야기를 나눕니다. 다 읽지 못해도 괜찮습니다. 마음에 걸린 문장 하나면 충분합니다.</p>\n    </div>\n    <div class=\"nal-reading__meta\"><span>Zoom</span><span>매월 4회 · 회당 60분</span><span>진행 김철웅 코치</span></div>\n    <a class=\"nal-reading__step-link\" href=\"#reading-books\">이번 달에 읽을 책들 ↓</a>\n  </div></div>\n</section>\n<section class=\"nal-reading__books\" id=\"reading-books\" aria-labelledby=\"reading-books-title\">\n  <div class=\"nal-container\"><div class=\"nal-reading__inner\">\n    <p class=\"nal-reading__eyebrow\">이렇게 읽습니다</p>\n    <h2 id=\"reading-books-title\" class=\"nal-reading__section-heading\">첫 세 주는 책을 읽고, 각자의 요즘을 나눕니다.</h2>\n    <ol class=\"nal-reading__book-list\">\n      <li class=\"nal-reading__book\">\n        <span class=\"nal-reading__book-num\">01</span>\n        <div><h3>계획이 어긋난 날에도</h3><p>계획이 틀어진 날, 내 몫이 아닌 것까지 짊어지고 있지는 않았을까.</p></div>\n        <a href=\"/nal/shop/nal-life-control-01-plan-changes/\">무료로 읽기 ↗</a>\n      </li>\n      <li class=\"nal-reading__book\">\n        <span class=\"nal-reading__book-num\">02</span>\n        <div><h3>마음까지 내 뜻대로 되지는 않아서</h3><p>마음이 뜻대로 움직이지 않는 날, 그 감정을 탓하지 않고 바라보기.</p></div>\n        <a href=\"/nal/shop/nal-life-control-02-mind-not-always-obey/\">무료로 읽기 ↗</a>\n      </li>\n      <li class=\"nal-reading__book\">\n        <span class=\"nal-reading__book-num\">03</span>\n        <div><h3>오늘 내가 할 수 있는 만큼</h3><p>더 큰 결심 말고, 다음에 해볼 수 있는 일과 필요한 조건 찾기.</p></div>\n        <a href=\"/nal/shop/nal-life-control-03-today-as-i-can/\">무료로 읽기 ↗</a>\n      </li>\n    </ol>\n  </div></div>\n</section>\n<section class=\"nal-reading__zine\" aria-labelledby=\"reading-zine-title\">\n  <div class=\"nal-container\"><div class=\"nal-reading__inner nal-reading__zine-inner\">\n    <div><p class=\"nal-reading__zine-eyebrow\">04 · 마지막 주</p>\n      <h2 id=\"reading-zine-title\">요즘 나, 이렇습니다.</h2>\n      <p>앞서 읽은 세 권에서 현실을 보는 눈, 마음을 읽는 시선, 작은 선택을 찾아왔습니다.</p>\n      <p>마지막 주에는 그 세 가지를 내 삶의 한 장면에 겹쳐 놓습니다. 그리고 요즘의 나를 설명하는 짧은 글을 한 편 써봅니다.</p>\n      <p>잘 쓴 글이 아니어도 좋습니다. 지금의 나를 알아볼 수 있으면 됩니다.</p>\n    </div>\n    <figure class=\"nal-reading__zine-cover\">\n      <img src=\"/nal/assets/images/catalog/gather/nal-monthly-zine-cover.webp\" alt=\"4주차에 함께 쓰는 월간 소책자 요즘 나, 이렇습니다. 실제 표지\" width=\"693\" height=\"982\" loading=\"lazy\" decoding=\"async\">\n    </figure>\n  </div></div>\n</section>\n<section class=\"nal-reading__join\" aria-labelledby=\"reading-join-title\">\n  <div class=\"nal-container\"><div class=\"nal-reading__inner nal-reading__join-inner\">\n    <h2 id=\"reading-join-title\">마음에 남은 문장 하나로 만나요.</h2>\n    <p>신청과 Zoom 참여 안내는 카카오톡 오픈채팅에서 진행합니다.</p>\n    <div data-monthly-registration><p class=\"nal-reading__join-status\">다음 모임 신청 안내는 준비 중입니다.</p></div>\n    <p class=\"nal-reading__footnote\">누구나 말하고 싶은 만큼만 나눕니다. 다른 사람의 이야기는 모임 밖으로 가져가지 않습니다.</p>\n  </div></div>\n</section>";
-    root.innerHTML = '<div class="nal-reading">' + markup.replace("<p class=\"nal-reading__join-status\">다음 모임 신청 안내는 준비 중입니다.</p>", action) + '</div>';
+    const isOpen = ["open", "closing", "waiting"].includes(item.status)
+      && /^https:\/\/open\.kakao\.com\/o\/[A-Za-z0-9]+\/?$/.test(url);
+    const pending = "<p>카카오톡 신청 오픈 준비 중</p>";
+    const action = isOpen
+      ? '<a href="' + escapeHtml(url) + '"' + externalAttrs(url) + '>카카오톡으로 참여하기 ↗</a>'
+      : pending;
+    root.innerHTML = (monthlyGatherInitialMarkup || root.innerHTML).replace(pending, action);
   }
 
   function renderProgramDetail(item) {
