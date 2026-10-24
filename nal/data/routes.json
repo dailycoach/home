@@ -276,6 +276,18 @@
       "title": "미술심리코칭 6주 과정 참여 안내 | NAL NOTE · 날빛",
       "description": "미술심리코칭 6주 과정의 참여 방식, 준비물, 진행자, FAQ와 과정 범위를 안내합니다.",
       "indexable": true
+    },
+    {
+      "path": "/nal/class/moonjar-nacre-artcoaching/",
+      "title": "빛을 담는 달항아리 — 자개 알아차림 아트코칭 | NAL CLASS · 날빛",
+      "description": "달항아리와 자개를 꾸미며 현재의 마음을 알아차리고, 작품과 자신의 언어를 간직하는 체험형 아트코칭 클래스",
+      "indexable": true
+    },
+    {
+      "path": "/nal/gather/moonjar-reflection-circle/",
+      "title": "달항아리 자개 이야기 모임 — 나를 담고 다시 보다 | NAL GATHER · 날빛",
+      "description": "달항아리와 자개 작품을 함께 바라보며 자신이 알아차린 것과 일상의 작은 선택을 나누는 자율적 아트코칭 모임",
+      "indexable": true
     }
   ]
 }

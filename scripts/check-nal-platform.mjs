@@ -165,11 +165,27 @@ const publicProducts = products.filter((item) => item.published);
 const targetPrograms = programs.filter((item) => gatherTargetIds.has(item.id) || classTargetIds.has(item.id));
 const targetProducts = products.filter((item) => productTargetIds.has(item.id));
 
-check(publicPrograms.filter((item) => item.type === 'gather').length === 4, 'expected exactly 4 public gathers');
+check(publicPrograms.filter((item) => item.type === 'gather').length === 5, 'expected 5 public gathers after Moonjar listing');
 check(targetPrograms.filter((item) => item.type === 'gather' && item.published).length === 4, 'expected all 4 target gathers public');
 check(targetPrograms.filter((item) => item.type === 'class' && item.published).length === 4, 'expected all 4 target classes public');
 check(publicPrograms.some((item) => item.id === 'art-psychology-coaching-6week'), 'existing art psychology coaching 6-week program must remain public');
 check(publicProducts.length === 4, 'expected exactly 4 public products');
+
+const newMoonjarIds=['moonjar-nacre-artcoaching-class','moonjar-reflection-circle-gather'];
+for(const id of newMoonjarIds){
+  const item=programs.find(entry=>entry.id===id);
+  check(Boolean(item), `missing Moonjar listing: ${id}`);
+  if(!item)continue;
+  check(item.published && item.status==='comingSoon', `Moonjar listing must be discoverable but cannot offer unconfigured signup: ${id}`);
+  check(item.hostId==='kim-cheol-woong', `Moonjar host must use existing NAL host: ${id}`);
+  for(const field of ['startDate','endDate','startTime','endTime','capacity','remainingSeats','price','originalPrice','applicationUrl','onlineUrl','sourceUrl','groupChat']){
+    check(item[field]===null, `unconfirmed or private Moonjar ${field} must not be public: ${id}`);
+  }
+  check(item.activities.length>=3 && item.recommendedFor.length>=3, `insufficient Moonjar editorial contents: ${id}`);
+  check(!JSON.stringify(item).includes('/activities/moonjar/'), `Moonjar app route disclosed in NAL program: ${id}`);
+  check(/콘셉트/.test(item.coverImageAlt), `Moonjar reused editorial image must be identified as concept: ${id}`);
+}
+
 check(targetProducts.filter((item) => item.published).length === 4, 'expected all 4 target products public');
 
 for (const item of targetPrograms) {
