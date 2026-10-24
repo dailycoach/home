@@ -1,65 +1,61 @@
-/* NAL GATHER · Life Control Monthly · 2026-10-24
-   The 4-week recurring reading circle. Isolated classes only. */
-.nal-monthly-promo{padding:clamp(1.5rem,4vw,3.5rem) 0;background:#f2eee5;border-block:1px solid #d6d2c6}
-.nal-monthly-promo__grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(1.5rem,4vw,4rem);align-items:center}
-.nal-monthly-promo__eyebrow,.nal-monthly-section__eyebrow{margin:0 0 1rem;font-size:.79rem;font-weight:800;letter-spacing:.13em;color:#2e5948}
-.nal-monthly-promo h2{font-size:clamp(2rem,4.7vw,4.45rem);font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;letter-spacing:-.055em;line-height:1.23;color:#1f3428;margin:0 0 1.2rem}
-.nal-monthly-promo__copy>p:not(.nal-monthly-promo__eyebrow){color:#415049;line-height:1.8;max-width:34rem}
-.nal-monthly-promo__meta{margin-top:1.5rem;display:flex;gap:.65rem;flex-wrap:wrap}
-.nal-monthly-promo__meta span{border:1px solid #bdc8b7;padding:.55rem .8rem;border-radius:100px;color:#2b4034;font-size:.8rem;font-weight:700}
-.nal-monthly-promo__media{border-radius:4px;overflow:hidden;box-shadow:0 18px 35px rgba(28,40,30,.12);display:block}
-.nal-monthly-promo__media img{display:block;width:100%;height:auto}
-.nal-monthly-promo__link{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;margin-top:1.5rem;min-height:48px;padding:.7rem 1.3rem;background:#193b2f;color:#f9f1dc!important;text-decoration:none;border-radius:3px;font-size:.94rem;font-weight:750}
-.nal-monthly-promo__link:hover,.nal-monthly-promo__link:focus-visible{background:#285943}
-.nal-card--monthly{outline:2px solid #8c9c83;outline-offset:-2px}
-.nal-monthly-label{display:inline-block;padding:.3rem .56rem;background:#234735;color:#fff2d9;font-size:.72rem;font-weight:700;letter-spacing:.06em}
-.nal-monthly-section{background:#f1eee6;padding:clamp(2rem,6vw,5rem) 0;color:#26342a}
-.nal-monthly-section__intro{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:1.75rem}
-.nal-monthly-section h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;color:#1b3227;font-size:clamp(1.75rem,3.25vw,3rem);line-height:1.32;margin:.25rem 0}
-.nal-monthly-section__lead{max-width:31rem;color:#5b635b;font-size:.99rem;line-height:1.8;margin:0}
-.nal-monthly-weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
-.nal-monthly-week{border:1px solid #d8d7cc;border-top:5px solid var(--week-color,#d7dfcc);background:#fffcf5;border-radius:4px;padding:clamp(1.1rem,2vw,1.6rem);min-height:235px;display:flex;flex-direction:column}
-.nal-monthly-week__num{font:800 .78rem/1.2 "Space Grotesk","Pretendard",sans-serif;letter-spacing:.13em;color:#506352}
-.nal-monthly-week h3{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;color:#23392a;font-size:clamp(1.12rem,1.8vw,1.5rem);line-height:1.44;margin:1rem 0 .65rem;letter-spacing:-.035em}
-.nal-monthly-week p{color:#5a645b;font-size:.88rem;line-height:1.7;margin:0 0 1.25rem}
-.nal-monthly-week a{color:#1f5740!important;text-decoration:underline;text-underline-offset:.23em;font-weight:750;font-size:.86rem;margin-top:auto}
-.nal-monthly-rhythm{margin-top:1.5rem;border-top:1px solid #cdd0c4;padding-top:1.5rem;display:flex;gap:1rem;align-items:flex-start;justify-content:space-between}
-.nal-monthly-rhythm p{margin:0;color:#536052;line-height:1.75;font-size:.94rem}
-.nal-monthly-rhythm strong{color:#214631;white-space:nowrap}
-.nal-monthly-next{background:#143528;color:#f6f1e7;padding:clamp(2rem,6vw,4rem) 0}
-.nal-monthly-next__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,250px);gap:3rem;align-items:center}
-.nal-monthly-next__eyebrow{color:#c5d899;font-size:.8rem;letter-spacing:.16em;font-weight:750}
-.nal-monthly-next h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo",serif;color:#f4efe5;letter-spacing:-.065em;font-size:clamp(2rem,4vw,3.55rem);margin:1rem 0 1.2rem}
-.nal-monthly-next p{color:#cbd9ca;line-height:1.86;max-width:40rem}
-.nal-monthly-next img{width:min(100%,245px);height:auto;filter:drop-shadow(7px 12px 12px rgba(0,0,0,.24));display:block}
-.nal-monthly-info{padding:2rem 0;background:#fffdf7;border-bottom:1px solid #e1e0d6}
-.nal-monthly-info__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
-.nal-monthly-info__grid>div{border-left:2px solid #b8c7b1;padding-left:1rem}
-.nal-monthly-info dt{color:#626e65;font-size:.8rem;letter-spacing:.04em}
-.nal-monthly-info dd{margin:.55rem 0 0;font-size:1.03rem;font-weight:700;line-height:1.5;color:#1d3e2d}
-.nal-monthly-info small{display:block;color:#6c756a;font-size:.78rem;margin-top:.3rem;line-height:1.6}
-.nal-monthly-registration{padding:2rem 0 3.5rem;background:#fffdf7}
-.nal-monthly-registration__inner{max-width:760px;border:1px solid #d8dace;padding:clamp(1.5rem,4vw,2.7rem);border-radius:5px;background:#f7f7f0}
-.nal-monthly-registration h2{color:#214432;font-size:clamp(1.45rem,2.6vw,2.1rem);margin:0 0 1rem}
-.nal-monthly-registration p{line-height:1.8;color:#43584b}
-.nal-monthly-registration__hint{color:#576357;font-size:.86rem}
-.nal-monthly-registration__button{display:inline-flex;align-items:center;min-height:46px;padding:.7rem 1.1rem;border-radius:4px;background:#283c30;color:#fbf4e9!important;text-decoration:none;font-size:.93rem;font-weight:700}
-.nal-monthly-registration__button[aria-disabled="true"]{background:#c7ccc1;color:#526154!important;cursor:not-allowed}
-.nal-monthly-lite .nal-detail-hero{background:#f6f3eb}
-.nal-monthly-lite .nal-detail-hero__copy>h1{letter-spacing:-.04em}
-@media(max-width:900px){.nal-monthly-weeks{grid-template-columns:repeat(2,minmax(0,1fr))}.nal-monthly-section__intro{display:block}.nal-monthly-section__lead{margin-top:1rem}.nal-monthly-promo__grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
-@media(max-width:640px){
- .nal-monthly-promo__grid,.nal-monthly-next__row,.nal-monthly-info__grid{grid-template-columns:1fr}
- .nal-monthly-promo__grid{gap:2rem}
- .nal-monthly-promo__copy{order:1}
- .nal-monthly-promo__media{order:0}
- .nal-monthly-promo__meta{gap:.45rem}
- .nal-monthly-weeks{grid-template-columns:1fr;gap:.75rem}
- .nal-monthly-week{min-height:0;padding:1.2rem}
- .nal-monthly-next__row{gap:1.4rem}
- .nal-monthly-next img{max-width:180px}
- .nal-monthly-info__grid{gap:1.45rem}
- .nal-monthly-rhythm{display:block}
- .nal-monthly-rhythm strong{display:block;margin-bottom:.5rem}
+/* NAL · MONTHLY READING / EDITORIAL V2
+   Intentionally scoped: no decorative book composite, tags, or duplicated status UI. */
+.nal-reading,.nal-reading-teaser{--paper:#f7f4ed;--ink:#24352b;--ink-soft:#586158;--line:#d8d9cc;--accent:#2d5843;color:var(--ink)}
+.nal-reading{background:var(--paper)}
+.nal-reading__inner{max-width:980px;margin-inline:auto}
+.nal-reading__eyebrow{font-size:.8rem;letter-spacing:.055em;font-weight:720;color:#4d6b5c;margin:0 0 1.25rem}
+.nal-reading__hero{background:#f7f4ed;padding:clamp(3.5rem,7.5vw,7rem) 0 clamp(2.7rem,6vw,5rem)}
+.nal-reading__hero h1{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-weight:700;letter-spacing:-.068em;line-height:1.3;color:#1e3329;font-size:clamp(2.25rem,5.4vw,4.6rem);max-width:12ch;margin:0 0 clamp(1.6rem,3.5vw,2.5rem)}
+.nal-reading__hero-copy{max-width:630px}
+.nal-reading__hero-copy p{font-size:clamp(1.02rem,1.45vw,1.16rem);line-height:1.98;color:#455248;margin:0 0 1rem;word-break:keep-all}
+.nal-reading__series{font-size:.94rem!important;font-weight:700;color:#345543!important;margin:0 0 1.5rem!important}
+.nal-reading__meta{display:flex;gap:.6rem 1rem;flex-wrap:wrap;align-items:center;font-size:.88rem;letter-spacing:.01em;color:#375646;padding-top:1.15rem;margin-top:1.4rem;border-top:1px solid var(--line)}
+.nal-reading__meta span+span::before{content:"·";margin-right:1rem;color:#adb6a6}
+.nal-reading__step-link{display:inline-block;color:#2d5843!important;text-decoration:underline;text-underline-offset:.3em;text-decoration-thickness:1px;font-weight:750;margin-top:1.2rem;font-size:.92rem}
+.nal-reading__books{background:#fffdf8;padding:clamp(3rem,7vw,5.5rem) 0 clamp(1rem,2vw,2rem)}
+.nal-reading__section-heading{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-size:clamp(1.7rem,3.35vw,2.65rem);font-weight:700;letter-spacing:-.045em;line-height:1.38;margin:0 0 2rem;color:#263b2c}
+.nal-reading__book-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.nal-reading__book{border-bottom:1px solid var(--line);padding:clamp(1.3rem,3.2vw,2rem) 0;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:clamp(1rem,2.5vw,2.5rem);align-items:start}
+.nal-reading__book-num{font-family:"Space Grotesk","Pretendard",sans-serif;font-size:.95rem;color:#63806d;letter-spacing:.04em;padding-top:.2rem}
+.nal-reading__book h3{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-size:clamp(1.23rem,2.25vw,1.67rem);color:#21392c;line-height:1.55;letter-spacing:-.035em;margin:0 0 .45rem}
+.nal-reading__book p{color:#6a7068;font-size:.93rem;line-height:1.75;margin:0;word-break:keep-all}
+.nal-reading__book a{align-self:center;white-space:nowrap;color:#355f47!important;font-weight:700;font-size:.86rem;text-decoration:underline;text-underline-offset:.27em}
+.nal-reading__book a:hover,.nal-reading__book a:focus-visible,.nal-reading__step-link:hover{color:#0b3721!important}
+.nal-reading__zine{background:#f1eee6;padding:clamp(2.8rem,6vw,5rem) 0}
+.nal-reading__zine-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,205px);gap:clamp(1.4rem,5vw,5rem);align-items:center}
+.nal-reading__zine-eyebrow{color:#567160;letter-spacing:.08em;font-size:.76rem;font-weight:700;margin:0 0 1.2rem}
+.nal-reading__zine h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-size:clamp(1.85rem,3.5vw,3.15rem);font-weight:700;letter-spacing:-.055em;color:#1b3627;line-height:1.33;margin:0 0 1.1rem}
+.nal-reading__zine p:not(.nal-reading__zine-eyebrow){font-size:clamp(.96rem,1.4vw,1.09rem);line-height:1.95;color:#4b584e;margin:0 0 .8rem;max-width:37rem;word-break:keep-all}
+.nal-reading__zine-cover{display:block;margin:0;max-width:205px}
+.nal-reading__zine-cover img{display:block;width:100%;height:auto;box-shadow:9px 14px 23px rgba(38,47,36,.16)}
+.nal-reading__join{background:#fffdf8;padding:clamp(2.7rem,6vw,5rem) 0}
+.nal-reading__join-inner{border-top:1px solid #bdc7b9;padding-top:clamp(2rem,4vw,3rem)}
+.nal-reading__join h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-size:clamp(1.45rem,3vw,2.3rem);line-height:1.45;letter-spacing:-.042em;color:#213b2d;margin:0 0 1rem}
+.nal-reading__join p{color:#58645b;font-size:.95rem;line-height:1.84;max-width:42rem;margin:0 0 1rem}
+.nal-reading__join-status{color:#486450!important;margin:.8rem 0 1.5rem!important}
+.nal-reading__join-link{display:inline-flex;justify-content:center;align-items:center;min-height:44px;background:#224c37;color:#fff6e4!important;padding:.7rem 1.2rem;text-decoration:none;font-weight:750;border-radius:3px}
+.nal-reading__join-link:hover,.nal-reading__join-link:focus-visible{background:#356b4a}
+.nal-reading__footnote{font-size:.82rem!important;color:#7a8076!important;line-height:1.75!important;margin-top:1.55rem!important}
+.nal-reading-teaser{background:#f5f1e9;padding:clamp(2.2rem,5vw,4.5rem) 0;border-block:1px solid #d6d8cb}
+.nal-reading-teaser__inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:1.25rem 3rem}
+.nal-reading-teaser__intro{max-width:720px}
+.nal-reading-teaser__kicker{font-size:.77rem;font-weight:750;color:#5b7562;margin:0 0 .8rem;letter-spacing:.065em}
+.nal-reading-teaser h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;font-size:clamp(1.9rem,3.6vw,3.15rem);color:#233c2d;letter-spacing:-.055em;margin:0 0 .65rem;line-height:1.3}
+.nal-reading-teaser p:not(.nal-reading-teaser__kicker){font-size:1.02rem;line-height:1.8;color:#4e5a4f;margin:0}
+.nal-reading-teaser a{color:#274d36!important;text-decoration:underline;text-underline-offset:.28em;white-space:nowrap;font-weight:750;font-size:.93rem;margin-bottom:.25rem}
+.nal-card--reading{background:#fcfaf4!important;border-top:3px solid #648873!important}
+.nal-card--reading .nal-card__body{padding:1.6rem!important}
+.nal-card--reading .nal-card__eyebrow{color:#4c7257}
+@media(max-width:740px){
+.nal-reading-teaser__inner{grid-template-columns:1fr}
+.nal-reading__book{grid-template-columns:38px minmax(0,1fr);column-gap:.8rem}
+.nal-reading__book a{grid-column:2;justify-self:start;margin-top:.35rem}
+.nal-reading__zine-inner{grid-template-columns:1fr}
+.nal-reading__zine-cover{max-width:150px}
+.nal-reading__meta span+span::before{margin-right:.6rem}
 }
-@media(prefers-reduced-motion:reduce){.nal-monthly-promo__link{transition:none}}
+@media(max-width:390px){
+.nal-reading__hero h1{font-size:clamp(2rem,8vw,2.4rem)}
+.nal-reading__hero-copy p{font-size:1rem}
+.nal-reading__meta{font-size:.83rem}
+}
