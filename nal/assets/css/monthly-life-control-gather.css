@@ -1,0 +1,65 @@
+/* NAL GATHER · Life Control Monthly · 2026-10-24
+   The 4-week recurring reading circle. Isolated classes only. */
+.nal-monthly-promo{padding:clamp(1.5rem,4vw,3.5rem) 0;background:#f2eee5;border-block:1px solid #d6d2c6}
+.nal-monthly-promo__grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(1.5rem,4vw,4rem);align-items:center}
+.nal-monthly-promo__eyebrow,.nal-monthly-section__eyebrow{margin:0 0 1rem;font-size:.79rem;font-weight:800;letter-spacing:.13em;color:#2e5948}
+.nal-monthly-promo h2{font-size:clamp(2rem,4.7vw,4.45rem);font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;letter-spacing:-.055em;line-height:1.23;color:#1f3428;margin:0 0 1.2rem}
+.nal-monthly-promo__copy>p:not(.nal-monthly-promo__eyebrow){color:#415049;line-height:1.8;max-width:34rem}
+.nal-monthly-promo__meta{margin-top:1.5rem;display:flex;gap:.65rem;flex-wrap:wrap}
+.nal-monthly-promo__meta span{border:1px solid #bdc8b7;padding:.55rem .8rem;border-radius:100px;color:#2b4034;font-size:.8rem;font-weight:700}
+.nal-monthly-promo__media{border-radius:4px;overflow:hidden;box-shadow:0 18px 35px rgba(28,40,30,.12);display:block}
+.nal-monthly-promo__media img{display:block;width:100%;height:auto}
+.nal-monthly-promo__link{display:inline-flex;align-items:center;justify-content:center;gap:.65rem;margin-top:1.5rem;min-height:48px;padding:.7rem 1.3rem;background:#193b2f;color:#f9f1dc!important;text-decoration:none;border-radius:3px;font-size:.94rem;font-weight:750}
+.nal-monthly-promo__link:hover,.nal-monthly-promo__link:focus-visible{background:#285943}
+.nal-card--monthly{outline:2px solid #8c9c83;outline-offset:-2px}
+.nal-monthly-label{display:inline-block;padding:.3rem .56rem;background:#234735;color:#fff2d9;font-size:.72rem;font-weight:700;letter-spacing:.06em}
+.nal-monthly-section{background:#f1eee6;padding:clamp(2rem,6vw,5rem) 0;color:#26342a}
+.nal-monthly-section__intro{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:1.75rem}
+.nal-monthly-section h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;color:#1b3227;font-size:clamp(1.75rem,3.25vw,3rem);line-height:1.32;margin:.25rem 0}
+.nal-monthly-section__lead{max-width:31rem;color:#5b635b;font-size:.99rem;line-height:1.8;margin:0}
+.nal-monthly-weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.nal-monthly-week{border:1px solid #d8d7cc;border-top:5px solid var(--week-color,#d7dfcc);background:#fffcf5;border-radius:4px;padding:clamp(1.1rem,2vw,1.6rem);min-height:235px;display:flex;flex-direction:column}
+.nal-monthly-week__num{font:800 .78rem/1.2 "Space Grotesk","Pretendard",sans-serif;letter-spacing:.13em;color:#506352}
+.nal-monthly-week h3{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo","Noto Serif KR",serif;color:#23392a;font-size:clamp(1.12rem,1.8vw,1.5rem);line-height:1.44;margin:1rem 0 .65rem;letter-spacing:-.035em}
+.nal-monthly-week p{color:#5a645b;font-size:.88rem;line-height:1.7;margin:0 0 1.25rem}
+.nal-monthly-week a{color:#1f5740!important;text-decoration:underline;text-underline-offset:.23em;font-weight:750;font-size:.86rem;margin-top:auto}
+.nal-monthly-rhythm{margin-top:1.5rem;border-top:1px solid #cdd0c4;padding-top:1.5rem;display:flex;gap:1rem;align-items:flex-start;justify-content:space-between}
+.nal-monthly-rhythm p{margin:0;color:#536052;line-height:1.75;font-size:.94rem}
+.nal-monthly-rhythm strong{color:#214631;white-space:nowrap}
+.nal-monthly-next{background:#143528;color:#f6f1e7;padding:clamp(2rem,6vw,4rem) 0}
+.nal-monthly-next__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,250px);gap:3rem;align-items:center}
+.nal-monthly-next__eyebrow{color:#c5d899;font-size:.8rem;letter-spacing:.16em;font-weight:750}
+.nal-monthly-next h2{font-family:"Gowun Batang NAL Fallback","Nanum Myeongjo",serif;color:#f4efe5;letter-spacing:-.065em;font-size:clamp(2rem,4vw,3.55rem);margin:1rem 0 1.2rem}
+.nal-monthly-next p{color:#cbd9ca;line-height:1.86;max-width:40rem}
+.nal-monthly-next img{width:min(100%,245px);height:auto;filter:drop-shadow(7px 12px 12px rgba(0,0,0,.24));display:block}
+.nal-monthly-info{padding:2rem 0;background:#fffdf7;border-bottom:1px solid #e1e0d6}
+.nal-monthly-info__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+.nal-monthly-info__grid>div{border-left:2px solid #b8c7b1;padding-left:1rem}
+.nal-monthly-info dt{color:#626e65;font-size:.8rem;letter-spacing:.04em}
+.nal-monthly-info dd{margin:.55rem 0 0;font-size:1.03rem;font-weight:700;line-height:1.5;color:#1d3e2d}
+.nal-monthly-info small{display:block;color:#6c756a;font-size:.78rem;margin-top:.3rem;line-height:1.6}
+.nal-monthly-registration{padding:2rem 0 3.5rem;background:#fffdf7}
+.nal-monthly-registration__inner{max-width:760px;border:1px solid #d8dace;padding:clamp(1.5rem,4vw,2.7rem);border-radius:5px;background:#f7f7f0}
+.nal-monthly-registration h2{color:#214432;font-size:clamp(1.45rem,2.6vw,2.1rem);margin:0 0 1rem}
+.nal-monthly-registration p{line-height:1.8;color:#43584b}
+.nal-monthly-registration__hint{color:#576357;font-size:.86rem}
+.nal-monthly-registration__button{display:inline-flex;align-items:center;min-height:46px;padding:.7rem 1.1rem;border-radius:4px;background:#283c30;color:#fbf4e9!important;text-decoration:none;font-size:.93rem;font-weight:700}
+.nal-monthly-registration__button[aria-disabled="true"]{background:#c7ccc1;color:#526154!important;cursor:not-allowed}
+.nal-monthly-lite .nal-detail-hero{background:#f6f3eb}
+.nal-monthly-lite .nal-detail-hero__copy>h1{letter-spacing:-.04em}
+@media(max-width:900px){.nal-monthly-weeks{grid-template-columns:repeat(2,minmax(0,1fr))}.nal-monthly-section__intro{display:block}.nal-monthly-section__lead{margin-top:1rem}.nal-monthly-promo__grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+@media(max-width:640px){
+ .nal-monthly-promo__grid,.nal-monthly-next__row,.nal-monthly-info__grid{grid-template-columns:1fr}
+ .nal-monthly-promo__grid{gap:2rem}
+ .nal-monthly-promo__copy{order:1}
+ .nal-monthly-promo__media{order:0}
+ .nal-monthly-promo__meta{gap:.45rem}
+ .nal-monthly-weeks{grid-template-columns:1fr;gap:.75rem}
+ .nal-monthly-week{min-height:0;padding:1.2rem}
+ .nal-monthly-next__row{gap:1.4rem}
+ .nal-monthly-next img{max-width:180px}
+ .nal-monthly-info__grid{gap:1.45rem}
+ .nal-monthly-rhythm{display:block}
+ .nal-monthly-rhythm strong{display:block;margin-bottom:.5rem}
+}
+@media(prefers-reduced-motion:reduce){.nal-monthly-promo__link{transition:none}}
