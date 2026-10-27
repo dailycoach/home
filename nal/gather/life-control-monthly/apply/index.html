@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#DCFF3B">
+  <meta name="robots" content="noindex,follow">
+  <title>삶의 통제권 연습 | 4주 모임 참여 신청</title>
+  <meta name="description" content="NAL 삶의 통제권 연습 월간 알아차림·셀프코칭 모임. 토요일 오전 시간 의견을 모으고 참가 신청을 접수합니다.">
+  <link rel="canonical" href="https://daily-coach-ing.com/nal/gather/life-control-monthly/apply/">
+  <link rel="icon" href="/nal/assets/images/nal-symbol.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/nal/assets/css/life-control-application.css?v=20261028">
+  <script src="/nal/assets/js/backend.js" defer></script>
+  <script src="/nal/assets/js/life-control-application.js?v=20261028" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <a class="logo" href="/nal/" aria-label="NAL 홈으로"><span aria-hidden="true">N</span> NAL</a>
+    <a class="back-link" href="/nal/gather/life-control-monthly/">모임 소개 보기 <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" class="page-wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> NAL GATHER / MONTHLY PRACTICE</p>
+      <h1 id="page-title">삶의 통제권<br><em>연습</em></h1>
+      <p class="hero-copy">뜻대로 되지 않는 하루에도,<br>내가 선택할 수 있는 한 걸음은 남아 있습니다.</p>
+      <p class="hero-subcopy">책을 많이 읽는 모임이 아닙니다. 현실을 알아차리고, 마음을 살피고, 오늘 가능한 행동을 함께 연습합니다.</p>
+    </section>
+    <div class="main-grid">
+      <section class="application-card" aria-labelledby="apply-title">
+        <div class="card-head">
+          <div><p class="section-label">JOIN / 신청</p><h2 id="apply-title">모임 참여 신청</h2></div>
+          <span class="minutes">약 1~2분</span>
+        </div>
+        <p class="form-intro">참여에 필요한 내용만 간단히 확인합니다. 입금 확인은 운영자가 직접 진행합니다.</p>
+        <div class="previous-receipt" data-previous-receipt hidden></div>
+        <form id="life-control-form" novalidate>
+          <div class="form-field">
+            <label for="nickname">1. 오픈채팅에서 사용할 닉네임 <span class="required">필수</span></label>
+            <input id="nickname" name="nickname" type="text" autocomplete="nickname" minlength="1" maxlength="24" placeholder="예: 한걸음" required>
+            <p class="field-hint">입장한 채팅방의 닉네임과 같게 적어주세요.</p>
+          </div>
+          <div class="form-field">
+            <label for="depositor_name">2. 입금자명 <span class="required">필수</span></label>
+            <input id="depositor_name" name="depositor_name" type="text" maxlength="40" autocomplete="off" placeholder="입금할 때 표시되는 이름" required>
+            <p class="field-hint">입금 내역 대조에만 사용하며 다른 참여자에게 공개되지 않습니다.</p>
+          </div>
+          <fieldset class="form-field">
+            <legend>3. 토요일 오전, 어느 시간이 더 편하신가요? <span class="required">필수</span></legend>
+            <p class="field-hint">10:00와 10:30 중 참여자 의견을 반영해 최종 공지합니다.</p>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="time_preference" value="10:30" required><span>오전 10:30</span></label>
+              <label class="choice"><input type="radio" name="time_preference" value="10:00"><span>오전 10:00</span></label>
+              <label class="choice"><input type="radio" name="time_preference" value="either"><span>둘 다 괜찮아요</span></label>
+              <label class="choice"><input type="radio" name="time_preference" value="other"><span>시간 조정이 필요해요</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="form-field">
+            <legend>4. 한 달 네 번의 만남에 참여 가능하신가요? <span class="required">필수</span></legend>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="attendance" value="all" required><span>네 번 모두 가능</span></label>
+              <label class="choice"><input type="radio" name="attendance" value="partial"><span>가능한 날만 참여</span></label>
+              <label class="choice"><input type="radio" name="attendance" value="undecided"><span>일정 확인이 필요해요</span></label>
+            </div>
+          </fieldset>
+          <div class="form-field">
+            <label for="focus_area">5. 지금 가장 연습해보고 싶은 것은? <span class="required">필수</span></label>
+            <select id="focus_area" name="focus_area" required>
+              <option value="">선택해 주세요</option>
+              <option value="reality">바꿀 수 있는 것과 없는 것 구분하기</option>
+              <option value="feelings">지금의 감정과 마음 알아차리기</option>
+              <option value="choices">오늘 가능한 작은 행동 찾기</option>
+              <option value="writing">나의 경험을 말과 글로 정리하기</option>
+              <option value="undecided">참여하면서 천천히 찾아보기</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="note">6. 진행자에게 전하고 싶은 말 <span class="optional">선택</span></label>
+            <textarea id="note" name="note" maxlength="240" rows="3" placeholder="참여와 관련된 이야기만 가볍게 남겨주세요."></textarea>
+            <p class="field-hint">건강 정보, 주민번호, 계좌 비밀번호 등 민감한 정보는 적지 말아 주세요.</p>
+          </div>
+          <fieldset class="form-field consent-group">
+            <legend>7. 신청 전 확인 <span class="required">필수</span></legend>
+            <p class="consent-copy"><strong>개인정보 수집·이용</strong><br>항목: 오픈채팅 닉네임, 입금자명, 시간 선호, 참여 가능 여부, 연습 주제 및 선택 메모.<br>목적: 모임 신청 접수, 입금 대조, 운영 안내.<br>보유: 신청일로부터 최대 90일. 삭제·철회 요청: <a href="mailto:hello@daily-coach-ing.com">hello@daily-coach-ing.com</a>.<br>동의를 거부하실 수 있으나, 그 경우 신청 접수가 어렵습니다.</p>
+            <label class="check-label"><input type="checkbox" name="privacy_consent" required> <span>위 개인정보 수집·이용에 동의합니다.</span></label>
+            <label class="check-label"><input type="checkbox" name="community_consent" required> <span>서로의 경험을 평가하지 않고, 동의 없는 녹화·캡처·외부 공유를 하지 않겠습니다.</span></label>
+          </fieldset>
+          <div class="honeypot" aria-hidden="true"><label for="website">웹사이트 주소</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="submit-area">
+            <p class="submit-note">신청 접수만으로 참여가 확정되거나 결제가 완료되지는 않습니다. 취소·환불 기준과 최종 시간을 오픈채팅에서 확인한 뒤 입금해 주세요.</p>
+            <button class="submit-button" type="submit" data-submit disabled><span data-submit-label>신청서 연결 확인 중…</span><span aria-hidden="true">↗</span></button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          </div>
+        </form>
+        <section class="success" id="life-control-success" hidden tabindex="-1" aria-labelledby="success-title">
+          <p class="success-kicker">APPLICATION RECEIVED</p>
+          <h2 id="success-title">신청이 접수되었습니다.</h2>
+          <p>참여가 아직 확정된 것은 아닙니다. 오픈채팅에서 최종 시간과 취소·환불 기준을 먼저 확인해 주세요.</p>
+          <div class="receipt">접수 확인번호 <strong data-application-code></strong><button type="button" data-copy-code>복사</button></div>
+          <div class="account-panel">
+            <strong>참가비 · 4주 전체 9,900원</strong>
+            <span>카카오뱅크 · 데일리코칭</span>
+            <p>3333280615350 <button type="button" data-copy-account>계좌 복사</button></p>
+            <small>운영 안내를 확인한 뒤 신청서의 입금자명과 동일하게 송금해 주세요. 입금 확인은 운영자가 진행합니다.</small>
+          </div>
+          <a class="chat-button" href="https://open.kakao.com/o/grzZAnUi" target="_blank" rel="noopener noreferrer">카카오톡 오픈채팅 입장하기 <span aria-hidden="true">↗</span></a>
+          <p class="after-note">변경·취소 문의는 오픈채팅 또는 <a href="mailto:hello@daily-coach-ing.com">이메일</a>로 연락해 주세요. 접수 확인번호를 함께 알려주시면 빠르게 확인할 수 있습니다.</p>
+        </section>
+      </section>
+      <aside class="summary" aria-label="모임 요약">
+        <div class="summary-card">
+          <p class="summary-label">THE PRACTICE</p>
+          <h2>모든 것을 통제할 수는 없지만,<br>선택을 연습할 수는 있습니다.</h2>
+          <dl>
+            <div><dt>진행</dt><dd>김철웅 코치</dd></div>
+            <div><dt>방식</dt><dd>Zoom · 주 1회 60분</dd></div>
+            <div><dt>요일</dt><dd>토요일 오전 (시간 의견 수렴 중)</dd></div>
+            <div><dt>구성</dt><dd>4주 · 총 4회</dd></div>
+            <div><dt>참가비</dt><dd><strong>9,900원 / 4주 전체</strong></dd></div>
+          </dl>
+          <ol class="weeks">
+            <li><span>01</span><div><strong>현실</strong><small>바꿀 수 있는 것과 없는 것</small></div></li>
+            <li><span>02</span><div><strong>마음</strong><small>감정과 필요를 알아차리기</small></div></li>
+            <li><span>03</span><div><strong>선택</strong><small>오늘 가능한 한 걸음</small></div></li>
+            <li><span>04</span><div><strong>기록</strong><small>요즘 나, 이렇습니다.</small></div></li>
+          </ol>
+          <p class="summary-footer">책은 대화를 돕는 자료입니다. 완독이나 발표는 필수가 아닙니다.</p>
+        </div>
+      </aside>
+    </div>
+    <footer class="footer"><span>© NAL · DAILYCOACHING</span><a href="/nal/gather/life-control-monthly/">모임 소개로 돌아가기</a></footer>
+  </main>
+  <noscript><p class="noscript">신청서를 제출하려면 브라우저에서 JavaScript를 사용해 주세요.</p></noscript>
+</body>
+</html>
