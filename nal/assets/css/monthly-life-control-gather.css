@@ -116,45 +116,43 @@
 }
 @media(prefers-reduced-motion:reduce){.nal-genz__deck-book,.nal-genz__book-image img,.nal-genz__jump,.nal-genz__registration a{transition:none}}
 
-/* Life Control Monthly — self-published visitor reviews */
-.nal-genz__reviews{background:#fffcf5;padding:clamp(3.6rem,7vw,7rem) 0;color:var(--genz-ink)}
-.nal-genz__reviews-header{margin-bottom:clamp(1.8rem,4vw,3.6rem)}
-.nal-genz__reviews-kicker{font-size:.8rem;letter-spacing:.06em;color:var(--genz-blue);font-weight:900;margin:0 0 1.05rem}
-.nal-genz__reviews-header h2{font-family:"Pretendard Variable","Noto Sans KR",system-ui,sans-serif!important;font-size:clamp(2.5rem,5.4vw,5.65rem)!important;line-height:1.1!important;letter-spacing:-.082em!important;color:var(--genz-ink)!important;margin:0 0 1.15rem!important;font-weight:950!important}
-.nal-genz__reviews-header h2 span{color:var(--genz-blue)}
-.nal-genz__reviews-header>p:last-child{font-size:clamp(.96rem,1.3vw,1.12rem);line-height:1.78;color:#54564e;margin:0;word-break:keep-all}
-.nal-genz__reviews-layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.78fr);gap:clamp(1.25rem,4vw,4.6rem);align-items:start}
-.nal-genz__reviews-feed-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.1rem}
-.nal-genz__reviews-feed-head h3{font-size:1.18rem!important;letter-spacing:-.04em!important;font-weight:850!important;margin:0!important;color:var(--genz-ink)!important}
-.nal-genz__reviews-feed-head span{color:#445034;background:var(--genz-lime);border:1px solid #172314;padding:.3rem .55rem;font-size:.72rem;font-weight:900;white-space:nowrap}
-.nal-genz__review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
-.nal-genz__review-empty,.nal-genz__review-error{grid-column:1/-1;background:#f0efe7;border:1px solid #d4d3c8;padding:clamp(1.6rem,3vw,2.6rem);font-size:1rem;line-height:1.7;color:#535650;min-height:166px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0}
-.nal-genz__review-card{position:relative;display:flex;flex-direction:column;min-height:190px;background:#fff;border:1px solid #d5d6c9;padding:1.4rem 1.3rem;overflow-wrap:anywhere}
-.nal-genz__review-card:before{content:"“";font-family:Georgia,serif;font-size:4rem;line-height:.8;color:var(--genz-blue);display:block;margin-bottom:1rem;opacity:.8}
-.nal-genz__review-card blockquote{border:0;padding:0;margin:0 0 1.35rem;font-size:.96rem;line-height:1.76;font-weight:570;color:#272b24;white-space:pre-wrap;word-break:break-word;flex:1}
-.nal-genz__review-card footer{border-top:1px solid #e9e9df;padding-top:.7rem;display:flex;justify-content:space-between;gap:.7rem;align-items:center;color:#565950;font-size:.77rem;font-weight:770}
-.nal-genz__review-card time{font-variant-numeric:tabular-nums;color:#757871}
-.nal-genz__review-form{position:relative;background:var(--genz-lime);border:2px solid var(--genz-ink);padding:clamp(1.35rem,2.8vw,2.5rem);box-shadow:9px 9px 0 var(--genz-ink);display:flex;flex-direction:column;gap:0;min-width:0}
-.nal-genz__review-form-kicker{font-size:.76rem;letter-spacing:.06em;font-weight:900;color:var(--genz-blue);margin:0 0 .9rem}
-.nal-genz__review-form h3{font-family:"Pretendard Variable","Noto Sans KR",system-ui,sans-serif!important;color:var(--genz-ink)!important;font-size:clamp(1.8rem,2.6vw,2.8rem)!important;letter-spacing:-.072em!important;line-height:1.19!important;font-weight:950!important;margin:0 0 .75rem!important}
-.nal-genz__review-form-lead{color:#424a34;font-size:.93rem;line-height:1.65;margin:0 0 1.45rem;word-break:keep-all}
-.nal-genz__review-form>label:not(.nal-genz__review-consent){font-size:.88rem;font-weight:900;margin:0 0 .45rem;color:var(--genz-ink)}
-.nal-genz__review-form>label span{font-weight:650}
-.nal-genz__review-form input[name=display_name],.nal-genz__review-form textarea{width:100%;box-sizing:border-box;border:1.5px solid #343a24;border-radius:0;background:#fff;color:var(--genz-ink);font:inherit;font-size:.98rem;min-height:49px;outline-offset:3px;padding:.85rem .9rem;margin-bottom:1rem}
-.nal-genz__review-form textarea{min-height:165px;resize:vertical;margin-bottom:.35rem;line-height:1.65}
-.nal-genz__review-form input:focus-visible,.nal-genz__review-form textarea:focus-visible{outline:3px solid var(--genz-blue)}
-.nal-genz__review-hint{display:flex;justify-content:space-between;gap:1rem;font-size:.76rem;line-height:1.5;color:#515b3c;margin:0 0 1.25rem}
-.nal-genz__review-hint output{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:900}
+/* Life Control Monthly — compact visitor reviews */
+.nal-genz__reviews{background:var(--genz-cream);padding:clamp(1.7rem,3.5vw,3.1rem) 0;color:var(--genz-ink)}
+.nal-genz__reviews-inner{width:min(100%,780px);margin-inline:auto}
+.nal-genz__reviews-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1rem;border-bottom:1px solid #d9d9d0;padding-bottom:.9rem}
+.nal-genz__reviews-header h2{font-family:"Pretendard Variable","Noto Sans KR",system-ui,sans-serif!important;font-size:clamp(1.4rem,2.5vw,1.8rem)!important;letter-spacing:-.045em!important;line-height:1.35!important;color:var(--genz-ink)!important;font-weight:850!important;margin:0!important}
+.nal-genz__review-composer{margin-left:auto;min-width:0}
+.nal-genz__review-composer[open]{flex:0 0 100%;order:3;margin:0}
+.nal-genz__review-composer summary{display:flex;align-items:center;gap:.35rem;max-width:max-content;margin-left:auto;padding:.55rem .8rem;border:1px solid #787b70;border-radius:5px;color:#242820;font-size:.85rem;font-weight:750;line-height:1.35;cursor:pointer;list-style:none}
+.nal-genz__review-composer summary::-webkit-details-marker{display:none}
+.nal-genz__review-composer summary:hover,.nal-genz__review-composer summary:focus-visible{border-color:var(--genz-blue);color:var(--genz-blue)}
+.nal-genz__review-composer summary span{font-size:1.1rem;line-height:.8}
+.nal-genz__review-list{display:grid;grid-template-columns:1fr;gap:0}
+.nal-genz__review-empty,.nal-genz__review-error{padding:1.3rem 0 .3rem;font-size:.91rem;line-height:1.6;color:#6a6d63;margin:0}
+.nal-genz__review-card{min-width:0;border-bottom:1px solid #e4e2d8;padding:1.25rem 0;overflow-wrap:anywhere}
+.nal-genz__review-card:last-child{border-bottom:0}
+.nal-genz__review-card blockquote{border:0;padding:0;margin:0 0 .65rem;font-size:.94rem;line-height:1.75;font-weight:500;color:#282b26;white-space:pre-wrap;word-break:break-word}
+.nal-genz__review-card footer{display:flex;gap:.75rem;align-items:center;color:#666a60;font-size:.77rem;font-weight:650}
+.nal-genz__review-card time{font-variant-numeric:tabular-nums;color:#858980}
+.nal-genz__review-form{max-width:100%;margin:1.05rem 0 .4rem;padding:1.25rem;background:#fff;border:1px solid #dcded3;border-radius:6px;display:flex;flex-direction:column;min-width:0}
+.nal-genz__review-form>label:not(.nal-genz__review-consent){font-size:.85rem;font-weight:750;margin:0 0 .35rem;color:#32372e}
+.nal-genz__review-form>label span{font-weight:500;color:#6b7166}
+.nal-genz__review-form input[name=display_name],.nal-genz__review-form textarea{width:100%;box-sizing:border-box;border:1px solid #cfd2c8;border-radius:4px;background:#fff;color:var(--genz-ink);font:inherit;font-size:.92rem;outline-offset:2px;padding:.72rem .8rem;margin-bottom:.9rem}
+.nal-genz__review-form input[name=display_name]{max-width:290px;min-height:43px}
+.nal-genz__review-form textarea{min-height:112px;resize:vertical;margin-bottom:.25rem;line-height:1.6}
+.nal-genz__review-form input:focus-visible,.nal-genz__review-form textarea:focus-visible{outline:2px solid var(--genz-blue)}
+.nal-genz__review-hint{display:flex;justify-content:flex-end;font-size:.72rem;line-height:1.4;color:#777d73;margin:0 0 .8rem}
+.nal-genz__review-hint output{font-variant-numeric:tabular-nums}
 .nal-genz__review-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
-.nal-genz__review-consent{display:flex;gap:.75rem;align-items:flex-start;line-height:1.58;color:#212a18;font-size:.85rem;margin:0 0 .8rem;cursor:pointer}
-.nal-genz__review-consent input{appearance:auto;accent-color:var(--genz-blue);width:20px;height:20px;flex:0 0 20px;margin:.07rem 0 0}
-.nal-genz__review-privacy{font-size:.75rem;line-height:1.7;color:#535c41;margin:0 0 1.25rem}
-.nal-genz__review-privacy a{color:#172ccc!important;text-underline-offset:.2em}
-.nal-genz__review-submit{min-height:51px;border:0;border-radius:0;background:var(--genz-ink);color:#fff;font:inherit;font-size:.96rem;font-weight:900;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.05rem;cursor:pointer;transition:background .15s ease}
+.nal-genz__review-consent{display:flex;gap:.55rem;align-items:flex-start;line-height:1.55;color:#444a40;font-size:.78rem;margin:0 0 .7rem;cursor:pointer}
+.nal-genz__review-consent input{appearance:auto;accent-color:var(--genz-blue);width:17px;height:17px;flex:0 0 17px;margin:.04rem 0 0}
+.nal-genz__review-form-actions{display:flex;align-items:center;justify-content:space-between;gap:.7rem 1rem;flex-wrap:wrap}
+.nal-genz__review-privacy{font-size:.72rem;line-height:1.65;color:#74786f;margin:0}
+.nal-genz__review-privacy a{color:#3744b8!important;text-underline-offset:.15em}
+.nal-genz__review-submit{min-width:88px;min-height:41px;border:0;border-radius:4px;background:var(--genz-ink);color:#fff;font:inherit;font-size:.86rem;font-weight:750;padding:.55rem 1.2rem;cursor:pointer}
 .nal-genz__review-submit:hover:not(:disabled),.nal-genz__review-submit:focus-visible:not(:disabled){background:var(--genz-blue)}
 .nal-genz__review-submit:disabled{opacity:.55;cursor:not-allowed}
-.nal-genz__review-status{font-size:.8rem;line-height:1.6;color:#3f4b2e;margin:.7rem 0 0;min-height:1.6em}
+.nal-genz__review-status{font-size:.77rem;line-height:1.55;color:#3e6c33;margin:.7rem 0 0}
+.nal-genz__review-status:empty{display:none}
 .nal-genz__review-status[data-error=true]{color:#a22535}
-@media(max-width:890px){.nal-genz__reviews-layout{grid-template-columns:1fr}.nal-genz__review-form{max-width:630px}}
-@media(max-width:540px){.nal-genz__review-list{grid-template-columns:1fr}.nal-genz__reviews-header>p:last-child br{display:none}.nal-genz__review-form{box-shadow:5px 5px 0 var(--genz-ink)}.nal-genz__review-card{min-height:160px}}
-@media(prefers-reduced-motion:reduce){.nal-genz__review-submit{transition:none}}
+@media(max-width:540px){.nal-genz__reviews{padding:1.6rem 0}.nal-genz__review-form{padding:1rem}.nal-genz__review-form input[name=display_name]{max-width:100%}.nal-genz__review-privacy{flex:1 1 190px}}
