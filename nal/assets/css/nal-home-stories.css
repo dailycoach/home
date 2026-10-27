@@ -267,7 +267,7 @@
     position: relative;
     grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(250px,86%);
+    grid-auto-columns: max(265px,86%);
     gap: 13px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
@@ -336,12 +336,14 @@
   }
   .nal-stories__details strong { font-size: 18px; }
   .nal-stories__details p { font-size: 12px !important; }
-  .nal-stories__actions { gap: 15px; }
+  .nal-stories__actions { flex-direction: column; align-items: stretch; gap: 8px; }
+  .nal-stories__join { width: 100%; }
+  .nal-stories__more { align-self: flex-start; }
   .nal-stories__join { min-height: 44px; font-size: 13px; }
   .nal-stories__footnote { margin-top: 8px !important; text-align: left; }
 }
 @media(max-width:370px) {
-  .nal-stories__rail { grid-auto-columns: minmax(244px,86%); }
+  .nal-stories__rail { grid-auto-columns: max(265px,86%); }
   .nal-stories .nal-story { padding: 19px; }
   .nal-stories .nal-story h1,.nal-stories .nal-story h2 { font-size: 33px !important; }
   .nal-stories .nal-story--weeks h2 { font-size: 32px !important; }
