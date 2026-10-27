@@ -448,23 +448,84 @@
     </article>`;
   }
 
-  function firstGatherStrip(item) {
-    const detailsUrl = itemRoute("programs", item);
-    const kakao = safeUrl(item.applicationUrl);
+  function lifeControlCardNews(item) {
+    const detailUrl = itemRoute("programs", item);
+    const chatUrl = safeUrl(item.applicationUrl);
     const isOpen = ["open", "closing", "waiting"].includes(item.status)
-      && /^https:\/\/open\.kakao\.com\/o\/[A-Za-z0-9]+\/?$/.test(kakao);
-    const fee = formatPrice(item.price);
-    const button = isOpen
-      ? `<a class="nal-first-gather__action" href="${escapeHtml(kakao)}"${externalAttrs(kakao)}>카카오톡 참여 <span aria-hidden="true">↗</span></a>`
-      : `<a class="nal-first-gather__action" href="${escapeHtml(detailsUrl)}">모임 보기 <span aria-hidden="true">↗</span></a>`;
-    return `<section class="nal-first-gather" aria-labelledby="nal-first-gather-heading">
-      <div class="nal-container nal-first-gather__inner">
-        <div class="nal-first-gather__content">
-          <p class="nal-first-gather__eyebrow">NAL GATHER · 첫 번째 모임</p>
-          <h2 id="nal-first-gather-heading"><a href="${escapeHtml(detailsUrl)}">삶의 통제권 연습</a></h2>
-          <p class="nal-first-gather__meta">토요일 오전 · Zoom 4주 4회${fee ? ` · ${escapeHtml(fee)}` : ""}</p>
+      && /^https:\/\/open\.kakao\.com\/o\/[A-Za-z0-9]+\/?$/.test(chatUrl);
+    const cost = formatPrice(item.price);
+    const action = isOpen
+      ? `<a class="nal-stories__join" href="${escapeHtml(chatUrl)}"${externalAttrs(chatUrl)}>카카오톡으로 참여하기 <span aria-hidden="true">↗</span></a>`
+      : `<a class="nal-stories__join" href="${escapeHtml(detailUrl)}">모임 자세히 보기 <span aria-hidden="true">↗</span></a>`;
+
+    return `<section class="nal-stories" data-nal-stories aria-labelledby="nal-story-title">
+      <div class="nal-container nal-stories__wrap">
+        <header class="nal-stories__heading">
+          <p class="nal-stories__eyebrow"><span aria-hidden="true" class="nal-stories__dot"></span>NAL GATHER / 첫 번째 모임</p>
+          <span class="nal-stories__hint">넘겨보며 알아보세요 <span aria-hidden="true">↗</span></span>
+        </header>
+
+        <div class="nal-stories__rail" data-stories-rail role="region" aria-roledescription="캐러셀" aria-label="삶의 통제권 연습 소개 카드 3장" tabindex="0">
+          <article class="nal-story nal-story--cover" data-story-card aria-label="첫 번째 카드: 삶의 통제권 연습">
+            <div class="nal-story__top"><span>NAL / MONTHLY</span><span>01 — 03</span></div>
+            <div class="nal-story__body">
+              <span class="nal-story__eyeline">FIRST GATHER</span>
+              <h1 id="nal-story-title">삶의<br>통제권<br><em>연습.</em></h1>
+            </div>
+            <p class="nal-story__footer">뜻대로 안 되는 하루에도,<br>내 선택은 남아 있으니까.</p>
+            <span class="nal-story__ring" aria-hidden="true"></span>
+          </article>
+
+          <article class="nal-story nal-story--choice" data-story-card aria-label="두 번째 카드: 통제할 수 없는 것과 선택할 수 있는 것">
+            <div class="nal-story__top"><span>NOTICE / AWARENESS</span><span>02 — 03</span></div>
+            <div class="nal-story__body">
+              <span class="nal-story__eyeline">코칭 질문 하나</span>
+              <h2>바꿀 수<br>없는 것과,<br><em>선택할 수<br>있는 것.</em></h2>
+            </div>
+            <p class="nal-story__footer">내가 바꿀 수 있는 작은 일은 무엇일까?</p>
+            <span class="nal-story__star" aria-hidden="true">✳</span>
+          </article>
+
+          <article class="nal-story nal-story--weeks" data-story-card aria-label="세 번째 카드: 4주간의 연습">
+            <div class="nal-story__top"><span>THE PRACTICE</span><span>03 — 03</span></div>
+            <div class="nal-story__body">
+              <span class="nal-story__eyeline">한 달의 작은 변화</span>
+              <h2>4주,<br><em>한 걸음씩.</em></h2>
+              <ol class="nal-story__weeklist">
+                <li><span>01</span> 현실</li><li><span>02</span> 마음</li>
+                <li><span>03</span> 선택</li><li><span>04</span> 기록</li>
+              </ol>
+            </div>
+            <p class="nal-story__footer">읽기는 도구, 연습은 내 삶에서.</p>
+          </article>
         </div>
-        ${button}
+
+        <div class="nal-stories__controls" aria-label="카드 넘기기">
+          <div class="nal-stories__progress">
+            <span class="nal-stories__count" data-stories-count aria-live="polite">01 / 03</span>
+            <div class="nal-stories__dots" aria-label="카드 위치">
+              <button type="button" class="is-active" data-story-index="0" aria-label="1번째 카드 보기" aria-current="true"></button>
+              <button type="button" data-story-index="1" aria-label="2번째 카드 보기"></button>
+              <button type="button" data-story-index="2" aria-label="3번째 카드 보기"></button>
+            </div>
+          </div>
+          <div class="nal-stories__arrows">
+            <button type="button" data-story-dir="-1" aria-label="이전 카드" disabled>‹</button>
+            <button type="button" data-story-dir="1" aria-label="다음 카드">›</button>
+          </div>
+        </div>
+
+        <footer class="nal-stories__bottom">
+          <div class="nal-stories__details">
+            <strong>삶의 통제권 연습</strong>
+            <p>토요일 오전 · Zoom 4주 4회${cost ? ` · ${escapeHtml(cost)}` : ""}</p>
+          </div>
+          <div class="nal-stories__actions">
+            ${action}
+            <a class="nal-stories__more" href="${escapeHtml(detailUrl)}">모임 자세히 보기 <span aria-hidden="true">↗</span></a>
+          </div>
+        </footer>
+        <p class="nal-stories__footnote">참여 신청서는 카카오톡방 공지에서만 안내합니다.</p>
       </div>
     </section>`;
   }
@@ -474,7 +535,7 @@
     const activePrograms = programs.filter((item) => !["closed", "completed"].includes(item.status));
     const featuredClass = sortFeatured(activePrograms.filter((item) => item.type === "class"))[0]
       || activePrograms.find((item) => item.type === "class");
-    const lifeControl = activePrograms.find((item) => item.id === "life-control-monthly-gather");
+    const lifeControl = programs.find((item) => item.id === "life-control-monthly-gather");
     const otherGathers = activePrograms.filter((item) => item.type === "gather" && item.id !== "life-control-monthly-gather");
     const featuredGather = sortFeatured(otherGathers)[0]
       || otherGathers[0] || lifeControl;
@@ -493,18 +554,9 @@
       .filter(Boolean)
       .map((program) => ({ program, product })));
 
-    const heroFeature = featuredClass
-      ? `<article class="nal-hero__feature nal-card--class">${imageMarkup(featuredClass.coverImage, featuredClass.coverImageAlt || `${featuredClass.title} 대표 이미지`, "", { mobileSrc: featuredClass.coverImageMobile, eager: true, width: 1600, height: 1000 })}<div class="nal-hero__feature-copy"><span class="nal-badge--class">${escapeHtml(statusLabel(featuredClass.status))}</span><h2>${escapeHtml(featuredClass.title)}</h2><p>${escapeHtml(featuredClass.summary)}</p><a class="nal-button--secondary" href="${itemRoute("programs", featuredClass)}">클래스 미리보기</a></div></article>`
-      : emptyState("대표 프로그램 준비 중", "확인된 모집 정보가 등록되면 이곳에서 가장 먼저 안내합니다.");
-
     root.innerHTML = `
-      ${lifeControl ? firstGatherStrip(lifeControl) : ""}
-      <section class="nal-hero nal-home-hero"><div class="nal-container nal-hero__grid">
-        <div class="nal-hero__copy"><p class="nal-eyebrow">NAL / CURATED COMMUNITY</p><h1>오늘, 조금 다른 사람들과<br><span>조금 더 나다운 시간을.</span></h1><p>모임과 클래스, 마음도구를 한곳에서.</p>
-          <div class="nal-hero__actions"><a class="nal-button--primary" href="/nal/gather/">모임 둘러보기</a></div>
-        </div>${heroFeature}
-      </div></section>
-      ${section({ label: "00 / CURATED THREE", title: "NAL에서 먼저 만날 세 가지", copy: "클래스·모임·도구를 하나씩 골라 서로 다른 경험을 함께 보여드립니다.", content: curated.length ? `<div class="nal-curation-grid">${featuredClass ? programCard(featuredClass) : ""}${featuredGather ? programCard(featuredGather) : ""}${featuredProduct ? productCard(featuredProduct) : ""}</div>` : emptyState("대표 큐레이션 준비 중", "공개된 클래스·모임·상품이 연결되면 이곳에 표시합니다.") })}
+      ${lifeControl ? lifeControlCardNews(lifeControl) : ""}
+      ${section({ label: "00 / CURATED THREE", title: "NAL의 다른 경험", copy: "모임과 클래스, 마음도구를 더 살펴보세요.", content: curated.length ? `<div class="nal-curation-grid">${featuredClass ? programCard(featuredClass) : ""}${featuredGather ? programCard(featuredGather) : ""}${featuredProduct ? productCard(featuredProduct) : ""}</div>` : emptyState("대표 큐레이션 준비 중", "공개된 클래스·모임·상품이 연결되면 이곳에 표시합니다.") })}
       ${section({ label: "01 / NOW OPEN", title: "지금 모집 중", copy: "현재 신청 가능한 프로그램만 먼저 보여드립니다.", content: recruiting.length ? `<div class="card-grid">${recruiting.map(programCard).join("")}</div>` : emptyState("현재 공개된 모집 일정이 없습니다.", "임의의 날짜나 잔여 좌석을 만들지 않습니다. 실제 일정이 확정되면 모집 상태와 함께 공개합니다."), action: '<a class="nal-text-link" href="/nal/gather/">NAL GATHER 보기 →</a>' })}
       ${section({ label: "02 / THIS WEEK", title: "이번 주 원데이클래스", copy: "가볍게 한 번 참여할 수 있는 프로그램.", content: classes.length ? `<div class="card-grid">${classes.map(programCard).join("")}</div>` : emptyState("이번 주 일정 등록 전입니다.", "날짜·시간·장소가 확인된 클래스만 이 영역에 노출합니다."), action: '<a class="nal-text-link" href="/nal/class/">전체 클래스 보기 →</a>' })}
       ${section({ label: "03 / KEEP MEETING", title: "계속 만나는 커뮤니티", copy: "원데이와 구분되는 정기·시즌·자유 모임.", content: gathers.length ? `<div class="card-grid">${gathers.map(programCard).join("")}</div>` : emptyState("공개된 커뮤니티가 아직 없습니다.", "운영 기간·주기·규칙이 확정된 모임부터 공개합니다.") })}
