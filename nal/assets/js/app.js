@@ -450,13 +450,7 @@
 
   function lifeControlCardNews(item) {
     const detailUrl = itemRoute("programs", item);
-    const chatUrl = safeUrl(item.applicationUrl);
-    const isOpen = ["open", "closing", "waiting"].includes(item.status)
-      && /^https:\/\/open\.kakao\.com\/o\/[A-Za-z0-9]+\/?$/.test(chatUrl);
     const cost = formatPrice(item.price);
-    const action = isOpen
-      ? `<a class="nal-stories__join" href="${escapeHtml(chatUrl)}"${externalAttrs(chatUrl)}>카카오톡으로 참여하기 <span aria-hidden="true">↗</span></a>`
-      : `<a class="nal-stories__join" href="${escapeHtml(detailUrl)}">모임 자세히 보기 <span aria-hidden="true">↗</span></a>`;
 
     return `<section class="nal-stories" data-nal-stories aria-labelledby="nal-story-title">
       <div class="nal-container nal-stories__wrap">
@@ -521,11 +515,9 @@
             <p>토요일 오전 · Zoom 4주 4회${cost ? ` · ${escapeHtml(cost)}` : ""}</p>
           </div>
           <div class="nal-stories__actions">
-            ${action}
-            <a class="nal-stories__more" href="${escapeHtml(detailUrl)}">모임 자세히 보기 <span aria-hidden="true">↗</span></a>
+            <a class="nal-stories__join" href="${escapeHtml(detailUrl)}">모임 자세히 보기 <span aria-hidden="true">↗</span></a>
           </div>
         </footer>
-        <p class="nal-stories__footnote">참여 신청서는 카카오톡방 공지에서만 안내합니다.</p>
       </div>
     </section>`;
   }
