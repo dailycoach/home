@@ -3,7 +3,7 @@
 
   const DATA_URL = "/nal/data/launches.json";
   const ROOT_SELECTOR = "[data-page-root]";
-  const HERO_SELECTOR = ".nal-home-hero";
+  const HERO_SELECTOR = ".nal-life-first, .nal-home-hero";
   const SECTION_ID = "nal-opening-lineup";
   let liveLaunches = null;
 
@@ -74,11 +74,11 @@
     section.setAttribute("aria-labelledby", `${SECTION_ID}-title`);
     section.innerHTML = `<div class="nal-container">
       <div class="nal-launch-head">
-        <div><p class="nal-eyebrow">00 / ${escapeHtml(data.title || "NAL FIRST LAUNCH")}</p><h2 id="${SECTION_ID}-title">가장 먼저 여는<br>세 가지 NAL 경험</h2></div>
-        <p>${escapeHtml(data.description || "NAL이 가장 먼저 여는 세 가지 경험입니다.")}<br>일정과 세부 조건은 각 프로그램 안내 또는 참여 문의에서 확인합니다.</p>
+        <div><p class="nal-eyebrow">NAL / MORE EXPERIENCES</p><h2 id="${SECTION_ID}-title">NAL에서 만날<br>또 다른 경험</h2></div>
+        <p>다른 방식으로 만나고, 읽고, 함께 성장할 수 있는 날빛의 프로그램도 살펴보세요.<br>일정과 세부 조건은 각 프로그램 안내 또는 참여 문의에서 확인합니다.</p>
       </div>
       <div class="nal-launch-grid">${cards}</div>
-      <p class="nal-launch-note">현재 미술심리코칭과 코치모임은 참여 문의를 먼저 받고, 마음서재는 기존 온라인 서재로 바로 입장합니다. 정식 신청 설문이 개통되면 같은 버튼에 연결합니다.</p>
+      <p class="nal-launch-note">각 프로그램의 현재 운영 상태와 참여 경로는 연결된 상세 페이지에서 확인할 수 있습니다.</p>
     </div>`;
     return section;
   }
