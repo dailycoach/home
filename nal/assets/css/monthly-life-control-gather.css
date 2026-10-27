@@ -156,3 +156,7 @@
 .nal-genz__review-status:empty{display:none}
 .nal-genz__review-status[data-error=true]{color:#a22535}
 @media(max-width:540px){.nal-genz__reviews{padding:1.6rem 0}.nal-genz__review-form{padding:1rem}.nal-genz__review-form input[name=display_name]{max-width:100%}.nal-genz__review-privacy{flex:1 1 190px}}
+
+/* Secondary help link for application questions */
+.nal-genz__chat-help{font-size:.81rem!important;margin:.7rem 0 0!important;line-height:1.7!important}
+.nal-genz__chat-help a{color:#212431!important;font-weight:850;text-decoration:underline;text-underline-offset:.2em}
