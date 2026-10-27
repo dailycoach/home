@@ -649,7 +649,7 @@
       && /^https:\/\/open\.kakao\.com\/o\/[A-Za-z0-9]+\/?$/.test(url);
     const pending = "<p>카카오톡 참여 안내 준비 중</p>";
     const action = isOpen
-      ? '<a href="' + escapeHtml(url) + '"' + externalAttrs(url) + '>카카오톡으로 참여하기 ↗</a>'
+      ? '<a href="/nal/gather/life-control-monthly/apply/">4주 모임 신청하기 ↗</a>'
       : pending;
     const registrationSlot = root.querySelector("[data-monthly-registration]");
     if (registrationSlot) registrationSlot.innerHTML = action;
