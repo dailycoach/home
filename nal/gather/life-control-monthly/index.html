@@ -18,12 +18,13 @@
 <meta property="og:image:width" content="1600"><meta property="og:image:height" content="900">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-genz-20261024">
-<link rel="stylesheet" href="/nal/assets/css/monthly-life-control-gather.css?v=nal-genz-v3-20261024">
+<link rel="stylesheet" href="/nal/assets/css/monthly-life-control-gather.css?v=nal-reviews-20261027">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"삶의 통제권 연습 | NAL 월간 Zoom 독서모임","url":"https://daily-coach-ing.com/nal/gather/life-control-monthly/","description":"매월 Zoom에서 네 번 만나는 독서·셀프코칭 모임. 무료 에세이 세 권과 넷째 주 자기 인터뷰 Zine."}</script>
 <script src="/nal/assets/js/product-routes.js?v=nal-life-control-03-20261024" defer></script>
 <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
 <script src="/nal/assets/js/backend.js" defer></script>
-<script src="/nal/assets/js/app.js?v=nal-genz-v3-20261024" defer></script>
+<script src="/nal/assets/js/app.js?v=nal-reviews-20261027" defer></script>
+<script src="/nal/assets/js/gather-reviews.js?v=nal-reviews-20261027" defer></script>
 </head>
 <body data-page="detail" data-collection="programs" data-type="gather" data-slug="life-control-monthly">
 <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
@@ -79,6 +80,48 @@
     <div class="nal-genz__wrap nal-genz__feature-grid">
       <div><p class="nal-genz__feature-kicker">ISSUE 04 / LAST WEEK</p><h2 id="genz-zine-title">마지막엔<br><span>내가 쓴 나.</span></h2><p>일어난 일과 그때의 마음, 그리고 지금 할 수 있는 일을 한 장면에 겹쳐 봅니다. 《요즘 나, 이렇습니다.》에 내 이야기를 남겨요.</p></div>
       <div class="nal-genz__feature-cover"><img src="/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp" alt="4주차 소책자 요즘 나, 이렇습니다. 새로운 그래픽 표지" width="1200" height="1600" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+
+  <section class="nal-genz__reviews" id="genz-reviews" aria-labelledby="genz-review-title">
+    <div class="nal-genz__wrap">
+      <header class="nal-genz__reviews-header">
+        <p class="nal-genz__reviews-kicker">PEOPLE'S NOTES / 함께 남기는 기록</p>
+        <h2 id="genz-review-title">이곳에 남는 건,<br><span>각자의 이야기.</span></h2>
+        <p>마음에 남은 문장 하나, 모임에서 발견한 작은 변화 하나.<br>길지 않아도 괜찮아요. 당신의 경험을 들려주세요.</p>
+      </header>
+      <div class="nal-genz__reviews-layout">
+        <div class="nal-genz__reviews-feed">
+          <div class="nal-genz__reviews-feed-head">
+            <h3>여러분이 남긴 후기</h3>
+            <span>작성 즉시 공개</span>
+          </div>
+          <div class="nal-genz__review-list" data-gather-review-list role="region" aria-label="등록된 후기" aria-live="polite">
+            <p class="nal-genz__review-empty">아직 등록된 후기가 없어요. 첫 번째 이야기를 남겨주세요.</p>
+          </div>
+        </div>
+        <form class="nal-genz__review-form" data-gather-review-form>
+          <p class="nal-genz__review-form-kicker">WRITE YOUR NOTE / 후기 작성</p>
+          <h3>당신의 한 문장을<br>남겨주세요.</h3>
+          <p class="nal-genz__review-form-lead">솔직한 경험이 다음 사람에게 작은 용기가 될 수 있어요.</p>
+          <label for="genz-review-name">표시 이름 <span>(선택)</span></label>
+          <input id="genz-review-name" name="display_name" type="text" autocomplete="nickname" maxlength="24" placeholder="예: 느린독자">
+          <label for="genz-review-body">후기 내용</label>
+          <textarea id="genz-review-body" name="review_body" rows="6" minlength="20" maxlength="800" required placeholder="모임에서 어떤 문장이 마음에 남았나요? 어떤 생각이 달라졌나요?"></textarea>
+          <div class="nal-genz__review-hint"><span>20~800자로 자유롭게 적어주세요.</span><output for="genz-review-body" data-gather-review-count>0 / 800</output></div>
+          <div class="nal-genz__review-honeypot" aria-hidden="true">
+            <label for="genz-review-website">웹사이트</label>
+            <input id="genz-review-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <label class="nal-genz__review-consent" for="genz-review-consent">
+            <input id="genz-review-consent" name="publication_consent" type="checkbox" required>
+            <span>후기 내용과 표시 이름이 이 페이지에 <strong>작성 즉시 공개</strong>되는 것에 동의합니다.</span>
+          </label>
+          <p class="nal-genz__review-privacy">실명·연락처·타인의 개인정보는 적지 말아 주세요. 게시물 수정·삭제 요청은 <a href="mailto:hello@daily-coach-ing.com?subject=NAL%20%ED%9B%84%EA%B8%B0%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD">이메일</a>로 받습니다.</p>
+          <button class="nal-genz__review-submit" type="submit" disabled>후기 남기기 <span aria-hidden="true">↗</span></button>
+          <p class="nal-genz__review-status" data-gather-review-status role="status" aria-live="polite">후기 접수 기능을 확인하고 있어요.</p>
+        </form>
+      </div>
     </div>
   </section>
   <section class="nal-genz__join" id="genz-join" aria-labelledby="genz-join-title">

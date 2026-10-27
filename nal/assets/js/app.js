@@ -30,7 +30,6 @@
   const collection = body.dataset.collection || "";
   const pageType = body.dataset.type || "";
   const slug = body.dataset.slug || new URLSearchParams(location.search).get("slug") || "";
-  const monthlyGatherInitialMarkup = page === "detail" && collection === "programs" && slug === "life-control-monthly" && root ? root.innerHTML : "";
   let lastDrawerTrigger = null;
   let state = {
     site: null,
@@ -652,7 +651,8 @@
     const action = isOpen
       ? '<a href="' + escapeHtml(url) + '"' + externalAttrs(url) + '>카카오톡으로 참여하기 ↗</a>'
       : pending;
-    root.innerHTML = (monthlyGatherInitialMarkup || root.innerHTML).replace(pending, action);
+    const registrationSlot = root.querySelector("[data-monthly-registration]");
+    if (registrationSlot) registrationSlot.innerHTML = action;
   }
 
   function renderProgramDetail(item) {
