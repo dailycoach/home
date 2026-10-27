@@ -535,7 +535,7 @@
     const activePrograms = programs.filter((item) => !["closed", "completed"].includes(item.status));
     const featuredClass = sortFeatured(activePrograms.filter((item) => item.type === "class"))[0]
       || activePrograms.find((item) => item.type === "class");
-    const lifeControl = activePrograms.find((item) => item.id === "life-control-monthly-gather");
+    const lifeControl = programs.find((item) => item.id === "life-control-monthly-gather");
     const otherGathers = activePrograms.filter((item) => item.type === "gather" && item.id !== "life-control-monthly-gather");
     const featuredGather = sortFeatured(otherGathers)[0]
       || otherGathers[0] || lifeControl;
