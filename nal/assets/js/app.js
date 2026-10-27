@@ -332,7 +332,7 @@
         + '<div class="nal-card__media">' + imageMarkup(cover, "요즘 나, 이렇습니다. 월간 소책자 표지", "", {width:1200,height:1600}) + '</div>'
         + '<div class="nal-card__body"><p class="nal-card__eyebrow">매달 선택을 연습하는 모임</p><h3 class="nal-card__title"><a href="' + route + '">'
         + escapeHtml(item.title) + '</a></h3><p class="nal-card__summary">현실·마음·선택을 살피고, 마지막에는 한 달의 나를 기록하는 시간.</p>'
-        + '<p class="nal-card__details">Zoom · 매월 네 번</p></div></article>';
+        + '<p class="nal-card__details">Zoom · 매월 네 번' + (typeof item.price === 'number' ? ' · 4주 ' + formatPrice(item.price) : '') + '</p></div></article>';
     }
     const route = itemRoute("programs", item);
     const date = formatDate(item);
