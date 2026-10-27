@@ -110,7 +110,8 @@
       if (!data) throw new Error("Launch catalog unavailable");
       const section = buildSection(data);
       if (!section || document.getElementById(SECTION_ID)) return true;
-      hero.insertAdjacentElement("afterend", section);
+      const featuredCollection = root.querySelector(".nal-section.home-section");
+      (featuredCollection || hero).insertAdjacentElement("afterend", section);
       return true;
     } catch (error) {
       console.warn("NAL launch lineup unavailable", error);
