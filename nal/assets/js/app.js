@@ -330,8 +330,8 @@
       const cover = "/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp";
       return '<article class="nal-card nal-card--gather nal-card--reading" data-catalog-id="' + escapeHtml(item.id) + '">'
         + '<div class="nal-card__media">' + imageMarkup(cover, "요즘 나, 이렇습니다. 월간 소책자 표지", "", {width:1200,height:1600}) + '</div>'
-        + '<div class="nal-card__body"><p class="nal-card__eyebrow">매달 함께 읽는 모임</p><h3 class="nal-card__title"><a href="' + route + '">'
-        + escapeHtml(item.title) + '</a></h3><p class="nal-card__summary">세 권을 읽고, 마지막에는 요즘의 나를 기록하는 시간.</p>'
+        + '<div class="nal-card__body"><p class="nal-card__eyebrow">매달 선택을 연습하는 모임</p><h3 class="nal-card__title"><a href="' + route + '">'
+        + escapeHtml(item.title) + '</a></h3><p class="nal-card__summary">현실·마음·선택을 살피고, 마지막에는 한 달의 나를 기록하는 시간.</p>'
         + '<p class="nal-card__details">Zoom · 매월 네 번</p></div></article>';
     }
     const route = itemRoute("programs", item);
@@ -556,14 +556,14 @@
       </div>
       <p class="nal-essential-spotlight__next">이어 읽기 <span aria-hidden="true">02</span> <a href="/nal/shop/nal-life-control-02-mind-not-always-obey/">마음까지 내 뜻대로 되지는 않아서 →</a></p>
       <p class="nal-essential-spotlight__next">마지막 권 <span aria-hidden="true">03</span> <a href="/nal/shop/nal-life-control-03-today-as-i-can/">오늘 내가 할 수 있는 만큼 →</a></p>
-      <p class="nal-essential-spotlight__next">함께 읽는 시간 <a href="/nal/gather/life-control-monthly/">매월 4회 Zoom 독서·셀프코칭 모임 →</a></p>
+      <p class="nal-essential-spotlight__next">함께 연습하는 시간 <a href="/nal/gather/life-control-monthly/">매월 4회 Zoom 알아차림·셀프코칭 모임 →</a></p>
     </div>
     <a class="nal-essential-spotlight__cover" href="/nal/shop/nal-life-control-01-plan-changes/" aria-label="필독서 계획이 어긋난 날에도 상품 상세">
       <img src="/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp" alt="짙은 숲색과 금박 느낌 타이포그래피의 계획이 어긋난 날에도 실제 표지" width="1200" height="1600" loading="eager" decoding="async">
     </a>
   </div>
 </section>` : "";
-    const monthlyGatherPromo = collection === "programs" && pageType === "gather" && !["q","category","status","format"].some(k => params.get(k)) && (!params.get("sort") || params.get("sort") === "recommended") && publicItems(state.programs).some(entry => entry.id === "life-control-monthly-gather") ? "<section class=\"nal-genz-preview\" aria-label=\"삶의 통제권 연습 정기 독서모임\">\n  <div class=\"nal-genz-preview__wrap\">\n    <div>\n      <p class=\"nal-genz-preview__eyebrow\">NAL · 월간 독서모임 / Zoom</p>\n      <h2>계획대로는 안 됐으니까,<br>같이 읽자.</h2>\n      <p>책은 세 권, 만남은 네 번. 마지막엔 《요즘 나, 이렇습니다.》로 내 한 달을 기록해요.</p>\n      <a class=\"nal-genz-preview__link\" href=\"/nal/gather/life-control-monthly/\">모임 살펴보기 ↗</a>\n    </div>\n    <div class=\"nal-genz-preview__covers\" aria-label=\"시리즈 세 권과 새로운 4주차 소책자\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp\" alt=\"삶의 통제권 연습 1권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-02-cover.webp\" alt=\"삶의 통제권 연습 2권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-03-cover.webp\" alt=\"삶의 통제권 연습 3권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp\" alt=\"요즘 나, 이렇습니다. 새로운 4주차 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n    </div>\n  </div>\n</section>" : "";
+    const monthlyGatherPromo = collection === "programs" && pageType === "gather" && !["q","category","status","format"].some(k => params.get(k)) && (!params.get("sort") || params.get("sort") === "recommended") && publicItems(state.programs).some(entry => entry.id === "life-control-monthly-gather") ? "<section class=\"nal-genz-preview\" aria-label=\"삶의 통제권 연습 월간 셀프코칭 모임\">\n  <div class=\"nal-genz-preview__wrap\">\n    <div>\n      <p class=\"nal-genz-preview__eyebrow\">NAL · 월간 알아차림·셀프코칭 / Zoom</p>\n      <h2>계획대로는 안 됐으니까,<br>다시 선택하자.</h2>\n      <p>현실을 보고, 마음을 알아차리고, 오늘의 선택을 연습합니다. 마지막엔 한 달의 나를 기록해요.</p>\n      <a class=\"nal-genz-preview__link\" href=\"/nal/gather/life-control-monthly/\">모임 살펴보기 ↗</a>\n    </div>\n    <div class=\"nal-genz-preview__covers\" aria-label=\"시리즈 세 권과 새로운 4주차 소책자\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp\" alt=\"삶의 통제권 연습 1권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-02-cover.webp\" alt=\"삶의 통제권 연습 2권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-03-cover.webp\" alt=\"삶의 통제권 연습 3권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp\" alt=\"요즘 나, 이렇습니다. 새로운 4주차 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n    </div>\n  </div>\n</section>" : "";
     const listedItems = monthlyGatherPromo ? items.filter(entry => entry.id !== "life-control-monthly-gather") : items;
     root.innerHTML = `
       ${essentialHtml}${monthlyGatherPromo}
@@ -647,7 +647,7 @@
     const url = safeUrl(item.applicationUrl);
     const isOpen = ["open", "closing", "waiting"].includes(item.status)
       && /^https:\/\/open\.kakao\.com\/o\/[A-Za-z0-9]+\/?$/.test(url);
-    const pending = "<p>카카오톡 신청 오픈 준비 중</p>";
+    const pending = "<p>카카오톡 참여 안내 준비 중</p>";
     const action = isOpen
       ? '<a href="' + escapeHtml(url) + '"' + externalAttrs(url) + '>카카오톡으로 참여하기 ↗</a>'
       : pending;
