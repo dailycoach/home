@@ -1,0 +1,81 @@
+/* Compact first-meeting highlight on the restored NAL homepage. */
+.nal-first-gather {
+  border-block-end: 1px solid var(--nal-border-soft, #e4e6df);
+  background: var(--nal-surface, #fafaf7);
+  color: var(--nal-text-primary, #202126);
+}
+.nal-first-gather .nal-first-gather__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-block: clamp(1.15rem, 2.5vw, 1.65rem);
+}
+.nal-first-gather__content { min-width: 0; }
+.nal-first-gather__eyebrow {
+  margin: 0 0 .2rem !important;
+  color: var(--nal-text-secondary, #6b6e68) !important;
+  font-size: .72rem !important;
+  font-weight: 760;
+  letter-spacing: .055em;
+  line-height: 1.5 !important;
+}
+.nal-first-gather__content h2 {
+  margin: 0 0 .25rem !important;
+  color: inherit !important;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem) !important;
+  line-height: 1.28 !important;
+  letter-spacing: -.05em !important;
+  font-weight: 830 !important;
+}
+.nal-first-gather__content h2 a {
+  color: inherit !important;
+  text-decoration: none;
+}
+.nal-first-gather__content h2 a:hover,
+.nal-first-gather__content h2 a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+.nal-first-gather__meta {
+  margin: 0 !important;
+  color: var(--nal-text-secondary, #606662) !important;
+  font-size: .82rem !important;
+  line-height: 1.55 !important;
+}
+.nal-first-gather__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.15rem;
+  min-height: 44px;
+  padding: .65rem 1rem;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #26362e;
+  color: #fff !important;
+  font-size: .87rem;
+  font-weight: 770;
+  text-decoration: none !important;
+  line-height: 1.4;
+}
+.nal-first-gather__action:hover,
+.nal-first-gather__action:focus-visible {
+  background: #344f42;
+}
+.nal-first-gather__action:focus-visible {
+  outline: 2px solid #344f42;
+  outline-offset: 3px;
+}
+@media (max-width: 47.999rem) {
+  .nal-first-gather .nal-first-gather__inner {
+    flex-wrap: wrap;
+    align-items: start;
+    gap: .8rem;
+    padding-block: 1rem 1.1rem;
+  }
+  .nal-first-gather__content { width: 100%; }
+  .nal-first-gather__content h2 { font-size: 1.45rem !important; }
+  .nal-first-gather__meta { font-size: .79rem !important; }
+  .nal-first-gather__action { min-height: 42px; padding: .6rem .88rem; }
+}
