@@ -30,7 +30,7 @@
     if (!items.length) {
       const empty = document.createElement("p");
       empty.className = "nal-genz__review-empty";
-      empty.textContent = "아직 등록된 후기가 없어요. 첫 번째 이야기를 남겨주세요.";
+      empty.textContent = "아직 후기가 없습니다.";
       list.append(empty);
       return;
     }
@@ -155,7 +155,7 @@
       backend = globalThis.NALBackend?.validateConfig(config);
       if (!backend) throw new Error("Review backend disabled");
       submitButton.disabled = false;
-      message("작성한 후기는 바로 공개됩니다.");
+      message("");
       await refresh();
     } catch {
       submitButton.disabled = true;
