@@ -47,9 +47,27 @@
 
   function validateFields() {
     if (!form.reportValidity()) return false;
+    const applicantName = inputValue("applicant_name");
+    const email = inputValue("email");
+    const phone = inputValue("phone").replace(/[\s-]/g, "");
     const nickname = inputValue("nickname");
     const depositor = inputValue("depositor_name");
     const note = inputValue("note");
+    if (!applicantName || applicantName.length > 40 || /[\x00-\x1f]/.test(applicantName)) {
+      setStatus("배지에 표시할 이름을 40자 이내로 정확하게 입력해 주세요.", true);
+      form.elements.namedItem("applicant_name").focus();
+      return false;
+    }
+    if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("디지털배지를 수령할 이메일 주소를 확인해 주세요.", true);
+      form.elements.namedItem("email").focus();
+      return false;
+    }
+    if (!/^(?:010[0-9]{8}|01[16789][0-9]{7,8})$/.test(phone)) {
+      setStatus("휴대전화번호를 010-1234-5678 형식으로 입력해 주세요.", true);
+      form.elements.namedItem("phone").focus();
+      return false;
+    }
     if (!nickname || nickname.length > 24 || !depositor || depositor.length > 40 || note.length > 240) {
       setStatus("닉네임, 입금자명, 메모의 글자 수를 확인해 주세요.", true);
       return false;
@@ -97,6 +115,9 @@
     const applicationCode = newApplicationCode();
     const payload = {
       application_code: applicationCode,
+      applicant_name: inputValue("applicant_name"),
+      email: inputValue("email").toLowerCase(),
+      phone: inputValue("phone").replace(/[\s-]/g, ""),
       nickname: inputValue("nickname"),
       depositor_name: inputValue("depositor_name"),
       time_preference: getChecked("time_preference"),
