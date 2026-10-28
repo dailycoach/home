@@ -72,10 +72,9 @@
       setStatus("닉네임, 입금자명, 메모의 글자 수를 확인해 주세요.", true);
       return false;
     }
-    if (!["10:00", "10:30", "either", "other"].includes(getChecked("time_preference"))
-      || !["all", "partial", "undecided"].includes(getChecked("attendance"))
+    if (!["all", "partial", "undecided"].includes(getChecked("attendance"))
       || !["reality", "feelings", "choices", "writing", "undecided"].includes(inputValue("focus_area"))) {
-      setStatus("참여 가능 시간과 연습 주제를 선택해 주세요.", true);
+      setStatus("참여 가능 여부와 연습 주제를 선택해 주세요.", true);
       return false;
     }
     return true;
@@ -93,7 +92,7 @@
     const code = getLocal(RECEIPT_STORAGE_KEY);
     if (!previousReceipt || !/^LC-[A-F0-9]{12}$/.test(code || "")) return;
     previousReceipt.hidden = false;
-    previousReceipt.textContent = "이 기기에서 이전에 접수한 확인번호: " + code + ". 변경이 필요하면 오픈채팅으로 문의해 주세요.";
+    previousReceipt.textContent = "이 기기에서 이전에 접수한 확인번호: " + code + ". 변경·취소 문의는 인스타그램 DM (@daily_coach_ing)으로 보내주세요.";
   }
 
   form.addEventListener("submit", async (event) => {
@@ -120,7 +119,7 @@
       phone: inputValue("phone").replace(/[\s-]/g, ""),
       nickname: inputValue("nickname"),
       depositor_name: inputValue("depositor_name"),
-      time_preference: getChecked("time_preference"),
+      time_preference: "10:30",
       attendance: getChecked("attendance"),
       focus_area: inputValue("focus_area"),
       note: inputValue("note") || null,
@@ -157,7 +156,7 @@
       showReceipt(applicationCode);
     } catch (error) {
       console.warn("NAL application submission failed:", error?.message || "unknown");
-      setStatus("신청을 접수하지 못했습니다. 잠시 후 다시 시도해 주세요. 접수 여부가 불확실하면 오픈채팅으로 문의해 주세요.", true);
+      setStatus("신청을 접수하지 못했습니다. 잠시 후 다시 시도해 주세요. 접수 여부가 불확실하면 인스타그램 DM (@daily_coach_ing)으로 문의해 주세요.", true);
     } finally {
       busy = false;
       button.disabled = !backend || !success.hidden;
@@ -203,7 +202,7 @@
     } catch (error) {
       button.disabled = true;
       buttonLabel.textContent = "현재 신청 접수 준비 중";
-      setStatus("신청 시스템에 연결하지 못했습니다. 잠시 후 새로고침하거나 카카오톡 오픈채팅으로 문의해 주세요.", true);
+      setStatus("신청 시스템에 연결하지 못했습니다. 잠시 후 새로고침하거나 인스타그램 DM (@daily_coach_ing)으로 문의해 주세요.", true);
       console.warn("NAL application initialization failed:", error?.message || "unknown");
     }
   }
