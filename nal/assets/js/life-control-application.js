@@ -63,7 +63,7 @@
       form.elements.namedItem("email").focus();
       return false;
     }
-    if (!/^01[016789][0-9]{7,8}$/.test(phone)) {
+    if (!/^(?:010[0-9]{8}|01[16789][0-9]{7,8})$/.test(phone)) {
       setStatus("휴대전화번호를 010-1234-5678 형식으로 입력해 주세요.", true);
       form.elements.namedItem("phone").focus();
       return false;
