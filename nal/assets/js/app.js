@@ -512,7 +512,7 @@
         <footer class="nal-stories__bottom">
           <div class="nal-stories__details">
             <strong>삶의 통제권 연습</strong>
-            <p>토요일 오전 · Zoom 4주 4회${cost ? ` · ${escapeHtml(cost)}` : ""}</p>
+            <p>토요일 10:30 · Zoom 4주 4회${cost ? ` · ${escapeHtml(cost)}` : ""}</p>
           </div>
           <div class="nal-stories__actions">
             <a class="nal-stories__join" href="${escapeHtml(detailUrl)}">모임 자세히 보기 <span aria-hidden="true">↗</span></a>
