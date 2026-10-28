@@ -10,9 +10,9 @@
   <meta name="description" content="NAL 삶의 통제권 연습 월간 알아차림·셀프코칭 모임. 토요일 오전 시간 의견을 모으고 참가 신청을 접수합니다.">
   <link rel="canonical" href="https://daily-coach-ing.com/nal/gather/life-control-monthly/apply/">
   <link rel="icon" href="/nal/assets/images/nal-symbol.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/nal/assets/css/life-control-application.css?v=20261028">
+  <link rel="stylesheet" href="/nal/assets/css/life-control-application.css?v=badge-contact-20261028">
   <script src="/nal/assets/js/backend.js" defer></script>
-  <script src="/nal/assets/js/life-control-application.js?v=20261028" defer></script>
+  <script src="/nal/assets/js/life-control-application.js?v=badge-contact-20261028" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 이동</a>
@@ -31,23 +31,38 @@
       <section class="application-card" aria-labelledby="apply-title">
         <div class="card-head">
           <div><p class="section-label">JOIN / 신청</p><h2 id="apply-title">모임 참여 신청</h2></div>
-          <span class="minutes">약 1~2분</span>
+          <span class="minutes">약 2~3분</span>
         </div>
-        <p class="form-intro">참여에 필요한 내용만 간단히 확인합니다. 입금 확인은 운영자가 직접 진행합니다.</p>
+        <p class="form-intro">모임 신청과 디지털배지 발급 안내에 필요한 정보를 확인합니다. 입금 확인은 운영자가 직접 진행합니다.</p>
         <div class="previous-receipt" data-previous-receipt hidden></div>
         <form id="life-control-form" novalidate>
           <div class="form-field">
-            <label for="nickname">1. 오픈채팅에서 사용할 닉네임 <span class="required">필수</span></label>
+            <label for="applicant_name">1. 이름 (디지털배지 표기용) <span class="required">필수</span></label>
+            <input id="applicant_name" name="applicant_name" type="text" autocomplete="name" maxlength="40" placeholder="배지에 표기할 본인 성명" required>
+            <p class="field-hint">디지털배지에 표시할 이름을 정확하게 적어주세요.</p>
+          </div>
+          <div class="form-field">
+            <label for="email">2. 이메일 (배지 수령용) <span class="required">필수</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="name@example.com" required>
+            <p class="field-hint">디지털배지 발급·수령 안내를 받을 주소를 적어주세요.</p>
+          </div>
+          <div class="form-field">
+            <label for="phone">3. 휴대전화번호 <span class="required">필수</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="13" placeholder="010-1234-5678" pattern="01[016789][- ]?[0-9]{3,4}[- ]?[0-9]{4}" title="010-1234-5678 형식으로 입력해 주세요." required>
+            <p class="field-hint">신청 내용 확인과 발급 관련 연락에만 사용합니다.</p>
+          </div>
+          <div class="form-field">
+            <label for="nickname">4. 오픈채팅에서 사용할 닉네임 <span class="required">필수</span></label>
             <input id="nickname" name="nickname" type="text" autocomplete="nickname" minlength="1" maxlength="24" placeholder="예: 한걸음" required>
             <p class="field-hint">입장한 채팅방의 닉네임과 같게 적어주세요.</p>
           </div>
           <div class="form-field">
-            <label for="depositor_name">2. 입금자명 <span class="required">필수</span></label>
+            <label for="depositor_name">5. 입금자명 <span class="required">필수</span></label>
             <input id="depositor_name" name="depositor_name" type="text" maxlength="40" autocomplete="off" placeholder="입금할 때 표시되는 이름" required>
             <p class="field-hint">입금 내역 대조에만 사용하며 다른 참여자에게 공개되지 않습니다.</p>
           </div>
           <fieldset class="form-field">
-            <legend>3. 토요일 오전, 어느 시간이 더 편하신가요? <span class="required">필수</span></legend>
+            <legend>6. 토요일 오전, 어느 시간이 더 편하신가요? <span class="required">필수</span></legend>
             <p class="field-hint">10:00와 10:30 중 참여자 의견을 반영해 최종 공지합니다.</p>
             <div class="choice-grid">
               <label class="choice"><input type="radio" name="time_preference" value="10:30" required><span>오전 10:30</span></label>
@@ -57,7 +72,7 @@
             </div>
           </fieldset>
           <fieldset class="form-field">
-            <legend>4. 한 달 네 번의 만남에 참여 가능하신가요? <span class="required">필수</span></legend>
+            <legend>7. 한 달 네 번의 만남에 참여 가능하신가요? <span class="required">필수</span></legend>
             <div class="choice-grid">
               <label class="choice"><input type="radio" name="attendance" value="all" required><span>네 번 모두 가능</span></label>
               <label class="choice"><input type="radio" name="attendance" value="partial"><span>가능한 날만 참여</span></label>
@@ -65,7 +80,7 @@
             </div>
           </fieldset>
           <div class="form-field">
-            <label for="focus_area">5. 지금 가장 연습해보고 싶은 것은? <span class="required">필수</span></label>
+            <label for="focus_area">8. 지금 가장 연습해보고 싶은 것은? <span class="required">필수</span></label>
             <select id="focus_area" name="focus_area" required>
               <option value="">선택해 주세요</option>
               <option value="reality">바꿀 수 있는 것과 없는 것 구분하기</option>
@@ -76,13 +91,13 @@
             </select>
           </div>
           <div class="form-field">
-            <label for="note">6. 진행자에게 전하고 싶은 말 <span class="optional">선택</span></label>
+            <label for="note">9. 진행자에게 전하고 싶은 말 <span class="optional">선택</span></label>
             <textarea id="note" name="note" maxlength="240" rows="3" placeholder="참여와 관련된 이야기만 가볍게 남겨주세요."></textarea>
             <p class="field-hint">건강 정보, 주민번호, 계좌 비밀번호 등 민감한 정보는 적지 말아 주세요.</p>
           </div>
           <fieldset class="form-field consent-group">
-            <legend>7. 신청 전 확인 <span class="required">필수</span></legend>
-            <p class="consent-copy"><strong>개인정보 수집·이용</strong><br>항목: 오픈채팅 닉네임, 입금자명, 시간 선호, 참여 가능 여부, 연습 주제 및 선택 메모.<br>목적: 모임 신청 접수, 입금 대조, 운영 안내.<br>보유: 신청일로부터 90일 경과 후 다음 정기 삭제 시 파기. 삭제·철회 요청: <a href="mailto:hello@daily-coach-ing.com">hello@daily-coach-ing.com</a>.<br>동의를 거부하실 수 있으나, 그 경우 신청 접수가 어렵습니다.</p>
+            <legend>10. 신청 전 확인 <span class="required">필수</span></legend>
+            <p class="consent-copy"><strong>개인정보 수집·이용 안내</strong><br>수집·이용자: 데일리코칭(NAL).<br>항목: 이름, 이메일, 휴대전화번호, 오픈채팅 닉네임, 입금자명, 시간 선호, 참여 가능 여부, 연습 주제 및 선택 메모.<br>목적: 모임 신청·입금 확인·운영 안내, 디지털배지 발급 대상 확인 및 발급·수령 안내.<br>보유: 신청일로부터 90일 경과 후 다음 정기 삭제 시 파기. 삭제·철회 요청: <a href="mailto:hello@daily-coach-ing.com">hello@daily-coach-ing.com</a>.<br>외부 배지 발급 플랫폼에 개인정보를 제공해야 할 경우 제공받는 곳·항목·목적 등을 사전 안내하고 필요한 동의를 별도로 받습니다.<br>동의를 거부하실 수 있으나, 그 경우 신청 접수가 어렵습니다.</p>
             <label class="check-label"><input type="checkbox" name="privacy_consent" required> <span>위 개인정보 수집·이용에 동의합니다.</span></label>
             <label class="check-label"><input type="checkbox" name="community_consent" required> <span>서로의 경험을 평가하지 않고, 동의 없는 녹화·캡처·외부 공유를 하지 않겠습니다.</span></label>
           </fieldset>
@@ -96,7 +111,7 @@
         <section class="success" id="life-control-success" hidden tabindex="-1" aria-labelledby="success-title">
           <p class="success-kicker">APPLICATION RECEIVED</p>
           <h2 id="success-title">신청이 접수되었습니다.</h2>
-          <p>참여가 아직 확정된 것은 아닙니다. 오픈채팅에서 최종 시간과 취소·환불 기준을 먼저 확인해 주세요.</p>
+          <p>참여가 아직 확정된 것은 아닙니다. 오픈채팅에서 최종 시간과 취소·환불 기준을 먼저 확인해 주세요. 디지털배지 발급 여부와 일정은 모임 참여·발급 기준을 확인한 후 별도 안내합니다.</p>
           <div class="receipt">접수 확인번호 <strong data-application-code></strong><button type="button" data-copy-code>복사</button></div>
           <div class="account-panel">
             <strong>참가비 · 4주 전체 9,900원</strong>
