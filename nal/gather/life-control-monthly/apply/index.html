@@ -48,7 +48,7 @@
           </div>
           <div class="form-field">
             <label for="phone">3. 휴대전화번호 <span class="required">필수</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="13" placeholder="010-1234-5678" pattern="01[016789][- ]?[0-9]{3,4}[- ]?[0-9]{4}" title="010-1234-5678 형식으로 입력해 주세요." required>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="13" placeholder="010-1234-5678" pattern="(?:010[- ]?[0-9]{4}[- ]?[0-9]{4}|01[16789][- ]?[0-9]{3,4}[- ]?[0-9]{4})" title="010-1234-5678 형식으로 입력해 주세요." required>
             <p class="field-hint">신청 내용 확인과 발급 관련 연락에만 사용합니다.</p>
           </div>
           <div class="form-field">
