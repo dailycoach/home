@@ -161,10 +161,10 @@
     "source": "local import"
   },
   {
-    "title": "마음서재 도서뉴스",
-    "description": "새 책·작가·출판·서점과 독서문화의 흐름을 골라 전하는 도서뉴스",
+    "title": "마음서재 코치의 글",
+    "description": "김철웅 코치의 브런치 연재를 마음서재에서 살펴보고 원문으로 이어 읽기",
     "category": "contents",
-    "url": "/maeum-library/news/",
+    "url": "/maeum-library/essays/",
     "source": "local import"
   },
   {

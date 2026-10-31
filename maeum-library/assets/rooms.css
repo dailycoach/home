@@ -292,3 +292,91 @@
   .atlas-shelf a span{transition:none}
   html{scroll-behavior:auto}
 }
+
+/* Maeum Library 3.0 — five simple choices, preserving the existing 25 rooms */
+.rooms-home .rooms-hero{min-height:0;padding:48px 0 36px;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:clamp(24px,4vw,56px)}
+.rooms-home .rooms-hero h1{font-size:clamp(38px,4.8vw,62px);line-height:1.19}
+.rooms-home .rooms-hero .hero-lead{margin-top:22px;font-size:16px;line-height:1.85}
+.rooms-home .rooms-hero .hero-actions{margin-top:24px}
+.rooms-home .rooms-hero-visual img{max-height:310px;aspect-ratio:5/4}
+.rooms-home .rooms-hero-visual::before{inset:12px -12px -12px 12px}
+.rooms-home .five-concepts{padding:42px 0 60px;background:var(--room-paper-light)}
+.concepts-intro{margin-bottom:28px;max-width:760px}
+.concepts-intro h2{margin:8px 0 12px;font-family:var(--serif);font-size:clamp(28px,3.6vw,44px);line-height:1.3;letter-spacing:-.055em}
+.concepts-intro p:last-child{margin:0;color:var(--room-muted);font-size:15px;line-height:1.75}
+.concept-list{display:grid;gap:10px}
+.concept-disclosure{border:1px solid var(--room-rule);background:#fffaf2}
+.concept-disclosure[open]{border-color:var(--room-ink);box-shadow:0 12px 28px rgba(35,29,25,.05)}
+.concept-summary{min-height:92px;display:grid;grid-template-columns:100px minmax(0,1fr) minmax(210px,.8fr) auto;gap:20px;align-items:center;padding:18px 26px;cursor:pointer;list-style:none}
+.concept-summary::-webkit-details-marker{display:none}
+.concept-summary::marker{content:""}
+.concept-summary:focus-visible{outline:3px solid var(--wine);outline-offset:3px}
+.concept-summary:hover{background:#f7f0e7}
+.concept-index{color:var(--room-muted);font-size:12px;font-weight:750}
+.concept-summary strong{font-family:var(--serif);font-size:clamp(21px,2.3vw,28px);line-height:1.35;letter-spacing:-.04em}
+.concept-description{color:var(--room-muted);font-size:13px;line-height:1.6}
+.concept-open{white-space:nowrap;color:var(--wine);font-size:12px;font-weight:750}
+.concept-open::after{content:" +";font-size:20px;margin-left:8px}
+.concept-disclosure[open] .concept-open{font-size:0}
+.concept-disclosure[open] .concept-open::before{content:"방 접기";font-size:12px}
+.concept-disclosure[open] .concept-open::after{content:" −";font-size:20px}
+.concept-inner{border-top:1px solid var(--room-rule);padding:0 24px 28px}
+.concept-inner .shelf-chapter{padding:36px 0 8px;border-top:0;background:transparent}
+.concept-inner .shelf-layout{display:block}
+.concept-inner .shelf-intro{position:static;margin-bottom:26px}
+.concept-inner .shelf-intro h2{font-size:clamp(30px,3.2vw,42px)}
+.concept-inner .shelf-question{margin-top:8px;font-size:18px}
+.concept-inner .shelf-path{margin-top:12px;padding-top:10px}
+.concept-inner .shelf-interpretation{margin-top:12px;gap:4px}
+.concept-inner .shelf-interpretation p{font-size:13px;line-height:1.7}
+.concept-inner .shelf-keywords{margin-top:12px}
+.concept-inner .shelf-image{display:none}
+.concept-inner .room-list{gap:12px}
+.concept-inner .room-summary{min-height:124px;grid-template-columns:92px minmax(0,1fr) auto;gap:18px}
+.concept-inner .room-summary img{width:92px;height:122px}
+.concept-inner .room-summary h3{font-size:clamp(21px,2.1vw,28px)}
+.concept-back{display:inline-flex;margin-top:22px;padding:12px 0;color:var(--wine);font-weight:750;text-decoration:underline;text-underline-offset:4px}
+.rooms-home .essays-home{padding:62px 0 70px}
+.essays-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.essays-card{min-width:0;display:flex;flex-direction:column;gap:12px;padding:26px;border:1px solid var(--room-rule);background:var(--room-paper-light)}
+.essays-card small{color:var(--room-muted);font-size:12px}
+.essays-card h3{margin:0;font-family:var(--serif);font-size:clamp(20px,2vw,27px);line-height:1.35}
+.essays-card p{flex:1;margin:0;color:var(--room-muted);font-size:14px;line-height:1.8}
+.essays-card a{align-self:flex-start;color:var(--wine);font-weight:750;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.essays-empty{grid-column:1/-1;margin:0;padding:24px;border:1px solid var(--room-rule);background:var(--room-paper-light);color:var(--room-muted)}
+.simple-doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0 0 72px}
+.simple-doors a{min-height:68px;padding:20px 22px;border:1px solid var(--room-rule);display:flex;justify-content:space-between;gap:16px;align-items:center;background:#fffaf2;color:var(--room-ink);font-size:15px;font-weight:750}
+.simple-doors a:focus-visible,.essays-card a:focus-visible,.concept-back:focus-visible{outline:3px solid var(--wine);outline-offset:3px}
+.simple-doors span{color:var(--wine)}
+body[data-view="essays"] .page-hero{padding-top:64px;padding-bottom:36px}
+body[data-view="essays"] .page-hero h1{font-size:clamp(40px,5vw,64px)}
+body[data-view="essays"] .essays-archive{padding-top:40px;padding-bottom:90px}
+@media(max-width:920px){
+ .concept-summary{grid-template-columns:75px minmax(0,1fr) auto;gap:12px}
+ .concept-description{grid-column:2;grid-row:2}
+ .concept-open{grid-column:3;grid-row:1 / span 2}
+ .rooms-home .rooms-hero{grid-template-columns:minmax(0,1fr) 30%}
+}
+@media(max-width:680px){
+ .rooms-home .rooms-hero{padding:38px 0 20px;display:block}
+ .rooms-home .rooms-hero h1{font-size:clamp(36px,9vw,46px)}
+ .rooms-home .rooms-hero-visual{display:none}
+ .rooms-home .rooms-hero .hero-actions{gap:10px}
+ .rooms-home .five-concepts{padding:34px 0 46px}
+ .concepts-intro h2{font-size:29px}
+ .concept-summary{min-height:96px;padding:18px;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px}
+ .concept-index{grid-column:1;grid-row:1;font-size:11px}
+ .concept-summary strong{grid-column:1;grid-row:2;font-size:22px}
+ .concept-description{grid-column:1;grid-row:3;font-size:12px}
+ .concept-open{grid-column:2;grid-row:1 / span 3;font-size:11px}
+ .concept-inner{padding:0 14px 24px}
+ .concept-inner .shelf-intro{margin-bottom:22px}
+ .concept-inner .room-summary{grid-template-columns:74px minmax(0,1fr);gap:12px;min-height:112px;padding-right:12px}
+ .concept-inner .room-summary img{width:74px;height:110px}
+ .concept-inner .room-summary-copy{padding:12px 0}
+ .concept-inner .room-summary h3{font-size:20px}
+ .concept-inner .room-enter{grid-column:2;min-width:0;text-align:left;padding:0 0 12px;font-size:11px}
+ .essays-grid{grid-template-columns:1fr}
+ .rooms-home .essays-home{padding:46px 0}
+ .simple-doors{grid-template-columns:1fr;padding-bottom:42px}
+}

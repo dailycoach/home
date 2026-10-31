@@ -3,7 +3,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = path.resolve(new URL('..', import.meta.url).pathname);
-const coreRoutes = ['', 'news', 'library', 'apply', 'connect', 'me', 'gathering', 'privacy', 'terms', 'toss'];
+const coreRoutes = ['', 'essays', 'news', 'library', 'apply', 'connect', 'me', 'gathering', 'privacy', 'terms', 'toss'];
 const read = (relative) => readFile(path.join(root, relative), 'utf8');
 
 async function walk(directory) {
@@ -23,23 +23,26 @@ for (const route of coreRoutes) {
   assert.match(html, /<html lang="ko">/i, `${relative}: lang`);
   assert.match(html, /<meta name="viewport"/i, `${relative}: viewport`);
   assert.match(html, /<link rel="canonical"/i, `${relative}: canonical`);
-  assert.match(html, /본문 바로가기/i, `${relative}: skip link`);
+  if (route !== 'news') assert.match(html, /본문 바로가기/i, `${relative}: skip link`);
 }
 
 const home = await read('maeum-library/index.html');
 const sectionOrder = [
-  'v24-hero',
-  'news-home',
-  'ONE LINE TALK · RECORD',
-  'HOW IT WORKS · READ',
-  'participation-band',
-  'gathering-card',
-  'final-cta',
+  'rooms-hero',
+  'five-concepts',
+  'essays-home',
+  'simple-doors',
+  'interpretation-notice',
 ].map((marker) => home.indexOf(marker));
 assert.ok(sectionOrder.every((index) => index >= 0), 'home sections are complete');
 assert.deepEqual(sectionOrder, [...sectionOrder].sort((left, right) => left - right), 'home IA order');
-assert.match(home, /data-book-news/);
-assert.match(home, /data-home-entries/);
+assert.equal((home.match(/<details class="concept-disclosure/g) || []).length, 5, 'five concepts');
+assert.equal((home.match(/<details class="room-card"/g) || []).length, 25, 'all 25 rooms preserved');
+for (const letter of ['a', 'b', 'c', 'd', 'e']) {
+  assert.equal((home.match(new RegExp('id="room-' + letter + '\\d{2}"', 'g')) || []).length, 5, 'five rooms in each concept');
+}
+assert.match(home, /data-brunch-list/);
+assert.doesNotMatch(home, /data-book-news|href="\/maeum-library\/news\/"/);
 assert.match(home, /href="\/maeum-library\/toss\/"/);
 assert.doesNotMatch(home, /minion\.toss\.im|intoss:\/\//);
 
@@ -69,9 +72,29 @@ for (const field of ['name="name"', 'name="email"', 'name="phone"', 'name="ageRa
 assert.doesNotMatch(apply, /minion\.toss\.im|intoss:\/\//);
 
 const news = await read('maeum-library/news/index.html');
-assert.match(news, /data-news-search/);
-assert.match(news, /data-news-filters/);
-assert.doesNotMatch(news, /minion\.toss\.im|intoss:\/\//);
+assert.match(news, /http-equiv="refresh"/);
+assert.match(news, /\/maeum-library\/essays\//);
+
+const essays = await read('maeum-library/essays/index.html');
+assert.match(essays, /data-brunch-list/);
+assert.match(essays, /href="\/maeum-library\/essays\/"/);
+assert.doesNotMatch(essays, /data-news-search|data-book-news/);
+const feed = JSON.parse(await read('maeum-library/assets/brunch-posts.json'));
+assert.ok(Array.isArray(feed.items), 'feed snapshot has items array');
+assert.equal(feed.authorUrl, 'https://brunch.co.kr/@dailycoach', 'correct author');
+assert.ok(feed.items.length > 0, 'initial Brunch articles are present');
+for (const post of feed.items) {
+  assert.match(post.link, /^https:\/\/brunch\.co\.kr\/@@1e5M\/\d+$/, 'Brunch canonical article');
+  assert.ok(post.title && post.publishedAt && post.summary, 'Brunch metadata is complete');
+  assert.doesNotMatch(post.summary, /<[^>]+>/, 'only plain-text teasers');
+}
+const sync = await read('scripts/sync-maeum-brunch.py');
+assert.match(sync, /https:\/\/brunch\.co\.kr\/rss\/@@1e5M/, 'real author RSS');
+assert.match(await read('.github/workflows/maeum-brunch-sync.yml'), /cron: ".*\/5/, 'five-minute RSS polling');
+const essayRenderer = await read('maeum-library/assets/essays.js');
+assert.match(essayRenderer, /textContent/, 'essay cards render plain text');
+assert.match(essayRenderer, /raw\.githubusercontent\.com\/dailycoach\/home\/main/, 'reads the live feed without a Pages rebuild');
+assert.match(essayRenderer, /maeum-library\/assets\/brunch-posts\.json/, 'published fallback is available');
 
 const connect = await read('maeum-library/connect/index.html');
 assert.match(connect, /웹 내 기록 열기/);
@@ -106,6 +129,7 @@ for (const file of maeumFiles) {
 const repositoryFiles = await walk(root);
 let repositoryText = '';
 for (const file of repositoryFiles) {
+  if (path.relative(root, file).replaceAll('\\\\', '/') === 'scripts/check-maeum-library-v24.mjs') continue;
   const info = await stat(file);
   if (info.size > 2_000_000 || /\.(?:webp|png|jpg|jpeg|gif|pdf|woff2?)$/i.test(file)) continue;
   repositoryText += await readFile(file, 'utf8');
@@ -115,11 +139,11 @@ for (const retired of ['https://minion.toss.im/NRHKhVoA', 'https://minion.toss.i
 }
 
 const pages = JSON.parse(await read('pages.json'));
-for (const url of ['/maeum-library/', '/maeum-library/news/', '/maeum-library/library/', '/maeum-library/apply/', '/maeum-library/gathering/']) {
+for (const url of ['/maeum-library/', '/maeum-library/essays/', '/maeum-library/library/', '/maeum-library/apply/', '/maeum-library/gathering/']) {
   assert.ok(pages.some((page) => page.url === url), `pages.json includes ${url}`);
 }
 const sitemap = await read('sitemap.xml');
-for (const url of ['/maeum-library/', '/maeum-library/news/', '/maeum-library/library/', '/maeum-library/apply/', '/maeum-library/gathering/']) {
+for (const url of ['/maeum-library/', '/maeum-library/essays/', '/maeum-library/library/', '/maeum-library/apply/', '/maeum-library/gathering/']) {
   assert.match(sitemap, new RegExp(`https://daily-coach-ing\\.com${url.replaceAll('/', '\\/')}`), `sitemap includes ${url}`);
 }
 assert.doesNotMatch(sitemap, /\/maeum-library\/toss\//, 'Toss gateway stays noindex and out of sitemap');
@@ -128,4 +152,4 @@ for (const image of ['hero-reading-desk.webp', 'news-books.webp', 'news-culture.
   assert.ok((await stat(path.join(root, 'maeum-library/assets/images', image))).size > 1_000, `${image} is present`);
 }
 
-console.log('마음서재 Toss gateway contract: PASS');
+console.log('마음서재 5개 콘셉트 · 브런치 전환 · Toss gateway 계약: PASS');
