@@ -81,6 +81,16 @@ assert.match(essays, /href="\/maeum-library\/essays\/"/);
 assert.doesNotMatch(essays, /data-news-search|data-book-news/);
 const feed = JSON.parse(await read('maeum-library/assets/brunch-posts.json'));
 assert.ok(Array.isArray(feed.items), 'feed snapshot has items array');
+assert.equal(feed.authorUrl, 'https://brunch.co.kr/@dailycoach', 'correct author');
+assert.ok(feed.items.length > 0, 'initial Brunch articles are present');
+for (const post of feed.items) {
+  assert.match(post.link, /^https:\/\/brunch\.co\.kr\/@@1e5M\/\d+$/, 'Brunch canonical article');
+  assert.ok(post.title && post.publishedAt && post.summary, 'Brunch metadata is complete');
+  assert.doesNotMatch(post.summary, /<[^>]+>/, 'only plain-text teasers');
+}
+const sync = await read('scripts/sync-maeum-brunch.py');
+assert.match(sync, /https:\/\/brunch\.co\.kr\/rss\/@@1e5M/, 'real author RSS');
+assert.match(await read('.github/workflows/maeum-brunch-sync.yml'), /cron: ".*\/5/, 'five-minute RSS polling');
 assert.match(await read('maeum-library/assets/essays.js'), /textContent/, 'essay cards render plain text');
 
 const connect = await read('maeum-library/connect/index.html');
