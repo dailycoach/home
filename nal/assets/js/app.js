@@ -183,6 +183,9 @@
       .join("");
 
     const themeControl = `<label class="nal-theme-control"><span>테마</span><select data-nal-theme aria-label="화면 테마"><option value="system">기기 설정</option><option value="light">밝게</option><option value="dark">어둡게</option></select></label>`;
+    // Catalog flag controls discovery only; Auth and database RLS enforce access.
+    const memberLink = site?.features?.account === true
+      ? '<a class="nal-nav__link" href="/nal/my/account/">내 계정</a>' : '';
 
     headerSlot.innerHTML = `
       <header class="nal-site-header">
@@ -191,6 +194,7 @@
           <nav class="nal-nav" aria-label="주요 메뉴"><ul class="nal-nav__list">${navLinks}</ul></nav>
           <ul class="nal-header-actions" aria-label="사용자 메뉴">
             <li class="nal-header-theme">${themeControl}</li>
+            ${memberLink ? `<li class="nal-header-action--optional">${memberLink}</li>` : ''}
             <li><a class="nal-icon-button" href="/nal/search/">${ICONS.search}<span class="nal-icon-button__label">검색</span></a></li>
             <li><a class="nal-icon-button" href="/nal/my/#wishlist">${ICONS.heart}<span class="nal-icon-button__label">내 관심</span><span class="nal-icon-button__count" data-wish-count hidden>0</span></a></li>
             <li><button class="nal-menu-button" type="button" data-drawer-open aria-controls="nalDrawer" aria-expanded="false">${ICONS.menu}<span class="nal-sr-only">메뉴 열기</span></button></li>
@@ -209,6 +213,7 @@
             <div class="nal-drawer-theme">${themeControl}<p>선택한 테마는 이 브라우저에 저장됩니다.</p></div>
             <a class="nal-button--ghost" href="/nal/search/">검색</a>
             <a class="nal-button--ghost" href="/nal/my/">MY NAL</a>
+            ${memberLink}
           </div>
         </div>
       </div>`;
@@ -990,7 +995,10 @@
   function renderMy() {
     const wishes = readLocal(STORAGE.wishlist).map(resolveKey).filter(Boolean);
     const recent = readLocal(STORAGE.recent).map(resolveKey).filter(Boolean);
+    const memberSection = state.site?.features?.account === true
+      ? '<section class="nal-section" id="member-account"><div class="nal-container"><p class="nal-eyebrow">MY ACCOUNT</p><h2>나의 NAL 계정</h2><p>카카오 또는 Google로 가입하고 내 회원 정보를 확인하세요.</p><a class="nal-button--primary" href="/nal/my/account/">내 계정 열기</a></div></section>' : '';
     root.innerHTML = `<section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">MY NAL / LOCAL</p><h1>내가 남겨둔 NAL의 장면들</h1><p>찜과 최근 본 항목은 로그인 없이 현재 기기에만 저장됩니다. 신청·구매 내역이 아닙니다.</p></div></section>
+      ${memberSection}
       <section class="nal-section" id="wishlist"><div class="nal-container"><div class="nal-section__header"><div><p class="nal-eyebrow">LOCAL WISHLIST</p><h2>찜한 항목</h2></div></div>${wishes.length ? `<div class="card-grid">${wishes.map(mixedCard).join("")}</div>` : emptyState("찜한 항목이 없습니다.", "모임이나 프로그램 카드의 ‘찜하기’를 눌러 이 기기에 저장할 수 있습니다.")}</div></section>
       <section class="nal-section"><div class="nal-container"><div class="nal-section__header"><div><p class="nal-eyebrow">RECENTLY VIEWED</p><h2>최근 본 항목</h2></div>${recent.length ? '<button class="nal-button--ghost" type="button" data-clear-recent>최근 기록 지우기</button>' : ""}</div>${recent.length ? `<div class="card-grid">${recent.map(mixedCard).join("")}</div>` : emptyState("최근 본 항목이 없습니다.", "상세 페이지를 열면 이 기기에만 최근 기록이 남습니다.")}</div></section>
       <section class="nal-section" id="purchased-materials" data-purchased-materials data-state="not-connected"><div class="nal-container"><h2>내 구매자료</h2><p>구매한 PDF와 이용권한을 확인하고 다시 내려받는 공간입니다.</p><p>현재 NAL 구매자료 보관함은 연결 준비 중입니다. 외부 판매채널에서 구매한 자료는 해당 채널의 주문 안내에 따라 받습니다.</p><a class="nal-text-link" href="/nal/shop/">마음도구 둘러보기 →</a></div></section>`;

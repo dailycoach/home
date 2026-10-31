@@ -326,6 +326,14 @@ ${fallbackExtras(page)}
 `;
 }
 
+// Membership screens have their own Auth UI and are not overwritten by the
+// catalog generator. Keep their discovery metadata when rebuilding routes.
+const standaloneMemberRoutes = [
+  { path: '/nal/login/', title: '가입·로그인 | NAL 날빛', description: '카카오 또는 Google 계정으로 NAL에 가입하고 로그인합니다.', indexable: false },
+  { path: '/nal/auth/callback/', title: '로그인 확인 | NAL 날빛', description: 'NAL 로그인 결과를 확인합니다.', indexable: false },
+  { path: '/nal/my/account/', title: '내 계정 | NAL 날빛', description: 'NAL 회원 정보와 로그인 상태를 확인합니다.', indexable: false }
+];
+
 const uniqueRoutes = new Set();
 for (const page of pages) {
   if (uniqueRoutes.has(page.route)) throw new Error(`Duplicate NAL route: ${page.route}`);
@@ -349,9 +357,9 @@ await writeFile(
   path.join(root, 'nal/data/routes.json'),
   `${JSON.stringify({
     schemaVersion: '1.2',
-    routes: pages.map((page) => ({
+    routes: [...pages.map((page) => ({
       path: page.route, title: page.title, description: page.description, indexable: !page.noindex
-    }))
+    })), ...standaloneMemberRoutes]
   }, null, 2)}\n`,
   'utf8'
 );

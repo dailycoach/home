@@ -1,0 +1,32 @@
+name: NAL member auth checks
+
+on:
+  pull_request:
+    paths:
+      - 'nal/assets/js/member-*.js'
+      - 'nal/assets/css/nal-membership.css'
+      - 'nal/data/membership.json'
+      - 'nal/login/**'
+      - 'nal/auth/**'
+      - 'nal/my/account/**'
+      - 'scripts/test-nal-member-auth.mjs'
+      - '.github/workflows/nal-member-auth-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  auth-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check nal/assets/js/member-auth.js
+          node --check nal/assets/js/member-pages.js
+      - name: Authentication and consent contract tests
+        run: node scripts/test-nal-member-auth.mjs
