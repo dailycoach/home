@@ -91,7 +91,10 @@ for (const post of feed.items) {
 const sync = await read('scripts/sync-maeum-brunch.py');
 assert.match(sync, /https:\/\/brunch\.co\.kr\/rss\/@@1e5M/, 'real author RSS');
 assert.match(await read('.github/workflows/maeum-brunch-sync.yml'), /cron: ".*\/5/, 'five-minute RSS polling');
-assert.match(await read('maeum-library/assets/essays.js'), /textContent/, 'essay cards render plain text');
+const essayRenderer = await read('maeum-library/assets/essays.js');
+assert.match(essayRenderer, /textContent/, 'essay cards render plain text');
+assert.match(essayRenderer, /raw\.githubusercontent\.com\/dailycoach\/home\/main/, 'reads the live feed without a Pages rebuild');
+assert.match(essayRenderer, /maeum-library\/assets\/brunch-posts\.json/, 'published fallback is available');
 
 const connect = await read('maeum-library/connect/index.html');
 assert.match(connect, /웹 내 기록 열기/);
