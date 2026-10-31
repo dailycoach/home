@@ -129,6 +129,7 @@ for (const file of maeumFiles) {
 const repositoryFiles = await walk(root);
 let repositoryText = '';
 for (const file of repositoryFiles) {
+  if (path.relative(root, file).replaceAll('\\\\', '/') === 'scripts/check-maeum-library-v24.mjs') continue;
   const info = await stat(file);
   if (info.size > 2_000_000 || /\.(?:webp|png|jpg|jpeg|gif|pdf|woff2?)$/i.test(file)) continue;
   repositoryText += await readFile(file, 'utf8');
