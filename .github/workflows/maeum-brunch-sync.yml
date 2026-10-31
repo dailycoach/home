@@ -7,7 +7,7 @@ on:
       - ".github/workflows/maeum-brunch-sync.yml"
       - "scripts/sync-maeum-brunch.py"
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "3-59/5 * * * *"
   workflow_dispatch:
 
 permissions:
