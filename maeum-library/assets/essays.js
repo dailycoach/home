@@ -36,11 +36,25 @@
     return article;
   };
 
+  async function readFeed() {
+    const sources = [
+      'https://raw.githubusercontent.com/dailycoach/home/main/maeum-library/assets/brunch-posts.json',
+      '/maeum-library/assets/brunch-posts.json',
+    ];
+    for (const source of sources) {
+      try {
+        const response = await fetch(source, { cache: 'no-cache' });
+        if (!response.ok) continue;
+        const payload = await response.json();
+        if (Array.isArray(payload.items)) return payload;
+      } catch { /* Try the last published snapshot. */ }
+    }
+    throw new Error('No available Brunch snapshot');
+  }
+
   async function loadPosts() {
     try {
-      const response = await fetch('/maeum-library/assets/brunch-posts.json', { cache: 'no-cache' });
-      if (!response.ok) throw new Error('Cannot read the essay list');
-      const payload = await response.json();
+      const payload = await readFeed();
       const posts = Array.isArray(payload.items)
         ? payload.items.filter((item) => item && validBrunchURL(item.link))
         : [];
