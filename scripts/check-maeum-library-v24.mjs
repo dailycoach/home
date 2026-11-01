@@ -97,7 +97,8 @@ assert.match(essayRenderer, /raw\.githubusercontent\.com\/dailycoach\/home\/main
 assert.match(essayRenderer, /maeum-library\/assets\/brunch-posts\.json/, 'published fallback is available');
 
 const connect = await read('maeum-library/connect/index.html');
-assert.match(connect, /웹 내 기록 열기/);
+assert.match(connect, /연동을 준비하고 있습니다/);
+assert.doesNotMatch(connect, /웹 내 기록 열기/, 'do not promise an unverified Toss app button');
 assert.match(connect, /href="\/maeum-library\/toss\/"/);
 assert.doesNotMatch(connect, /minion\.toss\.im|intoss:\/\//);
 
@@ -106,6 +107,9 @@ assert.match(app, /https:\/\/maeum-api\.daily-coach-ing\.com/);
 assert.match(app, /const TOSS_URL = '\/maeum-library\/toss\/'/);
 assert.doesNotMatch(app, /minion\.toss\.im|intoss:\/\//);
 assert.match(app, /\/api\/participant\/toss-exchange/);
+assert.match(app, /if \(mine && entry\.reflection\)/, 'personal reflection is never rendered in the public feed');
+assert.match(app, /if \(mine && entry\.chosenStep\)/, 'personal next step is never rendered in the public feed');
+assert.match(app, /mine \? '내 기록' : '익명의 마음'/, 'public feed never exposes a supplied display name');
 assert.doesNotMatch(app, /localStorage|sessionStorage/);
 assert.doesNotMatch(app, /console\./);
 
@@ -115,6 +119,34 @@ assert.match(tossGate, /https:\/\/minion\.toss\.im\/FZZaAaJp/);
 assert.match(tossGate, /noindex,nofollow/);
 assert.match(tossGate, /visibilitychange/);
 assert.match(tossGate, /2200/);
+assert.match(tossGate, /if \(!isMobile\)/, 'desktop shows manual Toss choices instead of redirecting');
+assert.match(tossGate, /href="\/maeum-library\/library\/"/, 'Toss gateway offers web reading');
+
+const gathering = await read('maeum-library/gathering/index.html');
+assert.equal((gathering.match(/class="journey-step"/g) || []).length, 3, 'gathering has three clear steps');
+for (const route of ['#all-rooms', '/maeum-library/toss/', '/maeum-library/library/']) {
+  assert.ok(gathering.includes(route), `gathering connects to ${route}`);
+}
+assert.doesNotMatch(gathering, /href="\/maeum-library\/apply\/"/, 'preparing gathering must not send people to a currently unavailable application');
+assert.match(gathering, /data-gathering-status/, 'existing gathering availability stays dynamic');
+assert.match(gathering, /data-gathering-schedule/, 'existing gathering schedule stays dynamic');
+
+const library = await read('maeum-library/library/index.html');
+assert.match(library, /data-library-filter-toggle/, 'optional filters start collapsed');
+assert.match(library, /data-library-entries/, 'public reading feed remains');
+assert.match(library, /href="\/maeum-library\/gathering\/"/, 'one-line talk connects to gatherings');
+for (const [route, html] of [['home', home], ['essays', essays], ['library', library], ['gathering', gathering]]) {
+  assert.doesNotMatch(html, /href="\/maeum-library\/me\/"/, `${route}: unfinished personal-record bridge is not promoted`);
+  assert.doesNotMatch(html, /href="\/maeum-library\/apply\/"/, `${route}: unavailable application is not promoted`);
+}
+assert.match(app, /requestedTheme/, 'deep link pre-selects one-line talk theme');
+assert.match(app, /response\.status === 401 \|\| response\.status === 403/, 'authorization failure is separate from server failure');
+assert.match(app, /recovery-actions/, 'unavailable API leaves useful actions');
+const roomScript = await read('maeum-library/assets/rooms.js');
+assert.match(roomScript, /connectRoomsToOneLineTalk/, 'rooms connect to public sharing');
+assert.match(roomScript, /encodeURIComponent\(themes\[match\[1\]\]\)/, 'room handoff preserves the selected shelf');
+const journeyCss = await read('maeum-library/assets/reading-journey.css');
+assert.match(journeyCss, /@media \(max-width: 680px\)/, 'connected flow supports small screens');
 
 const maeumFiles = await walk(path.join(root, 'maeum-library'));
 for (const file of maeumFiles) {
