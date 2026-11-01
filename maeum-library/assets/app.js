@@ -46,7 +46,7 @@ function loadingState(text = '내용을 불러오고 있습니다.') {
   return wrap;
 }
 
-function errorState(title, description, retry) {
+function errorState(title, description, retry, links = []) {
   const wrap = node('div', 'error-state');
   wrap.setAttribute('role', 'alert');
   wrap.append(node('b', '', title), node('p', '', description));
@@ -55,6 +55,15 @@ function errorState(title, description, retry) {
     button.type = 'button';
     button.addEventListener('click', retry);
     wrap.append(button);
+  }
+  if (links.length) {
+    const actions = node('div', 'form-actions recovery-actions');
+    links.forEach(({ href, label }) => {
+      const link = node('a', 'button ghost', label);
+      link.href = href;
+      actions.append(link);
+    });
+    wrap.append(actions);
   }
   return wrap;
 }
@@ -93,12 +102,12 @@ function entryCard(entry, { mine = false } = {}) {
   if (entry.bookAuthor) book.append(node('small', '', entry.bookAuthor));
   const quote = node('blockquote', '', `“${entry.quotedLine || ''}”`);
   article.append(meta, book, quote);
-  if (entry.reflection) {
+  if (mine && entry.reflection) {
     const scene = node('div', 'entry-scene');
     scene.append(node('span', '', '삶의 장면'), node('p', '', entry.reflection));
     article.append(scene);
   }
-  if (entry.chosenStep) {
+  if (mine && entry.chosenStep) {
     const step = node('p', 'entry-step');
     step.append(node('span', '', '다음 한 걸음'), document.createTextNode(entry.chosenStep));
     article.append(step);
@@ -107,7 +116,7 @@ function entryCard(entry, { mine = false } = {}) {
   const time = node('time', '', formatDate(entry.createdAt));
   const createdAt = new Date(entry.createdAt);
   if (Number.isFinite(createdAt.getTime())) time.dateTime = createdAt.toISOString();
-  footer.append(node('span', '', mine ? '내 기록' : entry.displayName || '익명의 마음'), time);
+  footer.append(node('span', '', mine ? '내 기록' : '익명의 마음'), time);
   article.append(footer);
   return article;
 }
@@ -118,10 +127,23 @@ function publicEntryEmpty(filtered = false) {
     wrap.append(node('b', '', '이 조건에 맞는 문장은 아직 없습니다.'), node('p', '', '검색어나 서가 필터를 바꿔보세요.'));
   } else {
     wrap.append(node('b', '', '이번 주 마음이 멈춘 문장은 무엇인가요?'), node('p', '', '첫 번째 문장이 이 서가에 꽂히기를 기다리고 있습니다.'));
-    const link = node('a', 'button accent', '토스에서 첫 문장 남기기');
-    link.href = TOSS_URL;
-    wrap.append(link);
+    const actions = node('div', 'form-actions recovery-actions');
+    const record = node('a', 'button accent', '토스에서 첫 문장 남기기');
+    record.href = TOSS_URL;
+    const gather = node('a', 'button ghost', '독서모임 알아보기');
+    gather.href = '/maeum-library/gathering/';
+    actions.append(record, gather);
+    wrap.append(actions);
   }
+  return wrap;
+}
+
+function myEntryEmpty() {
+  const wrap = node('div', 'empty-state');
+  wrap.append(node('b', '', '아직 내 기록이 없습니다.'), node('p', '', '오늘 읽은 책에서 마음에 남은 문장 하나로 시작해 보세요.'));
+  const link = node('a', 'button accent', '토스에서 문장 남기기');
+  link.href = TOSS_URL;
+  wrap.append(link);
   return wrap;
 }
 
@@ -139,7 +161,15 @@ async function loadEntries(target, params, retry, filtered = false) {
     if (!data.entries.length) target.append(publicEntryEmpty(filtered));
     else data.entries.forEach((entry) => target.append(entryCard(entry)));
   } catch (error) {
-    if (error?.name !== 'AbortError') target.replaceChildren(errorState('문장을 불러오지 못했습니다.', '잠시 후 다시 시도해 주세요.', retry));
+    if (error?.name !== 'AbortError') {
+      target.replaceChildren(errorState(
+        '지금 한줄톡을 불러오지 못해요.',
+        '공개 문장 목록에 연결되지 않았습니다. 잠시 후 다시 시도하거나 독서방과 모임 안내를 둘러보세요.',
+        retry,
+        [{ href: '/maeum-library/#all-rooms', label: '독서방 고르기' },
+          { href: '/maeum-library/gathering/', label: '독서모임 알아보기' }]
+      ));
+    }
   } finally {
     if (requests.get(target) === controller) {
       requests.delete(target);
@@ -158,10 +188,19 @@ function initHomeEntries() {
 function initLibrary() {
   const target = $('[data-library-entries]');
   if (!target) return;
-  let theme = '';
+  const filters = $$('[data-theme]');
+  const requestedTheme = new URL(location.href).searchParams.get('theme') || '';
+  const allowedThemes = new Set(filters.map((button) => button.dataset.theme || ''));
+  let theme = allowedThemes.has(requestedTheme) ? requestedTheme : '';
   let timer;
   const search = $('[data-library-search]');
-  const filters = $$('[data-theme]');
+  const filterToggle = $('[data-library-filter-toggle]');
+  if (theme && filterToggle) filterToggle.open = true;
+  filters.forEach((button) => {
+    const active = (button.dataset.theme || '') === theme;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
   const run = () => {
     const params = new URLSearchParams({ limit: '60' });
     if (theme) params.set('theme', theme);
@@ -169,7 +208,6 @@ function initLibrary() {
     loadEntries(target, params, run, Boolean(theme || search?.value.trim()));
   };
   filters.forEach((button) => {
-    button.setAttribute('aria-pressed', String(button.classList.contains('is-active')));
     button.addEventListener('click', () => {
       theme = button.dataset.theme || '';
       filters.forEach((item) => {
@@ -177,6 +215,10 @@ function initLibrary() {
         item.classList.toggle('is-active', active);
         item.setAttribute('aria-pressed', String(active));
       });
+      const url = new URL(location.href);
+      if (theme) url.searchParams.set('theme', theme);
+      else url.searchParams.delete('theme');
+      history.replaceState(history.state, '', url.pathname + url.search + url.hash);
       run();
     });
   });
@@ -331,7 +373,16 @@ function initApplication() {
       setStatus(status, `마음서재 참여 신청이 접수되었습니다. 내용을 확인한 뒤 참여 안내를 드립니다. 접수번호 ${data.receipt || ''}`);
       status?.focus();
     } catch (error) {
-      setStatus(status, error.message || '잠시 후 다시 시도해 주세요.', true);
+      const message = error?.message && !/Failed to fetch|NetworkError|Load failed/i.test(error.message)
+        ? error.message
+        : '신청 서버에 연결되지 않았습니다. 입력하신 내용은 이 화면에 남아 있으니 잠시 후 다시 시도해 주세요.';
+      setStatus(status, message, true);
+      if (status) {
+        const contact = node('a', '', '접수가 계속 안 될 때 이메일 문의');
+        contact.href = 'mailto:dailycoaching@naver.com';
+        contact.style.cssText = 'display:inline-block;margin-left:10px;text-decoration:underline;text-underline-offset:3px;font-weight:800';
+        status.append(contact);
+      }
     } finally {
       submit.disabled = false;
       submit.textContent = '참여 신청하기';
@@ -373,20 +424,22 @@ function initMyRecords() {
   const actions = $('[data-session-actions]');
   const run = async () => {
     target.replaceChildren(loadingState('내 기록을 불러오고 있습니다.'));
+    actions?.setAttribute('hidden', '');
     try {
       const response = await api('/api/participant/me');
       const data = await json(response);
-      if (!response.ok || !data.ok) {
+      if (response.status === 401 || response.status === 403) {
         profile?.setAttribute('hidden', '');
         target.replaceChildren();
         const empty = node('div', 'empty-state');
-        empty.append(node('b', '', '토스에서 내 기록을 열어주세요.'), node('p', '', '토스 마음서재의 ‘웹 내 기록 열기’를 누르면 별도 회원가입 없이 연결됩니다.'));
-        const link = node('a', 'button accent', '연결 방법 보기');
-        link.href = '/maeum-library/connect/';
+        empty.append(node('b', '', '내 기록은 토스 마음서재에서 확인해 주세요.'), node('p', '', '웹 개인 기록 조회는 서버 연동 완료 후 안내합니다. 공개된 문장은 한줄톡에서 볼 수 있습니다.'));
+        const link = node('a', 'button accent', '한줄톡 보기');
+        link.href = '/maeum-library/library/';
         empty.append(link);
         target.append(empty);
         return;
       }
+      if (!response.ok || !data.ok || !Array.isArray(data.entries)) throw new Error('records');
       if (profile) {
         profile.hidden = false;
         $('[data-member-name]', profile).textContent = `${data.member?.displayName || '참여자'}님의 서재`;
@@ -395,8 +448,7 @@ function initMyRecords() {
       }
       target.replaceChildren();
       if (!data.entries?.length) {
-        const empty = publicEntryEmpty();
-        target.append(empty);
+        target.append(myEntryEmpty());
       } else {
         data.entries.forEach((entry) => {
           const wrap = node('div', 'my-entry');
@@ -425,7 +477,15 @@ function initMyRecords() {
       }
       actions?.removeAttribute('hidden');
     } catch {
-      target.replaceChildren(errorState('내 기록을 불러오지 못했습니다.', '인터넷 연결을 확인한 뒤 다시 시도해 주세요.', run));
+      profile?.setAttribute('hidden', '');
+      actions?.setAttribute('hidden', '');
+      target.replaceChildren(errorState(
+        '내 기록을 불러오지 못했어요.',
+        '기록 연결이 잠시 원활하지 않습니다. 연결 방법을 확인하거나 잠시 후 다시 시도해 주세요.',
+        run,
+        [{ href: '/maeum-library/connect/', label: '연결 방법 보기' },
+          { href: '/maeum-library/gathering/', label: '독서모임 알아보기' }]
+      ));
     }
   };
   $$('[data-session-action]').forEach((button) => button.addEventListener('click', async () => {
