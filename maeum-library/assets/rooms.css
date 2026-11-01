@@ -344,7 +344,7 @@
 .essays-card p{flex:1;margin:0;color:var(--room-muted);font-size:14px;line-height:1.8}
 .essays-card a{align-self:flex-start;color:var(--wine);font-weight:750;font-size:13px;text-decoration:underline;text-underline-offset:4px}
 .essays-empty{grid-column:1/-1;margin:0;padding:24px;border:1px solid var(--room-rule);background:var(--room-paper-light);color:var(--room-muted)}
-.simple-doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0 0 72px}
+.simple-doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 0 72px}
 .simple-doors a{min-height:68px;padding:20px 22px;border:1px solid var(--room-rule);display:flex;justify-content:space-between;gap:16px;align-items:center;background:#fffaf2;color:var(--room-ink);font-size:15px;font-weight:750}
 .simple-doors a:focus-visible,.essays-card a:focus-visible,.concept-back:focus-visible{outline:3px solid var(--wine);outline-offset:3px}
 .simple-doors span{color:var(--wine)}
