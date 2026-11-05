@@ -276,6 +276,24 @@
       "title": "미술심리코칭 6주 과정 참여 안내 | NAL NOTE · 날빛",
       "description": "미술심리코칭 6주 과정의 참여 방식, 준비물, 진행자, FAQ와 과정 범위를 안내합니다.",
       "indexable": true
+    },
+    {
+      "path": "/nal/login/",
+      "title": "가입·로그인 | NAL 날빛",
+      "description": "카카오 또는 Google 계정으로 NAL에 가입하고 로그인합니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/auth/callback/",
+      "title": "로그인 확인 | NAL 날빛",
+      "description": "NAL 로그인 결과를 확인합니다.",
+      "indexable": false
+    },
+    {
+      "path": "/nal/my/account/",
+      "title": "내 계정 | NAL 날빛",
+      "description": "NAL 회원 정보와 로그인 상태를 확인합니다.",
+      "indexable": false
     }
   ]
 }
