@@ -10,7 +10,11 @@
       "summary": "색과 형태로 표현하고, 자신의 언어로 읽고, 다음 행동으로 연결하는 6주 미술심리코칭 과정",
       "description": "현재의 나, 관계, 바라는 삶과 다음 행동을 매주 다른 질문과 표현 방식으로 연결합니다.",
       "category": "미술·창작",
-      "tags": ["미술", "자기이해", "6주 과정"],
+      "tags": [
+        "미술",
+        "자기이해",
+        "6주 과정"
+      ],
       "coverImage": "/programs/art-psychology-coaching/assets/hero-identity-collage.webp",
       "coverImageMobile": null,
       "coverImageAlt": "서로 다른 색과 질감의 종이를 겹쳐 한 사람의 모습을 표현한 콜라주",
@@ -37,8 +41,13 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": null,
-      "materials": ["개인 스케치북", "색연필"],
-      "includedItems": ["참여자 워크북"],
+      "materials": [
+        "개인 스케치북",
+        "색연필"
+      ],
+      "includedItems": [
+        "참여자 워크북"
+      ],
       "activities": [
         "매주 다른 질문과 표현 재료로 현재의 장면을 남깁니다.",
         "작품에서 눈에 들어오는 선·색·형태를 자신의 언어로 기록합니다.",
@@ -59,8 +68,12 @@
         "작품을 근거로 성격이나 심리 상태를 진단하지 않습니다.",
         "정서 반응이 커지면 활동을 쉬거나 중단할 수 있습니다."
       ],
-      "productIds": ["art-psychology-workbook"],
-      "relatedContentIds": ["art-psychology-coaching-guide"],
+      "productIds": [
+        "art-psychology-workbook"
+      ],
+      "relatedContentIds": [
+        "art-psychology-coaching-guide"
+      ],
       "sourceUrl": "/programs/art-psychology-coaching/",
       "featured": true,
       "featuredOrder": 5,
@@ -77,7 +90,12 @@
       "summary": "감정카드를 고르고, 지금 마음에 가까운 단어를 자신의 속도로 나누는 정기 대화모임",
       "description": "정답을 찾거나 서로를 해석하지 않습니다. 말하고 싶은 만큼만 나누고, 다른 사람의 이야기를 들으며 내 감정의 언어를 넓혀갑니다.",
       "category": "정기모임",
-      "tags": ["감정", "대화", "카드", "초보 환영"],
+      "tags": [
+        "감정",
+        "대화",
+        "카드",
+        "초보 환영"
+      ],
       "coverImage": "/nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-emotion-card-conversation-mobile.webp",
       "coverImageAlt": "나무 테이블 위 여러 감정카드 중 한 장을 천천히 고르는 여러 사람의 손",
@@ -102,7 +120,9 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "입문",
-      "materials": ["감정카드"],
+      "materials": [
+        "감정카드"
+      ],
       "includedItems": [],
       "activities": [
         "지금 마음에 가까운 카드 한 장을 고릅니다.",
@@ -124,7 +144,9 @@
         "다른 참여자의 이야기를 분석하거나 조언하지 않습니다.",
         "공개된 일정과 참여 규칙을 확인한 뒤 신청을 받습니다."
       ],
-      "productIds": ["emotion-card"],
+      "productIds": [
+        "emotion-card"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -142,7 +164,12 @@
       "summary": "질문 한 가지를 따라 삶의 장면을 쓰고, 서로의 문장을 평가 없이 듣는 시즌 글쓰기 모임",
       "description": "긴 글이나 완성된 에세이를 요구하지 않습니다. 짧은 문장과 실제 장면에서 출발해 내가 중요하게 여기는 것과 다음 방향을 발견합니다.",
       "category": "시즌모임",
-      "tags": ["글쓰기", "자기이해", "질문", "기록"],
+      "tags": [
+        "글쓰기",
+        "자기이해",
+        "질문",
+        "기록"
+      ],
       "coverImage": "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-mobile.webp",
       "coverImageAlt": "밝은 테이블에 둘러앉아 각자의 펼친 노트에 문장을 적는 여러 사람의 손",
@@ -167,7 +194,10 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "입문",
-      "materials": ["개인 노트", "필기도구"],
+      "materials": [
+        "개인 노트",
+        "필기도구"
+      ],
       "includedItems": [],
       "activities": [
         "한 가지 질문에서 떠오르는 실제 삶의 장면을 고릅니다.",
@@ -189,7 +219,9 @@
         "공유하고 싶지 않은 글은 읽지 않아도 됩니다.",
         "개인의 경험과 문장을 모임 밖에 공유하지 않습니다."
       ],
-      "productIds": ["coaching-question-card"],
+      "productIds": [
+        "coaching-question-card"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -207,7 +239,12 @@
       "summary": "코칭 장면을 복기하고 질문·경청·개입의 선택을 함께 실습하는 코치 커뮤니티",
       "description": "이론 강의보다 실제 대화 장면과 선택을 중심에 둡니다. 코칭 후 무엇을 보았고 어떤 질문을 선택했는지 나누며 서로의 관점을 확장합니다.",
       "category": "자유모임",
-      "tags": ["코치", "코칭실습", "질문", "피드백"],
+      "tags": [
+        "코치",
+        "코칭실습",
+        "질문",
+        "피드백"
+      ],
       "coverImage": "/nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-coaches-dialogue-practice-mobile.webp",
       "coverImageAlt": "차콜 톤의 대화 스튜디오에서 노트와 타이머를 두고 코칭 장면을 함께 살펴보는 세 사람",
@@ -232,7 +269,9 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "코칭 경험자",
-      "materials": ["실습 노트"],
+      "materials": [
+        "실습 노트"
+      ],
       "includedItems": [],
       "activities": [
         "개인정보를 지운 실제 코칭 장면에서 기억나는 순간을 고릅니다.",
@@ -254,7 +293,9 @@
         "사례를 평가하거나 정답을 단정하지 않습니다.",
         "실습 피드백은 요청과 합의 범위 안에서 제공합니다."
       ],
-      "productIds": ["coaching-question-card"],
+      "productIds": [
+        "coaching-question-card"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -272,7 +313,12 @@
       "summary": "카카오톡·온라인·서울 오프라인을 오가며 코칭의 삶과 실천을 이어가는 코치 커뮤니티",
       "description": "성과 경쟁이나 자격 중심 네트워킹보다, 코치로 살아가며 생기는 질문과 실천을 편안하게 나눕니다. 온라인 대화와 줌 모임, 서울 오프라인 모임을 단계적으로 연결합니다.",
       "category": "정기모임",
-      "tags": ["25–45 코치", "커뮤니티", "서울", "온라인"],
+      "tags": [
+        "25–45 코치",
+        "커뮤니티",
+        "서울",
+        "온라인"
+      ],
       "coverImage": "/nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-flowing-river-coaches-mobile.webp",
       "coverImageAlt": "서울의 도시 조각과 대화 장면을 코발트색 흐르는 선으로 연결한 에디토리얼 콜라주",
@@ -337,7 +383,12 @@
       "summary": "감정카드를 활용해 현재의 마음을 발견하고 내 언어로 기록하는 입문 원데이클래스",
       "description": "감정의 원인을 맞히거나 심리 상태를 진단하지 않습니다. 카드 선택, 짧은 기록, 선택적 나눔을 통해 지금 필요한 감정의 언어를 발견합니다.",
       "category": "마음·감정",
-      "tags": ["감정카드", "자기이해", "원데이", "초보 환영"],
+      "tags": [
+        "감정카드",
+        "자기이해",
+        "원데이",
+        "초보 환영"
+      ],
       "coverImage": "/nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-meet-myself-with-emotion-cards-mobile.webp",
       "coverImageAlt": "코럴과 라일락 카드 여러 장 중 지금 마음에 가까운 한 장을 고르는 손",
@@ -362,8 +413,12 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "입문",
-      "materials": ["필기도구"],
-      "includedItems": ["클래스용 감정카드"],
+      "materials": [
+        "필기도구"
+      ],
+      "includedItems": [
+        "클래스용 감정카드"
+      ],
       "activities": [
         "여러 카드 중 지금 마음과 가까운 한 장을 고릅니다.",
         "카드를 고른 이유와 떠오른 장면을 짧게 적습니다.",
@@ -384,7 +439,9 @@
         "카드 선택을 성격이나 심리 상태의 증거로 해석하지 않습니다.",
         "활동 중 쉬거나 참여 범위를 조절할 수 있습니다."
       ],
-      "productIds": ["emotion-card"],
+      "productIds": [
+        "emotion-card"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -402,7 +459,12 @@
       "summary": "그림 실력보다 지금 손이 고르는 선·색·형태를 관찰하는 미술 원데이클래스",
       "description": "간단한 드로잉과 색연필 활동을 하고, 작품에서 눈에 들어오는 요소를 자신의 말로 기록합니다. 진행자는 작품을 대신 해석하지 않습니다.",
       "category": "미술·창작",
-      "tags": ["미술", "색연필", "자기표현", "원데이"],
+      "tags": [
+        "미술",
+        "색연필",
+        "자기표현",
+        "원데이"
+      ],
       "coverImage": "/nal/assets/images/catalog/class/nal-class-art-current-mind-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-art-current-mind-mobile.webp",
       "coverImageAlt": "색연필과 오일파스텔로 서로 다른 선과 색을 미완성 종이에 표현하는 여러 사람의 손",
@@ -427,8 +489,13 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "입문",
-      "materials": ["개인 스케치북", "색연필"],
-      "includedItems": ["활동 기록지"],
+      "materials": [
+        "개인 스케치북",
+        "색연필"
+      ],
+      "includedItems": [
+        "활동 기록지"
+      ],
       "activities": [
         "지금 손이 먼저 고르는 색과 도구로 짧게 표현합니다.",
         "잘 그렸는지보다 종이에 남은 선·색·형태를 관찰합니다.",
@@ -449,7 +516,9 @@
         "작품의 의미는 참여자가 직접 선택합니다.",
         "활동을 쉬거나 다른 표현 방식으로 바꿀 수 있습니다."
       ],
-      "productIds": ["art-psychology-workbook"],
+      "productIds": [
+        "art-psychology-workbook"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -467,7 +536,12 @@
       "summary": "관계에서 자주 반복되는 말과 반응을 살펴보고 다음 대화의 선택지를 만드는 원데이클래스",
       "description": "누가 맞는지를 판단하기보다 실제 장면에서 내가 무엇을 보고, 느끼고, 말했는지 구분합니다. 질문카드와 짧은 역할 연습으로 다른 반응을 설계합니다.",
       "category": "관계·대화",
-      "tags": ["관계", "대화", "질문카드", "실습"],
+      "tags": [
+        "관계",
+        "대화",
+        "질문카드",
+        "실습"
+      ],
       "coverImage": "/nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-relationship-dialogue-style-mobile.webp",
       "coverImageAlt": "마주 보는 두 자리 사이 질문카드와 엇갈렸다 다시 이어지는 두 개의 선",
@@ -492,8 +566,12 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "입문",
-      "materials": ["필기도구"],
-      "includedItems": ["대화 장면 기록지"],
+      "materials": [
+        "필기도구"
+      ],
+      "includedItems": [
+        "대화 장면 기록지"
+      ],
       "activities": [
         "최근 반복된 대화에서 기억나는 한 장면을 고릅니다.",
         "내가 본 사실·느낀 감정·했던 말을 구분해 적습니다.",
@@ -514,7 +592,9 @@
         "상대방의 성격이나 의도를 단정하지 않습니다.",
         "개인 사례 공유와 역할 연습은 참여자가 범위를 선택합니다."
       ],
-      "productIds": ["relationship-question-card"],
+      "productIds": [
+        "relationship-question-card"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -532,7 +612,12 @@
       "summary": "이미지와 문장을 조합해 올해 중요하게 살아갈 방향을 한 장면으로 구성하는 원데이클래스",
       "description": "해야 할 일 목록을 늘리기보다 마음이 움직이는 이미지와 단어를 수집합니다. 완성한 콜라주에서 이번 달의 작은 행동 한 가지를 선택합니다.",
       "category": "라이프",
-      "tags": ["콜라주", "방향", "라이프", "창작"],
+      "tags": [
+        "콜라주",
+        "방향",
+        "라이프",
+        "창작"
+      ],
       "coverImage": "/nal/assets/images/catalog/class/nal-class-direction-collage-cover.webp",
       "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-direction-collage-mobile.webp",
       "coverImageAlt": "가위와 종이 조각을 움직이며 올해의 방향 콜라주를 배열하는 여러 사람의 손",
@@ -557,8 +642,15 @@
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": "입문",
-      "materials": ["가위", "풀", "개인 필기도구"],
-      "includedItems": ["콜라주 이미지팩", "활동지"],
+      "materials": [
+        "가위",
+        "풀",
+        "개인 필기도구"
+      ],
+      "includedItems": [
+        "콜라주 이미지팩",
+        "활동지"
+      ],
       "activities": [
         "마음이 움직이는 이미지와 문장 조각을 빠르게 모읍니다.",
         "완성본을 서두르지 않고 살고 싶은 장면을 여러 방식으로 배열합니다.",
@@ -579,7 +671,9 @@
         "미래 계획을 강요하거나 성과를 보장하지 않습니다.",
         "개인적인 이미지는 공유하지 않아도 됩니다."
       ],
-      "productIds": ["one-day-class-kit"],
+      "productIds": [
+        "one-day-class-kit"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": true,
@@ -630,12 +724,170 @@
       "applicationUrl": null,
       "refundPolicy": null,
       "safetyGuide": [],
-      "productIds": ["coaching-question-card"],
+      "productIds": [
+        "coaching-question-card"
+      ],
       "relatedContentIds": [],
       "sourceUrl": null,
       "featured": false,
       "featuredOrder": null,
       "published": false,
+      "createdAt": null,
+      "updatedAt": null
+    },
+    {
+      "id": "moonjar-nacre-artcoaching-class",
+      "slug": "moonjar-nacre-artcoaching",
+      "type": "class",
+      "title": "빛을 담는 달항아리 — 자개 알아차림 아트코칭",
+      "subtitle": "자개를 놓는 손끝에서 지금의 나를 만나다",
+      "summary": "달항아리와 자개를 꾸미며 현재의 마음을 알아차리고, 작품과 자신의 언어를 간직하는 체험형 아트코칭 클래스",
+      "description": "흙에서 온 달항아리와 바다에서 온 자개를 소재로, 내가 고른 빛과 배치를 천천히 바라봅니다. 조각을 놓고 움직이며 몸과 마음의 신호를 알아차리고, 필요할 때만 짧은 글과 질문을 남깁니다. 작품을 완성한 뒤에는 오늘의 선택을 일상과 연결하는 작은 실험을 구상합니다. 디지털 활동 도구는 공개 링크 없이 진행 과정에서 개별 안내합니다. 대표 이미지는 활동 분야를 보여주는 NAL 콘셉트 비주얼이며 실제 수업이나 달항아리 작품 사진이 아닙니다.",
+      "category": "미술·창작",
+      "tags": [
+        "달항아리",
+        "자개",
+        "아트코칭",
+        "알아차림",
+        "자기이해",
+        "창작",
+        "원데이"
+      ],
+      "coverImage": "/nal/assets/images/catalog/class/nal-class-art-current-mind-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/class/nal-class-art-current-mind-mobile.webp",
+      "coverImageAlt": "미술 창작 분위기를 표현한 기존 NAL 콘셉트 비주얼; 실제 달항아리 수업이나 작품 사진이 아님",
+      "gallery": [
+        "/nal/assets/images/catalog/class/nal-class-art-current-mind-cover.webp"
+      ],
+      "hostId": "kim-cheol-woong",
+      "format": null,
+      "location": null,
+      "address": null,
+      "onlineUrl": null,
+      "startDate": null,
+      "endDate": null,
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "frequency": null,
+      "sessionCount": 1,
+      "capacity": null,
+      "remainingSeats": null,
+      "price": null,
+      "originalPrice": null,
+      "status": "comingSoon",
+      "difficulty": "입문",
+      "materials": [
+        "달항아리와 자개를 다루는 디지털 창작 활동",
+        "자신의 마음을 관찰하는 질문"
+      ],
+      "includedItems": [
+        "작품과 원하는 기록을 개인 기기에 남기는 방법 안내"
+      ],
+      "activities": [
+        "달항아리와 자개의 이야기를 만나고 지금 몸과 마음에서 알아차려지는 신호를 살핍니다.",
+        "자개 조각을 자유롭게 선택·배치하면서 마음이 머무는 장면을 관찰합니다.",
+        "작품의 의미를 직접 선택해 기록하고 오늘 삶에서 실험할 작은 행동을 정합니다."
+      ],
+      "recommendedFor": [
+        "미술 실력과 관계없이 창작으로 자신을 만나고 싶은 분",
+        "지금의 마음을 말보다 색과 형태로 표현하고 싶은 분",
+        "작품을 보며 나만의 질문과 다음 행동을 찾아보고 싶은 분"
+      ],
+      "soloFriendly": true,
+      "beginnerFriendly": true,
+      "groupChat": null,
+      "applicationUrl": null,
+      "refundPolicy": null,
+      "safetyGuide": [
+        "작품의 색과 배치만으로 심리 상태를 진단하거나 평가하지 않습니다.",
+        "원하지 않는 이야기는 기록하거나 공유하지 않아도 됩니다.",
+        "개인 작품과 기록을 저장하거나 공유하는 여부는 참여자가 선택합니다.",
+        "참여 안내는 운영자가 제공하며 공개 페이지에 활동 도구의 접속 링크를 싣지 않습니다."
+      ],
+      "productIds": [],
+      "relatedContentIds": [],
+      "sourceUrl": null,
+      "featured": false,
+      "featuredOrder": null,
+      "published": true,
+      "createdAt": null,
+      "updatedAt": null
+    },
+    {
+      "id": "moonjar-reflection-circle-gather",
+      "slug": "moonjar-reflection-circle",
+      "type": "gather",
+      "title": "달항아리 자개 이야기 모임 — 나를 담고 다시 보다",
+      "subtitle": "각자의 빛을 보고, 서로의 해석을 대신하지 않는 모임",
+      "summary": "달항아리와 자개 작품을 함께 바라보며 자신이 알아차린 것과 일상의 작은 선택을 나누는 자율적 아트코칭 모임",
+      "description": "한 사람의 작품에는 그 사람만의 속도가 있습니다. 달항아리 자개 활동에서 고른 빛과 남긴 자리를 다시 바라보며, 느껴진 점을 자신의 언어로 나눕니다. 서로의 작품을 평가하거나 뜻을 대신 해석하지 않고, 질문과 경청으로 다른 시선을 만납니다. 개인적인 작품과 기록은 공유하지 않아도 됩니다. 디지털 활동 도구의 접속 안내는 공개 목록이 아닌 운영 안내에서만 제공합니다. 대표 이미지는 NAL의 글쓰기·대화 콘셉트 비주얼이며 실제 모임 현장 사진이 아닙니다.",
+      "category": "자유모임",
+      "tags": [
+        "달항아리",
+        "자개",
+        "아트코칭",
+        "모임",
+        "알아차림",
+        "경청",
+        "자기돌봄"
+      ],
+      "coverImage": "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-cover.webp",
+      "coverImageMobile": "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-mobile.webp",
+      "coverImageAlt": "열린 노트와 글쓰기를 소재로 한 NAL 모임 콘셉트 비주얼; 실제 달항아리 모임 현장 사진이 아님",
+      "gallery": [
+        "/nal/assets/images/catalog/gather/nal-gather-self-understanding-writing-cover.webp"
+      ],
+      "hostId": "kim-cheol-woong",
+      "format": null,
+      "location": null,
+      "address": null,
+      "onlineUrl": null,
+      "startDate": null,
+      "endDate": null,
+      "startTime": null,
+      "endTime": null,
+      "duration": null,
+      "frequency": null,
+      "sessionCount": null,
+      "capacity": null,
+      "remainingSeats": null,
+      "price": null,
+      "originalPrice": null,
+      "status": "comingSoon",
+      "difficulty": "입문",
+      "materials": [
+        "개인이 만든 달항아리 자개 작품 또는 활동 후 기억",
+        "대화를 돕는 성찰 질문"
+      ],
+      "includedItems": [],
+      "activities": [
+        "자신의 달항아리 작품을 바라보며 눈에 들어오는 빛과 장면을 확인합니다.",
+        "원한다면 작품이나 짧은 이야기를 나누고, 서로의 말을 조언 없이 경청합니다.",
+        "오늘 알아차린 것을 일상에 연결할 작은 선택을 자신만의 속도로 정합니다."
+      ],
+      "recommendedFor": [
+        "창작 경험을 다른 사람들과 부담 없이 이야기해 보고 싶은 분",
+        "타인의 평가 없이 자신의 작품을 다시 바라보고 싶은 분",
+        "알아차림과 작은 실천을 모임에서 이어가고 싶은 분"
+      ],
+      "soloFriendly": true,
+      "beginnerFriendly": true,
+      "groupChat": null,
+      "applicationUrl": null,
+      "refundPolicy": null,
+      "safetyGuide": [
+        "서로의 작품과 감정을 진단하거나 해석하지 않습니다.",
+        "작품이나 기록을 공개할지는 본인이 결정합니다.",
+        "다른 참여자의 작품·이야기를 허락 없이 캡처하거나 공유하지 않습니다.",
+        "활동 도구의 접속 링크는 공개 홍보 페이지에 게재하지 않습니다."
+      ],
+      "productIds": [],
+      "relatedContentIds": [],
+      "sourceUrl": null,
+      "featured": false,
+      "featuredOrder": null,
+      "published": true,
       "createdAt": null,
       "updatedAt": null
     }

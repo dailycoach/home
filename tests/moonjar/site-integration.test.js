@@ -5,18 +5,18 @@ import vm from 'node:vm';
 const root=new URL('../../',import.meta.url),read=p=>readFileSync(new URL(p,root),'utf8');
 const homepage=read('index.html'),template=read('index-source-disc.html');
 const page=read('activities/moonjar/index.html');
-test('actual homepage loader preserves both moonjar tool links and resolves their route',async()=>{
+test('actual homepage loader keeps other activity tools but hides Moonjar workshop',async()=>{
  const script=[...homepage.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].at(-1)[1];
  let output='',settle;const done=new Promise(resolve=>{settle=resolve;});
  vm.runInNewContext(script,{fetch:async()=>({ok:true,text:async()=>template}),document:{open(){},write(html){output=html;},close(){settle();},body:{set innerHTML(_){throw new Error('Homepage loader failed');}}}});
- await done;assert.equal((output.match(/href="\/activities\/moonjar\/" data-route="moonjar"/g)||[]).length,2);
- assert.match(output,/moonjar: '\/activities\/moonjar\/',/);
+ await done;assert.equal((output.match(/href="\/activities\/moonjar\/" data-route="moonjar"/g)||[]).length,0,'private workshop link must not appear in public tools');
+ assert.doesNotMatch(output,/moonjar: '\/activities\/moonjar\/',/);
  for(const path of ['career-deduction-game','coaching-flex-move','value-scene','wilderness-survival','live-board'])assert.ok(output.includes(`/activities/${path}/`),path);
 });
-test('tool registry, sitemap and canonical point to the existing domain route',()=>{
- const listed=JSON.parse(read('pages.json')).filter(p=>p.url==='/activities/moonjar/');assert.equal(listed.length,1);assert.equal(listed[0].category,'activities');
- assert.match(read('sitemap.xml'),/<loc>https:\/\/daily-coach-ing.com\/activities\/moonjar\/<\/loc>/);
- assert.match(page,/<link rel="canonical" href="https:\/\/daily-coach-ing.com\/activities\/moonjar\/">/);
+test('private workshop route is no longer exposed by the public registry or sitemap',()=>{
+ const listed=JSON.parse(read('pages.json')).filter(p=>p.url==='/activities/moonjar/');assert.equal(listed.length,0,'app must be absent from public pages registry');
+ assert.doesNotMatch(read('sitemap.xml'),/<loc>https:\/\/daily-coach-ing.com\/activities\/moonjar\/<\/loc>/);
+ assert.match(page,/<meta name="robots" content="noindex,nofollow,noarchive">/);
  for(const file of ['styles.css','src/app.js','src/domain.js','src/persistence.js','src/rendering.js','data/story.json','data/manifest.json','data/schema.json','data/empty.json','assets/moonjar-original.svg'])assert.ok(existsSync(new URL(`activities/moonjar/${file}`,root)),file);
 });
 test('public app contains an original vector hero, not the removed museum photograph',()=>{
