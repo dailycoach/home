@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "1.0",
+  "authEnabled": false,
+  "policyVersion": null,
+  "allowedOrigins": ["https://daily-coach-ing.com"],
+  "providers": ["kakao", "google"]
+}

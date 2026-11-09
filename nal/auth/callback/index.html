@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f1e8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>로그인 확인 | NAL 날빛</title>
+  <link rel="icon" href="/nal/assets/images/nal-symbol.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/nal/assets/css/nal-membership.css?v=member-01">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.min.js" crossorigin="anonymous" defer></script>
+  <script src="/nal/assets/js/member-auth.js?v=member-01" defer></script>
+  <script src="/nal/assets/js/member-pages.js?v=member-01" defer></script>
+</head>
+<body data-member-page="callback">
+  <a class="member-skip" href="#member-main">본문으로 바로가기</a>
+  <div class="member-shell">
+    <header class="member-top"><a class="member-brand" href="/nal/">NAL<span>날빛</span></a><nav aria-label="바로가기"><a href="/nal/shop/">무료 PDF</a></nav></header>
+    <main id="member-main" class="member-grid">
+      <section class="member-intro"><p class="member-eyebrow">WELCOME TO NAL</p><h1>당신의 시간을<br>이어갈게요.</h1><p>안전하게 로그인하고<br>나만의 NAL을 이어가세요.</p></section>
+      <section class="member-card" aria-label="로그인 결과 확인">
+        <div data-member-onboarding hidden>
+          <h2>나의 NAL을 준비해요.</h2>
+          <form data-onboarding-form>
+            <label class="member-field"><span>어떻게 불러드릴까요?</span><input name="displayName" type="text" autocomplete="nickname" maxlength="80" required placeholder="사용할 이름"></label>
+            <label class="member-agreement"><input name="terms" type="checkbox" required><span><a href="/nal/policy/terms/" target="_blank" rel="noopener noreferrer">이용약관</a>을 확인하고 동의합니다. <small>필수</small></span></label>
+            <label class="member-agreement"><input name="privacy" type="checkbox" required><span><a href="/nal/policy/privacy/" target="_blank" rel="noopener noreferrer">개인정보 수집·이용 안내</a>를 확인하고 동의합니다. <small>필수</small></span></label>
+            <div class="member-stack"><button class="member-button primary" data-onboarding-submit type="submit">동의하고 가입 완료하기</button><button class="member-link-button" data-member-signout type="button">지금은 로그아웃하기</button></div>
+          </form>
+        </div>
+        <p id="member-status" class="member-status" data-member-status role="status" aria-live="polite" aria-atomic="true">로그인을 확인하고 있습니다.</p>
+        <div class="member-stack" data-member-recovery hidden><a href="/nal/login/" class="member-button primary">로그인 다시 시작하기</a><a href="/nal/shop/" class="member-button outline">무료 PDF 보기</a></div>
+      </section>
+    </main>
+    <footer class="member-footer"><p>지금의 나를 발견하는 작은 시간, NAL.</p><nav aria-label="이용 안내"><a href="/nal/policy/terms/">이용약관</a><a href="/nal/policy/privacy/">개인정보처리방침</a></nav></footer>
+  </div>
+  <noscript><p class="member-noscript">로그인을 완료하려면 JavaScript를 켠 뒤 <a href="/nal/login/">다시 시작해 주세요.</a></p></noscript>
+</body>
+</html>
