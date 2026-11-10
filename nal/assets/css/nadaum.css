@@ -100,7 +100,7 @@
 .nd-feature__price strong {font-size: 16px;margin-left: 5px;}
 .nd-feature .nd-caption {font-size: 11px !important;margin-top: 18px;}
 .nd-card {border: 1px solid var(--nd-line);border-radius: 0;box-shadow: none;overflow: hidden;}
-.nd-card__image {display: block;}
+.nd-card__image {display: block;background: #f4f1e8;}
 .nd-card__image img {width: 100%;aspect-ratio: 1;object-fit: contain;}
 .nd-card__body {padding: 25px;}
 .nd-card .nd-eyebrow {font-size: 10px;margin-bottom: 10px;}
