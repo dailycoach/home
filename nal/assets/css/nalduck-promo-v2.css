@@ -1,0 +1,120 @@
+/* NALDUCK SELF FAN CLUB · collectible editorial, scoped to NAL home. */
+.nduck-v2-banner, .nduck-v2-dialog { font-family: var(--nal-font-sans, "Pretendard", system-ui, sans-serif); }
+.nduck-v2-banner *, .nduck-v2-dialog *, .nduck-v2-banner *::before, .nduck-v2-dialog *::before { box-sizing: border-box; }
+.nduck-v2-locked { overflow: hidden; }
+
+/* The permanent home-page card feels like a collectible paper sleeve. */
+.nduck-v2-banner { width: min(1200px, calc(100% - 2 * var(--nal-gutter, 24px))); margin: clamp(32px, 4vw, 52px) auto clamp(58px, 7vw, 98px); }
+.nduck-v2-banner__link { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; min-height: 385px; overflow: hidden; isolation: isolate; border: 2px solid #191d28; border-radius: 24px; background: #f6efe3; text-decoration: none !important; color: #171c29 !important; box-shadow: 8px 9px 0 #1c2334; }
+.nduck-v2-banner__link:focus-visible { outline: 4px solid #4259e8; outline-offset: 12px; }
+.nduck-v2-banner__copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; padding: clamp(31px, 5vw, 64px) 0 clamp(31px, 4.5vw, 52px) clamp(31px, 5vw, 68px); }
+.nduck-v2-banner__eyebrow { display: flex; align-items: center; gap: 9px; margin-bottom: clamp(25px, 3vw, 36px); font-size: .82rem; font-weight: 900; letter-spacing: -.025em; color: #151922 !important; }
+.nduck-v2-banner__eyebrow b { font-size: 1.45rem; line-height: .6; color: #4056e0 !important; }
+.nduck-v2-banner__eyebrow i { margin-left: 7px; color: #525665 !important; font-size: .67rem; font-style: normal; font-weight: 850; letter-spacing: .13em; }
+.nduck-v2-banner h2 { margin: 0 !important; color: #191d29 !important; font-size: clamp(2.9rem, 5.3vw, 5.4rem); font-weight: 940; line-height: 1.02; letter-spacing: -.085em; word-break: keep-all; }
+.nduck-v2-banner h2 em { color: #4055e7 !important; font-style: normal; }
+.nduck-v2-banner__star { display: inline-block; margin-left: 12px; color: #f68db5; font-size: .42em; vertical-align: top; transform: rotate(17deg); }
+.nduck-v2-banner p { margin: 21px 0 26px; color: #555566 !important; font-size: clamp(.95rem, 1.7vw, 1.12rem); line-height: 1.65; word-break: keep-all; }
+.nduck-v2-banner p strong { color: #202339 !important; font-weight: 800; }
+.nduck-v2-banner__action { display: inline-flex; align-items: center; gap: 36px; padding: 14px 19px; border: 2px solid #202438; border-radius: 11px; background: #202438; color: #fcfcfa !important; font-size: .94rem; font-weight: 820; transition: background .18s, color .18s, transform .18s; }
+.nduck-v2-banner__link:hover .nduck-v2-banner__action { background: #e7f877; color: #1c2332 !important; transform: translateY(-3px); }
+.nduck-v2-banner__visual { position: relative; display: flex; justify-content: center; align-items: end; min-width: 0; min-height: 385px; }
+.nduck-v2-banner__visual::before { content: ""; position: absolute; inset: 0 0 0 6%; background: #c3caff; clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%); }
+.nduck-v2-banner__disc { position: absolute; z-index: 0; width: min(105%, 500px); aspect-ratio: 1; bottom: -39%; right: 6%; border-radius: 50%; background: #475bdf; box-shadow: 0 0 0 37px rgb(255 255 255 / 16%), 0 0 0 72px rgb(255 255 255 / 12%); }
+.nduck-v2-banner__visual img { position: absolute; z-index: 1; display: block; width: min(94%, 370px); height: 110%; max-height: 475px; bottom: -14%; right: 14%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 15px 12px rgb(30 37 71 / 27%)); transition: transform .35s ease; }
+.nduck-v2-banner__link:hover .nduck-v2-banner__visual img { transform: rotate(-2deg) translateY(-8px); }
+.nduck-v2-banner__sticker { position: absolute; top: 11%; right: 6%; z-index: 3; display: grid; place-content: center; width: 98px; height: 98px; border-radius: 50%; background: #f895b4; border: 2px solid #24243a; color: #1d2030 !important; text-align: center; font: 950 .82rem/1.07 var(--nal-font-latin, system-ui, sans-serif); letter-spacing: .02em; transform: rotate(15deg); box-shadow: 3px 5px 0 #202438; }
+.nduck-v2-banner__ticket { position: absolute; right: 16px; bottom: 17px; z-index: 3; padding: 8px 10px; color: #172046 !important; background: #e9f87c; font: 850 .65rem/1 var(--nal-font-latin, system-ui, sans-serif); letter-spacing: .085em; transform: rotate(-4deg); }
+
+/* The welcome card is a collectible reveal: character first, explanation second. */
+.nduck-v2-overlay { position: fixed; inset: 0; z-index: 2147482000; display: grid; place-items: center; padding: max(14px, env(safe-area-inset-top)) 16px max(14px, env(safe-area-inset-bottom)); overflow-y: auto; background: rgb(10 13 27 / 78%); backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px); }
+.nduck-v2-dialog { position: relative; display: grid; grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr); width: min(865px, 100%); max-height: min(92vh, 680px); max-height: min(92dvh, 680px); overflow-y: auto; border: 2px solid #fcf8f0; border-radius: 29px; background: #f8f5ee; box-shadow: 0 22px 95px rgb(0 0 0 / 43%); color: #191d29 !important; animation: nduck-v2-in .35s cubic-bezier(.17,.77,.25,1) both; }
+@keyframes nduck-v2-in { from { opacity: 0; transform: translateY(16px) scale(.975); } to { opacity: 1; transform: none; } }
+.nduck-v2-dialog__close { position: absolute; z-index: 9; display: grid; place-items: center; top: 18px; right: 19px; width: 43px; height: 43px; padding: 0; border: 2px solid #1b2140; border-radius: 50%; background: #fdfbf4; color: #1b2140 !important; cursor: pointer; transition: transform .18s, background .18s; }
+.nduck-v2-dialog__close:hover { background: #f2a1be; transform: rotate(90deg); }
+.nduck-v2-dialog a:focus-visible, .nduck-v2-dialog button:focus-visible { outline: 3px solid #f682af; outline-offset: 4px; }
+.nduck-v2-dialog__stage { position: relative; min-height: 510px; overflow: hidden; background: linear-gradient(145deg, #ced8ff 0%, #b5c6ff 50%, #9eaaf6 100%); isolation: isolate; }
+.nduck-v2-dialog__stage::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .48; background-image: radial-gradient(circle at 25% 22%, #f5fff8 0, transparent 38%), radial-gradient(circle at 83% 70%, #858bef 0, transparent 41%); }
+.nduck-v2-dialog__brand { position: absolute; z-index: 5; left: 26px; top: 25px; display: flex; align-items: center; gap: 8px; color: #15204b !important; font-size: 1.2rem; font-weight: 900; white-space: nowrap; }
+.nduck-v2-dialog__brand strong { font-weight: 950; }
+.nduck-v2-dialog__brand small { margin-left: 5px; color: #36468a !important; font-size: .57rem; font-weight: 880; letter-spacing: .14em; }
+.nduck-v2-dialog__orbit { position: absolute; width: 110%; aspect-ratio: 1; bottom: -45%; left: -14%; border-radius: 50%; background: #475adf; box-shadow: 0 0 0 37px rgb(255 255 255 / 22%), 0 0 0 73px rgb(255 255 255 / 15%); }
+.nduck-v2-dialog__smallstar { position: absolute; z-index: 4; top: 27%; right: 12%; color: #eff881 !important; font-size: 3.8rem; transform: rotate(14deg); }
+.nduck-v2-dialog__stage img { position: absolute; z-index: 3; display: block; bottom: -5%; left: -4%; width: 103%; height: 87%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 16px 13px rgb(33 34 91 / 29%)); }
+.nduck-v2-dialog__sticker { position: absolute; z-index: 4; right: 4%; bottom: 14%; display: grid; place-items: center; width: 91px; height: 91px; padding: 10px; border: 2px solid #25263c; border-radius: 50%; background: #f6a0b9; color: #1c1d2e !important; box-shadow: 4px 5px 0 #20263d; text-align: center; font: 950 .81rem/1.12 var(--nal-font-latin, system-ui, sans-serif); transform: rotate(12deg); }
+.nduck-v2-dialog__serial { position: absolute; z-index: 5; bottom: 22px; left: 25px; color: #e9f18e !important; font: 800 .6rem/1.4 var(--nal-font-latin, system-ui, sans-serif); letter-spacing: .12em; }
+.nduck-v2-dialog__copy { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 72px clamp(35px, 4.3vw, 58px) 46px; }
+.nduck-v2-dialog__eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; color: #4054d5 !important; font: 900 .7rem/1.3 var(--nal-font-latin, system-ui, sans-serif); letter-spacing: .15em; }
+.nduck-v2-dialog__eyebrow span { color: #f283aa !important; font-size: .73rem; }
+.nduck-v2-dialog h2 { margin: 0 !important; color: #171b27 !important; font-size: clamp(2.9rem, 4.7vw, 4.3rem); font-weight: 950; line-height: 1.09; letter-spacing: -.082em; word-break: keep-all; }
+.nduck-v2-dialog h2 em { color: #4058dd !important; font-style: normal; }
+.nduck-v2-dialog__copy > p { margin: 20px 0 20px; color: #555864 !important; font-size: .96rem; line-height: 1.68; letter-spacing: -.027em; word-break: keep-all; }
+.nduck-v2-dialog__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.nduck-v2-dialog__chips span { display: inline-block; padding: 7px 9px; background: #eeeafc; border: 1px solid #d7d8eb; border-radius: 50px; color: #40436f !important; font-size: .71rem; font-weight: 800; white-space: nowrap; }
+.nduck-v2-dialog__chips span:nth-child(2) { background: #ffeff1; border-color: #f5d9e0; color: #744253 !important; }
+.nduck-v2-dialog__chips span:nth-child(3) { background: #eff2cc; border-color: #dfe3ba; color: #4a5444 !important; }
+.nduck-v2-dialog__cta { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 14px; min-height: 58px; padding: 15px 20px; border-radius: 12px; background: #3e52d8; color: #fff !important; font-size: 1rem; font-weight: 880; text-decoration: none !important; box-shadow: 4px 5px 0 #c1c8f4; transition: transform .18s, box-shadow .18s, background .18s; }
+.nduck-v2-dialog__cta:hover { background: #273bbd; transform: translateY(-2px); box-shadow: 4px 7px 0 #c1c8f4; }
+.nduck-v2-dialog__cta span { font-size: 1.35rem; line-height: 1; }
+.nduck-v2-dialog__foot { display: flex; justify-content: space-between; align-items: center; gap: 7px; margin-top: 22px; }
+.nduck-v2-dialog__foot > span { color: #7a7b83 !important; font-size: .69rem; }
+.nduck-v2-dialog__foot button { padding: 5px 0 5px 6px; border: 0; background: transparent; color: #6e707c !important; font: 760 .71rem/1.4 var(--nal-font-sans, system-ui, sans-serif); text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; cursor: pointer; }
+
+@media (max-width: 700px) {
+  .nduck-v2-banner__link { grid-template-columns: 1fr; border-radius: 19px; }
+  .nduck-v2-banner__copy { padding: 29px 25px 0; }
+  .nduck-v2-banner__eyebrow { margin-bottom: 21px; font-size: .76rem; }
+  .nduck-v2-banner h2 { font-size: clamp(2.9rem, 12vw, 4.25rem); }
+  .nduck-v2-banner p { margin: 15px 0 16px; font-size: .93rem; }
+  .nduck-v2-banner__action { padding: 12px 17px; font-size: .84rem; }
+  .nduck-v2-banner__visual { min-height: 235px; }
+  .nduck-v2-banner__visual::before { inset: 16px 0 0; clip-path: polygon(0 17%, 100% 0, 100% 100%, 0 100%); }
+  .nduck-v2-banner__disc { width: 270px; bottom: -65%; right: 15%; }
+  .nduck-v2-banner__visual img { height: 290px; width: 270px; max-height: none; right: 6%; bottom: -11%; }
+  .nduck-v2-banner__sticker { top: 15%; right: 7%; width: 70px; height: 70px; font-size: .62rem; }
+  .nduck-v2-banner__ticket { bottom: 12px; font-size: .54rem; }
+
+  .nduck-v2-overlay { padding: max(11px, env(safe-area-inset-top)) 12px max(11px, env(safe-area-inset-bottom)); }
+  .nduck-v2-dialog { grid-template-columns: 1fr; width: min(430px, 100%); max-height: min(96vh, 770px); max-height: min(96dvh, 770px); border-radius: 24px; }
+  .nduck-v2-dialog__stage { min-height: 244px; height: 244px; }
+  .nduck-v2-dialog__brand { top: 19px; left: 20px; font-size: 1.03rem; }
+  .nduck-v2-dialog__brand small { font-size: .5rem; }
+  .nduck-v2-dialog__orbit { width: 330px; bottom: -200px; left: 50%; transform: translateX(-50%); }
+  .nduck-v2-dialog__smallstar { top: 27%; right: 15%; font-size: 2.8rem; }
+  .nduck-v2-dialog__stage img { height: 282px; width: 275px; max-width: 74%; left: 15%; bottom: -37px; }
+  .nduck-v2-dialog__sticker { width: 71px; height: 71px; right: 5%; bottom: 28px; font-size: .61rem; box-shadow: 3px 3px 0 #20263d; }
+  .nduck-v2-dialog__serial { font-size: .46rem; left: 17px; bottom: 17px; }
+  .nduck-v2-dialog__close { top: 13px; right: 14px; width: 39px; height: 39px; }
+  .nduck-v2-dialog__copy { padding: 24px 24px 22px; }
+  .nduck-v2-dialog__eyebrow { margin-bottom: 9px; font-size: .61rem; }
+  .nduck-v2-dialog h2 { font-size: clamp(2.12rem, 9vw, 2.8rem); line-height: 1.07; }
+  .nduck-v2-dialog__copy > p { margin: 11px 0 13px; font-size: .82rem; line-height: 1.56; }
+  .nduck-v2-dialog__copy > p br { display: none; }
+  .nduck-v2-dialog__chips { gap: 5px; margin-bottom: 16px; }
+  .nduck-v2-dialog__chips span { padding: 6px 8px; font-size: .65rem; }
+  .nduck-v2-dialog__cta { min-height: 52px; padding: 12px 17px; font-size: .9rem; }
+  .nduck-v2-dialog__foot { margin-top: 15px; }
+  .nduck-v2-dialog__foot > span { font-size: .58rem; }
+  .nduck-v2-dialog__foot button { font-size: .63rem; }
+}
+@media (max-width: 370px) {
+  .nduck-v2-dialog__copy { padding: 19px 19px 18px; }
+  .nduck-v2-dialog__stage { height: 224px; min-height: 224px; }
+  .nduck-v2-dialog__stage img { height: 260px; }
+  .nduck-v2-dialog__brand small { display: none; }
+  .nduck-v2-dialog__chips span { font-size: .58rem; }
+}
+@media (max-width: 700px) and (max-height: 675px) {
+  .nduck-v2-dialog__stage { height: 168px; min-height: 168px; }
+  .nduck-v2-dialog__stage img { height: 205px; bottom: -33px; }
+  .nduck-v2-dialog__sticker { width: 55px; height: 55px; font-size: .49rem; bottom: 14px; }
+  .nduck-v2-dialog__serial, .nduck-v2-dialog__smallstar { display: none; }
+  .nduck-v2-dialog__copy { padding-top: 17px; padding-bottom: 16px; }
+  .nduck-v2-dialog__copy > p { margin-top: 9px; margin-bottom: 10px; }
+  .nduck-v2-dialog__chips { margin-bottom: 11px; }
+  .nduck-v2-dialog__foot { margin-top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nduck-v2-dialog { animation: none; }
+  .nduck-v2-banner__visual img, .nduck-v2-banner__action, .nduck-v2-dialog__cta, .nduck-v2-dialog__close { transition: none; }
+}
