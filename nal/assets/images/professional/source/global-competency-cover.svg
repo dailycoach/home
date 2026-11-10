@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#222939"/><stop offset="1" stop-color="#293b63"/></linearGradient></defs>
+  <rect width="1600" height="1000" fill="url(#g)"/>
+  <g fill="none" stroke="#708ef4" stroke-width="4" opacity=".65"><path d="M1050 195 1320 170 1460 360 1360 605 1120 750 980 545 1050 195"/><path d="M1050 195 1360 605 1320 170 1120 750 1460 360 980 545"/></g>
+  <g fill="#a5b7fa"><circle cx="1050" cy="195" r="30"/><circle cx="1320" cy="170" r="30"/><circle cx="1460" cy="360" r="30"/><circle cx="1360" cy="605" r="30"/><circle cx="1120" cy="750" r="30"/><circle cx="980" cy="545" r="30"/><circle cx="1190" cy="430" r="30"/><circle cx="1500" cy="795" r="30"/></g>
+  <g fill="#202d4d"><circle cx="1050" cy="195" r="9"/><circle cx="1320" cy="170" r="9"/><circle cx="1460" cy="360" r="9"/><circle cx="1360" cy="605" r="9"/><circle cx="1120" cy="750" r="9"/><circle cx="980" cy="545" r="9"/><circle cx="1190" cy="430" r="9"/><circle cx="1500" cy="795" r="9"/></g>
+  <text x="112" y="138" fill="#b6c6ef" font-family="Noto Sans CJK KR,sans-serif" font-size="29" font-weight="700" letter-spacing="8">NAL / FT SERIES 05</text>
+  <rect x="114" y="190" width="97" height="10" fill="#eab292"/>
+  <text x="100" y="450" fill="#fff" font-family="Noto Sans CJK KR,sans-serif" font-size="174" font-weight="900" letter-spacing="-12">GLOBAL</text>
+  <text x="104" y="581" fill="#b3c6ff" font-family="Noto Sans CJK KR,sans-serif" font-size="117" font-weight="900" letter-spacing="-8">COACHING</text>
+  <text x="114" y="700" fill="#fff" font-family="Noto Sans CJK KR,sans-serif" font-size="64" font-weight="800" letter-spacing="-3">글로벌 코칭역량</text>
+  <line x1="114" y1="844" x2="824" y2="844" stroke="#c1cdee" stroke-opacity=".38"/>
+  <text x="115" y="895" fill="#c6d0eb" font-family="Noto Sans CJK KR,sans-serif" font-size="28" letter-spacing="4">8 COMPETENCIES / PRACTICE</text>
+</svg>

@@ -31,9 +31,9 @@ const pages = [
   },
   {
     route: '/nal/class/', attrs: 'data-page="listing" data-collection="programs" data-type="class"',
-    title: '원데이클래스 | NAL CLASS · 날빛', description: '마음, 관계, 미술, 글쓰기, 라이프, 커리어를 주제로 한 NAL 원데이클래스를 살펴보세요.',
-    label: 'NAL CLASS', heading: '한 번의 참여로\n새로운 장면을 여는 시간',
-    copy: '혼자 와도 괜찮은 클래스부터 도구를 직접 써보는 워크숍까지 큐레이션합니다.', schemaType: 'CollectionPage'
+    title: 'FT 전문가 코칭과정·원데이클래스 | NAL CLASS · 날빛', description: '작전타임 S-TOP 코칭, 프레이즈코칭, 알아차림코칭, NLP 코칭력 향상, 글로벌코칭역량 등 전문 교육과 NAL 원데이클래스를 살펴보세요.',
+    label: 'NAL CLASS', heading: '한 번의 경험에서\n전문적인 배움까지',
+    copy: '일상을 여는 원데이 워크숍부터 현장에서 쓰는 코칭 전문교육까지.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
@@ -90,15 +90,15 @@ const text = (item, ...keys) => keys.map((key) => item?.[key]).find((value) => t
 
 for (const item of publicItems(programs)) {
   const gather = item.type === 'gather';
-  const label = gather ? 'NAL GATHER' : 'NAL CLASS';
+  const label = gather ? 'NAL GATHER' : item.track === 'professional' ? 'NAL CLASS / FT 전문과정' : 'NAL CLASS';
   pages.push({
     route: `/nal/${gather ? 'gather' : 'class'}/${item.slug}/`,
     attrs: `data-page="detail" data-collection="programs" data-type="${item.type}" data-slug="${item.slug}"`,
     title: `${item.title} | ${label} · 날빛`,
     description: text(item, 'summary', 'description'),
     label, heading: item.title,
-    copy: '확정되지 않은 일정·가격·정원 정보는 공개하지 않습니다. 현재 등록 상태를 확인해 주세요.',
-    schemaType: 'WebPage',
+    copy: item.track === 'professional' ? `${item.duration || '전문 교육'} · 커리큘럼과 교육·개설 문의 안내` : '확정되지 않은 일정·가격·정원 정보는 공개하지 않습니다. 현재 등록 상태를 확인해 주세요.',
+    schemaType: item.track === 'professional' ? 'Course' : 'WebPage',
     ogImage: item.coverImage,
     ogImageMobile: item.coverImageMobile,
     ogImageAlt: item.coverImageAlt || `${item.title} 대표 이미지`,
@@ -244,6 +244,10 @@ function fallbackExtras(page) {
   if (page.attrs.includes('data-page="detail"') && slug) {
     const item = collections[collectionName].find((entry) => entry.slug === slug && entry.published);
     if (!item) return '';
+    if (collectionName === 'programs' && item.track === 'professional') {
+      const modules = Array.isArray(item.curriculum) ? item.curriculum : [];
+      return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose"><p>${escapeHtml(item.description)}</p><p><strong>${escapeHtml(item.duration || '교육시간 개설 시 안내')}</strong> · ${escapeHtml(item.scheduleDisplay || '다음 기수 개설 문의')}</p><h2>교육 커리큘럼</h2><ol>${modules.map((module) => `<li><strong>${escapeHtml(module.title)}</strong> — ${escapeHtml(module.detail)}</li>`).join('')}</ol>${item.accreditationNote ? `<h2>인정·수료 안내</h2><p>${escapeHtml(item.accreditationNote)}</p>` : ''}<p><a href="/nal/class/">NAL CLASS 전체 과정 보기</a></p></div></section>`;
+    }
     const source = item.sourceUrl ? `<a class="nal-button nal-button--secondary" href="${escapeHtml(item.sourceUrl)}">확인된 원문 보기</a>` : '';
     const freePdf = collectionName === 'products' && item.price === 0 && item.stockStatus === 'available' && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(item.purchaseUrl || '');
     const otherFormats = freePdf ? (item.freeDownloads || [])
@@ -297,12 +301,12 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-positive-writing-v2-20261011">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/product-routes.js?v=nal-positive-writing-v2-20261011" defer></script>
   <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=nal-positive-writing-v7-20261013" defer></script>
+  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=nal-ft-20261110" defer></script>
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>

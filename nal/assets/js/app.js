@@ -335,27 +335,25 @@
         + '<p class="nal-card__details">Zoom · 매월 네 번' + (typeof item.price === 'number' ? ' · 4주 ' + formatPrice(item.price) : '') + '</p></div></article>';
     }
     const route = itemRoute("programs", item);
+    const professional = item.track === "professional";
     const date = formatDate(item);
-    const facts = [
-      date,
-      item.startTime && item.endTime ? `${item.startTime}–${item.endTime}` : "",
-      item.location || (item.format === "online" ? "온라인" : ""),
-      item.duration,
-      Number.isFinite(item.remainingSeats) ? `잔여 ${item.remainingSeats}석` : ""
-    ].filter(Boolean);
+    const facts = (professional
+      ? [item.duration, item.scheduleDisplay, item.location]
+      : [date, item.startTime && item.endTime ? `${item.startTime}–${item.endTime}` : "", item.location || (item.format === "online" ? "온라인" : ""), item.duration, Number.isFinite(item.remainingSeats) ? `잔여 ${item.remainingSeats}석` : ""]
+    ).filter(Boolean);
     const price = formatPrice(item.price);
-    return `<article class="nal-card nal-card--${item.type}" data-catalog-id="${escapeHtml(item.id)}">
+    return `<article class="nal-card nal-card--${item.type}${professional ? " nal-card--professional" : ""}" data-catalog-id="${escapeHtml(item.id)}">
       <div class="nal-card__media">
         ${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { mobileSrc: item.coverImageMobile, width: 1600, height: 1000 })}
-        <div class="nal-card__badges"><span class="nal-badge ${badgeClass(item)}">${item.type === "gather" ? "커뮤니티" : "클래스"}</span><span class="nal-badge--status">${escapeHtml(statusLabel(item.status))}</span></div>
+        <div class="nal-card__badges"><span class="nal-badge ${badgeClass(item)}">${professional ? "FT · 전문과정" : item.type === "gather" ? "커뮤니티" : "클래스"}</span><span class="nal-badge--status">${escapeHtml(statusLabel(item.status))}</span></div>
         <div class="nal-card__wish">${wishButton("programs", item)}</div>
       </div>
       <div class="nal-card__body">
-        <p class="nal-card__eyebrow">${item.type === "gather" ? "NAL GATHER" : "NAL CLASS"}</p>
+        <p class="nal-card__eyebrow">${item.type === "gather" ? "NAL GATHER" : professional ? "NAL CLASS / PROFESSIONAL" : "NAL CLASS"}</p>
         <h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
         <p class="nal-card__summary">${escapeHtml(item.summary)}</p>
         ${facts.length ? `<div class="nal-card__details">${facts.map((fact) => `<span class="nal-card__detail"><span aria-hidden="true">·</span><span>${escapeHtml(fact)}</span></span>`).join("")}</div>` : ""}
-        <div class="nal-card__footer"><span class="nal-card__delivery">${price || "일정·참가비 확정 후 공개"}</span><span aria-hidden="true">→</span></div>
+        <div class="nal-card__footer"><span class="nal-card__delivery">${price || (professional ? "개설·참여 문의" : "일정·참가비 확정 후 공개")}</span><span aria-hidden="true">→</span></div>
       </div>
     </article>`;
   }
@@ -588,7 +586,7 @@
   function listingConfig() {
     if (collection === "programs") return pageType === "gather"
       ? ["NAL GATHER", "계속 만나며 조금씩 달라지는 모임", state.site?.categories?.gather || [], programCard]
-      : ["NAL CLASS", "한 번의 참여로 새로운 장면을 여는 시간", state.site?.categories?.class || [], programCard];
+      : ["NAL CLASS", "한 번의 경험에서, 전문적인 배움까지", state.site?.categories?.class || [], programCard];
     if (collection === "products") return ["NAL MIND TOOLS", "PDF 전자책부터 워크북·코칭도구까지", state.site?.categories?.shop || [], productCard];
     if (collection === "hosts") return ["NAL HOST", "어떻게 진행하는지 먼저 보여주는 사람들", [], hostCard];
     return ["NAL NOTE", "읽고 끝나지 않는 다음 경험의 기록", state.site?.categories?.note || [], noteCard];
@@ -608,7 +606,7 @@
       : "";
     const listingIntro = collection === "products"
       ? "NAL 무료 필독서 《삶의 통제권 연습》 3부작을 읽어보세요. 계획이 어긋나는 날, 마음이 뜻대로 움직이지 않는 날, 작은 행동을 다시 만드는 날까지. 세 권 모두 무료이며 로그인·결제 없이 이용할 수 있습니다."
-      : collection === "programs" && pageType === "gather" ? "들렀다 가도 좋고, 오래 머물러도 좋은 모임들을 모았습니다." : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
+      : collection === "programs" && pageType === "gather" ? "들렀다 가도 좋고, 오래 머물러도 좋은 모임들을 모았습니다." : collection === "programs" && pageType === "class" ? "일상의 변화를 여는 원데이클래스와 코칭 현장에서 활용하는 FT·전문가 과정을 함께 소개합니다. 일정과 인정 조건은 확인된 내용만 안내합니다." : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     const showEssential = collection === "products" && !["q","format","topic","audience","category"].some(key => params.get(key)) && (!params.get("sort") || params.get("sort") === "recommended");
     const essentialHtml = showEssential ? `<section class="nal-essential-spotlight" aria-label="NAL 무료 필독서 추천">
   <div class="nal-container nal-essential-spotlight__inner">
@@ -634,6 +632,11 @@
 </section>` : "";
     const monthlyGatherPromo = collection === "programs" && pageType === "gather" && !["q","category","status","format"].some(k => params.get(k)) && (!params.get("sort") || params.get("sort") === "recommended") && publicItems(state.programs).some(entry => entry.id === "life-control-monthly-gather") ? "<section class=\"nal-genz-preview\" aria-label=\"삶의 통제권 연습 월간 셀프코칭 모임\">\n  <div class=\"nal-genz-preview__wrap\">\n    <div>\n      <p class=\"nal-genz-preview__eyebrow\">NAL · 월간 알아차림·셀프코칭 / Zoom</p>\n      <h2>계획대로는 안 됐으니까,<br>다시 선택하자.</h2>\n      <p>현실을 보고, 마음을 알아차리고, 오늘의 선택을 연습합니다. 마지막엔 한 달의 나를 기록해요.</p>\n      <a class=\"nal-genz-preview__link\" href=\"/nal/gather/life-control-monthly/\">모임 살펴보기 ↗</a>\n    </div>\n    <div class=\"nal-genz-preview__covers\" aria-label=\"시리즈 세 권과 새로운 4주차 소책자\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp\" alt=\"삶의 통제권 연습 1권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-02-cover.webp\" alt=\"삶의 통제권 연습 2권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-03-cover.webp\" alt=\"삶의 통제권 연습 3권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp\" alt=\"요즘 나, 이렇습니다. 새로운 4주차 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n    </div>\n  </div>\n</section>" : "";
     const listedItems = monthlyGatherPromo ? items.filter(entry => entry.id !== "life-control-monthly-gather") : items;
+    const professionalCourses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => item.track === "professional") : [];
+    const generalClasses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => item.track !== "professional") : [];
+    const classSections = professionalCourses.length || generalClasses.length
+      ? `${professionalCourses.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / FT · PROFESSIONAL COURSES</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>김철웅 코치가 진행하는 전문 교육을 소개합니다. 모듈별 내용과 교육시간, 참여 대상, 개설 문의를 한곳에서 확인하세요.</p></div><span class="nal-ft-listing-count">${professionalCourses.length.toString().padStart(2, "0")} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professionalCourses.map(card).join("")}</div>` : ""}${generalClasses.length ? `<div class="nal-ft-listing-intro nal-ft-listing-intro--general"><div><p class="nal-eyebrow">02 / ONE DAY & WORKSHOPS</p><h2>지금 내 삶에 맞는, 한 번의 경험.</h2></div></div><div class="card-grid">${generalClasses.map(card).join("")}</div>` : ""}`
+      : "";
     root.innerHTML = `
       ${essentialHtml}${monthlyGatherPromo}
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
@@ -650,7 +653,7 @@
           <button class="nal-button--primary" type="submit">적용</button>
         </form>
         <div class="nal-result-summary" role="status"><strong>${listedItems.length}</strong>개의 공개 항목${q ? ` · “${escapeHtml(q)}” 검색 결과` : ""}</div>
-        ${listedItems.length ? `<div class="card-grid">${listedItems.map(card).join("")}</div>` : emptyState("조건에 맞는 공개 항목이 없습니다.", "초안 데이터나 확인되지 않은 일정은 목록에 노출하지 않습니다.", '<a class="nal-button--secondary" href="' + location.pathname + '">필터 초기화</a>')}
+        ${listedItems.length ? collection === "programs" && pageType === "class" ? classSections : `<div class="card-grid">${listedItems.map(card).join("")}</div>` : emptyState("조건에 맞는 공개 항목이 없습니다.", "초안 데이터나 확인되지 않은 일정은 목록에 노출하지 않습니다.", '<a class="nal-button--secondary" href="' + location.pathname + '">필터 초기화</a>')}
       </div></section>`;
   }
 
@@ -724,8 +727,59 @@
     if (registrationSlot) registrationSlot.innerHTML = action;
   }
 
+  function renderProfessionalDetail(item) {
+    remember("programs", item.id);
+    const host = byId(publicItems(state.hosts), item.hostId);
+    const inquiryUrl = safeUrl(item.inquiryUrl || state.site?.externalLinks?.inquiry);
+    const contactPhone = /^\d[\d-]*$/.test(item.contactPhone || "") ? item.contactPhone : "";
+    const contactLink = contactPhone ? `<a class="nal-ft-contact-phone" href="tel:${contactPhone.replaceAll("-", "")}">${escapeHtml(contactPhone)}</a>` : "";
+    const contactButton = inquiryUrl ? `<a class="nal-button--primary" href="${escapeHtml(inquiryUrl)}">교육·개설 문의하기 <span aria-hidden="true">↗</span></a>` : "<span>문의 채널 준비 중</span>";
+    const facts = [
+      ["교육 시간", item.duration || "개설 시 안내"],
+      ["교육 일정", item.scheduleDisplay || "기수별 개설 일정 안내"],
+      ["진행 방식", item.location || (item.format === "online" ? "온라인" : "개설 시 안내")],
+      ["참가 비용", formatPrice(item.price) || "개설 시 안내"]
+    ];
+    const related = publicItems(state.programs).filter((entry) => entry.track === "professional" && entry.id !== item.id).slice(0, 3);
+    const curriculum = asArray(item.curriculum);
+    root.innerHTML = `
+      <section class="nal-ft-hero">
+        <div class="nal-container"><nav class="nal-ft-breadcrumb" aria-label="현재 위치"><a href="/nal/class/">NAL CLASS</a><span aria-hidden="true">/</span><span>FT · 전문과정</span></nav></div>
+        <div class="nal-container nal-ft-hero__layout">
+          <div class="nal-ft-hero__copy">
+            <p class="nal-ft-overline">NAL CLASS <span aria-hidden="true">✳</span> FACILITATOR TRAINING</p>
+            <div class="nal-ft-hero__tags"><span>FT · 전문과정</span><span>${escapeHtml(statusLabel(item.status))}</span>${item.format === "online" ? "<span>온라인</span>" : ""}</div>
+            <h1>${escapeHtml(item.title)}</h1>
+            <p class="nal-ft-hero__lead">${escapeHtml(item.subtitle || item.summary)}</p>
+            <p class="nal-ft-hero__summary">${escapeHtml(item.summary)}</p>
+            <div class="nal-ft-hero__actions">${contactButton}<a class="nal-ft-text-link" href="#curriculum">커리큘럼 보기 <span aria-hidden="true">↓</span></a></div>
+            <p class="nal-ft-hero__honest">현재는 세부 교육 안내 및 개설 문의 단계입니다. 신청서 접수·교육 인정 조건은 해당 기수 확정 후 안내합니다.</p>
+          </div>
+          <figure class="nal-ft-hero__visual">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { eager: true, width: 1600, height: 1000 })}<figcaption>NAL / PROFESSIONAL LEARNING SERIES</figcaption></figure>
+        </div>
+      </section>
+      <section class="nal-ft-fact-band" aria-label="과정 핵심 정보"><div class="nal-container nal-ft-fact-band__grid">${facts.map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("")}</div></section>
+      <div class="nal-container nal-ft-body">
+        <article class="nal-ft-main">
+          <section class="nal-ft-section" id="experience"><p class="nal-eyebrow">01 / ABOUT THIS COURSE</p><h2>아는 것에서, 할 수 있는 것으로.</h2><p class="nal-ft-section__lead">${escapeHtml(item.description)}</p>${item.tags?.length ? `<div class="nal-chip-list">${item.tags.map((tag) => `<span class="nal-filter-chip">${escapeHtml(tag)}</span>`).join("")}</div>` : ""}</section>
+          ${item.learningOutcomes?.length ? `<section class="nal-ft-section"><p class="nal-eyebrow">02 / LEARNING OUTCOMES</p><h2>이 과정을 마치면</h2>${valueList(item.learningOutcomes, "nal-ft-outcomes")}</section>` : ""}
+          ${curriculum.length ? `<section class="nal-ft-section" id="curriculum"><div class="nal-ft-section__heading"><div><p class="nal-eyebrow">03 / CURRICULUM</p><h2>${escapeHtml(curriculum.length)}개의 배움, 하나의 현장.</h2></div><span>${escapeHtml(item.duration || "교육과정")}</span></div><ol class="nal-ft-module-list">${curriculum.map((module, index) => `<li><span class="nal-ft-module-list__number">${String(index + 1).padStart(2, "0")}</span><div><h3>${escapeHtml(module.title)}</h3><p>${escapeHtml(module.detail)}</p></div></li>`).join("")}</ol></section>` : ""}
+          ${item.activities?.length ? `<section class="nal-ft-section"><p class="nal-eyebrow">04 / PRACTICE</p><h2>교육장에서 실제로 해보는 일</h2>${valueList(item.activities, "nal-ft-outcomes")}</section>` : ""}
+          ${item.recommendedFor?.length ? `<section class="nal-ft-section"><p class="nal-eyebrow">05 / WHO IT'S FOR</p><h2>이런 분께 권합니다</h2>${valueList(item.recommendedFor, "nal-ft-outcomes")}</section>` : ""}
+          <section class="nal-ft-section"><p class="nal-eyebrow">06 / FACILITATORS</p><h2>과정 진행</h2><div class="nal-ft-facilitator"><span class="nal-ft-facilitator__mark">FT</span><div><h3>${escapeHtml(asArray(item.coaches).length ? item.coaches.join(" · ") : host?.name ? `${host.name} 코치` : "NAL 교육팀")}</h3><p>${escapeHtml(host?.headline || "NAL 전문 코칭 교육")}</p>${host ? `<a href="${itemRoute("hosts", host)}">김철웅 코치 프로필 보기 →</a>` : ""}</div></div></section>
+          ${item.accreditationNote ? `<section class="nal-ft-section nal-ft-section--notice"><p class="nal-eyebrow">07 / RECOGNITION & COMPLETION</p><h2>교육 인정·수료 안내</h2><p>${escapeHtml(item.accreditationNote)}</p></section>` : ""}
+          ${item.safetyGuide?.length ? `<section class="nal-ft-section"><p class="nal-eyebrow">BEFORE YOU JOIN</p><h2>참여 전 확인해 주세요</h2>${valueList(item.safetyGuide, "nal-ft-notices")}</section>` : ""}
+          ${item.sourceAttribution ? `<p class="nal-ft-source">${escapeHtml(item.sourceAttribution)}</p>` : ""}
+        </article>
+        <aside class="nal-ft-aside"><div class="nal-ft-enquiry"><p class="nal-eyebrow">COURSE INFORMATION</p><h2>다음 과정에서<br>만나요.</h2><p>교육 내용은 먼저 확인하고, 참여 일정은 개별 문의로 안내받으세요.</p><dl>${facts.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>${contactButton}${contactLink ? `<p class="nal-ft-contact-note">전화 문의 ${contactLink}</p>` : ""}<small>${escapeHtml(item.refundPolicy || "일정과 모집 조건은 기수별 안내에서 확인해 주세요.")}</small></div></aside>
+      </div>
+      ${related.length ? `<section class="nal-ft-related nal-section"><div class="nal-container"><p class="nal-eyebrow">KEEP LEARNING</p><div class="nal-ft-related__heading"><h2>다른 FT·전문과정</h2><a href="/nal/class/?category=${encodeURIComponent("코치·진행자")}">전문과정 전체 보기 →</a></div><div class="card-grid">${related.map(programCard).join("")}</div></div></section>` : ""}`;
+    renderStickyCta("개설 문의", "교육 문의하기", inquiryUrl);
+  }
+
   function renderProgramDetail(item) {
     if (item.id === "life-control-monthly-gather") return renderMonthlyGatherDetail(item);
+    if (item.track === "professional") return renderProfessionalDetail(item);
     remember("programs", item.id);
     const host = byId(publicItems(state.hosts), item.hostId);
     const relatedContent = publicItems(state.content).filter((entry) => item.relatedContentIds?.includes(entry.id));

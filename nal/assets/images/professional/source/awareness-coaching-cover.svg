@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#d6d0ee"/>
+  <g fill="none" stroke="#6b60a3"><circle cx="1280" cy="490" r="115" stroke-width="3" opacity=".7"/><circle cx="1280" cy="490" r="215" stroke-width="26" opacity=".3"/><circle cx="1280" cy="490" r="345" stroke-width="2" opacity=".45"/><circle cx="1280" cy="490" r="465" stroke-width="3" opacity=".25"/></g>
+  <path d="M1160 490h240M1280 370v240" stroke="#665b9f" stroke-width="2" opacity=".46"/>
+  <circle cx="1280" cy="490" r="31" fill="#eb8c72"/><circle cx="1280" cy="490" r="9" fill="#fff"/>
+  <text x="112" y="138" fill="#4e4a83" font-family="Noto Sans CJK KR,sans-serif" font-size="29" font-weight="700" letter-spacing="8">NAL / FT SERIES 03</text>
+  <rect x="115" y="195" width="87" height="10" fill="#ed8b73"/>
+  <text x="99" y="455" fill="#302d57" font-family="Noto Sans CJK KR,sans-serif" font-size="137" font-weight="900" letter-spacing="-9">AWARENESS</text>
+  <text x="116" y="615" fill="#302d57" font-family="Noto Sans CJK KR,sans-serif" font-size="73" font-weight="800" letter-spacing="-3">알아차림코칭</text>
+  <text x="118" y="693" fill="#5b5689" font-family="Noto Sans CJK KR,sans-serif" font-size="35">지금 여기, 경험을 듣는 힘</text>
+  <line x1="116" y1="842" x2="825" y2="842" stroke="#665b9f" stroke-opacity=".45"/>
+  <text x="117" y="895" fill="#393567" font-family="Noto Sans CJK KR,sans-serif" font-size="28" font-weight="600" letter-spacing="4">PRESENCE / OBSERVATION / CHOICE</text>
+</svg>
