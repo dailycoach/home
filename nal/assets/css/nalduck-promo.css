@@ -1,0 +1,80 @@
+/* NAL × NALDUCK: one-off brand invitation. Scoped to the home page only. */
+.nalduck-promo-banner,
+.nalduck-promo-dialog { font-family: var(--nal-font-sans, system-ui, sans-serif); }
+.nalduck-promo-lock { overflow: hidden; }
+.nalduck-promo-banner { width: min(1240px, calc(100% - 2 * var(--nal-gutter, 24px))); margin: clamp(25px, 4vw, 52px) auto clamp(55px, 6vw, 85px); color: #fffdf7; }
+.nalduck-promo-banner__link { position: relative; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(230px, .8fr); align-items: center; min-height: 335px; padding: clamp(28px, 4vw, 52px); color: inherit; text-decoration: none; background: #344acb; border-radius: 24px; overflow: hidden; isolation: isolate; box-shadow: 0 22px 45px rgb(26 32 100 / 14%); }
+.nalduck-promo-banner__link:focus-visible { outline: 4px solid #e2fa6e; outline-offset: 5px; }
+.nalduck-promo-banner__link:hover .nalduck-promo-banner__cta { background: #e4f976; transform: translateX(3px); }
+.nalduck-promo-banner__link::before { content: ""; position: absolute; width: 260px; height: 260px; right: 13%; top: -130px; border: 1px solid rgb(255 255 255 / 28%); border-radius: 50%; pointer-events: none; }
+.nalduck-promo-banner__copy { position: relative; z-index: 2; }
+.nalduck-promo-kicker { display: flex; align-items: center; gap: .65em; margin: 0 0 24px; color: #e9ecff; font: 700 .76rem/1.3 var(--nal-font-latin, sans-serif); letter-spacing: .13em; }
+.nalduck-promo-kicker > span:first-child { color: #e3fb69; font-size: 1.3rem; }
+.nalduck-promo-kicker__line { width: 29px; height: 1px; background: rgb(255 255 255 / 50%); }
+.nalduck-promo-banner h2 { margin: 0; color: #fffdf7; font-size: clamp(2.2rem, 4vw, 3.75rem); font-weight: 830; line-height: 1.12; letter-spacing: -.065em; word-break: keep-all; }
+.nalduck-promo-banner h2 em { color: #e6f87a; font-style: normal; }
+.nalduck-promo-banner__description { margin: 20px 0 22px; color: #eaeeff; font-size: clamp(.94rem, 1.45vw, 1.09rem); line-height: 1.65; word-break: keep-all; }
+.nalduck-promo-banner__cta { display: inline-flex; justify-content: space-between; align-items: center; gap: 24px; padding: 14px 19px; min-height: 48px; border-radius: 100px; background: #f1f9b5; color: #202534; font-size: .91rem; font-weight: 800; transition: background .2s, transform .2s; }
+.nalduck-promo-banner__cta > span { font-size: 1.1rem; }
+.nalduck-promo-banner__meta { display: block; margin-top: 15px; font-size: .73rem; color: #dce2ff; letter-spacing: .025em; }
+.nalduck-promo-banner__art { position: relative; display: flex; align-items: center; justify-content: center; width: min(100%, 290px); aspect-ratio: 1; justify-self: center; }
+.nalduck-promo-banner__art::before { content: ""; position: absolute; inset: 2%; border-radius: 50%; background: #e2e9ff; transform: rotate(-12deg); }
+.nalduck-promo-banner__art img { position: relative; z-index: 1; display: block; width: 88%; height: 88%; object-fit: cover; border-radius: 30% 30% 40% 40%; box-shadow: 0 14px 28px rgb(13 27 70 / 24%); }
+.nalduck-promo-banner__sticker { position: absolute; z-index: 2; top: -7px; right: -5px; display: grid; place-content: center; width: 75px; height: 75px; border-radius: 50%; background: #ed9ea5; color: #202126; font: 900 .78rem/1.05 var(--nal-font-latin, sans-serif); text-align: center; transform: rotate(13deg); }
+.nalduck-promo-banner__asterisk { position: absolute; bottom: -10px; left: 4px; z-index: 2; color: #e8fb83; font-size: 5rem; line-height: 1; }
+
+.nalduck-promo-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; overflow-y: auto; background: rgb(12 15 25 / 76%); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.nalduck-promo-dialog { position: relative; display: grid; grid-template-columns: minmax(0, 1.23fr) minmax(0, .95fr); width: min(930px, 100%); max-height: min(90vh, 800px); max-height: min(90dvh, 800px); overflow-y: auto; border: 1px solid #e5e1d9; border-radius: 27px; background: #f7f4eb; color: #25262d; box-shadow: 0 35px 100px rgb(0 0 0 / 38%); animation: nalduck-promo-pop .3s cubic-bezier(.2,.75,.15,1) both; }
+@keyframes nalduck-promo-pop { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+.nalduck-promo-dialog__close { position: absolute; z-index: 5; top: 17px; right: 17px; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgb(32 33 38 / 13%); border-radius: 50%; background: #fffdf9; color: #202126; font-family: sans-serif; font-size: 1.8rem; line-height: 1; cursor: pointer; }
+.nalduck-promo-dialog__close:hover, .nalduck-promo-dialog__close:focus-visible { background: #e8efff; }
+.nalduck-promo-dialog__copy { position: relative; z-index: 2; padding: clamp(35px, 5vw, 64px) clamp(28px, 5vw, 58px); }
+.nalduck-promo-dialog__brand { display: flex; align-items: center; gap: 6px; margin: 0 0 50px; font: 850 .95rem/1 var(--nal-font-latin, sans-serif); letter-spacing: -.02em; }
+.nalduck-promo-dialog__brand > span:first-child { color: #4254cf; }
+.nalduck-promo-dialog__brand > span:last-child { margin-left: 6px; color: #656a7b; font-size: .62rem; font-weight: 720; letter-spacing: .14em; }
+.nalduck-promo-dialog__overline { margin: 0 0 17px; color: #4359c9; font: 800 .71rem/1.4 var(--nal-font-latin, sans-serif); letter-spacing: .14em; }
+.nalduck-promo-dialog h2 { margin: 0; font-size: clamp(2.35rem, 4.9vw, 4rem); line-height: 1.12; letter-spacing: -.067em; word-break: keep-all; }
+.nalduck-promo-dialog h2 em { color: #4055d8; font-style: normal; }
+.nalduck-promo-dialog__description { max-width: 430px; margin: 22px 0 27px; color: #505561; font-size: clamp(.94rem, 1.42vw, 1.08rem); line-height: 1.72; word-break: keep-all; }
+.nalduck-promo-dialog__actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.nalduck-promo-dialog__go { display: inline-flex; align-items: center; justify-content: space-between; min-height: 50px; gap: 22px; padding: 13px 18px; border-radius: 9px; background: #334cd5; color: #fff; text-decoration: none; font-size: .88rem; font-weight: 780; }
+.nalduck-promo-dialog__go:hover { background: #263cae; }
+.nalduck-promo-dialog__not-again { min-height: 44px; padding: 10px 8px; border: 0; background: transparent; color: #555b66; font-size: .81rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.nalduck-promo-dialog__fineprint { margin: 19px 0 0; color: #74767b; font-size: .72rem; line-height: 1.5; }
+.nalduck-promo-dialog__art { position: relative; display: grid; place-items: center; overflow: hidden; background: #dbe3ff; min-height: 500px; }
+.nalduck-promo-dialog__circle { position: absolute; width: 120%; aspect-ratio: 1; border: 1px solid rgb(54 73 157 / 25%); border-radius: 50%; box-shadow: 0 0 0 45px rgb(255 255 255 / 17%), 0 0 0 90px rgb(255 255 255 / 13%); }
+.nalduck-promo-dialog__art img { z-index: 1; width: min(72%, 310px); aspect-ratio: 1; border-radius: 24% 24% 32% 32%; object-fit: cover; box-shadow: 0 23px 35px rgb(27 36 82 / 20%); transform: rotate(2deg); }
+.nalduck-promo-dialog__speech { position: absolute; z-index: 2; bottom: 11%; left: 4%; padding: 15px 18px; border-radius: 18px 18px 18px 4px; background: #fffdf8; color: #2a2b31; font-size: .92rem; line-height: 1.45; box-shadow: 0 10px 25px rgb(13 20 65 / 12%); transform: rotate(-6deg); }
+.nalduck-promo-dialog__speech strong { color: #4154d4; }
+.nalduck-promo-dialog__stamp { position: absolute; top: 13%; right: 7%; color: #3547a4; font: 800 .72rem/1.25 var(--nal-font-latin, sans-serif); letter-spacing: .09em; text-align: right; transform: rotate(7deg); }
+.nalduck-promo-dialog a:focus-visible, .nalduck-promo-dialog button:focus-visible { outline: 3px solid #f09aa5; outline-offset: 3px; }
+
+@media (max-width: 700px) {
+  .nalduck-promo-banner__link { grid-template-columns: 1fr; gap: 12px; padding: 29px 27px 19px; border-radius: 19px; }
+  .nalduck-promo-banner h2 { font-size: clamp(2.15rem, 7.9vw, 2.9rem); }
+  .nalduck-promo-banner__description { font-size: .91rem; }
+  .nalduck-promo-banner__art { width: 175px; margin: -15px 0 0 auto; }
+  .nalduck-promo-banner__sticker { top: -7px; right: -9px; width: 60px; height: 60px; font-size: .66rem; }
+  .nalduck-promo-banner__asterisk { font-size: 3.5rem; }
+  .nalduck-promo-dialog { grid-template-columns: 1fr; max-height: 92dvh; }
+  .nalduck-promo-dialog__copy { padding: 34px 26px 25px; }
+  .nalduck-promo-dialog__brand { margin-bottom: 28px; }
+  .nalduck-promo-dialog h2 { font-size: clamp(2.15rem, 8vw, 3.15rem); }
+  .nalduck-promo-dialog__description { margin: 15px 0 18px; font-size: .9rem; }
+  .nalduck-promo-dialog__art { min-height: 180px; max-height: 190px; }
+  .nalduck-promo-dialog__art img { width: 165px; }
+  .nalduck-promo-dialog__speech { bottom: 14px; left: 12%; padding: 8px 10px; font-size: .77rem; }
+  .nalduck-promo-dialog__stamp { top: 22px; right: 12%; font-size: .6rem; }
+  .nalduck-promo-dialog__close { top: 12px; right: 12px; width: 40px; height: 40px; }
+}
+@media (max-width: 390px) {
+  .nalduck-promo-banner__link { padding: 25px 20px 15px; }
+  .nalduck-promo-kicker { gap: .4em; font-size: .65rem; }
+  .nalduck-promo-dialog__copy { padding: 29px 21px 21px; }
+  .nalduck-promo-dialog__brand > span:last-child { display: none; }
+  .nalduck-promo-dialog__actions { gap: 4px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nalduck-promo-dialog { animation: none; }
+  .nalduck-promo-banner__cta { transition: none; }
+}
