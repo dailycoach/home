@@ -557,3 +557,35 @@
   body[data-slug="nadaum-self-management"] .nal-sticky-cta > div:first-child {display: none;}
   body[data-slug="nadaum-self-management"] .nal-sticky-cta > .nal-button--primary {display: flex;align-items: center;justify-content: center;flex: 1;min-height: 48px;}
 }
+.nd-class-front {background:#f4f1e8;color:#171717;}
+.nd-class-front__link {position:relative;display:block;height:clamp(660px,calc(100svh - var(--nal-header-height,72px)),930px);overflow:hidden;background:#f4f1e8;color:#171717;text-decoration:none;}
+.nd-class-front__art {display:block;position:absolute;inset:0;width:100%;height:100%;}
+.nd-class-front__art img {display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center bottom;}
+.nd-class-front__headline {position:absolute;z-index:1;top:clamp(72px,9vh,142px);left:max(5vw,calc((100% - 1216px)/2));width:min(56%,740px);}
+.nd-class-front .nd-eyebrow {color:#1644f5;font-size:12px;letter-spacing:.15em;margin:0 0 23px;}
+.nd-class-front h1 {margin:0;color:#171717;font-size:clamp(40px,4.3vw,68px);font-weight:850;letter-spacing:-.065em;line-height:1.24;word-break:keep-all;}
+.nd-class-front h1 em {font-style:normal;color:#1644f5;}
+.nd-class-summary {background:#f4f1e8;color:#171717;padding-block:clamp(66px,8vw,112px);border-bottom:1px solid #c9c7bf;}
+.nd-class-summary__inner {display:grid;grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);gap:clamp(48px,8vw,124px);align-items:start;}
+.nd-class-summary__lead h2 {max-width:650px;font-size:clamp(34px,3.25vw,50px);line-height:1.24;}
+.nd-class-summary__lead > p:last-child {margin-top:26px;font-size:18px;line-height:1.85;color:#4e4f49;}
+.nd-class-summary__details {border-left:1px solid #c9c7bf;padding-left:clamp(32px,4vw,60px);}
+.nd-class-summary__details > p:not(.nd-class-summary__faith) {padding-block:12px;margin:0;border-bottom:1px solid #c9c7bf;font-size:15px;line-height:1.85;}
+.nd-class-summary__details strong {font-weight:800;}
+.nd-class-summary__details .nd-button {margin-top:28px;}
+.nd-class-summary__faith {margin-top:18px !important;max-width:420px;font-size:12px;line-height:1.8;color:#565750;}
+@media (max-width:760px) {
+  .nd-class-front__link {height:max(640px,calc(100svh - var(--nal-header-height,72px)));}
+  .nd-class-front__art {inset:auto 0 0;height:auto;}
+  .nd-class-front__art img {width:100%;height:auto;aspect-ratio:4/5;object-fit:contain;object-position:center bottom;}
+  .nd-class-front__headline {top:clamp(46px,8svh,78px);left:6%;width:88%;}
+  .nd-class-front .nd-eyebrow {font-size:11px;margin-bottom:13px;}
+  .nd-class-front h1 {font-size:clamp(30px,8.1vw,44px);line-height:1.28;}
+  .nd-class-summary {padding-block:66px;}
+  .nd-class-summary__inner {display:block;}
+  .nd-class-summary__lead h2 {font-size:35px;}
+  .nd-class-summary__lead > p:last-child {font-size:16px;margin-top:22px;}
+  .nd-class-summary__details {margin-top:36px;padding-left:0;border-left:0;border-top:1px solid #c9c7bf;}
+  .nd-class-summary__details > p:not(.nd-class-summary__faith) {font-size:14px;}
+  .nd-class-summary__details .nd-button {width:100%;}
+}

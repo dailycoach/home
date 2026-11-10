@@ -202,7 +202,34 @@
 
   function feature(p) {
     const m = pricing(p);
-    return `<section class="nd nd-feature" aria-labelledby="nd-feature-title"><a class="nd-feature__image" href="${ROOT}" aria-label="나다움으로 자기경영하기 자세히 보기">${picture("hero_mobile", "푸른 길 위를 걷는 청년", 1080, 1350)}</a><div class="nd-feature__copy"><p class="nd-eyebrow">NAL 대표 클래스 · 2026년 12월 시작</p><h2 id="nd-feature-title">나답게 살겠다는 말,<br><em>이제 행동으로.</em></h2><p class="nd-feature__name">나다움으로 자기경영하기</p><p>반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><p class="nd-feature__meta">19–39세 · 월 4회 · 회당 2시간<br><strong>${CAPACITY_NOTE}</strong></p><p class="nd-feature__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-feature__price"><span>3개월 · 12회 <strong>${money(m.phase)}원</strong></span><span>4단계 중 원하는 단계에 신청</span></div><a class="nd-button nd-button--blue" href="${ROOT}#nd-membership">나에게 맞는 단계 고르기 ${arrow}</a><p class="nd-caption">${FAITH}</p></div></section>`;
+    return `<section class="nd nd-class-front" aria-labelledby="nd-class-front-title">
+      <a class="nd-class-front__link" href="${ROOT}" aria-label="나다움으로 자기경영하기 클래스 자세히 보기">
+        <picture class="nd-class-front__art">
+          <source media="(max-width: 760px)" srcset="${ASSETS}nal_nadaum_hero_mobile.webp" width="1080" height="1350">
+          <img src="${ASSETS}nal_nadaum_hero_desktop.webp" alt="푸른 길 위로 한 걸음을 내딛는 청년" width="2400" height="1350" fetchpriority="high" decoding="async">
+        </picture>
+        <div class="nd-class-front__headline">
+          <p class="nd-eyebrow">NAL CLASS</p>
+          <h1 id="nd-class-front-title">나답게 살겠다는 말,<br>이제 <em>행동으로.</em></h1>
+        </div>
+      </a>
+    </section>
+    <section class="nd nd-class-summary" aria-labelledby="nd-class-summary-title">
+      <div class="nd-wrap nd-class-summary__inner">
+        <div class="nd-class-summary__lead">
+          <p class="nd-eyebrow">2026.12 / FIRST CLASS</p>
+          <h2 id="nd-class-summary-title">나다움으로 자기경영하기</h2>
+          <p>반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p>
+        </div>
+        <div class="nd-class-summary__details">
+          <p>19–39세 청년 · 월 4회 · 회당 2시간<br><strong>${CAPACITY_NOTE}</strong></p>
+          <p><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p>
+          <p>3개월 · 12회 <strong>${money(m.phase)}원</strong><br>4단계 중 원하는 단계부터 신청</p>
+          <a class="nd-button nd-button--blue" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a>
+          <p class="nd-class-summary__faith">${FAITH}</p>
+        </div>
+      </div>
+    </section>`;
   }
 
   function card(p) {
