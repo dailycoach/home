@@ -53,8 +53,8 @@
     return {monthly, annual, months, total: monthly * months, saving: monthly * months - annual};
   }
 
-  function contact(plan) {
-    return "mailto:hello@daily-coach-ing.com?subject=" + encodeURIComponent("[NAL 나다움] " + plan + " 참여 문의");
+  function contact() {
+    return "https://open.kakao.com/o/pc24bvUi";
   }
 
   function picture(name, alt, width, height, extra) {
@@ -89,7 +89,7 @@
       {type:"클래스",key:"class2",action:"실제 경험을 읽는 관점을 배우고, 기존 행동을 이어가거나 수정할 기준을 세웁니다."},
       {type:"실기·나눔",key:"practice2",action:"처음의 자기 설명과 실제 경험을 대조하고 다음 행동을 선택합니다."}
     ];
-    return `<section class="nd-first-month nd-section" id="nd-first-month"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">12월, 첫 네 번의 만남</p><h2>${escape(first.title)}</h2></div><p>올해 내가 했던 선택으로<br>새해에 바꿀 첫 행동을 정합니다.</p></div><p class="nd-first-month__promise">내가 반복하는 선택 하나를 이해하고, 그것을 바꿔볼 행동을 선택하며, 실제 경험을 근거로 나에 대한 설명을 수정합니다.</p><ol class="nd-opening-sessions">${sessions.map((session,index) => {const item = first[session.key];return `<li><div class="nd-session-label"><span>${String(index + 1).padStart(2,"0")}</span><strong>${session.type}</strong><small>2시간</small></div><div><h3>${escape(item.title)}</h3><p>${escape(item.detail)}</p><p class="nd-session-action">${escape(session.action)}</p></div></li>`;}).join("")}</ol><p class="nd-caption">일요일 오전 10–12시 · 시메진 카페 · 오프라인. 클래스는 티칭 80%·코칭 20%로 진행합니다. 월별 세부 회차는 참여 문의를 통해 안내합니다.</p></div></section>`;
+    return `<section class="nd-first-month nd-section" id="nd-first-month"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">12월, 첫 네 번의 만남</p><h2>${escape(first.title)}</h2></div><p>올해 내가 했던 선택으로<br>새해에 바꿀 첫 행동을 정합니다.</p></div><p class="nd-first-month__promise">내가 반복하는 선택 하나를 이해하고, 그것을 바꿔볼 행동을 선택하며, 실제 경험을 근거로 나에 대한 설명을 수정합니다.</p><ol class="nd-opening-sessions">${sessions.map((session,index) => {const item = first[session.key];return `<li><div class="nd-session-label"><span>${String(index + 1).padStart(2,"0")}</span><strong>${session.type}</strong><small>2시간</small></div><div><h3>${escape(item.title)}</h3><p>${escape(item.detail)}</p><p class="nd-session-action">${escape(session.action)}</p></div></li>`;}).join("")}</ol><p class="nd-caption">일요일 오전 10–12시 · 시메진 카페 · 오프라인. 클래스는 티칭 80%·코칭 20%로 진행합니다. 월별 세부 회차는 카카오톡 문의방에서 안내합니다.</p></div></section>`;
   }
 
   function steps(compact) {
@@ -129,7 +129,7 @@
 
   function membership(p) {
     const m = pricing(p);
-    return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">MEMBERSHIP</p><h2>내 선택을<br>실제 삶으로 이어갈 시간.</h2></div><p>월 2회 클래스와 격주 실행 나눔으로<br>배움과 선택을 이어갑니다.</p></div><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>기간</dt><dd>2026.12–2027.11</dd></div></dl><div class="nd-plans"><article class="nd-plan"><p class="nd-eyebrow">MONTHLY</p><h3>월 멤버십</h3><p class="nd-plan__price">${money(m.monthly)}<small>원 / 월</small></p><p>지금 다루고 싶은 선택을<br>배움과 실제 실행으로 검토합니다.</p><ul><li>월 2회 이론 클래스</li><li>월 2회 실행 나눔 모임</li><li>회당 2시간 · 월 총 8시간</li></ul><a class="nd-button nd-button--outline" href="${contact("월 멤버십")}">월 멤버십 참여 문의 ${arrow}</a></article><article class="nd-plan nd-plan--annual"><div class="nd-plan__top"><p class="nd-eyebrow">ANNUAL</p><span class="nd-plan__label">1년 일시납</span></div><h3>연간 멤버십</h3><p class="nd-plan__price">${money(m.annual)}<small>원 / 년</small></p><p>경험을 누적하며 관계·진로·자원·기여에<br>사용할 나의 기준을 구체화합니다.</p><ul><li>네 단계로 이어지는 12개월 과정</li><li>총 48회 · 96시간</li><li>2026년 12월–2027년 11월</li></ul><a class="nd-button nd-button--blue" href="${contact("연간 멤버십")}">연간 멤버십 참여 문의 ${arrow}</a>${m.saving > 0 ? `<p class="nd-plan__saving">월납 ${escape(m.months)}개월 ${money(m.total)}원 대비 <strong>${money(m.saving)}원 절약</strong></p>` : ""}</article></div><p class="nd-membership__note">월별 세부 회차와 참여 신청, 이용 조건은 문의를 통해 안내합니다.<br><a href="mailto:hello@daily-coach-ing.com">hello@daily-coach-ing.com</a></p></div></section>`;
+    return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">MEMBERSHIP</p><h2>내 선택을<br>실제 삶으로 이어갈 시간.</h2></div><p>월 2회 클래스와 격주 실행 나눔으로<br>배움과 선택을 이어갑니다.</p></div><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>기간</dt><dd>2026.12–2027.11</dd></div></dl><div class="nd-plans"><article class="nd-plan"><p class="nd-eyebrow">MONTHLY</p><h3>월 멤버십</h3><p class="nd-plan__price">${money(m.monthly)}<small>원 / 월</small></p><p>지금 다루고 싶은 선택을<br>배움과 실제 실행으로 검토합니다.</p><ul><li>월 2회 이론 클래스</li><li>월 2회 실행 나눔 모임</li><li>회당 2시간 · 월 총 8시간</li></ul><a class="nd-button nd-button--outline" href="${contact()}" target="_blank" rel="noopener noreferrer">월 멤버십 카카오톡 문의 ${arrow}</a></article><article class="nd-plan nd-plan--annual"><div class="nd-plan__top"><p class="nd-eyebrow">ANNUAL</p><span class="nd-plan__label">1년 일시납</span></div><h3>연간 멤버십</h3><p class="nd-plan__price">${money(m.annual)}<small>원 / 년</small></p><p>경험을 누적하며 관계·진로·자원·기여에<br>사용할 나의 기준을 구체화합니다.</p><ul><li>네 단계로 이어지는 12개월 과정</li><li>총 48회 · 96시간</li><li>2026년 12월–2027년 11월</li></ul><a class="nd-button nd-button--blue" href="${contact()}" target="_blank" rel="noopener noreferrer">연간 멤버십 카카오톡 문의 ${arrow}</a>${m.saving > 0 ? `<p class="nd-plan__saving">월납 ${escape(m.months)}개월 ${money(m.total)}원 대비 <strong>${money(m.saving)}원 절약</strong></p>` : ""}</article></div><p class="nd-membership__note">월별 세부 회차와 참여 신청, 이용 조건은 카카오톡 문의방에서 안내합니다.<br><a href="${contact()}" target="_blank" rel="noopener noreferrer">카카오톡 문의방 바로가기</a></p></div></section>`;
   }
 
   function home(p) {
@@ -149,13 +149,13 @@
   function detail(p) {
     const m = pricing(p);
     const faq = [
-      ["언제, 어디서 진행하나요?", "2026년 12월부터 2027년 11월까지, 일요일 오전 10–12시에 시메진 카페에서 오프라인으로 만납니다. 월 4회·회당 2시간이며, 월별 세부 회차는 참여 문의를 통해 안내합니다."],
+      ["언제, 어디서 진행하나요?", "2026년 12월부터 2027년 11월까지, 일요일 오전 10–12시에 시메진 카페에서 오프라인으로 만납니다. 월 4회·회당 2시간이며, 월별 세부 회차는 카카오톡 문의방에서 안내합니다."],
       ["기독교인이 아니어도 참여할 수 있나요?", FAITH + " 성경과 복음에 관한 질문을 나눌 수 있으며, 신앙에 관한 응답과 나눔은 자율입니다."],
       ["클래스와 실행 나눔은 어떻게 다른가요?", "클래스는 개념과 사례, 판단법을 배우고 자신의 삶에 적용하는 시간으로 티칭 80%·코칭 20%로 진행합니다. 격주로 이어지는 실행 나눔에서는 실제로 한 행동과 나타난 결과를 살피고, 서로의 질문을 통해 다음 선택을 정합니다."],
       ["매번 새로운 행동을 정해야 하나요?", "자신이 선택한 행동 하나를 선언하고, 실행에 필요한 n개의 행동으로 스스로 나눕니다. 행동의 종류와 개수, 실행 시점은 본인이 정합니다. 한 번 선언한 행동을 여러 만남과 여러 달에 걸쳐 이어가고 수정할 수 있습니다."],
       ["결과 자가평가는 어떻게 하나요?", "선언한 행동, 실제로 한 행동, 나타난 결과를 비교합니다. 실행하지 못한 부분도 어디까지 했고 무엇이 막혔는지 구체적으로 살핍니다. 결과를 해석할 근거와 자신에 대해 새롭게 알게 된 점을 바탕으로 다음 선택을 정합니다."],
       ["월 멤버십과 연간 멤버십의 차이는 무엇인가요?", "월 멤버십은 월 " + money(m.monthly) + "원이며 해당 월의 클래스와 실행 나눔에 참여합니다. 연간 멤버십은 1년 일시납 " + money(m.annual) + "원으로, 네 단계의 배움과 실행을 12개월 동안 이어갑니다. " + (m.saving > 0 ? "월납 " + m.months + "개월 합계 " + money(m.total) + "원 대비 " + money(m.saving) + "원을 절약합니다." : "")],
-      ["참여 신청과 이용 조건은 어떻게 확인하나요?", "월간 또는 연간 멤버십 참여 문의를 선택해 연락해 주세요. 월별 세부 회차, 중간 참여, 결석 및 이용 조건을 확인한 뒤 참여를 결정할 수 있습니다."]
+      ["참여 신청과 이용 조건은 어떻게 확인하나요?", "월·연간 멤버십의 카카오톡 문의 버튼을 누르면 문의방으로 연결됩니다. 월별 세부 회차, 중간 참여, 결석 및 이용 조건을 확인한 뒤 참여를 결정할 수 있습니다."]
     ];
     return `<div class="nd nd-detail">${hero(true)}<nav class="nd-subnav" aria-label="클래스 소개 목차"><div class="nd-wrap"><a href="#nd-first-month">12월에 배우는 것</a><a href="#nd-method">진행 방식</a><a href="#nd-coach">함께할 코치</a><a href="#nd-year">12개월 과정</a><a href="#nd-membership">시간·장소·멤버십</a></div></nav>${audience()}${firstMonth(p,false)}${method()}${sharing()}${coach()}${year(p)}${faith()}${membership(p)}<section class="nd-wrap nd-section nd-faq" id="nd-faq"><div class="nd-section-heading"><div><p class="nd-eyebrow">참여 전 궁금한 점</p><h2>자주 묻는 질문</h2></div></div><div class="nd-faq__list">${faq.map(([q, a]) => `<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join("")}</div></section><div class="nd-detail-end"><div class="nd-wrap"><p>올해 내가 했던 선택으로,<br><strong>새해에 바꿀 첫 행동을 정합니다.</strong></p><a class="nd-button nd-button--blue" href="#nd-membership">멤버십 참여 안내 ${arrow}</a></div></div></div>`;
   }
