@@ -3,8 +3,8 @@
   "routes": [
     {
       "path": "/nal/",
-      "title": "날빛 | NAL 커뮤니티·원데이클래스·감정카드",
-      "description": "미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 우선 런칭하는 NAL 커뮤니티 플랫폼입니다.",
+      "title": "나다움으로 자기경영하기 | NAL · 날빛",
+      "description": "나답게 살겠다는 말, 이제 행동으로. 19–39세 청년을 위한 나다움 자기경영 멤버십. 2026년 12월 시작, 월 2회 클래스와 2회 나눔 모임. 월 120,000원, 1년 일시납 1,000,000원.",
       "indexable": true
     },
     {
@@ -15,8 +15,8 @@
     },
     {
       "path": "/nal/class/",
-      "title": "FT 전문가 코칭과정·원데이클래스 | NAL CLASS · 날빛",
-      "description": "작전타임 S-TOP 코칭, 프레이즈코칭, 알아차림코칭, NLP 코칭력 향상, 글로벌코칭역량 등 전문 교육과 NAL 원데이클래스를 살펴보세요.",
+      "title": "나다움 멤버십·FT 전문과정·원데이클래스 | NAL CLASS · 날빛",
+      "description": "19–39세 청년을 위한 나다움 자기경영 멤버십부터 FT 전문 코칭과정과 원데이클래스까지. 나에게 맞는 배움을 만나보세요.",
       "indexable": true
     },
     {
@@ -311,6 +311,12 @@
       "path": "/nal/note/art-psychology-coaching-guide/",
       "title": "미술심리코칭 6주 과정 참여 안내 | NAL NOTE · 날빛",
       "description": "미술심리코칭 6주 과정의 참여 방식, 준비물, 진행자, FAQ와 과정 범위를 안내합니다.",
+      "indexable": true
+    },
+    {
+      "path": "/nal/class/nadaum-self-management/",
+      "title": "나다움으로 자기경영하기 | NAL 청년 자기경영 멤버십",
+      "description": "19–39세 청년을 위한 12개월 자기경영 멤버십. 깨달음·행동 선언과 실행·결과 자가평가. 2026년 12월 시작, 월 4회·회당 2시간. 월 120,000원 또는 1년 일시납 1,000,000원.",
       "indexable": true
     }
   ]

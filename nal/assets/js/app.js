@@ -325,6 +325,12 @@
   }
 
   function programCard(item) {
+    if (item.id === "nadaum-self-management") {
+      if (globalThis.NALNadaum?.card) return globalThis.NALNadaum.card(item);
+      const route = itemRoute("programs", item);
+      const membership = item.membership || {};
+      return `<article class="nal-card nal-card--class" data-catalog-id="${escapeHtml(item.id)}"><div class="nal-card__media" style="aspect-ratio:1/1">${imageMarkup(item.coverImage, item.coverImageAlt || item.title, "", { width: 1200, height: 1200 })}<div class="nal-card__wish">${wishButton("programs", item)}</div></div><div class="nal-card__body"><p class="nal-card__eyebrow">NAL CLASS / 청년 멤버십</p><h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3><p class="nal-card__summary">${escapeHtml(item.summary)}</p><p class="nal-card__details">${escapeHtml(item.periodDisplay)} · 19–39세 · 월 4회</p><div class="nal-card__footer"><span class="nal-card__delivery">월 ${formatPrice(membership.monthlyPrice)}<br>1년 일시납 ${formatPrice(membership.annualPrice)}</span><span aria-hidden="true">→</span></div></div></article>`;
+    }
     if (item.id === "life-control-monthly-gather") {
       const route = itemRoute("programs", item);
       const cover = "/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp";
@@ -522,6 +528,16 @@
 
   function renderHome() {
     const programs = publicItems(state.programs);
+    const nadaum = programs.find((item) => item.id === "nadaum-self-management");
+    if (nadaum && globalThis.NALNadaum?.home) {
+      const gather = programs.find((item) => item.id === "life-control-monthly-gather");
+      const professional = sortFeatured(programs.filter((item) => item.track === "professional"))[0];
+      const product = sortFeatured(publicItems(state.products)).sort((a, b) => Number(isDigitalProduct(b)) - Number(isDigitalProduct(a)) || featuredOrder(a) - featuredOrder(b))[0];
+      const more = [gather && programCard(gather), professional && programCard(professional), product && productCard(product)].filter(Boolean);
+      root.innerHTML = globalThis.NALNadaum.home(nadaum)
+        + (more.length ? `<section class="nal-section"><div class="nal-container"><p class="nal-eyebrow">MORE FROM NAL</p><h2>NAL에서 이어가는 다른 경험</h2><p>모임·전문 클래스·마음도구도 함께 만나보세요.</p><div class="card-grid">${more.join("")}</div></div></section>` : "");
+      return;
+    }
     const activePrograms = programs.filter((item) => !["closed", "completed"].includes(item.status));
     const featuredClass = sortFeatured(activePrograms.filter((item) => item.type === "class"))[0]
       || activePrograms.find((item) => item.type === "class");
@@ -586,7 +602,7 @@
   function listingConfig() {
     if (collection === "programs") return pageType === "gather"
       ? ["NAL GATHER", "계속 만나며 조금씩 달라지는 모임", state.site?.categories?.gather || [], programCard]
-      : ["NAL CLASS", "일상의 경험에서, 코칭의 현장까지", state.site?.categories?.class || [], programCard];
+      : ["NAL CLASS", "배우고 실행하며, 내 삶에서 현장까지", state.site?.categories?.class || [], programCard];
     if (collection === "products") return ["NAL MIND TOOLS", "PDF 전자책부터 워크북·코칭도구까지", state.site?.categories?.shop || [], productCard];
     if (collection === "hosts") return ["NAL HOST", "어떻게 진행하는지 먼저 보여주는 사람들", [], hostCard];
     return ["NAL NOTE", "읽고 끝나지 않는 다음 경험의 기록", state.site?.categories?.note || [], noteCard];
@@ -606,7 +622,7 @@
       : "";
     const listingIntro = collection === "products"
       ? "NAL 무료 필독서 《삶의 통제권 연습》 3부작을 읽어보세요. 계획이 어긋나는 날, 마음이 뜻대로 움직이지 않는 날, 작은 행동을 다시 만드는 날까지. 세 권 모두 무료이며 로그인·결제 없이 이용할 수 있습니다."
-      : collection === "programs" && pageType === "gather" ? "들렀다 가도 좋고, 오래 머물러도 좋은 모임들을 모았습니다." : collection === "programs" && pageType === "class" ? "일상의 변화를 여는 원데이클래스와 코칭 현장에서 활용하는 FT·전문가 과정을 함께 소개합니다. 일정과 인정 조건은 확인된 내용만 안내합니다." : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
+      : collection === "programs" && pageType === "gather" ? "들렀다 가도 좋고, 오래 머물러도 좋은 모임들을 모았습니다." : collection === "programs" && pageType === "class" ? "나다움을 찾아가는 1년 멤버십부터 원데이클래스와 FT·전문가 과정까지. 나에게 맞는 배움을 만나보세요." : "확인되지 않은 일정·가격·잔여 좌석은 표시하지 않습니다.";
     const showEssential = collection === "products" && !["q","format","topic","audience","category"].some(key => params.get(key)) && (!params.get("sort") || params.get("sort") === "recommended");
     const essentialHtml = showEssential ? `<section class="nal-essential-spotlight" aria-label="NAL 무료 필독서 추천">
   <div class="nal-container nal-essential-spotlight__inner">
@@ -632,14 +648,17 @@
 </section>` : "";
     const monthlyGatherPromo = collection === "programs" && pageType === "gather" && !["q","category","status","format"].some(k => params.get(k)) && (!params.get("sort") || params.get("sort") === "recommended") && publicItems(state.programs).some(entry => entry.id === "life-control-monthly-gather") ? "<section class=\"nal-genz-preview\" aria-label=\"삶의 통제권 연습 월간 셀프코칭 모임\">\n  <div class=\"nal-genz-preview__wrap\">\n    <div>\n      <p class=\"nal-genz-preview__eyebrow\">NAL · 월간 알아차림·셀프코칭 / Zoom</p>\n      <h2>계획대로는 안 됐으니까,<br>다시 선택하자.</h2>\n      <p>현실을 보고, 마음을 알아차리고, 오늘의 선택을 연습합니다. 마지막엔 한 달의 나를 기록해요.</p>\n      <a class=\"nal-genz-preview__link\" href=\"/nal/gather/life-control-monthly/\">모임 살펴보기 ↗</a>\n    </div>\n    <div class=\"nal-genz-preview__covers\" aria-label=\"시리즈 세 권과 새로운 4주차 소책자\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-01-cover.webp\" alt=\"삶의 통제권 연습 1권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-02-cover.webp\" alt=\"삶의 통제권 연습 2권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/shop/life-control/nal-life-control-03-cover.webp\" alt=\"삶의 통제권 연습 3권 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n      <img src=\"/nal/assets/images/catalog/gather/nal-life-control-04-genz-zine.webp\" alt=\"요즘 나, 이렇습니다. 새로운 4주차 표지\" width=\"1200\" height=\"1600\" loading=\"eager\" decoding=\"async\">\n    </div>\n  </div>\n</section>" : "";
     const listedItems = monthlyGatherPromo ? items.filter(entry => entry.id !== "life-control-monthly-gather") : items;
+    const membershipCourses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => item.track === "membership") : [];
+    const membershipHtml = membershipCourses.map((item) => globalThis.NALNadaum?.feature ? `<div class="nal-container">${globalThis.NALNadaum.feature(item)}</div>` : `<section class="nal-section"><div class="nal-container"><div class="card-grid">${programCard(item)}</div></div></section>`).join("");
     const professionalCourses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => item.track === "professional") : [];
-    const generalClasses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => item.track !== "professional") : [];
+    const generalClasses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => !["professional", "membership"].includes(item.track)) : [];
     const classSections = professionalCourses.length || generalClasses.length
       ? `${professionalCourses.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / FT · PROFESSIONAL COURSES</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>김철웅 코치가 진행하는 전문 교육을 소개합니다. 모듈별 내용과 교육시간, 참여 대상, 개설 문의를 한곳에서 확인하세요.</p></div><span class="nal-ft-listing-count">${professionalCourses.length.toString().padStart(2, "0")} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professionalCourses.map(card).join("")}</div>` : ""}${generalClasses.length ? `<div class="nal-ft-listing-intro nal-ft-listing-intro--general"><div><p class="nal-eyebrow">02 / ONE DAY & WORKSHOPS</p><h2>지금 내 삶에 맞는, 한 번의 경험.</h2></div></div><div class="card-grid">${generalClasses.map(card).join("")}</div>` : ""}`
       : "";
     root.innerHTML = `
       ${essentialHtml}${monthlyGatherPromo}
       <section class="nal-page-hero"><div class="nal-container"><p class="nal-eyebrow">${label}</p><h1>${title}</h1><p>${listingIntro}</p></div></section>
+      ${membershipHtml}
       ${positiveSeries ? `<section class="nal-positive-series" aria-label="긍정문장 따라 쓰기 시리즈"><div class="nal-container"><p class="nal-eyebrow">POSITIVE WRITING / 01—08</p><h2>오늘 나에게 필요한 말부터</h2><p>자기이해부터 비교와 나의 기준까지. 원하는 권부터 무료로 펼쳐 보세요.</p><div class="nal-positive-series__items">${positiveSeries}</div></div></section>` : ""}
       <section class="nal-section nal-listing"><div class="nal-container">
         <form class="nal-filter-bar" data-filter-form role="search">
@@ -779,6 +798,12 @@
   }
 
   function renderProgramDetail(item) {
+    if (item.id === "nadaum-self-management" && globalThis.NALNadaum?.detail) {
+      remember("programs", item.id);
+      root.innerHTML = globalThis.NALNadaum.detail(item);
+      renderStickyCta(`월 ${formatPrice(item.membership?.monthlyPrice)} · 1년 ${formatPrice(item.membership?.annualPrice)}`, "멤버십 보기", "#nd-membership");
+      return;
+    }
     if (item.id === "life-control-monthly-gather") return renderMonthlyGatherDetail(item);
     if (item.track === "professional") return renderProfessionalDetail(item);
     remember("programs", item.id);

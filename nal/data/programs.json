@@ -1056,6 +1056,155 @@
       "published": false,
       "createdAt": null,
       "updatedAt": null
+    },
+    {
+      "id": "nadaum-self-management",
+      "slug": "nadaum-self-management",
+      "type": "class",
+      "track": "membership",
+      "title": "나다움으로 자기경영하기",
+      "subtitle": "나답게 살겠다는 말, 이제 행동으로.",
+      "summary": "배우고, 선택하고, 실행한 경험으로 나를 알아가는 청년 자기경영 멤버십. 월 2회 클래스와 격주 나눔 모임으로 만납니다.",
+      "description": "심리·대상관계·정신분석·경제·경영·리더십과 김철웅 코치의 삶, 기독교적 관점을 함께 다룹니다. 행동 하나를 스스로 선언하고 필요한 n개의 세부 행동으로 나눈 뒤 실제 결과를 평가하며 나다움을 구체화합니다.",
+      "category": "라이프",
+      "tags": [
+        "나다움",
+        "청년",
+        "자기경영",
+        "멤버십",
+        "선택과 실행",
+        "결과 자기평가",
+        "기독교"
+      ],
+      "coverImage": "/nal/assets/images/nadaum/nal_nadaum_class_card.webp",
+      "coverImageMobile": null,
+      "coverImageAlt": "파란 종이 면 위로 발을 내딛는 흑백 인물의 전신.",
+      "heroImage": "/nal/assets/images/nadaum/nal_nadaum_hero_desktop.webp",
+      "heroImageMobile": "/nal/assets/images/nadaum/nal_nadaum_hero_mobile.webp",
+      "ogImage": "/nal/assets/images/nadaum/nal_nadaum_og.png",
+      "gallery": [
+        "/nal/assets/images/nadaum/nal_nadaum_action.webp",
+        "/nal/assets/images/nadaum/nal_nadaum_gather.webp"
+      ],
+      "hostId": "kim-cheol-woong",
+      "format": null,
+      "location": null,
+      "address": null,
+      "onlineUrl": null,
+      "startDate": null,
+      "endDate": null,
+      "startTime": null,
+      "endTime": null,
+      "periodDisplay": "2026.12–2027.11",
+      "scheduleDisplay": "2026년 12월 시작 · 상세 일정·장소 개별 문의",
+      "duration": "회당 2시간",
+      "frequency": "월 4회 · 클래스와 나눔 모임 격주 진행",
+      "sessionCount": 48,
+      "capacity": null,
+      "remainingSeats": null,
+      "price": 120000,
+      "originalPrice": null,
+      "membership": {
+        "monthlyPrice": 120000,
+        "annualPrice": 1000000,
+        "months": 12
+      },
+      "status": "comingSoon",
+      "difficulty": null,
+      "materials": [],
+      "includedItems": [
+        "월 2회 클래스",
+        "월 2회 나눔 모임"
+      ],
+      "activities": [
+        "삶의 반복과 선택 기준을 이해합니다.",
+        "행동 하나를 선언하고 필요한 만큼 나누어 실행합니다.",
+        "실제 결과를 나누고 자신에 대한 이해와 다음 선택을 구체화합니다."
+      ],
+      "recommendedFor": [
+        "19–39세 청년",
+        "진로·일·돈·관계에서 자기 선택의 기준을 세우고 싶은 분",
+        "깨달음을 실제 행동으로 연결하고 경험을 함께 돌아보고 싶은 분"
+      ],
+      "audience": "19–39세",
+      "soloFriendly": true,
+      "beginnerFriendly": true,
+      "groupChat": null,
+      "applicationUrl": null,
+      "inquiryUrl": "mailto:hello@daily-coach-ing.com?subject=NAL%20%EB%82%98%EB%8B%A4%EC%9B%80%20%EB%A9%A4%EB%B2%84%EC%8B%AD%20%EC%B0%B8%EC%97%AC%20%EB%AC%B8%EC%9D%98",
+      "sourceUrl": null,
+      "refundPolicy": null,
+      "safetyGuide": [],
+      "faithNote": "기독교적 관점과 성경·복음을 함께 다룹니다. 신앙 유무와 관계없이 참여할 수 있습니다.",
+      "productIds": [],
+      "relatedContentIds": [],
+      "featured": true,
+      "featuredOrder": -10,
+      "published": true,
+      "createdAt": "2026-11-10",
+      "updatedAt": "2026-11-10",
+      "curriculum": [
+        {
+          "month": "2026.12",
+          "title": "나다움의 출발",
+          "detail": "내가 나를 설명해 온 말들 첫 실행으로 확인하기 · 내가 한 일·일어난 일·나에 대한 판정을 구분하기"
+        },
+        {
+          "month": "2027.01",
+          "title": "내 기준으로 새해를 선택하기",
+          "detail": "내 기준으로 목표를 선택한다는 것 · 선택한 목표에 시간·돈·도움을 실제로 배정하기"
+        },
+        {
+          "month": "2027.02",
+          "title": "가족의 기대와 내 선택",
+          "detail": "가족의 기대와 나의 선택 · 선택에 필요한 책임을 맡기"
+        },
+        {
+          "month": "2027.03",
+          "title": "내 목소리로 기회 만들기",
+          "detail": "기다리는 사람에서 제안하는 사람으로 · 내 의견을 실제 관계에서 말하기"
+        },
+        {
+          "month": "2027.04",
+          "title": "완성과 피드백",
+          "detail": "두려움이 있어도 완성하고 제출하기 · 피드백을 받고 다시 해내기"
+        },
+        {
+          "month": "2027.05",
+          "title": "관계와 사랑의 책임",
+          "detail": "내가 기대한 관계와 실제 상대 · 사랑을 지키는 약속과 행동"
+        },
+        {
+          "month": "2027.06",
+          "title": "비교·시간·돈의 우선순위",
+          "detail": "부러움 속에서 배울 것을 고르기 · 시간과 돈의 실제 사용을 보고 우선순위를 다시 정하기"
+        },
+        {
+          "month": "2027.07",
+          "title": "끝낼 수 있는 조건 만들기",
+          "detail": "끝낼 수 있는 조건을 만들기 · 조건을 바꾸고 다시 실행하기"
+        },
+        {
+          "month": "2027.08",
+          "title": "경험으로 진로 알아보기",
+          "detail": "해 보면서 내 가능성을 알아보기 · 잘하는 것과 더 배우고 싶은 것"
+        },
+        {
+          "month": "2027.09",
+          "title": "갈등을 지나 함께 일하기",
+          "detail": "내 반응이 협업에 미치는 영향 · 함께 만든 결과에 책임지기"
+        },
+        {
+          "month": "2027.10",
+          "title": "강점과 소명의 기여",
+          "detail": "내가 잘하는 일은 누구에게 필요한가 · 기여를 지속할 방향으로 만들기"
+        },
+        {
+          "month": "2027.11",
+          "title": "나를 설명하고 다음 삶으로",
+          "detail": "내가 만든 변화로 나를 설명하고 함께 살아갈 기여를 선택하기 · 끝낼 것을 끝내고 다음 90일을 시작하기"
+        }
+      ]
     }
   ]
 }

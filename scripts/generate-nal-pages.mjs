@@ -1,27 +1,51 @@
 import { mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import path from 'node:path';
+import { runInNewContext } from 'node:vm';
 
 const root = path.resolve(process.cwd());
 const canonicalBase = 'https://daily-coach-ing.com';
 const defaultOgImage = `${canonicalBase}/nal/assets/images/nal-og.png`;
+const args = process.argv.slice(2);
+let requestedRoutes = null;
+if (args.length) {
+  const value = args.length === 2 && args[0] === '--routes' ? args[1]
+    : args.length === 1 && args[0].startsWith('--routes=') ? args[0].slice(9) : '';
+  if (!value) throw new Error('Usage: node scripts/generate-nal-pages.mjs [--routes /nal/,/nal/class/]');
+  requestedRoutes = new Set(value.split(',').map((route) => route.trim()));
+  for (const route of requestedRoutes) {
+    if (!/^\/nal\/(?:[a-z0-9-]+\/)*$/.test(route)) throw new Error(`Invalid NAL route: ${route}`);
+  }
+}
 const [{ programs }, { products }, { hosts }, { content }] = await Promise.all([
   readFile(path.join(root, 'nal/data/programs.json'), 'utf8').then(JSON.parse),
   readFile(path.join(root, 'nal/data/products.json'), 'utf8').then(JSON.parse),
   readFile(path.join(root, 'nal/data/hosts.json'), 'utf8').then(JSON.parse),
   readFile(path.join(root, 'nal/data/content.json'), 'utf8').then(JSON.parse)
 ]);
+const nadaum = programs.find((item) => item.id === 'nadaum-self-management' && item.published === true);
+const nadaumRoute = '/nal/class/nadaum-self-management/';
+const nadaumOgImage = '/nal/assets/images/nadaum/nal_nadaum_og.png';
+const nadaumViews = new Map([['/nal/', 'home'], ['/nal/class/', 'feature'], [nadaumRoute, 'detail']]);
+let nadaumRenderer;
+if (nadaum && (!requestedRoutes || [...requestedRoutes].some((route) => nadaumViews.has(route)))) {
+  const sandbox = { window: {} };
+  runInNewContext(await readFile(path.join(root, 'nal/assets/js/nadaum.js'), 'utf8'), sandbox, { filename: 'nadaum.js', timeout: 1000 });
+  nadaumRenderer = sandbox.window.NALNadaum;
+  for (const method of ['home', 'feature', 'detail', 'card']) {
+    if (typeof nadaumRenderer?.[method] !== 'function') throw new Error(`Missing NALNadaum.${method} renderer`);
+  }
+}
 
 const pages = [
   {
     route: '/nal/', attrs: 'data-page="home"',
-    title: '날빛 | NAL 커뮤니티·원데이클래스·감정카드',
-    description: '미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 우선 런칭하는 NAL 커뮤니티 플랫폼입니다.',
-    label: 'NAL / FIRST LAUNCH', heading: '가장 먼저 여는\n세 가지 NAL 경험.',
-    copy: '미술심리코칭, 코치 커뮤니티, 마음서재 독서모임부터 실제 연결을 시작합니다.', schemaType: 'WebSite',
-    launch: true, ogTitle: 'NAL FIRST LAUNCH | 날빛',
-    ogDescription: '미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 가장 먼저 엽니다.',
-    schemaName: 'NAL FIRST LAUNCH',
-    schemaDescription: '미술심리코칭, 흐르는 강물처럼 코치모임, 마음서재 독서모임을 우선 런칭하는 NAL 플랫폼입니다.'
+    title: '나다움으로 자기경영하기 | NAL · 날빛',
+    description: '나답게 살겠다는 말, 이제 행동으로. 19–39세 청년을 위한 나다움 자기경영 멤버십. 2026년 12월 시작, 월 2회 클래스와 2회 나눔 모임. 월 120,000원, 1년 일시납 1,000,000원.',
+    label: 'NAL CLASS', heading: '나답게 살겠다는 말,\n이제 행동으로.',
+    copy: '배우고, 선택하고, 실행한 경험으로 나를 알아가는 1년.', schemaType: 'WebSite',
+    ogTitle: '나답게 살겠다는 말, 이제 행동으로. | NAL',
+    schemaName: 'NAL · 날빛',
+    schemaDescription: '나다움으로 자기경영하기와 모임·전문 클래스·마음도구를 만나는 날빛 플랫폼.'
   },
   {
     route: '/nal/gather/', attrs: 'data-page="listing" data-collection="programs" data-type="gather"',
@@ -31,9 +55,9 @@ const pages = [
   },
   {
     route: '/nal/class/', attrs: 'data-page="listing" data-collection="programs" data-type="class"',
-    title: 'FT 전문가 코칭과정·원데이클래스 | NAL CLASS · 날빛', description: '작전타임 S-TOP 코칭, 프레이즈코칭, 알아차림코칭, NLP 코칭력 향상, 글로벌코칭역량 등 전문 교육과 NAL 원데이클래스를 살펴보세요.',
-    label: 'NAL CLASS', heading: '일상의 경험에서\n코칭의 현장까지',
-    copy: '원데이클래스부터 FT 전문교육까지. 배우고 연습하는 장면을 모았습니다.', schemaType: 'CollectionPage'
+    title: '나다움 멤버십·FT 전문과정·원데이클래스 | NAL CLASS · 날빛', description: '19–39세 청년을 위한 나다움 자기경영 멤버십부터 FT 전문 코칭과정과 원데이클래스까지. 나에게 맞는 배움을 만나보세요.',
+    label: 'NAL CLASS', heading: '배우고 실행하며,\n내 삶에서 현장까지',
+    copy: '나다움을 찾아가는 1년 멤버십부터 원데이클래스와 FT·전문가 과정까지. 나에게 맞는 배움을 만나보세요.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
@@ -155,6 +179,21 @@ for (const item of publicItems(content)) {
   });
 }
 
+for (const page of pages) {
+  if (!nadaum || !nadaumViews.has(page.route)) continue;
+  page.nadaumView = nadaumViews.get(page.route);
+  page.ogImage = nadaum.ogImage || nadaumOgImage;
+  page.ogImageMobile = null;
+  page.ogImageAlt = '나다움으로 자기경영하기 — 나답게 살겠다는 말, 이제 행동으로. 12월 시작, 기독교적 관점의 청년 클래스';
+  page.ogImageWidth = 1200;
+  page.ogImageHeight = 630;
+  if (page.route === nadaumRoute) {
+    page.title = `${nadaum.title} | NAL 청년 자기경영 멤버십`;
+    page.description = '19–39세 청년을 위한 12개월 자기경영 멤버십. 깨달음·행동 선언과 실행·결과 자가평가. 2026년 12월 시작, 월 4회·회당 2시간. 월 120,000원 또는 1년 일시납 1,000,000원.';
+    page.schemaType = 'Course';
+  }
+}
+
 function jsonLd(page) {
   const base = {
     '@context': 'https://schema.org',
@@ -213,6 +252,42 @@ function fallbackImage(item, collectionName, eager = false) {
   return `<picture><source media="(max-width: 47.999rem)" srcset="${escapeHtml(item.coverImageMobile)}">${image}</picture>`;
 }
 
+function pageIntro(page, className = 'nal-page-intro') {
+  return `<section class="${className}"><div class="nal-container"><p class="nal-eyebrow">${escapeHtml(page.label)}</p><h1>${escapeHtml(page.heading).split('\n').join('<br>')}</h1><p>${escapeHtml(page.copy)}</p></div></section>`;
+}
+
+const featuredOrder = (item) => Number.isFinite(item?.featuredOrder) ? item.featuredOrder : Number.MAX_SAFE_INTEGER;
+const sortedFeatured = (items) => [...items].filter((item) => item.featured).sort((a, b) => featuredOrder(a) - featuredOrder(b) || String(a.title).localeCompare(String(b.title), 'ko'));
+const digitalProduct = (item) => item.deliveryType === 'digital' || ['pdf', 'digital', 'pdfEbook', 'pdfWorkbook', 'digitalGuide'].includes(item.productType);
+
+function snapshotCard(item, collection = 'programs') {
+  const professional = item.track === 'professional';
+  const type = collection === 'products' ? 'product' : item.type;
+  const label = collection === 'products' ? 'NAL 마음도구' : professional ? 'NAL CLASS / FT 전문과정' : item.type === 'gather' ? 'NAL GATHER' : 'NAL CLASS';
+  const price = professional ? '일정 · 신청 · 비용 개별 문의' : Number.isFinite(item.price) ? item.price === 0 ? '무료 PDF' : `${item.price.toLocaleString('ko-KR')}원` : '일정·참가비 확정 후 공개';
+  return `<article class="nal-card nal-card--${type}${professional ? ' nal-card--professional' : ''}"><div class="nal-card__media">${fallbackImage(item, collection)}</div><div class="nal-card__body"><p class="nal-card__eyebrow">${label}</p><h3 class="nal-card__title"><a href="${itemRoute(collection, item)}">${escapeHtml(item.title)}</a></h3><p class="nal-card__summary">${escapeHtml(item.summary)}</p><div class="nal-card__footer"><span class="nal-card__delivery">${escapeHtml(price)}</span><span aria-hidden="true">→</span></div></div></article>`;
+}
+
+function nadaumSnapshot(page) {
+  if (!page.nadaumView) return null;
+  if (!nadaumRenderer) throw new Error(`NALNadaum renderer was not loaded for ${page.route}`);
+  if (page.nadaumView === 'detail') return nadaumRenderer.detail(nadaum);
+  const existingPrograms = publicItems(programs).filter((item) => item.id !== nadaum.id);
+  if (page.nadaumView === 'home') {
+    const lifeControl = existingPrograms.find((item) => item.id === 'life-control-monthly-gather');
+    const professional = sortedFeatured(existingPrograms.filter((item) => item.track === 'professional'))[0];
+    const product = sortedFeatured(publicItems(products)).sort((a, b) => Number(digitalProduct(b)) - Number(digitalProduct(a)) || featuredOrder(a) - featuredOrder(b))[0];
+    const cards = [lifeControl && snapshotCard(lifeControl), professional && snapshotCard(professional), product && snapshotCard(product, 'products')].filter(Boolean).join('');
+    return `${nadaumRenderer.home(nadaum)}<section class="nal-section"><div class="nal-container"><p class="nal-eyebrow">MORE FROM NAL</p><h2>NAL에서 이어가는 다른 경험</h2><p>모임·전문 클래스·마음도구도 함께 만나보세요.</p><div class="card-grid">${cards}</div></div></section>`;
+  }
+  const classes = existingPrograms.filter((item) => item.type === 'class' && item.track !== 'membership');
+  const professional = classes.filter((item) => item.track === 'professional');
+  const general = classes.filter((item) => item.track !== 'professional');
+  const professionalList = professional.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / FT · PROFESSIONAL COURSES</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>김철웅 코치가 진행하는 전문 교육을 소개합니다. 모듈별 내용과 교육시간, 참여 대상, 개설 문의를 한곳에서 확인하세요.</p></div><span class="nal-ft-listing-count">${String(professional.length).padStart(2, '0')} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professional.map((item) => snapshotCard(item)).join('')}</div>` : '';
+  const generalList = general.length ? `<div class="nal-ft-listing-intro nal-ft-listing-intro--general"><div><p class="nal-eyebrow">02 / ONE DAY & WORKSHOPS</p><h2>지금 내 삶에 맞는, 한 번의 경험.</h2></div></div><div class="card-grid">${general.map((item) => snapshotCard(item)).join('')}</div>` : '';
+  return `${pageIntro(page, 'nal-page-hero')}<div class="nal-container">${nadaumRenderer.feature(nadaum)}</div><section class="nal-section nal-listing"><div class="nal-container">${professionalList}${generalList}</div></section>`;
+}
+
 function fallbackExtras(page) {
   if (page.route === '/nal/') {
     return `<section class="nal-section nal-static-fallback" aria-label="NAL 우선 런칭">
@@ -264,13 +339,15 @@ function fallbackExtras(page) {
 }
 
 function html(page) {
-  const heading = escapeHtml(page.heading).split('\n').join('<br>');
+  const body = nadaumSnapshot(page) ?? `${pageIntro(page)}\n${fallbackExtras(page)}`;
   const robots = page.noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large';
   const socialImage = absoluteUrl(page.ogImage);
   const socialImageAlt = page.ogImageAlt || 'NAL 커뮤니티·원데이클래스·감정도구 플랫폼';
   const socialImageWidth = page.ogImageWidth || 1200;
   const socialImageHeight = page.ogImageHeight || 630;
-  const preload = page.ogImage
+  const preload = page.nadaumView === 'home' || page.nadaumView === 'detail'
+    ? `\n  <link rel="preload" as="image" href="${escapeHtml(nadaum.heroImage)}" media="(min-width: 761px)" fetchpriority="high">\n  <link rel="preload" as="image" href="${escapeHtml(nadaum.heroImageMobile)}" media="(max-width: 760px)" fetchpriority="high">`
+    : page.ogImage && !page.nadaumView
     ? `\n  <link rel="preload" as="image" href="${escapeHtml(page.ogImage)}"${page.ogImageMobile ? ` imagesrcset="${escapeHtml(page.ogImageMobile)} 900w, ${escapeHtml(page.ogImage)} 1600w" imagesizes="(max-width: 47.999rem) 100vw, 55vw"` : ''}>`
     : '';
   return `<!doctype html>
@@ -301,30 +378,23 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${page.route === '/nal/class/' || page.route.includes('-professional/') ? '\n  <link rel="stylesheet" href="/nal/assets/css/nal-ft-editorial.css?v=nal-ft-editorial-20261110">' : ''}${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${page.route === '/nal/class/' || page.route.includes('-professional/') ? '\n  <link rel="stylesheet" href="/nal/assets/css/nal-ft-editorial.css?v=nal-ft-editorial-20261110">' : ''}${page.nadaumView ? '\n  <link rel="stylesheet" href="/nal/assets/css/nadaum.css?v=nadaum-20261110">' : ''}${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/product-routes.js?v=nal-positive-writing-v2-20261011" defer></script>
   <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=nal-ft-editorial-20261110" defer></script>
+  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}${page.nadaumView ? '<script src="/nal/assets/js/nadaum.js?v=nadaum-20261110" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=${page.nadaumView ? 'nadaum-20261110' : 'nal-ft-editorial-20261110'}" defer></script>
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>
   <div data-site-header></div>
   <main id="main-content" data-page-root tabindex="-1">
-    <section class="nal-page-intro">
-      <div class="nal-container">
-        <p class="nal-eyebrow">${escapeHtml(page.label)}</p>
-        <h1>${heading}</h1>
-        <p>${escapeHtml(page.copy)}</p>
-      </div>
-    </section>
-${fallbackExtras(page)}
+${body}
   </main>
   <div data-mobile-cta></div>
   <div data-site-footer></div>
   <div class="nal-toast" data-toast role="status" aria-live="polite" aria-atomic="true"></div>
-  <noscript><p class="nal-noscript">${page.product?.price === 0 && page.product?.purchaseUrl ? `<a href="${escapeHtml(page.product.purchaseUrl)}" download>무료 PDF 다운로드</a>` : "NAL의 목록과 상세 정보를 보려면 브라우저에서 JavaScript를 사용해 주세요."}</p></noscript>
+  <noscript><p class="nal-noscript">${page.nadaumView ? '클래스 안내와 문의 링크를 이용할 수 있습니다. 검색·필터 기능은 JavaScript를 켜면 사용할 수 있습니다.' : page.product?.price === 0 && page.product?.purchaseUrl ? `<a href="${escapeHtml(page.product.purchaseUrl)}" download>무료 PDF 다운로드</a>` : "NAL의 목록과 상세 정보를 보려면 브라우저에서 JavaScript를 사용해 주세요."}</p></noscript>
 </body>
 </html>
 `;
@@ -334,6 +404,14 @@ const uniqueRoutes = new Set();
 for (const page of pages) {
   if (uniqueRoutes.has(page.route)) throw new Error(`Duplicate NAL route: ${page.route}`);
   uniqueRoutes.add(page.route);
+}
+if (requestedRoutes) {
+  for (const route of requestedRoutes) {
+    if (!uniqueRoutes.has(route)) throw new Error(`Unknown or unpublished NAL route: ${route}`);
+  }
+}
+const selectedPages = requestedRoutes ? pages.filter((page) => requestedRoutes.has(page.route)) : pages;
+for (const page of selectedPages) {
   const file = path.join(root, page.route.replace(/^\//, ''), 'index.html');
   await mkdir(path.dirname(file), { recursive: true });
   await writeFile(file, html(page), 'utf8');
@@ -341,24 +419,28 @@ for (const page of pages) {
 
 // Remove only previously generated product pages that are no longer public.
 // Other NAL pages and assets remain under their existing generators.
+let previous = { schemaVersion: '1.2', routes: [] };
 try {
-  const previous = JSON.parse(await readFile(path.join(root, 'nal/data/routes.json'), 'utf8'));
-  for (const entry of previous.routes || []) if (/^\/nal\/shop\/[a-z0-9-]+\/$/.test(entry.path) && !uniqueRoutes.has(entry.path)) {
+  previous = JSON.parse(await readFile(path.join(root, 'nal/data/routes.json'), 'utf8'));
+  for (const entry of requestedRoutes ? [] : previous.routes || []) if (/^\/nal\/shop\/[a-z0-9-]+\/$/.test(entry.path) && !uniqueRoutes.has(entry.path)) {
     await rm(path.join(root, entry.path.slice(1), 'index.html'), { force: true });
   }
 } catch (error) { if (error.code !== 'ENOENT') throw error; }
 
 await mkdir(path.join(root, 'nal/data'), { recursive: true });
+const routeUpdates = selectedPages.map((page) => ({
+  path: page.route, title: page.title, description: page.description, indexable: !page.noindex
+}));
+const routeEntries = new Map((requestedRoutes ? previous.routes : []).map((entry) => [entry.path, entry]));
+for (const entry of routeUpdates) routeEntries.set(entry.path, entry);
 await writeFile(
   path.join(root, 'nal/data/routes.json'),
   `${JSON.stringify({
     schemaVersion: '1.2',
-    routes: pages.map((page) => ({
-      path: page.route, title: page.title, description: page.description, indexable: !page.noindex
-    }))
+    routes: [...routeEntries.values()]
   }, null, 2)}\n`,
   'utf8'
 );
 
-console.log(`Generated ${pages.length} NAL pages from published data.`);
-await writeFile(path.join(root, 'nal/assets/js/product-routes.js'), `globalThis.NALProductRoutes = Object.freeze(${JSON.stringify(publicItems(products).map(p => p.slug))});\n`);
+console.log(`Generated ${selectedPages.length} NAL pages from published data${requestedRoutes ? ' (selected routes only)' : ''}.`);
+if (!requestedRoutes) await writeFile(path.join(root, 'nal/assets/js/product-routes.js'), `globalThis.NALProductRoutes = Object.freeze(${JSON.stringify(publicItems(products).map(p => p.slug))});\n`);
