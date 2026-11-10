@@ -113,11 +113,18 @@
   }
 
   function hero(isDetail) {
+    const support = isDetail
+      ? `<div class="nd-hero__support nd-hero__support--minimal">
+          <p class="nd-hero__description">내 선택의 이유를 배우고,<br>행동으로 나를 확인합니다.</p>
+          <p class="nd-hero__meta">19–39세 · 일요일 오전 10–12시</p>
+          <div class="nd-actions"><a class="nd-button nd-button--blue" href="#nd-membership">4단계 살펴보기${arrow}</a></div>
+        </div>`
+      : `<div class="nd-hero__support"><p class="nd-hero__description">반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><ul class="nd-hero__facts" aria-label="참여 안내"><li>19–39세 청년</li><li>단계별 3개월 참여</li><li>월 4회 · 회당 2시간</li><li>${CAPACITY_NOTE}</li></ul><p class="nd-hero__meeting"><strong>${MEETING}</strong><span>${VENUE} · 오프라인</span></p><div class="nd-actions"><a class="nd-button nd-button--blue" href="${ROOT}#nd-membership">단계별 신청 보기${arrow}</a><a class="nd-text-link" href="${ROOT}#nd-first-month">12월에 배우는 내용 <span aria-hidden="true">↓</span></a></div><p class="nd-hero__faith">${FAITH}</p></div>`;
     return `<section class="nd-hero" aria-labelledby="nd-title">
       <div class="nd-hero__visual">
         <picture class="nd-hero__art"><source media="(max-width: 760px)" srcset="${ASSETS}nal_nadaum_hero_mobile.webp" width="1080" height="1350"><img src="${ASSETS}nal_nadaum_hero_desktop.webp" alt="푸른 길 위로 한 걸음을 내딛는 청년" width="2400" height="1350" fetchpriority="high" decoding="async"></picture>
         <div class="nd-hero__headline"><p class="nd-eyebrow">NAL CLASS · 2026년 12월 시작</p><p class="nd-hero__name">나다움으로 자기경영하기</p><h1 id="nd-title"><span>나답게 살겠다는 말,</span><span>이제 <em>행동으로.</em></span></h1></div>
-        <div class="nd-hero__support"><p class="nd-hero__description">반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><ul class="nd-hero__facts" aria-label="참여 안내"><li>19–39세 청년</li><li>단계별 3개월 참여</li><li>월 4회 · 회당 2시간</li><li>${CAPACITY_NOTE}</li></ul><p class="nd-hero__meeting"><strong>${MEETING}</strong><span>${VENUE} · 오프라인</span></p><div class="nd-actions"><a class="nd-button nd-button--blue" href="${isDetail ? "#nd-membership" : ROOT + "#nd-membership"}">단계별 신청 보기${arrow}</a><a class="nd-text-link" href="${isDetail ? "#nd-first-month" : ROOT + "#nd-first-month"}">12월에 배우는 내용 <span aria-hidden="true">↓</span></a></div><p class="nd-hero__faith">${FAITH}</p></div>
+        ${support}
       </div>
     </section>`;
   }
@@ -186,7 +193,7 @@
     const m = pricing(p);
     const phases = phaseOptions(p);
     const cards = phases.map((phase, index) => `<article class="nd-plan nd-plan--phase" id="nd-enroll-${escape(phase.id)}" aria-labelledby="nd-enroll-title-${index + 1}"><div class="nd-plan__top"><p class="nd-eyebrow">STEP ${String(index + 1).padStart(2,"0")} · ${escape(phase.period)}</p><span class="nd-plan__label">${escape(phase.startLabel)}</span></div><h3 id="nd-enroll-title-${index + 1}">${escape(phase.enrollmentTitle)}</h3><p class="nd-plan__who">${escape(phase.forWhom)}</p><ul class="nd-plan__topics">${phase.topics.map((topic) => `<li>${escape(topic)}</li>`).join("")}</ul><div class="nd-plan__outcome"><strong>이 단계에서 해볼 일</strong><p>${escape(phase.outcome)}</p></div><div class="nd-plan__action"><p class="nd-plan__price">${money(m.phase)}<small>원 / 단계</small></p><p class="nd-plan__duration">${m.months}개월 · ${m.sessions}회 · ${m.hours}시간<br><strong>${CAPACITY_NOTE}</strong></p><a class="nd-button nd-button--blue" href="${contact()}" target="_blank" rel="noopener noreferrer" aria-label="${index + 1}단계 ${escape(phase.enrollmentTitle)} 카카오톡 신청 문의">${index + 1}단계 신청 문의 ${arrow}</a></div></article>`).join("");
-    return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">단계별 신청</p><h2>지금 필요한 단계부터<br>시작하세요.</h2></div><p>내가 선택한 과제를<br>배움과 실제 행동으로 다루는 3개월.</p></div><p class="nd-enrollment-intro"><strong>각 단계 ${CAPACITY_NOTE}</strong><br>원하는 단계만 선택해 참여할 수 있습니다.</p><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인 · 19–39세</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>한 단계</dt><dd>클래스 6회 + 실행 나눔 6회</dd></div></dl><div class="nd-plans nd-plans--phases">${cards}</div><div class="nd-enrollment-guide"><h3>어떤 단계가 맞을지 궁금하다면</h3><a class="nd-text-link" href="${contact()}" target="_blank" rel="noopener noreferrer">카카오톡으로 문의하기 ${arrow}</a></div></div></section>`;
+    return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">단계별 신청</p><h2>지금 필요한 단계부터<br>시작하세요.</h2></div><p>내가 선택한 과제를<br>배움과 실제 행동으로 다루는 3개월.</p></div><p class="nd-enrollment-intro"><strong>각 단계 ${CAPACITY_NOTE}</strong><br>원하는 단계만 선택해 참여할 수 있습니다.</p><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인 · 19–39세</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>한 단계</dt><dd>클래스 6회 + 실행 나눔 6회</dd></div></dl><p class="nd-enrollment-faith">성경·복음을 함께 다루며, 신앙에 관한 응답과 나눔은 자율입니다.</p><div class="nd-plans nd-plans--phases">${cards}</div><div class="nd-enrollment-guide"><h3>어떤 단계가 맞을지 궁금하다면</h3><a class="nd-text-link" href="${contact()}" target="_blank" rel="noopener noreferrer">카카오톡으로 문의하기 ${arrow}</a></div></div></section>`;
   }
 
   function home(p) {

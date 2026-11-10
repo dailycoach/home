@@ -542,3 +542,18 @@
   .nd-action-scene__copy {margin-bottom: 23px;}
   .nd .nd-action-scenes__note {font-size: 15px;}
 }
+
+/* Keep the first view focused on the image, message and one application path. */
+.nd-hero__support--minimal .nd-hero__description {max-width: 440px;}
+.nd-hero__support--minimal .nd-hero__meta {color: #50514b;font-size: 12px;font-weight: 650;line-height: 1.7;margin-top: 13px;}
+.nd-hero__support--minimal .nd-actions {margin-top: 18px;}
+.nd .nd-enrollment-faith {font-size: 13px;line-height: 1.8;color: var(--nd-muted);margin: -9px 0 30px;}
+@media (max-width: 760px) {
+  .nd-hero__support--minimal {display: grid;gap: 7px;padding: 18px 24px 21px;}
+  .nd-hero__support--minimal .nd-hero__description {font-size: 15px;line-height: 1.55;}
+  .nd-hero__support--minimal .nd-hero__meta {font-size: 11px;margin-top: 2px;line-height: 1.6;}
+  body[data-slug="nadaum-self-management"] .nd-hero__support--minimal .nd-actions {display: none;}
+  body[data-slug="nadaum-self-management"] .nal-sticky-cta {gap: 0;padding: 9px 16px max(10px, env(safe-area-inset-bottom));}
+  body[data-slug="nadaum-self-management"] .nal-sticky-cta > div:first-child {display: none;}
+  body[data-slug="nadaum-self-management"] .nal-sticky-cta > .nal-button--primary {display: flex;align-items: center;justify-content: center;flex: 1;min-height: 48px;}
+}
