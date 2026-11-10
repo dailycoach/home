@@ -55,9 +55,9 @@ const pages = [
   },
   {
     route: '/nal/class/', attrs: 'data-page="listing" data-collection="programs" data-type="class"',
-    title: '나다움 멤버십·FT 전문과정·원데이클래스 | NAL CLASS · 날빛', description: '19–39세 청년을 위한 나다움 자기경영 멤버십부터 FT 전문 코칭과정과 원데이클래스까지. 나에게 맞는 배움을 만나보세요.',
+    title: '나다움 멤버십·코치양성과정·원데이클래스 | NAL CLASS · 날빛', description: '19–39세 청년을 위한 나다움 자기경영 멤버십부터 코치양성과정과 원데이클래스까지. 나에게 맞는 배움을 만나보세요.',
     label: 'NAL CLASS', heading: '배우고 실행하며,\n내 삶에서 현장까지',
-    copy: '나다움을 찾아가는 1년 멤버십부터 원데이클래스와 FT·전문가 과정까지. 나에게 맞는 배움을 만나보세요.', schemaType: 'CollectionPage'
+    copy: '나다움을 찾아가는 1년 멤버십부터 원데이클래스와 코치양성과정까지. 나에게 맞는 배움을 만나보세요.', schemaType: 'CollectionPage'
   },
   {
     route: '/nal/shop/', attrs: 'data-page="listing" data-collection="products"',
@@ -114,7 +114,7 @@ const text = (item, ...keys) => keys.map((key) => item?.[key]).find((value) => t
 
 for (const item of publicItems(programs)) {
   const gather = item.type === 'gather';
-  const label = gather ? 'NAL GATHER' : item.track === 'professional' ? 'NAL CLASS / FT 전문과정' : 'NAL CLASS';
+  const label = gather ? 'NAL GATHER' : item.track === 'professional' ? 'NAL CLASS / 코치양성과정' : 'NAL CLASS';
   pages.push({
     route: `/nal/${gather ? 'gather' : 'class'}/${item.slug}/`,
     attrs: `data-page="detail" data-collection="programs" data-type="${item.type}" data-slug="${item.slug}"`,
@@ -263,9 +263,9 @@ const digitalProduct = (item) => item.deliveryType === 'digital' || ['pdf', 'dig
 function snapshotCard(item, collection = 'programs') {
   const professional = item.track === 'professional';
   const type = collection === 'products' ? 'product' : item.type;
-  const label = collection === 'products' ? 'NAL 마음도구' : professional ? 'NAL CLASS / FT 전문과정' : item.type === 'gather' ? 'NAL GATHER' : 'NAL CLASS';
+  const label = collection === 'products' ? 'NAL 마음도구' : professional ? 'NAL CLASS / 코치양성과정' : item.type === 'gather' ? 'NAL GATHER' : 'NAL CLASS';
   const price = professional ? '일정 · 신청 · 비용 개별 문의' : Number.isFinite(item.price) ? item.price === 0 ? '무료 PDF' : `${item.price.toLocaleString('ko-KR')}원` : '일정·참가비 확정 후 공개';
-  return `<article class="nal-card nal-card--${type}${professional ? ' nal-card--professional' : ''}"><div class="nal-card__media">${fallbackImage(item, collection)}</div><div class="nal-card__body"><p class="nal-card__eyebrow">${label}</p><h3 class="nal-card__title"><a href="${itemRoute(collection, item)}">${escapeHtml(item.title)}</a></h3><p class="nal-card__summary">${escapeHtml(item.summary)}</p><div class="nal-card__footer"><span class="nal-card__delivery">${escapeHtml(price)}</span><span aria-hidden="true">→</span></div></div></article>`;
+  return `<article class="nal-card nal-card--${type}${professional ? ' nal-card--professional' : ''}"><div class="nal-card__media">${fallbackImage(item, collection)}</div><div class="nal-card__body"><p class="nal-card__eyebrow">${label}</p><h3 class="nal-card__title"><a href="${itemRoute(collection, item)}">${escapeHtml(item.title)}</a></h3>${professional && item.educationCenter ? `<p class="nal-card__center">${escapeHtml(item.educationCenterRole || "교육모델·교재")} · ${escapeHtml(item.educationCenter)}</p>` : ""}<p class="nal-card__summary">${escapeHtml(item.summary)}</p><div class="nal-card__footer"><span class="nal-card__delivery">${escapeHtml(price)}</span><span aria-hidden="true">→</span></div></div></article>`;
 }
 
 function nadaumSnapshot(page) {
@@ -283,7 +283,7 @@ function nadaumSnapshot(page) {
   const classes = existingPrograms.filter((item) => item.type === 'class' && item.track !== 'membership');
   const professional = classes.filter((item) => item.track === 'professional');
   const general = classes.filter((item) => item.track !== 'professional');
-  const professionalList = professional.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / FT · PROFESSIONAL COURSES</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>김철웅 코치가 진행하는 전문 교육을 소개합니다. 모듈별 내용과 교육시간, 참여 대상, 개설 문의를 한곳에서 확인하세요.</p></div><span class="nal-ft-listing-count">${String(professional.length).padStart(2, '0')} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professional.map((item) => snapshotCard(item)).join('')}</div>` : '';
+  const professionalList = professional.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / COACH TRAINING</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>알아차림코칭센터와 프레이즈코칭센터의 교육모델을 토대로, 김철웅 코치가 진행하는 코치양성과정을 소개합니다. 교육내용과 참여 대상, 개설 문의를 확인하세요.</p></div><span class="nal-ft-listing-count">${String(professional.length).padStart(2, '0')} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professional.map((item) => snapshotCard(item)).join('')}</div>` : '';
   const generalList = general.length ? `<div class="nal-ft-listing-intro nal-ft-listing-intro--general"><div><p class="nal-eyebrow">02 / ONE DAY & WORKSHOPS</p><h2>지금 내 삶에 맞는, 한 번의 경험.</h2></div></div><div class="card-grid">${general.map((item) => snapshotCard(item)).join('')}</div>` : '';
   return `${pageIntro(page, 'nal-page-hero')}<div class="nal-container">${nadaumRenderer.feature(nadaum)}</div><section class="nal-section nal-listing"><div class="nal-container">${professionalList}${generalList}</div></section>`;
 }
@@ -321,7 +321,7 @@ function fallbackExtras(page) {
     if (!item) return '';
     if (collectionName === 'programs' && item.track === 'professional') {
       const modules = Array.isArray(item.curriculum) ? item.curriculum : [];
-      return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose"><p>${escapeHtml(item.description)}</p><p><strong>${escapeHtml(item.duration || '교육시간 개설 시 안내')}</strong></p><p>교육 일정 · 신청 기간 · 수강료: <strong>개별 문의</strong></p><h2>교육 커리큘럼</h2><ol>${modules.map((module) => `<li><strong>${escapeHtml(module.title)}</strong> — ${escapeHtml(module.detail)}</li>`).join('')}</ol>${item.accreditationNote ? `<h2>인정·수료 안내</h2><p>${escapeHtml(item.accreditationNote)}</p>` : ''}<p><a href="/nal/class/">NAL CLASS 전체 과정 보기</a></p></div></section>`;
+      return `<section class="nal-section nal-static-fallback"><div class="nal-container nal-prose"><p>${escapeHtml(item.description)}</p>${item.educationCenter ? `<p><strong>${escapeHtml(item.educationCenterRole || "교육모델·교재")} 출처: ${escapeHtml(item.educationCenter)}</strong></p>` : ""}<p><strong>${escapeHtml(item.duration || '교육시간 개설 시 안내')}</strong></p><p>교육 일정 · 신청 기간 · 수강료: <strong>개별 문의</strong></p><h2>교육 커리큘럼</h2><ol>${modules.map((module) => `<li><strong>${escapeHtml(module.title)}</strong> — ${escapeHtml(module.detail)}</li>`).join('')}</ol>${item.accreditationNote ? `<h2>인정·수료 안내</h2><p>${escapeHtml(item.accreditationNote)}</p>` : ''}<p><a href="/nal/class/">NAL CLASS 전체 과정 보기</a></p></div></section>`;
     }
     const source = item.sourceUrl ? `<a class="nal-button nal-button--secondary" href="${escapeHtml(item.sourceUrl)}">확인된 원문 보기</a>` : '';
     const freePdf = collectionName === 'products' && item.price === 0 && item.stockStatus === 'available' && /^\/nal\/assets\/downloads\/free\/[a-z0-9-]+\.pdf$/.test(item.purchaseUrl || '');
@@ -378,12 +378,12 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${page.route === '/nal/' || page.route === '/nal/class/' || page.route.includes('-professional/') ? '\n  <link rel="stylesheet" href="/nal/assets/css/nal-ft-editorial.css?v=nal-blue-20261110">' : ''}${page.nadaumView ? '\n  <link rel="stylesheet" href="/nal/assets/css/nadaum.css?v=nadaum-20261110">' : ''}${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${page.route === '/nal/' || page.route === '/nal/class/' || page.route.includes('-professional/') ? '\n  <link rel="stylesheet" href="/nal/assets/css/nal-ft-editorial.css?v=nal-coach-training-20261110">' : ''}${page.nadaumView ? '\n  <link rel="stylesheet" href="/nal/assets/css/nadaum.css?v=nadaum-20261110">' : ''}${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/product-routes.js?v=nal-positive-writing-v2-20261011" defer></script>
   <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
   <script src="/nal/assets/js/backend.js" defer></script>
-  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}${page.nadaumView ? '<script src="/nal/assets/js/nadaum.js?v=nadaum-20261110" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=${page.nadaumView ? 'nadaum-20261110' : 'nal-blue-20261110'}" defer></script>
+  ${page.launch ? '<script src="/nal/assets/js/launch.js?v=awareness-ladder-1" defer></script>\n  ' : ''}${page.nadaumView ? '<script src="/nal/assets/js/nadaum.js?v=nadaum-20261110" defer></script>\n  ' : ''}<script src="/nal/assets/js/app.js?v=nal-coach-training-20261110" defer></script>
 </head>
 <body ${page.attrs}>
   <a class="nal-skip-link" href="#main-content">본문으로 바로가기</a>

@@ -143,6 +143,16 @@
     word-break: keep-all;
   }
   .nal-card--professional .nal-card__title a {color:#171717}
+  .nal-card--professional .nal-card__center {
+    margin: .35rem 0 .8rem;
+    color: #1644f5;
+    font-family: var(--ft-font);
+    font-size: .82rem;
+    font-weight: 800;
+    line-height: 1.55;
+    letter-spacing: -.025em;
+    word-break: keep-all;
+  }
   .nal-card--professional .nal-card__summary {
     min-height: 0;
     color: #393939;
@@ -222,6 +232,19 @@
     font-size: clamp(1.05rem, 1.75vw, 1.4rem);
   }
   .nal-ft-hero__summary {max-width:34rem;color:#373737;line-height:1.85;font-size:.98rem}
+  .nal-ft-hero__center {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .35rem .8rem;
+    margin: 1rem 0 .3rem;
+    color: #444;
+    font-family: var(--ft-font);
+    font-size: .87rem;
+    line-height: 1.6;
+  }
+  .nal-ft-hero__center span {font-weight: 600}
+  .nal-ft-hero__center strong {color:#1644f5;font-weight:800}
   .nal-ft-hero__duration {
     display: inline-flex;
     gap: .6rem;

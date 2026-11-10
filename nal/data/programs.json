@@ -803,7 +803,9 @@
       "featuredOrder": 0,
       "published": true,
       "createdAt": "2026-11-10",
-      "updatedAt": "2026-11-10"
+      "updatedAt": "2026-11-10",
+      "educationCenter": "알아차림코칭센터",
+      "educationCenterRole": "원 교육모델·교재"
     },
     {
       "id": "praise-coaching-professional",
@@ -921,7 +923,9 @@
       "featuredOrder": 1,
       "published": true,
       "createdAt": "2026-11-10",
-      "updatedAt": "2026-11-10"
+      "updatedAt": "2026-11-10",
+      "educationCenter": "프레이즈코칭센터",
+      "educationCenterRole": "프로그램 개발·교재"
     },
     {
       "id": "awareness-coaching-professional",
@@ -1035,7 +1039,9 @@
       "featuredOrder": 2,
       "published": true,
       "createdAt": "2026-11-10",
-      "updatedAt": "2026-11-10"
+      "updatedAt": "2026-11-10",
+      "educationCenter": "알아차림코칭센터",
+      "educationCenterRole": "교육모델·교재"
     },
     {
       "id": "nlp-coaching-professional",
@@ -1149,7 +1155,9 @@
       "featuredOrder": 3,
       "published": true,
       "createdAt": "2026-11-10",
-      "updatedAt": "2026-11-10"
+      "updatedAt": "2026-11-10",
+      "educationCenter": "알아차림코칭센터",
+      "educationCenterRole": "교육모델·교재"
     },
     {
       "id": "global-coaching-competency-professional",
@@ -1263,7 +1271,9 @@
       "featuredOrder": 4,
       "published": true,
       "createdAt": "2026-11-10",
-      "updatedAt": "2026-11-10"
+      "updatedAt": "2026-11-10",
+      "educationCenter": "알아차림코칭센터",
+      "educationCenterRole": "교육자료 기반"
     },
     {
       "id": "question-card-personal-sentence-class",

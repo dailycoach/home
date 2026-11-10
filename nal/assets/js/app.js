@@ -351,12 +351,13 @@
     return `<article class="nal-card nal-card--${item.type}${professional ? " nal-card--professional" : ""}" data-catalog-id="${escapeHtml(item.id)}">
       <div class="nal-card__media">
         ${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { mobileSrc: item.coverImageMobile, width: 1600, height: 1000 })}
-        <div class="nal-card__badges"><span class="nal-badge ${badgeClass(item)}">${professional ? "FT · 전문과정" : item.type === "gather" ? "커뮤니티" : "클래스"}</span><span class="nal-badge--status">${escapeHtml(statusLabel(item.status))}</span></div>
+        <div class="nal-card__badges"><span class="nal-badge ${badgeClass(item)}">${professional ? "코치양성과정" : item.type === "gather" ? "커뮤니티" : "클래스"}</span><span class="nal-badge--status">${escapeHtml(statusLabel(item.status))}</span></div>
         <div class="nal-card__wish">${wishButton("programs", item)}</div>
       </div>
       <div class="nal-card__body">
-        <p class="nal-card__eyebrow">${item.type === "gather" ? "NAL GATHER" : professional ? "NAL CLASS / PROFESSIONAL" : "NAL CLASS"}</p>
+        <p class="nal-card__eyebrow">${item.type === "gather" ? "NAL GATHER" : professional ? "NAL CLASS / 코치양성과정" : "NAL CLASS"}</p>
         <h3 class="nal-card__title"><a href="${route}">${escapeHtml(item.title)}</a></h3>
+        ${professional && item.educationCenter ? `<p class="nal-card__center">${escapeHtml(item.educationCenterRole || "교육모델·교재")} · ${escapeHtml(item.educationCenter)}</p>` : ""}
         <p class="nal-card__summary">${escapeHtml(item.summary)}</p>
         ${facts.length ? `<div class="nal-card__details">${facts.map((fact) => `<span class="nal-card__detail"><span aria-hidden="true">·</span><span>${escapeHtml(fact)}</span></span>`).join("")}</div>` : ""}
         <div class="nal-card__footer"><span class="nal-card__delivery">${professional ? "일정 · 신청 · 비용 개별 문의" : price || "일정·참가비 확정 후 공개"}</span><span aria-hidden="true">→</span></div>
@@ -653,7 +654,7 @@
     const professionalCourses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => item.track === "professional") : [];
     const generalClasses = collection === "programs" && pageType === "class" ? listedItems.filter((item) => !["professional", "membership"].includes(item.track)) : [];
     const classSections = professionalCourses.length || generalClasses.length
-      ? `${professionalCourses.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / FT · PROFESSIONAL COURSES</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>김철웅 코치가 진행하는 전문 교육을 소개합니다. 모듈별 내용과 교육시간, 참여 대상, 개설 문의를 한곳에서 확인하세요.</p></div><span class="nal-ft-listing-count">${professionalCourses.length.toString().padStart(2, "0")} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professionalCourses.map(card).join("")}</div>` : ""}${generalClasses.length ? `<div class="nal-ft-listing-intro nal-ft-listing-intro--general"><div><p class="nal-eyebrow">02 / ONE DAY & WORKSHOPS</p><h2>지금 내 삶에 맞는, 한 번의 경험.</h2></div></div><div class="card-grid">${generalClasses.map(card).join("")}</div>` : ""}`
+      ? `${professionalCourses.length ? `<div class="nal-ft-listing-intro"><div><p class="nal-eyebrow">01 / COACH TRAINING</p><h2>배운 것을, 현장에서 쓰는 코칭으로.</h2><p>알아차림코칭센터와 프레이즈코칭센터의 교육모델을 토대로, 김철웅 코치가 진행하는 코치양성과정을 소개합니다. 교육내용과 참여 대상, 개설 문의를 확인하세요.</p></div><span class="nal-ft-listing-count">${professionalCourses.length.toString().padStart(2, "0")} COURSES</span></div><div class="card-grid nal-ft-course-grid">${professionalCourses.map(card).join("")}</div>` : ""}${generalClasses.length ? `<div class="nal-ft-listing-intro nal-ft-listing-intro--general"><div><p class="nal-eyebrow">02 / ONE DAY & WORKSHOPS</p><h2>지금 내 삶에 맞는, 한 번의 경험.</h2></div></div><div class="card-grid">${generalClasses.map(card).join("")}</div>` : ""}`
       : "";
     root.innerHTML = `
       ${essentialHtml}${monthlyGatherPromo}
@@ -762,15 +763,16 @@
     const curriculum = asArray(item.curriculum);
     root.innerHTML = `
       <section class="nal-ft-hero nal-ft-hero--${escapeHtml(item.id.split("-")[0])}">
-        <div class="nal-container"><nav class="nal-ft-breadcrumb" aria-label="현재 위치"><a href="/nal/class/">NAL CLASS</a><span aria-hidden="true">/</span><span>FT · 전문과정</span></nav></div>
+        <div class="nal-container"><nav class="nal-ft-breadcrumb" aria-label="현재 위치"><a href="/nal/class/">NAL CLASS</a><span aria-hidden="true">/</span><span>코치양성과정</span></nav></div>
         <div class="nal-container nal-ft-hero__layout">
           <div class="nal-ft-hero__copy">
             <p class="nal-ft-overline">NAL CLASS <span aria-hidden="true">✳</span> COACHING STUDIO</p>
             <p class="nal-ft-hero__issue">FIELD STUDY&nbsp; / &nbsp;${String((item.featuredOrder ?? 0) + 1).padStart(2, "0")}</p>
-            <div class="nal-ft-hero__tags"><span>FT · 전문과정</span><span>${escapeHtml(statusLabel(item.status))}</span></div>
+            <div class="nal-ft-hero__tags"><span>코치양성과정</span><span>${escapeHtml(statusLabel(item.status))}</span></div>
             <h1>${escapeHtml(item.title)}</h1>
             <p class="nal-ft-hero__lead">${escapeHtml(item.subtitle || item.summary)}</p>
             <p class="nal-ft-hero__summary">${escapeHtml(item.summary)}</p>
+            ${item.educationCenter ? `<p class="nal-ft-hero__center"><span>${escapeHtml(item.educationCenterRole || "교육모델·교재")} 출처</span><strong>${escapeHtml(item.educationCenter)}</strong></p>` : ""}
             ${item.duration ? `<p class="nal-ft-hero__duration"><span aria-hidden="true">↗</span> ${escapeHtml(item.duration)}</p>` : ""}
             <div class="nal-ft-hero__actions">${contactButton}<a class="nal-ft-text-link" href="#curriculum">커리큘럼 보기 <span aria-hidden="true">↓</span></a></div>
             <p class="nal-ft-hero__honest">모집 및 운영 조건은 개별 문의로 안내합니다. 교육 인정·수료 기준은 기수별로 확인해 주세요.</p>
@@ -793,7 +795,7 @@
         </article>
         <aside class="nal-ft-aside"><div class="nal-ft-enquiry"><p class="nal-eyebrow">ASK ABOUT THIS CLASS</p><h2>다음 배움이<br>궁금하다면.</h2><p>일정과 신청, 비용은 교육 목적과 운영 기수에 따라 개별 안내합니다.</p><dl>${facts.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>${contactButton}${contactLink ? `<p class="nal-ft-contact-note">전화 문의 ${contactLink}</p>` : ""}<small>교육 운영 방식·수료 기준·취소 및 환불 조건도 문의 시 함께 안내합니다.</small></div></aside>
       </div>
-      ${related.length ? `<section class="nal-ft-related nal-section"><div class="nal-container"><p class="nal-eyebrow">KEEP LEARNING</p><div class="nal-ft-related__heading"><h2>다른 FT·전문과정</h2><a href="/nal/class/?category=${encodeURIComponent("코치·진행자")}">전문과정 전체 보기 →</a></div><div class="card-grid">${related.map(programCard).join("")}</div></div></section>` : ""}`;
+      ${related.length ? `<section class="nal-ft-related nal-section"><div class="nal-container"><p class="nal-eyebrow">KEEP LEARNING</p><div class="nal-ft-related__heading"><h2>다른 코치양성과정</h2><a href="/nal/class/?category=${encodeURIComponent("코치·진행자")}">코치양성과정 전체 보기 →</a></div><div class="card-grid">${related.map(programCard).join("")}</div></div></section>` : ""}`;
     renderStickyCta("개설 문의", "교육 문의하기", inquiryUrl);
   }
 

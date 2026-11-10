@@ -15,8 +15,8 @@
     },
     {
       "path": "/nal/class/",
-      "title": "나다움 멤버십·FT 전문과정·원데이클래스 | NAL CLASS · 날빛",
-      "description": "19–39세 청년을 위한 나다움 자기경영 멤버십부터 FT 전문 코칭과정과 원데이클래스까지. 나에게 맞는 배움을 만나보세요.",
+      "title": "나다움 멤버십·코치양성과정·원데이클래스 | NAL CLASS · 날빛",
+      "description": "19–39세 청년을 위한 나다움 자기경영 멤버십부터 코치양성과정과 원데이클래스까지. 나에게 맞는 배움을 만나보세요.",
       "indexable": true
     },
     {
@@ -147,31 +147,31 @@
     },
     {
       "path": "/nal/class/stop-coaching-professional/",
-      "title": "작전타임 S-TOP 코칭 | NAL CLASS / FT 전문과정 · 날빛",
+      "title": "작전타임 S-TOP 코칭 | NAL CLASS / 코치양성과정 · 날빛",
       "description": "알아차림에서 질문·경청·피드백·실전 코칭까지 연결하는 24시간 전문 코칭 워크숍",
       "indexable": true
     },
     {
       "path": "/nal/class/praise-coaching-professional/",
-      "title": "프레이즈(PRAISE) 코칭 | NAL CLASS / FT 전문과정 · 날빛",
+      "title": "프레이즈(PRAISE) 코칭 | NAL CLASS / 코치양성과정 · 날빛",
       "description": "크리스천 코치·목회자·공동체 리더를 위한 영성 기반 PRAISE 코칭 대화와 실습",
       "indexable": true
     },
     {
       "path": "/nal/class/awareness-coaching-professional/",
-      "title": "알아차림코칭 | NAL CLASS / FT 전문과정 · 날빛",
+      "title": "알아차림코칭 | NAL CLASS / 코치양성과정 · 날빛",
       "description": "현존·경청·감정과 욕구의 알아차림을 실제 코칭 장면에서 훈련하는 심화 과정",
       "indexable": true
     },
     {
       "path": "/nal/class/nlp-coaching-professional/",
-      "title": "코칭력 향상을 위한 NLP | NAL CLASS / FT 전문과정 · 날빛",
+      "title": "코칭력 향상을 위한 NLP | NAL CLASS / 코치양성과정 · 날빛",
       "description": "라포·표상체계·언어 패턴·관점 전환 등 NLP 도구를 코칭 대화에 적용하는 실습 과정",
       "indexable": true
     },
     {
       "path": "/nal/class/global-coaching-competency-professional/",
-      "title": "글로벌 코칭역량 | NAL CLASS / FT 전문과정 · 날빛",
+      "title": "글로벌 코칭역량 | NAL CLASS / 코치양성과정 · 날빛",
       "description": "ICF 핵심역량의 의미를 실제 코칭·관찰·피드백·SJT 판단 연습으로 연결하는 전문 과정",
       "indexable": true
     },
