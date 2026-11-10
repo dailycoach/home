@@ -775,7 +775,7 @@
             <div class="nal-ft-hero__actions">${contactButton}<a class="nal-ft-text-link" href="#curriculum">커리큘럼 보기 <span aria-hidden="true">↓</span></a></div>
             <p class="nal-ft-hero__honest">모집 및 운영 조건은 개별 문의로 안내합니다. 교육 인정·수료 기준은 기수별로 확인해 주세요.</p>
           </div>
-          <figure class="nal-ft-hero__visual">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { eager: true, width: 1600, height: 1000 })}<figcaption><span>NAL FIELD NOTES</span><span>EDITORIAL VISUAL CONCEPT</span></figcaption></figure>
+          <figure class="nal-ft-hero__visual">${imageMarkup(item.coverImage, item.coverImageAlt || `${item.title} 대표 이미지`, "", { eager: true, width: 1600, height: 1000 })}<figcaption><span>NAL CLASS / FIELD NOTES</span><span>선택에서 실행으로</span></figcaption></figure>
         </div>
       </section>
       <section class="nal-ft-fact-band" aria-label="과정 핵심 정보"><div class="nal-container nal-ft-fact-band__grid">${facts.map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`).join("")}</div></section>
