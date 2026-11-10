@@ -1374,7 +1374,7 @@
       "duration": "회당 2시간",
       "frequency": "월 4회 · 클래스 → 실기·나눔 → 클래스 → 실기·나눔",
       "sessionCount": 48,
-      "capacity": null,
+      "capacity": 20,
       "remainingSeats": null,
       "price": 360000,
       "originalPrice": null,
@@ -1871,7 +1871,9 @@
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
-          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi",
+          "capacity": 20,
+          "recruitmentNote": "정원 20명 · 선착순 모집"
         },
         {
           "id": "experience",
@@ -1892,7 +1894,9 @@
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
-          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi",
+          "capacity": 20,
+          "recruitmentNote": "정원 20명 · 선착순 모집"
         },
         {
           "id": "resources",
@@ -1913,7 +1917,9 @@
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
-          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi",
+          "capacity": 20,
+          "recruitmentNote": "정원 20명 · 선착순 모집"
         },
         {
           "id": "contribution",
@@ -1934,7 +1940,9 @@
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
-          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi",
+          "capacity": 20,
+          "recruitmentNote": "정원 20명 · 선착순 모집"
         }
       ],
       "enrollment": {
@@ -1943,7 +1951,9 @@
         "monthsPerPhase": 3,
         "monthlyEquivalent": 120000,
         "sessionsPerPhase": 12,
-        "hoursPerPhase": 24
+        "hoursPerPhase": 24,
+        "capacityPerPhase": 20,
+        "recruitmentNote": "정원 20명 · 선착순 모집"
       }
     }
   ]
