@@ -157,7 +157,6 @@
 .nd-plans {display: grid;grid-template-columns: repeat(2,minmax(0,1fr));border: 1px solid var(--nd-line);}
 .nd-plan {padding: 40px 42px;}
 .nd-plan + .nd-plan {border-left: 1px solid var(--nd-line);}
-.nd-plan--annual {background: var(--nd-soft);}
 .nd-plan__top {display: flex;justify-content: space-between;gap: 15px;}
 .nd-plan__label {font-size: 11px;font-weight: 700;color: var(--nd-blue);}
 .nd-plan h3 {font-size: 25px;}
@@ -167,8 +166,6 @@
 .nd-plan ul {list-style: none;padding: 24px 0 28px;font-size: 13px;line-height: 2;}
 .nd-plan li::before {content: "·";margin-right: 9px;color: var(--nd-blue);font-weight: 800;}
 .nd-plan .nd-button {display: flex;width: 100%;}
-.nd .nd-plan__saving {font-size: 11px;margin-top: 17px;color: var(--nd-muted);}
-.nd-plan__saving strong {color: var(--nd-blue);}
 .nd-membership__note {font-size: 13px;color: var(--nd-muted);line-height: 1.9;margin-top: 25px !important;}
 .nd-membership__note a {text-underline-offset: 4px;overflow-wrap: anywhere;}
 .nd-faq {border-top: 1px solid var(--nd-line);}
@@ -480,3 +477,27 @@
   .nd-operating dd {font-size: 14px;}
   .nd-feature .nd-feature__meeting {font-size: 13px !important;}
 }
+
+/* Phase enrollment */
+.nd .nd-enrollment-intro {max-width: 780px; margin: -12px 0 32px; color: var(--nd-muted); line-height: 1.9;}
+.nd-plans--phases {gap: 20px; border: 0;}
+.nd-plans--phases .nd-plan {display: flex; flex-direction: column; border: 1px solid var(--nd-line); min-width: 0;}
+.nd-plans--phases .nd-plan:first-child {border-color: var(--nd-blue);}
+.nd-plan--phase .nd-plan__top {align-items: baseline; flex-wrap: wrap; gap: 8px;}
+.nd-plan--phase .nd-plan__top .nd-eyebrow {margin-bottom: 18px;}
+.nd-plan--phase h3 {font-size: clamp(24px, 2.4vw, 31px); line-height: 1.4; word-break: keep-all;}
+.nd .nd-plan__who {margin-top: 16px; font-size: 14px; line-height: 1.8; color: var(--nd-muted);}
+.nd-plan--phase .nd-plan__topics {padding: 20px 0; font-size: 14px;}
+.nd-plan__outcome {background: var(--nd-soft); padding: 18px 20px; margin-bottom: 26px;}
+.nd-plan__outcome strong {font-size: 12px; color: var(--nd-blue);}
+.nd .nd-plan__outcome p {margin-top: 7px; font-size: 14px; line-height: 1.8;}
+.nd-plan__action {margin-top: auto;}
+.nd-plan__action .nd-plan__price {margin-bottom: 8px !important;}
+.nd .nd-plan__duration {font-size: 13px; color: var(--nd-muted); margin-bottom: 20px;}
+.nd-enrollment-guide {margin-top: 28px; padding: 26px 0 0; border-top: 1px solid var(--nd-line);}
+.nd-enrollment-guide h3 {font-size: 21px;}
+.nd .nd-enrollment-guide p {font-size: 14px; line-height: 1.9; color: var(--nd-muted); margin-top: 10px;}
+.nd-enrollment-guide .nd-text-link {margin-top: 18px;}
+@media (max-width: 760px) { .nd-plans--phases {gap: 16px;} .nd-plan--phase h3 {font-size: 25px;} .nd .nd-enrollment-intro {font-size: 14px;} .nd-plan__outcome {padding: 16px;} .nd-enrollment-guide h3 {font-size: 19px;} }
+@media print { .nd-plan--phase {break-inside: avoid;} }
+

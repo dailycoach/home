@@ -15,6 +15,52 @@
     {id:"resources",title:"가능성에 자원을 쓴다",period:"6–8월",question:"무엇에 자원을 쓰고, 무엇을 계속하거나 멈출 것인가?",description:"쌓인 경험을 근거로 시간과 돈을 배분하고 강점을 기회에 연결합니다."},
     {id:"contribution",title:"함께 기여하고 다음 방향을 정한다",period:"9–11월",question:"어떤 역할로 함께 일하고, 어떤 삶을 이어갈 것인가?",description:"자신의 기여 방식과 앞으로 사용할 선택의 기준을 구체화합니다."}
   ];
+  const enrollmentDefaults = [
+  {
+    "enrollmentTitle": "내 선택의 기준 찾기",
+    "forWhom": "남의 기대에 맞추느라 내 선택을 미뤄왔다면.",
+    "outcome": "미뤄 온 선택 하나를 행동으로 옮기고, 실제 경험에서 나의 기준을 확인합니다.",
+    "topics": [
+      "12월 · 반복되는 선택",
+      "1월 · 목표와 자원",
+      "2월 · 가족의 기대와 내 결정"
+    ],
+    "startLabel": "12월 시작"
+  },
+  {
+    "enrollmentTitle": "생각을 현실에서 시험하기",
+    "forWhom": "진로·일·관계에서 결정을 미루고 있다면.",
+    "outcome": "진로 경험·결과물 제출·대화 중 자신의 과제를 실행하고, 실제 반응에서 다음 선택을 정합니다.",
+    "topics": [
+      "3월 · 진로를 실제로 경험하기",
+      "4월 · 완성하고 평가받기",
+      "5월 · 내 뜻을 말하기"
+    ],
+    "startLabel": "3월 시작"
+  },
+  {
+    "enrollmentTitle": "시간과 돈을 내 가능성에 쓰기",
+    "forWhom": "하고 싶은 일에 쓸 시간과 돈이 늘 부족하다면.",
+    "outcome": "자원 배분·현재 일의 결정·강점을 담은 제안 중 하나를 실행하고, 바뀐 선택의 결과를 평가합니다.",
+    "topics": [
+      "6월 · 시간과 돈의 우선순위",
+      "7월 · 계속·수정·종료의 결정",
+      "8월 · 강점을 기회로 연결하기"
+    ],
+    "startLabel": "6월 시작"
+  },
+  {
+    "enrollmentTitle": "함께 일하고 다음 방향 세우기",
+    "forWhom": "협업에서 같은 역할과 어려움을 반복한다면.",
+    "outcome": "공동의 일에서 자신의 역할을 실행하고, 실제 기여와 한계를 근거로 다음 방향을 정합니다.",
+    "topics": [
+      "9월 · 함께 결과를 만드는 협업",
+      "10월 · 필요한 기여와 소명",
+      "11월 · 다음 삶의 방향"
+    ],
+    "startLabel": "9월 시작"
+  }
+];
   const defaultRows = [
     ["2026.12","내 인생인데, 왜 남의 기준으로 선택할까?","‘나는 원래 이런 사람’이라는 말은 어디서 왔을까","내면화된 평가와 자기표상을 살피며 반복되는 선택의 이유를 배웁니다.","실제 결과로 자기 설명을 고치는 법","행동·결과·해석을 구분하고, 첫 실행에서 얻은 경험으로 판단을 수정합니다.","미뤄온 지원·대화·제안 중 자신이 선택한 행동을 실행합니다.","예상했던 반응과 실제 반응은 어떻게 달랐으며, 나에 대한 설명을 무엇부터 고칠까?"],
     ["2027.01","계획은 많은데, 왜 중요한 일은 늘 밀릴까?","남들이 좋다는 목표와 내가 선택한 목표","인정 욕구와 가치, 순응을 살펴 자신의 목표를 구분합니다.","선택한 목표에 시간과 돈을 쓰는 법","기회비용과 제약을 이해하고 필요한 시간·돈·도움을 실제로 배정합니다.","선택한 일에 필요한 자원을 배정하고 행동합니다.","내가 말한 우선순위와 실제로 자원을 쓴 선택은 일치했는가?"],
@@ -45,12 +91,16 @@
   }
 
   function pricing(p) {
-    const m = (p && p.membership) || {};
+    const e = (p && p.enrollment) || {};
     const number = (value, fallback) => Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : fallback;
-    const monthly = number(m.monthlyPrice, 120000);
-    const annual = number(m.annualPrice, 1000000);
-    const months = number(m.months, 12);
-    return {monthly, annual, months, total: monthly * months, saving: monthly * months - annual};
+    const phase = number(e.pricePerPhase, 360000);
+    const months = number(e.monthsPerPhase, 3);
+    return {phase, months, monthly: number(e.monthlyEquivalent, phase / months), sessions: number(e.sessionsPerPhase, 12), hours: number(e.hoursPerPhase, 24)};
+  }
+
+  function phaseOptions(p) {
+    const rows = p && Array.isArray(p.phases) ? p.phases : [];
+    return phaseDefaults.map((phase, index) => Object.assign({}, phase, enrollmentDefaults[index], rows.find((row) => row.id === phase.id) || {}));
   }
 
   function contact() {
@@ -66,14 +116,14 @@
       <div class="nd-hero__visual">
         <picture class="nd-hero__art"><source media="(max-width: 760px)" srcset="${ASSETS}nal_nadaum_hero_mobile.webp" width="1080" height="1350"><img src="${ASSETS}nal_nadaum_hero_desktop.webp" alt="푸른 길 위로 한 걸음을 내딛는 청년" width="2400" height="1350" fetchpriority="high" decoding="async"></picture>
         <div class="nd-hero__headline"><p class="nd-eyebrow">NAL CLASS · 2026년 12월 시작</p><p class="nd-hero__name">나다움으로 자기경영하기</p><h1 id="nd-title"><span>나답게 살겠다는 말,</span><span>이제 <em>행동으로.</em></span></h1></div>
-        <div class="nd-hero__support"><p class="nd-hero__description">반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><ul class="nd-hero__facts" aria-label="참여 안내"><li>19–39세 청년</li><li>2026.12–2027.11</li><li>월 4회 · 회당 2시간</li></ul><p class="nd-hero__meeting"><strong>${MEETING}</strong><span>${VENUE} · 오프라인</span></p><div class="nd-actions"><a class="nd-button nd-button--blue" href="${isDetail ? "#nd-first-month" : ROOT + "#nd-first-month"}">12월에 배우는 내용${arrow}</a><a class="nd-text-link" href="${isDetail ? "#nd-membership" : ROOT + "#nd-membership"}">멤버십 안내 <span aria-hidden="true">↓</span></a></div><p class="nd-hero__faith">${FAITH}</p></div>
+        <div class="nd-hero__support"><p class="nd-hero__description">반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><ul class="nd-hero__facts" aria-label="참여 안내"><li>19–39세 청년</li><li>단계별 3개월 참여</li><li>월 4회 · 회당 2시간</li></ul><p class="nd-hero__meeting"><strong>${MEETING}</strong><span>${VENUE} · 오프라인</span></p><div class="nd-actions"><a class="nd-button nd-button--blue" href="${isDetail ? "#nd-membership" : ROOT + "#nd-membership"}">단계별 신청 보기${arrow}</a><a class="nd-text-link" href="${isDetail ? "#nd-first-month" : ROOT + "#nd-first-month"}">12월에 배우는 내용 <span aria-hidden="true">↓</span></a></div><p class="nd-hero__faith">${FAITH}</p></div>
       </div>
     </section>`;
   }
 
   function priceStrip(p) {
     const m = pricing(p);
-    return `<div class="nd-price-strip"><div class="nd-wrap nd-price-strip__inner"><p>${MEETING}<br><strong>${VENUE}에서 만납니다.</strong></p><div><span>월 멤버십</span><strong>${money(m.monthly)}<small>원 / 월</small></strong></div><div><span>1년 일시납</span><strong>${money(m.annual)}<small>원 / 년</small></strong>${m.saving > 0 ? `<small>월납 ${escape(m.months)}개월 대비 ${money(m.saving)}원 절약</small>` : ""}</div><a class="nd-text-link" href="${ROOT}#nd-membership">멤버십 안내 ${arrow}</a></div></div>`;
+    return `<div class="nd-price-strip"><div class="nd-wrap nd-price-strip__inner"><p>${MEETING}<br><strong>${VENUE}에서 만납니다.</strong></p><div><span>선택한 단계 · ${m.months}개월</span><strong>${money(m.phase)}<small>원 / 단계</small></strong><small>월 ${money(m.monthly)}원 기준</small></div><div><span>클래스 6회 + 실행 나눔 6회</span><strong>${m.sessions}회<small>총 ${m.hours}시간</small></strong><small>네 단계 중 필요한 단계부터</small></div><a class="nd-text-link" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a></div></div>`;
   }
 
   function audience() {
@@ -120,30 +170,32 @@
   function year(p) {
     const months = curriculum(p);
     const supplied = p && Array.isArray(p.phases) && p.phases.length === 4 ? p.phases : phaseDefaults;
-    return `<section class="nd-year nd-section" id="nd-year"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">2026.12 — 2027.11 · 4개의 단계</p><h2>선택의 기준에서<br>나의 기여와 다음 방향까지.</h2></div><p>24번의 클래스와 24번의 실행 나눔.<br>앞선 경험을 다음 선택에 사용합니다.</p></div><div class="nd-year-phases">${supplied.map((phase,index) => `<section class="nd-phase" aria-labelledby="nd-phase-${index + 1}"><div class="nd-phase__heading"><span class="nd-phase__number">${String(index + 1).padStart(2,"0")}</span><div><p class="nd-eyebrow">${escape(phase.period)}</p><h3 id="nd-phase-${index + 1}">${escape(phase.title)}</h3><p>${escape(phase.question)}</p><p class="nd-caption">${escape(phase.description)}</p></div></div><div class="nd-month-cards">${months.slice(index * 3,index * 3 + 3).map((item,position) => `<details class="nd-month-card"${index === 0 && position === 0 ? " open" : ""}><summary><span class="nd-month-card__month">${escape(item.month)}</span><span class="nd-month-card__heading"><strong>${escape(item.title)}</strong><small>클래스 2회 · 실기·나눔 2회</small></span><span class="nd-month-card__toggle" aria-hidden="true"></span></summary><div class="nd-month-card__content"><ol class="nd-month-sessions">${[{key:"class1",label:"01 · 클래스"},{key:"practice1",label:"02 · 실기·나눔"},{key:"class2",label:"03 · 클래스"},{key:"practice2",label:"04 · 실기·나눔"}].map((session) => `<li><span>${session.label}</span><h4>${escape(item[session.key].title)}</h4><p>${escape(item[session.key].detail)}</p></li>`).join("")}</ol><div class="nd-month-application"><p><strong>선택할 수 있는 행동의 예</strong>${escape(item.actionExample)}</p><p><strong>결과 자가평가</strong>${escape(item.evaluation)}</p></div></div></details>`).join("")}</div></section>`).join("")}</div><p class="nd-caption">개인의 행동은 첫 달부터 자신의 상황에 맞게 선택합니다. 같은 행동을 여러 달에 걸쳐 이어가며 각 달의 배움으로 계속·변경·종료를 판단할 수 있습니다.</p></div></section>`;
+    return `<section class="nd-year nd-section" id="nd-year"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">2026.12 — 2027.11 · 4개의 단계</p><h2>선택의 기준에서<br>나의 기여와 다음 방향까지.</h2></div><p>4단계의 클래스와 실행 나눔.<br>필요한 단계의 일정에 맞춰 참여합니다.</p></div><div class="nd-year-phases">${supplied.map((phase,index) => `<section class="nd-phase" aria-labelledby="nd-phase-${index + 1}"><div class="nd-phase__heading"><span class="nd-phase__number">${String(index + 1).padStart(2,"0")}</span><div><p class="nd-eyebrow">${escape(phase.period)}</p><h3 id="nd-phase-${index + 1}">${escape(phase.title)}</h3><p>${escape(phase.question)}</p><p class="nd-caption">${escape(phase.description)}</p></div></div><div class="nd-month-cards">${months.slice(index * 3,index * 3 + 3).map((item,position) => `<details class="nd-month-card"${index === 0 && position === 0 ? " open" : ""}><summary><span class="nd-month-card__month">${escape(item.month)}</span><span class="nd-month-card__heading"><strong>${escape(item.title)}</strong><small>클래스 2회 · 실기·나눔 2회</small></span><span class="nd-month-card__toggle" aria-hidden="true"></span></summary><div class="nd-month-card__content"><ol class="nd-month-sessions">${[{key:"class1",label:"01 · 클래스"},{key:"practice1",label:"02 · 실기·나눔"},{key:"class2",label:"03 · 클래스"},{key:"practice2",label:"04 · 실기·나눔"}].map((session) => `<li><span>${session.label}</span><h4>${escape(item[session.key].title)}</h4><p>${escape(item[session.key].detail)}</p></li>`).join("")}</ol><div class="nd-month-application"><p><strong>선택할 수 있는 행동의 예</strong>${escape(item.actionExample)}</p><p><strong>결과 자가평가</strong>${escape(item.evaluation)}</p></div></div></details>`).join("")}</div></section>`).join("")}</div><p class="nd-caption">참여를 시작한 단계에서 자신의 상황에 맞는 행동을 선택합니다. 같은 행동을 여러 만남에 걸쳐 이어가며 배움과 실제 결과로 계속·변경·종료를 판단할 수 있습니다.</p></div></section>`;
   }
 
   function faith() {
     return `<section class="nd-faith" id="nd-faith"><div class="nd-wrap nd-faith__inner"><p class="nd-eyebrow">이 클래스가 품은 관점</p><div><h2>삶의 질문에서,<br>신앙의 질문까지.</h2><p>${FAITH}</p><p>예수 그리스도 안에서 주어지는 은혜와 새로운 삶, 관계에서의 사랑과 책임, 시간·돈·능력을 사용하는 소명을 성경과 복음의 메시지로 함께 살핍니다.</p><p>자신의 경험과 연결해 질문하고 생각을 나눌 수 있습니다. 신앙에 관한 응답과 나눔은 자율이며, 결과 자가평가는 자신이 선언한 행동과 실제 결과를 중심으로 진행합니다.</p></div></div></section>`;
   }
 
-  function membership(p) {
+  function enrollment(p) {
     const m = pricing(p);
-    return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">MEMBERSHIP</p><h2>내 선택을<br>실제 삶으로 이어갈 시간.</h2></div><p>월 2회 클래스와 격주 실행 나눔으로<br>배움과 선택을 이어갑니다.</p></div><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>기간</dt><dd>2026.12–2027.11</dd></div></dl><div class="nd-plans"><article class="nd-plan"><p class="nd-eyebrow">MONTHLY</p><h3>월 멤버십</h3><p class="nd-plan__price">${money(m.monthly)}<small>원 / 월</small></p><p>지금 다루고 싶은 선택을<br>배움과 실제 실행으로 검토합니다.</p><ul><li>월 2회 이론 클래스</li><li>월 2회 실행 나눔 모임</li><li>회당 2시간 · 월 총 8시간</li></ul><a class="nd-button nd-button--outline" href="${contact()}" target="_blank" rel="noopener noreferrer">월 멤버십 카카오톡 문의 ${arrow}</a></article><article class="nd-plan nd-plan--annual"><div class="nd-plan__top"><p class="nd-eyebrow">ANNUAL</p><span class="nd-plan__label">1년 일시납</span></div><h3>연간 멤버십</h3><p class="nd-plan__price">${money(m.annual)}<small>원 / 년</small></p><p>경험을 누적하며 관계·진로·자원·기여에<br>사용할 나의 기준을 구체화합니다.</p><ul><li>네 단계로 이어지는 12개월 과정</li><li>총 48회 · 96시간</li><li>2026년 12월–2027년 11월</li></ul><a class="nd-button nd-button--blue" href="${contact()}" target="_blank" rel="noopener noreferrer">연간 멤버십 카카오톡 문의 ${arrow}</a>${m.saving > 0 ? `<p class="nd-plan__saving">월납 ${escape(m.months)}개월 ${money(m.total)}원 대비 <strong>${money(m.saving)}원 절약</strong></p>` : ""}</article></div><p class="nd-membership__note">월별 세부 회차와 참여 신청, 이용 조건은 카카오톡 문의방에서 안내합니다.<br><a href="${contact()}" target="_blank" rel="noopener noreferrer">카카오톡 문의방 바로가기</a></p></div></section>`;
+    const phases = phaseOptions(p);
+    const cards = phases.map((phase, index) => `<article class="nd-plan nd-plan--phase" id="nd-enroll-${escape(phase.id)}" aria-labelledby="nd-enroll-title-${index + 1}"><div class="nd-plan__top"><p class="nd-eyebrow">STEP ${String(index + 1).padStart(2,"0")} · ${escape(phase.period)}</p><span class="nd-plan__label">${escape(phase.startLabel)}</span></div><h3 id="nd-enroll-title-${index + 1}">${escape(phase.enrollmentTitle)}</h3><p class="nd-plan__who">${escape(phase.forWhom)}</p><ul class="nd-plan__topics">${phase.topics.map((topic) => `<li>${escape(topic)}</li>`).join("")}</ul><div class="nd-plan__outcome"><strong>이 단계에서 해볼 일</strong><p>${escape(phase.outcome)}</p></div><div class="nd-plan__action"><p class="nd-plan__price">${money(m.phase)}<small>원 / 단계</small></p><p class="nd-plan__duration">${m.months}개월 · ${m.sessions}회 · ${m.hours}시간</p><a class="nd-button nd-button--blue" href="${contact()}" target="_blank" rel="noopener noreferrer" aria-label="${index + 1}단계 ${escape(phase.enrollmentTitle)} 카카오톡 신청 문의">${index + 1}단계 신청 문의 ${arrow}</a></div></article>`).join("");
+    return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">CHOOSE YOUR NEXT STEP</p><h2>지금 필요한 단계부터<br>시작하세요.</h2></div><p>내가 선택한 과제를<br>배움과 실제 행동으로 다루는 3개월.</p></div><p class="nd-enrollment-intro">관심 있는 단계를 고르고 카카오톡으로 신청을 문의하세요. 각 단계는 개별 신청하며, 다음 단계 참여도 직접 선택합니다.</p><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인 · 19–39세</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>한 단계</dt><dd>클래스 6회 + 실행 나눔 6회</dd></div></dl><div class="nd-plans nd-plans--phases">${cards}</div><div class="nd-enrollment-guide"><h3>문의방에 희망 단계만 말씀해 주세요.</h3><p>예: “1단계 참여를 희망합니다.”</p><p>선택한 단계의 일정과 신청·이용 조건을 안내합니다. 교육비는 단계별 ${m.months}개월 ${money(m.phase)}원이며, 월 ${money(m.monthly)}원을 기준으로 산정했습니다.</p><a class="nd-text-link" href="${contact()}" target="_blank" rel="noopener noreferrer">어떤 단계가 맞을지 카카오톡으로 문의하기 ${arrow}</a></div></div></section>`;
   }
 
   function home(p) {
-    return `<div class="nd nd-home">${hero(false)}${priceStrip(p)}${firstMonth(p,true)}<section class="nd-wrap nd-section nd-section--ruled" id="nd-home-method"><div class="nd-section-heading"><div><p class="nd-eyebrow">나다움을 찾는 방식</p><h2>깨닫고, 움직이고,<br>내 결과를 확인합니다.</h2></div><p>내가 중요하게 여기는 것을<br>실제 선택에 사용할 수 있도록.</p></div>${steps(true)}<a class="nd-text-link nd-section-link" href="${ROOT}#nd-method">클래스의 방식 자세히 보기 ${arrow}</a></section><section class="nd-wrap nd-section nd-section--ruled">${rhythm(true)}</section><div class="nd-home-end"><div class="nd-wrap"><p>일요일 오전 10–12시,<br><strong>시메진 카페에서 만납니다.</strong></p><a class="nd-button nd-button--light" href="${ROOT}">12월 클래스 알아보기 ${arrow}</a></div></div></div>`;
+    return `<div class="nd nd-home">${hero(false)}${priceStrip(p)}${firstMonth(p,true)}<section class="nd-wrap nd-section nd-section--ruled" id="nd-home-method"><div class="nd-section-heading"><div><p class="nd-eyebrow">나다움을 찾는 방식</p><h2>깨닫고, 움직이고,<br>내 결과를 확인합니다.</h2></div><p>내가 중요하게 여기는 것을<br>실제 선택에 사용할 수 있도록.</p></div>${steps(true)}<a class="nd-text-link nd-section-link" href="${ROOT}#nd-method">클래스의 방식 자세히 보기 ${arrow}</a></section><section class="nd-wrap nd-section nd-section--ruled">${rhythm(true)}</section><div class="nd-home-end"><div class="nd-wrap"><p>일요일 오전 10–12시,<br><strong>시메진 카페에서 만납니다.</strong></p><a class="nd-button nd-button--light" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a></div></div></div>`;
   }
 
   function feature(p) {
     const m = pricing(p);
-    return `<section class="nd nd-feature" aria-labelledby="nd-feature-title"><a class="nd-feature__image" href="${ROOT}" aria-label="나다움으로 자기경영하기 자세히 보기">${picture("class_card", "나답게 살기 위한 한 걸음을 내딛는 청년", 1200, 1200)}</a><div class="nd-feature__copy"><p class="nd-eyebrow">NAL 대표 클래스 · 2026년 12월 시작</p><h2 id="nd-feature-title">나답게 살겠다는 말,<br><em>이제 행동으로.</em></h2><p class="nd-feature__name">나다움으로 자기경영하기</p><p>반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><p class="nd-feature__meta">19–39세 · 월 4회 · 회당 2시간</p><p class="nd-feature__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-feature__price"><span>월 멤버십 <strong>${money(m.monthly)}원</strong></span><span>1년 일시납 <strong>${money(m.annual)}원</strong></span></div><a class="nd-button nd-button--blue" href="${ROOT}#nd-first-month">12월에 배우는 내용 ${arrow}</a><p class="nd-caption">${FAITH}</p></div></section>`;
+    return `<section class="nd nd-feature" aria-labelledby="nd-feature-title"><a class="nd-feature__image" href="${ROOT}" aria-label="나다움으로 자기경영하기 자세히 보기">${picture("class_card", "나답게 살기 위한 한 걸음을 내딛는 청년", 1200, 1200)}</a><div class="nd-feature__copy"><p class="nd-eyebrow">NAL 대표 클래스 · 2026년 12월 시작</p><h2 id="nd-feature-title">나답게 살겠다는 말,<br><em>이제 행동으로.</em></h2><p class="nd-feature__name">나다움으로 자기경영하기</p><p>반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><p class="nd-feature__meta">19–39세 · 월 4회 · 회당 2시간</p><p class="nd-feature__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-feature__price"><span>3개월 · 12회 <strong>${money(m.phase)}원</strong></span><span>4단계 중 원하는 단계에 신청</span></div><a class="nd-button nd-button--blue" href="${ROOT}#nd-membership">나에게 맞는 단계 고르기 ${arrow}</a><p class="nd-caption">${FAITH}</p></div></section>`;
   }
 
   function card(p) {
     const m = pricing(p);
-    return `<article class="nd nd-card nal-card" data-catalog-id="${escape((p && p.id) || "nadaum-self-management")}"><a class="nd-card__image" href="${ROOT}" tabindex="-1" aria-hidden="true">${picture("class_card", "", 1200, 1200)}</a><div class="nd-card__body"><p class="nd-eyebrow">NAL CLASS · 12월 시작</p><h3><a href="${ROOT}">나다움으로 자기경영하기</a></h3><p>반복되는 선택을 이해하고,<br>실제 행동과 결과에서 나를 알아갑니다.</p><p class="nd-card__meta">19–39세 · 월 4회 · 회당 2시간</p><p class="nd-card__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-card__prices"><span>월 멤버십 <strong>${money(m.monthly)}원</strong></span><span>1년 일시납 <strong>${money(m.annual)}원</strong></span></div></div></article>`;
+    return `<article class="nd nd-card nal-card" data-catalog-id="${escape((p && p.id) || "nadaum-self-management")}"><a class="nd-card__image" href="${ROOT}" tabindex="-1" aria-hidden="true">${picture("class_card", "", 1200, 1200)}</a><div class="nd-card__body"><p class="nd-eyebrow">NAL CLASS · 12월 시작</p><h3><a href="${ROOT}">나다움으로 자기경영하기</a></h3><p>반복되는 선택을 이해하고,<br>실제 행동과 결과에서 나를 알아갑니다.</p><p class="nd-card__meta">19–39세 · 월 4회 · 회당 2시간</p><p class="nd-card__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-card__prices"><span>3개월 · 12회 <strong>${money(m.phase)}원</strong></span><span>단계별 신청 <strong>4개의 주제</strong></span></div></div></article>`;
   }
 
   function detail(p) {
@@ -154,11 +206,13 @@
       ["클래스와 실행 나눔은 어떻게 다른가요?", "클래스는 개념과 사례, 판단법을 배우고 자신의 삶에 적용하는 시간으로 티칭 80%·코칭 20%로 진행합니다. 격주로 이어지는 실행 나눔에서는 실제로 한 행동과 나타난 결과를 살피고, 서로의 질문을 통해 다음 선택을 정합니다."],
       ["매번 새로운 행동을 정해야 하나요?", "자신이 선택한 행동 하나를 선언하고, 실행에 필요한 n개의 행동으로 스스로 나눕니다. 행동의 종류와 개수, 실행 시점은 본인이 정합니다. 한 번 선언한 행동을 여러 만남과 여러 달에 걸쳐 이어가고 수정할 수 있습니다."],
       ["결과 자가평가는 어떻게 하나요?", "선언한 행동, 실제로 한 행동, 나타난 결과를 비교합니다. 실행하지 못한 부분도 어디까지 했고 무엇이 막혔는지 구체적으로 살핍니다. 결과를 해석할 근거와 자신에 대해 새롭게 알게 된 점을 바탕으로 다음 선택을 정합니다."],
-      ["월 멤버십과 연간 멤버십의 차이는 무엇인가요?", "월 멤버십은 월 " + money(m.monthly) + "원이며 해당 월의 클래스와 실행 나눔에 참여합니다. 연간 멤버십은 1년 일시납 " + money(m.annual) + "원으로, 네 단계의 배움과 실행을 12개월 동안 이어갑니다. " + (m.saving > 0 ? "월납 " + m.months + "개월 합계 " + money(m.total) + "원 대비 " + money(m.saving) + "원을 절약합니다." : "")],
-      ["참여 신청과 이용 조건은 어떻게 확인하나요?", "월·연간 멤버십의 카카오톡 문의 버튼을 누르면 문의방으로 연결됩니다. 월별 세부 회차, 중간 참여, 결석 및 이용 조건을 확인한 뒤 참여를 결정할 수 있습니다."]
+      ["앞 단계를 듣지 않아도 참여할 수 있나요?", "네. 원하는 단계의 시작 일정에 맞춰 참여할 수 있습니다. 각 단계 첫 클래스에서 행동 하나 선언하기, 필요한 n개로 나누기, 실행 결과 평가하기의 진행 방식을 함께 익힙니다. 단계가 진행 중일 때의 참여 가능 여부는 문의해 주세요."],
+      ["한 단계의 교육비와 구성은 어떻게 되나요?", "선택한 단계의 교육비는 3개월 " + money(m.phase) + "원입니다. 월 " + money(m.monthly) + "원을 기준으로 산정했으며, 클래스 6회와 실행 나눔 6회로 총 12회·24시간을 함께합니다. 각 단계는 개별 신청하며 다음 단계 참여는 직접 선택합니다."],
+      ["신청은 어떻게 하나요?", "관심 있는 단계의 신청 문의 버튼을 누르면 카카오톡 문의방으로 연결됩니다. 희망하는 단계만 말씀해 주세요. 예: ‘1단계 참여를 희망합니다.’ 세부 일정과 참여·이용 조건을 안내합니다."]
     ];
-    return `<div class="nd nd-detail">${hero(true)}<nav class="nd-subnav" aria-label="클래스 소개 목차"><div class="nd-wrap"><a href="#nd-first-month">12월에 배우는 것</a><a href="#nd-method">진행 방식</a><a href="#nd-coach">함께할 코치</a><a href="#nd-year">12개월 과정</a><a href="#nd-membership">시간·장소·멤버십</a></div></nav>${audience()}${firstMonth(p,false)}${method()}${sharing()}${coach()}${year(p)}${faith()}${membership(p)}<section class="nd-wrap nd-section nd-faq" id="nd-faq"><div class="nd-section-heading"><div><p class="nd-eyebrow">참여 전 궁금한 점</p><h2>자주 묻는 질문</h2></div></div><div class="nd-faq__list">${faq.map(([q, a]) => `<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join("")}</div></section><div class="nd-detail-end"><div class="nd-wrap"><p>올해 내가 했던 선택으로,<br><strong>새해에 바꿀 첫 행동을 정합니다.</strong></p><a class="nd-button nd-button--blue" href="#nd-membership">멤버십 참여 안내 ${arrow}</a></div></div></div>`;
+    return `<div class="nd nd-detail">${hero(true)}<nav class="nd-subnav" aria-label="클래스 소개 목차"><div class="nd-wrap"><a href="#nd-first-month">12월에 배우는 것</a><a href="#nd-method">진행 방식</a><a href="#nd-coach">함께할 코치</a><a href="#nd-year">전체 커리큘럼</a><a href="#nd-membership">단계별 신청</a></div></nav>${audience()}${firstMonth(p,false)}${enrollment(p)}${method()}${sharing()}${coach()}${year(p)}${faith()}<section class="nd-wrap nd-section nd-faq" id="nd-faq"><div class="nd-section-heading"><div><p class="nd-eyebrow">참여 전 궁금한 점</p><h2>자주 묻는 질문</h2></div></div><div class="nd-faq__list">${faq.map(([q, a]) => `<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join("")}</div></section><div class="nd-detail-end"><div class="nd-wrap"><p>올해 내가 했던 선택으로,<br><strong>새해에 바꿀 첫 행동을 정합니다.</strong></p><a class="nd-button nd-button--blue" href="#nd-membership">단계별 신청 보기 ${arrow}</a></div></div></div>`;
   }
 
   window.NALNadaum = Object.freeze({home, feature, detail, card});
 }());
+

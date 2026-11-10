@@ -1332,17 +1332,17 @@
       "id": "nadaum-self-management",
       "slug": "nadaum-self-management",
       "type": "class",
-      "track": "membership",
+      "track": "phased",
       "title": "나다움으로 자기경영하기",
       "subtitle": "나답게 살겠다는 말, 이제 행동으로.",
-      "summary": "진로·관계·시간과 돈 앞에서 반복되는 선택의 이유를 배우고, 직접 선택한 행동과 실제 결과로 나의 기준을 세우는 청년 자기경영 멤버십.",
+      "summary": "진로·관계·시간과 돈 앞에서 반복되는 선택의 이유를 배우고, 직접 선택한 행동과 실제 결과로 나의 기준을 세우는 청년 자기경영 과정. 3개월씩 네 단계로 구성하며, 원하는 단계에 신청할 수 있습니다.",
       "description": "대상관계이론과 심리·정신분석·경제·경영·리더십, 김철웅 코치의 실제 경험을 삶의 선택에 연결합니다. 행동 하나를 스스로 선언하고 필요한 n개의 행동으로 나누어 실행한 뒤, 실제 결과를 평가하며 자신에 대한 이해와 다음 선택을 구체화합니다. 기독교적 관점과 성경·복음을 함께 다룹니다.",
       "category": "라이프",
       "tags": [
         "나다움",
         "청년",
         "자기경영",
-        "멤버십",
+        "단계별 신청",
         "선택과 실행",
         "결과 자기평가",
         "기독교",
@@ -1376,13 +1376,8 @@
       "sessionCount": 48,
       "capacity": null,
       "remainingSeats": null,
-      "price": 120000,
+      "price": 360000,
       "originalPrice": null,
-      "membership": {
-        "monthlyPrice": 120000,
-        "annualPrice": 1000000,
-        "months": 12
-      },
       "status": "comingSoon",
       "difficulty": null,
       "materials": [],
@@ -1862,30 +1857,95 @@
           "title": "내 선택의 기준을 알아본다",
           "period": "2026.12–2027.02",
           "question": "나는 누구의 기대와 기준으로 선택해 왔는가?",
-          "description": "익숙한 자기 설명을 살피고, 내가 선택할 것과 책임질 것을 구체화합니다."
+          "description": "익숙한 자기 설명을 살피고, 내가 선택할 것과 책임질 것을 구체화합니다.",
+          "enrollmentTitle": "내 선택의 기준 찾기",
+          "forWhom": "남의 기대에 맞추느라 내 선택을 미뤄왔다면.",
+          "outcome": "미뤄 온 선택 하나를 행동으로 옮기고, 실제 경험에서 나의 기준을 확인합니다.",
+          "topics": [
+            "12월 · 반복되는 선택",
+            "1월 · 목표와 자원",
+            "2월 · 가족의 기대와 내 결정"
+          ],
+          "startLabel": "12월 시작",
+          "price": 360000,
+          "months": 3,
+          "sessionCount": 12,
+          "hours": 24,
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
         },
         {
           "id": "experience",
           "title": "현실에서 나를 알아본다",
           "period": "2027.03–2027.05",
           "question": "실제로 해보고, 보여주고, 대화하면 무엇이 달라지는가?",
-          "description": "진로와 일, 관계에서 예상과 실제의 차이를 확인하며 자신에 대한 이해를 고칩니다."
+          "description": "진로와 일, 관계에서 예상과 실제의 차이를 확인하며 자신에 대한 이해를 고칩니다.",
+          "enrollmentTitle": "생각을 현실에서 시험하기",
+          "forWhom": "진로·일·관계에서 결정을 미루고 있다면.",
+          "outcome": "진로 경험·결과물 제출·대화 중 자신의 과제를 실행하고, 실제 반응에서 다음 선택을 정합니다.",
+          "topics": [
+            "3월 · 진로를 실제로 경험하기",
+            "4월 · 완성하고 평가받기",
+            "5월 · 내 뜻을 말하기"
+          ],
+          "startLabel": "3월 시작",
+          "price": 360000,
+          "months": 3,
+          "sessionCount": 12,
+          "hours": 24,
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
         },
         {
           "id": "resources",
           "title": "가능성에 자원을 쓴다",
           "period": "2027.06–2027.08",
           "question": "무엇에 돈과 시간을 쓰고, 무엇을 계속하거나 멈출 것인가?",
-          "description": "경험을 근거로 자원을 배분하고, 확인한 강점을 실제 제안과 기회로 연결합니다."
+          "description": "경험을 근거로 자원을 배분하고, 확인한 강점을 실제 제안과 기회로 연결합니다.",
+          "enrollmentTitle": "시간과 돈을 내 가능성에 쓰기",
+          "forWhom": "하고 싶은 일에 쓸 시간과 돈이 늘 부족하다면.",
+          "outcome": "자원 배분·현재 일의 결정·강점을 담은 제안 중 하나를 실행하고, 바뀐 선택의 결과를 평가합니다.",
+          "topics": [
+            "6월 · 시간과 돈의 우선순위",
+            "7월 · 계속·수정·종료의 결정",
+            "8월 · 강점을 기회로 연결하기"
+          ],
+          "startLabel": "6월 시작",
+          "price": 360000,
+          "months": 3,
+          "sessionCount": 12,
+          "hours": 24,
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
         },
         {
           "id": "contribution",
           "title": "함께 기여하고 다음 방향을 정한다",
           "period": "2027.09–2027.11",
           "question": "나는 어떤 역할로 함께 일하고, 어떤 삶을 이어갈 것인가?",
-          "description": "공동의 결과에 책임지고 자신의 기여 방식과 다음 선택의 기준을 구체화합니다."
+          "description": "공동의 결과에 책임지고 자신의 기여 방식과 다음 선택의 기준을 구체화합니다.",
+          "enrollmentTitle": "함께 일하고 다음 방향 세우기",
+          "forWhom": "협업에서 같은 역할과 어려움을 반복한다면.",
+          "outcome": "공동의 일에서 자신의 역할을 실행하고, 실제 기여와 한계를 근거로 다음 방향을 정합니다.",
+          "topics": [
+            "9월 · 함께 결과를 만드는 협업",
+            "10월 · 필요한 기여와 소명",
+            "11월 · 다음 삶의 방향"
+          ],
+          "startLabel": "9월 시작",
+          "price": 360000,
+          "months": 3,
+          "sessionCount": 12,
+          "hours": 24,
+          "inquiryUrl": "https://open.kakao.com/o/pc24bvUi"
         }
-      ]
+      ],
+      "enrollment": {
+        "mode": "phase",
+        "pricePerPhase": 360000,
+        "monthsPerPhase": 3,
+        "monthlyEquivalent": 120000,
+        "sessionsPerPhase": 12,
+        "hoursPerPhase": 24
+      }
     }
   ]
 }
+
