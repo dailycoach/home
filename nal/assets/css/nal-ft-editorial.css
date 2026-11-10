@@ -1,0 +1,341 @@
+/* NAL FT EDITORIAL v2 — tactile field notes / photograph-first art direction */
+@layer nal-components {
+  body[data-page="listing"][data-type="class"] .nal-page-hero {
+    background: #f5f1e8;
+  }
+  body[data-page="listing"][data-type="class"] .nal-page-hero h1 {
+    max-width: 20ch;
+    font-size: clamp(3.1rem, 6vw, 6rem);
+    line-height: 1.12;
+  }
+
+  .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) {
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5.5rem);
+    min-height: 24rem;
+    margin: 2.2rem 0 2.25rem;
+    padding: clamp(1.5rem, 3.6vw, 3.4rem);
+    border: 0;
+    background: #eaece4;
+  }
+  .nal-ft-listing-intro:not(.nal-ft-listing-intro--general)::after {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.28;
+    grid-column: 2;
+    grid-row: 1;
+    background: url('/nal/assets/images/professional/stop-coaching-editorial.webp') center / cover no-repeat;
+  }
+  .nal-ft-listing-intro:not(.nal-ft-listing-intro--general)>div {
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 1;
+  }
+  .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) h2 {
+    max-width: 13ch;
+    margin: .75rem 0 1.2rem;
+    font-family: var(--nal-font-serif);
+    font-size: clamp(2.2rem, 3.8vw, 4.1rem);
+    line-height: 1.19;
+    letter-spacing: -.07em;
+    word-break: keep-all;
+  }
+  .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) p:not(.nal-eyebrow) {
+    max-width: 26rem;
+    line-height: 1.95;
+    color: #4b5053;
+  }
+  .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) .nal-ft-listing-count {
+    position: absolute;
+    bottom: 1rem;
+    right: clamp(1.5rem, 3.6vw, 3.4rem);
+    z-index: 2;
+    padding: .3rem .6rem;
+    color: #fff;
+    background: #283db0;
+  }
+  .nal-ft-listing-intro--general {
+    padding-top: 2.2rem;
+    border-top: 1px solid #b7b5ac;
+  }
+
+  .nal-ft-course-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(1rem, 2.5vw, 2.2rem);
+  }
+  .nal-ft-course-grid>.nal-card--professional:nth-child(1) {grid-column: span 7}
+  .nal-ft-course-grid>.nal-card--professional:nth-child(2) {grid-column: span 5}
+  .nal-ft-course-grid>.nal-card--professional:nth-child(n+3) {grid-column: span 4}
+  .nal-card--professional {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .nal-card--professional:hover {
+    border-color: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .nal-card--professional .nal-card__media {
+    aspect-ratio: 8 / 5;
+    border-radius: 0;
+    background: #e6e5df;
+  }
+  .nal-card--professional:nth-child(1) .nal-card__media {aspect-ratio: 1.46}
+  .nal-card--professional:nth-child(2) .nal-card__media {aspect-ratio: 1.06}
+  .nal-card--professional .nal-card__body {
+    flex: 1;
+    padding: 1.35rem .15rem 0;
+    border-top: 0;
+    border-bottom: 1px solid #c6c8c4;
+  }
+  .nal-card--professional .nal-card__eyebrow {
+    color: #4556b4;
+    font-size: .66rem;
+    letter-spacing: .14em;
+  }
+  .nal-card--professional .nal-card__title {
+    font-family: var(--nal-font-serif);
+    font-size: clamp(1.45rem, 2.35vw, 2.15rem);
+    line-height: 1.3;
+    letter-spacing: -.055em;
+    word-break: keep-all;
+  }
+  .nal-card--professional .nal-card__summary {
+    min-height: 0;
+    color: #595d5e;
+    line-height: 1.75;
+  }
+  .nal-card--professional .nal-card__details {
+    margin-top: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nal-card--professional .nal-card__footer {
+    padding-block: 1.05rem;
+    border-top: 1px solid #dcded9;
+  }
+  .nal-card--professional .nal-card__delivery {color: #3e4b8e; font-size: .82rem}
+  .nal-card--professional .nal-card__footer>span:last-child {font-size: 1.3rem}
+  .nal-card--professional .nal-card__badges .nal-badge {background:#f7f6f1;color:#283241}
+
+  .nal-ft-hero {
+    padding: 1.4rem 0 clamp(2rem, 3.6vw, 4rem);
+    border-bottom: 0;
+    background: #f5f1e8;
+    --ft-accent: #3850bd;
+  }
+  .nal-ft-hero--praise {--ft-accent: #8571a7}
+  .nal-ft-hero--awareness {--ft-accent: #8c79a9}
+  .nal-ft-hero--nlp {--ft-accent: #486c43}
+  .nal-ft-hero--global {--ft-accent: #3b4db3}
+  .nal-ft-breadcrumb {padding-bottom: .6rem;border-bottom: 1px solid #cac9c2;letter-spacing:.025em}
+  .nal-ft-breadcrumb a {color:#283241}
+  .nal-ft-hero__layout {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 5.5rem);
+    align-items: center;
+    padding-top: clamp(2.5rem, 4vw, 4.8rem);
+  }
+  .nal-ft-overline {color:var(--ft-accent);font-size:.72rem;letter-spacing:.16em}
+  .nal-ft-hero__issue {
+    margin: .55rem 0 2.5rem;
+    color: #797b79;
+    font-family: var(--nal-font-latin);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+  }
+  .nal-ft-hero__tags {margin: 0 0 1rem}
+  .nal-ft-hero__tags span {
+    border: 1px solid #c8c8c0;
+    border-radius: 0;
+    color: #51575a;
+    background: #f8f6ef;
+    padding: .32rem .55rem;
+    font-weight: 650;
+  }
+  .nal-ft-hero h1 {
+    max-width: 13ch;
+    margin: 0 0 1.35rem;
+    font-family: var(--nal-font-serif);
+    font-weight: 700;
+    font-size: clamp(3.1rem, 5.1vw, 5.5rem);
+    line-height: 1.16;
+    letter-spacing: -.085em;
+    word-break: keep-all;
+  }
+  .nal-ft-hero__lead {
+    color: var(--ft-accent);
+    font-weight: 800;
+    font-size: clamp(1.05rem, 1.75vw, 1.4rem);
+  }
+  .nal-ft-hero__summary {max-width:34rem;color:#50565a;line-height:1.85;font-size:.98rem}
+  .nal-ft-hero__duration {
+    display: inline-flex;
+    gap: .6rem;
+    margin: 1.3rem 0 0;
+    font-size: .86rem;
+    color: #3c464f;
+    font-weight: 750;
+  }
+  .nal-ft-hero__duration span {color:var(--ft-accent)}
+  .nal-ft-hero__actions {margin-top:2rem;gap:1.5rem}
+  .nal-ft-text-link {color:#303943}
+  .nal-ft-hero__honest {max-width:26rem;color:#6e706c}
+  .nal-ft-hero__visual {
+    aspect-ratio: 8 / 5;
+    margin: 0;
+    overflow: visible;
+    border-radius: 0;
+    background: #ebe7de;
+    box-shadow: none;
+  }
+  .nal-ft-hero__visual img {width:100%;height:100%;object-fit:cover;border-radius:0}
+  .nal-ft-hero__visual figcaption {
+    position: static;
+    display: flex;
+    justify-content: space-between;
+    gap: .75rem;
+    padding-top: .8rem;
+    font: 700 .63rem/1.4 var(--nal-font-latin), sans-serif;
+    letter-spacing: .13em;
+    color: #69706d;
+    text-shadow: none;
+  }
+
+  .nal-ft-fact-band {
+    color:#202733;
+    background:#e9ebe4;
+    border-top:1px solid #bec1b9;
+    border-bottom:1px solid #c5c9c2;
+  }
+  .nal-ft-fact-band__grid {grid-template-columns:repeat(3,minmax(0,1fr))}
+  .nal-ft-fact-band__grid>div {min-height:6.1rem;padding:1.15rem 1.8rem;border-right:1px solid #c4c9c5}
+  .nal-ft-fact-band__grid span {color:#6b706d;font-size:.72rem}
+  .nal-ft-fact-band__grid strong {color:#293344;font-family:var(--nal-font-serif);font-size:1.4rem;letter-spacing:-.045em}
+
+  .nal-ft-body {grid-template-columns:minmax(0,1fr) 19rem;gap:clamp(2rem,5vw,5.5rem)}
+  .nal-ft-section {border-color:#d5d7d1}
+  .nal-ft-section .nal-eyebrow {color:#5864ac;letter-spacing:.12em}
+  .nal-ft-section h2 {font-family:var(--nal-font-serif);font-size:clamp(2.1rem,3vw,3.1rem);line-height:1.29;letter-spacing:-.065em}
+  .nal-ft-section--introduction h2 {font-size:clamp(2.5rem,4vw,4.15rem)}
+  .nal-ft-section__lead {max-width:43rem;font-size:1.09rem;line-height:2.03;color:#454c50}
+  .nal-ft-section .nal-chip-list .nal-filter-chip {border-radius:0;background:#f4f1e8;color:#676d69}
+  .nal-ft-outcomes {
+    counter-reset: nal-outcome;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:0;
+    border-block:1px solid #cfd1cc;
+  }
+  .nal-ft-outcomes li {
+    counter-increment: nal-outcome;
+    min-width:0;
+    padding:3.9rem 1rem 1.55rem;
+    border:0;
+    border-right:1px solid #d5d6d0;
+    background:transparent;
+    color:#41494d;
+    font-size:.93rem;
+    line-height:1.77;
+  }
+  .nal-ft-outcomes li:first-child {padding-left:0}
+  .nal-ft-outcomes li:last-child {border-right:0}
+  .nal-ft-outcomes li::before {
+    content: '0' counter(nal-outcome);
+    top:1.15rem;
+    left:1rem;
+    color:#5664be;
+    font:800 .84rem/1.4 var(--nal-font-latin),sans-serif;
+    letter-spacing:.1em;
+  }
+  .nal-ft-outcomes li:first-child::before {left:0}
+  .nal-ft-module-list {border-top:1px solid #9da39d}
+  .nal-ft-module-list li {grid-template-columns:4.3rem minmax(0,1fr);padding:1.6rem 1rem;border-color:#d0d4cd}
+  .nal-ft-module-list li:nth-child(even) {background:#efefe8}
+  .nal-ft-module-list__number {color:#5364b4;font-size:1rem}
+  .nal-ft-module-list h3 {font-family:var(--nal-font-serif);font-size:1.3rem}
+  .nal-ft-module-list p {font-size:.92rem}
+  .nal-ft-facilitator {border-radius:0;background:#eeeae1;padding:1.65rem}
+  .nal-ft-facilitator__mark {border-radius:0;background:#d8ddf6;color:#3a4a9f}
+  .nal-ft-section--notice {background:#f2f0e8;border:0;border-left:3px solid #8e9ad8}
+  .nal-ft-aside {top:calc(var(--nal-header-height) + 1.25rem)}
+  .nal-ft-enquiry {
+    padding:clamp(1.5rem,2.8vw,2.3rem);
+    gap:1.25rem;
+    border:0;
+    border-top:4px solid #5869bc;
+    background:#e5e5e0;
+    box-shadow:none;
+  }
+  .nal-ft-enquiry h2 {font-family:var(--nal-font-serif);font-size:2.1rem}
+  .nal-ft-enquiry dl {border-color:#c8cac5}
+  .nal-ft-enquiry dl>div {grid-template-columns:1fr auto;align-items:center;gap:.5rem;border-color:#c8cac5}
+  .nal-ft-enquiry dt {font-size:.78rem}
+  .nal-ft-enquiry dd {color:#34438e;font-size:.92rem}
+  .nal-ft-enquiry>small {font-size:.72rem}
+  .nal-ft-related {background:#f0ede5}
+  .nal-ft-related__heading h2 {font-family:var(--nal-font-serif)}
+}
+@layer nal-responsive {
+  @media(max-width:70rem) and (min-width:48.001rem) {
+    .nal-ft-course-grid>.nal-card--professional:nth-child(n) {grid-column:span 6}
+    .nal-ft-course-grid>.nal-card--professional:last-child {grid-column:span 12}
+  }
+  @media(max-width:63rem) {
+    .nal-ft-body {grid-template-columns:minmax(0,1fr) 16rem;gap:2rem}
+    .nal-ft-hero__layout {gap:2rem}
+    .nal-ft-enquiry {padding:1.4rem}
+  }
+  @media(max-width:48rem) {
+    .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) {grid-template-columns:minmax(0,1fr);gap:1.7rem;padding:1.5rem}
+    .nal-ft-listing-intro:not(.nal-ft-listing-intro--general)>div {grid-column:1;grid-row:1}
+    .nal-ft-listing-intro:not(.nal-ft-listing-intro--general)::after {grid-column:1;grid-row:2;aspect-ratio:1.65}
+    .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) h2 {font-size:clamp(2rem,7vw,3.2rem)}
+    .nal-ft-listing-intro:not(.nal-ft-listing-intro--general) .nal-ft-listing-count {bottom:2rem;right:2rem}
+    .nal-ft-course-grid {grid-template-columns:minmax(0,1fr);gap:2.35rem}
+    .nal-ft-course-grid>.nal-card--professional:nth-child(n) {grid-column:1}
+    .nal-card--professional {display:flex;flex-direction:column}
+    .nal-card--professional .nal-card__media {height:auto;aspect-ratio:8 / 5}
+    .nal-card--professional:nth-child(1) .nal-card__media,.nal-card--professional:nth-child(2) .nal-card__media {aspect-ratio:8 / 5}
+    .nal-card--professional .nal-card__body {border-left:0;padding:1.15rem 0 0}
+    .nal-card--professional .nal-card__summary {display:-webkit-box}
+    .nal-ft-hero__layout {grid-template-columns:minmax(0,1fr);gap:2rem;padding-top:2rem}
+    .nal-ft-hero__issue {margin-bottom:1.5rem}
+    .nal-ft-hero h1 {max-width:20ch;font-size:clamp(2.6rem,8vw,4.1rem)}
+    .nal-ft-hero__visual {aspect-ratio:8 / 5}
+    .nal-ft-hero__visual figcaption {font-size:.57rem}
+    .nal-ft-fact-band__grid {grid-template-columns:repeat(3,minmax(0,1fr))}
+    .nal-ft-fact-band__grid>div {min-height:5.5rem;padding:.9rem .7rem;border-bottom:0}
+    .nal-ft-fact-band__grid>div:nth-child(even) {padding-left:.7rem;border-right:1px solid #c4c9c5}
+    .nal-ft-fact-band__grid>div:last-child {border-right:0}
+    .nal-ft-fact-band__grid strong {font-size:clamp(.95rem,3.5vw,1.25rem)}
+    .nal-ft-body {grid-template-columns:minmax(0,1fr)}
+    .nal-ft-outcomes {grid-template-columns:minmax(0,1fr)}
+    .nal-ft-outcomes li {min-height:0;padding:1.3rem .5rem 1.25rem 3.5rem;border:0;border-bottom:1px solid #d5d6d0}
+    .nal-ft-outcomes li:first-child {padding-left:3.5rem}
+    .nal-ft-outcomes li:last-child {border-bottom:0}
+    .nal-ft-outcomes li::before,.nal-ft-outcomes li:first-child::before {left:.5rem;top:1.5rem}
+  }
+  @media(max-width:30rem) {
+    body[data-page="listing"][data-type="class"] .nal-page-hero h1 {font-size:clamp(2.65rem,10vw,3.6rem)}
+    .nal-ft-hero__actions {align-items:stretch}
+    .nal-ft-hero__actions .nal-button--primary {text-align:center}
+    .nal-ft-hero__visual figcaption span:last-child {display:none}
+    .nal-ft-module-list li {grid-template-columns:2.65rem minmax(0,1fr);gap:.7rem;padding:1.2rem .55rem}
+    .nal-ft-section h2 {font-size:2rem}
+    .nal-ft-enquiry h2 {font-size:1.9rem}
+  }
+}
