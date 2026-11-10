@@ -33,7 +33,7 @@
 .nalduck-promo-dialog__brand > span:first-child { color: #4254cf; }
 .nalduck-promo-dialog__brand > span:last-child { margin-left: 6px; color: #656a7b; font-size: .62rem; font-weight: 720; letter-spacing: .14em; }
 .nalduck-promo-dialog__overline { margin: 0 0 17px; color: #4359c9; font: 800 .71rem/1.4 var(--nal-font-latin, sans-serif); letter-spacing: .14em; }
-.nalduck-promo-dialog h2 { margin: 0; font-size: clamp(2.35rem, 4.9vw, 4rem); line-height: 1.12; letter-spacing: -.067em; word-break: keep-all; }
+.nalduck-promo-dialog h2 { color: #25262d; margin: 0; font-size: clamp(2.35rem, 4.9vw, 4rem); line-height: 1.12; letter-spacing: -.067em; word-break: keep-all; }
 .nalduck-promo-dialog h2 em { color: #4055d8; font-style: normal; }
 .nalduck-promo-dialog__description { max-width: 430px; margin: 22px 0 27px; color: #505561; font-size: clamp(.94rem, 1.42vw, 1.08rem); line-height: 1.72; word-break: keep-all; }
 .nalduck-promo-dialog__actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
