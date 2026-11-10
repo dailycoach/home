@@ -45,6 +45,8 @@
 .nd-actions {display: flex;align-items: center;flex-wrap: wrap;gap: 16px 22px;}
 .nd-hero {--nd-ink: #171717;--nd-muted: #4e4f49;--nd-blue: #1644f5;background: #f4f1e8;color: #171717;}
 .nd-hero__visual {position: relative;width: 100%;max-width: 1920px;margin-inline: auto;}
+.nd-hero__cover-link {position: absolute;inset: 0;display: block;z-index: 3;cursor: pointer;}
+.nd-hero__cover-link:focus-visible {outline: 3px solid #1644f5;outline-offset: -3px;}
 .nd-hero__art {display: block;width: 100%;}
 .nd-hero__art img {width: 100%;height: auto;aspect-ratio: 16 / 9;object-fit: contain;}
 .nd-hero__headline {position: absolute;top: 9%;left: max(48px, calc((100% - 1216px) / 2));width: 47%;}

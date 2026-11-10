@@ -119,12 +119,13 @@
           <p class="nd-hero__meta">19–39세 · 일요일 오전 10–12시</p>
           <div class="nd-actions"><a class="nd-button nd-button--blue" href="#nd-membership">4단계 살펴보기${arrow}</a></div>
         </div>`
-      : `<div class="nd-hero__support"><p class="nd-hero__description">반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p><ul class="nd-hero__facts" aria-label="참여 안내"><li>19–39세 청년</li><li>단계별 3개월 참여</li><li>월 4회 · 회당 2시간</li><li>${CAPACITY_NOTE}</li></ul><p class="nd-hero__meeting"><strong>${MEETING}</strong><span>${VENUE} · 오프라인</span></p><div class="nd-actions"><a class="nd-button nd-button--blue" href="${ROOT}#nd-membership">단계별 신청 보기${arrow}</a><a class="nd-text-link" href="${ROOT}#nd-first-month">12월에 배우는 내용 <span aria-hidden="true">↓</span></a></div><p class="nd-hero__faith">${FAITH}</p></div>`;
+      : "";
     return `<section class="nd-hero" aria-labelledby="nd-title">
       <div class="nd-hero__visual">
         <picture class="nd-hero__art"><source media="(max-width: 760px)" srcset="${ASSETS}nal_nadaum_hero_mobile.webp" width="1080" height="1350"><img src="${ASSETS}nal_nadaum_hero_desktop.webp" alt="푸른 길 위로 한 걸음을 내딛는 청년" width="2400" height="1350" fetchpriority="high" decoding="async"></picture>
         <div class="nd-hero__headline"><p class="nd-eyebrow">NAL CLASS · 2026년 12월 시작</p><p class="nd-hero__name">나다움으로 자기경영하기</p><h1 id="nd-title"><span>나답게 살겠다는 말,</span><span>이제 <em>행동으로.</em></span></h1></div>
         ${support}
+        ${isDetail ? "" : `<a class="nd-hero__cover-link" href="${ROOT}" aria-label="나다움으로 자기경영하기 클래스 상세 보기"></a>`}
       </div>
     </section>`;
   }
@@ -197,11 +198,10 @@
   }
 
   function home(p) {
-    return `<div class="nd nd-home">${hero(false)}${priceStrip(p)}${firstMonth(p,true)}<section class="nd-wrap nd-section nd-section--ruled" id="nd-home-method"><div class="nd-section-heading"><div><p class="nd-eyebrow">나다움을 찾는 방식</p><h2>깨닫고, 움직이고,<br>내 결과를 확인합니다.</h2></div><p>내가 중요하게 여기는 것을<br>실제 선택에 사용할 수 있도록.</p></div>${steps(true)}<a class="nd-text-link nd-section-link" href="${ROOT}#nd-method">클래스의 방식 자세히 보기 ${arrow}</a></section><section class="nd-wrap nd-section nd-section--ruled">${rhythm(true)}</section><div class="nd-home-end"><div class="nd-wrap"><p>일요일 오전 10–12시,<br><strong>시메진 카페에서 만납니다.</strong></p><a class="nd-button nd-button--light" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a></div></div></div>`;
+    return `<div class="nd nd-home">${hero(false)}</div>`;
   }
 
   function feature(p) {
-    const m = pricing(p);
     return `<section class="nd nd-class-front" aria-labelledby="nd-class-front-title">
       <a class="nd-class-front__link" href="${ROOT}" aria-label="나다움으로 자기경영하기 클래스 자세히 보기">
         <picture class="nd-class-front__art">
@@ -213,22 +213,6 @@
           <h1 id="nd-class-front-title">나답게 살겠다는 말,<br>이제 <em>행동으로.</em></h1>
         </div>
       </a>
-    </section>
-    <section class="nd nd-class-summary" aria-labelledby="nd-class-summary-title">
-      <div class="nd-wrap nd-class-summary__inner">
-        <div class="nd-class-summary__lead">
-          <p class="nd-eyebrow">2026.12 / FIRST CLASS</p>
-          <h2 id="nd-class-summary-title">나다움으로 자기경영하기</h2>
-          <p>반복되는 선택의 이유를 배우고,<br>실제 행동과 결과에서 나의 기준을 세웁니다.</p>
-        </div>
-        <div class="nd-class-summary__details">
-          <p>19–39세 청년 · 월 4회 · 회당 2시간<br><strong>${CAPACITY_NOTE}</strong></p>
-          <p><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p>
-          <p>3개월 · 12회 <strong>${money(m.phase)}원</strong><br>4단계 중 원하는 단계부터 신청</p>
-          <a class="nd-button nd-button--blue" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a>
-          <p class="nd-class-summary__faith">${FAITH}</p>
-        </div>
-      </div>
     </section>`;
   }
 
