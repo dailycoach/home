@@ -378,7 +378,7 @@ function html(page) {
   <meta name="twitter:image" content="${escapeHtml(socialImage)}">
   <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}">
   <link rel="preload" href="/programs/art-psychology-coaching/assets/fonts/gowun-batang-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${page.route === '/nal/class/' || page.route.includes('-professional/') ? '\n  <link rel="stylesheet" href="/nal/assets/css/nal-ft-editorial.css?v=nal-blue-20261110">' : ''}${page.nadaumView ? '\n  <link rel="stylesheet" href="/nal/assets/css/nadaum.css?v=nadaum-20261110">' : ''}${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
+  <link rel="stylesheet" href="/nal/assets/css/nal.css?v=nal-ft-20261110">${page.route === '/nal/' || page.route === '/nal/class/' || page.route.includes('-professional/') ? '\n  <link rel="stylesheet" href="/nal/assets/css/nal-ft-editorial.css?v=nal-blue-20261110">' : ''}${page.nadaumView ? '\n  <link rel="stylesheet" href="/nal/assets/css/nadaum.css?v=nadaum-20261110">' : ''}${preload}${page.launch ? '\n  <link rel="stylesheet" href="/nal/assets/css/launch.css">' : ''}
   <script type="application/ld+json">${jsonLd(page)}</script>
   <script src="/nal/assets/js/product-routes.js?v=nal-positive-writing-v2-20261011" defer></script>
   <script src="/nal/assets/js/store.js?v=awareness-ladder-1" defer></script>
