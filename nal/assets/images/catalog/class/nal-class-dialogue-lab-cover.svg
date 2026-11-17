@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">NAL 실전 대화 LAB — 거절과 요청의 기술</title>
+  <desc id="desc">크림색 종이와 코발트블루 면 위에 거절과 요청의 대화가 겹치는 NAL 에디토리얼 커버</desc>
+  <rect width="1600" height="1000" fill="#f3f0e8"/>
+  <path d="M0 0h1600v78L0 128z" fill="#e4e1d9"/>
+  <path d="M0 910l1600-67v157H0z" fill="#e9e6de"/>
+  <path d="M68 94h1464" stroke="#171717" stroke-width="2"/>
+  <path d="M68 884h1464" stroke="#171717" stroke-width="2"/>
+  <g font-family="Arial,'Noto Sans CJK KR',sans-serif" fill="#151515">
+    <text x="78" y="177" font-size="88" font-weight="900" letter-spacing="-6">NAL.</text>
+  </g>
+  <path d="M81 228h56" stroke="#234bce" stroke-width="12"/>
+  <g font-family="'Noto Sans CJK KR',sans-serif" font-weight="900" letter-spacing="-8" fill="#171717" font-size="126">
+    <text x="77" y="382">거절과</text>
+    <text x="77" y="535">요청의</text>
+    <text x="77" y="688">기술.</text>
+  </g>
+  <text x="81" y="793" fill="#234bce" font-family="Arial,'Noto Sans CJK KR',sans-serif" font-size="24" font-weight="800" letter-spacing="2">120 MINUTES · ZOOM LIVE</text>
+  <text x="81" y="838" fill="#3d3b37" font-family="'Noto Sans CJK KR',sans-serif" font-size="27" font-weight="700">김철웅 코치의 실전 대화 훈련</text>
+  <path d="M728 143L1484 111L1563 886L761 869Z" fill="#10100f" opacity="0.16"/>
+  <path d="M706 144L1481 111L1540 873L759 881L730 816L748 756L711 703L731 635L699 561L722 490L697 403L723 321L700 247Z" fill="#234bce"/>
+  <path d="M744 184L1487 157" stroke="#d9e2ff" stroke-width="2" opacity=".7"/>
+  <text x="783" y="226" fill="#fff" font-size="24" font-family="Arial,sans-serif" font-weight="800" letter-spacing="3">THE CONVERSATION</text>
+  <path d="M1447 195l27 27m-25 0h25v-25" stroke="#c5d3ff" stroke-width="5" fill="none" stroke-linecap="square"/>
+  <path d="M807 277L1422 261L1432 459L825 482Z" fill="none" stroke="#b4c6ff" stroke-width="3"/>
+  <text x="853" y="350" fill="#fff" font-size="45" font-weight="800" font-family="'Noto Sans CJK KR',sans-serif" letter-spacing="-2">“오늘 이것도</text>
+  <text x="853" y="421" fill="#fff" font-size="45" font-weight="800" font-family="'Noto Sans CJK KR',sans-serif" letter-spacing="-2">맡아줄 수 있어요?”</text>
+  <path d="M868 534L1475 521L1491 787L873 797L880 734L859 697L869 649L859 592Z" fill="#faf9f5"/>
+  <text x="918" y="629" fill="#234bce" font-size="43" font-weight="900" font-family="'Noto Sans CJK KR',sans-serif" letter-spacing="-2">“오늘은 어렵습니다.</text>
+  <text x="918" y="710" fill="#234bce" font-size="41" font-weight="900" font-family="'Noto Sans CJK KR',sans-serif" letter-spacing="-2">내일 오전은 가능합니다.”</text>
+  <text x="1470" y="837" fill="#fff" text-anchor="end" font-size="19" font-family="Arial,sans-serif" font-weight="700" letter-spacing="3">LEARN · TRAIN · REFINE</text>
+  <g fill="#171717" font-family="Arial,'Noto Sans CJK KR',sans-serif" font-size="21" font-weight="800"><text x="80" y="948" letter-spacing="2">NAL CLASS</text><text x="1520" y="948" text-anchor="end" letter-spacing="1">01 / COMMUNICATION TRAINING</text></g>
+</svg>
