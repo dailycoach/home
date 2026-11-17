@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1125" viewBox="0 0 900 1125" role="img" aria-labelledby="title desc">
+  <title id="title">NAL 실전 대화 LAB 모바일 커버</title>
+  <desc id="desc">거절과 요청의 기술 제목과 두 가지 대화 문장을 코발트블루·크림 색면에 배치한 커버</desc>
+  <rect width="900" height="1125" fill="#f3f0e8"/>
+  <path d="M0 80L900 0v145L0 188z" fill="#e7e4dc"/>
+  <path d="M48 73h804M48 1054h804" stroke="#171717" stroke-width="2"/>
+  <text x="52" y="166" font-family="Arial,sans-serif" font-size="84" font-weight="900" letter-spacing="-7" fill="#171717">NAL.</text>
+  <text x="847" y="152" text-anchor="end" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing="2" fill="#171717">DIALOGUE LAB</text>
+  <path d="M56 212h52" stroke="#234bce" stroke-width="10"/>
+  <g fill="#171717" font-family="'Noto Sans CJK KR',sans-serif" font-weight="900" letter-spacing="-7" font-size="112"><text x="53" y="343">거절과</text><text x="53" y="477">요청의 기술.</text></g>
+  <text x="59" y="528" fill="#234bce" font-family="Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="1">120 MIN · ZOOM LIVE</text>
+  <path d="M48 573L858 553L885 995L62 1008L52 941L71 894L51 823L63 735L48 660Z" fill="#234bce"/>
+  <text x="89" y="634" fill="#fff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing="3">THE CONVERSATION</text>
+  <rect x="89" y="671" width="694" height="119" fill="none" stroke="#b7c9ff" stroke-width="3"/>
+  <text x="118" y="742" fill="#fff" font-family="'Noto Sans CJK KR',sans-serif" font-size="38" font-weight="800" letter-spacing="-2">“오늘 이것도 맡아줄 수 있어요?”</text>
+  <path d="M111 812L805 805L823 960L109 970L121 913L104 874Z" fill="#faf9f5"/>
+  <text x="146" y="874" fill="#234bce" font-family="'Noto Sans CJK KR',sans-serif" font-size="34" font-weight="900" letter-spacing="-1">“오늘은 어렵습니다.</text>
+  <text x="146" y="926" fill="#234bce" font-family="'Noto Sans CJK KR',sans-serif" font-size="34" font-weight="900" letter-spacing="-1">내일 오전은 가능합니다.”</text>
+  <text x="59" y="1095" fill="#171717" font-family="Arial,sans-serif" font-size="24" font-weight="800" letter-spacing="2">NAL CLASS</text>
+  <text x="846" y="1095" text-anchor="end" fill="#171717" font-family="Arial,sans-serif" font-size="20" font-weight="800" letter-spacing="2">LEARN · TRAIN · REFINE</text>
+</svg>
