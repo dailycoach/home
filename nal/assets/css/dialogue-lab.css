@@ -96,7 +96,7 @@
 .dl-speech::before { content:""; position:absolute; width:38vw; height:38vw; max-width:500px; max-height:500px; right:-10vw; top:-20vw; border:1px solid #4b6098; border-radius:50%; z-index:-1; }
 .dl-speech__grid { display: grid; grid-template-columns: minmax(0,1.08fr) minmax(0,.92fr); gap: 55px; align-items: center; }
 .dl-speech .dl-eyebrow { color: #dceba1; }
-.dl-speech h2 { font-family: var(--nal-font-display); font-weight: 850; font-size: clamp(2.7rem,4.65vw,5.5rem); line-height: 1.17; letter-spacing: -.07em; margin-top: 24px; }
+.dl-speech h2 { color:#fff; font-family: var(--nal-font-display); font-weight: 850; font-size: clamp(2.7rem,4.65vw,5.5rem); line-height: 1.17; letter-spacing: -.07em; margin-top: 24px; }
 .dl-speech h2 em { color: #d8ed79; }
 .dl-speech__copy > p:not(.dl-eyebrow) { color: #d7deee; font-size: clamp(.95rem,1.3vw,1.08rem); line-height: 1.8; max-width: 470px; margin-top: 25px; word-break: keep-all; }
 .dl-speech__details { display:flex; gap:9px; margin-top:26px; flex-wrap:wrap; }
