@@ -21,6 +21,13 @@
     "source": "local import"
   },
   {
+    "title": "CPDP 회원등록·검사 운영",
+    "description": "기관관리자 계정으로 CPDP 회원 등록, 대량등록, 검사 발송 및 결과 확인을 시작하는 연동 안내",
+    "category": "tests",
+    "url": "/cpdp/",
+    "source": "https://cpdp.co.kr/"
+  },
+  {
     "title": "LCMS",
     "description": "데이터 기반 맞춤형 진로 교육 인프라",
     "category": "education",
