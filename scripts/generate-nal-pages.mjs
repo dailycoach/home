@@ -40,7 +40,7 @@ const pages = [
   {
     route: '/nal/', attrs: 'data-page="home"',
     title: '나다움으로 자기경영하기 | NAL · 날빛',
-    description: '나답게 살겠다는 말, 이제 행동으로. 19–39세 청년을 위한 나다움 자기경영 멤버십. 2026년 12월 시작, 월 2회 클래스와 2회 나눔 모임. 월 120,000원, 1년 일시납 1,000,000원.',
+    description: '나답게 살겠다는 말, 이제 행동으로. 19–39세 청년을 위한 나다움 자기경영 클래스. 2026년 12월 시작, 월 2회 클래스와 2회 나눔 모임. 모든 회차 1회 10,000원, 단계별 12회 총 120,000원.',
     label: 'NAL CLASS', heading: '나답게 살겠다는 말,\n이제 행동으로.',
     copy: '배우고, 선택하고, 실행한 경험으로 나를 알아가는 1년.', schemaType: 'WebSite',
     ogTitle: '나답게 살겠다는 말, 이제 행동으로. | NAL',
@@ -189,7 +189,7 @@ for (const page of pages) {
   page.ogImageHeight = 630;
   if (page.route === nadaumRoute) {
     page.title = `${nadaum.title} | NAL 청년 자기경영 멤버십`;
-    page.description = '19–39세 청년을 위한 12개월 자기경영 멤버십. 깨달음·행동 선언과 실행·결과 자가평가. 2026년 12월 시작, 월 4회·회당 2시간. 월 120,000원 또는 1년 일시납 1,000,000원.';
+    page.description = '19–39세 청년을 위한 단계별 자기경영 클래스. 깨달음·행동 선언과 실행·결과 자가평가. 2026년 12월 시작, 월 4회·회당 2시간. 모든 회차 1회 10,000원, 3개월·12회 단계 총 120,000원.';
     page.schemaType = 'Course';
   }
 }
