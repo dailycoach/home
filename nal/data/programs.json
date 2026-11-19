@@ -1439,7 +1439,7 @@
       "sessionCount": 48,
       "capacity": 20,
       "remainingSeats": null,
-      "price": 360000,
+      "price": 120000,
       "originalPrice": null,
       "status": "comingSoon",
       "difficulty": null,
@@ -1476,7 +1476,7 @@
       "featuredOrder": -10,
       "published": true,
       "createdAt": "2026-11-10",
-      "updatedAt": "2026-11-10",
+      "updatedAt": "2026-11-19",
       "curriculum": [
         {
           "month": "2026.12",
@@ -1930,7 +1930,7 @@
             "2월 · 가족의 기대와 내 결정"
           ],
           "startLabel": "12월 시작",
-          "price": 360000,
+          "price": 120000,
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
@@ -1953,7 +1953,7 @@
             "5월 · 내 뜻을 말하기"
           ],
           "startLabel": "3월 시작",
-          "price": 360000,
+          "price": 120000,
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
@@ -1976,7 +1976,7 @@
             "8월 · 강점을 기회로 연결하기"
           ],
           "startLabel": "6월 시작",
-          "price": 360000,
+          "price": 120000,
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
@@ -1999,7 +1999,7 @@
             "11월 · 다음 삶의 방향"
           ],
           "startLabel": "9월 시작",
-          "price": 360000,
+          "price": 120000,
           "months": 3,
           "sessionCount": 12,
           "hours": 24,
@@ -2010,9 +2010,10 @@
       ],
       "enrollment": {
         "mode": "phase",
-        "pricePerPhase": 360000,
+        "pricePerPhase": 120000,
+        "pricePerSession": 10000,
         "monthsPerPhase": 3,
-        "monthlyEquivalent": 120000,
+        "monthlyEquivalent": 40000,
         "sessionsPerPhase": 12,
         "hoursPerPhase": 24,
         "capacityPerPhase": 20,
