@@ -94,9 +94,11 @@
   function pricing(p) {
     const e = (p && p.enrollment) || {};
     const number = (value, fallback) => Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : fallback;
-    const phase = number(e.pricePerPhase, 360000);
+    const phase = number(e.pricePerPhase, 120000);
     const months = number(e.monthsPerPhase, 3);
-    return {phase, months, monthly: number(e.monthlyEquivalent, phase / months), sessions: number(e.sessionsPerPhase, 12), hours: number(e.hoursPerPhase, 24)};
+    const sessions = number(e.sessionsPerPhase, 12);
+    const perSession = number(e.pricePerSession, phase / sessions);
+    return {phase, perSession, months, monthly: number(e.monthlyEquivalent, phase / months), sessions, hours: number(e.hoursPerPhase, 24)};
   }
 
   function phaseOptions(p) {
@@ -132,7 +134,7 @@
 
   function priceStrip(p) {
     const m = pricing(p);
-    return `<div class="nd-price-strip"><div class="nd-wrap nd-price-strip__inner"><p>${MEETING}<br><strong>${VENUE}에서 만납니다.</strong></p><div><span>선택한 단계 · ${m.months}개월</span><strong>${money(m.phase)}<small>원 / 단계</small></strong><small>월 ${money(m.monthly)}원 기준</small></div><div><span>클래스 6회 + 실행 나눔 6회</span><strong>${m.sessions}회<small>총 ${m.hours}시간</small></strong><small>네 단계 중 필요한 단계부터</small></div><a class="nd-text-link" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a></div></div>`;
+    return `<div class="nd-price-strip"><div class="nd-wrap nd-price-strip__inner"><p>${MEETING}<br><strong>${VENUE}에서 만납니다.</strong></p><div><span>클래스와 실행 나눔 · 동일 참가비</span><strong>${money(m.perSession)}<small>원 / 회</small></strong><small>${m.months}개월 · 단계 총 ${money(m.phase)}원</small></div><div><span>클래스 6회 + 실행 나눔 6회</span><strong>${m.sessions}회<small>총 ${m.hours}시간</small></strong><small>네 단계 중 필요한 단계부터</small></div><a class="nd-text-link" href="${ROOT}#nd-membership">단계별 신청 보기 ${arrow}</a></div></div>`;
   }
 
   function audience() {
@@ -193,7 +195,7 @@
   function enrollment(p) {
     const m = pricing(p);
     const phases = phaseOptions(p);
-    const cards = phases.map((phase, index) => `<article class="nd-plan nd-plan--phase" id="nd-enroll-${escape(phase.id)}" aria-labelledby="nd-enroll-title-${index + 1}"><div class="nd-plan__top"><p class="nd-eyebrow">STEP ${String(index + 1).padStart(2,"0")} · ${escape(phase.period)}</p><span class="nd-plan__label">${escape(phase.startLabel)}</span></div><h3 id="nd-enroll-title-${index + 1}">${escape(phase.enrollmentTitle)}</h3><p class="nd-plan__who">${escape(phase.forWhom)}</p><ul class="nd-plan__topics">${phase.topics.map((topic) => `<li>${escape(topic)}</li>`).join("")}</ul><div class="nd-plan__outcome"><strong>이 단계에서 해볼 일</strong><p>${escape(phase.outcome)}</p></div><div class="nd-plan__action"><p class="nd-plan__price">${money(m.phase)}<small>원 / 단계</small></p><p class="nd-plan__duration">${m.months}개월 · ${m.sessions}회 · ${m.hours}시간<br><strong>${CAPACITY_NOTE}</strong></p><a class="nd-button nd-button--blue" href="${contact()}" target="_blank" rel="noopener noreferrer" aria-label="${index + 1}단계 ${escape(phase.enrollmentTitle)} 카카오톡 신청 문의">${index + 1}단계 신청 문의 ${arrow}</a></div></article>`).join("");
+    const cards = phases.map((phase, index) => `<article class="nd-plan nd-plan--phase" id="nd-enroll-${escape(phase.id)}" aria-labelledby="nd-enroll-title-${index + 1}"><div class="nd-plan__top"><p class="nd-eyebrow">STEP ${String(index + 1).padStart(2,"0")} · ${escape(phase.period)}</p><span class="nd-plan__label">${escape(phase.startLabel)}</span></div><h3 id="nd-enroll-title-${index + 1}">${escape(phase.enrollmentTitle)}</h3><p class="nd-plan__who">${escape(phase.forWhom)}</p><ul class="nd-plan__topics">${phase.topics.map((topic) => `<li>${escape(topic)}</li>`).join("")}</ul><div class="nd-plan__outcome"><strong>이 단계에서 해볼 일</strong><p>${escape(phase.outcome)}</p></div><div class="nd-plan__action"><p class="nd-plan__price">${money(m.perSession)}<small>원 / 회</small></p><p class="nd-plan__duration">${m.months}개월 · ${m.sessions}회 · 단계 총 ${money(m.phase)}원<br>${m.hours}시간 · <strong>${CAPACITY_NOTE}</strong></p><a class="nd-button nd-button--blue" href="${contact()}" target="_blank" rel="noopener noreferrer" aria-label="${index + 1}단계 ${escape(phase.enrollmentTitle)} 카카오톡 신청 문의">${index + 1}단계 신청 문의 ${arrow}</a></div></article>`).join("");
     return `<section class="nd-membership nd-section" id="nd-membership"><div class="nd-wrap"><div class="nd-section-heading"><div><p class="nd-eyebrow">단계별 신청</p><h2>지금 필요한 단계부터<br>시작하세요.</h2></div><p>내가 선택한 과제를<br>배움과 실제 행동으로 다루는 3개월.</p></div><p class="nd-enrollment-intro"><strong>각 단계 ${CAPACITY_NOTE}</strong><br>원하는 단계만 선택해 참여할 수 있습니다.</p><dl class="nd-operating"><div><dt>진행</dt><dd>오프라인 · 19–39세</dd></div><div><dt>시간</dt><dd>${MEETING}</dd></div><div><dt>장소</dt><dd>${VENUE}</dd></div><div><dt>한 단계</dt><dd>클래스 6회 + 실행 나눔 6회</dd></div></dl><p class="nd-enrollment-faith">성경·복음을 함께 다루며, 신앙에 관한 응답과 나눔은 자율입니다.</p><div class="nd-plans nd-plans--phases">${cards}</div><div class="nd-enrollment-guide"><h3>어떤 단계가 맞을지 궁금하다면</h3><a class="nd-text-link" href="${contact()}" target="_blank" rel="noopener noreferrer">카카오톡으로 문의하기 ${arrow}</a></div></div></section>`;
   }
 
@@ -218,7 +220,7 @@
 
   function card(p) {
     const m = pricing(p);
-    return `<article class="nd nd-card nal-card" data-catalog-id="${escape((p && p.id) || "nadaum-self-management")}"><a class="nd-card__image" href="${ROOT}" tabindex="-1" aria-hidden="true">${picture("hero_mobile", "", 1080, 1350)}</a><div class="nd-card__body"><p class="nd-eyebrow">NAL CLASS · 12월 시작</p><h3><a href="${ROOT}">나다움으로 자기경영하기</a></h3><p>반복되는 선택을 이해하고,<br>실제 행동과 결과에서 나를 알아갑니다.</p><p class="nd-card__meta">19–39세 · 월 4회 · 회당 2시간<br><strong>${CAPACITY_NOTE}</strong></p><p class="nd-card__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-card__prices"><span>3개월 · 12회 <strong>${money(m.phase)}원</strong></span><span>단계별 신청 <strong>4개의 주제</strong></span></div></div></article>`;
+    return `<article class="nd nd-card nal-card" data-catalog-id="${escape((p && p.id) || "nadaum-self-management")}"><a class="nd-card__image" href="${ROOT}" tabindex="-1" aria-hidden="true">${picture("hero_mobile", "", 1080, 1350)}</a><div class="nd-card__body"><p class="nd-eyebrow">NAL CLASS · 12월 시작</p><h3><a href="${ROOT}">나다움으로 자기경영하기</a></h3><p>반복되는 선택을 이해하고,<br>실제 행동과 결과에서 나를 알아갑니다.</p><p class="nd-card__meta">19–39세 · 월 4회 · 회당 2시간<br><strong>${CAPACITY_NOTE}</strong></p><p class="nd-card__meeting"><strong>${MEETING}</strong><br>${VENUE} · 오프라인</p><div class="nd-card__prices"><span>모든 회차 <strong>${money(m.perSession)}원 / 회</strong></span><span>3개월 · 12회 <strong>${money(m.phase)}원</strong></span></div></div></article>`;
   }
 
   function detail(p) {
@@ -228,7 +230,7 @@
       ["기독교인이 아니어도 참여할 수 있나요?", "네. 성경·복음의 관점을 함께 다루며, 신앙 유무와 관계없이 참여할 수 있습니다. 신앙에 관한 응답과 나눔은 자율입니다."],
       ["매번 새로운 행동을 정해야 하나요?", "아니요. 한 번 선언한 행동을 여러 만남에 걸쳐 이어가며 수정할 수 있습니다. 행동의 범위와 실행 시점은 스스로 정합니다."],
       ["앞 단계를 듣지 않아도 참여할 수 있나요?", "네. 원하는 단계부터 참여할 수 있습니다. 진행 중인 단계의 합류 가능 여부는 문의해 주세요."],
-      ["한 단계의 교육비와 구성은 어떻게 되나요?", m.months + "개월 " + money(m.phase) + "원입니다. 클래스 6회와 실행 나눔 6회, 총 " + m.sessions + "회·" + m.hours + "시간으로 구성됩니다."],
+      ["한 단계의 교육비와 구성은 어떻게 되나요?", "이론 클래스와 실행 나눔 모두 1회 " + money(m.perSession) + "원입니다. " + m.months + "개월·" + m.sessions + "회 기준 단계 총 " + money(m.phase) + "원이며, 총 " + m.hours + "시간으로 구성됩니다."],
       ["신청은 어떻게 하나요?", "희망 단계의 신청 문의 버튼을 눌러 카카오톡으로 말씀해 주세요. 세부 일정과 신청 조건을 안내합니다."]
     ];
     return `<div class="nd nd-detail">${hero(true)}<nav class="nd-subnav" aria-label="클래스 소개 목차"><div class="nd-wrap"><a href="#nd-scene">수업과 공간</a><a href="#nd-first-month">12월에 배우는 것</a><a href="#nd-method">진행 방식</a><a href="#nd-coach">함께할 코치</a><a href="#nd-year">전체 커리큘럼</a><a href="#nd-membership">단계별 신청</a></div></nav>${audience()}${venueScene()}${firstMonth(p,false)}${enrollment(p)}${method()}${sharing()}${coach()}${year(p)}${faith()}<section class="nd-wrap nd-section nd-faq" id="nd-faq"><div class="nd-section-heading"><div><p class="nd-eyebrow">참여 전 궁금한 점</p><h2>자주 묻는 질문</h2></div></div><div class="nd-faq__list">${faq.map(([q, a]) => `<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join("")}</div></section><div class="nd-detail-end"><div class="nd-wrap"><p>올해 내가 했던 선택으로,<br><strong>새해에 바꿀 첫 행동을 정합니다.</strong></p><a class="nd-button nd-button--blue" href="#nd-membership">단계별 신청 보기 ${arrow}</a></div></div></div>`;
