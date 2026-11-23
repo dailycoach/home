@@ -1516,7 +1516,22 @@ function scoreRow(name,result,color=''){const val=result?.mean;return `<div clas
 function status(score){if(score==null)return'응답 자료가 충분하지 않습니다';if(score>=4.5)return'응답척도 중간보다 높은 편';if(score<=3.5)return'응답척도 중간보다 낮은 편';return'중간 범위에 위치';}
 function block(title,content){return `<section class="report-section"><h2>${title}</h2>${content}</section>`;}
 function computeQuality(){const answers=state.answers;const attention=BANK.quality.filter(x=>x.quality_type==='attention');const mistakes=attention.filter(x=>Number.isInteger(answers[x.id])&&answers[x.id]!==x.expected).length;const attended=attention.filter(x=>Number.isInteger(answers[x.id])).length;const inconsistents=BANK.quality.filter(x=>x.quality_type==='consistency').map(x=>({q:x,delta:Number.isInteger(answers[x.id])&&Number.isInteger(answers[x.compare_id])?Math.abs(answers[x.id]-answers[x.compare_id]):null}));const incon=inconsistents.filter(x=>x.delta!=null&&x.delta>=4).length;const ideal=BANK.quality.filter(x=>x.quality_type==='idealized');const idealAnswers=ideal.filter(x=>Number.isInteger(answers[x.id]));const idealFlag=idealAnswers.length===2&&idealAnswers.every(x=>answers[x.id]>=6);return{mistakes,attended,incon,idealFlag};}
-function displayProfile(disc,anx,avo){const ds=Object.entries(disc).filter(([k,v])=>v.mean!==null).sort((a,b)=>b[1].mean-a[1].mean);if(!ds.length||anx.mean==null||avo.mean==null)return{title:'내 관계 패턴을 함께 탐색하기',summary:'현재 응답 자료만으로는 충분한 결과를 계산할 수 없습니다. 아래 항목별 응답 수와 품질 점검을 확인해 주세요.',type:''};const [primary,pval]=ds[0];const dual=ds[1]&&pval.mean-ds[1][1].mean<.35?` · ${ds[1][0]}`:'';const margin=.5;let relational='관계에서 다양한 반응을 보일 수 있음';let type='연속점수 중심의 탐색형';if(Math.abs(anx.mean-4)>margin&&Math.abs(avo.mean-4)>margin){if(anx.mean<4&&avo.mean<4){relational='관계를 신뢰하면서 자신의 속도를 조율하려는 경향';type='개방·신뢰 방향';}else if(anx.mean>=4&&avo.mean<4){relational='관계의 반응을 확인하며 가까움을 유지하려는 경향';type='확인·접근 방향';}else if(anx.mean<4&&avo.mean>=4){relational='정서적 거리를 조절하면서 자율성을 확보하려는 경향';type='거리·자율 방향';}else{relational='가까움에 대한 욕구와 부담을 함께 경험할 가능성';type='접근·거리 긴장 방향';}}return{title:`${STYLE_LINE[primary]}을 자주 활용하는 당신`,summary:`행동 경향에서는 ${LEGEND[primary]}(${primary}${dual})이 상대적으로 두드러집니다. 애착 불안 ${anx.mean.toFixed(2)}점, 회피 ${avo.mean.toFixed(2)}점의 조합은 ${relational}을 탐색해 볼 출발점입니다. 점수 간 차이와 상황 맥락이 중요하므로 한 가지 고정된 성격으로 해석하지 않습니다.`,type,primary};}
+function displayProfile(disc,anx,avo){
+ const ds=Object.entries(disc).filter(([k,v])=>v.mean!==null).sort((a,b)=>b[1].mean-a[1].mean);
+ if(!ds.length||anx.mean==null||avo.mean==null)return{title:'내 관계 패턴을 함께 탐색하기',summary:'현재 응답 자료만으로는 충분한 결과를 계산할 수 없습니다. 아래 항목별 응답 수와 품질 점검을 확인해 주세요.',type:''};
+ const [primary,score]=ds[0];
+ const isClose=!!(ds[1]&&(score.mean-ds[1][1].mean)<.35);
+ let relational='두 차원의 점수를 연속적으로 살펴볼 여지가 있음',type='연속점수 중심의 탐색형';
+ if(Math.abs(anx.mean-4)>.5&&Math.abs(avo.mean-4)>.5){
+  if(anx.mean<4&&avo.mean<4){relational='상대적으로 개방·신뢰 방향의 반응';type='개방·신뢰 방향';}
+  else if(anx.mean>=4&&avo.mean<4){relational='확인·접근 방향의 반응';type='확인·접근 방향';}
+  else if(anx.mean<4&&avo.mean>=4){relational='거리·자율 방향의 반응';type='거리·자율 방향';}
+  else{relational='접근·거리 긴장 방향의 반응';type='접근·거리 긴장 방향';}
+ }
+ const title=isClose?'상황마다 여러 행동의 리듬을 쓰는 당신':`${STYLE_LINE[primary]}을 자주 활용하는 당신`;
+ const behavior=isClose?`행동 경향에서 ${LEGEND[primary]}(${primary})과 ${LEGEND[ds[1][0]]}(${ds[1][0]})의 점수가 가까워 대표 스타일 분류를 보류했습니다.`:`행동 경향에서 ${LEGEND[primary]}(${primary})의 응답 점수가 상대적으로 높게 나타났습니다.`;
+ return{title,summary:`${behavior} 애착 불안 ${anx.mean.toFixed(2)}점, 회피 ${avo.mean.toFixed(2)}점은 ${relational}을 탐색하는 출발점입니다. 이는 검증된 유형이나 진단이 아니며 실제 관계 맥락과 반례를 함께 확인해야 합니다.`,type,primary:isClose?null:primary};
+}
 
 // v1 adds conditional relationship-interaction hypotheses; these are not validated types.
 const CROSS_HYPOTHESES={
