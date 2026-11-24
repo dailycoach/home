@@ -32,8 +32,8 @@
     banner.innerHTML = `
       <a class="nduck-v2-banner__link" href="${TARGET}" target="_blank" rel="noopener noreferrer" aria-label="날덕에서 나의 캐릭터를 찾아보기, 새 창 열림">
         <div class="nduck-v2-banner__copy">
-          <span class="nduck-v2-banner__eyebrow"><b>✳</b> NALDUCK <i>SELF FAN CLUB</i></span>
-          <h2 id="nduck-v2-banner-title">오늘의 최애는,<br><em>나.</em><span class="nduck-v2-banner__star" aria-hidden="true">✴</span></h2>
+          <span class="nduck-v2-banner__eyebrow"><b>✦</b> NALDUCK <i>SELF FAN CLUB</i></span>
+          <h2 id="nduck-v2-banner-title">오늘의 최애는,<br><em>나.</em><span class="nduck-v2-banner__star" aria-hidden="true">✦</span></h2>
           <p>썸, 면접, 의사소통까지.<br>테스트하고 <strong>내 캐릭터를 찾아봐.</strong></p>
           <span class="nduck-v2-banner__action">캐릭터 보러 가기 <span aria-hidden="true">↗</span></span>
         </div>
@@ -41,7 +41,7 @@
           <div class="nduck-v2-banner__disc"></div>
           <span class="nduck-v2-banner__sticker">ONE &<br>ONLY<br>ME ★</span>
           <img src="${MASCOT}" alt="" width="969" height="1060" loading="lazy" decoding="async">
-          <span class="nduck-v2-banner__ticket">✳ YOUR TYPE. YOUR CHARACTER.</span>
+          <span class="nduck-v2-banner__ticket">✦ YOUR TYPE. YOUR CHARACTER.</span>
         </div>
       </a>`;
     anchor.insertAdjacentElement("afterend", banner);
@@ -60,9 +60,9 @@
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
         </button>
         <div class="nduck-v2-dialog__stage">
-          <span class="nduck-v2-dialog__brand">✳ <strong>NALDUCK</strong> <small>SELF FAN CLUB</small></span>
+          <span class="nduck-v2-dialog__brand">✦ <strong>NALDUCK</strong> <small>SELF FAN CLUB</small></span>
           <span class="nduck-v2-dialog__orbit" aria-hidden="true"></span>
-          <span class="nduck-v2-dialog__smallstar" aria-hidden="true">✴</span>
+          <span class="nduck-v2-dialog__smallstar" aria-hidden="true">✦</span>
           <img src="${MASCOT}" alt="" width="969" height="1060" decoding="async" fetchpriority="high">
           <span class="nduck-v2-dialog__sticker" aria-hidden="true">MY FAV<br>IS ME! ♡</span>
           <span class="nduck-v2-dialog__serial" aria-hidden="true">ME / 001<br>THE ORIGINAL</span>
@@ -72,7 +72,7 @@
           <h2 id="nduck-v2-title">내 안에 이런<br><em>캐릭터가?</em></h2>
           <p id="nduck-v2-desc">썸 탈 때의 나, 면접장의 나, 대화할 때의 나.<br>테스트하고 내 캐릭터를 찾아봐.</p>
           <div class="nduck-v2-dialog__chips" aria-label="테스트 주제">
-            <span>♡ 썸 고양이</span><span>✦ 면접 캐릭터</span><span>✳ 의사소통</span>
+            <span>♡ 썸 고양이</span><span>✦ 면접 캐릭터</span><span>✦ 의사소통</span>
           </div>
           <a class="nduck-v2-dialog__cta" href="${TARGET}" target="_blank" rel="noopener noreferrer" data-nduck-visit>내 캐릭터 찾으러 가기 <span aria-hidden="true">↗</span></a>
           <div class="nduck-v2-dialog__foot"><span>무료 테스트 · 재미로 시작하는 자기탐색</span><button type="button" data-nduck-never>다시 보지 않기</button></div>
